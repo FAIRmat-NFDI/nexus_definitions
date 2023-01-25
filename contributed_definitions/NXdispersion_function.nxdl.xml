@@ -2,14 +2,9 @@
 <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd" type="group" category="base" name="NXdispersion_function" extends="NXobject">
     <symbols>
-        <symbol name="n_single_params">
+        <symbol name="n_repetitions">
             <doc>
-                 The number of single parameters
-            </doc>
-        </symbol>
-        <symbol name="n_repeated_params">
-            <doc>
-                 The number of repeated params
+                 The number of repetitions for the repeated parameters
             </doc>
         </symbol>
     </symbols>
@@ -27,24 +22,12 @@
             <item value="n - ik"/>
         </enumeration>
     </field>
-    <field name="single_param_names" type="NX_CHAR">
-        <dimensions rank="1">
-            <dim index="1" value="n_single_params"/>
-        </dimensions>
-    </field>
-    <field name="single_param_values" type="NX_NUMBER" units="NX_ANY">
-        <dimensions rank="1">
-            <dim index="1" value="n_single_params"/>
-        </dimensions>
-    </field>
-    <field name="repeated_param_names" type="NX_CHAR">
-        <dimensions rank="1">
-            <dim index="1" value="n_repeated_params"/>
-        </dimensions>
-    </field>
-    <field name="repeated_param_values" type="NX_NUMBER">
-        <dimensions rank="1">
-            <dim index="1" value="n_repeated_params"/>
-        </dimensions>
-    </field>
+    <group type="NXdispersion_single_parameter"/>
+    <group type="NXdispersion_parameter">
+        <field name="values" type="NX_CHAR">
+            <dimensions rank="1">
+                <dim index="1" value="n_repetitions"/>
+            </dimensions>
+        </field>
+    </group>
 </definition>
