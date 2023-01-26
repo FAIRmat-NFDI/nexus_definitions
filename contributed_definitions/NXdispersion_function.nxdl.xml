@@ -22,8 +22,36 @@
             <item value="n - ik"/>
         </enumeration>
     </field>
+    <field name="energy_identifier" type="NX_CHAR" units="NX_ENERGY">
+        <doc>
+             The identifier used to represent energy
+             in the formula. It is recommended to use `E`.
+        </doc>
+    </field>
+    <field name="wavelength_identifier" type="NX_CHAR" units="NX_LENGTH">
+        <doc>
+             The identifier useed to represent wavelength
+             in the formula. It is recommended to use `lambda`.
+        </doc>
+    </field>
+    <field name="representation" type="NX_CHAR">
+        <doc>
+             Which representation does the formula evaluate to.
+             This may either be n for refractive index or eps for dielectric function.
+             The appropriate token is then to be used inside the formula.
+        </doc>
+        <enumeration>
+            <item value="n"/>
+            <item value="eps"/>
+        </enumeration>
+    </field>
     <group type="NXdispersion_single_parameter"/>
     <group type="NXdispersion_parameter">
+        <field name="units" type="NX_CHAR">
+            <dimensions rank="1">
+                <dim index="1" value="n_repetitions"/>
+            </dimensions>
+        </field>
         <field name="values" type="NX_CHAR">
             <dimensions rank="1">
                 <dim index="1" value="n_repetitions"/>
