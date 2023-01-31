@@ -25,12 +25,38 @@
                 <item value="NXdispersive_material"/>
             </enumeration>
         </field>
-        <field name="chemical_formula" type="NX_CHAR"/>
-        <field name="colloquial_name" type="NX_CHAR" optional="true">
-            <doc>
-                 The colloquial name of the material, e.g. graphite or diamond for carbon.
-            </doc>
-        </field>
+        <group name="sample" type="NXsample">
+            <field name="chemical_formula" type="NX_CHAR"/>
+            <field name="colloquial_name" type="NX_CHAR" optional="true">
+                <doc>
+                     The colloquial name of the material, e.g. graphite or diamond for carbon.
+                </doc>
+            </field>
+            <field name="material_phase" type="NX_CHAR" optional="true">
+                <doc>
+                     The phase of the material
+                </doc>
+                <enumeration>
+                    <item value="gas"/>
+                    <item value="liquid"/>
+                    <item value="solid"/>
+                    <item value="other"/>
+                </enumeration>
+            </field>
+            <field name="material_phase_comment" type="NX_CHAR" optional="true">
+                <doc>
+                     Additional information about the phase if the
+                     material phase is other.
+                </doc>
+            </field>
+            <field name="additional_phase_information" type="NX_CHAR" recommended="true">
+                <doc>
+                     This field may be used to denote additional phase information,
+                     such as crystalin phase of a crystal (e.g. 4H or 6H for SiC) or
+                     if a measurement was done on a thin film or bulk material.
+                </doc>
+            </field>
+        </group>
         <field name="dispersion_type" type="NX_CHAR">
             <doc>
                  Denotes whether the dispersion is calculated or derived from an experiment
@@ -48,30 +74,6 @@
         <field name="literature_dois" type="NX_CHAR" recommended="true">
             <doc>
                  This field holds the respective doi for the literature references.
-            </doc>
-        </field>
-        <field name="material_phase" type="NX_CHAR" optional="true">
-            <doc>
-                 The phase of the material
-            </doc>
-            <enumeration>
-                <item value="gas"/>
-                <item value="liquid"/>
-                <item value="solid"/>
-                <item value="other"/>
-            </enumeration>
-        </field>
-        <field name="material_phase_comment" type="NX_CHAR" optional="true">
-            <doc>
-                 Additional information about the phase if the
-                 material phase is other.
-            </doc>
-        </field>
-        <field name="additional_phase_information" type="NX_CHAR" recommended="true">
-            <doc>
-                 This field may be used to denote additional phase information,
-                 such as crystalin phase of a crystal (e.g. 4H or 6H for SiC) or
-                 if a measurement was done on a thin film or bulk material.
             </doc>
         </field>
         <group name="dispersion_x" type="NXdispersion">
