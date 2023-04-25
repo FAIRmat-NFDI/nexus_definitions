@@ -16,8 +16,8 @@ NXbias(NXobject):
           Modulated signal Bias(NXlockin): # or transfer it to NXlockin?
             doc: Sets the amplitude (in physical units of the modulated signal) of the sine modulation.
             unit: NX_VOLTAGE
-#Bias Spectroscopy(NXbias):
- #    doc: Bias sweeps while measuring arbitrary channels with I(V) curves.
+          (Bias Spectroscopy):
+            doc: Bias sweeps while measuring arbitrary channels with I(V) curves.
           Channels(NX_CHAR):
             doc: Select the channels to record.
           Reset Bias(NX_CHAR):
@@ -27,6 +27,9 @@ NXbias(NXobject):
             doc: Select whether to record the Z position during Z averaging time at the end of the sweep (after Z control time) and store the average value in the header of the file when saving. Using this option increases the sweep time by Z averaging time.
           Lock-In run(NX_CHAR):
             doc: Select whether to set the Lock-In to run during the measurement. When using this feature, make sure the Lock-In is configured correctly and settling times are set to twice the Lock-In period at least. This option is ignored when Lock-In is already running. This option is disabled if the Sweep Mode is MLS and the flag to configure the Lock-In per segment in the Multiline segment editor is set.
+          Integration time(NX_NUMBER):
+            doc: Time during which the spectroscopy data are acquired and averaged.
+            unit: NX_TIME
           Number of sweeps(NX_NUMBER):
             doc: Number of sweeps to measure and average.
           Sweep Start(NX_NUMBER):
@@ -45,9 +48,6 @@ NXbias(NXobject):
             unit: NX_LENGTH
           Settling time(NX_NUMBER):
             doc: time to wait after changing the bias to the next level and before starting to acquire data.
-            unit: NX_TIME
-          Integration time(NX_NUMBER):
-            doc: Time during which the data are acquired and averaged.
             unit: NX_TIME
           End Settling time(NX_NUMBER):
             doc: Time to wait after the sweep has finished and the bias is ramped to the initial value.
