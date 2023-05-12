@@ -5,19 +5,24 @@
 
 doc: This is the most general application definition for multidimensional photoelectron spectroscopy.
 category: application
-NXmpes:
+    NXmpes:
   (NXentry):
     title:
+      exists: recommended
     start_time(NX_DATE_TIME):
       doc: "Datetime of the start of the measurement."
+    end_time(NX_DATE_TIME):
+      exists: recommended
     definition:
       \@version:
-      enumeration: ["NXmpes"]
+      enumeration: ["NXmpes"] # ISO 18115
+    method: # ISO 18115
     (NXuser):
       doc: "Contact information of at least the user of the instrument or the
             investigator who performed this experiment.
             Adding multiple users if relevant is recommended."
       name:
+        exists: recommended
         doc: "Name of the user."
       affiliation:
         exists: recommended
@@ -28,14 +33,17 @@ NXmpes:
         doc: "Full address (street, street number, ZIP, city, country) of the
           user's affiliation."
       email:
+        exists: recommended
         doc: "Email address of the user."
       orcid:
         exists: recommended
         doc: "Author ID defined by https://orcid.org/."
     (NXinstrument):
       energy_resolution(NX_FLOAT):
+        exist: recommended
         unit: NX_ENERGY
-      (NXsource):
+      source_beam(NXsource): # TODO: Add linking between source and beam
+        # TODO: Much more information possible
         doc: "The source used to generate the primary photons. Properties refer strictly to parameters of the source, not of the output beam.
         For example, the energy of the source is not the optical power of the beam, but the energy of the electron beam in a synchrotron and so on."
         type:
@@ -48,13 +56,22 @@ NXmpes:
             "Optical Laser",
             "UV Plasma Source",
             "Metal Jet X-ray",
-            "HHG laser"
+            "HHG laser",
+            "UV lamp",
+            "other"
           ]
+        type_other:
+          exists: optional
+          doc: Specification of type, may also go to name
+          # TODO:
         name:
+          exists: recommended
         probe:
-          doc: "Type of probe. In photoemission it's always photons, so the full NIAC list is restricted."
-          enumeration: ["x-ray","ultraviolet", "visible light"]
-      (NXbeam):
+          doc: |
+            Type of probe. In photoemission it's always photons, so the full NIAC list is restricted"
+          enumeration: ["photons"]
+      beam_probe(NXbeam): # TODO: Add linking between source and beam
+        # TODO: Maybe add extend as recommended
         distance(NX_NUMBER):
           doc: "Distance of the point of evaluation of the beam from the sample surface."
           unit: NX_LENGTH
@@ -67,7 +84,8 @@ NXmpes:
           exists: recommended
           unit: NX_ANY
       (NXelectronanalyser):
-        description:
+        model(NXfabrication):
+          exists: recommended
         energy_resolution(NX_FLOAT):
           exists: recommended
           doc: "Energy resolution of the analyser with the current setting. May be linked from a NXcalibration."
@@ -160,6 +178,7 @@ NXmpes:
           calibrated_axis(NX_FLOAT):
             exists: recommended
             doc: "This is the calibrated energy axis to be used for data plotting."
+            # TODO:
         angular_calibration(NXcalibration):
           exists: optional
           applied(NX_BOOLEAN):
@@ -223,6 +242,7 @@ NXmpes:
       # Similar situation here, ca be a single number or a log.
       gas_pressure(NX_FLOAT):
         unit: NX_PRESSURE
+      (NXtransformations): # TODO: Add this here?
     (NXdata):
       \@signal:
         enumeration: ["data"] # There is an object named data that contains the signal
