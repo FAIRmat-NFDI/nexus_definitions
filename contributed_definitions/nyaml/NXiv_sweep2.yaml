@@ -27,7 +27,7 @@ NXiv_sweep2(NXsensor_scan):
     entry_identifier:
       doc: The name of the output file, with the number of scans at the end.e.g. (e.g. 221122_Au_5K00014)
     collection_dentifier:
-      doc: The name of the series output file, which represents only the public part of the output file. (e.g. 221122_Au_5K）
+      doc: The name of the series output file, which represents only the public part of the output file. (e.g. 221122_Au_5K)
     experiment_identifier:
       doc: Path to storage of output files. (e.g. Path C:\Users\SPM-PEEM\Desktop\DATA_Nanonis\20220711_CreaTec_Service_Benchmarks_LHe\Nanonis-Session-PMD100-HVHU_CreaTec_Service_PalmaLabBerlin220711)
     experiment_description:
@@ -102,17 +102,19 @@ NXiv_sweep2(NXsensor_scan):
         active_calib.:
           doc: The name of caliberation type. (e.g. LHe)
         calib._N(NX_NUMBER):
-          doc: N denotes X or Y or Z. There are 3 parameters in X, Y, and Z directions and there are 3 controls available: Calibr. (m/V), Range (m) and HV gain. Two of them are enough to define the calibration, so when changing any value one of the other values will be updated automatically. (e.g. 3.8E-9)
+          doc: |
+            N denotes X or Y or Z. There are 3 parameters in X, Y, and Z directions and there are 3 controls availables: Calibr. (m/V), Range (m) and HV gain. Two of them are enough to define the calibration, so when changing any value one of the other values will be updated automatically. (e.g. 3.8E-9)
         hv_gain_N(NX_NUMBER):
           doc: N denotes X or Y or Z. For some systems HV gain readout is available, so for those systems the HV gain should be adjusted automatically when the gain is changed at the high voltage amplifier. (e.g. 14.5)
-        tilt_N(NX_NUMBER): (e.g. 0.318343)
-        unit: NX_ANGLE
-        doc: N denotes X or Y. There are 2 parameters in X and Y directions and this tab is used to set the sample tilt (in degrees, first order correction).
-        curvature_radius N(NX_NUMBER): Inf
-        unit: NX_LENGTH
-        doc: N denotes X or Y. There are 2 parameters in X and Y directions and this tab is used to set a curvature (can be set approximately to the length of the piezotube).
+        tilt_N(NX_NUMBER): # (e.g. 0.318343)
+          unit: NX_ANGLE
+          doc: N denotes X or Y. There are 2 parameters in X and Y directions and this tab is used to set the sample tilt (in degrees, first order correction).
+        curvature_radius N(NX_NUMBER): # Inf
+          unit: NX_LENGTH
+          doc: N denotes X or Y. There are 2 parameters in X and Y directions and this tab is used to set a curvature (can be set approximately to the length of the piezotube).
         2nd_order_corr_N(NX_NUMBER):
-          doc: N denotes X or Y. There are 2 parameters in X and Y directions. If you know them, you can enter the 2nd order piezo characteristics to compensate for it. The following equation shows the interpretation of the 2nd order correction parameter: For the X-piezo: "Ux = 1/cx · X + cxx · X2" with units: [V] = [V/m] · [m] + [V/m2] · [m2] where cx is the calibration of the piezo X and cxx is the 2nd order correction. (V/m^2). (e.g. 0E+0)
+          doc: |
+            N denotes X or Y. There are 2 parameters in X and Y directions. If you know them, you can enter the 2nd order piezo characteristics to compensate for it. The following equation shows the interpretation of the 2nd order correction parameter: For the X-piezo: "Ux = 1/cx · X + cxx · X2" with units: [V] = [V/m] · [m] + [V/m2] · [m2] where cx is the calibration of the piezo X and cxx is the 2nd order correction. (V/m^2). (e.g. 0E+0)
         drift_N(NX_NUMBER):
           doc: N denotes X or Y. There are 2 parameters in X and Y directions. Define the drift speed for all three axes. When the compensation is on, the piezos will start to move at that speed. (e.g. 0E+0)
         drift_correction_status(NX_BOOLEAN):
