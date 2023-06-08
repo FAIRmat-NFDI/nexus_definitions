@@ -4,9 +4,9 @@
 #with higher granularity in the data description.
 
 doc: This is the application definition for multidimensional photoelectron spectroscopy on liquids
-category: application
-NXmpes:
-  ENTRY(NXentry):
+category: application 
+NXmpes_liquid(NXmpes):
+  (NXentry):
     \@entry(NX_CHAR):
       doc: "NeXus convention is to use “entry1”, “entry2”, for analysis software to locate each entry."
     \@default(NX_CHAR):
@@ -23,28 +23,27 @@ NXmpes:
     definition:
       \@version(NX_CHAR):
       enumeration: ["NXmpes_liquid"]
-    INSTRUMENT(NXinstrument):
+    (NXinstrument):
       energy_resolution(NX_FLOAT):
-      SOURCE(NXsource):
+      (NXsource):
         doc: "The source used to generate the primary photons. Properties refer strictly to parameters of the source, not of the output beam. For example, the energy of the source is not the optical power of the beam, but the energy of the electron beam in a synchrotron and so on."
         type(NX_CHAR):
-          enumeration:
-            [
-              "Synchrotron X-ray Source",
-              "Rotating Anode X-ray",
-              "Fixed Tube X-ray",
-              "UV Laser",
-              "Free-Electron Laser",
-              "Optical Laser",
-              "UV Plasma Source",
-              "Metal Jet X-ray",
-              "HHG laser",
-            ]
+          enumeration: [
+            "Synchrotron X-ray Source",
+            "Rotating Anode X-ray", 
+            "Fixed Tube X-ray",
+            "UV Laser", 
+            "Free-Electron Laser", 
+            "Optical Laser", 
+            "UV Plasma Source", 
+            "Metal Jet X-ray", 
+            "HHG laser",
+          ]
         name(NX_CHAR):
         probe(NX_CHAR):
           doc: "Type of probe. In photoemission it's always photons, so the full NIAC list is restricted."
-          enumeration: ["x-ray", "ultraviolet", "visible light"]
-      BEAM_PROBE(NXbeam):
+          enumeration: ["x-ray","ultraviolet", "visible light"]
+      (NXbeam): 
         distance(NX_NUMBER):
           doc: "Distance of the point of evaluation of the beam from the sample surface."
         incident_energy(NX_FLOAT):
@@ -59,7 +58,7 @@ NXmpes:
           doc: "Incident polarization specified as a Stokes vector."
           \@units(NX_CHAR):
             doc: "The units for this observable are not included in the NIAC list. Responsibility on correct formatting and parsing is handed to the user by using ‘NX_ANY’. Correct parsing can still be implemented by using this attribute. Fill with: The unit unidata symbol if the unit has one (Example: ‘T’ for the unit of magnetic flux density tesla). The unit unidata name if the unit has a name (Example: ‘farad’ for capacitance). A string describing the units according to unidata unit operation notation, if the unit is a complex combination of named units and does not have a name. Example: for lightsource brilliance (SI) ‘1/(s.mm2.mrad2)’. Here: SI units are ‘V2/m2’."
-      ANALYZER(NXelectronanalyser):
+      (NXelectronanalyser):
         description(NX_CHAR):
           doc: "Free text description of the type of detector."
         energy_resolution(NX_FLOAT):
@@ -70,26 +69,60 @@ NXmpes:
         slow_axes(NX_CHAR):
           exists: optional
           doc: "List of the axes that are acquired by scanning a physical parameter, listed in order of decreasing speed. See fast_axes for examples."
-        ANALYSER_LENS_SYSTEM(NXcollectioncolumn):
+        (NXcollectioncolumn):
           scheme(NX_CHAR):
             doc: "Scheme of the electron collection column."
-            enumeration:
-              [
-                "Standard",
-                "Angular dispersive",
-                "Selective area",
-                "Deflector",
-                "PEEM",
-                "Momentum Microscope",
-              ]
+            enumeration: [
+              "Standard", 
+              "Angular dispersive", 
+              "Selective area",
+              "Deflector", 
+              "PEEM", 
+              "Momentum Microscope",
+            ]
           mode(NX_CHAR):
             exists: recommended
             doc: "Labelling of the lens setting in use."
           projection(NX_CHAR):
             exists: recommended
             doc: "The space projected in the angularly dispersive directions, i.e. real or reciprocal."
-            enumeration: ["real", "reciprocal"]
-        ANALYSER_DISPERSIVE_ELEMENT(NXenergydispersion):
+            enumeration: [
+              "real", 
+              "reciprocal",
+            ]
+          (NXtransformations):
+            exists: optional
+            doc: "Direction of lens axis of analyzer."
+            rot_x(NX_NUMBER):
+              \@depends_on(NX_CHAR):
+                doc: "Is '.', since beam axis is assumed to be horizontal (perpendicular to gravity)."
+              \@transformation_type(NX_CHAR):
+                enumeration: ["rotation"]
+              \@units: NX_ANGLE
+              \@vector(NX_NUMBER):
+            rot_y(NX_NUMBER):
+              \@depends_on(NX_CHAR):
+                doc: "Link to /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_x"
+              \@transformation_type(NX_CHAR):
+                enumeration: ["rotation"]
+              \@units: NX_ANGLE
+              \@vector(NX_NUMBER):
+            rot_z(NX_NUMBER):
+              \@depends_on(NX_CHAR):
+                doc: "Link to /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_y."
+              \@transformation_type(NX_CHAR):
+                enumeration: ["rotation"]
+              \@units: NX_ANGLE
+              \@vector(NX_NUMBER): 
+            trans_z(NX_NUMBER):
+              doc: "Same as working_distance."
+              \@depends_on(NX_CHAR):
+                doc: "Link to /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_z."
+              \@transformation_type(NX_CHAR):
+                enumeration: ["translation"]
+              \@units: NX_LENGTH
+              \@vector(NX_NUMBER):
+        (NXenergydispersion):
           scheme(NX_CHAR):
             enumeration:
               [
@@ -105,13 +138,19 @@ NXmpes:
             doc: "Energy of the electrons on the mean path of the analyser. Pass energy for hemispherics, drift energy for tofs."
           energy_scan_mode(NX_CHAR):
             doc: "Way of scanning the energy axis (fixed or sweep)."
-            enumeration: ["fixed", "sweep"]
-          ENTRANCE_SLIT(NXaperture):
+            enumeration:
+              ["fixed","sweep",]
+          (NXaperture):
             exists: recommended
             doc: "Aperture generating the momentum and/or energy filtering."
             description(NX_CHAR):
               doc: "Type of aperture inserted in the beam."
-              enumeration: ["slit", "pinhole", "iris"]
+              enumeration:
+                [
+                  "slit",
+                  "pinhole",
+                  "iris",
+                ]
             shape(NX_CHAR):
               doc: "Description of the shape of the active part of the aperture, curved or straight for horizontal slits, square or round for pinhole etc."
               enumeration:
@@ -127,7 +166,7 @@ NXmpes:
               pass_energy(NX_FLOAT):
                 unit: NX_LENGTH
                 doc: "The relevant dimension for the aperture (slit width, pinhole diameter etc)."
-        ELECTRON_DETECTOR(NXdetector):
+        (NXdetector):
           amplifier_type(NX_CHAR):
             exists: recommended
             doc: "Type of electron amplifier in the first amplification step."
@@ -143,63 +182,60 @@ NXmpes:
                 "Anode",
                 "Multi-anode",
               ]
-          DATA(NXdata): # Raw signal without calibrated axes.
+          (NXdata): # Raw signal without calibrated axes.
             exists: recommended
             \@signal(NX_CHAR):
-              enumeration: ["raw"]
+              enumeration: ['raw']
             raw(NX_NUMBER): # There is a block of numbers named raw.
               doc: "Raw data before calibration."
-        GEOMETRY(NXtransformations):
+          (NXtransformations):
+            exists: optional
+            doc: "Direction of the hemisphere of an HEA. Points towards the detector from the entrance slit."
+            rot_x(NX_NUMBER):
+              \@depends_on(NX_CHAR):
+                doc: "Is '.', since beam axis is assumed to be horizontal (perpendicular to gravity)."
+              \@transformation_type(NX_CHAR):
+                enumeration: ["rotation"]
+              \@units: NX_ANGLE
+              \@vector(NX_NUMBER):
+            rot_y(NX_NUMBER):
+              \@depends_on(NX_CHAR):
+                doc: "Link to /NXentry/NXinstrument/NXelectronanalyser/NXdetector/NXtransformations/rot_x"
+              \@transformation_type(NX_CHAR):
+                enumeration: ["rotation"]
+              \@units: NX_ANGLE
+              \@vector(NX_NUMBER):
+            rot_z(NX_NUMBER):
+              \@depends_on(NX_CHAR):
+                doc: "Link to /NXentry/NXinstrument/NXelectronanalyser/NXdetector/NXtransformations/rot_y."
+              \@transformation_type(NX_CHAR):
+                enumeration: ["rotation"]
+              \@units: NX_ANGLE
+              \@vector(NX_NUMBER):
+        (NXtransformations):
           exists: optional
-          doc: "Transformations describing the transformation chain of all relevant vectors in the experiment."
+          doc: "Transformations describing base geometry in the experiment. Usually defaults to the beam in z direction and gravity in -y direction."
           gravity_axis(NX_NUMBER):
             doc: "Direction of gravity."
             \@vector(NX_NUMBER):
               doc: "The vector in the direction of gravity."
             \@depends_on(NX_CHAR):
-              doc: "Set to '.' to specify the normal vector to which all other vectors are related."
+              enumeration: ["."]
           beam_axis(NX_NUMBER):
             doc: "Direction of the photon beam."
             \@vector(NX_NUMBER):
               doc: "The vector of the photon-beam direction into the chamber after the last optical element (or directly from the source if there are no optical elements)."
             \@depends_on(NX_CHAR):
-              doc: "This should be a link to /entry/instrument/geometry/gravity_axis."
-          analyzer_lens_axis(NX_NUMBER):
-            doc: "Direction of lens axis of analyzer."
-            \@vector(NX_NUMBER):
-              doc: "The vector pointing along the central axis of the analyzer lens system in from the sample."
-            \@depends_on(NX_CHAR):
-              doc: "This should be a link to /entry/instrument/geometry/beam_axis."
-          hemisphere_orientation(NX_NUMBER):
-            exists: optional
-            doc: "Orientation of the hemisphere with respect to the lens system in case of a hemispherical electron analyzer."
-            \@vector(NX_NUMBER):
-              doc: "The vector pointing towards the detector from the entrance slit of the hemisphere, and should be perpendicular to the analyzer lens system."
-            \@depends_on(NX_CHAR):
-              doc: "This should be a link to /entry/instrument/geometry/analyzer_lens_axis."
-          liquid_jet_axis(NX_NUMBER):
-            exists: optional
-            doc: "Direction of liquid jet flow."
-            \@vector(NX_NUMBER):
-              doc: "The vector of the major flow direction of the liquid jet from the injection into the chamber. Along the cylinder axis for single, cylidrical jets, and parallel to the leaf plane for flatjets."
-            \@depends_on(NX_CHAR):
-              doc: "This should be a link to /entry/instrument/geometry/beam_axis."
-          leaf_normal_axis(NX_NUMBER):
-            exists: optional
-            doc: "Direction of surface normal vector of the first leaf on the side of solvent #1."
-            \@vector(NX_NUMBER):
-              doc: "The vector designating the surface normal of the first leaf, and points towards the electron lens in the default (unrotated) configuration. Rotation around liquid_jet_axis is possible."
-            \@depends_on(NX_CHAR):
-              doc: "This should be a link to /entry/instrument/geometry/liquid_jet_axis."
-    CALIBRATION(NXprocess):
-      doc: "Document an event of data processing, reconstruction, or analysis for this data. Describe the appropriate axis calibrations for your experiment using one or more of the following NXcalibrations"
-      energy_calibration(NXcalibration):
-        applied(NX_BOOLEAN):
-          doc: "Has an energy calibration been applied?"
-        calibrated_axis(NX_FLOAT):
-          exists: recommended
-          doc: "This is the calibrated energy axis to be used for data plotting."
-    SAMPLE(NXsample):
+              enumeration: ["."]
+    (NXprocess):
+        doc: "Document an event of data processing, reconstruction, or analysis for this data. Describe the appropriate axis calibrations for your experiment using one or more of the following NXcalibrations"
+        energy_calibration(NXcalibration):
+          applied(NX_BOOLEAN):
+            doc: "Has an energy calibration been applied?"
+          calibrated_axis(NX_FLOAT):
+            exists: recommended
+            doc: "This is the calibrated energy axis to be used for data plotting."
+    (NXsample):
       name(NX_CHAR):
       description(NX_CHAR):
         exists: recommended
@@ -214,13 +250,13 @@ NXmpes:
       temperature(NX_FLOAT):
         unit: NX_TEMPERATURE
         doc: "In the case of a fixed temperature measurement this is the scalar temperature of the sample. In the case of an experiment in which the temperature is changed and recoded, this is an array of length m of temperatures."
-      situation(NX_CHAR):
+      situation(NX_CHAR): 
         enumeration:
           [
-            "vacuum",
-            "inert atmosphere",
-            "oxidising atmosphere",
-            "reducing atmosphere",
+          "vacuum",
+          "inert atmosphere",
+          "oxidising atmosphere",
+          "reducing atmosphere",
           ]
       gas_pressure(NX_FLOAT):
         unit: NX_PRESSURE
@@ -237,29 +273,62 @@ NXmpes:
         exists: optional
         enumeration:
           [
-            "sample",
-            "sample+can",
-            "can",
-            "sample+buffer",
-            "buffer",
-            "calibration sample",
-            "normalisation sample",
-            "simulated data",
-            "none",
-            "sample environment",
+          "sample",
+          "sample+can",
+          "can",
+          "sample+buffer",
+          "buffer",
+          "calibration sample",
+          "normalisation sample",
+          "simulated data",
+          "none",
+          "sample environment",
           ]
       flow_rate(NX_FLOAT):
         exists: recommended
         unit: NX_VOLUME / NX_TIME
         doc: "Flow rate of the liquid into the chamber, i.e., throught the microjet capillary (or in case of a flat jet: both capillaries)."
       shape(NX_CHAR):
-        enumeration: ["round", "flat"]
+        enumeration: ["round", "flat",]
       nozzle_material(NX_CHAR):
         exists: recommended
         doc: "Material the microjet nozzle is made of (users are encouraged to expand on that in group preparation_description)."
-      leaf_normal(NXtransformations):
-        exists: optional
-        doc: "Transformations describing the transformation chain to the liqudjet leaf. Link to /entry/instrument/manipulator/sample_temperature"
+      (NXtransformations):
+        exists: recommended
+        doc: "Transformations describing the transformation chain of the liquid jet flow direction and optionally the flat jet normal. The vector of the major flow direction of the liquid jet from the injection into the chamber. Along the cylinder axis for single, cylidrical jets, and parallel to the leaf plane for flatjets."
+        rot_x(NX_NUMBER):
+          \@depends_on(NX_CHAR):
+            doc: "Is '.', since beam axis is assumed to be horizontal (perpendicular to gravity)."
+          \@transformation_type(NX_CHAR):
+            enumeration: ["rotation"]
+          \@units: NX_ANGLE
+          \@vector(NX_NUMBER):
+        rot_y(NX_NUMBER):
+          \@depends_on(NX_CHAR):
+            doc: "Link to /NXentry/NXsample/rot_x"
+          \@transformation_type(NX_CHAR):
+            enumeration: ["rotation"]
+          \@units: NX_ANGLE
+          \@vector(NX_NUMBER):
+        rot_z(NX_NUMBER):
+          \@depends_on(NX_CHAR):
+            doc: "Link to /NXentry/NXsample/rot_y."
+          \@transformation_type(NX_CHAR):
+            enumeration: ["rotation"]
+          \@units: NX_ANGLE
+          \@vector(NX_NUMBER):
+        leaf_normal(NXtransformations):
+          exists: optional
+          doc: "Direction of surface normal vector of the first leaf on the side of solvent #1."
+          rotation_theta(NX_NUMBER):
+            doc: "Direction of surface normal vector of the first leaf on the side of solvent #1. Defaults to be parallel to detection direction."
+            \@depends_on(NX_CHAR):
+              doc: "Link to /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_z."
+            \@transformation_type(NX_CHAR):
+              enumeration: ["rotation"]
+            \@units: NX_ANGLE
+            \@vector(NX_NUMBER):
+              doc: "Base vector is the liquid jet flow direction."
       SOLVENT(NXsample_component):
         doc: "Solvent substance of the liquid jet. This also accounts for multiple jets if more than one solvent is given."
         description(NX_CHAR):
@@ -295,7 +364,7 @@ NXmpes:
           doc: "Molarity of the solute in the solution."
         solvent(NX_CHAR):
           doc: "Specifies the parent solvent entry of the solution."
-    DATA(NXdata):
+    (NXdata):
       \@signal(NX_CHAR):
         enumeration: ["data"]
       \@axes(NX_CHAR):
