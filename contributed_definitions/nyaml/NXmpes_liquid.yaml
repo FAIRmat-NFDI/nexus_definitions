@@ -13,6 +13,9 @@ NXmpes_liquid(NXmpes):
     (NXinstrument):
       (NXelectronanalyser):
         (NXcollectioncolumn):
+          dependes_on:
+            doc: Refers to the NXtransformation matrix which places the collectioncolumn in its coordinate frame.
+            exists: recommended
           (NXtransformations):
             exists: optional
             doc: "Direction of lens axis of analyzer."
@@ -46,6 +49,9 @@ NXmpes_liquid(NXmpes):
               unit: NX_LENGTH
               \@vector(NX_NUMBER):
         (NXdetector):
+          depends_on:
+            doc: Refers to the NXtransformation matrix which places the detector in its coordinate frame.
+            exists: recommended
           (NXtransformations):
             exists: optional
             doc: "Direction of the hemisphere of an HEA. Points towards the detector from the entrance slit."
@@ -88,11 +94,7 @@ NXmpes_liquid(NXmpes):
               doc: "The vector of the photon-beam direction into the chamber after the last optical element (or directly from the source if there are no optical elements)."
             \@depends_on(NX_CHAR):
               enumeration: ["."]
-    (NXprocess):
-      energy_calibration(NXcalibration):
     (NXsample):
-      description:
-        exists: recommended
       chemical_formula:
         exists: optional
         doc: "In the case of a fixed temperature measurement this is the scalar temperature of the sample. In the case of an experiment in which the temperature is changed and recoded, this is an array of length m of temperatures."
