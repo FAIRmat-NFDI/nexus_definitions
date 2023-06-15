@@ -7,6 +7,7 @@ PYTHON = python3
 SPHINX = sphinx-build
 BUILD_DIR = "build"
 NXDL_DIRS := contributed_definitions applications base_classes
+export NEXUS_DEF_PATH = $(shell pwd)
 
 .PHONY: help install style autoformat test clean prepare html pdf impatient-guide all local
 
