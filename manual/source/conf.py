@@ -80,10 +80,10 @@ html_extra_path = ['CNAME']
 
 html_sidebars = {
     '**': [
-        'localtoc.html', 
-        'relations.html', 
-        'sourcelink.html', 
-        'searchbox.html', 
+        'localtoc.html',
+        'relations.html',
+        'sourcelink.html',
+        'searchbox.html',
         'google_search.html'
     ],
 }
@@ -96,5 +96,7 @@ latex_elements = {
     'maxlistdepth':25, # some application definitions are deeply nested
     'preamble': r'''
     \usepackage{amsbsy}
-    \listfiles'''
+    \listfiles
+    \DeclareUnicodeCharacter{1F517}{X}
+    '''
 }
