@@ -98,6 +98,6 @@ latex_elements = {
     \usepackage{amsbsy}
     \listfiles
     \DeclareUnicodeCharacter{1F517}{X}
-    \DeclareUnicodeCharacter{2906}{<-}
+    \DeclareUnicodeCharacter{2906}{<=}
     '''
 }
