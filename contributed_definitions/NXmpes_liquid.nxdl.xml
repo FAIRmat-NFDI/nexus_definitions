@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+<!--
+# NeXus - Neutron and X-ray Common Data Format
+# 
+# Copyright (C) 2014-2022 NeXus International Advisory Committee (NIAC)
+# 
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For further information, see http://www.nexusformat.org
+-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" name="NXmpes_liquid" extends="NXmpes" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+    <!--Pincelli, Rettig, Arora at fhi-berlin.mpg.de, Dobener at hu-berlin.de, 06/2022
+Draft version of a NeXus application definition for photoemission,
+It is designed to be extended by other application definitions
+with higher granularity in the data description.-->
+    <doc>
+         This is the application definition for multidimensional photoelectron
+         spectroscopy on liquids
+    </doc>
+    <group type="NXentry">
+        <field name="definition">
+            <attribute name="version"/>
+            <enumeration>
+                <item value="NXmpes_liquid"/>
+            </enumeration>
+        </field>
+        <group type="NXinstrument">
+            <group type="NXelectronanalyser">
+                <group type="NXcollectioncolumn">
+                    <field name="dependes_on" recommended="true">
+                        <doc>
+                             Refers to the NXtransformation matrix which places the collectioncolumn in its
+                             coordinate frame.
+                        </doc>
+                    </field>
+                    <group type="NXtransformations" optional="true">
+                        <doc>
+                             Direction of lens axis of analyzer.
+                        </doc>
+                        <field name="rot_x" type="NX_NUMBER" units="NX_ANGLE">
+                            <attribute name="depends_on" type="NX_CHAR">
+                                <doc>
+                                     Is '.', since beam axis is assumed to be horizontal (perpendicular to gravity).
+                                </doc>
+                            </attribute>
+                            <attribute name="transformation_type" type="NX_CHAR">
+                                <enumeration>
+                                    <item value="rotation"/>
+                                </enumeration>
+                            </attribute>
+                            <attribute name="vector" type="NX_NUMBER"/>
+                        </field>
+                        <field name="rot_y" type="NX_NUMBER" units="NX_ANGLE">
+                            <attribute name="depends_on" type="NX_CHAR">
+                                <doc>
+                                     Link to
+                                     /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_x
+                                </doc>
+                            </attribute>
+                            <attribute name="transformation_type" type="NX_CHAR">
+                                <enumeration>
+                                    <item value="rotation"/>
+                                </enumeration>
+                            </attribute>
+                            <attribute name="vector" type="NX_NUMBER"/>
+                        </field>
+                        <field name="rot_z" type="NX_NUMBER" units="NX_ANGLE">
+                            <attribute name="depends_on" type="NX_CHAR">
+                                <doc>
+                                     Link to
+                                     /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_y.
+                                </doc>
+                            </attribute>
+                            <attribute name="transformation_type" type="NX_CHAR">
+                                <enumeration>
+                                    <item value="rotation"/>
+                                </enumeration>
+                            </attribute>
+                            <attribute name="vector" type="NX_NUMBER"/>
+                        </field>
+                        <field name="trans_z" type="NX_NUMBER" units="NX_LENGTH">
+                            <doc>
+                                 Same as working_distance.
+                            </doc>
+                            <attribute name="depends_on" type="NX_CHAR">
+                                <doc>
+                                     Link to
+                                     /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_z.
+                                </doc>
+                            </attribute>
+                            <attribute name="transformation_type" type="NX_CHAR">
+                                <enumeration>
+                                    <item value="translation"/>
+                                </enumeration>
+                            </attribute>
+                            <attribute name="vector" type="NX_NUMBER"/>
+                        </field>
+                    </group>
+                </group>
+                <group type="NXdetector">
+                    <field name="depends_on" recommended="true">
+                        <doc>
+                             Refers to the NXtransformation matrix which places the detector in its
+                             coordinate frame.
+                        </doc>
+                    </field>
+                    <group type="NXtransformations" optional="true">
+                        <doc>
+                             Direction of the hemisphere of an HEA. Points towards the detector from the
+                             entrance slit.
+                        </doc>
+                        <field name="rot_x" type="NX_NUMBER" units="NX_ANGLE">
+                            <attribute name="depends_on" type="NX_CHAR">
+                                <doc>
+                                     Is '.', since beam axis is assumed to be horizontal (perpendicular to gravity).
+                                </doc>
+                                <enumeration>
+                                    <item value="."/>
+                                </enumeration>
+                            </attribute>
+                            <attribute name="transformation_type" type="NX_CHAR">
+                                <enumeration>
+                                    <item value="rotation"/>
+                                </enumeration>
+                            </attribute>
+                            <attribute name="vector" type="NX_NUMBER"/>
+                        </field>
+                        <field name="rot_y" type="NX_NUMBER" units="NX_ANGLE">
+                            <attribute name="depends_on" type="NX_CHAR">
+                                <doc>
+                                     Link to
+                                     /NXentry/NXinstrument/NXelectronanalyser/NXdetector/NXtransformations/rot_x
+                                </doc>
+                            </attribute>
+                            <attribute name="transformation_type" type="NX_CHAR">
+                                <enumeration>
+                                    <item value="rotation"/>
+                                </enumeration>
+                            </attribute>
+                            <attribute name="vector" type="NX_NUMBER"/>
+                        </field>
+                        <field name="rot_z" type="NX_NUMBER" units="NX_ANGLE">
+                            <attribute name="depends_on" type="NX_CHAR">
+                                <doc>
+                                     Link to /NXentry/NXinstrument/NXelectronanalyser
+                                     /NXdetector/NXtransformations/rot_y.
+                                </doc>
+                            </attribute>
+                            <attribute name="transformation_type" type="NX_CHAR">
+                                <enumeration>
+                                    <item value="rotation"/>
+                                </enumeration>
+                            </attribute>
+                            <attribute name="vector" type="NX_NUMBER"/>
+                        </field>
+                    </group>
+                </group>
+                <group type="NXtransformations" optional="true">
+                    <doc>
+                         Transformations describing base geometry in the experiment. Usually defaults to
+                         the beam in z direction and gravity in -y direction.
+                    </doc>
+                    <field name="gravity_axis" type="NX_NUMBER">
+                        <doc>
+                             Direction of gravity.
+                        </doc>
+                        <attribute name="vector" type="NX_NUMBER">
+                            <doc>
+                                 The vector in the direction of gravity.
+                            </doc>
+                        </attribute>
+                        <attribute name="depends_on" type="NX_CHAR">
+                            <enumeration>
+                                <item value="."/>
+                            </enumeration>
+                        </attribute>
+                    </field>
+                    <field name="beam_axis" type="NX_NUMBER">
+                        <doc>
+                             Direction of the photon beam.
+                        </doc>
+                        <attribute name="vector" type="NX_NUMBER">
+                            <doc>
+                                 The vector of the photon-beam direction into the chamber after the last optical
+                                 element (or directly from the source if there are no optical elements).
+                            </doc>
+                        </attribute>
+                        <attribute name="depends_on" type="NX_CHAR">
+                            <enumeration>
+                                <item value="."/>
+                            </enumeration>
+                        </attribute>
+                    </field>
+                </group>
+            </group>
+        </group>
+        <group type="NXsample">
+            <field name="chemical_formula" optional="true">
+                <doc>
+                     In the case of a fixed temperature measurement this is the scalar temperature of
+                     the sample. In the case of an experiment in which the temperature is changed and
+                     recoded, this is an array of length m of temperatures.
+                </doc>
+            </field>
+            <field name="electric_field" type="NX_FLOAT" recommended="true" units="NX_VOLTAGE">
+                <doc>
+                     Electric field applied to the sample with respect to ground / the system, e.g.,
+                     via biasing.
+                </doc>
+            </field>
+            <field name="thickness" type="NX_FLOAT" recommended="true" units="NX_LENGTH">
+                <doc>
+                     Thickness of the sample in normal direction to the surface that is probed, e.g.,
+                     diameter of capillary (round jets) or thickness of the leaf (flat jets).
+                </doc>
+            </field>
+            <field name="flow_rate" type="NX_FLOAT" recommended="true" units="NX_VOLUME / NX_TIME">
+                <doc>
+                     Flow rate of the liquid into the chamber, i.e., throught the microjet capillary
+                     (or in case of a flat jet: both capillaries).
+                </doc>
+            </field>
+            <field name="shape" type="NX_CHAR">
+                <enumeration>
+                    <item value="round"/>
+                    <item value="flat"/>
+                </enumeration>
+            </field>
+            <field name="nozzle_material" type="NX_CHAR" recommended="true">
+                <doc>
+                     Material the microjet nozzle is made of (users are encouraged to expand on that
+                     in group preparation_description).
+                </doc>
+            </field>
+            <field name="depends_on" recommended="true">
+                <doc>
+                     Connects this liquidjet to its transformation chain.
+                </doc>
+            </field>
+            <group type="NXtransformations" recommended="true">
+                <doc>
+                     Transformations describing the transformation chain of the liquid jet flow
+                     direction and optionally the flat jet normal. The vector of the major flow
+                     direction of the liquid jet from the injection into the chamber. Along the
+                     cylinder axis for single, cylidrical jets, and parallel to the leaf plane for
+                     flatjets.
+                </doc>
+                <field name="rot_x" type="NX_NUMBER" units="NX_ANGLE">
+                    <attribute name="depends_on" type="NX_CHAR">
+                        <doc>
+                             Is '.', since beam axis is assumed to be horizontal (perpendicular to gravity).
+                        </doc>
+                    </attribute>
+                    <attribute name="transformation_type" type="NX_CHAR">
+                        <enumeration>
+                            <item value="rotation"/>
+                        </enumeration>
+                    </attribute>
+                    <attribute name="vector" type="NX_NUMBER"/>
+                </field>
+                <field name="rot_y" type="NX_NUMBER" units="NX_ANGLE">
+                    <attribute name="depends_on" type="NX_CHAR">
+                        <doc>
+                             Link to /NXentry/NXsample/rot_x
+                        </doc>
+                    </attribute>
+                    <attribute name="transformation_type" type="NX_CHAR">
+                        <enumeration>
+                            <item value="rotation"/>
+                        </enumeration>
+                    </attribute>
+                    <attribute name="vector" type="NX_NUMBER"/>
+                </field>
+                <field name="rot_z" type="NX_NUMBER" units="NX_ANGLE">
+                    <attribute name="depends_on" type="NX_CHAR">
+                        <doc>
+                             Link to /NXentry/NXsample/rot_y.
+                        </doc>
+                    </attribute>
+                    <attribute name="transformation_type" type="NX_CHAR">
+                        <enumeration>
+                            <item value="rotation"/>
+                        </enumeration>
+                    </attribute>
+                    <attribute name="vector" type="NX_NUMBER"/>
+                </field>
+                <group name="leaf_normal" type="NXtransformations" optional="true">
+                    <doc>
+                         Direction of surface normal vector of the first leaf on the side of solvent #1.
+                    </doc>
+                    <field name="rotation_theta" type="NX_NUMBER" units="NX_ANGLE">
+                        <doc>
+                             Direction of surface normal vector of the first leaf on the side of solvent #1.
+                             Defaults to be parallel to detection direction.
+                        </doc>
+                        <attribute name="depends_on" type="NX_CHAR">
+                            <doc>
+                                 Link to
+                                 /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_z.
+                            </doc>
+                        </attribute>
+                        <attribute name="transformation_type" type="NX_CHAR">
+                            <enumeration>
+                                <item value="rotation"/>
+                            </enumeration>
+                        </attribute>
+                        <attribute name="vector" type="NX_NUMBER">
+                            <doc>
+                                 Base vector is the liquid jet flow direction.
+                            </doc>
+                        </attribute>
+                    </field>
+                </group>
+            </group>
+            <group name="solventSOLVENT" type="NXsample_component">
+                <doc>
+                     Solvent substance of the liquid jet. This also accounts for multiple jets if
+                     more than one solvent is given.
+                </doc>
+                <field name="description" type="NX_CHAR" recommended="true"/>
+                <field name="name" type="NX_CHAR"/>
+                <field name="chemical_formula" type="NX_CHAR">
+                    <doc>
+                         Molecular or structural formula of the solvent.
+                    </doc>
+                </field>
+                <field name="chem_id_cas" type="NX_CHAR" recommended="true"/>
+                <field name="ph_value" type="NX_FLOAT" optional="true" units="NX_UNITLESS">
+                    <doc>
+                         Measured pH value of the solution.
+                    </doc>
+                </field>
+                <field name="ph_adjustment" type="NX_BOOLEAN" optional="true">
+                    <doc>
+                         Whether or not agents for pH adjustment were added to the solution. In this
+                         case, users are encouraged to expand on that in preparation_description.
+                    </doc>
+                </field>
+                <field name="mol_fraction" type="NX_FLOAT" optional="true" units="1 / NX_VOLUME">
+                    <doc>
+                         Molarity of the solvent in the solution.
+                    </doc>
+                </field>
+            </group>
+            <group name="soluteSOLUTE" type="NXsample_component">
+                <doc>
+                     Solute substance solved in a given solvent. This also accounts for multiple
+                     solutes if more than one is given.
+                </doc>
+                <field name="description" type="NX_CHAR" recommended="true"/>
+                <field name="name" type="NX_CHAR"/>
+                <field name="chemical_formula" type="NX_CHAR">
+                    <doc>
+                         Molecular or structural formula of the solute.
+                    </doc>
+                </field>
+                <field name="chem_id_cas" type="NX_CHAR" recommended="true"/>
+                <field name="mol_fraction" type="NX_FLOAT" recommended="true" units="1 / NX_VOLUME">
+                    <doc>
+                         Molarity of the solute in the solution.
+                    </doc>
+                </field>
+                <field name="solvent" type="NX_CHAR">
+                    <doc>
+                         Specifies the parent solvent entry of the solution.
+                    </doc>
+                </field>
+            </group>
+        </group>
+        <group type="NXdata">
+            <attribute name="axes" type="NX_CHAR">
+                <enumeration>
+                    <item value="energy"/>
+                </enumeration>
+            </attribute>
+            <field name="energy" type="NX_NUMBER" units="NX_ENERGY">
+                <doc>
+                     Data containing the energy axis.
+                </doc>
+            </field>
+        </group>
+    </group>
+</definition>
