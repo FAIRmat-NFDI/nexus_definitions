@@ -1,0 +1,51 @@
+category: base
+doc: |
+  Base class for recurrent information of components used inside an electron microscope.
+  
+  The electron microscope can be a real one or a virtual (simulated one).
+  The key motivation behind this generalization is that in all cases a
+  controlled electron beam is generated or simulated and then altered
+  in a controlled manner for the purpose of studying physical interaction
+  mechanism of the beam with matter (a real specimen or a simulated one).
+  
+  Using a common description for the real experiment in the lab and what is
+  typically a simplification of it via a computer simulation has the benefit
+  that many pieces of information can be stored in the same way and thus
+  ease guiding users to find such information.
+info: |
+  The key idea that an electron microscope is a beam line is supported by the fact
+  that frequently electron microscopes use hardware components from different
+  manufacturers where sometime their control uses an own software package.
+  Examples are furnaces attached to the stage or scanbox.
+  
+  One example is `point Electronic GmbH <https://www.pointelectronic.de>`_
+  which build hardware and software components for microscopes.
+type: group
+NXcomponent_em(NXobject):
+  name:
+    doc: |
+      Given name/alias.
+  description:
+    doc: |
+      Ideally, a (globally) unique persistent identifier, link,
+      or text to a resource which gives further details. If this does not exist
+      a free-text field to report further details about the corrector.
+  (NXfabrication):
+  (NXprogram):
+  # (NXtransformations):
+  #   doc: |
+  #     Affine transformation which detail the arrangement in the
+  #     (real/simulated) electron-optical setup relative to the
+  #     optical axis and path of charged particles (electrons or ions).
+  depends_on:
+    doc: |
+      Specifies the position of the lens by pointing to the last transformation in the
+      transformation chain in the NXtransformations group.
+  (NXtransformations):
+    doc: |
+      Collection of axis-based translations and rotations to describe the
+      location and geometry of the component in the instrument.
+    info: |
+      Typically, the components of a system should all be related relative to
+      each other and only one component should relate to the reference
+      coordinate system.
