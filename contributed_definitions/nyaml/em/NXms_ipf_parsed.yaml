@@ -1,0 +1,71 @@
+category: base
+doc: |
+  Base class to store an inverse pole figure mapping.
+symbols:
+  n_y: |
+    Number of pixel along the y slowest direction.
+  n_x: |
+    Number of pixel along the x fast direction.
+  n_rgb: |
+    Number of RGB values along the fastest direction, always three.
+type: group
+NXms_ipf(NXprocess):
+  projection_direction(R):
+    doc: |
+      The direction along which orientations are projected.
+    unit: NX_UNITLESS
+    dim: (3,)
+  map(NXdata):
+    doc: |
+      Inverse pole figure mapping.
+    # \@signal: data
+    # \@axes: [axis_y, axis_x]
+    # \@axis_x_indices: 0
+    # \@axis_y_indices: 1
+    data(N0):
+      unit: NX_UNITLESS
+      # hehe, but can be larger than one but could also be an NX_DIMENSIONLESS !
+      doc: |
+        Inverse pole figure color code for each map coordinate.
+      dim: (n_y, n_x, 3)
+    axis_y(R):
+      unit: NX_LENGTH
+      doc: |
+        Pixel center along the y axis of the map.
+      dim: (n_y,)
+      # \@long_name:
+    axis_x(R):
+      unit: NX_LENGTH
+      doc: |
+        Pixel center along the x axis of the map.
+      dim: (n_x,)
+      # \@long_name:
+    # title:
+  legend(NXdata):
+    doc: |
+      The color code which represents how orientations about positions
+      in the fundamental zone of orientation space are mapped
+      to an RGB triplet each.
+    # \@signal: data
+    # \@axes: [axis_y, axis_x]
+    # \@axis_x_indices: 0
+    # \@axis_y_indices: 1
+    data(N0):
+      unit: NX_UNITLESS
+      # hehe, but can be larger than one but could also be an NX_DIMENSIONLESS !
+      doc: |
+        Inverse pole figure color code for each map coordinate.
+      dim: (n_y, n_x, 3)
+    axis_y(R):
+      unit: NX_LENGTH
+      doc: |
+        Pixel along the y-axis.
+      dim: (n_y,)
+      # \@long_name:
+    axis_x(R):
+      unit: NX_LENGTH
+      doc: |
+        Pixel along the x-axis.
+      dim: (n_x,)
+      # \@long_name:
+    # title:
