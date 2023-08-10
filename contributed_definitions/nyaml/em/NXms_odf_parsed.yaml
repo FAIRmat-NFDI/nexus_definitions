@@ -1,0 +1,118 @@
+category: base
+doc: |
+  Base class to store an orientation distribution function computation.
+symbols:
+  n_varphi_one: |
+    Number of pixel per varphi section plot along the varphi_one fastest direction.
+  n_capital_phi: |
+    Number of pixel per varphi section plot along the capital_phi slow direction.
+  n_varphi_two: |
+    Number of pixel per varphi section plot along the varphi_two slowest direction.
+  k: |
+    Number of local maxima evaluated in the component analysis.
+type: group
+NXms_odf(NXprocess):
+  configuration(NXobject):
+    doc: |
+      Details about the algorithm which computed the pole figure.
+    crystal_symmetry_point_group:
+      doc: |
+        Point group of the crystal structure of the phase for which the
+        here documented phase-dependent pole figure was computed.
+    specimen_symmetry_point_group:
+      doc: |
+        Point group assumed for processing induced *sample symmetries*.
+    kernel_halfwidth(R+):
+      unit: NX_ANGLE
+      doc: |
+        Halfwidth of the kernel.
+    kernel_name:
+      doc: |
+        Name of the kernel.
+    phase_identifier(N):
+      doc: |
+        Identifier of e.g. an instance NXem_ebsd_crystal_structure_model
+        from which the orientation set was composed to compute the here
+        shown phase-dependent orientation distribution function.
+    phase_name:
+      doc: |
+        Name of e.g. an instance NXem_ebsd_crystal_structure_model
+        from which the orientation set was composed to compute the here
+        shown phase-dependent orientation distribution function.
+    resolution(R+):
+      unit: NX_ANGLE
+      doc: |
+        Resolution of the kernel.
+  kth_extrema(NXobject):  # put into an own class, ms_odf_cmp):
+    kth(N):
+      doc: |
+        Number of local maxima evaluated for the ODF.
+      unit: NX_UNITLESS
+      # value of kth should be k
+    location(R):
+      doc: |
+        Euler angle representation of the kth-most maxima of the ODF
+        in decreasing order of the intensity maximum.
+      unit: NX_ANGLE
+      dim: (k, 3)
+    theta(R+):
+      doc: |
+        Disorientation threshold within which intensity of the ODF
+        is integrated for the component analysis.
+      unit: NX_ANGLE
+    volume_fraction(R+0):
+      doc: |
+        Integrated ODF intensity within a theta-ball of SO3 about
+        each location as specified for each location in the order
+        and reported in the order of these locations.
+      unit: NX_ANY
+      dim: (k,)
+    
+  
+  phi_two_plot(NXdata):
+    doc: |
+      Visualization of the ODF intensity in Euler space represented
+      as orthogonal sections along the varphi_two axis.
+      
+      This is one example of typical default plots used in the texture
+      community in Materials Engineering.
+      
+      Mind that the Euler space is a distorted space. Therefore, equivalent
+      orientations show intensity contributions in eventually multiple
+      locations.
+    # \@signal: intensity
+    # \@axes: [varphi_two, capital_phi, varphi_one]
+    # \@varphi_one_indices: 0
+    # \@capital_phi: 1
+    # \@varphi_two_indices: 2
+    intensity(R):
+      unit: NX_UNITLESS
+      # hehe, but can be larger than one but could also be an NX_DIMENSIONLESS !
+      doc: |
+        Orientation distribution function intensity.
+        Mind that ODF intensity is relative to a complete random texture.
+      dim: (n_varphi_two, n_capital_phi, n_varphi_one)
+    varphi_one(R):
+      unit: NX_ANGLE
+      doc: |
+        Pixel center along the :math:`\varphi_1` direction.
+      dim: (n_varphi_one,)
+      \@long_name:
+        doc: |
+          Coordinate along :math:`\varphi_1` direction.
+    varphi_two(R):
+      unit: NX_ANGLE
+      doc: |
+        Pixel center along the :math:`\varphi_2` direction.
+      dim: (n_varphi_two,)
+      \@long_name:
+        doc: |
+          Coordinate along :math:`\varphi_2` direction.
+    capital_phi(R):
+      unit: NX_ANGLE
+      doc: |
+        Pixel center along the :math:`\Phi` direction.
+      dim: (n_capital_phi,)
+      \@long_name:
+        doc: |
+          Coordinate along :math:`\Phi` direction.
