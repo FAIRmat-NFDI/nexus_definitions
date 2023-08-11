@@ -1,0 +1,73 @@
+category: base
+doc: |
+  Base class for simulating electron microscopy relevant beam-matter interaction.
+  
+  The concept behind this base class is to keep it as generic as possible
+  that simulations of electron/ion beam interaction with matter can be
+  represented. This base class is envisioned as the twin of the NXem_msr base
+  class. It is an attempt to test the idea if at some point one might even
+  the same base class template to describe measurements and computer simulations
+  of electron microscopy. This idea is attractive because the only practical
+  difference between a description of a measurement with a microscope and a
+  computer simulation of that microscope comes typically with substantial
+  simplifications of the simulated setup. These simplification can be the
+  optical setup, typically the ignoring of the fact that the electron beam
+  is produced by a complex setup of lenses while in simulations often single
+  lenses are considered. Dynamics of the environment like temperature fluctuation
+  in a lab, vibrations, users, and multiple detectors are typically either ignored
+  or reduced in complexity and number and coming with idealizations to keep the
+  simulations focused on the specific reason questions and efficient.
+# abTEM and other simulation packages
+type: group
+NXem_sim(NXem_method):
+simulation(NXprocess):
+#####################
+      exists: recommended
+      doc: |
+        Details about simulations for Kikuchi pattern using kinematic or dynamic
+        diffraction theory. Usually, the output of such computer simulations are
+        spherical Kikuchi images which only when projected or observed in some
+        region-of-interest will represent a set of rectangular Kikuchi pattern
+        with the same rectangular shape and image size.
+        
+        Therefore, these pattern should be stored. The spherical diffraction
+        pattern can be stored as a set of triangulated geodesic meshes.
+        The rectangular patterns should be stored as NXimage_set_em_kikuchi stack.
+        
+        Do not store pattern in the simulation group if they
+        have been measured are not simulated.
+      sequence_index(NX_POSINT):
+      (NXprogram):
+        exists: ['min', '0', 'max', 'unbounded']
+        program:
+          \@version:
+      (NXcg_geodesic_mesh):
+        exists: ['min', '0', 'max', 'unbounded']
+      (NXimage_set_em_kikuchi):
+        stack(NXdata):
+          \@signal:
+          \@axes:
+          \@AXISNAME_indices:
+          
+          # \@long_name:
+          title:
+          data_counts(NX_NUMBER):
+            \@long_name:
+          
+          # dimensions:
+          # rank: 3
+          # dim: [[1, n_p], [2, n_y], [3, n_x]]
+          pattern_identifier(NX_UINT):
+            \@long_name:
+          
+          # dimensions:
+          # rank: 1
+          # dim: [[1, n_p]]
+          axis_y(NX_NUMBER):
+            \@long_name:
+          
+          # dimensions:
+          # rank: 1
+          # dim: [[1, n_y]]
+          axis_x(NX_NUMBER):
+            \@long_name:

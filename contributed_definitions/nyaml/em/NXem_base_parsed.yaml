@@ -1,0 +1,295 @@
+category: base class   # template to be used for an application definition
+doc: |
+  Base class for structuring data and metadata of electron microscopy research.
+  
+  This base class combines a method-specific and technical design base classes
+  to enable users a storage and parameterized description of pieces of information
+  collected when performing electron microscopy research.
+  
+  The base class here shows all possible branches without making any statements
+  as to which of these have to be used in an instance. Thereby, the base class
+  provides a template how to name and structure concepts in a hierarchy
+  to support finding information and reducing the need for renaming and
+  restructuring information for a research field where many scientists perform
+  very specific research but all use controlled electron beams to study
+  electron beam matter interaction to explore physical mechanisms and phenomena
+  or to characterize materials.
+# flesh out the description of that to read the docs, because currently the
+# description on the NeXus front-page is overwhelming
+# considering what we learned from the diataxis workshop we write here a
+# specification neither a how to nor a tutorial which explains all the context
+# because we address here developers of software
+type: group
+NXem_base(NXroot):
+  # \@NX_class:
+  # \@file_time: (optional) NX_DATE_TIME
+  # \@file_name: (optional) NX_CHAR
+  # \@file_update_time: (optional) NX_DATE_TIME
+  # \@NeXus_version: (optional) NX_CHAR
+  # \@HDF_version: (optional) NX_CHAR
+  # \@HDF5_Version: (optional) NX_CHAR
+  # \@XML_version: (optional) NX_CHAR
+  # \@h5py_version: (optional) NX_CHAR
+  # \@creator: (optional) NX_CHAR
+  # \@creator_version: (optional) NX_CHAR
+  # \@default: (optional) NX_CHAR
+  (NXentry):  # means ENTRY(NXentry)
+    \@version:
+      doc: |
+        An at least as strong as SHA256 hashvalue of the file
+        which specifies the application definition.
+    definition:
+      doc: |
+        NeXus NXDL schema to which this file conforms.
+      enumeration: [NXem]
+    experiment_identifier:
+      doc: |
+        Ideally, a (globally) unique persistent identifier
+        for referring to this experiment.
+        
+        An experiment should be understood in that this can be an experiment
+        in reality or a computer simulation because also the latter is an
+        experiment (see the Cambridge Dictionary experiment: 
+        *a test done in order to find out something, eg if an idea is correct*).
+        
+        The identifier is usually issued by the facility, laboratory,
+        or the principle investigator. The identifier enables to link
+        experiments/simulations to e.g. proposals.
+    experiment_description:
+      doc: |
+        Free-text description about the experiment.
+        
+        Users are strongly advised to parameterize their description of the
+        experiment by using the respective base classes instead of writing prose
+        into this field.
+        
+        The reason is that such free-text field is difficult to machine-interpret.
+        The motivation behind keeping this field for now is to learn through
+        the information entered in this field in how far the current base
+        classes are incomplete.
+    start_time(NX_DATE_TIME):
+      doc: |
+        ISO 8601 time code with local time zone offset to UTC information included
+        when the microscope session started. If the application demands that time
+        codes in this section of the application definition should only be used
+        for specifying when the experiment was performed - and the exact
+        duration is not relevant - this start_time field should be used.
+        
+        Often though it is useful to specify a time interval via setting both
+        a start_time and an end_time as this enables more detailed bookkeeping and
+        interpretation of the experiment.
+      info: |
+        The user should be aware that even with having both time instances specified,
+        it may not be possible to infer how long the experiment took or for how
+        long data were acquired.
+        
+        More detailed timing data over the course of the experiment have
+        to be collected to compute this. These computations can take
+        advantage of individual time stamps in NXevent_data_em instances.
+    end_time(NX_DATE_TIME):
+      doc: |
+        ISO 8601 time code with local time zone offset to UTC included when
+        the microscope session ended.
+    (NXprogram):
+      doc: |
+        The program and eventual software libraries used with which the
+        NeXus instance was created. For the NOMAD OASIS research data
+        management system e.g. pynxtools and eventually (all modules
+        if desired).
+      # the above-description overwrites the default description of the NXprogram base class
+      # this is composed from the NXprogram base class
+      # program:
+      #   \@version:
+      #   \@url:
+    # Nxnote and thumbnail dropped for the reason that these are
+    # arbitrary binary containers without any clear provenance.
+    (NXuser):
+      doc: |
+        Contact information and eventually details of at least one person
+        who performed or was involved in the session. This can be the
+        principle investigator who performed this experiment or the student
+        who performed the simulation.
+        Adding multiple users if relevant is recommended.
+      name:
+        doc: |
+          Given (first) name and surname of the user.
+      affiliation:
+        doc: |
+          Name of the affiliation of the user at the point in time
+          when the experiment was performed.
+      address:
+        doc: |
+          Postal address of the affiliation.
+      email:
+        doc: |
+          Email address of the user at the point in time when the experiment
+          was performed. Writing the most permanently used email is recommended.
+      orcid:
+        doc: |
+          Globally unique identifier of the user as offered by services
+          like ORCID or ResearcherID. If this field is field the specific service
+          should also be written in orcid_platform
+      orcid_platform:
+        doc: |
+          Name of the OrcID or ResearcherID where the account
+          under orcid is registered.
+      telephone_number:
+        doc: |
+          (Business) (tele)phone number of the user at the point
+          in time when the experiment was performed.
+      role:
+        doc: |
+          Which role does the user have in the place and at the point
+          in time when the experiment was performed? Technician operating
+          the microscope. Student, postdoc, principle investigator, guest
+          are common examples.
+      social_media_name:
+        doc: |
+          Account name that is associated with the user in social media platforms.
+      social_media_platform:
+        doc: |
+          Name of the social media platform where the account
+          under social_media_name is registered.
+    sample(NXsample):
+      # NEW ISSUE: inject the conclusion from the discussion with Andrea
+      # according to SAMPLE.yaml 0f8df14 2022/06/15
+      # ID: -> maps to name
+      # name: -> short_title
+      # user: -> not matched right now
+      # citation: doi ->why relevant, should be solved by RDMS
+      doc: |
+        A description of the material characterized in the experiment.
+        Sample and specimen are threaded as de facto synonyms.
+        Samples can be real specimens or virtual (see method).
+      method:
+        doc: |
+          A qualifier whether the sample is a real one or a
+          virtual one (in a computer simulation)
+        enumeration: [experiment, simulation]
+      # MK:: declared_by_vendor I would rather expect this for a substance
+      # COMPONENT.yaml
+      # SUBSTANCE:
+      # QUANTIFY
+      identifier:
+        doc: |
+          Ideally, (globally) unique persistent identifier which distinguishes
+          the specimen from all others and especially the predecessor/origin
+          from where the specimen was cut. 
+          
+          This field must not be used for an alias! Instead, use name.
+          
+          In cases where multiple specimens were loaded into the microscope,
+          the identifier has to for the specific sample, whose results are stored
+          by this NXentry instance, because a single NXentry should be used only for
+          the characterization of a single specimen.
+          
+          Details about the specimen preparation should be stored in the
+          sample history.
+      sample_history:
+        doc: |
+          Ideally, a reference to or a (globally) unique persistent identifier,
+          whereby a data artifact is specified which documents ideally as many
+          details of the material, its microstructure, and its 
+          thermo-chemo-mechanical processing/preparation history as possible.
+          
+          The sample_history is the identifier which enables to trace what happened
+          before the experiment which is documented here.
+          
+          In the case that a detailed history of the sample is not available,
+          use this field as a free-text description to specify a sub-set of the
+          entire sample history, i.e. what you would consider are the key steps
+          and relevant information to report about the specimen,
+          its material, microstructure, thermo-chemo-mechanical processing state,
+          and the details of the preparation.
+          
+          Specific details about eventual physically-connected material like
+          embedding resin should be documented ideally also in the sample_history.
+          If all fails, the description field can be used but it is strongly
+          discouraged because it leads to eventually non-machine-actionable
+          data.
+      preparation_date(NX_DATE_TIME):
+        doc: |
+          ISO 8601 time code with local time zone offset to UTC information
+          when the specimen was prepared.
+          
+          Ideally report the end of the preparation, i.e. the last known time
+          the measured specimen surface was actively prepared. Usually this should
+          be a part of the sample history, i.e. the sample is imagined handed over
+          for analysis.
+          
+          Knowing when the specimen was exposed to e.g. specific atmosphere is
+          especially required for environmentally sensitive material such as
+          hydrogen charged specimens or experiments including tracers with a
+          short half time. Additional time stamps prior to preparation_date
+          should better be placed in resources which
+          describe the sample_history. To resolve these resources is the
+          purpose of sample_history.
+      name:
+        doc: |
+          An alias of used to refer to the specimen to please readability for humans.
+      atom_types:
+        doc: |
+          List of comma-separated elements from the periodic table that are
+          contained in the sample. If the sample substance has multiple
+          components, all elements from each component must be included in
+          `atom_types`.
+          
+          The purpose of the field is to offer materials database systems an
+          opportunity to parse the relevant elements without having to interpret
+          these from the sample history.
+      # NEW ISSUE: use Andrea and MarkusK groups for describing the geometry of the sample
+      thickness(R+):
+        unit: NX_LENGTH
+        doc: |
+          (Measured) sample thickness. The information is recorded to qualify
+          if the beam used was likely able to shine through the specimen.
+          For scanning electron microscopy, in many cases the specimen is much
+          thicker than what is illuminatable by the electron beam.
+          In this case the value should be set to the actual thickness of
+          the specimen viewed for an illumination situation where the nominal
+          surface normal of the specimen is parallel to the optical axis.
+      # \@units: nm
+      # NEW ISSUE: error estimates of the thickness and origin, i.e. how the value was obtained would be useful
+      # NEW ISSUE: error model
+      # NEW ISSUE: the KIT/SCC SEM, TEM schemata further qualify samples whether they are conductive e/ibeam sensitive
+      # etc. The problem with this is that beam sensitivity is too vague but spatio-temporal electron dose integral dependent
+      # KIT/SCC distinguish further conductivity and magnetic properties. While the motivation is clear, making
+      # it thus simple is likely problematic when the data entered in such fields remaining qualitative.
+      # what are good or bad properties, it would make sense though to quantify these values
+      # this includes the description of eventual plasma cleaning steps,
+      # just knowing that a sample was plasma cleaned is insufficient, maybe it was not cleaned long enough
+      # if plasma cleaning is done outside the EM than its certainly history, if it happens inside the EM
+      # are the ibeam description capabilities not sufficient enough?
+      density(R+):
+        unit: NX_MASS_PER_VOLUME
+        doc: |
+          (Measured) density of the specimen.
+        info: |
+          For multi-layered specimens this field should only be used to describe
+          the density of the excited volume. For scanning electron microscopy
+          the usage of this field is discouraged and instead an instance of an 
+          :ref:`NXinteraction_vol_em` within individual :ref:`NXevent_data_em`
+          instances can provide a cleaner description of the relevant details
+          why one may wish to store the density of the specimen.
+      description:
+        doc: |
+          Discouraged free-text field in case properly designed records
+          for the sample_history are not available.
+    (NXmonitor):
+    (NXdata):
+    (NXcoordinate_system_set):
+    # link to an instance of an NXinstrument but that is anyway specialized for EM
+    measurement(NXem_msr):
+    simulation(NXem_sim):
+    EM_ROI(NXroi):
+      doc: |
+        A region-of-interest analyzed either during or after the session.
+        For which specific processed data of the measured or simulated
+        data are available.
+      se(NXem_img):
+      bse(NXem_img):
+      ebsd(NXem_ebsd):
+      eds(NXem_eds):
+      adf(NXem_adf):
+      eels(NXem_eels):
+      # cl(NXem_cl):

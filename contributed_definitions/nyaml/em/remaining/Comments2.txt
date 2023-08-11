@@ -1,0 +1,793 @@
+##### debug
+    em_lab(NXinstrument):
+      doc: |
+        Metadata and numerical data of the microscope and the lab in which it stands.
+        
+        The em_lab section contains a description of the instrument and its components.
+        The component descriptions in this section differ from those inside individual
+        NXevent_data_em sections. These event instances take the role of time snapshot.
+        For an NXevent_data_em instance users should store only those settings for a
+        component which are relevant to understand the current state of the component.
+        Here, current means at the point in time, i.e. the time interval,
+        which the event represents.
+        
+        For example it is not relevant to store in each event's electron_source
+        group again the details of the gun type and manufacturer but only the
+        high-voltage if for that event the high-voltage was different. If for all
+        events the high-voltage was the same it is not even necessary to include
+        an electron_source section in the event.
+        
+        Individual sections of specific type should have the following names:
+        
+        * NXaperture: the name should match with the name of the lens
+        * NXlens_em: condenser_lens, objective_lens are commonly used names
+        * NXcorrector_cs: device for correcting spherical aberrations
+        * NXstage_lab: a collection of component for holding the specimen and
+          eventual additional component for applying external stimuli on the sample
+        * NXdetector: several possible names like secondary_electron,
+          backscattered_electron, direct_electron, ebsd, edx, wds, auger,
+          cathodoluminescence, camera, ronchigram
+      instrument_name:
+        doc: |
+          Given name of the microscope at the hosting institution. This is an alias.
+          Examples could be NionHermes, Titan, JEOL, Gemini, etc.
+      location:
+        exists: optional
+        doc: |
+          Location of the lab or place where the instrument is installed.
+          Using GEOREF is preferred.
+      (NXfabrication):
+        vendor:
+          exists: recommended
+        model:
+          exists: recommended
+        identifier:
+          exists: recommended
+        capabilities:
+          exists: optional
+      (NXchamber):
+        exists: optional
+      (NXebeam_column):
+        exists: ['min', '1', 'max', '1']
+        (NXfabrication):
+          exists: recommended
+          vendor:
+            exists: recommended
+          model:
+            exists: recommended
+          identifier:
+            exists: recommended
+        (NXchamber):
+          exists: optional
+        electron_source(NXsource):
+          name:
+            exists: recommended
+          (NXfabrication):
+            exists: recommended
+            vendor:
+              exists: recommended
+            model:
+              exists: recommended
+            identifier:
+              exists: recommended
+          voltage(NX_FLOAT):
+          emitter_type:
+            exists: recommended
+            enumeration: [thermionic, schottky, field_emission]
+        (NXaperture_em):
+          exists: ['min', '0', 'max', 'unbounded']
+          (NXfabrication):
+            exists: recommended
+            vendor:
+              exists: recommended
+            model:
+              exists: recommended
+            identifier:
+              exists: recommended
+          value(NX_NUMBER):
+          name:
+          description:
+            exists: optional
+        (NXlens_em):
+          exists: ['min', '0', 'max', 'unbounded']
+          doc: |
+            If the lens is described at least one of the fields
+            voltage, current, or value should be defined.
+          
+          # a classical case where we want at least one field of multiple to exist
+          (NXfabrication):
+            exists: recommended
+            vendor:
+              exists: recommended
+            model:
+              exists: recommended
+            identifier:
+              exists: recommended
+          voltage(NX_NUMBER):
+            exists: recommended
+          current(NX_NUMBER):
+            exists: recommended
+          value(NX_NUMBER):
+            exists: recommended
+        aberration_correction(NXcorrector_cs):
+          exists: recommended
+          applied(NX_BOOLEAN):
+          name:
+            exists: optional
+          (NXfabrication):
+            exists: recommended
+            vendor:
+              exists: recommended
+            model:
+              exists: recommended
+            identifier:
+              exists: recommended
+          ZEMLIN_TABLEAU(NXprocess):
+            exists: recommended
+            description:
+              exists: optional
+            tilt_angle(NX_FLOAT):
+              exists: recommended
+              unit: NX_ANGLE
+            exposure_time(NX_FLOAT):
+              exists: recommended
+              unit: NX_TIME
+            magnification(NX_NUMBER):
+              exists: optional
+              unit: NX_DIMENSIONLESS
+            (NXprocess):
+              exists: ['min', '0', 'max', 'unbounded']
+              ceos(NXaberration_model_ceos):
+                exists: optional
+                c_1(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_TIME
+                a_1(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  angle(NX_FLOAT):
+                    unit: NX_ANGLE
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_TIME
+                b_2(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  angle(NX_FLOAT):
+                    unit: NX_ANGLE
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_TIME
+                a_2(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  angle(NX_FLOAT):
+                    unit: NX_ANGLE
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_TIME
+                c_3(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_TIME
+                s_3(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  angle(NX_FLOAT):
+                    unit: NX_ANGLE
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_TIME
+                a_3(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  angle(NX_FLOAT):
+                    unit: NX_ANGLE
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_TIME
+                
+                # based on feedback from Thilo Remmele the following aberrations could be measured
+                b_4(NXaberration):
+                  exists: optional
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  angle(NX_FLOAT):
+                    unit: NX_ANGLE
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_TIME
+                d_4(NXaberration):
+                  exists: optional
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  angle(NX_FLOAT):
+                    unit: NX_ANGLE
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_TIME
+                a_4(NXaberration):
+                  exists: optional
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  angle(NX_FLOAT):
+                    unit: NX_ANGLE
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_TIME
+                c_5(NXaberration):
+                  exists: optional
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_TIME
+                s_5(NXaberration):
+                  exists: optional
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  angle(NX_FLOAT):
+                    unit: NX_ANGLE
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_TIME
+                r_5(NXaberration):
+                  exists: optional
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  angle(NX_FLOAT):
+                    unit: NX_ANGLE
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_TIME
+                a_6(NXaberration):
+                  exists: optional
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  angle(NX_FLOAT):
+                    unit: NX_ANGLE
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_TIME
+              nion(NXaberration_model_nion):
+                exists: optional
+                c_1_0(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_1_2_a(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_1_2_b(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_2_1_a(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_2_1_b(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_2_3_a(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_2_3_b(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_3_0(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_3_2_a(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_3_2_b(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_3_4_a(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_3_4_b(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_4_1_a(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_4_1_b(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_4_3_a(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_4_3_b(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_4_5_a(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_4_5_b(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_5_0(NXaberration):
+                  exists: recommended
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_5_2_a(NXaberration):
+                  exists: optional
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_5_2_b(NXaberration):
+                  exists: optional
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_5_4_a(NXaberration):
+                  exists: optional
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_5_4_b(NXaberration):
+                  exists: optional
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_5_6_a(NXaberration):
+                  exists: optional
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+                c_5_6_b(NXaberration):
+                  exists: optional
+                  magnitude(NX_FLOAT):
+                    unit: NX_LENGTH
+                  uncertainty(NX_FLOAT):
+                    exists: recommended
+                    unit: NX_LENGTH
+                  uncertainty_model:
+                    exists: recommended
+                  delta_time(NX_FLOAT):
+                    exists: optional
+                    unit: NX_TIME
+      (NXibeam_column):
+        exists: ['min', '0', 'max', '2']
+        (NXfabrication):
+          exists: recommended
+          vendor:
+            exists: recommended
+          model:
+            exists: recommended
+          identifier:
+            exists: recommended
+        (NXchamber):
+          exists: optional
+        ion_source(NXsource):
+          name:
+            exists: recommended
+          (NXfabrication):
+            exists: recommended
+            vendor:
+              exists: recommended
+            model:
+              exists: recommended
+            identifier:
+              exists: recommended
+          emitter_type:
+          probe(NXion):
+            charge_state(NX_INT):
+              exists: recommended
+            isotope_vector(NX_UINT):
+              exists: recommended
+            name:
+              exists: recommended
+          voltage(NX_FLOAT):
+          current(NX_FLOAT):
+        (NXaperture_em):
+          exists: recommended
+          (NXfabrication):
+            exists: recommended
+            vendor:
+              exists: recommended
+            model:
+              exists: recommended
+            identifier:
+              exists: recommended
+          value(NX_NUMBER):
+        (NXlens_em):
+          exists: recommended
+          doc: |
+            If the lens is described at least one of the fields
+            voltage, current, or value should be defined.
+          (NXfabrication):
+            exists: recommended
+            identifier:
+              exists: recommended
+          voltage(NX_NUMBER):
+            exists: recommended
+          current(NX_NUMBER):
+            exists: recommended
+          value(NX_NUMBER):
+            exists: recommended
+      EBEAM_DEFLECTOR(NXscanbox_em):
+        exists: ['min', '0', 'max', 'unbounded']
+        (NXfabrication):
+          exists: recommended
+          vendor:
+            exists: recommended
+          model:
+            exists: recommended
+          identifier:
+            exists: recommended
+        pixel_time(NX_FLOAT):
+          exists: recommended
+      IBEAM_DEFLECTOR(NXscanbox_em):
+        exists: ['min', '0', 'max', 'unbounded']
+        (NXfabrication):
+          exists: recommended
+          vendor:
+            exists: recommended
+          model:
+            exists: recommended
+          identifier:
+            exists: recommended
+      (NXoptical_system_em):
+        exists: recommended
+        camera_length(NX_NUMBER):
+          exists: optional
+        magnification(NX_NUMBER):
+          exists: optional
+        defocus(NX_NUMBER):
+          exists: recommended
+        
+        # this is c_1_0 of aberration_correction
+        semi_convergence_angle(NX_NUMBER):
+          exists: recommended
+        working_distance(NX_FLOAT):
+          exists: recommended
+        beam_current(NX_FLOAT):
+          exists: recommended
+        beam_current_description:
+          exists: recommended
+      
+      # vendor/instrument-specific data currently case-by-case dependent
+      # e.g. Nion Co. magboard settings
+      # instances of NXoptical system can be placed here and specific for
+      # each NXevent_data_em instance if desired
+      
+      ##MK::eventually only adding (NXfabrication) and the new docstring
+      # is needed, will the rest be inferred automatically?
+      DETECTOR(NXdetector):
+        exists: ['min', '1', 'max', 'unbounded']
+        doc: |
+          Description of the type of the detector.
+          
+          Electron microscopes have typically multiple detectors.
+          Different technologies are in use like CCD, scintillator,
+          direct electron, CMOS, or image plate to name but a few.
+        local_name:
+          doc: |
+            Instrument-specific alias/name
+        
+        # it is unfortunate that for NXdetector there are already many places
+        # how one can specify details which could equally end up in fabrications
+        # we should give better guidance which option to use
+        (NXfabrication):
+          exists: recommended
+          identifier:
+            exists: recommended
+      (NXpump):
+        exists: ['min', '0', 'max', 'unbounded']
+      
+      # NEW ISSUE: do we consider the EELS spectrometer an own detector or an own functional unit i.e. NXeels
+      stage_lab(NXstage_lab):
+        name:
+        (NXfabrication):
+          exists: recommended
+          vendor:
+            exists: recommended
+          model:
+            exists: recommended
+          identifier:
+            exists: recommended
+          capabilities:
+            exists: optional
+        design:
+          exists: recommended
+        description:
+          exists: optional
+        
+        # tricky for arbitrary design we cannot enforce all the below to exist at all
+        position(NX_FLOAT):
+          exists: recommended
+        rotation(NX_FLOAT):
+          exists: recommended
+        tilt_1(NX_FLOAT):
+          exists: recommended
+        tilt_2(NX_FLOAT):
+          exists: recommended
+
+#### end debug
