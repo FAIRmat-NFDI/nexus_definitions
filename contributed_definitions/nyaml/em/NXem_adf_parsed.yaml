@@ -1,6 +1,14 @@
 category: base
 doc: |
-  Specialized base class container for reporting a set of images in real space.
+  Base class method-specific for annular dark field imaging.
+  
+  In the majority of cases simple d-dimensional regular scan patterns are used
+  to probe a region-of-interest (ROI). Examples can be single point aka spot
+  measurements, line profiles, or (rectangular) surface mappings.
+  The latter pattern is the most frequently used.
+  
+  For now the base class provides for scans for which the settings,
+  binning, and energy resolution is the same for each scan point.
 symbols:
   n_images: |
     Number of images in the stack.
@@ -9,43 +17,18 @@ symbols:
   n_x: |
     Number of pixel per image in the fast direction.
 type: group
-NXimage_r_set(NXimage_set):
-  # process information are composable from the NXimage_set base class
-  stack(NXdata):
-    doc: |
-      Image (stack).
-    data_counts(R):
-      unit: NX_UNITLESS
+NXem_adf(NXem_method):
+  IMAGE_R_SET(NXimage_r_set):
+    half_angle_interval(R):
+      unit: NX_ANGLE
       doc: |
-        Image intensity values.
-      dim: (n_images, n_y, n_x)
-    axis_image_identifier(N0):
-      unit: NX_UNITLESS
-      doc: |
-        Image identifier
-      dim: (n_images,)
-      \@long_name:
-        doc: |
-          Image identifier.
-    axis_y(R):
-      unit: NX_LENGTH
-      doc: |
-        Pixel coordinate center along y direction.
-      dim: (n_y,)
-      \@long_name:
-        doc: |
-          Coordinate along y direction.
-    axis_x(R):
-      unit: NX_LENGTH
-      doc: |
-        Pixel coordinate center along x direction.
-      dim: (n_x,)
-      \@long_name:
-        doc: |
-          Coordinate along x direction.
+        Annulus inner (first value) and outer (second value) half angle.
+      dim: (2,)
+    # all information about annular dark field images is composed from
+    # the NXimage_r_set_em base class
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# d8a2ad749b0efcaf144af79af9d4ea222dc72b0d946125be13563dd6d5ccb4c2
+# 4af28c1f529beba15afbed5d28bccfaecc08b2c46e956fcaa3fe2e08ca4669e9
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -69,7 +52,7 @@ NXimage_r_set(NXimage_set):
 # #
 # # For further information, see http://www.nexusformat.org
 # -->
-# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" name="NXimage_set" extends="NXobject" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" name="NXimage_set_em_adf" extends="NXobject" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <symbols>
 #         <symbol name="n_images">
 #             <doc>
@@ -88,41 +71,69 @@ NXimage_r_set(NXimage_set):
 #         </symbol>
 #     </symbols>
 #     <doc>
-#          Container for reporting a set of images taken.
+#          Container for reporting a set of annular dark field images.
+#          
+#          Virtually the most important case is that spectra are collected in 
+#          a scanning microscope (SEM or STEM) for a collection of points.
+#          The majority of cases use simple d-dimensional regular scan pattern,
+#          such as single point, line profiles, or (rectangular) surface mappings.
+#          The latter pattern is the most frequently used.
+#          
+#          For now the base class provides for scans for which the settings,
+#          binning, and energy resolution is the same for each scan point.
 #     </doc>
 #     <group type="NXprocess">
 #         <doc>
-#              Details how images were processed from the detector readings.
+#              Details how (HA)ADF images were processed from the detector readings.
 #         </doc>
 #         <field name="source">
 #             <doc>
-#                  Resolvable data artifact (e.g. filename) from which the all values in
-#                  the NXdata instances in this NXimage_set were loaded during parsing.
+#                  Typically the name of the input, (vendor) file from which all
+#                  the NXdata instances in this NXimage_set_em_adf were loaded during
+#                  parsing to represent them in e.g. databases.
 #             </doc>
 #             <attribute name="version">
 #                 <doc>
-#                      An at least as strong as SHA256 hashvalue of the data artifact which
-#                      source represents digitally to support provenance tracking.
+#                      An at least as strong as SHA256 hashvalue of the dataset/file
+#                      which represents the source digitally to support provenance tracking.
 #                 </doc>
 #             </attribute>
 #         </field>
-#         <field name="mode">
+#         <field name="program">
 #             <doc>
-#                  Imaging (data collection) mode of the instrument during acquisition
-#                  of the data in this NXimage_set instance.
+#                  Commercial or otherwise given name to the program which was used
+#                  to process detector data into the adf image(s).
+#             </doc>
+#             <attribute name="version">
+#                 <doc>
+#                      Program version plus build number, commit hash, or description
+#                      of an ever persistent resource where the source code of the program
+#                      and build instructions can be found so that the program
+#                      can be configured in such a manner that the result file
+#                      is ideally recreatable yielding the same results.
+#                 </doc>
+#             </attribute>
+#         </field>
+#         <field name="adf_inner_half_angle" type="NX_FLOAT" units="NX_ANGLE">
+#             <doc>
+#                  Annulus inner half angle
 #             </doc>
 #         </field>
-#         <field name="detector_identifier">
+#         <field name="adf_outer_half_angle" type="NX_FLOAT" units="NX_ANGLE">
 #             <doc>
-#                  Link or name of an NXdetector instance with which the data were collected.
+#                  Annulus outer half angle
 #             </doc>
 #         </field>
-#         <group type="NXprogram"/>
 #     </group>
 #     <group name="stack" type="NXdata">
 #         <doc>
-#              Image (stack).
+#              Annular dark field image stack.
 #         </doc>
+#         <!--\@signal: intensity
+# \@axes: [image_id, ypos, xpos]
+# \@xpos_indices: 2
+# \@ypos_indices: 1
+# \@image_indices: 0-->
 #         <field name="data_counts" type="NX_NUMBER" units="NX_UNITLESS">
 #             <doc>
 #                  Image intensity values.
@@ -142,13 +153,13 @@ NXimage_r_set(NXimage_set):
 #             </dimensions>
 #             <attribute name="long_name">
 #                 <doc>
-#                      Image identifier.
+#                      Image ID.
 #                 </doc>
 #             </attribute>
 #         </field>
 #         <field name="axis_y" type="NX_NUMBER" units="NX_LENGTH">
 #             <doc>
-#                  Pixel coordinate center of mass along y direction.
+#                  Pixel center of mass along y direction.
 #             </doc>
 #             <dimensions rank="1">
 #                 <dim index="1" value="n_y"/>
@@ -161,7 +172,7 @@ NXimage_r_set(NXimage_set):
 #         </field>
 #         <field name="axis_x" type="NX_NUMBER" units="NX_LENGTH">
 #             <doc>
-#                  Pixel coordinate center of mass along x direction.
+#                  Pixel center of mass along x direction.
 #             </doc>
 #             <dimensions rank="1">
 #                 <dim index="1" value="n_x"/>
