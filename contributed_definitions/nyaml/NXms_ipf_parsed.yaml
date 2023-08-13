@@ -2,8 +2,11 @@ category: base
 doc: |
   Base class to store an inverse pole figure mapping.
 symbols:
+  # how to make this optional
+  n_z: |
+    Number of pixel along the z slowest direction.
   n_y: |
-    Number of pixel along the y slowest direction.
+    Number of pixel along the y slow direction.
   n_x: |
     Number of pixel along the x fast direction.
   n_rgb: |
@@ -185,7 +188,13 @@ NXms_ipf(NXprocess):
       # hehe, but can be larger than one but could also be an NX_DIMENSIONLESS !
       doc: |
         Inverse pole figure color code for each map coordinate.
-      dim: (n_y, n_x, 3)
+      dim: (n_y, n_x, 3)  # | (n_z, n_y, n_x, 3)
+    axis_z(R):
+      unit: NX_LENGTH
+      doc: |
+        Pixel center along the z axis of the map.
+      dim: (n_z,)
+      # \@long_name:
     axis_y(R):
       unit: NX_LENGTH
       doc: |

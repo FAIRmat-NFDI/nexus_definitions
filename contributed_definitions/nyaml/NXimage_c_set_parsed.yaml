@@ -1,74 +1,92 @@
 category: base
 doc: |
-  Container for reporting a set of images taken.
+  Specialized base class container for reporting a set of images in reciprocal space.
+info: |
+  In practice complex numbers are encoded via some formatted pair of real values.
+  In practice fast Algorithms for computing Fourier Transformations (FFT) are
+  used to encode images in reciprocal (frequency) space. FFT libraries are used
+  for implementing the key functionalities of these mathematical operations.
+  
+  Different libraries use different representations and encoding of the
+  image computed. Details can be found in the respective sections of the
+  typical FFT libraries:
+  
+  * `FFTW by M. Frigo and S. G. Johnson <https://www.fftw.org/fftw3_doc/Tutorial.html#Tutorial>`_
+  * `Intel MKL by the Intel Co. <https://www.intel.com/content/www/us/en/docs/onemkl/developer-reference-c/2023-0/fourier-transform-functions.html>`_
+  * `cuFFT by the NVidia Co. <https://docs.nvidia.com/cuda/cufft/index.html>`_
+  
+  Users are strongly advised to inspect carefully which specific conventions
+  their library uses to be able to store and or modify the implementation
+  of their code so that the serialized representations as it is detailed
+  here for NeXus matches with their intention.
 symbols:
   n_images: |
     Number of images in the stack.
-  n_y: |
+  # n_k: |
+  #   Number of pixel per image in the slow direction.
+  n_j: |
     Number of pixel per image in the slow direction.
-  n_x: |
-    Number of pixel per image in the fast direction.
+  # fast direction
+  n_i: |
+    Number of pixel per image in the fastest direction.
 type: group
-NXimage_set(NXobject):
-  (NXprocess):
-    doc: |
-      Details how images were processed from the detector readings.
-    source:
-      doc: |
-        Resolvable data artifact (e.g. filename) from which the all values in
-        the NXdata instances in this NXimage_set were loaded during parsing.
-      \@version:
-        doc: |
-          An at least as strong as SHA256 hashvalue of the data artifact which
-          source represents digitally to support provenance tracking.
-    mode:
-      doc: |
-        Imaging (data collection) mode of the instrument during acquisition
-        of the data in this NXimage_set instance.
-    detector_identifier:
-      doc: |
-        Link or name of an NXdetector instance with which the data were collected.
-    (NXprogram):
+NXimage_c_set(NXimage_set):
+  # details about the FFT library used could for instance be stored in the
+  # NXprocess group which the NXimage_c_set base class can borrow from its
+  # NXimage_set parent base class
+  # process information are composable from the NXimage_set base class
   stack(NXdata):
     doc: |
       Image (stack).
-    data_counts(NX_NUMBER):
+    real(R):
       unit: NX_UNITLESS
       doc: |
-        Image intensity values.
-      dimensions:
-        rank: 3
-        dim: [[1, n_images], [2, n_y], [3, n_x]]
-    axis_image_identifier(NX_UINT):
+        Image intensity of the real part.
+      dim: (n_images, n_j, n_i)
+    imag(R):
+      unit: NX_UNITLESS
+      doc: |
+        Image intensity of the imaginary part.
+      dim: (n_images, n_j, n_i)
+      # how to handle 1d, 3d cases? | (n_images, n_k, n_j, n_i) | (n_images, n_i)
+    # alternatively use a pair of numbers from R encoding real and imaginary part
+    magnitude(R):
+      unit: NX_UNITLESS
+      doc: |
+        Magnitude of the image intensity.
+      dim: (n_images, n_j, n_i)  # | (n_images, n_k, n_j, n_i) | (n_images, n_i)
+    axis_image_identifier(N0):
       unit: NX_UNITLESS
       doc: |
         Image identifier
-      dimensions:
-        rank: 1
-        dim: [[1, n_images]]
+      dim: (n_images,)
       \@long_name:
         doc: |
           Image identifier.
-    axis_y(NX_NUMBER):
-      unit: NX_LENGTH
+    axis_k(R):
+      unit: NX_RECIPROCAL_LENGTH
       doc: |
-        Pixel coordinate center of mass along y direction.
-      dimensions:
-        rank: 1
-        dim: [[1, n_y]]
+        Pixel coordinate center along k direction.
+      dim: (n_k,)
       \@long_name:
         doc: |
-          Coordinate along y direction.
-    axis_x(NX_NUMBER):
-      unit: NX_LENGTH
+          Coordinate along j direction.
+    axis_j(R):
+      unit: NX_RECIPROCAL_LENGTH
       doc: |
-        Pixel coordinate center of mass along x direction.
-      dimensions:
-        rank: 1
-        dim: [[1, n_x]]
+        Pixel coordinate center along j direction.
+      dim: (n_j,)
       \@long_name:
         doc: |
-          Coordinate along x direction.
+          Coordinate along j direction.
+    axis_i(R):
+      unit: NX_RECIPROCAL_LENGTH
+      doc: |
+        Pixel coordinate center along i direction.
+      dim: (n_i,)
+      \@long_name:
+        doc: |
+          Coordinate along i direction.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
 # d8a2ad749b0efcaf144af79af9d4ea222dc72b0d946125be13563dd6d5ccb4c2

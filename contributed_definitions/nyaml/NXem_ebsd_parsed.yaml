@@ -175,9 +175,9 @@ NXem_ebsd(NXem_method):
       used for measuring a stack of Kikuchi diffraction pattern with an
       electron microscope.
     info: |
-      The most frequently collected EBSD data are captured as for rectangular
+      The most frequently collected EBSD data are captured for rectangular
       regions-of-interested which are sampled with regular square or
-      hexagonally-shaped pixels. 
+      hexagon-shaped pixels.
     # The em_om parser will currently not interpret the majority of the
     # many system- and technique-specific metadata which come with the
     # files from e.g. technology partners. This is because the current
@@ -248,21 +248,21 @@ NXem_ebsd(NXem_method):
   simulation(NXprocess):
     doc: |
       This group documents relevant details about the conditions and the tools
-      used for simulating a stack of Kikuchi diffraction pattern with some model.
+      used for simulating a stack of Kikuchi diffraction pattern with some
+      physical model.
       
-      This group should not be confused with the reference group: Simulation
-      can be used to simulate pattern which one may wish to index maybe because
-      no measurements were taken and the study is entirely a simulation.
+      This group should not be confused with a group named simulation that
+      is however an instance of NXem_sim. Instead, the simulation group here
+      should be used if (e.g. instead of a measurement) a stack of pattern
+      were simulated which one is interested afterwards to index.
       
-      By contrast the reference group stores eventual pattern which can be
-      used e.g. in dictionary based indexing approaches to index pattern from
-      simulation or measurement against.
-      
-      In many practical cases where pattern are analyzed on-the-fly these
-      reference or sometimes also called master or lookup pattern are not stored
-      but instead a reduced description such as a list of reflectors is provided.
-      This latter pieces of information are should be stored in instance of
-      NXem_ebsd_crystal_structure_model and references thus may remain empty.
+      In many practical cases where pattern are analyzed on-the-fly and dictionary
+      indexing strategies are used so-called master pattern(s) are used to compare
+      measured or simulated pattern with the master pattern. In this case,
+      master pattern are the result of a computer simulation and thus should
+      be stored using in an own properly documented entry with a simulation
+      group which is an instance of NXem_sim. In this case the specific
+      NXem_ebsd_crystal_structure_model instances should refer to these simulations.
     pattern_available(NX_BOOLEAN):
       doc: |
         True if either the depends_on or origin field specify the actual
@@ -294,10 +294,9 @@ NXem_ebsd(NXem_method):
         the gnomonic projection has to be calibrated. Typically silicon or
         quartz crystals are used for this purpose.
       info: |
-        In many practical cases it is much more frequently the case that a
-        system is considered well-calibrated and thus just used instead that
-        one calibrates for the above-mentioned aspects before the measurement
-        is taken.
+        Considering a system is well-calibrated and using it is more frequently
+        the case than users calibrating for the above-mentioned aspects
+        before taking an EBSD measurement.
         
         In the first case, the user assumes that the principle geometry of the
         hardware components and the settings in the control and EBSD pattern
@@ -306,20 +305,24 @@ NXem_ebsd(NXem_method):
         :ref:`NXem_ebsd_crystal_structure_model` instances. Examples are
         reflector models as stored in CRY files (HKL/Channel 5/Flamenco).
         
-        In the second case, the system is being calibrated during the session
+        In the second case, users calibrate the system during the session
         using standards (silicon, quartz, or other common specimens).
         There is usually one person in each lab responsible for doing such
-        calibrations. Important is that often this person or technician(s) are also
-        in charge of configuring the graphical user interface and software
-        with which most users control and perform their analyses.
-        For EBSD this has key implications because, taking TSL OIM/EDAX as an example,
-        the conventions how orientations are stored is affected by how reference frames
-        are set up and this setup is made at the level of the GUI software.
+        calibrations. Often this person or technician is also in charge of
+        configuring the graphical user interface and software with which most
+        users control and perform their analyses.
+        
+        For EBSD this has key implications: Taking TSL OIM/EDAX as an example,
+        the conventions how orientations are stored is affected by how the
+        reference frames are configured and this setup is made at the level
+        of the GUI software.
+        
         Unfortunately, these pieces of information are not necessarily stored
         in the results files. In effect, key conventions become disconnected
-        from the data so it remains the users personal obligation to remember these
-        settings, write them down in the lab notebook, or these metadata get lost.
-        All these issues are a motivation and problem which NXem_ebsd solves.
+        from the data so it remains the users' obligation to remember these
+        settings or write these down in a lab notebook. Otherwise, these metadata
+        get lost. All these issues are a motivation and problem which
+        NXem_ebsd solves in that all conventions can be specified explicitly.
       sequence_index(NX_POSINT):
       calibration_available(NX_BOOLEAN):
         doc: |
@@ -347,10 +350,10 @@ NXem_ebsd(NXem_method):
       (on-the-fly) the beam scans the specimen. The resulting method is also
       known as orientation imaging microscopy (OIM).
       
-      Fundamentally different algorithms can be used to index EBSD/EBSP pattern.
-      Common is that pattern indexing is a computational step of comparing
-      simulated reference with patterns to index (as referred to via the
-      measurement or simulation groups of this base class).
+      Different algorithms can be used to index EBSD/EBSP pattern. Common to them
+      is the computational step where simulated reference pattern are compared
+      with measured or simulated patterns. These latter patterns are referred
+      to via the measurement or simulation groups of this base class.
       
       Quality descriptors are defined based on which an indexing algorithm
       yields a quantitative measure of how similar measured and reference
@@ -358,23 +361,23 @@ NXem_ebsd(NXem_method):
       were found.
     info: |
       Assumed or simulated pattern are simulated using kinematic or dynamical
-      electron diffraction theory. The Hough transform is essentially a
-      discretized Radon transform (for details see `M. van Ginkel et al. <https://www.semanticscholar.org/paper/A-short-introduction-to-the-Radon-and-Hough-and-how-Ginkel/fb6226f606cad489a15e38ed961c419037ccc858>`_).
+      theory of electron diffraction delivering master pattern.
       
+      The Hough transform is essentially a discretized Radon transform (for details see `M. van Ginkel et al. <https://www.semanticscholar.org/paper/A-short-introduction-to-the-Radon-and-Hough-and-how-Ginkel/fb6226f606cad489a15e38ed961c419037ccc858>`_).
       Recently, dictionary-based indexing methods are increasingly becoming used
       partly driven by the interest to use artificial intelligence algorithms.
       
       An inspection of several hundred publicly available EBSD datasets with an
       open-source license via OpenAire was performed prior to implementing
-      the examples for the NOMAD OASIS research data management system.
+      the EBSD examples for the NOMAD OASIS research data management system.
       
       This analysis revealed that EBSD data are in most cases stored in two ways:
       Case one was via a file in formats from technology partners. Examples
       are binary formats like OSC, H5OINA, OIP, EBSP, and many derived
-      text-based formats like CPR, CRC, ANG, CTF, HKL and more. 
+      text-based formats like CPR, CRC, ANG, CTF, HKL, DAT and more. 
       Recently, there is trend towards using HDF5-based formats thanks to
-      members of the DREAM3D community and the technology partners they were
-      able to motivate.
+      members of the DREAM3D community and the technology partners whom
+      they were able to motivate to implement these HDF5-based formats.
       
       These files contain many results and metadata which contextualize the
       numerical steps and computational workflow whereby Kikuchi pattern were
@@ -393,12 +396,14 @@ NXem_ebsd(NXem_method):
       or maybe even multiple pieces of software the data were processed remains
       elusive.
       
-      Other cases were storing results of custom post-processing steps and
-      associated Kikuchi patterns. Testing of advanced indexing, pseudo-symmetry
+      In other cases results were documented after custom post-processing steps
+      in non-standardized representations, also for Kikuchi patterns.
+      Testing of advanced indexing, pseudo-symmetry
       resolving methods, i.e. any sort of prototyping or alternative indexing
       strategies, so far seem to call for rapid prototyping capabilities.
-      The drawback of this is such results come formatted on a
-      case-by-case basis and are thus not interoperable.
+      The drawback with such science-focused prototyping though is that such
+      results come formatted on a case-by-case basis and are thus not
+      interoperable.
       
       Therefore, we first need to collect how these files have been generated
       and which metadata in these files (or database entries) represent
@@ -456,9 +461,9 @@ NXem_ebsd(NXem_method):
     # rank: 1
     # dim: [[1, 2]]
     parameter(NXprocess):
-        doc: |
-          Specific parameter relevant only for certain algorithms used
-        sequence_index(NX_POSINT):
+      doc: |
+        Specific parameter relevant only for certain algorithms used
+      sequence_index(NX_POSINT):
     # mode:
     # doc: Which method used to index pattern?
     # enumeration: [optimize_bd]  # what does optimize_bd mean Oxford?
@@ -631,398 +636,6 @@ NXem_ebsd(NXem_method):
         \@long_name:
           doc: |
             Label for the x axis
-
-
-# BEGIN BLOCK COMMENT
-  # clean-up this block of comments
-  # definition computation according to backend.
-  # AS THE FIRST STEP WE DO NOT IMPLEMENT A GENERIC ORIENTATION AND REFERENCE
-  # FRAME LIBRARY WHICH CAN TRANSLATE BETWEEN ALL POSSIBLE CONVENTIONS.
-  # INSTEAD WE TAKE THE RESULTS COMPUTED FROM THE BACKEND THAT IS
-  # For cpr/crc/ang the pythonEBSD backend
-  # For other file either MTex or kikuchipy
-  # For DREAM.3D this is DREAM.3D
-  # For pyxem following the orix library (which has some, though not yet in
-  # all details checked links and usage of the orix library because kikuchipy
-  # is somehow connected to pyxem. NEED TO TALK TO DEVELOPERS HERE!
-  # NXprogram:
-  # The tool/implementation used for creating the IPF color map from
-  # the orientation data. Effectively, this program is the backend
-  # which performs the computation of the inverse pole figure mappings
-  # which can be for some use cases the parser.
-  # Consider the explanations in the docstring of the ipf_mapID group.
-  # enumeration: [brinckmann, mtex, kikuchipy, dream3d, orix, tsl]
-
-  # correlation(NXprocess):
-    # doc: |
-      # Apart from single (spot), line, or surface ROIs,
-      # correlated measurements are performed.
-      
-      # One important class of such correlated experiments are the so-called
-      # (quasi) in-situ experiments. In this case the same or nearly the same ROI
-      # gets analyzed via a repetitive sequence of thermomechanical treatment,
-      # sample preparation, measurement, on-the-fly-indexing. Phenomena
-      # investigated are recrystallization, strain accumulation, material damage.
-      # Post-processing is required to correlate and reidentify eventual
-      # microstructural features or local ROIs across several orientation maps.
-      
-      # Another important class of correlated experiments are the so-called
-      # serial-sectioning experiments. Here the same sample is measured
-      # repetitively after polishing each time, to create a stack of
-      # orientation data which can be reconstructed to a
-      # three-dimensional volume ROI.
-      
-      # Data can be correlated in time, position (spatial), or both (spatiotemporal).
-      
-      # Spatial correlations between repetitively characterized regions-of-interests
-      # are typically correlated using image registration and alignment algorithms.
-      # For this typically so-called landmarks are used. These can be grains with
-      # a very large size or specific shape, i.e. grains which are qualitatively
-      # different enough to be used as a guide how images are shifted relative to
-      # one another. Other commonly used landmarks are fiducial marks which are
-      # milled into the specimen surface using focus-ion beam milling and/or various
-      # types of indentation methods.
-      
-      # As far as the same physical region-of-interest is just measured several times,
-      # the additional issue of the depth increment is not a concern. However, correct
-      # assumptions for the depth increment, amount of material removed along the milling
-      # direction is relevant for accurate and precise three-dimensional (serial-sectioning)
-      # correlations. For these studies it can be tricky though to assume or estimate
-      # useful depth increments. Different strategies have been proposed like
-      # calibrations, wedged-shaped landmarks and computer simulation assisted
-      # assumption making.
-      
-      # Despite the use of landmarks, there are many practical issues which make the
-      # processing of correlations imprecise and inaccurate. Among these are drift
-      # and shift of the specimen, instabilities of the holder, the beam, irrespective
-      # of the source of the drift, charging effects, here specifically causing local
-      # image distortions and rotations which may require special processing algorithms
-      # to reduce such imprecisions.
-      
-      # Time correlations face all of the above-mentioned issues surplus the challenge
-      # that specific experimental protocols have to be used to ensure the material state
-      # is observed at specific physical time. The example of quasi in-situ characterization
-      # of crystal growth phenomena, a common topic in engineering or modern catalysis research
-      # makes it necessary to consider that e.g. the target value for the desired annealing
-      # temperature is not just gauged based on macroscopic arguments but considers
-      # that transient effects take place. Heating or quenching a sample might thus might
-      # not have been executed under conditions in the interaction volume as they are
-      # documented and/or assumed.
-      
-      # These issue cause that correlations have an error margin as to how accurately
-      # respective datasets were not only just synced based on the geometry of the
-      # region-of-interests and the time markers but also to asssure which physical
-      # conditions the specimen experienced over the course of the measurements.
-      
-      # The fourth example of the em_om reference implementation explores the use of the
-      # correlation group with a serial-sectioning datasets that was collected by the
-      # classical Inconel 100 dataset collected by M. D. Uchic and colleagues
-      # (M. Groeber M, Haley BK, Uchic MD, Dimiduk DM, Ghosh S 3d reconstruction and
-      # characterization of polycrystalline microstructures using a fib-sem system data set.
-      # Mater Charac 2006, 57 259–273. 10.1016/j.matchar.2006.01.019M).
-      
-      # This dataset was specifically relevant in driving forward the implementation
-      # of the DREAM.3D software. DREAM.3D is an open-source software project for
-      # post-processing and reconstructing, i.e. correlating sets of orientation
-      # microscopy data foremost spatially. One focus of the software is the
-      # (post-)processing of EBSD datasets. Another cutting edge tool with similar
-      # scope but a commercial solution by Bruker is QUBE which was developed by
-      # P. Konijnenberg and coworkers.
-      
-      # Conceptually, software like DREAM.3D supports users with creating linear
-      # workflows of post-processing tasks. Workflows can be instructed via the
-      # graphical user interface or via so-called pipeline processing via command line
-      # calls. DREAM.3D is especially useful because its internal system documents all
-      # input, output, and parameter of the processing steps. This makes DREAM.3D a
-      # good candidate to interface with tools like em_om parser. Specifically, DREAM.3D
-      # documents numerical results via a customized HDF5 file format called DREAM3D.
-      # Workflow steps and settings are stored as nested dictionaries in JSON syntax
-      # inside a supplementary JSON file or alongside the data in the DREAM3D file.
-      # DREAM.3D has a few hundred algorithms implemented. These are called filters
-      # in DREAM.3D terminology.
-      
-      # Users configure a workflow which instructs DREAM.3D to send the data through
-      # a chain of predefined and configured filters. Given that for each analysis
-      # the filter is documented via its version tags surplus its parameter and setting
-      # via a controlled vocabulary, interpreting the content of a DREAM3D HDF5 file
-      # is possible in an automated manner using a parser. This makes DREAM.3D analyses
-      # repeatable and self-descriptive. A key limitation though is that most frequently
-      # the initial set of input data come from commercial files like ANG.
-      # This missing link between the provenance of these input files, their associated
-      # creation as electron microscope session, is also what NXem_ebsd solves.
-      
-      # Nevertheless, as this can be solved with e.g. NXem_ebsd we are convinced that
-      # the DREAM.3D and the em_om parser can work productively together to realize
-      # RDMS-agnostic parsing of serial-section analyses.
-      
-      # The internal documentation of the DREAM.3D workflow also simplifies the
-      # provenance tracking represented by an instance of NXem_ebsd as not every
-      # intermediate results has to be stored. Therefore, the fourth example
-      # focuses on the key result obtained from DREAM.3D - the reconstructed
-      # and aligned three-dimensional orientation map.
-      
-      # Usually, this result is the starting point for further post-processing
-      # and characterization of structural features. As here orientation microscopy
-      # is insofar scale invariant using DREAM.3D, NXem_ebsd, and em_om should
-      # be useful for different characterization methods, such as EBSD, Transmission
-      # Kikuchi Diffraction (TKD), Automated Crystal Orientation Mapping (ACOM),
-      # Nanobeam Electron Diffraction (using commercial systems like NanoMegas ASTAR)
-      # or open-source implementations of these techniques (such as via pyxem/orix).
-      
-      # The result of orientation microscopy methods are maps of local orientation
-      # and thermodynamic phase (crystal structure) pieces of information. Virtually
-      # all post-processing of such results for structural features includes again
-      # a workflow of steps which are covered though by the NXms partner application
-      # definition. The respective source of the data in an instance of NXms can
-      # again be a link or reference to an instance of NXem_ebsd to complete the
-      # chain of provenance.
-    # # NEW ISSUE: implement support for filters eventually many of them
-    # # NEW ISSUE: for now only show that data from DREAM3D can be loaded.
-    # # NEW ISSUE: how to handle landmarks
-    # # NEW ISSUE: again an entire set of workflows such as rigid or non-rigid
-    # # image registration etc.
-      # sequence_index(NX_POSINT):
-      # (NXem_ebsd_crystal_structure_model):
-      # exists: ['min', '1', 'max', 'unbounded']
-        # crystallographic_database_identifier:
-          # exists: recommended
-        # crystallographic_database:
-          # exists: recommended
-        # unit_cell_abc(NX_FLOAT):
-        # unit_cell_alphabetagamma(NX_FLOAT):
-        # space_group:
-          # exists: recommended
-        # phase_identifier(NX_UINT):
-        # phase_name:
-          # exists: recommended
-      
-      # # candidate for default plot
-      # region_of_interest(NXprocess):
-        # exists: ['min', '1', 'max', '1']
-        # doc: |
-          # An overview of the entire reconstructed volume. For details about
-          # what defines the image contrast inspect descriptor.
-        # descriptor:
-          # doc: |
-            # Descriptor representing the image contrast.
-        
-        # # enumeration: ["normalized_band_contrast", "normalized_confidence_index"]
-        # roi(NXdata):
-          # doc: |
-            # Container holding a default plot of the reconstructed volume.
-          
-          # # \@signal:  # data
-          # # \@axes:  # [axis_z, axis_y, axis_x]
-          # # \@axis_x_indices:  # 0
-          # # \@axis_y_indices:  # 1
-          # # \@axis_z_indices:  # 2
-          # \@signal:
-          # \@axes:
-          # \@AXISNAME_indices:
-          
-          # # \@long_name:
-          # title:
-          # data(NX_NUMBER):
-            # unit: NX_UNITLESS
-            # doc: |
-              # Descriptor values displaying the ROI.
-            # dimensions:
-              # rank: 3
-              # dim: [[1, n_z], [2, n_y], [3, n_x]]
-            
-            # # n_0 slow 2, n_1 fast 1, rgb triplet is fastest 0
-            # # in axes fast to fastest
-            # # while for _indices fastest to fast
-            # \@long_name:
-              # doc: |
-                # Signal
-          # axis_z(NX_NUMBER):
-            # unit: NX_LENGTH
-            # doc: |
-              # Calibrated center of mass of the pixel along the slow axis.
-            # dimensions:
-              # rank: 1
-              # dim: [[1, n_z]]
-            # \@long_name:
-              # doc: |
-                # Label for the z axis
-          # axis_y(NX_NUMBER):
-            # unit: NX_LENGTH
-            # doc: |
-              # Calibrated center of mass of the pixel along the fast axis.
-            # dimensions:
-              # rank: 1
-              # dim: [[1, n_y]]
-            # \@long_name:
-              # doc: |
-                # Label for the y axis
-          # axis_x(NX_NUMBER):
-            # unit: NX_LENGTH
-            # doc: |
-              # Calibrated center of mass of the pixel along the fastest axis.
-            # dimensions:
-              # rank: 1
-              # dim: [[1, n_x]]
-            # \@long_name:
-              # doc: |
-                # Label for the x axis
-      # (NXprocess):
-        # exists: ['min', '0', 'max', 'unbounded']
-        # doc: |
-          # Default inverse pole figure (IPF) plot of the data specific for each
-          # phase. No ipf_mapID instances for non-indexed scan points as these are
-          # by definition assigned the null phase with phase_identifier 0.
-          # The same comments apply as to the two-dimensional representation.
-        # phase_identifier(NX_UINT):
-          # unit: NX_UNITLESS
-          # doc: |
-            # Specifying which phase this IPF mapping visualizes.
-        # phase_name:
-          # doc: |
-            # Alias/name for the phase whose indexed scan points are displayed.
-        # description:
-          # exists: optional
-          # doc: |
-            # Which IPF definition computation according to backend.
-        
-        # # NEW ISSUE: [0, 0, 1] is defined in which coordinate system?
-        # projection_direction(NX_NUMBER):
-          # unit: NX_UNITLESS
-          # doc: |
-            # Along which axis to project? Typically [0, 0, 1] is chosen.
-          # dimensions:
-            # rank: 1
-            # dim: [[1, 3]]
-        # bitdepth(NX_UINT):
-          # unit: NX_UNITLESS
-          # doc: |
-            # Bitdepth used for the RGB color model. Usually 8 bit.
-        # (NXprogram):
-          # exists: ['min', '1', 'max', 'unbounded']
-          # doc: |
-            # The tool/implementation used for creating the IPF color map from
-            # the orientation data. Effectively, this program is the backend
-            # which performs the computation of the inverse pole figure mappings
-            # which can be for some use cases the parser.
-            # Consider the explanations in the docstring of the ipf_mapID group.
-          # program:
-            # \@version:
-        
-        # # enumeration: [brinckmann, mtex, kikuchipy, dream3d, orix, tsl]
-        # ipf_rgb_map(NXdata):
-          # doc: |
-            # The RGB image which represents the IPF map.
-          
-          # # \@signal:  # rgb
-          # # \@axes:  # [zpos, ypos, xpos]  # rgb
-          # # \@rgb_indices: 0
-          # # \@axis_x_indices: 0
-          # # \@axis_y_indices: 1
-          # # \@axis_z_indices: 2
-          # \@signal:
-          # \@axes:
-          # \@AXISNAME_indices:
-          
-          # # \@long_name:
-          # title:
-          # data(NX_UINT):
-            # unit: NX_UNITLESS
-            # doc: |
-              # RGB array, with resolution per fastest changing value
-              # defined by bitdepth.
-            # dimensions:
-              # rank: 4
-              # dim: [[1, n_z], [2, n_y], [3, n_x], [4, 3]]
-            
-            # # n_p_or_z slow 3, n_y fast 2, n_x faster 1, rgb triplet is fastest 0
-            # # in axes fast to fastest
-            # # while for _indices fastest to fast
-            # \@long_name:
-              # doc: |
-                # IPF color-coded orientation mapping
-          # axis_z(NX_NUMBER):
-            # unit: NX_LENGTH
-            # doc: |
-              # Calibrated center of mass of the pixel along the slow axis.
-            # dimensions:
-              # rank: 1
-              # dim: [[1, n_z]]
-            # \@long_name:
-              # doc: |
-                # Label for the z axis
-          
-          # # but for h5web RGB we need n_z + 1, was an issue in v6.6.1
-          # axis_y(NX_NUMBER):
-            # unit: NX_LENGTH
-            # doc: |
-              # Calibrated center of mass of the pixel along the faster axis.
-            # dimensions:
-              # rank: 1
-              # dim: [[1, n_y]]
-            # \@long_name:
-              # doc: |
-                # Label for the y axis
-          
-          # # but for h5web RGB we need n_y + 1, was an issue in v6.6.1
-          # axis_x(NX_NUMBER):
-            # doc: |
-              # Calibrated center of mass of the pixel along the fastest axis.
-            # dimensions:
-              # rank: 1
-              # dim: [[1, n_x]]
-            # \@long_name:
-              # doc: |
-                # Label for the x axis
-        # ipf_rgb_color_model(NXdata):
-          # doc: |
-            # Same comments as for the two-dimensional case apply.
-          
-          # # \@signal:  # rgb
-          # # \@axes:  # [ypos, xpos]  # rgb
-          # # \@rgb_indices: 0
-          # # \@axis_x_indices:  # 0
-          # # \@axis_y_indices:  # 1
-          # \@signal:
-          # \@axes:
-          # \@AXISNAME_indices:
-          
-          # # \@long_name:
-          # title:
-          # data(NX_UINT):
-            # unit: NX_UNITLESS
-            # doc: |
-              # RGB array, with resolution per fastest changing value defined by bitdepth.
-            # dimensions:
-              # rank: 3
-              # dim: [[1, n_y], [2, n_x], [3, 3]]
-            
-            # # n_0 slow 2, n_1 fast 1, rgb triplet is fastest 0
-            # # in axes fast to fastest
-            # # while for _indices fastest to fast
-            # \@long_name:
-              # doc: |
-                # IPF color key in stereographic standard triangle (SST)
-          # axis_y(NX_NUMBER):
-            # unit: NX_ANY
-            # doc: |
-              # Pixel coordinate along the slow axis.
-            # dimensions:
-              # rank: 1
-              # dim: [[1, n_y]]
-            # \@long_name:
-              # doc: |
-                # Label for the y axis
-          # axis_x(NX_NUMBER):
-            # unit: NX_ANY
-            # doc: |
-              # Pixel coordinate along the fast axis.
-            # dimensions:
-              # rank: 1
-              # dim: [[1, n_x]]
-            # \@long_name:
-              # doc: |
-                # Label for the x axis
-# END BLOCK COMMENT
 
   # further ideas
   # what to do when multiple pattern are averaged into one before the beam moves further?
