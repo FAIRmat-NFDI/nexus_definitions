@@ -1,0 +1,105 @@
+category: base
+doc: |
+  Base class to store the configuration when using the MTex/Matlab software.
+  
+  MTex is a Matlab package for texture analysis used in the Materials and Earth Sciences.
+  See `R. Hielscher et al. <https://mtex-toolbox.github.io/publications>`_ and
+  the `MTex source code <https://github.com/mtex-toolbox>`_ for details.
+type: group
+NXms_mtex_pref(NXobject):
+  conventions(NXcollection):
+    doc: |
+      Reference frame and orientation conventions.
+      Consult the `MTex docs <https://mtex-toolbox.github.io/EBSDReferenceFrame.html>`_ for details.
+    x_axis_direction:
+      # enumeration:
+    z_axis_direction:
+      # enumeration:
+    a_axis_direction:
+      # enumeration:
+    b_axis_direction:
+      # enumeration:
+    euler_angle:
+      enumeration: [unknown, undefined, bunge]
+  plotting(NXcollection):
+    doc: |
+      Settings relevant for generating plots.
+    font_size(R):
+      unit: NX_ANY
+    inner_plot_spacing(R):
+      unit: NX_ANY
+    outer_plot_spacing(R):
+      unit: NX_ANY
+    marker_size(R):
+      unit: NX_ANY
+    figure_size:
+    show_micron_bar(NX_BOOLEAN):
+      doc: |
+        Render scale bar within generated figures.
+    show_coordinates(NX_BOOLEAN):
+      doc: |
+        Render grid within generated figures.
+    pf_anno_fun_hdl:
+      doc: |
+        Code for the function handle used for annotating pole figure plots.
+    color_map(R):
+      dim: (i, 3)
+      unit: NX_UNITLESS
+    default_color_map(R):
+      dim: (i, 3)
+      unit: NX_UNITLESS
+    # phase_color_order:
+    #   dim: (i,)
+    color_palette:
+    degree_char:
+    arrow_char:
+    marker:
+    marker_edge_color:
+    marker_face_color:
+    hit_test(NX_BOOLEAN):
+  miscellaneous(NXcollection):
+    doc: |
+      Miscellaneous other settings of MTex.
+    mosek(NX_BOOLEAN):
+    generating_help_mode(NX_BOOLEAN):
+    methods_advise(NX_BOOLEAN):
+    stop_on_symmetry_mismatch(NX_BOOLEAN):
+    inside_poly(NX_BOOLEAN):
+    text_interpreter:
+  numerics(NXcollection):
+    doc: |
+      Miscellaneous settings relevant for numerics.
+    eps(R):
+      doc: Return value of the Matlab eps command.
+      unit: NX_UNITLESS
+    fft_accuracy(R):
+      unit: NX_ANY
+    max_stwo_bandwidth(R):
+      unit: NX_ANY
+    max_sothree_bandwidth(R):
+      unit: NX_ANY
+  system(NXcollection):
+     doc: |
+        Miscellaneous settings relevant of the system where MTex runs.
+     memory(R):
+     open_gl_bug(NX_BOOLEAN):
+     save_to_file(NX_BOOLEAN):
+  path(NXcollection):
+    doc: |
+      Collection of paths from where MTex reads information and code.
+    mtex:
+    data:
+    cif:
+    ebsd:
+    pf:
+    odf:
+    tensor:
+    example:
+    import_wizard:
+    pf_extensions:
+      doc: |
+        List of file type suffixes for which MTex assumes texture/pole figure information.
+    ebsd_extensions:
+      doc: |
+        List of file type suffixes for which MTex assumes EBSD content.
+    # version as an instance of (NXprogram) one for MTex one for Matlab
