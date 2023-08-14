@@ -1064,8 +1064,10 @@ def xml_handle_fields(obj, keyword, value, line_annot, line_loc, verbose=False):
                 rm_key_list.append(attr)
                 rm_key_list.append(line_number)
                 xml_handle_comment(obj, line_number, line_loc, elemt_obj)
-            else:
-                continue  # attr == "info" is ignored for now
+            elif attr == "info":
+                rm_key_list.append(attr)
+                rm_key_list.append(line_number)
+                # continue  # attr == "info" is ignored for now
 
         for key in rm_key_list:
             del value[key]
