@@ -418,6 +418,37 @@ def xml_handle_dimensions(dct, obj, keyword, value: dict):
         'dim_parameter:
             incr:[...]'
     """
+    # indeed the comment about xml_handle_dim is correct but that feature
+    # is in most cases not used and using numpy tensor notation would thus
+    # be much shorter, in that notation rank is implicit and dimensions equally clean
+    # xml_handle_dim_from_dimension_dict handles also attrs which have long been
+    # deprecated
+    # at least the description for rank is inconclusive stating that rank can be
+    # an uint but then rank could be 0
+    # https://manual.nexusformat.org/nxdl_desc.html#nxdl-data-type-dimensionstype
+    # if we use a shorthand notation like dimensions: (i, j, 3)
+    # then value is not a dictionary but a list so all we have to do
+    # release dict constraint handle two cases:
+    # the most frequent case short hand notation if isinstance(value, list) is True
+    # just walk the list items as they have to be arranged in order and add xml dim
+    # items the code in line 488, i.e. that key is always dim: is anyway a strong
+    # assumption not checked for afterwards; which can lead to a silent inconsistence
+    # the fact that there is @required enables defacto rank constraints to be set
+    # e.g. (i (required), j (required), k (optional)) imagine this in an NXdata/data
+    # could be used to define either a 2d or 3d array
+    # however rank constraints in turn like rank in [2, 3] make no statement
+    # about the order, hence my proposal:
+    # (i, j, k (optional)) should be interpreted as follows
+    # value can be a 2d or 3d array but 1th dim is always as long as i
+    # 2th as long as j, and the optional 3th dim has to be as long as k if used
+    # again the majority of cases uses (i, 2), (3, 3), etc... without any need
+    # for documentation, that doc is anyway currently not machine-interpreted
+    # also here dimensions following one optional statement have to be optional
+    # but in practice this is problematic, see that example a 3d RGB stack
+    # x and y always there, z maybe but z should not necessarily be the last
+    # i.e. the fastest dimension, currently order of dim arguments follow storage
+    # order, so again two groups in base classes needed for what could be one
+    # group with an optional third dimension
 
     possible_dimension_attrs = ["rank"]  # nxdl attributes
     line_number = f"__line__{keyword}"
@@ -908,6 +939,23 @@ def xml_handle_fields(obj, keyword, value, line_annot, line_loc, verbose=False):
         raise ValueError("Check for name or type in field.")
     elemt_obj = ET.SubElement(obj, "field")
 
+    # handling the expansion of convenient NX_DATA_TYPES for fields
+    # has to handle here, e.g.
+    shorthand_type_to_nx_type = {
+        "R": "NX_FLOAT",
+        "R+": "NX_FLOAT",
+        "R+0": "NX_FLOAT",
+        "N": "NX_POSINT",
+        "N0": "NX_UINT",
+        "Z": "NX_INT"}
+    # the mapping between R+, R+0 on NX_FLOAT is not bijektiv, would
+    # require setting xs:minInclusive for R+0 and xs:minExclusive for R+
+    if keyword_type in shorthand_type_to_nx_type.keys():
+        resolved_type = shorthand_type_to_nx_type[keyword_type]
+    else:
+        resolved_type = keyword_type
+    # in what follows use resolved_type instead of keyword_type
+
     # type come first
     if l_bracket == 0 and r_bracket > 0:
         elemt_obj.set("type", keyword_type)
@@ -1039,6 +1087,11 @@ def recursive_build(obj, dct, verbose):
             xml_handle_attributes(dct, obj, keyword, value, verbose)
         elif keyword == "doc":
             xml_handle_doc(obj, value, line_number, line_loc)
+        # elif keyword == "info":
+        #   xml_handle_info, currently info and doc are separated
+        #   likely info should become a subordinate of doc which also
+        #   makes sense in that the info has the quality of a comment
+        #   one would need to modify xml_handle_doc and xml_handle_comment
         elif keyword == NX_UNIT_IDNT:
             xml_handle_units(obj, value)
         elif keyword == "enumeration":
@@ -1046,6 +1099,8 @@ def recursive_build(obj, dct, verbose):
 
         elif keyword == "dimensions":
             xml_handle_dimensions(dct, obj, keyword, value)
+        # elif keyword == "dim":
+        #     xml_handle_dim(dct, obj, keyword, value)
 
         elif keyword == "exists":
             xml_handle_exists(dct, obj, keyword, value)
@@ -1159,6 +1214,12 @@ application and base are valid categories!"
             # check for name first or type first if (NXobject)NXname then type first
             l_bracket_ind = kkey.rfind("(")
             r_bracket_ind = kkey.rfind(")")
+
+            # why is there at all the difference between
+            # (NXextend)group_name and group_name(NXextend) ?
+            # the original idea was always that a base class
+            # composes its content from another base class so
+            # group_name(NXextend) should be it throughout
             if l_bracket_ind == 0:
                 extend = kkey[1:r_bracket_ind]
                 name = kkey[r_bracket_ind + 1 :]
