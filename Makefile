@@ -50,9 +50,9 @@ test ::
 
 clean ::
 	$(RM) -rf $(BUILD_DIR)
-	for dir in $(NXDL_DIRS); do\
-		$(RM) -rf $${dir}/nyaml;\
-	done
+	# for dir in $(NXDL_DIRS); do\
+	# 	$(RM) -rf $${dir}/nyaml;\
+	# done
 
 prepare ::
 	$(PYTHON) -m dev_tools manual --prepare --build-root $(BUILD_DIR)
