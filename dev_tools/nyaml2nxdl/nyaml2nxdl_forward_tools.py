@@ -37,6 +37,14 @@ from .nyaml2nxdl_helper import get_yaml_escape_char_reverter_dict
 from .nyaml2nxdl_helper import nx_name_type_resolving
 from .nyaml2nxdl_helper import remove_namespace_from_tag
 
+SHORTHAND_TYPE_TO_NXTYPE = {"R": "NX_FLOAT",
+                            "R+": "NX_FLOAT",
+                            "R+0": "NX_FLOAT",
+                            "N": "NX_POSINT",
+                            "N0": "NX_UINT",
+                            "Z": "NX_INT"}
+
+
 # pylint: disable=too-many-lines, global-statement, invalid-name
 DOM_COMMENT = (
     "\n"
@@ -196,7 +204,7 @@ def check_for_skiped_attributes(component, value, allowed_attr=None, verbose=Fal
     block_tag = ["enumeration"]
     if value:
         for attr, val in value.items():
-            if attr in ["doc"]:
+            if attr in ["doc", "info"]:
                 continue
             if "__line__" in attr or attr in block_tag:
                 continue
@@ -208,6 +216,7 @@ def check_for_skiped_attributes(component, value, allowed_attr=None, verbose=Fal
                 and "\\@" not in attr
                 and attr not in allowed_attr
                 and "NX" not in attr
+                and attr != "dim"
                 and val
             ):
                 raise ValueError(
@@ -393,6 +402,8 @@ def xml_handle_group(dct, obj, keyword, value, verbose=False):
                 rm_key_list.append(attr)
                 rm_key_list.append(line_number)
                 xml_handle_comment(obj, line_number, line_loc, grp)
+            else:  # effectively skipping info: and alike
+                continue
 
         for key in rm_key_list:
             del value[key]
@@ -497,6 +508,70 @@ def xml_handle_dimensions(dct, obj, keyword, value: dict):
 
     if isinstance(value, dict) and value != {}:
         recursive_build(dims, value, verbose=None)
+
+
+def xml_handle_dim(dct, obj, keyword, value):
+    """
+    This function creates a 'dimensions' element instance, and appends it to an existing element
+
+    NOTE: we could create xml_handle_dim() function.
+        But, the dim elements in yaml file is defined as 'dim =[[index, value]]'
+        but dim has other attributes such as 'ref' and also might have doc as chlid.
+        so in that sense 'dim' should have come as dict keeping attributes and child as members of
+        dict.
+        Regarding this situation all the attributes of 'dimensions' and child 'doc' has been
+        included here.
+
+        Other attributes, except 'index' and 'value', of 'dim' comes under nested dict named
+        'dim_parameter:
+            incr:[...]'
+    """
+    # indeed the comment about xml_handle_dim is correct but that feature
+    # is in most cases not used and using numpy tensor notation would thus
+    # be much shorter, in that notation rank is implicit and dimensions equally clean
+    # xml_handle_dim_from_dimension_dict handles also attrs which have long been
+    # deprecated
+    # at least the description for rank is inconclusive stating that rank can be
+    # an uint but then rank could be 0
+    # https://manual.nexusformat.org/nxdl_desc.html#nxdl-data-type-dimensionstype
+    # if we use a shorthand notation like dimensions: (i, j, 3)
+    # then value is not a dictionary but a list so all we have to do
+    # release dict constraint handle two cases:
+    # the most frequent case short hand notation if isinstance(value, list) is True
+    # just walk the list items as they have to be arranged in order and add xml dim
+    # items the code in line 488, i.e. that key is always dim: is anyway a strong
+    # assumption not checked for afterwards; which can lead to a silent inconsistence
+    # the fact that there is @required enables defacto rank constraints to be set
+    # e.g. (i (required), j (required), k (optional)) imagine this in an NXdata/data
+    # could be used to define either a 2d or 3d array
+    # however rank constraints in turn like rank in [2, 3] make no statement
+    # about the order, hence my proposal:
+    # (i, j, k (optional)) should be interpreted as follows
+    # value can be a 2d or 3d array but 1th dim is always as long as i
+    # 2th as long as j, and the optional 3th dim has to be as long as k if used
+    # again the majority of cases uses (i, 2), (3, 3), etc... without any need
+    # for documentation, that doc is anyway currently not machine-interpreted
+    # also here dimensions following one optional statement have to be optional
+    # but in practice this is problematic, see that example a 3d RGB stack
+    # x and y always there, z maybe but z should not necessarily be the last
+    # i.e. the fastest dimension, currently order of dim arguments follow storage
+    # order, so again two groups in base classes needed for what could be one
+    # group with an optional third dimension
+    if isinstance(value, str) is True:
+        if value[0] == '(' and value[-1] == ')':
+            valid_dims = []
+            for entry in value[1:-1].replace(" ", "").split(','):
+                if len(entry) > 0:  # ignore trailing comma and empty mnemonics
+                    valid_dims.append(entry)
+            if len(valid_dims) > 0:
+                dims = ET.SubElement(obj, "dimensions")
+                dims.set("rank", str(len(valid_dims)))
+                dim_idx = 1
+                for dim_name in valid_dims:
+                    dim = ET.SubElement(dims, "dim")
+                    dim.set("index", str(dim_idx))
+                    dim.set("value", str(dim_name))
+                    dim_idx += 1
 
 
 # pylint: disable=too-many-locals, too-many-arguments
@@ -904,6 +979,7 @@ def xml_handle_fields(obj, keyword, value, line_annot, line_loc, verbose=False):
     then the not empty keyword_name is a field!
     This simple function will define a new node of xml tree
     """
+
     # List of possible attributes of xml elements
     allowed_attr = [
         "name",
@@ -941,34 +1017,27 @@ def xml_handle_fields(obj, keyword, value, line_annot, line_loc, verbose=False):
 
     # handling the expansion of convenient NX_DATA_TYPES for fields
     # has to handle here, e.g.
-    shorthand_type_to_nx_type = {
-        "R": "NX_FLOAT",
-        "R+": "NX_FLOAT",
-        "R+0": "NX_FLOAT",
-        "N": "NX_POSINT",
-        "N0": "NX_UINT",
-        "Z": "NX_INT"}
-    # the mapping between R+, R+0 on NX_FLOAT is not bijektiv, would
+    # the mapping between R+, R+0 on NX_FLOAT is not bijective, would
     # require setting xs:minInclusive for R+0 and xs:minExclusive for R+
-    if keyword_type in shorthand_type_to_nx_type.keys():
-        resolved_type = shorthand_type_to_nx_type[keyword_type]
+    if keyword_type in SHORTHAND_TYPE_TO_NXTYPE.keys():
+        resolved_type = SHORTHAND_TYPE_TO_NXTYPE[keyword_type]
     else:
         resolved_type = keyword_type
     # in what follows use resolved_type instead of keyword_type
 
     # type come first
     if l_bracket == 0 and r_bracket > 0:
-        elemt_obj.set("type", keyword_type)
+        elemt_obj.set("type", resolved_type)
         if keyword_name:
             elemt_obj.set("name", keyword_name)
     elif l_bracket > 0:
         elemt_obj.set("name", keyword_name)
-        if keyword_type:
-            elemt_obj.set("type", keyword_type)
+        if resolved_type:
+            elemt_obj.set("type", resolved_type)
     else:
         elemt_obj.set("name", keyword_name)
 
-    if value:
+    if isinstance(value, dict):
         rm_key_list = []
         # In each each if clause apply xml_handle_comment(), to collect
         # comments on that yaml line.
@@ -978,12 +1047,7 @@ def xml_handle_fields(obj, keyword, value, line_annot, line_loc, verbose=False):
             line_number = f"__line__{attr}"
             line_loc = value[line_number]
             if attr == "doc":
-                xml_handle_doc(
-                    elemt_obj,
-                    vval,
-                    line_number,
-                    line_loc,
-                )
+                xml_handle_doc(elemt_obj, vval, line_number, line_loc)
                 rm_key_list.append(attr)
                 rm_key_list.append(line_number)
             elif attr == "exists" and vval:
@@ -1000,6 +1064,8 @@ def xml_handle_fields(obj, keyword, value, line_annot, line_loc, verbose=False):
                 rm_key_list.append(attr)
                 rm_key_list.append(line_number)
                 xml_handle_comment(obj, line_number, line_loc, elemt_obj)
+            else:
+                continue  # attr == "info" is ignored for now
 
         for key in rm_key_list:
             del value[key]
@@ -1077,9 +1143,9 @@ def recursive_build(obj, dct, verbose):
         elif keyword_type == "" and keyword_name == "symbols":
             xml_handle_symbols(dct, obj, keyword, value)
 
-        elif (keyword_type in NX_CLSS) or (
+        elif ((keyword_type in NX_CLSS) or (
             keyword_type not in [*NX_TYPE_KEYS, "", *NX_NEW_DEFINED_CLASSES]
-        ):
+        )) and (keyword_type not in SHORTHAND_TYPE_TO_NXTYPE.keys()):
             # we can be sure we need to instantiate a new group
             xml_handle_group(dct, obj, keyword, value, verbose)
 
@@ -1099,8 +1165,8 @@ def recursive_build(obj, dct, verbose):
 
         elif keyword == "dimensions":
             xml_handle_dimensions(dct, obj, keyword, value)
-        # elif keyword == "dim":
-        #     xml_handle_dim(dct, obj, keyword, value)
+        elif keyword == "dim":
+            xml_handle_dim(dct, obj, keyword, value)
 
         elif keyword == "exists":
             xml_handle_exists(dct, obj, keyword, value)
@@ -1209,6 +1275,8 @@ application and base are valid categories!"
             del yml_appdef[line_number]
             del yml_appdef[kkey]
         # Taking care or name and extends
+        elif kkey == "info":  # skip reading the info section
+           continue
         elif "NX" in kkey:
             # Tacking the attribute order but the correct value will be stored later
             # check for name first or type first if (NXobject)NXname then type first
@@ -1271,9 +1339,10 @@ has to be a non-empty string!"
 
     root_keys = 0
     for key in yml_appdef.keys():
-        if "__line__" not in key:
-            root_keys += 1
-            extra_key = key
+        if key != "info":  # skipping info but likely does not skip lines
+            if "__line__" not in key:
+                root_keys += 1
+                extra_key = key
 
     assert root_keys == 1, (
         f"Accepting at most keywords: category, doc, symbols, and NX... "
