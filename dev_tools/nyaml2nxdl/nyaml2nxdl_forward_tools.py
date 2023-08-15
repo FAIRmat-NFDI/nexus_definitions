@@ -37,12 +37,14 @@ from .nyaml2nxdl_helper import get_yaml_escape_char_reverter_dict
 from .nyaml2nxdl_helper import nx_name_type_resolving
 from .nyaml2nxdl_helper import remove_namespace_from_tag
 
-SHORTHAND_TYPE_TO_NXTYPE = {"R": "NX_FLOAT",
-                            "R+": "NX_FLOAT",
-                            "R+0": "NX_FLOAT",
-                            "N": "NX_POSINT",
-                            "N0": "NX_UINT",
-                            "Z": "NX_INT"}
+SHORTHAND_TYPE_TO_NXTYPE = {
+    "R": "NX_FLOAT",
+    "R+": "NX_FLOAT",
+    "R+0": "NX_FLOAT",
+    "N": "NX_POSINT",
+    "N0": "NX_UINT",
+    "Z": "NX_INT",
+}
 
 
 # pylint: disable=too-many-lines, global-statement, invalid-name
@@ -558,9 +560,9 @@ def xml_handle_dim(dct, obj, keyword, value):
     # order, so again two groups in base classes needed for what could be one
     # group with an optional third dimension
     if isinstance(value, str) is True:
-        if value[0] == '(' and value[-1] == ')':
+        if value[0] == "(" and value[-1] == ")":
             valid_dims = []
-            for entry in value[1:-1].replace(" ", "").split(','):
+            for entry in value[1:-1].replace(" ", "").split(","):
                 if len(entry) > 0:  # ignore trailing comma and empty mnemonics
                     valid_dims.append(entry)
             if len(valid_dims) > 0:
@@ -1145,9 +1147,10 @@ def recursive_build(obj, dct, verbose):
         elif keyword_type == "" and keyword_name == "symbols":
             xml_handle_symbols(dct, obj, keyword, value)
 
-        elif ((keyword_type in NX_CLSS) or (
-            keyword_type not in [*NX_TYPE_KEYS, "", *NX_NEW_DEFINED_CLASSES]
-        )) and (keyword_type not in SHORTHAND_TYPE_TO_NXTYPE.keys()):
+        elif (
+            (keyword_type in NX_CLSS)
+            or (keyword_type not in [*NX_TYPE_KEYS, "", *NX_NEW_DEFINED_CLASSES])
+        ) and (keyword_type not in SHORTHAND_TYPE_TO_NXTYPE.keys()):
             # we can be sure we need to instantiate a new group
             xml_handle_group(dct, obj, keyword, value, verbose)
 
@@ -1278,7 +1281,7 @@ application and base are valid categories!"
             del yml_appdef[kkey]
         # Taking care or name and extends
         elif kkey == "info":  # skip reading the info section
-           continue
+            continue
         elif "NX" in kkey:
             # Tacking the attribute order but the correct value will be stored later
             # check for name first or type first if (NXobject)NXname then type first
