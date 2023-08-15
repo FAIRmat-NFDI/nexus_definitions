@@ -21,7 +21,7 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" name="NXimage_set" extends="NXobject" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXimage_set" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <symbols>
         <symbol name="n_images">
             <doc>
@@ -40,11 +40,15 @@
         </symbol>
     </symbols>
     <doc>
-         Container for reporting a set of images taken.
+         Base class for reporting a set of images.
+         
+         This class provides a base vocabulary to be used for specialized NXimage_set
+         base classes like NXimage_r_set and NXimage_c_set.
     </doc>
     <group type="NXprocess">
         <doc>
-             Details how images were processed from the detector readings.
+             Details how NXdata instance inside instance of (specialized)
+             NXimage_set were processed from the detector readings/raw data.
         </doc>
         <field name="source">
             <doc>
@@ -71,58 +75,5 @@
         </field>
         <group type="NXprogram"/>
     </group>
-    <group name="stack" type="NXdata">
-        <doc>
-             Image (stack).
-        </doc>
-        <field name="data_counts" type="NX_NUMBER" units="NX_UNITLESS">
-            <doc>
-                 Image intensity values.
-            </doc>
-            <dimensions rank="3">
-                <dim index="1" value="n_images"/>
-                <dim index="2" value="n_y"/>
-                <dim index="3" value="n_x"/>
-            </dimensions>
-        </field>
-        <field name="axis_image_identifier" type="NX_UINT" units="NX_UNITLESS">
-            <doc>
-                 Image identifier
-            </doc>
-            <dimensions rank="1">
-                <dim index="1" value="n_images"/>
-            </dimensions>
-            <attribute name="long_name">
-                <doc>
-                     Image identifier.
-                </doc>
-            </attribute>
-        </field>
-        <field name="axis_y" type="NX_NUMBER" units="NX_LENGTH">
-            <doc>
-                 Pixel coordinate center of mass along y direction.
-            </doc>
-            <dimensions rank="1">
-                <dim index="1" value="n_y"/>
-            </dimensions>
-            <attribute name="long_name">
-                <doc>
-                     Coordinate along y direction.
-                </doc>
-            </attribute>
-        </field>
-        <field name="axis_x" type="NX_NUMBER" units="NX_LENGTH">
-            <doc>
-                 Pixel coordinate center of mass along x direction.
-            </doc>
-            <dimensions rank="1">
-                <dim index="1" value="n_x"/>
-            </dimensions>
-            <attribute name="long_name">
-                <doc>
-                     Coordinate along x direction.
-                </doc>
-            </attribute>
-        </field>
-    </group>
+    <group type="NXdata"/>
 </definition>

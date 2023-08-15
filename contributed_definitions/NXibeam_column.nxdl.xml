@@ -22,8 +22,10 @@
 # For further information, see http://www.nexusformat.org
 -->
 <!--symbols:
-  doc: The symbols used in the schema to specify e.g. variables.-->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" name="NXibeam_column" extends="NXobject" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+doc: The symbols used in the schema to specify e.g. variables.-->
+<!--NXibeam_column is an NXobject instead of an NXcomponent_em to make that
+part "an ion gun" reusable in other context-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXibeam_column" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <doc>
          Container for components of a focused-ion-beam (FIB) system.
          
@@ -42,11 +44,12 @@
          For more details about the relevant physics and application examples
          consult the literature, for example:
          
-         * `L. A. Giannuzzi et al. &lt;https://doi.org/10.1007/b101190&gt;`_  
-         * `E. I. Preiß et al. &lt;https://link.springer.com/content/pdf/10.1557/s43578-020-00045-w.pdf&gt;`_  
-         * `J. F. Ziegler et al. &lt;https://www.sciencedirect.com/science/article/pii/S0168583X10001862&gt;`_  
+         * `L. A. Giannuzzi et al. &lt;https://doi.org/10.1007/b101190&gt;`_
+         * `E. I. Preiß et al. &lt;https://link.springer.com/content/pdf/10.1557/s43578-020-00045-w.pdf&gt;`_
+         * `J. F. Ziegler et al. &lt;https://www.sciencedirect.com/science/article/pii/S0168583X10001862&gt;`_
          * `J. Lili &lt;https://www.osti.gov/servlets/purl/924801&gt;`_
     </doc>
+    <group type="NXchamber"/>
     <group type="NXfabrication"/>
     <group name="ion_source" type="NXsource">
         <doc>
@@ -80,11 +83,12 @@
         <group name="probe" type="NXion">
             <doc>
                  Which ionized elements or molecular ions form the beam.
-                 Examples are gallium, helium, neon, argon, krypton, 
+                 Examples are gallium, helium, neon, argon, krypton,
                  or xenon, O2+.
             </doc>
         </group>
-        <!--NEW ISSUE: use NXion instead-->
+        <!--NEW ISSUE: use NXion instead
+flux: 1/(area*time)-->
         <field name="brightness" type="NX_FLOAT" units="NX_ANY">
             <doc>
                  Average/nominal brightness
@@ -102,7 +106,11 @@ NEW ISSUE: (at which location?).-->
                  Ion acceleration voltage upon source exit and entering the vacuum flight path.
             </doc>
         </field>
-        <field name="ion_energy_profile" type="NX_NUMBER" units="NX_ENERGY"/>
+        <field name="ion_energy_profile" type="NX_FLOAT" units="NX_ENERGY">
+            <doc>
+                 To be defined more specifically. Community suggestions are welcome.
+            </doc>
+        </field>
         <group type="NXtransformations">
             <doc>
                  Affine transformation which detail the arrangement in the microscope relative to
@@ -114,8 +122,12 @@ NEW ISSUE: (at which location?).-->
 relevant from maintenance point of view-->
     <group type="NXaperture_em"/>
     <group type="NXlens_em"/>
-    <!--ibeam_deflector(NXscanbox_em):-->
-    <group type="NXsensor"/>
+    <group type="NXscanbox_em"/>
+    <group type="NXsensor">
+        <doc>
+             A sensor used to monitor an external or internal condition.
+        </doc>
+    </group>
     <group type="NXbeam">
         <doc>
              Individual characterization results for the position, shape,
@@ -133,12 +145,12 @@ doc: Description of the program and sequence of sample positions sputtered.
 in here we can store time-dependent quantities
 NEW ISSUE: for documentation of charge compensation
 (NXtransformation):
-   doc: |
-     A right-handed Cartesian coordinate system is used whose positive
-     z-axis points in the direction of the ion beam, i.e. towards the
-     sample. For modelling ion milling it is relevant to document the
-     illumination vector. NXtransformations offers a place to store how the
-     ion gun coordinate system has to be rotated to align its positive z-axis
-     with the positive z-axis of e.g. the electron beam and ion beam
-     respectively.-->
+doc: |
+A right-handed Cartesian coordinate system is used whose positive
+z-axis points in the direction of the ion beam, i.e. towards the
+sample. For modelling ion milling it is relevant to document the
+illumination vector. NXtransformations offers a place to store how the
+ion gun coordinate system has to be rotated to align its positive z-axis
+with the positive z-axis of e.g. the electron beam and ion beam
+respectively.-->
 </definition>

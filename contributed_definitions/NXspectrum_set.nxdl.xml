@@ -21,9 +21,13 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" name="NXspectrum_set" extends="NXobject" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXspectrum_set" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <symbols>
-        <!--n_p: Number of scan points-->
+        <symbol name="n_p">
+            <doc>
+                 Number of scan points.
+            </doc>
+        </symbol>
         <symbol name="n_y">
             <doc>
                  Number of pixel in the slow direction.
@@ -41,8 +45,11 @@
         </symbol>
     </symbols>
     <doc>
-         Container for reporting a set of spectra.
+         Base class container for reporting a set of spectra.
     </doc>
+    <!--for EELS we likely need a complex-valued NXspectrum_c_set to this
+NXspectrum_set base class here which should then be splitted into an
+NXspectrum_set to reduce redundant fields and specialized NXspectrum_r/c_set-->
     <group type="NXprocess">
         <doc>
              Details how spectra were processed from the detector readings.
@@ -72,13 +79,16 @@
         </field>
         <group type="NXprogram"/>
     </group>
-    <!--##MK::feel free to contact us when you would like to include more complicated scan pattern than rectangular ones.-->
+    <!--#MK::feel free to contact us when you would like to include
+lik omega/q mapping more complicated scan pattern than rectangular ones.-->
     <group name="stack" type="NXdata">
         <doc>
              Collected spectra for all pixels of a rectangular region-of-interest.
-             This representation supports rectangular scan pattern.
+             This representation supports rectangular scan pattern with equidistant
+             energy bins.
         </doc>
-        <field name="data_counts" type="NX_NUMBER" units="NX_UNITLESS">
+        <field name="info"/>
+        <field name="data_counts" type="NX_FLOAT" units="NX_UNITLESS">
             <dimensions rank="3">
                 <dim index="1" value="n_y"/>
                 <dim index="2" value="n_x"/>
@@ -95,27 +105,27 @@
 \@ypos_indices: 0
 \@xpos_indices: 1
 \@energy_indices: 2-->
-        <field name="axis_y" type="NX_NUMBER" units="NX_LENGTH">
+        <field name="axis_y" type="NX_FLOAT" units="NX_LENGTH">
             <dimensions rank="1">
                 <dim index="1" value="n_y"/>
             </dimensions>
             <attribute name="long_name">
                 <doc>
-                     Coordinate along y direction
+                     Pixel coordinate along y direction
                 </doc>
             </attribute>
         </field>
-        <field name="axis_x" type="NX_NUMBER" units="NX_LENGTH">
+        <field name="axis_x" type="NX_FLOAT" units="NX_LENGTH">
             <dimensions rank="1">
                 <dim index="1" value="n_x"/>
             </dimensions>
             <attribute name="long_name">
                 <doc>
-                     Coordinate along x direction
+                     Pixel coordinate along x direction
                 </doc>
             </attribute>
         </field>
-        <field name="axis_energy" type="NX_NUMBER" units="NX_ENERGY">
+        <field name="axis_energy" type="NX_FLOAT" units="NX_ENERGY">
             <dimensions rank="1">
                 <dim index="1" value="n_energy"/>
             </dimensions>
@@ -133,9 +143,10 @@ base classes-->
     <group name="summary" type="NXdata">
         <doc>
              Accumulated counts over all pixels of the region-of-interest.
-             This representation supports rectangular scan pattern.
+             This representation supports a rectangular scan pattern with
+             equidistant energy bins.
         </doc>
-        <field name="data_counts" type="NX_NUMBER" units="NX_UNITLESS">
+        <field name="data_counts" type="NX_FLOAT" units="NX_UNITLESS">
             <dimensions rank="1">
                 <dim index="1" value="n_energy"/>
             </dimensions>
@@ -148,13 +159,55 @@ base classes-->
         <!--\@signal: counts
 \@axes: [energy]
 \@energy_indices: 0-->
-        <field name="axis_energy" type="NX_NUMBER" units="NX_ENERGY">
+        <field name="axis_energy" type="NX_FLOAT" units="NX_ENERGY">
             <dimensions rank="1">
                 <dim index="1" value="n_energy"/>
             </dimensions>
             <attribute name="long_name">
                 <doc>
                      Energy
+                </doc>
+            </attribute>
+        </field>
+    </group>
+    <group name="collection" type="NXdata">
+        <doc>
+             Collected spectra for each scan point. This representation supports
+             equidistant energy bins.
+        </doc>
+        <field name="info"/>
+        <field name="data_counts" type="NX_FLOAT" units="NX_UNITLESS">
+            <dimensions rank="2">
+                <dim index="1" value="n_p"/>
+                <dim index="2" value="n_energy"/>
+            </dimensions>
+            <attribute name="long_name">
+                <doc>
+                     Counts
+                </doc>
+            </attribute>
+        </field>
+        <!--\@signal: counts
+\@axes: [scan_point_id, energy]
+\@scan_point_indices: 1
+\@energy_indices: 0-->
+        <field name="axis_scan_point_id" type="NX_POSINT" units="NX_UNITLESS">
+            <dimensions rank="1">
+                <dim index="1" value="n_p"/>
+            </dimensions>
+            <attribute name="long_name">
+                <doc>
+                     Scan point identifier
+                </doc>
+            </attribute>
+        </field>
+        <field name="axis_energy" type="NX_FLOAT" units="NX_ENERGY">
+            <dimensions rank="1">
+                <dim index="1" value="n_energy"/>
+            </dimensions>
+            <attribute name="long_name">
+                <doc>
+                     
                 </doc>
             </attribute>
         </field>

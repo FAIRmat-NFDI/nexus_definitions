@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+<!--
+# NeXus - Neutron and X-ray Common Data Format
+# 
+# Copyright (C) 2014-2022 NeXus International Advisory Committee (NIAC)
+# 
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For further information, see http://www.nexusformat.org
+-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXms_ipf" extends="NXprocess" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+    <symbols>
+        <!--how to make this optional-->
+        <symbol name="n_z">
+            <doc>
+                 Number of pixel along the z slowest direction.
+            </doc>
+        </symbol>
+        <symbol name="n_y">
+            <doc>
+                 Number of pixel along the y slow direction.
+            </doc>
+        </symbol>
+        <symbol name="n_x">
+            <doc>
+                 Number of pixel along the x fast direction.
+            </doc>
+        </symbol>
+        <symbol name="n_rgb">
+            <doc>
+                 Number of RGB values along the fastest direction, always three.
+            </doc>
+        </symbol>
+    </symbols>
+    <doc>
+         Base class to store an inverse pole figure mapping.
+    </doc>
+    <field name="projection_direction" type="NX_FLOAT" units="NX_UNITLESS">
+        <doc>
+             The direction along which orientations are projected.
+        </doc>
+        <dimensions rank="1">
+            <dim index="1" value="3"/>
+        </dimensions>
+    </field>
+    <group name="map" type="NXdata">
+        <doc>
+             Inverse pole figure mapping.
+        </doc>
+        <field name="info"/>
+        <!--\@signal: data
+\@axes: [axis_y, axis_x]
+\@axis_x_indices: 0
+\@axis_y_indices: 1-->
+        <field name="data" type="NX_UINT" units="NX_UNITLESS">
+            <!--hehe, but can be larger than one but could also be an NX_DIMENSIONLESS !-->
+            <doc>
+                 Inverse pole figure color code for each map coordinate.
+            </doc>
+            <dimensions rank="3">
+                <dim index="1" value="n_y"/>
+                <dim index="2" value="n_x"/>
+                <dim index="3" value="3"/>
+            </dimensions>
+        </field>
+        <field name="axis_z" type="NX_FLOAT" units="NX_LENGTH">
+            <doc>
+                 Pixel center along the z axis of the map.
+            </doc>
+            <dimensions rank="1">
+                <dim index="1" value="n_z"/>
+            </dimensions>
+        </field>
+        <!--\@long_name:-->
+        <field name="axis_y" type="NX_FLOAT" units="NX_LENGTH">
+            <doc>
+                 Pixel center along the y axis of the map.
+            </doc>
+            <dimensions rank="1">
+                <dim index="1" value="n_y"/>
+            </dimensions>
+        </field>
+        <!--\@long_name:-->
+        <field name="axis_x" type="NX_FLOAT" units="NX_LENGTH">
+            <doc>
+                 Pixel center along the x axis of the map.
+            </doc>
+            <dimensions rank="1">
+                <dim index="1" value="n_x"/>
+            </dimensions>
+        </field>
+    </group>
+    <!--\@long_name:
+title:-->
+    <group name="legend" type="NXdata">
+        <doc>
+             The color code which represents how orientations about positions
+             in the fundamental zone of orientation space are mapped
+             to an RGB triplet each.
+             
+             For each stereographic standard triangle (SST), i.e. a rendering of
+             the fundamental zone of the crystal-symmetry-reduced orientation space
+             SO3, it is possible to define a color model which assigns each point in
+             the fundamental zone a color.
+             Different mapping models are used. These implement (slightly) different
+             scaling relations. Differences are which base colors of the RGB
+             color model are placed in which extremal position of the SST
+             and where the white point is located. For further details see:
+             
+             * [G. Nolze et al.](https://doi.org/10.1107/S1600576716012942)
+             * Srikanth Patala and coworkers&quot;'&quot; work and of others.
+             
+             Details are implementation-specific and not standardized yet.
+        </doc>
+        <field name="info"/>
+        <!--\@signal: data
+\@axes: [axis_y, axis_x]
+\@axis_x_indices: 0
+\@axis_y_indices: 1-->
+        <field name="data" type="NX_UINT" units="NX_UNITLESS">
+            <!--hehe, but can be larger than one but could also be an NX_DIMENSIONLESS !-->
+            <doc>
+                 Inverse pole figure color code for each map coordinate.
+            </doc>
+            <dimensions rank="3">
+                <dim index="1" value="n_y"/>
+                <dim index="2" value="n_x"/>
+                <dim index="3" value="3"/>
+            </dimensions>
+        </field>
+        <field name="axis_y" type="NX_FLOAT" units="NX_LENGTH">
+            <doc>
+                 Pixel along the y-axis.
+            </doc>
+            <dimensions rank="1">
+                <dim index="1" value="n_y"/>
+            </dimensions>
+        </field>
+        <!--\@long_name:-->
+        <field name="axis_x" type="NX_FLOAT" units="NX_LENGTH">
+            <doc>
+                 Pixel along the x-axis.
+            </doc>
+            <dimensions rank="1">
+                <dim index="1" value="n_x"/>
+            </dimensions>
+        </field>
+    </group>
+    <!--\@long_name:
+title:-->
+</definition>

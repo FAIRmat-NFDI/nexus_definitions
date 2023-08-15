@@ -24,7 +24,8 @@
 <!--the benefit of NXcg_point_set is that the origin is 0 by default
 how to resolve the association between the unit normal and its associated primitive?
 rather make this a set of vectors, irrespective whether these are unit or not-->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" name="NXcg_unit_normal_set" extends="NXobject" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXcg_unit_normal_set" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+    <!--eventually remove this base class and make normal vector a property of the primitive-->
     <symbols>
         <doc>
              The symbols used in the schema to specify e.g. dimensions of arrays.
@@ -42,9 +43,11 @@ rather make this a set of vectors, irrespective whether these are unit or not-->
     </symbols>
     <doc>
          Computational geometry description of a set of (oriented) unit normal vectors.
+         
+         To be used for storing normal vector information as properties of primitives.
+         To be used only as a child of an instance class that is composed from
+         NXcg_primitive_set which acts as the parent to specify dimension information.
     </doc>
-    <field name="dimensionality" type="NX_POSINT" units="NX_UNITLESS"/>
-    <field name="cardinality" type="NX_POSINT" units="NX_UNITLESS"/>
     <field name="normals" type="NX_FLOAT" units="NX_LENGTH">
         <doc>
              Direction of each normal
@@ -54,14 +57,14 @@ rather make this a set of vectors, irrespective whether these are unit or not-->
             <dim index="2" value="d"/>
         </dimensions>
     </field>
-    <field name="orientation" type="NX_INT" units="NX_UNITLESS">
+    <field name="orientation" type="NX_UINT" units="NX_UNITLESS">
         <doc>
-             Qualifier how which specifically oriented normal to its primitive each
-             normal represents.
+             Qualifier which details the orientation of each normal vector
+             in relation to its primitive.
              
              * 0 - undefined
-             * 1 - outer
-             * 2 - inner
+             * 1 - outer unit normal vector
+             * 2 - inner unit normal vector
         </doc>
         <dimensions rank="1">
             <dim index="1" value="c"/>

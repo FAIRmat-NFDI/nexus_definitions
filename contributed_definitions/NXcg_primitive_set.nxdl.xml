@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+<!--
+# NeXus - Neutron and X-ray Common Data Format
+# 
+# Copyright (C) 2014-2022 NeXus International Advisory Committee (NIAC)
+# 
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For further information, see http://www.nexusformat.org
+-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXcg_primitive_set" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+    <!--many properties of non-degenerate primitives are in the number set R+ instead of in R+0-->
+    <symbols>
+        <doc>
+             The symbols used in the schema to specify e.g. dimensions of arrays.
+        </doc>
+        <symbol name="d">
+            <doc>
+                 The dimensionality of the space.
+            </doc>
+        </symbol>
+        <symbol name="c">
+            <doc>
+                 The cardinality of the set, i.e. the number of members.
+            </doc>
+        </symbol>
+    </symbols>
+    <doc>
+         Computational geometry description of a set of primitives in Euclidean space.
+    </doc>
+    <field name="dimensionality" type="NX_POSINT" units="NX_UNITLESS">
+        <enumeration>
+            <item value="1"/>
+            <item value="2"/>
+            <item value="3"/>
+        </enumeration>
+    </field>
+    <field name="cardinality" type="NX_POSINT" units="NX_UNITLESS"/>
+    <field name="identifier_offset" type="NX_INT" units="NX_UNITLESS">
+        <doc>
+             Integer which specifies the first index to be used for
+             distinguishing identifiers of set members.
+        </doc>
+    </field>
+    <field name="identifier" type="NX_INT">
+        <doc>
+             Identifier of each member for explicit indexing.
+        </doc>
+        <dimensions rank="1">
+            <dim index="1" value="c"/>
+        </dimensions>
+    </field>
+    <field name="center" type="NX_FLOAT" units="NX_LENGTH">
+        <doc>
+             The geometric center of each primitive.
+        </doc>
+        <dimensions rank="2">
+            <dim index="1" value="c"/>
+            <dim index="2" value="d"/>
+        </dimensions>
+    </field>
+    <!--a depends_on to define in which coordinate system-->
+    <field name="is_center_of_mass" type="NX_BOOLEAN">
+        <doc>
+             True if the center is a center of mass.
+        </doc>
+        <dimensions rank="1">
+            <dim index="1" value="c"/>
+        </dimensions>
+    </field>
+    <field name="shape" type="NX_FLOAT" units="NX_LENGTH">
+        <doc>
+             A qualitative description of each primitive.
+        </doc>
+        <dimensions rank="2">
+            <dim index="1" value="c"/>
+            <dim index="2" value="d"/>
+        </dimensions>
+    </field>
+    <field name="length" type="NX_FLOAT" units="NX_LENGTH">
+        <doc>
+             Qualifier for primitive individually how one edge is longer than all
+             the other edge of that respective primitive. Often the term length is
+             associated with one edge being parallel to an axis of
+             the coordinate system.
+        </doc>
+        <dimensions rank="1">
+            <dim index="1" value="c"/>
+        </dimensions>
+    </field>
+    <field name="width" type="NX_FLOAT" units="NX_LENGTH">
+        <doc>
+             Qualifier often used to describe the length of one characteristic edge
+             within the coordinate system.
+        </doc>
+        <dimensions rank="1">
+            <dim index="1" value="c"/>
+        </dimensions>
+    </field>
+    <field name="volume" type="NX_FLOAT" units="NX_VOLUME">
+        <dimensions rank="1">
+            <dim index="1" value="c"/>
+        </dimensions>
+    </field>
+    <field name="area" type="NX_FLOAT" units="NX_AREA">
+        <doc>
+             Alias for surface_area.
+        </doc>
+        <dimensions rank="1">
+            <dim index="1" value="c"/>
+        </dimensions>
+    </field>
+    <field name="surface_area" type="NX_FLOAT" units="NX_AREA">
+        <dimensions rank="1">
+            <dim index="1" value="c"/>
+        </dimensions>
+    </field>
+    <field name="orientation" type="NX_FLOAT" units="NX_DIMENSIONLESS">
+        <doc>
+             Direction unit vector which points along
+             the longest principal axis.
+        </doc>
+        <dimensions rank="2">
+            <dim index="1" value="c"/>
+            <dim index="2" value="d"/>
+        </dimensions>
+    </field>
+    <field name="is_closed" type="NX_BOOLEAN">
+        <doc>
+             Are the primitives closed (true) or hollow (false)?
+        </doc>
+        <dimensions rank="1">
+            <dim index="1" value="c"/>
+        </dimensions>
+    </field>
+    <group name="vertex_normal" type="NXcg_unit_normal_set"/>
+    <group name="edge_normal" type="NXcg_unit_normal_set"/>
+    <group name="face_normal" type="NXcg_unit_normal_set"/>
+    <group type="NXtransformations">
+        <doc>
+             Reference to or definition of a coordinate system within
+             which the positions, directions, and locations of primitives
+             are interpretable.
+        </doc>
+    </group>
+</definition>

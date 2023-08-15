@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+<!--
+# NeXus - Neutron and X-ray Common Data Format
+# 
+# Copyright (C) 2014-2022 NeXus International Advisory Committee (NIAC)
+# 
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For further information, see http://www.nexusformat.org
+-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXimage_r_set_diff" extends="NXimage_r_set" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+    <symbols>
+        <symbol name="n_sc">
+            <doc>
+                 Number of scanned points. Scan point may have none, one, or more pattern.
+            </doc>
+        </symbol>
+        <symbol name="n_p">
+            <doc>
+                 Number of diffraction pattern.
+            </doc>
+        </symbol>
+        <symbol name="n_y">
+            <doc>
+                 Number of pixel per pattern in the slow direction.
+            </doc>
+        </symbol>
+        <symbol name="n_x">
+            <doc>
+                 Number of pixel per pattern in the fast direction.
+            </doc>
+        </symbol>
+    </symbols>
+    <doc>
+         Base class specialized for reporting a cuboidal stack of diffraction pattern.
+         
+         Diffraction pattern whether they were simulated or measured are the raw data
+         for computational workflows to characterize the phase and orientation
+         in crystalline regions in matter.
+         
+         Steps of post-processing the diffraction patterns should be documented using
+         method-specific specialized base classes. All eventual post-processing of
+         resulting orientation maps (2D or 3D) should be documented using
+         base classes from the NXms family.
+    </doc>
+    <field name="pattern_type">
+        <doc>
+             Category which type of diffraction pattern is reported.
+        </doc>
+        <enumeration>
+            <item value="kikuchi"/>
+        </enumeration>
+    </field>
+    <group name="stack" type="NXdata">
+        <doc>
+             Collected diffraction pattern as an image stack. As raw and closest to the
+             first retrievable measured data as possible, i.e. do not use this
+             container to store already averaged, filtered or whatever post-processed
+             pattern unless these are generated unmodifiably in such manner by the
+             instrument given the way how the instrument and control software
+             was configured for your microscope session.
+        </doc>
+        <field name="scan_point_identifier" type="NX_UINT" units="NX_UNITLESS">
+            <doc>
+                 Array which resolves the scan point to which each pattern belongs.
+                 Scan points are evaluated in sequence starting from scan point zero
+                 until scan point n_sc - 1. Evaluating the cumulated of this array
+                 decodes which pattern in intensity belongs to which scan point.
+                 
+                 Take an example with three scan points: The first scan point has one
+                 pattern, the second has three pattern, the last scan point has no
+                 pattern. In this case the scan_point_identifier are 0, 1, 1, 1.
+                 The length of the scan_point_identifier array is four because four
+                 pattern were measured in total.
+                 
+                 In most cases usually one pattern is averaged by the detector for
+                 some amount of time and then reported as one pattern.
+            </doc>
+            <dimensions rank="1">
+                <dim index="1" value="n_p"/>
+            </dimensions>
+        </field>
+        <field name="intensity" type="NX_FLOAT" units="NX_UNITLESS">
+            <doc>
+                 Intensity of the diffraction pattern.
+            </doc>
+            <dimensions rank="3">
+                <dim index="1" value="n_p"/>
+                <dim index="2" value="n_y"/>
+                <dim index="3" value="n_x"/>
+            </dimensions>
+            <!--n_p fast 2, n_y faster 1, n_x fastest 0
+in axes fast to fastest
+while for _indices fastest to fast-->
+            <attribute name="long_name">
+                <doc>
+                     Pattern intensity
+                </doc>
+            </attribute>
+        </field>
+        <!--\@signal: intensity
+\@axes: [pattern_identifier, ypos, xpos]
+\@xpos_indices: 0
+\@ypos_indices: 1
+\@pattern_identifier_indices: 2-->
+        <field name="pattern_identifier" type="NX_UINT" units="NX_UNITLESS">
+            <doc>
+                 Pattern are enumerated starting from 0 to n_p - 1.
+            </doc>
+            <dimensions rank="1">
+                <dim index="1" value="n_p"/>
+            </dimensions>
+            <attribute name="long_name">
+                <doc>
+                     Pattern identifier
+                </doc>
+            </attribute>
+        </field>
+    </group>
+    <!--the following fields are taken from the NXimage_r_set base class
+axis_y(R):
+axis_x(R):-->
+</definition>

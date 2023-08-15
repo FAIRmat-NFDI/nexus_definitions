@@ -22,11 +22,14 @@
 # For further information, see http://www.nexusformat.org
 -->
 <!--symbols:
-  doc: The symbols used in the schema to specify e.g. variables.-->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" name="NXebeam_column" extends="NXobject" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+doc: The symbols used in the schema to specify e.g. variables.-->
+<!--NXebeam_column is an NXobject instead of an NXcomponent_em to make that
+part "an electron gun" reusable in other context-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXebeam_column" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <doc>
-         Container for components to form a controlled beam in electron microscopy.
+         Container for components of a controlled electron beam.
     </doc>
+    <group type="NXchamber"/>
     <group type="NXfabrication"/>
     <group name="electron_source" type="NXsource">
         <doc>
@@ -71,7 +74,7 @@
                  Material of which the emitter is build, e.g. the filament material.
             </doc>
         </field>
-        <!--#MK could be made an instance of NXsample-->
+        <!--MK could be made an instance of NXsample-->
         <field name="description">
             <doc>
                  Ideally, a (globally) unique persistent identifier, link,
@@ -90,8 +93,7 @@ relevant from maintenance point of view-->
     <group type="NXaperture_em"/>
     <group type="NXlens_em"/>
     <group type="NXcorrector_cs"/>
-    <!--ebeam_deflector(NXscan_box_em):-->
-    <group type="NXstage_lab"/>
+    <group type="NXscanbox_em"/>
     <group type="NXsensor">
         <doc>
              A sensor used to monitor an external or internal condition.

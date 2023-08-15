@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+<!--
+# NeXus - Neutron and X-ray Common Data Format
+# 
+# Copyright (C) 2014-2022 NeXus International Advisory Committee (NIAC)
+# 
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For further information, see http://www.nexusformat.org
+-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXem_correlation" extends="NXem_method" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+    <doc>
+         Base class to combine different method-specific data in electron microscopy.
+         
+         This base class represent a template for documenting correlations
+         (spatial, temporal) between different method-specific results.
+    </doc>
+    <group type="NXprocess">
+        <doc>
+             Details about processing steps.
+        </doc>
+        <field name="sequence_index" type="NX_UINT"/>
+    </group>
+    <group name="indexing" type="NXprocess">
+        <doc>
+             Details about correlated or logically connected EBSD datasets.
+        </doc>
+        <field name="info"/>
+        <group type="NXem_ebsd_crystal_structure_model"/>
+        <group name="roi" type="NXdata">
+            <field name="descriptor">
+                <doc>
+                     Descriptor representing the image contrast.
+                </doc>
+            </field>
+            <!--\@signal:  # data
+\@axes:  # [axis_y, axis_x]
+\@axis_x_indices: 0
+\@axis_y_indices: 1
+\@signal:
+\@axes:
+\@AXISNAME_indices:
+\@long_name:-->
+            <field name="title">
+                <doc>
+                     Title of the default plot.
+                </doc>
+            </field>
+            <field name="data" type="NX_FLOAT" units="NX_UNITLESS">
+                <doc>
+                     Descriptor values displaying the ROI.
+                </doc>
+                <dimensions rank="3">
+                    <dim index="1" value="n_z"/>
+                    <dim index="2" value="n_y"/>
+                    <dim index="3" value="n_x"/>
+                </dimensions>
+                <!--n_0 slowest 3, n_1 slow 2, n_2 fast 1, rgb triplet is fastest 0
+in axes fast to fastest
+while for _indices fastest to fast-->
+                <attribute name="long_name">
+                    <doc>
+                         Descriptor values.
+                    </doc>
+                </attribute>
+            </field>
+            <field name="axis_z" type="NX_FLOAT" units="NX_LENGTH">
+                <doc>
+                     Calibrated coordinate along the z-axis.
+                </doc>
+                <dimensions rank="1">
+                    <dim index="1" value="n_z"/>
+                </dimensions>
+                <attribute name="long_name">
+                    <doc>
+                         Label for the z axis
+                    </doc>
+                </attribute>
+            </field>
+            <field name="axis_y" type="NX_FLOAT" units="NX_LENGTH">
+                <doc>
+                     Calibrated coordinate along the y-axis.
+                </doc>
+                <dimensions rank="1">
+                    <dim index="1" value="n_y"/>
+                </dimensions>
+                <attribute name="long_name">
+                    <doc>
+                         Label for the y axis
+                    </doc>
+                </attribute>
+            </field>
+            <field name="axis_x" type="NX_FLOAT" units="NX_LENGTH">
+                <doc>
+                     Calibrated coordinate along the x-axis.
+                </doc>
+                <dimensions rank="1">
+                    <dim index="1" value="n_x"/>
+                </dimensions>
+                <attribute name="long_name">
+                    <doc>
+                         Label for the x axis
+                    </doc>
+                </attribute>
+            </field>
+        </group>
+    </group>
+    <!--NEW ISSUE: implement support for filters eventually many of them
+NEW ISSUE: for now only show that data from DREAM3D can be loaded.
+NEW ISSUE: how to handle landmarks
+NEW ISSUE: again an entire set of workflows such as rigid or non-rigid
+image registration etc.
+sequence_index(N0):-->
+</definition>

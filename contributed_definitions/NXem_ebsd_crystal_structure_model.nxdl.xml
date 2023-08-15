@@ -21,7 +21,9 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" name="NXem_ebsd_crystal_structure_model" extends="NXobject" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+<!--in the long run this base class should be refactored based on feedback from
+other diffraction methods to arrive maybe at an NXem_crystal_structure_model_ebsd_parsed.yaml-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXem_ebsd_crystal_structure_model" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <symbols>
         <symbol name="n_hkl">
             <doc>
@@ -38,31 +40,31 @@
          Crystal structure phase models used for indexing Kikuchi pattern.
          
          This base class contains key metadata relevant to every physical
-         kinematic or dynamic diffraction model to be used for simulating
+         kinematic or dynamic diffraction model which is used for simulating
          Kikuchi diffraction pattern.
-         The actual indexing of Kikuchi pattern however maybe use different
-         algorithms which build on these simulation results but evaluate different
-         workflows of comparing simulated and measured Kikuchi pattern to make
-         suggestions which orientation is the most likely (if any) for each
-         scan point investigated.
+         The actual indexing of Kikuchi patterns may use different algorithms.
+         Such are used within different workflows where simulated and measured
+         Kikuchi pattern are compared to rate which phase and orientation is the most
+         likely candidate describing the pattern measured at that each scan point
+         respectively. If this evaluation yields scan points without any solutions,
+         these are represented using the null-phase model phase0, aka n/a aka notIndexed.
          
-         Traditionally Hough transform based indexing has been the most frequently
-         used algorithm. More and more dictionary based alternatives are used.
-         Either way both algorithm need a crystal structure model.
+         Traditionally, Hough transformation-based indexing has been the most frequently
+         used algorithm. Dictionary-based alternatives are emerging.
     </doc>
     <!--for EBSD specifically we need to know the assumed crystal structure
 with assumed statistically distributed atoms, i.e. structure and atom
 positions-->
     <field name="crystallographic_database_identifier">
         <doc>
-             Identifier of an entry from crystallographic_database which was used
-             for creating this structure model.
+             Identifier of an entry resolvable via crystallographic_database
+             which was used for creating this structure model.
         </doc>
     </field>
     <field name="crystallographic_database">
         <doc>
              Name of the crystallographic database to resolve
-             crystallographic_database_identifier e.g. COD or others.
+             crystallographic_database_identifier e.g. COD, ICSD, or others.
         </doc>
     </field>
     <!--defined using which convention?-->
@@ -93,7 +95,7 @@ positions-->
              Crystallographic space group
         </doc>
     </field>
-    <!--add enumeration all possible-->
+    <!--add enumeration of all possible-->
     <field name="is_centrosymmetric" type="NX_BOOLEAN">
         <doc>
              True if space group is considered a centrosymmetric one.
@@ -115,7 +117,7 @@ positions-->
              Laue group
         </doc>
     </field>
-    <!--add enumeration all possible-->
+    <!--add enumeration of all possible-->
     <field name="point_group">
         <doc>
              Point group using International Notation.
@@ -138,15 +140,24 @@ positions-->
     </field>
     <field name="phase_identifier" type="NX_UINT" units="NX_UNITLESS">
         <doc>
-             Numeric identifier for each phase.
-             The value 0 is reserved for the unknown phase essentially representing the
-             null-model that no phase model was sufficiently significantly confirmed.
-             Consequently, the value 0 must not be used as a phase_identifier.
+             Identifier for each phase. The value 0 is reserved for the unknown phase
+             which represents the null-model that no phase model was sufficiently
+             significantly confirmed, i.e. the phase_name is n/a or notIndexed.
+             
+             The phase identifier value has to match with the integer postfix of the
+             group name which represents that instance in a NeXus/HDF5 file, i.e.
+             if two phases were used e.g. 0 and 1, two instances of an
+             NXem_ebsd_crystal_structure_model named phase0 and phase1
+             should be stored in the HDF5 file.
         </doc>
     </field>
     <field name="phase_name">
         <doc>
              Name of the phase/alias.
+             In the case that the NXem_ebsd_crystal_structure_model base class is
+             used with analyzed orientation maps (e.g. NXms_ipf instances or alike)
+             this field may have the value **n/a** or equivalently **notIndexed**
+             thereby reporting the null-model the unknown phase.
         </doc>
     </field>
     <field name="atom_identifier">
@@ -177,6 +188,12 @@ positions-->
             <dim index="2" value="3"/>
         </dimensions>
     </field>
+    <field name="depends_on">
+        <doc>
+             Reference to an instance of NXcoordinate_system
+             whereby the positions can be resolved.
+        </doc>
+    </field>
     <!--in addition we need to have a physical model e.g. kinematic or dynamical e-diffraction theory
 to describe the simulated Kikuchi pattern generated from such a model-->
     <field name="atom_occupancy" type="NX_FLOAT" units="NX_DIMENSIONLESS">
@@ -187,13 +204,14 @@ to describe the simulated Kikuchi pattern generated from such a model-->
             <dim index="1" value="n_pos"/>
         </dimensions>
     </field>
-    <field name="number_of_planes" type="NX_UINT" units="NX_UNITLESS">
+    <field name="number_of_planes" type="NX_POSINT" units="NX_UNITLESS">
         <doc>
-             How many reflectors are distinguished. Value has to be n_hkl.
+             How many reflectors are distinguished. Value has to
+             match value for symbol n_hkl.
         </doc>
     </field>
-    <!-- Miller indices :math:`(hkl)[uvw]`.-->
-    <field name="plane_miller" type="NX_NUMBER" units="NX_UNITLESS">
+    <!--Miller indices :math:`(hkl)[uvw]`.-->
+    <field name="plane_miller" type="NX_FLOAT" units="NX_UNITLESS">
         <doc>
              Miller indices :math:`(hkl)`.
         </doc>
@@ -218,6 +236,14 @@ to describe the simulated Kikuchi pattern generated from such a model-->
             <dim index="1" value="n_hkl"/>
         </dimensions>
     </field>
+    <field name="number_of_scan_points" type="NX_UINT" units="NX_UNITLESS">
+        <doc>
+             In case the NXem_ebsd_crystal_structure_model base class is used
+             with analyzed orientation maps this field stores how many scan points
+             of the map were identified as that phase.
+        </doc>
+    </field>
+    <group type="NXms_ipf"/>
     <!--here the theoreticians expert (Marc deGraeff, Aimo Winkelmann, Peter Rez)
 can give some good suggestions on how to improve and ideally make even
 more general this section-->

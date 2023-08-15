@@ -21,53 +21,15 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" name="NXcs_profiling" extends="NXobject" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXcs_profiling" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <symbols>
         <doc>
              The symbols used in the schema to specify e.g. dimensions of arrays.
         </doc>
     </symbols>
     <doc>
-         Computer science description for summary performance/profiling data of an application.
-         
-         Performance monitoring and benchmarking of software is a task where questions
-         can be asked at various levels of detail. In general, there are three main
-         contributions to performance:
-         
-         * Hardware capabilities and configuration
-         * Software configuration and capabilities
-         * Dynamic effects of the system in operation and the system working together
-           with eventually multiple computers, especially when these have to exchange
-           information across a network.
-         
-         At the most basic level users may wish to document how long e.g. a data
-         analysis with a scientific software (app).
-         A frequent idea is here to judge how critical the effect is on the workflow
-         of the scientists, i.e. is the analysis possible in a few seconds or would it
-         take days if I were to run this analysis on a comparable machine. In this case,
-         mainly the order of magnitude is relevant, as well as how this can be achieved
-         with using parallelization (i.e. reporting the number of CPU and GPU resources
-         used, the number of processes and/or threads, and basic details about the
-         computing node/computer.
-         
-         At more advanced levels benchmarks may go as deep as detailed temporal tracking
-         of individual processor instructions, their relation to other instructions, the
-         state of call stacks, in short eventually the entire app execution history
-         and hardware state history. Such analyses are mainly used for performance
-         optimization as well as for tracking bugs and other development purposes.
-         Specialized software exists which documents such performance data in
-         specifically-formatted event log files or databases.
-         
-         This base class cannot and should not replace these specific solutions.
-         Instead, the intention of the base class is to serve scientists at the 
-         basic level to enable simple monitoring of performance data and log profiling
-         data of key algorithmic steps or parts of computational workflows, so that
-         these pieces of information can guide users which order of magnitude differences
-         should be expected or not.
-         
-         Developers of application definitions should add additional fields and
-         references to e.g. more detailed performance data to which they wish to link
-         the metadata in this base class.
+         Computer science description for summary performance/profiling data of an
+         application.
     </doc>
     <!--details about queuing systems etc-->
     <field name="current_working_directory">
@@ -92,26 +54,20 @@
              included when the app terminated or crashed.
         </doc>
     </field>
-    <field name="total_elapsed_time" type="NX_NUMBER" units="NX_TIME">
+    <field name="total_elapsed_time" type="NX_FLOAT" units="NX_TIME">
         <doc>
              Wall-clock time how long the app execution took. This may be in principle
              end_time minus start_time; however usage of eventually more precise timers
              may warrant to use a finer temporal discretization,
-             and thus demand a more precise record of the wall-clock time.
+             and thus demands a more precise record of the wall-clock time.
         </doc>
     </field>
     <field name="number_of_processes" type="NX_POSINT" units="NX_UNITLESS">
         <doc>
-             Qualifier which specifies with how many nominal processes the app was 
-             invoked. The main idea behind this field, for instance for app using a
-             Message Passing Interface parallelization is to communicate how many
-             processes were used.
-             
-             For sequentially running apps number_of_processes and number_of_threads
-             is 1. If the app uses exclusively GPU parallelization number_of_gpus
-             can be larger than 1. If no GPU is used number_of_gpus is 0 even though
-             the hardware may have GPUs installed, thus indicating these were not
-             used though.
+             Qualifier which specifies with how many nominal processes the app was
+             invoked. The main idea behind this field e.g. for app using MPI
+             (Message Passing Interface) parallelization is to communicate
+             how many processes were used.
         </doc>
     </field>
     <field name="number_of_threads" type="NX_POSINT" units="NX_UNITLESS">
@@ -121,7 +77,7 @@
              high-level threading library used (e.g. OMP_NUM_THREADS), posix.
         </doc>
     </field>
-    <field name="number_of_gpus" type="NX_POSINT" units="NX_UNITLESS">
+    <field name="number_of_gpus" type="NX_UINT" units="NX_UNITLESS">
         <doc>
              Qualifier with how many nominal GPUs the app was invoked at runtime.
         </doc>

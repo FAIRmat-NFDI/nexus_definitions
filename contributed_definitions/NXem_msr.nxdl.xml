@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+<!--
+# NeXus - Neutron and X-ray Common Data Format
+# 
+# Copyright (C) 2014-2022 NeXus International Advisory Committee (NIAC)
+# 
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For further information, see http://www.nexusformat.org
+-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXem_msr" extends="NXem_method" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+    <doc>
+         Base class for collecting data during a session at a real electron microscope.
+         
+         For collecting data and experiments which are simulations of an
+         electron microscope use the NXem_sim base class.
+    </doc>
+    <group name="em_lab" type="NXinstrument">
+        <doc>
+             (Meta)data of the microscope and the lab in which it stands.
+             
+             This em_lab group differs from potential em_lab groups inside
+             NXevent_data_em instances in that here the more static descriptions
+             are kept and changes or time-dependent, i.e. dynamics are logged
+             via those the em_lab group inside instances of NXevent_data_em.
+             
+             For an NXevent_data_em instance users should store only those settings for a
+             component which are relevant to understand the current state of the component.
+             Here, current means at the point in time, i.e. the time interval,
+             which the event represents.
+             
+             For example it is not relevant to store in each NXevent_data_em
+             electron_source group again the details of the gun type and manufacturer
+             but only the high-voltage value if it was different for that event.
+             
+             As such the em_lab group here is evaluated first.
+        </doc>
+        <field name="instrument_name">
+            <doc>
+                 Given name of the microscope at the hosting institution.
+                 This is an alias. Examples could be NionHermes, Titan, JEOL,
+                 Gemini, etc.
+            </doc>
+        </field>
+        <field name="location">
+            <doc>
+                 Location of the lab or place where the instrument is installed.
+                 Using GEOREF is preferred.
+            </doc>
+        </field>
+        <group type="NXfabrication"/>
+        <group type="NXchamber"/>
+        <group type="NXebeam_column"/>
+        <group type="NXibeam_column"/>
+        <group type="NXoptical_system_em"/>
+        <group type="NXdetector">
+            <doc>
+                 Description of the type of the detector.
+                 
+                 Electron microscopes have typically multiple detectors.
+                 Different technologies are in use like CCD, scintillator,
+                 direct electron, CMOS, or image plate to name but a few.
+            </doc>
+            <field name="local_name">
+                <doc>
+                     Instrument-specific alias/name
+                </doc>
+            </field>
+        </group>
+        <!--it is unfortunate that for NXdetector there are already many places
+how one can specify details which could equally end up in fabrications
+we should give better guidance which option to use
+(NXfabrication):-->
+        <group type="NXpump"/>
+        <group type="NXstage_lab"/>
+    </group>
+    <group type="NXevent_data_em_set">
+        <group type="NXevent_data_em"/>
+    </group>
+</definition>
