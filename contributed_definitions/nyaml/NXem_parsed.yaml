@@ -34,7 +34,7 @@ NXem(NXem_base):
   # this also strenghtens that people write base classes instead of
   # highly customized and deeply overwriting application definitions
   # from the NXem_base class
-    # \@NX_class:
+  # \@NX_class:
   # \@file_time: (optional) NX_DATE_TIME
   # \@file_name: (optional) NX_CHAR
   # \@file_update_time: (optional) NX_DATE_TIME
@@ -46,6 +46,33 @@ NXem(NXem_base):
   # \@creator: (optional) NX_CHAR
   # \@creator_version: (optional) NX_CHAR
   # \@default: (optional) NX_CHAR
+  (NXprogram):
+    doc: |
+      A collection of all programs and libraries which are consider relevant
+      to understand with which software tools this NeXus file instance was
+      generated. Ideally, to enable a binary recreation from the input data.
+      
+      Examples include the name and version of the libraries
+      used to write the instance. Ideally, the software which writes these
+      NXprogram instances also includes the version of the set of NeXus classes
+      i.e. the specific set of base classes, application definitions, and 
+      contributed definitions with which the here described concepts can
+      be resolved.
+      
+      For the `pynxtools library <https://github.com/FAIRmat-NFDI/pynxtools>`_
+      which is used by the `NOMAD <https://nomad-lab.eu/nomad-lab>`_
+      research data management system, it makes sense to store e.g. the GitHub
+      repository commit and respective submodule references used.
+    exists: [min, 1, max, infty]
+  # each NeXus file instance should have a default plot
+  # however as there are cases when this cannot be assured we cannot
+  # make the default required, one example is e.g. a NeXus instance
+  # where scientists just store conventions without a default plot
+  cs_profiling(NXcs_profiling):
+    doc: |
+      The configuration of the I/O writer software (e.g. `pynxtools <https://github.com/FAIRmat-NFDI/pynxtools>`_)
+      which was used to generate this NeXus file instance.
+    command_line_call:
   (NXentry):  # means ENTRY(NXentry)
     exists: [min, 1, max, infty]
     \@version:
