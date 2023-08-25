@@ -1,0 +1,22 @@
+category: base
+doc: |
+  External field to control mechanical shear of a sample
+symbols:
+  n_shear: |
+    number of values in applied shear
+type: group
+NXapplied_shear(NXexternal_stimulus):
+  shear(NX_FLOAT):
+    doc: |
+      Applied shear. Could a a single float value for static value or  
+      an array of field strengths at different times and positions. 
+      In that case it should log to a value_log in NXsensor.
+    dimensions:
+      # could be any length
+      dim: [[1, n_shear]]
+    \@direction:
+      enumeration: [x, y, z]         
+  shear_sensor(NXsensor):
+    doc: For external shear.
+    measurement(NX_CHAR):
+      enumeration: [shear]

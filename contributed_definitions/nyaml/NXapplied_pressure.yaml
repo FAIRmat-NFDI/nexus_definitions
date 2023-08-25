@@ -1,0 +1,21 @@
+category: base
+doc: |
+  Pressure applied to sample.
+symbols:
+  n_shear: |
+    number of values in applied pressure
+type: group
+NXapplied_pressure(NXexternal_stimulus):
+  pressure(NX_FLOAT):
+    doc: |
+      Applied pressure. Could a a single float value for static field or  
+      an array of field strengths at different times and positions. 
+      In that case it should log to a value_log in NXsensor.
+    dimensions:
+      # could be any length
+      dim: [[1, n_shear]]
+    \@direction:
+      enumeration: [x, y, z]       
+  manometer(NXsensor):
+    measurement(NX_CHAR):
+       enumeration: [pressure]

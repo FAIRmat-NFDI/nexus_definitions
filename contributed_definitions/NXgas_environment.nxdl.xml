@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+<!--
+# NeXus - Neutron and X-ray Common Data Format
+# 
+# Copyright (C) 2014-2022 NeXus International Advisory Committee (NIAC)
+# 
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For further information, see http://www.nexusformat.org
+-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXgas_environment" extends="NXexternal_stimulus" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+    <symbols>
+        <symbol name="n_components">
+            <doc>
+                 number of gas phase components
+            </doc>
+        </symbol>
+        <symbol name="n_pressure">
+            <doc>
+                 number of values in gas phase pressure
+            </doc>
+        </symbol>
+    </symbols>
+    <doc>
+         Gas phase environment around a sample.
+    </doc>
+    <field name="gases" type="NX_CHAR">
+        <doc>
+             List of constituent gases.
+        </doc>
+    </field>
+    <field name="density" type="NX_FLOAT" units="NX_MASS_DENSITY">
+        <doc>
+             Overall density of the gas phase
+        </doc>
+    </field>
+    <field name="concentration" type="NX_FLOAT" units="NX_UNITLESS">
+        <doc>
+             Concentration of each gas phase component
+        </doc>
+        <dimensions rank="1">
+            <dim index="1" value="n_comp"/>
+        </dimensions>
+    </field>
+    <field name="volume_fraction" type="NX_FLOAT">
+        <doc>
+             Volume fraction of each gas phase component
+        </doc>
+        <dimensions rank="1">
+            <dim index="1" value="n_comp"/>
+        </dimensions>
+    </field>
+    <field name="pressure" type="NX_FLOAT">
+        <doc>
+             Gas phase pressure. Could a a single float value for static pressure or  
+             an array of pressures at different times and positions. 
+             In that case it should log to a value_log in NXsensor.
+        </doc>
+        <dimensions>
+            <!--could be any length-->
+            <dim index="1" value="n_pressure"/>
+        </dimensions>
+        <attribute name="direction">
+            <enumeration>
+                <item value="x"/>
+                <item value="y"/>
+                <item value="z"/>
+            </enumeration>
+        </attribute>
+    </field>
+    <group name="manometer" type="NXsensor">
+        <field name="measurement" type="NX_CHAR">
+            <enumeration>
+                <item value="pressure"/>
+            </enumeration>
+        </field>
+    </group>
+</definition>
