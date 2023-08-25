@@ -1,0 +1,21 @@
+category: base
+doc: External electric field
+symbols:
+  n_eField: |
+    number of values in applied electric field
+type: group
+NXelectric_field(NXexternal_stimulus):
+  strength(NX_FLOAT):
+    unit: NX_VOLTAGE
+    doc: |
+      Electric field strength. Could a a single float value for static field or  
+      an array of field strengths at different times and positions.
+      In that case it should log to a value_log in NXsensor.
+    dimensions:
+      # could be any length
+      dim: [[1, n_eField]]
+    \@direction:
+      enumeration: [x, y, z]
+  voltmeter(NXsensor):
+    measurement(NX_CHAR):
+      enumeration: [electric_field]

@@ -1,0 +1,41 @@
+category: base
+doc: |
+  Gas phase environment around a sample.
+symbols:
+  n_components: |
+    number of gas phase components
+  n_pressure: |
+    number of values in gas phase pressure
+type: group
+NXgas_environment(NXexternal_stimulus):
+  gases(NX_CHAR):
+    doc: List of constituent gases.
+  density(NX_FLOAT):
+    unit: NX_MASS_DENSITY
+    doc: Overall density of the gas phase
+  concentration(NX_FLOAT):
+    unit: NX_UNITLESS
+    doc: |
+      Concentration of each gas phase component
+    dimensions:
+      rank: 1
+      dim: [[1, n_comp]]
+  volume_fraction(NX_FLOAT):
+    doc: |
+      Volume fraction of each gas phase component
+    dimensions:
+      rank: 1
+      dim: [[1, n_comp]]
+  pressure(NX_FLOAT):
+    doc: |
+      Gas phase pressure. Could a a single float value for static pressure or  
+      an array of pressures at different times and positions. 
+      In that case it should log to a value_log in NXsensor.
+    dimensions:
+      # could be any length
+      dim: [[1, n_pressure]]
+    \@direction:
+      enumeration: [x, y, z]       
+  manometer(NXsensor):
+    measurement(NX_CHAR):
+      enumeration: [pressure]
