@@ -32,24 +32,24 @@
     <doc>
          External magnetic field
     </doc>
-    <field name="strength" type="NX_FLOAT">
+    <field name="strength" type="NX_FLOAT" units="NX_ANY">
         <doc>
              Magnetic field strength. Could a a single float value for static field or  
              an array of field strengths at different times and positions. 
              In that case it should log to a value_log in NXsensor.
         </doc>
+        <dimensions>
+            <!--could be any length-->
+            <dim index="1" value="n_mField"/>
+        </dimensions>
+        <attribute name="direction">
+            <enumeration>
+                <item value="x"/>
+                <item value="y"/>
+                <item value="z"/>
+            </enumeration>
+        </attribute>
     </field>
-    <dimensions>
-        <!--could be any length-->
-        <dim index="1" value="n_mField"/>
-    </dimensions>
-    <attribute name="direction">
-        <enumeration>
-            <item value="x"/>
-            <item value="y"/>
-            <item value="z"/>
-        </enumeration>
-    </attribute>
     <group name="magnetometer" type="NXsensor">
         <field name="measurement" type="NX_CHAR">
             <enumeration>

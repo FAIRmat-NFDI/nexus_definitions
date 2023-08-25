@@ -6,15 +6,16 @@ symbols:
 type: group
 NXmagnetic_field(NXexternal_stimulus):
   strength(NX_FLOAT):
+    unit: NX_ANY # this should be Teslas
     doc: |
       Magnetic field strength. Could a a single float value for static field or  
       an array of field strengths at different times and positions. 
       In that case it should log to a value_log in NXsensor.
-  dimensions:
-     # could be any length
-     dim: [[1, n_mField]]
-  \@direction:
-     enumeration: [x, y, z]
+    dimensions:
+      # could be any length
+      dim: [[1, n_mField]]
+    \@direction:
+      enumeration: [x, y, z]
   magnetometer(NXsensor):
     measurement(NX_CHAR):
       enumeration: [magnetic_field]
