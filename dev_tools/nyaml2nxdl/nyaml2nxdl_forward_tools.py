@@ -65,6 +65,7 @@ NX_NEW_DEFINED_CLASSES = ["NX_COMPLEX"]
 NX_TYPE_KEYS = pynxtools_nxlib.get_nx_attribute_type()
 NX_ATTR_IDNT = "\\@"
 NX_UNIT_IDNT = "unit"
+NX_UNITS_IDNT = "units"
 DEPTH_SIZE = "    "
 NX_UNIT_TYPES = pynxtools_nxlib.get_nx_units()
 COMMENT_BLOCKS: CommentCollector
@@ -345,6 +346,7 @@ def xml_handle_group(dct, obj, keyword, value, verbose=False):
         "recommended",
         "exists",
         "unit",
+        "units",
     ]
     l_bracket = -1
     r_bracket = -1
@@ -385,7 +387,7 @@ def xml_handle_group(dct, obj, keyword, value, verbose=False):
                 rm_key_list.append(attr)
                 rm_key_list.append(line_number)
                 xml_handle_comment(obj, line_number, line_loc, grp)
-            elif attr == "unit":
+            elif attr == "unit" or attr == "units":
                 xml_handle_units(grp, vval)
                 xml_handle_comment(obj, line_number, line_loc, grp)
             elif attr in list_of_attr and not isinstance(vval, dict) and vval:
@@ -799,6 +801,7 @@ def xml_handle_attributes(dct, obj, keyword, value, verbose):
         "name",
         "type",
         "unit",
+        "units",
         "nameType",
         "optional",
         "recommended",
@@ -828,7 +831,7 @@ def xml_handle_attributes(dct, obj, keyword, value, verbose):
             line_number = f"__line__{attr}"
             line_loc = value[line_number]
             if attr in ["doc", *attr_attr_list] and not isinstance(attr_val, dict):
-                if attr == "unit":
+                if attr == "unit"  or attr == "units":
                     elemt_obj.set(f"{attr}s", str(value[attr]))
                     rm_key_list.append(attr)
                     rm_key_list.append(line_number)
@@ -909,6 +912,7 @@ def xml_handle_fields(obj, keyword, value, line_annot, line_loc, verbose=False):
         "type",
         "nameType",
         "unit",
+        "units",
         "minOccurs",
         "long_name",
         "axis",
@@ -973,7 +977,7 @@ def xml_handle_fields(obj, keyword, value, line_annot, line_loc, verbose=False):
                 rm_key_list.append(attr)
                 rm_key_list.append(line_number)
                 xml_handle_comment(obj, line_number, line_loc, elemt_obj)
-            elif attr == "unit":
+            elif attr == "unit" or attr == "units":
                 xml_handle_units(elemt_obj, vval)
                 xml_handle_comment(obj, line_number, line_loc, elemt_obj)
             elif attr in allowed_attr and not isinstance(vval, dict) and vval:
@@ -1069,7 +1073,7 @@ def recursive_build(obj, dct, verbose):
             xml_handle_attributes(dct, obj, keyword, value, verbose)
         elif keyword == "doc":
             xml_handle_doc(obj, value, line_number, line_loc)
-        elif keyword == NX_UNIT_IDNT:
+        elif keyword == NX_UNIT_IDNT or keyword == NX_UNITS_IDNT:
             xml_handle_units(obj, value)
         elif keyword == "enumeration":
             xml_handle_enumeration(dct, obj, keyword, value, verbose)

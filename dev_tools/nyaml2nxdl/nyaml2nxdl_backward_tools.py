@@ -559,7 +559,7 @@ class Nxdl2yaml:
                     tmp_dict["exists"] = []
                 self.handle_exists(exists_dict, key, val)
             elif key == "units":
-                tmp_dict["unit"] = str(val)
+                tmp_dict["units"] = str(val)
             else:
                 tmp_dict[key] = str(val)
             if key not in allowed_attr:
@@ -813,7 +813,7 @@ class Nxdl2yaml:
                     tmp_dict["exists"] = []
                 self.handle_exists(exists_dict, key, val)
             elif key == "units":
-                tmp_dict["unit"] = val
+                tmp_dict["units"] = val
             else:
                 tmp_dict[key] = val
             if key not in allowed_attr:
