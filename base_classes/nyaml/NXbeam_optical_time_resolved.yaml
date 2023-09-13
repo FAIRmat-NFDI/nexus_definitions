@@ -1,5 +1,8 @@
 doc: |
   Properties of an optical time resolved beam at a given location.
+symbols:
+  nx: Number of x-axis points of the FROG trace
+  ny: Number of y-axis points of the FROG trace
 category: base
 NXbeam_optical_time_resolved(NXbeam_optical):
   pulse_energy(NX_FLOAT):
@@ -24,27 +27,26 @@ NXbeam_optical_time_resolved(NXbeam_optical):
   frog_trace(NX_FLOAT):
     doc: |
       FROG trace of the pulse.
-    dimensions:
-      rank: 2
-      dim: [[1, nx], [2, ny]]
+    exists: optional
+    dim: (nx, ny)
   frog_delays(NX_FLOAT):
     unit: NX_TIME
     doc: |
       Horizontal axis of a FROG trace, i.e. delay.
-    dimensions:
-      rank: 1
-      dim: [[1, nx]]
+    exists: optional
+    dim: (nx,)
   frog_frequencies(NX_FLOAT):
     unit: NX_FREQUENCY
     doc: |
       Vertical axis of a FROG trace, i.e. frequency.
-    dimensions:
-      rank: 1
-      dim: [[1, ny]]
+    exists: optional
+    dim: (ny,)
   chirp_type(NX_CHAR):
     doc: |
       The type of chirp implemented
+    exists: optional
   chirp_GDD(NX_FLOAT):
     unit: NX_TIME
     doc: |
       Group delay dispersion of the pulse for linear chirp
+    exists: optional

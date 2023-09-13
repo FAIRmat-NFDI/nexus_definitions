@@ -1,5 +1,5 @@
 doc: | 
-  Properties of the neutron or X-ray beam at a given location.
+  Properties of a beam of radiation or matter at a given location.
   
   This group is intended to be referenced
   by beamline component groups within the :ref:`NXinstrument` group or by the :ref:`NXsample` group. This group is
@@ -52,9 +52,7 @@ NXbeam:
       
       Note, variants are a good way to represent several of these use cases in a single dataset,
       e.g. if a calibrated, single-value energy value is available along with the original spectrum from which it was calibrated.
-    dimensions:
-      rank: 1
-      dim: [[1, m]]
+    dim: (m,)
   incident_energy_spread(NX_NUMBER):
     unit: NX_ENERGY
     doc: |
@@ -74,16 +72,12 @@ NXbeam:
     unit: NX_ENERGY
     doc: |
       Energy carried by each particle of the beam on leaving the beamline component
-    dimensions:
-      rank: 1
-      dim: [[1, m]]
+    dim: (m,)
   energy_transfer(NX_FLOAT):
     unit: NX_ENERGY
     doc: |
       Change in particle energy caused by the beamline component
-    dimensions:
-      rank: 1
-      dim: [[1, m]]
+    dim: (m,)
   incident_wavelength(NX_FLOAT):
     unit: NX_WAVELENGTH
     doc: |
@@ -139,9 +133,7 @@ NXbeam:
       spread, this is a 2D array of dimension **nP** by
       **m** (slow to fast) of the spreads of the
       corresponding wavelengths in incident_wavelength.
-    dimensions:
-      rank: 1
-      dim: [[1, nP]]
+    dim: (nP,)
   incident_beam_divergence(NX_FLOAT):
     unit: NX_ANGLE
     doc: |
@@ -154,45 +146,33 @@ NXbeam:
       
       Further moments in **c** characterize co-variance terms, so
       the next moment is the product of the first two, and so on.
-    dimensions:
-      rank: 2
-      dim: [[1, nP], [2, c]]
+    dim: (nP, c)
   extent(NX_FLOAT):
     unit: NX_LENGTH
     doc: |
       Size of the beam entering this component. Note this represents
       a rectangular beam aperture, and values represent FWHM
-    dimensions:
-      rank: 2
-      dim: [[1, nP], [2, 2]]
+    dim: (nP, 2)
   final_wavelength(NX_FLOAT):
     unit: NX_WAVELENGTH
     doc: |
       Wavelength on leaving beamline component
-    dimensions:
-      rank: 1
-      dim: [[1, m]]
+    dim: (m,)
   final_wavelength_spread(NX_FLOAT):
     unit: NX_WAVELENGTH
     doc: |
       Wavelength spread FWHM of beam leaving this component
-    dimensions:
-      rank: 1
-      dim: [[1, m]]
+    dim: (m,)
   final_beam_divergence(NX_FLOAT):
     unit: NX_ANGLE
     doc: |
       Divergence FWHM of beam leaving this component
-    dimensions:
-      rank: 2
-      dim: [[1, nP], [2, 2]]
+    dim: (nP, 2)
   flux(NX_FLOAT):
     unit: NX_FLUX
     doc: |
       flux incident on beam plane area
-    dimensions:
-      rank: 1
-      dim: [[1, nP]]
+    dim: (nP,)
   (NXdata):
     doc: |
       Distribution of beam with respect to relevant variable e.g. wavelength. This is mainly
