@@ -1,0 +1,86 @@
+doc: |
+  Properties of an optical beam at a given location.
+category: base
+(NXbeam)NXbeam_optical:
+  incident_polarization(NX_NUMBER):
+    unit: NX_ANY
+    doc: |
+      Incident polarization as a Stokes vector
+      on entering beamline component
+    dimensions:
+      rank: 2
+      dim: [[1, nP], [2, 2]]
+    \@units:
+      doc: |
+        The units for this observable are not included in the NIAC list.
+        Responsibility on correct formatting and parsing is handed to the user
+        by using `NX_ANY`. Correct parsing can still be implemented by using
+        this attribute.
+        
+        | Fill with:
+        
+        * The unit unidata symbol if the unit has one (Example: T for the unit of magnetic flux density tesla).
+        * The unit unidata name if the unit has a name (Example: farad for capacitance).
+        * A string describing the units according to unidata unit operation notation, if the unit is a complex combination of named units and
+        does not have a name.
+        
+        Example: for lightsource brilliance (SI) 1/(s.mm2.mrad2).
+        Here: SI units are V2/m2.
+  final_polarization(NX_NUMBER):
+    unit: NX_ANY
+    doc: |
+      Polarization as Stokes vector on leaving beamline component
+    dimensions:
+      rank: 2
+      dim: [[1, nP], [2, 2]]
+    \@units:
+      doc: |
+        The units for this observable are not included in the NIAC list.
+        Responsibility on correct formatting and parsing is handed to the user
+        by using `NX_ANY`. Correct parsing can still be implemented by using
+        this attribute.
+        
+        | Fill with:
+        
+        * The unit unidata symbol if the unit has one (Example: T for the unit of magnetic flux density tesla).
+        * The unit unidata name if the unit has a name (Example: farad for capacitance).
+        * A string describing the units according to unidata unit operation notation, if the unit is a complex combination of named units and
+        does not have a name.
+        
+        Example: for lightsource brilliance (SI) 1/(s.mm2.mrad2).
+        Here: SI units are V2/m2.
+  incident_polarization_stokes(NX_NUMBER):
+    unit: NX_ANY
+    doc: |
+      Polarization vector on entering beamline component using Stokes notation
+      
+      The Stokes parameters are four components labelled I,Q,U,V or S_0,S_1,S_2,S_3.
+      These are defined with the standard Nexus coordinate frame unless it is
+      overridden by an NXtransformations field pointed to by a depends_on attribute.
+      The last component, describing the circular polarization state, is positive
+      for a right-hand circular state - that is the electric field vector rotates
+      clockwise at the sample and over time when observed from the source.
+      
+      I (S_0) is the beam intensity (often normalized to 1). Q, U, and V scale
+      linearly with the total degree of polarization, and indicate the relative
+      magnitudes of the pure linear and circular orientation contributions.
+      
+      Q (S_1) is linearly polarized along the x axis (Q > 0) or y axis (Q < 0).
+      
+      U (S_2) is linearly polarized along the x==y axis (U > 0) or the
+      -x==y axis (U < 0).
+      
+      V (S_3) is circularly polarized. V > 0 when the electric field vector rotates
+      clockwise at the sample with respect to time when observed from the source;
+      V < 0 indicates the opposite rotation.
+    dimensions:
+      rank: 2
+      dim: [[1, nP], [2, 4]]
+  final_polarization_stokes(NX_NUMBER):
+    unit: NX_ANY
+    doc: |
+      Polarization vector on leaving beamline component using Stokes notation
+      (see incident_polarization_stokes).
+    dimensions:
+      rank: 2
+      dim: [[1, nP], [2, 4]]
