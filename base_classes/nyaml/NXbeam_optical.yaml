@@ -2,11 +2,11 @@ doc: |
   Properties of an optical beam at a given location.
 category: base
 NXbeam_optical(NXbeam):
-  incident_polarization(NX_NUMBER):
+  polarization(NX_NUMBER):
     unit: NX_ANY
     doc: |
-      Incident polarization as a Stokes vector
-      on entering beamline component
+      Polarization as a Stokes vector at the given location
+      of the beam.
     dim: (nP, 2)
     \@units:
       doc: |
@@ -24,31 +24,10 @@ NXbeam_optical(NXbeam):
         
         Example: for lightsource brilliance (SI) 1/(s.mm2.mrad2).
         Here: SI units are V2/m2.
-  final_polarization(NX_NUMBER):
+  polarization_stokes(NX_NUMBER):
     unit: NX_ANY
     doc: |
-      Polarization as Stokes vector on leaving beamline component
-    dim: (nP, 2)
-    \@units:
-      doc: |
-        The units for this observable are not included in the NIAC list.
-        Responsibility on correct formatting and parsing is handed to the user
-        by using `NX_ANY`. Correct parsing can still be implemented by using
-        this attribute.
-        
-        | Fill with:
-        
-        * The unit unidata symbol if the unit has one (Example: T for the unit of magnetic flux density tesla).
-        * The unit unidata name if the unit has a name (Example: farad for capacitance).
-        * A string describing the units according to unidata unit operation notation, if the unit is a complex combination of named units and
-        does not have a name.
-        
-        Example: for lightsource brilliance (SI) 1/(s.mm2.mrad2).
-        Here: SI units are V2/m2.
-  incident_polarization_stokes(NX_NUMBER):
-    unit: NX_ANY
-    doc: |
-      Polarization vector on entering beamline component using Stokes notation
+      Polarization vector at the given location of the beam using Stokes notation
       
       The Stokes parameters are four components labelled I,Q,U,V or S_0,S_1,S_2,S_3.
       These are defined with the standard Nexus coordinate frame unless it is
@@ -69,10 +48,4 @@ NXbeam_optical(NXbeam):
       V (S_3) is circularly polarized. V > 0 when the electric field vector rotates
       clockwise at the sample with respect to time when observed from the source;
       V < 0 indicates the opposite rotation.
-    dim: (nP, 4)
-  final_polarization_stokes(NX_NUMBER):
-    unit: NX_ANY
-    doc: |
-      Polarization vector on leaving beamline component using Stokes notation
-      (see incident_polarization_stokes).
     dim: (nP, 4)
