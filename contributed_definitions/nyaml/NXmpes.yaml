@@ -106,16 +106,16 @@ NXmpes:
           scheme:
             doc: |
               Scheme of the electron collection column.
-            enumeration: [Standard, Angular dispersive, Spatial dispersive, Selective area, Deflector, PEEM, Momentum Microscope]
+            enumeration: [standard, angular dispersive, selective area, deflector, PEEM, PEEM dark-field, LEEM, LEEM dark-field, LEED, dispersive plane, momentum microscope]
           mode:
             exists: recommended
           projection:
             exists: recommended
-          field_aperture(NXaperture):
+          field_aperture(NXaperture_em):
             doc: |
               The size and position of the field aperture inserted in the column. To add
               additional or other apertures use the APERTURE group of NXcollectioncolumn.
-          contrast_aperture(NXaperture):
+          contrast_aperture(NXaperture_em):
             doc: |
               The size and position of the contrast aperture inserted in the column. To add
               additional or other apertures use the APERTURE group of NXcollectioncolumn.
@@ -125,11 +125,11 @@ NXmpes:
           pass_energy(NX_FLOAT):
             unit: NX_ENERGY
           energy_scan_mode:
-          entrance_slit(NXaperture):
+          entrance_slit(NXaperture_em):
             doc: |
               Size, position and shape of the entrance slit in dispersive analyzers. To add
               additional or other slits use the APERTURE group of NXenergydispersion.
-          exit_slit(NXaperture):
+          exit_slit(NXaperture_em):
             doc: |
               Size, position and shape of the exit slit in dispersive analyzers. To add
               additional or other slits use the APERTURE group of NXenergydispersion.
@@ -251,6 +251,11 @@ NXmpes:
         unit: NX_VOLTAGE
         doc: |
           Voltage applied to sample and sample holder.
+      depends_on:
+      (NXtransformations): # links to fields in NXmanipulator
+        doc: |
+          The origin is at the sample position in the center of the detector field of view,
+          with all the manipulator positioners set to zero.
     (NXdata):
       \@signal:
         enumeration: [data]

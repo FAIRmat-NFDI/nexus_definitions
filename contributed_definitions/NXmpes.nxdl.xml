@@ -169,24 +169,29 @@
                              Scheme of the electron collection column.
                         </doc>
                         <enumeration>
-                            <item value="Standard"/>
-                            <item value="Angular dispersive"/>
-                            <item value="Spatial dispersive"/>
-                            <item value="Selective area"/>
-                            <item value="Deflector"/>
+                            <item value="standard"/>
+                            <item value="angular dispersive"/>
+                            <item value="spatial dispersive"/>
+                            <item value="selective area"/>
+                            <item value="deflector"/>
                             <item value="PEEM"/>
-                            <item value="Momentum Microscope"/>
+                            <item value="PEEM dark-field"/>
+                            <item value="LEEM"/>
+                            <item value="LEEM dark-field"/>
+                            <item value="LEED"/>
+                            <item value="dispersive plane"/>
+                            <item value="momentum microscope"/>
                         </enumeration>
                     </field>
                     <field name="mode" recommended="true"/> <!-- TODO: What does this refer to. It is currently not in the collection column base class -->
                     <field name="projection" recommended="true"/>
-                    <group name="field_aperture" type="NXaperture" optional="true">
+                    <group name="field_aperture" type="NXaperture_em" optional="true">
                         <doc>
                              The size and position of the field aperture inserted in the column. To add
                              additional or other apertures use the APERTURE group of NXcollectioncolumn.
                         </doc>
                     </group>
-                    <group name="contrast_aperture" type="NXaperture" optional="true">
+                    <group name="contrast_aperture" type="NXaperture_em" optional="true">
                         <doc>
                              The size and position of the contrast aperture inserted in the column. To add
                              additional or other apertures use the APERTURE group of NXcollectioncolumn.
@@ -206,13 +211,13 @@
                     </field>
                     <field name="pass_energy" type="NX_FLOAT" units="NX_ENERGY"/>
                     <field name="energy_scan_mode"/>
-                    <group name="entrance_slit" type="NXaperture" optional="true">
+                    <group name="entrance_slit" type="NXaperture_em" optional="true">
                         <doc>
                              Size, position and shape of the entrance slit in dispersive analyzers. To add
                              additional or other slits use the APERTURE group of NXenergydispersion.
                         </doc>
                     </group>
-                    <group name="exit_slit" type="NXaperture" optional="true">
+                    <group name="exit_slit" type="NXaperture_em" optional="true">
                         <doc>
                              Size, position and shape of the exit slit in dispersive analyzers. To add
                              additional or other slits use the APERTURE group of NXenergydispersion.
@@ -386,6 +391,13 @@
                     Voltage applied to sample and sample holder.
                 </doc>
             </field>
+            <field name="depends_on" />
+            <group type="NXtransformations">
+                <doc>
+                    The origin is at the sample position in the center of the detector field of view,
+                    with all the manipulator positioners set to zero.
+                </doc>
+            </group>
         </group>
         <group type="NXdata">
             <attribute name="signal">
