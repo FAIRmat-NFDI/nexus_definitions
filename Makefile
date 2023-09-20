@@ -6,9 +6,20 @@
 PYTHON = python3
 SPHINX = sphinx-build
 BUILD_DIR = "build"
-NXDL_DIRS := contributed_definitions applications base_classes
+BASE_CLASS_DIR := base_classes
+CONTRIB_DIR := contributed_definitions
+APPDEF_DIR := applications
+NXDL_DIRS := $(BASE_CLASS_DIR) $(CONTRIB_DIR) $(APPDEF_DIR)
 
-.PHONY: help install style autoformat test clean prepare html pdf impatient-guide all local
+NXDL_BC := $(wildcard $(BASE_CLASS_DIR)/*.nxdl.xml)
+NXDL_CONTRIB := $(wildcard $(CONTRIB_DIR)/*.nxdl.xml)
+NXDL_APPDEF := $(wildcard $(APPDEF_DIR)/*.nxdl.xml)
+
+YAML_BC := $(patsubst $(BASE_CLASS_DIR)/%.nxdl.xml,$(BASE_CLASS_DIR)/nyaml/%.yaml,$(NXDL_BC))
+YAML_CONTRIB := $(patsubst $(CONTRIB_DIR)/%.nxdl.xml,$(CONTRIB_DIR)/nyaml/%.yaml,$(NXDL_CONTRIB))
+YAML_APPDEF := $(patsubst $(APPDEF_DIR)/%.nxdl.xml,$(APPDEF_DIR)/nyaml/%.yaml,$(NXDL_APPDEF))
+
+.PHONY: help install style autoformat test clean prepare html pdf impatient-guide all local nyaml nxdl
 
 help ::
 	@echo ""
@@ -89,6 +100,19 @@ all ::
 	@echo "HTML built: `ls -lAFgh $(BUILD_DIR)/manual/build/html/index.html`"
 	@echo "PDF built: `ls -lAFgh $(BUILD_DIR)/manual/build/latex/nexus-fairmat.pdf`"
 
+$(BASE_CLASS_DIR)/%.nxdl.xml : $(BASE_CLASS_DIR)/nyaml/%.yaml
+	nyaml2nxdl --input-file $<
+	mv $(BASE_CLASS_DIR)/nyaml/$*.nxdl.xml $@
+
+$(CONTRIB_DIR)/%.nxdl.xml : $(CONTRIB_DIR)/nyaml/%.yaml
+	nyaml2nxdl --input-file $<
+	mv $(CONTRIB_DIR)/nyaml/$*.nxdl.xml $@
+
+$(APPDEF_DIR)/%.nxdl.xml : $(APPDEF_DIR)/nyaml/%.yaml
+	nyaml2nxdl --input-file $<
+	mv $(APPDEF_DIR)/nyaml/$*.nxdl.xml $@
+
+# The for loop is used to avoid circular dependency dropouts between the yaml and nxdl files.
 NXDLS := $(foreach dir,$(NXDL_DIRS),$(wildcard $(dir)/*.nxdl.xml))
 nyaml : $(DIRS) $(NXDLS)
 	for file in $^; do\
@@ -98,15 +122,29 @@ nyaml : $(DIRS) $(NXDLS)
 		mv -- "$${file%.nxdl.xml}_parsed.yaml" "$${file%/*}/nyaml/$${FNAME%.nxdl.xml}.yaml";\
 	done
 
-NYAMLS := $(foreach dir,$(NXDL_DIRS),$(wildcard $(dir)/nyaml/*.yaml))
-nxdl : $(DIRS) $(NYAMLS)
-	for file in $^; do\
-		mkdir -p "$${file%/*}/nyaml";\
-		nyaml2nxdl --input-file $${file};\
-		FNAME=$${file##*/};\
-		mv -- "$${file%.yaml}.nxdl.xml" "$${file%/*}/../$${FNAME%.yaml}.nxdl.xml";\
-	done
+nxdl: $(NXDL_APPDEF) $(NXDL_CONTRIB) $(NXDL_BC)
 
+# This rules can be used to compile *.yaml files from *.nxdl.xml files without using a for-loop
+# $(BASE_CLASS_DIR)/nyaml/%.yaml: $(BASE_CLASS_DIR)/%.nxdl.xml | $(BASE_CLASS_DIR)/nyaml
+# 	nyaml2nxdl --input-file $<
+# 	mv $(BASE_CLASS_DIR)/$*_parsed.yaml $@
+
+# $(CONTRIB_DIR)/nyaml/%.yaml: $(CONTRIB_DIR)/%.nxdl.xml | $(CONTRIB_DIR)/nyaml
+# 	nyaml2nxdl --input-file $<
+# 	mv $(CONTRIB_DIR)/$*_parsed.yaml $@
+
+# $(APPDEF_DIR)/nyaml/%.yaml: $(APPDEF_DIR)/%.nxdl.xml | $(APPDEF_DIR)/nyaml
+# 	nyaml2nxdl --input-file $<
+# 	mv $(APPDEF_DIR)/$*_parsed.yaml $@
+
+# $(BASE_CLASS_DIR)/nyaml:
+# 	mkdir -p $(BASE_CLASS_DIR)/nyaml
+
+# $(CONTRIB_DIR)/nyaml:
+# 	mkdir -p $(CONTRIB_DIR)/nyaml
+
+# $(APPDEF_DIR)/nyaml:
+# 	mkdir -p $(APPDEF_DIR)/nyaml
 
 # NeXus - Neutron and X-ray Common Data Format
 #
