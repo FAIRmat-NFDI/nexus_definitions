@@ -9,19 +9,16 @@ BUILD_DIR = "build"
 BASE_CLASS_DIR := base_classes
 CONTRIB_DIR := contributed_definitions
 APPDEF_DIR := applications
-NXDL_DIRS := $(BASE_CLASS_DIR) $(CONTRIB_DIR) $(APPDEF_DIR)
+NYAML_SUBDIR := nyaml
+NYAML_APPENDIX := _parsed
 
 NXDL_BC := $(wildcard $(BASE_CLASS_DIR)/*.nxdl.xml)
 NXDL_CONTRIB := $(wildcard $(CONTRIB_DIR)/*.nxdl.xml)
 NXDL_APPDEF := $(wildcard $(APPDEF_DIR)/*.nxdl.xml)
 
-P_YAML_BC := $(patsubst $(BASE_CLASS_DIR)/%.nxdl.xml,$(BASE_CLASS_DIR)/%_parsed.yaml,$(NXDL_BC))
-P_YAML_CONTRIB := $(patsubst $(CONTRIB_DIR)/%.nxdl.xml,$(CONTRIB_DIR)/%_parsed.yaml,$(NXDL_CONTRIB))
-P_YAML_APPDEF := $(patsubst $(APPDEF_DIR)/%.nxdl.xml,$(APPDEF_DIR)/%_parsed.yaml,$(NXDL_APPDEF))
-
-YAML_BC := $(patsubst $(BASE_CLASS_DIR)/%.nxdl.xml,$(BASE_CLASS_DIR)/nyaml/%.yaml,$(NXDL_BC))
-YAML_CONTRIB := $(patsubst $(CONTRIB_DIR)/%.nxdl.xml,$(CONTRIB_DIR)/nyaml/%.yaml,$(NXDL_CONTRIB))
-YAML_APPDEF := $(patsubst $(APPDEF_DIR)/%.nxdl.xml,$(APPDEF_DIR)/nyaml/%.yaml,$(NXDL_APPDEF))
+YAML_BC := $(patsubst $(BASE_CLASS_DIR)/%.nxdl.xml,$(BASE_CLASS_DIR)/%$(NYAML_APPENDIX).yaml,$(NXDL_BC))
+YAML_CONTRIB := $(patsubst $(CONTRIB_DIR)/%.nxdl.xml,$(CONTRIB_DIR)/%$(NYAML_APPENDIX).yaml,$(NXDL_CONTRIB))
+YAML_APPDEF := $(patsubst $(APPDEF_DIR)/%.nxdl.xml,$(APPDEF_DIR)/%$(NYAML_APPENDIX).yaml,$(NXDL_APPDEF))
 
 .PHONY: help install style autoformat test clean prepare html pdf impatient-guide all local nyaml nxdl
 
@@ -67,9 +64,9 @@ clean ::
 	$(RM) -rf $(BUILD_DIR)
 
 clean-nyaml ::
-	for dir in $(NXDL_DIRS); do\
-		$(RM) -rf $${dir}/nyaml;\
-	done
+	$(RM) -rf $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)
+	$(RM) -rf $(APPDEF_DIR)/$(NYAML_SUBDIR)
+	$(RM) -rf $(CONTRIB_DIR)/$(NYAML_SUBDIR)
 
 prepare ::
 	$(PYTHON) -m dev_tools manual --prepare --build-root $(BUILD_DIR)
@@ -104,46 +101,43 @@ all ::
 	@echo "HTML built: `ls -lAFgh $(BUILD_DIR)/manual/build/html/index.html`"
 	@echo "PDF built: `ls -lAFgh $(BUILD_DIR)/manual/build/latex/nexus-fairmat.pdf`"
 
-$(BASE_CLASS_DIR)/%.nxdl.xml : $(BASE_CLASS_DIR)/nyaml/%.yaml
+$(BASE_CLASS_DIR)/%.nxdl.xml : $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)/%.yaml
 	nyaml2nxdl --input-file $<
-	mv $(BASE_CLASS_DIR)/nyaml/$*.nxdl.xml $@
+	mv $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
 
-$(CONTRIB_DIR)/%.nxdl.xml : $(CONTRIB_DIR)/nyaml/%.yaml
+$(CONTRIB_DIR)/%.nxdl.xml : $(CONTRIB_DIR)/$(NYAML_SUBDIR)/%.yaml
 	nyaml2nxdl --input-file $<
-	mv $(CONTRIB_DIR)/nyaml/$*.nxdl.xml $@
+	mv $(CONTRIB_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
 
-$(APPDEF_DIR)/%.nxdl.xml : $(APPDEF_DIR)/nyaml/%.yaml
+$(APPDEF_DIR)/%.nxdl.xml : $(APPDEF_DIR)/$(NYAML_SUBDIR)/%.yaml
 	nyaml2nxdl --input-file $<
-	mv $(APPDEF_DIR)/nyaml/$*.nxdl.xml $@
+	mv $(APPDEF_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
 
 # The following rules trick make into avoiding a circular dependency.
 # The target is set to %_parsed.yaml but actually the file is copied to appropriate the nyaml directory.
-$(BASE_CLASS_DIR)/%_parsed.yaml: $(BASE_CLASS_DIR)/%.nxdl.xml | $(BASE_CLASS_DIR)/nyaml
+$(BASE_CLASS_DIR)/%$(NYAML_APPENDIX).yaml: $(BASE_CLASS_DIR)/%.nxdl.xml | $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)
 	nyaml2nxdl --input-file $<
-	mv $(BASE_CLASS_DIR)/$*_parsed.yaml $@
+	mv $(BASE_CLASS_DIR)/$*$(NYAML_APPENDIX).yaml $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)/$*.yaml
 
-$(CONTRIB_DIR)/%_parsed.yaml: $(CONTRIB_DIR)/%.nxdl.xml | $(CONTRIB_DIR)/nyaml
+$(CONTRIB_DIR)/%$(NYAML_APPENDIX).yaml: $(CONTRIB_DIR)/%.nxdl.xml | $(CONTRIB_DIR)/$(NYAML_SUBDIR)
 	nyaml2nxdl --input-file $<
-	mv $(CONTRIB_DIR)/$*_parsed.yaml $@
+	mv $(CONTRIB_DIR)/$*$(NYAML_APPENDIX).yaml $(CONTRIB_DIR)/$(NYAML_SUBDIR)/$*.yaml
 
-$(APPDEF_DIR)/%_parsed.yaml: $(APPDEF_DIR)/%.nxdl.xml | $(APPDEF_DIR)/nyaml
+$(APPDEF_DIR)/%$(NYAML_APPENDIX).yaml: $(APPDEF_DIR)/%.nxdl.xml | $(APPDEF_DIR)/$(NYAML_SUBDIR)
 	nyaml2nxdl --input-file $<
-	mv $(APPDEF_DIR)/$*_parsed.yaml $@
+	mv $(APPDEF_DIR)/$*$(NYAML_APPENDIX).yaml $(APPDEF_DIR)/$(NYAML_SUBDIR)/$*.yaml
 
-$(BASE_CLASS_DIR)/nyaml:
-	mkdir -p $(BASE_CLASS_DIR)/nyaml
+$(BASE_CLASS_DIR)/$(NYAML_SUBDIR):
+	mkdir -p $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)
 
-$(CONTRIB_DIR)/nyaml:
-	mkdir -p $(CONTRIB_DIR)/nyaml
+$(CONTRIB_DIR)/$(NYAML_SUBDIR):
+	mkdir -p $(CONTRIB_DIR)/$(NYAML_SUBDIR)
 
 $(APPDEF_DIR)/nyaml:
-	mkdir -p $(APPDEF_DIR)/nyaml
+	mkdir -p $(APPDEF_DIR)/$(NYAML_SUBDIR)
 
-nyaml: $(P_YAML_APPDEF) $(P_YAML_CONTRIB) $(P_YAML_BC)
+nyaml: $(YAML_APPDEF) $(YAML_CONTRIB) $(YAML_BC)
 nxdl: $(NXDL_APPDEF) $(NXDL_CONTRIB) $(NXDL_BC)
-
-# This rules can be used to compile *.yaml files from *.nxdl.xml files without using a for-loop
-
 
 # NeXus - Neutron and X-ray Common Data Format
 #
