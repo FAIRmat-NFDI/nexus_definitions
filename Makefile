@@ -15,6 +15,10 @@ NXDL_BC := $(wildcard $(BASE_CLASS_DIR)/*.nxdl.xml)
 NXDL_CONTRIB := $(wildcard $(CONTRIB_DIR)/*.nxdl.xml)
 NXDL_APPDEF := $(wildcard $(APPDEF_DIR)/*.nxdl.xml)
 
+P_YAML_BC := $(patsubst $(BASE_CLASS_DIR)/%.nxdl.xml,$(BASE_CLASS_DIR)/%_parsed.yaml,$(NXDL_BC))
+P_YAML_CONTRIB := $(patsubst $(CONTRIB_DIR)/%.nxdl.xml,$(CONTRIB_DIR)/%_parsed.yaml,$(NXDL_CONTRIB))
+P_YAML_APPDEF := $(patsubst $(APPDEF_DIR)/%.nxdl.xml,$(APPDEF_DIR)/%_parsed.yaml,$(NXDL_APPDEF))
+
 YAML_BC := $(patsubst $(BASE_CLASS_DIR)/%.nxdl.xml,$(BASE_CLASS_DIR)/nyaml/%.yaml,$(NXDL_BC))
 YAML_CONTRIB := $(patsubst $(CONTRIB_DIR)/%.nxdl.xml,$(CONTRIB_DIR)/nyaml/%.yaml,$(NXDL_CONTRIB))
 YAML_APPDEF := $(patsubst $(APPDEF_DIR)/%.nxdl.xml,$(APPDEF_DIR)/nyaml/%.yaml,$(NXDL_APPDEF))
@@ -112,39 +116,34 @@ $(APPDEF_DIR)/%.nxdl.xml : $(APPDEF_DIR)/nyaml/%.yaml
 	nyaml2nxdl --input-file $<
 	mv $(APPDEF_DIR)/nyaml/$*.nxdl.xml $@
 
-# The for loop is used to avoid circular dependency dropouts between the yaml and nxdl files.
-NXDLS := $(foreach dir,$(NXDL_DIRS),$(wildcard $(dir)/*.nxdl.xml))
-nyaml : $(DIRS) $(NXDLS)
-	for file in $^; do\
-		mkdir -p "$${file%/*}/nyaml";\
-		nyaml2nxdl --input-file $${file};\
-		FNAME=$${file##*/};\
-		mv -- "$${file%.nxdl.xml}_parsed.yaml" "$${file%/*}/nyaml/$${FNAME%.nxdl.xml}.yaml";\
-	done
+# The following rules trick make into avoiding a circular dependency.
+# The target is set to %_parsed.yaml but actually the file is copied to appropriate the nyaml directory.
+$(BASE_CLASS_DIR)/%_parsed.yaml: $(BASE_CLASS_DIR)/%.nxdl.xml | $(BASE_CLASS_DIR)/nyaml
+	nyaml2nxdl --input-file $<
+	mv $(BASE_CLASS_DIR)/$*_parsed.yaml $@
 
+$(CONTRIB_DIR)/%_parsed.yaml: $(CONTRIB_DIR)/%.nxdl.xml | $(CONTRIB_DIR)/nyaml
+	nyaml2nxdl --input-file $<
+	mv $(CONTRIB_DIR)/$*_parsed.yaml $@
+
+$(APPDEF_DIR)/%_parsed.yaml: $(APPDEF_DIR)/%.nxdl.xml | $(APPDEF_DIR)/nyaml
+	nyaml2nxdl --input-file $<
+	mv $(APPDEF_DIR)/$*_parsed.yaml $@
+
+$(BASE_CLASS_DIR)/nyaml:
+	mkdir -p $(BASE_CLASS_DIR)/nyaml
+
+$(CONTRIB_DIR)/nyaml:
+	mkdir -p $(CONTRIB_DIR)/nyaml
+
+$(APPDEF_DIR)/nyaml:
+	mkdir -p $(APPDEF_DIR)/nyaml
+
+nyaml: $(P_YAML_APPDEF) $(P_YAML_CONTRIB) $(P_YAML_BC)
 nxdl: $(NXDL_APPDEF) $(NXDL_CONTRIB) $(NXDL_BC)
 
 # This rules can be used to compile *.yaml files from *.nxdl.xml files without using a for-loop
-# $(BASE_CLASS_DIR)/nyaml/%.yaml: $(BASE_CLASS_DIR)/%.nxdl.xml | $(BASE_CLASS_DIR)/nyaml
-# 	nyaml2nxdl --input-file $<
-# 	mv $(BASE_CLASS_DIR)/$*_parsed.yaml $@
 
-# $(CONTRIB_DIR)/nyaml/%.yaml: $(CONTRIB_DIR)/%.nxdl.xml | $(CONTRIB_DIR)/nyaml
-# 	nyaml2nxdl --input-file $<
-# 	mv $(CONTRIB_DIR)/$*_parsed.yaml $@
-
-# $(APPDEF_DIR)/nyaml/%.yaml: $(APPDEF_DIR)/%.nxdl.xml | $(APPDEF_DIR)/nyaml
-# 	nyaml2nxdl --input-file $<
-# 	mv $(APPDEF_DIR)/$*_parsed.yaml $@
-
-# $(BASE_CLASS_DIR)/nyaml:
-# 	mkdir -p $(BASE_CLASS_DIR)/nyaml
-
-# $(CONTRIB_DIR)/nyaml:
-# 	mkdir -p $(CONTRIB_DIR)/nyaml
-
-# $(APPDEF_DIR)/nyaml:
-# 	mkdir -p $(APPDEF_DIR)/nyaml
 
 # NeXus - Neutron and X-ray Common Data Format
 #
