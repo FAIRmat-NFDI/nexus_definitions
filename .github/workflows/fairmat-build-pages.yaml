@@ -8,17 +8,20 @@ jobs:
   pages:
     runs-on: ubuntu-20.04
     steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: install dependencies
       run: pip install -r requirements.txt
+    - name: test
+      run: make test
     - name: prepare
       run: make prepare
-    - id: deployment
-      uses: sphinx-notes/pages@v3
+    - name: html
+      run: make html
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
-        publish: false
-        documentation_path: ./manual/source
-        requirements_path: ./requirements.txt
-    - uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ${{ steps.deployment.outputs.artifact }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        folder: build/manual/build/html
