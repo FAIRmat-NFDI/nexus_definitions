@@ -1,0 +1,26 @@
+name: Check nxdl/yaml consistency
+
+on:
+  push:
+    branches: [fairmat]
+  pull_request:
+    branches: [fairmat]
+
+jobs:
+  check_nxdl:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: install dependencies
+      run: pip install -r requirements.txt
+    - name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v7
+    - name: make nxdls
+      run: make nxdl
+    - uses: CatChen/check-git-status-action@v1
+        with:
+          fail-if-not-clean: true
