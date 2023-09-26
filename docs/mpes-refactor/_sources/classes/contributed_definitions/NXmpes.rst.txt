@@ -27,9 +27,9 @@ NXmpes
   No symbol table
 
 **Groups cited**:
-  :ref:`NXaperture`, :ref:`NXbeam`, :ref:`NXcalibration`, :ref:`NXcollectioncolumn`, :ref:`NXdata`, :ref:`NXdetector`, :ref:`NXelectronanalyser`, :ref:`NXenergydispersion`, :ref:`NXentry`, :ref:`NXfabrication`, :ref:`NXinstrument`, :ref:`NXmanipulator`, :ref:`NXnote`, :ref:`NXprocess`, :ref:`NXsample`, :ref:`NXsource`, :ref:`NXuser`
+  :ref:`NXaperture`, :ref:`NXbeam`, :ref:`NXcalibration`, :ref:`NXcollectioncolumn`, :ref:`NXdata`, :ref:`NXdetector`, :ref:`NXelectronanalyser`, :ref:`NXenergydispersion`, :ref:`NXentry`, :ref:`NXfabrication`, :ref:`NXinstrument`, :ref:`NXmanipulator`, :ref:`NXnote`, :ref:`NXprocess`, :ref:`NXresolution`, :ref:`NXsample`, :ref:`NXsource`, :ref:`NXuser`
 
-.. index:: NXentry (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXsource (base class); used in application definition, NXbeam (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXfabrication (base class); used in application definition, NXcollectioncolumn (base class); used in application definition, NXaperture (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXdetector (base class); used in application definition, NXdata (base class); used in application definition, NXmanipulator (base class); used in application definition, NXprocess (base class); used in application definition, NXcalibration (base class); used in application definition, NXsample (base class); used in application definition, NXnote (base class); used in application definition
+.. index:: NXentry (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXresolution (base class); used in application definition, NXsource (base class); used in application definition, NXbeam (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXfabrication (base class); used in application definition, NXcollectioncolumn (base class); used in application definition, NXaperture (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXdetector (base class); used in application definition, NXdata (base class); used in application definition, NXmanipulator (base class); used in application definition, NXprocess (base class); used in application definition, NXcalibration (base class); used in application definition, NXsample (base class); used in application definition, NXnote (base class); used in application definition
 
 **Structure**:
 
@@ -57,7 +57,7 @@ NXmpes
 
     .. index:: end_time (field)
 
-    **end_time**: (required) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXentry/end_time-field>`
+    **end_time**: (recommended) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXentry/end_time-field>`
 
       Datetime of the end of the measurement.
 
@@ -65,7 +65,7 @@ NXmpes
 
     .. index:: method (field)
 
-    **method**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+    **method**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
       .. collapse:: A name of the experimental method according ...
 
@@ -150,16 +150,21 @@ NXmpes
     **INSTRUMENT**: (required) :ref:`NXinstrument` :ref:`⤆ </NXentry/INSTRUMENT-group>`
 
 
-      .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution-field:
+      .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution-group:
 
-      .. index:: energy_resolution (field)
-
-      **energy_resolution**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXinstrument/energy_resolution-field>`
+      **energy_resolution**: (recommended) :ref:`NXresolution` 
 
 
-      .. _/NXmpes/ENTRY/INSTRUMENT/source_beam-group:
+        .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-field:
 
-      **source_beam**: (required) :ref:`NXsource` :ref:`⤆ </NXinstrument/SOURCE-group>`
+        .. index:: resolution (field)
+
+        **resolution**: (required) :ref:`NX_CHAR <NX_CHAR>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} 
+
+
+      .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE-group:
+
+      **source_TYPE**: (required) :ref:`NXsource` :ref:`⤆ </NXinstrument/SOURCE-group>`
 
         .. collapse:: The source used to generate the primary photons. Properties refer strictly ...
 
@@ -168,7 +173,7 @@ NXmpes
             source is not the optical power of the beam, but the energy of the electron beam
             in a synchrotron and so on.
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/source_beam/type-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/type-field:
 
         .. index:: type (field)
 
@@ -202,7 +207,7 @@ NXmpes
             * ``other``
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/source_beam/type_other-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/type_other-field:
 
         .. index:: type_other (field)
 
@@ -210,14 +215,14 @@ NXmpes
 
           Specification of type, may also go to name.
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/source_beam/name-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/name-field:
 
         .. index:: name (field)
 
         **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsource/name-field>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/source_beam/probe-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/probe-field:
 
         .. index:: probe (field)
 
@@ -230,12 +235,24 @@ NXmpes
 
               Obligatory value: ``photons``
 
-      .. _/NXmpes/ENTRY/INSTRUMENT/beam_probe-group:
+        .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/associated_beam-group:
 
-      **beam_probe**: (required) :ref:`NXbeam` :ref:`⤆ </NXinstrument/BEAM-group>`
+        **associated_beam**: (required) :ref:`NXbeam` 
+
+          .. collapse:: The beam emitted by this source. ...
+
+              The beam emitted by this source.
+              Should be named with the same appendix, e.g.,
+              for `source_probe` it should refer to `beam_probe`.
+              Refers to the same concept as /NXentry/NXinstrument/source_TYPE
+              and may be linked.
+
+      .. _/NXmpes/ENTRY/INSTRUMENT/beam_TYPE-group:
+
+      **beam_TYPE**: (required) :ref:`NXbeam` :ref:`⤆ </NXinstrument/BEAM-group>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/beam_probe/distance-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/distance-field:
 
         .. index:: distance (field)
 
@@ -243,26 +260,45 @@ NXmpes
 
           Distance of the point of evaluation of the beam from the sample surface.
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/beam_probe/incident_energy-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_energy-field:
 
         .. index:: incident_energy (field)
 
         **incident_energy**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXbeam/incident_energy-field>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/beam_probe/incident_energy_spread-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_energy_spread-field:
 
         .. index:: incident_energy_spread (field)
 
         **incident_energy_spread**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXbeam/incident_energy_spread-field>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/beam_probe/incident_polarization-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_polarization-field:
 
         .. index:: incident_polarization (field)
 
         **incident_polarization**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXbeam/incident_polarization-field>`
 
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/extent-field:
+
+        .. index:: extent (field)
+
+        **extent**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXbeam/extent-field>`
+
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/associated_source-group:
+
+        **associated_source**: (required) :ref:`NXsource` 
+
+          .. collapse:: The beam emitted by this source. ...
+
+              The beam emitted by this source.
+              Should be named with the same appendix, e.g.,
+              for `beam_probe` it should refer to `source_probe`.
+              Refers to the same concept as /NXentry/NXinstrument/beam_TYPE
+              and may be linked.
 
       .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER-group:
 
@@ -301,26 +337,26 @@ NXmpes
         **slow_axes**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXelectronanalyser/slow_axes-field>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/model-group:
+        .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information-group:
 
-        **model**: (recommended) :ref:`NXfabrication` 
+        **device_information**: (recommended) :ref:`NXfabrication` 
 
 
-          .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/model/vendor-field:
+          .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/vendor-field:
 
           .. index:: vendor (field)
 
           **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
-          .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/model/model-field:
+          .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/model-field:
 
           .. index:: model (field)
 
           **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/model-field>`
 
 
-          .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/model/identifier-field:
+          .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/identifier-field:
 
           .. index:: identifier (field)
 
@@ -365,6 +401,7 @@ NXmpes
 
           **mode**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXcollectioncolumn/mode-field>`
 
+            Labelling of the lens setting in use.
 
           .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/projection-field:
 
@@ -795,11 +832,13 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/definition@version-attribute </NXmpes/ENTRY/definition@version-attribute>`
 * :ref:`/NXmpes/ENTRY/end_time-field </NXmpes/ENTRY/end_time-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT-group </NXmpes/ENTRY/INSTRUMENT-group>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_probe-group </NXmpes/ENTRY/INSTRUMENT/beam_probe-group>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_probe/distance-field </NXmpes/ENTRY/INSTRUMENT/beam_probe/distance-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_probe/incident_energy-field </NXmpes/ENTRY/INSTRUMENT/beam_probe/incident_energy-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_probe/incident_energy_spread-field </NXmpes/ENTRY/INSTRUMENT/beam_probe/incident_energy_spread-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_probe/incident_polarization-field </NXmpes/ENTRY/INSTRUMENT/beam_probe/incident_polarization-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_TYPE-group </NXmpes/ENTRY/INSTRUMENT/beam_TYPE-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/associated_source-group </NXmpes/ENTRY/INSTRUMENT/beam_TYPE/associated_source-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/distance-field </NXmpes/ENTRY/INSTRUMENT/beam_TYPE/distance-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/extent-field </NXmpes/ENTRY/INSTRUMENT/beam_TYPE/extent-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_energy-field </NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_energy-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_energy_spread-field </NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_energy_spread-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_polarization-field </NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_polarization-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER-group </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN-group </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/contrast_aperture-group </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/contrast_aperture-group>`
@@ -814,6 +853,10 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/DATA/raw-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/DATA/raw-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/DATA@signal-attribute </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/DATA@signal-attribute>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/detector_type-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/detector_type-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information-group </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/identifier-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/identifier-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/model-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/model-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/vendor-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/vendor-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION-group </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/energy_scan_mode-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/energy_scan_mode-field>`
@@ -822,21 +865,19 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/pass_energy-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/pass_energy-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/scheme-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/scheme-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/fast_axes-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/fast_axes-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/model-group </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/model-group>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/model/identifier-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/model/identifier-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/model/model-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/model/model-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/model/vendor-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/model/vendor-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/slow_axes-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/slow_axes-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution-group </NXmpes/ENTRY/INSTRUMENT/energy_resolution-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_temperature-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_temperature-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_beam-group </NXmpes/ENTRY/INSTRUMENT/source_beam-group>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_beam/name-field </NXmpes/ENTRY/INSTRUMENT/source_beam/name-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_beam/probe-field </NXmpes/ENTRY/INSTRUMENT/source_beam/probe-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_beam/type-field </NXmpes/ENTRY/INSTRUMENT/source_beam/type-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_beam/type_other-field </NXmpes/ENTRY/INSTRUMENT/source_beam/type_other-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE-group </NXmpes/ENTRY/INSTRUMENT/source_TYPE-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/associated_beam-group </NXmpes/ENTRY/INSTRUMENT/source_TYPE/associated_beam-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/name-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/name-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/probe-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/probe-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/type-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/type-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/type_other-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/type_other-field>`
 * :ref:`/NXmpes/ENTRY/method-field </NXmpes/ENTRY/method-field>`
 * :ref:`/NXmpes/ENTRY/PROCESS-group </NXmpes/ENTRY/PROCESS-group>`
 * :ref:`/NXmpes/ENTRY/PROCESS/angular_calibration-group </NXmpes/ENTRY/PROCESS/angular_calibration-group>`
