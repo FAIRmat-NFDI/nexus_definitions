@@ -24,16 +24,98 @@ NXresolution
   No symbol table
 
 **Groups cited**:
-  none
+  :ref:`NXcalibration`, :ref:`NXdata`, :ref:`NXlink`, :ref:`NXnote`
+
+.. index:: NXnote (base class); used in base class, NXdata (base class); used in base class, NXlink (base class); used in base class, NXcalibration (base class); used in base class
 
 **Structure**:
 
-  .. _/NXresolution/resolution-field:
+  .. _/NXresolution/dimension-field:
 
-  .. index:: resolution (field)
+  .. index:: dimension (field)
 
-  **resolution**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ANY <NX_ANY>`} 
+  **dimension**: (optional) :ref:`NX_CHAR <NX_CHAR>` {units=\ :ref:`NX_ANY <NX_ANY>`} 
 
+    .. collapse:: The physical dimension of the resolution, e.g., ...
+
+        The physical dimension of the resolution, e.g.,
+        energy, momentum, time, etc.
+
+  .. _/NXresolution/type-field:
+
+  .. index:: type (field)
+
+  **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+    .. collapse:: The process by which the resolution was determined. ...
+
+        The process by which the resolution was determined.
+
+        Any of these values: ``estimated`` | ``derived`` | ``calibrated`` | ``other``
+
+  .. _/NXresolution/resolution_formula-field:
+
+  .. index:: resolution_formula (field)
+
+  **resolution_formula**: (optional) :ref:`NX_CHAR <NX_CHAR>` {units=\ :ref:`NX_ANY <NX_ANY>`} 
+
+    .. collapse:: A resolution formula to determine the resolution from a set of symbols as ...
+
+        A resolution formula to determine the resolution from a set of symbols as
+        entered by the `formula_symbol_...` fields.
+        The output unit should match the provided unit of this field.
+
+  .. _/NXresolution/note-group:
+
+  **note**: (optional) :ref:`NXnote` 
+
+    Additional details of the estimate or description of the calibration procedure
+
+  .. _/NXresolution/resolution-group:
+
+  **resolution**: (optional) :ref:`NXdata` 
+
+    The data describing the resolution in dependency of the experimental axes.
+
+    .. _/NXresolution/resolution/magnitude-field:
+
+    .. index:: magnitude (field)
+
+    **magnitude**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ANY <NX_ANY>`} 
+
+      .. collapse:: The magnitude of the resolution at the given point(s) or single value ...
+
+          The magnitude of the resolution at the given point(s) or single value
+          for a constant resolution throughout the experimental phase-space.
+
+  .. _/NXresolution/formula_symbol_LINK-group:
+
+  **formula_symbol_LINK**: (optional) :ref:`NXlink` 
+
+    .. collapse:: A symbol linking to another path in this appdef ...
+
+        A symbol linking to another path in this appdef
+        to be referred to from the `resolution_formula` field.
+
+    .. _/NXresolution/formula_symbol_LINK/symbol-field:
+
+    .. index:: symbol (field)
+
+    **symbol**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXlink/symbol-field>`
+
+
+    .. _/NXresolution/formula_symbol_LINK/path-field:
+
+    .. index:: path (field)
+
+    **path**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXlink/path-field>`
+
+
+  .. _/NXresolution/CALIBRATION-group:
+
+  **CALIBRATION**: (optional) :ref:`NXcalibration` 
+
+    For storing details and data of a calibration to derive a resolution from data
 
 
 Hypertext Anchors
@@ -43,7 +125,16 @@ List of hypertext anchors for all groups, fields,
 attributes, and links defined in this class.
 
 
-* :ref:`/NXresolution/resolution-field </NXresolution/resolution-field>`
+* :ref:`/NXresolution/CALIBRATION-group </NXresolution/CALIBRATION-group>`
+* :ref:`/NXresolution/dimension-field </NXresolution/dimension-field>`
+* :ref:`/NXresolution/formula_symbol_LINK-group </NXresolution/formula_symbol_LINK-group>`
+* :ref:`/NXresolution/formula_symbol_LINK/path-field </NXresolution/formula_symbol_LINK/path-field>`
+* :ref:`/NXresolution/formula_symbol_LINK/symbol-field </NXresolution/formula_symbol_LINK/symbol-field>`
+* :ref:`/NXresolution/note-group </NXresolution/note-group>`
+* :ref:`/NXresolution/resolution-group </NXresolution/resolution-group>`
+* :ref:`/NXresolution/resolution/magnitude-field </NXresolution/resolution/magnitude-field>`
+* :ref:`/NXresolution/resolution_formula-field </NXresolution/resolution_formula-field>`
+* :ref:`/NXresolution/type-field </NXresolution/type-field>`
 
 **NXDL Source**:
   https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXresolution.nxdl.xml

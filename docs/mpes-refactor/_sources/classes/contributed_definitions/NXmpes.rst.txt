@@ -29,7 +29,7 @@ NXmpes
 **Groups cited**:
   :ref:`NXaperture`, :ref:`NXbeam`, :ref:`NXcalibration`, :ref:`NXcollectioncolumn`, :ref:`NXdata`, :ref:`NXdetector`, :ref:`NXelectronanalyser`, :ref:`NXenergydispersion`, :ref:`NXentry`, :ref:`NXfabrication`, :ref:`NXinstrument`, :ref:`NXmanipulator`, :ref:`NXnote`, :ref:`NXprocess`, :ref:`NXresolution`, :ref:`NXsample`, :ref:`NXsource`, :ref:`NXuser`
 
-.. index:: NXentry (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXresolution (base class); used in application definition, NXsource (base class); used in application definition, NXbeam (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXfabrication (base class); used in application definition, NXcollectioncolumn (base class); used in application definition, NXaperture (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXdetector (base class); used in application definition, NXdata (base class); used in application definition, NXmanipulator (base class); used in application definition, NXprocess (base class); used in application definition, NXcalibration (base class); used in application definition, NXsample (base class); used in application definition, NXnote (base class); used in application definition
+.. index:: NXentry (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXresolution (base class); used in application definition, NXdata (base class); used in application definition, NXsource (base class); used in application definition, NXfabrication (base class); used in application definition, NXbeam (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXcollectioncolumn (base class); used in application definition, NXaperture (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXdetector (base class); used in application definition, NXmanipulator (base class); used in application definition, NXprocess (base class); used in application definition, NXcalibration (base class); used in application definition, NXsample (base class); used in application definition, NXnote (base class); used in application definition
 
 **Structure**:
 
@@ -155,11 +155,30 @@ NXmpes
       **energy_resolution**: (recommended) :ref:`NXresolution` 
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution/dimension-field:
 
-        .. index:: resolution (field)
+        .. index:: dimension (field)
 
-        **resolution**: (required) :ref:`NX_CHAR <NX_CHAR>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} 
+        **dimension**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXresolution/dimension-field>`
+
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution/type-field:
+
+        .. index:: type (field)
+
+        **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXresolution/type-field>`
+
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-group:
+
+        **resolution**: (required) :ref:`NXdata` :ref:`⤆ </NXresolution/resolution-group>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution/magnitude-field:
+
+          .. index:: magnitude (field)
+
+          **magnitude**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXresolution/resolution/magnitude-field>`
 
 
       .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE-group:
@@ -234,6 +253,32 @@ NXmpes
               restricted.
 
               Obligatory value: ``photons``
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information-group:
+
+        **device_information**: (recommended) :ref:`NXfabrication` 
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/vendor-field:
+
+          .. index:: vendor (field)
+
+          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/model-field:
+
+          .. index:: model (field)
+
+          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/model-field>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/identifier-field:
+
+          .. index:: identifier (field)
+
+          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
+
 
         .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/associated_beam-group:
 
@@ -867,13 +912,20 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/fast_axes-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/fast_axes-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/slow_axes-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/slow_axes-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution-group </NXmpes/ENTRY/INSTRUMENT/energy_resolution-group>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/dimension-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/dimension-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-group </NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution/magnitude-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution/magnitude-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/type-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/type-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_temperature-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_temperature-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE-group </NXmpes/ENTRY/INSTRUMENT/source_TYPE-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/associated_beam-group </NXmpes/ENTRY/INSTRUMENT/source_TYPE/associated_beam-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information-group </NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/identifier-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/identifier-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/model-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/model-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/vendor-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/vendor-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/name-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/name-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/probe-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/probe-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/type-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/type-field>`
