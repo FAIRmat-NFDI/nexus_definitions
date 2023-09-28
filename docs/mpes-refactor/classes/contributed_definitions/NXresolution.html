@@ -73,7 +73,11 @@ energy, momentum, time, etc.</p>
 <summary>The process by which the resolution was determined. ...</summary><p>The process by which the resolution was determined.</p>
 <p>Any of these values: <code class="docutils literal notranslate"><span class="pre">estimated</span></code> | <code class="docutils literal notranslate"><span class="pre">derived</span></code> | <code class="docutils literal notranslate"><span class="pre">calibrated</span></code> | <code class="docutils literal notranslate"><span class="pre">other</span></code></p>
 </details></div></blockquote>
-<span class="target" id="nxresolution-resolution-formula-field"></span><p id="index-4"><strong>resolution_formula</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<span class="target" id="nxresolution-resolution-field"></span><p id="index-4"><strong>resolution</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>The resolution of the physical quantity.</p>
+</div></blockquote>
+<span class="target" id="nxresolution-resolution-formula-field"></span><p id="index-5"><strong>resolution_formula</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
 <blockquote>
 <div><details class="summary-a-resolution-formula-to-determine-the-resolution-from-a-set-of-symbols-as">
 <summary>A resolution formula to determine the resolution from a set of symbols as ...</summary><p>A resolution formula to determine the resolution from a set of symbols as
@@ -84,14 +88,26 @@ The output unit should match the provided unit of this field.</p>
 <blockquote>
 <div><p>Additional details of the estimate or description of the calibration procedure</p>
 </div></blockquote>
-<p id="nxresolution-resolution-group"><strong>resolution</strong>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a></p>
+<p id="nxresolution-response-function-group"><strong>response_function</strong>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a></p>
 <blockquote>
-<div><p>The data describing the resolution in dependency of the experimental axes.</p>
-<span class="target" id="nxresolution-resolution-magnitude-field"></span><p id="index-5"><strong>magnitude</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<div><details class="summary-the-response-of-the-instrument-or-part-to-a-infinitesimal-short-input-signal">
+<summary>The response of the instrument or part to a infinitesimal short input signal ...</summary><p>The response of the instrument or part to a infinitesimal short input signal
+along the physical quantity of this group.
+This is also sometimes called instrument response function for time resolution or
+point spread function for spatial response.
+The resolution is typically determined by taking the FWHM of the response function.</p>
+</details><span class="target" id="nxresolution-response-function-input-field"></span><p id="index-6"><strong>input</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
 <blockquote>
-<div><details class="summary-the-magnitude-of-the-resolution-at-the-given-point-s-or-single-value">
-<summary>The magnitude of the resolution at the given point(s) or single value ...</summary><p>The magnitude of the resolution at the given point(s) or single value
-for a constant resolution throughout the experimental phase-space.</p>
+<div><details class="summary-the-input-axis-or-grid-of-the-response-function">
+<summary>The input axis or grid of the response function. ...</summary><p>The input axis or grid of the response function.
+The unit should match the one of the resolution field.</p>
+</details></div></blockquote>
+<span class="target" id="nxresolution-response-function-magnitude-field"></span><p id="index-7"><strong>magnitude</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a></p>
+<blockquote>
+<div><details class="summary-the-magnitude-of-the-response-function-corresponding-to-the-points">
+<summary>The magnitude of the response function corresponding to the points ...</summary><p>The magnitude of the response function corresponding to the points
+in the input axis or grid.
+This field should have the same dimensions as <cite>input</cite>.</p>
 </details></div></blockquote>
 </div></blockquote>
 <p id="nxresolution-formula-symbol-link-group"><strong>formula_symbol_LINK</strong>: (optional) <a class="reference internal" href="NXlink.html#nxlink"><span class="std std-ref">NXlink</span></a></p>
@@ -99,8 +115,8 @@ for a constant resolution throughout the experimental phase-space.</p>
 <div><details class="summary-a-symbol-linking-to-another-path-in-this-appdef">
 <summary>A symbol linking to another path in this appdef ...</summary><p>A symbol linking to another path in this appdef
 to be referred to from the <cite>resolution_formula</cite> field.</p>
-</details><span class="target" id="nxresolution-formula-symbol-link-symbol-field"></span><p id="index-6"><strong>symbol</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXlink.html#nxlink-symbol-field"><span class="std std-ref">⤆</span></a></p>
-<span class="target" id="nxresolution-formula-symbol-link-path-field"></span><p id="index-7"><strong>path</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXlink.html#nxlink-path-field"><span class="std std-ref">⤆</span></a></p>
+</details><span class="target" id="nxresolution-formula-symbol-link-symbol-field"></span><p id="index-8"><strong>symbol</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXlink.html#nxlink-symbol-field"><span class="std std-ref">⤆</span></a></p>
+<span class="target" id="nxresolution-formula-symbol-link-path-field"></span><p id="index-9"><strong>path</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXlink.html#nxlink-path-field"><span class="std std-ref">⤆</span></a></p>
 </div></blockquote>
 <p id="nxresolution-calibration-group"><strong>CALIBRATION</strong>: (optional) <a class="reference internal" href="NXcalibration.html#nxcalibration"><span class="std std-ref">NXcalibration</span></a></p>
 <blockquote>
@@ -118,9 +134,11 @@ attributes, and links defined in this class.</p>
 <li><p><a class="reference internal" href="#nxresolution-formula-symbol-link-symbol-field"><span class="std std-ref">/NXresolution/formula_symbol_LINK/symbol-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxresolution-note-group"><span class="std std-ref">/NXresolution/note-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxresolution-physical-quantity-field"><span class="std std-ref">/NXresolution/physical_quantity-field</span></a></p></li>
-<li><p><a class="reference internal" href="#nxresolution-resolution-group"><span class="std std-ref">/NXresolution/resolution-group</span></a></p></li>
-<li><p><a class="reference internal" href="#nxresolution-resolution-magnitude-field"><span class="std std-ref">/NXresolution/resolution/magnitude-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxresolution-resolution-field"><span class="std std-ref">/NXresolution/resolution-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxresolution-resolution-formula-field"><span class="std std-ref">/NXresolution/resolution_formula-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxresolution-response-function-group"><span class="std std-ref">/NXresolution/response_function-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxresolution-response-function-input-field"><span class="std std-ref">/NXresolution/response_function/input-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxresolution-response-function-magnitude-field"><span class="std std-ref">/NXresolution/response_function/magnitude-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxresolution-type-field"><span class="std std-ref">/NXresolution/type-field</span></a></p></li>
 </ul>
 <dl class="simple">

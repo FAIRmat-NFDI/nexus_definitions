@@ -53,6 +53,14 @@ NXresolution
 
         Any of these values: ``estimated`` | ``derived`` | ``calibrated`` | ``other``
 
+  .. _/NXresolution/resolution-field:
+
+  .. index:: resolution (field)
+
+  **resolution**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ANY <NX_ANY>`} 
+
+    The resolution of the physical quantity.
+
   .. _/NXresolution/resolution_formula-field:
 
   .. index:: resolution_formula (field)
@@ -71,22 +79,40 @@ NXresolution
 
     Additional details of the estimate or description of the calibration procedure
 
-  .. _/NXresolution/resolution-group:
+  .. _/NXresolution/response_function-group:
 
-  **resolution**: (optional) :ref:`NXdata` 
+  **response_function**: (optional) :ref:`NXdata` 
 
-    The data describing the resolution in dependency of the experimental axes.
+    .. collapse:: The response of the instrument or part to a infinitesimal short input signal ...
 
-    .. _/NXresolution/resolution/magnitude-field:
+        The response of the instrument or part to a infinitesimal short input signal
+        along the physical quantity of this group.
+        This is also sometimes called instrument response function for time resolution or
+        point spread function for spatial response.
+        The resolution is typically determined by taking the FWHM of the response function.
+
+    .. _/NXresolution/response_function/input-field:
+
+    .. index:: input (field)
+
+    **input**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ANY <NX_ANY>`} 
+
+      .. collapse:: The input axis or grid of the response function. ...
+
+          The input axis or grid of the response function.
+          The unit should match the one of the resolution field.
+
+    .. _/NXresolution/response_function/magnitude-field:
 
     .. index:: magnitude (field)
 
-    **magnitude**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ANY <NX_ANY>`} 
+    **magnitude**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` 
 
-      .. collapse:: The magnitude of the resolution at the given point(s) or single value ...
+      .. collapse:: The magnitude of the response function corresponding to the points ...
 
-          The magnitude of the resolution at the given point(s) or single value
-          for a constant resolution throughout the experimental phase-space.
+          The magnitude of the response function corresponding to the points
+          in the input axis or grid.
+          This field should have the same dimensions as `input`.
 
   .. _/NXresolution/formula_symbol_LINK-group:
 
@@ -131,9 +157,11 @@ attributes, and links defined in this class.
 * :ref:`/NXresolution/formula_symbol_LINK/symbol-field </NXresolution/formula_symbol_LINK/symbol-field>`
 * :ref:`/NXresolution/note-group </NXresolution/note-group>`
 * :ref:`/NXresolution/physical_quantity-field </NXresolution/physical_quantity-field>`
-* :ref:`/NXresolution/resolution-group </NXresolution/resolution-group>`
-* :ref:`/NXresolution/resolution/magnitude-field </NXresolution/resolution/magnitude-field>`
+* :ref:`/NXresolution/resolution-field </NXresolution/resolution-field>`
 * :ref:`/NXresolution/resolution_formula-field </NXresolution/resolution_formula-field>`
+* :ref:`/NXresolution/response_function-group </NXresolution/response_function-group>`
+* :ref:`/NXresolution/response_function/input-field </NXresolution/response_function/input-field>`
+* :ref:`/NXresolution/response_function/magnitude-field </NXresolution/response_function/magnitude-field>`
 * :ref:`/NXresolution/type-field </NXresolution/type-field>`
 
 **NXDL Source**:
