@@ -2,7 +2,7 @@
 hide: toc
 ---
 
-# FAIRmat nexus documentation
+# FAIRmat NeXus documentation
 
 <!-- A single sentence that says what the product is, succinctly and memorably -->
 

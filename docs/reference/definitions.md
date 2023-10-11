@@ -1,3 +1,3 @@
-# Nexus definitions
+# NeXus definitions
 
-This should link to or integrate the nexus sphinx documentation
+This should link to or integrate the NeXus sphinx documentation

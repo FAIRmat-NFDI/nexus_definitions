@@ -1,1 +1,1 @@
-# Generate a nexus file and upload it to nomad
+# Generate a NeXus file and upload it to nomad

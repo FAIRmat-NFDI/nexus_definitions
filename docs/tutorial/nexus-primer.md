@@ -1,1 +1,1 @@
-# A primer on nexus
+# A primer on NeXus
