@@ -35,7 +35,7 @@ def get_vcs_version(tag_match="*[0-9]*") -> Optional[str]:
             run(
                 ["git", "describe", "--tags", "--long", "--match", tag_match],
                 cwd=os.path.dirname(__file__),
-                check=False,
+                check=True,
                 capture_output=True,
             )
             .stdout.decode("utf-8")
