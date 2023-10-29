@@ -332,7 +332,7 @@ class Nxdl2yaml:
 
         return text
 
-    def check_and_handle_doc_xref_and_other_doc(self, text):
+    def check_and_handle_doc_xref_and_other_doc(self, text, indent):
         """Check for xref doc which comes as a block of text. 
         
         The doc part bellow is the example how xref comes:
@@ -342,10 +342,10 @@ class Nxdl2yaml:
         '''
         converter as 
         '''
-        "xref:
-          xpec: <value>
-          erm: <value>
-          rl: <value>"
+        <indent>  "xref:
+        <indent>    xpec: <value>
+        <indent>    erm: <value>
+        <indent>    url: <value>"
         '''
 
         Parameters
@@ -364,18 +364,17 @@ class Nxdl2yaml:
         after_term = "`_ of the"
         after_spec = " standard."
         before_url = ": "
+        indent = indent + '  '  # see example in func doc
         if before_term in text:
             term_part = text.split(before_term, 1)[-1]
             # To be overconfirmed for the xref doc
             if after_term in term_part: 
                 term, spec_part = term_part.split(after_term, 1)
-                print(' #### : ', spec_part.split(after_spec, 1))
-                print(' #### : ', spec_part)
                 spec, url_part = spec_part.split(after_spec, 1)
                 _, url = url_part.split(before_url, 1)
             spec, term, url = (x.strip() for x in [spec, term, url])
-            return (f"\"{xref_key}:\n{DEPTH_SIZE}{spec_key}: {spec}\n{DEPTH_SIZE}{term_key}"
-                    f": {term}\n{DEPTH_SIZE}{url_key}: {url}\"")
+            return (f'{indent}\"{xref_key}:\n{indent + DEPTH_SIZE}{spec_key}: {spec}\n{indent + DEPTH_SIZE}{term_key}'
+                    f': {term}\n{indent + DEPTH_SIZE}{url_key}: {url}\"')
         return text
     
     # pylint: disable=too-many-branches
@@ -395,7 +394,7 @@ class Nxdl2yaml:
         modified_docs = []
         for doc_part in docs:
             if not doc_part.isspace():
-                modified_docs.append(self.check_and_handle_doc_xref_and_other_doc(doc_part))
+                modified_docs.append(self.check_and_handle_doc_xref_and_other_doc(doc_part, indent))
         # doc example:
         # doc:
         #  - |
@@ -405,12 +404,12 @@ class Nxdl2yaml:
         #       spec:
         #       term:
         if len(modified_docs) > 1:
-            doc_str = f"{indent}{tag}:"
+            doc_str = f"{indent}{tag}:\n"
             for mod_doc in modified_docs:
                 if not re.match(r'^\s*\n', mod_doc):  # if not starts with 'spaces and/or \n'
-                    doc_str = '\n' + doc_str
+                    mod_doc = '\n' + mod_doc
                 #doc_str = f"{doc_str}{indent} - |\n{textwrap.indent(mod_doc, indent+'  ')}\n"
-                doc_str = f"{doc_str}{indent} - |\n{textwrap.indent(mod_doc, '')}\n"
+                doc_str = f"{doc_str}{indent} - |{textwrap.indent(mod_doc, '')}\n"
         elif len(modified_docs) == 1:
             doc_str = f"{indent}{tag}: |{modified_docs[0]}\n"
         else:
