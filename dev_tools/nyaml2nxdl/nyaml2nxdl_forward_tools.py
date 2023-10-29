@@ -26,6 +26,8 @@ import pathlib
 import textwrap
 import warnings
 from urllib.parse import unquote
+from typing import Union
+import re
 
 import lxml.etree as ET
 import yaml
@@ -129,7 +131,9 @@ def yml_reader(inputfile):
 
 
 def check_for_default_attribute_and_value(xml_element):
-    """NeXus Groups, fields and attributes might have xml default attributes and values that must
+    """Check for default attribute for NeXus concepts.
+
+    NeXus Groups, fields and attributes might have xml default attributes and values that must
     come. For example: 'optional' which is 'true' by default for base class and false otherwise.
     """
 
@@ -253,13 +257,70 @@ def check_for_mapping_char_other(text):
     return text.strip()
 
 
-def xml_handle_doc(obj, value: str, line_number=None, line_loc=None):
+def Handle_each_part_doc(text):
+    """Check and handle if the text is corresponds to xref or plain doc.
+
+    In nyaml doc the entire documentation may come in list of small docs.
+    one doc string might be as follows:
+    '''
+    xref:
+        spec: <spec>
+        term: <term>
+        url: <url>
+    '''
+
+    which has to be formatted as 
+    ''' 
+        This concept is related to term `<term>`_ of the <spec> standard.
+    .. _<term>: <url>
+     
+
+    Parameters
+    ----------
+    text : string
+        String that looks like yaml notaion.
+
+    return
+    ------
+    Formated text
+    """
+    if re.match(r'^\s*\"', text):
+        text = text.split('\"', 1)[-1]
+    if re.search(r'\"[^\n\s]*$', text):
+        text = text.rsplit('\"', 1)[0]
+
+    search_keys = ('xref:', 'spec:', 'term:', 'url:')
+    spec, term, url = ('NO SPECIFICATION', 'NO TERM', 'NO URL')
+    # Check with the signiture keys
+    if all(key in text for key in search_keys):
+        lines = text.split('\n')
+        if len(lines) > 0:
+            # key combination could be in any order
+            for line in lines:
+                if search_keys[1] in line:  # spec
+                    spec = line.split(search_keys[1])[-1].strip()
+                elif search_keys[2] in line:  # term
+                    term = line.split(search_keys[2])[-1].strip()
+                elif search_keys[3] in line:  # url
+                    url = line.split(search_keys[3])[-1].strip()
+            return f'''    This concept is related to term `{term}`_ of the {spec} standard.
+.. _{term}: {url}'''
+    else:
+        return format_nxdl_doc(check_for_mapping_char_other(text)).strip()
+
+
+def xml_handle_doc(obj, value: Union[str, list], line_number=None, line_loc=None):
     """This function creates a 'doc' element instance, and appends it to an existing element"""
     # global comment_bolcks
     doc_elemt = ET.SubElement(obj, "doc")
-    text = format_nxdl_doc(check_for_mapping_char_other(value)).strip()
+    text = ''
+    if isinstance(value, list):
+        for doc_part in value:
+            text = text + '\n' + Handle_each_part_doc(doc_part) + '\n'
+    else:
+        text = text + '\n' + Handle_each_part_doc(value) + '\n'
     # To keep the doc middle of doc tag.
-    doc_elemt.text = f"\n{text}\n"
+    doc_elemt.text = text
     if line_loc is not None and line_number is not None:
         xml_handle_comment(obj, line_number, line_loc, doc_elemt)
 
