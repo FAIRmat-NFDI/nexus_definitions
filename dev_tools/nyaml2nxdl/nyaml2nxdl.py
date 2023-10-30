@@ -24,7 +24,6 @@ conversion beteen YAML and nxdl.xml files that follows rules of NeXus ontology o
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import os
 from pathlib import Path
 
 import click
@@ -50,10 +49,10 @@ def generate_nxdl_or_retrieve_nxdl(yaml_in, xml_out, verbose):
     retrieve the nxdl part from provided yaml.
     Else, generate nxdl from separated yaml with the help of nyaml2nxdl function
     """
-
-    file_path, rel_file = os.path.split(yaml_in)
-    sep_yaml = os.path.join(file_path, f"temp_{rel_file}")
-    hash_found = separate_hash_yaml_and_nxdl(yaml_in, sep_yaml, xml_out)
+    file_path = Path(yaml_file)
+    pa_path, rel_file = file_path.parent, file_path.name
+    sep_yaml = (pa_path / f"temp_{rel_file}").as_posix()
+    hash_found = separate_hash_yaml_and_nxdl(yaml_file, sep_yaml, out_xml_file)
 
     if hash_found:
         gen_hash = get_sha256_hash(sep_yaml)
@@ -116,11 +115,11 @@ def launch_tool(input_file, verbose, do_not_store_nxdl, check_consistency):
     """
     Main function that distinguishes the input file format and launches the tools.
     """
-    if os.path.isfile(input_file):
+    
+    if Path(input_file).is_file():
         raw_name, ext = split_name_and_extension(input_file)
     else:
         raise ValueError("Need a valid input file.")
-
     if ext == "yaml":
         xml_out_file = raw_name + _nxdl
         generate_nxdl_or_retrieve_nxdl(input_file, xml_out_file, verbose)
