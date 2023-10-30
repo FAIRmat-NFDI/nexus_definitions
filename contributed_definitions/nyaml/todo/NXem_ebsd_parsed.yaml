@@ -1,0 +1,785 @@
+category: base
+doc: |
+  Base class method-specific for Electron Backscatter Diffraction (EBSD).
+info: |
+  The general procedure of an EBSD experiment is as follows:
+  Users load the specimen, collect first a coarse image of the surface.
+  Next, they set an approximate value for the calibrated working distance
+  tilt the stage to diffraction conditions.
+  
+  Users then may configure the microscope for collecting higher quality data
+  and push in the EBSD detector. Subsequently, they fine tune the illumination
+  and aberration corrector settings and select one or multiple ROIs for
+  the microscope to machine off automatically. On-the-fly indexing parameter
+  are configured and the measurement queue started.
+  
+  Nowadays, this is in most cases an automated process. The pattern
+  collection runs during the allocated microscope session until the
+  queue finishes or gets interrupted by errors or the next user.
+  
+  Kikuchi pattern surplus eventually multi-modal detector signals are
+  collected and usually indexed on-the-fly. Patterns may be stored or not
+  so one should not assume that raw data are always stored.
+  
+  Results are stored in files, which afterwards are typically copied
+  automatically or manual for archival purposes to certain storage
+  locations or further consumption. The result of such an EBSD
+  measurement/experiment is a set of usually proprietary or open files
+  from technology partners.
+  
+  This base classNXem_ebsd application is a proposal how to represent data, metadata, and
+  connections between these for the research field of electron microscopy.
+  More specifically, exemplified here for electron backscatter diffraction (EBSD).
+  The application definition solves two key documentation issues which are missing
+  so far to document provenance of data and metadata in the field of EBSD.
+  The application definition can be an example that is relevant for related
+  workflows in orientation microscopy.
+  
+  Firstly, an instance of NXem_ebsd (such as a NeXus/HDF5 file which is formatted
+  according to the NXem_ebsd application definition) stores the connection between
+  the microscope session and the key datasets which are considered typically results
+  of the various processing steps involved when working with EBSD data.
+  
+  Different groups in this application definition make connections to data artifacts
+  which were collected when working with electron microscopes via the NXem partner
+  application definition. Using a file which stores information according to the
+  NXem application definition has the benefit that it connects the sample, references
+  to the sample processing, the user operating the microscope, details about the
+  microscope session, and details about the acquistion and eventual indexing of
+  Kikuchi pattern, associated overview images, like secondary electron or
+  backscattered electron images of the region-of-interest probed and many
+  more pieces of information.
+  
+  Secondly, this NXem_ebsd application definition connects and stores the conventions
+  and reference frames which were used and are the key to mathematically correctly
+  interpret every EBSD result. Otherwise, results would be ripped out of their
+  context, as it is the situation with many traditional studies where EBSD data were
+  indexed on-the-fly and shared with the community only via sharing the results file
+  with some technology-partner-specific file but leaving important conventions out
+  or relying on the assumptions that colleagues know these even though multiple
+  definitions are possible.
+  
+  This application definition covers experiments with one-, two-dimensional, and
+  so-called three-dimensional EBSD datasets. The third dimension is either time
+  (in the case of quasi in-situ experiments) or space (in the case of serial-
+  sectioning) methods where a combination of mechanical or ion milling is used
+  repetitively to measure the same region-of-interest at different depth increments.
+  Material removal can be achieved with electron or ion polishing, using manual
+  steps or using automated equipment like a robot system.
+  
+  Three-dimensional experiments require to follow a sequence of specimen, surface
+  preparation, and data collection steps. By nature these methods are destructive
+  in that they either require the removal of the previously measured material region
+  or that the sample surface can degrade due to e.g. contamination or other
+  electron-matter interaction.
+  
+  For three-dimensional EBSD, multiple two-dimensional EBSD orientation mappings are
+  combined into one reconstructed stack. That is serial-sectioning is mainly a
+  computational workflow. Users collect data for each serial sectioning step
+  via an experiment. This assures that data for associated microscope sessions
+  and steps of data processing stay connected and contextualized.
+  
+  Eventual tomography methods also use such a workflow because first diffraction
+  images are collected (e.g. with X-ray) and then these imagres are indexed and
+  computed into a 3D orientation mapping. The here proposed NXem_ebsd application
+  definition contains conceptual ideas how this splitting between measurement and
+  post-processing can be granularized also for such X-ray-based techniques, whether
+  it be 3DXRD or HEDM.
+symbols:
+  n_op: |
+    Number of arguments per orientation for given parameterization.
+  n_sc: |
+    Number of scan points.
+  n_z: |
+    Number of pixel along the slowest changing dimension for a rediscretized, 
+    i.e. standardized default plot orientation mapping.
+  n_y: |
+    Number of pixel along slow changing dimension for a rediscretized i.e.
+    standardized default plot orientation mapping.
+  n_x: |
+    Number of pixel along fast changing dimension for a rediscretized i.e.
+    standardized default plot orientation mapping.
+# The respective partner application definition NXxray_fourd
+# can be used for storing data and post-processing results of X-ray diffraction
+# experiments which can yield also orientation maps in one, two- or three-dimensions.
+# These complementary techniques and associated application definitions can be used
+# to inform NXms, another partner application definition to NXem_ebsd. NXms describes
+# the connection between measured or simulated structural features with a focus of
+# the length and time-scale coarser then the atomic scale. The term microstructure
+# is used here but is not restricted to features at the micron scale.
+# the IUCr DMI should work on an e.g. NXhedm
+# NXem_tkd is not needed as it can be covered by NXem_ebsd as well.
+# if we think of the metadata/data graph collected from the microscope session
+# documented in NXem there may be only a few relations between nodes of an instance
+# of NXem_ebsd and NXem. Key data from NXem which many users would expect to find
+# also enumerated in NXem_ebsd could be settings of the microscope, timestamp data
+# when tasks were performed at the microscope using which specimen, operated
+# and prepared by whom. These latter pieces of information are all available
+# in NXem but if we were to make fields in NXem deep inside an instance
+# of NXem_event_data required than we factually more and more granularize and
+# pull in steps of detailed numerical post-processing which arguably is not
+# any longer at all necessarily related to the microscope session.
+# We know many cases in EBSD community, see the work of e.g. Marc de Graef's group
+# or of Hakon Wiik Anes and Knut Marthinsen who spent much longer with a collected
+# dataset in post-processing than collecting it at the microscope. Therefore, we
+# need to have the flexibility that documentation of the actual microscope session
+# and the post-processing of some of the data therein collected remain coupled
+# but not too repetively and with too stiff constraints on the existence of specific
+# fields as otherwise there can be contradictions for which NXem_ebsd would no longer
+# be applicable when one wishes to remain at the same time conformant with the data
+# scheme.
+# The idea used here is to use a reference to another NeXus file in the NXem_ebsd
+# file instance and the NXem file instance. So far we acknowledge that exporting
+# data as an NXem application definition is limited and scientists currently have
+# specific file formats from commercial or open-source tools to work with.
+# Therefore, we so far model the connections between the application definitions
+# as NXprocesses. As soon as NXem is more supported these NXclasses should become
+# NXem e.g. though.
+# Details about scan positions should not be reproduced unless needed for
+# interpolating between results of neighboring scan positions.
+# Currently, we suggest to leave the scan positions as closely to where they are
+# collected, i.e. inside NXem.
+# What this exampe of linking information rather than duplicating shows is that
+# somewhat a culture change is needed: Instead of packing everything in one file
+# we just need to assure that we have a tool whereby we can follow and inspect a
+# set of linked objects if you would like to say so, also having multiple files
+# is okay.
+# Finally, this application definition makes any assumptions about
+# gridding, this enables to handle all sort of scan schemes.
+# We follow the argumentation of MTex, in certain cases data will not yield
+# fully occupied grids anyway.
+# NXem_ebsd could also be useful/used for storing generic simulations of EBSD pattern
+# which is one example for simulations of diffractions patterns as they may be observed
+# with electron microscopes. In this case, there should be simulation(NXprocess) under this
+# the simulation group where one can store the minimum required set of pieces of information
+# which comes with every diffraction pattern simulation.
+# The main problem is in this case that the simulation group is required but then there must
+# either be no measurement group and on_the_fly_indexing group, and eventually calibration ?
+# or these groups should be created but remain empty.
+# Using the current NeXus appdef design and rules for setting constraints demands that then the
+# same appdef should be used for post-processing measured data. So there is a conflict:
+# The simulation must not be required and measurement must not be optional.
+# Arguably one may call for two application definitions in this case but most constraints and
+# concepts would then match those of NXem_ebsd which works again standardization and
+# reducing the total number of ontologies.
+type: group
+NXem_ebsd(NXem_method):
+  conventions(NXem_conventions):
+  # either we have simulated data or we have a set of measured data
+  # in every case data are Kikuchi diffraction pattern and their metadata
+  measurement(NXprocess):
+    doc: |
+      This group documents relevant details about the conditions and the tools
+      used for measuring a stack of Kikuchi diffraction pattern with an
+      electron microscope.
+    info: |
+      The most frequently collected EBSD data are captured for rectangular
+      regions-of-interested which are sampled with regular square or
+      hexagon-shaped pixels.
+    # The em_om parser will currently not interpret the majority of the
+    # many system- and technique-specific metadata which come with the
+    # files from e.g. technology partners. This is because the current
+    # culture in the EBSD community is that many of the metadata fields
+    # are neither in all cases fully documented nor use a standardized
+    # vocabulary although many people understand terms from different
+    # implementations and how these metadata can likely be compared to
+    # one another.
+    # 
+    # In addition, it is common practice in the research field of EBSD that
+    # users transcode their raw data into other (often text-based or HDF5)
+    # files with custom formatting to realize an information transfer
+    # between specific software tools including commercial software from
+    # technology partner, custom scripts in Matlab using tools like MTex,
+    # or Python scripting with tools like hyperspy, pyxem, orix, diffsims,
+    # kikuchipy, or EBSD data stack alignment tools like DREAM.3D.
+    # We have opted that in the first iteration this implementation of a
+    # RDMS-agnostic FAIR data schema for EBSD that we discard these metadata
+    # because these ad hoc file formats are not designed to communicate
+    # also specifically and most importantly the eventually different context
+    # of the metadata.
+    # Another reason for this choice was also to emphasize that in fact such
+    # challenges do exist in the community and thus pointing them out may
+    # support the discussion to arrive at eventually more complete solutions.
+    # As developing these solutions should not be our authority and necessarily
+    # demands feedback from the technology partners, we have opted for this
+    # intermediate approach to stimulate discussion.
+    # sequence_index(N):
+    #   unit: NX_UNITLESS
+    time(R):
+      unit: NX_TIME
+      doc: |
+        Physical time since the beginning of a timestamp that is required to be
+        same for all experiments in the set. The purpose of this marker is
+        to identify how all experiments in the set have have to be arranged
+        sequentially based on the time elapsed.
+        The time is relevant to sort e.g. experiments of consecutive quasi
+        in-situ experiments where a measurement was e.g. taken after 0 minutes
+        of annealing, 30 minutes, 6 hours, or 24 hours of annealing.
+    # (NXtransformations):
+    #   doc: |
+    #     Transformation which details where the region-of-interest described under
+    #     indexing is located in absolute coordinates and rotation with respect
+    #     to which coordinate system.
+    pattern_available(NX_BOOLEAN):
+      doc: |
+        True if either the depends_on or origin field specify the actual
+        Kikuchi pattern stack with which the indexing is performed.
+        False if this information is not available.
+    depends_on:
+      doc: |
+        Reference to a location (in an application definition instance) which
+        specifies the stack. If this field is used, the reference has to point
+        to an existent instance of NXimage_r_set_diff.
+        
+        Alternatively, use origin if the Kikuchi pattern stack or already processed
+        data which should be used as input is available. A typical example is a
+        file in common formats e.g. HDF5, CPR, CTF, etc.
+    origin:
+      doc: |
+        Reference (e.g. path and filename) to an existent data artifact which
+        stores either the pattern or input (already processed EBSD data)
+        which is now processed further as described by this NXem_ebsd instance.
+      \@version:
+        doc: |
+          Commit identifying this resource or at least an as strong as SHA256
+          hash generated from the content of the data artifact.
+  simulation(NXprocess):
+    doc: |
+      This group documents relevant details about the conditions and the tools
+      used for simulating a stack of Kikuchi diffraction pattern with some
+      physical model.
+      
+      This group should not be confused with a group named simulation that
+      is however an instance of NXem_sim. Instead, the simulation group here
+      should be used if (e.g. instead of a measurement) a stack of pattern
+      were simulated which one is interested afterwards to index.
+      
+      In many practical cases where pattern are analyzed on-the-fly and dictionary
+      indexing strategies are used so-called master pattern(s) are used to compare
+      measured or simulated pattern with the master pattern. In this case,
+      master pattern are the result of a computer simulation and thus should
+      be stored using in an own properly documented entry with a simulation
+      group which is an instance of NXem_sim. In this case the specific
+      NXem_ebsd_crystal_structure_model instances should refer to these simulations.
+    pattern_available(NX_BOOLEAN):
+      doc: |
+        True if either the depends_on or origin field specify the actual
+        Kikuchi pattern stack with which the indexing is performed.
+        False if this information is not available.
+    depends_on:
+      doc: |
+        Reference to a location (in an application definition instance) which
+        specifies the stack. If this field is used, the reference has to point
+        to an existent instance of NXimage_r_set_diff.
+        
+        Alternatively, use origin if the Kikuchi pattern stack or already processed
+        data which should be used as input is available. A typical example is a
+        file in common formats e.g. HDF5, CPR, CTF, etc.
+    origin:
+      doc: |
+        Reference (e.g. path and filename) to an existent data artifact which
+        stores either the pattern or input (already processed EBSD data)
+        which is now processed further as described by this NXem_ebsd instance.
+      \@version:
+        doc: |
+          Commit identifying this resource or at least an as strong as SHA256
+          hash generated from the content of the data artifact.
+  calibration(NXprocess):
+      doc: |
+        The EBSD system, including components like the electron gun, pole-piece,
+        stage tilting, EBSD detector, and the gnomonic projection have to be
+        calibrated to achieve reliable indexing results. Specifically,
+        the gnomonic projection has to be calibrated. Typically silicon or
+        quartz crystals are used for this purpose.
+      info: |
+        Considering a system is well-calibrated and using it is more frequently
+        the case than users calibrating for the above-mentioned aspects
+        before taking an EBSD measurement.
+        
+        In the first case, the user assumes that the principle geometry of the
+        hardware components and the settings in the control and EBSD pattern
+        acquisition software has been calibrated. Consequently, users pick from
+        an existent library of phase candidates, i.e.
+        :ref:`NXem_ebsd_crystal_structure_model` instances. Examples are
+        reflector models as stored in CRY files (HKL/Channel 5/Flamenco).
+        
+        In the second case, users calibrate the system during the session
+        using standards (silicon, quartz, or other common specimens).
+        There is usually one person in each lab responsible for doing such
+        calibrations. Often this person or technician is also in charge of
+        configuring the graphical user interface and software with which most
+        users control and perform their analyses.
+        
+        For EBSD this has key implications: Taking TSL OIM/EDAX as an example,
+        the conventions how orientations are stored is affected by how the
+        reference frames are configured and this setup is made at the level
+        of the GUI software.
+        
+        Unfortunately, these pieces of information are not necessarily stored
+        in the results files. In effect, key conventions become disconnected
+        from the data so it remains the users' obligation to remember these
+        settings or write these down in a lab notebook. Otherwise, these metadata
+        get lost. All these issues are a motivation and problem which
+        NXem_ebsd solves in that all conventions can be specified explicitly.
+      sequence_index(NX_POSINT):
+      calibration_available(NX_BOOLEAN):
+        doc: |
+          True if calibration data are available and resolvable via either
+          depends_on or origin.
+      depends_on:
+        doc: |
+          Reference to a location (in an application definition instance) which
+          specifies a calibration measurement. If this field is used,
+          the reference has to point to an instance of NXem_base.
+          
+          Alternatively, use origin if a calibration measurement is available
+          only as a file.
+      origin:
+        doc: |
+          Reference (e.g. path and filename) to an existent data artifact which
+          stores either a log of the calibration measurement.
+        \@version:
+          doc: |
+            Commit identifying this resource or at least an as strong as SHA256
+            hash generated from the content of the data artifact.
+  indexing(NXprocess):
+    doc: |
+      Indexing is a data processing step performed either after or while
+      (on-the-fly) the beam scans the specimen. The resulting method is also
+      known as orientation imaging microscopy (OIM).
+      
+      Different algorithms can be used to index EBSD/EBSP pattern. Common to them
+      is the computational step where simulated reference pattern are compared
+      with measured or simulated patterns. These latter patterns are referred
+      to via the measurement or simulation groups of this base class.
+      
+      Quality descriptors are defined based on which an indexing algorithm
+      yields a quantitative measure of how similar measured and reference
+      pattern are, and thus if no, one, or multiple so-called solutions
+      were found.
+    info: |
+      Assumed or simulated pattern are simulated using kinematic or dynamical
+      theory of electron diffraction delivering master pattern.
+      
+      The Hough transform is essentially a discretized Radon transform (for details see `M. van Ginkel et al. <https://www.semanticscholar.org/paper/A-short-introduction-to-the-Radon-and-Hough-and-how-Ginkel/fb6226f606cad489a15e38ed961c419037ccc858>`_).
+      Recently, dictionary-based indexing methods are increasingly becoming used
+      partly driven by the interest to use artificial intelligence algorithms.
+      
+      An inspection of several hundred publicly available EBSD datasets with an
+      open-source license via OpenAire was performed prior to implementing
+      the EBSD examples for the NOMAD OASIS research data management system.
+      
+      This analysis revealed that EBSD data are in most cases stored in two ways:
+      Case one was via a file in formats from technology partners. Examples
+      are binary formats like OSC, H5OINA, OIP, EBSP, and many derived
+      text-based formats like CPR, CRC, ANG, CTF, HKL, DAT and more. 
+      Recently, there is trend towards using HDF5-based formats thanks to
+      members of the DREAM3D community and the technology partners whom
+      they were able to motivate to implement these HDF5-based formats.
+      
+      These files contain many results and metadata which contextualize the
+      numerical steps and computational workflow whereby Kikuchi pattern were
+      indexed. Examples of metadata include scan point positions, indexing
+      solutions per scan point, some quality descriptors for the solutions,
+      as well as crystal structure and phase metadata.
+      
+      Case two were raw pattern in some custom format, often text-based with
+      some but in general neither a conclusive nor interoperable representation
+      of all relevant metadata.
+      
+      Often it remains unclear what individual fields and data arrays of these
+      fields resolve or mean conceptually. For some fields, publications were
+      referred to. However, software tools change over time and thus which 
+      specific data ended up in the file, with which specific version of software
+      or maybe even multiple pieces of software the data were processed remains
+      elusive.
+      
+      In other cases results were documented after custom post-processing steps
+      in non-standardized representations, also for Kikuchi patterns.
+      Testing of advanced indexing, pseudo-symmetry
+      resolving methods, i.e. any sort of prototyping or alternative indexing
+      strategies, so far seem to call for rapid prototyping capabilities.
+      The drawback with such science-focused prototyping though is that such
+      results come formatted on a case-by-case basis and are thus not
+      interoperable.
+      
+      Therefore, we first need to collect how these files have been generated
+      and which metadata in these files (or database entries) represent
+      which pieces of information conceptually. Ideally, one would do so by
+      creating a complete set of information in e.g. an NXem application definition,
+      such as a log of time-stamped events and processing steps, metadata and data.
+      Eventually even interactions with the graphical user interface of commercial
+      software during the microscope session should be stored and become a
+      part of the application definition.
+      
+      Such a set of pieces of information could then be used via reading directly
+      for the NXem application definition. However, in most cases such a data
+      representation is not available yet.
+    # sequence_index(N):
+    on_the_fly_indexing(NXprocess):
+      doc: |
+        This group provides a compromise for the dilemna and approach whereby
+        to document steps of on-the-fly processing.
+      depends_on:
+        doc: |
+          Reference to the relevant group (either measurement, simulation, 
+          or calibration inside this NXem_ebsd group) which resolves the
+          data artifact which was generated from this on_the_fly_indexing step.
+    method:
+      doc: |
+        Principal algorithm used for indexing.
+      enumeration: [undefined, hough_transform, dictionary, radon_transform, other]
+    background_correction(NXprocess):
+      doc: |
+        Details about the background correction applied to each Kikuchi pattern.
+      sequence_index(NX_POSINT):
+      # for each process the program used
+      # auto_background_correction:
+      # static_or_dynamic:
+      # pattern_averaging(NXprocess):
+      # doc: |
+      # Details about how patterns of each scan point are average or how
+      # pattern from scan points and neighboring scan points are spatially
+      # averaged (using weighting schemes and e.g. kernels) before these
+      # patterns are passed to the indexing algorithm.
+    binning(NXprocess):
+      doc: |
+        Binning i.e. downsampling of the pattern.
+      sequence_index(NX_POSINT):
+    # for each process the program used
+    # mode:
+    # doc: Free-text description for instrument specific settings
+    # binning(NX_UINT): ##MK equivalent to pattern height and width?
+    # doc: |
+    # How is the camera signal binned.
+    # First the number of pixel along the slow direction.
+    # Second the number of pixel along the fast direction.
+    # unit: NX_UNITLESS
+    # dimensions:
+    # rank: 1
+    # dim: [[1, 2]]
+    parameter(NXprocess):
+      doc: |
+        Specific parameter relevant only for certain algorithms used
+      sequence_index(NX_POSINT):
+    # mode:
+    # doc: Which method used to index pattern?
+    # enumeration: [optimize_bd]  # what does optimize_bd mean Oxford?
+    (NXem_ebsd_crystal_structure_model):
+    # connection to data collected using kinematic or
+    # NEW ISSUE: dynamic diffraction theory simulations
+    # individual mappings
+    # (scientists in EBSD consult all sorts of mappings)
+    # like image_quality map, orientation mapping, ipf mapping, grain mapping
+    # etc. in fact these could be all the possible mappings which one can
+    # create with the famous commercial software solutions
+    # the problem a RDMS cannot understand these mappings unless they
+    # are standardized in the sense, one has an exchange format whereby
+    # these mappings can be exported/transcoded from their representation
+    # in the commercial software, e.g.
+    # keep in mind, everybody uses the TSL OIM or Bruker AZTec OIM mapping
+    # but even these two are not directly interoperable, which is why
+    # they are also not interoperable in some RDMS if one does not come
+    # up with a way how to go about standardizing their description
+    # summary(NXdata):
+    # doc: |
+    
+    # data(NX_UINT):
+    # doc: |
+    # Status value of each pixel of the orientation mapping.
+    status(N0):
+      unit: NX_UNITLESS
+      doc: |
+        Which return value did the indexing algorithm yield for each scan point.
+        Practically useful is to use an uint8 mask.
+        
+        * 0 - Not analyzed
+        * 1 - Too high angular deviation
+        * 2 - No solution
+        * 100 - Success
+        * 255 - Unexpected errors
+      dim: (n_sc,)
+    n_phases_per_scan_point(N0):
+      unit: NX_UNITLESS
+      doc: |
+        How many phases i.e. crystal structure models were used to index each
+        scan point if any? Let's assume an example to explain how this field
+        should be used: In the simplest case users collected one pattern for
+        each scan point and have indexed using one phase, i.e. one instance
+        of an NXem_ebsd_crystal_structure_model.
+        
+        In another example users may have skipped some scan points (not indexed)
+        them at all) and/or used differing numbers of phases for different scan
+        points.
+        
+        The cumulated of this array decodes how phase_identifier and phase_matching
+        arrays have to be interpreted. In the simplest case (one pattern per scan
+        point, and all scan points indexed using that same single phase model),
+        phase_identifier has as many entries as scan points
+        and phase_matching has also as many entries as scan points.
+      dim: (n_sc,)
+    phase_identifier(N0):
+      unit: NX_UNITLESS
+      doc: |
+        The array n_phases_per_scan_point details how the phase_identifier
+        and the phase_matching arrays have to be interpreted.
+        
+        For the example with a single phase phase_identifier has trivial
+        values either 0 (no solution) or 1 (solution matching
+        sufficiently significant with the model for phase 1).
+        
+        When there are multiple phases, it is possible (although not frequently
+        needed) that a pattern matches eventually (not equally well) sufficiently
+        significant with multiple pattern. This can especially happen in cases of
+        pseudosymmetry and more frequently with an improperly calibrated system
+        or false or inaccurate phase models e.g. (ferrite, austenite).
+        Having such field is especially relevant for recent machine learning
+        or dictionary based indexing schemes because in combination with
+        phase_matching these fields communicate the results in a model-agnostic
+        way.
+        
+        Depending on the n_phases_per_scan_point value phase_identifier and
+        phase_matching arrays represent a collection of concatenated tuples,
+        which are organized in sequence: The solutions for the 0-th scan point,
+        the 1-th scan point, the n_sc - 1 th scan point and omitting tuples
+        for those scan points with no phases according to n_phases_per_scan_point
+      dim: (i,)
+    phase_matching(N0):
+      unit: NX_UNITLESS
+      doc: |
+        One-dimensional array, pattern by pattern labelling the solutions found.
+        The array n_phases_per_scan_point has to be specified because it details
+        how the phase_identifier and the phase_matching arrays have to be interpreted.
+        See documentation of phase_identifier for further details.
+      dim: (i,)
+    phase_matching_descriptor:
+      doc: |
+        Phase_matching is a descriptor for how well the solution matches or not.
+        Examples can be confidence index (ci), mean angular deviation (mad),
+        some AI-based matching probability (other), i.e. the details are implementation-specific.
+      enumeration: [undefined, ci, mad, other]
+    (NXrotation_set):
+    scan_point_positions(R):
+      unit: NX_LENGTH
+      # we make this only required as people may not yet be so happy with
+      # having to walk a graph from measurement -> path -> NXevent_data_em
+      # -> em_lab/ebeam_deflector to retrieve the actual scan positions
+      # although this would be much cleaner
+      doc: |
+        Matrix of calibrated center positions of each scan point
+        in the sample surface reference system.
+      dim: (n_sc, 2)
+      # EW ISSUE: this is in fact a duplicate because if we know th
+      # path to the measurement we would have available all ebeam_deflector
+      # settings and thus could identify where the beam was scanning for each
+      # NXevent_data_em instance, we have even more
+      # NEW ISSUE: replace by a more generic pivot table
+    indexing_rate(R+0):
+      unit: NX_DIMENSIONLESS
+      doc: |
+        Fraction of successfully indexed pattern with a phase not the
+        null-phase vs the total number of scan points.
+    number_of_scan_points(N0):
+      unit: NX_UNITLESS
+      doc: |
+        Number of scan points in the original mapping.
+    (NXms_odf_set):
+    (NXms_pf_set):
+    (NXms_recon):
+    # overview over the entire map, rediscretized on a tight aabb
+    roi(NXdata):
+      doc: |
+        An overview of the entire area which was scanned processed from
+        the entire scan area but eventually downsampled.
+      descriptor:
+        doc: |
+          Descriptor representing the image contrast.
+        # taking two examples (CTF and H5OINA choked completely of possibility to find s.th. conceptually common to plot
+        enumeration: [normalized_band_contrast, normalized_confidence_index]
+      # \@signal:  # data
+      # \@axes:  # [axis_y, axis_x]
+      # \@axis_x_indices: 0
+      # \@axis_y_indices: 1
+      # \@signal:
+      # \@axes:
+      # \@AXISNAME_indices:
+      # \@long_name:
+      title:
+        doc: |
+          Title of the default plot.
+      data(R):
+        unit: NX_UNITLESS
+        doc: |
+          Descriptor values displaying the ROI.
+        dim: (n_y, n_x)
+        # n_0 slow 2, n_1 fast 1, rgb triplet is fastest 0
+        # in axes fast to fastest
+        # while for _indices fastest to fast
+        \@long_name:
+          doc: |
+            Descriptor values.
+      axis_y(R):
+        unit: NX_LENGTH
+        doc: |
+          Calibrated coordinate along the y-axis.
+        dim: (n_y,)
+        \@long_name:
+          doc: |
+            Label for the y axis
+      axis_x(R):
+        unit: NX_LENGTH
+        doc: |
+          Calibrated coordinate along the x-axis.
+        dim: (n_x,)
+        \@long_name:
+          doc: |
+            Label for the x axis
+
+  # further ideas
+  # what to do when multiple pattern are averaged into one before the beam moves further?
+  # NEW ISSUE: frame averaging
+  # NEW ISSUE: going towards the level of suggestions what would all be immediately possible
+  # ebsd_mapping(NXprocess):
+  # doc: |
+  # An EBSD mapping is the result of a collecting and indexing of Kikuchi
+  # pattern, so that for each pattern there is either an associated
+  # phase_identifier or a status marker stating that no solution was found
+  # (NXsst_color_model): ##MK
+  # doc: |
+  # For each stereographic standard triangle, (fundamental zone) of
+  # the orientation space, it is possible to define a color model which
+  # associates an orientation in the fundamental zone to a color.
+  # For details see:
+  # * [G. Nolze et al.](https://doi.org/10.1107/S1600576716012942)
+  # * Srikanth Patala and coworkers"'" work and of others.
+  # (NXorientation_set):
+  # doc: |
+  # Collection of quaternions in the SO3 fundamental zone with colors and
+  # rgb(NX_NUMBER):
+  # doc: RGB colors.
+  # unit: NX_UNITLESS
+  # dimensions: [[1, n_oris], [2, 3]]
+  # hsv and other models
+  # (NXcg_point_set):
+  # rgb(NX_NUMBER):
+  # dimensions: [[1, n_points], [2, 3]]
+  # mapping(NX_NUMBER):
+  # doc: |
+  # The EBSD mapping with colors outlined
+  # unit: NX_UNITLESS
+  # dimensions: [[1, n_y], [2, n_x], [3, 3]]
+  # NEW ISSUE: it would also be possible to define additional color models to overlay
+  # check n_p vs n_sc vs n_p_or_z
+  
+  # confidence_index(NX_FLOAT):
+  # doc: |
+  # Is a technology-partner-specific (TSL OIM) AMETEK phase_matching descriptor.
+  # unit: NX_UNITLESS
+  # dimensions:
+  # rank: 1
+  # dim: [[1, i]]
+  # mean_angular_deviation(NX_FLOAT):
+  # doc: |
+  # The mean angular deviation is also a technology-partner-specific
+  # (HKL Channel5) solution-to-reflector matching descriptor.
+  # unit: NX_ANGLE
+  # dimensions:
+  # rank: 1
+  # dim: [[1, i]]
+  # there are many other type of descriptor especially for new machine learning
+  # type and dictionary type indexing methods
+  # some descriptors are relevant only for Hough based indexing and technology-partner-specific
+  # band_count(NX_UINT):
+  # doc: |
+  # How many bands were detected in the pattern.
+  # unit: NX_UNITLESS
+  # dimensions:
+  # rank: 1
+  # dim: [[1, n_p]]
+  # band_minimum(NX_UINT):
+  # doc: |
+  # Minimum number of bands required to index the pattern
+  # unit: NX_UNITLESS
+  # dimensions:
+  # rank: 1
+  # dim: [[1, n_p]]
+  # band_maximum(NX_UINT):
+  # doc: |
+  # Maximum number of bands required to index the pattern
+  # unit: NX_UNITLESS
+  # dimensions:
+  # rank: 1
+  # dim: [[1, n_p]]
+  # resolution(NX_NUMBER):
+  # doc: |
+  # Resolution in Hough space.
+  # unit: NX_ANGLE  # or NX_ANY
+  # band_detection(NXprocess):  # for hough_transform
+  # mode:
+  # doc: |
+  # How are Kikuchi bands detected
+  # enumeration: [center]
+  # band_contrast(NX_NUMBER):
+  # doc: |
+  # Value for band contrast descriptor.
+  # unit: NX_UNITLESS
+  # dimensions:
+  # rank: 1
+  # dim: [[1, n_p]]
+  # band_slope(NX_NUMBER):
+  # doc: |
+  # Value for band slope descriptor.
+  # unit: NX_UNITLESS
+  # dimensions:
+  # rank: 1
+  # dim: [[1, n_p]]
+  # centre(NX_FLOAT):
+  # doc: |
+  # Pattern centre location used for analyzing each pattern.
+  # unit: NX_LENGTH
+  # dimensions:
+  # rank: 2
+  # dim: [[1, n_p], [2, 2]]  # what to do when a different one for each pattern seldom but possible
+  # distance(NX_FLOAT):
+  # doc: |
+  # Pattern centre distance used for analyzing each pattern.
+  # unit: NX_LENGTH
+  # dimensions:
+  # rank: 2
+  # dim: [[1, n_p], [2, 2]]
+  # vh_ratio(NX_FLOAT):
+  # doc: |
+  # TBD Oxford/HKL Channel 5 CPR files
+  # unit: NX_DIMENSIONLESS
+  # how to parameterize a group with value, and descriptor type or a
+  # field with descriptor type as attribute?
+  # pattern_quality(NXprocess):
+  # value(NX_NUMBER):
+  # doc: |
+  # Pattern quality descriptor
+  # unit: NX_UNITLESS
+  # dimensions:
+  # rank: 1
+  # dim: [[1, n_p]]
+  # model:
+  # doc: |
+  # Model used to describe some aspect of the pattern.
+  # enumeration: [band_contrast, mean_angular_deviation]
+  # tilt_angle(NX_FLOAT):
+  # maybe better make this integrated into the NXtransformations of the stage_lab, a stage_lab event?
+  # beam_position(NXcg_point_set):
+  # (NXdetector):
+  # exposure_time(NX_TIME):
+  # gain(NX_FLOAT):
+  ##MK how does a gain translate mathematically an input signal into an intensity signal?
+  # insertion_distance(NX_FLOAT):
+  # unit: NX_LENGTH
+  ##MK a coordinate system for the detector in the NXcoordinate_system_set
+  # drift_correction(NX_BOOLEAN): ##MK??
+  # move the next two rather to detector
+  # acquisition_speed(NX_FLOAT):
+  # doc: |
+  # Average number of patterns taken per second averaged over entire set.
+  # unit: NX_FREQUENCY
+  # acquisition_time(NX_TIME):
+  # doc: Wall-clock time the acquisition took.

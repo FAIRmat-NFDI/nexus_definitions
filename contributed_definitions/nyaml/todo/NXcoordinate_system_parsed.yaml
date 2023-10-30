@@ -1,0 +1,54 @@
+category: base
+doc: |
+  Base class to detail a coordinate system (CS).
+  
+  Whenever possible an instance of coordinate system should be used as
+  a member in an NXcoordinate_system_set and the name of the instance
+  should be this alias. This may support a process whereby jargon
+  when talking about coordinate systems and conventions may become
+  cleaner for users because it is not evident for people outside a lab
+  that the terms tip space, specimen space, refer to the same coordinate
+  system. This is an example of jargon used in e.g. the field of atom
+  probe tomography.
+type: group
+NXcoordinate_system(NXobject):
+  origin:
+    doc: |
+      Human-readable field telling where the origin of this CS is.
+      Exemplar values could be *left corner of the lab bench*, *door-handle*
+      *pinhole through which the electron beam exists the pole piece*.
+      *barycenter of the triangle*, *center of mass of the stone*.
+  # implementing a proposal for "a common base table" along thoughts like:
+  # https://manual.nexusformat.org/classes/base_classes/NXtransformations.html#nxtransformations
+  # similar to a place where all transformations are stored
+  # https://www.zenodo.org/record/3526738/files/lyso009a_0087.JF07T32V01_master.h5?download=1
+  alias:
+    doc: |
+      An alternative name given that that coordinate system.
+  type:
+    doc: |
+      Coordinate system type.
+    enumeration: [cartesian]
+  handedness:
+    enumeration: [right_handed, left_handed]
+  x(R):
+    doc: |
+      Base unit vector along the first axis which spans the coordinate system.
+      This axis is frequently referred to as the x-axis in real space and
+      the i-axis in reciprocal space.
+    unit: NX_LENGTH
+    dim: (3,)
+  y(R):
+    doc: |
+      Base unit vector along the second axis which spans the coordinate system.
+      This axis is frequently referred to as the y-axis in real space and
+      the j-axis in reciprocal space.
+    unit: NX_LENGTH
+    dim: (3,)
+  z(R):
+    doc: |
+      Base unit vector along the second axis which spans the coordinate system.
+      This axis is frequently referred to as the z-axis in real space and
+      the k-axis in reciprocal space.
+    unit: NX_LENGTH
+    dim: (3,)
