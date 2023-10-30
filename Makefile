@@ -59,8 +59,6 @@ test ::
 
 clean ::
 	$(RM) -rf $(BUILD_DIR)
-
-clean-nyaml ::
 	$(RM) -rf $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)
 	$(RM) -rf $(APPDEF_DIR)/$(NYAML_SUBDIR)
 	$(RM) -rf $(CONTRIB_DIR)/$(NYAML_SUBDIR)
@@ -97,6 +95,18 @@ all ::
 	@echo "PDF built: `ls -lAFgh $(BUILD_DIR)/impatient-guide/build/latex/NXImpatient.pdf`"
 	@echo "HTML built: `ls -lAFgh $(BUILD_DIR)/manual/build/html/index.html`"
 	@echo "PDF built: `ls -lAFgh $(BUILD_DIR)/manual/build/latex/nexus-fairmat.pdf`"
+
+$(BASE_CLASS_DIR)/%.nxdl.xml : $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)/%.yaml
+	nyaml2nxdl --input-file $<
+	mv $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
+
+$(CONTRIB_DIR)/%.nxdl.xml : $(CONTRIB_DIR)/$(NYAML_SUBDIR)/%.yaml
+	nyaml2nxdl --input-file $<
+	mv $(CONTRIB_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
+
+$(APPDEF_DIR)/%.nxdl.xml : $(APPDEF_DIR)/$(NYAML_SUBDIR)/%.yaml
+	nyaml2nxdl --input-file $<
+	mv $(APPDEF_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
 
 $(BASE_CLASS_DIR)/%.nxdl.xml : $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)/%.yaml
 	nyaml2nxdl --input-file $<
