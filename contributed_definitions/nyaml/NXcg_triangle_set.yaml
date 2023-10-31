@@ -16,18 +16,21 @@ NXcg_triangle_set(NXcg_primitive_set):
     doc: |
       Number of unique vertices in the triangle set.
     unit: NX_UNITLESS
-  (NXcg_face_list_data_structure):
+  triangles(NXcg_face_list_data_structure):
     doc: |
-      A simple approach to describe the entire set of triangles when the
-      main intention is to store the shape of the triangles for
-      visualization purposes.
+      Combined storage of all primitives of all triangles.
       
       This description resembles the typical representation of primitives
       in file formats such as OFF, PLY, VTK, or STL.
-  (NXcg_half_edge_data_structure):
+  triangleID(NXcg_face_list_data_structure):
     doc: |
-      A graph-based approach to describe the entire set of triangles that
-      is better suited for topological analyses than a face_list_data_structure.
+      Individual storage of each triangle.
+      Users are advised that using such individual storage of primitives
+      may be less storage efficient than creating a combined storage.
+  # ##MK::considered too trivial:
+  # triangle_half_edgeID(NXcg_half_edge_data_structure):
+  #   doc: |
+  #     Individual storage of each triangle as a graph.
   # properties of triangles
   edge_length(NX_NUMBER):
     doc: |
@@ -45,6 +48,3 @@ NXcg_triangle_set(NXcg_primitive_set):
       to the respective edges in the sequence how vertices are defined.
     unit: NX_ANGLE
     dim: (c, 3)
-  bounding_box(NXcg_hexahedron_set):
-    doc: |
-      Axis-aligned or (approximate) (optimal) bounding boxes to each polygon.

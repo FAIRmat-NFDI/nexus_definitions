@@ -2,14 +2,28 @@ category: base
 doc: |
   Computational geometry description of a set of primitives in Euclidean space.
   
-  Primitives must neither be degenerated nor self-intersect. Individual primitives
-  can differ in their properties (e.g. size, shape, rotation).
+  Primitives must neither be degenerated nor self-intersect.
+  Individual primitives can differ in their properties (e.g. size, shape, rotation).
 # this base class defines common fields and properties of geometric primitives
 # more complex primitive sets like NXcg_cylinder_set are considered specializations
 # of NXcg_primitive_set. They contain all fields and groups which NXcg_primitive_set
-# defines. This is an action of compositing an information set an act of inheriting props
-# TODO:: many properties of non-degenerate primitives are in the
-# number set R+ instead of in R+0
+# defines. This is an action of compositing an information set; an act of inheriting
+# TODO:: many properties of non-degenerate primitives are in the number set
+# R+ instead of in R+0 but currently NeXus does not allow for such value range
+# constraints unless the coarsely discretized NX_INT, NX_POSINT, NX_FLOAT
+# but there is no say NX_FLOAT+0
+# MK::but in computational geometry numerical precision matters as it defines
+# whether objects numerically intersect or not and thus it can make a real difference
+# if one stores triangles with 16, 32, or 64 bit precision, however:
+# are two triangle_set instance A and B no longer conceptually triangle sets
+# because A stores the positions of vertices using int8 while B stores such using float64 ?
+# we here assume that we still conceptually talk that A and B are triangle sets
+# but this brings at the level of the application definition the problem that if the
+# precision is not properly constrainted a consuming application will not obtain
+# the instances of the concept triangle_set with relevant high enough precision
+# and thus neither the base class nor the application definition is specific enough
+# for what it was designed in the first place - be specific about the requirements
+# on your data...
 symbols:
   doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
@@ -39,7 +53,7 @@ NXcg_primitive_set(NXobject):
       
       Identifiers can be defined either implicitly or explicitly.
       For implicit indexing identifiers are defined on the interval
-      $[identifier_offset, identifier_offset + c - 1]$.
+      :math:`[identifier_offset, identifier_offset + c - 1]`.
       
       Therefore, implicit identifier are completely defined by the value of
       identifier_offset and cardinality. For example if identifier run from
@@ -70,10 +84,10 @@ NXcg_primitive_set(NXobject):
     dim: (c, d)
   length(NX_NUMBER):
     doc: |
-      Qualifier for primitive individually how one edge is longer than all
-      the other edge of that respective primitive. Often the term length is
-      associated with one edge being parallel to an axis of
-      the coordinate system.
+      Qualifier for the length of characteristic features of the primitive.
+      
+      Often the term length is associated with the assumption that one
+      edge is parallel to an axis of the coordinate system.
     unit: NX_LENGTH
     dim: (c,)
   width(NX_NUMBER):
@@ -112,3 +126,8 @@ NXcg_primitive_set(NXobject):
   vertex_normal(NXcg_unit_normal_set):
   edge_normal(NXcg_unit_normal_set):
   face_normal(NXcg_unit_normal_set):
+  # roi(NXcg_parallelogram_set or NXcg_hexahedron_set)
+  # aabb(NXcg_parallelogram_set or NXcg_hexahedron_set)
+  # obb(NXcg_parallelogram_set or NXcg_hexahedron_set)
+  # MK::one could add (NXcg_parallelogram_set) and/or (NXcg_hexahedron_set)
+  # but then one would not give any hint at the base class level how to name
