@@ -27,6 +27,7 @@ NXcalibration(NXobject):
     unit: NX_ANY
     doc: |
       Vector containing the data coordinates in the original uncalibrated axis
+    dim: (ncal, )
     \@symbol:
       doc: |
         The symbol of the axis to be used in the fit_function, e.g., `energy`, `E`.
@@ -40,13 +41,13 @@ NXcalibration(NXobject):
       doc: |
         The path from which this data is derived, e.g., raw detector axis.
         Should be a valid NeXus path name, e.g., /entry/instrument/detector/raw.
-    dim: (ncal, )
   input_SYMBOL(NX_FLOAT):
     unit: NX_ANY
     doc: |
       Additional input axis to be used in the formula.
       The part after `input_` is used as the symbol to be used in the `fit_function`, i.e.,
       if the field name is `input_my_field` you should refer to this axis by `my_field` in the `fit_function`.
+    dim: (ncal, )
     \@input_path:
       doc: |
         The path from which this data is derived, e.g., raw detector axis.
@@ -88,11 +89,11 @@ NXcalibration(NXobject):
     unit: NX_ANY
     doc: |
       A vector representing the axis after calibration, matching the data length
+    dim: (ncal, )
     \@output_path:
       doc: |
         The path to which this data is written, e.g., the calibrated energy.
         Should be a valid NeXus path name, e.g., /entry/data/energy.
-    dim: (ncal, )
   description(NX_CHAR):
     doc: |
       A description of the procedures employed.
