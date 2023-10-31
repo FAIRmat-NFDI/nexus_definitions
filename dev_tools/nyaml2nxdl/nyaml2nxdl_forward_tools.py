@@ -23,11 +23,11 @@
 
 import datetime
 import pathlib
+import re
 import textwrap
 import warnings
-from urllib.parse import unquote
 from typing import Union
-import re
+from urllib.parse import unquote
 
 import lxml.etree as ET
 import yaml
@@ -207,7 +207,6 @@ def check_for_skipped_attributes(component, value, allowed_attr=None, verbose=Fa
                 and "\\@" not in attr
                 and attr not in allowed_attr
                 and "NX" not in attr
-                and attr != "dim"
                 and val
             ):
                 raise ValueError(
@@ -270,11 +269,11 @@ def Handle_each_part_doc(text):
         url: <url>
     '''
 
-    which has to be formatted as 
-    ''' 
+    which has to be formatted as
+    '''
         This concept is related to term `<term>`_ of the <spec> standard.
     .. _<term>: <url>
-     
+
 
     Parameters
     ----------
@@ -285,16 +284,16 @@ def Handle_each_part_doc(text):
     ------
     Formated text
     """
-    if re.match(r'^\s*\"', text):
-        text = text.split('\"', 1)[-1]
-    if re.search(r'\"[^\n\s]*$', text):
-        text = text.rsplit('\"', 1)[0]
+    if re.match(r"^\s*\"", text):
+        text = text.split('"', 1)[-1]
+    if re.search(r"\"[^\n\s]*$", text):
+        text = text.rsplit('"', 1)[0]
 
-    search_keys = ('xref:', 'spec:', 'term:', 'url:')
-    spec, term, url = ('NO SPECIFICATION', 'NO TERM', 'NO URL')
+    search_keys = ("xref:", "spec:", "term:", "url:")
+    spec, term, url = ("NO SPECIFICATION", "NO TERM", "NO URL")
     # Check with the signiture keys
     if all(key in text for key in search_keys):
-        lines = text.split('\n')
+        lines = text.split("\n")
         if len(lines) > 0:
             # key combination could be in any order
             for line in lines:
@@ -304,8 +303,8 @@ def Handle_each_part_doc(text):
                     term = line.split(search_keys[2])[-1].strip()
                 elif search_keys[3] in line:  # url
                     url = line.split(search_keys[3])[-1].strip()
-            return f'''    This concept is related to term `{term}`_ of the {spec} standard.
-.. _{term}: {url}'''
+            return f"""    This concept is related to term `{term}`_ of the {spec} standard.
+.. _{term}: {url}"""
     else:
         return format_nxdl_doc(check_for_mapping_char_other(text)).strip()
 
@@ -314,12 +313,12 @@ def xml_handle_doc(obj, value: Union[str, list], line_number=None, line_loc=None
     """This function creates a 'doc' element instance, and appends it to an existing element"""
     # global comment_bolcks
     doc_elemt = ET.SubElement(obj, "doc")
-    text = ''
+    text = ""
     if isinstance(value, list):
         for doc_part in value:
-            text = text + '\n' + Handle_each_part_doc(doc_part) + '\n'
+            text = text + "\n" + Handle_each_part_doc(doc_part) + "\n"
     else:
-        text = text + '\n' + Handle_each_part_doc(value) + '\n'
+        text = text + "\n" + Handle_each_part_doc(value) + "\n"
     # To keep the doc middle of doc tag.
     doc_elemt.text = text
     if line_loc is not None and line_number is not None:
@@ -449,35 +448,6 @@ def xml_handle_dimensions(dct, obj, keyword, value: dict):
 
     if isinstance(value, dict) and value != {}:
         recursive_build(dims, value, verbose=None)
-
-
-def xml_handle_dim(dct, obj, keyword, value):
-    """
-    This function creates a 'dimensions' element instance, and appends it to an existing element.
-
-    Allows for handling numpy tensor notation of dimensions. That is,
-    dimensions:
-      rank: 1
-      dim: (1, 3)
-    can be replaced by
-    dim: (3,)
-
-    """
-    if isinstance(value, str) is True:
-        if value[0] == "(" and value[-1] == ")":
-            valid_dims = []
-            for entry in value[1:-1].replace(" ", "").split(","):
-                if len(entry) > 0:  # ignore trailing comma and empty mnemonics
-                    valid_dims.append(entry)
-            if len(valid_dims) > 0:
-                dims = ET.SubElement(obj, "dimensions")
-                dims.set("rank", str(len(valid_dims)))
-                dim_idx = 1
-                for dim_name in valid_dims:
-                    dim = ET.SubElement(dims, "dim")
-                    dim.set("index", str(dim_idx))
-                    dim.set("value", str(dim_name))
-                    dim_idx += 1
 
 
 # pylint: disable=too-many-locals, too-many-arguments
@@ -1040,12 +1010,6 @@ def recursive_build(obj, dct, verbose):
             xml_handle_enumeration(dct, obj, keyword, value, verbose)
         elif keyword == "dimensions":
             xml_handle_dimensions(dct, obj, keyword, value)
-<<<<<<< HEAD
-        elif keyword == "dim":
-            xml_handle_dim(dct, obj, keyword, value)
-
-=======
->>>>>>> d702250c (Updating nyaml_forward_tools.py.)
         elif keyword == "exists":
             xml_handle_exists(dct, obj, keyword, value)
         # Handles fileds e.g. AXISNAME

@@ -21,12 +21,13 @@
 # limitations under the License.
 #
 
+import re
+import textwrap
 from pathlib import Path
 from typing import Callable
 from typing import Dict
 from typing import List
-import re
-import textwrap
+
 import lxml.etree as ET
 
 from .nyaml2nxdl_helper import NXDL_ATTRIBUTES_ATTRIBUTES
@@ -333,14 +334,14 @@ class Nxdl2yaml:
         return text
 
     def check_and_handle_doc_xref_and_other_doc(self, text, indent):
-        """Check for xref doc which comes as a block of text. 
-        
+        """Check for xref doc which comes as a block of text.
+
         The doc part bellow is the example how xref comes:
         '''
         This concept is related to term `<term>`_ of the <spec> standard.
         .. _<term>: <url>
         '''
-        converter as 
+        converter as
         '''
         <indent>  "xref:
         <indent>    xpec: <value>
@@ -359,24 +360,26 @@ class Nxdl2yaml:
         """
 
         spec, term, url = (None, None, None)
-        xref_key, spec_key, term_key, url_key = ('xref', 'spec', 'term', 'url')
+        xref_key, spec_key, term_key, url_key = ("xref", "spec", "term", "url")
         before_term = "This concept is related to term `"
         after_term = "`_ of the"
         after_spec = " standard."
         before_url = ": "
-        indent = indent + '  '  # see example in func doc
+        indent = indent + "  "  # see example in func doc
         if before_term in text:
             term_part = text.split(before_term, 1)[-1]
             # To be overconfirmed for the xref doc
-            if after_term in term_part: 
+            if after_term in term_part:
                 term, spec_part = term_part.split(after_term, 1)
                 spec, url_part = spec_part.split(after_spec, 1)
                 _, url = url_part.split(before_url, 1)
             spec, term, url = (x.strip() for x in [spec, term, url])
-            return (f'{indent}\"{xref_key}:\n{indent + DEPTH_SIZE}{spec_key}: {spec}\n{indent + DEPTH_SIZE}{term_key}'
-                    f': {term}\n{indent + DEPTH_SIZE}{url_key}: {url}\"')
+            return (
+                f'{indent}"{xref_key}:\n{indent + DEPTH_SIZE}{spec_key}: {spec}\n{indent + DEPTH_SIZE}{term_key}'
+                f': {term}\n{indent + DEPTH_SIZE}{url_key}: {url}"'
+            )
         return text
-    
+
     # pylint: disable=too-many-branches
     def handle_not_root_level_doc(self, depth, text, tag="doc", file_out=None):
         """Handle docs field of group and field but not root.
@@ -390,11 +393,13 @@ class Nxdl2yaml:
             tag = remove_namespace_from_tag(tag)
         indent = depth * DEPTH_SIZE
         text = self.clean_and_organise_text(text, depth)  # starts with '\n'
-        docs = re.split(r'\n\s*\n', text)
+        docs = re.split(r"\n\s*\n", text)
         modified_docs = []
         for doc_part in docs:
             if not doc_part.isspace():
-                modified_docs.append(self.check_and_handle_doc_xref_and_other_doc(doc_part, indent))
+                modified_docs.append(
+                    self.check_and_handle_doc_xref_and_other_doc(doc_part, indent)
+                )
         # doc example:
         # doc:
         #  - |
@@ -406,9 +411,11 @@ class Nxdl2yaml:
         if len(modified_docs) > 1:
             doc_str = f"{indent}{tag}:\n"
             for mod_doc in modified_docs:
-                if not re.match(r'^\s*\n', mod_doc):  # if not starts with 'spaces and/or \n'
-                    mod_doc = '\n' + mod_doc
-                #doc_str = f"{doc_str}{indent} - |\n{textwrap.indent(mod_doc, indent+'  ')}\n"
+                if not re.match(
+                    r"^\s*\n", mod_doc
+                ):  # if not starts with 'spaces and/or \n'
+                    mod_doc = "\n" + mod_doc
+                # doc_str = f"{doc_str}{indent} - |\n{textwrap.indent(mod_doc, indent+'  ')}\n"
                 doc_str = f"{doc_str}{indent} - |{textwrap.indent(mod_doc, '')}\n"
         elif len(modified_docs) == 1:
             doc_str = f"{indent}{tag}: |{modified_docs[0]}\n"

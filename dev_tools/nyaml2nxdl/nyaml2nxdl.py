@@ -41,7 +41,7 @@ _nxdl = ".nxdl.xml"
 # https://manual.nexusformat.org/nxdl_desc.html?highlight=optional
 
 
-def generate_nxdl_or_retrieve_nxdl(yaml_in, xml_out, verbose):
+def generate_nxdl_or_retrieve_nxdl(yaml_file, out_xml_file, verbose):
     """
     Generate yaml, nxdl and hash.
 
