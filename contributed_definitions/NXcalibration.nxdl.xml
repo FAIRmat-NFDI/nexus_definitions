@@ -55,68 +55,16 @@
              Has the calibration been applied?
         </doc>
     </field>
-    <field name="coefficients" type="NX_FLOAT" units="NX_ANY">
-        <doc>
-             For non-linear energy calibrations, e.g. in a TOF, a polynomial function is fit
-             to a set of features (peaks) at well defined energy positions to determine
-             E(TOF). Here we can store the array of fit coefficients.
-        </doc>
-        <dimensions rank="1">
-            <dim index="1" value="ncoeff"/>
-        </dimensions>
-    </field>
     <group name="reference" type="NXidentifier">
         <doc>
              A reference to a calibration on which this calibration is based.
         </doc>
-        <field name="service">
+        <field name="service" type="NX_CHAR">
             <enumeration>
                 <item value="doi"/>
             </enumeration>
         </field>
     </group>
-    <field name="fit_function" type="NX_CHAR">
-        <doc>
-             For non-linear energy calibrations. Here we can store the formula of the
-             fit function.
-             
-             Use a0, a1, ..., an for the coefficients, corresponding to the values in the coefficients field.
-             
-             Use x0, x1, ..., xn for the nth position of in the `original_axis` field.
-             If there is the symbol attribute specified for the `original_axis` this may be used instead of x.
-             If you want to use the whole axis use `x`.
-             Alternate axis can also be available as specified by the `input_SYMBOL` field.
-             The data should then be referred here by the `SYMBOL` name, e.g., for a field
-             name `input_my_field` it should be referred here by `my_field` or `my_field0` if
-             you want to read the zeroth element of the array.
-             
-             The formula should be numpy compliant.
-        </doc>
-    </field>
-    <field name="scaling" type="NX_FLOAT" units="NX_ANY">
-        <doc>
-             For linear calibration. Scaling parameter.
-        </doc>
-    </field>
-    <field name="offset" type="NX_FLOAT" units="NX_ANY">
-        <doc>
-             For linear calibration. Offset parameter.
-        </doc>
-    </field>
-    <field name="calibrated_axis" type="NX_FLOAT" units="NX_ANY">
-        <doc>
-             A vector representing the axis after calibration, matching the data length
-        </doc>
-        <attribute name="output_path">
-            <doc>
-                 The path to which this data is written, e.g., the calibrated energy.
-                 Should be a valid NeXus path name, e.g., /entry/data/energy.
-            </doc>
-        </attribute>
-        <dimensions rank="1">
-            <dim index="1" value="ncal"/>
-        </dimensions>
-    </field>
     <field name="original_axis" type="NX_FLOAT" units="NX_ANY">
         <doc>
              Vector containing the data coordinates in the original uncalibrated axis
@@ -147,6 +95,60 @@
             <doc>
                  The path from which this data is derived, e.g., raw detector axis.
                  Should be a valid NeXus path name, e.g., /entry/instrument/detector/raw.
+            </doc>
+        </attribute>
+        <dimensions rank="1">
+            <dim index="1" value="ncal"/>
+        </dimensions>
+    </field>
+    <field name="coefficients" type="NX_FLOAT" units="NX_ANY">
+        <doc>
+             For non-linear energy calibrations, e.g. in a TOF, a polynomial function is fit
+             to a set of features (peaks) at well defined energy positions to determine
+             E(TOF). Here we can store the array of fit coefficients.
+        </doc>
+        <dimensions rank="1">
+            <dim index="1" value="ncoeff"/>
+        </dimensions>
+    </field>
+    <field name="fit_function" type="NX_CHAR">
+        <doc>
+             For non-linear energy calibrations. Here we can store the formula of the
+             fit function.
+             
+             Use a0, a1, ..., an for the coefficients, corresponding to the values in the coefficients field.
+             
+             Use x0, x1, ..., xn for the nth position in the `original_axis` field.
+             If there is the symbol attribute specified for the `original_axis` this may be used instead of x.
+             If you want to use the whole axis use `x`.
+             Alternate axis can also be available as specified by the `input_SYMBOL` field.
+             The data should then be referred here by the `SYMBOL` name, e.g., for a field
+             name `input_my_field` it should be referred here by `my_field` or `my_field0` if
+             you want to read the zeroth element of the array.
+             
+             The formula should be numpy compliant.
+        </doc>
+    </field>
+    <field name="scaling" type="NX_FLOAT" units="NX_ANY">
+        <doc>
+             For linear calibration. Scaling parameter.
+             This is should yield the relation `calibrated_axis` = `scaling` * `original_axis` + `offset`.
+        </doc>
+    </field>
+    <field name="offset" type="NX_FLOAT" units="NX_ANY">
+        <doc>
+             For linear calibration. Offset parameter.
+             This is should yield the relation `calibrated_axis` = `scaling` * `original_axis` + `offset`.
+        </doc>
+    </field>
+    <field name="calibrated_axis" type="NX_FLOAT" units="NX_ANY">
+        <doc>
+             A vector representing the axis after calibration, matching the data length
+        </doc>
+        <attribute name="output_path">
+            <doc>
+                 The path to which this data is written, e.g., the calibrated energy.
+                 Should be a valid NeXus path name, e.g., /entry/data/energy.
             </doc>
         </attribute>
         <dimensions rank="1">
