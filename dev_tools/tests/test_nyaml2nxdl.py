@@ -12,8 +12,9 @@ def test_conversion():
     root = find_definition_file("NXentry")
     result = CliRunner().invoke(conv.launch_tool, ["--input-file", str(root)])
     assert result.exit_code == 0
-    # replace nxdl.xml with _parsed.yaml
-    yaml = root.with_suffix("").with_suffix("_parsed.yaml")
+    # Replace suffixes
+    yaml = root.with_suffix("").with_suffix(".yaml")  # replace .nxdl.xml
+    yaml = yaml.with_stem(yaml.stem + "_parsed")  # extend file name with '_parsed'
     result = CliRunner().invoke(conv.launch_tool, ["--input-file", str(yaml)])
     assert result.exit_code == 0
     new_root = yaml.with_suffix(".nxdl.xml")  # replace yaml
