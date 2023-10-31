@@ -1073,7 +1073,7 @@ def pretty_print_xml(xml_root, output_xml, def_comments=None):
     with open(tmp_xml, "r", encoding="utf-8") as file_out:
         with open(output_xml, "w", encoding="utf-8") as file_out_mod:
             for i in file_out.readlines():
-                i = unquote(i.encode())
+                i = unquote(i)
                 if "<doc>" not in i and "</doc>" not in i and flag is False:
                     file_out_mod.write(i)
                 elif "<doc>" in i and "</doc>" in i:
