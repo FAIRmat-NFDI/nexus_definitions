@@ -40,9 +40,7 @@ NXcalibration(NXobject):
       doc: |
         The path from which this data is derived, e.g., raw detector axis.
         Should be a valid NeXus path name, e.g., /entry/instrument/detector/raw.
-    dimensions:
-      rank: 1
-      dim: [[1, ncal]]
+    dim: (ncal, )
   input_SYMBOL(NX_FLOAT):
     unit: NX_ANY
     doc: |
@@ -53,18 +51,13 @@ NXcalibration(NXobject):
       doc: |
         The path from which this data is derived, e.g., raw detector axis.
         Should be a valid NeXus path name, e.g., /entry/instrument/detector/raw.
-    dimensions:
-      rank: 1
-      dim: [[1, ncal]]
   coefficients(NX_FLOAT):
     unit: NX_ANY
     doc: |
       For non-linear energy calibrations, e.g. in a TOF, a polynomial function is fit
       to a set of features (peaks) at well defined energy positions to determine
       E(TOF). Here we can store the array of fit coefficients.
-    dimensions:
-      rank: 1
-      dim: [[1, ncoeff]]
+    dim: (ncoeff, )
   fit_function(NX_CHAR):
     doc: |
       For non-linear energy calibrations. Here we can store the formula of the
@@ -99,9 +92,7 @@ NXcalibration(NXobject):
       doc: |
         The path to which this data is written, e.g., the calibrated energy.
         Should be a valid NeXus path name, e.g., /entry/data/energy.
-    dimensions:
-      rank: 1
-      dim: [[1, ncal]]
+    dim: (ncal, )
   description(NX_CHAR):
     doc: |
       A description of the procedures employed.
