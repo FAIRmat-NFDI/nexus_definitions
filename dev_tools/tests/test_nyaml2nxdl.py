@@ -13,11 +13,8 @@ def test_conversion():
     result = CliRunner().invoke(conv.launch_tool, ["--input-file", str(root)])
     assert result.exit_code == 0
     # Replace suffixes
-    # yaml = root.with_suffix("").with_suffix(".yaml")  # replace .nxdl.xml
-    yaml = root.parent / Path(
-        root.with_suffix("").stem + "_parsed.yaml"
-    )  # extend file name with '_parsed'
-    result = CliRunner().invoke(conv.launch_tool, ["--input-file", str(yaml)])
+    yaml = root.with_suffix("").with_suffix(".yaml")  # replace .nxdl.xml
+    yaml = yaml.with_stem(yaml.stem + "_parsed")  # extend file name with _parsed
     assert result.exit_code == 0
     new_root = yaml.with_suffix(".nxdl.xml")  # replace yaml
     with open(root, encoding="utf-8", mode="r") as tmp_f:
