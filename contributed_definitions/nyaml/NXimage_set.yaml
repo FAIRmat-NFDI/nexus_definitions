@@ -1,0 +1,32 @@
+category: base
+doc: |
+  Base class for reporting a set of images.
+  
+  This class provides a base vocabulary to be used for specialized NXimage_set
+  base classes like NXimage_r_set and NXimage_c_set.
+symbols:
+  n_images: |
+    Number of images in the stack.
+  n_y: |
+    Number of pixel per image in the slow direction.
+  n_x: |
+    Number of pixel per image in the fast direction.
+type: group
+NXimage_set(NXobject):
+  (NXprocess):
+    doc: |
+      Details how NXdata instance inside instance of (specialized)
+      NXimage_set were processed from the detector readings/raw data.
+    source(NXserialized):
+      doc: |
+        Resolvable data artifact (e.g. filename) from which the all values in
+        the NXdata instances in this NXimage_set were loaded during parsing.
+    mode(NX_CHAR):
+      doc: |
+        Imaging (data collection) mode of the instrument during acquisition
+        of the data in this NXimage_set instance.
+    detector_identifier(NX_CHAR):
+      doc: |
+        Link or name of an NXdetector instance with which the data were collected.
+    (NXprogram):
+  (NXdata):
