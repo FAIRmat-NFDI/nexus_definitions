@@ -26,14 +26,11 @@ conversion beteen YAML and nxdl.xml files that follows rules of NeXus ontology o
 #
 import os
 from pathlib import Path
-import xml.etree.ElementTree as ET
 
 import click
 
 from .nyaml2nxdl_backward_tools import Nxdl2yaml
-from .nyaml2nxdl_backward_tools import compare_niac_and_my
 from .nyaml2nxdl_forward_tools import nyaml2nxdl
-from .nyaml2nxdl_forward_tools import pretty_print_xml
 from .nyaml2nxdl_helper import extend_yamlfile_by_nxdl_as_comment
 from .nyaml2nxdl_helper import get_sha256_hash
 from .nyaml2nxdl_helper import separate_hash_yaml_and_nxdl
@@ -128,8 +125,7 @@ def launch_tool(input_file, verbose, do_not_store_nxdl, check_consistency):
     if ext == "yaml":
         xml_out_file = raw_name + _nxdl
         generate_nxdl_or_retrieve_nxdl(input_file, xml_out_file, verbose)
-        # if append:
-        #     append_yml(raw_name + _nxdl, append, verbose)
+  
         # For consistency running
         if check_consistency:
             yaml_out_file = raw_name + "_consistency." + ext
@@ -158,14 +154,12 @@ def launch_tool(input_file, verbose, do_not_store_nxdl, check_consistency):
                 file_to_be_appended=input_file,
                 top_lines_list=top_lines,
             )
-        # else:
-        #     append_yml(input_file, append, verbose)
+
         # Taking care of consistency running
         if check_consistency:
             xml_out_file = raw_name + "_consistency." + ext
             generate_nxdl_or_retrieve_nxdl(yaml_out_file, xml_out_file, verbose)
             Path.unlink(yaml_out_file)
-            # os.remove(yaml_out_file)
     else:
         raise ValueError("Provide correct file with extension '.yaml or '.nxdl.xml")
 
