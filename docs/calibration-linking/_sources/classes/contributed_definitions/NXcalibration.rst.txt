@@ -30,11 +30,19 @@ NXcalibration
   **ncal**: Number of points of the calibrated and uncalibrated axes
 
 **Groups cited**:
-  :ref:`NXcite`
+  :ref:`NXidentifier`, :ref:`NXserialized`
 
-.. index:: NXcite (base class); used in base class
+.. index:: NXidentifier (base class); used in base class, NXserialized (base class); used in base class
 
 **Structure**:
+
+  .. _/NXcalibration/description-field:
+
+  .. index:: description (field)
+
+  **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+    A description of the procedures employed.
 
   .. _/NXcalibration/last_process-field:
 
@@ -186,22 +194,37 @@ NXcalibration
           The path to which this data is written, e.g., the calibrated energy.
           Should be a valid NeXus path name, e.g., /entry/data/energy.
 
-  .. _/NXcalibration/description-field:
+  .. _/NXcalibration/calibration_method-group:
 
-  .. index:: description (field)
+  **calibration_method**: (optional) :ref:`NXidentifier` 
 
-  **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+    .. collapse:: A digital persistent identifier (e.g., a doi) referring to the description of  ...
 
-    A description of the procedures employed.
+        A digital persistent identifier (e.g., a doi) referring to the description of the calibration
+        method applied here.
 
-  .. _/NXcalibration/reference-group:
+  .. _/NXcalibration/calibration_reference-group:
 
-  **reference**: (optional) :ref:`NXcite` 
+  **calibration_reference**: (optional) :ref:`NXidentifier` 
 
     .. collapse:: A digital persistent identifier (e.g., a doi) referring to an  ...
 
         A digital persistent identifier (e.g., a doi) referring to an 
         object containing the calibration applied here.
+        The axis values might also be copied/linked here for reference.
+
+  .. _/NXcalibration/calibration_object-group:
+
+  **calibration_object**: (optional) :ref:`NXserialized` 
+
+    .. collapse:: Metadata to a set of pieces of information describing the calibration event. ...
+
+        Metadata to a set of pieces of information describing the calibration event.
+
+        This metadata can be a documentation of the source (file) or database (entry) from which pieces
+        of information have been extracted for consumption in e.g. a research data management system (RDMS).
+        It is also possible to include the actual file by using the `file` field.
+
         The axis values might also be copied/linked here for reference.
 
 
@@ -215,6 +238,9 @@ attributes, and links defined in this class.
 * :ref:`/NXcalibration/applied-field </NXcalibration/applied-field>`
 * :ref:`/NXcalibration/calibrated_axis-field </NXcalibration/calibrated_axis-field>`
 * :ref:`/NXcalibration/calibrated_axis@output_path-attribute </NXcalibration/calibrated_axis@output_path-attribute>`
+* :ref:`/NXcalibration/calibration_method-group </NXcalibration/calibration_method-group>`
+* :ref:`/NXcalibration/calibration_object-group </NXcalibration/calibration_object-group>`
+* :ref:`/NXcalibration/calibration_reference-group </NXcalibration/calibration_reference-group>`
 * :ref:`/NXcalibration/coefficients-field </NXcalibration/coefficients-field>`
 * :ref:`/NXcalibration/description-field </NXcalibration/description-field>`
 * :ref:`/NXcalibration/fit_function-field </NXcalibration/fit_function-field>`
@@ -225,7 +251,6 @@ attributes, and links defined in this class.
 * :ref:`/NXcalibration/original_axis-field </NXcalibration/original_axis-field>`
 * :ref:`/NXcalibration/original_axis@input_path-attribute </NXcalibration/original_axis@input_path-attribute>`
 * :ref:`/NXcalibration/original_axis@symbol-attribute </NXcalibration/original_axis@symbol-attribute>`
-* :ref:`/NXcalibration/reference-group </NXcalibration/reference-group>`
 * :ref:`/NXcalibration/scaling-field </NXcalibration/scaling-field>`
 
 **NXDL Source**:
