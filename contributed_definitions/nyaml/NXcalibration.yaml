@@ -12,17 +12,33 @@ symbols:
     Number of points of the calibrated and uncalibrated axes
 type: group
 NXcalibration(NXobject):
+  description(NX_CHAR):
+    doc: |
+      A description of the procedures employed.
+  calibration_method(NXidentifier):
+    doc: |
+      A digital persistent identifier (e.g., a doi) referring to the description of the calibration
+      method applied here.
+  calibration_reference(NXidentifier):
+    doc: |
+      A digital persistent identifier (e.g., a doi) referring to an 
+      object containing the calibration applied here.
+      The axis values might also be copied/linked here for reference.
+  calibration_object(NXserialized):
+    doc: |
+     Metadata to a set of pieces of information describing the calibration event.
+      
+     This metadata can be a documentation of the source (file) or database (entry) from which pieces
+     of information have been extracted for consumption in e.g. a research data management system (RDMS).
+     It is also possible to include the actual file by using the `file` field.
+ 
+     The axis values might also be copied/linked here for reference.
   last_process(NX_CHAR):
     doc: |
       Indicates the name of the last operation applied in the NXprocess sequence.
   applied(NX_BOOLEAN):
     doc: |
       Has the calibration been applied?
-  reference(NXcite):
-    doc: |
-      A digital persistent identifier (e.g., a doi) referring to an 
-      object containing the calibration applied here.
-      The axis values might also be copied/linked here for reference.
   original_axis(NX_FLOAT):
     unit: NX_ANY
     doc: |
@@ -94,9 +110,6 @@ NXcalibration(NXobject):
       doc: |
         The path to which this data is written, e.g., the calibrated energy.
         Should be a valid NeXus path name, e.g., /entry/data/energy.
-  description(NX_CHAR):
-    doc: |
-      A description of the procedures employed.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
 # 7394f6136c95cdee182a96a9aff856eee0285b94b6a3e83a0175949aa9752ae3

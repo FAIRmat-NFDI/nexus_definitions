@@ -45,6 +45,35 @@
     <doc>
          Subclass of NXprocess to describe post-processing calibrations.
     </doc>
+    <field name="description" type="NX_CHAR">
+        <doc>
+             A description of the procedures employed.
+        </doc>
+    </field>
+    <group name="calibration_method" type="NXidentifier">
+        <doc>
+             A digital persistent identifier (e.g., a doi) referring to the description of the calibration
+             method applied here.
+        </doc>
+    </group>
+    <group name="calibration_reference" type="NXidentifier">
+        <doc>
+             A digital persistent identifier (e.g., a doi) referring to an 
+             object containing the calibration applied here.
+             The axis values might also be copied/linked here for reference.
+        </doc>
+    </group>
+    <group name="calibration_object" type="NXserialized">
+        <doc>
+             Metadata to a set of pieces of information describing the calibration event.
+              
+             This metadata can be a documentation of the source (file) or database (entry) from which pieces
+             of information have been extracted for consumption in e.g. a research data management system (RDMS).
+             It is also possible to include the actual file by using the `file` field.
+             
+             The axis values might also be copied/linked here for reference.
+        </doc>
+    </group>
     <field name="last_process" type="NX_CHAR">
         <doc>
              Indicates the name of the last operation applied in the NXprocess sequence.
@@ -55,13 +84,6 @@
              Has the calibration been applied?
         </doc>
     </field>
-    <group name="reference" type="NXcite">
-        <doc>
-             A digital persistent identifier (e.g., a doi) referring to an 
-             object containing the calibration applied here.
-             The axis values might also be copied/linked here for reference.
-        </doc>
-    </group>
     <field name="original_axis" type="NX_FLOAT" units="NX_ANY">
         <doc>
              Vector containing the data coordinates in the original uncalibrated axis
@@ -156,10 +178,5 @@
                  Should be a valid NeXus path name, e.g., /entry/data/energy.
             </doc>
         </attribute>
-    </field>
-    <field name="description" type="NX_CHAR">
-        <doc>
-             A description of the procedures employed.
-        </doc>
     </field>
 </definition>
