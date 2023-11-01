@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from click.testing import CliRunner
 
 from ..nyaml2nxdl import nyaml2nxdl as conv
