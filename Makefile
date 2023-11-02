@@ -96,18 +96,6 @@ all ::
 	@echo "PDF built: `ls -lAFgh $(BUILD_DIR)/manual/build/latex/nexus-fairmat.pdf`"
 
 $(BASE_CLASS_DIR)/%.nxdl.xml : $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)/%.yaml
-	nyaml2nxdl --input-file $<
-	mv $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
-
-$(CONTRIB_DIR)/%.nxdl.xml : $(CONTRIB_DIR)/$(NYAML_SUBDIR)/%.yaml
-	nyaml2nxdl --input-file $<
-	mv $(CONTRIB_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
-
-$(APPDEF_DIR)/%.nxdl.xml : $(APPDEF_DIR)/$(NYAML_SUBDIR)/%.yaml
-	nyaml2nxdl --input-file $<
-	mv $(APPDEF_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
-
-$(BASE_CLASS_DIR)/%.nxdl.xml : $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)/%.yaml
 	$(PYTHON) -m dev_tools.nyaml2nxdl.nyaml2nxdl --input-file $<
 	mv $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
 
