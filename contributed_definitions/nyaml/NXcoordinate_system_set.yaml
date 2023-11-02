@@ -2,23 +2,23 @@ category: base
 doc: |
   Base class to hold different coordinate systems and representation conversions.
   
-  How many nodes of type NXcoordinate_system_set should be used in an appdef?
+  How many nodes of type :ref:`NXcoordinate_system_set` should be used in an appdef?
   
-  * 0; if no instance of NXcoordinate_system_set and therein or elsewhere across
+  * 0; if no instance of :ref:`NXcoordinate_system_set` and therein or elsewhere across
     the appdef an instance of NXcoordinate_system is defined,
     the default NeXus `McStas <https://mailman2.mcstas.org/pipermail/mcstas-users/2021q2/001431.html>`_
-    coordinate system is assumed. This makes NXcoordinate_system_set and
+    coordinate system is assumed. This makes :ref:`NXcoordinate_system_set` and
     NXcoordinate_system base classes backwards compatible to older
     NeXus conventions and classes.
-  * 1; if only one NXcoordinate_system_set is defined, it should be placed
+  * 1; if only one :ref:`NXcoordinate_system_set` is defined, it should be placed
     as high up in the node hierarchy (ideally right below an instance of NXentry)
     of the application definition tree as possible.
-    This NXcoordinate_system_set should at least define one NXcoordinate_system
+    This :ref:`NXcoordinate_system_set` should at least define one NXcoordinate_system
     instance which should be called mcstas for the sake of improved clarity.
     Alternatively, at least one NXcoordinate_system member of the set should be
     defined and named such that it is clear how this coordinate system is
     typically referred to in a community. Additional NXcoordinate_system instances
-    should be specified if possible in that same NXcoordinate_system_set instead
+    should be specified if possible in that same :ref:`NXcoordinate_system_set` instead
     of cluttering them across the tree.
     
     If this is the case, it is assumed that the NXcoordinate_system_members
@@ -31,11 +31,11 @@ doc: |
     systems is relevant. If these depends_on hints are not provided, it is
     automatically assumed that all children (to arbitrary depth)
     of that branch and sub-branches below the one in which that
-    NXcoordinate_system_set is defined use either the only NXcoordinate_system_set
+    :ref:`NXcoordinate_system_set` is defined use either the only NXcoordinate_system_set
     instance in that set or the application definition is considered
     underconstrained which should at all costs be avoided and in which case
     again McStas is assumed.
-  * 2 and more; as soon as more than one NXcoordinate_system_set is specified
+  * 2 and more; as soon as more than one :ref:`NXcoordinate_system_set` is specified
     somewhere in the tree, different interpretations are possible as to which
     of these coordinate system sets and instances apply or take preference.
     We realize that such ambiguities should at all costs be avoided.
@@ -45,25 +45,25 @@ doc: |
     cases where having a definition of global translation and conversion tables
     how to convert between representations in different coordinate systems
     is not desired or available for now.
-    We argue that having 2 or more NXcoordinate_system_set instances and respective
+    We argue that having 2 or more :ref:`NXcoordinate_system_set` instances and respective
     NXcoordinate_system instances makes the interpretation eventually unnecessary
     complicated. Instead, developers of application definitions should always try
     to work for clarity and thus use only one top-level coordinate system set.
   
   For these reasons we conclude that the option with one top-level
-  NXcoordinate_system_set instance is the preferred choice.
+  :ref:`NXcoordinate_system_set` instance is the preferred choice.
   
-  McStas is used if neither an instance of NXcoordinate_system_set nor an instance
+  McStas is used if neither an instance of :ref:`NXcoordinate_system_set` nor an instance
   of NXcoordinate_system is specified. However, even in this case it is better
   to be explicit like for every other coordinate system definition to support
   users with interpreting the content and logic behind every instance of the tree.
   
-  How to store coordinate systems inside NXcoordinate_system_set?
+  How to store coordinate systems inside :ref:`NXcoordinate_system_set`?
   Individual coordinate systems should be specified as members of the
-  NXcoordinate_system_set instance using instances of NXcoordinate_system.
+  :ref:`NXcoordinate_system_set` instance using instances of NXcoordinate_system.
   
   How many individual instances of NXcoordinate_system to allow within one
-  instance of NXcoordinate_system_set?
+  instance of :ref:`NXcoordinate_system_set`?
   
   * 0; This case should be avoided for the sake of clarity but this case could
     mean the authors of the definition meant that McStas is used. We conclude,
