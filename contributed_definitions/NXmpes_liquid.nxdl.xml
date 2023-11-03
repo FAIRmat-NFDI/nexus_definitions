@@ -212,27 +212,28 @@ with higher granularity in the data description.
     <group type="NXsample">
       <field name="chemical_formula" optional="true">
         <doc>
-             In the case of a fixed temperature measurement this is the scalar temperature of
-             the sample. In the case of an experiment in which the temperature is changed and
-             recoded, this is an array of length m of temperatures.
+             In the case of a fixed temperature measurement this is the scalar temperature of the sample.
+             In the case of an experiment in which the temperature is changed and recoded,
+             this is an array of length m of temperatures.
         </doc>
       </field>
       <field name="electric_field" type="NX_FLOAT" recommended="true" units="NX_VOLTAGE">
         <doc>
-             Electric field applied to the sample with respect to ground / the system, e.g.,
-             via biasing.
+             Electric field applied to the sample with respect to
+             ground / the system, e.g., via biasing.
         </doc>
       </field>
       <field name="thickness" type="NX_FLOAT" recommended="true" units="NX_LENGTH">
         <doc>
-             Thickness of the sample in normal direction to the surface that is probed, e.g.,
-             diameter of capillary (round jets) or thickness of the leaf (flat jets).
+             Thickness of the sample in normal direction to the surface that is probed,
+             e.g., diameter of capillary (round jets) or thickness of the leaf (flat jets).
         </doc>
       </field>
-      <field name="flow_rate" type="NX_FLOAT" recommended="true" units="NX_VOLUME / NX_TIME">
+      <field name="flow_rate" type="NX_FLOAT" recommended="true" units="NX_ANY">
         <doc>
-             Flow rate of the liquid into the chamber, i.e., throught the microjet capillary
-             (or in case of a flat jet: both capillaries).
+             Flow rate of the liquid into the chamber, i.e.,
+             throught the microjet capillary (or in case of a flat jet: both capillaries).
+             Unit should be NX_VOLUME / NX_TIME.
         </doc>
       </field>
       <field name="shape" type="NX_CHAR">
@@ -243,8 +244,8 @@ with higher granularity in the data description.
       </field>
       <field name="nozzle_material" type="NX_CHAR" recommended="true">
         <doc>
-             Material the microjet nozzle is made of (users are encouraged to expand on that
-             in group preparation_description).
+             Material the microjet nozzle is made of
+             (users are encouraged to expand on that in group preparation_description).
         </doc>
       </field>
       <field name="depends_on" recommended="true">
@@ -254,11 +255,10 @@ with higher granularity in the data description.
       </field>
       <group type="NXtransformations" recommended="true">
         <doc>
-             Transformations describing the transformation chain of the liquid jet flow
-             direction and optionally the flat jet normal. The vector of the major flow
-             direction of the liquid jet from the injection into the chamber. Along the
-             cylinder axis for single, cylidrical jets, and parallel to the leaf plane for
-             flatjets.
+             Transformations describing the transformation chain of the liquid jet flow direction
+             and optionally the flat jet normal. The vector of the major flow direction of the
+             liquid jet from the injection into the chamber.
+             Along the cylinder axis for single, cylidrical jets, and parallel to the leaf plane for flatjets.
         </doc>
         <field name="rot_x" type="NX_NUMBER" units="NX_ANGLE">
           <attribute name="depends_on" type="NX_CHAR">
@@ -347,13 +347,14 @@ with higher granularity in the data description.
         </field>
         <field name="ph_adjustment" type="NX_BOOLEAN" optional="true">
           <doc>
-               Whether or not agents for pH adjustment were added to the solution. In this
-               case, users are encouraged to expand on that in preparation_description.
+               Whether or not agents for pH adjustment were added to the solution.
+               In this case, users are encouraged to expand on that in preparation_description.
           </doc>
         </field>
-        <field name="mol_fraction" type="NX_FLOAT" optional="true" units="1 / NX_VOLUME">
+        <field name="mol_fraction" type="NX_FLOAT" optional="true" units="NX_ANY">
           <doc>
                Molarity of the solvent in the solution.
+               Unit should be 1 / NX_VOLUME.
           </doc>
         </field>
       </group>
@@ -370,9 +371,10 @@ with higher granularity in the data description.
           </doc>
         </field>
         <field name="chem_id_cas" type="NX_CHAR" recommended="true"/>
-        <field name="mol_fraction" type="NX_FLOAT" recommended="true" units="1 / NX_VOLUME">
+        <field name="mol_fraction" type="NX_FLOAT" recommended="true" units="NX_ANY">
           <doc>
                Molarity of the solute in the solution.
+               Unit should be 1 / NX_VOLUME
           </doc>
         </field>
         <field name="solvent" type="NX_CHAR">

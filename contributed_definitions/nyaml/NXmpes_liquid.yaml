@@ -97,30 +97,46 @@ NXmpes_liquid(NXmpes):
     (NXsample):
       chemical_formula:
         exists: optional
-        doc: "In the case of a fixed temperature measurement this is the scalar temperature of the sample. In the case of an experiment in which the temperature is changed and recoded, this is an array of length m of temperatures."
+        doc: |
+          In the case of a fixed temperature measurement this is the scalar temperature of the sample.
+          In the case of an experiment in which the temperature is changed and recoded,
+          this is an array of length m of temperatures.
       electric_field(NX_FLOAT):
         exists: recommended
         unit: NX_VOLTAGE
-        doc: "Electric field applied to the sample with respect to ground / the system, e.g., via biasing."
+        doc: |
+          Electric field applied to the sample with respect to
+          ground / the system, e.g., via biasing.
       thickness(NX_FLOAT):
         exists: recommended
         unit: NX_LENGTH
-        doc: "Thickness of the sample in normal direction to the surface that is probed, e.g., diameter of capillary (round jets) or thickness of the leaf (flat jets)."
+        doc: |
+          Thickness of the sample in normal direction to the surface that is probed,
+          e.g., diameter of capillary (round jets) or thickness of the leaf (flat jets).
       flow_rate(NX_FLOAT):
         exists: recommended
-        unit: NX_VOLUME / NX_TIME
-        doc: "Flow rate of the liquid into the chamber, i.e., throught the microjet capillary (or in case of a flat jet: both capillaries)."
+        unit: NX_ANY
+        doc: |
+          Flow rate of the liquid into the chamber, i.e.,
+          throught the microjet capillary (or in case of a flat jet: both capillaries).
+          Unit should be NX_VOLUME / NX_TIME.
       shape(NX_CHAR):
         enumeration: ["round", "flat"]
       nozzle_material(NX_CHAR):
         exists: recommended
-        doc: "Material the microjet nozzle is made of (users are encouraged to expand on that in group preparation_description)."
+        doc: |
+          Material the microjet nozzle is made of
+          (users are encouraged to expand on that in group preparation_description).
       depends_on:
         exists: recommended
         doc: Connects this liquidjet to its transformation chain.
       (NXtransformations):
         exists: recommended
-        doc: "Transformations describing the transformation chain of the liquid jet flow direction and optionally the flat jet normal. The vector of the major flow direction of the liquid jet from the injection into the chamber. Along the cylinder axis for single, cylidrical jets, and parallel to the leaf plane for flatjets."
+        doc: |
+          Transformations describing the transformation chain of the liquid jet flow direction
+          and optionally the flat jet normal. The vector of the major flow direction of the
+          liquid jet from the injection into the chamber.
+          Along the cylinder axis for single, cylidrical jets, and parallel to the leaf plane for flatjets.
         rot_x(NX_NUMBER):
           \@depends_on(NX_CHAR):
             doc: "Is '.', since beam axis is assumed to be horizontal (perpendicular to gravity)."
@@ -169,11 +185,15 @@ NXmpes_liquid(NXmpes):
           doc: "Measured pH value of the solution."
         ph_adjustment(NX_BOOLEAN):
           exists: optional
-          doc: "Whether or not agents for pH adjustment were added to the solution. In this case, users are encouraged to expand on that in preparation_description."
+          doc: |
+            Whether or not agents for pH adjustment were added to the solution.
+            In this case, users are encouraged to expand on that in preparation_description.
         mol_fraction(NX_FLOAT):
           exists: optional
-          unit: 1 / NX_VOLUME
-          doc: "Molarity of the solvent in the solution."
+          unit: NX_ANY
+          doc: |
+            Molarity of the solvent in the solution.
+            Unit should be 1 / NX_VOLUME.
       soluteSOLUTE(NXsample_component):
         doc: "Solute substance solved in a given solvent. This also accounts for multiple solutes if more than one is given."
         description(NX_CHAR):
@@ -185,8 +205,10 @@ NXmpes_liquid(NXmpes):
           exists: recommended
         mol_fraction(NX_FLOAT):
           exists: recommended
-          unit: 1 / NX_VOLUME
-          doc: "Molarity of the solute in the solution."
+          unit: NX_ANY
+          doc: |
+            Molarity of the solute in the solution.
+            Unit should be 1 / NX_VOLUME
         solvent(NX_CHAR):
           doc: "Specifies the parent solvent entry of the solution."
     (NXdata):
