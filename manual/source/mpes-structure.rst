@@ -25,5 +25,8 @@ Application Definitions
 
 We created two new application definitions:
 
-    :ref:`NXmpes`:
-       A general appdef with minimalistic metadata requirements, apt to describe all photemission experiments.
+   :ref:`NXmpes`:
+      A general appdef with minimalistic metadata requirements, apt to describe all photemission experiments.
+
+   :ref:`NXmpes_liquid`:
+      An appdef for mpes measurements with liquids (jets)
