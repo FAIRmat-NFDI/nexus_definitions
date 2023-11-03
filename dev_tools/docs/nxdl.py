@@ -17,10 +17,6 @@ from ..utils.github import get_file_contributors_via_api
 from ..utils.types import PathLike
 from .anchor_list import AnchorRegistry
 
-# controlling the length of progressively more indented sub-node
-MIN_COLLAPSE_HINT_LINE_LENGTH = 20
-MAX_COLLAPSE_HINT_LINE_LENGTH = 80
-
 
 class NXClassDocGenerator:
     """Generate documentation in reStructuredText markup

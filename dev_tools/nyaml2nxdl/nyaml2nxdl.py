@@ -44,7 +44,6 @@ _nxdl = ".nxdl.xml"
 def generate_nxdl_or_retrieve_nxdl(yaml_in, xml_out, verbose):
     """
     Generate yaml, nxdl and hash.
-
     If the extracted hash is exactly the same as produced from generated yaml then
     retrieve the nxdl part from provided yaml.
     Else, generate nxdl from separated yaml with the help of nyaml2nxdl function
