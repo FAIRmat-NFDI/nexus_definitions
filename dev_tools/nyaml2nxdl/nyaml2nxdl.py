@@ -41,17 +41,17 @@ _nxdl = ".nxdl.xml"
 # https://manual.nexusformat.org/nxdl_desc.html?highlight=optional
 
 
-def generate_nxdl_or_retrieve_nxdl(yaml_in, xml_out, verbose):
+def generate_nxdl_or_retrieve_nxdl(yaml_file, out_xml_file, verbose):
     """
     Generate yaml, nxdl and hash.
     If the extracted hash is exactly the same as produced from generated yaml then
     retrieve the nxdl part from provided yaml.
     Else, generate nxdl from separated yaml with the help of nyaml2nxdl function
     """
-    file_path = Path(yaml_in)
+    file_path = Path(yaml_file)
     pa_path, rel_file = file_path.parent, file_path.name
     sep_yaml = (pa_path / f"temp_{rel_file}").as_posix()
-    hash_found = separate_hash_yaml_and_nxdl(yaml_in, sep_yaml, xml_out)
+    hash_found = separate_hash_yaml_and_nxdl(yaml_file, sep_yaml, out_xml_file)
 
     if hash_found:
         gen_hash = get_sha256_hash(sep_yaml)
@@ -59,7 +59,7 @@ def generate_nxdl_or_retrieve_nxdl(yaml_in, xml_out, verbose):
             Path(sep_yaml).unlink()
             return
 
-    nyaml2nxdl(sep_yaml, xml_out, verbose)
+    nyaml2nxdl(sep_yaml, out_xml_file, verbose)
     Path(sep_yaml).unlink()
 
 
