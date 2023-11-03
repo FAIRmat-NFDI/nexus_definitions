@@ -17,13 +17,11 @@ NXsample
 
 **Description**:
 
-  .. collapse:: Any information on the sample. ...
+  Any information on the sample.
 
-      Any information on the sample.
-
-      This could include scanned variables that
-      are associated with one of the data dimensions, e.g. the magnetic field, or
-      logged data, e.g. monitored temperature vs elapsed time.
+  This could include scanned variables that
+  are associated with one of the data dimensions, e.g. the magnetic field, or
+  logged data, e.g. monitored temperature vs elapsed time.
 
 **Symbols**:
 
@@ -54,17 +52,15 @@ NXsample
 
   **@default**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: Declares which child group contains a path leading ...
+    .. index:: plotting
 
-        .. index:: plotting
+    Declares which child group contains a path leading
+    to a :ref:`NXdata` group.
 
-        Declares which child group contains a path leading
-        to a :ref:`NXdata` group.
-
-        It is recommended (as of NIAC2014) to use this attribute
-        to help define the path to the default dataset to be plotted.
-        See https://www.nexusformat.org/2014_How_to_find_default_data.html
-        for a summary of the discussion.
+    It is recommended (as of NIAC2014) to use this attribute
+    to help define the path to the default dataset to be plotted.
+    See https://www.nexusformat.org/2014_How_to_find_default_data.html
+    for a summary of the discussion.
 
   .. _/NXsample/name-field:
 
@@ -88,26 +84,24 @@ NXsample
 
   **chemical_formula**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: The chemical formula specified using CIF conventions. ...
+    The chemical formula specified using CIF conventions.
+    Abbreviated version of CIF standard:
 
-        The chemical formula specified using CIF conventions.
-        Abbreviated version of CIF standard:
+    * Only recognized element symbols may be used.
+    * Each element symbol is followed by a 'count' number. A count of '1' may be omitted.
+    * A space or parenthesis must separate each cluster of (element symbol + count).
+    * Where a group of elements is enclosed in parentheses, the multiplier for the
+      group must follow the closing parentheses. That is, all element and group
+      multipliers are assumed to be printed as subscripted numbers.
+    * Unless the elements are ordered in a manner that corresponds to their chemical
+      structure, the order of the elements within any group or moiety depends on
+      whether or not carbon is present.
+    * If carbon is present, the order should be:
 
-        * Only recognized element symbols may be used.
-        * Each element symbol is followed by a 'count' number. A count of '1' may be omitted.
-        * A space or parenthesis must separate each cluster of (element symbol + count).
-        * Where a group of elements is enclosed in parentheses, the multiplier for the
-          group must follow the closing parentheses. That is, all element and group
-          multipliers are assumed to be printed as subscripted numbers.
-        * Unless the elements are ordered in a manner that corresponds to their chemical
-          structure, the order of the elements within any group or moiety depends on
-          whether or not carbon is present.
-        * If carbon is present, the order should be:
+      - C, then H, then the other elements in alphabetical order of their symbol.
+      - If carbon is not present, the elements are listed purely in alphabetic order of their symbol.
 
-          - C, then H, then the other elements in alphabetical order of their symbol.
-          - If carbon is not present, the elements are listed purely in alphabetic order of their symbol.
-
-        * This is the *Hill* system used by Chemical Abstracts.
+    * This is the *Hill* system used by Chemical Abstracts.
 
   .. _/NXsample/temperature-field:
 
@@ -222,10 +216,8 @@ NXsample
 
   **sample_orientation**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [3]) {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
 
-    .. collapse:: This will follow the Busing-Levy convention: ...
-
-        This will follow the Busing-Levy convention:
-        W. R. Busing and H. A. Levy (1967). Acta Cryst. 22, 457-464
+    This will follow the Busing-Levy convention:
+    W. R. Busing and H. A. Levy (1967). Acta Cryst. 22, 457-464
 
   .. _/NXsample/orientation_matrix-field:
 
@@ -233,10 +225,8 @@ NXsample
 
   **orientation_matrix**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 3, Dimensions: [n_comp, 3, 3]) 
 
-    .. collapse:: Orientation matrix of single crystal sample using Busing-Levy convention: ...
-
-        Orientation matrix of single crystal sample using Busing-Levy convention:
-        W. R. Busing and H. A. Levy (1967). Acta Cryst. 22, 457-464
+    Orientation matrix of single crystal sample using Busing-Levy convention:
+    W. R. Busing and H. A. Levy (1967). Acta Cryst. 22, 457-464
 
   .. _/NXsample/ub_matrix-field:
 
@@ -244,13 +234,11 @@ NXsample
 
   **ub_matrix**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 3, Dimensions: [n_comp, 3, 3]) 
 
-    .. collapse:: UB matrix of single crystal sample using Busing-Levy convention: ...
-
-        UB matrix of single crystal sample using Busing-Levy convention:
-        W. R. Busing and H. A. Levy (1967). Acta Cryst. 22, 457-464. This is
-        the multiplication of the orientation_matrix, given above,
-        with the :math:`B` matrix which
-        can be derived from the lattice constants.
+    UB matrix of single crystal sample using Busing-Levy convention:
+    W. R. Busing and H. A. Levy (1967). Acta Cryst. 22, 457-464. This is
+    the multiplication of the orientation_matrix, given above,
+    with the :math:`B` matrix which
+    can be derived from the lattice constants.
 
   .. _/NXsample/mass-field:
 
@@ -312,27 +300,25 @@ NXsample
 
   **situation**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: The atmosphere will be one of the components, which is where ...
+    The atmosphere will be one of the components, which is where
+    its details will be stored; the relevant components will be
+    indicated by the entry in the sample_component member.
 
-        The atmosphere will be one of the components, which is where
-        its details will be stored; the relevant components will be
-        indicated by the entry in the sample_component member.
+    Any of these values:
 
-        Any of these values:
+      * ``air``
 
-          * ``air``
+      * ``vacuum``
 
-          * ``vacuum``
+      * ``inert atmosphere``
 
-          * ``inert atmosphere``
+      * ``oxidising atmosphere``
 
-          * ``oxidising atmosphere``
+      * ``reducing atmosphere``
 
-          * ``reducing atmosphere``
+      * ``sealed can``
 
-          * ``sealed can``
-
-          * ``other``
+      * ``other``
 
 
   .. _/NXsample/description-field:
@@ -365,11 +351,9 @@ NXsample
 
   **sample_component**: (optional) :ref:`NX_CHAR <NX_CHAR>` (Rank: 1, Dimensions: [n_comp]) 
 
-    .. collapse:: Type of component ...
+    Type of component
 
-        Type of component
-
-        Any of these values: ``sample`` | ``can`` | ``atmosphere`` | ``kit``
+    Any of these values: ``sample`` | ``can`` | ``atmosphere`` | ``kit``
 
   .. _/NXsample/concentration-field:
 
@@ -401,25 +385,23 @@ NXsample
 
   **unit_cell_class**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: In case it is all we know and we want to record/document it ...
+    In case it is all we know and we want to record/document it
 
-        In case it is all we know and we want to record/document it
+    Any of these values:
 
-        Any of these values:
+      * ``triclinic``
 
-          * ``triclinic``
+      * ``monoclinic``
 
-          * ``monoclinic``
+      * ``orthorhombic``
 
-          * ``orthorhombic``
+      * ``tetragonal``
 
-          * ``tetragonal``
+      * ``rhombohedral``
 
-          * ``rhombohedral``
+      * ``hexagonal``
 
-          * ``hexagonal``
-
-          * ``cubic``
+      * ``cubic``
 
 
   .. _/NXsample/space_group-field:
@@ -444,10 +426,8 @@ NXsample
 
   **path_length**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
-    .. collapse:: Path length through sample/can for simple case when ...
-
-        Path length through sample/can for simple case when
-        it does not vary with scattering direction
+    Path length through sample/can for simple case when
+    it does not vary with scattering direction
 
   .. _/NXsample/path_length_window-field:
 
@@ -455,10 +435,8 @@ NXsample
 
   **path_length_window**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
-    .. collapse:: Thickness of a beam entry/exit window on the can (mm) ...
-
-        Thickness of a beam entry/exit window on the can (mm)
-        - assumed same for entry and exit
+    Thickness of a beam entry/exit window on the can (mm)
+    - assumed same for entry and exit
 
   .. _/NXsample/thickness-field:
 
@@ -490,12 +468,10 @@ NXsample
 
   **rotation_angle**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
 
-    .. collapse:: Optional rotation angle for the case when the powder diagram has ...
-
-        Optional rotation angle for the case when the powder diagram has
-        been obtained through an omega-2theta scan like from a traditional
-        single detector powder diffractometer.
-        Note, it is recommended to use NXtransformations instead.
+    Optional rotation angle for the case when the powder diagram has
+    been obtained through an omega-2theta scan like from a traditional
+    single detector powder diffractometer.
+    Note, it is recommended to use NXtransformations instead.
 
   .. _/NXsample/x_translation-field:
 
@@ -503,10 +479,8 @@ NXsample
 
   **x_translation**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
-    .. collapse:: Translation of the sample along the X-direction of the laboratory coordinate s ...
-
-        Translation of the sample along the X-direction of the laboratory coordinate system
-        Note, it is recommended to use NXtransformations instead.
+    Translation of the sample along the X-direction of the laboratory coordinate system
+    Note, it is recommended to use NXtransformations instead.
 
   .. _/NXsample/distance-field:
 
@@ -514,10 +488,8 @@ NXsample
 
   **distance**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
-    .. collapse:: Translation of the sample along the Z-direction of the laboratory coordinate s ...
-
-        Translation of the sample along the Z-direction of the laboratory coordinate system.
-        Note, it is recommended to use NXtransformations instead.
+    Translation of the sample along the Z-direction of the laboratory coordinate system.
+    Note, it is recommended to use NXtransformations instead.
 
   .. _/NXsample/depends_on-field:
 
@@ -525,14 +497,12 @@ NXsample
 
   **depends_on**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: NeXus positions components by applying a set of translations and rotations ...
-
-        NeXus positions components by applying a set of translations and rotations
-        to apply to the component starting from 0, 0, 0. The order of these operations
-        is critical and forms what NeXus calls a dependency chain. The depends_on
-        field defines the path to the top most operation of the dependency chain or the
-        string "." if located in the origin. Usually these operations are stored in a
-        NXtransformations group. But NeXus allows them to be stored anywhere.
+    NeXus positions components by applying a set of translations and rotations
+    to apply to the component starting from 0, 0, 0. The order of these operations
+    is critical and forms what NeXus calls a dependency chain. The depends_on
+    field defines the path to the top most operation of the dependency chain or the
+    string "." if located in the origin. Usually these operations are stored in a
+    NXtransformations group. But NeXus allows them to be stored anywhere.
 
   .. _/NXsample/geometry-group:
 
@@ -550,19 +520,15 @@ NXsample
 
   **BEAM**: (optional) :ref:`NXbeam` 
 
-    .. collapse:: Details of beam incident on sample - used to calculate sample/beam interaction ...
-
-        Details of beam incident on sample - used to calculate sample/beam interaction
-        point
+    Details of beam incident on sample - used to calculate sample/beam interaction
+    point
 
   .. _/NXsample/SAMPLE_COMPONENT-group:
 
   **SAMPLE_COMPONENT**: (optional) :ref:`NXsample_component` 
 
-    .. collapse:: One group per sample component ...
-
-        One group per sample component
-        This is the perferred way of recording per component information over the n_comp arrays
+    One group per sample component
+    This is the perferred way of recording per component information over the n_comp arrays
 
   .. _/NXsample/transmission-group:
 
@@ -604,10 +570,8 @@ NXsample
 
     **DEPRECATED**: use ``magnetic_field``, see: https://github.com/nexusformat/definitions/issues/816
 
-    .. collapse:: magnetic_field_log.value is a link to e.g. ...
-
-        magnetic_field_log.value is a link to e.g.
-        magnetic_field_env.sensor1.value_log.value
+    magnetic_field_log.value is a link to e.g.
+    magnetic_field_env.sensor1.value_log.value
 
   .. _/NXsample/magnetic_field_env-group:
 
@@ -637,28 +601,22 @@ NXsample
 
   **SINGLE_CRYSTAL**: (optional) :ref:`NXsingle_crystal` 
 
-    .. collapse:: If the sample is a single crystal, add description of single crystal and unit ...
-
-        If the sample is a single crystal, add description of single crystal and unit
-        cell.
+    If the sample is a single crystal, add description of single crystal and unit
+    cell.
 
   .. _/NXsample/SAMPLE_COMPONENT_SET-group:
 
   **SAMPLE_COMPONENT_SET**: (optional) :ref:`NXsample_component_set` 
 
-    .. collapse:: Set of sample components and their configuration. ...
-
-        Set of sample components and their configuration.
-        There can only be one NXsample_component_set in one component.
+    Set of sample components and their configuration.
+    There can only be one NXsample_component_set in one component.
 
   .. _/NXsample/SUBSTANCE-group:
 
   **SUBSTANCE**: (optional) :ref:`NXsubstance` 
 
-    .. collapse:: If the sample is made from a pure substance and cannot be further divided usin ...
-
-        If the sample is made from a pure substance and cannot be further divided using
-        NXsample_component.
+    If the sample is made from a pure substance and cannot be further divided using
+    NXsample_component.
 
   .. _/NXsample/FABRICATION-group:
 
@@ -670,12 +628,10 @@ NXsample
 
   **ENVIRONMENT**: (optional) :ref:`NXenvironment` 
 
-    .. collapse:: Any environmental or external stimuli/measurements. ...
-
-        Any environmental or external stimuli/measurements.
-        These can include, among others:
-        applied pressure, surrounding gas phase and gas pressure,
-        external electric/magnetic/mechanical fields, temperature, ...
+    Any environmental or external stimuli/measurements.
+    These can include, among others:
+    applied pressure, surrounding gas phase and gas pressure,
+    external electric/magnetic/mechanical fields, temperature, ...
 
   .. _/NXsample/SAMPLE_HISTORY-group:
 
@@ -687,12 +643,10 @@ NXsample
 
   **TRANSFORMATIONS**: (optional) :ref:`NXtransformations` 
 
-    .. collapse:: This is the group recommended for holding the chain of translation ...
-
-        This is the group recommended for holding the chain of translation
-        and rotation operations necessary to position the component within
-        the instrument. The dependency chain may however traverse similar groups in
-        other component groups.
+    This is the group recommended for holding the chain of translation
+    and rotation operations necessary to position the component within
+    the instrument. The dependency chain may however traverse similar groups in
+    other component groups.
 
 
 Hypertext Anchors

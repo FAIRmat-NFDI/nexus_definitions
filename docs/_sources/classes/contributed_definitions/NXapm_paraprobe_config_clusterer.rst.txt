@@ -45,7 +45,7 @@ NXapm_paraprobe_config_clusterer
 
     .. index:: version (group attribute)
 
-    **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXentry@IDF_Version-attribute>`
+    **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
       Version specifier of this application definition.
 
@@ -53,13 +53,11 @@ NXapm_paraprobe_config_clusterer
 
     .. index:: definition (field)
 
-    **definition**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXentry/definition-field>`
+    **definition**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-      .. collapse:: Official NeXus NXDL schema with which this file was written. ...
+      Official NeXus NXDL schema with which this file was written.
 
-          Official NeXus NXDL schema with which this file was written.
-
-          Obligatory value: ``NXapm_paraprobe_config_clusterer``
+      Obligatory value: ``NXapm_paraprobe_config_clusterer``
 
     .. _/NXapm_paraprobe_config_clusterer/ENTRY/program-field:
 
@@ -67,10 +65,8 @@ NXapm_paraprobe_config_clusterer
 
     **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-      .. collapse:: Given name of the program/software/tool with which this NeXus ...
-
-          Given name of the program/software/tool with which this NeXus
-          (configuration) file was generated.
+      Given name of the program/software/tool with which this NeXus
+      (configuration) file was generated.
 
       .. _/NXapm_paraprobe_config_clusterer/ENTRY/program@version-attribute:
 
@@ -78,13 +74,11 @@ NXapm_paraprobe_config_clusterer
 
       **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-        .. collapse:: Ideally program version plus build number, or commit hash or description ...
-
-            Ideally program version plus build number, or commit hash or description
-            of ever persistent resources where the source code of the program and
-            build instructions can be found so that the program can be configured
-            ideally in such a manner that the result of this computational process
-            is recreatable in the same deterministic manner.
+        Ideally program version plus build number, or commit hash or description
+        of ever persistent resources where the source code of the program and
+        build instructions can be found so that the program can be configured
+        ideally in such a manner that the result of this computational process
+        is recreatable in the same deterministic manner.
 
     .. _/NXapm_paraprobe_config_clusterer/ENTRY/time_stamp-field:
 
@@ -92,10 +86,8 @@ NXapm_paraprobe_config_clusterer
 
     **time_stamp**: (required) :ref:`NX_DATE_TIME <NX_DATE_TIME>` 
 
-      .. collapse:: ISO 8601 formatted time code with local time zone offset to UTC ...
-
-          ISO 8601 formatted time code with local time zone offset to UTC
-          information included when this configuration file was created.
+      ISO 8601 formatted time code with local time zone offset to UTC
+      information included when this configuration file was created.
 
     .. _/NXapm_paraprobe_config_clusterer/ENTRY/analysis_identifier-field:
 
@@ -103,10 +95,8 @@ NXapm_paraprobe_config_clusterer
 
     **analysis_identifier**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-      .. collapse:: Ideally, a (globally persistent) unique identifier for referring ...
-
-          Ideally, a (globally persistent) unique identifier for referring
-          to this analysis.
+      Ideally, a (globally persistent) unique identifier for referring
+      to this analysis.
 
     .. _/NXapm_paraprobe_config_clusterer/ENTRY/analysis_description-field:
 
@@ -126,32 +116,30 @@ NXapm_paraprobe_config_clusterer
 
     .. _/NXapm_paraprobe_config_clusterer/ENTRY/cameca_to_nexus-group:
 
-    **cameca_to_nexus**: (optional) :ref:`NXprocess` :ref:`⤆ </NXentry/PROCESS-group>`
+    **cameca_to_nexus**: (optional) :ref:`NXprocess` 
 
-      .. collapse:: This process maps results from cluster analyses performed with IVAS/APSuite ...
+      This process maps results from cluster analyses performed with IVAS/APSuite
+      into an interoperable representation. Specifically in this process
+      paraprobe-clusterer takes results from clustering methods from other tools
+      of the APM community, like IVAS/APSuite. These results are usually reported
+      in two ways. Either as an explicit list of reconstructed ion positions.
+      In the case of IVAS these positions are reported through a text file
+      with a cluster label for each position.
 
-          This process maps results from cluster analyses performed with IVAS/APSuite
-          into an interoperable representation. Specifically in this process
-          paraprobe-clusterer takes results from clustering methods from other tools
-          of the APM community, like IVAS/APSuite. These results are usually reported
-          in two ways. Either as an explicit list of reconstructed ion positions.
-          In the case of IVAS these positions are reported through a text file
-          with a cluster label for each position.
+      Alternatively, the list of positions is reported, as it is the case for
+      AMETEK (IVAS/AP Suite) but the cluster labels are specified implicitly
+      only in the following way: The mass-to-charge-state ratio column of a
+      what is effectively a file formatted like POS is used to assign a hypothetical
+      mass-to-charge value which resolves a floating point representation
+      of the cluster ID.
 
-          Alternatively, the list of positions is reported, as it is the case for
-          AMETEK (IVAS/AP Suite) but the cluster labels are specified implicitly
-          only in the following way: The mass-to-charge-state ratio column of a
-          what is effectively a file formatted like POS is used to assign a hypothetical
-          mass-to-charge value which resolves a floating point representation
-          of the cluster ID.
+      Another case can occur where all disjoint floating point values,
+      i.e. here cluster labels, are reported and then a dictionary is created
+      how each value matches to a cluster ID.
 
-          Another case can occur where all disjoint floating point values,
-          i.e. here cluster labels, are reported and then a dictionary is created
-          how each value matches to a cluster ID.
-
-          In general the cluster ID zero is reserved for marking the dataset
-          as to not be assigned to any cluster. Therefore, indices of disjoint
-          clusters start at 1.
+      In general the cluster ID zero is reserved for marking the dataset
+      as to not be assigned to any cluster. Therefore, indices of disjoint
+      clusters start at 1.
 
       .. _/NXapm_paraprobe_config_clusterer/ENTRY/cameca_to_nexus/recover_evaporation_id-field:
 
@@ -159,13 +147,11 @@ NXapm_paraprobe_config_clusterer
 
       **recover_evaporation_id**: (required) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
-        .. collapse:: Specifies if the tool should try to recover for each position the closest ...
-
-            Specifies if the tool should try to recover for each position the closest
-            matching position from dataset/dataset_name_reconstruction (within
-            floating point accuracy). This can be useful for instance when users
-            wish to recover the original evaporation ID, which IVAS/AP Suite drops
-            for instance when writing their *.indexed.* cluster results POS files.
+        Specifies if the tool should try to recover for each position the closest
+        matching position from dataset/dataset_name_reconstruction (within
+        floating point accuracy). This can be useful for instance when users
+        wish to recover the original evaporation ID, which IVAS/AP Suite drops
+        for instance when writing their *.indexed.* cluster results POS files.
 
       .. _/NXapm_paraprobe_config_clusterer/ENTRY/cameca_to_nexus/dataset-group:
 
@@ -176,48 +162,44 @@ NXapm_paraprobe_config_clusterer
 
         .. index:: filename (field)
 
-        **filename**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXapm_input_reconstruction/filename-field>`
+        **filename**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cameca_to_nexus/dataset/filename@version-attribute:
 
           .. index:: version (field attribute)
 
-          **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXapm_input_reconstruction/filename@version-attribute>`
+          **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cameca_to_nexus/dataset/dataset_name_reconstruction-field:
 
         .. index:: dataset_name_reconstruction (field)
 
-        **dataset_name_reconstruction**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXapm_input_reconstruction/dataset_name_reconstruction-field>`
+        **dataset_name_reconstruction**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cameca_to_nexus/dataset/dataset_name_mass_to_charge-field:
 
         .. index:: dataset_name_mass_to_charge (field)
 
-        **dataset_name_mass_to_charge**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXapm_input_reconstruction/dataset_name_mass_to_charge-field>`
+        **dataset_name_mass_to_charge**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-          .. collapse:: AMETEK/Cameca results of cluster analyses, like with the maximum- ...
-
-              AMETEK/Cameca results of cluster analyses, like with the maximum-
-              separation (MS) method clustering algorithm `J. Hyde et al. <https://doi.org/10.1557/PROC-650-R6.6>`_  
-              are stored as an improper POS file: This is a matrix of floating
-              point quadruplets, one for each ion and as many quadruplets as
-              ions were investigated. The first three values encode the position
-              of the ion. The fourth value is an improper mass-to-charge-state-ratio
-              value which encodes the integer identifier of the cluster as a floating
-              point number.
+          AMETEK/Cameca results of cluster analyses, like with the maximum-
+          separation (MS) method clustering algorithm `J. Hyde et al. <https://doi.org/10.1557/PROC-650-R6.6>`_  
+          are stored as an improper POS file: This is a matrix of floating
+          point quadruplets, one for each ion and as many quadruplets as
+          ions were investigated. The first three values encode the position
+          of the ion. The fourth value is an improper mass-to-charge-state-ratio
+          value which encodes the integer identifier of the cluster as a floating
+          point number.
 
     .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis-group:
 
-    **cluster_analysis**: (optional) :ref:`NXprocess` :ref:`⤆ </NXentry/PROCESS-group>`
+    **cluster_analysis**: (optional) :ref:`NXprocess` 
 
-      .. collapse:: This process performs a cluster analysis on a reconstructed dataset ...
-
-          This process performs a cluster analysis on a reconstructed dataset
-          or a portion of the reconstruction.
+      This process performs a cluster analysis on a reconstructed dataset
+      or a portion of the reconstruction.
 
       .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/ion_type_filter-field:
 
@@ -225,37 +207,35 @@ NXapm_paraprobe_config_clusterer
 
       **ion_type_filter**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-        .. collapse:: How should iontypes be interpreted/considered during the cluster analysis. ...
+        How should iontypes be interpreted/considered during the cluster analysis.
+        Different options exist how iontypes are interpreted (if considered at all)
+        given an iontype represents in general a (molecular) ion with different isotopes
+        that have individually different multiplicity.
 
-            How should iontypes be interpreted/considered during the cluster analysis.
-            Different options exist how iontypes are interpreted (if considered at all)
-            given an iontype represents in general a (molecular) ion with different isotopes
-            that have individually different multiplicity.
+        The value resolve_all will set an ion active in the analysis
+        regardless of which iontype it is.
+        The value resolve_unknown will set an ion active when it is of the
+        UNKNOWNTYPE.
+        The value resolve_ion will set an ion active if it is of the
+        specific iontype, irregardless of its elemental or isotopic details.
+        The value resolve_element will set an ion active, and most importantly,
+        account as many times for it, as the (molecular) ion contains
+        atoms of elements in the whitelist ion_query_isotope_vector.
+        The value resolve_isotope will set an ion active, and most importantly,
+        account as many times for it, as the (molecular) ion contains isotopes
+        in the whitelist ion_query_isotope_vector.
 
-            The value resolve_all will set an ion active in the analysis
-            regardless of which iontype it is.
-            The value resolve_unknown will set an ion active when it is of the
-            UNKNOWNTYPE.
-            The value resolve_ion will set an ion active if it is of the
-            specific iontype, irregardless of its elemental or isotopic details.
-            The value resolve_element will set an ion active, and most importantly,
-            account as many times for it, as the (molecular) ion contains
-            atoms of elements in the whitelist ion_query_isotope_vector.
-            The value resolve_isotope will set an ion active, and most importantly,
-            account as many times for it, as the (molecular) ion contains isotopes
-            in the whitelist ion_query_isotope_vector.
+        In effect, ion_query_isotope_vector acts as a whitelist to filter
+        which ions are considered as source ions of the correlation statistics
+        and how the multiplicity of each ion will be factorized.
 
-            In effect, ion_query_isotope_vector acts as a whitelist to filter
-            which ions are considered as source ions of the correlation statistics
-            and how the multiplicity of each ion will be factorized.
+        This is relevant as in atom probe we have the situation that a ion
+        of a molecular ion with more than one nuclid, say Ti O for example
+        is counted such that although there is a single TiO molecular ion
+        at a position that the cluster has two members. This multiplicity
+        affects the size of the feature and chemical composition.
 
-            This is relevant as in atom probe we have the situation that a ion
-            of a molecular ion with more than one nuclid, say Ti O for example
-            is counted such that although there is a single TiO molecular ion
-            at a position that the cluster has two members. This multiplicity
-            affects the size of the feature and chemical composition.
-
-            Obligatory value: ``resolve_element``
+        Obligatory value: ``resolve_element``
 
       .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/ion_query_isotope_vector-field:
 
@@ -263,15 +243,13 @@ NXapm_paraprobe_config_clusterer
 
       **ion_query_isotope_vector**: (required) :ref:`NX_UINT <NX_UINT>` (Rank: 2, Dimensions: [n_ions, n_ivecmax]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-        .. collapse:: Matrix of isotope vectors, as many as rows as different candidates ...
-
-            Matrix of isotope vectors, as many as rows as different candidates
-            for iontypes should be distinguished as possible source iontypes.
-            In the simplest case, the matrix contains only the proton number
-            of the element in the row, all other values set to zero.
-            Combined with ion_query_type_source set to resolve_element this will
-            recover usual spatial correlation statistics like the 1NN C-C
-            spatial statistics.
+        Matrix of isotope vectors, as many as rows as different candidates
+        for iontypes should be distinguished as possible source iontypes.
+        In the simplest case, the matrix contains only the proton number
+        of the element in the row, all other values set to zero.
+        Combined with ion_query_type_source set to resolve_element this will
+        recover usual spatial correlation statistics like the 1NN C-C
+        spatial statistics.
 
       .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/dataset-group:
 
@@ -282,28 +260,28 @@ NXapm_paraprobe_config_clusterer
 
         .. index:: filename (field)
 
-        **filename**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXapm_input_reconstruction/filename-field>`
+        **filename**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/dataset/filename@version-attribute:
 
           .. index:: version (field attribute)
 
-          **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXapm_input_reconstruction/filename@version-attribute>`
+          **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/dataset/dataset_name_reconstruction-field:
 
         .. index:: dataset_name_reconstruction (field)
 
-        **dataset_name_reconstruction**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXapm_input_reconstruction/dataset_name_reconstruction-field>`
+        **dataset_name_reconstruction**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/dataset/dataset_name_mass_to_charge-field:
 
         .. index:: dataset_name_mass_to_charge (field)
 
-        **dataset_name_mass_to_charge**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXapm_input_reconstruction/dataset_name_mass_to_charge-field>`
+        **dataset_name_mass_to_charge**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
       .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/iontypes-group:
@@ -315,31 +293,29 @@ NXapm_paraprobe_config_clusterer
 
         .. index:: filename (field)
 
-        **filename**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXapm_input_ranging/filename-field>`
+        **filename**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/iontypes/filename@version-attribute:
 
           .. index:: version (field attribute)
 
-          **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXapm_input_ranging/filename@version-attribute>`
+          **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/iontypes/group_name_iontypes-field:
 
         .. index:: group_name_iontypes (field)
 
-        **group_name_iontypes**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXapm_input_ranging/group_name_iontypes-field>`
+        **group_name_iontypes**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
       .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/ion_to_edge_distances-group:
 
       **ion_to_edge_distances**: (optional) :ref:`NXprocess` 
 
-        .. collapse:: The tool enables to inject precomputed distance information for each ...
-
-            The tool enables to inject precomputed distance information for each
-            point/ion which can be used for further post-processing and analysis.
+        The tool enables to inject precomputed distance information for each
+        point/ion which can be used for further post-processing and analysis.
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/ion_to_edge_distances/filename-field:
 
@@ -355,11 +331,9 @@ NXapm_paraprobe_config_clusterer
 
           **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-            .. collapse:: Version identifier of the file such as a secure hash which documents ...
-
-                Version identifier of the file such as a secure hash which documents
-                the binary state of the file to add an additional layer of
-                reproducibility from which file specifically contains these data.
+            Version identifier of the file such as a secure hash which documents
+            the binary state of the file to add an additional layer of
+            reproducibility from which file specifically contains these data.
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/ion_to_edge_distances/dataset_name-field:
 
@@ -378,167 +352,167 @@ NXapm_paraprobe_config_clusterer
 
         .. index:: windowing_method (field)
 
-        **windowing_method**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXspatial_filter/windowing_method-field>`
+        **windowing_method**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
           Obligatory value: ``entire_dataset``
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_ELLIPSOID_SET-group:
 
-        **CG_ELLIPSOID_SET**: (optional) :ref:`NXcg_ellipsoid_set` :ref:`⤆ </NXspatial_filter/CG_ELLIPSOID_SET-group>`
+        **CG_ELLIPSOID_SET**: (optional) :ref:`NXcg_ellipsoid_set` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_ELLIPSOID_SET/dimensionality-field:
 
           .. index:: dimensionality (field)
 
-          **dimensionality**: (required) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXcg_ellipsoid_set/dimensionality-field>`
+          **dimensionality**: (required) :ref:`NX_POSINT <NX_POSINT>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_ELLIPSOID_SET/cardinality-field:
 
           .. index:: cardinality (field)
 
-          **cardinality**: (required) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXcg_ellipsoid_set/cardinality-field>`
+          **cardinality**: (required) :ref:`NX_POSINT <NX_POSINT>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_ELLIPSOID_SET/identifier_offset-field:
 
           .. index:: identifier_offset (field)
 
-          **identifier_offset**: (required) :ref:`NX_INT <NX_INT>` :ref:`⤆ </NXcg_ellipsoid_set/identifier_offset-field>`
+          **identifier_offset**: (required) :ref:`NX_INT <NX_INT>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_ELLIPSOID_SET/center-field:
 
           .. index:: center (field)
 
-          **center**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXcg_ellipsoid_set/center-field>`
+          **center**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_ELLIPSOID_SET/half_axes_radii-field:
 
           .. index:: half_axes_radii (field)
 
-          **half_axes_radii**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXcg_ellipsoid_set/half_axes_radii-field>`
+          **half_axes_radii**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_ELLIPSOID_SET/orientation-field:
 
           .. index:: orientation (field)
 
-          **orientation**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXcg_ellipsoid_set/orientation-field>`
+          **orientation**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_CYLINDER_SET-group:
 
-        **CG_CYLINDER_SET**: (optional) :ref:`NXcg_cylinder_set` :ref:`⤆ </NXspatial_filter/CG_CYLINDER_SET-group>`
+        **CG_CYLINDER_SET**: (optional) :ref:`NXcg_cylinder_set` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_CYLINDER_SET/dimensionality-field:
 
           .. index:: dimensionality (field)
 
-          **dimensionality**: (required) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXcg_cylinder_set/dimensionality-field>`
+          **dimensionality**: (required) :ref:`NX_POSINT <NX_POSINT>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_CYLINDER_SET/cardinality-field:
 
           .. index:: cardinality (field)
 
-          **cardinality**: (required) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXcg_cylinder_set/cardinality-field>`
+          **cardinality**: (required) :ref:`NX_POSINT <NX_POSINT>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_CYLINDER_SET/identifier_offset-field:
 
           .. index:: identifier_offset (field)
 
-          **identifier_offset**: (required) :ref:`NX_INT <NX_INT>` :ref:`⤆ </NXcg_cylinder_set/identifier_offset-field>`
+          **identifier_offset**: (required) :ref:`NX_INT <NX_INT>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_CYLINDER_SET/center-field:
 
           .. index:: center (field)
 
-          **center**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXcg_cylinder_set/center-field>`
+          **center**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_CYLINDER_SET/height-field:
 
           .. index:: height (field)
 
-          **height**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXcg_cylinder_set/height-field>`
+          **height**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_CYLINDER_SET/radii-field:
 
           .. index:: radii (field)
 
-          **radii**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXcg_cylinder_set/radii-field>`
+          **radii**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_HEXAHEDRON_SET-group:
 
-        **CG_HEXAHEDRON_SET**: (optional) :ref:`NXcg_hexahedron_set` :ref:`⤆ </NXspatial_filter/CG_HEXAHEDRON_SET-group>`
+        **CG_HEXAHEDRON_SET**: (optional) :ref:`NXcg_hexahedron_set` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_HEXAHEDRON_SET/dimensionality-field:
 
           .. index:: dimensionality (field)
 
-          **dimensionality**: (required) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXcg_hexahedron_set/dimensionality-field>`
+          **dimensionality**: (required) :ref:`NX_POSINT <NX_POSINT>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_HEXAHEDRON_SET/cardinality-field:
 
           .. index:: cardinality (field)
 
-          **cardinality**: (required) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXcg_hexahedron_set/cardinality-field>`
+          **cardinality**: (required) :ref:`NX_POSINT <NX_POSINT>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_HEXAHEDRON_SET/identifier_offset-field:
 
           .. index:: identifier_offset (field)
 
-          **identifier_offset**: (required) :ref:`NX_INT <NX_INT>` :ref:`⤆ </NXcg_hexahedron_set/identifier_offset-field>`
+          **identifier_offset**: (required) :ref:`NX_INT <NX_INT>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CG_HEXAHEDRON_SET/hexahedra-group:
 
-          **hexahedra**: (required) :ref:`NXcg_face_list_data_structure` :ref:`⤆ </NXcg_hexahedron_set/hexahedra-group>`
+          **hexahedra**: (required) :ref:`NXcg_face_list_data_structure` 
 
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CS_FILTER_BOOLEAN_MASK-group:
 
-        **CS_FILTER_BOOLEAN_MASK**: (optional) :ref:`NXcs_filter_boolean_mask` :ref:`⤆ </NXspatial_filter/CS_FILTER_BOOLEAN_MASK-group>`
+        **CS_FILTER_BOOLEAN_MASK**: (optional) :ref:`NXcs_filter_boolean_mask` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CS_FILTER_BOOLEAN_MASK/number_of_objects-field:
 
           .. index:: number_of_objects (field)
 
-          **number_of_objects**: (required) :ref:`NX_UINT <NX_UINT>` :ref:`⤆ </NXcs_filter_boolean_mask/number_of_objects-field>`
+          **number_of_objects**: (required) :ref:`NX_UINT <NX_UINT>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CS_FILTER_BOOLEAN_MASK/bitdepth-field:
 
           .. index:: bitdepth (field)
 
-          **bitdepth**: (required) :ref:`NX_UINT <NX_UINT>` :ref:`⤆ </NXcs_filter_boolean_mask/bitdepth-field>`
+          **bitdepth**: (required) :ref:`NX_UINT <NX_UINT>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CS_FILTER_BOOLEAN_MASK/mask-field:
 
           .. index:: mask (field)
 
-          **mask**: (required) :ref:`NX_UINT <NX_UINT>` :ref:`⤆ </NXcs_filter_boolean_mask/mask-field>`
+          **mask**: (required) :ref:`NX_UINT <NX_UINT>` 
 
 
           .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/spatial_filter/CS_FILTER_BOOLEAN_MASK/identifier-field:
 
           .. index:: identifier (field)
 
-          **identifier**: (required) :ref:`NX_UINT <NX_UINT>` :ref:`⤆ </NXcs_filter_boolean_mask/identifier-field>`
+          **identifier**: (required) :ref:`NX_UINT <NX_UINT>` 
 
 
       .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/evaporation_id_filter-group:
@@ -560,17 +534,15 @@ NXapm_paraprobe_config_clusterer
 
       **dbscan**: (required) :ref:`NXprocess` 
 
-        .. collapse:: Settings for DBScan clustering algorithm. For original details about the ...
+        Settings for DBScan clustering algorithm. For original details about the
+        algorithms and (performance-relevant) details consider:
 
-            Settings for DBScan clustering algorithm. For original details about the
-            algorithms and (performance-relevant) details consider:
+        * `M. Ester et al. <https://dx.doi.org/10.5555/3001460.3001507>`_  
+        * `M. Götz et al. <https://dx.doi.org/10.1145/2834892.2834894>`_
 
-            * `M. Ester et al. <https://dx.doi.org/10.5555/3001460.3001507>`_  
-            * `M. Götz et al. <https://dx.doi.org/10.1145/2834892.2834894>`_
-
-            For details about how the DBScan algorithms is the key behind the
-            specific modification known as the maximum-separation method in the
-            atom probe community consider `E. Jägle et al. <https://dx.doi.org/10.1017/S1431927614013294>`_
+        For details about how the DBScan algorithms is the key behind the
+        specific modification known as the maximum-separation method in the
+        atom probe community consider `E. Jägle et al. <https://dx.doi.org/10.1017/S1431927614013294>`_
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/dbscan/high_throughput_method-field:
 
@@ -578,25 +550,23 @@ NXapm_paraprobe_config_clusterer
 
         **high_throughput_method**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-          .. collapse:: Strategy how runs are performed with different parameter: ...
+          Strategy how runs are performed with different parameter:
 
-              Strategy how runs are performed with different parameter:
+          * For tuple as many runs are performed as parameter values.
+          * For combinatorics individual parameter arrays are looped over.
 
-              * For tuple as many runs are performed as parameter values.
-              * For combinatorics individual parameter arrays are looped over.
+          As an example we may define eps with ten entries and min_pts with
+          three entries. If high_throughput_method is tuple the analysis is
+          invalid as we have an insufficient number of min_pts for the ten
+          eps values.
+          By contrast, for combinatorics paraprobe-clusterer will run three
+          individual min_pts runs for each eps value, resulting in a total
+          of 30 analyses.
+          As an example the DBScan analysis reported in `M. Kühbach et al. <https://dx.doi.org/10.1038/s41524-020-00486-1>`_
+          would have defined an array of values np.linspace(0.2, 5.0, nums=241, endpoint=True)
+          eps values, min_pts one, and high_throughput_method set to combinatorics.
 
-              As an example we may define eps with ten entries and min_pts with
-              three entries. If high_throughput_method is tuple the analysis is
-              invalid as we have an insufficient number of min_pts for the ten
-              eps values.
-              By contrast, for combinatorics paraprobe-clusterer will run three
-              individual min_pts runs for each eps value, resulting in a total
-              of 30 analyses.
-              As an example the DBScan analysis reported in `M. Kühbach et al. <https://dx.doi.org/10.1038/s41524-020-00486-1>`_
-              would have defined an array of values np.linspace(0.2, 5.0, nums=241, endpoint=True)
-              eps values, min_pts one, and high_throughput_method set to combinatorics.
-
-              Any of these values: ``tuple`` | ``combinatorics``
+          Any of these values: ``tuple`` | ``combinatorics``
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/dbscan/eps-field:
 
@@ -618,11 +588,9 @@ NXapm_paraprobe_config_clusterer
 
       **optics**: (required) :ref:`NXprocess` 
 
-        .. collapse:: Settings for the OPTICS clustering algorithm. ...
+        Settings for the OPTICS clustering algorithm.
 
-            Settings for the OPTICS clustering algorithm.
-
-            * `M. Ankerest et al. <https://dx.doi.org/10.1145/304181.304187>`_
+        * `M. Ankerest et al. <https://dx.doi.org/10.1145/304181.304187>`_
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/optics/high_throughput_method-field:
 
@@ -630,17 +598,15 @@ NXapm_paraprobe_config_clusterer
 
         **high_throughput_method**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-          .. collapse:: Strategy how runs are performed with different parameter: ...
+          Strategy how runs are performed with different parameter:
 
-              Strategy how runs are performed with different parameter:
+          * For tuple as many runs are performed as parameter values.
+          * For combinatorics individual parameter arrays are looped over.
 
-              * For tuple as many runs are performed as parameter values.
-              * For combinatorics individual parameter arrays are looped over.
+          See the explanation for the corresponding parameter for dbscan
+          processes above-mentioned for further details.
 
-              See the explanation for the corresponding parameter for dbscan
-              processes above-mentioned for further details.
-
-              Any of these values: ``tuple`` | ``combinatorics``
+          Any of these values: ``tuple`` | ``combinatorics``
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/optics/min_pts-field:
 
@@ -662,15 +628,13 @@ NXapm_paraprobe_config_clusterer
 
       **hdbscan**: (required) :ref:`NXprocess` 
 
-        .. collapse:: Settings for the HPDBScan clustering algorithm. ...
+        Settings for the HPDBScan clustering algorithm.
 
-            Settings for the HPDBScan clustering algorithm.
+        * L. McInnes et al. <https://dx.doi.org/10.21105/joss.00205>`_  
+        * scikit-learn hdbscan library `<https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html>`_
 
-            * L. McInnes et al. <https://dx.doi.org/10.21105/joss.00205>`_  
-            * scikit-learn hdbscan library `<https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html>`_
-
-            See also this documentation for details about the parameter.
-            Here we use the terminology of the hdbscan documentation.
+        See also this documentation for details about the parameter.
+        Here we use the terminology of the hdbscan documentation.
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/hdbscan/high_throughput_method-field:
 
@@ -678,17 +642,15 @@ NXapm_paraprobe_config_clusterer
 
         **high_throughput_method**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-          .. collapse:: Strategy how runs are performed with different parameter: ...
+          Strategy how runs are performed with different parameter:
 
-              Strategy how runs are performed with different parameter:
+          * For tuple as many runs are performed as parameter values.
+          * For combinatorics individual parameter arrays are looped over.
 
-              * For tuple as many runs are performed as parameter values.
-              * For combinatorics individual parameter arrays are looped over.
+          See the explanation for the corresponding parameter for dbscan
+          processes above-mentioned for further details.
 
-              See the explanation for the corresponding parameter for dbscan
-              processes above-mentioned for further details.
-
-              Any of these values: ``tuple`` | ``combinatorics``
+          Any of these values: ``tuple`` | ``combinatorics``
 
         .. _/NXapm_paraprobe_config_clusterer/ENTRY/cluster_analysis/hdbscan/min_cluster_size-field:
 

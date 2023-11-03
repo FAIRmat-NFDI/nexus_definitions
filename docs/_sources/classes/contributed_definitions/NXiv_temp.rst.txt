@@ -17,17 +17,15 @@ NXiv_temp
 
 **Description**:
 
-  .. collapse:: Application definition for temperature-dependent IV curve measurements. ...
+  Application definition for temperature-dependent IV curve measurements.
 
-      Application definition for temperature-dependent IV curve measurements.
+  In this application definition, times should be specified always together
+  with an UTC offset.
 
-      In this application definition, times should be specified always together
-      with an UTC offset.
-
-      This is the application definition describing temperature dependent IV curve
-      measurements. For this a temperature is set. After reaching the temperature,
-      a voltage sweep is performed. For each voltage a current is measured.
-      Then, the next desired temperature is set and an IV measurement is performed.
+  This is the application definition describing temperature dependent IV curve
+  measurements. For this a temperature is set. After reaching the temperature,
+  a voltage sweep is performed. For each voltage a current is measured.
+  Then, the next desired temperature is set and an IV measurement is performed.
 
 **Symbols**:
 
@@ -45,28 +43,28 @@ NXiv_temp
 
   .. _/NXiv_temp/ENTRY-group:
 
-  **ENTRY**: (required) :ref:`NXentry` :ref:`⤆ </NXsensor_scan/ENTRY-group>`
+  **ENTRY**: (required) :ref:`NXentry` 
 
 
     .. _/NXiv_temp/ENTRY/definition-field:
 
     .. index:: definition (field)
 
-    **definition**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsensor_scan/ENTRY/definition-field>`
+    **definition**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
       Obligatory value: ``NXiv_temp``
 
     .. _/NXiv_temp/ENTRY/SAMPLE-group:
 
-    **SAMPLE**: (recommended) :ref:`NXsample` :ref:`⤆ </NXsensor_scan/ENTRY/SAMPLE-group>`
+    **SAMPLE**: (recommended) :ref:`NXsample` 
 
 
       .. _/NXiv_temp/ENTRY/SAMPLE/name-field:
 
       .. index:: name (field)
 
-      **name**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsensor_scan/ENTRY/SAMPLE/name-field>`
+      **name**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
         Descriptive name or ideally (globally) unique persistent identifier.
 
@@ -76,78 +74,72 @@ NXiv_temp
 
       **atom_types**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-        .. collapse:: List of comma-separated elements from the periodic table ...
+        List of comma-separated elements from the periodic table
+        that are contained in the sample. 
+        If the sample substance has multiple components, all 
+        elements from each component must be included in `atom_types`.
 
-            List of comma-separated elements from the periodic table
-            that are contained in the sample. 
-            If the sample substance has multiple components, all 
-            elements from each component must be included in `atom_types`.
-
-            The purpose of the field is to offer materials database systems an
-            opportunity to parse the relevant elements without having to interpret
-            these from the sample history or from other data sources.
+        The purpose of the field is to offer materials database systems an
+        opportunity to parse the relevant elements without having to interpret
+        these from the sample history or from other data sources.
 
     .. _/NXiv_temp/ENTRY/INSTRUMENT-group:
 
-    **INSTRUMENT**: (required) :ref:`NXinstrument` :ref:`⤆ </NXsensor_scan/ENTRY/INSTRUMENT-group>`
+    **INSTRUMENT**: (required) :ref:`NXinstrument` 
 
 
       .. _/NXiv_temp/ENTRY/INSTRUMENT/ENVIRONMENT-group:
 
-      **ENVIRONMENT**: (required) :ref:`NXenvironment` :ref:`⤆ </NXsensor_scan/ENTRY/INSTRUMENT/ENVIRONMENT-group>`
+      **ENVIRONMENT**: (required) :ref:`NXenvironment` 
 
-        .. collapse:: Describes an environment setup for a temperature-dependent IV measurement  ...
+        Describes an environment setup for a temperature-dependent IV measurement experiment.
 
-            Describes an environment setup for a temperature-dependent IV measurement experiment.
-
-            The temperature and voltage must be present as independently scanned controllers and
-            the current sensor must also be present with its readings.
+        The temperature and voltage must be present as independently scanned controllers and
+        the current sensor must also be present with its readings.
 
         .. _/NXiv_temp/ENTRY/INSTRUMENT/ENVIRONMENT/voltage_controller-group:
 
-        **voltage_controller**: (required) :ref:`NXsensor` :ref:`⤆ </NXsensor_scan/ENTRY/INSTRUMENT/ENVIRONMENT/SENSOR-group>`
+        **voltage_controller**: (required) :ref:`NXsensor` 
 
 
         .. _/NXiv_temp/ENTRY/INSTRUMENT/ENVIRONMENT/temperature_controller-group:
 
-        **temperature_controller**: (required) :ref:`NXsensor` :ref:`⤆ </NXsensor_scan/ENTRY/INSTRUMENT/ENVIRONMENT/SENSOR-group>`
+        **temperature_controller**: (required) :ref:`NXsensor` 
 
 
         .. _/NXiv_temp/ENTRY/INSTRUMENT/ENVIRONMENT/current_sensor-group:
 
-        **current_sensor**: (required) :ref:`NXsensor` :ref:`⤆ </NXsensor_scan/ENTRY/INSTRUMENT/ENVIRONMENT/SENSOR-group>`
+        **current_sensor**: (required) :ref:`NXsensor` 
 
 
     .. _/NXiv_temp/ENTRY/DATA-group:
 
-    **DATA**: (required) :ref:`NXdata` :ref:`⤆ </NXsensor_scan/ENTRY/DATA-group>`
+    **DATA**: (required) :ref:`NXdata` 
 
-      .. collapse:: This NXdata should contain separate fields for the current values at differe ...
-
-          This NXdata should contain separate fields for the current values at different temperature setpoints, for example current_at_100C.
-          There should also be two more fields called temperature and voltage containing the setpoint values.
-          There should also be a field with an array of rank equal to the number of different temperature setpoints and each child's dimension
-          equal to the number of voltage setpoints.
+      This NXdata should contain separate fields for the current values at different temperature setpoints, for example current_at_100C.
+      There should also be two more fields called temperature and voltage containing the setpoint values.
+      There should also be a field with an array of rank equal to the number of different temperature setpoints and each child's dimension
+      equal to the number of voltage setpoints.
 
       .. _/NXiv_temp/ENTRY/DATA/temperature-field:
 
       .. index:: temperature (field)
 
-      **temperature**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXdata/AXISNAME-field>`
+      **temperature**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
       .. _/NXiv_temp/ENTRY/DATA/voltage-field:
 
       .. index:: voltage (field)
 
-      **voltage**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXdata/AXISNAME-field>`
+      **voltage**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
       .. _/NXiv_temp/ENTRY/DATA/current-field:
 
       .. index:: current (field)
 
-      **current**: (required) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_different_temperatures, n_different_voltages]) :ref:`⤆ </NXdata/AXISNAME-field>`
+      **current**: (required) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_different_temperatures, n_different_voltages]) 
 
 
 

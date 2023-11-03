@@ -41,7 +41,7 @@ NXapm_paraprobe_results_selector
 
     .. index:: version (group attribute)
 
-    **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXentry@IDF_Version-attribute>`
+    **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
       Version specifier of this application definition.
 
@@ -49,13 +49,11 @@ NXapm_paraprobe_results_selector
 
     .. index:: definition (field)
 
-    **definition**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXentry/definition-field>`
+    **definition**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-      .. collapse:: Official NeXus NXDL schema with which this file was written. ...
+      Official NeXus NXDL schema with which this file was written.
 
-          Official NeXus NXDL schema with which this file was written.
-
-          Obligatory value: ``NXapm_paraprobe_results_selector``
+      Obligatory value: ``NXapm_paraprobe_results_selector``
 
     .. _/NXapm_paraprobe_results_selector/ENTRY/program-field:
 
@@ -63,10 +61,8 @@ NXapm_paraprobe_results_selector
 
     **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-      .. collapse:: Given name of the program/software/tool with which this NeXus ...
-
-          Given name of the program/software/tool with which this NeXus
-          (configuration) file was generated.
+      Given name of the program/software/tool with which this NeXus
+      (configuration) file was generated.
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/program@version-attribute:
 
@@ -74,13 +70,11 @@ NXapm_paraprobe_results_selector
 
       **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-        .. collapse:: Ideally program version plus build number, or commit hash or description ...
-
-            Ideally program version plus build number, or commit hash or description
-            of ever persistent resources where the source code of the program and
-            build instructions can be found so that the program can be configured
-            ideally in such a manner that the result of this computational process
-            is recreatable in the same deterministic manner.
+        Ideally program version plus build number, or commit hash or description
+        of ever persistent resources where the source code of the program and
+        build instructions can be found so that the program can be configured
+        ideally in such a manner that the result of this computational process
+        is recreatable in the same deterministic manner.
 
     .. _/NXapm_paraprobe_results_selector/ENTRY/analysis_identifier-field:
 
@@ -88,10 +82,8 @@ NXapm_paraprobe_results_selector
 
     **analysis_identifier**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-      .. collapse:: Ideally, a (globally persistent) unique identifier for referring ...
-
-          Ideally, a (globally persistent) unique identifier for referring
-          to this analysis.
+      Ideally, a (globally persistent) unique identifier for referring
+      to this analysis.
 
     .. _/NXapm_paraprobe_results_selector/ENTRY/analysis_description-field:
 
@@ -105,25 +97,21 @@ NXapm_paraprobe_results_selector
 
     .. index:: start_time (field)
 
-    **start_time**: (required) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXentry/start_time-field>`
+    **start_time**: (required) :ref:`NX_DATE_TIME <NX_DATE_TIME>` 
 
-      .. collapse:: ISO 8601 formatted time code with local time zone offset to UTC ...
-
-          ISO 8601 formatted time code with local time zone offset to UTC
-          information included when the analysis behind this results file
-          was started, i.e. the paraprobe-tool executable started as a process.
+      ISO 8601 formatted time code with local time zone offset to UTC
+      information included when the analysis behind this results file
+      was started, i.e. the paraprobe-tool executable started as a process.
 
     .. _/NXapm_paraprobe_results_selector/ENTRY/end_time-field:
 
     .. index:: end_time (field)
 
-    **end_time**: (required) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXentry/end_time-field>`
+    **end_time**: (required) :ref:`NX_DATE_TIME <NX_DATE_TIME>` 
 
-      .. collapse:: ISO 8601 formatted time code with local time zone offset to UTC ...
-
-          ISO 8601 formatted time code with local time zone offset to UTC
-          information included when the analysis behind this results file
-          were completed and the paraprobe-tool executable exited as a process.
+      ISO 8601 formatted time code with local time zone offset to UTC
+      information included when the analysis behind this results file
+      were completed and the paraprobe-tool executable exited as a process.
 
     .. _/NXapm_paraprobe_results_selector/ENTRY/config_filename-field:
 
@@ -139,10 +127,8 @@ NXapm_paraprobe_results_selector
 
       **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-        .. collapse:: At least SHA256 strong hash of the specific config_file for ...
-
-            At least SHA256 strong hash of the specific config_file for
-            tracking provenance.
+        At least SHA256 strong hash of the specific config_file for
+        tracking provenance.
 
     .. _/NXapm_paraprobe_results_selector/ENTRY/status-field:
 
@@ -150,97 +136,93 @@ NXapm_paraprobe_results_selector
 
     **status**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-      .. collapse:: A statement whether the paraprobe-tool executable managed to ...
+      A statement whether the paraprobe-tool executable managed to
+      process the analysis or failed prematurely.
 
-          A statement whether the paraprobe-tool executable managed to
-          process the analysis or failed prematurely.
+      This status is written to the results file after the end_time
+      at which point the executable must not compute any analysis.
+      Only when this status message is present and shows `success`, the
+      user should consider the results. In all other cases it might be
+      that the executable has terminated prematurely or another error
+      occurred.
 
-          This status is written to the results file after the end_time
-          at which point the executable must not compute any analysis.
-          Only when this status message is present and shows `success`, the
-          user should consider the results. In all other cases it might be
-          that the executable has terminated prematurely or another error
-          occurred.
-
-          Any of these values: ``success`` | ``failure``
+      Any of these values: ``success`` | ``failure``
 
     .. _/NXapm_paraprobe_results_selector/ENTRY/USER-group:
 
-    **USER**: (recommended) :ref:`NXuser` :ref:`⤆ </NXentry/USER-group>`
+    **USER**: (recommended) :ref:`NXuser` 
 
-      .. collapse:: If used, contact information and eventually details ...
-
-          If used, contact information and eventually details
-          of at least the person who performed this analysis.
+      If used, contact information and eventually details
+      of at least the person who performed this analysis.
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/USER/name-field:
 
       .. index:: name (field)
 
-      **name**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/name-field>`
+      **name**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/USER/affiliation-field:
 
       .. index:: affiliation (field)
 
-      **affiliation**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/affiliation-field>`
+      **affiliation**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/USER/address-field:
 
       .. index:: address (field)
 
-      **address**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/address-field>`
+      **address**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/USER/email-field:
 
       .. index:: email (field)
 
-      **email**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/email-field>`
+      **email**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/USER/orcid-field:
 
       .. index:: orcid (field)
 
-      **orcid**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/ORCID-field>`
+      **orcid**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/USER/orcid_platform-field:
 
       .. index:: orcid_platform (field)
 
-      **orcid_platform**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/ORCID-field>`
+      **orcid_platform**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/USER/telephone_number-field:
 
       .. index:: telephone_number (field)
 
-      **telephone_number**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/telephone_number-field>`
+      **telephone_number**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/USER/role-field:
 
       .. index:: role (field)
 
-      **role**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/role-field>`
+      **role**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/USER/social_media_name-field:
 
       .. index:: social_media_name (field)
 
-      **social_media_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/ORCID-field>`
+      **social_media_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/USER/social_media_platform-field:
 
       .. index:: social_media_platform (field)
 
-      **social_media_platform**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/ORCID-field>`
+      **social_media_platform**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
 
     .. _/NXapm_paraprobe_results_selector/ENTRY/COORDINATE_SYSTEM_SET-group:
@@ -251,35 +233,31 @@ NXapm_paraprobe_results_selector
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/COORDINATE_SYSTEM_SET/TRANSFORMATIONS-group:
 
-      **TRANSFORMATIONS**: (required) :ref:`NXtransformations` :ref:`⤆ </NXcoordinate_system_set/TRANSFORMATIONS-group>`
+      **TRANSFORMATIONS**: (required) :ref:`NXtransformations` 
 
-        .. collapse:: The individual coordinate systems which should be used. ...
+        The individual coordinate systems which should be used.
+        Field names should be prefixed with the following controlled terms
+        indicating which individual coordinate system is described:
 
-            The individual coordinate systems which should be used.
-            Field names should be prefixed with the following controlled terms
-            indicating which individual coordinate system is described:
-
-            * paraprobe
-            * lab
-            * specimen
-            * laser
-            * leap
-            * detector
-            * recon
+        * paraprobe
+        * lab
+        * specimen
+        * laser
+        * leap
+        * detector
+        * recon
 
     .. _/NXapm_paraprobe_results_selector/ENTRY/PROCESS-group:
 
-    **PROCESS**: (optional) :ref:`NXprocess` :ref:`⤆ </NXentry/PROCESS-group>`
+    **PROCESS**: (optional) :ref:`NXprocess` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/PROCESS/window-group:
 
       **window**: (required) :ref:`NXcs_filter_boolean_mask` 
 
-        .. collapse:: A bitmask which identifies which of the ions in the dataset ...
-
-            A bitmask which identifies which of the ions in the dataset
-            were selected to become included in the region-of-interest (ROI).
+        A bitmask which identifies which of the ions in the dataset
+        were selected to become included in the region-of-interest (ROI).
 
         .. _/NXapm_paraprobe_results_selector/ENTRY/PROCESS/window/number_of_ions-field:
 
@@ -287,40 +265,34 @@ NXapm_paraprobe_results_selector
 
         **number_of_ions**: (required) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-          .. collapse:: Number of ions covered by the mask. ...
-
-              Number of ions covered by the mask.
-              The mask value for most may be 0.
+          Number of ions covered by the mask.
+          The mask value for most may be 0.
 
         .. _/NXapm_paraprobe_results_selector/ENTRY/PROCESS/window/bitdepth-field:
 
         .. index:: bitdepth (field)
 
-        **bitdepth**: (required) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} :ref:`⤆ </NXcs_filter_boolean_mask/bitdepth-field>`
+        **bitdepth**: (required) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-          .. collapse:: Number of bits assumed matching on a default datatype. ...
-
-              Number of bits assumed matching on a default datatype.
-              (e.g. 8 bits for a C-style uint8).
+          Number of bits assumed matching on a default datatype.
+          (e.g. 8 bits for a C-style uint8).
 
         .. _/NXapm_paraprobe_results_selector/ENTRY/PROCESS/window/mask-field:
 
         .. index:: mask (field)
 
-        **mask**: (required) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_ions]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} :ref:`⤆ </NXcs_filter_boolean_mask/mask-field>`
+        **mask**: (required) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_ions]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-          .. collapse:: The unsigned integer array representing the content of the mask. ...
-
-              The unsigned integer array representing the content of the mask.
-              If padding is used the padded bits are set to 0. The mask is for
-              convenience always as large as the entire dataset as it will
-              be stored compressed anyway. The convenience feature with this
-              is that then the mask can be decoded with numpy and mirrored
-              against the evaporation_id array and one immediately can filter
-              out all points that were used by the paraprobe.
-              The length of the array adds to the next unsigned integer
-              if the number of ions in the dataset is not an integer
-              multiple of the bitdepth.
+          The unsigned integer array representing the content of the mask.
+          If padding is used the padded bits are set to 0. The mask is for
+          convenience always as large as the entire dataset as it will
+          be stored compressed anyway. The convenience feature with this
+          is that then the mask can be decoded with numpy and mirrored
+          against the evaporation_id array and one immediately can filter
+          out all points that were used by the paraprobe.
+          The length of the array adds to the next unsigned integer
+          if the number of ions in the dataset is not an integer
+          multiple of the bitdepth.
 
     .. _/NXapm_paraprobe_results_selector/ENTRY/performance-group:
 
@@ -331,106 +303,106 @@ NXapm_paraprobe_results_selector
 
       .. index:: command_line_call (field)
 
-      **command_line_call**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXcs_profiling/command_line_call-field>`
+      **command_line_call**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/performance/start_time-field:
 
       .. index:: start_time (field)
 
-      **start_time**: (recommended) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXcs_profiling/start_time-field>`
+      **start_time**: (recommended) :ref:`NX_DATE_TIME <NX_DATE_TIME>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/performance/end_time-field:
 
       .. index:: end_time (field)
 
-      **end_time**: (recommended) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXcs_profiling/end_time-field>`
+      **end_time**: (recommended) :ref:`NX_DATE_TIME <NX_DATE_TIME>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/performance/total_elapsed_time-field:
 
       .. index:: total_elapsed_time (field)
 
-      **total_elapsed_time**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXcs_profiling/total_elapsed_time-field>`
+      **total_elapsed_time**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/performance/number_of_processes-field:
 
       .. index:: number_of_processes (field)
 
-      **number_of_processes**: (required) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXcs_profiling/number_of_processes-field>`
+      **number_of_processes**: (required) :ref:`NX_POSINT <NX_POSINT>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/performance/number_of_threads-field:
 
       .. index:: number_of_threads (field)
 
-      **number_of_threads**: (required) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXcs_profiling/number_of_threads-field>`
+      **number_of_threads**: (required) :ref:`NX_POSINT <NX_POSINT>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/performance/number_of_gpus-field:
 
       .. index:: number_of_gpus (field)
 
-      **number_of_gpus**: (required) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXcs_profiling/number_of_gpus-field>`
+      **number_of_gpus**: (required) :ref:`NX_POSINT <NX_POSINT>` 
 
 
       .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER-group:
 
-      **CS_COMPUTER**: (recommended) :ref:`NXcs_computer` :ref:`⤆ </NXcs_profiling/CS_COMPUTER-group>`
+      **CS_COMPUTER**: (recommended) :ref:`NXcs_computer` 
 
 
         .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/name-field:
 
         .. index:: name (field)
 
-        **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXcs_computer/name-field>`
+        **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
 
         .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/operating_system-field:
 
         .. index:: operating_system (field)
 
-        **operating_system**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXcs_computer/operating_system-field>`
+        **operating_system**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
           .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/operating_system@version-attribute:
 
           .. index:: version (field attribute)
 
-          **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXcs_computer/operating_system@version-attribute>`
+          **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
         .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/uuid-field:
 
         .. index:: uuid (field)
 
-        **uuid**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXcs_computer/uuid-field>`
+        **uuid**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
 
         .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_CPU-group:
 
-        **CS_CPU**: (optional) :ref:`NXcs_cpu` :ref:`⤆ </NXcs_computer/CS_CPU-group>`
+        **CS_CPU**: (optional) :ref:`NXcs_cpu` 
 
 
           .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_CPU/name-field:
 
           .. index:: name (field)
 
-          **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXcs_cpu/name-field>`
+          **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
 
           .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_CPU/FABRICATION-group:
 
-          **FABRICATION**: (recommended) :ref:`NXfabrication` :ref:`⤆ </NXcs_cpu/FABRICATION-group>`
+          **FABRICATION**: (recommended) :ref:`NXfabrication` 
 
 
             .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_CPU/FABRICATION/identifier-field:
 
             .. index:: identifier (field)
 
-            **identifier**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
+            **identifier**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
 
             .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_CPU/FABRICATION/capabilities-field:
@@ -442,26 +414,26 @@ NXapm_paraprobe_results_selector
 
         .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_GPU-group:
 
-        **CS_GPU**: (optional) :ref:`NXcs_gpu` :ref:`⤆ </NXcs_computer/CS_GPU-group>`
+        **CS_GPU**: (optional) :ref:`NXcs_gpu` 
 
 
           .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_GPU/name-field:
 
           .. index:: name (field)
 
-          **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXcs_gpu/name-field>`
+          **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
 
           .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_GPU/FABRICATION-group:
 
-          **FABRICATION**: (recommended) :ref:`NXfabrication` :ref:`⤆ </NXcs_gpu/FABRICATION-group>`
+          **FABRICATION**: (recommended) :ref:`NXfabrication` 
 
 
             .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_GPU/FABRICATION/identifier-field:
 
             .. index:: identifier (field)
 
-            **identifier**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
+            **identifier**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
 
             .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_GPU/FABRICATION/capabilities-field:
@@ -473,57 +445,57 @@ NXapm_paraprobe_results_selector
 
         .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_MM_SYS-group:
 
-        **CS_MM_SYS**: (optional) :ref:`NXcs_mm_sys` :ref:`⤆ </NXcs_computer/CS_MM_SYS-group>`
+        **CS_MM_SYS**: (optional) :ref:`NXcs_mm_sys` 
 
 
           .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_MM_SYS/total_physical_memory-field:
 
           .. index:: total_physical_memory (field)
 
-          **total_physical_memory**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXcs_mm_sys/total_physical_memory-field>`
+          **total_physical_memory**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
         .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_IO_SYS-group:
 
-        **CS_IO_SYS**: (optional) :ref:`NXcs_io_sys` :ref:`⤆ </NXcs_computer/CS_IO_SYS-group>`
+        **CS_IO_SYS**: (optional) :ref:`NXcs_io_sys` 
 
 
           .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_IO_SYS/CS_IO_OBJ-group:
 
-          **CS_IO_OBJ**: (required) :ref:`NXcs_io_obj` :ref:`⤆ </NXcs_io_sys/CS_IO_OBJ-group>`
+          **CS_IO_OBJ**: (required) :ref:`NXcs_io_obj` 
 
 
             .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_IO_SYS/CS_IO_OBJ/technology-field:
 
             .. index:: technology (field)
 
-            **technology**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXcs_io_obj/technology-field>`
+            **technology**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
             .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_IO_SYS/CS_IO_OBJ/max_physical_capacity-field:
 
             .. index:: max_physical_capacity (field)
 
-            **max_physical_capacity**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXcs_io_obj/max_physical_capacity-field>`
+            **max_physical_capacity**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
             .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_IO_SYS/CS_IO_OBJ/name-field:
 
             .. index:: name (field)
 
-            **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXcs_io_obj/name-field>`
+            **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
 
             .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_IO_SYS/CS_IO_OBJ/FABRICATION-group:
 
-            **FABRICATION**: (recommended) :ref:`NXfabrication` :ref:`⤆ </NXcs_io_obj/FABRICATION-group>`
+            **FABRICATION**: (recommended) :ref:`NXfabrication` 
 
 
               .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_IO_SYS/CS_IO_OBJ/FABRICATION/identifier-field:
 
               .. index:: identifier (field)
 
-              **identifier**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
+              **identifier**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
 
               .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_IO_SYS/CS_IO_OBJ/FABRICATION/capabilities-field:
@@ -542,75 +514,69 @@ NXapm_paraprobe_results_selector
 
           .. index:: start_time (field)
 
-          **start_time**: (optional) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXcs_profiling_event/start_time-field>`
+          **start_time**: (optional) :ref:`NX_DATE_TIME <NX_DATE_TIME>` 
 
 
           .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_PROFILING_EVENT/end_time-field:
 
           .. index:: end_time (field)
 
-          **end_time**: (optional) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXcs_profiling_event/end_time-field>`
+          **end_time**: (optional) :ref:`NX_DATE_TIME <NX_DATE_TIME>` 
 
 
           .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_PROFILING_EVENT/description-field:
 
           .. index:: description (field)
 
-          **description**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXcs_profiling_event/description-field>`
+          **description**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
           .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_PROFILING_EVENT/elapsed_time-field:
 
           .. index:: elapsed_time (field)
 
-          **elapsed_time**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXcs_profiling_event/elapsed_time-field>`
+          **elapsed_time**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
           .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_PROFILING_EVENT/number_of_processes-field:
 
           .. index:: number_of_processes (field)
 
-          **number_of_processes**: (required) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXcs_profiling_event/number_of_processes-field>`
+          **number_of_processes**: (required) :ref:`NX_POSINT <NX_POSINT>` 
 
-            .. collapse:: Specify if it was different from the number_of_processes ...
-
-                Specify if it was different from the number_of_processes
-                in the NXcs_profiling super class.
+            Specify if it was different from the number_of_processes
+            in the NXcs_profiling super class.
 
           .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_PROFILING_EVENT/number_of_threads-field:
 
           .. index:: number_of_threads (field)
 
-          **number_of_threads**: (required) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXcs_profiling_event/number_of_threads-field>`
+          **number_of_threads**: (required) :ref:`NX_POSINT <NX_POSINT>` 
 
-            .. collapse:: Specify if it was different from the number_of_threads ...
-
-                Specify if it was different from the number_of_threads
-                in the NXcs_profiling super class.
+            Specify if it was different from the number_of_threads
+            in the NXcs_profiling super class.
 
           .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_PROFILING_EVENT/number_of_gpus-field:
 
           .. index:: number_of_gpus (field)
 
-          **number_of_gpus**: (required) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXcs_profiling_event/number_of_gpus-field>`
+          **number_of_gpus**: (required) :ref:`NX_POSINT <NX_POSINT>` 
 
-            .. collapse:: Specify if it was different from the number_of_threads ...
-
-                Specify if it was different from the number_of_threads
-                in the NXcs_profiling super class.
+            Specify if it was different from the number_of_threads
+            in the NXcs_profiling super class.
 
           .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_PROFILING_EVENT/max_virtual_memory_snapshot-field:
 
           .. index:: max_virtual_memory_snapshot (field)
 
-          **max_virtual_memory_snapshot**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXcs_profiling_event/max_virtual_memory_snapshot-field>`
+          **max_virtual_memory_snapshot**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
           .. _/NXapm_paraprobe_results_selector/ENTRY/performance/CS_COMPUTER/CS_PROFILING_EVENT/max_resident_memory_snapshot-field:
 
           .. index:: max_resident_memory_snapshot (field)
 
-          **max_resident_memory_snapshot**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXcs_profiling_event/max_resident_memory_snapshot-field>`
+          **max_resident_memory_snapshot**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
 
