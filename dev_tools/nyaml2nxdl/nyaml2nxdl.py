@@ -103,15 +103,6 @@ a YAML or XML file from, respectively.",
     ),
 )
 @click.option(
-    "--do-not-store-nxdl",
-    is_flag=True,
-    default=True,
-    help=(
-        "Whether the input nxdl file will be stored as a comment"
-        " at the end of output yaml file."
-    ),
-)
-@click.option(
     "--verbose",
     is_flag=True,
     default=False,
