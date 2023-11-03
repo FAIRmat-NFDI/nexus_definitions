@@ -41,7 +41,7 @@ _nxdl = ".nxdl.xml"
 # https://manual.nexusformat.org/nxdl_desc.html?highlight=optional
 
 
-def generate_nxdl_or_retrieve_nxdl(yaml_file, out_xml_file, verbose):
+def generate_nxdl_or_retrieve_nxdl(yaml_in, xml_out, verbose):
     """
     Generate yaml, nxdl and hash.
 
@@ -97,6 +97,15 @@ a YAML or XML file from, respectively.",
     "--do-not-store-nxdl",
     is_flag=True,
     default=False,
+    help=(
+        "Whether the input nxdl file will be stored as a comment"
+        " at the end of output yaml file."
+    ),
+)
+@click.option(
+    "--do-not-store-nxdl",
+    is_flag=True,
+    default=True,
     help=(
         "Whether the input nxdl file will be stored as a comment"
         " at the end of output yaml file."

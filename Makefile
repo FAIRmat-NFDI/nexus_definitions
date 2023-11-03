@@ -9,6 +9,7 @@ BUILD_DIR = "build"
 BASE_CLASS_DIR := base_classes
 CONTRIB_DIR := contributed_definitions
 APPDEF_DIR := applications
+NXDL_DIRS := $(BASE_CLASS_DIR) $(CONTRIB_DIR) $(APPDEF_DIR)
 NYAML_SUBDIR := nyaml
 NYAML_APPENDIX := _parsed
 
@@ -58,6 +59,8 @@ test ::
 
 clean ::
 	$(RM) -rf $(BUILD_DIR)
+
+clean-nyaml ::
 	$(RM) -rf $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)
 	$(RM) -rf $(APPDEF_DIR)/$(NYAML_SUBDIR)
 	$(RM) -rf $(CONTRIB_DIR)/$(NYAML_SUBDIR)
@@ -68,7 +71,7 @@ prepare ::
 
 pdf ::
 	$(SPHINX) -M latexpdf $(BUILD_DIR)/manual/source/ $(BUILD_DIR)/manual/build
-	cp $(BUILD_DIR)/manual/build/latex/nexus.pdf $(BUILD_DIR)/manual/source/_static/NeXusManual.pdf
+	cp $(BUILD_DIR)/manual/build/latex/nexus-fairmat.pdf $(BUILD_DIR)/manual/source/_static/NeXusManual.pdf
 
 html ::
 	$(SPHINX) -b html -W $(BUILD_DIR)/manual/source/ $(BUILD_DIR)/manual/build/html
@@ -93,7 +96,19 @@ all ::
 	@echo "HTML built: `ls -lAFgh $(BUILD_DIR)/impatient-guide/build/html/index.html`"
 	@echo "PDF built: `ls -lAFgh $(BUILD_DIR)/impatient-guide/build/latex/NXImpatient.pdf`"
 	@echo "HTML built: `ls -lAFgh $(BUILD_DIR)/manual/build/html/index.html`"
-	@echo "PDF built: `ls -lAFgh $(BUILD_DIR)/manual/build/latex/nexus.pdf`"
+	@echo "PDF built: `ls -lAFgh $(BUILD_DIR)/manual/build/latex/nexus-fairmat.pdf`"
+
+$(BASE_CLASS_DIR)/%.nxdl.xml : $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)/%.yaml
+	nyaml2nxdl --input-file $<
+	mv $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
+
+$(CONTRIB_DIR)/%.nxdl.xml : $(CONTRIB_DIR)/$(NYAML_SUBDIR)/%.yaml
+	nyaml2nxdl --input-file $<
+	mv $(CONTRIB_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
+
+$(APPDEF_DIR)/%.nxdl.xml : $(APPDEF_DIR)/$(NYAML_SUBDIR)/%.yaml
+	nyaml2nxdl --input-file $<
+	mv $(APPDEF_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
 
 $(BASE_CLASS_DIR)/%.nxdl.xml : $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)/%.yaml
 	$(PYTHON) -m dev_tools.nyaml2nxdl.nyaml2nxdl --input-file $<

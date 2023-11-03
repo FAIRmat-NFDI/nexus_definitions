@@ -3,10 +3,12 @@ name: CI
 on:
   push:
     branches:
-      - main   # push commit to the main branch
+      - main
+      - fairmat   # push commit to the fairmat branch
   pull_request:
     branches:
-      - main   # pull request to the main branch
+      - main
+      - fairmat   # pull request to the fairmat branch
   workflow_dispatch:   # allow manual triggering
     inputs:
       deploy:
@@ -72,6 +74,7 @@ jobs:
             texlive-latex-recommended \
             texlive-latex-extra \
             texlive-fonts-recommended
+          tex --version
 
       - name: Generate build files
         env:
