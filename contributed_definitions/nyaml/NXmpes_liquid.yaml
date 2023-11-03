@@ -1,0 +1,197 @@
+#Pincelli, Rettig, Arora at fhi-berlin.mpg.de, Dobener at hu-berlin.de, 06/2022
+#Draft version of a NeXus application definition for photoemission,
+#It is designed to be extended by other application definitions
+#with higher granularity in the data description.
+
+doc: This is the application definition for multidimensional photoelectron spectroscopy on liquids
+category: application
+NXmpes_liquid(NXmpes):
+  (NXentry):
+    definition:
+      \@version:
+      enumeration: ["NXmpes_liquid"]
+    (NXinstrument):
+      (NXelectronanalyser):
+        (NXcollectioncolumn):
+          dependes_on:
+            doc: Refers to the NXtransformation matrix which places the collectioncolumn in its coordinate frame.
+            exists: recommended
+          (NXtransformations):
+            exists: optional
+            doc: "Direction of lens axis of analyzer."
+            rot_x(NX_NUMBER):
+              \@depends_on(NX_CHAR):
+                doc: "Is '.', since beam axis is assumed to be horizontal (perpendicular to gravity)."
+              \@transformation_type(NX_CHAR):
+                enumeration: ["rotation"]
+              unit: NX_ANGLE
+              \@vector(NX_NUMBER):
+            rot_y(NX_NUMBER):
+              \@depends_on(NX_CHAR):
+                doc: "Link to /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_x"
+              \@transformation_type(NX_CHAR):
+                enumeration: ["rotation"]
+              unit: NX_ANGLE
+              \@vector(NX_NUMBER):
+            rot_z(NX_NUMBER):
+              \@depends_on(NX_CHAR):
+                doc: "Link to /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_y."
+              \@transformation_type(NX_CHAR):
+                enumeration: ["rotation"]
+              unit: NX_ANGLE
+              \@vector(NX_NUMBER):
+            trans_z(NX_NUMBER):
+              doc: "Same as working_distance."
+              \@depends_on(NX_CHAR):
+                doc: "Link to /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_z."
+              \@transformation_type(NX_CHAR):
+                enumeration: ["translation"]
+              unit: NX_LENGTH
+              \@vector(NX_NUMBER):
+        (NXdetector):
+          depends_on:
+            doc: Refers to the NXtransformation matrix which places the detector in its coordinate frame.
+            exists: recommended
+          (NXtransformations):
+            exists: optional
+            doc: "Direction of the hemisphere of an HEA. Points towards the detector from the entrance slit."
+            rot_x(NX_NUMBER):
+              \@depends_on(NX_CHAR):
+                doc: "Is '.', since beam axis is assumed to be horizontal (perpendicular to gravity)."
+                enumeration: ["."]
+              \@transformation_type(NX_CHAR):
+                enumeration: ["rotation"]
+              unit: NX_ANGLE
+              \@vector(NX_NUMBER):
+            rot_y(NX_NUMBER):
+              \@depends_on(NX_CHAR):
+                doc: "Link to /NXentry/NXinstrument/NXelectronanalyser/NXdetector/NXtransformations/rot_x"
+              \@transformation_type(NX_CHAR):
+                enumeration: ["rotation"]
+              unit: NX_ANGLE
+              \@vector(NX_NUMBER):
+            rot_z(NX_NUMBER):
+              \@depends_on(NX_CHAR):
+                doc: |
+                  Link to /NXentry/NXinstrument/NXelectronanalyser
+                  /NXdetector/NXtransformations/rot_y.
+              \@transformation_type(NX_CHAR):
+                enumeration: ["rotation"]
+              unit: NX_ANGLE
+              \@vector(NX_NUMBER):
+        (NXtransformations):
+          exists: optional
+          doc: "Transformations describing base geometry in the experiment. Usually defaults to the beam in z direction and gravity in -y direction."
+          gravity_axis(NX_NUMBER):
+            doc: "Direction of gravity."
+            \@vector(NX_NUMBER):
+              doc: "The vector in the direction of gravity."
+            \@depends_on(NX_CHAR):
+              enumeration: ["."]
+          beam_axis(NX_NUMBER):
+            doc: "Direction of the photon beam."
+            \@vector(NX_NUMBER):
+              doc: "The vector of the photon-beam direction into the chamber after the last optical element (or directly from the source if there are no optical elements)."
+            \@depends_on(NX_CHAR):
+              enumeration: ["."]
+    (NXsample):
+      chemical_formula:
+        exists: optional
+        doc: "In the case of a fixed temperature measurement this is the scalar temperature of the sample. In the case of an experiment in which the temperature is changed and recoded, this is an array of length m of temperatures."
+      electric_field(NX_FLOAT):
+        exists: recommended
+        unit: NX_VOLTAGE
+        doc: "Electric field applied to the sample with respect to ground / the system, e.g., via biasing."
+      thickness(NX_FLOAT):
+        exists: recommended
+        unit: NX_LENGTH
+        doc: "Thickness of the sample in normal direction to the surface that is probed, e.g., diameter of capillary (round jets) or thickness of the leaf (flat jets)."
+      flow_rate(NX_FLOAT):
+        exists: recommended
+        unit: NX_VOLUME / NX_TIME
+        doc: "Flow rate of the liquid into the chamber, i.e., throught the microjet capillary (or in case of a flat jet: both capillaries)."
+      shape(NX_CHAR):
+        enumeration: ["round", "flat"]
+      nozzle_material(NX_CHAR):
+        exists: recommended
+        doc: "Material the microjet nozzle is made of (users are encouraged to expand on that in group preparation_description)."
+      depends_on:
+        exists: recommended
+        doc: Connects this liquidjet to its transformation chain.
+      (NXtransformations):
+        exists: recommended
+        doc: "Transformations describing the transformation chain of the liquid jet flow direction and optionally the flat jet normal. The vector of the major flow direction of the liquid jet from the injection into the chamber. Along the cylinder axis for single, cylidrical jets, and parallel to the leaf plane for flatjets."
+        rot_x(NX_NUMBER):
+          \@depends_on(NX_CHAR):
+            doc: "Is '.', since beam axis is assumed to be horizontal (perpendicular to gravity)."
+          \@transformation_type(NX_CHAR):
+            enumeration: ["rotation"]
+          unit: NX_ANGLE
+          \@vector(NX_NUMBER):
+        rot_y(NX_NUMBER):
+          \@depends_on(NX_CHAR):
+            doc: "Link to /NXentry/NXsample/rot_x"
+          \@transformation_type(NX_CHAR):
+            enumeration: ["rotation"]
+          unit: NX_ANGLE
+          \@vector(NX_NUMBER):
+        rot_z(NX_NUMBER):
+          \@depends_on(NX_CHAR):
+            doc: "Link to /NXentry/NXsample/rot_y."
+          \@transformation_type(NX_CHAR):
+            enumeration: ["rotation"]
+          unit: NX_ANGLE
+          \@vector(NX_NUMBER):
+        leaf_normal(NXtransformations):
+          exists: optional
+          doc: "Direction of surface normal vector of the first leaf on the side of solvent #1."
+          rotation_theta(NX_NUMBER):
+            doc: "Direction of surface normal vector of the first leaf on the side of solvent #1. Defaults to be parallel to detection direction."
+            \@depends_on(NX_CHAR):
+              doc: "Link to /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_z."
+            \@transformation_type(NX_CHAR):
+              enumeration: ["rotation"]
+            unit: NX_ANGLE
+            \@vector(NX_NUMBER):
+              doc: "Base vector is the liquid jet flow direction."
+      solventSOLVENT(NXsample_component):
+        doc: "Solvent substance of the liquid jet. This also accounts for multiple jets if more than one solvent is given."
+        description(NX_CHAR):
+          exists: recommended
+        name(NX_CHAR):
+        chemical_formula(NX_CHAR):
+          doc: "Molecular or structural formula of the solvent."
+        chem_id_cas(NX_CHAR):
+          exists: recommended
+        ph_value(NX_FLOAT):
+          exists: optional
+          unit: NX_UNITLESS
+          doc: "Measured pH value of the solution."
+        ph_adjustment(NX_BOOLEAN):
+          exists: optional
+          doc: "Whether or not agents for pH adjustment were added to the solution. In this case, users are encouraged to expand on that in preparation_description."
+        mol_fraction(NX_FLOAT):
+          exists: optional
+          unit: 1 / NX_VOLUME
+          doc: "Molarity of the solvent in the solution."
+      soluteSOLUTE(NXsample_component):
+        doc: "Solute substance solved in a given solvent. This also accounts for multiple solutes if more than one is given."
+        description(NX_CHAR):
+          exists: recommended
+        name(NX_CHAR):
+        chemical_formula(NX_CHAR):
+          doc: "Molecular or structural formula of the solute."
+        chem_id_cas(NX_CHAR):
+          exists: recommended
+        mol_fraction(NX_FLOAT):
+          exists: recommended
+          unit: 1 / NX_VOLUME
+          doc: "Molarity of the solute in the solution."
+        solvent(NX_CHAR):
+          doc: "Specifies the parent solvent entry of the solution."
+    (NXdata):
+      \@axes(NX_CHAR):
+        enumeration: ["energy"]
+      energy(NX_NUMBER):
+        unit: NX_ENERGY
+        doc: "Data containing the energy axis."
