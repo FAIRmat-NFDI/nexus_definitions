@@ -253,79 +253,56 @@ with higher granularity in the data description.
              Connects this liquidjet to its transformation chain.
         </doc>
       </field>
-      <group type="NXtransformations" recommended="true">
+      <group name="liquidjet_orientation" type="NXtransformations">
         <doc>
              Transformations describing the transformation chain of the liquid jet flow direction
              and optionally the flat jet normal. The vector of the major flow direction of the
              liquid jet from the injection into the chamber.
              Along the cylinder axis for single, cylidrical jets, and parallel to the leaf plane for flatjets.
         </doc>
-        <field name="rot_x" type="NX_NUMBER" units="NX_ANGLE">
-          <attribute name="depends_on" type="NX_CHAR">
-            <doc>
-                 Is '.', since beam axis is assumed to be horizontal (perpendicular to gravity).
-            </doc>
-          </attribute>
-          <attribute name="transformation_type" type="NX_CHAR">
+        <field name="jet_direction" type="NX_NUMBER" units="NX_ANGLE">
+          <doc>
+               The jet direction. If no direction is specified,
+               the jet points in the positive z-direction.
+          </doc>
+          <attribute name="transformation_type">
             <enumeration>
               <item value="rotation"/>
             </enumeration>
           </attribute>
-          <attribute name="vector" type="NX_NUMBER"/>
+          <attribute name="direction" type="NX_NUMBER" recommended="true">
+            <dimensions rank="1">
+              <dim index="1" value="3"/>
+            </dimensions>
+          </attribute>
         </field>
-        <field name="rot_y" type="NX_NUMBER" units="NX_ANGLE">
-          <attribute name="depends_on" type="NX_CHAR">
-            <doc>
-                 Link to /NXentry/NXsample/rot_x
-            </doc>
-          </attribute>
-          <attribute name="transformation_type" type="NX_CHAR">
-            <enumeration>
-              <item value="rotation"/>
-            </enumeration>
-          </attribute>
-          <attribute name="vector" type="NX_NUMBER"/>
-        </field>
-        <field name="rot_z" type="NX_NUMBER" units="NX_ANGLE">
-          <attribute name="depends_on" type="NX_CHAR">
-            <doc>
-                 Link to /NXentry/NXsample/rot_y.
-            </doc>
-          </attribute>
-          <attribute name="transformation_type" type="NX_CHAR">
-            <enumeration>
-              <item value="rotation"/>
-            </enumeration>
-          </attribute>
-          <attribute name="vector" type="NX_NUMBER"/>
-        </field>
-        <group name="leaf_normal" type="NXtransformations" optional="true">
+        <field name="leaf_normal" type="NX_NUMBER" units="NX_ANGLE">
           <doc>
                Direction of surface normal vector of the first leaf on the side of solvent #1.
+               
+               The surface normal of the liqudjet leaf. If no direction is specified,
+               the leaf normal points in the positive z-direction.
+               The value of this field is the angle between the
+               analyzer optical axis and the leaf normal.
+               If you only want to collect the angle between the leaf normal
+               and the analyzer optical axis the `depends_on` attribute may be omitted.
+               If a transformation chain is provided (with the `depends_on` attribute)
+               it should depend on the analyzer optical axis or the jet direction depending
+               on the use case.
+               
+               Direction of surface normal vector of the first leaf on the side of solvent #1. Defaults to be parallel to detection direction.
           </doc>
-          <field name="rotation_theta" type="NX_NUMBER" units="NX_ANGLE">
-            <doc>
-                 Direction of surface normal vector of the first leaf on the side of solvent #1.
-                 Defaults to be parallel to detection direction.
-            </doc>
-            <attribute name="depends_on" type="NX_CHAR">
-              <doc>
-                   Link to
-                   /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_z.
-              </doc>
-            </attribute>
-            <attribute name="transformation_type" type="NX_CHAR">
-              <enumeration>
-                <item value="rotation"/>
-              </enumeration>
-            </attribute>
-            <attribute name="vector" type="NX_NUMBER">
-              <doc>
-                   Base vector is the liquid jet flow direction.
-              </doc>
-            </attribute>
-          </field>
-        </group>
+          <attribute name="transformation_type">
+            <enumeration>
+              <item value="rotation"/>
+            </enumeration>
+          </attribute>
+          <attribute name="direction" type="NX_NUMBER" recommended="true">
+            <dimensions rank="1">
+              <dim index="1" value="3"/>
+            </dimensions>
+          </attribute>
+        </field>
       </group>
       <group name="solventSOLVENT" type="NXsample_component">
         <doc>
