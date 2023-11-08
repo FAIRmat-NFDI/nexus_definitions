@@ -455,31 +455,25 @@ NXmpes_liquid
 
         Connects this liquidjet to its transformation chain.
 
-      .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS-group:
+      .. _/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation-group:
 
-      **TRANSFORMATIONS**: (recommended) :ref:`NXtransformations` 
+      **liquidjet_orientation**: (required) :ref:`NXtransformations` 
 
         Transformations describing the transformation chain of the liquid jet flow direction
         and optionally the flat jet normal. The vector of the major flow direction of the
         liquid jet from the injection into the chamber.
         Along the cylinder axis for single, cylidrical jets, and parallel to the leaf plane for flatjets.
 
-        .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_x-field:
+        .. _/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction-field:
 
-        .. index:: rot_x (field)
+        .. index:: jet_direction (field)
 
-        **rot_x**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
+        **jet_direction**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
 
+          The jet direction. If no direction is specified,
+          the jet points in the positive z-direction.
 
-          .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_x@depends_on-attribute:
-
-          .. index:: depends_on (field attribute)
-
-          **@depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-            Is '.', since beam axis is assumed to be horizontal (perpendicular to gravity).
-
-          .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_x@transformation_type-attribute:
+          .. _/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction@transformation_type-attribute:
 
           .. index:: transformation_type (field attribute)
 
@@ -488,115 +482,48 @@ NXmpes_liquid
 
             Obligatory value: ``rotation``
 
-          .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_x@vector-attribute:
+          .. _/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction@direction-attribute:
 
-          .. index:: vector (field attribute)
+          .. index:: direction (field attribute)
 
-          **@vector**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
-
-
-        .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_y-field:
-
-        .. index:: rot_y (field)
-
-        **rot_y**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
+          **@direction**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
-          .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_y@depends_on-attribute:
+        .. _/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/leaf_normal-field:
 
-          .. index:: depends_on (field attribute)
+        .. index:: leaf_normal (field)
 
-          **@depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-            Link to /NXentry/NXsample/rot_x
-
-          .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_y@transformation_type-attribute:
-
-          .. index:: transformation_type (field attribute)
-
-          **@transformation_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-
-            Obligatory value: ``rotation``
-
-          .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_y@vector-attribute:
-
-          .. index:: vector (field attribute)
-
-          **@vector**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
-
-
-        .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_z-field:
-
-        .. index:: rot_z (field)
-
-        **rot_z**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
-
-
-          .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_z@depends_on-attribute:
-
-          .. index:: depends_on (field attribute)
-
-          **@depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-            Link to /NXentry/NXsample/rot_y.
-
-          .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_z@transformation_type-attribute:
-
-          .. index:: transformation_type (field attribute)
-
-          **@transformation_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-
-            Obligatory value: ``rotation``
-
-          .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_z@vector-attribute:
-
-          .. index:: vector (field attribute)
-
-          **@vector**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
-
-
-        .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/leaf_normal-group:
-
-        **leaf_normal**: (optional) :ref:`NXtransformations` 
+        **leaf_normal**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
 
           Direction of surface normal vector of the first leaf on the side of solvent #1.
 
-          .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/leaf_normal/rotation_theta-field:
+          The surface normal of the liqudjet leaf. If no direction is specified,
+          the leaf normal points in the positive z-direction.
+          The value of this field is the angle between the
+          analyzer optical axis and the leaf normal.
+          If you only want to collect the angle between the leaf normal
+          and the analyzer optical axis the `depends_on` attribute may be omitted.
+          If a transformation chain is provided (with the `depends_on` attribute)
+          it should depend on the analyzer optical axis or the jet direction depending
+          on the use case.
 
-          .. index:: rotation_theta (field)
+          Direction of surface normal vector of the first leaf on the side of solvent #1. Defaults to be parallel to detection direction.
 
-          **rotation_theta**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
+          .. _/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/leaf_normal@transformation_type-attribute:
 
-            Direction of surface normal vector of the first leaf on the side of solvent #1.
-            Defaults to be parallel to detection direction.
+          .. index:: transformation_type (field attribute)
 
-            .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/leaf_normal/rotation_theta@depends_on-attribute:
-
-            .. index:: depends_on (field attribute)
-
-            **@depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-              Link to
-              /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_z.
-
-            .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/leaf_normal/rotation_theta@transformation_type-attribute:
-
-            .. index:: transformation_type (field attribute)
-
-            **@transformation_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+          **@transformation_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
-              Obligatory value: ``rotation``
+            Obligatory value: ``rotation``
 
-            .. _/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/leaf_normal/rotation_theta@vector-attribute:
+          .. _/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/leaf_normal@direction-attribute:
 
-            .. index:: vector (field attribute)
+          .. index:: direction (field attribute)
 
-            **@vector**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
+          **@direction**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` 
 
-              Base vector is the liquid jet flow direction.
 
       .. _/NXmpes_liquid/ENTRY/SAMPLE/solventSOLVENT-group:
 
@@ -797,6 +724,13 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/depends_on-field </NXmpes_liquid/ENTRY/SAMPLE/depends_on-field>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/electric_field-field </NXmpes_liquid/ENTRY/SAMPLE/electric_field-field>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/flow_rate-field </NXmpes_liquid/ENTRY/SAMPLE/flow_rate-field>`
+* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation-group </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation-group>`
+* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction-field </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction-field>`
+* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction@direction-attribute </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction@direction-attribute>`
+* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction@transformation_type-attribute </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction@transformation_type-attribute>`
+* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/leaf_normal-field </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/leaf_normal-field>`
+* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/leaf_normal@direction-attribute </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/leaf_normal@direction-attribute>`
+* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/leaf_normal@transformation_type-attribute </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/leaf_normal@transformation_type-attribute>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/nozzle_material-field </NXmpes_liquid/ENTRY/SAMPLE/nozzle_material-field>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/shape-field </NXmpes_liquid/ENTRY/SAMPLE/shape-field>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/soluteSOLUTE-group </NXmpes_liquid/ENTRY/SAMPLE/soluteSOLUTE-group>`
@@ -815,24 +749,6 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/solventSOLVENT/ph_adjustment-field </NXmpes_liquid/ENTRY/SAMPLE/solventSOLVENT/ph_adjustment-field>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/solventSOLVENT/ph_value-field </NXmpes_liquid/ENTRY/SAMPLE/solventSOLVENT/ph_value-field>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/thickness-field </NXmpes_liquid/ENTRY/SAMPLE/thickness-field>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS-group </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS-group>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/leaf_normal-group </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/leaf_normal-group>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/leaf_normal/rotation_theta-field </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/leaf_normal/rotation_theta-field>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/leaf_normal/rotation_theta@depends_on-attribute </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/leaf_normal/rotation_theta@depends_on-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/leaf_normal/rotation_theta@transformation_type-attribute </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/leaf_normal/rotation_theta@transformation_type-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/leaf_normal/rotation_theta@vector-attribute </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/leaf_normal/rotation_theta@vector-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_x-field </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_x-field>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_x@depends_on-attribute </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_x@depends_on-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_x@transformation_type-attribute </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_x@transformation_type-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_x@vector-attribute </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_x@vector-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_y-field </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_y-field>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_y@depends_on-attribute </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_y@depends_on-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_y@transformation_type-attribute </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_y@transformation_type-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_y@vector-attribute </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_y@vector-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_z-field </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_z-field>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_z@depends_on-attribute </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_z@depends_on-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_z@transformation_type-attribute </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_z@transformation_type-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_z@vector-attribute </NXmpes_liquid/ENTRY/SAMPLE/TRANSFORMATIONS/rot_z@vector-attribute>`
 
 **NXDL Source**:
   https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXmpes_liquid.nxdl.xml
