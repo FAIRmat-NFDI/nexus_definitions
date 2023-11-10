@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 <!--
 # NeXus - Neutron and X-ray Common Data Format
 # 
-# Copyright (C) 2014-2022 NeXus International Advisory Committee (NIAC)
+# Copyright (C) 2014-2023 NeXus International Advisory Committee (NIAC)
 # 
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -21,77 +21,66 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
-<!--it is useful to define own base classes for frequently used classes
-a polyhedron is a specific polytope in 3d, do we need
-higher-dimensional polytopes? that could be useful for simplicies though
-as they are used in numerics etc. maybe reach out here to our friends
-from MarDI, for now let's assume we do not need polytopes for d > 3-->
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXcg_tetrahedron_set" extends="NXcg_primitive_set" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
-    <symbols>
-        <doc>
-             The symbols used in the schema to specify e.g. dimensions of arrays.
-        </doc>
-        <symbol name="c">
-            <doc>
-                 The cardinality of the set, i.e. the number of tetrahedra.
-            </doc>
-        </symbol>
-    </symbols>
+  <symbols>
     <doc>
-         Computational geometry description of a set of tetrahedra.
+         The symbols used in the schema to specify e.g. dimensions of arrays.
     </doc>
-    <!--qualifiers and properties of tetrahedra-->
-    <field name="face_area" type="NX_FLOAT" units="NX_AREA">
-        <doc>
-             Area of each of the four triangular faces of each tetrahedron.
-        </doc>
-        <dimensions rank="2">
-            <dim index="1" value="c"/>
-            <dim index="2" value="4"/>
-        </dimensions>
-    </field>
-    <field name="edge_length" type="NX_FLOAT" units="NX_LENGTH">
-        <doc>
-             Length of each edge of each tetrahedron.
-        </doc>
-        <dimensions rank="2">
-            <dim index="1" value="c"/>
-            <dim index="2" value="6"/>
-        </dimensions>
-    </field>
-    <!--substantially more detailed descriptors of the shape, the mesh
+    <symbol name="c">
+      <doc>
+           The cardinality of the set, i.e. the number of tetrahedra.
+      </doc>
+    </symbol>
+  </symbols>
+  <doc>
+       Computational geometry description of a set of tetrahedra.
+       
+       Among hexahedral elements, tetrahedral elements are one of the most
+       frequently used geometric primitive for meshing and describing volumetric
+       objects in continuum-field simulations.
+  </doc>
+  <!--qualifiers and properties of tetrahedra-->
+  <field name="face_area" type="NX_NUMBER" units="NX_AREA">
+    <doc>
+         Area of each of the four triangular faces of each tetrahedron.
+    </doc>
+    <dimensions rank="2">
+      <dim index="1" value="c"/>
+      <dim index="2" value="4"/>
+    </dimensions>
+  </field>
+  <field name="edge_length" type="NX_NUMBER" units="NX_LENGTH">
+    <doc>
+         Length of each edge of each tetrahedron.
+    </doc>
+    <dimensions rank="2">
+      <dim index="1" value="c"/>
+      <dim index="2" value="6"/>
+    </dimensions>
+  </field>
+  <!--substantially more detailed descriptors of the shape, the mesh
+currently not used should be discussed as sequence might not be clear to everybody
 interior_angle(NX_NUMBER):
-doc: |
-Array of interior angle values. For each tetrahedron the quadruplet of
-angles is a sequence following the order of the vertices. The angle
-is the angle at the specific vertex. TODO lexiographical order.
-Winding order has to be interpreted to resolve the individual angles
-between edges of adjoining face triangles meeting at each corner/vertex.
-unit: NX_ANGLE
-dimensions:
-rank: 2
-dim: [[1, c], [2, 12]]
+  doc: |
+    Interior angle values for each tetrahedron.
+    The quadruplet of angles is a sequence following the order of the vertices.
+    The angle is the angle at the specific vertex.
+
+    The sequence of the vertices follows their definition in tetrahedra.
 detailed mesh-based representation-->
-    <group name="tetrahedra" type="NXcg_face_list_data_structure">
-        <!--exists: [min, 0, max, 1]-->
-        <doc>
-             A simple approach to describe the entire set of tetrahedra when the
-             main intention is to store the shape of the tetrahedra for visualization
-             purposes.
-        </doc>
-    </group>
-    <group name="tetrahedron" type="NXcg_face_list_data_structure">
-        <!--exists: [min, 0, max, infty]  # can this be max, c?-->
-        <doc>
-             Disentangled representations of the mesh of specific tetrahedra.
-        </doc>
-    </group>
-    <group name="tetrahedron_half_edge" type="NXcg_half_edge_data_structure">
-        <!--exists: [min, 0, max, infty]-->
-        <doc>
-             Disentangled representation of the planar graph that each tetrahedron
-             represents. Such a description simplifies topological processing
-             or analyses of mesh primitive operations and neighborhood queries.
-        </doc>
-    </group>
+  <group name="tetrahedra" type="NXcg_face_list_data_structure">
+    <doc>
+         Combined storage of all primitives of all tetrahedra.
+    </doc>
+  </group>
+  <group name="tetrahedronID" type="NXcg_face_list_data_structure">
+    <doc>
+         Individual storage of each tetrahedron.
+    </doc>
+  </group>
+  <group name="tetrahedron_half_edgeID" type="NXcg_half_edge_data_structure">
+    <doc>
+         Individual storage of each tetrahedron as a graph.
+    </doc>
+  </group>
 </definition>

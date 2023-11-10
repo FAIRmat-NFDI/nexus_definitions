@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 <!--
 # NeXus - Neutron and X-ray Common Data Format
 # 
-# Copyright (C) 2014-2022 NeXus International Advisory Committee (NIAC)
+# Copyright (C) 2014-2023 NeXus International Advisory Committee (NIAC)
 # 
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -21,58 +21,49 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
+<!--
+`point Electronic GmbH <https://www.pointelectronic.de>`_-->
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXcomponent_em" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+  <doc>
+       Base class for components used in an electron microscope.
+       
+       The electron microscope can be a real one or a simulated microscope.
+       The key motivation behind this generalization is the observation that in all
+       cases a controlled electron beam is generated in reality or that beam is simulated
+       and this beam is then used or modified in a controlled manner for the purpose
+       of studying physical interaction mechanisms of the beam with matter.
+       Here it does not matter whether one considers a real specimen or a simulated one.
+       
+       Using a common description for the real experiment in the lab and - what is
+       typically a simplification of it - via a computer simulation, has the benefit
+       that many pieces of information can be stored in the same way. In effect,
+       users are guided with finding information and unnecessary descriptive
+       variety for what are exactly the same concept is avoided to work towards
+       more interoperability.
+       
+       Another motivation to make no fundamental distinction between a scanning and
+       a transmission electron microscope is that both are electron microscopes whose
+       components are often very similar.
+  </doc>
+  <field name="name" type="NX_CHAR">
     <doc>
-         Base class for recurrent information of components used inside an electron microscope.
-         
-         The electron microscope can be a real one or a virtual (simulated one).
-         The key motivation behind this generalization is that in all cases a
-         controlled electron beam is generated or simulated and then altered
-         in a controlled manner for the purpose of studying physical interaction
-         mechanism of the beam with matter (a real specimen or a simulated one).
-         
-         Using a common description for the real experiment in the lab and what is
-         typically a simplification of it via a computer simulation has the benefit
-         that many pieces of information can be stored in the same way and thus
-         ease guiding users to find such information.
+         Given name to the component e.g stage, lens C1, etc.
     </doc>
-    <field name="name">
-        <doc>
-             Given name/alias.
-        </doc>
-    </field>
-    <field name="description">
-        <doc>
-             Ideally, a (globally) unique persistent identifier, link,
-             or text to a resource which gives further details. If this does not exist
-             a free-text field to report further details about the corrector.
-        </doc>
-    </field>
-    <group type="NXfabrication"/>
-    <group type="NXprogram"/>
-    <!--(NXtransformations):
-  doc: |
-    Affine transformation which detail the arrangement in the
-    (real/simulated) electron-optical setup relative to the
-    optical axis and path of charged particles (electrons or ions).-->
-    <field name="depends_on">
-        <doc>
-             Specifies the position of the lens by pointing to the last transformation in the
-             transformation chain in the NXtransformations group.
-        </doc>
-    </field>
-    <group type="NXtransformations">
-        <doc>
-             Collection of axis-based translations and rotations to describe the
-             location and geometry of the component in the instrument.
-        </doc>
-    </group>
-    <!--info: |
- Typically, the components of a system should all be related relative to
- each other and only one component should relate to the reference
- coordinate system.
-this info keyword will take the role of a field
-and even more an invalid one which can only be solved if no field any
-longer must be named info or with making all info annotations a
-an attribute of a docstring, like a comment-of-a-comment-->
+  </field>
+  <field name="description" type="NX_CHAR">
+    <doc>
+         Ideally, a (globally) unique persistent identifier, link, or text to a
+         resource which gives further details to this component.
+         If such resource does not exist, a free-text field to report
+         further details about the component is possible.
+    </doc>
+  </field>
+  <group type="NXfabrication"/>
+  <group type="NXprogram"/>
+  <group type="NXtransformations">
+    <doc>
+         Collection of axis-based translations and rotations to describe the
+         location and geometry of the component in the instrument.
+    </doc>
+  </group>
 </definition>

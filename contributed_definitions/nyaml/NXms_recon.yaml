@@ -1,6 +1,15 @@
 # position would need another depends_on the specific coordinate system used, currently we assume McStas
 # roi1/ebsd/microstructure1
 category: base
+doc: |
+  Base class to describe discretized (micro)structural features of a material.
+  
+  One instance of this base class can be used to describe the current configuration
+  the base class does not include time-dependent descriptions for the sake of
+  clarity and because of the fact that virtually all simulations or experiments
+  probe time by sampling. Therefore, time-dependent state descriptions should
+  be realized with creating a set of :ref:`NXms_snapshot_set` and :ref:`NXms_snapshot`.
+# and adding an instance of the here specified :ref:`NXms_recon` base class inside an 
 symbols:
   doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
@@ -32,15 +41,6 @@ symbols:
     The number of triple lines
   n_q: |
     The number of quadruple junctions.
-doc: |
-  Base class to describe discretized (micro)structural features of a material.
-  
-  One instance of this base class can be used to describe the current configuration
-  the base class does not include time-dependent descriptions for the sake of
-  clarity and because of the fact that virtually all simulations or experiments
-  probe time by sampling. Therefore, time-dependent state descriptions should
-  be realized with creating a set of :ref:`NXms_snapshot_set` and adding an instance
-  of the here specified :ref:`NXms_recon` base class inside an :ref:`NXms_snapshot`.
 type: group
 NXms_recon(NXobject):
   # as e.g. a result of one grain reconstruction with MTex or othe
@@ -73,7 +73,6 @@ NXms_recon(NXobject):
         which warrants to argue that there is an interface between the
         two regions.
       unit: NX_ANGLE
-
   # the result of running one grain reconstruction
   # ms_feature_set1
   # we could also enumerate instances ms_feature_setID here because configuration
@@ -111,7 +110,7 @@ NXms_recon(NXobject):
           representation (projection) of the characterized material.
           
           For true volumetric techniques use the specifically
-          specialized crystals :ref:`NXms_feature_set)` instead.
+          specialized crystals :ref:`NXms_feature_set` instead.
           See stereology literature for more details e.g.
           E.E. Underwood's book entitled Quantitative Stereology
       number_of_crystals(NX_UINT):
@@ -142,9 +141,9 @@ NXms_recon(NXobject):
           of the set differs from zero.
         unit: NX_UNITLESS
       phase_identifier(NX_INT):
-        \@depends_on:
+        \@depends_on(NX_CHAR):
         doc: |
-          Identifier used for phass for explicit indexing.
+          Identifier used for phase for explicit indexing.
         unit: NX_UNITLESS
         dim: (n_c_two,)
       # properties of crystal_projections aka grain properties
@@ -251,7 +250,7 @@ NXms_recon(NXobject):
         effects of an intersection between a triple line that is cut
         by the specimen surface as these defects are then exposed typically
         to a different atmosphere and hence have different thermodynamic boundary
-        conditions than of their true volumetric defects in the bulk.\@discretization(NX_CHAR):
+        conditions than of their true volumetric defects in the bulk.
       \@discretization(NX_CHAR):
         doc: |
           Reference to points(NXcg_point_set) which supports the
@@ -277,7 +276,7 @@ NXms_recon(NXobject):
         unit: NX_UNITLESS
         dim: (n_t_two,)
       location(NX_INT):
-        \@depends_on:
+        \@depends_on(NX_CHAR):
           doc: |
             The relevant points(NXcg_point_set) instance whereby to
             resolve interface identifiers.
@@ -286,7 +285,7 @@ NXms_recon(NXobject):
         unit: NX_UNITLESS
         dim: (n_t_two,)
       interfaces(NX_INT): # aka topology or interfaces
-        \@depends_on:
+        \@depends_on(NX_CHAR):
           doc: |
             The specific interface_projections(NXms_feature_set)
             instance whereby to resolve interface identifiers.
@@ -296,7 +295,6 @@ NXms_recon(NXobject):
           the triple point connects.
         unit: NX_UNITLESS
         dim: (n_t_two, 3)
-        
       # ii) a triplet of line segment identifier whereby the point-like features is assumed discretized via three polylines representing interfaces
       polylines(NX_INT):
         \@depends_on(NX_CHAR):

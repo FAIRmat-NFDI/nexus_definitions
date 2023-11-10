@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 <!--
 # NeXus - Neutron and X-ray Common Data Format
 # 
-# Copyright (C) 2014-2022 NeXus International Advisory Committee (NIAC)
+# Copyright (C) 2014-2023 NeXus International Advisory Committee (NIAC)
 # 
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -21,24 +21,27 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
+<!--
+:ref:`NXem_se`, :ref:`NXem_bse`.-->
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXem_method" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+  <doc>
+       Base class to describe specific analysis methods in electron microscopy.
+       
+       This base class represent a template how specialized, deep, and method-specific
+       base classes can be defined with which an (NXem) application
+       definition gets equipped with specific groups to document method-specific
+       processing steps and report analyzed quantities.
+       
+       The template base class name :ref:`NXem_method` needs to be changed for each
+       method e.g. :ref:`NXem_adf`, :ref:`NXem_ebsd`, :ref:`NXem_eels`, :ref:`NXem_eds`.
+  </doc>
+  <group type="NXprocess">
     <doc>
-         Base class to describe specific analysis methods in electron microscopy.
-         
-         This base class represent a template how specialized, deep, and
-         method-specific base classes can be defined with which an (NXem) application
-         definition gets equipped with specific groups to document
-         method-specific process steps and analyzed quantities.
-         The template base class name NXem_method needs to be changed for each
-         method e.g. NXem_adf, NXem_ebsd, NXem_eels, NXem_eds, NXem_se, NXem_bse.
+         Details about processing steps.
     </doc>
-    <group type="NXprocess">
-        <doc>
-             Details about processing steps.
-        </doc>
-        <field name="sequence_index" type="NX_UINT"/>
-    </group>
-    <group name="IMAGE_R_SET" type="NXimage_r_set"/>
-    <group name="IMAGE_C_SET" type="NXimage_c_set"/>
-    <group name="SPECTRUM_SET" type="NXspectrum_set"/>
+    <field name="sequence_index" type="NX_INT"/>
+  </group>
+  <group name="IMAGE_R_SET" type="NXimage_r_set"/>
+  <group name="IMAGE_C_SET" type="NXimage_c_set"/>
+  <group name="SPECTRUM_SET" type="NXspectrum_set"/>
 </definition>
