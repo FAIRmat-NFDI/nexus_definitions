@@ -17,11 +17,9 @@ NXsensor_sts
 
 **Description**:
 
-  .. collapse:: A sensor used to monitor an external condition ...
+  A sensor used to monitor an external condition
 
-      A sensor used to monitor an external condition
-
-      The condition itself is described in :ref:`NXenvironment`.
+  The condition itself is described in :ref:`NXenvironment`.
 
 **Symbols**:
 
@@ -40,17 +38,15 @@ NXsensor_sts
 
   **@default**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: Declares which child group contains a path leading ...
+    .. index:: plotting
 
-        .. index:: plotting
+    Declares which child group contains a path leading
+    to a :ref:`NXdata` group.
 
-        Declares which child group contains a path leading
-        to a :ref:`NXdata` group.
-
-        It is recommended (as of NIAC2014) to use this attribute
-        to help define the path to the default dataset to be plotted.
-        See https://www.nexusformat.org/2014_How_to_find_default_data.html
-        for a summary of the discussion.
+    It is recommended (as of NIAC2014) to use this attribute
+    to help define the path to the default dataset to be plotted.
+    See https://www.nexusformat.org/2014_How_to_find_default_data.html
+    for a summary of the discussion.
 
   .. _/NXsensor_sts/model-field:
 
@@ -90,39 +86,37 @@ NXsensor_sts
 
   **measurement**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: name for measured signal ...
+    name for measured signal
 
-        name for measured signal
+    Any of these values:
 
-        Any of these values:
+      * ``temperature``
 
-          * ``temperature``
+      * ``pH``
 
-          * ``pH``
+      * ``magnetic_field``
 
-          * ``magnetic_field``
+      * ``electric_field``
 
-          * ``electric_field``
+      * ``conductivity``
 
-          * ``conductivity``
+      * ``resistance``
 
-          * ``resistance``
+      * ``voltage``
 
-          * ``voltage``
+      * ``current``
 
-          * ``current``
+      * ``pressure``
 
-          * ``pressure``
+      * ``flow``
 
-          * ``flow``
+      * ``stress``
 
-          * ``stress``
+      * ``strain``
 
-          * ``strain``
+      * ``shear``
 
-          * ``shear``
-
-          * ``surface_pressure``
+      * ``surface_pressure``
 
 
   .. _/NXsensor_sts/type-field:
@@ -131,21 +125,19 @@ NXsensor_sts
 
   **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: The type of hardware used for the measurement. ...
+    The type of hardware used for the measurement.
+    Examples (suggestions but not restrictions):
 
-        The type of hardware used for the measurement.
-        Examples (suggestions but not restrictions):
-
-        :Temperature:
-          J | K | T | E | R | S | Pt100 | Pt1000 | Rh/Fe
-        :pH:
-          Hg/Hg2Cl2 | Ag/AgCl | ISFET
-        :Ion selective electrode:
-          specify species; e.g. Ca2+
-        :Magnetic field:
-          Hall
-        :Surface pressure:
-          wilhelmy plate
+    :Temperature:
+      J | K | T | E | R | S | Pt100 | Pt1000 | Rh/Fe
+    :pH:
+      Hg/Hg2Cl2 | Ag/AgCl | ISFET
+    :Ion selective electrode:
+      specify species; e.g. Ca2+
+    :Magnetic field:
+      Hall
+    :Surface pressure:
+      wilhelmy plate
 
   .. _/NXsensor_sts/run_control-field:
 
@@ -153,10 +145,8 @@ NXsensor_sts
 
   **run_control**: (optional) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
-    .. collapse:: Is data collection controlled or synchronised to this quantity: ...
-
-        Is data collection controlled or synchronised to this quantity:
-        1=no, 0=to "value", 1=to "value_deriv1", etc.
+    Is data collection controlled or synchronised to this quantity:
+    1=no, 0=to "value", 1=to "value_deriv1", etc.
 
   .. _/NXsensor_sts/high_trip_value-field:
 
@@ -180,10 +170,8 @@ NXsensor_sts
 
   **value**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n]) {units=\ :ref:`NX_ANY <NX_ANY>`} 
 
-    .. collapse:: nominal setpoint or average value ...
-
-        nominal setpoint or average value
-        - need [n] as may be a vector
+    nominal setpoint or average value
+    - need [n] as may be a vector
 
   .. _/NXsensor_sts/value_deriv1-field:
 
@@ -191,11 +179,9 @@ NXsensor_sts
 
   **value_deriv1**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: same as field value, Dimensions: same as field value) {units=\ :ref:`NX_ANY <NX_ANY>`} 
 
-    .. collapse:: Nominal/average first derivative of value ...
-
-        Nominal/average first derivative of value
-        e.g. strain rate
-        - same dimensions as "value" (may be a vector)
+    Nominal/average first derivative of value
+    e.g. strain rate
+    - same dimensions as "value" (may be a vector)
 
   .. _/NXsensor_sts/value_deriv2-field:
 
@@ -203,10 +189,8 @@ NXsensor_sts
 
   **value_deriv2**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: same as field value, Dimensions: same as field value) {units=\ :ref:`NX_ANY <NX_ANY>`} 
 
-    .. collapse:: Nominal/average second derivative of value ...
-
-        Nominal/average second derivative of value
-        - same dimensions as "value" (may be a vector)
+    Nominal/average second derivative of value
+    - same dimensions as "value" (may be a vector)
 
   .. _/NXsensor_sts/external_field_brief-field:
 
@@ -236,17 +220,15 @@ NXsensor_sts
 
   **depends_on**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: NeXus positions components by applying a set of translations and rotations ...
+    NeXus positions components by applying a set of translations and rotations
+    to apply to the component starting from 0, 0, 0. The order of these operations
+    is critical and forms what NeXus calls a dependency chain. The depends_on
+    field defines the path to the top most operation of the dependency chain or the
+    string "." if located in the origin. Usually these operations are stored in a
+    NXtransformations group. But NeXus allows them to be stored anywhere.
 
-        NeXus positions components by applying a set of translations and rotations
-        to apply to the component starting from 0, 0, 0. The order of these operations
-        is critical and forms what NeXus calls a dependency chain. The depends_on
-        field defines the path to the top most operation of the dependency chain or the
-        string "." if located in the origin. Usually these operations are stored in a
-        NXtransformations group. But NeXus allows them to be stored anywhere.
-
-        .. todo::
-          Add a definition for the reference point of a sensor.
+    .. todo::
+      Add a definition for the reference point of a sensor.
 
   .. _/NXsensor_sts/temperature-field:
 
@@ -254,11 +236,9 @@ NXsensor_sts
 
   **temperature**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_TEMPERATURE <NX_TEMPERATURE>`} 
 
-    .. collapse:: External sensors connected to the device. For example, T1, temperature of STM ...
-
-        External sensors connected to the device. For example, T1, temperature of STM
-        head. T2, temperature of bottom of LHe helium cryostat. T3, temperature of LN2
-        nitrogen shield.
+    External sensors connected to the device. For example, T1, temperature of STM
+    head. T2, temperature of bottom of LHe helium cryostat. T3, temperature of LN2
+    nitrogen shield.
 
   .. _/NXsensor_sts/pressure-field:
 
@@ -266,10 +246,8 @@ NXsensor_sts
 
   **pressure**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_PRESSURE <NX_PRESSURE>`} 
 
-    .. collapse:: External sensors connected to the device. Pressure of each chamber or ion pump ...
-
-        External sensors connected to the device. Pressure of each chamber or ion pump,
-        such as prepare chamber and analysis chamber
+    External sensors connected to the device. Pressure of each chamber or ion pump,
+    such as prepare chamber and analysis chamber
 
   .. _/NXsensor_sts/power_spectral_density-field:
 
@@ -277,11 +255,9 @@ NXsensor_sts
 
   **power_spectral_density**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` 
 
-    .. collapse:: The power present in the signal as a function of frequency. Used to characteri ...
-
-        The power present in the signal as a function of frequency. Used to characterise
-        the vibration and noise of scanning probes to detect and reduce the impact on
-        resolution during STM imaging
+    The power present in the signal as a function of frequency. Used to characterise
+    the vibration and noise of scanning probes to detect and reduce the impact on
+    resolution during STM imaging
 
   .. _/NXsensor_sts/geometry-group:
 
@@ -293,10 +269,8 @@ NXsensor_sts
 
     **DEPRECATED**: Use the field `depends_on` and :ref:`NXtransformations` to position the beamstop and NXoff_geometry to describe its shape instead
 
-    .. collapse:: Defines the axes for logged vector quantities if they are not the global ...
-
-        Defines the axes for logged vector quantities if they are not the global
-        instrument axes.
+    Defines the axes for logged vector quantities if they are not the global
+    instrument axes.
 
   .. _/NXsensor_sts/amplifier-group:
 
@@ -343,12 +317,10 @@ NXsensor_sts
 
   **TRANSFORMATIONS**: (optional) :ref:`NXtransformations` 
 
-    .. collapse:: This is the group recommended for holding the chain of translation ...
-
-        This is the group recommended for holding the chain of translation
-        and rotation operations necessary to position the component within
-        the instrument. The dependency chain may however traverse similar groups in
-        other component groups.
+    This is the group recommended for holding the chain of translation
+    and rotation operations necessary to position the component within
+    the instrument. The dependency chain may however traverse similar groups in
+    other component groups.
 
 
 Hypertext Anchors

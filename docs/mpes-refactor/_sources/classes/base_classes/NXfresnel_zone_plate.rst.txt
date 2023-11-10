@@ -36,17 +36,15 @@ NXfresnel_zone_plate
 
   **@default**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: Declares which child group contains a path leading  ...
+    .. index:: plotting
 
-        .. index:: plotting
+    Declares which child group contains a path leading 
+    to a :ref:`NXdata` group.
 
-        Declares which child group contains a path leading 
-        to a :ref:`NXdata` group.
-
-        It is recommended (as of NIAC2014) to use this attribute
-        to help define the path to the default dataset to be plotted.
-        See https://www.nexusformat.org/2014_How_to_find_default_data.html
-        for a summary of the discussion.
+    It is recommended (as of NIAC2014) to use this attribute
+    to help define the path to the default dataset to be plotted.
+    See https://www.nexusformat.org/2014_How_to_find_default_data.html
+    for a summary of the discussion.
 
   .. _/NXfresnel_zone_plate/focus_parameters-field:
 
@@ -54,10 +52,8 @@ NXfresnel_zone_plate
 
   **focus_parameters**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1) 
 
-    .. collapse:: list of polynomial coefficients describing the focal length of the zone plate, ...
-
-        list of polynomial coefficients describing the focal length of the zone plate, in increasing powers of photon energy,
-        that describes the focal length of the zone plate (in microns) at an X-ray photon energy (in electron volts).
+    list of polynomial coefficients describing the focal length of the zone plate, in increasing powers of photon energy,
+    that describes the focal length of the zone plate (in microns) at an X-ray photon energy (in electron volts).
 
   .. _/NXfresnel_zone_plate/outer_diameter-field:
 
@@ -86,11 +82,9 @@ NXfresnel_zone_plate
 
   **fabrication**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: how the zone plate was manufactured ...
+    how the zone plate was manufactured
 
-        how the zone plate was manufactured
-
-        Any of these values: ``etched`` | ``plated`` | ``zone doubled`` | ``other``
+    Any of these values: ``etched`` | ``plated`` | ``zone doubled`` | ``other``
 
   .. _/NXfresnel_zone_plate/zone_height-field:
 
@@ -164,31 +158,27 @@ NXfresnel_zone_plate
 
   **depends_on**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: NeXus positions components by applying a set of translations and rotations ...
+    NeXus positions components by applying a set of translations and rotations
+    to apply to the component starting from 0, 0, 0. The order of these operations
+    is critical and forms what NeXus calls a dependency chain. The depends_on
+    field defines the path to the top most operation of the dependency chain or the
+    string "." if located in the origin. Usually these operations are stored in a
+    NXtransformations group. But NeXus allows them to be stored anywhere.
 
-        NeXus positions components by applying a set of translations and rotations
-        to apply to the component starting from 0, 0, 0. The order of these operations
-        is critical and forms what NeXus calls a dependency chain. The depends_on
-        field defines the path to the top most operation of the dependency chain or the
-        string "." if located in the origin. Usually these operations are stored in a
-        NXtransformations group. But NeXus allows them to be stored anywhere.
-
-        .. todo::
-          Add a definition for the reference point of a fresnel zone plate.
+    .. todo::
+      Add a definition for the reference point of a fresnel zone plate.
 
 
   .. _/NXfresnel_zone_plate/TRANSFORMATIONS-group:
 
   **TRANSFORMATIONS**: (optional) :ref:`NXtransformations` 
 
-    .. collapse:: "Engineering" position of the fresnel zone plate ...
+    "Engineering" position of the fresnel zone plate
 
-        "Engineering" position of the fresnel zone plate
-
-        This is the group recommended for holding the chain of translation
-        and rotation operations necessary to position the component within
-        the instrument. The dependency chain may however traverse similar groups in
-        other component groups.
+    This is the group recommended for holding the chain of translation
+    and rotation operations necessary to position the component within
+    the instrument. The dependency chain may however traverse similar groups in
+    other component groups.
 
 
 Hypertext Anchors
