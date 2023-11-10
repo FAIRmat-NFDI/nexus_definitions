@@ -144,8 +144,8 @@ are deep base classes for which each field and group is optional. Specific insta
 
 The definition of several new base classes is motivated by by NXem_ebsd:
 
-    :ref:`NXem_ebsd_conventions`:
+    :ref:`NXem_conventions`, :ref:`NXem_conventions_ebsd`:
         A base class to store all reference frames and rotation conventions which are necessary to interpret the alignment and conventions used when working with orientation data.
 
-    :ref:`NXem_ebsd_crystal_structure_model`:
+    :ref:`NXcrystal_structure`:
         A base class to store crystalline phase/structure used for a simulation of diffraction pattern and comparison of these pattern against patterns to support indexin.

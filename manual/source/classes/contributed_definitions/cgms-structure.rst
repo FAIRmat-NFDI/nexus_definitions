@@ -179,7 +179,7 @@ not only for stencil-based methods:
     :ref:`NXclustering`:
         A base class to describe clustering of objects (such as atoms or features).
 
-    :ref:`NXorientation_set`:
+    :ref:`NXrotation_set`:
         A base class to describe the relative orientation or rotation members
         of a set of features/objects.
 
