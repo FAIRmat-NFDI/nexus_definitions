@@ -26,6 +26,9 @@ concepts which are equally modellable with NeXus:
     :ref:`NXms`:
         An application definition for arbitrary spatiotemporally resolved simulations.
 
+    :ref:`NXms_recon`:
+        A base class for documenting results of reconstructed microstructures.
+
     :ref:`NXms_score_config`:
         A specific example how :ref:`NXapm_paraprobe_config_ranger` can be
         specialized for documenting the configuration of a computer simulation
