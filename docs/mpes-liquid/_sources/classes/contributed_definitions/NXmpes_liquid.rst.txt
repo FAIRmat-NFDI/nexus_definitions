@@ -18,16 +18,16 @@ NXmpes_liquid
 **Description**:
 
   This is the application definition for multidimensional photoelectron
-  spectroscopy on liquids
+  spectroscopy on liquids.
 
 **Symbols**:
 
   No symbol table
 
 **Groups cited**:
-  :ref:`NXcollectioncolumn`, :ref:`NXdata`, :ref:`NXdetector`, :ref:`NXelectronanalyser`, :ref:`NXentry`, :ref:`NXinstrument`, :ref:`NXsample_component`, :ref:`NXsample`, :ref:`NXtransformations`
+  :ref:`NXdata`, :ref:`NXelectronanalyser`, :ref:`NXentry`, :ref:`NXinstrument`, :ref:`NXsample_component`, :ref:`NXsample`, :ref:`NXtransformations`
 
-.. index:: NXentry (base class); used in application definition, NXinstrument (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXcollectioncolumn (base class); used in application definition, NXtransformations (base class); used in application definition, NXdetector (base class); used in application definition, NXsample (base class); used in application definition, NXsample_component (base class); used in application definition, NXdata (base class); used in application definition
+.. index:: NXentry (base class); used in application definition, NXinstrument (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXtransformations (base class); used in application definition, NXsample (base class); used in application definition, NXsample_component (base class); used in application definition, NXdata (base class); used in application definition
 
 **Structure**:
 
@@ -62,329 +62,36 @@ NXmpes_liquid
       **ELECTRONANALYSER**: (required) :ref:`NXelectronanalyser` 
 
 
-        .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN-group:
+        .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation-group:
 
-        **COLLECTIONCOLUMN**: (required) :ref:`NXcollectioncolumn` 
+        **instrument_orientation**: (optional) :ref:`NXtransformations` 
 
+          Transformations describing base geometry in the experiment.
+          Usually defaults to the beam in z direction and gravity in -y direction.
 
-          .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/depends_on-field:
+          .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis-field:
 
-          .. index:: depends_on (field)
+          .. index:: analyzer_optical_axis (field)
 
-          **depends_on**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **analyzer_optical_axis**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` 
 
-            Refers to the NXtransformation matrix which places the collectioncolumn in its
-            coordinate frame.
+            The optical axis of the analyzer
 
-          .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS-group:
+            .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis@gravity-attribute:
 
-          **TRANSFORMATIONS**: (optional) :ref:`NXtransformations` 
+            .. index:: gravity (field attribute)
 
-            Direction of lens axis of analyzer.
+            **@gravity**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-            .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_x-field:
+              Direction of gravity in the analyzer coordinate system.
 
-            .. index:: rot_x (field)
+            .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis@beam_direction-attribute:
 
-            **rot_x**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
+            .. index:: beam_direction (field attribute)
 
+            **@beam_direction**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_x@depends_on-attribute:
-
-              .. index:: depends_on (field attribute)
-
-              **@depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-                Is '.', since beam axis is assumed to be horizontal (perpendicular to gravity).
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_x@transformation_type-attribute:
-
-              .. index:: transformation_type (field attribute)
-
-              **@transformation_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-
-                Obligatory value: ``rotation``
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_x@vector-attribute:
-
-              .. index:: vector (field attribute)
-
-              **@vector**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
-
-
-            .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_y-field:
-
-            .. index:: rot_y (field)
-
-            **rot_y**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
-
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_y@depends_on-attribute:
-
-              .. index:: depends_on (field attribute)
-
-              **@depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-                Link to
-                /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_x
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_y@transformation_type-attribute:
-
-              .. index:: transformation_type (field attribute)
-
-              **@transformation_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-
-                Obligatory value: ``rotation``
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_y@vector-attribute:
-
-              .. index:: vector (field attribute)
-
-              **@vector**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
-
-
-            .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_z-field:
-
-            .. index:: rot_z (field)
-
-            **rot_z**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
-
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_z@depends_on-attribute:
-
-              .. index:: depends_on (field attribute)
-
-              **@depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-                Link to
-                /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_y.
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_z@transformation_type-attribute:
-
-              .. index:: transformation_type (field attribute)
-
-              **@transformation_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-
-                Obligatory value: ``rotation``
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_z@vector-attribute:
-
-              .. index:: vector (field attribute)
-
-              **@vector**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
-
-
-            .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/trans_z-field:
-
-            .. index:: trans_z (field)
-
-            **trans_z**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
-
-              Same as working_distance.
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/trans_z@depends_on-attribute:
-
-              .. index:: depends_on (field attribute)
-
-              **@depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-                Link to
-                /NXentry/NXinstrument/NXelectronanalyser/NXcollectioncolumn/NXtransformations/rot_z.
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/trans_z@transformation_type-attribute:
-
-              .. index:: transformation_type (field attribute)
-
-              **@transformation_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-
-                Obligatory value: ``translation``
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/trans_z@vector-attribute:
-
-              .. index:: vector (field attribute)
-
-              **@vector**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
-
-
-        .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR-group:
-
-        **DETECTOR**: (required) :ref:`NXdetector` 
-
-
-          .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/depends_on-field:
-
-          .. index:: depends_on (field)
-
-          **depends_on**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
-
-            Refers to the NXtransformation matrix which places the detector in its
-            coordinate frame.
-
-          .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS-group:
-
-          **TRANSFORMATIONS**: (optional) :ref:`NXtransformations` 
-
-            Direction of the hemisphere of an HEA. Points towards the detector from the
-            entrance slit.
-
-            .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_x-field:
-
-            .. index:: rot_x (field)
-
-            **rot_x**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
-
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_x@depends_on-attribute:
-
-              .. index:: depends_on (field attribute)
-
-              **@depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-                Is '.', since beam axis is assumed to be horizontal (perpendicular to gravity).
-
-                Obligatory value: ``.``
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_x@transformation_type-attribute:
-
-              .. index:: transformation_type (field attribute)
-
-              **@transformation_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-
-                Obligatory value: ``rotation``
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_x@vector-attribute:
-
-              .. index:: vector (field attribute)
-
-              **@vector**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
-
-
-            .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_y-field:
-
-            .. index:: rot_y (field)
-
-            **rot_y**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
-
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_y@depends_on-attribute:
-
-              .. index:: depends_on (field attribute)
-
-              **@depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-                Link to
-                /NXentry/NXinstrument/NXelectronanalyser/NXdetector/NXtransformations/rot_x
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_y@transformation_type-attribute:
-
-              .. index:: transformation_type (field attribute)
-
-              **@transformation_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-
-                Obligatory value: ``rotation``
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_y@vector-attribute:
-
-              .. index:: vector (field attribute)
-
-              **@vector**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
-
-
-            .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_z-field:
-
-            .. index:: rot_z (field)
-
-            **rot_z**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
-
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_z@depends_on-attribute:
-
-              .. index:: depends_on (field attribute)
-
-              **@depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-                Link to /NXentry/NXinstrument/NXelectronanalyser
-                /NXdetector/NXtransformations/rot_y.
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_z@transformation_type-attribute:
-
-              .. index:: transformation_type (field attribute)
-
-              **@transformation_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-
-                Obligatory value: ``rotation``
-
-              .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_z@vector-attribute:
-
-              .. index:: vector (field attribute)
-
-              **@vector**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
-
-
-        .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS-group:
-
-        **TRANSFORMATIONS**: (optional) :ref:`NXtransformations` 
-
-          Transformations describing base geometry in the experiment. Usually defaults to
-          the beam in z direction and gravity in -y direction.
-
-          .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/gravity_axis-field:
-
-          .. index:: gravity_axis (field)
-
-          **gravity_axis**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
-
-            Direction of gravity.
-
-            .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/gravity_axis@vector-attribute:
-
-            .. index:: vector (field attribute)
-
-            **@vector**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
-
-              The vector in the direction of gravity.
-
-            .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/gravity_axis@depends_on-attribute:
-
-            .. index:: depends_on (field attribute)
-
-            **@depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-
-              Obligatory value: ``.``
-
-          .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/beam_axis-field:
-
-          .. index:: beam_axis (field)
-
-          **beam_axis**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
-
-            Direction of the photon beam.
-
-            .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/beam_axis@vector-attribute:
-
-            .. index:: vector (field attribute)
-
-            **@vector**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
-
-              The vector of the photon-beam direction into the chamber after the last optical
-              element (or directly from the source if there are no optical elements).
-
-            .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/beam_axis@depends_on-attribute:
-
-            .. index:: depends_on (field attribute)
-
-            **@depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-
-              Obligatory value: ``.``
+              Direction of the photon beam in the analyzer coordinate system.
 
     .. _/NXmpes_liquid/ENTRY/SAMPLE-group:
 
@@ -470,8 +177,18 @@ NXmpes_liquid
 
         **jet_direction**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
 
-          The jet direction. If no direction is specified,
+          The coordinate system frame of the liquid jet direction.
+          If no direction attribute is specified,
           the jet points in the positive z-direction.
+
+          .. _/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction@gravity-attribute:
+
+          .. index:: gravity (field attribute)
+
+          **@gravity**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` 
+
+            The direction of gravity in the coordinate system
+            of `jet_direction`.
 
           .. _/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction@transformation_type-attribute:
 
@@ -488,6 +205,11 @@ NXmpes_liquid
 
           **@direction**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` 
 
+            The direction of the liqud jet.
+            If this is not specified the jet points
+            in the positive jet direction.
+            It is recommended to always specify the jet
+            direction explicitly (even for the default case).
 
         .. _/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/leaf_normal-field:
 
@@ -495,10 +217,9 @@ NXmpes_liquid
 
         **leaf_normal**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
 
-          Direction of surface normal vector of the first leaf on the side of solvent #1.
-
-          The surface normal of the liqudjet leaf. If no direction is specified,
-          the leaf normal points in the positive z-direction.
+          Coordinate frame for the surface normal of the first leaf on the side of solvent #1.
+          If no direction is specified,
+          the surface leaf normal vector points in the positive z-direction.
           The value of this field is the angle between the
           analyzer optical axis and the leaf normal.
           If you only want to collect the angle between the leaf normal
@@ -506,8 +227,6 @@ NXmpes_liquid
           If a transformation chain is provided (with the `depends_on` attribute)
           it should depend on the analyzer optical axis or the jet direction depending
           on the use case.
-
-          Direction of surface normal vector of the first leaf on the side of solvent #1. Defaults to be parallel to detection direction.
 
           .. _/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/leaf_normal@transformation_type-attribute:
 
@@ -524,13 +243,18 @@ NXmpes_liquid
 
           **@direction**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` 
 
+            Direction of surface normal vector of the first leaf on the side of solvent #1.
+            If this is not specified it defaults to the positve z-direction which should
+            be parallel to the detection direction.
+            It is recommended to always specify the leaf normal direction
+            explicitly (even for the default case).
 
       .. _/NXmpes_liquid/ENTRY/SAMPLE/solventSOLVENT-group:
 
       **solventSOLVENT**: (required) :ref:`NXsample_component` 
 
-        Solvent substance of the liquid jet. This also accounts for multiple jets if
-        more than one solvent is given.
+        Solvent substance of the liquid jet.
+        This also accounts for multiple jets if more than one solvent is given.
 
         .. _/NXmpes_liquid/ENTRY/SAMPLE/solventSOLVENT/description-field:
 
@@ -591,8 +315,8 @@ NXmpes_liquid
 
       **soluteSOLUTE**: (required) :ref:`NXsample_component` 
 
-        Solute substance solved in a given solvent. This also accounts for multiple
-        solutes if more than one is given.
+        Solute substance solved in a given solvent.
+        This also accounts for multiple solutes if more than one is given.
 
         .. _/NXmpes_liquid/ENTRY/SAMPLE/soluteSOLUTE/description-field:
 
@@ -678,47 +402,10 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes_liquid/ENTRY/definition@version-attribute </NXmpes_liquid/ENTRY/definition@version-attribute>`
 * :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT-group </NXmpes_liquid/ENTRY/INSTRUMENT-group>`
 * :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER-group </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER-group>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN-group </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN-group>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/depends_on-field </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/depends_on-field>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS-group </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS-group>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_x-field </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_x-field>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_x@depends_on-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_x@depends_on-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_x@transformation_type-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_x@transformation_type-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_x@vector-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_x@vector-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_y-field </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_y-field>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_y@depends_on-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_y@depends_on-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_y@transformation_type-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_y@transformation_type-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_y@vector-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_y@vector-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_z-field </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_z-field>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_z@depends_on-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_z@depends_on-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_z@transformation_type-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_z@transformation_type-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_z@vector-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/rot_z@vector-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/trans_z-field </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/trans_z-field>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/trans_z@depends_on-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/trans_z@depends_on-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/trans_z@transformation_type-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/trans_z@transformation_type-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/trans_z@vector-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN/TRANSFORMATIONS/trans_z@vector-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR-group </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR-group>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/depends_on-field </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/depends_on-field>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS-group </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS-group>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_x-field </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_x-field>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_x@depends_on-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_x@depends_on-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_x@transformation_type-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_x@transformation_type-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_x@vector-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_x@vector-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_y-field </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_y-field>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_y@depends_on-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_y@depends_on-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_y@transformation_type-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_y@transformation_type-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_y@vector-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_y@vector-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_z-field </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_z-field>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_z@depends_on-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_z@depends_on-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_z@transformation_type-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_z@transformation_type-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_z@vector-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/TRANSFORMATIONS/rot_z@vector-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS-group </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS-group>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/beam_axis-field </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/beam_axis-field>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/beam_axis@depends_on-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/beam_axis@depends_on-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/beam_axis@vector-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/beam_axis@vector-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/gravity_axis-field </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/gravity_axis-field>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/gravity_axis@depends_on-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/gravity_axis@depends_on-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/gravity_axis@vector-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/TRANSFORMATIONS/gravity_axis@vector-attribute>`
+* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation-group </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation-group>`
+* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis-field </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis-field>`
+* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis@beam_direction-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis@beam_direction-attribute>`
+* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis@gravity-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis@gravity-attribute>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE-group </NXmpes_liquid/ENTRY/SAMPLE-group>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/chemical_formula-field </NXmpes_liquid/ENTRY/SAMPLE/chemical_formula-field>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/depends_on-field </NXmpes_liquid/ENTRY/SAMPLE/depends_on-field>`
@@ -727,6 +414,7 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation-group </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation-group>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction-field </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction-field>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction@direction-attribute </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction@direction-attribute>`
+* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction@gravity-attribute </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction@gravity-attribute>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction@transformation_type-attribute </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction@transformation_type-attribute>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/leaf_normal-field </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/leaf_normal-field>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/leaf_normal@direction-attribute </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/leaf_normal@direction-attribute>`
