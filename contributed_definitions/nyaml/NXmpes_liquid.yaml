@@ -1,5 +1,7 @@
 doc: |
   This is the application definition for multidimensional photoelectron spectroscopy on liquids.
+  It extends the NXmpes application definition by metadata for characterizing liquidjet composition
+  and geometry.
 category: application
 NXmpes_liquid(NXmpes):
   (NXentry):
@@ -7,35 +9,31 @@ NXmpes_liquid(NXmpes):
       \@version:
       enumeration: ["NXmpes_liquid"]
     (NXinstrument):
-      (NXelectronanalyser):
-        instrument_orientation(NXtransformations):
-          doc: |
-            Transformations describing base geometry in the experiment.
-            Usually defaults to the beam in z direction and gravity in -y direction.
-          exists: optional
-          analyzer_optical_axis(NX_NUMBER):
-            exists: recommended
-            doc: |
-              The optical axis of the analyzer
-            \@gravity:
-              doc: |
-                Direction of gravity in the analyzer coordinate system.
-            \@beam_direction:
-              doc: |
-                Direction of the photon beam in the analyzer coordinate system. 
-    (NXsample):
-      chemical_formula:
+      instrument_orientation(NXtransformations):
+        doc: |
+          Transformations describing base geometry in the experiment.
+          Usually defaults to the beam in z direction and gravity in -y direction.
         exists: optional
-        doc: |
-          In the case of a fixed temperature measurement this is the scalar temperature of the sample.
-          In the case of an experiment in which the temperature is changed and recoded,
-          this is an array of length m of temperatures.
-      electric_field(NX_FLOAT):
-        exists: recommended
-        unit: NX_VOLTAGE
-        doc: |
-          Electric field applied to the sample with respect to
-          ground / the system, e.g., via biasing.
+        analyzer_optical_axis(NX_NUMBER):
+          exists: recommended
+          doc: |
+            The coordinate system frame of the analyzer.
+            If no direction attribute is specified,
+            the optical axis of the analyzer follows the positive z-direction.
+          \@gravity:
+            doc: |
+              Direction of gravity in the analyzer coordinate system.
+          \@beam_direction:
+            doc: |
+              Direction of the photon beam in the analyzer coordinate system. 
+          \@direction:
+            doc: |
+              The direction of the analyzer optical axis.
+              If this is not specified the optical axis points
+              in the positive jet direction.
+              It is recommended to always specify the axis
+              direction explicitly (even for the default case).
+    (NXsample):
       thickness(NX_FLOAT):
         exists: recommended
         unit: NX_LENGTH
@@ -47,7 +45,7 @@ NXmpes_liquid(NXmpes):
         unit: NX_ANY
         doc: |
           Flow rate of the liquid into the chamber, i.e.,
-          throught the microjet capillary (or in case of a flat jet: both capillaries).
+          through the microjet capillary (or in case of a flat jet: both capillaries).
           Unit should be NX_VOLUME / NX_TIME.
       shape(NX_CHAR):
         enumeration: ["round", "flat"]
@@ -64,8 +62,8 @@ NXmpes_liquid(NXmpes):
         doc: |
           Transformations describing the transformation chain of the liquid jet flow direction
           and optionally the flat jet normal. The vector of the major flow direction of the
-          liquid jet from the injection into the chamber.
-          Along the cylinder axis for single, cylidrical jets, and parallel to the leaf plane for flatjets.
+          liquid jet from the point of injection into the chamber.
+          Along the cylinder axis for single, cylindrical jets, and parallel to the leaf plane for flatjets.
         jet_direction(NX_NUMBER):
           doc: |
             The coordinate system frame of the liquid jet direction.
@@ -122,7 +120,10 @@ NXmpes_liquid(NXmpes):
       solventSOLVENT(NXsample_component):
         doc: |
           Solvent substance of the liquid jet.
-          This also accounts for multiple jets if more than one solvent is given.
+          For flat jets, this group may appear more than once.
+          If a mixture of solvents is used,
+          the one with the highest mol fraction should be designated solvent,
+          and the other(s) solute(s) (see solute group).
         description(NX_CHAR):
           exists: recommended
         name(NX_CHAR):
@@ -140,7 +141,8 @@ NXmpes_liquid(NXmpes):
           exists: optional
           doc: |
             Whether or not agents for pH adjustment were added to the solution.
-            In this case, users are encouraged to expand on that in preparation_description.
+            In this case, users are encouraged to expand on that in preparation_description
+            or add a corresponding solute group.
         mol_fraction(NX_FLOAT):
           exists: optional
           unit: NX_ANY
@@ -168,10 +170,3 @@ NXmpes_liquid(NXmpes):
         solvent(NX_CHAR):
           doc: |
             Specifies the parent solvent entry of the solution.
-    (NXdata):
-      \@axes(NX_CHAR):
-        enumeration: ["energy"]
-      energy(NX_NUMBER):
-        unit: NX_ENERGY
-        doc: |
-          Data containing the energy axis.
