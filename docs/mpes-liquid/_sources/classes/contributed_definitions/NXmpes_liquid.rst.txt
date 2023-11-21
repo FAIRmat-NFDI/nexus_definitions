@@ -17,17 +17,18 @@ NXmpes_liquid
 
 **Description**:
 
-  This is the application definition for multidimensional photoelectron
-  spectroscopy on liquids.
+  This is the application definition for multidimensional photoelectron spectroscopy on liquids.
+  It extends the NXmpes application definition by metadata for characterizing liquidjet composition
+  and geometry.
 
 **Symbols**:
 
   No symbol table
 
 **Groups cited**:
-  :ref:`NXdata`, :ref:`NXelectronanalyser`, :ref:`NXentry`, :ref:`NXinstrument`, :ref:`NXsample_component`, :ref:`NXsample`, :ref:`NXtransformations`
+  :ref:`NXentry`, :ref:`NXinstrument`, :ref:`NXsample_component`, :ref:`NXsample`, :ref:`NXtransformations`
 
-.. index:: NXentry (base class); used in application definition, NXinstrument (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXtransformations (base class); used in application definition, NXsample (base class); used in application definition, NXsample_component (base class); used in application definition, NXdata (base class); used in application definition
+.. index:: NXentry (base class); used in application definition, NXinstrument (base class); used in application definition, NXtransformations (base class); used in application definition, NXsample (base class); used in application definition, NXsample_component (base class); used in application definition
 
 **Structure**:
 
@@ -57,65 +58,55 @@ NXmpes_liquid
     **INSTRUMENT**: (required) :ref:`NXinstrument` 
 
 
-      .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER-group:
+      .. _/NXmpes_liquid/ENTRY/INSTRUMENT/instrument_orientation-group:
 
-      **ELECTRONANALYSER**: (required) :ref:`NXelectronanalyser` 
+      **instrument_orientation**: (optional) :ref:`NXtransformations` 
 
+        Transformations describing base geometry in the experiment.
+        Usually defaults to the beam in z direction and gravity in -y direction.
 
-        .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation-group:
+        .. _/NXmpes_liquid/ENTRY/INSTRUMENT/instrument_orientation/analyzer_optical_axis-field:
 
-        **instrument_orientation**: (optional) :ref:`NXtransformations` 
+        .. index:: analyzer_optical_axis (field)
 
-          Transformations describing base geometry in the experiment.
-          Usually defaults to the beam in z direction and gravity in -y direction.
+        **analyzer_optical_axis**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` 
 
-          .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis-field:
+          The coordinate system frame of the analyzer.
+          If no direction attribute is specified,
+          the optical axis of the analyzer follows the positive z-direction.
 
-          .. index:: analyzer_optical_axis (field)
+          .. _/NXmpes_liquid/ENTRY/INSTRUMENT/instrument_orientation/analyzer_optical_axis@gravity-attribute:
 
-          **analyzer_optical_axis**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` 
+          .. index:: gravity (field attribute)
 
-            The optical axis of the analyzer
+          **@gravity**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-            .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis@gravity-attribute:
+            Direction of gravity in the analyzer coordinate system.
 
-            .. index:: gravity (field attribute)
+          .. _/NXmpes_liquid/ENTRY/INSTRUMENT/instrument_orientation/analyzer_optical_axis@beam_direction-attribute:
 
-            **@gravity**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+          .. index:: beam_direction (field attribute)
 
-              Direction of gravity in the analyzer coordinate system.
+          **@beam_direction**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-            .. _/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis@beam_direction-attribute:
+            Direction of the photon beam in the analyzer coordinate system.
 
-            .. index:: beam_direction (field attribute)
+          .. _/NXmpes_liquid/ENTRY/INSTRUMENT/instrument_orientation/analyzer_optical_axis@direction-attribute:
 
-            **@beam_direction**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+          .. index:: direction (field attribute)
 
-              Direction of the photon beam in the analyzer coordinate system.
+          **@direction**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+
+            The direction of the analyzer optical axis.
+            If this is not specified the optical axis points
+            in the positive jet direction.
+            It is recommended to always specify the axis
+            direction explicitly (even for the default case).
 
     .. _/NXmpes_liquid/ENTRY/SAMPLE-group:
 
     **SAMPLE**: (required) :ref:`NXsample` 
 
-
-      .. _/NXmpes_liquid/ENTRY/SAMPLE/chemical_formula-field:
-
-      .. index:: chemical_formula (field)
-
-      **chemical_formula**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-        In the case of a fixed temperature measurement this is the scalar temperature of the sample.
-        In the case of an experiment in which the temperature is changed and recoded,
-        this is an array of length m of temperatures.
-
-      .. _/NXmpes_liquid/ENTRY/SAMPLE/electric_field-field:
-
-      .. index:: electric_field (field)
-
-      **electric_field**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_VOLTAGE <NX_VOLTAGE>`} 
-
-        Electric field applied to the sample with respect to
-        ground / the system, e.g., via biasing.
 
       .. _/NXmpes_liquid/ENTRY/SAMPLE/thickness-field:
 
@@ -133,7 +124,7 @@ NXmpes_liquid
       **flow_rate**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ANY <NX_ANY>`} 
 
         Flow rate of the liquid into the chamber, i.e.,
-        throught the microjet capillary (or in case of a flat jet: both capillaries).
+        through the microjet capillary (or in case of a flat jet: both capillaries).
         Unit should be NX_VOLUME / NX_TIME.
 
       .. _/NXmpes_liquid/ENTRY/SAMPLE/shape-field:
@@ -168,8 +159,8 @@ NXmpes_liquid
 
         Transformations describing the transformation chain of the liquid jet flow direction
         and optionally the flat jet normal. The vector of the major flow direction of the
-        liquid jet from the injection into the chamber.
-        Along the cylinder axis for single, cylidrical jets, and parallel to the leaf plane for flatjets.
+        liquid jet from the point of injection into the chamber.
+        Along the cylinder axis for single, cylindrical jets, and parallel to the leaf plane for flatjets.
 
         .. _/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction-field:
 
@@ -254,7 +245,10 @@ NXmpes_liquid
       **solventSOLVENT**: (required) :ref:`NXsample_component` 
 
         Solvent substance of the liquid jet.
-        This also accounts for multiple jets if more than one solvent is given.
+        For flat jets, this group may appear more than once.
+        If a mixture of solvents is used,
+        the one with the highest mol fraction should be designated solvent,
+        and the other(s) solute(s) (see solute group).
 
         .. _/NXmpes_liquid/ENTRY/SAMPLE/solventSOLVENT/description-field:
 
@@ -300,7 +294,8 @@ NXmpes_liquid
         **ph_adjustment**: (optional) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
           Whether or not agents for pH adjustment were added to the solution.
-          In this case, users are encouraged to expand on that in preparation_description.
+          In this case, users are encouraged to expand on that in preparation_description
+          or add a corresponding solute group.
 
         .. _/NXmpes_liquid/ENTRY/SAMPLE/solventSOLVENT/mol_fraction-field:
 
@@ -364,28 +359,6 @@ NXmpes_liquid
 
           Specifies the parent solvent entry of the solution.
 
-    .. _/NXmpes_liquid/ENTRY/DATA-group:
-
-    **DATA**: (required) :ref:`NXdata` 
-
-
-      .. _/NXmpes_liquid/ENTRY/DATA@axes-attribute:
-
-      .. index:: axes (group attribute)
-
-      **@axes**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-
-        Obligatory value: ``energy``
-
-      .. _/NXmpes_liquid/ENTRY/DATA/energy-field:
-
-      .. index:: energy (field)
-
-      **energy**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} 
-
-        Data containing the energy axis.
-
 
 Hypertext Anchors
 -----------------
@@ -395,21 +368,16 @@ attributes, and links defined in this class.
 
 
 * :ref:`/NXmpes_liquid/ENTRY-group </NXmpes_liquid/ENTRY-group>`
-* :ref:`/NXmpes_liquid/ENTRY/DATA-group </NXmpes_liquid/ENTRY/DATA-group>`
-* :ref:`/NXmpes_liquid/ENTRY/DATA/energy-field </NXmpes_liquid/ENTRY/DATA/energy-field>`
-* :ref:`/NXmpes_liquid/ENTRY/DATA@axes-attribute </NXmpes_liquid/ENTRY/DATA@axes-attribute>`
 * :ref:`/NXmpes_liquid/ENTRY/definition-field </NXmpes_liquid/ENTRY/definition-field>`
 * :ref:`/NXmpes_liquid/ENTRY/definition@version-attribute </NXmpes_liquid/ENTRY/definition@version-attribute>`
 * :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT-group </NXmpes_liquid/ENTRY/INSTRUMENT-group>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER-group </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER-group>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation-group </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation-group>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis-field </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis-field>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis@beam_direction-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis@beam_direction-attribute>`
-* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis@gravity-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/ELECTRONANALYSER/instrument_orientation/analyzer_optical_axis@gravity-attribute>`
+* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/instrument_orientation-group </NXmpes_liquid/ENTRY/INSTRUMENT/instrument_orientation-group>`
+* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/instrument_orientation/analyzer_optical_axis-field </NXmpes_liquid/ENTRY/INSTRUMENT/instrument_orientation/analyzer_optical_axis-field>`
+* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/instrument_orientation/analyzer_optical_axis@beam_direction-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/instrument_orientation/analyzer_optical_axis@beam_direction-attribute>`
+* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/instrument_orientation/analyzer_optical_axis@direction-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/instrument_orientation/analyzer_optical_axis@direction-attribute>`
+* :ref:`/NXmpes_liquid/ENTRY/INSTRUMENT/instrument_orientation/analyzer_optical_axis@gravity-attribute </NXmpes_liquid/ENTRY/INSTRUMENT/instrument_orientation/analyzer_optical_axis@gravity-attribute>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE-group </NXmpes_liquid/ENTRY/SAMPLE-group>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/chemical_formula-field </NXmpes_liquid/ENTRY/SAMPLE/chemical_formula-field>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/depends_on-field </NXmpes_liquid/ENTRY/SAMPLE/depends_on-field>`
-* :ref:`/NXmpes_liquid/ENTRY/SAMPLE/electric_field-field </NXmpes_liquid/ENTRY/SAMPLE/electric_field-field>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/flow_rate-field </NXmpes_liquid/ENTRY/SAMPLE/flow_rate-field>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation-group </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation-group>`
 * :ref:`/NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction-field </NXmpes_liquid/ENTRY/SAMPLE/liquidjet_orientation/jet_direction-field>`
