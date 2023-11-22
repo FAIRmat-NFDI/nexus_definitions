@@ -1,17 +1,30 @@
 # A primer on NeXus
 
-NeXus is is a description of a common data exchange format initially developed for neutron, X-ray, and muon experiments. Within FAIRmat we extensively extended the format to cover a range of experiments with major support for APM, ARPES, XPS, and optical spectroscpy but we give advince and guidance for developing standards for other formats as well.
+NeXus is is a description of a common data exchange format initially developed for neutron, X-ray, and muon experiments. Within FAIRmat we extensively extended the format to cover a range of experiments with major support for APM, ARPES, XPS, and optical spectroscpy but we also give advice and guidance for developing standards for other formats as well.
 
-Who is this tutorial for?
+## Who is this tutorial for?
 
-The document is for people not familiar with nexus to understand what it is doing and why it is useful.
+The document is for people not familiar with NeXus to grasp the basic principles and common terms for NeXus.
 
-What should people know before this tutorial?
+## What should people know before this tutorial?
 
 - They should have a basic understanding what an hdf5 file is and how to write it
-- They should have basic programming skills
+- They should have a basic understanding of FAIR data [wilkinson et al](...)
 
-What should people learn from this tutorial?
+## What you will know at the end of this tutorial?
+
+You will have
+
+- a basic understanding how to write a file according to a NeXus standard
+- an idea of how to start writing an NeXus application definition for your domain of research
+
+
+Concept of this tutorial:
+
+Create an example file NXdouble_slit
+
+NXslit_experiments --> NXdouble_slit
+NXslit_experiments --> NXsingle_slit
 
 They should learn the basic principles of how nexus works, the different path notations
 - Principles of nexus
@@ -30,10 +43,12 @@ Additional information (i.e., not in this tutorial but linked to this):
 
 !!! info "NeXus path notations"
 
-    ToDo: Clarify different path notations. We have one notation for the actual NeXus class. One for the appdef path and one in the actual instance. It still has to be clarified how we want to address when we add something like `my_INSTRUMENT` in an application definition. How would this translate to concept path?
+    There are several methods for referencing concepts or data paths within NeXus:
 
-    - **Concept path notation:** The concept path is a description of the path of a concept, e.g. `/NXentry/NXinstrument/NXdetector`
-    - **Expanded concept path notation:** `NXexperiment:NXentry/NXinstrument/NXdetector`
-    - **Instance path notation:** `/entry/instrument/detector`
-    - **Combined notation:** `/NXentry[entry]/NXinstrument[instrument]/NXdetector[detector]`, Something like `/ENTRY[entry]/INSTRUMENT[instrument]/NXinstrument:my_DETECTOR[my_detector]` for partly variable data??
-    - **Expanded combined notation:** `NXexperiment:NXentry[my_experiment.nxs:entry]/NXinstrument[instrument]/NXdetector[detector]`
+    - **Concept Path Notation:** This notation describes the hierarchical structure of NeXus concepts using class names. For example, `NXexperiment:/NXentry/NXinstrument/NXdetector` indicates the creation of a new NXdetector class within the NXexperiment concept. This path typically forms automatically when an application definition extends a base class's fields.
+
+    - **Instance Path Notation:** It represents the actual location of a field or group in a NeXus data instance (e.g., an HDF5 file). An example is `my_file.nxs:/entry/instrument/detector`.
+
+    - **Combined Notation:** This combines concept and instance paths. For example, `NXexperiment:/NXentry[my_file.nxs:entry]/NXinstrument[instrument]/NXdetector[detector]`. Here, concept paths are outside and instance paths within square brackets. The leftmost entries may include the NeXus class or file reference.
+
+    - **Appdef Notation:** This format is used in application definitions, where uppercase indicates a selectable name and lowercase a fixed name. Examples include `NXexperiment:ENTRY[my_experiment.nxs:entry]/INSTRUMENT[instrument]/DETECTOR[detector]` and `NXexperiment:ENTRY[my_experiment.nxs:entry]/my_INSTRUMENT[my_instrument]/DETECTOR[detector]`.
