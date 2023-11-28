@@ -110,7 +110,7 @@ $(APPDEF_DIR)/%.nxdl.xml : $(APPDEF_DIR)/$(NYAML_SUBDIR)/%.yaml
 	nyaml2nxdl --input-file $<
 	mv $(APPDEF_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
 
-NXDLS := $(NXDL_APPDEF) + $(NXDL_CONTRIB) + $(NXDL_BC)
+NXDLS := $(NXDL_APPDEF) $(NXDL_CONTRIB) $(NXDL_BC)
 nyaml :
 	for file in $(NXDLS); do\
 		mkdir -p "$${file%/*}/nyaml";\
