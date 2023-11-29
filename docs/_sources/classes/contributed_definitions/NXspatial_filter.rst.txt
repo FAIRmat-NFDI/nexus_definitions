@@ -17,8 +17,10 @@ NXspatial_filter
 
 **Description**:
 
-  Spatial filter to filter entries within a region-of-interest based on their
-  position.
+  .. collapse:: Spatial filter to filter entries within a region-of-interest based on their ...
+
+      Spatial filter to filter entries within a region-of-interest based on their
+      position.
 
 **Symbols**:
 
@@ -43,28 +45,30 @@ NXspatial_filter
 
   **windowing_method**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    Qualitative statement which specifies which spatial filtering with respective
-    geometric primitives or bitmask is used. These settings are possible:
+    .. collapse:: Qualitative statement which specifies which spatial filtering with respective ...
 
-    * entire_dataset, no filter is applied, the entire dataset is used.  
-    * union_of_primitives, a filter with (rotated) geometric primitives.  
-      All ions in or on the surface of the primitives are considered  
-      while all other ions are ignored.  
-    * bitmasked_points, a boolean array whose bits encode with 1  
-      which ions should be included. Those ions whose bit is set to 0  
-      will be excluded. Users of python can use the bitfield operations  
-      of the numpy package to define such bitfields.
+        Qualitative statement which specifies which spatial filtering with respective
+        geometric primitives or bitmask is used. These settings are possible:
 
-    Conditions:
-    In the case that windowing_method is entire_dataset all entries are processed.
-    In the case that windowing_method is union_of_primitives,
-    it is possible to specify none or all types of primitives
-    (ellipsoids, cylinder, hexahedra). If no primitives are specified
-    the filter falls back to entire_dataset.
-    In the case that windowing_method is bitmask, the bitmask has to be defined;
-    otherwise the filter falls back to entire dataset.
+        * entire_dataset, no filter is applied, the entire dataset is used.  
+        * union_of_primitives, a filter with (rotated) geometric primitives.  
+          All ions in or on the surface of the primitives are considered  
+          while all other ions are ignored.  
+        * bitmasked_points, a boolean array whose bits encode with 1  
+          which ions should be included. Those ions whose bit is set to 0  
+          will be excluded. Users of python can use the bitfield operations  
+          of the numpy package to define such bitfields.
 
-    Any of these values: ``entire_dataset`` | ``union_of_primitives`` | ``bitmask``
+        Conditions:
+        In the case that windowing_method is entire_dataset all entries are processed.
+        In the case that windowing_method is union_of_primitives,
+        it is possible to specify none or all types of primitives
+        (ellipsoids, cylinder, hexahedra). If no primitives are specified
+        the filter falls back to entire_dataset.
+        In the case that windowing_method is bitmask, the bitmask has to be defined;
+        otherwise the filter falls back to entire dataset.
+
+        Any of these values: ``entire_dataset`` | ``union_of_primitives`` | ``bitmask``
 
   .. _/NXspatial_filter/CG_ELLIPSOID_SET-group:
 

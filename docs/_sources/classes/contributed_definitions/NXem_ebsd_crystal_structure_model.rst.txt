@@ -17,20 +17,22 @@ NXem_ebsd_crystal_structure_model
 
 **Description**:
 
-  Crystal structure phase models used for indexing Kikuchi pattern.
+  .. collapse:: Crystal structure phase models used for indexing Kikuchi pattern. ...
 
-  This base class contains key metadata relevant to every physical
-  kinematic or dynamic diffraction model to be used for simulating
-  Kikuchi diffraction pattern.
-  The actual indexing of Kikuchi pattern however maybe use different
-  algorithms which build on these simulation results but evaluate different
-  workflows of comparing simulated and measured Kikuchi pattern to make
-  suggestions which orientation is the most likely (if any) for each
-  scan point investigated.
+      Crystal structure phase models used for indexing Kikuchi pattern.
 
-  Traditionally Hough transform based indexing has been the most frequently
-  used algorithm. More and more dictionary based alternatives are used.
-  Either way both algorithm need a crystal structure model.
+      This base class contains key metadata relevant to every physical
+      kinematic or dynamic diffraction model to be used for simulating
+      Kikuchi diffraction pattern.
+      The actual indexing of Kikuchi pattern however maybe use different
+      algorithms which build on these simulation results but evaluate different
+      workflows of comparing simulated and measured Kikuchi pattern to make
+      suggestions which orientation is the most likely (if any) for each
+      scan point investigated.
+
+      Traditionally Hough transform based indexing has been the most frequently
+      used algorithm. More and more dictionary based alternatives are used.
+      Either way both algorithm need a crystal structure model.
 
 **Symbols**:
 
@@ -50,8 +52,10 @@ NXem_ebsd_crystal_structure_model
 
   **crystallographic_database_identifier**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    Identifier of an entry from crystallographic_database which was used
-    for creating this structure model.
+    .. collapse:: Identifier of an entry from crystallographic_database which was used ...
+
+        Identifier of an entry from crystallographic_database which was used
+        for creating this structure model.
 
   .. _/NXem_ebsd_crystal_structure_model/crystallographic_database-field:
 
@@ -59,8 +63,10 @@ NXem_ebsd_crystal_structure_model
 
   **crystallographic_database**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    Name of the crystallographic database to resolve
-    crystallographic_database_identifier e.g. COD or others.
+    .. collapse:: Name of the crystallographic database to resolve ...
+
+        Name of the crystallographic database to resolve
+        crystallographic_database_identifier e.g. COD or others.
 
   .. _/NXem_ebsd_crystal_structure_model/unit_cell_abc-field:
 
@@ -100,12 +106,14 @@ NXem_ebsd_crystal_structure_model
 
   **is_centrosymmetric**: (optional) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
-    True if space group is considered a centrosymmetric one.
-    False if space group is considered a non-centrosymmetric one.
-    Centrosymmetric has all types and combinations of symmetry elements
-    (translation, rotational axis, mirror planes, center of inversion)
-    Non-centrosymmetric compared to centrosymmetric is constrained (no inversion).
-    Chiral compared to non-centrosymmetric is constrained (no mirror planes).
+    .. collapse:: True if space group is considered a centrosymmetric one. ...
+
+        True if space group is considered a centrosymmetric one.
+        False if space group is considered a non-centrosymmetric one.
+        Centrosymmetric has all types and combinations of symmetry elements
+        (translation, rotational axis, mirror planes, center of inversion)
+        Non-centrosymmetric compared to centrosymmetric is constrained (no inversion).
+        Chiral compared to non-centrosymmetric is constrained (no mirror planes).
 
   .. _/NXem_ebsd_crystal_structure_model/is_chiral-field:
 
@@ -113,8 +121,10 @@ NXem_ebsd_crystal_structure_model
 
   **is_chiral**: (optional) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
-    True if space group is considered a chiral one.
-    False if space group is consider a non-chiral one.
+    .. collapse:: True if space group is considered a chiral one. ...
+
+        True if space group is considered a chiral one.
+        False if space group is consider a non-chiral one.
 
   .. _/NXem_ebsd_crystal_structure_model/laue_group-field:
 
@@ -138,23 +148,25 @@ NXem_ebsd_crystal_structure_model
 
   **unit_cell_class**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    Crystal system
+    .. collapse:: Crystal system ...
 
-    Any of these values:
+        Crystal system
 
-      * ``triclinic``
+        Any of these values:
 
-      * ``monoclinic``
+          * ``triclinic``
 
-      * ``orthorhombic``
+          * ``monoclinic``
 
-      * ``tetragonal``
+          * ``orthorhombic``
 
-      * ``rhombohedral``
+          * ``tetragonal``
 
-      * ``hexagonal``
+          * ``rhombohedral``
 
-      * ``cubic``
+          * ``hexagonal``
+
+          * ``cubic``
 
 
   .. _/NXem_ebsd_crystal_structure_model/phase_identifier-field:
@@ -163,10 +175,12 @@ NXem_ebsd_crystal_structure_model
 
   **phase_identifier**: (optional) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    Numeric identifier for each phase.
-    The value 0 is reserved for the unknown phase essentially representing the
-    null-model that no phase model was sufficiently significantly confirmed.
-    Consequently, the value 0 must not be used as a phase_identifier.
+    .. collapse:: Numeric identifier for each phase. ...
+
+        Numeric identifier for each phase.
+        The value 0 is reserved for the unknown phase essentially representing the
+        null-model that no phase model was sufficiently significantly confirmed.
+        Consequently, the value 0 must not be used as a phase_identifier.
 
   .. _/NXem_ebsd_crystal_structure_model/phase_name-field:
 
@@ -190,10 +204,12 @@ NXem_ebsd_crystal_structure_model
 
   **atom**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_pos]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    The hash value :math:`H` is :math:`H = Z + N*256` with :math:`Z`
-    the number of protons and :math:`N` the number of neutrons
-    of each isotope respectively. Z and N have to be 8-bit unsigned integers.
-    For the rationale behind this `M. Kühbach et al. (2021) <https://doi.org/10.1017/S1431927621012241>`_
+    .. collapse:: The hash value :math:`H` is :math:`H = Z + N*256` with :math:`Z` ...
+
+        The hash value :math:`H` is :math:`H = Z + N*256` with :math:`Z`
+        the number of protons and :math:`N` the number of neutrons
+        of each isotope respectively. Z and N have to be 8-bit unsigned integers.
+        For the rationale behind this `M. Kühbach et al. (2021) <https://doi.org/10.1017/S1431927621012241>`_
 
   .. _/NXem_ebsd_crystal_structure_model/atom_positions-field:
 

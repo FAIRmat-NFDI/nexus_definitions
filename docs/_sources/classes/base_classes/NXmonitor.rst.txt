@@ -17,13 +17,15 @@ NXmonitor
 
 **Description**:
 
-  A monitor of incident beam data.
+  .. collapse:: A monitor of incident beam data. ...
 
-  It is similar to the :ref:`NXdata` groups containing
-  monitor data and its associated dimension scale, e.g. time_of_flight or
-  wavelength in pulsed neutron instruments. However, it may also include
-  integrals, or scalar monitor counts, which are often used in both in both
-  pulsed and steady-state instrumentation.
+      A monitor of incident beam data.
+
+      It is similar to the :ref:`NXdata` groups containing
+      monitor data and its associated dimension scale, e.g. time_of_flight or
+      wavelength in pulsed neutron instruments. However, it may also include
+      integrals, or scalar monitor counts, which are often used in both in both
+      pulsed and steady-state instrumentation.
 
 **Symbols**:
 
@@ -42,15 +44,17 @@ NXmonitor
 
   **@default**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. index:: plotting
+    .. collapse:: Declares which child group contains a path leading  ...
 
-    Declares which child group contains a path leading 
-    to a :ref:`NXdata` group.
+        .. index:: plotting
 
-    It is recommended (as of NIAC2014) to use this attribute
-    to help define the path to the default dataset to be plotted.
-    See https://www.nexusformat.org/2014_How_to_find_default_data.html
-    for a summary of the discussion.
+        Declares which child group contains a path leading 
+        to a :ref:`NXdata` group.
+
+        It is recommended (as of NIAC2014) to use this attribute
+        to help define the path to the default dataset to be plotted.
+        See https://www.nexusformat.org/2014_How_to_find_default_data.html
+        for a summary of the discussion.
 
   .. _/NXmonitor/mode-field:
 
@@ -58,10 +62,12 @@ NXmonitor
 
   **mode**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    Count to a preset value based on either clock time (timer)
-    or received monitor counts (monitor).
+    .. collapse:: Count to a preset value based on either clock time (timer) ...
 
-    Any of these values: ``monitor`` | ``timer``
+        Count to a preset value based on either clock time (timer)
+        or received monitor counts (monitor).
+
+        Any of these values: ``monitor`` | ``timer``
 
   .. _/NXmonitor/start_time-field:
 
@@ -172,10 +178,12 @@ NXmonitor
 
   **count_time**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_TIME <NX_TIME>`} 
 
-    Elapsed actual counting time, can be an array of size ``np``
-    when scanning. This is not the difference of the calendar time
-    but the time the instrument was really counting, without
-    pauses or times lost due beam unavailability
+    .. collapse:: Elapsed actual counting time, can be an array of size ``np`` ...
+
+        Elapsed actual counting time, can be an array of size ``np``
+        when scanning. This is not the difference of the calendar time
+        but the time the instrument was really counting, without
+        pauses or times lost due beam unavailability
 
   .. _/NXmonitor/depends_on-field:
 
@@ -183,20 +191,22 @@ NXmonitor
 
   **depends_on**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    NeXus positions components by applying a set of translations and rotations
-    to apply to the component starting from 0, 0, 0. The order of these operations
-    is critical and forms what NeXus calls a dependency chain. The depends_on
-    field defines the path to the top most operation of the dependency chain or the
-    string "." if located in the origin. Usually these operations are stored in a
-    NXtransformations group. But NeXus allows them to be stored anywhere.
+    .. collapse:: NeXus positions components by applying a set of translations and rotations ...
 
-    The reference plane of the monitor contains the surface of the detector that faces the source
-    and is the entry point of the beam. The reference point of the monitor in the x and y axis is
-    its centre on this surface. The reference plane is orthogonal to the the z axis and the
-    reference point on this z axis is where they intersect.
+        NeXus positions components by applying a set of translations and rotations
+        to apply to the component starting from 0, 0, 0. The order of these operations
+        is critical and forms what NeXus calls a dependency chain. The depends_on
+        field defines the path to the top most operation of the dependency chain or the
+        string "." if located in the origin. Usually these operations are stored in a
+        NXtransformations group. But NeXus allows them to be stored anywhere.
 
-    .. image:: monitor/monitor.png
-      :width: 40%
+        The reference plane of the monitor contains the surface of the detector that faces the source
+        and is the entry point of the beam. The reference point of the monitor in the x and y axis is
+        its centre on this surface. The reference plane is orthogonal to the the z axis and the
+        reference point on this z axis is where they intersect.
+
+        .. image:: monitor/monitor.png
+          :width: 40%
 
 
   .. _/NXmonitor/integral_log-group:
@@ -227,10 +237,12 @@ NXmonitor
 
   **TRANSFORMATIONS**: (optional) :ref:`NXtransformations` 
 
-    This is the group recommended for holding the chain of translation
-    and rotation operations necessary to position the component within
-    the instrument. The dependency chain may however traverse similar groups in
-    other component groups.
+    .. collapse:: This is the group recommended for holding the chain of translation ...
+
+        This is the group recommended for holding the chain of translation
+        and rotation operations necessary to position the component within
+        the instrument. The dependency chain may however traverse similar groups in
+        other component groups.
 
 
 Hypertext Anchors

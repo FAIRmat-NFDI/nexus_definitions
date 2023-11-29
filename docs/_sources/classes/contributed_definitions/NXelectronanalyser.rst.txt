@@ -96,20 +96,22 @@ NXelectronanalyser
 
   **fast_axes**: (optional) :ref:`NX_CHAR <NX_CHAR>` (Rank: 1, Dimensions: [nfa]) 
 
-    List of the axes that are acquired simultaneously by the detector.
-    These refer only to the experimental variables recorded by the electron analyser.
-    Other variables such as temperature, manipulator angles etc. are labeled as fast or slow in the data.
+    .. collapse:: List of the axes that are acquired simultaneously by the detector. ...
 
-    .. csv-table:: Examples
-      :header: "Mode", "fast_axes", "slow_axes"
+        List of the axes that are acquired simultaneously by the detector.
+        These refer only to the experimental variables recorded by the electron analyser.
+        Other variables such as temperature, manipulator angles etc. are labeled as fast or slow in the data.
 
-      Hemispherical in ARPES mode,  "['energy', 'kx']",""
-      "Hemispherical with channeltron, sweeping energy mode", "", [\"energy\"]
-      "Tof", "['energy', 'kx', 'ky']",""
-      "Momentum microscope, spin-resolved", "['energy', 'kx', 'ky']", "['spin up-down', 'spin left-right']"
+        .. csv-table:: Examples
+          :header: "Mode", "fast_axes", "slow_axes"
 
-    Axes may be less abstract than this, i.e. ['detector_x', 'detector_y'].
-    If energy_scan_mode=sweep, fast_axes: ['energy', 'kx']; slow_axes: ['energy'] is allowed.
+          Hemispherical in ARPES mode,  "['energy', 'kx']",""
+          "Hemispherical with channeltron, sweeping energy mode", "", [\"energy\"]
+          "Tof", "['energy', 'kx', 'ky']",""
+          "Momentum microscope, spin-resolved", "['energy', 'kx', 'ky']", "['spin up-down', 'spin left-right']"
+
+        Axes may be less abstract than this, i.e. ['detector_x', 'detector_y'].
+        If energy_scan_mode=sweep, fast_axes: ['energy', 'kx']; slow_axes: ['energy'] is allowed.
 
   .. _/NXelectronanalyser/slow_axes-field:
 
@@ -117,8 +119,10 @@ NXelectronanalyser
 
   **slow_axes**: (optional) :ref:`NX_CHAR <NX_CHAR>` (Rank: 1, Dimensions: [nsa]) 
 
-    List of the axes that are acquired by scanning a physical parameter, listed in
-    order of decreasing speed. See fast_axes for examples.
+    .. collapse:: List of the axes that are acquired by scanning a physical parameter, listed in ...
+
+        List of the axes that are acquired by scanning a physical parameter, listed in
+        order of decreasing speed. See fast_axes for examples.
 
   .. _/NXelectronanalyser/depends_on-field:
 
@@ -126,21 +130,25 @@ NXelectronanalyser
 
   **depends_on**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    Refers to the last transformation specifying the positon of the manipulator in
-    the NXtransformations chain.
+    .. collapse:: Refers to the last transformation specifying the positon of the manipulator in ...
+
+        Refers to the last transformation specifying the positon of the manipulator in
+        the NXtransformations chain.
 
   .. _/NXelectronanalyser/TRANSFORMATIONS-group:
 
   **TRANSFORMATIONS**: (optional) :ref:`NXtransformations` 
 
-    Collection of axis-based translations and rotations to describe the location and
-    geometry of the electron analyser as a component in the instrument. Conventions
-    from the NXtransformations base class are used. In principle, the McStas
-    coordinate system is used. The first transformation has to point either to
-    another component of the system or . (for pointing to the reference frame) to
-    relate it relative to the experimental setup. Typically, the components of a
-    system should all be related relative to each other and only one component
-    should relate to the reference coordinate system.
+    .. collapse:: Collection of axis-based translations and rotations to describe the location a ...
+
+        Collection of axis-based translations and rotations to describe the location and
+        geometry of the electron analyser as a component in the instrument. Conventions
+        from the NXtransformations base class are used. In principle, the McStas
+        coordinate system is used. The first transformation has to point either to
+        another component of the system or . (for pointing to the reference frame) to
+        relate it relative to the experimental setup. Typically, the components of a
+        system should all be related relative to each other and only one component
+        should relate to the reference coordinate system.
 
   .. _/NXelectronanalyser/COLLECTIONCOLUMN-group:
 
