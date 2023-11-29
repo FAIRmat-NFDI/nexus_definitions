@@ -11,13 +11,7 @@ from typing import Callable
 
 import lxml.etree as ET
 from lxml.etree import ParseError as xmlER
-
-
-def remove_namespace_from_tag(tag):
-    """Helper function to remove the namespace from an XML tag."""
-    if isinstance(tag, Callable) and tag.__name__ == "Comment":
-        return "!--"
-    return tag.split("}")[-1]
+from nyaml.helper import remove_namespace_from_tag
 
 
 class NxdlAttributeNotFoundError(Exception):
