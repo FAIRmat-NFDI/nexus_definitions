@@ -20,7 +20,6 @@
 #
 
 import os
-import logging
 import xml.etree.ElementTree as ET
 
 from ..utils import nxdl_utils as nexus
