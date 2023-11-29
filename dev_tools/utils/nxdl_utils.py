@@ -10,7 +10,11 @@ from pathlib import Path
 
 import lxml.etree as ET
 from lxml.etree import ParseError as xmlER
-from nyaml.helper import remove_namespace_from_tag
+
+def remove_namespace_from_tag(tag):
+    """Helper function to remove the namespace from an XML tag."""
+
+    return tag.split("}")[-1]
 
 
 class NxdlAttributeNotFoundError(Exception):
