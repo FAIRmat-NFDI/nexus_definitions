@@ -11,6 +11,7 @@ from pathlib import Path
 import lxml.etree as ET
 from lxml.etree import ParseError as xmlER
 
+
 def remove_namespace_from_tag(tag):
     """Helper function to remove the namespace from an XML tag."""
 
