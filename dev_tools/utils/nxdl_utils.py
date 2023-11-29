@@ -4,6 +4,8 @@
 
 import os
 import textwrap
+from typing import Callable
+
 from functools import lru_cache
 from glob import glob
 from pathlib import Path
@@ -11,7 +13,12 @@ from pathlib import Path
 import lxml.etree as ET
 from lxml.etree import ParseError as xmlER
 
-from ..nyaml2nxdl.nyaml2nxdl_helper import remove_namespace_from_tag
+
+def remove_namespace_from_tag(tag):
+    """Helper function to remove the namespace from an XML tag."""
+    if isinstance(tag, Callable) and tag.__name__ == "Comment":
+        return "!--"
+    return tag.split("}")[-1]
 
 
 class NxdlAttributeNotFoundError(Exception):
