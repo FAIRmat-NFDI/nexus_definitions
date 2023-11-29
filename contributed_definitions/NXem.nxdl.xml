@@ -22,41 +22,41 @@
 # For further information, see http://www.nexusformat.org
 -->
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXem" extends="NXem_base" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
-  <doc>
-       Application definition for normalized representation of electron microscopy research.
-       
-       In line with the idea of NeXus application definitions, this schema is a
-       specialized version of NXem_base in that fields and groups are specifically
-       constrained. This has the effect that some quantities are required, so
-       that a research data management system (RDMS) can rely on the existence of
-       these pieces of information without demanding that RDMS to implement further
-       verification in its own source code or further harmonization or normalization
-       what each piece of information means conceptually.
-       
-       This application definition is thus an example of a general description
-       with which to normalize specific pieces of information and data collected
-       within electron microscopy research.
-       
-       This application definition is also a blueprint which shows how users
-       can build specific application definitions by reusing - instead of completely
-       reimplementing the wheel from scratch - em-specific base classes - and thus
-       represent electron-microscopy-specific content.
-       
-       The constraints of all these application definitions might be different
-       than for the here exemplified application definition NXem.
-       
-       Nevertheless, the key benefit remains: Many pieces of information are still
-       conceptually the same, named in the same way and found in the same place
-       in the hierarchy. This supports interoperability of electron microscopy data
-       and is advantageous compared to having everybody using own formatting and
-       conceptually not harmonized terms for describing their electron microscopy
-       research.
-       
-       For the detailed rationale and explanation of the concept behind the
-       NeXus electron microscopy class definitions please consult the preamble
-       of the NXem_base base class.
-  </doc>
-  <!--composing from NXem_base should work because NXem_base is composed from NXroot
+    <doc>
+         Application definition for normalized representation of electron microscopy research.
+         
+         In line with the idea of NeXus application definitions, this schema is a
+         specialized version of NXem_base in that fields and groups are specifically
+         constrained. This has the effect that some quantities are required, so
+         that a research data management system (RDMS) can rely on the existence of
+         these pieces of information without demanding that RDMS to implement further
+         verification in its own source code or further harmonization or normalization
+         what each piece of information means conceptually.
+         
+         This application definition is thus an example of a general description
+         with which to normalize specific pieces of information and data collected
+         within electron microscopy research.
+         
+         This application definition is also a blueprint which shows how users
+         can build specific application definitions by reusing - instead of completely
+         reimplementing the wheel from scratch - em-specific base classes - and thus
+         represent electron-microscopy-specific content.
+         
+         The constraints of all these application definitions might be different
+         than for the here exemplified application definition NXem.
+         
+         Nevertheless, the key benefit remains: Many pieces of information are still
+         conceptually the same, named in the same way and found in the same place
+         in the hierarchy. This supports interoperability of electron microscopy data
+         and is advantageous compared to having everybody using own formatting and
+         conceptually not harmonized terms for describing their electron microscopy
+         research.
+         
+         For the detailed rationale and explanation of the concept behind the
+         NeXus electron microscopy class definitions please consult the preamble
+         of the NXem_base base class.
+    </doc>
+    <!--composing from NXem_base should work because NXem_base is composed from NXroot
 just list what is required or recommended or optional
 overwrite which known building blocks should get a different meaning
 and add specific fields for which there is not yet a base class
@@ -65,107 +65,107 @@ highly customized and deeply overwriting application definitions
 other than for base classes the default existentiality constraint is
 exists: required therefore spelling this out is omitted for convenience
 a releasing of this default constraint is possible with writing exists:-->
-  <attribute name="NX_class"/>
-  <attribute name="file_time" type="NX_DATE_TIME"/>
-  <attribute name="file_name" type="NX_CHAR"/>
-  <attribute name="file_update_time" type="NX_DATE_TIME"/>
-  <attribute name="NeXus_version" type="NX_CHAR"/>
-  <attribute name="HDF5_Version" type="NX_CHAR"/>
-  <attribute name="h5py_version" type="NX_CHAR"/>
-  <attribute name="default" type="NX_CHAR"/>
-  <group type="NXprogram" minOccurs="0" maxOccurs="unbounded">
-    <doc>
-         A collection of all programs and libraries which are considered relevant
-         to understand with which software tools this NeXus file instance was
-         generated. Ideally, to enable a binary recreation from the input data.
-         
-         Examples include the name and version of the libraries used to write the
-         instance. Ideally, the software which writes these NXprogram instances
-         also includes the version of the set of NeXus classes i.e. the specific
-         set of base classes, application definitions, and  contributed definitions
-         with which the here described concepts can be resolved.
-         
-         For the `pynxtools library &lt;https://github.com/FAIRmat-NFDI/pynxtools&gt;`_
-         which is used by the `NOMAD &lt;https://nomad-lab.eu/nomad-lab&gt;`_
-         research data management system, it makes sense to store e.g. the GitHub
-         repository commit and respective submodule references used.
-    </doc>
-  </group>
-  <!--each NeXus file instance should have a default plot
+    <attribute name="NX_class"/>
+    <attribute name="file_time" type="NX_DATE_TIME"/>
+    <attribute name="file_name" type="NX_CHAR"/>
+    <attribute name="file_update_time" type="NX_DATE_TIME"/>
+    <attribute name="NeXus_version" type="NX_CHAR"/>
+    <attribute name="HDF5_Version" type="NX_CHAR"/>
+    <attribute name="h5py_version" type="NX_CHAR"/>
+    <attribute name="default" type="NX_CHAR"/>
+    <group type="NXprogram" minOccurs="0" maxOccurs="unbounded">
+        <doc>
+             A collection of all programs and libraries which are considered relevant
+             to understand with which software tools this NeXus file instance was
+             generated. Ideally, to enable a binary recreation from the input data.
+             
+             Examples include the name and version of the libraries used to write the
+             instance. Ideally, the software which writes these NXprogram instances
+             also includes the version of the set of NeXus classes i.e. the specific
+             set of base classes, application definitions, and  contributed definitions
+             with which the here described concepts can be resolved.
+             
+             For the `pynxtools library &lt;https://github.com/FAIRmat-NFDI/pynxtools&gt;`_
+             which is used by the `NOMAD &lt;https://nomad-lab.eu/nomad-lab&gt;`_
+             research data management system, it makes sense to store e.g. the GitHub
+             repository commit and respective submodule references used.
+        </doc>
+    </group>
+    <!--each NeXus file instance should have a default plot
 however as there are cases when this cannot be assured we cannot
 make the default required, one example is e.g. a NeXus instance
 where scientists just store conventions without a default plot-->
-  <group name="cs_profiling" type="NXcs_profiling">
-    <doc>
-         The configuration of the I/O writer software (e.g. `pynxtools &lt;https://github.com/FAIRmat-NFDI/pynxtools&gt;`_)
-         which was used to generate this NeXus file instance.
-    </doc>
-    <field name="command_line_call"/>
-  </group>
-  <group type="NXentry" minOccurs="1" maxOccurs="unbounded">
-    <attribute name="version" type="NX_CHAR"/>
-    <field name="definition" type="NX_CHAR">
-      <enumeration>
-        <item value="NXem"/>
-      </enumeration>
-    </field>
-    <group name="experiment_identifier" type="NXidentifier" recommended="true">
-      <field name="service" type="NX_CHAR"/>
-      <field name="identifier" type="NX_CHAR"/>
-      <field name="is_persistent" type="NX_BOOLEAN"/>
+    <group name="cs_profiling" type="NXcs_profiling">
+        <doc>
+             The configuration of the I/O writer software (e.g. `pynxtools &lt;https://github.com/FAIRmat-NFDI/pynxtools&gt;`_)
+             which was used to generate this NeXus file instance.
+        </doc>
+        <field name="command_line_call"/>
     </group>
-    <field name="experiment_alias" type="NX_CHAR">
-      <doc>
-           Either an identifier or an alias that is human-friendly so that
-           scientist find that experiment again
-      </doc>
-    </field>
-    <field name="experiment_description" type="NX_CHAR"/>
-    <field name="start_time" type="NX_DATE_TIME"/>
-    <field name="end_time" type="NX_DATE_TIME" recommended="true"/>
-    <group type="NXcite" minOccurs="0" maxOccurs="unbounded"/>
-    <group type="NXprogram" minOccurs="1" maxOccurs="unbounded">
-      <field name="program" type="NX_CHAR">
+    <group type="NXentry" minOccurs="1" maxOccurs="unbounded">
         <attribute name="version" type="NX_CHAR"/>
-      </field>
-    </group>
-    <!--\@url:-->
-    <group type="NXserialized" minOccurs="0" maxOccurs="unbounded">
-      <field name="type" type="NX_CHAR"/>
-      <field name="path" type="NX_CHAR"/>
-      <field name="checksum" type="NX_CHAR"/>
-      <field name="algoritm" type="NX_CHAR"/>
-    </group>
-    <group type="NXuser" minOccurs="1" maxOccurs="unbounded">
-      <field name="name" type="NX_CHAR"/>
-      <group name="identifier" type="NXidentifier" recommended="true">
-        <field name="service" type="NX_CHAR"/>
-        <field name="identifier" type="NX_CHAR"/>
-        <field name="is_persistent" type="NX_BOOLEAN"/>
-      </group>
-    </group>
-    <!--all other fields are optional but clearly defined in NXem_base-->
-    <group name="sample" type="NXsample">
-      <field name="method" type="NX_CHAR"/>
-      <field name="identifier" type="NX_CHAR"/>
-      <field name="parent_identifier" type="NX_CHAR"/>
-      <field name="preparation_date" type="NX_DATE_TIME"/>
-      <field name="name" recommended="true"/>
-      <field name="atom_types" type="NX_CHAR"/>
-    </group>
-    <!--again all other fields are optional-->
-    <group type="NXcoordinate_system_set" minOccurs="1" maxOccurs="1">
-      <group type="NXcoordinate_system" minOccurs="1" maxOccurs="unbounded">
-        <field name="origin" type="NX_CHAR"/>
-        <field name="alias" type="NX_CHAR"/>
-        <field name="type" type="NX_CHAR"/>
-        <field name="handedness" type="NX_CHAR"/>
-        <field name="x_direction" type="NX_CHAR"/>
-        <field name="y_direction" type="NX_CHAR"/>
-        <field name="z_direction" type="NX_CHAR"/>
-      </group>
-    </group>
-    <!--the description can be so lean because we do not need
+        <field name="definition" type="NX_CHAR">
+            <enumeration>
+                <item value="NXem"/>
+            </enumeration>
+        </field>
+        <group name="experiment_identifier" type="NXidentifier" recommended="true">
+            <field name="service" type="NX_CHAR"/>
+            <field name="identifier" type="NX_CHAR"/>
+            <field name="is_persistent" type="NX_BOOLEAN"/>
+        </group>
+        <field name="experiment_alias" type="NX_CHAR">
+            <doc>
+                 Either an identifier or an alias that is human-friendly so that
+                 scientist find that experiment again
+            </doc>
+        </field>
+        <field name="experiment_description" type="NX_CHAR"/>
+        <field name="start_time" type="NX_DATE_TIME"/>
+        <field name="end_time" type="NX_DATE_TIME" recommended="true"/>
+        <group type="NXcite" minOccurs="0" maxOccurs="unbounded"/>
+        <group type="NXprogram" minOccurs="1" maxOccurs="unbounded">
+            <field name="program" type="NX_CHAR">
+                <attribute name="version" type="NX_CHAR"/>
+            </field>
+        </group>
+        <!--\@url:-->
+        <group type="NXserialized" minOccurs="0" maxOccurs="unbounded">
+            <field name="type" type="NX_CHAR"/>
+            <field name="path" type="NX_CHAR"/>
+            <field name="checksum" type="NX_CHAR"/>
+            <field name="algoritm" type="NX_CHAR"/>
+        </group>
+        <group type="NXuser" minOccurs="1" maxOccurs="unbounded">
+            <field name="name" type="NX_CHAR"/>
+            <group name="identifier" type="NXidentifier" recommended="true">
+                <field name="service" type="NX_CHAR"/>
+                <field name="identifier" type="NX_CHAR"/>
+                <field name="is_persistent" type="NX_BOOLEAN"/>
+            </group>
+        </group>
+        <!--all other fields are optional but clearly defined in NXem_base-->
+        <group name="sample" type="NXsample">
+            <field name="method" type="NX_CHAR"/>
+            <field name="identifier" type="NX_CHAR"/>
+            <field name="parent_identifier" type="NX_CHAR"/>
+            <field name="preparation_date" type="NX_DATE_TIME"/>
+            <field name="name" recommended="true"/>
+            <field name="atom_types" type="NX_CHAR"/>
+        </group>
+        <!--again all other fields are optional-->
+        <group type="NXcoordinate_system_set" minOccurs="1" maxOccurs="1">
+            <group type="NXcoordinate_system" minOccurs="1" maxOccurs="unbounded">
+                <field name="origin" type="NX_CHAR"/>
+                <field name="alias" type="NX_CHAR"/>
+                <field name="type" type="NX_CHAR"/>
+                <field name="handedness" type="NX_CHAR"/>
+                <field name="x_direction" type="NX_CHAR"/>
+                <field name="y_direction" type="NX_CHAR"/>
+                <field name="z_direction" type="NX_CHAR"/>
+            </group>
+        </group>
+        <!--the description can be so lean because we do not need
 to overwrite here s.th. as everything is defined already
 in NXem_base and we also do not wish to overwrite the datatype
 of fields, we just say hey we need the above-mentioned fields
@@ -175,223 +175,223 @@ we also should not need to specify the value type like R, NX_POSINT
 because anyway within a group all field names have to be unique
 so there must not be any name conflict and this we can take to our
 advantage-->
-    <group name="measurement" type="NXem_msr" optional="true">
-      <group name="em_lab" type="NXinstrument">
-        <field name="instrument_name" type="NX_CHAR" recommended="true"/>
-        <field name="location" type="NX_CHAR" recommended="true"/>
-        <group type="NXfabrication">
-          <field name="vendor" type="NX_CHAR"/>
-          <field name="model" type="NX_CHAR"/>
-        </group>
-        <group type="NXdetector" minOccurs="0" maxOccurs="unbounded">
-          <group type="NXfabrication">
-            <field name="vendor" type="NX_CHAR"/>
-            <field name="model" type="NX_CHAR"/>
-          </group>
-        </group>
-        <group type="NXebeam_column">
-          <group name="electron_source" type="NXsource">
-            <field name="emitter_type" type="NX_CHAR"/>
-            <field name="probe" type="NX_CHAR"/>
-          </group>
-        </group>
-        <group type="NXibeam_column" optional="true">
-          <group name="ion_source" type="NXsource">
-            <group name="probe" type="NXion"/>
-          </group>
-        </group>
-      </group>
-      <!--voltage(NX_NUMBER):
+        <group name="measurement" type="NXem_msr" optional="true">
+            <group name="em_lab" type="NXinstrument">
+                <field name="instrument_name" type="NX_CHAR" recommended="true"/>
+                <field name="location" type="NX_CHAR" recommended="true"/>
+                <group type="NXfabrication">
+                    <field name="vendor" type="NX_CHAR"/>
+                    <field name="model" type="NX_CHAR"/>
+                </group>
+                <group type="NXdetector" minOccurs="0" maxOccurs="unbounded">
+                    <group type="NXfabrication">
+                        <field name="vendor" type="NX_CHAR"/>
+                        <field name="model" type="NX_CHAR"/>
+                    </group>
+                </group>
+                <group type="NXebeam_column">
+                    <group name="electron_source" type="NXsource">
+                        <field name="emitter_type" type="NX_CHAR"/>
+                        <field name="probe" type="NX_CHAR"/>
+                    </group>
+                </group>
+                <group type="NXibeam_column" optional="true">
+                    <group name="ion_source" type="NXsource">
+                        <group name="probe" type="NXion"/>
+                    </group>
+                </group>
+            </group>
+            <!--voltage(NX_NUMBER):
 does not have to be written out unless that field should be required!
 like all other sub-graphs in the NXibeam_column base class and all
 the fields they can be used-->
-      <group type="NXevent_data_em_set" minOccurs="0" maxOccurs="1">
-        <!--an instance must not have an NXevent_data_em_set but if it has one it must not be more than 1 !-->
-        <group type="NXevent_data_em" minOccurs="0" maxOccurs="unbounded">
-          <field name="start_time" type="NX_DATE_TIME" recommended="true"/>
-          <field name="end_time" type="NX_DATE_TIME" recommended="true"/>
-          <group type="NXimage_r_set" minOccurs="0" maxOccurs="unbounded">
-            <group type="NXprocess">
-              <group name="source" type="NXserialized" recommended="true">
-                <field name="type" type="NX_CHAR"/>
-                <field name="path" type="NX_CHAR"/>
-                <field name="checksum" type="NX_CHAR"/>
-                <field name="algorithm" type="NX_CHAR"/>
-              </group>
-              <field name="detector_identifier" type="NX_CHAR"/>
+            <group type="NXevent_data_em_set" minOccurs="0" maxOccurs="1">
+                <!--an instance must not have an NXevent_data_em_set but if it has one it must not be more than 1 !-->
+                <group type="NXevent_data_em" minOccurs="0" maxOccurs="unbounded">
+                    <field name="start_time" type="NX_DATE_TIME" recommended="true"/>
+                    <field name="end_time" type="NX_DATE_TIME" recommended="true"/>
+                    <group type="NXimage_r_set" minOccurs="0" maxOccurs="unbounded">
+                        <group type="NXprocess">
+                            <group name="source" type="NXserialized" recommended="true">
+                                <field name="type" type="NX_CHAR"/>
+                                <field name="path" type="NX_CHAR"/>
+                                <field name="checksum" type="NX_CHAR"/>
+                                <field name="algorithm" type="NX_CHAR"/>
+                            </group>
+                            <field name="detector_identifier" type="NX_CHAR"/>
+                        </group>
+                        <group name="stack" type="NXdata" optional="true">
+                            <attribute name="signal" type="NX_CHAR"/>
+                            <attribute name="axes" type="NX_CHAR"/>
+                            <attribute name="AXISNAME_indices" type="NX_INT"/>
+                            <attribute name="long_name" type="NX_CHAR"/>
+                            <field name="title" type="NX_CHAR"/>
+                            <field name="intensity" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="axis_image_identifier" type="NX_INT">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="axis_y" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="axis_x" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                        </group>
+                    </group>
+                    <group type="NXimage_c_set" minOccurs="0" maxOccurs="unbounded">
+                        <group type="NXprocess">
+                            <group name="source" type="NXserialized" recommended="true">
+                                <field name="type" type="NX_CHAR"/>
+                                <field name="path" type="NX_CHAR"/>
+                                <field name="checksum" type="NX_CHAR"/>
+                                <field name="algorithm" type="NX_CHAR"/>
+                            </group>
+                            <field name="detector_identifier" type="NX_CHAR"/>
+                        </group>
+                        <group name="stack" type="NXdata" optional="true">
+                            <attribute name="signal" type="NX_CHAR"/>
+                            <attribute name="axes" type="NX_CHAR"/>
+                            <attribute name="AXISNAME_indices" type="NX_CHAR"/>
+                            <attribute name="long_name" type="NX_CHAR"/>
+                            <field name="title"/>
+                            <field name="real" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="imag" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="axis_image_identifier" type="NX_INT">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="axis_j" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="axis_i" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                        </group>
+                        <group name="hyperstack" type="NXdata" optional="true">
+                            <attribute name="signal" type="NX_CHAR"/>
+                            <attribute name="axes" type="NX_CHAR"/>
+                            <attribute name="AXISNAME_indices" type="NX_CHAR"/>
+                            <attribute name="long_name" type="NX_CHAR"/>
+                            <field name="title"/>
+                            <field name="real" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="imag" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="axis_image_identifier" type="NX_INT">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="axis_k" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="axis_j" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="axis_i" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                        </group>
+                    </group>
+                    <group type="NXspectrum_set" minOccurs="0" maxOccurs="unbounded">
+                        <group type="NXprocess">
+                            <group name="source" type="NXserialized" recommended="true">
+                                <field name="type" type="NX_CHAR"/>
+                                <field name="path" type="NX_CHAR"/>
+                                <field name="checksum" type="NX_CHAR"/>
+                                <field name="algorithm" type="NX_CHAR"/>
+                            </group>
+                            <field name="detector_identifier" type="NX_CHAR"/>
+                        </group>
+                        <group name="stack" type="NXdata" optional="true">
+                            <attribute name="signal" type="NX_CHAR"/>
+                            <attribute name="axes" type="NX_CHAR"/>
+                            <attribute name="AXISNAME_indices" type="NX_INT"/>
+                            <attribute name="long_name" type="NX_CHAR"/>
+                            <field name="title" type="NX_CHAR"/>
+                            <field name="intensity" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="axis_y" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="axis_x" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="axis_energy" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                        </group>
+                        <group name="summary" type="NXdata" recommended="true">
+                            <attribute name="signal" type="NX_CHAR"/>
+                            <attribute name="axes" type="NX_CHAR"/>
+                            <attribute name="AXISNAME_indices" type="NX_INT"/>
+                            <attribute name="long_name" type="NX_CHAR"/>
+                            <field name="title" type="NX_CHAR"/>
+                            <field name="axis_energy" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                        </group>
+                    </group>
+                    <group name="em_lab" type="NXinstrument">
+                        <group type="NXebeam_column">
+                            <group name="electron_source" type="NXsource">
+                                <field name="voltage" type="NX_NUMBER"/>
+                            </group>
+                        </group>
+                        <group type="NXibeam_column" optional="true">
+                            <group name="ion_source" type="NXsource">
+                                <group name="probe" type="NXion"/>
+                                <field name="voltage" type="NX_NUMBER"/>
+                            </group>
+                        </group>
+                    </group>
+                </group>
             </group>
-            <group name="stack" type="NXdata" optional="true">
-              <attribute name="signal" type="NX_CHAR"/>
-              <attribute name="axes" type="NX_CHAR"/>
-              <attribute name="AXISNAME_indices" type="NX_INT"/>
-              <attribute name="long_name" type="NX_CHAR"/>
-              <field name="title" type="NX_CHAR"/>
-              <field name="intensity" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-              <field name="axis_image_identifier" type="NX_INT">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-              <field name="axis_y" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-              <field name="axis_x" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-            </group>
-          </group>
-          <group type="NXimage_c_set" minOccurs="0" maxOccurs="unbounded">
-            <group type="NXprocess">
-              <group name="source" type="NXserialized" recommended="true">
-                <field name="type" type="NX_CHAR"/>
-                <field name="path" type="NX_CHAR"/>
-                <field name="checksum" type="NX_CHAR"/>
-                <field name="algorithm" type="NX_CHAR"/>
-              </group>
-              <field name="detector_identifier" type="NX_CHAR"/>
-            </group>
-            <group name="stack" type="NXdata" optional="true">
-              <attribute name="signal" type="NX_CHAR"/>
-              <attribute name="axes" type="NX_CHAR"/>
-              <attribute name="AXISNAME_indices" type="NX_CHAR"/>
-              <attribute name="long_name" type="NX_CHAR"/>
-              <field name="title"/>
-              <field name="real" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-              <field name="imag" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-              <field name="axis_image_identifier" type="NX_INT">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-              <field name="axis_j" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-              <field name="axis_i" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-            </group>
-            <group name="hyperstack" type="NXdata" optional="true">
-              <attribute name="signal" type="NX_CHAR"/>
-              <attribute name="axes" type="NX_CHAR"/>
-              <attribute name="AXISNAME_indices" type="NX_CHAR"/>
-              <attribute name="long_name" type="NX_CHAR"/>
-              <field name="title"/>
-              <field name="real" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-              <field name="imag" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-              <field name="axis_image_identifier" type="NX_INT">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-              <field name="axis_k" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-              <field name="axis_j" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-              <field name="axis_i" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-            </group>
-          </group>
-          <group type="NXspectrum_set" minOccurs="0" maxOccurs="unbounded">
-            <group type="NXprocess">
-              <group name="source" type="NXserialized" recommended="true">
-                <field name="type" type="NX_CHAR"/>
-                <field name="path" type="NX_CHAR"/>
-                <field name="checksum" type="NX_CHAR"/>
-                <field name="algorithm" type="NX_CHAR"/>
-              </group>
-              <field name="detector_identifier" type="NX_CHAR"/>
-            </group>
-            <group name="stack" type="NXdata" optional="true">
-              <attribute name="signal" type="NX_CHAR"/>
-              <attribute name="axes" type="NX_CHAR"/>
-              <attribute name="AXISNAME_indices" type="NX_INT"/>
-              <attribute name="long_name" type="NX_CHAR"/>
-              <field name="title" type="NX_CHAR"/>
-              <field name="intensity" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-              <field name="axis_y" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-              <field name="axis_x" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-              <field name="axis_energy" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-            </group>
-            <group name="summary" type="NXdata" recommended="true">
-              <attribute name="signal" type="NX_CHAR"/>
-              <attribute name="axes" type="NX_CHAR"/>
-              <attribute name="AXISNAME_indices" type="NX_INT"/>
-              <attribute name="long_name" type="NX_CHAR"/>
-              <field name="title" type="NX_CHAR"/>
-              <field name="axis_energy" type="NX_NUMBER">
-                <attribute name="long_name" type="NX_CHAR"/>
-              </field>
-            </group>
-          </group>
-          <group name="em_lab" type="NXinstrument">
-            <group type="NXebeam_column">
-              <group name="electron_source" type="NXsource">
-                <field name="voltage" type="NX_NUMBER"/>
-              </group>
-            </group>
-            <group type="NXibeam_column" optional="true">
-              <group name="ion_source" type="NXsource">
-                <group name="probe" type="NXion"/>
-                <field name="voltage" type="NX_NUMBER"/>
-              </group>
-            </group>
-          </group>
         </group>
-      </group>
-    </group>
-    <!--why at all do we need to add here (NXinstrument) ?
+        <!--why at all do we need to add here (NXinstrument) ?
 nyaml2nxdl could query the NXem_msr base class definition
 and check if an identifier named em_lab exists in this case
 it assumes it is em_lab(NXinstrument) and continues.-->
-    <group name="simulation" type="NXem_sim" optional="true"/>
-    <!--remains to be discussed based on examples
+        <group name="simulation" type="NXem_sim" optional="true"/>
+        <!--remains to be discussed based on examples
 relevant research result post-processed for specific community methods
 but normalized in its representation ready to be consumed for a
 research data management system-->
-    <group type="NXroi" minOccurs="0" maxOccurs="unbounded">
-      <doc>
-           A region-of-interest analyzed either during or after the session.
-           For which specific processed data of the measured or simulated
-           data are available.
-      </doc>
-      <!--as soon as one entry is here constrained further
+        <group type="NXroi" minOccurs="0" maxOccurs="unbounded">
+            <doc>
+                 A region-of-interest analyzed either during or after the session.
+                 For which specific processed data of the measured or simulated
+                 data are available.
+            </doc>
+            <!--as soon as one entry is here constrained further
 an RDM can be sure to find specific pieces of information in a
 specific way but then every user of this application definition
 is required to provide such information in this way!-->
-      <group name="se" type="NXem_img" optional="true"/>
-      <!--remains to be discussed based on examples-->
-      <group name="bse" type="NXem_img" optional="true"/>
-      <!--remains to be discussed based on examples-->
-      <group name="ebsd" type="NXem_ebsd" optional="true"/>
-      <!--remains to be discussed based on examples-->
-      <group name="eds" type="NXem_eds" optional="true"/>
-      <!--remains to be discussed based on examples-->
-      <group name="adf" type="NXem_adf" optional="true"/>
-      <!--remains to be discussed based on examples-->
-      <group name="eels" type="NXem_eels" optional="true"/>
-      <!--remains to be discussed based on examples
+            <group name="se" type="NXem_img" optional="true"/>
+            <!--remains to be discussed based on examples-->
+            <group name="bse" type="NXem_img" optional="true"/>
+            <!--remains to be discussed based on examples-->
+            <group name="ebsd" type="NXem_ebsd" optional="true"/>
+            <!--remains to be discussed based on examples-->
+            <group name="eds" type="NXem_eds" optional="true"/>
+            <!--remains to be discussed based on examples-->
+            <group name="adf" type="NXem_adf" optional="true"/>
+            <!--remains to be discussed based on examples-->
+            <group name="eels" type="NXem_eels" optional="true"/>
+            <!--remains to be discussed based on examples
 cl(NXem_cl):
   exists: optional-->
-      <group name="correlation" type="NXem_correlation" optional="true"/>
+            <group name="correlation" type="NXem_correlation" optional="true"/>
+        </group>
     </group>
-  </group>
-  <!--remains to be discussed based on examples-->
-  <!--finally an example how to map e.g. a simple flat schema to NXem:
+    <!--remains to be discussed based on examples-->
+    <!--finally an example how to map e.g. a simple flat schema to NXem:
 https://www.zenodo.org/record/6513745, source path mapped on (->) target path
 for all source paths /SEM/ is the src path prefix
 for all target paths /entry1/ is the trg path prefix

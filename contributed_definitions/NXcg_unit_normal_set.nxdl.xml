@@ -26,50 +26,50 @@ the benefit of NXcg_point_set is that the origin is 0 by default
 how to resolve the association between the unit normal and its associated primitive?
 rather make this a set of vectors, irrespective whether these are unit or not-->
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXcg_unit_normal_set" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
-  <!--eventually remove this base class and make normal vector a property of the primitive-->
-  <symbols>
+    <!--eventually remove this base class and make normal vector a property of the primitive-->
+    <symbols>
+        <doc>
+             The symbols used in the schema to specify e.g. dimensions of arrays.
+        </doc>
+        <symbol name="d">
+            <doc>
+                 The dimensionality, which has to be at least 2.
+            </doc>
+        </symbol>
+        <symbol name="c">
+            <doc>
+                 The cardinality of the set, i.e. the number of unit normals.
+            </doc>
+        </symbol>
+    </symbols>
     <doc>
-         The symbols used in the schema to specify e.g. dimensions of arrays.
-    </doc>
-    <symbol name="d">
-      <doc>
-           The dimensionality, which has to be at least 2.
-      </doc>
-    </symbol>
-    <symbol name="c">
-      <doc>
-           The cardinality of the set, i.e. the number of unit normals.
-      </doc>
-    </symbol>
-  </symbols>
-  <doc>
-       Computational geometry description of a set of (oriented) unit normal vectors.
-       
-       Store normal vector information as properties of primitives.
-       Use only only as a child of an instance of :ref:`NXcg_primitive_set`
-       so that this instance acts as the parent to define a context.
-  </doc>
-  <field name="normals" type="NX_NUMBER" units="NX_LENGTH">
-    <doc>
-         Direction of each normal - a unit normal.
-    </doc>
-    <dimensions rank="2">
-      <dim index="1" value="c"/>
-      <dim index="2" value="d"/>
-    </dimensions>
-  </field>
-  <field name="orientation" type="NX_INT" units="NX_UNITLESS">
-    <doc>
-         Qualifier which details the orientation of each normal vector
-         in relation to its primitive, assuming the object is viewed
-         from a position outside the object.
+         Computational geometry description of a set of (oriented) unit normal vectors.
          
-         * 0 - undefined
-         * 1 - outer unit normal vector
-         * 2 - inner unit normal vector
+         Store normal vector information as properties of primitives.
+         Use only only as a child of an instance of :ref:`NXcg_primitive_set`
+         so that this instance acts as the parent to define a context.
     </doc>
-    <dimensions rank="1">
-      <dim index="1" value="c"/>
-    </dimensions>
-  </field>
+    <field name="normals" type="NX_NUMBER" units="NX_LENGTH">
+        <doc>
+             Direction of each normal - a unit normal.
+        </doc>
+        <dimensions rank="2">
+            <dim index="1" value="c"/>
+            <dim index="2" value="d"/>
+        </dimensions>
+    </field>
+    <field name="orientation" type="NX_INT" units="NX_UNITLESS">
+        <doc>
+             Qualifier which details the orientation of each normal vector
+             in relation to its primitive, assuming the object is viewed
+             from a position outside the object.
+             
+             * 0 - undefined
+             * 1 - outer unit normal vector
+             * 2 - inner unit normal vector
+        </doc>
+        <dimensions rank="1">
+            <dim index="1" value="c"/>
+        </dimensions>
+    </field>
 </definition>

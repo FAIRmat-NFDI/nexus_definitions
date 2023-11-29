@@ -24,38 +24,38 @@
 <!--
 redundant as there is NXcsg, and NXquadric but easier to understand-->
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXcg_sphere_set" extends="NXcg_ellipsoid_set" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
-  <symbols>
+    <symbols>
+        <doc>
+             The symbols used in the schema to specify e.g. dimensions of arrays.
+        </doc>
+        <symbol name="d">
+            <doc>
+                 The dimensionality, which has to be at least 2.
+            </doc>
+        </symbol>
+        <symbol name="c">
+            <doc>
+                 The cardinality of the set, i.e. the number of circles or spheres.
+            </doc>
+        </symbol>
+    </symbols>
     <doc>
-         The symbols used in the schema to specify e.g. dimensions of arrays.
+         Computational geometry description of a set of spheres.
+         
+         Each sphere can have a different radius but all need to have finite volume.
     </doc>
-    <symbol name="d">
-      <doc>
-           The dimensionality, which has to be at least 2.
-      </doc>
-    </symbol>
-    <symbol name="c">
-      <doc>
-           The cardinality of the set, i.e. the number of circles or spheres.
-      </doc>
-    </symbol>
-  </symbols>
-  <doc>
-       Computational geometry description of a set of spheres.
-       
-       Each sphere can have a different radius but all need to have finite volume.
-  </doc>
-  <field name="radius" type="NX_NUMBER" units="NX_LENGTH">
-    <doc>
-         In the case that all spheres have the same radius.
-    </doc>
-  </field>
-  <field name="radii" type="NX_NUMBER" units="NX_LENGTH">
-    <doc>
-         In the case that spheres have different radius use this
-         instead of the radius field.
-    </doc>
-    <dimensions rank="1">
-      <dim index="1" value="c"/>
-    </dimensions>
-  </field>
+    <field name="radius" type="NX_NUMBER" units="NX_LENGTH">
+        <doc>
+             In the case that all spheres have the same radius.
+        </doc>
+    </field>
+    <field name="radii" type="NX_NUMBER" units="NX_LENGTH">
+        <doc>
+             In the case that spheres have different radius use this
+             instead of the radius field.
+        </doc>
+        <dimensions rank="1">
+            <dim index="1" value="c"/>
+        </dimensions>
+    </field>
 </definition>
