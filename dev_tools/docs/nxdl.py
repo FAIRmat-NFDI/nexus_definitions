@@ -546,7 +546,7 @@ class NXClassDocGenerator:
         (doclen, line, blocks) = self.long_doc(ns, node, len(indent))
         if len(node_list) + doclen > 1:
             collapse_indent = f"{indent}    "
-            self._print(f"{indent}{self._INDENTATION_UNIT}..collapse:: {line} ...\n")
+            self._print(f"{indent}{self._INDENTATION_UNIT}.. collapse:: {line} ...\n")
         self._print_doc(
             collapse_indent + self._INDENTATION_UNIT, ns, node, required=required
         )
