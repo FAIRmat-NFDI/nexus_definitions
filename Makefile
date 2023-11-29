@@ -9,15 +9,14 @@ BUILD_DIR = "build"
 BASE_CLASS_DIR := base_classes
 CONTRIB_DIR := contributed_definitions
 APPDEF_DIR := applications
-NXDL_DIRS := $(BASE_CLASS_DIR) $(CONTRIB_DIR) $(APPDEF_DIR)
 NYAML_SUBDIR := nyaml
-NYAML_APPENDIX := _parsed
 
-NXDL_BC := $(wildcard $(BASE_CLASS_DIR)/*.nxdl.xml)
-NXDL_CONTRIB := $(wildcard $(CONTRIB_DIR)/*.nxdl.xml)
-NXDL_APPDEF := $(wildcard $(APPDEF_DIR)/*.nxdl.xml)
+YBC_NXDL = $(patsubst %.yaml,%.nxdl.xml,$(subst /nyaml/,/, $(wildcard $(BASE_CLASS_DIR)/nyaml/*.yaml)))
+YCONTRIB_NXDL = $(patsubst %.yaml,%.nxdl.xml,$(subst /nyaml/,/, $(wildcard $(CONTRIB_DIR)/nyaml/*.yaml)))
+YAPPDEF_NXDL = $(patsubst %.yaml,%.nxdl.xml,$(subst /nyaml/,/, $(wildcard $(APPDEF_DIR)/nyaml/*.yaml)))
 
-.PHONY: help install style autoformat test clean prepare html pdf impatient-guide all local nyaml nxdl
+
+.PHONY: help install style autoformat test clean prepare html pdf impatient-guide all local nxdl
 
 help ::
 	@echo ""
@@ -99,27 +98,16 @@ all ::
 	@echo "PDF built: `ls -lAFgh $(BUILD_DIR)/manual/build/latex/nexus-fairmat.pdf`"
 
 $(BASE_CLASS_DIR)/%.nxdl.xml : $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)/%.yaml
-	nyaml2nxdl $<
-	mv $(BASE_CLASS_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
+	nyaml2nxdl $< --output-file $@
 
 $(CONTRIB_DIR)/%.nxdl.xml : $(CONTRIB_DIR)/$(NYAML_SUBDIR)/%.yaml
-	nyaml2nxdl $<
-	mv $(CONTRIB_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
+	nyaml2nxdl $< --output-file $@
 
 $(APPDEF_DIR)/%.nxdl.xml : $(APPDEF_DIR)/$(NYAML_SUBDIR)/%.yaml
-	nyaml2nxdl $<
-	mv $(APPDEF_DIR)/$(NYAML_SUBDIR)/$*.nxdl.xml $@
+	nyaml2nxdl $< --output-file $@
 
-NXDLS := $(NXDL_APPDEF) $(NXDL_CONTRIB) $(NXDL_BC)
-nyaml :
-	for file in $(NXDLS); do\
-		mkdir -p "$${file%/*}/nyaml";\
-		nyaml2nxdl $${file};\
-		FNAME=$${file##*/};\
-		mv -- "$${file%.nxdl.xml}_parsed.yaml" "$${file%/*}/nyaml/$${FNAME%.nxdl.xml}.yaml";\
-	done
+nxdl: $(YBC_NXDL) $(YCONTRIB_NXDL) $(YAPPDEF_NXDL)
 
-nxdl: $(NXDL_APPDEF) $(NXDL_CONTRIB) $(NXDL_BC)
 
 # NeXus - Neutron and X-ray Common Data Format
 #
