@@ -48,7 +48,7 @@ def get_app_defs_names():
         if root.attrib["category"] == "application":
             files.append(nexus_file)
 
-    return [Path(file).stem for file in files] + ["NXroot"]
+    return [Path(file).name[:-9] for file in files] + ["NXroot"]
 
 
 @lru_cache(maxsize=None)
@@ -146,7 +146,7 @@ def get_nx_classes():
         except xmlER as e:
             raise ValueError(f"Getting an issue while parsing file {nexus_file}") from e
         if root.attrib["category"] == "base":
-            nx_class.append(nexus_file.stem)
+            nx_class.append(nexus_file.name[:-9])
     return sorted(nx_class)
 
 
