@@ -147,8 +147,16 @@ where scientists just store conventions without a default plot-->
         <!--all other fields are optional but clearly defined in NXem_base-->
         <group name="sample" type="NXsample">
             <field name="method" type="NX_CHAR"/>
-            <field name="identifier" type="NX_CHAR"/>
-            <field name="parent_identifier" type="NX_CHAR"/>
+            <group name="identifier" type="NXidentifier" recommended="true">
+                <field name="service" type="NX_CHAR"/>
+                <field name="identifier" type="NX_CHAR"/>
+                <field name="is_persistent" type="NX_BOOLEAN"/>
+            </group>
+            <group name="parent_identifier" type="NXidentifier" recommended="true">
+                <field name="service" type="NX_CHAR"/>
+                <field name="identifier" type="NX_CHAR"/>
+                <field name="is_persistent" type="NX_BOOLEAN"/>
+            </group>
             <field name="preparation_date" type="NX_DATE_TIME"/>
             <field name="name" recommended="true"/>
             <field name="atom_types" type="NX_CHAR"/>

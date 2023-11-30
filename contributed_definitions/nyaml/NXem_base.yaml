@@ -14,7 +14,8 @@ doc: |
   restructuring information for a research field where many scientists perform
   very specific research but who all also share commonalities like usage of
   controlled electron beams, a focus on studies of electron beam matter interaction
-  to explore physical mechanisms and phenomena, or the desire to characterize materials.
+  to explore physical mechanisms and phenomena, or the desire to characterize materials
+  using electron microscopy.
 # flesh out the description of that to read the docs, because currently the
 # description on the NeXus front-page is overwhelming
 # considering what we learned from the diataxis workshop we write here a
@@ -110,8 +111,8 @@ NXem_base(NXroot):
       doc: |
         The program and eventual software libraries used with which the
         NeXus instance was created. For the NOMAD OASIS research data
-        management system e.g. pynxtools and eventually (all modules
-        if desired).
+        management system e.g. pynxtools and eventually all modules
+        if desired.
       # the above-description overwrites the default description of the NXprogram base class
       # this is composed from the NXprogram base class
       # program:
@@ -158,7 +159,7 @@ NXem_base(NXroot):
         doc: |
           Which role does the user have in the place and at the point
           in time when the experiment was performed? Technician operating
-          the microscope. Student, postdoc, principle investigator, guest
+          the microscope, student, postdoc, principle investigator, or guest
           are common examples.
     sample(NXsample):
       # NEW ISSUE: inject the conclusion from the discussion with Andrea
@@ -180,7 +181,7 @@ NXem_base(NXroot):
       # COMPONENT.yaml
       # SUBSTANCE:
       # QUANTIFY
-      identifier(NX_CHAR):  # why not NXidentifier?
+      identifier(NXidentifier):
         doc: |
           Ideally, (globally) unique persistent identifier which distinguishes
           the specimen from all others and especially the predecessor/origin
@@ -195,7 +196,7 @@ NXem_base(NXroot):
           
           Details about the specimen preparation should be
           stored in resources referring to parent_identifier.
-      parent_identifier:
+      parent_identifier(NXidentifier):
         doc: |
           Identifier of the sample from which the sample was cut or the string
           *None*. The purpose of this field is to support functionalities
@@ -214,13 +215,13 @@ NXem_base(NXroot):
           especially required for environmentally sensitive material such as
           hydrogen charged specimens or experiments including tracers with a
           short half time. Additional time stamps prior to preparation_date
-          should better be placed in resources which describe the but not pollute
-          the description here. Resolving these connected pieces of information
+          should better be placed in resources which describe but which do not pollute
+          the description here with prose. Resolving these connected pieces of information
           is considered within the responsibility of the research data management
           system.
       name(NX_CHAR):
         doc: |
-          An alias of used to refer to the specimen to please readability for humans.
+          An alias used to refer to the specimen to please readability for humans.
       atom_types(NX_CHAR):
         doc: |
           List of comma-separated elements from the periodic table that are
@@ -228,9 +229,10 @@ NXem_base(NXroot):
           components, all elements from each component must be included in
           `atom_types`.
           
-          The purpose of the field is to offer materials database systems an
+          The purpose of the field is to offer research data management systems an
           opportunity to parse the relevant elements without having to interpret
-          these from the resources pointed to by parent_identifier.
+          these from the resources pointed to by parent_identifier or walk through
+          eventually deeply nested groups in data instances.
       # NEW ISSUE: use Andrea and MarkusK groups for describing the geometry of the sample
       thickness(NX_NUMBER):
         doc: |
@@ -282,9 +284,9 @@ NXem_base(NXroot):
     simulation(NXem_sim):
     (NXroi):
       doc: |
-        A region-of-interest analyzed either during or after the session.
-        For which specific processed data of the measured or simulated
-        data are available.
+        A region-of-interest analyzed either during or after the session
+        for which specific processed data generated from the measured or the
+        simulated data are available.
       se(NXem_img):
       bse(NXem_img):
       ebsd(NXem_ebsd):

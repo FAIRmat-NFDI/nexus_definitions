@@ -4,8 +4,8 @@ doc: |
   
   The general procedure of an EBSD experiment is as follows:
   Users load the specimen, collect first a coarse image of the surface.
-  Next, they set an approximate value for the calibrated working distance
-  tilt the stage to diffraction conditions.
+  Next, they set an approximate value for the calibrated working distance and
+  tilt the stage to set the desired diffraction conditions.
   
   Users then typically configure the microscope for collecting higher quality data
   and push in the EBSD detector. Subsequently, they fine tune the illumination
@@ -37,35 +37,35 @@ doc: |
   missing in the field of EBSD.
   
   Firstly, an instance of NXem_ebsd (such as a NeXus/HDF5 file which is formatted
-  according to the NXem_ebsd application definition) stores the connection between
-  the microscope session and the key datasets which are considered typically results
-  of the various processing steps involved when working with EBSD data.
+  according to NXem_ebsd) stores the connection between the microscope session and
+  the key datasets which are considered typically results of the various processing
+  steps involved when working with EBSD data.
   
-  Different groups in this application definition make connections to data artifacts
-  which were collected when working with electron microscopes via the NXem partner
-  application definition. Using a file which stores information according to the
-  NXem application definition has the benefit that it connects the sample, references
-  to the sample processing, the user operating the microscope, details about the
-  microscope session, and details about the acquisition and eventual indexing of
-  Kikuchi pattern, associated overview images, like secondary electron or
-  backscattered electron images of the region-of-interest probed and many
-  more pieces of information.
+  Different groups in NXem_ebsd make connections to data artifacts which were collected
+  when working with electron microscopes via the NXem application definition.
+  Using a file which stores information according to the NXem application definition
+  has the benefit that it connects the sample, references to the sample processing,
+  the user operating the microscope, details about the microscope session,
+  and details about the acquisition and eventual indexing of Kikuchi pattern,
+  associated overview images, like secondary electron or backscattered electron
+  images of the region-of-interest probed and many more pieces of information.
   
-  Secondly, this NXem_ebsd application definition connects and stores the conventions
-  and reference frames which were used and are the key to mathematically correctly
-  interpret every EBSD result. Otherwise, results would be ripped out of their
-  context, as it is the current situation with many traditional studies where
-  EBSD data were indexed on-the-fly and shared with the community only via sharing
+  Secondly, NXem_ebsd connects and stores the conventions and reference frames
+  which were used and which are the key to a correct mathematical interpretation
+  of every EBSD result. Otherwise, results would be ripped out of their context,
+  as it is the current situation with many traditional studies where EBSD data
+  were indexed on-the-fly and shared with the community only via sharing
   the strongly processed results file in some technology-partner-specific file
   format but without communicating all conventions or relying on the assumptions
-  that colleagues likely know these even though multiple definitions are possible.
+  that colleagues likely know these conventions even though multiple definitions
+  are possible.
   
-  This application definition covers experiments with one-, two-dimensional, and
-  so-called three-dimensional EBSD datasets. The third dimension is either time
-  (in the case of quasi in-situ experiments) or space (in the case of serial-
-  sectioning) methods where a combination of mechanical or ion milling is used
-  repetitively to measure the same region-of-interest at different depth increments.
-  Material removal can be achieved with electron or ion polishing, using manual
+  NXem_ebsd covers experiments with one-, two-dimensional, and so-called three-
+  dimensional EBSD datasets. The third dimension is either time (in the case of
+  quasi in-situ experiments) or space (in the case of serial-sectioning) methods
+  where a combination of mechanical or ion milling is used repetitively to measure
+  the same region-of-interest at different depth increments. Material removal
+  can be achieved with electron or ion polishing, using manual
   steps or using automated equipment like a robot system.
   
   Three-dimensional experiments require to follow a sequence of specimen, surface
@@ -178,10 +178,10 @@ NXem_ebsd(NXem_method):
       calibrated to achieve reliable indexing results.
       
       Specifically, the gnomonic projection has to be calibrated.
-      Typically silicon or quartz crystals are used for this purpose.
+      Typically, silicon or quartz crystals are used for this purpose.
       
       Considering a system is well-calibrated, it is much more frequently the
-      case in practice that users assume the system is calibrated (and thus used)
+      case in practice that users assume the system is calibrated (and thus usable)
       vs. they perform the calibration of the EBSD system.
       
       In the first case, the user assumes that the principle geometry of the
@@ -340,7 +340,7 @@ NXem_ebsd(NXem_method):
         Examples can be confidence_index, mean_angular_deviation, some AI-based
         matching probability (other), i.e. the details are implementation-specific.
       enumeration: [undefined, confidence_index, mean_angular_deviation, other]
-    (NXrotation_set):
+    rotation_set(NXrotation_set):
     scan_point_positions(NX_NUMBER):
       # we make this only required as people may not yet be so happy with
       # having to walk a graph from measurement -> path -> NXevent_data_em

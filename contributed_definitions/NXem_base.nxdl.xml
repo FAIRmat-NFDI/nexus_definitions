@@ -45,7 +45,8 @@ template to be used for an application definition
          restructuring information for a research field where many scientists perform
          very specific research but who all also share commonalities like usage of
          controlled electron beams, a focus on studies of electron beam matter interaction
-         to explore physical mechanisms and phenomena, or the desire to characterize materials.
+         to explore physical mechanisms and phenomena, or the desire to characterize materials
+         using electron microscopy.
     </doc>
     <group type="NXprogram">
         <doc>
@@ -153,8 +154,8 @@ where scientists just store conventions without a default plot-->
             <doc>
                  The program and eventual software libraries used with which the
                  NeXus instance was created. For the NOMAD OASIS research data
-                 management system e.g. pynxtools and eventually (all modules
-                 if desired).
+                 management system e.g. pynxtools and eventually all modules
+                 if desired.
             </doc>
         </group>
         <!--the above-description overwrites the default description of the NXprogram base class
@@ -218,7 +219,7 @@ arbitrary binary containers without any clear provenance.-->
                 <doc>
                      Which role does the user have in the place and at the point
                      in time when the experiment was performed? Technician operating
-                     the microscope. Student, postdoc, principle investigator, guest
+                     the microscope, student, postdoc, principle investigator, or guest
                      are common examples.
                 </doc>
             </field>
@@ -251,7 +252,7 @@ citation: doi ->why relevant, should be solved by RDMS
 COMPONENT.yaml
 SUBSTANCE:
 QUANTIFY-->
-            <field name="identifier" type="NX_CHAR">
+            <group name="identifier" type="NXidentifier">
                 <doc>
                      Ideally, (globally) unique persistent identifier which distinguishes
                      the specimen from all others and especially the predecessor/origin
@@ -267,14 +268,14 @@ QUANTIFY-->
                      Details about the specimen preparation should be
                      stored in resources referring to parent_identifier.
                 </doc>
-            </field>
-            <field name="parent_identifier">
+            </group>
+            <group name="parent_identifier" type="NXidentifier">
                 <doc>
                      Identifier of the sample from which the sample was cut or the string
                      *None*. The purpose of this field is to support functionalities
                      for tracking sample provenance via a research data management system.
                 </doc>
-            </field>
+            </group>
             <field name="preparation_date" type="NX_DATE_TIME">
                 <doc>
                      ISO 8601 time code with local time zone offset to UTC information
@@ -289,15 +290,15 @@ QUANTIFY-->
                      especially required for environmentally sensitive material such as
                      hydrogen charged specimens or experiments including tracers with a
                      short half time. Additional time stamps prior to preparation_date
-                     should better be placed in resources which describe the but not pollute
-                     the description here. Resolving these connected pieces of information
+                     should better be placed in resources which describe but which do not pollute
+                     the description here with prose. Resolving these connected pieces of information
                      is considered within the responsibility of the research data management
                      system.
                 </doc>
             </field>
             <field name="name" type="NX_CHAR">
                 <doc>
-                     An alias of used to refer to the specimen to please readability for humans.
+                     An alias used to refer to the specimen to please readability for humans.
                 </doc>
             </field>
             <field name="atom_types" type="NX_CHAR">
@@ -307,9 +308,10 @@ QUANTIFY-->
                      components, all elements from each component must be included in
                      `atom_types`.
                      
-                     The purpose of the field is to offer materials database systems an
+                     The purpose of the field is to offer research data management systems an
                      opportunity to parse the relevant elements without having to interpret
-                     these from the resources pointed to by parent_identifier.
+                     these from the resources pointed to by parent_identifier or walk through
+                     eventually deeply nested groups in data instances.
                 </doc>
             </field>
             <!--NEW ISSUE: use Andrea and MarkusK groups for describing the geometry of the sample-->
@@ -370,9 +372,9 @@ NX_MASS_PER_VOLUME
         <group name="simulation" type="NXem_sim"/>
         <group type="NXroi">
             <doc>
-                 A region-of-interest analyzed either during or after the session.
-                 For which specific processed data of the measured or simulated
-                 data are available.
+                 A region-of-interest analyzed either during or after the session
+                 for which specific processed data generated from the measured or the
+                 simulated data are available.
             </doc>
             <group name="se" type="NXem_img"/>
             <group name="bse" type="NXem_img"/>
