@@ -16,7 +16,7 @@ YCONTRIB_NXDL = $(patsubst %.yaml,%.nxdl.xml,$(subst /nyaml/,/, $(wildcard $(CON
 YAPPDEF_NXDL = $(patsubst %.yaml,%.nxdl.xml,$(subst /nyaml/,/, $(wildcard $(APPDEF_DIR)/nyaml/*.yaml)))
 
 
-.PHONY: help install style autoformat test clean prepare html pdf impatient-guide all local nxdl
+.PHONY: help install style autoformat test clean prepare html pdf impatient-guide all local nxdl nyaml
 
 help ::
 	@echo ""
@@ -107,6 +107,9 @@ $(APPDEF_DIR)/%.nxdl.xml : $(APPDEF_DIR)/$(NYAML_SUBDIR)/%.yaml
 	nyaml2nxdl $< --output-file $@
 
 nxdl: $(YBC_NXDL) $(YCONTRIB_NXDL) $(YAPPDEF_NXDL)
+
+nyaml:
+	$(MAKE) -f nyaml.mk
 
 
 # NeXus - Neutron and X-ray Common Data Format
