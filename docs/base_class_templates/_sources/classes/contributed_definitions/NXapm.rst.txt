@@ -121,7 +121,7 @@ NXapm
 
     .. index:: version (group attribute)
 
-    **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXentry@IDF_Version-attribute>`
+    **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
       .. collapse:: An at least as strong as SHA256 hashvalue of the file ...
 
@@ -165,7 +165,7 @@ NXapm
 
           Free-text description about the experiment.
 
-          Users are strongly advised to detail the sample history in the 
+          Users are strongly advised to detail the sample history in the
           respective field and fill rather as completely as possible the fields
           of the application definition behind instead of filling in these
           details into the experiment_description free-text description field.
@@ -237,7 +237,7 @@ NXapm
           This application definition does currently not allow storing the
           entire set of such interrupted runs. Not because of a technical limitation
           within NeXus but because we have not seen a covering use case based
-          on which we could have designed and implemented this case. 
+          on which we could have designed and implemented this case.
           Atom probers are invited to contact the respective people in the
           FAIRmat team to fix this.
 
@@ -253,12 +253,12 @@ NXapm
           This field is primarily meant to inform materials database systems
           to qualitatively filter experiments:
 
-          * apt are experiments where the analysis_chamber has no imaging gas.  
-            experiment with LEAP instruments are typically performed as apt.  
-          * fim are experiments where the analysis_chamber has an imaging gas,  
-            which should be specified with the atmosphere in the analysis_chamber group.  
-          * apt_fim should be used for combinations of the two imaging modes.  
-          * other should be used in combination with the user specifying details in the  
+          * apt are experiments where the analysis_chamber has no imaging gas.
+            experiment with LEAP instruments are typically performed as apt.
+          * fim are experiments where the analysis_chamber has an imaging gas,
+            which should be specified with the atmosphere in the analysis_chamber group.
+          * apt_fim should be used for combinations of the two imaging modes.
+          * other should be used in combination with the user specifying details in the
             experiment_documentation field.
 
           Any of these values: ``apt`` | ``fim`` | ``apt_fim`` | ``other``
@@ -305,7 +305,7 @@ NXapm
 
           A small image that is representative of the entry; this can be an
           image taken from the dataset like a thumbnail of a spectrum.
-          A 640 x 480 pixel jpeg image is recommended. 
+          A 640 x 480 pixel jpeg image is recommended.
           Adding a scale bar to that image is recommended but not required
           as the main purpose of the thumbnail is to provide e.g. thumbnail
           images for displaying them in data repositories.
@@ -374,7 +374,7 @@ NXapm
         .. collapse:: Globally unique identifier of the user as offered by services ...
 
             Globally unique identifier of the user as offered by services
-            like ORCID or ResearcherID. If this field is field the specific 
+            like ORCID or ResearcherID. If this field is field the specific
             service should also be written in orcid_platform
 
       .. _/NXapm/ENTRY/USER/orcid_platform-field:
@@ -405,9 +405,9 @@ NXapm
 
       **role**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/role-field>`
 
-        .. collapse:: Which role does the user have in the place and at the point  ...
+        .. collapse:: Which role does the user have in the place and at the point ...
 
-            Which role does the user have in the place and at the point 
+            Which role does the user have in the place and at the point
             in time when the experiment was performed? Technician operating
             the microscope. Student, postdoc, principle investigator, guest
             are common examples.
@@ -650,7 +650,7 @@ NXapm
             enough to resolve which specimen on e.g. the microtip array was taken.
 
             The user is advised to store the details how a specimen was cut/prepared
-            from a specific sample in the sample_history. The sample_history field 
+            from a specific sample in the sample_history. The sample_history field
             must not be used for writing an alias of the specimen. Instead,
             use the field alias for this. As an example there may be a specimen/sample
             monitoring system in a lab with bar codes. The bar code is a good
@@ -659,7 +659,7 @@ NXapm
 
             In cases where multiple specimens have been loaded into the microscope
             the name has to be the specific one, whose results are stored
-            by this NXentry, because a single NXentry is to be used for the 
+            by this NXentry, because a single NXentry is to be used for the
             characterization of a single specimen in a single continuous run.
 
             Details about the specimen preparation should be stored in the
@@ -726,8 +726,8 @@ NXapm
         .. collapse:: List of comma-separated elements from the periodic table ...
 
             List of comma-separated elements from the periodic table
-            that are contained in the sample. 
-            If the sample substance has multiple components, all 
+            that are contained in the sample.
+            If the sample substance has multiple components, all
             elements from each component must be included in `atom_types`.
 
             The purpose of the field is to offer materials database systems an
@@ -782,28 +782,28 @@ NXapm
           In this research field scientists distinguish usually several
           Euclidean coordinate systems (CS):
 
-          * World space;  
+          * World space;
             a CS specifying a local coordinate system of the planet earth which
             identifies into which direction gravity is pointing such that
             the laboratory space CS can be rotated into this world CS.
-          * The laboratory space;  
-            a CS specifying the room where the instrument is located in or  
-            a physical landmark on the instrument, e.g. the direction of the  
-            transfer rod where positive is the direction how the rod  
-            has to be pushed during loading a specimen into the instrument.  
+          * The laboratory space;
+            a CS specifying the room where the instrument is located in or
+            a physical landmark on the instrument, e.g. the direction of the
+            transfer rod where positive is the direction how the rod
+            has to be pushed during loading a specimen into the instrument.
             In summary, this CS is defined by the chassis of the instrument.
-          * The specimen space;  
-            a CS affixed to either the base or the initial apex of the specimen,  
-            whose z axis points towards the detector.  
-          * The detector space;  
-            a CS affixed to the detector plane whose xy plane is usually in the  
-            detector and whose z axis points towards the specimen.  
-            This is a distorted space with respect to the reconstructed ion  
-            positions.  
-          * The reconstruction space;  
-            a CS in which the reconstructed ion positions are defined.  
-            The orientation depends on the analysis software used.  
-          * Eventually further coordinate systems attached to the  
+          * The specimen space;
+            a CS affixed to either the base or the initial apex of the specimen,
+            whose z axis points towards the detector.
+          * The detector space;
+            a CS affixed to the detector plane whose xy plane is usually in the
+            detector and whose z axis points towards the specimen.
+            This is a distorted space with respect to the reconstructed ion
+            positions.
+          * The reconstruction space;
+            a CS in which the reconstructed ion positions are defined.
+            The orientation depends on the analysis software used.
+          * Eventually further coordinate systems attached to the
             flight path of individual ions might be defined.
 
           Coordinate systems should be right-handed ones.
@@ -838,20 +838,20 @@ NXapm
 
     **atom_probe**: (required) :ref:`NXinstrument` :ref:`⤆ </NXentry/INSTRUMENT-group>`
 
-      .. collapse:: Metadata and numerical data of the atom probe and the lab in which it  ...
+      .. collapse:: Metadata and numerical data of the atom probe and the lab in which it ...
 
-          Metadata and numerical data of the atom probe and the lab in which it 
+          Metadata and numerical data of the atom probe and the lab in which it
           stands.
 
           An atom probe microscope (experiment) is different compared to a large-
           scale facility or electron accelerator experiments in at least two ways:
 
-          * First, ionized atoms and molecular ion(s fragments)  
-            (in the case of atom probe tomography)  
-            and (primarily) imaging gas ions (in the case of field ion  
-            microscopy) are accelerated towards a position-sensitive  
-            and time-of-flight taking detector system.  
-            Hence, there is no real probe/beam.  
+          * First, ionized atoms and molecular ion(s fragments)
+            (in the case of atom probe tomography)
+            and (primarily) imaging gas ions (in the case of field ion
+            microscopy) are accelerated towards a position-sensitive
+            and time-of-flight taking detector system.
+            Hence, there is no real probe/beam.
           * Second, the specimen is the lens of the microscope.
 
       .. _/NXapm/ENTRY/atom_probe/instrument_name-field:
@@ -1215,8 +1215,8 @@ NXapm
               LEAP6000-type instruments) having the group/section laser_gun
               is required and the following of its fields have to be filled:
 
-              * name  
-              * wavelength  
+              * name
+              * wavelength
               * energy
 
           .. _/NXapm/ENTRY/atom_probe/pulser/SOURCE/name-field:
@@ -1682,7 +1682,7 @@ NXapm
             A possible place, which has to be discussed with the atom probe
             community more though, where quantitative details about the calibration
             of the counter electrode could be stored. Work in this direction was
-            e.g. reported by the `Erlangen group <https://www.youtube.com/watch?v=99hNEkqdj78t=1876s>`_  
+            e.g. reported by the `Erlangen group <https://www.youtube.com/watch?v=99hNEkqdj78t=1876s>`_
             (see `P. Felfer et al. <http://dx.doi.org/10.1016/j.ultramic.2016.07.008>`_  )
 
       .. _/NXapm/ENTRY/atom_probe/specimen_monitoring-group:
@@ -1696,22 +1696,22 @@ NXapm
             of the specimen can be stored. There are currently very few
             techniques which can measure the shape evolution:
 
-            * Correlative electron microscopy coupled with modeling  
-              but this usually takes an interrupted experiment  
-              in which the specimen is transferred, an image taken,  
-              and a new evaporation sequence initiated.  
-              Examples are `I. Mouton et al. <https://doi.org/10.1017/S1431927618016161>`_  
-              and `C. Fletcher <https://doi.org/10.1088/1361-6463/abaaa6>`_.  
-            * Another method, which is less accurate though, is to monitor  
-              the specimen evolution via the in-built camera system  
-              (if available) in the instrument.  
-            * Another method is to use correlated scanning force microscopy  
-              methods like reported in `C. Fleischmann <https://doi.org/10.1016/j.ultramic.2018.08.010>`_.  
-            * A continuous monitoring of the specimen in a   
-              correlative electron microscopy/atom probe experiment  
-              is planned to be developed by `T. Kelly et al. <https://doi.org/10.1017/S1431927620022205>`_  
-              Nothing can be said about the outcome of this research yet but  
-              here is where such spatio-temporally data could be stored.
+            * Correlative electron microscopy coupled with modeling
+              but this usually takes an interrupted experiment
+              in which the specimen is transferred, an image taken,
+              and a new evaporation sequence initiated.
+              Examples are `I. Mouton et al. <https://doi.org/10.1017/S1431927618016161>`_
+              and `C. Fletcher <https://doi.org/10.1088/1361-6463/abaaa6>`_.
+            * Another method, which is less accurate though, is to monitor
+              the specimen evolution via the in-built camera system
+              (if available) in the instrument.
+            * Another method is to use correlated scanning force microscopy
+              methods like reported in `C. Fleischmann <https://doi.org/10.1016/j.ultramic.2018.08.010>`_.
+            * A continuous monitoring of the specimen in a
+              correlative electron microscopy/atom probe experiment
+              is planned to be developed by `T. Kelly et al. <https://doi.org/10.1017/S1431927620022205>`_
+              Nothing can be said about the outcome of this research yet but
+              here is where such spatiotemporally data could be stored.
 
         .. _/NXapm/ENTRY/atom_probe/specimen_monitoring/initial_radius-field:
 
@@ -1936,7 +1936,7 @@ NXapm
             These data form the basis to analyses of the so-called
             (hit) multiplicity of an ion.
 
-            Multiplicity must not be confused with how many atoms 
+            Multiplicity must not be confused with how many atoms
             f the same element or isotope, respectively, a molecular
             ion contains (which is instead encoded with the
             isotope_vector field of each NXion instance).
@@ -2023,9 +2023,9 @@ NXapm
 
         **evaporation_id_included**: (required) :ref:`NX_BOOLEAN <NX_BOOLEAN>` (Rank: 1, Dimensions: [n_ions]) 
 
-          .. collapse:: Bitmask which is set to true if the ion  ...
+          .. collapse:: Bitmask which is set to true if the ion ...
 
-              Bitmask which is set to true if the ion 
+              Bitmask which is set to true if the ion
               is considered and false otherwise.
 
         .. _/NXapm/ENTRY/atom_probe/ion_filtering/PROGRAM-group:
@@ -2436,8 +2436,8 @@ NXapm
             The documentation of these steps is based on ideas
             described in the literature:
 
-            * `M. K. Miller <https://doi.org/10.1002/sia.1719>`_  
-            * `D. Haley et al. <https://doi.org/10.1017/S1431927620024290>`_  
+            * `M. K. Miller <https://doi.org/10.1002/sia.1719>`_
+            * `D. Haley et al. <https://doi.org/10.1017/S1431927620024290>`_
             * `M. Kühbach et al. <https://doi.org/10.1017/S1431927621012241>`_
 
         .. _/NXapm/ENTRY/atom_probe/ranging/sequence_index-field:
