@@ -61,7 +61,8 @@ to support finding information and reducing the need for renaming and
 restructuring information for a research field where many scientists perform
 very specific research but who all also share commonalities like usage of
 controlled electron beams, a focus on studies of electron beam matter interaction
-to explore physical mechanisms and phenomena, or the desire to characterize materials.</p>
+to explore physical mechanisms and phenomena, or the desire to characterize materials
+using electron microscopy.</p>
 </details></div></blockquote>
 <p><strong>Symbols</strong>:</p>
 <blockquote>
@@ -166,8 +167,8 @@ experiments/simulations to e.g. proposals.</p>
 <div><details class="summary-the-program-and-eventual-software-libraries-used-with-which-the">
 <summary>The program and eventual software libraries used with which the ...</summary><p>The program and eventual software libraries used with which the
 NeXus instance was created. For the NOMAD OASIS research data
-management system e.g. pynxtools and eventually (all modules
-if desired).</p>
+management system e.g. pynxtools and eventually all modules
+if desired.</p>
 </details></div></blockquote>
 <p id="nxem-base-entry-serialized-group"><strong>SERIALIZED</strong>: (optional) <a class="reference internal" href="NXserialized.html#nxserialized"><span class="std std-ref">NXserialized</span></a></p>
 <blockquote>
@@ -214,7 +215,7 @@ in time when the experiment was performed.</p>
 <div><details class="summary-which-role-does-the-user-have-in-the-place-and-at-the-point">
 <summary>Which role does the user have in the place and at the point ...</summary><p>Which role does the user have in the place and at the point
 in time when the experiment was performed? Technician operating
-the microscope. Student, postdoc, principle investigator, guest
+the microscope, student, postdoc, principle investigator, or guest
 are common examples.</p>
 </details></div></blockquote>
 <p id="nxem-base-entry-user-identifier-group"><strong>identifier</strong>: (optional) <a class="reference internal" href="NXidentifier.html#nxidentifier"><span class="std std-ref">NXidentifier</span></a></p>
@@ -238,7 +239,71 @@ Samples can be real specimens or virtual (see method).</p>
 virtual one (in a computer simulation)</p>
 <p>Any of these values: <code class="docutils literal notranslate"><span class="pre">experiment</span></code> | <code class="docutils literal notranslate"><span class="pre">simulation</span></code></p>
 </details></div></blockquote>
-<p id="index-14"><span id="nxem-base-entry-sample-identifier-field"></span><strong>identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<p id="index-14"><span id="nxem-base-entry-sample-preparation-date-field"></span><strong>preparation_date</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a> <a class="reference internal" href="../base_classes/NXsample.html#nxsample-preparation-date-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-iso-8601-time-code-with-local-time-zone-offset-to-utc-information">
+<summary>ISO 8601 time code with local time zone offset to UTC information ...</summary><p>ISO 8601 time code with local time zone offset to UTC information
+when the specimen was prepared.</p>
+<p>Ideally, report the end of the preparation, i.e. the last known time
+the measured specimen surface was actively prepared. Ideally, this
+matches the last timestamp that is mentioned in the digital resource
+pointed to by parent_identifier.</p>
+<p>Knowing when the specimen was exposed to e.g. specific atmosphere is
+especially required for environmentally sensitive material such as
+hydrogen charged specimens or experiments including tracers with a
+short half time. Additional time stamps prior to preparation_date
+should better be placed in resources which describe but which do not pollute
+the description here with prose. Resolving these connected pieces of information
+is considered within the responsibility of the research data management
+system.</p>
+</details></div></blockquote>
+<p id="index-15"><span id="nxem-base-entry-sample-name-field"></span><strong>name</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsample.html#nxsample-name-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>An alias used to refer to the specimen to please readability for humans.</p>
+</div></blockquote>
+<p id="index-16"><span id="nxem-base-entry-sample-atom-types-field"></span><strong>atom_types</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-list-of-comma-separated-elements-from-the-periodic-table-that-are">
+<summary>List of comma-separated elements from the periodic table that are ...</summary><p>List of comma-separated elements from the periodic table that are
+contained in the sample. If the sample substance has multiple
+components, all elements from each component must be included in
+<cite>atom_types</cite>.</p>
+<p>The purpose of the field is to offer research data management systems an
+opportunity to parse the relevant elements without having to interpret
+these from the resources pointed to by parent_identifier or walk through
+eventually deeply nested groups in data instances.</p>
+</details></div></blockquote>
+<p id="index-17"><span id="nxem-base-entry-sample-thickness-field"></span><strong>thickness</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><details class="summary-measured-sample-thickness">
+<summary>(Measured) sample thickness. ...</summary><p>(Measured) sample thickness.</p>
+<p>The information is recorded to qualify if the beam used was likely
+able to shine through the specimen. For scanning electron microscopy,
+in many cases the specimen is typically thicker than what is
+illuminatable by the electron beam.</p>
+<p>In this case the value should be set to the actual thickness of
+the specimen viewed for an illumination situation where the nominal
+surface normal of the specimen is parallel to the optical axis.</p>
+</details></div></blockquote>
+<p id="index-18"><span id="nxem-base-entry-sample-density-field"></span><strong>density</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-measured-density-of-the-specimen">
+<summary>(Measured) density of the specimen. ...</summary><p>(Measured) density of the specimen.</p>
+<p>For multi-layered specimens this field should only be used to describe
+the density of the excited volume. For scanning electron microscopy
+the usage of this field is discouraged and instead an instance of an
+<a class="reference internal" href="NXinteraction_vol_em.html#nxinteraction-vol-em"><span class="std std-ref">NXinteraction_vol_em</span></a> within individual <a class="reference internal" href="NXevent_data_em.html#nxevent-data-em"><span class="std std-ref">NXevent_data_em</span></a>
+instances can provide a cleaner description of the relevant details
+why one may wish to store the density of the specimen.</p>
+</details></div></blockquote>
+<p id="index-19"><span id="nxem-base-entry-sample-description-field"></span><strong>description</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsample.html#nxsample-description-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-discouraged-free-text-field-to-provide-further-detail-although-adding">
+<summary>Discouraged free-text field to provide further detail although adding ...</summary><p>Discouraged free-text field to provide further detail although adding
+parent_identifier and having a working research data management system
+should provide this contextualization.</p>
+</details></div></blockquote>
+<p id="nxem-base-entry-sample-identifier-group"><strong>identifier</strong>: (optional) <a class="reference internal" href="NXidentifier.html#nxidentifier"><span class="std std-ref">NXidentifier</span></a></p>
 <blockquote>
 <div><details class="summary-ideally-globally-unique-persistent-identifier-which-distinguishes">
 <summary>Ideally, (globally) unique persistent identifier which distinguishes ...</summary><p>Ideally, (globally) unique persistent identifier which distinguishes
@@ -252,75 +317,12 @@ used only for the characterization of a single specimen.</p>
 <p>Details about the specimen preparation should be
 stored in resources referring to parent_identifier.</p>
 </details></div></blockquote>
-<p id="index-15"><span id="nxem-base-entry-sample-parent-identifier-field"></span><strong>parent_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<p id="nxem-base-entry-sample-parent-identifier-group"><strong>parent_identifier</strong>: (optional) <a class="reference internal" href="NXidentifier.html#nxidentifier"><span class="std std-ref">NXidentifier</span></a></p>
 <blockquote>
 <div><details class="summary-identifier-of-the-sample-from-which-the-sample-was-cut-or-the-string">
 <summary>Identifier of the sample from which the sample was cut or the string ...</summary><p>Identifier of the sample from which the sample was cut or the string
 <em>None</em>. The purpose of this field is to support functionalities
 for tracking sample provenance via a research data management system.</p>
-</details></div></blockquote>
-<p id="index-16"><span id="nxem-base-entry-sample-preparation-date-field"></span><strong>preparation_date</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a> <a class="reference internal" href="../base_classes/NXsample.html#nxsample-preparation-date-field"><span class="std std-ref">⤆</span></a></p>
-<blockquote>
-<div><details class="summary-iso-8601-time-code-with-local-time-zone-offset-to-utc-information">
-<summary>ISO 8601 time code with local time zone offset to UTC information ...</summary><p>ISO 8601 time code with local time zone offset to UTC information
-when the specimen was prepared.</p>
-<p>Ideally, report the end of the preparation, i.e. the last known time
-the measured specimen surface was actively prepared. Ideally, this
-matches the last timestamp that is mentioned in the digital resource
-pointed to by parent_identifier.</p>
-<p>Knowing when the specimen was exposed to e.g. specific atmosphere is
-especially required for environmentally sensitive material such as
-hydrogen charged specimens or experiments including tracers with a
-short half time. Additional time stamps prior to preparation_date
-should better be placed in resources which describe the but not pollute
-the description here. Resolving these connected pieces of information
-is considered within the responsibility of the research data management
-system.</p>
-</details></div></blockquote>
-<p id="index-17"><span id="nxem-base-entry-sample-name-field"></span><strong>name</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsample.html#nxsample-name-field"><span class="std std-ref">⤆</span></a></p>
-<blockquote>
-<div><p>An alias of used to refer to the specimen to please readability for humans.</p>
-</div></blockquote>
-<p id="index-18"><span id="nxem-base-entry-sample-atom-types-field"></span><strong>atom_types</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
-<blockquote>
-<div><details class="summary-list-of-comma-separated-elements-from-the-periodic-table-that-are">
-<summary>List of comma-separated elements from the periodic table that are ...</summary><p>List of comma-separated elements from the periodic table that are
-contained in the sample. If the sample substance has multiple
-components, all elements from each component must be included in
-<cite>atom_types</cite>.</p>
-<p>The purpose of the field is to offer materials database systems an
-opportunity to parse the relevant elements without having to interpret
-these from the resources pointed to by parent_identifier.</p>
-</details></div></blockquote>
-<p id="index-19"><span id="nxem-base-entry-sample-thickness-field"></span><strong>thickness</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
-<blockquote>
-<div><details class="summary-measured-sample-thickness">
-<summary>(Measured) sample thickness. ...</summary><p>(Measured) sample thickness.</p>
-<p>The information is recorded to qualify if the beam used was likely
-able to shine through the specimen. For scanning electron microscopy,
-in many cases the specimen is typically thicker than what is
-illuminatable by the electron beam.</p>
-<p>In this case the value should be set to the actual thickness of
-the specimen viewed for an illumination situation where the nominal
-surface normal of the specimen is parallel to the optical axis.</p>
-</details></div></blockquote>
-<p id="index-20"><span id="nxem-base-entry-sample-density-field"></span><strong>density</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
-<blockquote>
-<div><details class="summary-measured-density-of-the-specimen">
-<summary>(Measured) density of the specimen. ...</summary><p>(Measured) density of the specimen.</p>
-<p>For multi-layered specimens this field should only be used to describe
-the density of the excited volume. For scanning electron microscopy
-the usage of this field is discouraged and instead an instance of an
-<a class="reference internal" href="NXinteraction_vol_em.html#nxinteraction-vol-em"><span class="std std-ref">NXinteraction_vol_em</span></a> within individual <a class="reference internal" href="NXevent_data_em.html#nxevent-data-em"><span class="std std-ref">NXevent_data_em</span></a>
-instances can provide a cleaner description of the relevant details
-why one may wish to store the density of the specimen.</p>
-</details></div></blockquote>
-<p id="index-21"><span id="nxem-base-entry-sample-description-field"></span><strong>description</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsample.html#nxsample-description-field"><span class="std std-ref">⤆</span></a></p>
-<blockquote>
-<div><details class="summary-discouraged-free-text-field-to-provide-further-detail-although-adding">
-<summary>Discouraged free-text field to provide further detail although adding ...</summary><p>Discouraged free-text field to provide further detail although adding
-parent_identifier and having a working research data management system
-should provide this contextualization.</p>
 </details></div></blockquote>
 </div></blockquote>
 <p id="nxem-base-entry-data-group"><strong>DATA</strong>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="../base_classes/NXentry.html#nxentry-data-group"><span class="std std-ref">⤆</span></a></p>
@@ -330,9 +332,9 @@ should provide this contextualization.</p>
 <p id="nxem-base-entry-roi-group"><strong>ROI</strong>: (optional) <a class="reference internal" href="NXroi.html#nxroi"><span class="std std-ref">NXroi</span></a></p>
 <blockquote>
 <div><details class="summary-a-region-of-interest-analyzed-either-during-or-after-the-session">
-<summary>A region-of-interest analyzed either during or after the session. ...</summary><p>A region-of-interest analyzed either during or after the session.
-For which specific processed data of the measured or simulated
-data are available.</p>
+<summary>A region-of-interest analyzed either during or after the session ...</summary><p>A region-of-interest analyzed either during or after the session
+for which specific processed data generated from the measured or the
+simulated data are available.</p>
 </details><p id="nxem-base-entry-roi-se-group"><strong>se</strong>: (optional) <a class="reference internal" href="NXem_img.html#nxem-img"><span class="std std-ref">NXem_img</span></a></p>
 <p id="nxem-base-entry-roi-bse-group"><strong>bse</strong>: (optional) <a class="reference internal" href="NXem_img.html#nxem-img"><span class="std std-ref">NXem_img</span></a></p>
 <p id="nxem-base-entry-roi-ebsd-group"><strong>ebsd</strong>: (optional) <a class="reference internal" href="NXem_ebsd.html#nxem-ebsd"><span class="std std-ref">NXem_ebsd</span></a></p>
@@ -371,10 +373,10 @@ attributes, and links defined in this class.</p>
 <li><p><a class="reference internal" href="#nxem-base-entry-sample-atom-types-field"><span class="std std-ref">/NXem_base/ENTRY/sample/atom_types-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxem-base-entry-sample-density-field"><span class="std std-ref">/NXem_base/ENTRY/sample/density-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxem-base-entry-sample-description-field"><span class="std std-ref">/NXem_base/ENTRY/sample/description-field</span></a></p></li>
-<li><p><a class="reference internal" href="#nxem-base-entry-sample-identifier-field"><span class="std std-ref">/NXem_base/ENTRY/sample/identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-base-entry-sample-identifier-group"><span class="std std-ref">/NXem_base/ENTRY/sample/identifier-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxem-base-entry-sample-method-field"><span class="std std-ref">/NXem_base/ENTRY/sample/method-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxem-base-entry-sample-name-field"><span class="std std-ref">/NXem_base/ENTRY/sample/name-field</span></a></p></li>
-<li><p><a class="reference internal" href="#nxem-base-entry-sample-parent-identifier-field"><span class="std std-ref">/NXem_base/ENTRY/sample/parent_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-base-entry-sample-parent-identifier-group"><span class="std std-ref">/NXem_base/ENTRY/sample/parent_identifier-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxem-base-entry-sample-preparation-date-field"><span class="std std-ref">/NXem_base/ENTRY/sample/preparation_date-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxem-base-entry-sample-thickness-field"><span class="std std-ref">/NXem_base/ENTRY/sample/thickness-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxem-base-entry-serialized-group"><span class="std std-ref">/NXem_base/ENTRY/SERIALIZED-group</span></a></p></li>

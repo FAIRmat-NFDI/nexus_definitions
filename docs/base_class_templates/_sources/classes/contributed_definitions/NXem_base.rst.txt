@@ -32,7 +32,8 @@ NXem_base
       restructuring information for a research field where many scientists perform
       very specific research but who all also share commonalities like usage of
       controlled electron beams, a focus on studies of electron beam matter interaction
-      to explore physical mechanisms and phenomena, or the desire to characterize materials.
+      to explore physical mechanisms and phenomena, or the desire to characterize materials
+      using electron microscopy.
 
 **Symbols**:
 
@@ -192,8 +193,8 @@ NXem_base
 
           The program and eventual software libraries used with which the
           NeXus instance was created. For the NOMAD OASIS research data
-          management system e.g. pynxtools and eventually (all modules
-          if desired).
+          management system e.g. pynxtools and eventually all modules
+          if desired.
 
     .. _/NXem_base/ENTRY/SERIALIZED-group:
 
@@ -275,7 +276,7 @@ NXem_base
 
             Which role does the user have in the place and at the point
             in time when the experiment was performed? Technician operating
-            the microscope. Student, postdoc, principle investigator, guest
+            the microscope, student, postdoc, principle investigator, or guest
             are common examples.
 
       .. _/NXem_base/ENTRY/USER/identifier-group:
@@ -311,40 +312,6 @@ NXem_base
 
             Any of these values: ``experiment`` | ``simulation``
 
-      .. _/NXem_base/ENTRY/sample/identifier-field:
-
-      .. index:: identifier (field)
-
-      **identifier**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-        .. collapse:: Ideally, (globally) unique persistent identifier which distinguishes ...
-
-            Ideally, (globally) unique persistent identifier which distinguishes
-            the specimen from all others and especially the predecessor/origin
-            from where the specimen was cut.
-
-            This field must not be used for an alias! Instead, use name.
-
-            In cases where multiple specimens were loaded into the microscope,
-            the identifier has to resolve the specific sample, whose results are
-            stored by this :ref:`NXentry` instance, because a single NXentry should be
-            used only for the characterization of a single specimen.
-
-            Details about the specimen preparation should be
-            stored in resources referring to parent_identifier.
-
-      .. _/NXem_base/ENTRY/sample/parent_identifier-field:
-
-      .. index:: parent_identifier (field)
-
-      **parent_identifier**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-        .. collapse:: Identifier of the sample from which the sample was cut or the string ...
-
-            Identifier of the sample from which the sample was cut or the string
-            *None*. The purpose of this field is to support functionalities
-            for tracking sample provenance via a research data management system.
-
       .. _/NXem_base/ENTRY/sample/preparation_date-field:
 
       .. index:: preparation_date (field)
@@ -365,8 +332,8 @@ NXem_base
             especially required for environmentally sensitive material such as
             hydrogen charged specimens or experiments including tracers with a
             short half time. Additional time stamps prior to preparation_date
-            should better be placed in resources which describe the but not pollute
-            the description here. Resolving these connected pieces of information
+            should better be placed in resources which describe but which do not pollute
+            the description here with prose. Resolving these connected pieces of information
             is considered within the responsibility of the research data management
             system.
 
@@ -376,7 +343,7 @@ NXem_base
 
       **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsample/name-field>`
 
-        An alias of used to refer to the specimen to please readability for humans.
+        An alias used to refer to the specimen to please readability for humans.
 
       .. _/NXem_base/ENTRY/sample/atom_types-field:
 
@@ -391,9 +358,10 @@ NXem_base
             components, all elements from each component must be included in
             `atom_types`.
 
-            The purpose of the field is to offer materials database systems an
+            The purpose of the field is to offer research data management systems an
             opportunity to parse the relevant elements without having to interpret
-            these from the resources pointed to by parent_identifier.
+            these from the resources pointed to by parent_identifier or walk through
+            eventually deeply nested groups in data instances.
 
       .. _/NXem_base/ENTRY/sample/thickness-field:
 
@@ -443,6 +411,36 @@ NXem_base
             parent_identifier and having a working research data management system
             should provide this contextualization.
 
+      .. _/NXem_base/ENTRY/sample/identifier-group:
+
+      **identifier**: (optional) :ref:`NXidentifier` 
+
+        .. collapse:: Ideally, (globally) unique persistent identifier which distinguishes ...
+
+            Ideally, (globally) unique persistent identifier which distinguishes
+            the specimen from all others and especially the predecessor/origin
+            from where the specimen was cut.
+
+            This field must not be used for an alias! Instead, use name.
+
+            In cases where multiple specimens were loaded into the microscope,
+            the identifier has to resolve the specific sample, whose results are
+            stored by this :ref:`NXentry` instance, because a single NXentry should be
+            used only for the characterization of a single specimen.
+
+            Details about the specimen preparation should be
+            stored in resources referring to parent_identifier.
+
+      .. _/NXem_base/ENTRY/sample/parent_identifier-group:
+
+      **parent_identifier**: (optional) :ref:`NXidentifier` 
+
+        .. collapse:: Identifier of the sample from which the sample was cut or the string ...
+
+            Identifier of the sample from which the sample was cut or the string
+            *None*. The purpose of this field is to support functionalities
+            for tracking sample provenance via a research data management system.
+
     .. _/NXem_base/ENTRY/DATA-group:
 
     **DATA**: (optional) :ref:`NXdata` :ref:`⤆ </NXentry/DATA-group>`
@@ -467,11 +465,11 @@ NXem_base
 
     **ROI**: (optional) :ref:`NXroi` 
 
-      .. collapse:: A region-of-interest analyzed either during or after the session. ...
+      .. collapse:: A region-of-interest analyzed either during or after the session ...
 
-          A region-of-interest analyzed either during or after the session.
-          For which specific processed data of the measured or simulated
-          data are available.
+          A region-of-interest analyzed either during or after the session
+          for which specific processed data generated from the measured or the
+          simulated data are available.
 
       .. _/NXem_base/ENTRY/ROI/se-group:
 
@@ -539,10 +537,10 @@ attributes, and links defined in this class.
 * :ref:`/NXem_base/ENTRY/sample/atom_types-field </NXem_base/ENTRY/sample/atom_types-field>`
 * :ref:`/NXem_base/ENTRY/sample/density-field </NXem_base/ENTRY/sample/density-field>`
 * :ref:`/NXem_base/ENTRY/sample/description-field </NXem_base/ENTRY/sample/description-field>`
-* :ref:`/NXem_base/ENTRY/sample/identifier-field </NXem_base/ENTRY/sample/identifier-field>`
+* :ref:`/NXem_base/ENTRY/sample/identifier-group </NXem_base/ENTRY/sample/identifier-group>`
 * :ref:`/NXem_base/ENTRY/sample/method-field </NXem_base/ENTRY/sample/method-field>`
 * :ref:`/NXem_base/ENTRY/sample/name-field </NXem_base/ENTRY/sample/name-field>`
-* :ref:`/NXem_base/ENTRY/sample/parent_identifier-field </NXem_base/ENTRY/sample/parent_identifier-field>`
+* :ref:`/NXem_base/ENTRY/sample/parent_identifier-group </NXem_base/ENTRY/sample/parent_identifier-group>`
 * :ref:`/NXem_base/ENTRY/sample/preparation_date-field </NXem_base/ENTRY/sample/preparation_date-field>`
 * :ref:`/NXem_base/ENTRY/sample/thickness-field </NXem_base/ENTRY/sample/thickness-field>`
 * :ref:`/NXem_base/ENTRY/SERIALIZED-group </NXem_base/ENTRY/SERIALIZED-group>`
