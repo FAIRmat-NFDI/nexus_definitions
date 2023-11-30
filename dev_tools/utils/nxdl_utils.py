@@ -26,7 +26,7 @@ def get_nexus_definitions_path():
     """Check NEXUS_DEF_PATH variable.
     If it is empty, this function is filling it"""
     try:  # either given by sys env
-        return os.environ["NEXUS_DEF_PATH"]
+        return Path(os.environ["NEXUS_DEF_PATH"])
     except KeyError:  # or it should be available locally under the dir 'definitions'
         local_dir = Path(__file__).resolve().parent
         for _ in range(2):
@@ -232,7 +232,7 @@ def belongs_to_capital(params):
     (act_htmlname, chk_name, name_any, nxdl_elem, child, name) = params
     # or starts with capital and no reserved words used
     if (
-        (act_htmlname[0].isalpha() and act_htmlname[0].isupper())
+        (name_any or (act_htmlname[0].isalpha() and act_htmlname[0].isupper()))
         and name != "doc"
         and name != "enumeration"
     ):
