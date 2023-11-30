@@ -13,13 +13,13 @@ NXcg_alpha_complex
 
 **Status**:
 
-  base class, extends :ref:`NXobject`
+  base class, extends :ref:`NXcg_primitive_set`
 
 **Description**:
 
-  .. collapse:: Computational geometry description of alpha shapes or wrappings to primitives. ...
+  .. collapse:: Computational geometry of alpha shapes or alpha wrappings about primitives. ...
 
-      Computational geometry description of alpha shapes or wrappings to primitives.
+      Computational geometry of alpha shapes or alpha wrappings about primitives.
 
       For details see:
 
@@ -27,22 +27,14 @@ NXcg_alpha_complex
       * https://dx.doi.org/10.1145/174462.156635 for 3D,
       * https://dl.acm.org/doi/10.5555/871114 for weighted, and
       * https://doc.cgal.org/latest/Alpha_shapes_3 for 3D implementation
-      * https://doc.cgal.org/latest/Manual/packages.html#PkgAlphaWrap3 for 3D wrap
+      * https://doc.cgal.org/latest/Manual/packages.html#PkgAlphaWrap3 for 3D wrappings
 
       in CGAL, the Computational Geometry Algorithms Library.
       As a starting point, we follow the conventions of the CGAL library.
 
 **Symbols**:
 
-  The symbols used in the schema to specify e.g. dimensions of arrays.
-
-  **d**: The dimensionality of the alpha shape, for now 2 or 3.
-
-  **n_e**: The number of edges.
-
-  **n_f**: The number of faces.
-
-  **n_c**: The number of cells.
+  No symbol table
 
 **Groups cited**:
   :ref:`NXcg_point_set`, :ref:`NXcg_tetrahedron_set`, :ref:`NXcg_triangle_set`
@@ -51,41 +43,31 @@ NXcg_alpha_complex
 
 **Structure**:
 
-  .. _/NXcg_alpha_complex/dimensionality-field:
-
-  .. index:: dimensionality (field)
-
-  **dimensionality**: (optional) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
-
-
-    Any of these values: ``2`` | ``3``
-
   .. _/NXcg_alpha_complex/type-field:
 
   .. index:: type (field)
 
   **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: Specify which general type of alpha shape is computed. ...
+    .. collapse:: Type of alpha complex following the terminology used by CGAL for now. ...
 
-        Specify which general type of alpha shape is computed.
-        Using for now the CGAL terminology. Basic means (unweighted) alpha shapes.
-        Alpha_wrapping means meshes created using alpha wrapping procedures.
+        Type of alpha complex following the terminology used by CGAL for now.
+
+        Basic means (unweighted) alpha shapes. Alpha_wrapping means meshes
+        created using the alpha_wrapping algorithm.
 
         Any of these values: ``convex_hull`` | ``alpha_shape`` | ``alpha_wrapping``
 
-  .. _/NXcg_alpha_complex/mode-field:
+  .. _/NXcg_alpha_complex/regularize_alpha_complex-field:
 
-  .. index:: mode (field)
+  .. index:: regularize_alpha_complex (field)
 
-  **mode**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+  **regularize_alpha_complex**: (optional) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
-    .. collapse:: Specifically when computed with the CGAL, the mode specifies if singular  ...
+    .. collapse:: Are singular faces removed, i.e. has the alpha complex ...
 
-        Specifically when computed with the CGAL, the mode specifies if singular 
-        faces are removed (regularized) of the alpha complex.
-
-        Any of these values: ``general`` | ``regularized``
+        Are singular faces removed, i.e. has the alpha complex
+        been regularized or not.
 
   .. _/NXcg_alpha_complex/alpha-field:
 
@@ -93,10 +75,10 @@ NXcg_alpha_complex
 
   **alpha**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
-    .. collapse:: The alpha, (radius of the alpha-sphere) parameter to be used for alpha ...
+    .. collapse:: The alpha parameter, i.e. the radius of the alpha-sphere that ...
 
-        The alpha, (radius of the alpha-sphere) parameter to be used for alpha
-        shapes and alpha wrappings.
+        The alpha parameter, i.e. the radius of the alpha-sphere that
+        is used when computing the alpha complex.
 
   .. _/NXcg_alpha_complex/offset-field:
 
@@ -104,33 +86,31 @@ NXcg_alpha_complex
 
   **offset**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
-    .. collapse:: The offset distance parameter to be used in addition to alpha ...
+    The offset distance parameter used when computing alpha_wrappings.
 
-        The offset distance parameter to be used in addition to alpha
-        in the case of alpha_wrapping.
+  .. _/NXcg_alpha_complex/point_setID-group:
 
-  .. _/NXcg_alpha_complex/point_set-group:
+  **point_setID**: (optional) :ref:`NXcg_point_set` 
 
-  **point_set**: (optional) :ref:`NXcg_point_set` 
+    Point cloud for which the alpha shape or wrapping has been computed.
 
-    Point cloud for which the alpha shape or wrapping should be computed.
+  .. _/NXcg_alpha_complex/triangle_setID-group:
 
-  .. _/NXcg_alpha_complex/triangle_set-group:
+  **triangle_setID**: (optional) :ref:`NXcg_triangle_set` 
 
-  **triangle_set**: (optional) :ref:`NXcg_triangle_set` 
+    Triangle soup for which the alpha wrapping has been computed.
 
-    Triangle soup for which the alpha wrapping should be computed.
+  .. _/NXcg_alpha_complex/triangle_meshID-group:
 
-  .. _/NXcg_alpha_complex/triangulation-group:
+  **triangle_meshID**: (optional) :ref:`NXcg_triangle_set` 
 
-  **triangulation**: (optional) :ref:`NXcg_triangle_set` 
+    Triangle mesh representing the alpha complex.
 
-    A meshed representation of the resulting shape.
+  .. _/NXcg_alpha_complex/interior_cellsID-group:
 
-  .. _/NXcg_alpha_complex/interior_cells-group:
+  **interior_cellsID**: (optional) :ref:`NXcg_tetrahedron_set` 
 
-  **interior_cells**: (optional) :ref:`NXcg_tetrahedron_set` 
-
+    Set of tetrahedra representing the volume inside the alpha complex.
 
 
 Hypertext Anchors
@@ -141,13 +121,12 @@ attributes, and links defined in this class.
 
 
 * :ref:`/NXcg_alpha_complex/alpha-field </NXcg_alpha_complex/alpha-field>`
-* :ref:`/NXcg_alpha_complex/dimensionality-field </NXcg_alpha_complex/dimensionality-field>`
-* :ref:`/NXcg_alpha_complex/interior_cells-group </NXcg_alpha_complex/interior_cells-group>`
-* :ref:`/NXcg_alpha_complex/mode-field </NXcg_alpha_complex/mode-field>`
+* :ref:`/NXcg_alpha_complex/interior_cellsID-group </NXcg_alpha_complex/interior_cellsID-group>`
 * :ref:`/NXcg_alpha_complex/offset-field </NXcg_alpha_complex/offset-field>`
-* :ref:`/NXcg_alpha_complex/point_set-group </NXcg_alpha_complex/point_set-group>`
-* :ref:`/NXcg_alpha_complex/triangle_set-group </NXcg_alpha_complex/triangle_set-group>`
-* :ref:`/NXcg_alpha_complex/triangulation-group </NXcg_alpha_complex/triangulation-group>`
+* :ref:`/NXcg_alpha_complex/point_setID-group </NXcg_alpha_complex/point_setID-group>`
+* :ref:`/NXcg_alpha_complex/regularize_alpha_complex-field </NXcg_alpha_complex/regularize_alpha_complex-field>`
+* :ref:`/NXcg_alpha_complex/triangle_meshID-group </NXcg_alpha_complex/triangle_meshID-group>`
+* :ref:`/NXcg_alpha_complex/triangle_setID-group </NXcg_alpha_complex/triangle_setID-group>`
 * :ref:`/NXcg_alpha_complex/type-field </NXcg_alpha_complex/type-field>`
 
 **NXDL Source**:

@@ -29,15 +29,12 @@ NXrotation_set
       * `D. Rowenhorst et al. <https://doi.org/10.1088/0965-0393/23/8/083501>`_
       * `A. Morawiec <https://doi.org/10.1007/978-3-662-09156-2>`_
 
-      Once orientations are defined one can continue to characterize the
-      misorientation and specifically the disorientation which describes the
-      rotation that is required to register the lattices of two oriented objects
+      Once orientations are defined, one can continue to characterize the
+      misorientation and specifically the disorientation. The misorientation describes
+      the rotation that is required to register the lattices of two oriented objects
       (like crystal lattice) into a crystallographic equivalent orientation:
 
       * `R. Bonnet <https://doi.org/10.1107/S0567739480000186>`_
-
-      Based on the idea of this NXorientation_set one could equally formulate
-      an NXdisorientation_set.
 
 **Symbols**:
 
@@ -45,32 +42,37 @@ NXrotation_set
 
   **c**: The cardinality of the set, i.e. the number of value tuples.
 
+  **n_phases**: How many phases with usually different crystal and symmetry are distinguished.
+
 **Groups cited**:
   none
 
 **Structure**:
 
-  .. _/NXrotation_set/depends_on-field:
+  .. _/NXrotation_set@depends_on-attribute:
 
-  .. index:: depends_on (field)
+  .. index:: depends_on (file attribute)
 
-  **depends_on**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+  **@depends_on**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: Reference to an instance of NXem_conventions which contextualizes ...
+    .. collapse:: Reference to an instance of :ref:`NXem_conventions` which contextualizes ...
 
-        Reference to an instance of NXem_conventions which contextualizes
+        Reference to an instance of :ref:`NXem_conventions` which contextualizes
         how the here reported parameterized quantities can be interpreted.
 
   .. _/NXrotation_set/crystal_symmetry-field:
 
   .. index:: crystal_symmetry (field)
 
-  **crystal_symmetry**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+  **crystal_symmetry**: (optional) :ref:`NX_CHAR <NX_CHAR>` (Rank: 1, Dimensions: [n_phases]) 
 
     .. collapse:: Point group which defines the symmetry of the crystal. ...
 
         Point group which defines the symmetry of the crystal.
-        This has to be at least a single string.
+
+        This has to be at least a single string. If crystal_symmetry is not
+        provided point group 1 is assumed.
+
         In the case that misorientation or disorientation fields are used
         and the two crystal sets resolve for phases with a different
         crystal symmetry, this field has to encode two string.
@@ -82,49 +84,53 @@ NXrotation_set
 
   .. index:: sample_symmetry (field)
 
-  **sample_symmetry**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+  **sample_symmetry**: (optional) :ref:`NX_CHAR <NX_CHAR>` (Rank: 1, Dimensions: [n_phases]) 
 
     .. collapse:: Point group which defines an assumed symmetry imprinted upon processing ...
 
         Point group which defines an assumed symmetry imprinted upon processing
         the material/sample which could give rise to or may justify to use a
         simplified description of rotations, orientations, misorientations,
-        and disorientations via numerical procedures known as symmetrization.
+        and disorientations via numerical procedures that are known as
+        symmetrization.
+
+        If sample_symmetry is not provided point group 1 is assumed.
 
         The traditionally used symmetrization operations within the texture
         community in Materials Science, though, are thanks to methodology and
         software improvements no longer strictly needed. Therefore, users are
         encouraged to set the sample_symmetry to 1 (triclinic) and thus assume
-        there is no implied additional processing symmetry imprinted.
+        there is no justification to assume the imprinting of additional
+        symmetry because of the processing.
 
         In practice one often faces situations where indeed these assumed
-        symmetries are anyway not fully observed and thus an accepting of
+        symmetries are anyway not fully observed, and thus an accepting of
         eventual inaccuracies just for the sake of reporting a simplified
-        symmetrized description can be avoided.
+        symmetrized description should be avoided.
 
   .. _/NXrotation_set/rotation_quaternion-field:
 
   .. index:: rotation_quaternion (field)
 
-  **rotation_quaternion**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 2, Dimensions: [c, 4]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
+  **rotation_quaternion**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [c, 4]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
 
-    .. collapse:: The set of rotations expressed in quaternion representation. The assumed ...
+    .. collapse:: The set of rotations expressed in quaternion parameterization considering ...
 
-        The set of rotations expressed in quaternion representation. The assumed
-        crystal and sample symmetry point group is 1, triclinic. Rotations which
-        should be interpreted as antipodal are not marked as such.
+        The set of rotations expressed in quaternion parameterization considering
+        crystal_symmetry and sample_symmetry. Rotations which should be
+        interpreted as antipodal are not marked as such.
 
   .. _/NXrotation_set/rotation_euler-field:
 
   .. index:: rotation_euler (field)
 
-  **rotation_euler**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 2, Dimensions: [c, 3]) {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
+  **rotation_euler**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [c, 3]) {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
 
-    .. collapse:: The set of rotations expressed in Euler angle representation following ...
+    .. collapse:: The set of rotations expressed in Euler angle parameterization considering ...
 
-        The set of rotations expressed in Euler angle representation following
-        the same applied symmetries as explained for rotation_quaternion.
-        To interpret Euler angles correctly it is necessary to inspect the
+        The set of rotations expressed in Euler angle parameterization considering
+        the same applied symmetries as detailed for the field rotation_quaternion.
+        To interpret Euler angles correctly, it is necessary to inspect the
         conventions behind depends_on to resolve which of the many Euler-angle
         conventions possible (Bunge ZXZ, XYZ, Kocks, Tait, etc.) were used.
 
@@ -134,72 +140,47 @@ NXrotation_set
 
   **is_antipodal**: (optional) :ref:`NX_BOOLEAN <NX_BOOLEAN>` (Rank: 1, Dimensions: [c]) 
 
-    .. collapse:: True for all those values which are considered antipodal,  ...
+    .. collapse:: True for all those value tuples which have assumed antipodal symmetry. ...
 
-        True for all those values which are considered antipodal, 
-        false for those which are not considered antipodal.
+        True for all those value tuples which have assumed antipodal symmetry.
+        False for all others.
 
   .. _/NXrotation_set/orientation_quaternion-field:
 
   .. index:: orientation_quaternion (field)
 
-  **orientation_quaternion**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 2, Dimensions: [c, 4]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
+  **orientation_quaternion**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [c, 4]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
 
-    .. collapse:: The set of orientations expressed in quaternion representation and ...
+    .. collapse:: The set of orientations expressed in quaternion parameterization and ...
 
-        The set of orientations expressed in quaternion representation and
+        The set of orientations expressed in quaternion parameterization and
         obeying symmetry for equivalent cases as detailed in crystal_symmetry
         and sample_symmetry. The supplementary field is_antipodal can be used
-        to mark orientations which are antipodal.
+        to mark orientations with the antipodal property.
 
   .. _/NXrotation_set/orientation_euler-field:
 
   .. index:: orientation_euler (field)
 
-  **orientation_euler**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 2, Dimensions: [c, 3]) {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
+  **orientation_euler**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [c, 3]) {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
 
-    .. collapse:: The set of orientations expressed in Euler angle representation following ...
+    .. collapse:: The set of orientations expressed in Euler angle parameterization following ...
 
-        The set of orientations expressed in Euler angle representation following
+        The set of orientations expressed in Euler angle parameterization following
         the same assumptions like for orientation_quaternion.
-        To interpret Euler angles correctly it is necessary to inspect the
+        To interpret Euler angles correctly, it is necessary to inspect the
         conventions behind depends_on to resolve which of the many Euler-angle
         conventions possible (Bunge ZXZ, XYZ, Kocks, Tait, etc.) were used.
-
-  .. _/NXrotation_set/orientation_busing_levy-field:
-
-  .. index:: orientation_busing_levy (field)
-
-  **orientation_busing_levy**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 2, Dimensions: [3, 3]) {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
-
-    .. collapse:: This will follow the Busing-Levy convention: ...
-
-        This will follow the Busing-Levy convention:
-        W. R. Busing and H. A. Levy (1967). Acta Cryst. 22, 457-464
-
-  .. _/NXrotation_set/ub_matrix_busing_levy-field:
-
-  .. index:: ub_matrix_busing_levy (field)
-
-  **ub_matrix_busing_levy**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 2, Dimensions: [3, 3]) 
-
-    .. collapse:: UB matrix of single crystal sample using Busing-Levy convention: ...
-
-        UB matrix of single crystal sample using Busing-Levy convention:
-        W. R. Busing and H. A. Levy (1967). Acta Cryst. 22, 457-464. This is
-        the multiplication of the orientation_matrix, given above,
-        with the :math:`B` matrix which
-        can be derived from the lattice constants.
 
   .. _/NXrotation_set/misorientation_quaternion-field:
 
   .. index:: misorientation_quaternion (field)
 
-  **misorientation_quaternion**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 2, Dimensions: [c, 4]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
+  **misorientation_quaternion**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [c, 4]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
 
-    .. collapse:: The set of misorientations expressed in quaternion representation and ...
+    .. collapse:: The set of misorientations expressed in quaternion parameterization ...
 
-        The set of misorientations expressed in quaternion representation and
+        The set of misorientations expressed in quaternion parameterization
         obeying symmetry operations for equivalent misorientations
         as defined by crystal_symmetry and sample_symmetry.
 
@@ -207,7 +188,7 @@ NXrotation_set
 
   .. index:: misorientation_angle (field)
 
-  **misorientation_angle**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [c]) {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
+  **misorientation_angle**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [c]) {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
 
     .. collapse:: Misorientation angular argument (eventually signed) following the same ...
 
@@ -218,7 +199,7 @@ NXrotation_set
 
   .. index:: misorientation_axis (field)
 
-  **misorientation_axis**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 2, Dimensions: [c, 3]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
+  **misorientation_axis**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [c, 3]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
 
     .. collapse:: Misorientation axis (normalized) and signed following the same ...
 
@@ -229,11 +210,11 @@ NXrotation_set
 
   .. index:: disorientation_quaternion (field)
 
-  **disorientation_quaternion**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
+  **disorientation_quaternion**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [c, 4]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
 
-    .. collapse:: The set of disorientation expressed in quaternion representation and ...
+    .. collapse:: The set of disorientation expressed in quaternion parameterization ...
 
-        The set of disorientation expressed in quaternion representation and
+        The set of disorientation expressed in quaternion parameterization
         obeying symmetry operations for equivalent misorientations
         as defined by crystal_symmetry and sample_symmetry.
 
@@ -241,7 +222,7 @@ NXrotation_set
 
   .. index:: disorientation_angle (field)
 
-  **disorientation_angle**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [c]) {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
+  **disorientation_angle**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [c]) {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
 
     .. collapse:: Disorientation angular argument (should not be signed, see ...
 
@@ -254,12 +235,12 @@ NXrotation_set
 
   .. index:: disorientation_axis (field)
 
-  **disorientation_axis**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 2, Dimensions: [c, 3]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
+  **disorientation_axis**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [c, 3]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
 
     .. collapse:: Disorientation axis (normalized) following the same symmetry assumptions ...
 
         Disorientation axis (normalized) following the same symmetry assumptions
-        as expressed for the field disorientation_quaternion.
+        as expressed for the field disorientation_angle.
 
 
 Hypertext Anchors
@@ -270,7 +251,6 @@ attributes, and links defined in this class.
 
 
 * :ref:`/NXrotation_set/crystal_symmetry-field </NXrotation_set/crystal_symmetry-field>`
-* :ref:`/NXrotation_set/depends_on-field </NXrotation_set/depends_on-field>`
 * :ref:`/NXrotation_set/disorientation_angle-field </NXrotation_set/disorientation_angle-field>`
 * :ref:`/NXrotation_set/disorientation_axis-field </NXrotation_set/disorientation_axis-field>`
 * :ref:`/NXrotation_set/disorientation_quaternion-field </NXrotation_set/disorientation_quaternion-field>`
@@ -278,13 +258,12 @@ attributes, and links defined in this class.
 * :ref:`/NXrotation_set/misorientation_angle-field </NXrotation_set/misorientation_angle-field>`
 * :ref:`/NXrotation_set/misorientation_axis-field </NXrotation_set/misorientation_axis-field>`
 * :ref:`/NXrotation_set/misorientation_quaternion-field </NXrotation_set/misorientation_quaternion-field>`
-* :ref:`/NXrotation_set/orientation_busing_levy-field </NXrotation_set/orientation_busing_levy-field>`
 * :ref:`/NXrotation_set/orientation_euler-field </NXrotation_set/orientation_euler-field>`
 * :ref:`/NXrotation_set/orientation_quaternion-field </NXrotation_set/orientation_quaternion-field>`
 * :ref:`/NXrotation_set/rotation_euler-field </NXrotation_set/rotation_euler-field>`
 * :ref:`/NXrotation_set/rotation_quaternion-field </NXrotation_set/rotation_quaternion-field>`
 * :ref:`/NXrotation_set/sample_symmetry-field </NXrotation_set/sample_symmetry-field>`
-* :ref:`/NXrotation_set/ub_matrix_busing_levy-field </NXrotation_set/ub_matrix_busing_levy-field>`
+* :ref:`/NXrotation_set@depends_on-attribute </NXrotation_set@depends_on-attribute>`
 
 **NXDL Source**:
   https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXrotation_set.nxdl.xml

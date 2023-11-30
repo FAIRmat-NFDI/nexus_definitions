@@ -41,33 +41,58 @@ NXcg_half_edge_data_structure
 
 **Structure**:
 
+  .. _/NXcg_half_edge_data_structure@depends_on-attribute:
+
+  .. index:: depends_on (file attribute)
+
+  **@depends_on**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+    .. collapse:: Hint to help resolve in which Euclidean coordinate system ...
+
+        Hint to help resolve in which Euclidean coordinate system
+        field values vertices are defined.
+
   .. _/NXcg_half_edge_data_structure/dimensionality-field:
 
   .. index:: dimensionality (field)
 
   **dimensionality**: (optional) :ref:`NX_POSINT <NX_POSINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
+    Dimensionality of the primitives described.
 
   .. _/NXcg_half_edge_data_structure/number_of_vertices-field:
 
   .. index:: number_of_vertices (field)
 
-  **number_of_vertices**: (optional) :ref:`NX_POSINT <NX_POSINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **number_of_vertices**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 1, Dimensions: [n_f]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
+    .. collapse:: Number of vertices for each face. ...
+
+        Number of vertices for each face.
+
+        Each entry represents the total number of vertices for that face,
+        irrespectively whether vertices are shared among faces or not.
+
+  .. _/NXcg_half_edge_data_structure/number_of_edges-field:
+
+  .. index:: number_of_edges (field)
+
+  **number_of_edges**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 1, Dimensions: [n_e]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+
+    .. collapse:: Number of edges for each face. ...
+
+        Number of edges for each face.
+
+        Each entry represents the total number of edges for that face,
+        irrespectively whether edges are shared across faces or not.
 
   .. _/NXcg_half_edge_data_structure/number_of_faces-field:
 
   .. index:: number_of_faces (field)
 
-  **number_of_faces**: (optional) :ref:`NX_POSINT <NX_POSINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **number_of_faces**: (optional) :ref:`NX_INT <NX_INT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-
-  .. _/NXcg_half_edge_data_structure/number_of_half_edges-field:
-
-  .. index:: number_of_half_edges (field)
-
-  **number_of_half_edges**: (optional) :ref:`NX_POSINT <NX_POSINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
-
+    Number of faces of the primitives.
 
   .. _/NXcg_half_edge_data_structure/vertex_identifier_offset-field:
 
@@ -75,49 +100,47 @@ NXcg_half_edge_data_structure
 
   **vertex_identifier_offset**: (optional) :ref:`NX_INT <NX_INT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    .. collapse:: In this half-edge data structure vertex identifiers start at 1. ...
+    .. collapse:: Integer offset whereby the identifier of the first member ...
 
-        In this half-edge data structure vertex identifiers start at 1.
-        Vertices are identified with consecutive integers up to number_of_vertices.
-        This field can be used to document which constant integer has to be
-        added to another set of vertex_identifier to assure that these other
-        identifiers also start at 1.
+        Integer offset whereby the identifier of the first member
+        of the vertices differs from zero.
+
+        Identifier can be defined explicitly or implicitly.
+        Inspect the definition of :ref:`NXcg_primitive_set` for further details.
+
+  .. _/NXcg_half_edge_data_structure/edge_identifier_offset-field:
+
+  .. index:: edge_identifier_offset (field)
+
+  **edge_identifier_offset**: (optional) :ref:`NX_INT <NX_INT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+
+    .. collapse:: Integer offset whereby the identifier of the first member ...
+
+        Integer offset whereby the identifier of the first member
+        of the edges differs from zero.
+
+        Identifier can be defined explicitly or implicitly.
+        Inspect the definition of :ref:`NXcg_primitive_set` for further details.
 
   .. _/NXcg_half_edge_data_structure/face_identifier_offset-field:
 
   .. index:: face_identifier_offset (field)
 
-  **face_identifier_offset**: (optional) :ref:`NX_INT <NX_INT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **face_identifier_offset**: (optional) :ref:`NX_INT <NX_INT>` 
 
-    .. collapse:: In this half-edge data structure face identifiers start at 1. ...
+    .. collapse:: Integer offset whereby the identifier of the first member ...
 
-        In this half-edge data structure face identifiers start at 1.
-        Faces are identified with consecutive integers up to number_of_faces.
-        This field can be used to document which constant integer has to be
-        added to another set of face_identifier to assure that these other
-        identifiers also start at 1.
+        Integer offset whereby the identifier of the first member
+        of the faces differs from zero.
 
-        The face identifier zero is reserved for the NULL face !
-
-  .. _/NXcg_half_edge_data_structure/half_edge_identifier_offset-field:
-
-  .. index:: half_edge_identifier_offset (field)
-
-  **half_edge_identifier_offset**: (optional) :ref:`NX_INT <NX_INT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
-
-    .. collapse:: In this half-edge data structure half-edge identifiers start at 1. ...
-
-        In this half-edge data structure half-edge identifiers start at 1.
-        Half-edges are identified with consecutive integers up to number_of_half_edges.
-        This field can be used to document which constant integer has to be
-        added to another set of half_edge_identifier to assure that these other
-        identifiers also start at 1.
+        Identifier can be defined explicitly or implicitly.
+        Inspect the definition of :ref:`NXcg_primitive_set` for further details.
 
   .. _/NXcg_half_edge_data_structure/position-field:
 
   .. index:: position (field)
 
-  **position**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_v, d]) {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
+  **position**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_v, d]) {units=\ :ref:`NX_ANY <NX_ANY>`} 
 
     The position of the vertices.
 
@@ -125,7 +148,7 @@ NXcg_half_edge_data_structure
 
   .. index:: vertex_incident_half_edge (field)
 
-  **vertex_incident_half_edge**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_v]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **vertex_incident_half_edge**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 1, Dimensions: [n_v]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
     Identifier of the incident half-edge.
 
@@ -133,7 +156,7 @@ NXcg_half_edge_data_structure
 
   .. index:: face_half_edge (field)
 
-  **face_half_edge**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_f]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **face_half_edge**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 1, Dimensions: [n_f]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
     Identifier of the (starting)/associated half-edge of the face.
 
@@ -141,7 +164,7 @@ NXcg_half_edge_data_structure
 
   .. index:: half_edge_vertex_origin (field)
 
-  **half_edge_vertex_origin**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_he]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **half_edge_vertex_origin**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 1, Dimensions: [n_he]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
     The identifier of the vertex from which this half-edge is outwards pointing.
 
@@ -149,7 +172,7 @@ NXcg_half_edge_data_structure
 
   .. index:: half_edge_twin (field)
 
-  **half_edge_twin**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_he]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **half_edge_twin**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 1, Dimensions: [n_he]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
     Identifier of the associated oppositely pointing half-edge.
 
@@ -157,7 +180,7 @@ NXcg_half_edge_data_structure
 
   .. index:: half_edge_incident_face (field)
 
-  **half_edge_incident_face**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_he]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **half_edge_incident_face**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 1, Dimensions: [n_he]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
     .. collapse:: If the half-edge is a boundary half-edge the ...
 
@@ -168,7 +191,7 @@ NXcg_half_edge_data_structure
 
   .. index:: half_edge_next (field)
 
-  **half_edge_next**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_he]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **half_edge_next**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 1, Dimensions: [n_he]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
     Identifier of the next half-edge.
 
@@ -176,7 +199,7 @@ NXcg_half_edge_data_structure
 
   .. index:: half_edge_prev (field)
 
-  **half_edge_prev**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_he]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **half_edge_prev**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 1, Dimensions: [n_he]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
     Identifier of the previous half-edge.
 
@@ -191,8 +214,8 @@ NXcg_half_edge_data_structure
         Users are referred to the literature for the background of L. Weinberg's
         work about topological characterization of planar graphs:
 
-        * `L. Weinberg 1966a, <https://dx.doi.org/10.1109/TCT.1964.1082216>`_  
-        * `L. Weinberg, 1966b, <https://dx.doi.org/10.1137/0114062>`_  
+        * `L. Weinberg 1966a, <https://dx.doi.org/10.1109/TCT.1964.1082216>`_
+        * `L. Weinberg, 1966b, <https://dx.doi.org/10.1137/0114062>`_
         * `E. A. Lazar et al. <https://doi.org/10.1103/PhysRevLett.109.095505>`_
 
         and how this work can e.g. be applied in space-filling tessellations
@@ -207,21 +230,22 @@ attributes, and links defined in this class.
 
 
 * :ref:`/NXcg_half_edge_data_structure/dimensionality-field </NXcg_half_edge_data_structure/dimensionality-field>`
+* :ref:`/NXcg_half_edge_data_structure/edge_identifier_offset-field </NXcg_half_edge_data_structure/edge_identifier_offset-field>`
 * :ref:`/NXcg_half_edge_data_structure/face_half_edge-field </NXcg_half_edge_data_structure/face_half_edge-field>`
 * :ref:`/NXcg_half_edge_data_structure/face_identifier_offset-field </NXcg_half_edge_data_structure/face_identifier_offset-field>`
-* :ref:`/NXcg_half_edge_data_structure/half_edge_identifier_offset-field </NXcg_half_edge_data_structure/half_edge_identifier_offset-field>`
 * :ref:`/NXcg_half_edge_data_structure/half_edge_incident_face-field </NXcg_half_edge_data_structure/half_edge_incident_face-field>`
 * :ref:`/NXcg_half_edge_data_structure/half_edge_next-field </NXcg_half_edge_data_structure/half_edge_next-field>`
 * :ref:`/NXcg_half_edge_data_structure/half_edge_prev-field </NXcg_half_edge_data_structure/half_edge_prev-field>`
 * :ref:`/NXcg_half_edge_data_structure/half_edge_twin-field </NXcg_half_edge_data_structure/half_edge_twin-field>`
 * :ref:`/NXcg_half_edge_data_structure/half_edge_vertex_origin-field </NXcg_half_edge_data_structure/half_edge_vertex_origin-field>`
+* :ref:`/NXcg_half_edge_data_structure/number_of_edges-field </NXcg_half_edge_data_structure/number_of_edges-field>`
 * :ref:`/NXcg_half_edge_data_structure/number_of_faces-field </NXcg_half_edge_data_structure/number_of_faces-field>`
-* :ref:`/NXcg_half_edge_data_structure/number_of_half_edges-field </NXcg_half_edge_data_structure/number_of_half_edges-field>`
 * :ref:`/NXcg_half_edge_data_structure/number_of_vertices-field </NXcg_half_edge_data_structure/number_of_vertices-field>`
 * :ref:`/NXcg_half_edge_data_structure/position-field </NXcg_half_edge_data_structure/position-field>`
 * :ref:`/NXcg_half_edge_data_structure/vertex_identifier_offset-field </NXcg_half_edge_data_structure/vertex_identifier_offset-field>`
 * :ref:`/NXcg_half_edge_data_structure/vertex_incident_half_edge-field </NXcg_half_edge_data_structure/vertex_incident_half_edge-field>`
 * :ref:`/NXcg_half_edge_data_structure/weinberg_vector-field </NXcg_half_edge_data_structure/weinberg_vector-field>`
+* :ref:`/NXcg_half_edge_data_structure@depends_on-attribute </NXcg_half_edge_data_structure@depends_on-attribute>`
 
 **NXDL Source**:
   https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXcg_half_edge_data_structure.nxdl.xml
