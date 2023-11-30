@@ -17,9 +17,11 @@ NXbias_spectroscopy
 
 **Description**:
 
-  Base classes definition for bias spectroscopy.
+  .. collapse:: Base classes definition for bias spectroscopy. ...
 
-  Bias sweeps while measuring arbitrary channels with I(V) curves.
+      Base classes definition for bias spectroscopy.
+
+      Bias sweeps while measuring arbitrary channels with I(V) curves.
 
 **Symbols**:
 
@@ -44,13 +46,15 @@ NXbias_spectroscopy
 
   **reset_bias**: (optional) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
-    If chosen, the Bias voltage resets to its initial value (before the sweep initiation) at 
-    the conclusion of the spectroscopy measurement. When this option is not selected, the Bias 
-    voltage maintains the last value acquired during the sweep. This functionality proves 
-    beneficial, especially when combining multiple sweep segments. As an illustration of an 
-    automated measurement: turn off the z-Controller, commence spectroscopy sweep segments (
-    forward sweep only, without resetting the bias), restore the bias to its initial value, 
-    and then turn on the z-Controller.
+    .. collapse:: If chosen, the Bias voltage resets to its initial value (before the sweep init ...
+
+        If chosen, the Bias voltage resets to its initial value (before the sweep initiation) at 
+        the conclusion of the spectroscopy measurement. When this option is not selected, the Bias 
+        voltage maintains the last value acquired during the sweep. This functionality proves 
+        beneficial, especially when combining multiple sweep segments. As an illustration of an 
+        automated measurement: turn off the z-Controller, commence spectroscopy sweep segments (
+        forward sweep only, without resetting the bias), restore the bias to its initial value, 
+        and then turn on the z-Controller.
 
   .. _/NXbias_spectroscopy/record_final_z-field:
 
@@ -58,10 +62,12 @@ NXbias_spectroscopy
 
   **record_final_z**: (optional) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
-    Select whether to record the Z position during Z averaging time at the end of
-    the sweep (after Z control time) and store the average value in the header of
-    the file when saving. Using this option increases the sweep time by Z averaging
-    time.
+    .. collapse:: Select whether to record the Z position during Z averaging time at the end of ...
+
+        Select whether to record the Z position during Z averaging time at the end of
+        the sweep (after Z control time) and store the average value in the header of
+        the file when saving. Using this option increases the sweep time by Z averaging
+        time.
 
   .. _/NXbias_spectroscopy/lock_in_run-field:
 
@@ -69,11 +75,13 @@ NXbias_spectroscopy
 
   **lock_in_run**: (optional) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
-    Select whether to set the Lock-In to run during the measurement. When using this
-    feature, make sure the Lock-In is configured correctly and settling times are
-    set to twice the Lock-In period at least. This option is ignored when Lock-In is
-    already running. This option is disabled if the Sweep Mode is MLS and the flag
-    to configure the Lock-In per segment in the Multiline segment editor is set.
+    .. collapse:: Select whether to set the Lock-In to run during the measurement. When using th ...
+
+        Select whether to set the Lock-In to run during the measurement. When using this
+        feature, make sure the Lock-In is configured correctly and settling times are
+        set to twice the Lock-In period at least. This option is ignored when Lock-In is
+        already running. This option is disabled if the Sweep Mode is MLS and the flag
+        to configure the Lock-In per segment in the Multiline segment editor is set.
 
   .. _/NXbias_spectroscopy/integration_time-field:
 
@@ -113,8 +121,10 @@ NXbias_spectroscopy
 
   **num_pixel**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` 
 
-    Define the sweep number of points, that is, the maximum spectrum resolution eq.
-    Bias window divide by Num Pixel.
+    .. collapse:: Define the sweep number of points, that is, the maximum spectrum resolution eq ...
+
+        Define the sweep number of points, that is, the maximum spectrum resolution eq.
+        Bias window divide by Num Pixel.
 
   .. _/NXbias_spectroscopy/z_avg_time-field:
 
@@ -122,11 +132,13 @@ NXbias_spectroscopy
 
   **z_avg_time**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_TIME <NX_TIME>`} 
 
-    Duration over which the Z position is recorded and averaged before and after the
-    sweep (the latter only if Record final Z position is selected in the Advanced
-    section). After the initial z averaging time, if Z-Controller to Hold is
-    selected in the Advanced section, the z-Controller is set to hold and the tip is
-    placed at the previously averaged z position (plus z offset).
+    .. collapse:: Duration over which the Z position is recorded and averaged before and after t ...
+
+        Duration over which the Z position is recorded and averaged before and after the
+        sweep (the latter only if Record final Z position is selected in the Advanced
+        section). After the initial z averaging time, if Z-Controller to Hold is
+        selected in the Advanced section, the z-Controller is set to hold and the tip is
+        placed at the previously averaged z position (plus z offset).
 
   .. _/NXbias_spectroscopy/sw_filter_type-field:
 
@@ -134,8 +146,10 @@ NXbias_spectroscopy
 
   **sw_filter_type**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    Select a filter to smooth the displayed data. When saving, if any filter is selected, 
-    filtered data are saved to file along with the unfiltered data.
+    .. collapse:: Select a filter to smooth the displayed data. When saving, if any filter is se ...
+
+        Select a filter to smooth the displayed data. When saving, if any filter is selected, 
+        filtered data are saved to file along with the unfiltered data.
 
   .. _/NXbias_spectroscopy/sw_filter_order-field:
 
@@ -143,8 +157,10 @@ NXbias_spectroscopy
 
   **sw_filter_order**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` 
 
-    Filter order of a dynamic filter or width (in number of points) for the Gaussian
-    filter.
+    .. collapse:: Filter order of a dynamic filter or width (in number of points) for the Gaussi ...
+
+        Filter order of a dynamic filter or width (in number of points) for the Gaussian
+        filter.
 
   .. _/NXbias_spectroscopy/sw_filter_cutoff_frq-field:
 
@@ -160,10 +176,12 @@ NXbias_spectroscopy
 
   **z_offset**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
-    Offset added to the initial averaged position Zaver before starting to sweep.
-    This parameter is disabled when Z-Controller to Hold is deselected in the 
-    Advanced section. The LED “Alt” next to the Z offset indicates if an alternate 
-    Z-controller setpoint is enabled.
+    .. collapse:: Offset added to the initial averaged position Zaver before starting to sweep. ...
+
+        Offset added to the initial averaged position Zaver before starting to sweep.
+        This parameter is disabled when Z-Controller to Hold is deselected in the 
+        Advanced section. The LED “Alt” next to the Z offset indicates if an alternate 
+        Z-controller setpoint is enabled.
 
   .. _/NXbias_spectroscopy/settling_time-field:
 
@@ -171,8 +189,10 @@ NXbias_spectroscopy
 
   **settling_time**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_TIME <NX_TIME>`} 
 
-    Time to wait after changing the bias to the next level and before 
-    starting to acquire data.
+    .. collapse:: Time to wait after changing the bias to the next level and before  ...
+
+        Time to wait after changing the bias to the next level and before 
+        starting to acquire data.
 
   .. _/NXbias_spectroscopy/first_settling_time-field:
 
@@ -188,8 +208,10 @@ NXbias_spectroscopy
 
   **end_settling_time**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_TIME <NX_TIME>`} 
 
-    Time to wait after the sweep has finished and the bias is ramped to 
-    the initial value.
+    .. collapse:: Time to wait after the sweep has finished and the bias is ramped to  ...
+
+        Time to wait after the sweep has finished and the bias is ramped to 
+        the initial value.
 
   .. _/NXbias_spectroscopy/z_control_time-field:
 
@@ -197,12 +219,14 @@ NXbias_spectroscopy
 
   **z_control_time**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_TIME <NX_TIME>`} 
 
-    Time during which the Z-Controller is enabled once a sweep has finished. 
-    When averaging multiple sweeps (i.e. Sweeps>1), the Z-Controller is enabled
-    for this duration between each sweep. After the last sweep, it will wait the
-    specified time before continuing a running scan. This ensures each sweep 
-    reliably starts from the same position. This parameter is disabled when 
-    Z-Controller to Hold is deselected in the Advanced section.
+    .. collapse:: Time during which the Z-Controller is enabled once a sweep has finished.  ...
+
+        Time during which the Z-Controller is enabled once a sweep has finished. 
+        When averaging multiple sweeps (i.e. Sweeps>1), the Z-Controller is enabled
+        for this duration between each sweep. After the last sweep, it will wait the
+        specified time before continuing a running scan. This ensures each sweep 
+        reliably starts from the same position. This parameter is disabled when 
+        Z-Controller to Hold is deselected in the Advanced section.
 
   .. _/NXbias_spectroscopy/max_slew_rate-field:
 
@@ -210,8 +234,10 @@ NXbias_spectroscopy
 
   **max_slew_rate**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` 
 
-    Maximum rate at which the bias changes (before, during and after sweeping).
-    (V/s)
+    .. collapse:: Maximum rate at which the bias changes (before, during and after sweeping). ...
+
+        Maximum rate at which the bias changes (before, during and after sweeping).
+        (V/s)
 
   .. _/NXbias_spectroscopy/backward_sweep-field:
 
@@ -227,9 +253,11 @@ NXbias_spectroscopy
 
   **z_ccontroller_hold**: (optional) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
-    Select whether to set the Z-Controller on hold (i.e. disabled) during the sweep. 
-    It is selected by default. When deselected, Z-offset and Z control time parameters
-    are disabled.
+    .. collapse:: Select whether to set the Z-Controller on hold (i.e. disabled) during the swee ...
+
+        Select whether to set the Z-Controller on hold (i.e. disabled) during the sweep. 
+        It is selected by default. When deselected, Z-offset and Z control time parameters
+        are disabled.
 
 
 Hypertext Anchors

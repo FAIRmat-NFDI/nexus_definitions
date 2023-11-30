@@ -17,10 +17,12 @@ NXspectrum_set
 
 **Description**:
 
-  Container for reporting a set of spectra.
+  Base class container for reporting a set of spectra.
 
 **Symbols**:
 
+
+  **n_p**: Number of scan points.
 
   **n_y**: Number of pixel in the slow direction.
 
@@ -29,9 +31,9 @@ NXspectrum_set
   **n_energy**: Number of energy bins.
 
 **Groups cited**:
-  :ref:`NXdata`, :ref:`NXprocess`, :ref:`NXprogram`
+  :ref:`NXdata`, :ref:`NXprocess`, :ref:`NXprogram`, :ref:`NXserialized`
 
-.. index:: NXprocess (base class); used in base class, NXprogram (base class); used in base class, NXdata (base class); used in base class
+.. index:: NXprocess (base class); used in base class, NXserialized (base class); used in base class, NXprogram (base class); used in base class, NXdata (base class); used in base class
 
 **Structure**:
 
@@ -41,32 +43,16 @@ NXspectrum_set
 
     Details how spectra were processed from the detector readings.
 
-    .. _/NXspectrum_set/PROCESS/source-field:
-
-    .. index:: source (field)
-
-    **source**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-      Resolvable data artifact (e.g. filename) from which the all values in
-      the NXdata instances in this NXspectrum_set were loaded during parsing.
-
-      .. _/NXspectrum_set/PROCESS/source@version-attribute:
-
-      .. index:: version (field attribute)
-
-      **@version**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-        An at least as strong as SHA256 hashvalue of the data artifact which
-        source represents digitally to support provenance tracking.
-
     .. _/NXspectrum_set/PROCESS/mode-field:
 
     .. index:: mode (field)
 
     **mode**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-      Imaging (data collection) mode of the instrument during acquisition
-      of the data in this NXspectrum_set instance.
+      .. collapse:: Imaging (data collection) mode of the instrument during acquisition ...
+
+          Imaging (data collection) mode of the instrument during acquisition
+          of the data in this :ref:`NXspectrum_set` instance.
 
     .. _/NXspectrum_set/PROCESS/detector_identifier-field:
 
@@ -74,7 +60,20 @@ NXspectrum_set
 
     **detector_identifier**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-      Link or name of an NXdetector instance with which the data were collected.
+      .. collapse:: Link or name of an :ref:`NXdetector` instance with which the data were ...
+
+          Link or name of an :ref:`NXdetector` instance with which the data were
+          collected.
+
+    .. _/NXspectrum_set/PROCESS/source-group:
+
+    **source**: (optional) :ref:`NXserialized` 
+
+      .. collapse:: Resolvable data artifact (e.g. filename) from which the all values in ...
+
+          Resolvable data artifact (e.g. filename) from which the all values in
+          the :ref:`NXdata` instances in this :ref:`NXspectrum_set` were
+          loaded during parsing.
 
     .. _/NXspectrum_set/PROCESS/PROGRAM-group:
 
@@ -85,21 +84,27 @@ NXspectrum_set
 
   **stack**: (optional) :ref:`NXdata` 
 
-    Collected spectra for all pixels of a rectangular region-of-interest.
-    This representation supports rectangular scan pattern.
+    .. collapse:: Collected spectra for all pixels of a rectangular region-of-interest. ...
 
-    .. _/NXspectrum_set/stack/data_counts-field:
+        Collected spectra for all pixels of a rectangular region-of-interest.
 
-    .. index:: data_counts (field)
+        This representation supports rectangular scan pattern with equidistant
+        energy bins. For randomly or dissimilarly spaced scan points
+        use collection instead.
 
-    **data_counts**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 3, Dimensions: [n_y, n_x, n_energy]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+    .. _/NXspectrum_set/stack/intensity-field:
 
+    .. index:: intensity (field)
 
-      .. _/NXspectrum_set/stack/data_counts@long_name-attribute:
+    **intensity**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 3, Dimensions: [n_y, n_x, n_energy]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+
+      Counts
+
+      .. _/NXspectrum_set/stack/intensity@long_name-attribute:
 
       .. index:: long_name (field attribute)
 
-      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata/AXISNAME@long_name-attribute>`
 
         Counts
 
@@ -107,44 +112,47 @@ NXspectrum_set
 
     .. index:: axis_y (field)
 
-    **axis_y**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_y]) {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
+    **axis_y**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_y]) {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
+      Coordinate along y direction.
 
       .. _/NXspectrum_set/stack/axis_y@long_name-attribute:
 
       .. index:: long_name (field attribute)
 
-      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata/AXISNAME@long_name-attribute>`
 
-        Coordinate along y direction
+        Pixel coordinate along y direction
 
     .. _/NXspectrum_set/stack/axis_x-field:
 
     .. index:: axis_x (field)
 
-    **axis_x**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_x]) {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
+    **axis_x**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_x]) {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
+      Coordinate along x direction.
 
       .. _/NXspectrum_set/stack/axis_x@long_name-attribute:
 
       .. index:: long_name (field attribute)
 
-      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata/AXISNAME@long_name-attribute>`
 
-        Coordinate along x direction
+        Pixel coordinate along x direction
 
     .. _/NXspectrum_set/stack/axis_energy-field:
 
     .. index:: axis_energy (field)
 
-    **axis_energy**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_energy]) {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} 
+    **axis_energy**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_energy]) {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
+      Energy axis
 
       .. _/NXspectrum_set/stack/axis_energy@long_name-attribute:
 
       .. index:: long_name (field attribute)
 
-      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata/AXISNAME@long_name-attribute>`
 
         Energy
 
@@ -152,21 +160,25 @@ NXspectrum_set
 
   **summary**: (optional) :ref:`NXdata` 
 
-    Accumulated counts over all pixels of the region-of-interest.
-    This representation supports rectangular scan pattern.
+    .. collapse:: Accumulated counts over all pixels of the region-of-interest. ...
 
-    .. _/NXspectrum_set/summary/data_counts-field:
+        Accumulated counts over all pixels of the region-of-interest.
+        This representation supports a rectangular scan pattern with
+        equidistant energy bins.
 
-    .. index:: data_counts (field)
+    .. _/NXspectrum_set/summary/intensity-field:
 
-    **data_counts**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_energy]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+    .. index:: intensity (field)
 
+    **intensity**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_energy]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
-      .. _/NXspectrum_set/summary/data_counts@long_name-attribute:
+      Accumulated counts
+
+      .. _/NXspectrum_set/summary/intensity@long_name-attribute:
 
       .. index:: long_name (field attribute)
 
-      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata/AXISNAME@long_name-attribute>`
 
         Counts
 
@@ -174,14 +186,74 @@ NXspectrum_set
 
     .. index:: axis_energy (field)
 
-    **axis_energy**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_energy]) {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} 
+    **axis_energy**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_energy]) {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
+      Energy axis
 
       .. _/NXspectrum_set/summary/axis_energy@long_name-attribute:
 
       .. index:: long_name (field attribute)
 
+      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata/AXISNAME@long_name-attribute>`
+
+        Energy
+
+  .. _/NXspectrum_set/collection-group:
+
+  **collection**: (optional) :ref:`NXdata` 
+
+    .. collapse:: Collected spectra for each scan point. ...
+
+        Collected spectra for each scan point.
+
+        This representation supports equidistant energy bins.
+        For rectangular sampling use stack and summary instead.
+
+    .. _/NXspectrum_set/collection/intensity-field:
+
+    .. index:: intensity (field)
+
+    **intensity**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_p, n_energy]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+
+      Counts
+
+      .. _/NXspectrum_set/collection/intensity@long_name-attribute:
+
+      .. index:: long_name (field attribute)
+
+      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata/AXISNAME@long_name-attribute>`
+
+        Counts
+
+    .. _/NXspectrum_set/collection/axis_scan_point_id-field:
+
+    .. index:: axis_scan_point_id (field)
+
+    **axis_scan_point_id**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 1, Dimensions: [n_p]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+
+      Scan point identifier
+
+      .. _/NXspectrum_set/collection/axis_scan_point_id@long_name-attribute:
+
+      .. index:: long_name (field attribute)
+
       **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+        Scan point identifier
+
+    .. _/NXspectrum_set/collection/axis_energy-field:
+
+    .. index:: axis_energy (field)
+
+    **axis_energy**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_energy]) {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+
+      Energy axis
+
+      .. _/NXspectrum_set/collection/axis_energy@long_name-attribute:
+
+      .. index:: long_name (field attribute)
+
+      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata/AXISNAME@long_name-attribute>`
 
         Energy
 
@@ -193,12 +265,18 @@ List of hypertext anchors for all groups, fields,
 attributes, and links defined in this class.
 
 
+* :ref:`/NXspectrum_set/collection-group </NXspectrum_set/collection-group>`
+* :ref:`/NXspectrum_set/collection/axis_energy-field </NXspectrum_set/collection/axis_energy-field>`
+* :ref:`/NXspectrum_set/collection/axis_energy@long_name-attribute </NXspectrum_set/collection/axis_energy@long_name-attribute>`
+* :ref:`/NXspectrum_set/collection/axis_scan_point_id-field </NXspectrum_set/collection/axis_scan_point_id-field>`
+* :ref:`/NXspectrum_set/collection/axis_scan_point_id@long_name-attribute </NXspectrum_set/collection/axis_scan_point_id@long_name-attribute>`
+* :ref:`/NXspectrum_set/collection/intensity-field </NXspectrum_set/collection/intensity-field>`
+* :ref:`/NXspectrum_set/collection/intensity@long_name-attribute </NXspectrum_set/collection/intensity@long_name-attribute>`
 * :ref:`/NXspectrum_set/PROCESS-group </NXspectrum_set/PROCESS-group>`
 * :ref:`/NXspectrum_set/PROCESS/detector_identifier-field </NXspectrum_set/PROCESS/detector_identifier-field>`
 * :ref:`/NXspectrum_set/PROCESS/mode-field </NXspectrum_set/PROCESS/mode-field>`
 * :ref:`/NXspectrum_set/PROCESS/PROGRAM-group </NXspectrum_set/PROCESS/PROGRAM-group>`
-* :ref:`/NXspectrum_set/PROCESS/source-field </NXspectrum_set/PROCESS/source-field>`
-* :ref:`/NXspectrum_set/PROCESS/source@version-attribute </NXspectrum_set/PROCESS/source@version-attribute>`
+* :ref:`/NXspectrum_set/PROCESS/source-group </NXspectrum_set/PROCESS/source-group>`
 * :ref:`/NXspectrum_set/stack-group </NXspectrum_set/stack-group>`
 * :ref:`/NXspectrum_set/stack/axis_energy-field </NXspectrum_set/stack/axis_energy-field>`
 * :ref:`/NXspectrum_set/stack/axis_energy@long_name-attribute </NXspectrum_set/stack/axis_energy@long_name-attribute>`
@@ -206,13 +284,13 @@ attributes, and links defined in this class.
 * :ref:`/NXspectrum_set/stack/axis_x@long_name-attribute </NXspectrum_set/stack/axis_x@long_name-attribute>`
 * :ref:`/NXspectrum_set/stack/axis_y-field </NXspectrum_set/stack/axis_y-field>`
 * :ref:`/NXspectrum_set/stack/axis_y@long_name-attribute </NXspectrum_set/stack/axis_y@long_name-attribute>`
-* :ref:`/NXspectrum_set/stack/data_counts-field </NXspectrum_set/stack/data_counts-field>`
-* :ref:`/NXspectrum_set/stack/data_counts@long_name-attribute </NXspectrum_set/stack/data_counts@long_name-attribute>`
+* :ref:`/NXspectrum_set/stack/intensity-field </NXspectrum_set/stack/intensity-field>`
+* :ref:`/NXspectrum_set/stack/intensity@long_name-attribute </NXspectrum_set/stack/intensity@long_name-attribute>`
 * :ref:`/NXspectrum_set/summary-group </NXspectrum_set/summary-group>`
 * :ref:`/NXspectrum_set/summary/axis_energy-field </NXspectrum_set/summary/axis_energy-field>`
 * :ref:`/NXspectrum_set/summary/axis_energy@long_name-attribute </NXspectrum_set/summary/axis_energy@long_name-attribute>`
-* :ref:`/NXspectrum_set/summary/data_counts-field </NXspectrum_set/summary/data_counts-field>`
-* :ref:`/NXspectrum_set/summary/data_counts@long_name-attribute </NXspectrum_set/summary/data_counts@long_name-attribute>`
+* :ref:`/NXspectrum_set/summary/intensity-field </NXspectrum_set/summary/intensity-field>`
+* :ref:`/NXspectrum_set/summary/intensity@long_name-attribute </NXspectrum_set/summary/intensity@long_name-attribute>`
 
 **NXDL Source**:
   https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXspectrum_set.nxdl.xml

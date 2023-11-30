@@ -19,6 +19,7 @@
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -49,25 +50,19 @@
 </div></blockquote>
 <p><strong>Description</strong>:</p>
 <blockquote>
-<div><p>Computational geometry description of geometric primitives via a face and edge list.</p>
-<p>Primitives must not be degenerated or self-intersect.
-Such descriptions of primitives are frequently used for triangles and polyhedra
-to store them on disk for visualization purposes. Although storage efficient,
-such a description is not well suited for topological and neighborhood queries
-of especially meshes that are built from primitives.</p>
-<p>In this case, scientists may need a different view on the primitives which
-is better represented for instance with a half_edge_data_structure instance.
-The reason to split thus the geometric description of primitives, sets, and
-specifically meshes of primitives is to keep the structure simple enough for
-users without these computational geometry demands but also enable those more
-computational geometry savy users the storing of the additionally relevant
-data structure.</p>
-<p>This is beneficial and superior over NXoff_geometry because for instance a
-half_edge_data_structure instance can be immediately use to reinstantiate
-the set without having to recompute the half_edge_structure from the vertex
-and face-list based representation and thus offer a more efficient route
-to serve applications where topological and graph-based operations are key.</p>
-</div></blockquote>
+<div><details class="summary-computational-geometry-of-primitives-via-a-face-and-edge-list-data-structure">
+<summary>Computational geometry of primitives via a face-and-edge-list data structure. ...</summary><p>Computational geometry of primitives via a face-and-edge-list data structure.</p>
+<p>Primitives must neither be degenerated nor self-intersect but can differ in
+their properties. A face-and-edge-list-based description of primitives is
+frequently used for triangles and polyhedra to store them on disk for
+visualization purposes (see OFF, PLY, VTK, or STL file formats).</p>
+<p>Although this description is storage efficient it is not well suited for
+topological analyses though. In this case, scientists may need a different
+view on the primitives which is better represented with e.g. a
+half_edge_data_structure.</p>
+<p>Having an own base class for the data structure how primitives are stored is
+useful to embrace both users with small or very detailed specification demands.</p>
+</details></div></blockquote>
 <p><strong>Symbols</strong>:</p>
 <blockquote>
 <div><p>The symbols used in the schema to specify e.g. dimensions of arrays.</p>
@@ -84,116 +79,123 @@ to serve applications where topological and graph-based operations are key.</p>
 </dl>
 <p><strong>Structure</strong>:</p>
 <blockquote>
-<div><p id="index-1"><span id="nxcg-face-list-data-structure-dimensionality-field"></span><strong>dimensionality</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-posint"><span class="std std-ref">NX_POSINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<div><p id="index-1"><span id="nxcg-face-list-data-structure-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
 <blockquote>
-<div><p>Dimensionality.</p>
+<div><details class="summary-hint-to-help-resolve-in-which-euclidean-coordinate-system">
+<summary>Hint to help resolve in which Euclidean coordinate system ...</summary><p>Hint to help resolve in which Euclidean coordinate system
+field values vertices are defined.</p>
+</details></div></blockquote>
+<p id="index-2"><span id="nxcg-face-list-data-structure-dimensionality-field"></span><strong>dimensionality</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-posint"><span class="std std-ref">NX_POSINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Dimensionality of the primitives described.</p>
 </div></blockquote>
-<p id="index-2"><span id="nxcg-face-list-data-structure-number-of-vertices-field"></span><strong>number_of_vertices</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-posint"><span class="std std-ref">NX_POSINT</span></a> (Rank: 1, Dimensions: [n_f]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<p id="index-3"><span id="nxcg-face-list-data-structure-number-of-vertices-field"></span><strong>number_of_vertices</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_f]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
-<div><p>Array which specifies of how many vertices each face is built.
-Each entry represent the total number of vertices for face, irrespectively
-whether vertices are shared among faces/are unique or not.</p>
+<div><details class="summary-number-of-vertices-for-each-face">
+<summary>Number of vertices for each face. ...</summary><p>Number of vertices for each face.</p>
+<p>Each entry represents the total number of vertices for that face,
+irrespectively whether vertices are shared among faces or not.</p>
+</details></div></blockquote>
+<p id="index-4"><span id="nxcg-face-list-data-structure-number-of-edges-field"></span><strong>number_of_edges</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_e]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-number-of-edges-for-each-face">
+<summary>Number of edges for each face. ...</summary><p>Number of edges for each face.</p>
+<p>Each entry represents the total number of edges for that face,
+irrespectively whether edges are shared across faces or not.</p>
+</details></div></blockquote>
+<p id="index-5"><span id="nxcg-face-list-data-structure-number-of-faces-field"></span><strong>number_of_faces</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Number of faces of the primitives.</p>
 </div></blockquote>
-<p id="index-3"><span id="nxcg-face-list-data-structure-number-of-edges-field"></span><strong>number_of_edges</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-posint"><span class="std std-ref">NX_POSINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<p id="index-6"><span id="nxcg-face-list-data-structure-vertex-identifier-offset-field"></span><strong>vertex_identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
-<div><p>Number of edges.</p>
+<div><details class="summary-integer-offset-whereby-the-identifier-of-the-first-member">
+<summary>Integer offset whereby the identifier of the first member ...</summary><p>Integer offset whereby the identifier of the first member
+of the vertices differs from zero.</p>
+<p>Identifier can be defined explicitly or implicitly.
+Inspect the definition of NXcg_primitive_set for further details.</p>
+</details></div></blockquote>
+<p id="index-7"><span id="nxcg-face-list-data-structure-edge-identifier-offset-field"></span><strong>edge_identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-integer-offset-whereby-the-identifier-of-the-first-member">
+<summary>Integer offset whereby the identifier of the first member ...</summary><p>Integer offset whereby the identifier of the first member
+of the edges differs from zero.</p>
+<p>Identifier can be defined explicitly or implicitly.
+Inspect the definition of NXcg_primitive_set for further details.</p>
+</details></div></blockquote>
+<p id="index-8"><span id="nxcg-face-list-data-structure-face-identifier-offset-field"></span><strong>face_identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-integer-offset-whereby-the-identifier-of-the-first-member">
+<summary>Integer offset whereby the identifier of the first member ...</summary><p>Integer offset whereby the identifier of the first member
+of the faces differs from zero.</p>
+<p>Identifier can be defined explicitly or implicitly.
+Inspect the definition of NXcg_primitive_set for further details.</p>
+</details></div></blockquote>
+<p id="index-9"><span id="nxcg-face-list-data-structure-vertex-identifier-field"></span><strong>vertex_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_v]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Integer identifier to distinguish all vertices explicitly.</p>
 </div></blockquote>
-<p id="index-4"><span id="nxcg-face-list-data-structure-number-of-faces-field"></span><strong>number_of_faces</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-posint"><span class="std std-ref">NX_POSINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<p id="index-10"><span id="nxcg-face-list-data-structure-edge-identifier-field"></span><strong>edge_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_e]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
-<div><p>Number of faces.</p>
+<div><p>Integer used to distinguish all edges explicitly.</p>
 </div></blockquote>
-<p id="index-5"><span id="nxcg-face-list-data-structure-vertex-identifier-offset-field"></span><strong>vertex_identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<p id="index-11"><span id="nxcg-face-list-data-structure-face-identifier-field"></span><strong>face_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_f]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
-<div><p>Integer which specifies the first index to be used for distinguishing
-identifiers for vertices. Identifiers are defined either implicitly
-or explicitly. For implicit indexing the identifiers are defined on the
-interval [identifier_offset, identifier_offset+c-1].
-For explicit indexing the identifier array has to be defined.</p>
-<p>The identifier_offset field can for example be used to communicate if
-identifiers are expected to start from 1 (referred to as Fortran-/Matlab-)
-or from 0 (referred to as C-, Python-style index notation) respectively.</p>
+<div><p>Integer used to distinguish all faces explicitly.</p>
 </div></blockquote>
-<p id="index-6"><span id="nxcg-face-list-data-structure-edge-identifier-offset-field"></span><strong>edge_identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<p id="index-12"><span id="nxcg-face-list-data-structure-vertices-field"></span><strong>vertices</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [n_v, d]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
 <blockquote>
-<div><p>Integer which specifies the first index to be used for distinguishing
-identifiers for edges. Identifiers are defined either implicitly
-or explicitly. For implicit indexing the identifiers are defined on the
-interval [identifier_offset, identifier_offset+c-1].
-For explicit indexing the identifier array has to be defined.</p>
-<p>The identifier_offset field can for example be used to communicate if
-identifiers are expected to start from 1 (referred to as Fortran-/Matlab-)
-or from 0 (referred to as C-, Python-style index notation) respectively.</p>
-</div></blockquote>
-<p id="index-7"><span id="nxcg-face-list-data-structure-face-identifier-offset-field"></span><strong>face_identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
-<blockquote>
-<div><p>Integer which specifies the first index to be used for distinguishing
-identifiers for faces. Identifiers are defined either implicitly
-or explicitly. For implicit indexing the identifiers are defined on the
-interval [identifier_offset, identifier_offset+c-1].
-For explicit indexing the identifier array has to be defined.</p>
-<p>The identifier_offset field can for example be used to communicate if
-identifiers are expected to start from 1 (referred to as Fortran-/Matlab-)
-or from 0 (referred to as C-, Python-style index notation) respectively.</p>
-</div></blockquote>
-<p id="index-8"><span id="nxcg-face-list-data-structure-vertex-identifier-field"></span><strong>vertex_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_v]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
-<blockquote>
-<div><p>Integer used to distinguish vertices explicitly.</p>
-</div></blockquote>
-<p id="index-9"><span id="nxcg-face-list-data-structure-edge-identifier-field"></span><strong>edge_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_e]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
-<blockquote>
-<div><p>Integer used to distinguish edges explicitly.</p>
-</div></blockquote>
-<p id="index-10"><span id="nxcg-face-list-data-structure-face-identifier-field"></span><strong>face_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_f]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
-<blockquote>
-<div><p>Integer used to distinguish faces explicitly.</p>
-</div></blockquote>
-<p id="index-11"><span id="nxcg-face-list-data-structure-vertices-field"></span><strong>vertices</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [n_v, d]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
-<blockquote>
-<div><p>Positions of the vertices.</p>
-<p>Users are encouraged to reduce the vertices to unique set of positions
-and vertices as this supports a more efficient storage of the geometry data.
+<div><details class="summary-positions-of-the-vertices">
+<summary>Positions of the vertices. ...</summary><p>Positions of the vertices.</p>
+<p>Users are encouraged to reduce the vertices to a unique set as this may
+result in a more efficient storage of the geometry data.
 It is also possible though to store the vertex positions naively in which
-case vertices_are_unique is likely False.
-Naively here means that one for example stores each vertex of a triangle
-mesh even though many vertices are shared between triangles and thus
-the positions of these vertices do not have to be duplicated.</p>
-</div></blockquote>
-<p id="index-12"><span id="nxcg-face-list-data-structure-edges-field"></span><strong>edges</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [n_e, 2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+case vertices_are_unique is likely False. Naively here means that each
+vertex is stored even though many share the same positions.</p>
+</details></div></blockquote>
+<p id="index-13"><span id="nxcg-face-list-data-structure-edges-field"></span><strong>edges</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [n_e, 2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
-<div><p>The edges are stored as a pairs of vertex identifier values.</p>
+<div><p>The edges are stored as pairs of vertex identifier.</p>
 </div></blockquote>
-<p id="index-13"><span id="nxcg-face-list-data-structure-faces-field"></span><strong>faces</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_total]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<p id="index-14"><span id="nxcg-face-list-data-structure-faces-field"></span><strong>faces</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_total]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
-<div><p>Array of identifiers from vertices which describe each face.</p>
+<div><details class="summary-the-faces-are-stored-as-a-concatenated-array-of-vertex-identifier-tuples">
+<summary>The faces are stored as a concatenated array of vertex identifier tuples. ...</summary><p>The faces are stored as a concatenated array of vertex identifier tuples.</p>
 <p>The first entry is the identifier of the start vertex of the first face,
 followed by the second vertex of the first face, until the last vertex
 of the first face. Thereafter, the start vertex of the second face, the
 second vertex of the second face, and so on and so forth.</p>
 <p>Therefore, summating over the number_of_vertices, allows to extract
 the vertex identifiers for the i-th face on the following index interval
-of the faces array: [$sum_i = 0}^{i = n-1}$, $sum_{i=0}^{i = n}$].</p>
-</div></blockquote>
-<p id="index-14"><span id="nxcg-face-list-data-structure-vertices-are-unique-field"></span><strong>vertices_are_unique</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+of the faces array: <span class="math notranslate nohighlight">\([\sum_{i = 0}^{i = n-1}, \sum_{i=0}^{i = n}]\)</span>.</p>
+</details></div></blockquote>
+<p id="index-15"><span id="nxcg-face-list-data-structure-vertices-are-unique-field"></span><strong>vertices_are_unique</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
 <blockquote>
-<div><p>If true indicates that the vertices are all placed at different positions
-and have different identifiers, i.e. no points overlap or are counted twice.</p>
-</div></blockquote>
-<p id="index-15"><span id="nxcg-face-list-data-structure-edges-are-unique-field"></span><strong>edges_are_unique</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<div><details class="summary-if-true-indicates-that-the-vertices-are-all-placed-at-different-positions">
+<summary>If true, indicates that the vertices are all placed at different positions ...</summary><p>If true, indicates that the vertices are all placed at different positions
+and have different identifiers, i.e. no points overlap or are counted more
+than once.</p>
+</details></div></blockquote>
+<p id="index-16"><span id="nxcg-face-list-data-structure-edges-are-unique-field"></span><strong>edges_are_unique</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
 <blockquote>
-<div><p>If true indicates that no edge is stored twice. Users are encouraged to
-consider and use the half_edge_data_structure instead as this will work
-towards achieving a cleaner graph-based description if relevant and possible.</p>
-</div></blockquote>
-<p id="index-16"><span id="nxcg-face-list-data-structure-faces-are-unique-field"></span><strong>faces_are_unique</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
-<p id="index-17"><span id="nxcg-face-list-data-structure-winding-order-field"></span><strong>winding_order</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_f]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<div><details class="summary-if-true-indicates-that-no-edge-is-stored-more-than-once">
+<summary>If true, indicates that no edge is stored more than once. ...</summary><p>If true, indicates that no edge is stored more than once.</p>
+<p>Users are encouraged to consider using a half_edge_data_structure instead.</p>
+</details></div></blockquote>
+<p id="index-17"><span id="nxcg-face-list-data-structure-faces-are-unique-field"></span><strong>faces_are_unique</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
 <blockquote>
-<div><p>Specifies for each face which winding order was used if any:</p>
+<div><p>If true, indicates that no face is stored more than once.</p>
+</div></blockquote>
+<p id="index-18"><span id="nxcg-face-list-data-structure-winding-order-field"></span><strong>winding_order</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_f]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-specifies-for-each-face-which-winding-order-was-used-if-any">
+<summary>Specifies for each face which winding order was used if any: ...</summary><p>Specifies for each face which winding order was used if any:</p>
 <ul class="simple">
 <li><p>0 - undefined</p></li>
 <li><p>1 - counter-clockwise (CCW)</p></li>
 <li><p>2 - clock-wise (CW)</p></li>
 </ul>
-</div></blockquote>
+</details></div></blockquote>
 </div></blockquote>
 <section id="hypertext-anchors">
 <h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
@@ -217,6 +219,7 @@ attributes, and links defined in this class.</p>
 <li><p><a class="reference internal" href="#nxcg-face-list-data-structure-vertices-field"><span class="std std-ref">/NXcg_face_list_data_structure/vertices-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxcg-face-list-data-structure-vertices-are-unique-field"><span class="std std-ref">/NXcg_face_list_data_structure/vertices_are_unique-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxcg-face-list-data-structure-winding-order-field"><span class="std std-ref">/NXcg_face_list_data_structure/winding_order-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxcg-face-list-data-structure-depends-on-attribute"><span class="std std-ref">/NXcg_face_list_data_structure&#64;depends_on-attribute</span></a></p></li>
 </ul>
 <dl class="simple">
 <dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXcg_face_list_data_structure.nxdl.xml">https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXcg_face_list_data_structure.nxdl.xml</a></p>

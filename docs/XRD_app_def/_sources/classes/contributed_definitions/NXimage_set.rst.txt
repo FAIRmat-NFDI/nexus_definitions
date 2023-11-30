@@ -17,7 +17,12 @@ NXimage_set
 
 **Description**:
 
-  Container for reporting a set of images taken.
+  .. collapse:: Base class for reporting a set of images. ...
+
+      Base class for reporting a set of images.
+
+      This class provides a base vocabulary to be used for specialized :ref:`NXimage_set`
+      base classes like :ref:`NXimage_r_set` and :ref:`NXimage_c_set`.
 
 **Symbols**:
 
@@ -29,9 +34,9 @@ NXimage_set
   **n_x**: Number of pixel per image in the fast direction.
 
 **Groups cited**:
-  :ref:`NXdata`, :ref:`NXprocess`, :ref:`NXprogram`
+  :ref:`NXdata`, :ref:`NXprocess`, :ref:`NXprogram`, :ref:`NXserialized`
 
-.. index:: NXprocess (base class); used in base class, NXprogram (base class); used in base class, NXdata (base class); used in base class
+.. index:: NXprocess (base class); used in base class, NXserialized (base class); used in base class, NXprogram (base class); used in base class, NXdata (base class); used in base class
 
 **Structure**:
 
@@ -39,25 +44,10 @@ NXimage_set
 
   **PROCESS**: (optional) :ref:`NXprocess` 
 
-    Details how images were processed from the detector readings.
+    .. collapse:: Details how NXdata instance inside instance of (specialized) ...
 
-    .. _/NXimage_set/PROCESS/source-field:
-
-    .. index:: source (field)
-
-    **source**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-      Resolvable data artifact (e.g. filename) from which the all values in
-      the NXdata instances in this NXimage_set were loaded during parsing.
-
-      .. _/NXimage_set/PROCESS/source@version-attribute:
-
-      .. index:: version (field attribute)
-
-      **@version**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-        An at least as strong as SHA256 hashvalue of the data artifact which
-        source represents digitally to support provenance tracking.
+        Details how NXdata instance inside instance of (specialized)
+        :ref:`NXimage_set` were processed from the detector readings/raw data.
 
     .. _/NXimage_set/PROCESS/mode-field:
 
@@ -65,8 +55,10 @@ NXimage_set
 
     **mode**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-      Imaging (data collection) mode of the instrument during acquisition
-      of the data in this NXimage_set instance.
+      .. collapse:: Imaging (data collection) mode of the instrument during acquisition ...
+
+          Imaging (data collection) mode of the instrument during acquisition
+          of the data in this :ref:`NXimage_set` instance.
 
     .. _/NXimage_set/PROCESS/detector_identifier-field:
 
@@ -74,74 +66,30 @@ NXimage_set
 
     **detector_identifier**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-      Link or name of an NXdetector instance with which the data were collected.
+      .. collapse:: Link or name of an :ref:`NXdetector` instance with which the data were ...
+
+          Link or name of an :ref:`NXdetector` instance with which the data were
+          collected.
+
+    .. _/NXimage_set/PROCESS/source-group:
+
+    **source**: (optional) :ref:`NXserialized` 
+
+      .. collapse:: Resolvable data artifact (e.g. filename) from which the all values in ...
+
+          Resolvable data artifact (e.g. filename) from which the all values in
+          the :ref:`NXdata` instances in this :ref:`NXimage_set` were loaded
+          during parsing.
 
     .. _/NXimage_set/PROCESS/PROGRAM-group:
 
     **PROGRAM**: (optional) :ref:`NXprogram` 
 
 
-  .. _/NXimage_set/stack-group:
+  .. _/NXimage_set/DATA-group:
 
-  **stack**: (optional) :ref:`NXdata` 
+  **DATA**: (optional) :ref:`NXdata` 
 
-    Image (stack).
-
-    .. _/NXimage_set/stack/data_counts-field:
-
-    .. index:: data_counts (field)
-
-    **data_counts**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 3, Dimensions: [n_images, n_y, n_x]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
-
-      Image intensity values.
-
-    .. _/NXimage_set/stack/axis_image_identifier-field:
-
-    .. index:: axis_image_identifier (field)
-
-    **axis_image_identifier**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_images]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
-
-      Image identifier
-
-      .. _/NXimage_set/stack/axis_image_identifier@long_name-attribute:
-
-      .. index:: long_name (field attribute)
-
-      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-        Image identifier.
-
-    .. _/NXimage_set/stack/axis_y-field:
-
-    .. index:: axis_y (field)
-
-    **axis_y**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_y]) {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
-
-      Pixel coordinate center of mass along y direction.
-
-      .. _/NXimage_set/stack/axis_y@long_name-attribute:
-
-      .. index:: long_name (field attribute)
-
-      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-        Coordinate along y direction.
-
-    .. _/NXimage_set/stack/axis_x-field:
-
-    .. index:: axis_x (field)
-
-    **axis_x**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_x]) {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
-
-      Pixel coordinate center of mass along x direction.
-
-      .. _/NXimage_set/stack/axis_x@long_name-attribute:
-
-      .. index:: long_name (field attribute)
-
-      **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-        Coordinate along x direction.
 
 
 Hypertext Anchors
@@ -151,20 +99,12 @@ List of hypertext anchors for all groups, fields,
 attributes, and links defined in this class.
 
 
+* :ref:`/NXimage_set/DATA-group </NXimage_set/DATA-group>`
 * :ref:`/NXimage_set/PROCESS-group </NXimage_set/PROCESS-group>`
 * :ref:`/NXimage_set/PROCESS/detector_identifier-field </NXimage_set/PROCESS/detector_identifier-field>`
 * :ref:`/NXimage_set/PROCESS/mode-field </NXimage_set/PROCESS/mode-field>`
 * :ref:`/NXimage_set/PROCESS/PROGRAM-group </NXimage_set/PROCESS/PROGRAM-group>`
-* :ref:`/NXimage_set/PROCESS/source-field </NXimage_set/PROCESS/source-field>`
-* :ref:`/NXimage_set/PROCESS/source@version-attribute </NXimage_set/PROCESS/source@version-attribute>`
-* :ref:`/NXimage_set/stack-group </NXimage_set/stack-group>`
-* :ref:`/NXimage_set/stack/axis_image_identifier-field </NXimage_set/stack/axis_image_identifier-field>`
-* :ref:`/NXimage_set/stack/axis_image_identifier@long_name-attribute </NXimage_set/stack/axis_image_identifier@long_name-attribute>`
-* :ref:`/NXimage_set/stack/axis_x-field </NXimage_set/stack/axis_x-field>`
-* :ref:`/NXimage_set/stack/axis_x@long_name-attribute </NXimage_set/stack/axis_x@long_name-attribute>`
-* :ref:`/NXimage_set/stack/axis_y-field </NXimage_set/stack/axis_y-field>`
-* :ref:`/NXimage_set/stack/axis_y@long_name-attribute </NXimage_set/stack/axis_y@long_name-attribute>`
-* :ref:`/NXimage_set/stack/data_counts-field </NXimage_set/stack/data_counts-field>`
+* :ref:`/NXimage_set/PROCESS/source-group </NXimage_set/PROCESS/source-group>`
 
 **NXDL Source**:
   https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXimage_set.nxdl.xml

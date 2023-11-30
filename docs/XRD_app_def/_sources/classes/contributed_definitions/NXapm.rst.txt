@@ -17,67 +17,69 @@ NXapm
 
 **Description**:
 
-  Application definition for atom probe and field ion microscopy experiments.
+  .. collapse:: Application definition for atom probe and field ion microscopy experiments. ...
 
-  This application definition provides a place to document data and metadata to
-  an atom probe experiment. Primarily the measurement itself is documented.
-  However, as most atom probe experiments are controlled with commercial software
-  which does not allow to access the raw detector hits, this application definition
-  also includes two key groups of processing steps (reconstruction and ranging).
+      Application definition for atom probe and field ion microscopy experiments.
 
-  During tomographic reconstruction measured data are processed into a point cloud
-  of reconstructed positions of certain ions. During ranging time-of-flight data
-  are identified as representing specific ions to annotate each ion with a label.
+      This application definition provides a place to document data and metadata to
+      an atom probe experiment. Primarily the measurement itself is documented.
+      However, as most atom probe experiments are controlled with commercial software
+      which does not allow to access the raw detector hits, this application definition
+      also includes two key groups of processing steps (reconstruction and ranging).
 
-  Commercial software used in atom probe research is designed as an integrated
-  acquisition and instrument control software. For AMETEK/Cameca local electrode
-  atom probe (LEAP) instruments the least processed (rawest) numerical results
-  and metadata are stored in so-called STR, RRAW, RHIT, and HITS files, which
-  are proprietary and their file format specifications not publicly documented.
+      During tomographic reconstruction measured data are processed into a point cloud
+      of reconstructed positions of certain ions. During ranging time-of-flight data
+      are identified as representing specific ions to annotate each ion with a label.
 
-  Supplementary metadata are kept in a database (formerly known as the ISDb)
-  which is connected to the instrument control software and synced with the
-  experiment while ions are detected. In effect, RHIT and HITS files
-  store the (rawest) experiment data in a closed manner that is
-  practically useless for users unless they have access to the
-  commercial software.
+      Commercial software used in atom probe research is designed as an integrated
+      acquisition and instrument control software. For AMETEK/Cameca local electrode
+      atom probe (LEAP) instruments the least processed (rawest) numerical results
+      and metadata are stored in so-called STR, RRAW, RHIT, and HITS files, which
+      are proprietary and their file format specifications not publicly documented.
 
-  To arrive at a state that atom probe microscopy (APM) with LEAP instruments
-  delivers a dataset with which users can study reconstructed atomic
-  position and do e.g. composition analyses or other post-processing
-  analysis tasks, these raw data have to be processed. Therefore, it is
-  necessary that for an application definition to be useful, details about
-  the physical acquisition of the raw data and all its
-  processing steps have to be stored.
+      Supplementary metadata are kept in a database (formerly known as the ISDb)
+      which is connected to the instrument control software and synced with the
+      experiment while ions are detected. In effect, RHIT and HITS files
+      store the (rawest) experiment data in a closed manner that is
+      practically useless for users unless they have access to the
+      commercial software.
 
-  With this a user can create derived quantities like ion hit positions
-  (on the detector) and calibrated time-of-flight data. These derived
-  quantities are also needed to obtain calibrated mass-to-charge-state
-  ratios, and finally the tomographic reconstruction of the ion positions.
+      To arrive at a state that atom probe microscopy (APM) with LEAP instruments
+      delivers a dataset with which users can study reconstructed atomic
+      position and do e.g. composition analyses or other post-processing
+      analysis tasks, these raw data have to be processed. Therefore, it is
+      necessary that for an application definition to be useful, details about
+      the physical acquisition of the raw data and all its
+      processing steps have to be stored.
 
-  In most cases, an APM dataset is useful only if it gets post-processed
-  via so-called ranging. Ranging defines rules for mapping time-of-flight
-  and mass-to-charge-state ratio values on ion species. This is post-processing
-  even though in practice it is performed sometimes already (as preview)
-  already while data are still being collected.
+      With this a user can create derived quantities like ion hit positions
+      (on the detector) and calibrated time-of-flight data. These derived
+      quantities are also needed to obtain calibrated mass-to-charge-state
+      ratios, and finally the tomographic reconstruction of the ion positions.
 
-  The ion types decode molecular identities which can very often be
-  mapped to elemental identities, and also be used to distinguish isotopes.
-  All these steps are in most cases performed using commercial software.
+      In most cases, an APM dataset is useful only if it gets post-processed
+      via so-called ranging. Ranging defines rules for mapping time-of-flight
+      and mass-to-charge-state ratio values on ion species. This is post-processing
+      even though in practice it is performed sometimes already (as preview)
+      already while data are still being collected.
 
-  Frequently, though, ranging and post-processing is also performed with
-  (open-source) research software. Therefore, there is strictly speaking
-  not a single program used throughout an atom probe analysis not even
-  for the early stage of data acquisition and processing stages to obtain
-  a useful reconstructed and ranged dataset.
+      The ion types decode molecular identities which can very often be
+      mapped to elemental identities, and also be used to distinguish isotopes.
+      All these steps are in most cases performed using commercial software.
 
-  This application definition documents not only the measurement but also the
-  key post-processing steps which transform the proprietary data into a
-  tomographic reconstruction with ranging definitions.
+      Frequently, though, ranging and post-processing is also performed with
+      (open-source) research software. Therefore, there is strictly speaking
+      not a single program used throughout an atom probe analysis not even
+      for the early stage of data acquisition and processing stages to obtain
+      a useful reconstructed and ranged dataset.
 
-  Future guidance by the technology partners like AMETEK/Cameca could improve
-  this description to cover a substantial larger number of eventually metadata
-  that so far are neither publicly documented nor accessible.
+      This application definition documents not only the measurement but also the
+      key post-processing steps which transform the proprietary data into a
+      tomographic reconstruction with ranging definitions.
+
+      Future guidance by the technology partners like AMETEK/Cameca could improve
+      this description to cover a substantial larger number of eventually metadata
+      that so far are neither publicly documented nor accessible.
 
 **Symbols**:
 
@@ -121,79 +123,91 @@ NXapm
 
     **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-      An at least as strong as SHA256 hashvalue of the file
-      that specifies the application definition.
+      .. collapse:: An at least as strong as SHA256 hashvalue of the file ...
+
+          An at least as strong as SHA256 hashvalue of the file
+          that specifies the application definition.
 
     .. _/NXapm/ENTRY/definition-field:
 
     .. index:: definition (field)
 
-    **definition**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+    **definition**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXentry/definition-field>`
 
-      NeXus NXDL schema to which this file conforms.
+      .. collapse:: NeXus NXDL schema to which this file conforms. ...
 
-      Obligatory value: ``NXapm``
+          NeXus NXDL schema to which this file conforms.
+
+          Obligatory value: ``NXapm``
 
     .. _/NXapm/ENTRY/experiment_identifier-field:
 
     .. index:: experiment_identifier (field)
 
-    **experiment_identifier**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+    **experiment_identifier**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXentry/experiment_identifier-field>`
 
-      Ideally, a (globally) unique persistent identifier
-      for referring to this experiment.
+      .. collapse:: Ideally, a (globally) unique persistent identifier ...
 
-      The identifier is usually defined/issued by the facility, laboratory,
-      or the principle investigator. The identifier enables to link
-      experiments to e.g. proposals.
+          Ideally, a (globally) unique persistent identifier
+          for referring to this experiment.
+
+          The identifier is usually defined/issued by the facility, laboratory,
+          or the principle investigator. The identifier enables to link
+          experiments to e.g. proposals.
 
     .. _/NXapm/ENTRY/experiment_description-field:
 
     .. index:: experiment_description (field)
 
-    **experiment_description**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+    **experiment_description**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXentry/experiment_description-field>`
 
-      Free-text description about the experiment.
+      .. collapse:: Free-text description about the experiment. ...
 
-      Users are strongly advised to detail the sample history in the 
-      respective field and fill rather as completely as possible the fields
-      of the application definition behind instead of filling in these
-      details into the experiment_description free-text description field.
+          Free-text description about the experiment.
 
-      Users are encouraged to add in this field eventual DOIs to papers
-      which yield further details to the experiment.
+          Users are strongly advised to detail the sample history in the
+          respective field and fill rather as completely as possible the fields
+          of the application definition behind instead of filling in these
+          details into the experiment_description free-text description field.
+
+          Users are encouraged to add in this field eventual DOIs to papers
+          which yield further details to the experiment.
 
     .. _/NXapm/ENTRY/start_time-field:
 
     .. index:: start_time (field)
 
-    **start_time**: (required) :ref:`NX_DATE_TIME <NX_DATE_TIME>` 
+    **start_time**: (required) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXentry/start_time-field>`
 
-      ISO 8601 time code with local time zone offset to UTC information
-      included when the microscope session started.
-      If the application demands that time codes in this section of the
-      application definition should only be used for specifying when the
-      experiment was performed - and the exact duration is not relevant
-      - this start_time field should be used.
+      .. collapse:: ISO 8601 time code with local time zone offset to UTC information ...
 
-      Often though it is useful to specify a time interval with specifying
-      both start_time and end_time to allow for more detailed bookkeeping
-      and interpretation of the experiment. The user should be aware that
-      even with having both dates specified, it may not be possible
-      to infer how long the experiment took or for how long data
-      were collected.
+          ISO 8601 time code with local time zone offset to UTC information
+          included when the microscope session started.
+          If the application demands that time codes in this section of the
+          application definition should only be used for specifying when the
+          experiment was performed - and the exact duration is not relevant
+          - this start_time field should be used.
 
-      More detailed timing data over the course of the experiment have to be
-      collected to compute this event chain during the experiment.
+          Often though it is useful to specify a time interval with specifying
+          both start_time and end_time to allow for more detailed bookkeeping
+          and interpretation of the experiment. The user should be aware that
+          even with having both dates specified, it may not be possible
+          to infer how long the experiment took or for how long data
+          were collected.
+
+          More detailed timing data over the course of the experiment have to be
+          collected to compute this event chain during the experiment.
 
     .. _/NXapm/ENTRY/end_time-field:
 
     .. index:: end_time (field)
 
-    **end_time**: (recommended) :ref:`NX_DATE_TIME <NX_DATE_TIME>` 
+    **end_time**: (recommended) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXentry/end_time-field>`
 
-      ISO 8601 time code with local time zone offset to UTC included
-      when the microscope session ended.
+      .. collapse:: ISO 8601 time code with local time zone offset to UTC included ...
+
+          ISO 8601 time code with local time zone offset to UTC included
+          when the microscope session ended.
 
     .. _/NXapm/ENTRY/run_number-field:
 
@@ -201,29 +215,31 @@ NXapm
 
     **run_number**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
-      Neither the specimen_name nor the experiment_identifier but the identifier
-      through which the experiment is referred to in the control software.
-      For LEAP instruments it is recommended to use the IVAS/APSuite
-      run_number. For other instruments, such as the one from Stuttgart or
-      Oxcart from Erlangen, or the instruments at GPM in Rouen, use the
-      identifier which is closest in meaning to the LEAP run number.
-      The field does not have to be required if the information is recoverable
-      in the dataset which for LEAP instruments is the case when RHIT or HITS
-      files are also stored alongside a data artifact instance which is
-      generated according to this NXapm application definition.
+      .. collapse:: Neither the specimen_name nor the experiment_identifier but the identifier ...
 
-      As a destructive microscopy technique, a run can be performed only once.
-      It is possible, however, to interrupt a run and restart data acquisition
-      while still using the same specimen. In this case, each evaporation run
-      needs to be distinguished with different run numbers.
-      We follow this habit of most atom probe groups.
+          Neither the specimen_name nor the experiment_identifier but the identifier
+          through which the experiment is referred to in the control software.
+          For LEAP instruments it is recommended to use the IVAS/APSuite
+          run_number. For other instruments, such as the one from Stuttgart or
+          Oxcart from Erlangen, or the instruments at GPM in Rouen, use the
+          identifier which is closest in meaning to the LEAP run number.
+          The field does not have to be required if the information is recoverable
+          in the dataset which for LEAP instruments is the case when RHIT or HITS
+          files are also stored alongside a data artifact instance which is
+          generated according to this NXapm application definition.
 
-      This application definition does currently not allow storing the
-      entire set of such interrupted runs. Not because of a technical limitation
-      within NeXus but because we have not seen a covering use case based
-      on which we could have designed and implemented this case. 
-      Atom probers are invited to contact the respective people in the
-      FAIRmat team to fix this.
+          As a destructive microscopy technique, a run can be performed only once.
+          It is possible, however, to interrupt a run and restart data acquisition
+          while still using the same specimen. In this case, each evaporation run
+          needs to be distinguished with different run numbers.
+          We follow this habit of most atom probe groups.
+
+          This application definition does currently not allow storing the
+          entire set of such interrupted runs. Not because of a technical limitation
+          within NeXus but because we have not seen a covering use case based
+          on which we could have designed and implemented this case.
+          Atom probers are invited to contact the respective people in the
+          FAIRmat team to fix this.
 
     .. _/NXapm/ENTRY/operation_mode-field:
 
@@ -231,19 +247,21 @@ NXapm
 
     **operation_mode**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-      What type of atom probe microscopy experiment is performed.
-      This field is primarily meant to inform materials database systems
-      to qualitatively filter experiments:
+      .. collapse:: What type of atom probe microscopy experiment is performed. ...
 
-      * apt are experiments where the analysis_chamber has no imaging gas.  
-        experiment with LEAP instruments are typically performed as apt.  
-      * fim are experiments where the analysis_chamber has an imaging gas,  
-        which should be specified with the atmosphere in the analysis_chamber group.  
-      * apt_fim should be used for combinations of the two imaging modes.  
-      * other should be used in combination with the user specifying details in the  
-        experiment_documentation field.
+          What type of atom probe microscopy experiment is performed.
+          This field is primarily meant to inform materials database systems
+          to qualitatively filter experiments:
 
-      Any of these values: ``apt`` | ``fim`` | ``apt_fim`` | ``other``
+          * apt are experiments where the analysis_chamber has no imaging gas.
+            experiment with LEAP instruments are typically performed as apt.
+          * fim are experiments where the analysis_chamber has an imaging gas,
+            which should be specified with the atmosphere in the analysis_chamber group.
+          * apt_fim should be used for combinations of the two imaging modes.
+          * other should be used in combination with the user specifying details in the
+            experiment_documentation field.
+
+          Any of these values: ``apt`` | ``fim`` | ``apt_fim`` | ``other``
 
     .. _/NXapm/ENTRY/PROGRAM-group:
 
@@ -254,60 +272,66 @@ NXapm
 
       .. index:: program (field)
 
-      **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+      **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
         .. _/NXapm/ENTRY/PROGRAM/program@version-attribute:
 
         .. index:: version (field attribute)
 
-        **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+        **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
     .. _/NXapm/ENTRY/experiment_documentation-group:
 
-    **experiment_documentation**: (optional) :ref:`NXnote` 
+    **experiment_documentation**: (optional) :ref:`NXnote` :ref:`⤆ </NXentry/experiment_documentation-group>`
 
-      Binary container for a file or a compressed collection of files which
-      can be used to add further descriptions and details to the experiment.
-      The container can hold a compressed archive.
+      .. collapse:: Binary container for a file or a compressed collection of files which ...
 
-      Required for operation_mode apt_fim or other to give further details.
-      Users should not abuse this field to provide free-text information.
-      Instead, these pieces of information should be mapped to
-      respective groups and sections.
+          Binary container for a file or a compressed collection of files which
+          can be used to add further descriptions and details to the experiment.
+          The container can hold a compressed archive.
+
+          Required for operation_mode apt_fim or other to give further details.
+          Users should not abuse this field to provide free-text information.
+          Instead, these pieces of information should be mapped to
+          respective groups and sections.
 
     .. _/NXapm/ENTRY/thumbnail-group:
 
-    **thumbnail**: (optional) :ref:`NXnote` 
+    **thumbnail**: (optional) :ref:`NXnote` :ref:`⤆ </NXentry/thumbnail-group>`
 
-      A small image that is representative of the entry; this can be an
-      image taken from the dataset like a thumbnail of a spectrum.
-      A 640 x 480 pixel jpeg image is recommended. 
-      Adding a scale bar to that image is recommended but not required
-      as the main purpose of the thumbnail is to provide e.g. thumbnail
-      images for displaying them in data repositories.
+      .. collapse:: A small image that is representative of the entry; this can be an ...
+
+          A small image that is representative of the entry; this can be an
+          image taken from the dataset like a thumbnail of a spectrum.
+          A 640 x 480 pixel jpeg image is recommended.
+          Adding a scale bar to that image is recommended but not required
+          as the main purpose of the thumbnail is to provide e.g. thumbnail
+          images for displaying them in data repositories.
 
       .. _/NXapm/ENTRY/thumbnail@type-attribute:
 
       .. index:: type (group attribute)
 
-      **@type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+      **@type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXentry/thumbnail@type-attribute>`
 
 
     .. _/NXapm/ENTRY/USER-group:
 
-    **USER**: (optional) :ref:`NXuser` 
+    **USER**: (optional) :ref:`NXuser` :ref:`⤆ </NXentry/USER-group>`
 
-      Contact information and eventually details person(s) involved in the
-      microscope session. This can be the principle investigator who performed
-      this experiment. Adding multiple users if relevant is recommended.
+      .. collapse:: Contact information and eventually details person(s) involved in the ...
+
+          Contact information and eventually details person(s) involved in the
+          microscope session. This can be the principle investigator who performed
+          this experiment. Adding multiple users if relevant is recommended.
 
       .. _/NXapm/ENTRY/USER/name-field:
 
       .. index:: name (field)
 
-      **name**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+      **name**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/name-field>`
 
         Given (first) name and surname of the user.
 
@@ -315,16 +339,18 @@ NXapm
 
       .. index:: affiliation (field)
 
-      **affiliation**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+      **affiliation**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/affiliation-field>`
 
-        Name of the affiliation of the user at the point in time
-        when the experiment was performed.
+        .. collapse:: Name of the affiliation of the user at the point in time ...
+
+            Name of the affiliation of the user at the point in time
+            when the experiment was performed.
 
       .. _/NXapm/ENTRY/USER/address-field:
 
       .. index:: address (field)
 
-      **address**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+      **address**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/address-field>`
 
         Postal address of the affiliation.
 
@@ -332,95 +358,111 @@ NXapm
 
       .. index:: email (field)
 
-      **email**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+      **email**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/email-field>`
 
-        Email address of the user at the point in time when the experiment
-        was performed. Writing the most permanently used email is recommended.
+        .. collapse:: Email address of the user at the point in time when the experiment ...
+
+            Email address of the user at the point in time when the experiment
+            was performed. Writing the most permanently used email is recommended.
 
       .. _/NXapm/ENTRY/USER/orcid-field:
 
       .. index:: orcid (field)
 
-      **orcid**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+      **orcid**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/ORCID-field>`
 
-        Globally unique identifier of the user as offered by services
-        like ORCID or ResearcherID. If this field is field the specific 
-        service should also be written in orcid_platform
+        .. collapse:: Globally unique identifier of the user as offered by services ...
+
+            Globally unique identifier of the user as offered by services
+            like ORCID or ResearcherID. If this field is field the specific
+            service should also be written in orcid_platform
 
       .. _/NXapm/ENTRY/USER/orcid_platform-field:
 
       .. index:: orcid_platform (field)
 
-      **orcid_platform**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+      **orcid_platform**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/ORCID-field>`
 
-        Name of the OrcID or ResearcherID where the account
-        under orcid is registered.
+        .. collapse:: Name of the OrcID or ResearcherID where the account ...
+
+            Name of the OrcID or ResearcherID where the account
+            under orcid is registered.
 
       .. _/NXapm/ENTRY/USER/telephone_number-field:
 
       .. index:: telephone_number (field)
 
-      **telephone_number**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+      **telephone_number**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/telephone_number-field>`
 
-        (Business) (tele)phone number of the user at the point
-        in time when the experiment was performed.
+        .. collapse:: (Business) (tele)phone number of the user at the point ...
+
+            (Business) (tele)phone number of the user at the point
+            in time when the experiment was performed.
 
       .. _/NXapm/ENTRY/USER/role-field:
 
       .. index:: role (field)
 
-      **role**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+      **role**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/role-field>`
 
-        Which role does the user have in the place and at the point 
-        in time when the experiment was performed? Technician operating
-        the microscope. Student, postdoc, principle investigator, guest
-        are common examples.
+        .. collapse:: Which role does the user have in the place and at the point ...
+
+            Which role does the user have in the place and at the point
+            in time when the experiment was performed? Technician operating
+            the microscope. Student, postdoc, principle investigator, guest
+            are common examples.
 
       .. _/NXapm/ENTRY/USER/social_media_name-field:
 
       .. index:: social_media_name (field)
 
-      **social_media_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+      **social_media_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/ORCID-field>`
 
-        Account name that is associated with the user
-        in social media platforms.
+        .. collapse:: Account name that is associated with the user ...
+
+            Account name that is associated with the user
+            in social media platforms.
 
       .. _/NXapm/ENTRY/USER/social_media_platform-field:
 
       .. index:: social_media_platform (field)
 
-      **social_media_platform**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+      **social_media_platform**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/ORCID-field>`
 
-        Name of the social media platform where the account
-        under social_media_name is registered.
+        .. collapse:: Name of the social media platform where the account ...
+
+            Name of the social media platform where the account
+            under social_media_name is registered.
 
     .. _/NXapm/ENTRY/sample-group:
 
-    **sample**: (recommended) :ref:`NXsample` 
+    **sample**: (recommended) :ref:`NXsample` :ref:`⤆ </NXentry/SAMPLE-group>`
 
-      Description of the sample from which the specimen was prepared or
-      site-specifically cut out using e.g. a focused-ion beam instrument.
+      .. collapse:: Description of the sample from which the specimen was prepared or ...
 
-      The sample group is currently a place for storing suggestions from
-      atom probers about other knowledge they have gained about the sample
-      from which they cut the specimen which is field-evaporated during the
-      experiment. Typically this is possible because the atom probe specimen
-      is usually not heat treated as is but one assumes that one has the sample
-      prepared as needed (i.e. with a specific grain diameter) and can thus
-      just cut out the specimen from that material.
+          Description of the sample from which the specimen was prepared or
+          site-specifically cut out using e.g. a focused-ion beam instrument.
 
-      There are cases though where the specimen is processed further, i.e. the
-      specimen is machined further or exposed to external stimuli during the
-      experiment. In this case, these details should not be stored in the
-      sample group but atom probers should make suggestions how this application
-      definition can be improved to find a better place and compromise
-      how to improve this application definition.
+          The sample group is currently a place for storing suggestions from
+          atom probers about other knowledge they have gained about the sample
+          from which they cut the specimen which is field-evaporated during the
+          experiment. Typically this is possible because the atom probe specimen
+          is usually not heat treated as is but one assumes that one has the sample
+          prepared as needed (i.e. with a specific grain diameter) and can thus
+          just cut out the specimen from that material.
 
-      In the future also details like how the grain_diameter was characterized,
-      how the sample was prepared, how the material was heat-treated etc.,
-      should be stored as using specific application definitions/schemas
-      which are then arranged and documented with a description of the workflow
-      so that actionable graphs become instantiatable.
+          There are cases though where the specimen is processed further, i.e. the
+          specimen is machined further or exposed to external stimuli during the
+          experiment. In this case, these details should not be stored in the
+          sample group but atom probers should make suggestions how this application
+          definition can be improved to find a better place and compromise
+          how to improve this application definition.
+
+          In the future also details like how the grain_diameter was characterized,
+          how the sample was prepared, how the material was heat-treated etc.,
+          should be stored as using specific application definitions/schemas
+          which are then arranged and documented with a description of the workflow
+          so that actionable graphs become instantiatable.
 
       .. _/NXapm/ENTRY/sample/grain_diameter-field:
 
@@ -428,19 +470,21 @@ NXapm
 
       **grain_diameter**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
-        Qualitative information about the grain size, here specifically
-        described as the equivalent spherical diameter of an assumed
-        average grain size for the crystal ensemble.
-        Users of this information should be aware that although the grain
-        diameter or radius is often referred to as grain size and used in
-        e.g. Hall-Petch-type materials models this is if at all an ensemble
-        average whose reporting may be very informative or not if the specimen
-        contains a few grains only. In atom probe the latter is often the case
-        because grains are measured partially as their diameter can be in the
-        order of magnitude of the physical diameter of the specimen.
+        .. collapse:: Qualitative information about the grain size, here specifically ...
 
-        Reporting a grain size is useful though as it allows judging if
-        specific features are expected to be found in the detector hit map.
+            Qualitative information about the grain size, here specifically
+            described as the equivalent spherical diameter of an assumed
+            average grain size for the crystal ensemble.
+            Users of this information should be aware that although the grain
+            diameter or radius is often referred to as grain size and used in
+            e.g. Hall-Petch-type materials models this is if at all an ensemble
+            average whose reporting may be very informative or not if the specimen
+            contains a few grains only. In atom probe the latter is often the case
+            because grains are measured partially as their diameter can be in the
+            order of magnitude of the physical diameter of the specimen.
+
+            Reporting a grain size is useful though as it allows judging if
+            specific features are expected to be found in the detector hit map.
 
       .. _/NXapm/ENTRY/sample/grain_diameter_error-field:
 
@@ -456,13 +500,15 @@ NXapm
 
       **heat_treatment_temperature**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_TEMPERATURE <NX_TEMPERATURE>`} 
 
-        The temperature of the last heat treatment step before quenching.
-        Knowledge about this value can give an idea how the sample
-        was heat treated, however if available a documentation of the
-        annealing treatment should be delivered by adding additional files
-        which are uploaded alongside an NXapm instance.
-        In the future there should better be an own schema used for the
-        heat treatment.
+        .. collapse:: The temperature of the last heat treatment step before quenching. ...
+
+            The temperature of the last heat treatment step before quenching.
+            Knowledge about this value can give an idea how the sample
+            was heat treated, however if available a documentation of the
+            annealing treatment should be delivered by adding additional files
+            which are uploaded alongside an NXapm instance.
+            In the future there should better be an own schema used for the
+            heat treatment.
 
       .. _/NXapm/ENTRY/sample/heat_treatment_temperature_error-field:
 
@@ -478,25 +524,27 @@ NXapm
 
       **heat_treatment_quenching_rate**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ANY <NX_ANY>`} 
 
-        Rate of the last quenching step.
-        Knowledge about this value can give an idea how the specimen
-        was heat treated, however there are many situations where one
-        can imagine that the scalar value for just the quenching rate,
-        i.e. the first derivative of the measured time-temperature profile
-        is itself time-dependant. An example is when the specimen was
-        left in the furnace after the furnace was switched off. In this case
-        the specimen cools down with a specific rate of how this furnace
-        cools down in the lab. Processes which in practice are often not
-        documented with measuring the time-temperature profile.
+        .. collapse:: Rate of the last quenching step. ...
 
-        This can be problematic because when the furnace door was left open
-        or the ambient temperature in the lab changes, i.e. for a series of
-        experiments where one is conducted on a hot summer
-        day and the next during winter as might have an effect on the
-        evolution of the microstructure. There are many cases where this
-        has been reported to be an issue in industry, e.g. think about aging
-        aluminium samples left on the factory parking lot on a hot summer
-        day.
+            Rate of the last quenching step.
+            Knowledge about this value can give an idea how the specimen
+            was heat treated, however there are many situations where one
+            can imagine that the scalar value for just the quenching rate,
+            i.e. the first derivative of the measured time-temperature profile
+            is itself time-dependant. An example is when the specimen was
+            left in the furnace after the furnace was switched off. In this case
+            the specimen cools down with a specific rate of how this furnace
+            cools down in the lab. Processes which in practice are often not
+            documented with measuring the time-temperature profile.
+
+            This can be problematic because when the furnace door was left open
+            or the ambient temperature in the lab changes, i.e. for a series of
+            experiments where one is conducted on a hot summer
+            day and the next during winter as might have an effect on the
+            evolution of the microstructure. There are many cases where this
+            has been reported to be an issue in industry, e.g. think about aging
+            aluminium samples left on the factory parking lot on a hot summer
+            day.
 
       .. _/NXapm/ENTRY/sample/heat_treatment_quenching_rate_error-field:
 
@@ -510,17 +558,19 @@ NXapm
 
       .. index:: description (field)
 
-      **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+      **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsample/description-field>`
 
 
       .. _/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION-group:
 
       **CHEMICAL_COMPOSITION**: (recommended) :ref:`NXchemical_composition` 
 
-        The chemical composition of the sample. Typically it is assumed that
-        this more macroscopic composition is representative for the material
-        so that the composition of the typically substantially less voluminous
-        specimen probes from the more voluminous sample.
+        .. collapse:: The chemical composition of the sample. Typically it is assumed that ...
+
+            The chemical composition of the sample. Typically it is assumed that
+            this more macroscopic composition is representative for the material
+            so that the composition of the typically substantially less voluminous
+            specimen probes from the more voluminous sample.
 
         .. _/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/normalization-field:
 
@@ -528,31 +578,35 @@ NXapm
 
         **normalization**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-          Reporting compositions as atom and weight percent yields both
-          dimensionless quantities but their conceptual interpretation
-          differs. A normalization based on atom_percent counts relative to the
-          total number of atoms are of a particular type. By contrast, weight_percent
-          normalization factorizes in the respective mass of the elements.
-          Python libraries like pint are challenged by these differences as
-          at.-% and wt.-% both yield fractional quantities.
+          .. collapse:: Reporting compositions as atom and weight percent yields both ...
 
-          Any of these values: ``atom_percent`` | ``weight_percent``
+              Reporting compositions as atom and weight percent yields both
+              dimensionless quantities but their conceptual interpretation
+              differs. A normalization based on atom_percent counts relative to the
+              total number of atoms are of a particular type. By contrast, weight_percent
+              normalization factorizes in the respective mass of the elements.
+              Python libraries like pint are challenged by these differences as
+              at.-% and wt.-% both yield fractional quantities.
+
+              Any of these values: ``atom_percent`` | ``weight_percent``
 
         .. _/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION-group:
 
-        **ION**: (required) :ref:`NXion` 
+        **ION**: (required) :ref:`NXion` :ref:`⤆ </NXchemical_composition/ION-group>`
 
 
           .. _/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION/name-field:
 
           .. index:: name (field)
 
-          **name**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+          **name**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXion/name-field>`
 
-            Human-readable name of the element/ion (e.g. Fe).
-            Name has to be a symbol of an element from the periodic table.
-            All symbols in the set of NXion instances inside the group
-            chemical_composition need to be disjoint.
+            .. collapse:: Human-readable name of the element/ion (e.g. Fe). ...
+
+                Human-readable name of the element/ion (e.g. Fe).
+                Name has to be a symbol of an element from the periodic table.
+                All symbols in the set of NXion instances inside the group
+                chemical_composition need to be disjoint.
 
           .. _/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION/composition-field:
 
@@ -560,9 +614,11 @@ NXapm
 
           **composition**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
 
-            Composition value for the element/ion referred to under name.
-            The value is normalized based on normalization, i.e. composition
-            is either an atom or weight percent quantity.
+            .. collapse:: Composition value for the element/ion referred to under name. ...
+
+                Composition value for the element/ion referred to under name.
+                The value is normalized based on normalization, i.e. composition
+                is either an atom or weight percent quantity.
 
           .. _/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION/composition_error-field:
 
@@ -574,38 +630,40 @@ NXapm
 
     .. _/NXapm/ENTRY/specimen-group:
 
-    **specimen**: (required) :ref:`NXsample` 
+    **specimen**: (required) :ref:`NXsample` :ref:`⤆ </NXentry/SAMPLE-group>`
 
 
       .. _/NXapm/ENTRY/specimen/name-field:
 
       .. index:: name (field)
 
-      **name**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+      **name**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsample/name-field>`
 
-        Descriptive name or ideally (globally) unique persistent identifier.
-        The name distinguishes the specimen from all others and especially the
-        predecessor/origin (see the sample group) from where this specimen was cut.
-        In cases where the specimen was e.g. site-specifically cut from the
-        sample referred to in the sample group or in cases of an instrument session
-        during which multiple specimens are loaded, the name has to be descriptive
-        enough to resolve which specimen on e.g. the microtip array was taken.
+        .. collapse:: Descriptive name or ideally (globally) unique persistent identifier. ...
 
-        The user is advised to store the details how a specimen was cut/prepared
-        from a specific sample in the sample_history. The sample_history field 
-        must not be used for writing an alias of the specimen. Instead,
-        use the field alias for this. As an example there may be a specimen/sample
-        monitoring system in a lab with bar codes. The bar code is a good
-        specimen/sample name. A shorter and more human readable alias like
-        A0 can be an example for something to write in the alias field.
+            Descriptive name or ideally (globally) unique persistent identifier.
+            The name distinguishes the specimen from all others and especially the
+            predecessor/origin (see the sample group) from where this specimen was cut.
+            In cases where the specimen was e.g. site-specifically cut from the
+            sample referred to in the sample group or in cases of an instrument session
+            during which multiple specimens are loaded, the name has to be descriptive
+            enough to resolve which specimen on e.g. the microtip array was taken.
 
-        In cases where multiple specimens have been loaded into the microscope
-        the name has to be the specific one, whose results are stored
-        by this NXentry, because a single NXentry is to be used for the 
-        characterization of a single specimen in a single continuous run.
+            The user is advised to store the details how a specimen was cut/prepared
+            from a specific sample in the sample_history. The sample_history field
+            must not be used for writing an alias of the specimen. Instead,
+            use the field alias for this. As an example there may be a specimen/sample
+            monitoring system in a lab with bar codes. The bar code is a good
+            specimen/sample name. A shorter and more human readable alias like
+            A0 can be an example for something to write in the alias field.
 
-        Details about the specimen preparation should be stored in the
-        sample_history or if this is not possible in the sample group.
+            In cases where multiple specimens have been loaded into the microscope
+            the name has to be the specific one, whose results are stored
+            by this NXentry, because a single NXentry is to be used for the
+            characterization of a single specimen in a single continuous run.
+
+            Details about the specimen preparation should be stored in the
+            sample_history or if this is not possible in the sample group.
 
       .. _/NXapm/ENTRY/specimen/sample_history-field:
 
@@ -613,39 +671,43 @@ NXapm
 
       **sample_history**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
-        Ideally, a reference to the location of or a (globally) unique
-        persistent identifier of e.g. another file which should document
-        ideally as many details as possible of the material, its
-        microstructure, and its thermo-chemo-mechanical processing/
-        preparation history.
+        .. collapse:: Ideally, a reference to the location of or a (globally) unique ...
 
-        In the case that such a detailed history of the sample/specimen is not
-        available, use this field as a free-text description to specify a
-        sub-set of the entire sample history, i.e. what you would consider
-        as being the key steps and relevant information about the specimen,
-        its material, microstructure, thermo-chemo-mechanical processing
-        state and details of the preparation.
+            Ideally, a reference to the location of or a (globally) unique
+            persistent identifier of e.g. another file which should document
+            ideally as many details as possible of the material, its
+            microstructure, and its thermo-chemo-mechanical processing/
+            preparation history.
+
+            In the case that such a detailed history of the sample/specimen is not
+            available, use this field as a free-text description to specify a
+            sub-set of the entire sample history, i.e. what you would consider
+            as being the key steps and relevant information about the specimen,
+            its material, microstructure, thermo-chemo-mechanical processing
+            state and details of the preparation.
 
       .. _/NXapm/ENTRY/specimen/preparation_date-field:
 
       .. index:: preparation_date (field)
 
-      **preparation_date**: (recommended) :ref:`NX_DATE_TIME <NX_DATE_TIME>` 
+      **preparation_date**: (recommended) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXsample/preparation_date-field>`
 
-        ISO 8601 time code with local time zone offset to UTC information
-        when the specimen was prepared.
+        .. collapse:: ISO 8601 time code with local time zone offset to UTC information ...
 
-        Ideally, report the end of the preparation, i.e. the last known time
-        the measured specimen surface was actively prepared. Usually this
-        should be a part of the sample history, i.e. the sample is imagined
-        handed over for the analysis. At the point it enters the microscope
-        the session starts.
+            ISO 8601 time code with local time zone offset to UTC information
+            when the specimen was prepared.
 
-        Knowing when the specimen was exposed to e.g. specific atmosphere is
-        especially required for environmentally sensitive material such as
-        hydrogen charged specimens or experiments including tracers with a
-        short half time. Further time stamps prior to preparation_date should
-        better be placed in resources which describe the sample_history.
+            Ideally, report the end of the preparation, i.e. the last known time
+            the measured specimen surface was actively prepared. Usually this
+            should be a part of the sample history, i.e. the sample is imagined
+            handed over for the analysis. At the point it enters the microscope
+            the session starts.
+
+            Knowing when the specimen was exposed to e.g. specific atmosphere is
+            especially required for environmentally sensitive material such as
+            hydrogen charged specimens or experiments including tracers with a
+            short half time. Further time stamps prior to preparation_date should
+            better be placed in resources which describe the sample_history.
 
       .. _/NXapm/ENTRY/specimen/alias-field:
 
@@ -661,23 +723,27 @@ NXapm
 
       **atom_types**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-        List of comma-separated elements from the periodic table
-        that are contained in the sample. 
-        If the sample substance has multiple components, all 
-        elements from each component must be included in `atom_types`.
+        .. collapse:: List of comma-separated elements from the periodic table ...
 
-        The purpose of the field is to offer materials database systems an
-        opportunity to parse the relevant elements without having to interpret
-        these from the sample history or from other data sources.
+            List of comma-separated elements from the periodic table
+            that are contained in the sample.
+            If the sample substance has multiple components, all
+            elements from each component must be included in `atom_types`.
+
+            The purpose of the field is to offer materials database systems an
+            opportunity to parse the relevant elements without having to interpret
+            these from the sample history or from other data sources.
 
       .. _/NXapm/ENTRY/specimen/description-field:
 
       .. index:: description (field)
 
-      **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+      **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsample/description-field>`
 
-        Discouraged free-text field in case properly designed records
-        for the sample_history or sample section are not available.
+        .. collapse:: Discouraged free-text field in case properly designed records ...
+
+            Discouraged free-text field in case properly designed records
+            for the sample_history or sample section are not available.
 
       .. _/NXapm/ENTRY/specimen/is_polycrystalline-field:
 
@@ -685,72 +751,78 @@ NXapm
 
       **is_polycrystalline**: (recommended) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
-        Report if the specimen is polycrystalline, in which case it
-        contains a grain or phase boundary, or if the specimen is a
-        single crystal.
+        .. collapse:: Report if the specimen is polycrystalline, in which case it ...
+
+            Report if the specimen is polycrystalline, in which case it
+            contains a grain or phase boundary, or if the specimen is a
+            single crystal.
 
     .. _/NXapm/ENTRY/DATA-group:
 
-    **DATA**: (optional) :ref:`NXdata` 
+    **DATA**: (optional) :ref:`NXdata` :ref:`⤆ </NXentry/DATA-group>`
 
-      Hard link to a location in the hierarchy of the NeXus file
-      where the data for default plotting are stored.
+      .. collapse:: Hard link to a location in the hierarchy of the NeXus file ...
+
+          Hard link to a location in the hierarchy of the NeXus file
+          where the data for default plotting are stored.
 
     .. _/NXapm/ENTRY/COORDINATE_SYSTEM_SET-group:
 
     **COORDINATE_SYSTEM_SET**: (recommended) :ref:`NXcoordinate_system_set` 
 
-      Container to hold different coordinate systems conventions.
+      .. collapse:: Container to hold different coordinate systems conventions. ...
 
-      For the specific idea and conventions to use with the
-      NXcoordinate_system_set inspect the description of the
-      NXcoordinate_system_set base class. Specific details for application
-      in atom probe microscopy follow.
+          Container to hold different coordinate systems conventions.
 
-      In this research field scientists distinguish usually several
-      Euclidean coordinate systems (CS):
+          For the specific idea and conventions to use with the
+          NXcoordinate_system_set inspect the description of the
+          NXcoordinate_system_set base class. Specific details for application
+          in atom probe microscopy follow.
 
-      * World space;  
-        a CS specifying a local coordinate system of the planet earth which
-        identifies into which direction gravity is pointing such that
-        the laboratory space CS can be rotated into this world CS.
-      * The laboratory space;  
-        a CS specifying the room where the instrument is located in or  
-        a physical landmark on the instrument, e.g. the direction of the  
-        transfer rod where positive is the direction how the rod  
-        has to be pushed during loading a specimen into the instrument.  
-        In summary, this CS is defined by the chassis of the instrument.
-      * The specimen space;  
-        a CS affixed to either the base or the initial apex of the specimen,  
-        whose z axis points towards the detector.  
-      * The detector space;  
-        a CS affixed to the detector plane whose xy plane is usually in the  
-        detector and whose z axis points towards the specimen.  
-        This is a distorted space with respect to the reconstructed ion  
-        positions.  
-      * The reconstruction space;  
-        a CS in which the reconstructed ion positions are defined.  
-        The orientation depends on the analysis software used.  
-      * Eventually further coordinate systems attached to the  
-        flight path of individual ions might be defined.
+          In this research field scientists distinguish usually several
+          Euclidean coordinate systems (CS):
 
-      Coordinate systems should be right-handed ones.
-      Clockwise rotations should be considered positive rotations.
+          * World space;
+            a CS specifying a local coordinate system of the planet earth which
+            identifies into which direction gravity is pointing such that
+            the laboratory space CS can be rotated into this world CS.
+          * The laboratory space;
+            a CS specifying the room where the instrument is located in or
+            a physical landmark on the instrument, e.g. the direction of the
+            transfer rod where positive is the direction how the rod
+            has to be pushed during loading a specimen into the instrument.
+            In summary, this CS is defined by the chassis of the instrument.
+          * The specimen space;
+            a CS affixed to either the base or the initial apex of the specimen,
+            whose z axis points towards the detector.
+          * The detector space;
+            a CS affixed to the detector plane whose xy plane is usually in the
+            detector and whose z axis points towards the specimen.
+            This is a distorted space with respect to the reconstructed ion
+            positions.
+          * The reconstruction space;
+            a CS in which the reconstructed ion positions are defined.
+            The orientation depends on the analysis software used.
+          * Eventually further coordinate systems attached to the
+            flight path of individual ions might be defined.
 
-      In atom probe microscopy a frequently used choice for the detector
-      space (CS) is discussed with the so-called detector space image
-      (stack). This is a stack of two-dimensional histograms of detected ions
-      within a predefined evaporation ID interval. Typically, the set of
-      ion evaporation sequence IDs is grouped into chunks.
+          Coordinate systems should be right-handed ones.
+          Clockwise rotations should be considered positive rotations.
 
-      For each chunk a histogram of the ion hit positions on the detector
-      is computed. This leaves the possibility for inconsistency between
-      the so-called detector space and the e.g. specimen space.
+          In atom probe microscopy a frequently used choice for the detector
+          space (CS) is discussed with the so-called detector space image
+          (stack). This is a stack of two-dimensional histograms of detected ions
+          within a predefined evaporation ID interval. Typically, the set of
+          ion evaporation sequence IDs is grouped into chunks.
 
-      The transformation here resolves this ambiguity by specifying how
-      the positive z-axes of either coordinate systems is oriented.
-      Consult the work of A. J. Breen and B. Gault and team
-      for further details.
+          For each chunk a histogram of the ion hit positions on the detector
+          is computed. This leaves the possibility for inconsistency between
+          the so-called detector space and the e.g. specimen space.
+
+          The transformation here resolves this ambiguity by specifying how
+          the positive z-axes of either coordinate systems is oriented.
+          Consult the work of A. J. Breen and B. Gault and team
+          for further details.
 
       .. _/NXapm/ENTRY/COORDINATE_SYSTEM_SET/TRANSFORMATIONS-group:
 
@@ -759,26 +831,28 @@ NXapm
 
     .. _/NXapm/ENTRY/MONITOR-group:
 
-    **MONITOR**: (optional) :ref:`NXmonitor` 
+    **MONITOR**: (optional) :ref:`NXmonitor` :ref:`⤆ </NXentry/MONITOR-group>`
 
 
     .. _/NXapm/ENTRY/atom_probe-group:
 
-    **atom_probe**: (required) :ref:`NXinstrument` 
+    **atom_probe**: (required) :ref:`NXinstrument` :ref:`⤆ </NXentry/INSTRUMENT-group>`
 
-      Metadata and numerical data of the atom probe and the lab in which it 
-      stands.
+      .. collapse:: Metadata and numerical data of the atom probe and the lab in which it ...
 
-      An atom probe microscope (experiment) is different compared to a large-
-      scale facility or electron accelerator experiments in at least two ways:
+          Metadata and numerical data of the atom probe and the lab in which it
+          stands.
 
-      * First, ionized atoms and molecular ion(s fragments)  
-        (in the case of atom probe tomography)  
-        and (primarily) imaging gas ions (in the case of field ion  
-        microscopy) are accelerated towards a position-sensitive  
-        and time-of-flight taking detector system.  
-        Hence, there is no real probe/beam.  
-      * Second, the specimen is the lens of the microscope.
+          An atom probe microscope (experiment) is different compared to a large-
+          scale facility or electron accelerator experiments in at least two ways:
+
+          * First, ionized atoms and molecular ion(s fragments)
+            (in the case of atom probe tomography)
+            and (primarily) imaging gas ions (in the case of field ion
+            microscopy) are accelerated towards a position-sensitive
+            and time-of-flight taking detector system.
+            Hence, there is no real probe/beam.
+          * Second, the specimen is the lens of the microscope.
 
       .. _/NXapm/ENTRY/atom_probe/instrument_name-field:
 
@@ -786,9 +860,11 @@ NXapm
 
       **instrument_name**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-        Given name of the atom probe at the hosting institution. This is an
-        alias. Examples could be LEAP5000, Raptor, Oxcart, one atom at a time,
-        etc.
+        .. collapse:: Given name of the atom probe at the hosting institution. This is an ...
+
+            Given name of the atom probe at the hosting institution. This is an
+            alias. Examples could be LEAP5000, Raptor, Oxcart, one atom at a time,
+            etc.
 
       .. _/NXapm/ENTRY/atom_probe/location-field:
 
@@ -796,8 +872,10 @@ NXapm
 
       **location**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-        Location of the lab or place where the instrument is installed.
-        Using GEOREF is preferred.
+        .. collapse:: Location of the lab or place where the instrument is installed. ...
+
+            Location of the lab or place where the instrument is installed.
+            Using GEOREF is preferred.
 
       .. _/NXapm/ENTRY/atom_probe/flight_path_length-field:
 
@@ -805,10 +883,12 @@ NXapm
 
       **flight_path_length**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
-        The space inside the atom probe along which ions pass nominally
-        when they leave the specimen and travel to the detector.
+        .. collapse:: The space inside the atom probe along which ions pass nominally ...
 
-        THIS DOCSTRING NEEDS CLARIFICATION.
+            The space inside the atom probe along which ions pass nominally
+            when they leave the specimen and travel to the detector.
+
+            THIS DOCSTRING NEEDS CLARIFICATION.
 
       .. _/NXapm/ENTRY/atom_probe/field_of_view-field:
 
@@ -816,10 +896,12 @@ NXapm
 
       **field_of_view**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
-        The nominal diameter of the specimen ROI which is measured in the
-        experiment. It is important to mention that the physical specimen
-        cannot be measured completely because ions may launch but not be
-        detected or hit elsewhere in the analysis_chamber.
+        .. collapse:: The nominal diameter of the specimen ROI which is measured in the ...
+
+            The nominal diameter of the specimen ROI which is measured in the
+            experiment. It is important to mention that the physical specimen
+            cannot be measured completely because ions may launch but not be
+            detected or hit elsewhere in the analysis_chamber.
 
       .. _/NXapm/ENTRY/atom_probe/status-field:
 
@@ -827,9 +909,11 @@ NXapm
 
       **status**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
-        A statement whether the measurement was successful or failed prematurely.
+        .. collapse:: A statement whether the measurement was successful or failed prematurely. ...
 
-        Any of these values: ``success`` | ``failure`` | ``unknown``
+            A statement whether the measurement was successful or failed prematurely.
+
+            Any of these values: ``success`` | ``failure`` | ``unknown``
 
       .. _/NXapm/ENTRY/atom_probe/CSG-group:
 
@@ -845,21 +929,21 @@ NXapm
 
         .. index:: vendor (field)
 
-        **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+        **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/FABRICATION/model-field:
 
         .. index:: model (field)
 
-        **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+        **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/model-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/FABRICATION/identifier-field:
 
         .. index:: identifier (field)
 
-        **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+        **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/FABRICATION/capabilities-field:
@@ -886,40 +970,40 @@ NXapm
 
         .. index:: name (field)
 
-        **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+        **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXreflectron/name-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/REFLECTRON/description-field:
 
         .. index:: description (field)
 
-        **description**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+        **description**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXreflectron/description-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/REFLECTRON/FABRICATION-group:
 
-        **FABRICATION**: (optional) :ref:`NXfabrication` 
+        **FABRICATION**: (optional) :ref:`NXfabrication` :ref:`⤆ </NXreflectron/FABRICATION-group>`
 
 
           .. _/NXapm/ENTRY/atom_probe/REFLECTRON/FABRICATION/vendor-field:
 
           .. index:: vendor (field)
 
-          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/REFLECTRON/FABRICATION/model-field:
 
           .. index:: model (field)
 
-          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/model-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/REFLECTRON/FABRICATION/identifier-field:
 
           .. index:: identifier (field)
 
-          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/REFLECTRON/FABRICATION/capabilities-field:
@@ -938,14 +1022,16 @@ NXapm
 
       **local_electrode**: (required) :ref:`NXlens_em` 
 
-        A local electrode guiding the ion flight path. Also called
-        counter or extraction electrode.
+        .. collapse:: A local electrode guiding the ion flight path. Also called ...
+
+            A local electrode guiding the ion flight path. Also called
+            counter or extraction electrode.
 
         .. _/NXapm/ENTRY/atom_probe/local_electrode/name-field:
 
         .. index:: name (field)
 
-        **name**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+        **name**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXlens_em/name-field>`
 
           Identifier of the local_electrode in an e.g. database.
 
@@ -958,26 +1044,26 @@ NXapm
 
           .. index:: name (field)
 
-          **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXcomponent_em/name-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/local_electrode/APERTURE_EM/value-field:
 
           .. index:: value (field)
 
-          **value**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` 
+          **value**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXaperture_em/value-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/local_electrode/APERTURE_EM/FABRICATION-group:
 
-          **FABRICATION**: (optional) :ref:`NXfabrication` 
+          **FABRICATION**: (optional) :ref:`NXfabrication` :ref:`⤆ </NXcomponent_em/FABRICATION-group>`
 
 
             .. _/NXapm/ENTRY/atom_probe/local_electrode/APERTURE_EM/FABRICATION/identifier-field:
 
             .. index:: identifier (field)
 
-            **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+            **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/local_electrode/APERTURE_EM/FABRICATION/capabilities-field:
@@ -994,23 +1080,27 @@ NXapm
 
       .. _/NXapm/ENTRY/atom_probe/ion_detector-group:
 
-      **ion_detector**: (required) :ref:`NXdetector` 
+      **ion_detector**: (required) :ref:`NXdetector` :ref:`⤆ </NXinstrument/DETECTOR-group>`
 
-        Detector for taking raw time-of-flight and
-        ion/hit impact positions data.
+        .. collapse:: Detector for taking raw time-of-flight and ...
+
+            Detector for taking raw time-of-flight and
+            ion/hit impact positions data.
 
         .. _/NXapm/ENTRY/atom_probe/ion_detector/type-field:
 
         .. index:: type (field)
 
-        **type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+        **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdetector/type-field>`
 
-          Description of the detector type. Specify if the detector is
-          not the usual type, i.e. not a delay-line detector.
-          In the case the detector is a multi-channel plate/
-          delay line detector, use mcp_dld. In the case the detector is
-          a phosphor CCD use phosphor_ccd. In other case specify
-          the detector type via free-text.
+          .. collapse:: Description of the detector type. Specify if the detector is ...
+
+              Description of the detector type. Specify if the detector is
+              not the usual type, i.e. not a delay-line detector.
+              In the case the detector is a multi-channel plate/
+              delay line detector, use mcp_dld. In the case the detector is
+              a phosphor CCD use phosphor_ccd. In other case specify
+              the detector type via free-text.
 
         .. _/NXapm/ENTRY/atom_probe/ion_detector/name-field:
 
@@ -1032,10 +1122,12 @@ NXapm
 
         .. index:: serial_number (field)
 
-        **serial_number**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+        **serial_number**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdetector/serial_number-field>`
 
-          Given hardware name/serial number or hash identifier
-          issued by the manufacturer.
+          .. collapse:: Given hardware name/serial number or hash identifier ...
+
+              Given hardware name/serial number or hash identifier
+              issued by the manufacturer.
 
         .. _/NXapm/ENTRY/atom_probe/ion_detector/manufacturer_name-field:
 
@@ -1051,11 +1143,13 @@ NXapm
 
         **signal_amplitude**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n_ions]) {units=\ :ref:`NX_CURRENT <NX_CURRENT>`} 
 
-          Amplitude of the signal detected on the multi-channel plate (MCP).
+          .. collapse:: Amplitude of the signal detected on the multi-channel plate (MCP). ...
 
-          This field should be used for storing the signal amplitude quantity
-          within ATO files. The ATO file format is used primarily by the
-          atom probe groups of the GPM in Rouen, France.
+              Amplitude of the signal detected on the multi-channel plate (MCP).
+
+              This field should be used for storing the signal amplitude quantity
+              within ATO files. The ATO file format is used primarily by the
+              atom probe groups of the GPM in Rouen, France.
 
         .. _/NXapm/ENTRY/atom_probe/ion_detector/CSG-group:
 
@@ -1071,35 +1165,35 @@ NXapm
 
         .. index:: pulse_mode (field)
 
-        **pulse_mode**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+        **pulse_mode**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpulser_apm/pulse_mode-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/pulser/pulse_frequency-field:
 
         .. index:: pulse_frequency (field)
 
-        **pulse_frequency**: (required) :ref:`NX_FLOAT <NX_FLOAT>` 
+        **pulse_frequency**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXpulser_apm/pulse_frequency-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/pulser/pulse_fraction-field:
 
         .. index:: pulse_fraction (field)
 
-        **pulse_fraction**: (required) :ref:`NX_FLOAT <NX_FLOAT>` 
+        **pulse_fraction**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXpulser_apm/pulse_fraction-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/pulser/pulsed_voltage-field:
 
         .. index:: pulsed_voltage (field)
 
-        **pulsed_voltage**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` 
+        **pulsed_voltage**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXpulser_apm/pulsed_voltage-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/pulser/standing_voltage-field:
 
         .. index:: standing_voltage (field)
 
-        **standing_voltage**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` 
+        **standing_voltage**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXpulser_apm/standing_voltage-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/pulser/CSG-group:
@@ -1109,72 +1203,74 @@ NXapm
 
         .. _/NXapm/ENTRY/atom_probe/pulser/SOURCE-group:
 
-        **SOURCE**: (optional) :ref:`NXsource` 
+        **SOURCE**: (optional) :ref:`NXsource` :ref:`⤆ </NXpulser_apm/SOURCE-group>`
 
-          Atom probe microscopes use controlled laser, voltage, or a
-          combination of pulsing strategies to trigger the excitation
-          and eventual field evaporation/emission of an ion during
-          an experiment.
-          If pulse_mode is set to laser or laser_and_voltage (e.g. for
-          LEAP6000-type instruments) having the group/section laser_gun
-          is required and the following of its fields have to be filled:
+          .. collapse:: Atom probe microscopes use controlled laser, voltage, or a ...
 
-          * name  
-          * wavelength  
-          * energy
+              Atom probe microscopes use controlled laser, voltage, or a
+              combination of pulsing strategies to trigger the excitation
+              and eventual field evaporation/emission of an ion during
+              an experiment.
+              If pulse_mode is set to laser or laser_and_voltage (e.g. for
+              LEAP6000-type instruments) having the group/section laser_gun
+              is required and the following of its fields have to be filled:
+
+              * name
+              * wavelength
+              * energy
 
           .. _/NXapm/ENTRY/atom_probe/pulser/SOURCE/name-field:
 
           .. index:: name (field)
 
-          **name**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+          **name**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpulser_apm/SOURCE/name-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/pulser/SOURCE/wavelength-field:
 
           .. index:: wavelength (field)
 
-          **wavelength**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` 
+          **wavelength**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXpulser_apm/SOURCE/wavelength-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/pulser/SOURCE/power-field:
 
           .. index:: power (field)
 
-          **power**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` 
+          **power**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXpulser_apm/SOURCE/power-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/pulser/SOURCE/pulse_energy-field:
 
           .. index:: pulse_energy (field)
 
-          **pulse_energy**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` 
+          **pulse_energy**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXpulser_apm/SOURCE/pulse_energy-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/pulser/SOURCE/FABRICATION-group:
 
-          **FABRICATION**: (optional) :ref:`NXfabrication` 
+          **FABRICATION**: (optional) :ref:`NXfabrication` :ref:`⤆ </NXpulser_apm/SOURCE/FABRICATION-group>`
 
 
             .. _/NXapm/ENTRY/atom_probe/pulser/SOURCE/FABRICATION/vendor-field:
 
             .. index:: vendor (field)
 
-            **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+            **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/pulser/SOURCE/FABRICATION/model-field:
 
             .. index:: model (field)
 
-            **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+            **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/model-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/pulser/SOURCE/FABRICATION/identifier-field:
 
             .. index:: identifier (field)
 
-            **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+            **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/pulser/SOURCE/FABRICATION/capabilities-field:
@@ -1186,17 +1282,17 @@ NXapm
 
           .. _/NXapm/ENTRY/atom_probe/pulser/SOURCE/BEAM-group:
 
-          **BEAM**: (optional) :ref:`NXbeam` 
+          **BEAM**: (optional) :ref:`NXbeam` :ref:`⤆ </NXpulser_apm/SOURCE/BEAM-group>`
 
 
             .. _/NXapm/ENTRY/atom_probe/pulser/SOURCE/BEAM/pinhole_position-group:
 
-            **pinhole_position**: (recommended) :ref:`NXcollection` 
+            **pinhole_position**: (recommended) :ref:`NXcollection` :ref:`⤆ </NXpulser_apm/SOURCE/BEAM/pinhole_position-group>`
 
 
             .. _/NXapm/ENTRY/atom_probe/pulser/SOURCE/BEAM/spot_position-group:
 
-            **spot_position**: (recommended) :ref:`NXcollection` 
+            **spot_position**: (recommended) :ref:`NXcollection` :ref:`⤆ </NXpulser_apm/SOURCE/BEAM/spot_position-group>`
 
 
       .. _/NXapm/ENTRY/atom_probe/stage_lab-group:
@@ -1210,8 +1306,10 @@ NXapm
 
         **base_temperature**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_TEMPERATURE <NX_TEMPERATURE>`} 
 
-          Average temperature at the specimen base, i.e.
-          base_temperature during the measurement.
+          .. collapse:: Average temperature at the specimen base, i.e. ...
+
+              Average temperature at the specimen base, i.e.
+              base_temperature during the measurement.
 
         .. _/NXapm/ENTRY/atom_probe/stage_lab/temperature-field:
 
@@ -1219,9 +1317,11 @@ NXapm
 
         **temperature**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n_ions]) {units=\ :ref:`NX_TEMPERATURE <NX_TEMPERATURE>`} 
 
-          The best estimate, at experiment time, for the temperature at the
-          sample base (furthest point along sample apex and holding assembly
-          that is removable from the sample stage).
+          .. collapse:: The best estimate, at experiment time, for the temperature at the ...
+
+              The best estimate, at experiment time, for the temperature at the
+              sample base (furthest point along sample apex and holding assembly
+              that is removable from the sample stage).
 
         .. _/NXapm/ENTRY/atom_probe/stage_lab/CSG-group:
 
@@ -1237,14 +1337,14 @@ NXapm
 
         .. index:: name (field)
 
-        **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+        **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXchamber/name-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/analysis_chamber/description-field:
 
         .. index:: description (field)
 
-        **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+        **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXchamber/description-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/analysis_chamber/pressure-field:
@@ -1257,28 +1357,28 @@ NXapm
 
         .. _/NXapm/ENTRY/atom_probe/analysis_chamber/FABRICATION-group:
 
-        **FABRICATION**: (optional) :ref:`NXfabrication` 
+        **FABRICATION**: (optional) :ref:`NXfabrication` :ref:`⤆ </NXchamber/FABRICATION-group>`
 
 
           .. _/NXapm/ENTRY/atom_probe/analysis_chamber/FABRICATION/vendor-field:
 
           .. index:: vendor (field)
 
-          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/analysis_chamber/FABRICATION/model-field:
 
           .. index:: model (field)
 
-          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/model-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/analysis_chamber/FABRICATION/identifier-field:
 
           .. index:: identifier (field)
 
-          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/analysis_chamber/FABRICATION/capabilities-field:
@@ -1302,14 +1402,14 @@ NXapm
 
         .. index:: name (field)
 
-        **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+        **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXchamber/name-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/buffer_chamber/description-field:
 
         .. index:: description (field)
 
-        **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+        **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXchamber/description-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/buffer_chamber/pressure-field:
@@ -1322,28 +1422,28 @@ NXapm
 
         .. _/NXapm/ENTRY/atom_probe/buffer_chamber/FABRICATION-group:
 
-        **FABRICATION**: (optional) :ref:`NXfabrication` 
+        **FABRICATION**: (optional) :ref:`NXfabrication` :ref:`⤆ </NXchamber/FABRICATION-group>`
 
 
           .. _/NXapm/ENTRY/atom_probe/buffer_chamber/FABRICATION/vendor-field:
 
           .. index:: vendor (field)
 
-          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/buffer_chamber/FABRICATION/model-field:
 
           .. index:: model (field)
 
-          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/model-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/buffer_chamber/FABRICATION/identifier-field:
 
           .. index:: identifier (field)
 
-          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/buffer_chamber/FABRICATION/capabilities-field:
@@ -1367,14 +1467,14 @@ NXapm
 
         .. index:: name (field)
 
-        **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+        **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXchamber/name-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/load_lock_chamber/description-field:
 
         .. index:: description (field)
 
-        **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+        **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXchamber/description-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/load_lock_chamber/pressure-field:
@@ -1387,28 +1487,28 @@ NXapm
 
         .. _/NXapm/ENTRY/atom_probe/load_lock_chamber/FABRICATION-group:
 
-        **FABRICATION**: (optional) :ref:`NXfabrication` 
+        **FABRICATION**: (optional) :ref:`NXfabrication` :ref:`⤆ </NXchamber/FABRICATION-group>`
 
 
           .. _/NXapm/ENTRY/atom_probe/load_lock_chamber/FABRICATION/vendor-field:
 
           .. index:: vendor (field)
 
-          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/load_lock_chamber/FABRICATION/model-field:
 
           .. index:: model (field)
 
-          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/model-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/load_lock_chamber/FABRICATION/identifier-field:
 
           .. index:: identifier (field)
 
-          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/load_lock_chamber/FABRICATION/capabilities-field:
@@ -1432,33 +1532,33 @@ NXapm
 
         .. index:: design (field)
 
-        **design**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+        **design**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpump/design-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/getter_pump/FABRICATION-group:
 
-        **FABRICATION**: (optional) :ref:`NXfabrication` 
+        **FABRICATION**: (optional) :ref:`NXfabrication` :ref:`⤆ </NXpump/FABRICATION-group>`
 
 
           .. _/NXapm/ENTRY/atom_probe/getter_pump/FABRICATION/vendor-field:
 
           .. index:: vendor (field)
 
-          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/getter_pump/FABRICATION/model-field:
 
           .. index:: model (field)
 
-          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/model-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/getter_pump/FABRICATION/identifier-field:
 
           .. index:: identifier (field)
 
-          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/getter_pump/FABRICATION/capabilities-field:
@@ -1482,33 +1582,33 @@ NXapm
 
         .. index:: design (field)
 
-        **design**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+        **design**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpump/design-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/roughening_pump/FABRICATION-group:
 
-        **FABRICATION**: (optional) :ref:`NXfabrication` 
+        **FABRICATION**: (optional) :ref:`NXfabrication` :ref:`⤆ </NXpump/FABRICATION-group>`
 
 
           .. _/NXapm/ENTRY/atom_probe/roughening_pump/FABRICATION/vendor-field:
 
           .. index:: vendor (field)
 
-          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/roughening_pump/FABRICATION/model-field:
 
           .. index:: model (field)
 
-          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/model-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/roughening_pump/FABRICATION/identifier-field:
 
           .. index:: identifier (field)
 
-          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/roughening_pump/FABRICATION/capabilities-field:
@@ -1532,33 +1632,33 @@ NXapm
 
         .. index:: design (field)
 
-        **design**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+        **design**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpump/design-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/turbomolecular_pump/FABRICATION-group:
 
-        **FABRICATION**: (optional) :ref:`NXfabrication` 
+        **FABRICATION**: (optional) :ref:`NXfabrication` :ref:`⤆ </NXpump/FABRICATION-group>`
 
 
           .. _/NXapm/ENTRY/atom_probe/turbomolecular_pump/FABRICATION/vendor-field:
 
           .. index:: vendor (field)
 
-          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/turbomolecular_pump/FABRICATION/model-field:
 
           .. index:: model (field)
 
-          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/model-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/turbomolecular_pump/FABRICATION/identifier-field:
 
           .. index:: identifier (field)
 
-          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
 
 
           .. _/NXapm/ENTRY/atom_probe/turbomolecular_pump/FABRICATION/capabilities-field:
@@ -1575,39 +1675,43 @@ NXapm
 
       .. _/NXapm/ENTRY/atom_probe/instrument_calibration-group:
 
-      **instrument_calibration**: (recommended) :ref:`NXcollection` 
+      **instrument_calibration**: (recommended) :ref:`NXcollection` :ref:`⤆ </NXinstrument/COLLECTION-group>`
 
-        A possible place, which has to be discussed with the atom probe
-        community more though, where quantitative details about the calibration
-        of the counter electrode could be stored. Work in this direction was
-        e.g. reported by the `Erlangen group <https://www.youtube.com/watch?v=99hNEkqdj78t=1876s>`_  
-        (see `P. Felfer et al. <http://dx.doi.org/10.1016/j.ultramic.2016.07.008>`_  )
+        .. collapse:: A possible place, which has to be discussed with the atom probe ...
+
+            A possible place, which has to be discussed with the atom probe
+            community more though, where quantitative details about the calibration
+            of the counter electrode could be stored. Work in this direction was
+            e.g. reported by the `Erlangen group <https://www.youtube.com/watch?v=99hNEkqdj78t=1876s>`_
+            (see `P. Felfer et al. <http://dx.doi.org/10.1016/j.ultramic.2016.07.008>`_  )
 
       .. _/NXapm/ENTRY/atom_probe/specimen_monitoring-group:
 
-      **specimen_monitoring**: (recommended) :ref:`NXcollection` 
+      **specimen_monitoring**: (recommended) :ref:`NXcollection` :ref:`⤆ </NXinstrument/COLLECTION-group>`
 
-        A place where details about the initial shape of the specimen
-        can be stored. Ideally, here also data about the shape evolution
-        of the specimen can be stored. There are currently very few
-        techniques which can measure the shape evolution:
+        .. collapse:: A place where details about the initial shape of the specimen ...
 
-        * Correlative electron microscopy coupled with modeling  
-          but this usually takes an interrupted experiment  
-          in which the specimen is transferred, an image taken,  
-          and a new evaporation sequence initiated.  
-          Examples are `I. Mouton et al. <https://doi.org/10.1017/S1431927618016161>`_  
-          and `C. Fletcher <https://doi.org/10.1088/1361-6463/abaaa6>`_.  
-        * Another method, which is less accurate though, is to monitor  
-          the specimen evolution via the in-built camera system  
-          (if available) in the instrument.  
-        * Another method is to use correlated scanning force microscopy  
-          methods like reported in `C. Fleischmann <https://doi.org/10.1016/j.ultramic.2018.08.010>`_.  
-        * A continuous monitoring of the specimen in a   
-          correlative electron microscopy/atom probe experiment  
-          is planned to be developed by `T. Kelly et al. <https://doi.org/10.1017/S1431927620022205>`_  
-          Nothing can be said about the outcome of this research yet but  
-          here is where such spatio-temporally data could be stored.
+            A place where details about the initial shape of the specimen
+            can be stored. Ideally, here also data about the shape evolution
+            of the specimen can be stored. There are currently very few
+            techniques which can measure the shape evolution:
+
+            * Correlative electron microscopy coupled with modeling
+              but this usually takes an interrupted experiment
+              in which the specimen is transferred, an image taken,
+              and a new evaporation sequence initiated.
+              Examples are `I. Mouton et al. <https://doi.org/10.1017/S1431927618016161>`_
+              and `C. Fletcher <https://doi.org/10.1088/1361-6463/abaaa6>`_.
+            * Another method, which is less accurate though, is to monitor
+              the specimen evolution via the in-built camera system
+              (if available) in the instrument.
+            * Another method is to use correlated scanning force microscopy
+              methods like reported in `C. Fleischmann <https://doi.org/10.1016/j.ultramic.2018.08.010>`_.
+            * A continuous monitoring of the specimen in a
+              correlative electron microscopy/atom probe experiment
+              is planned to be developed by `T. Kelly et al. <https://doi.org/10.1017/S1431927620022205>`_
+              Nothing can be said about the outcome of this research yet but
+              here is where such spatiotemporally data could be stored.
 
         .. _/NXapm/ENTRY/atom_probe/specimen_monitoring/initial_radius-field:
 
@@ -1615,8 +1719,10 @@ NXapm
 
         **initial_radius**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
-          Ideally measured or best elaborated guess of the
-          initial radius of the specimen.
+          .. collapse:: Ideally measured or best elaborated guess of the ...
+
+              Ideally measured or best elaborated guess of the
+              initial radius of the specimen.
 
         .. _/NXapm/ENTRY/atom_probe/specimen_monitoring/shank_angle-field:
 
@@ -1624,11 +1730,13 @@ NXapm
 
         **shank_angle**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
 
-          Ideally measured or best elaborated guess of the shank angle.
-          This is a measure of the specimen taper. Define it in such a way
-          that the base of the specimen is modelled as a conical frustrum so
-          that the shank angle is the (shortest) angle between the specimen
-          space z-axis and a vector on the lateral surface of the cone.
+          .. collapse:: Ideally measured or best elaborated guess of the shank angle. ...
+
+              Ideally measured or best elaborated guess of the shank angle.
+              This is a measure of the specimen taper. Define it in such a way
+              that the base of the specimen is modelled as a conical frustrum so
+              that the shank angle is the (shortest) angle between the specimen
+              space z-axis and a vector on the lateral surface of the cone.
 
         .. _/NXapm/ENTRY/atom_probe/specimen_monitoring/detection_rate-field:
 
@@ -1648,35 +1756,37 @@ NXapm
 
       .. _/NXapm/ENTRY/atom_probe/control_software-group:
 
-      **control_software**: (required) :ref:`NXcollection` 
+      **control_software**: (required) :ref:`NXcollection` :ref:`⤆ </NXinstrument/COLLECTION-group>`
 
-        The majority of atom probe microscopes come from a
-        single commercial manufacturer `AMETEK (formerly Cameca) <https://www.atomprobe.com>`_.
-        Their instruments are controlled via an(/a set) of integrated
-        instrument control system(s) (APSuite/IVAS/DAVis).
+        .. collapse:: The majority of atom probe microscopes come from a ...
 
-        By contrast, instruments which were built by individual
-        research groups such as of the French (GPM, Rouen, France),
-        the Schmitz (Inspico, Stuttgart, Germany),
-        the Felfer (Oxcart, Erlangen, Germany),
-        the Northwestern (D. Isheim, Seidman group et al.),
-        or the PNNL group (Pacific Northwest National Laborary,
-        Portland, Oregon, U.S.) have other solutions
-        to control the instrument.
+            The majority of atom probe microscopes come from a
+            single commercial manufacturer `AMETEK (formerly Cameca) <https://www.atomprobe.com>`_.
+            Their instruments are controlled via an(/a set) of integrated
+            instrument control system(s) (APSuite/IVAS/DAVis).
 
-        Some of which are modularized and open,
-        some of which realize also integrated control units with
-        portions of eventually undisclosed source code and
-        (so far) lacking (support of)/open APIs.
+            By contrast, instruments which were built by individual
+            research groups such as of the French (GPM, Rouen, France),
+            the Schmitz (Inspico, Stuttgart, Germany),
+            the Felfer (Oxcart, Erlangen, Germany),
+            the Northwestern (D. Isheim, Seidman group et al.),
+            or the PNNL group (Pacific Northwest National Laborary,
+            Portland, Oregon, U.S.) have other solutions
+            to control the instrument.
 
-        Currently, there is no accepted/implemented
-        community-specific API for getting finely granularized
-        access to such control settings.
+            Some of which are modularized and open,
+            some of which realize also integrated control units with
+            portions of eventually undisclosed source code and
+            (so far) lacking (support of)/open APIs.
 
-        These considerations motivated the design of the NXapm
-        application definition in that it stores quantities in NXcollection.
-        groups to begin with. Holding heterogeneous, not yet standardized
-        but relevant pieces of information is the purpose of this collection.
+            Currently, there is no accepted/implemented
+            community-specific API for getting finely granularized
+            access to such control settings.
+
+            These considerations motivated the design of the NXapm
+            application definition in that it stores quantities in NXcollection.
+            groups to begin with. Holding heterogeneous, not yet standardized
+            but relevant pieces of information is the purpose of this collection.
 
         .. _/NXapm/ENTRY/atom_probe/control_software/PROGRAM-group:
 
@@ -1687,57 +1797,65 @@ NXapm
 
           .. index:: program (field)
 
-          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/control_software/PROGRAM/program@version-attribute:
 
             .. index:: version (field attribute)
 
-            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
         .. _/NXapm/ENTRY/atom_probe/control_software/buffer_chamber-group:
 
         **buffer_chamber**: (optional) :ref:`NXcollection` 
 
-          Track time-dependent details over the course of the measurement about the
-          buffer_chamber.
+          .. collapse:: Track time-dependent details over the course of the measurement about th ...
+
+              Track time-dependent details over the course of the measurement about the
+              buffer_chamber.
 
         .. _/NXapm/ENTRY/atom_probe/control_software/load_lock_chamber-group:
 
         **load_lock_chamber**: (optional) :ref:`NXcollection` 
 
-          Track time-dependent details over the course of the measurement about the
-          load_lock_chamber.
+          .. collapse:: Track time-dependent details over the course of the measurement about th ...
+
+              Track time-dependent details over the course of the measurement about the
+              load_lock_chamber.
 
         .. _/NXapm/ENTRY/atom_probe/control_software/analysis_chamber-group:
 
         **analysis_chamber**: (optional) :ref:`NXcollection` 
 
-          Track time-dependent details over the course of the measurement about the
-          analysis_chamber.
+          .. collapse:: Track time-dependent details over the course of the measurement about th ...
+
+              Track time-dependent details over the course of the measurement about the
+              analysis_chamber.
 
       .. _/NXapm/ENTRY/atom_probe/ion_impact_positions-group:
 
       **ion_impact_positions**: (recommended) :ref:`NXprocess` 
 
-        Details about where ions hit the ion_detector and data processing
-        steps related to analog-to-digital conversion of detector signals
-        into ion hit positions. For AMETEK LEAP instruments this processing
-        takes place partly in the control unit of the detector partly
-        in the software. The process is controlled by the acquisition/
-        instrument control software (IVAS/APSuite/DAVis).
-        The exact details are not documented by AMETEK in an open manner.
-        For instruments built by individual research groups,
-        like the Oxcart instrument, individual timing data from the
-        delay-line detector are openly accessible.
+        .. collapse:: Details about where ions hit the ion_detector and data processing ...
+
+            Details about where ions hit the ion_detector and data processing
+            steps related to analog-to-digital conversion of detector signals
+            into ion hit positions. For AMETEK LEAP instruments this processing
+            takes place partly in the control unit of the detector partly
+            in the software. The process is controlled by the acquisition/
+            instrument control software (IVAS/APSuite/DAVis).
+            The exact details are not documented by AMETEK in an open manner.
+            For instruments built by individual research groups,
+            like the Oxcart instrument, individual timing data from the
+            delay-line detector are openly accessible.
 
         .. _/NXapm/ENTRY/atom_probe/ion_impact_positions/sequence_index-field:
 
         .. index:: sequence_index (field)
 
-        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` 
+        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXprocess/sequence_index-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/ion_impact_positions/arrival_time_pairs-field:
@@ -1746,8 +1864,10 @@ NXapm
 
         **arrival_time_pairs**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 3, Dimensions: [n_ions, n_dld_wires, 2]) {units=\ :ref:`NX_TIME <NX_TIME>`} 
 
-          Raw readings from the analog-to-digital-converter
-          timing circuits of the detector wires.
+          .. collapse:: Raw readings from the analog-to-digital-converter ...
+
+              Raw readings from the analog-to-digital-converter
+              timing circuits of the detector wires.
 
         .. _/NXapm/ENTRY/atom_probe/ion_impact_positions/hit_positions-field:
 
@@ -1755,12 +1875,14 @@ NXapm
 
         **hit_positions**: (required) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_ions, 2]) {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
-          Evaluated ion impact coordinates at the detector
-          (either as computed from the arrival time data
-          or as reported by the control software).
-          If the acquisition software enables it one can also store in this
-          field the hit_positions, as measured by the detector, without any
-          corrections.
+          .. collapse:: Evaluated ion impact coordinates at the detector ...
+
+              Evaluated ion impact coordinates at the detector
+              (either as computed from the arrival time data
+              or as reported by the control software).
+              If the acquisition software enables it one can also store in this
+              field the hit_positions, as measured by the detector, without any
+              corrections.
 
         .. _/NXapm/ENTRY/atom_probe/ion_impact_positions/PROGRAM-group:
 
@@ -1771,55 +1893,59 @@ NXapm
 
           .. index:: program (field)
 
-          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/ion_impact_positions/PROGRAM/program@version-attribute:
 
             .. index:: version (field attribute)
 
-            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
       .. _/NXapm/ENTRY/atom_probe/hit_quality_filtering-group:
 
       **hit_quality_filtering**: (optional) :ref:`NXprocess` 
 
-        This could be a place where currently the publicly undocumented
-        algorithmic steps are stored how detected hits are judged for their
-        quality. In CamecaRoot this there is something mentioned like
-        golden and partial hits, here is where this could be documented.
+        .. collapse:: This could be a place where currently the publicly undocumented ...
+
+            This could be a place where currently the publicly undocumented
+            algorithmic steps are stored how detected hits are judged for their
+            quality. In CamecaRoot this there is something mentioned like
+            golden and partial hits, here is where this could be documented.
 
         .. _/NXapm/ENTRY/atom_probe/hit_quality_filtering/sequence_index-field:
 
         .. index:: sequence_index (field)
 
-        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` 
+        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXprocess/sequence_index-field>`
 
 
       .. _/NXapm/ENTRY/atom_probe/hit_multiplicity-group:
 
       **hit_multiplicity**: (recommended) :ref:`NXprocess` 
 
-        Data post-processing step which is, like the impact position analyses,
-        usually executed in the integrated control software. This processing
-        yields how many ions were detected with each pulse.
+        .. collapse:: Data post-processing step which is, like the impact position analyses, ...
 
-        It is possible that multiple ions evaporate and hit the same or
-        different pixels of the detector on the same pulse.
-        These data form the basis to analyses of the so-called
-        (hit) multiplicity of an ion.
+            Data post-processing step which is, like the impact position analyses,
+            usually executed in the integrated control software. This processing
+            yields how many ions were detected with each pulse.
 
-        Multiplicity must not be confused with how many atoms 
-        f the same element or isotope, respectively, a molecular
-        ion contains (which is instead encoded with the
-        isotope_vector field of each NXion instance).
+            It is possible that multiple ions evaporate and hit the same or
+            different pixels of the detector on the same pulse.
+            These data form the basis to analyses of the so-called
+            (hit) multiplicity of an ion.
+
+            Multiplicity must not be confused with how many atoms
+            f the same element or isotope, respectively, a molecular
+            ion contains (which is instead encoded with the
+            isotope_vector field of each NXion instance).
 
         .. _/NXapm/ENTRY/atom_probe/hit_multiplicity/sequence_index-field:
 
         .. index:: sequence_index (field)
 
-        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` 
+        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXprocess/sequence_index-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/hit_multiplicity/pulses_since_last_ion-field:
@@ -1828,8 +1954,10 @@ NXapm
 
         **pulses_since_last_ion**: (recommended) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_ions]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-          Number of pulses since the last detected ion pulse.
-          For multi-hit records, after the first record, this is zero.
+          .. collapse:: Number of pulses since the last detected ion pulse. ...
+
+              Number of pulses since the last detected ion pulse.
+              For multi-hit records, after the first record, this is zero.
 
         .. _/NXapm/ENTRY/atom_probe/hit_multiplicity/pulse_id-field:
 
@@ -1837,8 +1965,10 @@ NXapm
 
         **pulse_id**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_ions]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-          Number of pulses since the start of the atom probe
-          run/evaporation sequence.
+          .. collapse:: Number of pulses since the start of the atom probe ...
+
+              Number of pulses since the start of the atom probe
+              run/evaporation sequence.
 
         .. _/NXapm/ENTRY/atom_probe/hit_multiplicity/hit_multiplicity-field:
 
@@ -1857,32 +1987,34 @@ NXapm
 
           .. index:: program (field)
 
-          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/hit_multiplicity/PROGRAM/program@version-attribute:
 
             .. index:: version (field attribute)
 
-            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
       .. _/NXapm/ENTRY/atom_probe/ion_filtering-group:
 
       **ion_filtering**: (recommended) :ref:`NXprocess` 
 
-        Like impact position and hit multiplicity computations,
-        ion filtering is a data post-processing step with which users
-        identify which of the detected ions should be included
-        in the voltage-and-bowl correction.
-        This post-processing is usually performed via GUI interaction
-        in the reconstruction pipeline of IVAS/APSuite.
+        .. collapse:: Like impact position and hit multiplicity computations, ...
+
+            Like impact position and hit multiplicity computations,
+            ion filtering is a data post-processing step with which users
+            identify which of the detected ions should be included
+            in the voltage-and-bowl correction.
+            This post-processing is usually performed via GUI interaction
+            in the reconstruction pipeline of IVAS/APSuite.
 
         .. _/NXapm/ENTRY/atom_probe/ion_filtering/sequence_index-field:
 
         .. index:: sequence_index (field)
 
-        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` 
+        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXprocess/sequence_index-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/ion_filtering/evaporation_id_included-field:
@@ -1891,8 +2023,10 @@ NXapm
 
         **evaporation_id_included**: (required) :ref:`NX_BOOLEAN <NX_BOOLEAN>` (Rank: 1, Dimensions: [n_ions]) 
 
-          Bitmask which is set to true if the ion 
-          is considered and false otherwise.
+          .. collapse:: Bitmask which is set to true if the ion ...
+
+              Bitmask which is set to true if the ion
+              is considered and false otherwise.
 
         .. _/NXapm/ENTRY/atom_probe/ion_filtering/PROGRAM-group:
 
@@ -1903,30 +2037,32 @@ NXapm
 
           .. index:: program (field)
 
-          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/ion_filtering/PROGRAM/program@version-attribute:
 
             .. index:: version (field attribute)
 
-            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
       .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl_correction-group:
 
       **voltage_and_bowl_correction**: (recommended) :ref:`NXprocess` 
 
-        Data post-processing step to correct for ion impact
-        position flight path differences, detector biases,
-        and nonlinearities. This step is usually performed
-        with commercial software.
+        .. collapse:: Data post-processing step to correct for ion impact ...
+
+            Data post-processing step to correct for ion impact
+            position flight path differences, detector biases,
+            and nonlinearities. This step is usually performed
+            with commercial software.
 
         .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl_correction/sequence_index-field:
 
         .. index:: sequence_index (field)
 
-        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` 
+        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXprocess/sequence_index-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl_correction/raw_tof-field:
@@ -1935,8 +2071,10 @@ NXapm
 
         **raw_tof**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n_ions]) {units=\ :ref:`NX_TIME <NX_TIME>`} 
 
-          Raw time-of-flight data as read out from the acquisition software
-          if these data are available and accessible.
+          .. collapse:: Raw time-of-flight data as read out from the acquisition software ...
+
+              Raw time-of-flight data as read out from the acquisition software
+              if these data are available and accessible.
 
         .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl_correction/calibrated_tof-field:
 
@@ -1955,54 +2093,58 @@ NXapm
 
           .. index:: program (field)
 
-          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl_correction/PROGRAM/program@version-attribute:
 
             .. index:: version (field attribute)
 
-            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
         .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl_correction/tof_calibration-group:
 
         **tof_calibration**: (recommended) :ref:`NXcollection` 
 
-          The key idea and algorithm of the voltage-and-bowl correction is
-          qualitatively similar for instruments of different manufacturers
-          or research groups.
+          .. collapse:: The key idea and algorithm of the voltage-and-bowl correction is ...
 
-          Specific differences exists though in the form of different
-          calibration models. For now we do not wish to resolve or
-          generalize these differences. Rather the purpose of this collection
-          is to provide a container where model-specific parameters
-          and calibration models can be stored if users know these
-          for sure.
+              The key idea and algorithm of the voltage-and-bowl correction is
+              qualitatively similar for instruments of different manufacturers
+              or research groups.
 
-          For AMETEK LEAP instruments this should be the place for
-          storing initial calibration values. These values are
-          accessible normally only by AMETEK service engineers.
-          They use these for calibrating the detector and instrument.
+              Specific differences exists though in the form of different
+              calibration models. For now we do not wish to resolve or
+              generalize these differences. Rather the purpose of this collection
+              is to provide a container where model-specific parameters
+              and calibration models can be stored if users know these
+              for sure.
 
-          Users can also use this NXcollection for storing the
-          iteratively identified calibrations which scientists
-          will see displayed in e.g. APSuite while they execute
-          the voltage-and-bowl correction as a part of the
-          reconstruction pipeline in APSuite.
+              For AMETEK LEAP instruments this should be the place for
+              storing initial calibration values. These values are
+              accessible normally only by AMETEK service engineers.
+              They use these for calibrating the detector and instrument.
+
+              Users can also use this NXcollection for storing the
+              iteratively identified calibrations which scientists
+              will see displayed in e.g. APSuite while they execute
+              the voltage-and-bowl correction as a part of the
+              reconstruction pipeline in APSuite.
 
       .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion-group:
 
       **mass_to_charge_conversion**: (recommended) :ref:`NXprocess` 
 
-        Data post-processing step in which calibrated time-of-flight data
-        (ToF) are interpreted into mass-to-charge-state ratios.
+        .. collapse:: Data post-processing step in which calibrated time-of-flight data ...
+
+            Data post-processing step in which calibrated time-of-flight data
+            (ToF) are interpreted into mass-to-charge-state ratios.
 
         .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/sequence_index-field:
 
         .. index:: sequence_index (field)
 
-        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` 
+        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXprocess/sequence_index-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/mass_to_charge-field:
@@ -2022,14 +2164,14 @@ NXapm
 
           .. index:: program (field)
 
-          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/PROGRAM/program@version-attribute:
 
             .. index:: version (field attribute)
 
-            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
         .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/parameter-group:
@@ -2042,19 +2184,21 @@ NXapm
 
       **reconstruction**: (recommended) :ref:`NXprocess` 
 
-        Data post-processing step to create a tomographic reconstruction
-        of the specimen based on selected calibrated ion hit positions,
-        the evaporation sequence, and voltage curve data.
-        Very often scientists use own software scripts according to
-        published procedures, so-called reconstruction protocols,
-        i.e. numerical recipes how to compute x, y, z atomic positions
-        from the input data.
+        .. collapse:: Data post-processing step to create a tomographic reconstruction ...
+
+            Data post-processing step to create a tomographic reconstruction
+            of the specimen based on selected calibrated ion hit positions,
+            the evaporation sequence, and voltage curve data.
+            Very often scientists use own software scripts according to
+            published procedures, so-called reconstruction protocols,
+            i.e. numerical recipes how to compute x, y, z atomic positions
+            from the input data.
 
         .. _/NXapm/ENTRY/atom_probe/reconstruction/sequence_index-field:
 
         .. index:: sequence_index (field)
 
-        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` 
+        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXprocess/sequence_index-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/reconstruction/protocol_name-field:
@@ -2063,9 +2207,11 @@ NXapm
 
         **protocol_name**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-          Qualitative statement about which reconstruction protocol was used.
+          .. collapse:: Qualitative statement about which reconstruction protocol was used. ...
 
-          Any of these values: ``bas`` | ``geiser`` | ``gault`` | ``cameca`` | ``other``
+              Qualitative statement about which reconstruction protocol was used.
+
+              Any of these values: ``bas`` | ``geiser`` | ``gault`` | ``cameca`` | ``other``
 
         .. _/NXapm/ENTRY/atom_probe/reconstruction/parameter-field:
 
@@ -2073,11 +2219,13 @@ NXapm
 
         **parameter**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-          Different reconstruction protocols exist. Although these approaches
-          are qualitatively similar, each protocol uses different parameters
-          (and interprets these differently). The source code to IVAS/APSuite
-          is not open. For now users should store reconstruction parameter
-          in a collection.
+          .. collapse:: Different reconstruction protocols exist. Although these approaches ...
+
+              Different reconstruction protocols exist. Although these approaches
+              are qualitatively similar, each protocol uses different parameters
+              (and interprets these differently). The source code to IVAS/APSuite
+              is not open. For now users should store reconstruction parameter
+              in a collection.
 
         .. _/NXapm/ENTRY/atom_probe/reconstruction/crystallographic_calibration-field:
 
@@ -2085,11 +2233,13 @@ NXapm
 
         **crystallographic_calibration**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-          Different strategies for crystallographic calibration of the
-          reconstruction are possible. The field is required and details
-          should be specified in free-text at least. If the not crystallographic
-          calibration was performed the field should be filled with the n/a,
-          meaning not applied.
+          .. collapse:: Different strategies for crystallographic calibration of the ...
+
+              Different strategies for crystallographic calibration of the
+              reconstruction are possible. The field is required and details
+              should be specified in free-text at least. If the not crystallographic
+              calibration was performed the field should be filled with the n/a,
+              meaning not applied.
 
         .. _/NXapm/ENTRY/atom_probe/reconstruction/reconstructed_positions-field:
 
@@ -2097,8 +2247,10 @@ NXapm
 
         **reconstructed_positions**: (required) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 2, Dimensions: [n_ions, 3]) {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
-          Three-dimensional reconstructed positions of the ions.
-          Interleaved array of x, y, z positions in the specimen space.
+          .. collapse:: Three-dimensional reconstructed positions of the ions. ...
+
+              Three-dimensional reconstructed positions of the ions.
+              Interleaved array of x, y, z positions in the specimen space.
 
         .. _/NXapm/ENTRY/atom_probe/reconstruction/xdmf_topology-field:
 
@@ -2106,11 +2258,13 @@ NXapm
 
         **xdmf_topology**: (required) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [36]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-          Six equally formatted sextets chained together. For each
-          sextett the first entry is an XDMF primitive topology
-          key (here 5 for polygon), the second entry the XDMF primitive
-          count value (here 4 because each face is a quad).
-          The remaining four values are the vertex indices.
+          .. collapse:: Six equally formatted sextets chained together. For each ...
+
+              Six equally formatted sextets chained together. For each
+              sextett the first entry is an XDMF primitive topology
+              key (here 5 for polygon), the second entry the XDMF primitive
+              count value (here 4 because each face is a quad).
+              The remaining four values are the vertex indices.
 
         .. _/NXapm/ENTRY/atom_probe/reconstruction/PROGRAM-group:
 
@@ -2121,14 +2275,14 @@ NXapm
 
           .. index:: program (field)
 
-          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/reconstruction/PROGRAM/program@version-attribute:
 
             .. index:: version (field attribute)
 
-            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
         .. _/NXapm/ENTRY/atom_probe/reconstruction/visualization-group:
@@ -2142,20 +2296,24 @@ NXapm
 
           **xdmf_topology**: (required) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_topology]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-            An array of triplets of integers which can serve as a supplementary
-            array for Paraview to display the reconstructed dataset.
-            The XDMF primitive type is here 1, the number of primitives 1 per
-            triplet, the last integer in each triplet is the identifier of
-            each point starting from zero.
+            .. collapse:: An array of triplets of integers which can serve as a supplementary ...
+
+                An array of triplets of integers which can serve as a supplementary
+                array for Paraview to display the reconstructed dataset.
+                The XDMF primitive type is here 1, the number of primitives 1 per
+                triplet, the last integer in each triplet is the identifier of
+                each point starting from zero.
 
         .. _/NXapm/ENTRY/atom_probe/reconstruction/naive_point_cloud_density_map-group:
 
         **naive_point_cloud_density_map**: (required) :ref:`NXprocess` 
 
-          To get a first overview of the reconstructed dataset,
-          the format conversion computes a simple 3d histogram
-          of the ion density using one nanometer cubic bins without
-          applying smoothening algorithms on this histogram.
+          .. collapse:: To get a first overview of the reconstructed dataset, ...
+
+              To get a first overview of the reconstructed dataset,
+              the format conversion computes a simple 3d histogram
+              of the ion density using one nanometer cubic bins without
+              applying smoothening algorithms on this histogram.
 
           .. _/NXapm/ENTRY/atom_probe/reconstruction/naive_point_cloud_density_map/PROGRAM-group:
 
@@ -2166,36 +2324,38 @@ NXapm
 
             .. index:: program (field)
 
-            **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
               .. _/NXapm/ENTRY/atom_probe/reconstruction/naive_point_cloud_density_map/PROGRAM/program@version-attribute:
 
               .. index:: version (field attribute)
 
-              **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+              **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
           .. _/NXapm/ENTRY/atom_probe/reconstruction/naive_point_cloud_density_map/DATA-group:
 
           **DATA**: (required) :ref:`NXdata` 
 
-            A default three-dimensional histogram of the total
-            number of ions in each bin obtained via using a rectangular
-            transfer function.
+            .. collapse:: A default three-dimensional histogram of the total ...
+
+                A default three-dimensional histogram of the total
+                number of ions in each bin obtained via using a rectangular
+                transfer function.
 
             .. _/NXapm/ENTRY/atom_probe/reconstruction/naive_point_cloud_density_map/DATA@signal-attribute:
 
             .. index:: signal (group attribute)
 
-            **@signal**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **@signal**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata@signal-attribute>`
 
 
             .. _/NXapm/ENTRY/atom_probe/reconstruction/naive_point_cloud_density_map/DATA@axes-attribute:
 
             .. index:: axes (group attribute)
 
-            **@axes**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **@axes**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata@axes-attribute>`
 
 
             .. _/NXapm/ENTRY/atom_probe/reconstruction/naive_point_cloud_density_map/DATA@AXISNAME_indices-attribute:
@@ -2209,14 +2369,14 @@ NXapm
 
             .. index:: title (field)
 
-            **title**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **title**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata/title-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/reconstruction/naive_point_cloud_density_map/DATA/data_counts-field:
 
             .. index:: data_counts (field)
 
-            **data_counts**: (required) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 3, Dimensions: [n_z, n_y, n_x]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+            **data_counts**: (required) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 3, Dimensions: [n_z, n_y, n_x]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} :ref:`⤆ </NXdata/DATA-field>`
 
               Array of counts for each bin.
 
@@ -2269,20 +2429,22 @@ NXapm
 
       **ranging**: (recommended) :ref:`NXprocess` 
 
-        Data post-processing step in which elemental, isotopic,
-        and/or molecular identities are assigned to the ions.
-        The documentation of these steps is based on ideas
-        described in the literature:
+        .. collapse:: Data post-processing step in which elemental, isotopic, ...
 
-        * `M. K. Miller <https://doi.org/10.1002/sia.1719>`_  
-        * `D. Haley et al. <https://doi.org/10.1017/S1431927620024290>`_  
-        * `M. Kühbach et al. <https://doi.org/10.1017/S1431927621012241>`_
+            Data post-processing step in which elemental, isotopic,
+            and/or molecular identities are assigned to the ions.
+            The documentation of these steps is based on ideas
+            described in the literature:
+
+            * `M. K. Miller <https://doi.org/10.1002/sia.1719>`_
+            * `D. Haley et al. <https://doi.org/10.1017/S1431927620024290>`_
+            * `M. Kühbach et al. <https://doi.org/10.1017/S1431927621012241>`_
 
         .. _/NXapm/ENTRY/atom_probe/ranging/sequence_index-field:
 
         .. index:: sequence_index (field)
 
-        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` 
+        **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXprocess/sequence_index-field>`
 
 
         .. _/NXapm/ENTRY/atom_probe/ranging/number_of_ion_types-field:
@@ -2291,10 +2453,12 @@ NXapm
 
         **number_of_ion_types**: (required) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-          How many ion types are distinguished.
-          If no ranging was performed each ion is of the special unknown type.
-          The iontype ID of this unknown type is 0 which is a reserve value.
-          Consequently, iontypes start counting from 1.
+          .. collapse:: How many ion types are distinguished. ...
+
+              How many ion types are distinguished.
+              If no ranging was performed each ion is of the special unknown type.
+              The iontype ID of this unknown type is 0 which is a reserve value.
+              Consequently, iontypes start counting from 1.
 
         .. _/NXapm/ENTRY/atom_probe/ranging/maximum_number_of_atoms_per_molecular_ion-field:
 
@@ -2302,9 +2466,11 @@ NXapm
 
         **maximum_number_of_atoms_per_molecular_ion**: (required) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-          Assumed maximum value that suffices to store all relevant
-          molecular ions, even the most complicated ones.
-          Currently a value of 32 is used.
+          .. collapse:: Assumed maximum value that suffices to store all relevant ...
+
+              Assumed maximum value that suffices to store all relevant
+              molecular ions, even the most complicated ones.
+              Currently a value of 32 is used.
 
         .. _/NXapm/ENTRY/atom_probe/ranging/PROGRAM-group:
 
@@ -2315,24 +2481,26 @@ NXapm
 
           .. index:: program (field)
 
-          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+          **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/ranging/PROGRAM/program@version-attribute:
 
             .. index:: version (field attribute)
 
-            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
         .. _/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution-group:
 
         **mass_to_charge_distribution**: (recommended) :ref:`NXprocess` 
 
-          Specifies the computation of the mass-to-charge histogram.
-          Usually mass-to-charge values are studied as an ensemble quantity,
-          specifically these values are binned.
-          This (NXprocess) stores the settings of this binning.
+          .. collapse:: Specifies the computation of the mass-to-charge histogram. ...
+
+              Specifies the computation of the mass-to-charge histogram.
+              Usually mass-to-charge values are studied as an ensemble quantity,
+              specifically these values are binned.
+              This (NXprocess) stores the settings of this binning.
 
           .. _/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/range_minmax-field:
 
@@ -2359,35 +2527,37 @@ NXapm
 
             .. index:: program (field)
 
-            **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
               .. _/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/PROGRAM/program@version-attribute:
 
               .. index:: version (field attribute)
 
-              **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+              **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
           .. _/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/mass_spectrum-group:
 
           **mass_spectrum**: (required) :ref:`NXdata` 
 
-            A default histogram aka mass spectrum of
-            the mass-to-charge-state ratio values.
+            .. collapse:: A default histogram aka mass spectrum of ...
+
+                A default histogram aka mass spectrum of
+                the mass-to-charge-state ratio values.
 
             .. _/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/mass_spectrum@signal-attribute:
 
             .. index:: signal (group attribute)
 
-            **@signal**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **@signal**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata@signal-attribute>`
 
 
             .. _/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/mass_spectrum@axes-attribute:
 
             .. index:: axes (group attribute)
 
-            **@axes**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **@axes**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata@axes-attribute>`
 
 
             .. _/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/mass_spectrum@AXISNAME_indices-attribute:
@@ -2401,14 +2571,14 @@ NXapm
 
             .. index:: title (field)
 
-            **title**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **title**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata/title-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/mass_spectrum/data_counts-field:
 
             .. index:: data_counts (field)
 
-            **data_counts**: (required) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_bins]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+            **data_counts**: (required) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_bins]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} :ref:`⤆ </NXdata/DATA-field>`
 
               Array of counts for each bin.
 
@@ -2416,7 +2586,7 @@ NXapm
 
               .. index:: long_name (field attribute)
 
-              **@long_name**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+              **@long_name**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata/DATA@long_name-attribute>`
 
 
             .. _/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/mass_spectrum/axis_mass_to_charge-field:
@@ -2438,8 +2608,10 @@ NXapm
 
         **background_quantification**: (recommended) :ref:`NXprocess` 
 
-          Details of the background model which was used to
-          correct the total counts per bin into counts.
+          .. collapse:: Details of the background model which was used to ...
+
+              Details of the background model which was used to
+              correct the total counts per bin into counts.
 
           .. _/NXapm/ENTRY/atom_probe/ranging/background_quantification/PROGRAM-group:
 
@@ -2450,22 +2622,24 @@ NXapm
 
             .. index:: program (field)
 
-            **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
               .. _/NXapm/ENTRY/atom_probe/ranging/background_quantification/PROGRAM/program@version-attribute:
 
               .. index:: version (field attribute)
 
-              **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+              **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
         .. _/NXapm/ENTRY/atom_probe/ranging/peak_search_and_deconvolution-group:
 
         **peak_search_and_deconvolution**: (recommended) :ref:`NXprocess` 
 
-          How where peaks in the background-corrected in the histogram
-          of mass-to-charge-state ratio values identified?
+          .. collapse:: How where peaks in the background-corrected in the histogram ...
+
+              How where peaks in the background-corrected in the histogram
+              of mass-to-charge-state ratio values identified?
 
           .. _/NXapm/ENTRY/atom_probe/ranging/peak_search_and_deconvolution/PROGRAM-group:
 
@@ -2476,14 +2650,14 @@ NXapm
 
             .. index:: program (field)
 
-            **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
               .. _/NXapm/ENTRY/atom_probe/ranging/peak_search_and_deconvolution/PROGRAM/program@version-attribute:
 
               .. index:: version (field attribute)
 
-              **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+              **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
           .. _/NXapm/ENTRY/atom_probe/ranging/peak_search_and_deconvolution/PEAK-group:
@@ -2495,14 +2669,14 @@ NXapm
 
             .. index:: label (field)
 
-            **label**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+            **label**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpeak/label-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/ranging/peak_search_and_deconvolution/PEAK/peak_model-field:
 
             .. index:: peak_model (field)
 
-            **peak_model**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **peak_model**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpeak/peak_model-field>`
 
               THIS DOCSTRING NEEDS CLARIFICATION.
 
@@ -2510,8 +2684,10 @@ NXapm
 
         **peak_identification**: (recommended) :ref:`NXprocess` 
 
-          Details about how peaks, with taking into account
-          error models, were interpreted as ion types or not.
+          .. collapse:: Details about how peaks, with taking into account ...
+
+              Details about how peaks, with taking into account
+              error models, were interpreted as ion types or not.
 
           .. _/NXapm/ENTRY/atom_probe/ranging/peak_identification/PROGRAM-group:
 
@@ -2522,14 +2698,14 @@ NXapm
 
             .. index:: program (field)
 
-            **program**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+            **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
               .. _/NXapm/ENTRY/atom_probe/ranging/peak_identification/PROGRAM/program@version-attribute:
 
               .. index:: version (field attribute)
 
-              **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+              **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
           .. _/NXapm/ENTRY/atom_probe/ranging/peak_identification/ION-group:
@@ -2541,14 +2717,14 @@ NXapm
 
             .. index:: isotope_vector (field)
 
-            **isotope_vector**: (required) :ref:`NX_UINT <NX_UINT>` 
+            **isotope_vector**: (required) :ref:`NX_UINT <NX_UINT>` :ref:`⤆ </NXion/isotope_vector-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/ranging/peak_identification/ION/charge_state-field:
 
             .. index:: charge_state (field)
 
-            **charge_state**: (required) :ref:`NX_INT <NX_INT>` 
+            **charge_state**: (required) :ref:`NX_INT <NX_INT>` :ref:`⤆ </NXion/charge_state-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/ranging/peak_identification/ION/mass_to_charge_range-field:
@@ -2562,14 +2738,14 @@ NXapm
 
             .. index:: nuclid_list (field)
 
-            **nuclid_list**: (recommended) :ref:`NX_UINT <NX_UINT>` 
+            **nuclid_list**: (recommended) :ref:`NX_UINT <NX_UINT>` :ref:`⤆ </NXion/nuclid_list-field>`
 
 
             .. _/NXapm/ENTRY/atom_probe/ranging/peak_identification/ION/name-field:
 
             .. index:: name (field)
 
-            **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+            **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXion/name-field>`
 
 
 
