@@ -77,7 +77,8 @@ def test_get_node_at_nxdl_path():
     assert node.attrib["type"] == "NXem_msr"
 
     node = nexus.get_node_at_nxdl_path(
-        "/ENTRY/measurement/EVENT_DATA_EM_SET/EVENT_DATA_EM/IMAGE_C_SET/hyperstack", elem=elem
+        "/ENTRY/measurement/EVENT_DATA_EM_SET/EVENT_DATA_EM/IMAGE_C_SET/hyperstack",
+        elem=elem,
     )
     assert node.attrib["type"] == "NXdata"
 
@@ -87,9 +88,7 @@ def test_get_node_at_nxdl_path():
     )
     assert node.attrib["name"] == "AXISNAME_indices"
 
-    node = nexus.get_node_at_nxdl_path(
-        "/ENTRY/COORDINATE_SYSTEM_SET", elem=elem
-    )
+    node = nexus.get_node_at_nxdl_path("/ENTRY/COORDINATE_SYSTEM_SET", elem=elem)
     assert node.attrib["type"] == "NXcoordinate_system_set"
 
     nxdl_file_path = os.path.join(
