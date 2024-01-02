@@ -1,4 +1,4 @@
-# Uploading NeXus files to NOMAD
+# Storing experimental geometries
 
 !!! danger "Work in progress"
 

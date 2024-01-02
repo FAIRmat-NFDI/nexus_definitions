@@ -1,15 +1,31 @@
 # A primer on NeXus
 
+!!! danger "Work in progress"
+
+    This part of the documentation is still being written and it might be confusing or incomplete.
+
 NeXus is is a description of a common data exchange format initially developed for neutron, X-ray, and muon experiments. Within FAIRmat we extensively extended the format to cover a range of experiments with major support for APM, ARPES, XPS, and optical spectroscpy but we also give advice and guidance for developing standards for other formats as well.
+
+!!! info "NeXus as a tool for FAIR data"
+
+    NeXus is supported be the research data management platform NOMAD.
+    Experimental data following an NeXus application definition can easily be uploaded and is recognized by NOMAD's search system.
+    If you want to learn more about uploading NeXus data to NOMAD, please refer to the [NeXus to nomad](./nexus-to-nomad.md) tutorial
+    of this documentation.
+    Accordingly, if you want to build data according to the FAIR principles, you can think of NeXus fulfilling the interoperability and
+    reproducibility part and a research data management platform like NOMAD the findable and accessible part.
 
 ## Who is this tutorial for?
 
-The document is for people not familiar with NeXus to grasp the basic principles and common terms for NeXus.
+The document is for people who want to standardize their research data and want to understand the modelling principles
+of NeXus definitions or who want to build their own application definition for an experiment.
+We cover the basic principles and common principles of NeXus, here.
+For a more detailed description we recommend reading the [official NeXus documentation](...).
 
-## What should people know before this tutorial?
+## What should you should know before this tutorial?
 
-- They should have a basic understanding what an hdf5 file is and how to write it
-- They should have a basic understanding of FAIR data [wilkinson et al](...)
+- You should have a basic understanding what an hdf5 file is and how to write it
+- You should have a basic understanding of FAIR data [wilkinson et al](...)
 
 ## What you will know at the end of this tutorial?
 
@@ -17,6 +33,7 @@ You will have
 
 - a basic understanding how to write a file according to a NeXus standard
 - an idea of how to start writing an NeXus application definition for your domain of research
+- a basic understanding of common NeXus terminology
 
 
 Concept of this tutorial:

@@ -1,8 +1,13 @@
-# Utilizing Multiple Application Definitions in NeXus
+# Multiple Application Definitions in NeXus
+
+!!! danger "Work in progress"
+
+    This part of the documentation is still being written and it might be confusing or incomplete.
 
 This tutorial showcases how to employ multiple application definitions in NeXus for creating a file that conforms to various definitions simultaneously.
 
 !!! info "Prerequisites"
+
     Familiarity with the basics of NeXus and its application definitions is required. For an introduction to NeXus, please refer to the [basic documentation](nexus-primer.md).
 
 In a laboratory setting, the data we collect can vary significantly depending on the experiment's specific setup. Consider, for instance, an experiment characterized using the `NXexperiment` application definition. Suppose we want to enhance this experiment by incorporating energy resolution details. A straightforward approach might involve creating a specialized sub-application definition, like `NXexperiment_energy_resolved`, to include metadata about the experiment's energy resolution.

@@ -1,4 +1,4 @@
-# Uploading NeXus files to NOMAD
+# Writing a Simple Application Definition
 
 !!! danger "Work in progress"
 

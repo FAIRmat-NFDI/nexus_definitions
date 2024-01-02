@@ -1,4 +1,4 @@
-# Uploading NeXus files to NOMAD
+# Converting research data to NeXus
 
 !!! danger "Work in progress"
 
