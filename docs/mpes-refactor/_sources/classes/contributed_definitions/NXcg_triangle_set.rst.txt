@@ -13,11 +13,11 @@ NXcg_triangle_set
 
 **Status**:
 
-  base class, extends :ref:`NXobject`
+  base class, extends :ref:`NXcg_primitive_set`
 
 **Description**:
 
-  Computational geometry description of a set of triangles in Euclidean space.
+  Computational geometry description of a set of triangles.
 
 **Symbols**:
 
@@ -30,63 +30,19 @@ NXcg_triangle_set
   **n_unique**: The number of unique vertices supporting the triangles.
 
 **Groups cited**:
-  :ref:`NXcg_face_list_data_structure`, :ref:`NXcg_hexahedron_set`, :ref:`NXcg_unit_normal_set`, :ref:`NXtransformations`
+  :ref:`NXcg_face_list_data_structure`
 
-.. index:: NXtransformations (base class); used in base class, NXcg_face_list_data_structure (base class); used in base class, NXcg_unit_normal_set (base class); used in base class, NXcg_hexahedron_set (base class); used in base class
+.. index:: NXcg_face_list_data_structure (base class); used in base class
 
 **Structure**:
-
-  .. _/NXcg_triangle_set/dimensionality-field:
-
-  .. index:: dimensionality (field)
-
-  **dimensionality**: (optional) :ref:`NX_POSINT <NX_POSINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
-
-
-  .. _/NXcg_triangle_set/cardinality-field:
-
-  .. index:: cardinality (field)
-
-  **cardinality**: (optional) :ref:`NX_POSINT <NX_POSINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
-
 
   .. _/NXcg_triangle_set/number_of_unique_vertices-field:
 
   .. index:: number_of_unique_vertices (field)
 
-  **number_of_unique_vertices**: (optional) :ref:`NX_POSINT <NX_POSINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **number_of_unique_vertices**: (optional) :ref:`NX_INT <NX_INT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-
-  .. _/NXcg_triangle_set/identifier_offset-field:
-
-  .. index:: identifier_offset (field)
-
-  **identifier_offset**: (optional) :ref:`NX_INT <NX_INT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
-
-    Integer which specifies the first index to be used for distinguishing
-    triangles. Identifiers are defined either implicitly
-    or explicitly. For implicit indexing the identifiers are defined on the
-    interval [identifier_offset, identifier_offset+c-1].
-    For explicit indexing the identifier array has to be defined.
-
-    The identifier_offset field can for example be used to communicate if the
-    identifiers are expected to start from 1 (referred to as Fortran-/Matlab-)
-    or from 0 (referred to as C-, Python-style index notation) respectively.
-
-  .. _/NXcg_triangle_set/identifier-field:
-
-  .. index:: identifier (field)
-
-  **identifier**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 1, Dimensions: [c]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
-
-    Integer used to distinguish triangles for explicit indexing.
-
-  .. _/NXcg_triangle_set/area-field:
-
-  .. index:: area (field)
-
-  **area**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [c]) {units=\ :ref:`NX_AREA <NX_AREA>`} 
-
+    Number of unique vertices in the triangle set.
 
   .. _/NXcg_triangle_set/edge_length-field:
 
@@ -94,9 +50,12 @@ NXcg_triangle_set
 
   **edge_length**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [c, 3]) {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
-    Array of edge length values. For each triangle the edge length is
-    reported for the edges traversed according to the sequence
-    in which vertices are indexed in triangles.
+    .. collapse:: Length of the edges of each triangle. ...
+
+        Length of the edges of each triangle.
+
+        For each triangle values are reported via traversing
+        the vertices in the sequence as these are defined.
 
   .. _/NXcg_triangle_set/interior_angle-field:
 
@@ -104,52 +63,33 @@ NXcg_triangle_set
 
   **interior_angle**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [c, 3]) {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
 
-    Array of interior angle values. For each triangle the angle is
-    reported for the angle opposite to the edges which are traversed
-    according to the sequence in which vertices are indexed in triangles.
+    .. collapse:: Interior angles of each triangle. ...
 
-  .. _/NXcg_triangle_set/center-field:
+        Interior angles of each triangle.
 
-  .. index:: center (field)
-
-  **center**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [c, d]) {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
-
-    The center of mass of each polygon.
-
-  .. _/NXcg_triangle_set/TRANSFORMATIONS-group:
-
-  **TRANSFORMATIONS**: (optional) :ref:`NXtransformations` 
-
-    Reference to or definition of a coordinate system with
-    which the qualifiers and primitive data are interpretable.
+        For each triangle values are reported for the angle opposite
+        to the respective edges in the sequence how vertices are defined.
 
   .. _/NXcg_triangle_set/triangles-group:
 
   **triangles**: (optional) :ref:`NXcg_face_list_data_structure` 
 
-    A simple approach to describe the entire set of triangles when the
-    main intention is to store the shape of the triangles for visualization.
+    .. collapse:: Combined storage of all primitives of all triangles. ...
 
-  .. _/NXcg_triangle_set/vertex_normal-group:
+        Combined storage of all primitives of all triangles.
 
-  **vertex_normal**: (optional) :ref:`NXcg_unit_normal_set` 
+        This description resembles the typical representation of primitives
+        in file formats such as OFF, PLY, VTK, or STL.
 
+  .. _/NXcg_triangle_set/triangleID-group:
 
-  .. _/NXcg_triangle_set/edge_normal-group:
+  **triangleID**: (optional) :ref:`NXcg_face_list_data_structure` 
 
-  **edge_normal**: (optional) :ref:`NXcg_unit_normal_set` 
+    .. collapse:: Individual storage of each triangle. ...
 
-
-  .. _/NXcg_triangle_set/face_normal-group:
-
-  **face_normal**: (optional) :ref:`NXcg_unit_normal_set` 
-
-
-  .. _/NXcg_triangle_set/bounding_box-group:
-
-  **bounding_box**: (optional) :ref:`NXcg_hexahedron_set` 
-
-    Axis-aligned or (approximate) (optimal) bounding boxes to each polygon.
+        Individual storage of each triangle.
+        Users are advised that using such individual storage of primitives
+        may be less storage efficient than creating a combined storage.
 
 
 Hypertext Anchors
@@ -159,21 +99,11 @@ List of hypertext anchors for all groups, fields,
 attributes, and links defined in this class.
 
 
-* :ref:`/NXcg_triangle_set/area-field </NXcg_triangle_set/area-field>`
-* :ref:`/NXcg_triangle_set/bounding_box-group </NXcg_triangle_set/bounding_box-group>`
-* :ref:`/NXcg_triangle_set/cardinality-field </NXcg_triangle_set/cardinality-field>`
-* :ref:`/NXcg_triangle_set/center-field </NXcg_triangle_set/center-field>`
-* :ref:`/NXcg_triangle_set/dimensionality-field </NXcg_triangle_set/dimensionality-field>`
 * :ref:`/NXcg_triangle_set/edge_length-field </NXcg_triangle_set/edge_length-field>`
-* :ref:`/NXcg_triangle_set/edge_normal-group </NXcg_triangle_set/edge_normal-group>`
-* :ref:`/NXcg_triangle_set/face_normal-group </NXcg_triangle_set/face_normal-group>`
-* :ref:`/NXcg_triangle_set/identifier-field </NXcg_triangle_set/identifier-field>`
-* :ref:`/NXcg_triangle_set/identifier_offset-field </NXcg_triangle_set/identifier_offset-field>`
 * :ref:`/NXcg_triangle_set/interior_angle-field </NXcg_triangle_set/interior_angle-field>`
 * :ref:`/NXcg_triangle_set/number_of_unique_vertices-field </NXcg_triangle_set/number_of_unique_vertices-field>`
-* :ref:`/NXcg_triangle_set/TRANSFORMATIONS-group </NXcg_triangle_set/TRANSFORMATIONS-group>`
+* :ref:`/NXcg_triangle_set/triangleID-group </NXcg_triangle_set/triangleID-group>`
 * :ref:`/NXcg_triangle_set/triangles-group </NXcg_triangle_set/triangles-group>`
-* :ref:`/NXcg_triangle_set/vertex_normal-group </NXcg_triangle_set/vertex_normal-group>`
 
 **NXDL Source**:
   https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXcg_triangle_set.nxdl.xml

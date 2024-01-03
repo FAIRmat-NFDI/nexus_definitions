@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>2.3.3.3.165. NXsimilarity_grouping &#8212; NeXus-FAIRmat v2022.07 documentation</title>
+    <title>2.3.3.3.192. NXsimilarity_grouping &#8212; NeXus-FAIRmat v2022.07 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=f9822eda" />
     <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
@@ -23,8 +23,8 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="next" title="2.3.3.3.166. NXsingle_crystal" href="NXsingle_crystal.html" />
-    <link rel="prev" title="2.3.3.3.164. NXserialized" href="NXserialized.html" />
+    <link rel="next" title="2.3.3.3.193. NXsingle_crystal" href="NXsingle_crystal.html" />
+    <link rel="prev" title="2.3.3.3.191. NXserialized" href="NXserialized.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -42,14 +42,15 @@
           <div class="body" role="main">
             
   <section id="nxsimilarity-grouping">
-<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.165. </span>NXsimilarity_grouping<a class="headerlink" href="#nxsimilarity-grouping" title="Link to this heading">¶</a></h1>
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.192. </span>NXsimilarity_grouping<a class="headerlink" href="#nxsimilarity-grouping" title="Link to this heading">¶</a></h1>
 <p><strong>Status</strong>:</p>
 <blockquote>
 <div><p>base class, extends <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
 </div></blockquote>
 <p><strong>Description</strong>:</p>
 <blockquote>
-<div><p>Metadata to the results of a similarity grouping analysis.</p>
+<div><details class="summary-metadata-to-the-results-of-a-similarity-grouping-analysis">
+<summary>Metadata to the results of a similarity grouping analysis. ...</summary><p>Metadata to the results of a similarity grouping analysis.</p>
 <p>Similarity grouping analyses can be supervised segmentation or machine learning
 clustering algorithms. These are routine methods which partition the member of
 a set of objects/geometric primitives into (sub-)groups, features of
@@ -61,7 +62,7 @@ analysis applied to a set in which objects are either categorized as noise
 or belonging to a cluster.
 As the results of the analysis each similarity group, here called feature
 aka object can get a number of numerical and/or categorical labels.</p>
-</div></blockquote>
+</details></div></blockquote>
 <p><strong>Symbols</strong>:</p>
 <blockquote>
 <div><p>The symbols used in the schema to specify e.g. dimensions of arrays.</p>
@@ -90,29 +91,32 @@ aka object can get a number of numerical and/or categorical labels.</p>
 </div></blockquote>
 <p id="index-5"><span id="nxsimilarity-grouping-identifier-offset-field"></span><strong>identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 1, Dimensions: [n_lbl_num]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
-<div><p>Which identifier is the first to be used to label a cluster.</p>
+<div><details class="summary-which-identifier-is-the-first-to-be-used-to-label-a-cluster">
+<summary>Which identifier is the first to be used to label a cluster. ...</summary><p>Which identifier is the first to be used to label a cluster.</p>
 <p>The value should be chosen in such a way that special values can be resolved:
 * identifier_offset-1 indicates an object belongs to no cluster.
 * identifier_offset-2 indicates an object belongs to the noise category.
 Setting for instance identifier_offset to 1 recovers the commonly used
 case that objects of the noise category get values to -1 and unassigned points to 0.
 Numerical identifier have to be strictly increasing.</p>
-</div></blockquote>
+</details></div></blockquote>
 <p id="index-6"><span id="nxsimilarity-grouping-numerical-label-field"></span><strong>numerical_label</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 2, Dimensions: [c, n_lbl_num]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
-<div><p>Matrix of numerical label for each member in the set.
+<div><details class="summary-matrix-of-numerical-label-for-each-member-in-the-set">
+<summary>Matrix of numerical label for each member in the set. ...</summary><p>Matrix of numerical label for each member in the set.
 For classical clustering algorithms this can for instance
 encode the cluster_identifier.</p>
-</div></blockquote>
+</details></div></blockquote>
 <p id="index-7"><span id="nxsimilarity-grouping-categorical-label-field"></span><strong>categorical_label</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> (Rank: 2, Dimensions: [c, n_lbl_cat])</p>
 <blockquote>
 <div><p>Matrix of categorical attribute data for each member in the set.</p>
 </div></blockquote>
 <p id="nxsimilarity-grouping-statistics-group"><strong>statistics</strong>: (optional) <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a></p>
 <blockquote>
-<div><p>In addition to the detailed storage which members was grouped to which
+<div><details class="summary-in-addition-to-the-detailed-storage-which-members-was-grouped-to-which">
+<summary>In addition to the detailed storage which members was grouped to which ...</summary><p>In addition to the detailed storage which members was grouped to which
 feature/group summary statistics are stored under this group.</p>
-<p id="index-8"><span id="nxsimilarity-grouping-statistics-number-of-unassigned-members-field"></span><strong>number_of_unassigned_members</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 1, Dimensions: [n_lbl_num]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+</details><p id="index-8"><span id="nxsimilarity-grouping-statistics-number-of-unassigned-members-field"></span><strong>number_of_unassigned_members</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 1, Dimensions: [n_lbl_num]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
 <div><p>Total number of members in the set which are categorized as unassigned.</p>
 </div></blockquote>
@@ -218,7 +222,7 @@ attributes, and links defined in this class.</p>
   <div>
     <h3><a href="../../index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">2.3.3.3.165. NXsimilarity_grouping</a><ul>
+<li><a class="reference internal" href="#">2.3.3.3.192. NXsimilarity_grouping</a><ul>
 <li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
 </ul>
 </li>
@@ -232,8 +236,8 @@ attributes, and links defined in this class.</p>
   <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
   <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
   <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
-      <li>Previous: <a href="NXserialized.html" title="previous chapter"><span class="section-number">2.3.3.3.164. </span>NXserialized</a></li>
-      <li>Next: <a href="NXsingle_crystal.html" title="next chapter"><span class="section-number">2.3.3.3.166. </span>NXsingle_crystal</a></li>
+      <li>Previous: <a href="NXserialized.html" title="previous chapter"><span class="section-number">2.3.3.3.191. </span>NXserialized</a></li>
+      <li>Next: <a href="NXsingle_crystal.html" title="next chapter"><span class="section-number">2.3.3.3.193. </span>NXsingle_crystal</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -304,7 +308,7 @@ attributes, and links defined in this class.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2022-2023, The FAIRmat collaboration.
+      &copy;2022-2024, The FAIRmat collaboration.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>

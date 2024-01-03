@@ -17,17 +17,21 @@ NXcs_prng
 
 **Description**:
 
-  Computer science description of pseudo-random number generator.
+  .. collapse:: Computer science description of pseudo-random number generator. ...
 
-  The purpose of such metadata is to identify if exactly the same sequence
-  can be reproduced, like for a PRNG or not (for a true physically random source).
+      Computer science description of pseudo-random number generator.
+
+      The purpose of this base class is to identify if exactly the same sequence
+      can be reproduced, like for a PRNG or not (for a true physically random source).
 
 **Symbols**:
 
   The symbols used in the schema to specify e.g. dimensions of arrays.
 
 **Groups cited**:
-  none
+  :ref:`NXprogram`
+
+.. index:: NXprogram (base class); used in base class
 
 **Structure**:
 
@@ -37,56 +41,58 @@ NXcs_prng
 
   **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    Different approaches for generating random numbers with a computer exists.
-    Some use a dedicated physical device where the state is unpredictable (physically).
-    Some use a mangling of the system clock (system_clock), where also without
-    additional pieces of information the sequence is not reproducible.
-    Some use so-called pseudo-random number generator (PRNG) are used.
-    These are algorithms which yield a deterministic sequence of practically
-    randomly appearing numbers. These algorithms different in their quality in
-    how close the resulting sequences are random.
-    Nowadays one of the most commonly used algorithm is
-    the MersenneTwister (mt19937).
+    .. collapse:: Physical approach or algorithm whereby random numbers are generated. ...
 
-    Any of these values: ``physical`` | ``system_clock`` | ``mt19937`` | ``other``
+        Physical approach or algorithm whereby random numbers are generated.
 
-  .. _/NXcs_prng/program-field:
+        Different approaches for generating random numbers with a computer exists.
+        Some use a dedicated physical device whose the state is unpredictable
+        (physically). Some use a strategy of mangling information from the system
+        clock. Also in this case the sequence is not reproducible without having
+        additional pieces of information.
 
-  .. index:: program (field)
+        In most cases though so-called pseudo-random number generator (PRNG)
+        algorithms are used. These yield a deterministic sequence of practically
+        randomly appearing numbers. These algorithms differ in their quality in
+        how close the resulting sequences are random, i.e. sequentially
+        uncorrelated. Nowadays one of the most commonly used algorithm is the
+        MersenneTwister (mt19937).
 
-  **program**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-    Name of the PRNG implementation and version. If such information is not
-    available or if the PRNG type was set to other the DOI to the publication
-    or the source code should be given.
-
-    .. _/NXcs_prng/program@version-attribute:
-
-    .. index:: version (field attribute)
-
-    **@version**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-      Version and build number, or commit hash.
+        Any of these values: ``physical`` | ``system_clock`` | ``mt19937`` | ``other``
 
   .. _/NXcs_prng/seed-field:
 
   .. index:: seed (field)
 
-  **seed**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **seed**: (optional) :ref:`NX_INT <NX_INT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    Parameter of the PRNG controlling its initialization and thus the specific
-    sequence of numbers it generates.
+    .. collapse:: Parameter of the PRNG controlling its initialization ...
+
+        Parameter of the PRNG controlling its initialization
+        and thus controlling the specific sequence generated.
 
   .. _/NXcs_prng/warmup-field:
 
   .. index:: warmup (field)
 
-  **warmup**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **warmup**: (optional) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    Number of initial draws from the PRNG which are discarded in an effort
-    to equilibrate the sequence and make it thus to statistically more random.
-    If no warmup was performed or if warmup procedures are unclear,
-    users should set the value to zero.
+    .. collapse:: Number of initial draws from the PRNG after its initialized with the seed. ...
+
+        Number of initial draws from the PRNG after its initialized with the seed.
+        These initial draws are typically discarded in an effort to equilibrate the
+        sequence. If no warmup was performed or if warmup procedures are unclear,
+        users should set the value to zero.
+
+  .. _/NXcs_prng/PROGRAM-group:
+
+  **PROGRAM**: (optional) :ref:`NXprogram` 
+
+    .. collapse:: Name of the PRNG implementation and version. If such information is not ...
+
+        Name of the PRNG implementation and version. If such information is not
+        available or if the PRNG type was set to other the DOI to the publication
+        or the source code should be given.
 
 
 Hypertext Anchors
@@ -96,8 +102,7 @@ List of hypertext anchors for all groups, fields,
 attributes, and links defined in this class.
 
 
-* :ref:`/NXcs_prng/program-field </NXcs_prng/program-field>`
-* :ref:`/NXcs_prng/program@version-attribute </NXcs_prng/program@version-attribute>`
+* :ref:`/NXcs_prng/PROGRAM-group </NXcs_prng/PROGRAM-group>`
 * :ref:`/NXcs_prng/seed-field </NXcs_prng/seed-field>`
 * :ref:`/NXcs_prng/type-field </NXcs_prng/type-field>`
 * :ref:`/NXcs_prng/warmup-field </NXcs_prng/warmup-field>`
