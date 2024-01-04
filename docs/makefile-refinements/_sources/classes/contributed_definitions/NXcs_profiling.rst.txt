@@ -17,9 +17,9 @@ NXcs_profiling
 
 **Description**:
 
-  .. collapse:: Computer science description for summary performance/profiling data of an applic ...
+  .. collapse:: Computer science description for performance and profiling data of an applicatio ...
 
-      Computer science description for summary performance/profiling data of an application.
+      Computer science description for performance and profiling data of an application.
 
       Performance monitoring and benchmarking of software is a task where questions
       can be asked at various levels of detail. In general, there are three main
@@ -29,28 +29,29 @@ NXcs_profiling
       * Software configuration and capabilities
       * Dynamic effects of the system in operation and the system working together
         with eventually multiple computers, especially when these have to exchange
-        information across a network.
+        information across a network and these are used usually by multiple users.
 
       At the most basic level users may wish to document how long e.g. a data
-      analysis with a scientific software (app).
-      A frequent idea is here to judge how critical the effect is on the workflow
-      of the scientists, i.e. is the analysis possible in a few seconds or would it
-      take days if I were to run this analysis on a comparable machine. In this case,
-      mainly the order of magnitude is relevant, as well as how this can be achieved
-      with using parallelization (i.e. reporting the number of CPU and GPU resources
-      used, the number of processes and/or threads, and basic details about the
-      computing node/computer.
+      analysis with a scientific software (app) took.
+      A frequent idea is here to answer practical questions like how critical is the
+      effect on the workflow of the scientists, i.e. is the analysis possible in
+      a few seconds or would it take days if I were to run this analysis on a
+      comparable machine?
+      For this more qualitative performance monitoring, mainly the order of
+      magnitude is relevant, as well as how this was achieved using parallelization
+      (i.e. reporting the number of CPU and GPU resources used, the number of
+      processes and threads configured, and providing basic details about the computer).
 
       At more advanced levels benchmarks may go as deep as detailed temporal tracking
       of individual processor instructions, their relation to other instructions, the
-      state of call stacks, in short eventually the entire app execution history
+      state of call stacks; in short eventually the entire app execution history
       and hardware state history. Such analyses are mainly used for performance
-      optimization as well as for tracking bugs and other development purposes.
-      Specialized software exists which documents such performance data in
-      specifically-formatted event log files or databases.
+      optimization, i.e. by software and hardware developers as well as for
+      tracking bugs. Specialized software exists which documents such performance
+      data in specifically-formatted event log files or databases.
 
-      This base class cannot and should not replace these specific solutions.
-      Instead, the intention of the base class is to serve scientists at the 
+      This base class cannot and should not replace these specific solutions for now.
+      Instead, the intention of the base class is to serve scientists at the
       basic level to enable simple monitoring of performance data and log profiling
       data of key algorithmic steps or parts of computational workflows, so that
       these pieces of information can guide users which order of magnitude differences
@@ -120,20 +121,20 @@ NXcs_profiling
         Wall-clock time how long the app execution took. This may be in principle
         end_time minus start_time; however usage of eventually more precise timers
         may warrant to use a finer temporal discretization,
-        and thus demand a more precise record of the wall-clock time.
+        and thus demands a more precise record of the wall-clock time.
 
   .. _/NXcs_profiling/number_of_processes-field:
 
   .. index:: number_of_processes (field)
 
-  **number_of_processes**: (optional) :ref:`NX_POSINT <NX_POSINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **number_of_processes**: (optional) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    .. collapse:: Qualifier which specifies with how many nominal processes the app was  ...
+    .. collapse:: Qualifier which specifies with how many nominal processes the app was ...
 
-        Qualifier which specifies with how many nominal processes the app was 
-        invoked. The main idea behind this field, for instance for app using a
-        Message Passing Interface parallelization is to communicate how many
-        processes were used.
+        Qualifier which specifies with how many nominal processes the app was
+        invoked. The main idea behind this field e.g. for apps which use e.g. MPI
+        (Message Passing Interface) parallelization is to communicate
+        how many processes were used.
 
         For sequentially running apps number_of_processes and number_of_threads
         is 1. If the app uses exclusively GPU parallelization number_of_gpus
@@ -145,19 +146,19 @@ NXcs_profiling
 
   .. index:: number_of_threads (field)
 
-  **number_of_threads**: (optional) :ref:`NX_POSINT <NX_POSINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **number_of_threads**: (optional) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    .. collapse:: Qualifier with how many nominal threads were accessible to the app at ...
+    .. collapse:: Qualifier how many nominal threads were used at runtime. ...
 
-        Qualifier with how many nominal threads were accessible to the app at
-        runtime. Specifically here the maximum number of threads used for the
+        Qualifier how many nominal threads were used at runtime.
+        Specifically here the maximum number of threads used for the
         high-level threading library used (e.g. OMP_NUM_THREADS), posix.
 
   .. _/NXcs_profiling/number_of_gpus-field:
 
   .. index:: number_of_gpus (field)
 
-  **number_of_gpus**: (optional) :ref:`NX_POSINT <NX_POSINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **number_of_gpus**: (optional) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
     Qualifier with how many nominal GPUs the app was invoked at runtime.
 

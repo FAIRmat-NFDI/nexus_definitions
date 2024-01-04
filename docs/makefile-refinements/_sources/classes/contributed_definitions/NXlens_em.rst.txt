@@ -17,16 +17,16 @@ NXlens_em
 
 **Description**:
 
-  .. collapse:: Description of an electro-magnetic lens or a compound lens. ...
+  .. collapse:: Base class for an electro-magnetic lens or a compound lens. ...
 
-      Description of an electro-magnetic lens or a compound lens.
+      Base class for an electro-magnetic lens or a compound lens.
 
-      For NXtransformations the origin of the coordinate system is placed
-      in the center of the lens
-      (its polepiece, pinhole, or another point of reference).
-      The origin should be specified in the NXtransformations.
+      For :ref:`NXtransformations` the origin of the coordinate system is placed
+      in the center of the lens (its polepiece, pinhole, or another
+      point of reference). The origin should be specified in the :ref:`NXtransformations`.
 
-      For details of electro-magnetic lenses in the literature see e.g. `L. Reimer <https://doi.org/10.1007/978-3-540-38967-5>`_
+      For details of electro-magnetic lenses in the literature
+      see e.g. `L. Reimer <https://doi.org/10.1007/978-3-540-38967-5>`_
 
 **Symbols**:
 
@@ -38,6 +38,17 @@ NXlens_em
 .. index:: NXfabrication (base class); used in base class, NXtransformations (base class); used in base class
 
 **Structure**:
+
+  .. _/NXlens_em@depends_on-attribute:
+
+  .. index:: depends_on (file attribute)
+
+  **@depends_on**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+    .. collapse:: Specifies the position of the lens by pointing to the last transformation in t ...
+
+        Specifies the position of the lens by pointing to the last transformation in the
+        transformation chain in the NXtransformations group.
 
   .. _/NXlens_em/type-field:
 
@@ -73,35 +84,16 @@ NXlens_em
         Given name, alias, colloquial, or short name for the lens.
         For manufacturer names and identifiers use respective manufacturer fields.
 
-  .. _/NXlens_em/manufacturer_name-field:
-
-  .. index:: manufacturer_name (field)
-
-  **manufacturer_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-    Name of the manufacturer who built/constructed the lens.
-
-  .. _/NXlens_em/model-field:
-
-  .. index:: model (field)
-
-  **model**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-    .. collapse:: Hardware name, hash identifier, or serial number that was given by the ...
-
-        Hardware name, hash identifier, or serial number that was given by the
-        manufacturer to identify the lens.
-
   .. _/NXlens_em/description-field:
 
   .. index:: description (field)
 
   **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: Ideally an identifier, persistent link, or free text which gives further detai ...
+    .. collapse:: Ideally an identifier, persistent link, or free text which ...
 
-        Ideally an identifier, persistent link, or free text which gives further details
-        about the lens.
+        Ideally an identifier, persistent link, or free text which
+        gives further details about the lens.
 
   .. _/NXlens_em/voltage-field:
 
@@ -109,10 +101,12 @@ NXlens_em
 
   **voltage**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_VOLTAGE <NX_VOLTAGE>`} 
 
-    .. collapse:: Excitation voltage of the lens. For dipoles it is a single number. For higher ...
+    .. collapse:: Excitation voltage of the lens. ...
 
-        Excitation voltage of the lens. For dipoles it is a single number. For higher
-        orders, it is an array.
+        Excitation voltage of the lens.
+
+        For dipoles it is a single number.
+        For higher order multipoles, it is an array.
 
   .. _/NXlens_em/current-field:
 
@@ -120,10 +114,12 @@ NXlens_em
 
   **current**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_CURRENT <NX_CURRENT>`} 
 
-    .. collapse:: Excitation current of the lens. For dipoles it is a single number. For higher ...
+    .. collapse:: Excitation current of the lens. ...
 
-        Excitation current of the lens. For dipoles it is a single number. For higher
-        orders, it is an array.
+        Excitation current of the lens.
+
+        For dipoles it is a single number.
+        For higher order multipoles, it is an array.
 
   .. _/NXlens_em/value-field:
 
@@ -131,26 +127,20 @@ NXlens_em
 
   **value**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANY <NX_ANY>`} 
 
-    .. collapse:: This field should be used when the exact voltage or current of the lens is not ...
+    .. collapse:: This field should be used when the exact voltage or current of the lens ...
 
-        This field should be used when the exact voltage or current of the lens is not directly controllable
-        as the control software of the microscope does not enable users/or is was not configured to enable
-        the user to retrieve these values. In this case this field should be used to specify the value as
-        read from the control software. Although consumers of the application definition should not expect
-        this value to represent the exact physical voltage or excitation, it is still useful to know though
-        as it allows other users to reuse this lens setting, which, provided a properly working instrument
-        and software should bring the lenses into a similar state.
+        This field should be used when the exact voltage or current of the lens
+        is not directly controllable as the control software of the microscope
+        does not enable or was not configured to display these values.
 
-  .. _/NXlens_em/depends_on-field:
+        In this case this value field should be used and the value
+        from the control software stored as is.
 
-  .. index:: depends_on (field)
-
-  **depends_on**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-    .. collapse:: Specifies the position of the lens by pointing to the last transformation in t ...
-
-        Specifies the position of the lens by pointing to the last transformation in the
-        transformation chain in the NXtransformations group.
+        Although this value does not document the exact physical voltage or
+        excitation, it can still give useful context to reproduce the lens setting,
+        which, provided a properly working instrument and software sets the lens
+        into a similar state to the technical level possible when no more information
+        is available physically or accessible legally.
 
   .. _/NXlens_em/FABRICATION-group:
 
@@ -178,16 +168,14 @@ attributes, and links defined in this class.
 
 
 * :ref:`/NXlens_em/current-field </NXlens_em/current-field>`
-* :ref:`/NXlens_em/depends_on-field </NXlens_em/depends_on-field>`
 * :ref:`/NXlens_em/description-field </NXlens_em/description-field>`
 * :ref:`/NXlens_em/FABRICATION-group </NXlens_em/FABRICATION-group>`
-* :ref:`/NXlens_em/manufacturer_name-field </NXlens_em/manufacturer_name-field>`
-* :ref:`/NXlens_em/model-field </NXlens_em/model-field>`
 * :ref:`/NXlens_em/name-field </NXlens_em/name-field>`
 * :ref:`/NXlens_em/TRANSFORMATIONS-group </NXlens_em/TRANSFORMATIONS-group>`
 * :ref:`/NXlens_em/type-field </NXlens_em/type-field>`
 * :ref:`/NXlens_em/value-field </NXlens_em/value-field>`
 * :ref:`/NXlens_em/voltage-field </NXlens_em/voltage-field>`
+* :ref:`/NXlens_em@depends_on-attribute </NXlens_em@depends_on-attribute>`
 
 **NXDL Source**:
   https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXlens_em.nxdl.xml
