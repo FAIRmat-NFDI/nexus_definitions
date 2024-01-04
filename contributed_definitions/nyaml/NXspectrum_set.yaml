@@ -1,0 +1,143 @@
+category: base
+doc: |
+  Base class container for reporting a set of spectra.
+symbols:
+  n_p: |
+    Number of scan points.
+  n_y: |
+    Number of pixel in the slow direction.
+  n_x: |
+    Number of pixel in the fast direction.
+  n_energy: |
+    Number of energy bins.
+type: group
+NXspectrum_set(NXobject):
+  # for EELS we likely need a complex-valued NXspectrum_c_set to this
+  # NXspectrum_set base class here which should then be splitted into an
+  # NXspectrum_set to reduce redundant fields and specialized NXspectrum_r/c_set
+  (NXprocess):
+    doc: |
+      Details how spectra were processed from the detector readings.
+    source(NXserialized):
+      doc: |
+        Resolvable data artifact (e.g. filename) from which the all values in
+        the :ref:`NXdata` instances in this :ref:`NXspectrum_set` were
+        loaded during parsing.
+    mode(NX_CHAR):
+      doc: |
+        Imaging (data collection) mode of the instrument during acquisition
+        of the data in this :ref:`NXspectrum_set` instance.
+    detector_identifier(NX_CHAR):
+      doc: |
+        Link or name of an :ref:`NXdetector` instance with which the data were collected.
+    (NXprogram):
+  ##MK::feel free to contact us when you would like to include
+  # lik omega/q mapping more complicated scan pattern than rectangular ones.
+  stack(NXdata):
+    doc: |
+      Collected spectra for all pixels of a rectangular region-of-interest.
+      
+      This representation supports rectangular scan pattern with equidistant
+      energy bins. For randomly or dissimilarly spaced scan points
+      use collection instead.
+    intensity(NX_NUMBER):
+      doc: |
+        Counts
+      unit: NX_UNITLESS
+      dim: (n_y, n_x, n_energy)
+      \@long_name(NX_CHAR):
+        doc: |
+          Counts
+    # \@signal: counts
+    # \@axes: [ypos, xpos, energy]
+    # \@ypos_indices: 0
+    # \@xpos_indices: 1
+    # \@energy_indices: 2
+    axis_y(NX_NUMBER):
+      doc: |
+        Coordinate along y direction.
+      unit: NX_LENGTH
+      dim: (n_y,)
+      \@long_name(NX_CHAR):
+        doc: |
+          Pixel coordinate along y direction
+    axis_x(NX_NUMBER):
+      doc: |
+        Coordinate along x direction.
+      unit: NX_LENGTH
+      dim: (n_x,)
+      \@long_name(NX_CHAR):
+        doc: |
+          Pixel coordinate along x direction
+    axis_energy(NX_NUMBER):
+      doc: |
+        Energy axis
+      unit: NX_ENERGY
+      dim: (n_energy,)
+      \@long_name(NX_CHAR):
+        doc: |
+          Energy
+  
+  # in the majority of cases rectangular or line scans are performed
+  # if there is interest to support arbitrary scan pattern one should use
+  # scan points and contact us to generalize this base class and related
+  # base classes
+  summary(NXdata):
+    doc: |
+      Accumulated counts over all pixels of the region-of-interest.
+      This representation supports a rectangular scan pattern with
+      equidistant energy bins.
+    intensity(NX_NUMBER):
+      doc: |
+        Accumulated counts
+      unit: NX_UNITLESS
+      dim: (n_energy,)
+      \@long_name(NX_CHAR):
+        doc: |
+          Counts
+    # \@signal: counts
+    # \@axes: [energy]
+    # \@energy_indices: 0
+    axis_energy(NX_NUMBER):
+      doc: |
+        Energy axis
+      unit: NX_ENERGY
+      dim: (n_energy,)
+      \@long_name(NX_CHAR):
+        doc: |
+          Energy
+
+  collection(NXdata):
+    doc: |
+      Collected spectra for each scan point.
+      
+      This representation supports equidistant energy bins.
+      For rectangular sampling use stack and summary instead.
+    intensity(NX_NUMBER):
+      doc: |
+        Counts
+      unit: NX_UNITLESS
+      dim: (n_p, n_energy)
+      \@long_name(NX_CHAR):
+        doc: |
+          Counts
+    # \@signal: counts
+    # \@axes: [scan_point_id, energy]
+    # \@scan_point_indices: 1
+    # \@energy_indices: 0
+    axis_scan_point_id(NX_INT):
+      doc: |
+        Scan point identifier
+      unit: NX_UNITLESS
+      dim: (n_p,)
+      \@long_name(NX_CHAR):
+        doc: |
+          Scan point identifier
+    axis_energy(NX_NUMBER):
+      doc: |
+        Energy axis
+      unit: NX_ENERGY
+      dim: (n_energy,)
+      \@long_name(NX_CHAR):
+        doc: |
+          Energy
