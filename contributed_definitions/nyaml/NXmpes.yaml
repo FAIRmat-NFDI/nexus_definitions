@@ -54,38 +54,33 @@ NXmpes(NXobject):
         doc: |
           Name of the user.
       affiliation:
-        exists: recommended
         doc: |
           Name of the affiliation of the user at the point in time when the experiment was
           performed.
-      address:
-        exists: recommended
-        doc: |
-          Full address (street, street number, ZIP, city, country) of the user's
-          affiliation.
-      email:
-        doc: |
-          Email address of the user.
-      orcid:
-        exists: recommended
-        doc: |
-          Author ID defined by https://orcid.org/.
     (NXinstrument):
-      doc: |
+      doc: 
+       - |
         MPES spectrometer
-        
-        Refers to Term `12.58`_ of the ISO 18115-1:2023 specification.
-        
-        .. _12.58: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.58
+       - |
+        xref:
+          spec: ISO 18115-1:2023
+          term: 12.58
+          url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.58
       energy_resolution(NXresolution):
         exists: recommended
-        doc: |
+        doc:
+        - |
           Overall energy resolution of the MPES instrument
-          
-          Refers to Terms `10.7`_ ff. and `10.24`_ of the ISO 18115-1:2023 specification.
-          
-          .. _10.7: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.7
-          .. _10.24: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.24
+        - |
+          xref:
+            spec: ISO 18115-1:2023
+            term: 10.7 ff.
+            url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.7
+        - |
+          xref:
+            spec: ISO 18115-1:2023
+            term: 10.24
+            url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.24 
         physical_quantity:
         type:
         resolution(NXdata):
@@ -117,10 +112,11 @@ NXmpes(NXobject):
         name:
           exists: recommended
         probe:
+          exists: optional
           doc: |
             Type of probe. In photoemission it's always photons, so the full NIAC list is
             restricted.
-          enumeration: [photons]
+          enumeration: [photon, x-ray, visible light, ultraviolet]
         device_information(NXfabrication):
           exists: recommended
           vendor:
@@ -141,15 +137,18 @@ NXmpes(NXobject):
       # we have a subdefinition NXlink to refer to a path.
       # This would also be helpful for NXtransformations
       beam_TYPE(NXbeam):
+        doc: |
+          Properties of the photon beam at a given location.
+          Should be named with the same appendix as source_TYPE, e.g.,
+          for `source_probe` it should refer to `beam_probe`.
         distance(NX_NUMBER):
           unit: NX_LENGTH
           exists: recommended
           doc: |
-            The beam emitted by this source.
-            Should be named with the same appendix, e.g.,
-            for `source_probe` it should refer to `beam_probe`.
-            Refers to the same concept as /NXentry/NXinstrument/source_TYPE
-            and may be linked.
+            Distance between the point where the current NXbeam instance is evaluating
+            the beam properties and the point where the beam interacts with the sample.
+            For photoemission, the latter is the point where the the centre of the beam
+            touches the sample surface.
         incident_energy(NX_FLOAT):
           unit: NX_ENERGY
         incident_energy_spread(NX_NUMBER):
@@ -180,13 +179,15 @@ NXmpes(NXobject):
         energy_resolution(NX_FLOAT):
           exists: recommended
           unit: NX_ENERGY
-          doc: |
+          doc:
+          - |
             Energy resolution of the analyser with the current setting. May be linked from a
-            NXcalibration.
-            
-            Refers to Term `10.24`_ of the ISO 18115-1:2023 specification.
-            
-            .. _10.24: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.24
+            NXcalibration.            
+          - |
+            xref:
+              spec: ISO 18115-1:2023
+              term: 10.24
+              url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.24
         fast_axes:
           exists: recommended
         slow_axes:
@@ -201,11 +202,9 @@ NXmpes(NXobject):
           scheme:
             doc: |
               Scheme of the electron collection column.
-            enumeration: [Standard, Angular dispersive, Spatial dispersive, Selective area, Deflector, PEEM, Momentum Microscope]
+            enumeration: [Standard, Angular dispersive, Spatial dispersive, Selective area, Deflector, PEEM, Momentum Microscope, Torroidal]
           mode:
             exists: recommended
-            doc: |
-              Labelling of the lens setting in use.
           projection:
             exists: recommended
           field_aperture(NXaperture):
@@ -300,14 +299,16 @@ NXmpes(NXobject):
         sample_bias(NX_FLOAT):
           exists: recommended
           unit: NX_CURRENT
-          doc: |
+          doc:
+          - |
             Bias of the sample with respect to analyser ground.
             
             This field may also be found in NXsample if present.
-            
-            Refers to Term `8.41`_ of the ISO 18115-1:2023 specification.
-            
-            .. _8.41: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:8.41
+          - |
+            xref:
+              spec: ISO 18115-1:2023
+              term: 8.41
+              url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:8.41
         device_information(NXfabrication):
           exists: recommended
           vendor:
@@ -331,56 +332,42 @@ NXmpes(NXobject):
           `ISO 15472:2010`_ specification.
           
           .. _ISO 15472:2010: https://www.iso.org/standard/74811.html
-        applied(NX_BOOLEAN):
-          doc: |
-            Has an energy calibration been applied?
         calibrated_axis(NX_FLOAT):
           exists: recommended
           doc: |
             This is the calibrated energy axis to be used for data plotting.
       angular_calibration(NXcalibration):
         exists: optional
-        applied(NX_BOOLEAN):
-          doc: |
-            Has an angular calibration been applied?
         calibrated_axis(NX_FLOAT):
           exists: recommended
           doc: |
             This is the calibrated angular axis to be used for data plotting.
       spatial_calibration(NXcalibration):
         exists: optional
-        applied(NX_BOOLEAN):
-          doc: |
-            Has an spatial calibration been applied?
         calibrated_axis(NX_FLOAT):
           exists: recommended
           doc: |
             This is the calibrated spatial axis to be used for data plotting.
       momentum_calibration(NXcalibration):
         exists: optional
-        applied(NX_BOOLEAN):
-          doc: |
-            Has an momentum calibration been applied?
         calibrated_axis(NX_FLOAT):
           exists: recommended
           doc: |
             This is the momentum axis to be used for data plotting.
       energy_referencing(NXcalibration):
         exists: optional
-        doc: |
+        doc:
+        - |
           For energy referencing, the measured energies are corrected for the charging potential
           (i.e., the electrical potential of the surface region of an insulating sample, caused by
           irradiation) such that those energies correspond to a sample with no surface charge.
           Usually, the energy axis is adjusted by shifting all energies uniformally until one
           well-defined emission line peak (or the Fermi edge) is located at a known _correct_ energy.
-          
-          Refers to Term `12.74`_ ff. of the ISO 18115-1:2023 specification.
-          
-          .. _12.74: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.74
-        applied(NX_BOOLEAN):
-          doc: |
-            Have the energy axes been adjusted (e.g., in cases where samples are not
-            conductive)?
+        - |
+          xref:
+            spec: ISO 18115-1:2023
+            term: 12.74 ff.
+            url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.74
         level(NXelectron_level):
           exists: recommended
           doc: |
@@ -392,13 +379,15 @@ NXmpes(NXobject):
             For example: adventitious carbon | C-C | metallic Au | elemental Si | Fermi edge
         binding_energy(NX_FLOAT):
           exists: recommended
-          doc: |
+          doc:
+          - |
             The binding energy (in units of eV) that the specified emission line appeared at,
-            after adjusting the binding energy scale.
-            
-            Refers to Term `12.16`_ ff. of the ISO 18115-1:2023 specification.
-            
-            .. _12.16: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16
+            after adjusting the binding energy scale.          
+          - |
+            xref:
+              spec: ISO 18115-1:2023
+              term: 12.16_ ff.
+              url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16
         offset(NX_FLOAT):
           exists: recommended
           doc: |
@@ -417,11 +406,6 @@ NXmpes(NXobject):
           kinetic energy is multiplied by the corresponding value in the relative_intensity
           field of the transmission_function. This calibration procedure is used to account for
           the different tranmsission efficiencies when using different lens modes.
-        applied(NX_BOOLEAN):
-          doc: |
-            Has an intensity calibration been applied?
-            
-            That is, has the transmission function of the analyser been taken into account?
         mapping(NXdata):
           exists: recommended
           doc: |
@@ -486,11 +470,11 @@ NXmpes(NXobject):
           recoded, this is an array of length m of temperatures. This should be a link to
           /entry/instrument/manipulator/sample_temperature.
       situation:
-        exists: optional
+        exists: recommended
         enumeration: [vacuum, inert atmosphere, oxidising atmosphere, reducing atmosphere]
       gas_pressure(NX_FLOAT):
         unit: NX_PRESSURE
-        exists: optional
+        exists: recommended
       bias(NX_FLOAT):
         unit: NX_VOLTAGE
         exists: optional
@@ -519,18 +503,26 @@ NXmpes(NXobject):
           type: NX_CHAR
           exists: recommended
           doc: |
-            The energy can be either stored as kinetic (Term `3.35`_ of the ISO 18115-1:2023
-            specification) or as binding (Term `12.16`_) energy.
-            
-            .. _3.35: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.35
-            .. _12.16: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16
+            The energy can be either stored as kinetic or as binding energy.
           enumeration: 
             kinetic: 
-              doc: |
+              doc:
+              - |
                 Calibrated kinetic energy axis.
+              - |
+                xref:
+                  spec: ISO 18115-1:2023
+                  term: 3.35
+                  url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.35
             binding: 
-              doc: |
+              doc:
+              - |
                 Calibrated binding energy axis.
+              - |
+                xref:
+                  spec: ISO 18115-1:2023
+                  term: 12.16
+                  url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
 # 64e1e15b1f8a7c2ce32d41da6fcd2f2e9811da3a7abb36a9d79355f9bda5e020
@@ -625,26 +617,10 @@ NXmpes(NXobject):
 #                      Name of the user.
 #                 </doc>
 #             </field>
-#             <field name="affiliation" recommended="true">
+#             <field name="affiliation">
 #                 <doc>
 #                      Name of the affiliation of the user at the point in time when the experiment was
 #                      performed.
-#                 </doc>
-#             </field>
-#             <field name="address" recommended="true">
-#                 <doc>
-#                      Full address (street, street number, ZIP, city, country) of the user's
-#                      affiliation.
-#                 </doc>
-#             </field>
-#             <field name="email">
-#                 <doc>
-#                      Email address of the user.
-#                 </doc>
-#             </field>
-#             <field name="orcid" recommended="true">
-#                 <doc>
-#                      Author ID defined by https://orcid.org/.
 #                 </doc>
 #             </field>
 #         </group>
@@ -707,13 +683,16 @@ NXmpes(NXobject):
 #                     </doc>
 #                 </field>
 #                 <field name="name" recommended="true"/>
-#                 <field name="probe">
+#                 <field name="probe" optional="true">
 #                     <doc>
 #                          Type of probe. In photoemission it's always photons, so the full NIAC list is
 #                          restricted.
 #                     </doc>
 #                     <enumeration>
-#                         <item value="photons"/>
+#                         <item value="photon"/>
+#                         <item value="x-ray"/>
+#                         <item value="visible light"/>
+#                         <item value="ultraviolet"/>
 #                     </enumeration>
 #                 </field>
 #                 <group name="device_information" type="NXfabrication" recommended="true">
@@ -794,6 +773,7 @@ NXmpes(NXobject):
 #                             <item value="Deflector"/>
 #                             <item value="PEEM"/>
 #                             <item value="Momentum Microscope"/>
+#                             <item value="torroidal"/>
 #                         </enumeration>
 #                     </field>
 #                     <field name="mode" recommended="true">

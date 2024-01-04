@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 <!--
 # NeXus - Neutron and X-ray Common Data Format
-# 
-# Copyright (C) 2014-2022 NeXus International Advisory Committee (NIAC)
-# 
+#
+# Copyright (C) 2014-2024 NeXus International Advisory Committee (NIAC)
+#
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
@@ -89,26 +89,10 @@
                      Name of the user.
                 </doc>
             </field>
-            <field name="affiliation" recommended="true">
+            <field name="affiliation">
                 <doc>
                      Name of the affiliation of the user at the point in time when the experiment was
                      performed.
-                </doc>
-            </field>
-            <field name="address" recommended="true">
-                <doc>
-                     Full address (street, street number, ZIP, city, country) of the user's
-                     affiliation.
-                </doc>
-            </field>
-            <field name="email">
-                <doc>
-                     Email address of the user.
-                </doc>
-            </field>
-            <field name="orcid" recommended="true">
-                <doc>
-                     Author ID defined by https://orcid.org/.
                 </doc>
             </field>
         </group>
@@ -116,7 +100,7 @@
             <doc>
                  MPES spectrometer
                  
-                 Refers to Term `12.58`_ of the ISO 18115-1:2023 specification.
+                     This concept is related to term `12.58`_ of the ISO 18115-1:2023 standard.
                  
                  .. _12.58: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.58
             </doc>
@@ -124,9 +108,12 @@
                 <doc>
                      Overall energy resolution of the MPES instrument
                      
-                     Refers to Terms `10.7`_ ff. and `10.24`_ of the ISO 18115-1:2023 specification.
+                         This concept is related to term `10.7 ff.`_ of the ISO 18115-1:2023 standard.
                      
-                     .. _10.7: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.7
+                     .. _10.7 ff.: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.7
+                     
+                         This concept is related to term `10.24`_ of the ISO 18115-1:2023 standard.
+                     
                      .. _10.24: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.24
                 </doc>
                 <field name="physical_quantity"/>
@@ -141,8 +128,10 @@
                 <field name="identifier" recommended="true"/>
             </group>
             <group name="source_TYPE" type="NXsource">
-                <!--Comment from mpes may workshop:
-- There is much more information which can be provided for NXsource-->
+                <!--
+Comment from mpes may workshop:
+- There is much more information which can be provided for NXsource
+-->
                 <doc>
                      The source used to generate the primary photons. Properties refer strictly to
                      parameters of the source, not of the output beam. For example, the energy of the
@@ -171,13 +160,16 @@
                     </doc>
                 </field>
                 <field name="name" recommended="true"/>
-                <field name="probe">
+                <field name="probe" optional="true">
                     <doc>
                          Type of probe. In photoemission it's always photons, so the full NIAC list is
                          restricted.
                     </doc>
                     <enumeration>
-                        <item value="photons"/>
+                        <item value="photon"/>
+                        <item value="x-ray"/>
+                        <item value="visible light"/>
+                        <item value="ultraviolet"/>
                     </enumeration>
                 </field>
                 <group name="device_information" type="NXfabrication" recommended="true">
@@ -199,13 +191,17 @@
 we have a subdefinition NXlink to refer to a path.
 This would also be helpful for NXtransformations-->
             <group name="beam_TYPE" type="NXbeam">
+                <doc>
+                     Properties of the photon beam at a given location.
+                     Should be named with the same appendix as source_TYPE, e.g.,
+                     for `source_probe` it should refer to `beam_probe`.
+                </doc>
                 <field name="distance" type="NX_NUMBER" units="NX_LENGTH" recommended="true">
                     <doc>
-                         The beam emitted by this source.
-                         Should be named with the same appendix, e.g.,
-                         for `source_probe` it should refer to `beam_probe`.
-                         Refers to the same concept as /NXentry/NXinstrument/source_TYPE
-                         and may be linked.
+                         Distance between the point where the current NXbeam instance is evaluating
+                         the beam properties and the point where the beam interacts with the sample.
+                         For photoemission, the latter is the point where the the centre of the beam
+                         touches the sample surface.
                     </doc>
                 </field>
                 <field name="incident_energy" type="NX_FLOAT" units="NX_ENERGY"/>
@@ -234,7 +230,7 @@ This would also be helpful for NXtransformations-->
                          Energy resolution of the analyser with the current setting. May be linked from a
                          NXcalibration.
                          
-                         Refers to Term `10.24`_ of the ISO 18115-1:2023 specification.
+                             This concept is related to term `10.24`_ of the ISO 18115-1:2023 standard.
                          
                          .. _10.24: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.24
                     </doc>
@@ -258,13 +254,10 @@ Optional constant settings (like lens focusing parameters on the sample: positio
                             <item value="Deflector"/>
                             <item value="PEEM"/>
                             <item value="Momentum Microscope"/>
+                            <item value="Torroidal"/>
                         </enumeration>
                     </field>
-                    <field name="mode" recommended="true">
-                        <doc>
-                             Labelling of the lens setting in use.
-                        </doc>
-                    </field>
+                    <field name="mode" recommended="true"/>
                     <field name="projection" recommended="true"/>
                     <group name="field_aperture" type="NXaperture" optional="true">
                         <doc>
@@ -381,7 +374,7 @@ Optional constant settings (like lens focusing parameters on the sample: positio
                          
                          This field may also be found in NXsample if present.
                          
-                         Refers to Term `8.41`_ of the ISO 18115-1:2023 specification.
+                             This concept is related to term `8.41`_ of the ISO 18115-1:2023 standard.
                          
                          .. _8.41: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:8.41
                     </doc>
@@ -408,11 +401,6 @@ Optional constant settings (like lens focusing parameters on the sample: positio
                      
                      .. _ISO 15472:2010: https://www.iso.org/standard/74811.html
                 </doc>
-                <field name="applied" type="NX_BOOLEAN">
-                    <doc>
-                         Has an energy calibration been applied?
-                    </doc>
-                </field>
                 <field name="calibrated_axis" type="NX_FLOAT" recommended="true">
                     <doc>
                          This is the calibrated energy axis to be used for data plotting.
@@ -420,11 +408,6 @@ Optional constant settings (like lens focusing parameters on the sample: positio
                 </field>
             </group>
             <group name="angular_calibration" type="NXcalibration" optional="true">
-                <field name="applied" type="NX_BOOLEAN">
-                    <doc>
-                         Has an angular calibration been applied?
-                    </doc>
-                </field>
                 <field name="calibrated_axis" type="NX_FLOAT" recommended="true">
                     <doc>
                          This is the calibrated angular axis to be used for data plotting.
@@ -432,11 +415,6 @@ Optional constant settings (like lens focusing parameters on the sample: positio
                 </field>
             </group>
             <group name="spatial_calibration" type="NXcalibration" optional="true">
-                <field name="applied" type="NX_BOOLEAN">
-                    <doc>
-                         Has an spatial calibration been applied?
-                    </doc>
-                </field>
                 <field name="calibrated_axis" type="NX_FLOAT" recommended="true">
                     <doc>
                          This is the calibrated spatial axis to be used for data plotting.
@@ -444,11 +422,6 @@ Optional constant settings (like lens focusing parameters on the sample: positio
                 </field>
             </group>
             <group name="momentum_calibration" type="NXcalibration" optional="true">
-                <field name="applied" type="NX_BOOLEAN">
-                    <doc>
-                         Has an momentum calibration been applied?
-                    </doc>
-                </field>
                 <field name="calibrated_axis" type="NX_FLOAT" recommended="true">
                     <doc>
                          This is the momentum axis to be used for data plotting.
@@ -463,16 +436,10 @@ Optional constant settings (like lens focusing parameters on the sample: positio
                      Usually, the energy axis is adjusted by shifting all energies uniformally until one
                      well-defined emission line peak (or the Fermi edge) is located at a known _correct_ energy.
                      
-                     Refers to Term `12.74`_ ff. of the ISO 18115-1:2023 specification.
+                         This concept is related to term `12.74 ff.`_ of the ISO 18115-1:2023 standard.
                      
-                     .. _12.74: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.74
+                     .. _12.74 ff.: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.74
                 </doc>
-                <field name="applied" type="NX_BOOLEAN">
-                    <doc>
-                         Have the energy axes been adjusted (e.g., in cases where samples are not
-                         conductive)?
-                    </doc>
-                </field>
                 <group name="level" type="NXelectron_level" recommended="true">
                     <doc>
                          Electronic core or valence level that was used for the calibration.
@@ -490,9 +457,9 @@ Optional constant settings (like lens focusing parameters on the sample: positio
                          The binding energy (in units of eV) that the specified emission line appeared at,
                          after adjusting the binding energy scale.
                          
-                         Refers to Term `12.16`_ ff. of the ISO 18115-1:2023 specification.
+                             This concept is related to term `12.16_ ff.`_ of the ISO 18115-1:2023 standard.
                          
-                         .. _12.16: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16
+                         .. _12.16_ ff.: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16
                     </doc>
                 </field>
                 <field name="offset" type="NX_FLOAT" recommended="true">
@@ -516,13 +483,6 @@ Optional constant settings (like lens focusing parameters on the sample: positio
                      field of the transmission_function. This calibration procedure is used to account for
                      the different tranmsission efficiencies when using different lens modes.
                 </doc>
-                <field name="applied" type="NX_BOOLEAN">
-                    <doc>
-                         Has an intensity calibration been applied?
-                         
-                         That is, has the transmission function of the analyser been taken into account?
-                    </doc>
-                </field>
                 <group name="mapping" type="NXdata" recommended="true">
                     <doc>
                          Transmission function of the electron analyser.
@@ -600,7 +560,7 @@ Optional constant settings (like lens focusing parameters on the sample: positio
                      /entry/instrument/manipulator/sample_temperature.
                 </doc>
             </field>
-            <field name="situation" optional="true">
+            <field name="situation" recommended="true">
                 <enumeration>
                     <item value="vacuum"/>
                     <item value="inert atmosphere"/>
@@ -608,7 +568,7 @@ Optional constant settings (like lens focusing parameters on the sample: positio
                     <item value="reducing atmosphere"/>
                 </enumeration>
             </field>
-            <field name="gas_pressure" type="NX_FLOAT" units="NX_PRESSURE" optional="true"/>
+            <field name="gas_pressure" type="NX_FLOAT" units="NX_PRESSURE" recommended="true"/>
             <field name="bias" type="NX_FLOAT" units="NX_VOLTAGE" optional="true">
                 <doc>
                      Voltage applied to sample and sample holder.
@@ -640,21 +600,25 @@ Optional constant settings (like lens focusing parameters on the sample: positio
                 </doc>
                 <attribute name="type" type="NX_CHAR" recommended="true">
                     <doc>
-                         The energy can be either stored as kinetic (Term `3.35`_ of the ISO 18115-1:2023
-                         specification) or as binding (Term `12.16`_) energy.
-                         
-                         .. _3.35: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.35
-                         .. _12.16: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16
+                         The energy can be either stored as kinetic or as binding energy.
                     </doc>
                     <enumeration>
                         <item value="kinetic">
                             <doc>
                                  Calibrated kinetic energy axis.
+                                 
+                                     This concept is related to term `3.35`_ of the ISO 18115-1:2023 standard.
+                                 
+                                 .. _3.35: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.35
                             </doc>
                         </item>
                         <item value="binding">
                             <doc>
                                  Calibrated binding energy axis.
+                                 
+                                     This concept is related to term `12.16`_ of the ISO 18115-1:2023 standard.
+                                 
+                                 .. _12.16: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16
                             </doc>
                         </item>
                     </enumeration>
