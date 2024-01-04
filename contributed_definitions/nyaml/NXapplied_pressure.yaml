@@ -9,14 +9,78 @@ NXapplied_pressure(NXexternal_stimulus):
   pressure(NX_FLOAT):
     unit: NX_PRESSURE
     doc: |
-      Applied pressure. Could a a single float value for static field or  
-      an array of field strengths at different times and positions. 
+      Applied pressure. Could a a single float value for static field or
+      an array of field strengths at different times and positions.
       In that case it should log to a value_log in NXsensor.
     dimensions:
+      
       # could be any length
       dim: [[1, n_shear]]
     \@direction:
-      enumeration: [x, y, z]       
+      enumeration: [x, y, z]
   manometer(NXsensor):
     measurement(NX_CHAR):
-       enumeration: [pressure]
+      enumeration: [pressure]
+
+# ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
+# 6d63bf73eb3137be2ac39d14373ad18c3751def0bf03d9c9e7cf2a16c43a4128
+# <?xml version='1.0' encoding='UTF-8'?>
+# <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+# <!--
+# # NeXus - Neutron and X-ray Common Data Format
+# #
+# # Copyright (C) 2014-2024 NeXus International Advisory Committee (NIAC)
+# #
+# # This library is free software; you can redistribute it and/or
+# # modify it under the terms of the GNU Lesser General Public
+# # License as published by the Free Software Foundation; either
+# # version 3 of the License, or (at your option) any later version.
+# #
+# # This library is distributed in the hope that it will be useful,
+# # but WITHOUT ANY WARRANTY; without even the implied warranty of
+# # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# # Lesser General Public License for more details.
+# #
+# # You should have received a copy of the GNU Lesser General Public
+# # License along with this library; if not, write to the Free Software
+# # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# #
+# # For further information, see http://www.nexusformat.org
+# -->
+# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXapplied_pressure" extends="NXexternal_stimulus" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+#     <symbols>
+#         <symbol name="n_shear">
+#             <doc>
+#                  number of values in applied pressure
+#             </doc>
+#         </symbol>
+#     </symbols>
+#     <doc>
+#          Pressure applied to sample.
+#     </doc>
+#     <field name="pressure" type="NX_FLOAT" units="NX_PRESSURE">
+#         <doc>
+#              Applied pressure. Could a a single float value for static field or  
+#              an array of field strengths at different times and positions. 
+#              In that case it should log to a value_log in NXsensor.
+#         </doc>
+#         <dimensions>
+#             <!--could be any length-->
+#             <dim index="1" value="n_shear"/>
+#         </dimensions>
+#         <attribute name="direction">
+#             <enumeration>
+#                 <item value="x"/>
+#                 <item value="y"/>
+#                 <item value="z"/>
+#             </enumeration>
+#         </attribute>
+#     </field>
+#     <group name="manometer" type="NXsensor">
+#         <field name="measurement" type="NX_CHAR">
+#             <enumeration>
+#                 <item value="pressure"/>
+#             </enumeration>
+#         </field>
+#     </group>
+# </definition>

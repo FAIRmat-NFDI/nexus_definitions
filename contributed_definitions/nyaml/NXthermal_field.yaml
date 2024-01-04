@@ -2,18 +2,76 @@ category: base
 doc: |
   External thermal field (e.g. for controlling the sample temperature)
 symbols:
-  n_Temp: number of temperatures
+  n_Temp: |
+    number of temperatures
 type: group
 NXthermal_field(NXexternal_stimulus):
   temperature(NX_FLOAT):
     unit: NX_TEMPERATURE
     doc: |
-      Measured/applied temperature. Could a a single float value for static temperature or  
-      an array of field strengths at different times and positions. 
+      Measured/applied temperature. Could a a single float value for static temperature or
+      an array of field strengths at different times and positions.
       In that case it should log to a value_log in NXsensor.
     dimensions:
+      
       # could be any length
-      dim: [[1, n_Temp]]       
+      dim: [[1, n_Temp]]
   thermometer(NXsensor):
     measurement(NX_CHAR):
       enumeration: [temperature]
+
+# ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
+# bec1831af4f6fb78dbb8cd8476bef085af50d87f21095270312d644dbd4b70ac
+# <?xml version='1.0' encoding='UTF-8'?>
+# <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+# <!--
+# # NeXus - Neutron and X-ray Common Data Format
+# #
+# # Copyright (C) 2014-2024 NeXus International Advisory Committee (NIAC)
+# #
+# # This library is free software; you can redistribute it and/or
+# # modify it under the terms of the GNU Lesser General Public
+# # License as published by the Free Software Foundation; either
+# # version 3 of the License, or (at your option) any later version.
+# #
+# # This library is distributed in the hope that it will be useful,
+# # but WITHOUT ANY WARRANTY; without even the implied warranty of
+# # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# # Lesser General Public License for more details.
+# #
+# # You should have received a copy of the GNU Lesser General Public
+# # License along with this library; if not, write to the Free Software
+# # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# #
+# # For further information, see http://www.nexusformat.org
+# -->
+# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXthermal_field" extends="NXexternal_stimulus" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+#     <symbols>
+#         <symbol name="n_Temp">
+#             <doc>
+#                  number of temperatures
+#             </doc>
+#         </symbol>
+#     </symbols>
+#     <doc>
+#          External thermal field (e.g. for controlling the sample temperature)
+#     </doc>
+#     <field name="temperature" type="NX_FLOAT" units="NX_TEMPERATURE">
+#         <doc>
+#              Measured/applied temperature. Could a a single float value for static temperature or  
+#              an array of field strengths at different times and positions. 
+#              In that case it should log to a value_log in NXsensor.
+#         </doc>
+#         <dimensions>
+#             <!--could be any length-->
+#             <dim index="1" value="n_Temp"/>
+#         </dimensions>
+#     </field>
+#     <group name="thermometer" type="NXsensor">
+#         <field name="measurement" type="NX_CHAR">
+#             <enumeration>
+#                 <item value="temperature"/>
+#             </enumeration>
+#         </field>
+#     </group>
+# </definition>

@@ -1,17 +1,19 @@
 category: base
-doc: External magnetic field
+doc: |
+  External magnetic field
 symbols:
   n_mField: |
     number of values in applied magnetic field
 type: group
 NXmagnetic_field(NXexternal_stimulus):
   strength(NX_FLOAT):
-    unit: NX_ANY # this should be Teslas
+    unit: NX_ANY
     doc: |
-      Magnetic field strength. Could a a single float value for static field or  
-      an array of field strengths at different times and positions. 
+      Magnetic field strength. Could a a single float value for static field or
+      an array of field strengths at different times and positions.
       In that case it should log to a value_log in NXsensor.
     dimensions:
+      
       # could be any length
       dim: [[1, n_mField]]
     \@direction:
@@ -19,3 +21,66 @@ NXmagnetic_field(NXexternal_stimulus):
   magnetometer(NXsensor):
     measurement(NX_CHAR):
       enumeration: [magnetic_field]
+
+# ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
+# cbf2ab2ab84edeed296154ee9b723a5e071ac8f3087a9fda9174915aaef0d1f7
+# <?xml version='1.0' encoding='UTF-8'?>
+# <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+# <!--
+# # NeXus - Neutron and X-ray Common Data Format
+# #
+# # Copyright (C) 2014-2024 NeXus International Advisory Committee (NIAC)
+# #
+# # This library is free software; you can redistribute it and/or
+# # modify it under the terms of the GNU Lesser General Public
+# # License as published by the Free Software Foundation; either
+# # version 3 of the License, or (at your option) any later version.
+# #
+# # This library is distributed in the hope that it will be useful,
+# # but WITHOUT ANY WARRANTY; without even the implied warranty of
+# # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# # Lesser General Public License for more details.
+# #
+# # You should have received a copy of the GNU Lesser General Public
+# # License along with this library; if not, write to the Free Software
+# # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# #
+# # For further information, see http://www.nexusformat.org
+# -->
+# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXmagnetic_field" extends="NXexternal_stimulus" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+#     <symbols>
+#         <symbol name="n_mField">
+#             <doc>
+#                  number of values in applied magnetic field
+#             </doc>
+#         </symbol>
+#     </symbols>
+#     <doc>
+#          External magnetic field
+#     </doc>
+#     <field name="strength" type="NX_FLOAT" units="NX_ANY">
+#         <doc>
+#              Magnetic field strength. Could a a single float value for static field or  
+#              an array of field strengths at different times and positions. 
+#              In that case it should log to a value_log in NXsensor.
+#         </doc>
+#         <dimensions>
+#             <!--could be any length-->
+#             <dim index="1" value="n_mField"/>
+#         </dimensions>
+#         <attribute name="direction">
+#             <enumeration>
+#                 <item value="x"/>
+#                 <item value="y"/>
+#                 <item value="z"/>
+#             </enumeration>
+#         </attribute>
+#     </field>
+#     <group name="magnetometer" type="NXsensor">
+#         <field name="measurement" type="NX_CHAR">
+#             <enumeration>
+#                 <item value="magnetic_field"/>
+#             </enumeration>
+#         </field>
+#     </group>
+# </definition>
