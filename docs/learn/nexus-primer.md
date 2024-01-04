@@ -10,53 +10,20 @@ NeXus is is a description of a common data exchange format initially developed f
 
     NeXus is supported be the research data management platform NOMAD.
     Experimental data following an NeXus application definition can easily be uploaded and is recognized by NOMAD's search system.
-    If you want to learn more about uploading NeXus data to NOMAD, please refer to the [NeXus to nomad](./nexus-to-nomad.md) tutorial
+    If you want to learn more about uploading NeXus data to NOMAD, please refer to the [NeXus to nomad](../tutorial/nexus-to-nomad.md) tutorial
     of this documentation.
     Accordingly, if you want to build data according to the FAIR principles, you can think of NeXus fulfilling the interoperability and
     reproducibility part and a research data management platform like NOMAD the findable and accessible part.
 
-## Who is this tutorial for?
+## What is NeXus?
 
-The document is for people who want to standardize their research data and want to understand the modelling principles
-of NeXus definitions or who want to build their own application definition for an experiment.
-We cover the basic principles and common principles of NeXus, here.
-For a more detailed description we recommend reading the [official NeXus documentation](...).
+Sometimes, NeXus is seen as writing data to some form of file in hdf5 format.
+While this is partly true, NeXus is independent of the actual storage format but is typically written into an hdf5 file.
 
-## What should you should know before this tutorial?
-
-- You should have a basic understanding what an hdf5 file is and how to write it
-- You should have a basic understanding of FAIR data [wilkinson et al](...)
-
-## What you will know at the end of this tutorial?
-
-You will have
-
-- a basic understanding how to write a file according to a NeXus standard
-- an idea of how to start writing an NeXus application definition for your domain of research
-- a basic understanding of common NeXus terminology
-
-
-Concept of this tutorial:
-
-Create an example file NXdouble_slit
-
-NXslit_experiments --> NXdouble_slit
-NXslit_experiments --> NXsingle_slit
-
-They should learn the basic principles of how nexus works, the different path notations
-- Principles of nexus
-    - concepts
-    - appdefs
-    - base classes
-- Inheritance of application definitions and base classes
-- Connection of concept paths and instance paths
-- Description of appdef/base class notation (upper and lower case)
-- Basic tools for creation (pynxtools) and verification (pynxtools?) of nexus files
-
-Additional information (i.e., not in this tutorial but linked to this):
-- Creating a reader in pynxtools
-- Reading/writing nexus data in nomad
-
+But what is NeXus then? It is the conceptual layer above the file structure.
+It is a contract on which data has to be present and how to name them in a given dataset.
+Hence, using NeXus participates in making data FAIR.
+It especially covers the interoperability and reproducibility part of research data.
 
 !!! info "NeXus path notations"
 
