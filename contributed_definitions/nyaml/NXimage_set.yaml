@@ -1,60 +1,33 @@
 category: base
 doc: |
-  Container for reporting a set of images taken.
+  Base class for reporting a set of images.
+  
+  This class provides a base vocabulary to be used for specialized :ref:`NXimage_set`
+  base classes like :ref:`NXimage_r_set` and :ref:`NXimage_c_set`.
 symbols:
-  n_images: Number of images in the stack.
-  n_y: Number of pixel per image in the slow direction.
-  n_x: Number of pixel per image in the fast direction.
-NXimage_set:
+  n_images: |
+    Number of images in the stack.
+  n_y: |
+    Number of pixel per image in the slow direction.
+  n_x: |
+    Number of pixel per image in the fast direction.
+type: group
+NXimage_set(NXobject):
   (NXprocess):
     doc: |
-      Details how images were processed from the detector readings.
-    source:
+      Details how NXdata instance inside instance of (specialized)
+      :ref:`NXimage_set` were processed from the detector readings/raw data.
+    source(NXserialized):
       doc: |
         Resolvable data artifact (e.g. filename) from which the all values in
-        the NXdata instances in this NXimage_set were loaded during parsing.
-      \@version:
-        doc: |
-          An at least as strong as SHA256 hashvalue of the data artifact which
-          source represents digitally to support provenance tracking.
-    mode:
+        the :ref:`NXdata` instances in this :ref:`NXimage_set` were loaded
+        during parsing.
+    mode(NX_CHAR):
       doc: |
         Imaging (data collection) mode of the instrument during acquisition
-        of the data in this NXimage_set instance.
-    detector_identifier:
+        of the data in this :ref:`NXimage_set` instance.
+    detector_identifier(NX_CHAR):
       doc: |
-        Link or name of an NXdetector instance with which the data were collected.
+        Link or name of an :ref:`NXdetector` instance with which the data were collected.
     (NXprogram):
-  stack(NXdata):
-    doc: |
-      Image (stack).
-    data_counts(NX_NUMBER):
-      doc: Image intensity values.
-      unit: NX_UNITLESS
-      dimensions:
-        rank: 3
-        dim: [[1, n_images], [2, n_y], [3, n_x]]
-    axis_image_identifier(NX_UINT):
-      doc: Image identifier
-      unit: NX_UNITLESS
-      dimensions:
-        rank: 1
-        dim: [[1, n_images]]
-      \@long_name:
-        doc: Image identifier.
-    axis_y(NX_NUMBER):
-      doc: Pixel coordinate center of mass along y direction.
-      unit: NX_LENGTH
-      dimensions:
-        rank: 1
-        dim: [[1, n_y]]
-      \@long_name:
-        doc: Coordinate along y direction.
-    axis_x(NX_NUMBER):
-      doc: Pixel coordinate center of mass along x direction.
-      unit: NX_LENGTH
-      dimensions:
-        rank: 1
-        dim: [[1, n_x]]
-      \@long_name:
-        doc: Coordinate along x direction.
+  (NXdata):

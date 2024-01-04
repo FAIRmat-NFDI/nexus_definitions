@@ -1,4 +1,3 @@
-# inspect comments behind NXms
 category: application
 doc: |
   Application definition for storing results of the SCORE cellular automaton.
@@ -11,10 +10,9 @@ doc: |
   Specifically the SCORE model can be used to simulate the growth of static
   recrystallization nuclei. The model is described in the literature:
   
-  * `M. Kühbach et al. <https://doi.org/10.1016/j.actamat.2016.01.068>`_  
-  * `C. Haase et al. <https://doi.org/10.1016/j.actamat.2015.08.057>`_  
-  * `M. Diehl et al. <https://doi.org/10.1088/1361-651X/ab51bd>`_  
-  
+  * `M. Kühbach et al. <https://doi.org/10.1016/j.actamat.2016.01.068>`_
+  * `C. Haase et al. <https://doi.org/10.1016/j.actamat.2015.08.057>`_
+  * `M. Diehl et al. <https://doi.org/10.1088/1361-651X/ab51bd>`_
 symbols:
   doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
@@ -32,12 +30,16 @@ symbols:
     Number of active cells in the (recrystallization) front.
   n_grains: |
     Number of grains in the computer simulation.
-NXms_score_results:
+
+# inspect comments behind NXms
+type: group
+NXms_score_results(NXobject):
   (NXentry):
     \@version:
       doc: |
         An at least as strong as SHA256 hashvalue of the file
         that specifies the application definition.
+    
     # enumeration: [sha_256_hash]
     definition:
       doc: |
@@ -56,7 +58,7 @@ NXms_score_results:
       doc: |
         Free-text description about the workflow (analysis/simulation).
         
-        Users are strongly advised to detail the sample history in the 
+        Users are strongly advised to detail the sample history in the
         respective field and fill rather as completely as possible the fields
         of this application definition rather than write details about the
         experiment into this free-text description field.
@@ -69,11 +71,11 @@ NXms_score_results:
         ISO 8601 time code with local time zone offset to UTC included
         when the characterization ended.
     PROGRAM(NXprogram):
-      exists: [min, 1, max, infty]
+      exists: ['min', '1', 'max', 'unbounded']
       program_name:
-       \@version:
+        \@version:
     experiment_or_simulation:
-      doc: | 
+      doc: |
         Specify if the (characterization) results/data of this instance of an
         application definition are based on the results of a simulation or the
         results of a post-processing of measured data to describe a microstructure.
@@ -83,6 +85,7 @@ NXms_score_results:
         Nanostructure and macrostructure are close synonyms.
         Material architecture is a narrow synonym.
       enumeration: [experiment, simulation]
+    
     # always a simulation!
     config_filename:
       doc: |
@@ -110,13 +113,14 @@ NXms_score_results:
         occurred.
       enumeration: [success, failure]
     USER(NXuser):
-      exists: [min, 0, max, infty]
+      exists: ['min', '0', 'max', 'unbounded']
       doc: |
         Contact information and eventually details of at least one person
         involved in creating this result. This can be the principle investigator
         who performed this experiment. Adding multiple users if relevant is recommended.
       name:
-        doc: Given (first) name and surname of the user.
+        doc: |
+          Given (first) name and surname of the user.
       affiliation:
         exists: recommended
         doc: |
@@ -124,7 +128,8 @@ NXms_score_results:
           when the experiment was performed.
       address:
         exists: recommended
-        doc: Postal address of the affiliation.
+        doc: |
+          Postal address of the affiliation.
       email:
         exists: recommended
         doc: |
@@ -139,8 +144,8 @@ NXms_score_results:
       orcid_platform:
         exists: recommended
         doc: |
-           Name of the OrcID or ResearcherID where the account
-           under orcid is registered.
+          Name of the OrcID or ResearcherID where the account
+          under orcid is registered.
       telephone_number:
         exists: optional
         doc: |
@@ -149,7 +154,7 @@ NXms_score_results:
       role:
         exists: recommended
         doc: |
-          Which role does the user have in the place and at the point 
+          Which role does the user have in the place and at the point
           in time when the experiment was performed? Technician operating
           the microscope. Student, postdoc, principle investigator, guest
           are common examples.
@@ -163,22 +168,24 @@ NXms_score_results:
           Name of the social media platform where the account
           under social_media_name is registered.
     specimen(NXsample):
+      
       # NEW ISSUE: inject the conclusion from the discussion with Andrea
       # according to SAMPLE.yaml 0f8df14 2022/06/15
       name:
         doc: |
           Descriptive name or ideally (globally) unique persistent identifier.
-      # sample_history:
-      #  doc: |
-      #    Ideally, a reference to the location of or a (globally) unique
-      #    persistent identifier of e.g. another file which should document
-      #    ideally as many details as possible of the material, its
-      #    microstructure, and its thermo-chemo-mechanical processing/
-      #    preparation history.
-      # preparation_date(NX_DATE_TIME):
-      #  doc: | 
-      #    ISO 8601 time code with local time zone offset to UTC information
-      #    when the specimen was prepared.
+    
+    # sample_history:
+    # doc: |
+    # Ideally, a reference to the location of or a (globally) unique
+    # persistent identifier of e.g. another file which should document
+    # ideally as many details as possible of the material, its
+    # microstructure, and its thermo-chemo-mechanical processing/
+    # preparation history.
+    # preparation_date(NX_DATE_TIME):
+    # doc: |
+    # ISO 8601 time code with local time zone offset to UTC information
+    # when the specimen was prepared.
     (NXdata):
       exists: optional
       doc: |
@@ -191,9 +198,8 @@ NXms_score_results:
         named x, y, and z has to be specified. Each base vector of the
         coordinate system should be described with an NXtransformations instance.
       TRANSFORMATIONS(NXtransformations):
-        exists: [min, 3, max, infty]
-
-    conventions(NXem_ebsd_conventions):
+        exists: ['min', '3', 'max', 'unbounded']
+    conventions(NXem_conventions):
       rotation_conventions(NXprocess):
         three_dimensional_rotation_handedness:
         rotation_convention:
@@ -215,9 +221,9 @@ NXms_score_results:
         yaxis_direction:
         zaxis_direction:
         origin:
-
     ROI_SET(NXcg_roi_set):
-      exists: [min, 1, max, infty]  # usually a single domain covering the entire simulated or measured material volume
+      exists: ['min', '1', 'max', 'unbounded']
+      
       # however for solitary unit models aka volume element ensemble, replica methods we may need more than one domain
       # the volume element is not called representative because for what we consider the volume element to be representative
       # for is a matter of interpretation (fundamentally this is an assumption) and can differ for different descriptors
@@ -235,21 +241,24 @@ NXms_score_results:
         extent(NX_POSINT):
         identifier_offset(NX_INT):
       boundary(NXcg_polyhedron_set):
-        doc: A tight bounding box or sphere or bounding primitive about the grid.
+        doc: |
+          A tight bounding box or sphere or bounding primitive about the grid.
+        
         # a good example for a general bounding box description for such a grids of triclinic cells
         # https://docs.lammps.org/Howto_triclinic.html NXcg_polyhedron because a parallelepiped
         number_of_boundaries(NX_POSINT):
+          unit: NX_UNITLESS
           doc: |
             How many distinct boundaries are distinguished?
             Most grids discretize a cubic or cuboidal region. In this case
             six sides can be distinguished, each making an own boundary.
-          unit: NX_UNITLESS
         boundaries:
-          exists: recommmended
+          exists: ['min', '0']
           doc: |
             Name of the boundaries. E.g. left, right, front, back, bottom, top,
             The field must have as many entries as there are number_of_boundaries.
         boundary_conditions(NX_INT):
+          unit: NX_UNITLESS
           doc: |
             The boundary conditions for each boundary:
             
@@ -259,16 +268,14 @@ NXms_score_results:
             3 - mirror
             4 - von Neumann
             5 - Dirichlet
-            
-          unit: NX_UNITLESS
           dimensions:
             rank: 1
             dim: [[1, n_b]]
-
       snapshot_set(NXms_snapshot_set):
         doc: |
           Collection of microstructural data observed/simulated.
         identifier_offset(NX_UINT):
+          unit: NX_UNITLESS
           doc: |
             Integer which specifies the first index to be used for distinguishing
             snapshots. Identifiers are defined either implicitly or explicitly.
@@ -280,8 +287,7 @@ NXms_score_results:
             if the identifiers are expected to start from 1 (referred to as
             Fortran-/Matlab-) or from 0 (referred to as C-, Python-style index
             notation) respectively.
-          unit: NX_UNITLESS
-
+        
         # essentially NXmonitor instances for evolution of ensemble summary statistics
         evolution(NXprocess):
           exists: optional
@@ -300,160 +306,166 @@ NXms_score_results:
             exists: optional
             doc: |
               Evolution of the simulated temperature over time.
+          
           # pressure(NXprocess):
-          #   exists: optional
+          # exists: optional
           # stress(NXprocess):
-          #   exists: optional
+          # exists: optional
           # strain(NXprocess):
-          #   exists: optional
+          # exists: optional
           # deformation_gradient(NXprocess):
-          #   exists: optional
+          # exists: optional
           # magnetic_field(NXprocess):
-          #   exists: optional
+          # exists: optional
           # electric_field(NXprocess):
-          #   exists: optional
+          # exists: optional
           kinetics(NXprocess):
             exists: optional
             doc: |
               Evolution of the recrystallized volume fraction over time.
-          # recrystallization_front(NXprocess):
-          #   exists: optional
+        
+        # recrystallization_front(NXprocess):
+        # exists: optional
         # time-resolved results for individual snapshots
         # virtually all computer simulations and all experiments always probe
         # snapshots
-        MS_SNAPSHOT(NXms_snapshot):  # equivalent to time-step
+        MS_SNAPSHOT(NXms_snapshot):
           time(NX_NUMBER):
+            unit: NX_TIME
             doc: |
               Measured or simulated physical time stamp for this snapshot.
               Not to be confused with wall-clock timing or profiling data.
-            unit: NX_TIME
           temperature(NX_NUMBER):
-            doc: |
-               Simulated temperature.
             unit: NX_TEMPERATURE
+            doc: |
+              Simulated temperature.
           iteration(NX_UINT):
+            unit: NX_UNITLESS
             doc: |
               Iteration or increment counter.
-            unit: NX_UNITLESS
+          
           # optional places to store the grid for instance if it changes
-          grid(NXcg_grid):  # cell_based quantities for Vitesh Shah
+          grid(NXcg_grid):
             exists: recommended
             grain_identifier(NX_UINT):
               exists: recommended
+              unit: NX_UNITLESS
               doc: |
                 Grain identifier for each cell.
-              unit: NX_UNITLESS
               dimensions:
                 rank: 3
                 dim: [[1, n_x], [2, n_y], [3, n_z]]
             thread_identifier(NX_UINT):
               exists: optional
+              unit: NX_UNITLESS
               doc: |
                 Identifier of the OpenMP thread which processed this part of the grid.
-              unit: NX_UNITLESS
               dimensions:
                 rank: 3
                 dim: [[1, n_x], [2, n_y], [3, n_z]]
+          
           # check comments behind NXms
-          recrystallization_front(NXprocess):  # front_based quantities for Vitesh Shah
+          recrystallization_front(NXprocess):
             exists: recommended
             doc: |
               Details about those cells which in this time step represent
               the discretized recrystallization front.
             halo_region(NX_UINT):
               exists: optional
+              unit: NX_UNITLESS
               doc: |
                 Which cells are currently in a halo region of threads.
-              unit: NX_UNITLESS
               dimensions:
                 rank: 1
                 dim: [[1, n_front]]
             mobility_weight(NX_NUMBER):
               exists: recommended
+              unit: NX_UNITLESS
               doc: |
                 So-called mobility weight which is a scaling factor to
                 control the mobility of the grain boundary which is assumed
                 to sweep currently this volume.
-              unit: NX_UNITLESS
               dimensions:
                 rank: 1
                 dim: [[1, n_front]]
             coordinate(NX_NUMBER):
               exists: recommended
+              unit: NX_LENGTH
               doc: |
                 Grid coordinates of each cell in the recrystallization front.
-              unit: NX_LENGTH
               dimensions:
                 rank: 2
                 dim: [[1, n_front], [2, 3]]
             deformed_grain_identifier(NX_UINT):
               exists: recommended
+              unit: NX_UNITLESS
               doc: |
                 Grain identifier assigned to each cell in the recrystallization front.
-              unit: NX_UNITLESS
               dimensions:
                 rank: 1
                 dim: [[1, n_front]]
             recrystallized_grain_identifier(NX_UINT):
               exists: recommended
-              doc: |
-                Grain identifier assigned to each nucleus which affected that cell in the recrystallization front.
               unit: NX_UNITLESS
+              doc: |
+                Grain identifier assigned to each nucleus which affected that cell in the
+                recrystallization front.
               dimensions:
                 rank: 1
                 dim: [[1, n_front]]
             recrystallized_volume_fraction(NX_NUMBER):
               exists: recommended
+              unit: NX_DIMENSIONLESS
               doc: |
                 Relative volume transformed as a measure of infection progress.
-              unit: NX_DIMENSIONLESS
               dimensions:
                 rank: 1
                 dim: [[1, n_front]]
             thread_identifier(NX_UINT):
               exists: optional
-              doc: |
-                Identifier of the OpenMP thread processing each cell in the recrystallization front.
               unit: NX_UNITLESS
+              doc: |
+                Identifier of the OpenMP thread processing each cell in the recrystallization
+                front.
               dimensions:
                 rank: 1
                 dim: [[1, n_front]]
             infection_direction(NX_UINT):
               exists: optional
+              unit: NX_UNITLESS
               doc: |
                 Hint about the direction from which the cell was infected.
-              unit: NX_UNITLESS
               dimensions:
                 rank: 1
                 dim: [[1, n_front]]
-          grain_ensemble(NXprocess):  # grain_based quantities for Vitesh Shah
+          grain_ensemble(NXprocess):
             exists: recommended
             doc: |
               Current grain-related quantities.
             euler(NX_NUMBER):
               exists: optional
+              unit: NX_ANGLE
               doc: |
                 Bunge-Euler angle triplets for each grain.
-              unit: NX_ANGLE
               dimensions:
                 rank: 2
                 dim: [[1, n_grains], [2, 3]]
             volume(NX_NUMBER):
+              unit: NX_VOLUME
               doc: |
                 Discrete volume of each grain accounting also for partially
                 transformed cells.
-              unit: NX_VOLUME
               dimensions:
                 rank: 1
                 dim: [[1, n_grains]]
             dislocation_density(NX_NUMBER):
               exists: recommended
+              unit: NX_ANY
               doc: |
                 Current value for the dislocation density as a measure of
                 the remaining stored energy in assumed crystal defects inside
                 each grain. The difference between these values scales the
                 driving force of grain boundary migration.
-              unit: NX_ANY  # 1/m^2
               dimensions:
                 rank: 1
                 dim: [[1, n_grains]]
@@ -471,47 +483,47 @@ NXms_score_results:
               dimensions:
                 rank: 1
                 dim: [[1, n_grains]]
-
           recrystallized_kinetics(NXprocess):
             doc: |
               Current recrystallized volume fraction.
             value(NX_NUMBER):
+              unit: NX_DIMENSIONLESS
               doc: |
                 Currently evaluated actual recrystallized volume fraction.
                 This takes into account partially recrystallized cells.
-              unit: NX_DIMENSIONLESS
             target(NX_NUMBER):
+              unit: NX_DIMENSIONLESS
               doc: |
                 Currently desired target recrystallized volume fraction at
                 which the user requested to log a snapshot.
-              unit: NX_DIMENSIONLESS
+          
           # pressure(NXprocess):
-          #   exists: optional
+          # exists: optional
           stress(NXprocess):
             exists: optional
             value(NX_NUMBER):
+              unit: NX_ANY
               doc: |
                 Currently assumed globally applied Cauchy stress tensor on the ROI.
-              unit: NX_ANY
               dimensions:
                 rank: 2
                 dim: [[1, 3], [2, 3]]
           strain(NXprocess):
             exists: optional
             value(NX_NUMBER):
+              unit: NX_UNITLESS
               doc: |
                 Currently assumed globally applied Cauchy strain tensor on the ROI.
-              unit: NX_UNITLESS
               dimensions:
                 rank: 2
                 dim: [[1, 3], [2, 3]]
-          # deformation_gradient(NXprocess):
-          #   exists: optional
-          # magnetic_field(NXprocess):
-          #   exists: optional
-          # electric_field(NXprocess):
-          #   exists: optional
-
+    
+    # deformation_gradient(NXprocess):
+    # exists: optional
+    # magnetic_field(NXprocess):
+    # exists: optional
+    # electric_field(NXprocess):
+    # exists: optional
     performance(NXcs_profiling):
       current_working_directory:
       command_line_call:
@@ -533,7 +545,7 @@ NXms_score_results:
         uuid:
           exists: optional
         (NXcs_cpu):
-          exists: [min, 0, max, infty]
+          exists: ['min', '0', 'max', 'unbounded']
           name:
             exists: optional
           (NXfabrication):
@@ -543,7 +555,7 @@ NXms_score_results:
             capabilities:
               exists: optional
         (NXcs_gpu):
-          exists: [min, 0, max, infty]
+          exists: ['min', '0', 'max', 'unbounded']
           name:
             exists: optional
           (NXfabrication):
@@ -553,12 +565,12 @@ NXms_score_results:
             capabilities:
               exists: optional
         (NXcs_mm_sys):
-          exists: [min, 0, max, 1]
+          exists: ['min', '0', 'max', '1']
           total_physical_memory(NX_NUMBER):
         (NXcs_io_sys):
-          exists: [min, 0, max, 1]
+          exists: ['min', '0', 'max', '1']
           (NXcs_io_obj):
-            exists: [min, 1, max, infty]
+            exists: ['min', '1', 'max', 'unbounded']
             technology:
             max_physical_capacity(NX_NUMBER):
             name:
@@ -569,7 +581,6 @@ NXms_score_results:
                 exists: optional
               capabilities:
                 exists: optional
-
         (NXcs_profiling_event):
           start_time(NX_DATE_TIME):
             exists: optional
@@ -578,16 +589,19 @@ NXms_score_results:
           description:
           elapsed_time(NX_NUMBER):
           number_of_processes(NX_POSINT):
+            
             # exists: recommended
             doc: |
               Specify if it was different from the number_of_processes
               in the NXcs_profiling super class.
           number_of_threads(NX_POSINT):
+            
             # exists: recommended
             doc: |
               Specify if it was different from the number_of_threads
               in the NXcs_profiling super class.
           number_of_gpus(NX_POSINT):
+            
             # exists: recommended
             doc: |
               Specify if it was different from the number_of_threads
