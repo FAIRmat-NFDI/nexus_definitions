@@ -37,7 +37,7 @@ NXmpes
 **Groups cited**:
   :ref:`NXaperture`, :ref:`NXbeam`, :ref:`NXcalibration`, :ref:`NXcollectioncolumn`, :ref:`NXdata`, :ref:`NXdetector`, :ref:`NXelectron_level`, :ref:`NXelectronanalyser`, :ref:`NXenergydispersion`, :ref:`NXentry`, :ref:`NXfabrication`, :ref:`NXinstrument`, :ref:`NXmanipulator`, :ref:`NXnote`, :ref:`NXprocess`, :ref:`NXresolution`, :ref:`NXsample`, :ref:`NXsource`, :ref:`NXuser`
 
-.. index:: NXentry (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXresolution (base class); used in application definition, NXdata (base class); used in application definition, NXfabrication (base class); used in application definition, NXsource (base class); used in application definition, NXbeam (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXcollectioncolumn (base class); used in application definition, NXaperture (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXdetector (base class); used in application definition, NXmanipulator (base class); used in application definition, NXprocess (base class); used in application definition, NXcalibration (base class); used in application definition, NXelectron_level (base class); used in application definition, NXsample (base class); used in application definition, NXnote (base class); used in application definition
+.. index:: NXentry (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXresolution (base class); used in application definition, NXfabrication (base class); used in application definition, NXsource (base class); used in application definition, NXbeam (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXcollectioncolumn (base class); used in application definition, NXaperture (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXdetector (base class); used in application definition, NXdata (base class); used in application definition, NXmanipulator (base class); used in application definition, NXprocess (base class); used in application definition, NXcalibration (base class); used in application definition, NXelectron_level (base class); used in application definition, NXsample (base class); used in application definition, NXnote (base class); used in application definition
 
 **Structure**:
 
@@ -151,7 +151,7 @@ NXmpes
 
       .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution-group:
 
-      **energy_resolution**: (recommended) :ref:`NXresolution` 
+      **energy_resolution**: (recommended) :ref:`NXresolution` :ref:`⤆ </NXinstrument/RESOLUTION-group>`
 
         .. collapse:: Overall energy resolution of the MPES instrument ...
 
@@ -172,23 +172,20 @@ NXmpes
         **physical_quantity**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXresolution/physical_quantity-field>`
 
 
+          Obligatory value: ``energy``
+
         .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution/type-field:
 
         .. index:: type (field)
 
-        **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXresolution/type-field>`
+        **type**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXresolution/type-field>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-group:
+        .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-field:
 
-        **resolution**: (required) :ref:`NXdata` 
+        .. index:: resolution (field)
 
-
-          .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution/magnitude-field:
-
-          .. index:: magnitude (field)
-
-          **magnitude**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} 
+        **resolution**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXresolution/resolution-field>`
 
 
       .. _/NXmpes/ENTRY/INSTRUMENT/device_information-group:
@@ -397,21 +394,6 @@ NXmpes
         **description**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXelectronanalyser/description-field>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution-field:
-
-        .. index:: energy_resolution (field)
-
-        **energy_resolution**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXelectronanalyser/energy_resolution-field>`
-
-          .. collapse:: Energy resolution of the analyser with the current setting. May be linke ...
-
-              Energy resolution of the analyser with the current setting. May be linked from a
-              NXcalibration.
-
-                  This concept is related to term `10.24`_ of the ISO 18115-1:2023 standard.
-
-              .. _10.24: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.24
-
         .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/fast_axes-field:
 
         .. index:: fast_axes (field)
@@ -457,6 +439,34 @@ NXmpes
           .. index:: identifier (field)
 
           **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
+
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution-group:
+
+        **energy_resolution**: (recommended) :ref:`NXresolution` :ref:`⤆ </NXelectronanalyser/energy_resolution-group>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution/type-field:
+
+          .. index:: type (field)
+
+          **type**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXresolution/type-field>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution/physical_quantity-field:
+
+          .. index:: physical_quantity (field)
+
+          **physical_quantity**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXelectronanalyser/energy_resolution/physical_quantity-field>`
+
+
+            Obligatory value: ``energy``
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution/resolution-field:
+
+          .. index:: resolution (field)
+
+          **resolution**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXelectronanalyser/energy_resolution/resolution-field>`
 
 
         .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN-group:
@@ -1241,7 +1251,10 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/identifier-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/identifier-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/model-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/model-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/vendor-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/vendor-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution-group </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution/physical_quantity-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution/physical_quantity-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution/resolution-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution/resolution-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution/type-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution/type-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION-group </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/device_information-group </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/device_information-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/device_information/identifier-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/device_information/identifier-field>`
@@ -1257,8 +1270,7 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/transmission_function-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/transmission_function-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution-group </NXmpes/ENTRY/INSTRUMENT/energy_resolution-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/physical_quantity-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/physical_quantity-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-group </NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-group>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution/magnitude-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution/magnitude-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/type-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/type-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information-group>`
