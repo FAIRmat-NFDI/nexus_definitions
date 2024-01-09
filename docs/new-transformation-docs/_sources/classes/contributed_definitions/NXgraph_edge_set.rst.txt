@@ -17,7 +17,13 @@ NXgraph_edge_set
 
 **Description**:
 
-  A set of (eventually directed) edges which connect nodes/vertices of a graph.
+  .. collapse:: A set of (eventually directed) edges which connect nodes of a graph. ...
+
+      A set of (eventually directed) edges which connect nodes of a graph.
+
+      Use as a direct child of an instance of :ref:`NXgraph_root`.
+      Alternatively, use depends_on to specify which instance
+      of :ref:`NXgraph_root` is defined by this instance.
 
 **Symbols**:
 
@@ -30,11 +36,22 @@ NXgraph_edge_set
 
 **Structure**:
 
+  .. _/NXgraph_edge_set@depends_on-attribute:
+
+  .. index:: depends_on (file attribute)
+
+  **@depends_on**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+    .. collapse:: Specify which instance of :ref:`NXgraph_root` this :ref:`NXgraph_edge_set` ...
+
+        Specify which instance of :ref:`NXgraph_root` this :ref:`NXgraph_edge_set`
+        refers to.
+
   .. _/NXgraph_edge_set/number_of_edges-field:
 
   .. index:: number_of_edges (field)
 
-  **number_of_edges**: (optional) :ref:`NX_POSINT <NX_POSINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **number_of_edges**: (optional) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
     Total number of edges, counting eventual bidirectional edges only once.
 
@@ -44,15 +61,16 @@ NXgraph_edge_set
 
   **identifier_offset**: (optional) :ref:`NX_INT <NX_INT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    Integer which specifies the first index to be used for distinguishing
-    edges. Identifiers are defined either implicitly
-    or explicitly. For implicit indexing the identifiers are defined on the
-    interval [identifier_offset, identifier_offset+c-1].
-    For explicit indexing the identifier array has to be defined.
+    .. collapse:: Integer which specifies the first index to be used for distinguishing ...
 
-    The identifier_offset field can for example be used to communicate if the
-    identifiers are expected to start from 1 (referred to as Fortran-/Matlab-)
-    or from 0 (referred to as C-, Python-style index notation) respectively.
+        Integer which specifies the first index to be used for distinguishing
+        edges. Identifiers are defined either implicitly or explicitly.
+
+        For implicit indexing the identifiers are defined on the interval
+        :math:`[identifier_offset, identifier_offset + c - 1]`.
+
+        For explicit indexing use the field identifier. For implicit indexing,
+        consult :ref:`NXcg_primitive_set` to get guidance how to set identifier_offset.
 
   .. _/NXgraph_edge_set/identifier-field:
 
@@ -66,15 +84,17 @@ NXgraph_edge_set
 
   .. index:: directionality (field)
 
-  **directionality**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 1, Dimensions: [n_edges]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **directionality**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_edges]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    Specifier whether each edge is non-directional, one-directional,
-    or bidirectional. Use the smallest available binary representation
-    which can store three different states:
+    .. collapse:: Specifier whether each edge is non-directional, one-directional, ...
 
-    * 0 / state 0x00 is non-directional
-    * 1 / state 0x01 is one-directional
-    * 2 / state 0x02 is bi-directional
+        Specifier whether each edge is non-directional, one-directional,
+        or bidirectional. Use the smallest available binary representation
+        which can store three different states:
+
+        * 0 / state 0x00 is non-directional
+        * 1 / state 0x01 is one-directional
+        * 2 / state 0x02 is bi-directional
 
   .. _/NXgraph_edge_set/node_pair-field:
 
@@ -82,25 +102,28 @@ NXgraph_edge_set
 
   **node_pair**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 2, Dimensions: [n_edges, 2]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    Pairs of node/vertex identifier. Each pair represents the connection 
-    between two nodes.
+    .. collapse:: Pairs of node/vertex identifier. Each pair represents the connection ...
 
-    In the case that the edge is non- or bi-directional
-    node identifier should be stored in ascending order is preferred.
+        Pairs of node/vertex identifier. Each pair represents the connection
+        between two nodes. The order in the pair encodes eventual directionality.
 
-    In the case of one-directional, for each pair the identifier of the source
-    node is the first entry in the pair. The identifier of the target is the
-    second entry in the pair, i.e. the pair encodes the information as 
-    if one traverses the edge from the source node walking to the target node.
+        In the case that an edge is non- or bi-directional, storing
+        node identifier in ascending order is preferred.
+
+        In the case that an edge is one-directional, node identifier should be
+        stored such that the identifier of the source node is the first entry
+        and the identifier of the target is the second entry in the pair.
 
   .. _/NXgraph_edge_set/is_a-field:
 
   .. index:: is_a (field)
 
-  **is_a**: (optional) :ref:`NX_CHAR <NX_CHAR>` (Rank: 1, Dimensions: [c]) 
+  **is_a**: (optional) :ref:`NX_CHAR <NX_CHAR>` (Rank: 1, Dimensions: [n_edges]) 
 
-    A human-readable qualifier which type or e.g. class instance the
-    edge is an instance of.
+    .. collapse:: A human-readable qualifier which type or e.g. class instance the ...
+
+        A human-readable qualifier which type or e.g. class instance the
+        edge is an instance of.
 
   .. _/NXgraph_edge_set/label-field:
 
@@ -108,7 +131,7 @@ NXgraph_edge_set
 
   **label**: (optional) :ref:`NX_CHAR <NX_CHAR>` (Rank: 1, Dimensions: [n_edges]) 
 
-    A human-readable label/caption/tag for the edge.
+    A human-readable label/caption/tag of each edge.
 
 
 Hypertext Anchors
@@ -125,6 +148,7 @@ attributes, and links defined in this class.
 * :ref:`/NXgraph_edge_set/label-field </NXgraph_edge_set/label-field>`
 * :ref:`/NXgraph_edge_set/node_pair-field </NXgraph_edge_set/node_pair-field>`
 * :ref:`/NXgraph_edge_set/number_of_edges-field </NXgraph_edge_set/number_of_edges-field>`
+* :ref:`/NXgraph_edge_set@depends_on-attribute </NXgraph_edge_set@depends_on-attribute>`
 
 **NXDL Source**:
   https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXgraph_edge_set.nxdl.xml
