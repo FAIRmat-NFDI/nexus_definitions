@@ -100,21 +100,24 @@
             <doc>
                  MPES spectrometer
                  
-                 This concept is related to term `12.58`_ of the ISO 18115-1:2023 standard.
-                 
-                 .. _12.58: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.58
+                 "xref:
+                   spec: ISO 18115-1:2023
+                   term: 12.58
+                   url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.58"
             </doc>
             <group name="energy_resolution" type="NXresolution" recommended="true">
                 <doc>
                      Overall energy resolution of the MPES instrument
                      
-                     This concept is related to term `10.7 ff.`_ of the ISO 18115-1:2023 standard.
+                     "xref:
+                       spec: ISO 18115-1:2023
+                       term: 10.7 ff.
+                       url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.7"
                      
-                     .. _10.7 ff.: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.7
-                     
-                     This concept is related to term `10.24`_ of the ISO 18115-1:2023 standard.
-                     
-                     .. _10.24: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.24
+                     "xref:
+                       spec: ISO 18115-1:2023
+                       term: 10.24
+                       url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.24"
                 </doc>
                 <field name="physical_quantity">
                     <enumeration>
@@ -406,9 +409,10 @@ ToDo:
                          
                          This field may also be found in NXsample if present.
                          
-                         This concept is related to term `8.41`_ of the ISO 18115-1:2023 standard.
-                         
-                         .. _8.41: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:8.41
+                         "xref:
+                           spec: ISO 18115-1:2023
+                           term: 8.41
+                           url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:8.41"
                     </doc>
                 </field>
                 <group name="device_information" type="NXfabrication" recommended="true">
@@ -468,9 +472,10 @@ ToDo:
                      Usually, the energy axis is adjusted by shifting all energies uniformally until one
                      well-defined emission line peak (or the Fermi edge) is located at a known _correct_ energy.
                      
-                     This concept is related to term `12.74 ff.`_ of the ISO 18115-1:2023 standard.
-                     
-                     .. _12.74 ff.: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.74
+                     "xref:
+                       spec: ISO 18115-1:2023
+                       term: 12.74 ff.
+                       url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.74"
                 </doc>
                 <group name="level" type="NXelectron_level" recommended="true">
                     <doc>
@@ -489,9 +494,10 @@ ToDo:
                          The binding energy (in units of eV) that the specified emission line appeared at,
                          after adjusting the binding energy scale.
                          
-                         This concept is related to term `12.16_ ff.`_ of the ISO 18115-1:2023 standard.
-                         
-                         .. _12.16_ ff.: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16
+                         "xref:
+                           spec: ISO 18115-1:2023
+                           term: 12.16_ ff.
+                           url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16"
                     </doc>
                 </field>
                 <field name="offset" type="NX_FLOAT" recommended="true">
@@ -694,6 +700,17 @@ ToDo:
                     </enumeration>
                 </attribute>
             </field>
+            <attribute name="energy_indices" recommended="true"/>
+            <attribute name="energy_depends" type="NX_CHAR" recommended="true">
+                <doc>
+                     The energy can be dispersed according to different strategies. ``energy_depends`` points to
+                     the path of a field defining the axis on which the energy axis depends.
+                     
+                     For example:
+                       @energy_depends: '/entry/instrument/detector/data/sensor_y' for a 2D detector
+                       @energy_depends: '/entry/instrument/energydispersion/center_energy' for a swept scan
+                </doc>
+            </attribute>
         </group>
     </group>
 </definition>
