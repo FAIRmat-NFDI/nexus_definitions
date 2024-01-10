@@ -71,20 +71,34 @@ units will be appropriate to the <code class="docutils literal notranslate"><spa
 <li><p><code class="docutils literal notranslate"><span class="pre">NX_UNITLESS</span></code> for axes for which no transformation type is specified</p></li>
 </ul>
 <p>This class will usually contain all axes of a sample stage or goniometer or
-a detector.  The NeXus default McSTAS coordinate frame is assumed, but additional
-useful coordinate axes may be defined by using axes for which no transformation
-type has been specified.</p>
-<p>The entry point (<code class="docutils literal notranslate"><span class="pre">depends_on</span></code>) will be outside of this class and point to a
-field in here. Following the chain may also require following <code class="docutils literal notranslate"><span class="pre">depends_on</span></code>
-links to transformations outside, for example to a common base table.  If
-a relative path is given, it is relative to the group enclosing the <code class="docutils literal notranslate"><span class="pre">depends_on</span></code>
-specification.</p>
+a detector. The NeXus default <a class="reference internal" href="../../design.html#design-coordinatesystem"><span class="std std-ref">McSTAS coordinate frame</span></a>
+is assumed, but additional useful coordinate axes may be defined by using axes for which
+no transformation type has been specified.</p>
+<p><strong>Transformation chain</strong></p>
+<p>The entry point of a chain of transformations is a field called <code class="docutils literal notranslate"><span class="pre">depends_on</span></code>
+will be outside of this class and points to a field in here. Following the chain may
+also require following <code class="docutils literal notranslate"><span class="pre">depends_on</span></code> links to transformations outside, for example
+to a common base table.  If a relative path is given, it is relative to the group
+enclosing the <code class="docutils literal notranslate"><span class="pre">depends_on</span></code> specification.</p>
 <p>For a chain of three transformations, where <span class="math notranslate nohighlight">\(T_1\)</span> depends on <span class="math notranslate nohighlight">\(T_2\)</span>
-and that in turn depends on <span class="math notranslate nohighlight">\(T_3\)</span>, the final transformation <span class="math notranslate nohighlight">\(T_f\)</span> is</p>
+which in turn depends on <span class="math notranslate nohighlight">\(T_3\)</span>, the final <em>active</em> transformation
+matrix <span class="math notranslate nohighlight">\(T_f\)</span> is</p>
 <div class="math notranslate nohighlight">
-\[T_f = T_3 T_2 T_1\]</div>
-<p>In explicit terms, the transformations are a subset of affine transformations
-expressed as 4x4 matrices that act on homogeneous coordinates, <span class="math notranslate nohighlight">\(w=(x,y,z,1)^T\)</span>.</p>
+\[T_f = T_3 . T_2 . T_1\]</div>
+<p>For example when positioning a flat detector, its pixel positions in the laboratory
+reference frame (<a class="reference internal" href="../../design.html#design-coordinatesystem"><span class="std std-ref">McSTAS coordinate frame</span></a> by default)
+can be calculated by</p>
+<div class="math notranslate nohighlight">
+\[X_\text{lab} = T_f . X_\text{pixel} = T_3 . T_2 . T_1 . X_\text{pixel}\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(T_1\)</span> comes first in the <em>depends-on</em> chain and is also applied first
+to the pixel coordinates.</p>
+<p>When we say transformation <span class="math notranslate nohighlight">\(A\)</span> <em>depends on</em> transformation <span class="math notranslate nohighlight">\(B\)</span> we mean that
+the physical motor that realizes <span class="math notranslate nohighlight">\(A\)</span> is <em>stacked on top of</em> the motor that realizes <span class="math notranslate nohighlight">\(B\)</span>.
+So the activate coordinate transformation <span class="math notranslate nohighlight">\(A\)</span> needs to be applied to a coordinate
+before applying <span class="math notranslate nohighlight">\(B\)</span>. In other words <span class="math notranslate nohighlight">\(X' = B . A . X\)</span>.</p>
+<p><strong>Transformation matrix</strong></p>
+<p>In explicit terms, the transformations are a subset of affine transformations expressed as
+4x4 active transformation matrices that act on homogeneous coordinates, <span class="math notranslate nohighlight">\(X=[x,y,z,1]^T\)</span>.</p>
 <p>For rotation and translation,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}T_r &amp;= \begin{pmatrix} R &amp; o \\ 0_3 &amp; 1 \end{pmatrix} \\ T_t &amp;= \begin{pmatrix} I_3  &amp; t + o \\ 0_3 &amp; 1 \end{pmatrix}\end{split}\]</div>
@@ -94,14 +108,14 @@ expressed as 4x4 matrices that act on homogeneous coordinates, <span class="math
 <p><span class="math notranslate nohighlight">\(o\)</span> is given by the <code class="docutils literal notranslate"><span class="pre">offset</span></code> attribute, <span class="math notranslate nohighlight">\(t\)</span> is given by the <code class="docutils literal notranslate"><span class="pre">vector</span></code>
 attribute multiplied by the field value, and <span class="math notranslate nohighlight">\(R\)</span> is defined as a rotation
 about an axis in the direction of <code class="docutils literal notranslate"><span class="pre">vector</span></code>, of angle of the field value.</p>
-<p>NOTE</p>
+<p><strong>Usage</strong></p>
 <p>One possible use of <code class="docutils literal notranslate"><span class="pre">NXtransformations</span></code> is to define the motors and
 transformations for a diffractometer (goniometer).  Such use is mentioned
 in the <code class="docutils literal notranslate"><span class="pre">NXinstrument</span></code> base class.  Use one <code class="docutils literal notranslate"><span class="pre">NXtransformations</span></code> group
 for each diffractometer and name the group appropriate to the device.
 Collecting the motors of a sample table or xyz-stage in an NXtransformations
 group is equally possible.</p>
-<p>Following the section on the general dscription of axis in NXtransformations is a section which
+<p>Following the section on the general description of axis in NXtransformations is a section which
 documents the fields commonly used within NeXus for positioning purposes and their meaning. Whenever
 there is a need for positioning a beam line component please use the existing names. Use as many fields
 as needed in order to position the component. Feel free to add more axis if required. In the description
@@ -114,6 +128,135 @@ of the full set:</p>
 <li><p>depends_on</p></li>
 </ul>
 <p>as needed.</p>
+<p><strong>Example 1: goniometer</strong></p>
+<p>Position a sample mounted on a goniometer in the <a class="reference internal" href="../../design.html#design-coordinatesystem"><span class="std std-ref">McSTAS coordinate frame</span></a>.</p>
+<p>The sample is oriented as follows</p>
+<div class="math notranslate nohighlight">
+\[X_\text{lab} = R(\vec{v}_\omega, \omega) .
+T(\vec{v}_z, \text{sam}_z) .
+T(\vec{v}_y, \text{sam}_y) .
+T(\vec{v}_x, \text{sam}_x) .
+R(\vec{v}_\chi, \chi) .
+R(\vec{v}_\varphi, \varphi) . X_s\]</div>
+<p>where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R(\vec{v},a)\)</span> is a rotation around vector <span class="math notranslate nohighlight">\(\vec{v}\)</span> with angle <span class="math notranslate nohighlight">\(a\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(T(\vec{u},t)\)</span> is a translation along vector <span class="math notranslate nohighlight">\(\vec{u}\)</span> over a distance <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(X_s\)</span> a coordinate in the sample reference frame.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entry</span><span class="p">:</span><span class="n">NXentry</span>
+  <span class="n">sample</span><span class="p">:</span><span class="n">NXsample</span>
+    <span class="n">depends_on</span><span class="o">=</span><span class="n">transformations</span><span class="o">/</span><span class="n">phi</span>
+    <span class="n">transformations</span><span class="p">:</span><span class="n">NXtransformations</span>
+      <span class="n">phi</span><span class="o">=</span><span class="mi">0</span>
+        <span class="nd">@depends_on</span><span class="o">=</span><span class="n">chi</span>
+        <span class="nd">@transformation_type</span><span class="o">=</span><span class="n">rotation</span>
+        <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="mf">0.0037</span> <span class="o">-</span><span class="mf">0.002</span><span class="p">]</span>
+        <span class="nd">@units</span><span class="o">=</span><span class="n">degrees</span>
+      <span class="n">chi</span><span class="o">=</span><span class="mi">0</span>
+        <span class="nd">@depends_on</span><span class="o">=</span><span class="n">sam_x</span>
+        <span class="nd">@transformation_type</span><span class="o">=</span><span class="n">rotation</span>
+        <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0046</span> <span class="mf">0.0372</span> <span class="mf">0.9993</span><span class="p">]</span>
+        <span class="nd">@units</span><span class="o">=</span><span class="n">degrees</span>
+      <span class="n">sam_x</span><span class="o">=</span><span class="mi">0</span>
+        <span class="nd">@depends_on</span><span class="o">=</span><span class="n">sam_y</span>
+        <span class="nd">@transformation_type</span><span class="o">=</span><span class="n">translation</span>
+        <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="nd">@units</span><span class="o">=</span><span class="n">mm</span>
+      <span class="n">sam_y</span><span class="o">=</span><span class="mi">0</span>
+        <span class="nd">@depends_on</span><span class="o">=</span><span class="n">sam_z</span>
+        <span class="nd">@transformation_type</span><span class="o">=</span><span class="n">translation</span>
+        <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="nd">@units</span><span class="o">=</span><span class="n">mm</span>
+      <span class="n">sam_z</span><span class="o">=</span><span class="mi">0</span>
+        <span class="nd">@depends_on</span><span class="o">=</span><span class="n">omega</span>
+        <span class="nd">@transformation_type</span><span class="o">=</span><span class="n">translation</span>
+        <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="nd">@units</span><span class="o">=</span><span class="n">mm</span>
+      <span class="n">omega</span><span class="o">=</span><span class="mi">174</span>
+        <span class="nd">@depends_on</span><span class="o">=.</span>
+        <span class="nd">@transformation_type</span><span class="o">=</span><span class="n">rotation</span>
+        <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="nd">@units</span><span class="o">=</span><span class="n">degrees</span>
+</pre></div>
+</div>
+<p><strong>Example 2: different coordinate system</strong></p>
+<p>Define a laboratory reference frame with the X-axis along the beam and the Z-axis opposite to the direction of gravity.
+Three point detectors are positioned in this reference:</p>
+<ul class="simple">
+<li><p><em>transmission</em>:
+* point detector in the beam
+* 20 cm downstream from the sample (the origin of the reference frame)</p></li>
+<li><p><em>vertical</em>:
+* point detector 10 cm downstream from the sample
+* making an angle of 5 degrees with the beam w.r.t. the sample
+* positioned in the XZ-plane above the XY-plane</p></li>
+<li><p><em>horizontal</em>:
+* point detector 11 cm downstream from the sample
+* making an angle of 6 degrees with the beam w.r.t. the sample
+* positioned in the XY-plane above the XZ-plane</p></li>
+</ul>
+<p>The coordinates of the point detectors in the laboratory reference frame are</p>
+<ul class="simple">
+<li><p><em>transmission</em>: <span class="math notranslate nohighlight">\(X_\text{lab} = T_x(20) . X_d\)</span></p></li>
+<li><p><em>vertical</em>: <span class="math notranslate nohighlight">\(X_\text{lab} = R_y(-5) . T_x(10) . X_d\)</span></p></li>
+<li><p><em>horizontal</em>: <span class="math notranslate nohighlight">\(X_\text{lab} = R_x(-90) . R_y(-6) . T_x(11) . X_d\)</span></p></li>
+</ul>
+<p>where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T_x\)</span>, <span class="math notranslate nohighlight">\(T_y\)</span>, <span class="math notranslate nohighlight">\(T_z\)</span>: active transformation matrices for translation along the X, Y and Z axes</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_x\)</span>, <span class="math notranslate nohighlight">\(R_y\)</span>, <span class="math notranslate nohighlight">\(R_z\)</span>: active transformation matrices for rotation around the X, Y and Z axes</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_d\)</span> is a coordinate in the detector reference frame.</p></li>
+</ul>
+<p>Note that as these are point detectors, we only have one coordinate <span class="math notranslate nohighlight">\(X_d=[0,0,0,1]^T\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">entry</span><span class="p">:</span><span class="n">NXentry</span>
+  <span class="n">instrument</span><span class="p">:</span><span class="n">NXinstrument</span>
+    <span class="n">vertical</span><span class="p">:</span><span class="n">NXdetector</span>
+      <span class="n">depends_on</span><span class="o">=</span><span class="n">position</span><span class="o">/</span><span class="n">distance</span>
+      <span class="n">position</span><span class="p">:</span><span class="n">NXtransformations</span>
+        <span class="n">distance</span><span class="o">=</span><span class="mi">10</span>            <span class="c1"># move downstream from the sample</span>
+          <span class="nd">@depends_on</span><span class="o">=</span><span class="n">polar</span>
+          <span class="nd">@units</span><span class="o">=</span><span class="n">cm</span>
+          <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">polar</span><span class="o">=</span><span class="mi">5</span>                <span class="c1"># title above the horizontal plane</span>
+          <span class="nd">@depends_on</span><span class="o">=</span><span class="n">azimuth</span>
+          <span class="nd">@units</span><span class="o">=</span><span class="n">degrees</span>
+          <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="o">-</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">azimuth</span><span class="o">=</span><span class="mi">0</span>              <span class="c1"># stay in the vertical plane</span>
+          <span class="nd">@depends_on</span><span class="o">=/</span><span class="n">entry</span><span class="o">/</span><span class="n">coordinate_system</span><span class="o">/</span><span class="n">beam</span>
+          <span class="nd">@units</span><span class="o">=</span><span class="n">degrees</span>
+          <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">horizontal</span><span class="p">:</span><span class="n">NXdetector</span>
+      <span class="n">depends_on</span><span class="o">=</span><span class="n">position</span><span class="o">/</span><span class="n">distance</span>
+      <span class="n">position</span><span class="p">:</span><span class="n">NXtransformations</span>
+        <span class="n">distance</span><span class="o">=</span><span class="mi">11</span>            <span class="c1"># move downstream from the sample</span>
+          <span class="nd">@depends_on</span><span class="o">=</span><span class="n">polar</span>
+          <span class="nd">@units</span><span class="o">=</span><span class="n">cm</span>
+          <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">polar</span><span class="o">=</span><span class="mi">6</span>                <span class="c1"># title above the horizontal plane</span>
+          <span class="nd">@depends_on</span><span class="o">=</span><span class="n">azimuth</span>
+          <span class="nd">@units</span><span class="o">=</span><span class="n">degrees</span>
+          <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="o">-</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">azimuth</span><span class="o">=</span><span class="mi">90</span>             <span class="c1"># rotate to the horizontal plane</span>
+          <span class="nd">@depends_on</span><span class="o">=/</span><span class="n">entry</span><span class="o">/</span><span class="n">coordinate_system</span><span class="o">/</span><span class="n">beam</span>
+          <span class="nd">@units</span><span class="o">=</span><span class="n">degrees</span>
+          <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">transmission</span><span class="p">:</span><span class="n">NXdetector</span>
+      <span class="n">depends_on</span><span class="o">=</span><span class="n">position</span><span class="o">/</span><span class="n">distance</span>
+      <span class="n">position</span><span class="p">:</span><span class="n">NXtransformations</span>
+        <span class="n">distance</span><span class="o">=</span><span class="mi">20</span>            <span class="c1"># move downstream from the sample</span>
+          <span class="nd">@depends_on</span><span class="o">=/</span><span class="n">entry</span><span class="o">/</span><span class="n">coordinate_system</span><span class="o">/</span><span class="n">beam</span>
+          <span class="nd">@units</span><span class="o">=</span><span class="n">cm</span>
+          <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">]</span>
+  <span class="n">coordinate_system</span><span class="p">:</span><span class="n">NXtransformations</span>
+    <span class="n">beam</span><span class="o">=</span><span class="n">NaN</span>                   <span class="c1"># value is never used</span>
+      <span class="nd">@depends_on</span><span class="o">=</span><span class="n">gravity</span>
+      <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">]</span>          <span class="c1"># X-axis points in the beam direction</span>
+    <span class="n">gravity</span><span class="o">=</span><span class="n">NaN</span>                <span class="c1"># value is never used</span>
+      <span class="nd">@depends_on</span><span class="o">=.</span>            <span class="c1"># end of the chain</span>
+      <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>         <span class="c1"># Z-axis points up</span>
+</pre></div>
+</div>
 </details></div></blockquote>
 <p><strong>Symbols</strong>:</p>
 <blockquote>
@@ -183,7 +326,7 @@ as the mechanical offset from mounting the axis to its dependency.</p>
 <blockquote>
 <div><details class="summary-points-to-the-path-to-a-field-defining-the-axis-on-which-this">
 <summary>Points to the path to a field defining the axis on which this ...</summary><p>Points to the path to a field defining the axis on which this
-depends or the string “.”.</p>
+depends or the string “.” when at the end of the chain.</p>
 </details></div></blockquote>
 <p id="index-9"><span id="nxtransformations-axisname-equipment-component-attribute"></span><strong>&#64;equipment_component</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
 <blockquote>
@@ -387,7 +530,7 @@ attributes, and links defined in this class.</p>
       
       |
       Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.15</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="../../_sources/classes/base_classes/NXtransformations.rst.txt"

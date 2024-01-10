@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>2.3.3.3.152. NXmpes &#8212; NeXus-FAIRmat v2022.07 documentation</title>
+    <title>2.3.3.3.154. NXmpes &#8212; NeXus-FAIRmat v2022.07 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
     <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
@@ -23,8 +23,8 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="next" title="2.3.3.3.153. NXms" href="NXms.html" />
-    <link rel="prev" title="2.3.3.3.151. NXmatch_filter" href="NXmatch_filter.html" />
+    <link rel="next" title="2.3.3.3.155. NXms" href="NXms.html" />
+    <link rel="prev" title="2.3.3.3.153. NXmatch_filter" href="NXmatch_filter.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -43,7 +43,7 @@
           <div class="body" role="main">
             
   <section id="nxmpes">
-<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.152. </span>NXmpes<a class="headerlink" href="#nxmpes" title="Link to this heading">¶</a></h1>
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.154. </span>NXmpes<a class="headerlink" href="#nxmpes" title="Link to this heading">¶</a></h1>
 <p><strong>Status</strong>:</p>
 <blockquote>
 <div><p>application definition, extends <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
@@ -356,13 +356,46 @@ electrons entering the analyzer.</p>
 <p id="index-55"><span id="nxmpes-entry-instrument-electronanalyser-detector-device-information-model-field"></span><strong>model</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-model-field"><span class="std std-ref">⤆</span></a></p>
 <p id="index-56"><span id="nxmpes-entry-instrument-electronanalyser-detector-device-information-identifier-field"></span><strong>identifier</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-identifier-field"><span class="std std-ref">⤆</span></a></p>
 </div></blockquote>
-<p id="nxmpes-entry-instrument-electronanalyser-detector-data-group"><strong>DATA</strong>: (recommended) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector-data-group"><span class="std std-ref">⤆</span></a></p>
+<p id="nxmpes-entry-instrument-electronanalyser-detector-raw-data-group"><strong>raw_data</strong>: (recommended) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector-data-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-57"><span id="nxmpes-entry-instrument-electronanalyser-detector-data-signal-attribute"></span><strong>&#64;signal</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-signal-attribute"><span class="std std-ref">⤆</span></a></p>
+<div><details class="summary-contains-the-raw-data-collected-by-the-detector-before-calibration">
+<summary>Contains the raw data collected by the detector before calibration. ...</summary><p>Contains the raw data collected by the detector before calibration.
+The data which is considered raw might change from experiment to experiment
+due to hardware pre-processing of the data.
+This field ideally collects the data with the lowest level of processing
+possible.</p>
+<p>The naming of fields should follow a convention to ensure compatibility.
+It is recommend to use the following field names:</p>
+<ul class="simple">
+<li><p><strong>pixel_x</strong>: Detector pixel in x direction.</p></li>
+<li><p><strong>pixel_y</strong>: Detector pixel in y direction.</p></li>
+<li><p><strong>energy</strong>: (Un)calibrated energy (kinetic or binding energy). Unit category: NX_ENERGY (e.g., eV).</p></li>
+<li><p><strong>kx</strong>: (Un)calibrated x axis in k-space. Unit category: NX_ANY (e.g., 1/Angström).</p></li>
+<li><p><strong>ky</strong>: (Un)calibrated y axis in k-space. Unit category: NX_ANY (1/Angström).</p></li>
+<li><p><strong>kz</strong>: (Un)calibrated z axis in k-space. Unit category: NX_ANY (1/Angström).</p></li>
+<li><p><strong>angular0</strong>: Fast-axis angular coordinate (or second slow axis if angularly integrated).
+Unit category: NX_ANGLE</p></li>
+<li><p><strong>angular1</strong>: Slow-axis angular coordinate (or second fast axis if simultaneously dispersed in 2 dimensions)
+Unit category: NX_ANGLE</p></li>
+<li><p><strong>spatial0</strong>: Fast-axis spatial coordinate (or second slow axis if spatially integrated)
+Unit category: NX_LENGTH</p></li>
+<li><p><strong>spatial1</strong>: Slow-axis spatial coordinate (or second fast axis if simultaneously dispersed in 2 dimensions)
+Unit category: NX_LENGTH</p></li>
+<li><p><strong>delay</strong>: Calibrated delay time. Unit category: NX_TIME (s).</p></li>
+<li><p><strong>polarization_angle</strong>: Linear polarization angle of the incoming or
+outgoing beam.
+Unit category: NX_ANGLE (° or rad)</p></li>
+<li><p><strong>ellipticity</strong>: Ellipticity of the incoming or outgoing beam.
+Unit category: NX_ANGLE (° or rad)</p></li>
+<li><p><strong>time_of_flight</strong>: Total time of flight. Unit category: NX_TIME_OF_FLIGHT</p></li>
+<li><p><strong>time_of_flight_adc</strong>: Time-of-flight values, analog-to-digital converted.</p></li>
+<li><p><strong>external_AXIS</strong>: Describes an axis which is coming from outside the detectors scope.</p></li>
+</ul>
+</details><p id="index-57"><span id="nxmpes-entry-instrument-electronanalyser-detector-raw-data-signal-attribute"></span><strong>&#64;signal</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-signal-attribute"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">raw</span></code></p>
 </div></blockquote>
-<p id="index-58"><span id="nxmpes-entry-instrument-electronanalyser-detector-data-raw-field"></span><strong>raw</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-58"><span id="nxmpes-entry-instrument-electronanalyser-detector-raw-data-raw-field"></span><strong>raw</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Raw data before calibration.</p>
 </div></blockquote>
@@ -569,11 +602,53 @@ other metadata file. In the case these are not available, free-text description.
 </div></blockquote>
 <p id="nxmpes-entry-data-group"><strong>DATA</strong>: (required) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="../base_classes/NXentry.html#nxentry-data-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-86"><span id="nxmpes-entry-data-signal-attribute"></span><strong>&#64;signal</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-signal-attribute"><span class="std std-ref">⤆</span></a></p>
+<div><details class="summary-an-nxdata-field-containing-a-view-on-the-measured-data">
+<summary>An NXdata field containing a view on the measured data. ...</summary><p>An NXdata field containing a view on the measured data.
+This NXdata field contains a collection of the main relevant fields (axes).
+In NXmpes, it is required to provide an energy axis.
+The other data fields ideally should be named according to conventions
+to ensure compatibility. We recommened the following field names
+for common data fields:</p>
+<ul class="simple">
+<li><p><strong>kx</strong>: Calibrated x axis in k-space. Unit category: NX_ANY (e.g., 1/Angström).</p></li>
+<li><p><strong>ky</strong>: Calibrated y axis in k-space. Unit category: NX_ANY (1/Angström).</p></li>
+<li><p><strong>kz</strong>: Calibrated z axis in k-space. Unit category: NX_ANY (1/Angström).</p></li>
+<li><p><strong>angular0</strong>: Fast-axis angular coordinate (or second slow axis if angularly integrated).
+Unit category: NX_ANGLE</p></li>
+<li><p><strong>angular1</strong>: Slow-axis angular coordinate (or second fast axis if simultaneously dispersed in 2 dimensions)
+Unit category: NX_ANGLE</p></li>
+<li><p><strong>spatial0</strong>: Fast-axis spatial coordinate (or second slow axis if spatially integrated)
+Unit category: NX_LENGTH</p></li>
+<li><p><strong>spatial1</strong>: Slow-axis spatial coordinate (or second fast axis if simultaneously dispersed in 2 dimensions)
+Unit category: NX_LENGTH</p></li>
+<li><p><strong>delay</strong>: Calibrated delay time. Unit category: NX_TIME (s).</p></li>
+<li><p><strong>polarization_angle</strong>: Linear polarization angle of the incoming or
+outgoing beam. This could be a link to
+/entry/instrument/beam/incident_polarization_angle or
+/entry/instrument/beam/final_polarization_angle if they exist.
+Unit category: NX_ANGLE (° or rad)</p></li>
+<li><p><strong>ellipticity</strong>: Ellipticity of the incoming or outgoing beam.
+Could be a link to /entry/instrument/beam/incident_ellipticity or
+/entry/instrument/beam/final_ellipticity if they exist.
+Unit category: NX_ANGLE (° or rad)</p></li>
+</ul>
+</details><p id="index-86"><span id="nxmpes-entry-data-signal-attribute"></span><strong>&#64;signal</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-signal-attribute"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">data</span></code></p>
 </div></blockquote>
-<p id="index-87"><span id="nxmpes-entry-data-data-field"></span><strong>data</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-data-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-87"><span id="nxmpes-entry-data-energy-indices-attribute"></span><strong>&#64;energy_indices</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<p id="index-88"><span id="nxmpes-entry-data-energy-depends-attribute"></span><strong>&#64;energy_depends</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-depends-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-energy-can-be-dispersed-according-to-different-strategies-energy-de">
+<summary>The energy can be dispersed according to different strategies. ``energy_de ...</summary><p>The energy can be dispersed according to different strategies. <code class="docutils literal notranslate"><span class="pre">energy_depends</span></code> points to
+the path of a field defining the axis on which the energy axis depends.</p>
+<dl class="simple">
+<dt>For example:</dt><dd><p>&#64;energy_depends: ‘/entry/instrument/detector/data/sensor_y’ for a 2D detector
+&#64;energy_depends: ‘/entry/instrument/energydispersion/center_energy’ for a swept scan</p>
+</dd>
+</dl>
+</details></div></blockquote>
+<p id="index-89"><span id="nxmpes-entry-data-data-field"></span><strong>data</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-data-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-represents-a-measure-of-one-or-more-dimensional-photoemission-counts-whe">
 <summary>Represents a measure of one- or more-dimensional photoemission counts, whe ...</summary><p>Represents a measure of one- or more-dimensional photoemission counts, where the
@@ -581,15 +656,14 @@ varied axis may be for example energy, momentum, spatial coordinate, pump-probe
 delay, spin index, temperature, etc. The axes traces should be linked to the
 actual encoder position in NXinstrument or calibrated axes in NXprocess.</p>
 </details></div></blockquote>
-<p id="index-88"><span id="nxmpes-entry-data-energy-field"></span><strong>energy</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-90"><span id="nxmpes-entry-data-energy-field"></span><strong>energy</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-energy"><span class="std std-ref">NX_ENERGY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-calibrated-energy-axis">
 <summary>Calibrated energy axis. ...</summary><p>Calibrated energy axis.</p>
-<p>The calibrated energy axis can be either in binding or kinetic energy.
-This should be a link to either
+<p>This could be a link to either
 /entry/process/energy_calibration/calibrated_axis or
 /entry/process/energy_correction/calibrated_axis.</p>
-</details><p id="index-89"><span id="nxmpes-entry-data-energy-type-attribute"></span><strong>&#64;type</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-long-name-attribute"><span class="std std-ref">⤆</span></a></p>
+</details><p id="index-91"><span id="nxmpes-entry-data-energy-type-attribute"></span><strong>&#64;type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-long-name-attribute"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-the-energy-can-be-either-stored-as-kinetic-or-as-binding-energy">
 <summary>The energy can be either stored as kinetic or as binding energy. ...</summary><p>The energy can be either stored as kinetic or as binding energy.</p>
@@ -615,6 +689,8 @@ attributes, and links defined in this class.</p>
 <li><p><a class="reference internal" href="#nxmpes-entry-data-data-field"><span class="std std-ref">/NXmpes/ENTRY/DATA/data-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-data-energy-field"><span class="std std-ref">/NXmpes/ENTRY/DATA/energy-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-data-energy-type-attribute"><span class="std std-ref">/NXmpes/ENTRY/DATA/energy&#64;type-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-data-energy-depends-attribute"><span class="std std-ref">/NXmpes/ENTRY/DATA&#64;energy_depends-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-data-energy-indices-attribute"><span class="std std-ref">/NXmpes/ENTRY/DATA&#64;energy_indices-attribute</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-data-signal-attribute"><span class="std std-ref">/NXmpes/ENTRY/DATA&#64;signal-attribute</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-definition-field"><span class="std std-ref">/NXmpes/ENTRY/definition-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-definition-version-attribute"><span class="std std-ref">/NXmpes/ENTRY/definition&#64;version-attribute</span></a></p></li>
@@ -648,14 +724,14 @@ attributes, and links defined in this class.</p>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-description-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/description-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-detector-group"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-detector-amplifier-type-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/amplifier_type-field</span></a></p></li>
-<li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-detector-data-group"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/DATA-group</span></a></p></li>
-<li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-detector-data-raw-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/DATA/raw-field</span></a></p></li>
-<li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-detector-data-signal-attribute"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/DATA&#64;signal-attribute</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-detector-detector-type-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/detector_type-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-detector-device-information-group"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/device_information-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-detector-device-information-identifier-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/device_information/identifier-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-detector-device-information-model-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/device_information/model-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-detector-device-information-vendor-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/device_information/vendor-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-detector-raw-data-group"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/raw_data-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-detector-raw-data-raw-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/raw_data/raw-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-detector-raw-data-signal-attribute"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/raw_data&#64;signal-attribute</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-device-information-group"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-device-information-identifier-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/identifier-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-device-information-model-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information/model-field</span></a></p></li>
@@ -805,7 +881,7 @@ attributes, and links defined in this class.</p>
   <div>
     <h3><a href="../../index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">2.3.3.3.152. NXmpes</a><ul>
+<li><a class="reference internal" href="#">2.3.3.3.154. NXmpes</a><ul>
 <li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
 </ul>
 </li>
@@ -819,8 +895,8 @@ attributes, and links defined in this class.</p>
   <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
   <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
   <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
-      <li>Previous: <a href="NXmatch_filter.html" title="previous chapter"><span class="section-number">2.3.3.3.151. </span>NXmatch_filter</a></li>
-      <li>Next: <a href="NXms.html" title="next chapter"><span class="section-number">2.3.3.3.153. </span>NXms</a></li>
+      <li>Previous: <a href="NXmatch_filter.html" title="previous chapter"><span class="section-number">2.3.3.3.153. </span>NXmatch_filter</a></li>
+      <li>Next: <a href="NXms.html" title="next chapter"><span class="section-number">2.3.3.3.155. </span>NXms</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -895,7 +971,7 @@ attributes, and links defined in this class.</p>
       
       |
       Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.15</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="../../_sources/classes/contributed_definitions/NXmpes.rst.txt"
