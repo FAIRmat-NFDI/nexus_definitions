@@ -35,9 +35,9 @@ NXmpes
   **n_transmission_function**: Number of data points in the transmission function.
 
 **Groups cited**:
-  :ref:`NXaperture`, :ref:`NXbeam`, :ref:`NXcalibration`, :ref:`NXcollectioncolumn`, :ref:`NXdata`, :ref:`NXdetector`, :ref:`NXelectron_level`, :ref:`NXelectronanalyser`, :ref:`NXenergydispersion`, :ref:`NXentry`, :ref:`NXfabrication`, :ref:`NXinstrument`, :ref:`NXmanipulator`, :ref:`NXnote`, :ref:`NXprocess`, :ref:`NXresolution`, :ref:`NXsample`, :ref:`NXsource`, :ref:`NXuser`
+  :ref:`NXactuator`, :ref:`NXaperture`, :ref:`NXbeam`, :ref:`NXcalibration`, :ref:`NXcollectioncolumn`, :ref:`NXdata`, :ref:`NXdetector`, :ref:`NXelectron_level`, :ref:`NXelectronanalyser`, :ref:`NXenergydispersion`, :ref:`NXentry`, :ref:`NXenvironment`, :ref:`NXfabrication`, :ref:`NXinstrument`, :ref:`NXlog`, :ref:`NXmanipulator`, :ref:`NXphysical_process`, :ref:`NXpid`, :ref:`NXprocess`, :ref:`NXresolution`, :ref:`NXsample_history`, :ref:`NXsample`, :ref:`NXsensor`, :ref:`NXsource`, :ref:`NXsubstance`, :ref:`NXuser`
 
-.. index:: NXentry (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXresolution (base class); used in application definition, NXfabrication (base class); used in application definition, NXsource (base class); used in application definition, NXbeam (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXcollectioncolumn (base class); used in application definition, NXaperture (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXdetector (base class); used in application definition, NXdata (base class); used in application definition, NXmanipulator (base class); used in application definition, NXprocess (base class); used in application definition, NXcalibration (base class); used in application definition, NXelectron_level (base class); used in application definition, NXsample (base class); used in application definition, NXnote (base class); used in application definition
+.. index:: NXentry (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXresolution (base class); used in application definition, NXfabrication (base class); used in application definition, NXsource (base class); used in application definition, NXbeam (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXcollectioncolumn (base class); used in application definition, NXaperture (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXdetector (base class); used in application definition, NXdata (base class); used in application definition, NXmanipulator (base class); used in application definition, NXsensor (base class); used in application definition, NXactuator (base class); used in application definition, NXpid (base class); used in application definition, NXlog (base class); used in application definition, NXprocess (base class); used in application definition, NXcalibration (base class); used in application definition, NXelectron_level (base class); used in application definition, NXsample (base class); used in application definition, NXsubstance (base class); used in application definition, NXsample_history (base class); used in application definition, NXphysical_process (base class); used in application definition, NXenvironment (base class); used in application definition
 
 **Structure**:
 
@@ -799,35 +799,157 @@ NXmpes
 
         Manipulator for positioning of the sample.
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_temperature-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/temperature_sensor-group:
 
-        .. index:: sample_temperature (field)
-
-        **sample_temperature**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_TEMPERATURE <NX_TEMPERATURE>`} :ref:`⤆ </NXmanipulator/sample_temperature-field>`
+        **temperature_sensor**: (recommended) :ref:`NXsensor` :ref:`⤆ </NXmanipulator/temperature_sensor-group>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current-field:
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/temperature_sensor/name-field:
 
-        .. index:: drain_current (field)
+          .. index:: name (field)
 
-        **drain_current**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_CURRENT <NX_CURRENT>`} :ref:`⤆ </NXmanipulator/drain_current-field>`
+          **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsensor/name-field>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias-field:
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/temperature_sensor/measurement-field:
 
-        .. index:: sample_bias (field)
+          .. index:: measurement (field)
 
-        **sample_bias**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_CURRENT <NX_CURRENT>`} :ref:`⤆ </NXmanipulator/sample_bias-field>`
+          **measurement**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXmanipulator/temperature_sensor/measurement-field>`
 
-          .. collapse:: Bias of the sample with respect to analyser ground. ...
 
-              Bias of the sample with respect to analyser ground.
+            Obligatory value: ``temperature``
 
-              This field may also be found in NXsample if present.
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/temperature_sensor/type-field:
 
-              This concept is related to term `8.41`_ of the ISO 18115-1:2023 standard.
+          .. index:: type (field)
 
-              .. _8.41: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:8.41
+          **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsensor/type-field>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/temperature_sensor/value-field:
+
+          .. index:: value (field)
+
+          **value**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/temperature_sensor/value-field>`
+
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater-group:
+
+        **sample_heater**: (recommended) :ref:`NXactuator` :ref:`⤆ </NXmanipulator/sample_heater-group>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/name-field:
+
+          .. index:: name (field)
+
+          **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXactuator/name-field>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/physical_quantity-field:
+
+          .. index:: physical_quantity (field)
+
+          **physical_quantity**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXmanipulator/sample_heater/physical_quantity-field>`
+
+
+            Obligatory value: ``temperature``
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/type-field:
+
+          .. index:: type (field)
+
+          **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXactuator/type-field>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/heater_power-field:
+
+          .. index:: heater_power (field)
+
+          **heater_power**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/sample_heater/heater_power-field>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/PID-group:
+
+          **PID**: (recommended) :ref:`NXpid` :ref:`⤆ </NXmanipulator/sample_heater/PID-group>`
+
+
+            .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/PID/setpoint-field:
+
+            .. index:: setpoint (field)
+
+            **setpoint**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/sample_heater/PID/setpoint-field>`
+
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter-group:
+
+        **drain_current_amperemeter**: (recommended) :ref:`NXsensor` :ref:`⤆ </NXmanipulator/drain_current_amperemeter-group>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/name-field:
+
+          .. index:: name (field)
+
+          **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsensor/name-field>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/measurement-field:
+
+          .. index:: measurement (field)
+
+          **measurement**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXmanipulator/drain_current_amperemeter/measurement-field>`
+
+
+            Obligatory value: ``current``
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/type-field:
+
+          .. index:: type (field)
+
+          **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsensor/type-field>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/value-field:
+
+          .. index:: value (field)
+
+          **value**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/drain_current_amperemeter/value-field>`
+
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter-group:
+
+        **sample_bias_voltmeter**: (recommended) :ref:`NXsensor` :ref:`⤆ </NXmanipulator/sample_bias_voltmeter-group>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/name-field:
+
+          .. index:: name (field)
+
+          **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsensor/name-field>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/measurement-field:
+
+          .. index:: measurement (field)
+
+          **measurement**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXmanipulator/sample_bias_voltmeter/measurement-field>`
+
+
+            Obligatory value: ``voltage``
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/type-field:
+
+          .. index:: type (field)
+
+          **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsensor/type-field>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/value-field:
+
+          .. index:: value (field)
+
+          **value**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/sample_bias_voltmeter/value-field>`
+
 
         .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information-group:
 
@@ -852,8 +974,120 @@ NXmpes
 
           .. index:: identifier (field)
 
-          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
+          **identifier**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
 
+
+      .. _/NXmpes/ENTRY/INSTRUMENT/pressure_gauge-group:
+
+      **pressure_gauge**: (recommended) :ref:`NXsensor` :ref:`⤆ </NXinstrument/SENSOR-group>`
+
+        Device to measure the gas pressure around the sample.
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/pressure_gauge/name-field:
+
+        .. index:: name (field)
+
+        **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsensor/name-field>`
+
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/pressure_gauge/measurement-field:
+
+        .. index:: measurement (field)
+
+        **measurement**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsensor/measurement-field>`
+
+
+          Obligatory value: ``pressure``
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/pressure_gauge/type-field:
+
+        .. index:: type (field)
+
+        **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsensor/type-field>`
+
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/pressure_gauge/value-field:
+
+        .. index:: value (field)
+
+        **value**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_PRESSURE <NX_PRESSURE>`} :ref:`⤆ </NXsensor/value-field>`
+
+          .. collapse:: In case of a single or averaged gas pressure measurement, this is the sc ...
+
+              In case of a single or averaged gas pressure measurement, this is the scalar gas pressure around
+              the sample. It can also be an 1D array of measured pressures (without time stamps).
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/pressure_gauge/value_log-group:
+
+        **value_log**: (optional) :ref:`NXlog` :ref:`⤆ </NXsensor/value_log-group>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/pressure_gauge/value_log/value-field:
+
+          .. index:: value (field)
+
+          **value**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_PRESSURE <NX_PRESSURE>`} :ref:`⤆ </NXlog/value-field>`
+
+            .. collapse:: In the case of an experiment in which the gas pressure changes and is  ...
+
+                In the case of an experiment in which the gas pressure changes and is recorded,
+                this is an array of length m of gas pressures.
+
+      .. _/NXmpes/ENTRY/INSTRUMENT/flood_gun-group:
+
+      **flood_gun**: (optional) :ref:`NXactuator` :ref:`⤆ </NXinstrument/ACTUATOR-group>`
+
+        Device to bring low-energy electrons to the sample for charge neutralization
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/flood_gun/name-field:
+
+        .. index:: name (field)
+
+        **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXactuator/name-field>`
+
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/flood_gun/physical_quantity-field:
+
+        .. index:: physical_quantity (field)
+
+        **physical_quantity**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXactuator/physical_quantity-field>`
+
+
+          Obligatory value: ``current``
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/flood_gun/type-field:
+
+        .. index:: type (field)
+
+        **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXactuator/type-field>`
+
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/flood_gun/current-field:
+
+        .. index:: current (field)
+
+        **current**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_CURRENT <NX_CURRENT>`} :ref:`⤆ </NXactuator/OUTPUT-field>`
+
+          .. collapse:: In case of a fixed or averaged electron current, this is the scalar curr ...
+
+              In case of a fixed or averaged electron current, this is the scalar current.
+              It can also be an 1D array of output current (without time stamps).
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/flood_gun/current_log-group:
+
+        **current_log**: (optional) :ref:`NXlog` :ref:`⤆ </NXactuator/OUTPUT_log-group>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/flood_gun/current_log/value-field:
+
+          .. index:: value (field)
+
+          **value**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_CURRENT <NX_CURRENT>`} :ref:`⤆ </NXlog/value-field>`
+
+            .. collapse:: In the case of an experiment in which the electron current is changed  ...
+
+                In the case of an experiment in which the electron current is changed and
+                recorded with time stamps, this is an array of length m of current setpoints.
 
     .. _/NXmpes/ENTRY/PROCESS-group:
 
@@ -1066,17 +1300,6 @@ NXmpes
       **name**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsample/name-field>`
 
 
-      .. _/NXmpes/ENTRY/SAMPLE/chemical_formula-field:
-
-      .. index:: chemical_formula (field)
-
-      **chemical_formula**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsample/chemical_formula-field>`
-
-        .. collapse:: The chemical formula of the sample. For mixtures use the NXsample_componen ...
-
-            The chemical formula of the sample. For mixtures use the NXsample_component
-            group in NXsample instead.
-
       .. _/NXmpes/ENTRY/SAMPLE/atom_types-field:
 
       .. index:: atom_types (field)
@@ -1097,30 +1320,6 @@ NXmpes
       **physical_form**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsample/physical_form-field>`
 
 
-      .. _/NXmpes/ENTRY/SAMPLE/preparation_date-field:
-
-      .. index:: preparation_date (field)
-
-      **preparation_date**: (recommended) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXsample/preparation_date-field>`
-
-        .. collapse:: Date of preparation of the sample for the XPS experiment (i.e. cleaving, l ...
-
-            Date of preparation of the sample for the XPS experiment (i.e. cleaving, last
-            annealing).
-
-      .. _/NXmpes/ENTRY/SAMPLE/temperature-field:
-
-      .. index:: temperature (field)
-
-      **temperature**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_TEMPERATURE <NX_TEMPERATURE>`} :ref:`⤆ </NXsample/temperature-field>`
-
-        .. collapse:: In the case of a fixed temperature measurement this is the scalar temperat ...
-
-            In the case of a fixed temperature measurement this is the scalar temperature of
-            the sample. In the case of an experiment in which the temperature is changed and
-            recoded, this is an array of length m of temperatures. This should be a link to
-            /entry/instrument/manipulator/sample_temperature.
-
       .. _/NXmpes/ENTRY/SAMPLE/situation-field:
 
       .. index:: situation (field)
@@ -1139,44 +1338,156 @@ NXmpes
           * ``reducing atmosphere``
 
 
-      .. _/NXmpes/ENTRY/SAMPLE/gas_pressure-field:
+      .. _/NXmpes/ENTRY/SAMPLE/SUBSTANCE-group:
 
-      .. index:: gas_pressure (field)
+      **SUBSTANCE**: (recommended) :ref:`NXsubstance` :ref:`⤆ </NXsample/SUBSTANCE-group>`
 
-      **gas_pressure**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_PRESSURE <NX_PRESSURE>`} 
+        .. collapse:: For samples containing a single pure substances. For mixtures use the ...
+
+            For samples containing a single pure substances. For mixtures use the
+            NXsample_component_set and NXsample_component group in NXsample instead.
+
+        .. _/NXmpes/ENTRY/SAMPLE/SUBSTANCE/molecular_formula_hill-field:
+
+        .. index:: molecular_formula_hill (field)
+
+        **molecular_formula_hill**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsubstance/molecular_formula_hill-field>`
+
+          The chemical formula of the sample (using CIF conventions).
+
+      .. _/NXmpes/ENTRY/SAMPLE/SAMPLE_HISTORY-group:
+
+      **SAMPLE_HISTORY**: (recommended) :ref:`NXsample_history` :ref:`⤆ </NXsample/SAMPLE_HISTORY-group>`
+
+        .. collapse:: A set of activities that occurred to the sample prior to/during photoemiss ...
+
+            A set of activities that occurred to the sample prior to/during photoemission
+            experiment.
+
+        .. _/NXmpes/ENTRY/SAMPLE/SAMPLE_HISTORY/sample_preparation-group:
+
+        **sample_preparation**: (recommended) :ref:`NXphysical_process` 
+
+          .. collapse:: Details about the sample preparation for the MPES experiment (e.g. UHV c ...
+
+              Details about the sample preparation for the MPES experiment (e.g. UHV cleaving,
+              in-situ growth, sputtering/annealing, etc.).
+
+          .. _/NXmpes/ENTRY/SAMPLE/SAMPLE_HISTORY/sample_preparation/start_time-field:
+
+          .. index:: start_time (field)
+
+          **start_time**: (required) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXphysical_process/start_time-field>`
 
 
-      .. _/NXmpes/ENTRY/SAMPLE/bias-field:
+          .. _/NXmpes/ENTRY/SAMPLE/SAMPLE_HISTORY/sample_preparation/end_time-field:
 
-      .. index:: bias (field)
+          .. index:: end_time (field)
 
-      **bias**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_VOLTAGE <NX_VOLTAGE>`} 
+          **end_time**: (recommended) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXphysical_process/end_time-field>`
 
-        Voltage applied to sample and sample holder.
 
-      .. _/NXmpes/ENTRY/SAMPLE/sample_history-group:
+          .. _/NXmpes/ENTRY/SAMPLE/SAMPLE_HISTORY/sample_preparation/method-field:
 
-      **sample_history**: (recommended) :ref:`NXnote` 
+          .. index:: method (field)
 
-        .. collapse:: A descriptor to keep track of the treatment of the sample before entering  ...
+          **method**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXphysical_process/method-field>`
 
-            A descriptor to keep track of the treatment of the sample before entering the
-            photoemission experiment. Ideally, a full report of the previous operations, in
-            any format (NXnote allows to add pictures, audio, movies). Alternatively, a
-            reference to the location or a unique identifier or other metadata file. In the
-            case these are not available, free-text description.
+            Details about the method of sample preparation before the MPES experiment.
 
-      .. _/NXmpes/ENTRY/SAMPLE/preparation_description-group:
+      .. _/NXmpes/ENTRY/SAMPLE/temperature-group:
 
-      **preparation_description**: (optional) :ref:`NXnote` 
+      **temperature**: (recommended) :ref:`NXenvironment` 
 
-        .. collapse:: Description of the surface preparation technique for the XPS experiment, i ...
+        Sample temperature (either controlled or just measured).
 
-            Description of the surface preparation technique for the XPS experiment, i.e.
-            UHV cleaving, in-situ growth, sputtering/annealing etc. Ideally, a full report
-            of the previous operations, in any format(NXnote allows to add pictures, audio,
-            movies). Alternatively, a reference to the location or a unique identifier or
-            other metadata file. In the case these are not available, free-text description.
+        .. _/NXmpes/ENTRY/SAMPLE/temperature/temperature_sensor-group:
+
+        **temperature_sensor**: (required) :ref:`NXsensor` :ref:`⤆ </NXenvironment/SENSOR-group>`
+
+          .. collapse:: Temperature sensor measuring the sample temperature. ...
+
+              Temperature sensor measuring the sample temperature.
+              This should be a link to /entry/instrument/manipulator/temperature_sensor.
+
+        .. _/NXmpes/ENTRY/SAMPLE/temperature/sample_heater-group:
+
+        **sample_heater**: (optional) :ref:`NXactuator` 
+
+          .. collapse:: Device to heat the sample. ...
+
+              Device to heat the sample.
+              This should be a link to /entry/instrument/manipulator/sample_heater.
+
+      .. _/NXmpes/ENTRY/SAMPLE/gas_pressure-group:
+
+      **gas_pressure**: (recommended) :ref:`NXenvironment` :ref:`⤆ </NXsample/ENVIRONMENT-group>`
+
+        Gas pressure surrounding the sample.
+
+        .. _/NXmpes/ENTRY/SAMPLE/gas_pressure/pressure_gauge-group:
+
+        **pressure_gauge**: (required) :ref:`NXsensor` :ref:`⤆ </NXenvironment/SENSOR-group>`
+
+          .. collapse:: Gauge measuring the gas pressure. ...
+
+              Gauge measuring the gas pressure.
+
+              This should be a link to /entry/instrument/pressure_gauge.
+
+      .. _/NXmpes/ENTRY/SAMPLE/bias-group:
+
+      **bias**: (recommended) :ref:`NXenvironment` :ref:`⤆ </NXsample/ENVIRONMENT-group>`
+
+        .. collapse:: Bias of the sample with respect to analyser ground. ...
+
+            Bias of the sample with respect to analyser ground.
+
+            This concept is related to term `8.41`_ of the ISO 18115-1:2023 standard.
+
+            .. _8.41: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:8.41
+
+        .. _/NXmpes/ENTRY/SAMPLE/bias/voltmeter-group:
+
+        **voltmeter**: (required) :ref:`NXsensor` :ref:`⤆ </NXenvironment/SENSOR-group>`
+
+          .. collapse:: Sensor setting/measuring the applied voltage. ...
+
+              Sensor setting/measuring the applied voltage.
+
+              This should be a link to /entry/instrument/manipulator/sample_bias_voltmeter.
+
+      .. _/NXmpes/ENTRY/SAMPLE/drain_current-group:
+
+      **drain_current**: (recommended) :ref:`NXenvironment` :ref:`⤆ </NXsample/ENVIRONMENT-group>`
+
+        Drain current of the sample and sample holder.
+
+        .. _/NXmpes/ENTRY/SAMPLE/drain_current/amperemeter-group:
+
+        **amperemeter**: (required) :ref:`NXsensor` :ref:`⤆ </NXenvironment/SENSOR-group>`
+
+          .. collapse:: Amperemeter measuring the drain current of the sample and sample holder. ...
+
+              Amperemeter measuring the drain current of the sample and sample holder.
+
+              This should be a link to /entry/instrument/manipulator/drain_current_amperemeter.
+
+      .. _/NXmpes/ENTRY/SAMPLE/flood_gun_current-group:
+
+      **flood_gun_current**: (optional) :ref:`NXenvironment` :ref:`⤆ </NXsample/ENVIRONMENT-group>`
+
+        Current of low-energy electrons to the sample for charge neutralization.
+
+        .. _/NXmpes/ENTRY/SAMPLE/flood_gun_current/flood_gun-group:
+
+        **flood_gun**: (required) :ref:`NXactuator` 
+
+          .. collapse:: Flood gun creating a current of low-energy electrons. ...
+
+              Flood gun creating a current of low-energy electrons.
+
+              This should be a link to /entry/instrument/flood_gun.
 
     .. _/NXmpes/ENTRY/data-group:
 
@@ -1371,14 +1682,47 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/physical_quantity-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/physical_quantity-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/type-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/type-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/flood_gun-group </NXmpes/ENTRY/INSTRUMENT/flood_gun-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/flood_gun/current-field </NXmpes/ENTRY/INSTRUMENT/flood_gun/current-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/flood_gun/current_log-group </NXmpes/ENTRY/INSTRUMENT/flood_gun/current_log-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/flood_gun/current_log/value-field </NXmpes/ENTRY/INSTRUMENT/flood_gun/current_log/value-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/flood_gun/name-field </NXmpes/ENTRY/INSTRUMENT/flood_gun/name-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/flood_gun/physical_quantity-field </NXmpes/ENTRY/INSTRUMENT/flood_gun/physical_quantity-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/flood_gun/type-field </NXmpes/ENTRY/INSTRUMENT/flood_gun/type-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information/identifier-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information/identifier-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information/model-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information/model-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information/vendor-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information/vendor-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_temperature-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_temperature-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/measurement-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/measurement-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/name-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/name-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/type-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/type-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/value-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/value-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/measurement-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/measurement-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/name-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/name-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/type-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/type-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/value-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/value-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/heater_power-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/heater_power-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/name-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/name-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/physical_quantity-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/physical_quantity-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/PID-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/PID-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/PID/setpoint-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/PID/setpoint-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/type-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/type-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/temperature_sensor-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/temperature_sensor-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/temperature_sensor/measurement-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/temperature_sensor/measurement-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/temperature_sensor/name-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/temperature_sensor/name-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/temperature_sensor/type-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/temperature_sensor/type-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/temperature_sensor/value-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/temperature_sensor/value-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/pressure_gauge-group </NXmpes/ENTRY/INSTRUMENT/pressure_gauge-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/pressure_gauge/measurement-field </NXmpes/ENTRY/INSTRUMENT/pressure_gauge/measurement-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/pressure_gauge/name-field </NXmpes/ENTRY/INSTRUMENT/pressure_gauge/name-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/pressure_gauge/type-field </NXmpes/ENTRY/INSTRUMENT/pressure_gauge/type-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/pressure_gauge/value-field </NXmpes/ENTRY/INSTRUMENT/pressure_gauge/value-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/pressure_gauge/value_log-group </NXmpes/ENTRY/INSTRUMENT/pressure_gauge/value_log-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/pressure_gauge/value_log/value-field </NXmpes/ENTRY/INSTRUMENT/pressure_gauge/value_log/value-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE-group </NXmpes/ENTRY/INSTRUMENT/source_TYPE-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/associated_beam-group </NXmpes/ENTRY/INSTRUMENT/source_TYPE/associated_beam-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information-group </NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information-group>`
@@ -1413,16 +1757,27 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/mapping@signal-attribute </NXmpes/ENTRY/PROCESS/transmission_correction/mapping@signal-attribute>`
 * :ref:`/NXmpes/ENTRY/SAMPLE-group </NXmpes/ENTRY/SAMPLE-group>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/atom_types-field </NXmpes/ENTRY/SAMPLE/atom_types-field>`
-* :ref:`/NXmpes/ENTRY/SAMPLE/bias-field </NXmpes/ENTRY/SAMPLE/bias-field>`
-* :ref:`/NXmpes/ENTRY/SAMPLE/chemical_formula-field </NXmpes/ENTRY/SAMPLE/chemical_formula-field>`
-* :ref:`/NXmpes/ENTRY/SAMPLE/gas_pressure-field </NXmpes/ENTRY/SAMPLE/gas_pressure-field>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/bias-group </NXmpes/ENTRY/SAMPLE/bias-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/bias/voltmeter-group </NXmpes/ENTRY/SAMPLE/bias/voltmeter-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/drain_current-group </NXmpes/ENTRY/SAMPLE/drain_current-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/drain_current/amperemeter-group </NXmpes/ENTRY/SAMPLE/drain_current/amperemeter-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/flood_gun_current-group </NXmpes/ENTRY/SAMPLE/flood_gun_current-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/flood_gun_current/flood_gun-group </NXmpes/ENTRY/SAMPLE/flood_gun_current/flood_gun-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/gas_pressure-group </NXmpes/ENTRY/SAMPLE/gas_pressure-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/gas_pressure/pressure_gauge-group </NXmpes/ENTRY/SAMPLE/gas_pressure/pressure_gauge-group>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/name-field </NXmpes/ENTRY/SAMPLE/name-field>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/physical_form-field </NXmpes/ENTRY/SAMPLE/physical_form-field>`
-* :ref:`/NXmpes/ENTRY/SAMPLE/preparation_date-field </NXmpes/ENTRY/SAMPLE/preparation_date-field>`
-* :ref:`/NXmpes/ENTRY/SAMPLE/preparation_description-group </NXmpes/ENTRY/SAMPLE/preparation_description-group>`
-* :ref:`/NXmpes/ENTRY/SAMPLE/sample_history-group </NXmpes/ENTRY/SAMPLE/sample_history-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/SAMPLE_HISTORY-group </NXmpes/ENTRY/SAMPLE/SAMPLE_HISTORY-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/SAMPLE_HISTORY/sample_preparation-group </NXmpes/ENTRY/SAMPLE/SAMPLE_HISTORY/sample_preparation-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/SAMPLE_HISTORY/sample_preparation/end_time-field </NXmpes/ENTRY/SAMPLE/SAMPLE_HISTORY/sample_preparation/end_time-field>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/SAMPLE_HISTORY/sample_preparation/method-field </NXmpes/ENTRY/SAMPLE/SAMPLE_HISTORY/sample_preparation/method-field>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/SAMPLE_HISTORY/sample_preparation/start_time-field </NXmpes/ENTRY/SAMPLE/SAMPLE_HISTORY/sample_preparation/start_time-field>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/situation-field </NXmpes/ENTRY/SAMPLE/situation-field>`
-* :ref:`/NXmpes/ENTRY/SAMPLE/temperature-field </NXmpes/ENTRY/SAMPLE/temperature-field>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/SUBSTANCE-group </NXmpes/ENTRY/SAMPLE/SUBSTANCE-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/SUBSTANCE/molecular_formula_hill-field </NXmpes/ENTRY/SAMPLE/SUBSTANCE/molecular_formula_hill-field>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/temperature-group </NXmpes/ENTRY/SAMPLE/temperature-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/temperature/sample_heater-group </NXmpes/ENTRY/SAMPLE/temperature/sample_heater-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/temperature/temperature_sensor-group </NXmpes/ENTRY/SAMPLE/temperature/temperature_sensor-group>`
 * :ref:`/NXmpes/ENTRY/start_time-field </NXmpes/ENTRY/start_time-field>`
 * :ref:`/NXmpes/ENTRY/title-field </NXmpes/ENTRY/title-field>`
 * :ref:`/NXmpes/ENTRY/USER-group </NXmpes/ENTRY/USER-group>`
