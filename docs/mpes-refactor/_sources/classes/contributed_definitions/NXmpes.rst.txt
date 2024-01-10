@@ -1178,16 +1178,18 @@ NXmpes
             movies). Alternatively, a reference to the location or a unique identifier or
             other metadata file. In the case these are not available, free-text description.
 
-    .. _/NXmpes/ENTRY/DATA-group:
+    .. _/NXmpes/ENTRY/data-group:
 
-    **DATA**: (required) :ref:`NXdata` :ref:`⤆ </NXentry/DATA-group>`
+    **data**: (required) :ref:`NXdata` :ref:`⤆ </NXentry/DATA-group>`
 
-      .. collapse:: An NXdata field containing a view on the measured data. ...
+      .. collapse:: The default NXdata field containing a view on the measured data. ...
 
-          An NXdata field containing a view on the measured data.
+          The default NXdata field containing a view on the measured data.
           This NXdata field contains a collection of the main relevant fields (axes).
           In NXmpes, it is required to provide an energy axis.
-          The other data fields ideally should be named according to conventions
+          If you want to provide additional views on your data, you can additionally use
+          the generic NXdata group of NXentry.
+          The other data fields inside this NXdata group should be named according to conventions
           to ensure compatibility. We recommened the following field names
           for common data fields:
 
@@ -1213,7 +1215,7 @@ NXmpes
             /entry/instrument/beam/final_ellipticity if they exist.
             Unit category: NX_ANGLE (° or rad)
 
-      .. _/NXmpes/ENTRY/DATA@signal-attribute:
+      .. _/NXmpes/ENTRY/data@signal-attribute:
 
       .. index:: signal (group attribute)
 
@@ -1222,14 +1224,14 @@ NXmpes
 
         Obligatory value: ``data``
 
-      .. _/NXmpes/ENTRY/DATA@energy_indices-attribute:
+      .. _/NXmpes/ENTRY/data@energy_indices-attribute:
 
       .. index:: energy_indices (group attribute)
 
       **@energy_indices**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
 
-      .. _/NXmpes/ENTRY/DATA@energy_depends-attribute:
+      .. _/NXmpes/ENTRY/data@energy_depends-attribute:
 
       .. index:: energy_depends (group attribute)
 
@@ -1244,7 +1246,7 @@ NXmpes
               @energy_depends: '/entry/instrument/detector/data/sensor_y' for a 2D detector
               @energy_depends: '/entry/instrument/energydispersion/center_energy' for a swept scan
 
-      .. _/NXmpes/ENTRY/DATA/data-field:
+      .. _/NXmpes/ENTRY/data/data-field:
 
       .. index:: data (field)
 
@@ -1257,7 +1259,7 @@ NXmpes
             delay, spin index, temperature, etc. The axes traces should be linked to the
             actual encoder position in NXinstrument or calibrated axes in NXprocess.
 
-      .. _/NXmpes/ENTRY/DATA/energy-field:
+      .. _/NXmpes/ENTRY/data/energy-field:
 
       .. index:: energy (field)
 
@@ -1271,7 +1273,7 @@ NXmpes
             /entry/process/energy_calibration/calibrated_axis or
             /entry/process/energy_correction/calibrated_axis.
 
-        .. _/NXmpes/ENTRY/DATA/energy@type-attribute:
+        .. _/NXmpes/ENTRY/data/energy@type-attribute:
 
         .. index:: type (field attribute)
 
@@ -1297,13 +1299,13 @@ attributes, and links defined in this class.
 
 
 * :ref:`/NXmpes/ENTRY-group </NXmpes/ENTRY-group>`
-* :ref:`/NXmpes/ENTRY/DATA-group </NXmpes/ENTRY/DATA-group>`
-* :ref:`/NXmpes/ENTRY/DATA/data-field </NXmpes/ENTRY/DATA/data-field>`
-* :ref:`/NXmpes/ENTRY/DATA/energy-field </NXmpes/ENTRY/DATA/energy-field>`
-* :ref:`/NXmpes/ENTRY/DATA/energy@type-attribute </NXmpes/ENTRY/DATA/energy@type-attribute>`
-* :ref:`/NXmpes/ENTRY/DATA@energy_depends-attribute </NXmpes/ENTRY/DATA@energy_depends-attribute>`
-* :ref:`/NXmpes/ENTRY/DATA@energy_indices-attribute </NXmpes/ENTRY/DATA@energy_indices-attribute>`
-* :ref:`/NXmpes/ENTRY/DATA@signal-attribute </NXmpes/ENTRY/DATA@signal-attribute>`
+* :ref:`/NXmpes/ENTRY/data-group </NXmpes/ENTRY/data-group>`
+* :ref:`/NXmpes/ENTRY/data/data-field </NXmpes/ENTRY/data/data-field>`
+* :ref:`/NXmpes/ENTRY/data/energy-field </NXmpes/ENTRY/data/energy-field>`
+* :ref:`/NXmpes/ENTRY/data/energy@type-attribute </NXmpes/ENTRY/data/energy@type-attribute>`
+* :ref:`/NXmpes/ENTRY/data@energy_depends-attribute </NXmpes/ENTRY/data@energy_depends-attribute>`
+* :ref:`/NXmpes/ENTRY/data@energy_indices-attribute </NXmpes/ENTRY/data@energy_indices-attribute>`
+* :ref:`/NXmpes/ENTRY/data@signal-attribute </NXmpes/ENTRY/data@signal-attribute>`
 * :ref:`/NXmpes/ENTRY/definition-field </NXmpes/ENTRY/definition-field>`
 * :ref:`/NXmpes/ENTRY/definition@version-attribute </NXmpes/ENTRY/definition@version-attribute>`
 * :ref:`/NXmpes/ENTRY/end_time-field </NXmpes/ENTRY/end_time-field>`
