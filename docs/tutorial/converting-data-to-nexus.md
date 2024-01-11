@@ -14,25 +14,49 @@ For a more detailed description on the general principles of NeXus we recommend 
 
 ## What should you should know before this tutorial?
 
-- You should have a basic understanding what an hdf5 file is and how to write it
-- You should have a basic understanding of FAIR data [wilkinson et al](...)
+- You should have a basic understanding of NeXus - [A primer on NeXus](../learn/nexus-primer.md)
+- You should have a basic understanding of FAIR data - [wilkinson et al](...)
 
 ## What you will know at the end of this tutorial?
 
 You will have
 
-- a basic understanding how to write a file according to a NeXus standard
-- a basic understanding of common NeXus terminology
+- a basic understanding how to use the NeXus data converter from the pynxtools package
 
-!!! info "NeXus path notations"
+## Setup
 
-    There are several methods for referencing concepts or data paths within NeXus:
+We use a Python tool to make converting our research data easier. This has a number of [readers](https://github.com/FAIRmat-NFDI/pynxtools/tree/master/pynxtools/dataconverter/readers) that support multiple file formats. You can browse the separate folders to find the reader that might work for you. A generic reader is the [JSON Map Reader](https://github.com/FAIRmat-NFDI/pynxtools/tree/master/pynxtools/dataconverter/readers/json_map).
 
-    - **Concept Path Notation:** This notation describes the hierarchical structure of NeXus concepts using class names. For example, `NXexperiment:/NXentry/NXinstrument/NXdetector` indicates the creation of a new NXdetector class within the NXexperiment concept. This path typically forms automatically when an application definition extends a base class's fields.
+We will use the [XPS Reader](https://github.com/FAIRmat-NFDI/pynxtools/tree/master/pynxtools/dataconverter/readers/xps) with Vamas (.vms) files as an example. 
 
-    - **Instance Path Notation:** It represents the actual location of a field or group in a NeXus data instance (e.g., an HDF5 file). An example is `my_file.nxs:/entry/instrument/detector`.
+#### Steps
 
-    - **Combined Notation:** This combines concept and instance paths. For example, `NXexperiment:/NXentry[my_file.nxs:entry]/NXinstrument[instrument]/NXdetector[detector]`. Here, concept paths are outside and instance paths within square brackets. The leftmost entries may include the NeXus class or file reference.
+1. Download the example files from here:
+2. Install [pynxtools](https://github.com/FAIRmat-NFDI/pynxtools/tree/master?tab=readme-ov-file#installation)
+3. Verify you can run the ```dataconverter``` in a terminal window. Open a terminal with the Python environment where you installed ```pynxtools```. Then type the following:
+```console
+dataconverter --help
+```
+4. Copy the example files to your working directory. You can find the working directory by typing the following in your terminal:
+```console
+pwd
+```
 
-    - **Appdef Notation:** This format is used in application definitions, where uppercase indicates a selectable name and lowercase a fixed name. Examples include `NXexperiment:ENTRY[my_experiment.nxs:entry]/INSTRUMENT[instrument]/DETECTOR[detector]` and `NXexperiment:ENTRY[my_experiment.nxs:entry]/my_INSTRUMENT[my_instrument]/DETECTOR[detector]`.
+## Converting the example files
 
+!!! **we might need a part to explain how to find an appdef to use and link to documents on creating an appdef**
+
+Once you have your files copied into the working directory. Your directory structure should look like this:
+```
+- file1.vms
+- otherfile.vms
+```
+
+Next, you will run the conversion routine:
+```console
+dataconverter --reader xps 
+```
+
+This will create a file called ```output.nxs``` in your current directory.
+
+**Congrats! You now have a FAIR NeXus file!**
