@@ -48,8 +48,14 @@ You can find the Nomad interpretation of your data under entries. If you click o
 
 <br/>
 
-Here is a snapshot of the ```NeXus``` file in Nomad.
+On the Overview page you will be presented with ```H5Web``` that let's you browse the data in your ```NeXus``` file directly.
 
-<img src="media/h5web.png" />
+<img src="media/overview.png" width="1000"/>
+
+<br/>
+
+Nomad also interprets and ```normalizes``` this data to make it interoperable with other corners of Material's research. To browse this ```normalized``` data you can browse the ```DATA``` tab. Here you see all the information Nomad has picked up and made available for search and comparison with synthesis, experimental, and computational materials data.
+
+<img src="media/data-tab.gif" />
 
 Feel free to explore more!
