@@ -25,14 +25,12 @@ NXcalibration
 
   **ncoeff**: Number of coefficients of the calibration function
 
-  **nfeat**: Number of features used to fit the calibration function
-
   **ncal**: Number of points of the calibrated and uncalibrated axes
 
 **Groups cited**:
-  :ref:`NXidentifier`, :ref:`NXserialized`
+  :ref:`NXdata`, :ref:`NXidentifier`, :ref:`NXserialized`
 
-.. index:: NXidentifier (base class); used in base class, NXserialized (base class); used in base class
+.. index:: NXidentifier (base class); used in base class, NXserialized (base class); used in base class, NXdata (base class); used in base class
 
 **Structure**:
 
@@ -175,11 +173,11 @@ NXcalibration
         For linear calibration. Offset parameter.
         This should yield the relation `calibrated_axis` = `scaling` * `original_axis` + `offset`.
 
-  .. _/NXcalibration/MAPPING-field:
+  .. _/NXcalibration/mapping_MAPPING-field:
 
-  .. index:: MAPPING (field)
+  .. index:: mapping_MAPPING (field)
 
-  **MAPPING**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` 
+  **mapping_MAPPING**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` 
 
     .. collapse:: Mapping data for calibration. ...
 
@@ -211,20 +209,19 @@ NXcalibration
 
   **calibration_method**: (optional) :ref:`NXidentifier` 
 
-    .. collapse:: A digital persistent identifier (e.g., doi, ISO standard) referring to a detai ...
+    .. collapse:: A digital persistent identifier (e.g., DOI, ISO standard) referring to a detai ...
 
-        A digital persistent identifier (e.g., doi, ISO standard) referring to a detailed description of a 
+        A digital persistent identifier (e.g., DOI, ISO standard) referring to a detailed description of a
         calibration method but no actual calibration data.
 
   .. _/NXcalibration/calibration_reference-group:
 
   **calibration_reference**: (optional) :ref:`NXidentifier` 
 
-    .. collapse:: A digital persistent identifier (e.g., a doi) referring to a  ...
+    .. collapse:: A digital persistent identifier (e.g., a DOI) referring to a publicly availabl ...
 
-        A digital persistent identifier (e.g., a doi) referring to a 
-        publicly available calibration measurement used for this instrument
-        , e.g., a measurement of a known standard containing calibration information.
+        A digital persistent identifier (e.g., a DOI) referring to a publicly available calibration measurement
+        used for this instrument, e.g., a measurement of a known standard containing calibration information.
         The axis values may be copied or linked in the appropriate NXcalibration fields for reference.
 
   .. _/NXcalibration/calibration_object-group:
@@ -236,10 +233,19 @@ NXcalibration
         A file serialisation of a calibration which may not be publicly available (externally from the nexus file).
 
         This metadata can be a documentation of the source (file) or database (entry) from which pieces
-        of information have been extracted for consumption in e.g. a research data management system (RDMS).
+        of information have been extracted for consumption (e.g. in a research data management system (RDMS)).
         It is also possible to include the actual file by using the `file` field.
 
         The axis values may be copied or linked in the appropriate NXcalibration fields for reference.
+
+  .. _/NXcalibration/DATA-group:
+
+  **DATA**: (optional) :ref:`NXdata` 
+
+    .. collapse:: Any data acquired/used during the calibration that does not fit the `NX_FLOAT` ...
+
+        Any data acquired/used during the calibration that does not fit the `NX_FLOAT` fields above.
+        NXdata groups can be used for multidimensional data which are relevant to the calibration
 
 
 Hypertext Anchors
@@ -256,12 +262,13 @@ attributes, and links defined in this class.
 * :ref:`/NXcalibration/calibration_object-group </NXcalibration/calibration_object-group>`
 * :ref:`/NXcalibration/calibration_reference-group </NXcalibration/calibration_reference-group>`
 * :ref:`/NXcalibration/coefficients-field </NXcalibration/coefficients-field>`
+* :ref:`/NXcalibration/DATA-group </NXcalibration/DATA-group>`
 * :ref:`/NXcalibration/description-field </NXcalibration/description-field>`
 * :ref:`/NXcalibration/fit_function-field </NXcalibration/fit_function-field>`
 * :ref:`/NXcalibration/input_SYMBOL-field </NXcalibration/input_SYMBOL-field>`
 * :ref:`/NXcalibration/input_SYMBOL@input_path-attribute </NXcalibration/input_SYMBOL@input_path-attribute>`
 * :ref:`/NXcalibration/last_process-field </NXcalibration/last_process-field>`
-* :ref:`/NXcalibration/MAPPING-field </NXcalibration/MAPPING-field>`
+* :ref:`/NXcalibration/mapping_MAPPING-field </NXcalibration/mapping_MAPPING-field>`
 * :ref:`/NXcalibration/offset-field </NXcalibration/offset-field>`
 * :ref:`/NXcalibration/original_axis-field </NXcalibration/original_axis-field>`
 * :ref:`/NXcalibration/original_axis@input_path-attribute </NXcalibration/original_axis@input_path-attribute>`

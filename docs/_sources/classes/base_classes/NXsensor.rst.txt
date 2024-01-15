@@ -28,9 +28,9 @@ NXsensor
   No symbol table
 
 **Groups cited**:
-  :ref:`NXgeometry`, :ref:`NXlog`, :ref:`NXoff_geometry`, :ref:`NXorientation`, :ref:`NXtransformations`
+  :ref:`NXfabrication`, :ref:`NXgeometry`, :ref:`NXlog`, :ref:`NXoff_geometry`, :ref:`NXorientation`, :ref:`NXtransformations`
 
-.. index:: NXgeometry (base class); used in base class, NXlog (base class); used in base class, NXorientation (base class); used in base class, NXoff_geometry (base class); used in base class, NXtransformations (base class); used in base class
+.. index:: NXgeometry (base class); used in base class, NXlog (base class); used in base class, NXorientation (base class); used in base class, NXoff_geometry (base class); used in base class, NXfabrication (base class); used in base class, NXtransformations (base class); used in base class
 
 **Structure**:
 
@@ -40,11 +40,11 @@ NXsensor
 
   **@default**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: Declares which child group contains a path leading  ...
+    .. collapse:: Declares which child group contains a path leading ...
 
         .. index:: plotting
 
-        Declares which child group contains a path leading 
+        Declares which child group contains a path leading
         to a :ref:`NXdata` group.
 
         It is recommended (as of NIAC2014) to use this attribute
@@ -104,6 +104,8 @@ NXsensor
 
           * ``electric_field``
 
+          * ``current``
+
           * ``conductivity``
 
           * ``resistance``
@@ -129,9 +131,9 @@ NXsensor
 
   **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: The type of hardware used for the measurement.   ...
+    .. collapse:: The type of hardware used for the measurement. ...
 
-        The type of hardware used for the measurement.  
+        The type of hardware used for the measurement.
         Examples (suggestions but not restrictions):
 
         :Temperature:
@@ -151,9 +153,9 @@ NXsensor
 
   **run_control**: (optional) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
-    .. collapse:: Is data collection controlled or synchronised to this quantity:  ...
+    .. collapse:: Is data collection controlled or synchronised to this quantity: ...
 
-        Is data collection controlled or synchronised to this quantity: 
+        Is data collection controlled or synchronised to this quantity:
         1=no, 0=to "value", 1=to "value_deriv1", etc.
 
   .. _/NXsensor/high_trip_value-field:
@@ -178,9 +180,9 @@ NXsensor
 
   **value**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n]) {units=\ :ref:`NX_ANY <NX_ANY>`} 
 
-    .. collapse:: nominal setpoint or average value  ...
+    .. collapse:: nominal setpoint or average value ...
 
-        nominal setpoint or average value 
+        nominal setpoint or average value
         - need [n] as may be a vector
 
   .. _/NXsensor/value_deriv1-field:
@@ -189,10 +191,10 @@ NXsensor
 
   **value_deriv1**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: same as field value, Dimensions: same as field value) {units=\ :ref:`NX_ANY <NX_ANY>`} 
 
-    .. collapse:: Nominal/average first derivative of value  ...
+    .. collapse:: Nominal/average first derivative of value ...
 
-        Nominal/average first derivative of value 
-        e.g. strain rate 
+        Nominal/average first derivative of value
+        e.g. strain rate
         - same dimensions as "value" (may be a vector)
 
   .. _/NXsensor/value_deriv2-field:
@@ -246,7 +248,6 @@ NXsensor
         .. todo::
           Add a definition for the reference point of a sensor.
 
-
   .. _/NXsensor/geometry-group:
 
   **geometry**: (optional) :ref:`NXgeometry` 
@@ -257,7 +258,10 @@ NXsensor
 
     **DEPRECATED**: Use the field `depends_on` and :ref:`NXtransformations` to position the beamstop and NXoff_geometry to describe its shape instead
 
-    Defines the axes for logged vector quantities if they are not the global instrument axes.
+    .. collapse:: Defines the axes for logged vector quantities if they are not the global ...
+
+        Defines the axes for logged vector quantities if they are not the global
+        instrument axes.
 
   .. _/NXsensor/value_log-group:
 
@@ -289,6 +293,11 @@ NXsensor
 
     This group describes the shape of the sensor when necessary.
 
+  .. _/NXsensor/FABRICATION-group:
+
+  **FABRICATION**: (optional) :ref:`NXfabrication` 
+
+
   .. _/NXsensor/TRANSFORMATIONS-group:
 
   **TRANSFORMATIONS**: (optional) :ref:`NXtransformations` 
@@ -312,6 +321,7 @@ attributes, and links defined in this class.
 * :ref:`/NXsensor/depends_on-field </NXsensor/depends_on-field>`
 * :ref:`/NXsensor/external_field_brief-field </NXsensor/external_field_brief-field>`
 * :ref:`/NXsensor/external_field_full-group </NXsensor/external_field_full-group>`
+* :ref:`/NXsensor/FABRICATION-group </NXsensor/FABRICATION-group>`
 * :ref:`/NXsensor/geometry-group </NXsensor/geometry-group>`
 * :ref:`/NXsensor/high_trip_value-field </NXsensor/high_trip_value-field>`
 * :ref:`/NXsensor/low_trip_value-field </NXsensor/low_trip_value-field>`
