@@ -37,7 +37,7 @@ NXmpes
 **Groups cited**:
   :ref:`NXactuator`, :ref:`NXaperture`, :ref:`NXbeam`, :ref:`NXcalibration`, :ref:`NXcollectioncolumn`, :ref:`NXdata`, :ref:`NXdetector`, :ref:`NXelectron_level`, :ref:`NXelectronanalyser`, :ref:`NXenergydispersion`, :ref:`NXentry`, :ref:`NXenvironment`, :ref:`NXfabrication`, :ref:`NXinstrument`, :ref:`NXlog`, :ref:`NXmanipulator`, :ref:`NXphysical_process`, :ref:`NXpid`, :ref:`NXprocess`, :ref:`NXresolution`, :ref:`NXsample_history`, :ref:`NXsample`, :ref:`NXsensor`, :ref:`NXsource`, :ref:`NXsubstance`, :ref:`NXuser`
 
-.. index:: NXentry (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXresolution (base class); used in application definition, NXfabrication (base class); used in application definition, NXsource (base class); used in application definition, NXbeam (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXcollectioncolumn (base class); used in application definition, NXaperture (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXdetector (base class); used in application definition, NXdata (base class); used in application definition, NXmanipulator (base class); used in application definition, NXsensor (base class); used in application definition, NXactuator (base class); used in application definition, NXpid (base class); used in application definition, NXlog (base class); used in application definition, NXprocess (base class); used in application definition, NXcalibration (base class); used in application definition, NXelectron_level (base class); used in application definition, NXsample (base class); used in application definition, NXsubstance (base class); used in application definition, NXsample_history (base class); used in application definition, NXphysical_process (base class); used in application definition, NXenvironment (base class); used in application definition
+.. index:: NXentry (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXresolution (base class); used in application definition, NXfabrication (base class); used in application definition, NXsource (base class); used in application definition, NXbeam (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXdata (base class); used in application definition, NXcollectioncolumn (base class); used in application definition, NXaperture (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXdetector (base class); used in application definition, NXmanipulator (base class); used in application definition, NXsensor (base class); used in application definition, NXactuator (base class); used in application definition, NXpid (base class); used in application definition, NXlog (base class); used in application definition, NXprocess (base class); used in application definition, NXcalibration (base class); used in application definition, NXelectron_level (base class); used in application definition, NXsample (base class); used in application definition, NXsubstance (base class); used in application definition, NXsample_history (base class); used in application definition, NXphysical_process (base class); used in application definition, NXenvironment (base class); used in application definition
 
 **Structure**:
 
@@ -99,9 +99,11 @@ NXmpes
 
     **method**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
-      .. collapse:: A name of the experimental method according to `Clause 11`_ of ...
+      .. collapse:: Name of the experimental method. ...
 
-          A name of the experimental method according to `Clause 11`_ of
+          Name of the experimental method.
+
+          If applicable, this name should match the terms given by `Clause 11`_ of
           the `ISO 18115-1:2023`_ specification.
 
           Examples include:
@@ -113,6 +115,9 @@ NXmpes
               * near ambient pressure X-ray photoelectron spectroscopy (NAPXPS)
               * photoelectron emission microscopy (PEEM)
               * electron spectroscopy for chemical analysis (ESCA)
+              * time-resolved angle-resolved X-ray photoelectron spectroscopy (trARPES)
+              * spin-resolved angle-resolved X-ray photoelectron spectroscopy (spin-ARPES)
+              * momentum microscopy
 
           .. _ISO 18115-1:2023: https://www.iso.org/standard/74811.html
           .. _Clause 11: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:sec:11
@@ -140,18 +145,18 @@ NXmpes
 
       **affiliation**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/affiliation-field>`
 
-        .. collapse:: Name of the affiliation of the user at the point in time when the experime ...
+        .. collapse:: Name of the affiliation of the user at the time when the experiment was ...
 
-            Name of the affiliation of the user at the point in time when the experiment was
+            Name of the affiliation of the user at the time when the experiment was
             performed.
 
     .. _/NXmpes/ENTRY/INSTRUMENT-group:
 
     **INSTRUMENT**: (required) :ref:`NXinstrument` :ref:`⤆ </NXentry/INSTRUMENT-group>`
 
-      .. collapse:: MPES spectrometer ...
+      .. collapse:: Description of the MPES spectrometer and its individual parts. ...
 
-          MPES spectrometer
+          Description of the MPES spectrometer and its individual parts.
 
           This concept is related to term `12.58`_ of the ISO 18115-1:2023 standard.
 
@@ -231,7 +236,7 @@ NXmpes
             A source used to generate a beam. Properties refer strictly to parameters of the
             source, not of the output beam. For example, the energy of the source is not the
             optical power of the beam, but the energy of the electron beam in a synchrotron
-            and so on.
+            or similar.
 
             Note that the uppercase notation in source_TYPE means that multiple sources can
             be provided. For example, in pump-probe experiments, it is possible to have both
@@ -427,13 +432,6 @@ NXmpes
         **slow_axes**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXelectronanalyser/slow_axes-field>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/transmission_function-field:
-
-        .. index:: transmission_function (field)
-
-        **transmission_function**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` 
-
-
         .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/device_information-group:
 
         **device_information**: (recommended) :ref:`NXfabrication` :ref:`⤆ </NXelectronanalyser/FABRICATION-group>`
@@ -486,6 +484,11 @@ NXmpes
           .. index:: resolution (field)
 
           **resolution**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXelectronanalyser/energy_resolution/resolution-field>`
+
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/transmission_function-group:
+
+        **transmission_function**: (optional) :ref:`NXdata` :ref:`⤆ </NXelectronanalyser/transmission_function-group>`
 
 
         .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/COLLECTIONCOLUMN-group:
@@ -846,12 +849,12 @@ NXmpes
 
           .. index:: value (field)
 
-          **value**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/temperature_sensor/value-field>`
+          **value**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/temperature_sensor/value-field>`
 
 
         .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater-group:
 
-        **sample_heater**: (recommended) :ref:`NXactuator` :ref:`⤆ </NXmanipulator/sample_heater-group>`
+        **sample_heater**: (optional) :ref:`NXactuator` :ref:`⤆ </NXmanipulator/sample_heater-group>`
 
 
           .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/name-field:
@@ -881,7 +884,7 @@ NXmpes
 
           .. index:: heater_power (field)
 
-          **heater_power**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/sample_heater/heater_power-field>`
+          **heater_power**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/sample_heater/heater_power-field>`
 
 
           .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_heater/PID-group:
@@ -894,6 +897,39 @@ NXmpes
             .. index:: setpoint (field)
 
             **setpoint**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/sample_heater/PID/setpoint-field>`
+
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat-group:
+
+        **cryostat**: (optional) :ref:`NXactuator` :ref:`⤆ </NXmanipulator/cryostat-group>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/physical_quantity-field:
+
+          .. index:: physical_quantity (field)
+
+          **physical_quantity**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXmanipulator/cryostat/physical_quantity-field>`
+
+
+            Obligatory value: ``temperature``
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/type-field:
+
+          .. index:: type (field)
+
+          **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXactuator/type-field>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/PID-group:
+
+          **PID**: (required) :ref:`NXpid` :ref:`⤆ </NXmanipulator/cryostat/PID-group>`
+
+
+            .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/PID/setpoint-field:
+
+            .. index:: setpoint (field)
+
+            **setpoint**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/cryostat/PID/setpoint-field>`
 
 
         .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter-group:
@@ -928,7 +964,7 @@ NXmpes
 
           .. index:: value (field)
 
-          **value**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/drain_current_amperemeter/value-field>`
+          **value**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/drain_current_amperemeter/value-field>`
 
 
         .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter-group:
@@ -963,7 +999,47 @@ NXmpes
 
           .. index:: value (field)
 
-          **value**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/sample_bias_voltmeter/value-field>`
+          **value**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/sample_bias_voltmeter/value-field>`
+
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat-group:
+
+        **sample_bias_potentiostat**: (recommended) :ref:`NXactuator` :ref:`⤆ </NXmanipulator/sample_bias_potentiostat-group>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/name-field:
+
+          .. index:: name (field)
+
+          **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXactuator/name-field>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/physical_quantity-field:
+
+          .. index:: physical_quantity (field)
+
+          **physical_quantity**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXmanipulator/sample_bias_potentiostat/physical_quantity-field>`
+
+
+            Obligatory value: ``voltage``
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/type-field:
+
+          .. index:: type (field)
+
+          **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXactuator/type-field>`
+
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/PID-group:
+
+          **PID**: (recommended) :ref:`NXpid` :ref:`⤆ </NXmanipulator/sample_bias_potentiostat/PID-group>`
+
+
+            .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/PID/setpoint-field:
+
+            .. index:: setpoint (field)
+
+            **setpoint**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXmanipulator/sample_bias_potentiostat/PID/setpoint-field>`
 
 
         .. _/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information-group:
@@ -1025,7 +1101,7 @@ NXmpes
 
         .. index:: value (field)
 
-        **value**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_PRESSURE <NX_PRESSURE>`} :ref:`⤆ </NXsensor/value-field>`
+        **value**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_PRESSURE <NX_PRESSURE>`} :ref:`⤆ </NXsensor/value-field>`
 
           .. collapse:: In case of a single or averaged gas pressure measurement, this is the sc ...
 
@@ -1206,7 +1282,7 @@ NXmpes
 
         .. index:: binding_energy (field)
 
-        **binding_energy**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXcalibration/MAPPING-field>`
+        **binding_energy**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` 
 
           .. collapse:: The binding energy (in units of eV) that the specified emission line app ...
 
@@ -1257,9 +1333,9 @@ NXmpes
             field of the transmission_function. This calibration procedure is used to account for
             the different tranmsission efficiencies when using different lens modes.
 
-        .. _/NXmpes/ENTRY/PROCESS/transmission_correction/mapping-group:
+        .. _/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function-group:
 
-        **mapping**: (recommended) :ref:`NXdata` 
+        **transmission_function**: (recommended) :ref:`NXdata` 
 
           .. collapse:: Transmission function of the electron analyser. ...
 
@@ -1269,7 +1345,7 @@ NXmpes
               different kinetic energy passing through the electron analyser.
               This can be a link to /entry/instrument/electronanalyser/transmission_function.
 
-          .. _/NXmpes/ENTRY/PROCESS/transmission_correction/mapping@signal-attribute:
+          .. _/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function@signal-attribute:
 
           .. index:: signal (group attribute)
 
@@ -1278,7 +1354,7 @@ NXmpes
 
             Obligatory value: ``relative_intensity``
 
-          .. _/NXmpes/ENTRY/PROCESS/transmission_correction/mapping@axes-attribute:
+          .. _/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function@axes-attribute:
 
           .. index:: axes (group attribute)
 
@@ -1287,7 +1363,7 @@ NXmpes
 
             Obligatory value: ``kinetic_energy``
 
-          .. _/NXmpes/ENTRY/PROCESS/transmission_correction/mapping/kinetic_energy-field:
+          .. _/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function/kinetic_energy-field:
 
           .. index:: kinetic_energy (field)
 
@@ -1295,7 +1371,7 @@ NXmpes
 
             Kinetic energy values
 
-          .. _/NXmpes/ENTRY/PROCESS/transmission_correction/mapping/relative_intensity-field:
+          .. _/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function/relative_intensity-field:
 
           .. index:: relative_intensity (field)
 
@@ -1357,9 +1433,9 @@ NXmpes
 
       **SUBSTANCE**: (recommended) :ref:`NXsubstance` :ref:`⤆ </NXsample/SUBSTANCE-group>`
 
-        .. collapse:: For samples containing a single pure substances. For mixtures use the ...
+        .. collapse:: For samples containing a single pure substance. For mixtures use the ...
 
-            For samples containing a single pure substances. For mixtures use the
+            For samples containing a single pure substance. For mixtures use the
             NXsample_component_set and NXsample_component group in NXsample instead.
 
         .. _/NXmpes/ENTRY/SAMPLE/SUBSTANCE/molecular_formula_hill-field:
@@ -1434,6 +1510,15 @@ NXmpes
               Device to heat the sample.
               This should be a link to /entry/instrument/manipulator/sample_heater.
 
+        .. _/NXmpes/ENTRY/SAMPLE/temperature/cryostat-group:
+
+        **cryostat**: (optional) :ref:`NXactuator` 
+
+          .. collapse:: Cryostat for cooling the sample. ...
+
+              Cryostat for cooling the sample.
+              This should be a link to /entry/instrument/manipulator/cryostat.
+
       .. _/NXmpes/ENTRY/SAMPLE/gas_pressure-group:
 
       **gas_pressure**: (recommended) :ref:`NXenvironment` :ref:`⤆ </NXsample/ENVIRONMENT-group>`
@@ -1466,9 +1551,19 @@ NXmpes
 
         **voltmeter**: (required) :ref:`NXsensor` :ref:`⤆ </NXenvironment/SENSOR-group>`
 
-          .. collapse:: Sensor setting/measuring the applied voltage. ...
+          .. collapse:: Sensor measuring the applied voltage. ...
 
-              Sensor setting/measuring the applied voltage.
+              Sensor measuring the applied voltage.
+
+              This should be a link to /entry/instrument/manipulator/sample_bias_voltmeter.
+
+        .. _/NXmpes/ENTRY/SAMPLE/bias/sample_bias_potentiostat-group:
+
+        **sample_bias_potentiostat**: (required) :ref:`NXactuator` 
+
+          .. collapse:: Actuator applying a voltage to sample and sample holder.s ...
+
+              Actuator applying a voltage to sample and sample holder.s
 
               This should be a link to /entry/instrument/manipulator/sample_bias_voltmeter.
 
@@ -1566,11 +1661,10 @@ NXmpes
         .. collapse:: The energy can be dispersed according to different strategies. ``energy_de ...
 
             The energy can be dispersed according to different strategies. ``energy_depends`` points to
-            the path of a field defining the axis on which the energy axis depends.
+            the path of a field defining the calibrated axis on which the energy axis depends.
 
             For example:
-              @energy_depends: '/entry/instrument/detector/data/sensor_y' for a 2D detector
-              @energy_depends: '/entry/instrument/energydispersion/center_energy' for a swept scan
+              @energy_depends: 'entry/process/energy_calibration'
 
       .. _/NXmpes/ENTRY/data/data-field:
 
@@ -1611,7 +1705,7 @@ NXmpes
 
               Any of these values:
 
-                * ``kinetic``:  Calibrated kinetic energy axis. This concept is related to term `3.35 <https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.35>`_ of the ISO 18115-1:2023 standard.
+                * ``kinetic``:  Calibrated kinetic energy axis. In case the kinetic energy axis is referenced to the Fermi level :math:`E_F` (e.g., in entry/process/energy_referencing), kinetic energies :math:`E` are provided as :math:`E-E_F`. This concept is related to term `3.35 <https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.35>`_ of the ISO 18115-1:2023 standard.
 
                 * ``binding``:  Calibrated binding energy axis. This concept is related to term `12.16 <https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16>`_ of the ISO 18115-1:2023 standard.
 
@@ -1692,7 +1786,7 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/scheme-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/scheme-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/fast_axes-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/fast_axes-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/slow_axes-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/slow_axes-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/transmission_function-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/transmission_function-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/transmission_function-group </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/transmission_function-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/work_function-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/work_function-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution-group </NXmpes/ENTRY/INSTRUMENT/energy_resolution-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/physical_quantity-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/physical_quantity-field>`
@@ -1706,6 +1800,11 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/flood_gun/physical_quantity-field </NXmpes/ENTRY/INSTRUMENT/flood_gun/physical_quantity-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/flood_gun/type-field </NXmpes/ENTRY/INSTRUMENT/flood_gun/type-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/physical_quantity-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/physical_quantity-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/PID-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/PID-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/PID/setpoint-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/PID/setpoint-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/type-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/type-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information/identifier-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information/identifier-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information/model-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information/model-field>`
@@ -1715,6 +1814,12 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/name-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/name-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/type-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/type-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/value-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/value-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/name-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/name-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/physical_quantity-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/physical_quantity-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/PID-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/PID-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/PID/setpoint-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/PID/setpoint-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/type-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/type-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/measurement-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/measurement-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/name-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/name-field>`
@@ -1766,14 +1871,15 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/PROCESS/spatial_calibration-group </NXmpes/ENTRY/PROCESS/spatial_calibration-group>`
 * :ref:`/NXmpes/ENTRY/PROCESS/spatial_calibration/calibrated_axis-field </NXmpes/ENTRY/PROCESS/spatial_calibration/calibrated_axis-field>`
 * :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction-group </NXmpes/ENTRY/PROCESS/transmission_correction-group>`
-* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/mapping-group </NXmpes/ENTRY/PROCESS/transmission_correction/mapping-group>`
-* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/mapping/kinetic_energy-field </NXmpes/ENTRY/PROCESS/transmission_correction/mapping/kinetic_energy-field>`
-* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/mapping/relative_intensity-field </NXmpes/ENTRY/PROCESS/transmission_correction/mapping/relative_intensity-field>`
-* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/mapping@axes-attribute </NXmpes/ENTRY/PROCESS/transmission_correction/mapping@axes-attribute>`
-* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/mapping@signal-attribute </NXmpes/ENTRY/PROCESS/transmission_correction/mapping@signal-attribute>`
+* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function-group </NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function-group>`
+* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function/kinetic_energy-field </NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function/kinetic_energy-field>`
+* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function/relative_intensity-field </NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function/relative_intensity-field>`
+* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function@axes-attribute </NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function@axes-attribute>`
+* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function@signal-attribute </NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function@signal-attribute>`
 * :ref:`/NXmpes/ENTRY/SAMPLE-group </NXmpes/ENTRY/SAMPLE-group>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/atom_types-field </NXmpes/ENTRY/SAMPLE/atom_types-field>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/bias-group </NXmpes/ENTRY/SAMPLE/bias-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/bias/sample_bias_potentiostat-group </NXmpes/ENTRY/SAMPLE/bias/sample_bias_potentiostat-group>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/bias/voltmeter-group </NXmpes/ENTRY/SAMPLE/bias/voltmeter-group>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/drain_current-group </NXmpes/ENTRY/SAMPLE/drain_current-group>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/drain_current/amperemeter-group </NXmpes/ENTRY/SAMPLE/drain_current/amperemeter-group>`
@@ -1792,6 +1898,7 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/SAMPLE/SUBSTANCE-group </NXmpes/ENTRY/SAMPLE/SUBSTANCE-group>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/SUBSTANCE/molecular_formula_hill-field </NXmpes/ENTRY/SAMPLE/SUBSTANCE/molecular_formula_hill-field>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/temperature-group </NXmpes/ENTRY/SAMPLE/temperature-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/temperature/cryostat-group </NXmpes/ENTRY/SAMPLE/temperature/cryostat-group>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/temperature/sample_heater-group </NXmpes/ENTRY/SAMPLE/temperature/sample_heater-group>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/temperature/temperature_sensor-group </NXmpes/ENTRY/SAMPLE/temperature/temperature_sensor-group>`
 * :ref:`/NXmpes/ENTRY/start_time-field </NXmpes/ENTRY/start_time-field>`

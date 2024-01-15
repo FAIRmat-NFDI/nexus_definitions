@@ -19,6 +19,7 @@
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -91,8 +92,9 @@ otherwise the local time zone is assumed per ISO8601.</p>
 </details></div></blockquote>
 <p id="index-7"><span id="nxmpes-entry-method-field"></span><strong>method</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
 <blockquote>
-<div><details class="summary-a-name-of-the-experimental-method-according-to-clause-11-of">
-<summary>A name of the experimental method according to `Clause 11`_ of ...</summary><p>A name of the experimental method according to <a class="reference external" href="https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:sec:11">Clause 11</a> of
+<div><details class="summary-name-of-the-experimental-method">
+<summary>Name of the experimental method. ...</summary><p>Name of the experimental method.</p>
+<p>If applicable, this name should match the terms given by <a class="reference external" href="https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:sec:11">Clause 11</a> of
 the <a class="reference external" href="https://www.iso.org/standard/74811.html">ISO 18115-1:2023</a> specification.</p>
 <dl class="simple">
 <dt>Examples include:</dt><dd><ul class="simple">
@@ -104,6 +106,9 @@ the <a class="reference external" href="https://www.iso.org/standard/74811.html"
 <li><p>near ambient pressure X-ray photoelectron spectroscopy (NAPXPS)</p></li>
 <li><p>photoelectron emission microscopy (PEEM)</p></li>
 <li><p>electron spectroscopy for chemical analysis (ESCA)</p></li>
+<li><p>time-resolved angle-resolved X-ray photoelectron spectroscopy (trARPES)</p></li>
+<li><p>spin-resolved angle-resolved X-ray photoelectron spectroscopy (spin-ARPES)</p></li>
+<li><p>momentum microscopy</p></li>
 </ul>
 </dd>
 </dl>
@@ -119,15 +124,15 @@ who performed this experiment. Adding multiple users if relevant is recommended.
 </div></blockquote>
 <p id="index-9"><span id="nxmpes-entry-user-affiliation-field"></span><strong>affiliation</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXuser.html#nxuser-affiliation-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><details class="summary-name-of-the-affiliation-of-the-user-at-the-point-in-time-when-the-experime">
-<summary>Name of the affiliation of the user at the point in time when the experime ...</summary><p>Name of the affiliation of the user at the point in time when the experiment was
+<div><details class="summary-name-of-the-affiliation-of-the-user-at-the-time-when-the-experiment-was">
+<summary>Name of the affiliation of the user at the time when the experiment was ...</summary><p>Name of the affiliation of the user at the time when the experiment was
 performed.</p>
 </details></div></blockquote>
 </div></blockquote>
 <p id="nxmpes-entry-instrument-group"><strong>INSTRUMENT</strong>: (required) <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument"><span class="std std-ref">NXinstrument</span></a> <a class="reference internal" href="../base_classes/NXentry.html#nxentry-instrument-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><details class="summary-mpes-spectrometer">
-<summary>MPES spectrometer ...</summary><p>MPES spectrometer</p>
+<div><details class="summary-description-of-the-mpes-spectrometer-and-its-individual-parts">
+<summary>Description of the MPES spectrometer and its individual parts. ...</summary><p>Description of the MPES spectrometer and its individual parts.</p>
 <p>This concept is related to term <a class="reference external" href="https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.58">12.58</a> of the ISO 18115-1:2023 standard.</p>
 </details><p id="nxmpes-entry-instrument-energy-resolution-group"><strong>energy_resolution</strong>: (recommended) <a class="reference internal" href="NXresolution.html#nxresolution"><span class="std std-ref">NXresolution</span></a> <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument-resolution-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
@@ -154,7 +159,7 @@ performed.</p>
 <summary>A source used to generate a beam. Properties refer strictly to parameters  ...</summary><p>A source used to generate a beam. Properties refer strictly to parameters of the
 source, not of the output beam. For example, the energy of the source is not the
 optical power of the beam, but the energy of the electron beam in a synchrotron
-and so on.</p>
+or similar.</p>
 <p>Note that the uppercase notation in source_TYPE means that multiple sources can
 be provided. For example, in pump-probe experiments, it is possible to have both
 a <cite>source_probe</cite> and a <cite>source_pump</cite></p>
@@ -234,25 +239,25 @@ and may be linked.</p>
 <p id="index-29"><span id="nxmpes-entry-instrument-electronanalyser-work-function-field"></span><strong>work_function</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-energy"><span class="std std-ref">NX_ENERGY</span></a>} <a class="reference internal" href="NXelectronanalyser.html#nxelectronanalyser-work-function-field"><span class="std std-ref">⤆</span></a></p>
 <p id="index-30"><span id="nxmpes-entry-instrument-electronanalyser-fast-axes-field"></span><strong>fast_axes</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXelectronanalyser.html#nxelectronanalyser-fast-axes-field"><span class="std std-ref">⤆</span></a></p>
 <p id="index-31"><span id="nxmpes-entry-instrument-electronanalyser-slow-axes-field"></span><strong>slow_axes</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXelectronanalyser.html#nxelectronanalyser-slow-axes-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-32"><span id="nxmpes-entry-instrument-electronanalyser-transmission-function-field"></span><strong>transmission_function</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a></p>
 <p id="nxmpes-entry-instrument-electronanalyser-device-information-group"><strong>device_information</strong>: (recommended) <a class="reference internal" href="NXfabrication.html#nxfabrication"><span class="std std-ref">NXfabrication</span></a> <a class="reference internal" href="NXelectronanalyser.html#nxelectronanalyser-fabrication-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-33"><span id="nxmpes-entry-instrument-electronanalyser-device-information-vendor-field"></span><strong>vendor</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-vendor-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-34"><span id="nxmpes-entry-instrument-electronanalyser-device-information-model-field"></span><strong>model</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-model-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-35"><span id="nxmpes-entry-instrument-electronanalyser-device-information-identifier-field"></span><strong>identifier</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-identifier-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-32"><span id="nxmpes-entry-instrument-electronanalyser-device-information-vendor-field"></span><strong>vendor</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-vendor-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-33"><span id="nxmpes-entry-instrument-electronanalyser-device-information-model-field"></span><strong>model</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-model-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-34"><span id="nxmpes-entry-instrument-electronanalyser-device-information-identifier-field"></span><strong>identifier</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-identifier-field"><span class="std std-ref">⤆</span></a></p>
 </div></blockquote>
 <p id="nxmpes-entry-instrument-electronanalyser-energy-resolution-group"><strong>energy_resolution</strong>: (recommended) <a class="reference internal" href="NXresolution.html#nxresolution"><span class="std std-ref">NXresolution</span></a> <a class="reference internal" href="NXelectronanalyser.html#nxelectronanalyser-energy-resolution-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-36"><span id="nxmpes-entry-instrument-electronanalyser-energy-resolution-type-field"></span><strong>type</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXresolution.html#nxresolution-type-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-37"><span id="nxmpes-entry-instrument-electronanalyser-energy-resolution-physical-quantity-field"></span><strong>physical_quantity</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXelectronanalyser.html#nxelectronanalyser-energy-resolution-physical-quantity-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-35"><span id="nxmpes-entry-instrument-electronanalyser-energy-resolution-type-field"></span><strong>type</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXresolution.html#nxresolution-type-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-36"><span id="nxmpes-entry-instrument-electronanalyser-energy-resolution-physical-quantity-field"></span><strong>physical_quantity</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXelectronanalyser.html#nxelectronanalyser-energy-resolution-physical-quantity-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">energy</span></code></p>
 </div></blockquote>
-<p id="index-38"><span id="nxmpes-entry-instrument-electronanalyser-energy-resolution-resolution-field"></span><strong>resolution</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXelectronanalyser.html#nxelectronanalyser-energy-resolution-resolution-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-37"><span id="nxmpes-entry-instrument-electronanalyser-energy-resolution-resolution-field"></span><strong>resolution</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXelectronanalyser.html#nxelectronanalyser-energy-resolution-resolution-field"><span class="std std-ref">⤆</span></a></p>
 </div></blockquote>
+<p id="nxmpes-entry-instrument-electronanalyser-transmission-function-group"><strong>transmission_function</strong>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="NXelectronanalyser.html#nxelectronanalyser-transmission-function-group"><span class="std std-ref">⤆</span></a></p>
 <p id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-group"><strong>COLLECTIONCOLUMN</strong>: (required) <a class="reference internal" href="NXcollectioncolumn.html#nxcollectioncolumn"><span class="std std-ref">NXcollectioncolumn</span></a> <a class="reference internal" href="NXelectronanalyser.html#nxelectronanalyser-collectioncolumn-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-39"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-scheme-field"></span><strong>scheme</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXcollectioncolumn.html#nxcollectioncolumn-scheme-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-38"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-scheme-field"></span><strong>scheme</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXcollectioncolumn.html#nxcollectioncolumn-scheme-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-scheme-of-the-electron-collection-column">
 <summary>Scheme of the electron collection column. ...</summary><p>Scheme of the electron collection column.</p>
@@ -265,10 +270,10 @@ and may be linked.</p>
 </ul>
 </div></blockquote>
 </details></div></blockquote>
-<p id="index-40"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-mode-field"></span><strong>mode</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXcollectioncolumn.html#nxcollectioncolumn-mode-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-41"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-projection-field"></span><strong>projection</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXcollectioncolumn.html#nxcollectioncolumn-projection-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-42"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-angular-acceptance-field"></span><strong>angular_acceptance</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcollectioncolumn.html#nxcollectioncolumn-angular-acceptance-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-43"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-spatial-acceptance-field"></span><strong>spatial_acceptance</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcollectioncolumn.html#nxcollectioncolumn-spatial-acceptance-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-39"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-mode-field"></span><strong>mode</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXcollectioncolumn.html#nxcollectioncolumn-mode-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-40"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-projection-field"></span><strong>projection</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXcollectioncolumn.html#nxcollectioncolumn-projection-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-41"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-angular-acceptance-field"></span><strong>angular_acceptance</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcollectioncolumn.html#nxcollectioncolumn-angular-acceptance-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-42"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-spatial-acceptance-field"></span><strong>spatial_acceptance</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcollectioncolumn.html#nxcollectioncolumn-spatial-acceptance-field"><span class="std std-ref">⤆</span></a></p>
 <p id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-field-aperture-group"><strong>field_aperture</strong>: (optional) <a class="reference internal" href="../base_classes/NXaperture.html#nxaperture"><span class="std std-ref">NXaperture</span></a> <a class="reference internal" href="NXcollectioncolumn.html#nxcollectioncolumn-aperture-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-the-size-and-position-of-the-field-aperture-inserted-in-the-column-to">
@@ -291,14 +296,14 @@ electrons entering the analyzer.</p>
 </details></div></blockquote>
 <p id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-device-information-group"><strong>device_information</strong>: (recommended) <a class="reference internal" href="NXfabrication.html#nxfabrication"><span class="std std-ref">NXfabrication</span></a> <a class="reference internal" href="NXcollectioncolumn.html#nxcollectioncolumn-fabrication-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-44"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-device-information-vendor-field"></span><strong>vendor</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-vendor-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-45"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-device-information-model-field"></span><strong>model</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-model-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-46"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-device-information-identifier-field"></span><strong>identifier</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-identifier-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-43"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-device-information-vendor-field"></span><strong>vendor</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-vendor-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-44"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-device-information-model-field"></span><strong>model</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-model-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-45"><span id="nxmpes-entry-instrument-electronanalyser-collectioncolumn-device-information-identifier-field"></span><strong>identifier</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-identifier-field"><span class="std std-ref">⤆</span></a></p>
 </div></blockquote>
 </div></blockquote>
 <p id="nxmpes-entry-instrument-electronanalyser-energydispersion-group"><strong>ENERGYDISPERSION</strong>: (required) <a class="reference internal" href="NXenergydispersion.html#nxenergydispersion"><span class="std std-ref">NXenergydispersion</span></a> <a class="reference internal" href="NXelectronanalyser.html#nxelectronanalyser-energydispersion-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-47"><span id="nxmpes-entry-instrument-electronanalyser-energydispersion-scheme-field"></span><strong>scheme</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXenergydispersion.html#nxenergydispersion-scheme-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-46"><span id="nxmpes-entry-instrument-electronanalyser-energydispersion-scheme-field"></span><strong>scheme</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXenergydispersion.html#nxenergydispersion-scheme-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Any of these values:</p>
 <blockquote>
@@ -312,8 +317,8 @@ electrons entering the analyzer.</p>
 </ul>
 </div></blockquote>
 </div></blockquote>
-<p id="index-48"><span id="nxmpes-entry-instrument-electronanalyser-energydispersion-pass-energy-field"></span><strong>pass_energy</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-energy"><span class="std std-ref">NX_ENERGY</span></a>} <a class="reference internal" href="NXenergydispersion.html#nxenergydispersion-pass-energy-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-49"><span id="nxmpes-entry-instrument-electronanalyser-energydispersion-energy-scan-mode-field"></span><strong>energy_scan_mode</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXenergydispersion.html#nxenergydispersion-energy-scan-mode-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-47"><span id="nxmpes-entry-instrument-electronanalyser-energydispersion-pass-energy-field"></span><strong>pass_energy</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-energy"><span class="std std-ref">NX_ENERGY</span></a>} <a class="reference internal" href="NXenergydispersion.html#nxenergydispersion-pass-energy-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-48"><span id="nxmpes-entry-instrument-electronanalyser-energydispersion-energy-scan-mode-field"></span><strong>energy_scan_mode</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXenergydispersion.html#nxenergydispersion-energy-scan-mode-field"><span class="std std-ref">⤆</span></a></p>
 <p id="nxmpes-entry-instrument-electronanalyser-energydispersion-entrance-slit-group"><strong>entrance_slit</strong>: (optional) <a class="reference internal" href="../base_classes/NXaperture.html#nxaperture"><span class="std std-ref">NXaperture</span></a> <a class="reference internal" href="NXenergydispersion.html#nxenergydispersion-aperture-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-size-position-and-shape-of-the-entrance-slit-in-dispersive-analyzers">
@@ -328,20 +333,20 @@ electrons entering the analyzer.</p>
 </details></div></blockquote>
 <p id="nxmpes-entry-instrument-electronanalyser-energydispersion-device-information-group"><strong>device_information</strong>: (recommended) <a class="reference internal" href="NXfabrication.html#nxfabrication"><span class="std std-ref">NXfabrication</span></a> <a class="reference internal" href="NXenergydispersion.html#nxenergydispersion-fabrication-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-50"><span id="nxmpes-entry-instrument-electronanalyser-energydispersion-device-information-vendor-field"></span><strong>vendor</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-vendor-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-51"><span id="nxmpes-entry-instrument-electronanalyser-energydispersion-device-information-model-field"></span><strong>model</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-model-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-52"><span id="nxmpes-entry-instrument-electronanalyser-energydispersion-device-information-identifier-field"></span><strong>identifier</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-identifier-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-49"><span id="nxmpes-entry-instrument-electronanalyser-energydispersion-device-information-vendor-field"></span><strong>vendor</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-vendor-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-50"><span id="nxmpes-entry-instrument-electronanalyser-energydispersion-device-information-model-field"></span><strong>model</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-model-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-51"><span id="nxmpes-entry-instrument-electronanalyser-energydispersion-device-information-identifier-field"></span><strong>identifier</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-identifier-field"><span class="std std-ref">⤆</span></a></p>
 </div></blockquote>
 </div></blockquote>
 <p id="nxmpes-entry-instrument-electronanalyser-detector-group"><strong>DETECTOR</strong>: (required) <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector"><span class="std std-ref">NXdetector</span></a> <a class="reference internal" href="NXelectronanalyser.html#nxelectronanalyser-detector-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-53"><span id="nxmpes-entry-instrument-electronanalyser-detector-amplifier-type-field"></span><strong>amplifier_type</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector-amplifier-type-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-52"><span id="nxmpes-entry-instrument-electronanalyser-detector-amplifier-type-field"></span><strong>amplifier_type</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector-amplifier-type-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-type-of-electron-amplifier-in-the-first-amplification-step">
 <summary>Type of electron amplifier in the first amplification step. ...</summary><p>Type of electron amplifier in the first amplification step.</p>
 <p>Any of these values: <code class="docutils literal notranslate"><span class="pre">MCP</span></code> | <code class="docutils literal notranslate"><span class="pre">channeltron</span></code></p>
 </details></div></blockquote>
-<p id="index-54"><span id="nxmpes-entry-instrument-electronanalyser-detector-detector-type-field"></span><strong>detector_type</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector-detector-type-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-53"><span id="nxmpes-entry-instrument-electronanalyser-detector-detector-type-field"></span><strong>detector_type</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector-detector-type-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-description-of-the-detector-type">
 <summary>Description of the detector type. ...</summary><p>Description of the detector type.</p>
@@ -359,9 +364,9 @@ electrons entering the analyzer.</p>
 </details></div></blockquote>
 <p id="nxmpes-entry-instrument-electronanalyser-detector-device-information-group"><strong>device_information</strong>: (recommended) <a class="reference internal" href="NXfabrication.html#nxfabrication"><span class="std std-ref">NXfabrication</span></a> <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector-fabrication-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-55"><span id="nxmpes-entry-instrument-electronanalyser-detector-device-information-vendor-field"></span><strong>vendor</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-vendor-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-56"><span id="nxmpes-entry-instrument-electronanalyser-detector-device-information-model-field"></span><strong>model</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-model-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-57"><span id="nxmpes-entry-instrument-electronanalyser-detector-device-information-identifier-field"></span><strong>identifier</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-identifier-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-54"><span id="nxmpes-entry-instrument-electronanalyser-detector-device-information-vendor-field"></span><strong>vendor</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-vendor-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-55"><span id="nxmpes-entry-instrument-electronanalyser-detector-device-information-model-field"></span><strong>model</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-model-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-56"><span id="nxmpes-entry-instrument-electronanalyser-detector-device-information-identifier-field"></span><strong>identifier</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-identifier-field"><span class="std std-ref">⤆</span></a></p>
 </div></blockquote>
 <p id="nxmpes-entry-instrument-electronanalyser-detector-raw-data-group"><strong>raw_data</strong>: (recommended) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector-data-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
@@ -398,11 +403,11 @@ Unit category: NX_ANGLE (° or rad)</p></li>
 <li><p><strong>time_of_flight_adc</strong>: Time-of-flight values, analog-to-digital converted.</p></li>
 <li><p><strong>external_AXIS</strong>: Describes an axis which is coming from outside the detectors scope.</p></li>
 </ul>
-</details><p id="index-58"><span id="nxmpes-entry-instrument-electronanalyser-detector-raw-data-signal-attribute"></span><strong>&#64;signal</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-signal-attribute"><span class="std std-ref">⤆</span></a></p>
+</details><p id="index-57"><span id="nxmpes-entry-instrument-electronanalyser-detector-raw-data-signal-attribute"></span><strong>&#64;signal</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-signal-attribute"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">raw</span></code></p>
 </div></blockquote>
-<p id="index-59"><span id="nxmpes-entry-instrument-electronanalyser-detector-raw-data-raw-field"></span><strong>raw</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-58"><span id="nxmpes-entry-instrument-electronanalyser-detector-raw-data-raw-field"></span><strong>raw</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Raw data before calibration.</p>
 </div></blockquote>
@@ -414,65 +419,90 @@ Unit category: NX_ANGLE (° or rad)</p></li>
 <div><p>Manipulator for positioning of the sample.</p>
 <p id="nxmpes-entry-instrument-manipulator-temperature-sensor-group"><strong>temperature_sensor</strong>: (recommended) <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor"><span class="std std-ref">NXsensor</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-temperature-sensor-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-60"><span id="nxmpes-entry-instrument-manipulator-temperature-sensor-name-field"></span><strong>name</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-name-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-61"><span id="nxmpes-entry-instrument-manipulator-temperature-sensor-measurement-field"></span><strong>measurement</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-temperature-sensor-measurement-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-59"><span id="nxmpes-entry-instrument-manipulator-temperature-sensor-name-field"></span><strong>name</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-name-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-60"><span id="nxmpes-entry-instrument-manipulator-temperature-sensor-measurement-field"></span><strong>measurement</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-temperature-sensor-measurement-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">temperature</span></code></p>
 </div></blockquote>
-<p id="index-62"><span id="nxmpes-entry-instrument-manipulator-temperature-sensor-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-type-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-63"><span id="nxmpes-entry-instrument-manipulator-temperature-sensor-value-field"></span><strong>value</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-temperature-sensor-value-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-61"><span id="nxmpes-entry-instrument-manipulator-temperature-sensor-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-type-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-62"><span id="nxmpes-entry-instrument-manipulator-temperature-sensor-value-field"></span><strong>value</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-temperature-sensor-value-field"><span class="std std-ref">⤆</span></a></p>
 </div></blockquote>
-<p id="nxmpes-entry-instrument-manipulator-sample-heater-group"><strong>sample_heater</strong>: (recommended) <a class="reference internal" href="NXactuator.html#nxactuator"><span class="std std-ref">NXactuator</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-heater-group"><span class="std std-ref">⤆</span></a></p>
+<p id="nxmpes-entry-instrument-manipulator-sample-heater-group"><strong>sample_heater</strong>: (optional) <a class="reference internal" href="NXactuator.html#nxactuator"><span class="std std-ref">NXactuator</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-heater-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-64"><span id="nxmpes-entry-instrument-manipulator-sample-heater-name-field"></span><strong>name</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXactuator.html#nxactuator-name-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-65"><span id="nxmpes-entry-instrument-manipulator-sample-heater-physical-quantity-field"></span><strong>physical_quantity</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-heater-physical-quantity-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-63"><span id="nxmpes-entry-instrument-manipulator-sample-heater-name-field"></span><strong>name</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXactuator.html#nxactuator-name-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-64"><span id="nxmpes-entry-instrument-manipulator-sample-heater-physical-quantity-field"></span><strong>physical_quantity</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-heater-physical-quantity-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">temperature</span></code></p>
 </div></blockquote>
-<p id="index-66"><span id="nxmpes-entry-instrument-manipulator-sample-heater-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXactuator.html#nxactuator-type-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-67"><span id="nxmpes-entry-instrument-manipulator-sample-heater-heater-power-field"></span><strong>heater_power</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-heater-heater-power-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-65"><span id="nxmpes-entry-instrument-manipulator-sample-heater-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXactuator.html#nxactuator-type-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-66"><span id="nxmpes-entry-instrument-manipulator-sample-heater-heater-power-field"></span><strong>heater_power</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-heater-heater-power-field"><span class="std std-ref">⤆</span></a></p>
 <p id="nxmpes-entry-instrument-manipulator-sample-heater-pid-group"><strong>PID</strong>: (recommended) <a class="reference internal" href="NXpid.html#nxpid"><span class="std std-ref">NXpid</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-heater-pid-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-68"><span id="nxmpes-entry-instrument-manipulator-sample-heater-pid-setpoint-field"></span><strong>setpoint</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-heater-pid-setpoint-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-67"><span id="nxmpes-entry-instrument-manipulator-sample-heater-pid-setpoint-field"></span><strong>setpoint</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-heater-pid-setpoint-field"><span class="std std-ref">⤆</span></a></p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxmpes-entry-instrument-manipulator-cryostat-group"><strong>cryostat</strong>: (optional) <a class="reference internal" href="NXactuator.html#nxactuator"><span class="std std-ref">NXactuator</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-cryostat-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-68"><span id="nxmpes-entry-instrument-manipulator-cryostat-physical-quantity-field"></span><strong>physical_quantity</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-cryostat-physical-quantity-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">temperature</span></code></p>
+</div></blockquote>
+<p id="index-69"><span id="nxmpes-entry-instrument-manipulator-cryostat-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXactuator.html#nxactuator-type-field"><span class="std std-ref">⤆</span></a></p>
+<p id="nxmpes-entry-instrument-manipulator-cryostat-pid-group"><strong>PID</strong>: (required) <a class="reference internal" href="NXpid.html#nxpid"><span class="std std-ref">NXpid</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-cryostat-pid-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-70"><span id="nxmpes-entry-instrument-manipulator-cryostat-pid-setpoint-field"></span><strong>setpoint</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-cryostat-pid-setpoint-field"><span class="std std-ref">⤆</span></a></p>
 </div></blockquote>
 </div></blockquote>
 <p id="nxmpes-entry-instrument-manipulator-drain-current-amperemeter-group"><strong>drain_current_amperemeter</strong>: (recommended) <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor"><span class="std std-ref">NXsensor</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-drain-current-amperemeter-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-69"><span id="nxmpes-entry-instrument-manipulator-drain-current-amperemeter-name-field"></span><strong>name</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-name-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-70"><span id="nxmpes-entry-instrument-manipulator-drain-current-amperemeter-measurement-field"></span><strong>measurement</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-drain-current-amperemeter-measurement-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-71"><span id="nxmpes-entry-instrument-manipulator-drain-current-amperemeter-name-field"></span><strong>name</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-name-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-72"><span id="nxmpes-entry-instrument-manipulator-drain-current-amperemeter-measurement-field"></span><strong>measurement</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-drain-current-amperemeter-measurement-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">current</span></code></p>
 </div></blockquote>
-<p id="index-71"><span id="nxmpes-entry-instrument-manipulator-drain-current-amperemeter-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-type-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-72"><span id="nxmpes-entry-instrument-manipulator-drain-current-amperemeter-value-field"></span><strong>value</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-drain-current-amperemeter-value-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-73"><span id="nxmpes-entry-instrument-manipulator-drain-current-amperemeter-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-type-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-74"><span id="nxmpes-entry-instrument-manipulator-drain-current-amperemeter-value-field"></span><strong>value</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-drain-current-amperemeter-value-field"><span class="std std-ref">⤆</span></a></p>
 </div></blockquote>
 <p id="nxmpes-entry-instrument-manipulator-sample-bias-voltmeter-group"><strong>sample_bias_voltmeter</strong>: (recommended) <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor"><span class="std std-ref">NXsensor</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-bias-voltmeter-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-73"><span id="nxmpes-entry-instrument-manipulator-sample-bias-voltmeter-name-field"></span><strong>name</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-name-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-74"><span id="nxmpes-entry-instrument-manipulator-sample-bias-voltmeter-measurement-field"></span><strong>measurement</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-bias-voltmeter-measurement-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-75"><span id="nxmpes-entry-instrument-manipulator-sample-bias-voltmeter-name-field"></span><strong>name</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-name-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-76"><span id="nxmpes-entry-instrument-manipulator-sample-bias-voltmeter-measurement-field"></span><strong>measurement</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-bias-voltmeter-measurement-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">voltage</span></code></p>
 </div></blockquote>
-<p id="index-75"><span id="nxmpes-entry-instrument-manipulator-sample-bias-voltmeter-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-type-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-76"><span id="nxmpes-entry-instrument-manipulator-sample-bias-voltmeter-value-field"></span><strong>value</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-bias-voltmeter-value-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-77"><span id="nxmpes-entry-instrument-manipulator-sample-bias-voltmeter-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-type-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-78"><span id="nxmpes-entry-instrument-manipulator-sample-bias-voltmeter-value-field"></span><strong>value</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-bias-voltmeter-value-field"><span class="std std-ref">⤆</span></a></p>
+</div></blockquote>
+<p id="nxmpes-entry-instrument-manipulator-sample-bias-potentiostat-group"><strong>sample_bias_potentiostat</strong>: (recommended) <a class="reference internal" href="NXactuator.html#nxactuator"><span class="std std-ref">NXactuator</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-bias-potentiostat-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-79"><span id="nxmpes-entry-instrument-manipulator-sample-bias-potentiostat-name-field"></span><strong>name</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXactuator.html#nxactuator-name-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-80"><span id="nxmpes-entry-instrument-manipulator-sample-bias-potentiostat-physical-quantity-field"></span><strong>physical_quantity</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-bias-potentiostat-physical-quantity-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">voltage</span></code></p>
+</div></blockquote>
+<p id="index-81"><span id="nxmpes-entry-instrument-manipulator-sample-bias-potentiostat-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXactuator.html#nxactuator-type-field"><span class="std std-ref">⤆</span></a></p>
+<p id="nxmpes-entry-instrument-manipulator-sample-bias-potentiostat-pid-group"><strong>PID</strong>: (recommended) <a class="reference internal" href="NXpid.html#nxpid"><span class="std std-ref">NXpid</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-bias-potentiostat-pid-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-82"><span id="nxmpes-entry-instrument-manipulator-sample-bias-potentiostat-pid-setpoint-field"></span><strong>setpoint</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-sample-bias-potentiostat-pid-setpoint-field"><span class="std std-ref">⤆</span></a></p>
+</div></blockquote>
 </div></blockquote>
 <p id="nxmpes-entry-instrument-manipulator-device-information-group"><strong>device_information</strong>: (recommended) <a class="reference internal" href="NXfabrication.html#nxfabrication"><span class="std std-ref">NXfabrication</span></a> <a class="reference internal" href="NXmanipulator.html#nxmanipulator-fabrication-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-77"><span id="nxmpes-entry-instrument-manipulator-device-information-vendor-field"></span><strong>vendor</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-vendor-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-78"><span id="nxmpes-entry-instrument-manipulator-device-information-model-field"></span><strong>model</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-model-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-79"><span id="nxmpes-entry-instrument-manipulator-device-information-identifier-field"></span><strong>identifier</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-identifier-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-83"><span id="nxmpes-entry-instrument-manipulator-device-information-vendor-field"></span><strong>vendor</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-vendor-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-84"><span id="nxmpes-entry-instrument-manipulator-device-information-model-field"></span><strong>model</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-model-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-85"><span id="nxmpes-entry-instrument-manipulator-device-information-identifier-field"></span><strong>identifier</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfabrication.html#nxfabrication-identifier-field"><span class="std std-ref">⤆</span></a></p>
 </div></blockquote>
 </div></blockquote>
 <p id="nxmpes-entry-instrument-pressure-gauge-group"><strong>pressure_gauge</strong>: (recommended) <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor"><span class="std std-ref">NXsensor</span></a> <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument-sensor-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Device to measure the gas pressure around the sample.</p>
-<p id="index-80"><span id="nxmpes-entry-instrument-pressure-gauge-name-field"></span><strong>name</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-name-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-81"><span id="nxmpes-entry-instrument-pressure-gauge-measurement-field"></span><strong>measurement</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-measurement-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-86"><span id="nxmpes-entry-instrument-pressure-gauge-name-field"></span><strong>name</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-name-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-87"><span id="nxmpes-entry-instrument-pressure-gauge-measurement-field"></span><strong>measurement</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-measurement-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">pressure</span></code></p>
 </div></blockquote>
-<p id="index-82"><span id="nxmpes-entry-instrument-pressure-gauge-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-type-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-83"><span id="nxmpes-entry-instrument-pressure-gauge-value-field"></span><strong>value</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-pressure"><span class="std std-ref">NX_PRESSURE</span></a>} <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-value-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-88"><span id="nxmpes-entry-instrument-pressure-gauge-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-type-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-89"><span id="nxmpes-entry-instrument-pressure-gauge-value-field"></span><strong>value</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-pressure"><span class="std std-ref">NX_PRESSURE</span></a>} <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-value-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-in-case-of-a-single-or-averaged-gas-pressure-measurement-this-is-the-sc">
 <summary>In case of a single or averaged gas pressure measurement, this is the sc ...</summary><p>In case of a single or averaged gas pressure measurement, this is the scalar gas pressure around
@@ -480,7 +510,7 @@ the sample. It can also be an 1D array of measured pressures (without time stamp
 </details></div></blockquote>
 <p id="nxmpes-entry-instrument-pressure-gauge-value-log-group"><strong>value_log</strong>: (optional) <a class="reference internal" href="../base_classes/NXlog.html#nxlog"><span class="std std-ref">NXlog</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-value-log-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-84"><span id="nxmpes-entry-instrument-pressure-gauge-value-log-value-field"></span><strong>value</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-pressure"><span class="std std-ref">NX_PRESSURE</span></a>} <a class="reference internal" href="../base_classes/NXlog.html#nxlog-value-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-90"><span id="nxmpes-entry-instrument-pressure-gauge-value-log-value-field"></span><strong>value</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-pressure"><span class="std std-ref">NX_PRESSURE</span></a>} <a class="reference internal" href="../base_classes/NXlog.html#nxlog-value-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-in-the-case-of-an-experiment-in-which-the-gas-pressure-changes-and-is">
 <summary>In the case of an experiment in which the gas pressure changes and is  ...</summary><p>In the case of an experiment in which the gas pressure changes and is recorded,
@@ -491,13 +521,13 @@ this is an array of length m of gas pressures.</p>
 <p id="nxmpes-entry-instrument-flood-gun-group"><strong>flood_gun</strong>: (optional) <a class="reference internal" href="NXactuator.html#nxactuator"><span class="std std-ref">NXactuator</span></a> <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument-actuator-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Device to bring low-energy electrons to the sample for charge neutralization</p>
-<p id="index-85"><span id="nxmpes-entry-instrument-flood-gun-name-field"></span><strong>name</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXactuator.html#nxactuator-name-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-86"><span id="nxmpes-entry-instrument-flood-gun-physical-quantity-field"></span><strong>physical_quantity</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXactuator.html#nxactuator-physical-quantity-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-91"><span id="nxmpes-entry-instrument-flood-gun-name-field"></span><strong>name</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXactuator.html#nxactuator-name-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-92"><span id="nxmpes-entry-instrument-flood-gun-physical-quantity-field"></span><strong>physical_quantity</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXactuator.html#nxactuator-physical-quantity-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">current</span></code></p>
 </div></blockquote>
-<p id="index-87"><span id="nxmpes-entry-instrument-flood-gun-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXactuator.html#nxactuator-type-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-88"><span id="nxmpes-entry-instrument-flood-gun-current-field"></span><strong>current</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-current"><span class="std std-ref">NX_CURRENT</span></a>} <a class="reference internal" href="NXactuator.html#nxactuator-output-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-93"><span id="nxmpes-entry-instrument-flood-gun-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXactuator.html#nxactuator-type-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-94"><span id="nxmpes-entry-instrument-flood-gun-current-field"></span><strong>current</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-current"><span class="std std-ref">NX_CURRENT</span></a>} <a class="reference internal" href="NXactuator.html#nxactuator-output-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-in-case-of-a-fixed-or-averaged-electron-current-this-is-the-scalar-curr">
 <summary>In case of a fixed or averaged electron current, this is the scalar curr ...</summary><p>In case of a fixed or averaged electron current, this is the scalar current.
@@ -505,7 +535,7 @@ It can also be an 1D array of output current (without time stamps).</p>
 </details></div></blockquote>
 <p id="nxmpes-entry-instrument-flood-gun-current-log-group"><strong>current_log</strong>: (optional) <a class="reference internal" href="../base_classes/NXlog.html#nxlog"><span class="std std-ref">NXlog</span></a> <a class="reference internal" href="NXactuator.html#nxactuator-output-log-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-89"><span id="nxmpes-entry-instrument-flood-gun-current-log-value-field"></span><strong>value</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-current"><span class="std std-ref">NX_CURRENT</span></a>} <a class="reference internal" href="../base_classes/NXlog.html#nxlog-value-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-95"><span id="nxmpes-entry-instrument-flood-gun-current-log-value-field"></span><strong>value</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-current"><span class="std std-ref">NX_CURRENT</span></a>} <a class="reference internal" href="../base_classes/NXlog.html#nxlog-value-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-in-the-case-of-an-experiment-in-which-the-electron-current-is-changed">
 <summary>In the case of an experiment in which the electron current is changed  ...</summary><p>In the case of an experiment in which the electron current is changed and
@@ -526,28 +556,28 @@ of the following NXcalibrations</p>
 <summary>Calibration event on the energy axis. ...</summary><p>Calibration event on the energy axis.</p>
 <p>For XPS, the calibration should ideally be performed according to
 <a class="reference external" href="https://www.iso.org/standard/74811.html">ISO 15472:2010</a> specification.</p>
-</details><p id="index-90"><span id="nxmpes-entry-process-energy-calibration-calibrated-axis-field"></span><strong>calibrated_axis</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcalibration.html#nxcalibration-calibrated-axis-field"><span class="std std-ref">⤆</span></a></p>
+</details><p id="index-96"><span id="nxmpes-entry-process-energy-calibration-calibrated-axis-field"></span><strong>calibrated_axis</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcalibration.html#nxcalibration-calibrated-axis-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>This is the calibrated energy axis to be used for data plotting.</p>
 </div></blockquote>
 </div></blockquote>
 <p id="nxmpes-entry-process-angular-calibration-group"><strong>angular_calibration</strong>: (optional) <a class="reference internal" href="NXcalibration.html#nxcalibration"><span class="std std-ref">NXcalibration</span></a> <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess-calibration-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-91"><span id="nxmpes-entry-process-angular-calibration-calibrated-axis-field"></span><strong>calibrated_axis</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcalibration.html#nxcalibration-calibrated-axis-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-97"><span id="nxmpes-entry-process-angular-calibration-calibrated-axis-field"></span><strong>calibrated_axis</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcalibration.html#nxcalibration-calibrated-axis-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>This is the calibrated angular axis to be used for data plotting.</p>
 </div></blockquote>
 </div></blockquote>
 <p id="nxmpes-entry-process-spatial-calibration-group"><strong>spatial_calibration</strong>: (optional) <a class="reference internal" href="NXcalibration.html#nxcalibration"><span class="std std-ref">NXcalibration</span></a> <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess-calibration-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-92"><span id="nxmpes-entry-process-spatial-calibration-calibrated-axis-field"></span><strong>calibrated_axis</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcalibration.html#nxcalibration-calibrated-axis-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-98"><span id="nxmpes-entry-process-spatial-calibration-calibrated-axis-field"></span><strong>calibrated_axis</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcalibration.html#nxcalibration-calibrated-axis-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>This is the calibrated spatial axis to be used for data plotting.</p>
 </div></blockquote>
 </div></blockquote>
 <p id="nxmpes-entry-process-momentum-calibration-group"><strong>momentum_calibration</strong>: (optional) <a class="reference internal" href="NXcalibration.html#nxcalibration"><span class="std std-ref">NXcalibration</span></a> <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess-calibration-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-93"><span id="nxmpes-entry-process-momentum-calibration-calibrated-axis-field"></span><strong>calibrated_axis</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcalibration.html#nxcalibration-calibrated-axis-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-99"><span id="nxmpes-entry-process-momentum-calibration-calibrated-axis-field"></span><strong>calibrated_axis</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcalibration.html#nxcalibration-calibrated-axis-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>This is the momentum axis to be used for data plotting.</p>
 </div></blockquote>
@@ -561,26 +591,26 @@ irradiation) such that those energies correspond to a sample with no surface cha
 Usually, the energy axis is adjusted by shifting all energies uniformally until one
 well-defined emission line peak (or the Fermi edge) is located at a known _correct_ energy.</p>
 <p>This concept is related to term <a class="reference external" href="https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.74">12.74 ff.</a> of the ISO 18115-1:2023 standard.</p>
-</details><p id="index-94"><span id="nxmpes-entry-process-energy-referencing-reference-peak-field"></span><strong>reference_peak</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+</details><p id="index-100"><span id="nxmpes-entry-process-energy-referencing-reference-peak-field"></span><strong>reference_peak</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
 <blockquote>
 <div><details class="summary-reference-peak-that-was-used-for-the-calibration">
 <summary>Reference peak that was used for the calibration. ...</summary><p>Reference peak that was used for the calibration.</p>
 <p>For example: adventitious carbon | C-C | metallic Au | elemental Si | Fermi edge | vacuum level</p>
 </details></div></blockquote>
-<p id="index-95"><span id="nxmpes-entry-process-energy-referencing-binding-energy-field"></span><strong>binding_energy</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcalibration.html#nxcalibration-mapping-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-101"><span id="nxmpes-entry-process-energy-referencing-binding-energy-field"></span><strong>binding_energy</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a></p>
 <blockquote>
 <div><details class="summary-the-binding-energy-in-units-of-ev-that-the-specified-emission-line-app">
 <summary>The binding energy (in units of eV) that the specified emission line app ...</summary><p>The binding energy (in units of eV) that the specified emission line appeared at,
 after adjusting the binding energy scale.</p>
 <p>This concept is related to term <a class="reference external" href="https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16">12.16_ ff.</a> of the ISO 18115-1:2023 standard.</p>
 </details></div></blockquote>
-<p id="index-96"><span id="nxmpes-entry-process-energy-referencing-offset-field"></span><strong>offset</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcalibration.html#nxcalibration-offset-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-102"><span id="nxmpes-entry-process-energy-referencing-offset-field"></span><strong>offset</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcalibration.html#nxcalibration-offset-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-offset-between-measured-binding-energy-and-calibrated-binding-energy-of">
 <summary>Offset between measured binding energy and calibrated binding energy of  ...</summary><p>Offset between measured binding energy and calibrated binding energy of the
 emission line.</p>
 </details></div></blockquote>
-<p id="index-97"><span id="nxmpes-entry-process-energy-referencing-calibrated-axis-field"></span><strong>calibrated_axis</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcalibration.html#nxcalibration-calibrated-axis-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-103"><span id="nxmpes-entry-process-energy-referencing-calibrated-axis-field"></span><strong>calibrated_axis</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXcalibration.html#nxcalibration-calibrated-axis-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-this-is-the-calibrated-energy-axis-to-be-used-for-data-plotting">
 <summary>This is the calibrated energy axis to be used for data plotting. ...</summary><p>This is the calibrated energy axis to be used for data plotting.</p>
@@ -598,26 +628,26 @@ emission line.</p>
 kinetic energy is multiplied by the corresponding value in the relative_intensity
 field of the transmission_function. This calibration procedure is used to account for
 the different tranmsission efficiencies when using different lens modes.</p>
-</details><p id="nxmpes-entry-process-transmission-correction-mapping-group"><strong>mapping</strong>: (recommended) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a></p>
+</details><p id="nxmpes-entry-process-transmission-correction-transmission-function-group"><strong>transmission_function</strong>: (recommended) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a></p>
 <blockquote>
 <div><details class="summary-transmission-function-of-the-electron-analyser">
 <summary>Transmission function of the electron analyser. ...</summary><p>Transmission function of the electron analyser.</p>
 <p>The transmission function (TF) specifies the detection efficiency for electrons of
 different kinetic energy passing through the electron analyser.
 This can be a link to /entry/instrument/electronanalyser/transmission_function.</p>
-</details><p id="index-98"><span id="nxmpes-entry-process-transmission-correction-mapping-signal-attribute"></span><strong>&#64;signal</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-signal-attribute"><span class="std std-ref">⤆</span></a></p>
+</details><p id="index-104"><span id="nxmpes-entry-process-transmission-correction-transmission-function-signal-attribute"></span><strong>&#64;signal</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-signal-attribute"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">relative_intensity</span></code></p>
 </div></blockquote>
-<p id="index-99"><span id="nxmpes-entry-process-transmission-correction-mapping-axes-attribute"></span><strong>&#64;axes</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axes-attribute"><span class="std std-ref">⤆</span></a></p>
+<p id="index-105"><span id="nxmpes-entry-process-transmission-correction-transmission-function-axes-attribute"></span><strong>&#64;axes</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axes-attribute"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">kinetic_energy</span></code></p>
 </div></blockquote>
-<p id="index-100"><span id="nxmpes-entry-process-transmission-correction-mapping-kinetic-energy-field"></span><strong>kinetic_energy</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 1, Dimensions: [n_transmission_function]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-energy"><span class="std std-ref">NX_ENERGY</span></a>}</p>
+<p id="index-106"><span id="nxmpes-entry-process-transmission-correction-transmission-function-kinetic-energy-field"></span><strong>kinetic_energy</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 1, Dimensions: [n_transmission_function]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-energy"><span class="std std-ref">NX_ENERGY</span></a>}</p>
 <blockquote>
 <div><p>Kinetic energy values</p>
 </div></blockquote>
-<p id="index-101"><span id="nxmpes-entry-process-transmission-correction-mapping-relative-intensity-field"></span><strong>relative_intensity</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 1, Dimensions: [n_transmission_function]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<p id="index-107"><span id="nxmpes-entry-process-transmission-correction-transmission-function-relative-intensity-field"></span><strong>relative_intensity</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 1, Dimensions: [n_transmission_function]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
 <div><p>Relative transmission efficiency for the given kinetic energies</p>
 </div></blockquote>
@@ -626,8 +656,8 @@ This can be a link to /entry/instrument/electronanalyser/transmission_function.<
 </div></blockquote>
 <p id="nxmpes-entry-sample-group"><strong>SAMPLE</strong>: (required) <a class="reference internal" href="../base_classes/NXsample.html#nxsample"><span class="std std-ref">NXsample</span></a> <a class="reference internal" href="../base_classes/NXentry.html#nxentry-sample-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-102"><span id="nxmpes-entry-sample-name-field"></span><strong>name</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsample.html#nxsample-name-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-103"><span id="nxmpes-entry-sample-atom-types-field"></span><strong>atom_types</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<div><p id="index-108"><span id="nxmpes-entry-sample-name-field"></span><strong>name</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsample.html#nxsample-name-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-109"><span id="nxmpes-entry-sample-atom-types-field"></span><strong>atom_types</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
 <blockquote>
 <div><details class="summary-list-of-comma-separated-elements-from-the-periodic-table">
 <summary>List of comma-separated elements from the periodic table ...</summary><p>List of comma-separated elements from the periodic table
@@ -635,8 +665,8 @@ that are contained in the sample.
 If the sample substance has multiple components, all
 elements from each component must be included in <cite>atom_types</cite>.</p>
 </details></div></blockquote>
-<p id="index-104"><span id="nxmpes-entry-sample-physical-form-field"></span><strong>physical_form</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsample.html#nxsample-physical-form-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-105"><span id="nxmpes-entry-sample-situation-field"></span><strong>situation</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsample.html#nxsample-situation-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-110"><span id="nxmpes-entry-sample-physical-form-field"></span><strong>physical_form</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsample.html#nxsample-physical-form-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-111"><span id="nxmpes-entry-sample-situation-field"></span><strong>situation</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXsample.html#nxsample-situation-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Any of these values:</p>
 <blockquote>
@@ -650,10 +680,10 @@ elements from each component must be included in <cite>atom_types</cite>.</p>
 </div></blockquote>
 <p id="nxmpes-entry-sample-substance-group"><strong>SUBSTANCE</strong>: (recommended) <a class="reference internal" href="NXsubstance.html#nxsubstance"><span class="std std-ref">NXsubstance</span></a> <a class="reference internal" href="../base_classes/NXsample.html#nxsample-substance-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><details class="summary-for-samples-containing-a-single-pure-substances-for-mixtures-use-the">
-<summary>For samples containing a single pure substances. For mixtures use the ...</summary><p>For samples containing a single pure substances. For mixtures use the
+<div><details class="summary-for-samples-containing-a-single-pure-substance-for-mixtures-use-the">
+<summary>For samples containing a single pure substance. For mixtures use the ...</summary><p>For samples containing a single pure substance. For mixtures use the
 NXsample_component_set and NXsample_component group in NXsample instead.</p>
-</details><p id="index-106"><span id="nxmpes-entry-sample-substance-molecular-formula-hill-field"></span><strong>molecular_formula_hill</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXsubstance.html#nxsubstance-molecular-formula-hill-field"><span class="std std-ref">⤆</span></a></p>
+</details><p id="index-112"><span id="nxmpes-entry-sample-substance-molecular-formula-hill-field"></span><strong>molecular_formula_hill</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXsubstance.html#nxsubstance-molecular-formula-hill-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>The chemical formula of the sample (using CIF conventions).</p>
 </div></blockquote>
@@ -668,9 +698,9 @@ experiment.</p>
 <div><details class="summary-details-about-the-sample-preparation-for-the-mpes-experiment-e-g-uhv-c">
 <summary>Details about the sample preparation for the MPES experiment (e.g. UHV c ...</summary><p>Details about the sample preparation for the MPES experiment (e.g. UHV cleaving,
 in-situ growth, sputtering/annealing, etc.).</p>
-</details><p id="index-107"><span id="nxmpes-entry-sample-sample-history-sample-preparation-start-time-field"></span><strong>start_time</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a> <a class="reference internal" href="NXphysical_process.html#nxphysical-process-start-time-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-108"><span id="nxmpes-entry-sample-sample-history-sample-preparation-end-time-field"></span><strong>end_time</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a> <a class="reference internal" href="NXphysical_process.html#nxphysical-process-end-time-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-109"><span id="nxmpes-entry-sample-sample-history-sample-preparation-method-field"></span><strong>method</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXphysical_process.html#nxphysical-process-method-field"><span class="std std-ref">⤆</span></a></p>
+</details><p id="index-113"><span id="nxmpes-entry-sample-sample-history-sample-preparation-start-time-field"></span><strong>start_time</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a> <a class="reference internal" href="NXphysical_process.html#nxphysical-process-start-time-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-114"><span id="nxmpes-entry-sample-sample-history-sample-preparation-end-time-field"></span><strong>end_time</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a> <a class="reference internal" href="NXphysical_process.html#nxphysical-process-end-time-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-115"><span id="nxmpes-entry-sample-sample-history-sample-preparation-method-field"></span><strong>method</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXphysical_process.html#nxphysical-process-method-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Details about the method of sample preparation before the MPES experiment.</p>
 </div></blockquote>
@@ -691,6 +721,12 @@ This should be a link to /entry/instrument/manipulator/temperature_sensor.</p>
 <summary>Device to heat the sample. ...</summary><p>Device to heat the sample.
 This should be a link to /entry/instrument/manipulator/sample_heater.</p>
 </details></div></blockquote>
+<p id="nxmpes-entry-sample-temperature-cryostat-group"><strong>cryostat</strong>: (optional) <a class="reference internal" href="NXactuator.html#nxactuator"><span class="std std-ref">NXactuator</span></a></p>
+<blockquote>
+<div><details class="summary-cryostat-for-cooling-the-sample">
+<summary>Cryostat for cooling the sample. ...</summary><p>Cryostat for cooling the sample.
+This should be a link to /entry/instrument/manipulator/cryostat.</p>
+</details></div></blockquote>
 </div></blockquote>
 <p id="nxmpes-entry-sample-gas-pressure-group"><strong>gas_pressure</strong>: (recommended) <a class="reference internal" href="../base_classes/NXenvironment.html#nxenvironment"><span class="std std-ref">NXenvironment</span></a> <a class="reference internal" href="../base_classes/NXsample.html#nxsample-environment-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
@@ -709,8 +745,14 @@ This should be a link to /entry/instrument/manipulator/sample_heater.</p>
 <p>This concept is related to term <a class="reference external" href="https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:8.41">8.41</a> of the ISO 18115-1:2023 standard.</p>
 </details><p id="nxmpes-entry-sample-bias-voltmeter-group"><strong>voltmeter</strong>: (required) <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor"><span class="std std-ref">NXsensor</span></a> <a class="reference internal" href="../base_classes/NXenvironment.html#nxenvironment-sensor-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><details class="summary-sensor-setting-measuring-the-applied-voltage">
-<summary>Sensor setting/measuring the applied voltage. ...</summary><p>Sensor setting/measuring the applied voltage.</p>
+<div><details class="summary-sensor-measuring-the-applied-voltage">
+<summary>Sensor measuring the applied voltage. ...</summary><p>Sensor measuring the applied voltage.</p>
+<p>This should be a link to /entry/instrument/manipulator/sample_bias_voltmeter.</p>
+</details></div></blockquote>
+<p id="nxmpes-entry-sample-bias-sample-bias-potentiostat-group"><strong>sample_bias_potentiostat</strong>: (required) <a class="reference internal" href="NXactuator.html#nxactuator"><span class="std std-ref">NXactuator</span></a></p>
+<blockquote>
+<div><details class="summary-actuator-applying-a-voltage-to-sample-and-sample-holder-s">
+<summary>Actuator applying a voltage to sample and sample holder.s ...</summary><p>Actuator applying a voltage to sample and sample holder.s</p>
 <p>This should be a link to /entry/instrument/manipulator/sample_bias_voltmeter.</p>
 </details></div></blockquote>
 </div></blockquote>
@@ -769,23 +811,22 @@ Could be a link to /entry/instrument/beam/incident_ellipticity or
 /entry/instrument/beam/final_ellipticity if they exist.
 Unit category: NX_ANGLE (° or rad)</p></li>
 </ul>
-</details><p id="index-110"><span id="nxmpes-entry-data-signal-attribute"></span><strong>&#64;signal</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-signal-attribute"><span class="std std-ref">⤆</span></a></p>
+</details><p id="index-116"><span id="nxmpes-entry-data-signal-attribute"></span><strong>&#64;signal</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-signal-attribute"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">data</span></code></p>
 </div></blockquote>
-<p id="index-111"><span id="nxmpes-entry-data-energy-indices-attribute"></span><strong>&#64;energy_indices</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
-<p id="index-112"><span id="nxmpes-entry-data-energy-depends-attribute"></span><strong>&#64;energy_depends</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-depends-attribute"><span class="std std-ref">⤆</span></a></p>
+<p id="index-117"><span id="nxmpes-entry-data-energy-indices-attribute"></span><strong>&#64;energy_indices</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<p id="index-118"><span id="nxmpes-entry-data-energy-depends-attribute"></span><strong>&#64;energy_depends</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-depends-attribute"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-the-energy-can-be-dispersed-according-to-different-strategies-energy-de">
 <summary>The energy can be dispersed according to different strategies. ``energy_de ...</summary><p>The energy can be dispersed according to different strategies. <code class="docutils literal notranslate"><span class="pre">energy_depends</span></code> points to
-the path of a field defining the axis on which the energy axis depends.</p>
+the path of a field defining the calibrated axis on which the energy axis depends.</p>
 <dl class="simple">
-<dt>For example:</dt><dd><p>&#64;energy_depends: ‘/entry/instrument/detector/data/sensor_y’ for a 2D detector
-&#64;energy_depends: ‘/entry/instrument/energydispersion/center_energy’ for a swept scan</p>
+<dt>For example:</dt><dd><p>&#64;energy_depends: ‘entry/process/energy_calibration’</p>
 </dd>
 </dl>
 </details></div></blockquote>
-<p id="index-113"><span id="nxmpes-entry-data-data-field"></span><strong>data</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-data-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-119"><span id="nxmpes-entry-data-data-field"></span><strong>data</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-data-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-represents-a-measure-of-one-or-more-dimensional-photoemission-counts-whe">
 <summary>Represents a measure of one- or more-dimensional photoemission counts, whe ...</summary><p>Represents a measure of one- or more-dimensional photoemission counts, where the
@@ -793,21 +834,21 @@ varied axis may be for example energy, momentum, spatial coordinate, pump-probe
 delay, spin index, temperature, etc. The axes traces should be linked to the
 actual encoder position in NXinstrument or calibrated axes in NXprocess.</p>
 </details></div></blockquote>
-<p id="index-114"><span id="nxmpes-entry-data-energy-field"></span><strong>energy</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-energy"><span class="std std-ref">NX_ENERGY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-120"><span id="nxmpes-entry-data-energy-field"></span><strong>energy</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-energy"><span class="std std-ref">NX_ENERGY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-calibrated-energy-axis">
 <summary>Calibrated energy axis. ...</summary><p>Calibrated energy axis.</p>
 <p>This could be a link to either
 /entry/process/energy_calibration/calibrated_axis or
 /entry/process/energy_correction/calibrated_axis.</p>
-</details><p id="index-115"><span id="nxmpes-entry-data-energy-type-attribute"></span><strong>&#64;type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-long-name-attribute"><span class="std std-ref">⤆</span></a></p>
+</details><p id="index-121"><span id="nxmpes-entry-data-energy-type-attribute"></span><strong>&#64;type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-long-name-attribute"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><details class="summary-the-energy-can-be-either-stored-as-kinetic-or-as-binding-energy">
 <summary>The energy can be either stored as kinetic or as binding energy. ...</summary><p>The energy can be either stored as kinetic or as binding energy.</p>
 <p>Any of these values:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">kinetic</span></code>:  Calibrated kinetic energy axis. This concept is related to term <a class="reference external" href="https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.35">3.35</a> of the ISO 18115-1:2023 standard.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kinetic</span></code>:  Calibrated kinetic energy axis. In case the kinetic energy axis is referenced to the Fermi level <span class="math notranslate nohighlight">\(E_F\)</span> (e.g., in entry/process/energy_referencing), kinetic energies <span class="math notranslate nohighlight">\(E\)</span> are provided as <span class="math notranslate nohighlight">\(E-E_F\)</span>. This concept is related to term <a class="reference external" href="https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.35">3.35</a> of the ISO 18115-1:2023 standard.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">binding</span></code>:  Calibrated binding energy axis. This concept is related to term <a class="reference external" href="https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16">12.16</a> of the ISO 18115-1:2023 standard.</p></li>
 </ul>
 </div></blockquote>
@@ -889,7 +930,7 @@ attributes, and links defined in this class.</p>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-energydispersion-scheme-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/scheme-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-fast-axes-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/fast_axes-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-slow-axes-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/slow_axes-field</span></a></p></li>
-<li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-transmission-function-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/transmission_function-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-transmission-function-group"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/transmission_function-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-electronanalyser-work-function-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/work_function-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-energy-resolution-group"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/energy_resolution-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-energy-resolution-physical-quantity-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/energy_resolution/physical_quantity-field</span></a></p></li>
@@ -903,6 +944,11 @@ attributes, and links defined in this class.</p>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-flood-gun-physical-quantity-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/flood_gun/physical_quantity-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-flood-gun-type-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/flood_gun/type-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-group"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-cryostat-group"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-cryostat-physical-quantity-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/physical_quantity-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-cryostat-pid-group"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/PID-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-cryostat-pid-setpoint-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/PID/setpoint-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-cryostat-type-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/type-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-device-information-group"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-device-information-identifier-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information/identifier-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-device-information-model-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/device_information/model-field</span></a></p></li>
@@ -912,6 +958,12 @@ attributes, and links defined in this class.</p>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-drain-current-amperemeter-name-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/name-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-drain-current-amperemeter-type-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/type-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-drain-current-amperemeter-value-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/drain_current_amperemeter/value-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-sample-bias-potentiostat-group"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-sample-bias-potentiostat-name-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/name-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-sample-bias-potentiostat-physical-quantity-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/physical_quantity-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-sample-bias-potentiostat-pid-group"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/PID-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-sample-bias-potentiostat-pid-setpoint-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/PID/setpoint-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-sample-bias-potentiostat-type-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_potentiostat/type-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-sample-bias-voltmeter-group"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-sample-bias-voltmeter-measurement-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/measurement-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-instrument-manipulator-sample-bias-voltmeter-name-field"><span class="std std-ref">/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/sample_bias_voltmeter/name-field</span></a></p></li>
@@ -963,14 +1015,15 @@ attributes, and links defined in this class.</p>
 <li><p><a class="reference internal" href="#nxmpes-entry-process-spatial-calibration-group"><span class="std std-ref">/NXmpes/ENTRY/PROCESS/spatial_calibration-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-process-spatial-calibration-calibrated-axis-field"><span class="std std-ref">/NXmpes/ENTRY/PROCESS/spatial_calibration/calibrated_axis-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-process-transmission-correction-group"><span class="std std-ref">/NXmpes/ENTRY/PROCESS/transmission_correction-group</span></a></p></li>
-<li><p><a class="reference internal" href="#nxmpes-entry-process-transmission-correction-mapping-group"><span class="std std-ref">/NXmpes/ENTRY/PROCESS/transmission_correction/mapping-group</span></a></p></li>
-<li><p><a class="reference internal" href="#nxmpes-entry-process-transmission-correction-mapping-kinetic-energy-field"><span class="std std-ref">/NXmpes/ENTRY/PROCESS/transmission_correction/mapping/kinetic_energy-field</span></a></p></li>
-<li><p><a class="reference internal" href="#nxmpes-entry-process-transmission-correction-mapping-relative-intensity-field"><span class="std std-ref">/NXmpes/ENTRY/PROCESS/transmission_correction/mapping/relative_intensity-field</span></a></p></li>
-<li><p><a class="reference internal" href="#nxmpes-entry-process-transmission-correction-mapping-axes-attribute"><span class="std std-ref">/NXmpes/ENTRY/PROCESS/transmission_correction/mapping&#64;axes-attribute</span></a></p></li>
-<li><p><a class="reference internal" href="#nxmpes-entry-process-transmission-correction-mapping-signal-attribute"><span class="std std-ref">/NXmpes/ENTRY/PROCESS/transmission_correction/mapping&#64;signal-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-process-transmission-correction-transmission-function-group"><span class="std std-ref">/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-process-transmission-correction-transmission-function-kinetic-energy-field"><span class="std std-ref">/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function/kinetic_energy-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-process-transmission-correction-transmission-function-relative-intensity-field"><span class="std std-ref">/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function/relative_intensity-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-process-transmission-correction-transmission-function-axes-attribute"><span class="std std-ref">/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function&#64;axes-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-process-transmission-correction-transmission-function-signal-attribute"><span class="std std-ref">/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function&#64;signal-attribute</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-sample-group"><span class="std std-ref">/NXmpes/ENTRY/SAMPLE-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-sample-atom-types-field"><span class="std std-ref">/NXmpes/ENTRY/SAMPLE/atom_types-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-sample-bias-group"><span class="std std-ref">/NXmpes/ENTRY/SAMPLE/bias-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-sample-bias-sample-bias-potentiostat-group"><span class="std std-ref">/NXmpes/ENTRY/SAMPLE/bias/sample_bias_potentiostat-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-sample-bias-voltmeter-group"><span class="std std-ref">/NXmpes/ENTRY/SAMPLE/bias/voltmeter-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-sample-drain-current-group"><span class="std std-ref">/NXmpes/ENTRY/SAMPLE/drain_current-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-sample-drain-current-amperemeter-group"><span class="std std-ref">/NXmpes/ENTRY/SAMPLE/drain_current/amperemeter-group</span></a></p></li>
@@ -989,6 +1042,7 @@ attributes, and links defined in this class.</p>
 <li><p><a class="reference internal" href="#nxmpes-entry-sample-substance-group"><span class="std std-ref">/NXmpes/ENTRY/SAMPLE/SUBSTANCE-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-sample-substance-molecular-formula-hill-field"><span class="std std-ref">/NXmpes/ENTRY/SAMPLE/SUBSTANCE/molecular_formula_hill-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-sample-temperature-group"><span class="std std-ref">/NXmpes/ENTRY/SAMPLE/temperature-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmpes-entry-sample-temperature-cryostat-group"><span class="std std-ref">/NXmpes/ENTRY/SAMPLE/temperature/cryostat-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-sample-temperature-sample-heater-group"><span class="std std-ref">/NXmpes/ENTRY/SAMPLE/temperature/sample_heater-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-sample-temperature-temperature-sensor-group"><span class="std std-ref">/NXmpes/ENTRY/SAMPLE/temperature/temperature_sensor-group</span></a></p></li>
 <li><p><a class="reference internal" href="#nxmpes-entry-start-time-field"><span class="std std-ref">/NXmpes/ENTRY/start_time-field</span></a></p></li>
