@@ -6,7 +6,7 @@
 <html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>2.3.3.3.128. NXenergydispersion &#8212; NeXus-FAIRmat v2022.07 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
@@ -102,7 +102,7 @@ measurement point.</p>
 <p>Any of these values:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">fixed_analyser_transmission</span></code>:  constant <span class="math notranslate nohighlight">\(\Delta E\)</span> mode, where the electron retardation (i.e., the fraction of pass energy to kinetic energy, <span class="math notranslate nohighlight">\(R = (E_K - WF/E_p)\)</span>, is scanned, but the pass energy <span class="math notranslate nohighlight">\(E_p\)</span> is kept constant. Here, <span class="math notranslate nohighlight">\(WF\)</span> is the spectrometer work function. This mode is often used in XPS/UPS because the energy resolution does not change with changing energy (due to the constant pass energy). Synonyms: constant <span class="math notranslate nohighlight">\(\Delta E\)</span> mode, constant analyser energy mode, CAE mode, FAT mode This concept is related to term <a class="reference external" href="https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.64">12.64</a> of the ISO 18115-1:2023 standard.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fixed_analyser_transmission</span></code>:  constant <span class="math notranslate nohighlight">\(\Delta E\)</span> mode, where the electron retardation (i.e., the fraction of pass energy to kinetic energy, <span class="math notranslate nohighlight">\(R = (E_K - W/E_p)\)</span>, is scanned, but the pass energy <span class="math notranslate nohighlight">\(E_p\)</span> is kept constant. Here, <span class="math notranslate nohighlight">\(W = e \phi\)</span> is the spectrometer work function (with the potential difference <span class="math notranslate nohighlight">\(\phi_{\mathrm{sample}}\)</span> between the electrochemical potential of electrons in the bulk and the electrostatic potential of an electron in the vacuum just outside the surface). This mode is often used in XPS/UPS because the energy resolution does not change with changing energy (due to the constant pass energy). Synonyms: constant <span class="math notranslate nohighlight">\(\Delta E\)</span> mode, constant analyser energy mode, CAE mode, FAT mode This concept is related to term <a class="reference external" href="https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.64">12.64</a> of the ISO 18115-1:2023 standard.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fixed_retardation_ratio</span></code>:  constant <span class="math notranslate nohighlight">\(\Delta E/E\)</span> mode, where the pass energy is scanned such that the electron retardation ratio is constant. In this mode, electrons of all energies are decelerated with this same fixed factor. Thus, the pass energy is proportional to the kinetic energy. This mode is often used in Auger electron spectroscopy (AES) to improve S/N for high-KE electrons, but this leads to a changing energy resolution (<span class="math notranslate nohighlight">\(\Delta E \sim E_p\)</span>) at different kinetic energies. It can however also be used in XPS. Synonyms: constant <span class="math notranslate nohighlight">\(\Delta E/E\)</span> mode, constant retardation ratio mode, CRR mode, FRR mode This concept is related to term <a class="reference external" href="https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.66">12.66</a> of the ISO 18115-1:2023 standard.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fixed_energy</span></code>:  In the fixed energy (FE) mode, the intensity for one single kinetic energy is measured for a specified time. This mode is particulary useful during setup or alignment of the electron analyzer, for analysis of stability of the excitation source or for sample alignment. Since the mode measures intensity as a function of time, the difference in channel signals is not of interest. Therefore, the signals from all channels are summed. Synonyms: FE mode</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">snapshot</span></code>: Snapshot mode does not involve an energy scan and instead collects data from all channels of the detector without averaging. The resulting spectrum reflects the energy distribution of particles passing through the analyzer using the current settings. This mode is commonly used to position the detection energy at the peak of a peak and record the signal, enabling faster data acquisition within a limited energy range compared to FAT. Snapshot measurements are particularly suitable for CCD and DLD detectors, which have multiple channels and can accurately display the peak shape. While five or nine-channel detectors can also be used for snapshot measurements, their energy resolution is relatively lower.</p></li>
@@ -114,7 +114,14 @@ measurement point.</p>
 <blockquote>
 <div><p>Length of the tof drift electrode</p>
 </div></blockquote>
-<p id="index-9"><span id="nxenergydispersion-depends-on-field"></span><strong>depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<p id="index-9"><span id="nxenergydispersion-voltage-scan-range-field"></span><strong>voltage_scan_range</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-voltage"><span class="std std-ref">NX_VOLTAGE</span></a>}</p>
+<blockquote>
+<div><details class="summary-maximum-minimum-voltage-range-of-the-energy-dispersion-i-e-the-voltage-that">
+<summary>Maximum/minimum voltage range of the energy dispersion, i.e., the voltage that ...</summary><p>Maximum/minimum voltage range of the energy dispersion, i.e., the voltage that is set on
+the two hemispheres. If this range is set to <cite>k</cite> V, it means that the voltage can be varied
+-<cite>k</cite> and <cite>k</cite> V. Influences the energy resolution.</p>
+</details></div></blockquote>
+<p id="index-10"><span id="nxenergydispersion-depends-on-field"></span><strong>depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
 <blockquote>
 <div><details class="summary-specifies-the-position-of-the-energy-dispesive-elemeent-by-pointing-to-the-las">
 <summary>Specifies the position of the energy dispesive elemeent by pointing to the las ...</summary><p>Specifies the position of the energy dispesive elemeent by pointing to the last
@@ -166,6 +173,7 @@ attributes, and links defined in this class.</p>
 <li><p><a class="reference internal" href="#nxenergydispersion-scheme-field"><span class="std std-ref">/NXenergydispersion/scheme-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxenergydispersion-tof-distance-field"><span class="std std-ref">/NXenergydispersion/tof_distance-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxenergydispersion-transformations-group"><span class="std std-ref">/NXenergydispersion/TRANSFORMATIONS-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxenergydispersion-voltage-scan-range-field"><span class="std std-ref">/NXenergydispersion/voltage_scan_range-field</span></a></p></li>
 </ul>
 <dl class="simple">
 <dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXenergydispersion.nxdl.xml">https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXenergydispersion.nxdl.xml</a></p>
