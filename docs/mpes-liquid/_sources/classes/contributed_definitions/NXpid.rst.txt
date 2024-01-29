@@ -36,9 +36,11 @@ NXpid
 
   **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    Description of how the Process Value for the PID controller is produced by sensor(s) in the setup.
+    .. collapse:: Description of how the Process Value for the PID controller is produced by sen ...
 
-    For example, a set of sensors could be averaged over before feeding it back into the loop.
+        Description of how the Process Value for the PID controller is produced by sensor(s) in the setup.
+
+        For example, a set of sensors could be averaged over before feeding it back into the loop.
 
   .. _/NXpid/setpoint-field:
 
@@ -46,9 +48,11 @@ NXpid
 
   **setpoint**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ANY <NX_ANY>`} 
 
-    The Setpoint(s) used as an input for the PID controller.
+    .. collapse:: The Setpoint(s) used as an input for the PID controller. ...
 
-    It can also be a link to an NXsensor.value field.
+        The Setpoint(s) used as an input for the PID controller.
+
+        It can also be a link to an NXsensor.value field.
 
   .. _/NXpid/K_p_value-field:
 
@@ -56,11 +60,13 @@ NXpid
 
   **K_p_value**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` 
 
-    Proportional term. The proportional term produces an output value
-    that is proportional to the current error value.
-    The proportional response can be adjusted by multiplying the error
-    by a constant Kp, called the proportional gain constant.
-    The Type switches controller parameters between P/I (proportional gain/integral gain) and P/T (proportional gain/time constant). The formula for the controller in the frequency domain is G(s) = P + I/s = P(1 + 1/(Ts)). The integral gain and time constant are related as follows I = P/T.
+    .. collapse:: Proportional term. The proportional term produces an output value ...
+
+        Proportional term. The proportional term produces an output value
+        that is proportional to the current error value.
+        The proportional response can be adjusted by multiplying the error
+        by a constant Kp, called the proportional gain constant.
+        The Type switches controller parameters between P/I (proportional gain/integral gain) and P/T (proportional gain/time constant). The formula for the controller in the frequency domain is G(s) = P + I/s = P(1 + 1/(Ts)). The integral gain and time constant are related as follows I = P/T.
 
   .. _/NXpid/K_i_value-field:
 
@@ -68,13 +74,15 @@ NXpid
 
   **K_i_value**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` 
 
-    The contribution from the integral term is proportional to both
-    the magnitude of the error and the duration of the error.
-    The integral in a PID controller is the sum of the instantaneous
-    error over time and gives the accumulated offset that should have
-    been corrected previously. The accumulated error is then
-    multiplied by the integral gain (Ki) and added to the
-    controller output.
+    .. collapse:: The contribution from the integral term is proportional to both ...
+
+        The contribution from the integral term is proportional to both
+        the magnitude of the error and the duration of the error.
+        The integral in a PID controller is the sum of the instantaneous
+        error over time and gives the accumulated offset that should have
+        been corrected previously. The accumulated error is then
+        multiplied by the integral gain (Ki) and added to the
+        controller output.
 
   .. _/NXpid/K_d_value-field:
 
@@ -82,11 +90,13 @@ NXpid
 
   **K_d_value**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` 
 
-    The derivative of the process error is calculated by determining
-    the slope of the error over time and multiplying this rate of
-    change by the derivative gain K_d. The magnitude of the
-    contribution of the derivative term to the overall control
-    action is termed the derivative gain, K_d
+    .. collapse:: The derivative of the process error is calculated by determining ...
+
+        The derivative of the process error is calculated by determining
+        the slope of the error over time and multiplying this rate of
+        change by the derivative gain K_d. The magnitude of the
+        contribution of the derivative term to the overall control
+        action is termed the derivative gain, K_d
 
   .. _/NXpid/K_t_const-field:
 
@@ -94,31 +104,41 @@ NXpid
 
   **K_t_const**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_TIME <NX_TIME>`} 
 
-    The Type switches controller parameters between P/I (proportional gain/integral
-    gain) and P/T (proportional gain/time constant). The formula for the controller
-    in the frequency domain is G(s) = P + I/s = P(1 + 1/(Ts)). The integral gain and
-    time constant are related as follows I = P/T.
+    .. collapse:: The Type switches controller parameters between P/I (proportional gain/integra ...
+
+        The Type switches controller parameters between P/I (proportional gain/integral
+        gain) and P/T (proportional gain/time constant). The formula for the controller
+        in the frequency domain is G(s) = P + I/s = P(1 + 1/(Ts)). The integral gain and
+        time constant are related as follows I = P/T.
 
   .. _/NXpid/pv_sensor-group:
 
   **pv_sensor**: (optional) :ref:`NXsensor` 
 
-    The sensor representing the Process Value used in the feedback loop for the PID.
+    .. collapse:: The sensor representing the Process Value used in the feedback loop for the PI ...
 
-    In case multiple sensors were used, this NXsensor should contain the proper calculated/aggregated value.
+        The sensor representing the Process Value used in the feedback loop for the PID.
+
+        In case multiple sensors were used, this NXsensor should contain the proper calculated/aggregated value.
 
     .. _/NXpid/pv_sensor/value_log-group:
 
-    **value_log**: (optional) :ref:`NXlog` 
+    **value_log**: (optional) :ref:`NXlog` :ref:`⤆ </NXsensor/value_log-group>`
 
 
       .. _/NXpid/pv_sensor/value_log/value-field:
 
       .. index:: value (field)
 
-      **value**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` 
+      **value**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXlog/value-field>`
 
         The actual timeseries data fed back to the PID loop.
+
+  .. _/NXpid/setpoint_log-group:
+
+  **setpoint_log**: (optional) :ref:`NXlog` 
+
+    Time log of the setpoint(s) used as an input for the PID controller.
 
 
 Hypertext Anchors
@@ -137,6 +157,7 @@ attributes, and links defined in this class.
 * :ref:`/NXpid/pv_sensor/value_log-group </NXpid/pv_sensor/value_log-group>`
 * :ref:`/NXpid/pv_sensor/value_log/value-field </NXpid/pv_sensor/value_log/value-field>`
 * :ref:`/NXpid/setpoint-field </NXpid/setpoint-field>`
+* :ref:`/NXpid/setpoint_log-group </NXpid/setpoint_log-group>`
 
 **NXDL Source**:
   https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXpid.nxdl.xml

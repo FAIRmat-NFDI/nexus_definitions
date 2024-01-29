@@ -17,32 +17,36 @@ NXcs_filter_boolean_mask
 
 **Description**:
 
-  Computer science base class for packing and unpacking booleans.
+  .. collapse:: Computer science base class for packing and unpacking booleans. ...
 
-  One use case is processing of object sets (like point cloud data).
-  When one applies e.g. a spatial filter to a set of points to define which 
-  points are analyzed and which not, it is useful to document which points were
-  taken. One can store this information in a compact manner with an array of 
-  boolean values. If the value is True the point is taken, else it is not.
+      Computer science base class for packing and unpacking booleans.
 
-  If the points are identified by an array of integer identifiers and an 
-  arbitrary spatial filtering, the boolean array will be filled with True and False
-  values in an arbitrary manner. Especially when the number of points is large,
-  for instance several thousands and more, some situations can be more efficiently
-  stored if one would not store the boolean array but just list the identifiers
-  of the points taken. For instance if within a set of 1000 points only one point is
-  taken, it would take (naively) 4000 bits to store the array but only 32 bits
-  to store e.g. the ID of that taken point. Of course the 4000 bit field is so 
-  sparse that it could be compressed resulting also in a substantial reduction 
-  of the storage demands. Therefore boolean masks are useful compact descriptions
-  to store information about set memberships in a compact manner. 
-  In general it is true, though, that which representation is best, i.e. 
-  most compact (especially when compressed) depends strongly on occupation of
-  the array.
+      This base class bookkeeps metadata to inform software about necessary modulo
+      operations to decode e.g. set membership of objects in sets which are encoded
+      as a packed array of boolean values.
 
-  This base class just bookkeeps metadata to inform software about necessary 
-  modulo operations to decode the set membership of each object. This is useful
-  because the number of objects not necessarily is an integer multiple of the bit depth.
+      One use case is processing of object sets (point cloud data). When one applies
+      e.g. a spatial filter to a set of points to define which points are analyzed
+      and which not, one can store this information in a compact manner using an array
+      of boolean values. If the value is True the point is taken, otherwise the point
+      is not taken.
+
+      The resulting boolean array will be filled with True and False in a manner
+      that is often arbitrary and in general case-dependent.
+
+      Especially when the number of points is large, for instance several thousands
+      or more, some situations can be more efficiently stored if one would not store
+      the boolean array but just list the identifiers of the points taken.
+
+      For example, if within a set of 1000 points only one point is taken, it would
+      take (naively) 4000 bits to store the array but only 32 bits to store e.g. the
+      ID of the single point that is taken. Of course the 4000 bit field is so
+      sparse that it could be compressed resulting also in a substantial reduction
+      of the storage demands. Therefore, boolean masks are useful in that
+      they store compact representation of set memberships.
+
+      The number of encoded pieces of information is not necessarily
+      an integer multiple of the bit depth.
 
 **Symbols**:
 
@@ -59,11 +63,24 @@ NXcs_filter_boolean_mask
 
 **Structure**:
 
+  .. _/NXcs_filter_boolean_mask@depends_on-attribute:
+
+  .. index:: depends_on (file attribute)
+
+  **@depends_on**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+    .. collapse:: Possibility to refer to which set this mask applies. ...
+
+        Possibility to refer to which set this mask applies.
+
+        If depends_on is not provided, it is assumed that the mask
+        applies to its direct parent.
+
   .. _/NXcs_filter_boolean_mask/number_of_objects-field:
 
   .. index:: number_of_objects (field)
 
-  **number_of_objects**: (optional) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **number_of_objects**: (optional) :ref:`NX_INT <NX_INT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
     Number of objects represented by the mask.
 
@@ -71,10 +88,12 @@ NXcs_filter_boolean_mask
 
   .. index:: bitdepth (field)
 
-  **bitdepth**: (optional) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **bitdepth**: (optional) :ref:`NX_INT <NX_INT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    Number of bits assumed matching on a default datatype.
-    (e.g. 8 bits for a C-style uint8).
+    .. collapse:: Number of bits assumed matching on a default datatype. ...
+
+        Number of bits assumed matching on a default datatype.
+        (e.g. 8 bits for a C-style uint8).
 
   .. _/NXcs_filter_boolean_mask/mask-field:
 
@@ -82,19 +101,21 @@ NXcs_filter_boolean_mask
 
   **mask**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_total]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    The unsigned integer array representing the content of the mask.
-    If padding is used the padded bits have to be set to 0.
+    The content of the mask. If padding is used, padding bits have to be set to 0.
 
   .. _/NXcs_filter_boolean_mask/identifier-field:
 
   .. index:: identifier (field)
 
-  **identifier**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_object]) 
+  **identifier**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 1, Dimensions: [n_object]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    Link to/or array of identifiers for the objects. The decoded mask is
-    interpreted consecutively, i.e. the first bit in the mask matches
-    to the first identifier, the second bit in the mask to the second
-    identifier and so on and so forth.
+    .. collapse:: Link to/or array of identifiers for the objects. The decoded mask is ...
+
+        Link to/or array of identifiers for the objects. The decoded mask is
+        interpreted consecutively, i.e. the first bit in the mask matches
+        to the first identifier, the second bit in the mask to the second
+        identifier and so on and so forth. Resolving of identifier follows
+        the conventions made for depends_on, so consult the also its description.
 
 
 Hypertext Anchors
@@ -108,6 +129,7 @@ attributes, and links defined in this class.
 * :ref:`/NXcs_filter_boolean_mask/identifier-field </NXcs_filter_boolean_mask/identifier-field>`
 * :ref:`/NXcs_filter_boolean_mask/mask-field </NXcs_filter_boolean_mask/mask-field>`
 * :ref:`/NXcs_filter_boolean_mask/number_of_objects-field </NXcs_filter_boolean_mask/number_of_objects-field>`
+* :ref:`/NXcs_filter_boolean_mask@depends_on-attribute </NXcs_filter_boolean_mask@depends_on-attribute>`
 
 **NXDL Source**:
   https://github.com/nexusformat/definitions/blob/main/contributed_definitions/NXcs_filter_boolean_mask.nxdl.xml

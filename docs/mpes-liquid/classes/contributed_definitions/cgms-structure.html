@@ -6,11 +6,11 @@
 <html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>2.3.3.3.7. Geometry and microstructures &#8212; NeXus-FAIRmat v2022.07 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=4f649999" />
-    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=f9822eda" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
     <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
     <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
     <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
@@ -28,8 +28,9 @@
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -51,8 +52,8 @@ has the following aims:</p>
 and relations between terms, for computational-geometry-based descriptions of the structure of
 materials and atomic configurations used when characterizing materials in experiments
 and computer simulations.</p>
-<p>As far as NeXus is concerned, the here proposed distinct sets of geometric primitives offer
-a complementary alternative to the already existent base classes in NeXus for
+<p>As far as NeXus is concerned, this proposed set of geometric primitives offer
+a complementary alternative to the current set of base classes in NeXus for
 constructive solid geometry (CSG) such as <a class="reference internal" href="NXcsg.html#nxcsg"><span class="std std-ref">NXcsg</span></a>, <a class="reference internal" href="../base_classes/NXoff_geometry.html#nxoff-geometry"><span class="std std-ref">NXoff_geometry</span></a>, or <a class="reference internal" href="NXquadric.html#nxquadric"><span class="std std-ref">NXquadric</span></a>.</p>
 <p>Second, to explore how terms which are frequently used by materials scientists in the field of
 condensed-matter physics can be harmonized with definitions and terms offer by the NOMAD MetaInfo
@@ -66,7 +67,7 @@ FAIRmat, NFDI-MatWerk, NFDI4Ing, NFDI4Chem, NFDI4Cat, MaRDI, and DAPHNE.</p>
 <span id="physicscgms"></span><h2>Physics background<a class="headerlink" href="#physics-background" title="Link to this heading">¶</a></h2>
 <p>Microstructural features or crystal defects are spatial arrangements of atoms.
 Given their specific atomic arrangement and composition, such features have
-specific constraints on the degrees of freedom. This equips these defects with specific
+specific constraints on the degrees of freedom. This causes these defects to have specific
 properties (thermodynamic observables/descriptors). Provided well-defined coarse-graining procedures
 are used and regions-of-interest and/or regions-of-applicability are defined, microstructural
 features are often characterized and modelled to have associated thermodynamic descriptors.</p>
@@ -80,10 +81,9 @@ and interoperability.</p>
 <p>Maybe this is a historical burden given the large set of technical terms in place which then
 motivated pragmatic solutions that have resulted in many research groups having developed
 similar formats using similar descriptions.</p>
-<p>Defining crystal defects is a question of how to coarse-grain a given spatio-temporal set of atoms,
-each having a nuclid type and position/trajectory. In most cases, such a coarse-graining is an ill-posed
-task because different mathematical/geometrical methods exists how a point, a line, a surface, or a volumetric
-defect can be described and be spatio-temporally constrained through a geometrical model
+<p>Defining crystal defects is a question of how to coarse-grain a given spatiotemporal set of atoms,
+each having a nuclide type and position/trajectory. Different mathematical/geometrical methods exists
+to determine how a point, a line, a surface, or a volumetric defect can be described and be spatiotemporally constrained through a geometrical model
 with defined primitives and associated observables.</p>
 <p>The key motivation to such coarse-graining is to reduce the complexity of the description.
 On the one hand to support visualization and scientific analyses - not only of crystal defect arrangements.
@@ -177,7 +177,7 @@ is smoothened in a controlled manner (typically using kernel methods).</p>
 </dd>
 <dt><a class="reference internal" href="NXclustering.html#nxclustering"><span class="std std-ref">NXclustering</span></a>:</dt><dd><p>A base class to describe clustering of objects (such as atoms or features).</p>
 </dd>
-<dt><a class="reference internal" href="NXorientation_set.html#nxorientation-set"><span class="std std-ref">NXorientation_set</span></a>:</dt><dd><p>A base class to describe the relative orientation or rotation members
+<dt><a class="reference internal" href="NXrotation_set.html#nxrotation-set"><span class="std std-ref">NXrotation_set</span></a>:</dt><dd><p>A base class to describe the relative orientation or rotation members
 of a set of features/objects.</p>
 </dd>
 <dt><a class="reference internal" href="NXslip_system_set.html#nxslip-system-set"><span class="std std-ref">NXslip_system_set</span></a>:</dt><dd><p>A base class to describe a set of slip system/slip system family for
@@ -196,9 +196,8 @@ at a given point in time.</p>
 </dd>
 </dl>
 </div></blockquote>
-<p>Furthermore, it can be useful to have a set of base classes whereby software tools can
-documents their state and return summaries for users about the performance
-and elapsed time measured while processing data. These utility base classes are:</p>
+<p>Finally, the following base classes allow data processing software to document its
+input parameters and to summarize its performance statistics:</p>
 <blockquote>
 <div><dl class="simple">
 <dt><a class="reference internal" href="NXprogram.html#nxprogram"><span class="std std-ref">NXprogram</span></a>:</dt><dd><p>A base class for a specifically named and versioned program or library/component.</p>
@@ -270,7 +269,7 @@ and elapsed time measured while processing data. These utility base classes are:
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. B1: Electron microscopy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. B2/B3: Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ellipsometry-structure.html">5. B4: Optical spectroscopy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. B5: Atom-probe tomography</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport Phenomena</a></li>
@@ -375,11 +374,11 @@ and elapsed time measured while processing data. These utility base classes are:
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2022-2023, The FAIRmat collaboration.
+      &#169;2022-2024, The FAIRmat collaboration.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="../../_sources/classes/contributed_definitions/cgms-structure.rst.txt"

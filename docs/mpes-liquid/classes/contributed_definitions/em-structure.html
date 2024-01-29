@@ -6,11 +6,11 @@
 <html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>2.3.3.3.1. Electron microscopy &#8212; NeXus-FAIRmat v2022.07 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=4f649999" />
-    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=f9822eda" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
     <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
     <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
     <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
@@ -28,8 +28,9 @@
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -51,24 +52,14 @@ We realize that the biology-/bio-materials/omics-branch of electron microscopy i
 to data management practices. In what follows, the focus is on the usage of electron microscopy in condensed-matter physics, chemical physics of solids,
 and materials engineering applications. As many of the components of electron microscopes used in the bio-materials communities are the same or at least many
 components are very similar, it is likely that the here presented schema definitions can also inspire discussion and exchange with the bio-materials community.
-International and national projects and consortia including the German National Research Data Infrastructure are addressed NFDI-MatWerk, NFDI-BioImage, MaRDI,
-NFDI-Microbiota, NFDI4Health, and e.g. NFDI-Neuro.</p>
-<p>Electron microscopes are functionally very customizable tools: Examples include multi-signal/-modal analyses which are frequently realized as on-the-fly computational analyses,
-regularly switching between GUI-based instrument control, computational steps, and more and more using high-throughput stream-based processing. Also artificial intelligence
-methods are increasingly used and become closer interconnected with classical modes of controlling the instrument and perform data processing. A challenge in electron microscopy
-is that these steps are often executed within commercial integrated control and analysis software. This makes it difficult to keep track of workflows in a technology-partner-agnostic,
-i.e. interdisciplinary manner.</p>
+Partner consortia in the German National Research Data Infrastructure are here e.g. NFDI-BioImage, NFDI-Microbiota, NFDI4Health, and e.g. NFDI-Neuro.</p>
+<p>Electron microscopes are functionally very customizable tools: Examples include multi-signal/-modal analyses which are frequently realized as on-the-fly computational analyses, regularly switching between GUI-based instrument control, computational steps, and more and more using high-throughput stream-based processing. Also artificial intelligence methods are increasingly used and are becoming more closely interconnected with classical modes of controlling the instrument and perform data processing. A challenge in electron microscopy is that these steps are often executed within commercial integrated control and analysis software. This makes it difficult to keep track of workflows in a technology-partner-agnostic, i.e. interdisciplinary manner.</p>
 </section>
 <section id="application-definitions">
 <span id="emappdef"></span><h2>Application Definitions<a class="headerlink" href="#application-definitions" title="Link to this heading">¶</a></h2>
-<p>We acknowledge that it can be difficult to agree on a single application definition which is generally enough applicable but not too complex to remain useful for application across a
-variety of instruments, technology partners, and instrument use cases. In what follows, the proposal conceptualizes first the basic components of an electron microscope. Secondly,
-the proposal documents the steps of usual workflows how an electron microscope is used when collecting data with detectors via probing radiation-specimen-matter interaction mechanisms.</p>
-<p>In summary, scientists place a specimen/sample into the microscope, calibrate the instrument, take measurements, may perform experiments, prepare their specimens with a focused ion beam,
-calibrate again, and take other measurements, before their session on the instrument ends. In between virtually all of these steps data are collected and stream in from different detectors
-probing different physical mechanisms of the interaction between electrons or other types of radiation with the specimen.</p>
-<p>A microscope session ends with the scientist removing the specimen from the instrument or parking it so that the next user can start a session.
-Occasionally, service technicians perform calibrations and maintenance which also can be described as a session on the microscope.</p>
+<p>We acknowledge that it can be difficult to agree on a single application definition which is generally enough applicable yet not unnecessarily complex and useful for applications across a variety of instruments, technology partners, and instrument use cases. In what follows, the proposal conceptualizes first the basic components of an electron microscope and the usual workflow of how an electron microscope is used for collecting data with detectors via probing radiation-specimen-matter interaction mechanisms.</p>
+<p>In summary, scientists place a specimen/sample into the microscope, calibrate the instrument, take measurements, and may perform experiments, prepare their specimens with a focused ion beam, calibrate again, and take other measurements, before their session on the instrument ends. In between virtually all of these steps data are collected and stream in from different detectors probing different physical mechanisms of the interaction between electrons or other types of radiation with the specimen.</p>
+<p>A microscope session ends with the scientist removing the specimen from the instrument or parking it so that the next user can start a session. Occasionally, service technicians perform calibrations and maintenance which also can be described as a session on the microscope. We have provided base classes to describe these steps and events and an application definition for electron microscopy:</p>
 <blockquote>
 <div><dl class="simple">
 <dt><a class="reference internal" href="NXem.html#nxem"><span class="std std-ref">NXem</span></a>:</dt><dd><p>An application definition which explores the possibilities of electron microscopes.</p>
@@ -136,12 +127,10 @@ which modern stages of electron microscopes typically offer.</p>
 </dd>
 </dl>
 </div></blockquote>
-</section>
-<section id="partner-application-definitions">
-<span id="empartnerclasses"></span><h2>Partner application definitions<a class="headerlink" href="#partner-application-definitions" title="Link to this heading">¶</a></h2>
-<p>A partner application definition is considered an application definition which stores data and metadata which are relevant for a given experiment but have usually only few connections to the detailed description of the workflow and experiment which motivates to granularize out these pieces of information into an own application definition. In fact, one limitation of application definitions in NeXus is currently that they define a set of constraints on their graph of controlled concepts and terms. If we take for example diffraction experiments with an electron microscope, it is usually the case that (diffraction) patterns are collected in the session at the microscope. However, all scientifically relevant conclusions are typically drawn later, i.e. through post-processing the collected diffraction (raw) data. These numerical and algorithmic steps define computational workflows were data from an instance of an application definition such as NXem are used as input but many additional concepts and constraints are applied without these demanding necessarily for changing constraints on fields or groups of NXem. If we were to modify NXem for these cases, NXem would combinatorially diverge as every different combination of required constraints demands having an own but almost similar application definition. For this reason, the concept of partner application definition are currently used which have fields/links whereby specifically
-relevant sources of information are connected to e.g. NXem. More consolidation through the use of NXsubentry classes should be considered in the future. An alternative solution is to define both NXem and its partner application definitions
-are deep base classes for which each field and group is optional. Specific instances of these blue print base classes could then elegantly combine the reuse of vocabulary and hierarchical organization information with specific constraints which are relevant only for specific usage of such data by specific tools used by an eventually smaller circle of users.</p>
+<p id="emanalysisclasses">We provide specific base classes which granularize frequently collected or analyzed quantities in specific application fields of electron microscopy to deal
+with the situation that there are cases were logical connections between generated data artifacts mainly exist for the fact that the data artifacts were
+collected during a workflow of electron microscopy research (e.g. taking measurements and then performing method-specific analyses generating new data and conclusions). We see a value in granularizing out these pieces of information into own classes. In fact, one limitation of application definitions in NeXus is currently that they define a set of constraints on their graph of controlled concepts and terms. If we take for example diffraction experiments with an electron microscope, it is usually the case that (diffraction) patterns are collected in the session at the microscope. However, all scientifically relevant conclusions are typically drawn later, i.e. through post-processing the collected diffraction (raw) data. These numerical and algorithmic steps define computational workflows were data from an instance of an application definition such as NXem are used as input but many additional concepts and constraints are applied without these demanding necessarily for changing constraints on fields or groups of NXem. If we were to modify NXem for these cases, NXem would combinatorially diverge as every different combination of required constraints demands having an own but almost similar application definition. For this reason, the concept of partner application definition are currently used which have fields/links whereby specifically relevant sources of information are connected to e.g. NXem.</p>
+<p>More consolidation through the use of NXsubentry classes should be considered in the future. For now we use an approach whereby base classes are combined to reuse vocabulary and a hierarchical organization of pieces of information with specific constraints which are relevant only for specific usage of such data by specific tools used by an eventually smaller circle of users.</p>
 <blockquote>
 <div><dl class="simple">
 <dt><a class="reference internal" href="NXem_ebsd.html#nxem-ebsd"><span class="std std-ref">NXem_ebsd</span></a>:</dt><dd><p>Application definition for collecting and indexing Kikuchi pattern into orientation maps for the two-dimensional, three- (serial sectioning) and four-dimensional (spatial and time-dependent) case.</p>
@@ -151,9 +140,9 @@ are deep base classes for which each field and group is optional. Specific insta
 <p>The definition of several new base classes is motivated by by NXem_ebsd:</p>
 <blockquote>
 <div><dl class="simple">
-<dt><a class="reference internal" href="NXem_ebsd_conventions.html#nxem-ebsd-conventions"><span class="std std-ref">NXem_ebsd_conventions</span></a>:</dt><dd><p>A base class to store all reference frames and rotation conventions which are necessary to interpret the alignment and conventions used when working with orientation data.</p>
+<dt><a class="reference internal" href="NXem_conventions.html#nxem-conventions"><span class="std std-ref">NXem_conventions</span></a>, <a class="reference internal" href="NXem_conventions_ebsd.html#nxem-conventions-ebsd"><span class="std std-ref">NXem_conventions_ebsd</span></a>:</dt><dd><p>A base class to store all reference frames and rotation conventions which are necessary to interpret the alignment and conventions used when working with orientation data.</p>
 </dd>
-<dt><a class="reference internal" href="NXem_ebsd_crystal_structure_model.html#nxem-ebsd-crystal-structure-model"><span class="std std-ref">NXem_ebsd_crystal_structure_model</span></a>:</dt><dd><p>A base class to store crystalline phase/structure used for a simulation of diffraction pattern and comparison of these pattern against patterns to support indexin.</p>
+<dt><a class="reference internal" href="NXcrystal_structure.html#nxcrystal-structure"><span class="std std-ref">NXcrystal_structure</span></a>:</dt><dd><p>A base class to store crystalline phase/structure used for a simulation of diffraction pattern and comparison of these pattern against patterns to support indexin.</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -202,7 +191,7 @@ are deep base classes for which each field and group is optional. Specific insta
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. B1: Electron microscopy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. B2/B3: Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ellipsometry-structure.html">5. B4: Optical spectroscopy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. B5: Atom-probe tomography</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport Phenomena</a></li>
@@ -223,7 +212,6 @@ are deep base classes for which each field and group is optional. Specific insta
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#application-definitions">Application Definitions</a></li>
 <li><a class="reference internal" href="#base-classes">Base Classes</a></li>
-<li><a class="reference internal" href="#partner-application-definitions">Partner application definitions</a></li>
 </ul>
 </li>
 </ul>
@@ -308,11 +296,11 @@ are deep base classes for which each field and group is optional. Specific insta
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2022-2023, The FAIRmat collaboration.
+      &#169;2022-2024, The FAIRmat collaboration.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="../../_sources/classes/contributed_definitions/em-structure.rst.txt"

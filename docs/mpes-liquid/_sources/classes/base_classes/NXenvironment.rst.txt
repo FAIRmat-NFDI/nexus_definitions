@@ -24,9 +24,9 @@ NXenvironment
   No symbol table
 
 **Groups cited**:
-  :ref:`NXgeometry`, :ref:`NXnote`, :ref:`NXsensor`, :ref:`NXtransformations`
+  :ref:`NXactuator`, :ref:`NXgeometry`, :ref:`NXnote`, :ref:`NXsensor`, :ref:`NXtransformations`
 
-.. index:: NXgeometry (base class); used in base class, NXtransformations (base class); used in base class, NXnote (base class); used in base class, NXsensor (base class); used in base class
+.. index:: NXgeometry (base class); used in base class, NXtransformations (base class); used in base class, NXnote (base class); used in base class, NXactuator (base class); used in base class, NXsensor (base class); used in base class
 
 **Structure**:
 
@@ -44,7 +44,10 @@ NXenvironment
 
   **short_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    Alternative short name, perhaps for dashboard display like a present Seblock name
+    .. collapse:: Alternative short name, perhaps for dashboard display like a present Seblock ...
+
+        Alternative short name, perhaps for dashboard display like a present Seblock
+        name
 
   .. _/NXenvironment/type-field:
 
@@ -52,7 +55,10 @@ NXenvironment
 
   **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    Type of apparatus. This could be the SE codes in scheduling database; e.g. OC/100
+    .. collapse:: Type of apparatus. This could be the SE codes in scheduling database; e.g. ...
+
+        Type of apparatus. This could be the SE codes in scheduling database; e.g.
+        OC/100
 
   .. _/NXenvironment/description-field:
 
@@ -76,28 +82,34 @@ NXenvironment
 
   **depends_on**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    NeXus positions components by applying a set of translations and rotations
-    to apply to the component starting from 0, 0, 0. The order of these operations
-    is critical and forms what NeXus calls a dependency chain. The depends_on
-    field defines the path to the top most operation of the dependency chain or the
-    string "." if located in the origin. Usually these operations are stored in a
-    NXtransformations group. But NeXus allows them to be stored anywhere.
+    .. collapse:: NeXus positions components by applying a set of translations and rotations ...
+
+        NeXus positions components by applying a set of translations and rotations
+        to apply to the component starting from 0, 0, 0. The order of these operations
+        is critical and forms what NeXus calls a dependency chain. The depends_on
+        field defines the path to the top most operation of the dependency chain or the
+        string "." if located in the origin. Usually these operations are stored in a
+        NXtransformations group. But NeXus allows them to be stored anywhere.
 
   .. _/NXenvironment/position-group:
 
   **position**: (optional) :ref:`NXgeometry` 
 
-    The position and orientation of the apparatus.
-    Note, it is recommended to use NXtransformations instead.
+    .. collapse:: The position and orientation of the apparatus. ...
+
+        The position and orientation of the apparatus.
+        Note, it is recommended to use NXtransformations instead.
 
   .. _/NXenvironment/TRANSFORMATIONS-group:
 
   **TRANSFORMATIONS**: (optional) :ref:`NXtransformations` 
 
-    This is the group recommended for holding the chain of translation
-    and rotation operations necessary to position the component within
-    the instrument. The dependency chain may however traverse similar groups in
-    other component groups.
+    .. collapse:: This is the group recommended for holding the chain of translation ...
+
+        This is the group recommended for holding the chain of translation
+        and rotation operations necessary to position the component within
+        the instrument. The dependency chain may however traverse similar groups in
+        other component groups.
 
   .. _/NXenvironment/NOTE-group:
 
@@ -105,10 +117,23 @@ NXenvironment
 
     Additional information, LabView logs, digital photographs, etc
 
+  .. _/NXenvironment/ACTUATOR-group:
+
+  **ACTUATOR**: (optional) :ref:`NXactuator` 
+
+    .. collapse:: Any actuator used to control the environment. This can be linked to an actuato ...
+
+        Any actuator used to control the environment. This can be linked to an actuator
+        defined in an NXinstrument instance.
+
   .. _/NXenvironment/SENSOR-group:
 
   **SENSOR**: (optional) :ref:`NXsensor` 
 
+    .. collapse:: Any sensor used to monitor the environment. This can be linked to a sensor ...
+
+        Any sensor used to monitor the environment. This can be linked to a sensor
+        defined in an NXinstrument instance.
 
 
 Hypertext Anchors
@@ -118,6 +143,7 @@ List of hypertext anchors for all groups, fields,
 attributes, and links defined in this class.
 
 
+* :ref:`/NXenvironment/ACTUATOR-group </NXenvironment/ACTUATOR-group>`
 * :ref:`/NXenvironment/depends_on-field </NXenvironment/depends_on-field>`
 * :ref:`/NXenvironment/description-field </NXenvironment/description-field>`
 * :ref:`/NXenvironment/name-field </NXenvironment/name-field>`

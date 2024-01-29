@@ -17,29 +17,31 @@ NXevent_data
 
 **Description**:
 
-  NXevent_data is a special group for storing data from neutron
-  detectors in event mode.  In this mode, the detector electronics
-  emits a stream of detectorID, timestamp pairs. With detectorID
-  describing the detector element in which the neutron was detected
-  and timestamp the timestamp at which the neutron event was
-  detected. In NeXus detectorID maps to event_id, event_time_offset
-  to the timestamp.
+  .. collapse:: NXevent_data is a special group for storing data from neutron ...
 
-  As this kind of data is common at pulsed neutron
-  sources, the timestamp is almost always relative to the start of a
-  neutron pulse. Thus the pulse timestamp is recorded too together
-  with an index in the event_id, event_time_offset pair at which data for
-  that pulse starts. At reactor source the same pulsed data effect
-  may be achieved through the use of choppers or in stroboscopic
-  measurement setups.
+      NXevent_data is a special group for storing data from neutron
+      detectors in event mode.  In this mode, the detector electronics
+      emits a stream of detectorID, timestamp pairs. With detectorID
+      describing the detector element in which the neutron was detected
+      and timestamp the timestamp at which the neutron event was
+      detected. In NeXus detectorID maps to event_id, event_time_offset
+      to the timestamp.
 
-  In order to make random access to timestamped data
-  faster there is an optional array pair of
-  cue_timestamp_zero and cue_index. The cue_timestamp_zero will
-  contain courser timestamps then in the time array, say
-  every five minutes. The cue_index will then contain the
-  index into the event_id,event_time_offset pair of arrays for that
-  courser cue_timestamp_zero.
+      As this kind of data is common at pulsed neutron
+      sources, the timestamp is almost always relative to the start of a
+      neutron pulse. Thus the pulse timestamp is recorded too together
+      with an index in the event_id, event_time_offset pair at which data for
+      that pulse starts. At reactor source the same pulsed data effect
+      may be achieved through the use of choppers or in stroboscopic
+      measurement setups.
+
+      In order to make random access to timestamped data
+      faster there is an optional array pair of
+      cue_timestamp_zero and cue_index. The cue_timestamp_zero will
+      contain courser timestamps then in the time array, say
+      every five minutes. The cue_index will then contain the
+      index into the event_id,event_time_offset pair of arrays for that
+      courser cue_timestamp_zero.
 
 **Symbols**:
 
@@ -56,15 +58,17 @@ NXevent_data
 
   **@default**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. index:: plotting
+    .. collapse:: Declares which child group contains a path leading  ...
 
-    Declares which child group contains a path leading 
-    to a :ref:`NXdata` group.
+        .. index:: plotting
 
-    It is recommended (as of NIAC2014) to use this attribute
-    to help define the path to the default dataset to be plotted.
-    See https://www.nexusformat.org/2014_How_to_find_default_data.html
-    for a summary of the discussion.
+        Declares which child group contains a path leading 
+        to a :ref:`NXdata` group.
+
+        It is recommended (as of NIAC2014) to use this attribute
+        to help define the path to the default dataset to be plotted.
+        See https://www.nexusformat.org/2014_How_to_find_default_data.html
+        for a summary of the discussion.
 
   .. _/NXevent_data/event_time_offset-field:
 
@@ -80,8 +84,10 @@ NXevent_data
 
   **event_id**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 1, Dimensions: [i]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
 
-    There will be extra information in the NXdetector to convert 
-    event_id to detector_number.
+    .. collapse:: There will be extra information in the NXdetector to convert  ...
+
+        There will be extra information in the NXdetector to convert 
+        event_id to detector_number.
 
   .. _/NXevent_data/event_time_zero-field:
 
@@ -105,8 +111,10 @@ NXevent_data
 
   **event_index**: (optional) :ref:`NX_INT <NX_INT>` (Rank: 1, Dimensions: [j]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
 
-    The index into the event_time_offset, event_id pair for
-    the pulse occurring at the matching entry in event_time_zero.
+    .. collapse:: The index into the event_time_offset, event_id pair for ...
+
+        The index into the event_time_offset, event_id pair for
+        the pulse occurring at the matching entry in event_time_zero.
 
   .. _/NXevent_data/pulse_height-field:
 
@@ -114,10 +122,12 @@ NXevent_data
 
   **pulse_height**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 2, Dimensions: [i, k]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
 
-    If voltages from the ends of the detector are read out this 
-    is where they go. This list is for all events with information 
-    to attach to a particular pulse height. The information to 
-    attach to a particular pulse is located in events_per_pulse.
+    .. collapse:: If voltages from the ends of the detector are read out this  ...
+
+        If voltages from the ends of the detector are read out this 
+        is where they go. This list is for all events with information 
+        to attach to a particular pulse height. The information to 
+        attach to a particular pulse is located in events_per_pulse.
 
   .. _/NXevent_data/cue_timestamp_zero-field:
 
@@ -125,8 +135,10 @@ NXevent_data
 
   **cue_timestamp_zero**: (optional) :ref:`NX_DATE_TIME <NX_DATE_TIME>` {units=\ :ref:`NX_TIME <NX_TIME>`} 
 
-    Timestamps matching the corresponding cue_index into the
-    event_id, event_time_offset pair.
+    .. collapse:: Timestamps matching the corresponding cue_index into the ...
+
+        Timestamps matching the corresponding cue_index into the
+        event_id, event_time_offset pair.
 
     .. _/NXevent_data/cue_timestamp_zero@start-attribute:
 
@@ -141,8 +153,10 @@ NXevent_data
 
   **cue_index**: (optional) :ref:`NX_INT <NX_INT>` 
 
-    Index into the event_id, event_time_offset pair matching the corresponding
-    cue_timestamp.
+    .. collapse:: Index into the event_id, event_time_offset pair matching the corresponding ...
+
+        Index into the event_id, event_time_offset pair matching the corresponding
+        cue_timestamp.
 
 
 Hypertext Anchors

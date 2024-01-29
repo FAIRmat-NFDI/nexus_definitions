@@ -17,18 +17,20 @@ NXsensor
 
 **Description**:
 
-  A sensor used to monitor an external condition
+  .. collapse:: A sensor used to monitor an external condition ...
 
-  The condition itself is described in :ref:`NXenvironment`.
+      A sensor used to monitor an external condition
+
+      The condition itself is described in :ref:`NXenvironment`.
 
 **Symbols**:
 
   No symbol table
 
 **Groups cited**:
-  :ref:`NXgeometry`, :ref:`NXlog`, :ref:`NXoff_geometry`, :ref:`NXorientation`, :ref:`NXtransformations`
+  :ref:`NXfabrication`, :ref:`NXgeometry`, :ref:`NXlog`, :ref:`NXoff_geometry`, :ref:`NXorientation`, :ref:`NXtransformations`
 
-.. index:: NXgeometry (base class); used in base class, NXlog (base class); used in base class, NXorientation (base class); used in base class, NXoff_geometry (base class); used in base class, NXtransformations (base class); used in base class
+.. index:: NXgeometry (base class); used in base class, NXlog (base class); used in base class, NXorientation (base class); used in base class, NXoff_geometry (base class); used in base class, NXfabrication (base class); used in base class, NXtransformations (base class); used in base class
 
 **Structure**:
 
@@ -38,15 +40,17 @@ NXsensor
 
   **@default**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. index:: plotting
+    .. collapse:: Declares which child group contains a path leading ...
 
-    Declares which child group contains a path leading 
-    to a :ref:`NXdata` group.
+        .. index:: plotting
 
-    It is recommended (as of NIAC2014) to use this attribute
-    to help define the path to the default dataset to be plotted.
-    See https://www.nexusformat.org/2014_How_to_find_default_data.html
-    for a summary of the discussion.
+        Declares which child group contains a path leading
+        to a :ref:`NXdata` group.
+
+        It is recommended (as of NIAC2014) to use this attribute
+        to help define the path to the default dataset to be plotted.
+        See https://www.nexusformat.org/2014_How_to_find_default_data.html
+        for a summary of the discussion.
 
   .. _/NXsensor/model-field:
 
@@ -86,35 +90,39 @@ NXsensor
 
   **measurement**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    name for measured signal
+    .. collapse:: name for measured signal ...
 
-    Any of these values:
+        name for measured signal
 
-      * ``temperature``
+        Any of these values:
 
-      * ``pH``
+          * ``temperature``
 
-      * ``magnetic_field``
+          * ``pH``
 
-      * ``electric_field``
+          * ``magnetic_field``
 
-      * ``conductivity``
+          * ``electric_field``
 
-      * ``resistance``
+          * ``current``
 
-      * ``voltage``
+          * ``conductivity``
 
-      * ``pressure``
+          * ``resistance``
 
-      * ``flow``
+          * ``voltage``
 
-      * ``stress``
+          * ``pressure``
 
-      * ``strain``
+          * ``flow``
 
-      * ``shear``
+          * ``stress``
 
-      * ``surface_pressure``
+          * ``strain``
+
+          * ``shear``
+
+          * ``surface_pressure``
 
 
   .. _/NXsensor/type-field:
@@ -123,19 +131,21 @@ NXsensor
 
   **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    The type of hardware used for the measurement.  
-    Examples (suggestions but not restrictions):
+    .. collapse:: The type of hardware used for the measurement. ...
 
-    :Temperature:
-      J | K | T | E | R | S | Pt100 | Rh/Fe
-    :pH:
-      Hg/Hg2Cl2 | Ag/AgCl | ISFET
-    :Ion selective electrode:
-      specify species; e.g. Ca2+
-    :Magnetic field:
-      Hall
-    :Surface pressure:
-      wilhelmy plate
+        The type of hardware used for the measurement.
+        Examples (suggestions but not restrictions):
+
+        :Temperature:
+          J | K | T | E | R | S | Pt100 | Rh/Fe
+        :pH:
+          Hg/Hg2Cl2 | Ag/AgCl | ISFET
+        :Ion selective electrode:
+          specify species; e.g. Ca2+
+        :Magnetic field:
+          Hall
+        :Surface pressure:
+          wilhelmy plate
 
   .. _/NXsensor/run_control-field:
 
@@ -143,8 +153,10 @@ NXsensor
 
   **run_control**: (optional) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
-    Is data collection controlled or synchronised to this quantity: 
-    1=no, 0=to "value", 1=to "value_deriv1", etc.
+    .. collapse:: Is data collection controlled or synchronised to this quantity: ...
+
+        Is data collection controlled or synchronised to this quantity:
+        1=no, 0=to "value", 1=to "value_deriv1", etc.
 
   .. _/NXsensor/high_trip_value-field:
 
@@ -168,8 +180,10 @@ NXsensor
 
   **value**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n]) {units=\ :ref:`NX_ANY <NX_ANY>`} 
 
-    nominal setpoint or average value 
-    - need [n] as may be a vector
+    .. collapse:: nominal setpoint or average value ...
+
+        nominal setpoint or average value
+        - need [n] as may be a vector
 
   .. _/NXsensor/value_deriv1-field:
 
@@ -177,9 +191,11 @@ NXsensor
 
   **value_deriv1**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: same as field value, Dimensions: same as field value) {units=\ :ref:`NX_ANY <NX_ANY>`} 
 
-    Nominal/average first derivative of value 
-    e.g. strain rate 
-    - same dimensions as "value" (may be a vector)
+    .. collapse:: Nominal/average first derivative of value ...
+
+        Nominal/average first derivative of value
+        e.g. strain rate
+        - same dimensions as "value" (may be a vector)
 
   .. _/NXsensor/value_deriv2-field:
 
@@ -187,8 +203,10 @@ NXsensor
 
   **value_deriv2**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: same as field value, Dimensions: same as field value) {units=\ :ref:`NX_ANY <NX_ANY>`} 
 
-    Nominal/average second derivative of value
-    - same dimensions as "value" (may be a vector)
+    .. collapse:: Nominal/average second derivative of value ...
+
+        Nominal/average second derivative of value
+        - same dimensions as "value" (may be a vector)
 
   .. _/NXsensor/external_field_brief-field:
 
@@ -218,16 +236,17 @@ NXsensor
 
   **depends_on**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    NeXus positions components by applying a set of translations and rotations
-    to apply to the component starting from 0, 0, 0. The order of these operations
-    is critical and forms what NeXus calls a dependency chain. The depends_on
-    field defines the path to the top most operation of the dependency chain or the
-    string "." if located in the origin. Usually these operations are stored in a
-    NXtransformations group. But NeXus allows them to be stored anywhere.
+    .. collapse:: NeXus positions components by applying a set of translations and rotations ...
 
-    .. todo::
-      Add a definition for the reference point of a sensor.
+        NeXus positions components by applying a set of translations and rotations
+        to apply to the component starting from 0, 0, 0. The order of these operations
+        is critical and forms what NeXus calls a dependency chain. The depends_on
+        field defines the path to the top most operation of the dependency chain or the
+        string "." if located in the origin. Usually these operations are stored in a
+        NXtransformations group. But NeXus allows them to be stored anywhere.
 
+        .. todo::
+          Add a definition for the reference point of a sensor.
 
   .. _/NXsensor/geometry-group:
 
@@ -239,7 +258,10 @@ NXsensor
 
     **DEPRECATED**: Use the field `depends_on` and :ref:`NXtransformations` to position the beamstop and NXoff_geometry to describe its shape instead
 
-    Defines the axes for logged vector quantities if they are not the global instrument axes.
+    .. collapse:: Defines the axes for logged vector quantities if they are not the global ...
+
+        Defines the axes for logged vector quantities if they are not the global
+        instrument axes.
 
   .. _/NXsensor/value_log-group:
 
@@ -271,14 +293,21 @@ NXsensor
 
     This group describes the shape of the sensor when necessary.
 
+  .. _/NXsensor/FABRICATION-group:
+
+  **FABRICATION**: (optional) :ref:`NXfabrication` 
+
+
   .. _/NXsensor/TRANSFORMATIONS-group:
 
   **TRANSFORMATIONS**: (optional) :ref:`NXtransformations` 
 
-    This is the group recommended for holding the chain of translation
-    and rotation operations necessary to position the component within
-    the instrument. The dependency chain may however traverse similar groups in
-    other component groups.
+    .. collapse:: This is the group recommended for holding the chain of translation ...
+
+        This is the group recommended for holding the chain of translation
+        and rotation operations necessary to position the component within
+        the instrument. The dependency chain may however traverse similar groups in
+        other component groups.
 
 
 Hypertext Anchors
@@ -292,6 +321,7 @@ attributes, and links defined in this class.
 * :ref:`/NXsensor/depends_on-field </NXsensor/depends_on-field>`
 * :ref:`/NXsensor/external_field_brief-field </NXsensor/external_field_brief-field>`
 * :ref:`/NXsensor/external_field_full-group </NXsensor/external_field_full-group>`
+* :ref:`/NXsensor/FABRICATION-group </NXsensor/FABRICATION-group>`
 * :ref:`/NXsensor/geometry-group </NXsensor/geometry-group>`
 * :ref:`/NXsensor/high_trip_value-field </NXsensor/high_trip_value-field>`
 * :ref:`/NXsensor/low_trip_value-field </NXsensor/low_trip_value-field>`
