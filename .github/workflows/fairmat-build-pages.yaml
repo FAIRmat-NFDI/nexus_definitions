@@ -3,6 +3,8 @@ name: GH pages fairmat proposal
 on:
   push:
     branches: [fairmat]
+    tags:
+      - '*'
   pull_request:
     branches: [fairmat]
 
@@ -30,7 +32,7 @@ jobs:
     - name: html
       run: make html
     - name: Deploy
-      if: steps.branch-name.outputs.is_default == 'true'
+      if: steps.branch-name.outputs.is_default == 'true' && !startsWith(github.ref, 'refs/tags/')
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -39,7 +41,7 @@ jobs:
         target-folder: docs
         clean: false
     - name: Deploy PR
-      if: steps.branch-name.outputs.is_default == 'false'
+      if: steps.branch-name.outputs.is_default == 'false' || startsWith(github.ref, 'refs/tags/')
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
