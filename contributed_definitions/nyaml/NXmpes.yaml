@@ -34,7 +34,9 @@ NXmpes(NXobject):
     method:
       exists: recommended
       doc: |
-        A name of the experimental method according to `Clause 11`_ of
+        Name of the experimental method.
+        
+        If applicable, this name should match the terms given by `Clause 11`_ of
         the `ISO 18115-1:2023`_ specification.
         
         Examples include:
@@ -46,6 +48,9 @@ NXmpes(NXobject):
             * near ambient pressure X-ray photoelectron spectroscopy (NAPXPS)
             * photoelectron emission microscopy (PEEM)
             * electron spectroscopy for chemical analysis (ESCA)
+            * time-resolved angle-resolved X-ray photoelectron spectroscopy (trARPES)
+            * spin-resolved angle-resolved X-ray photoelectron spectroscopy (spin-ARPES)
+            * momentum microscopy
         
         .. _ISO 18115-1:2023: https://www.iso.org/standard/74811.html
         .. _Clause 11: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:sec:11
@@ -59,12 +64,12 @@ NXmpes(NXobject):
           Name of the user.
       affiliation:
         doc: |
-          Name of the affiliation of the user at the point in time when the experiment was
+          Name of the affiliation of the user at the time when the experiment was
           performed.
     (NXinstrument):
       doc:
       - |
-        MPES spectrometer
+        Description of the MPES spectrometer and its individual parts.
       - |
         xref:
           spec: ISO 18115-1:2023
@@ -99,16 +104,13 @@ NXmpes(NXobject):
           exists: recommended
         identifier:
           exists: recommended
-      
-      # Comment from mpes may workshop:
-      # - There is much more information which can be provided for NXsource
       source_TYPE(NXsource):
         exists: recommended
         doc: |
           A source used to generate a beam. Properties refer strictly to parameters of the
           source, not of the output beam. For example, the energy of the source is not the
           optical power of the beam, but the energy of the electron beam in a synchrotron
-          and so on.
+          or similar.
           
           Note that the uppercase notation in source_TYPE means that multiple sources can
           be provided. For example, in pump-probe experiments, it is possible to have both
@@ -138,10 +140,6 @@ NXmpes(NXobject):
             for `source_probe` it should refer to `beam_probe`.
             Refers to the same concept as /NXentry/NXinstrument/beam_TYPE
             and may be linked.
-      
-      # It would be nice if we had the notion of linking in nexus or if
-      # we have a subdefinition NXlink to refer to a path.
-      # This would also be helpful for NXtransformations
       beam_TYPE(NXbeam):
         doc: |
           Properties of the photon beam at a given location.
@@ -166,12 +164,14 @@ NXmpes(NXobject):
         extent(NX_FLOAT):
           exists: recommended
         associated_source(NXsource):
+          exists: recommended
           doc: |
             The source that emitted this beam.
             Should be named with the same appendix, e.g.,
             for `beam_probe` it should refer to `source_probe`.
             Refers to the same concept as /NXentry/NXinstrument/source_TYPE
             and may be linked.
+            Should be specified if an associated source exists.
       (NXelectronanalyser):
         device_information(NXfabrication):
           exists: recommended
@@ -196,17 +196,13 @@ NXmpes(NXobject):
           exists: recommended
         slow_axes:
           exists: recommended
-        transmission_function(NX_FLOAT):
+        transmission_function(NXdata):
           exists: optional
         (NXcollectioncolumn):
-          
-          # TODO: Comment from Anders Frisk on proposal page
-          # What is the definition of a collection column?
-          # Optional constant settings (like lens focusing parameters on the sample: position_x, position_y, working_distance)
           scheme:
             doc: |
               Scheme of the electron collection column.
-            enumeration: [angular dispersive, spatial dispersive, non-dispersive]
+            enumeration: [angular dispersive, spatial dispersive, momentum dispersive, non-dispersive]
           mode:
             exists: recommended
           projection:
@@ -248,6 +244,7 @@ NXmpes(NXobject):
           pass_energy(NX_FLOAT):
             unit: NX_ENERGY
           energy_scan_mode:
+            exists: recommended
           entrance_slit(NXaperture):
             exists: optional
             doc: |
@@ -287,12 +284,6 @@ NXmpes(NXobject):
               exists: recommended
             identifier:
               exists: recommended
-          
-          # ToDo:
-          # - With base class inheritance this should be
-          # a field of type NXdata_mpes_detector
-          # - The field name should be aligned with the `data` field in
-          # the `NXdetector` base class. But some refinement is necessary there.
           raw_data(NXdata):
             exists: recommended
             doc: |
@@ -346,9 +337,8 @@ NXmpes(NXobject):
           type:
             exists: optional
           value(NX_FLOAT):
-            exists: recommended
         sample_heater(NXactuator):
-          exists: recommended
+          exists: optional
           name:
             exists: recommended
           physical_quantity:
@@ -356,13 +346,23 @@ NXmpes(NXobject):
           type:
             exists: optional
           heater_power(NX_FLOAT):
-            exists: recommended
           (NXpid):
             exists: recommended
             setpoint(NX_FLOAT):
               exists: recommended
+        cryostat(NXactuator):
+          exists: optional
+          name:
+            exists: recommended
+          physical_quantity:
+            enumeration: [temperature]
+          type:
+            exists: optional
+          (NXpid):
+            setpoint(NX_FLOAT):
+              exists: recommended
         drain_current_amperemeter(NXsensor):
-          exists: recommended
+          exists: optional
           name:
             exists: recommended
           measurement:
@@ -370,7 +370,6 @@ NXmpes(NXobject):
           type:
             exists: optional
           value(NX_FLOAT):
-            exists: recommended
         sample_bias_voltmeter(NXsensor):
           exists: recommended
           name:
@@ -380,7 +379,18 @@ NXmpes(NXobject):
           type:
             exists: optional
           value(NX_FLOAT):
+        sample_bias_potentiostat(NXactuator):
+          exists: recommended
+          name:
             exists: recommended
+          physical_quantity:
+            enumeration: [voltage]
+          type:
+            exists: optional
+          (NXpid):
+            exists: recommended
+            setpoint(NX_FLOAT):
+              exists: recommended
         device_information(NXfabrication):
           exists: recommended
           vendor:
@@ -399,7 +409,6 @@ NXmpes(NXobject):
         type:
           exists: optional
         value(NX_FLOAT):
-          exists: recommended
           unit: NX_PRESSURE
           doc: |
             In case of a single or averaged gas pressure measurement, this is the scalar gas pressure around
@@ -523,7 +532,7 @@ NXmpes(NXobject):
           kinetic energy is multiplied by the corresponding value in the relative_intensity
           field of the transmission_function. This calibration procedure is used to account for
           the different tranmsission efficiencies when using different lens modes.
-        mapping(NXdata):
+        transmission_function(NXdata):
           exists: recommended
           doc: |
             Transmission function of the electron analyser.
@@ -554,7 +563,7 @@ NXmpes(NXobject):
       (NXsubstance):
         exists: recommended
         doc: |
-          For samples containing a single pure substances. For mixtures use the
+          For samples containing a single pure substance. For mixtures use the
           NXsample_component_set and NXsample_component group in NXsample instead.
         molecular_formula_hill:
           exists: recommended
@@ -572,7 +581,7 @@ NXmpes(NXobject):
       situation:
         exists: recommended
         enumeration: [vacuum, inert atmosphere, oxidising atmosphere, reducing atmosphere]
-      (NXsample_history):
+      sample_history(NXsample_history):
         exists: recommended
         doc: |
           A set of activities that occurred to the sample prior to/during photoemission
@@ -602,6 +611,11 @@ NXmpes(NXobject):
           doc: |
             Device to heat the sample.
             This should be a link to /entry/instrument/manipulator/sample_heater.
+        cryostat(NXactuator):
+          exists: optional
+          doc: |
+            Cryostat for cooling the sample.
+            This should be a link to /entry/instrument/manipulator/cryostat.
       gas_pressure(NXenvironment):
         exists: recommended
         doc: |
@@ -623,11 +637,17 @@ NXmpes(NXobject):
             url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:8.41
         voltmeter(NXsensor):
           doc: |
-            Sensor setting/measuring the applied voltage.
+            Sensor measuring the applied voltage.
             
             This should be a link to /entry/instrument/manipulator/sample_bias_voltmeter.
+        potentiostat(NXactuator):
+          exists: optional
+          doc: |
+            Actuator applying a voltage to sample and sample holder.
+            
+            This should be a link to /entry/instrument/manipulator/sample_bias_potentiostat.
       drain_current(NXenvironment):
-        exists: recommended
+        exists: optional
         doc: |
           Drain current of the sample and sample holder.
         amperemeter(NXsensor):
@@ -697,17 +717,21 @@ NXmpes(NXobject):
           type: NX_CHAR
           doc: |
             The energy can be either stored as kinetic or as binding energy.
-          enumeration: 
-            kinetic: 
+          enumeration:
+            kinetic:
               doc:
               - |
                 Calibrated kinetic energy axis.
+              - |
+                In case the kinetic energy axis is referenced to the Fermi level :math:`E_F`
+                (e.g., in entry/process/energy_referencing), kinetic energies :math:`E` are
+                provided as :math:`E-E_F`.
               - |
                 xref:
                   spec: ISO 18115-1:2023
                   term: 3.35
                   url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.35
-            binding: 
+            binding:
               doc:
               - |
                 Calibrated binding energy axis.
@@ -723,14 +747,13 @@ NXmpes(NXobject):
         exists: recommended
         doc: |
           The energy can be dispersed according to different strategies. ``energy_depends`` points to
-          the path of a field defining the axis on which the energy axis depends.
+          the path of a field defining the calibrated axis on which the energy axis depends.
           
           For example:
-            @energy_depends: '/entry/instrument/detector/data/sensor_y' for a 2D detector
-            @energy_depends: '/entry/instrument/energydispersion/center_energy' for a swept scan
+            @energy_depends: 'entry/process/energy_calibration'
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 74a4d48340a4440024b23ca7e9375d58b16291bd2dd6a35867c83631aa41b1dd
+# 0858e4c498e1d031bbe35e761fdbb30b8db75d6725f7b39b320d53a90ec23587
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -799,7 +822,9 @@ NXmpes(NXobject):
 #         </field>
 #         <field name="method" recommended="true">
 #             <doc>
-#                  A name of the experimental method according to `Clause 11`_ of
+#                  Name of the experimental method.
+#                  
+#                  If applicable, this name should match the terms given by `Clause 11`_ of
 #                  the `ISO 18115-1:2023`_ specification.
 #                  
 #                  Examples include:
@@ -811,6 +836,9 @@ NXmpes(NXobject):
 #                      * near ambient pressure X-ray photoelectron spectroscopy (NAPXPS)
 #                      * photoelectron emission microscopy (PEEM)
 #                      * electron spectroscopy for chemical analysis (ESCA)
+#                      * time-resolved angle-resolved X-ray photoelectron spectroscopy (trARPES)
+#                      * spin-resolved angle-resolved X-ray photoelectron spectroscopy (spin-ARPES)
+#                      * momentum microscopy
 #                  
 #                  .. _ISO 18115-1:2023: https://www.iso.org/standard/74811.html
 #                  .. _Clause 11: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:sec:11
@@ -828,14 +856,14 @@ NXmpes(NXobject):
 #             </field>
 #             <field name="affiliation">
 #                 <doc>
-#                      Name of the affiliation of the user at the point in time when the experiment was
+#                      Name of the affiliation of the user at the time when the experiment was
 #                      performed.
 #                 </doc>
 #             </field>
 #         </group>
 #         <group type="NXinstrument">
 #             <doc>
-#                  MPES spectrometer
+#                  Description of the MPES spectrometer and its individual parts.
 #                  
 #                  This concept is related to term `12.58`_ of the ISO 18115-1:2023 standard.
 #                  
@@ -866,14 +894,12 @@ NXmpes(NXobject):
 #                 <field name="model" recommended="true"/>
 #                 <field name="identifier" recommended="true"/>
 #             </group>
-#             <!--Comment from mpes may workshop:
-# - There is much more information which can be provided for NXsource-->
 #             <group name="source_TYPE" type="NXsource" recommended="true">
 #                 <doc>
 #                      A source used to generate a beam. Properties refer strictly to parameters of the
 #                      source, not of the output beam. For example, the energy of the source is not the
 #                      optical power of the beam, but the energy of the electron beam in a synchrotron
-#                      and so on.
+#                      or similar.
 #                      
 #                      Note that the uppercase notation in source_TYPE means that multiple sources can
 #                      be provided. For example, in pump-probe experiments, it is possible to have both
@@ -917,9 +943,6 @@ NXmpes(NXobject):
 #                     </doc>
 #                 </group>
 #             </group>
-#             <!--It would be nice if we had the notion of linking in nexus or if
-# we have a subdefinition NXlink to refer to a path.
-# This would also be helpful for NXtransformations-->
 #             <group name="beam_TYPE" type="NXbeam">
 #                 <doc>
 #                      Properties of the photon beam at a given location.
@@ -938,13 +961,14 @@ NXmpes(NXobject):
 #                 <field name="incident_energy_spread" type="NX_NUMBER" recommended="true" units="NX_ENERGY"/>
 #                 <field name="incident_polarization" type="NX_NUMBER" recommended="true" units="NX_ANY"/>
 #                 <field name="extent" type="NX_FLOAT" recommended="true"/>
-#                 <group name="associated_source" type="NXsource">
+#                 <group name="associated_source" type="NXsource" recommended="true">
 #                     <doc>
 #                          The source that emitted this beam.
 #                          Should be named with the same appendix, e.g.,
 #                          for `beam_probe` it should refer to `source_probe`.
 #                          Refers to the same concept as /NXentry/NXinstrument/source_TYPE
 #                          and may be linked.
+#                          Should be specified if an associated source exists.
 #                     </doc>
 #                 </group>
 #             </group>
@@ -967,11 +991,8 @@ NXmpes(NXobject):
 #                 </group>
 #                 <field name="fast_axes" recommended="true"/>
 #                 <field name="slow_axes" recommended="true"/>
-#                 <field name="transmission_function" type="NX_FLOAT" optional="true"/>
+#                 <group name="transmission_function" type="NXdata" optional="true"/>
 #                 <group type="NXcollectioncolumn">
-#                     <!--TODO: Comment from Anders Frisk on proposal page
-# What is the definition of a collection column?
-# Optional constant settings (like lens focusing parameters on the sample: position_x, position_y, working_distance)-->
 #                     <field name="scheme">
 #                         <doc>
 #                              Scheme of the electron collection column.
@@ -979,6 +1000,7 @@ NXmpes(NXobject):
 #                         <enumeration>
 #                             <item value="angular dispersive"/>
 #                             <item value="spatial dispersive"/>
+#                             <item value="momentum dispersive"/>
 #                             <item value="non-dispersive"/>
 #                         </enumeration>
 #                     </field>
@@ -1026,7 +1048,7 @@ NXmpes(NXobject):
 #                         </enumeration>
 #                     </field>
 #                     <field name="pass_energy" type="NX_FLOAT" units="NX_ENERGY"/>
-#                     <field name="energy_scan_mode"/>
+#                     <field name="energy_scan_mode" recommended="true"/>
 #                     <group name="entrance_slit" type="NXaperture" optional="true">
 #                         <doc>
 #                              Size, position and shape of the entrance slit in dispersive analyzers.
@@ -1075,11 +1097,6 @@ NXmpes(NXobject):
 #                         <field name="model" recommended="true"/>
 #                         <field name="identifier" recommended="true"/>
 #                     </group>
-#                     <!--ToDo:
-# - With base class inheritance this should be
-# a field of type NXdata_mpes_detector
-# - The field name should be aligned with the `data` field in
-# the `NXdetector` base class. But some refinement is necessary there.-->
 #                     <group name="raw_data" type="NXdata" recommended="true">
 #                         <doc>
 #                              Contains the raw data collected by the detector before calibration.
@@ -1140,9 +1157,9 @@ NXmpes(NXobject):
 #                         </enumeration>
 #                     </field>
 #                     <field name="type" optional="true"/>
-#                     <field name="value" type="NX_FLOAT" recommended="true"/>
+#                     <field name="value" type="NX_FLOAT"/>
 #                 </group>
-#                 <group name="sample_heater" type="NXactuator" recommended="true">
+#                 <group name="sample_heater" type="NXactuator" optional="true">
 #                     <field name="name" recommended="true"/>
 #                     <field name="physical_quantity">
 #                         <enumeration>
@@ -1150,12 +1167,24 @@ NXmpes(NXobject):
 #                         </enumeration>
 #                     </field>
 #                     <field name="type" optional="true"/>
-#                     <field name="heater_power" type="NX_FLOAT" recommended="true"/>
+#                     <field name="heater_power" type="NX_FLOAT"/>
 #                     <group type="NXpid" recommended="true">
 #                         <field name="setpoint" type="NX_FLOAT" recommended="true"/>
 #                     </group>
 #                 </group>
-#                 <group name="drain_current_amperemeter" type="NXsensor" recommended="true">
+#                 <group name="cryostat" type="NXactuator" optional="true">
+#                     <field name="name" recommended="true"/>
+#                     <field name="physical_quantity">
+#                         <enumeration>
+#                             <item value="temperature"/>
+#                         </enumeration>
+#                     </field>
+#                     <field name="type" optional="true"/>
+#                     <group type="NXpid">
+#                         <field name="setpoint" type="NX_FLOAT" recommended="true"/>
+#                     </group>
+#                 </group>
+#                 <group name="drain_current_amperemeter" type="NXsensor" optional="true">
 #                     <field name="name" recommended="true"/>
 #                     <field name="measurement">
 #                         <enumeration>
@@ -1163,7 +1192,7 @@ NXmpes(NXobject):
 #                         </enumeration>
 #                     </field>
 #                     <field name="type" optional="true"/>
-#                     <field name="value" type="NX_FLOAT" recommended="true"/>
+#                     <field name="value" type="NX_FLOAT"/>
 #                 </group>
 #                 <group name="sample_bias_voltmeter" type="NXsensor" recommended="true">
 #                     <field name="name" recommended="true"/>
@@ -1173,7 +1202,19 @@ NXmpes(NXobject):
 #                         </enumeration>
 #                     </field>
 #                     <field name="type" optional="true"/>
-#                     <field name="value" type="NX_FLOAT" recommended="true"/>
+#                     <field name="value" type="NX_FLOAT"/>
+#                 </group>
+#                 <group name="sample_bias_potentiostat" type="NXactuator" recommended="true">
+#                     <field name="name" recommended="true"/>
+#                     <field name="physical_quantity">
+#                         <enumeration>
+#                             <item value="voltage"/>
+#                         </enumeration>
+#                     </field>
+#                     <field name="type" optional="true"/>
+#                     <group type="NXpid" recommended="true">
+#                         <field name="setpoint" type="NX_FLOAT" recommended="true"/>
+#                     </group>
 #                 </group>
 #                 <group name="device_information" type="NXfabrication" recommended="true">
 #                     <field name="vendor" recommended="true"/>
@@ -1192,7 +1233,7 @@ NXmpes(NXobject):
 #                     </enumeration>
 #                 </field>
 #                 <field name="type" optional="true"/>
-#                 <field name="value" type="NX_FLOAT" recommended="true" units="NX_PRESSURE">
+#                 <field name="value" type="NX_FLOAT" units="NX_PRESSURE">
 #                     <doc>
 #                          In case of a single or averaged gas pressure measurement, this is the scalar gas pressure around
 #                          the sample. It can also be an 1D array of measured pressures (without time stamps).
@@ -1331,7 +1372,7 @@ NXmpes(NXobject):
 #                      field of the transmission_function. This calibration procedure is used to account for
 #                      the different tranmsission efficiencies when using different lens modes.
 #                 </doc>
-#                 <group name="mapping" type="NXdata" recommended="true">
+#                 <group name="transmission_function" type="NXdata" recommended="true">
 #                     <doc>
 #                          Transmission function of the electron analyser.
 #                          
@@ -1372,7 +1413,7 @@ NXmpes(NXobject):
 #             <field name="name"/>
 #             <group type="NXsubstance" recommended="true">
 #                 <doc>
-#                      For samples containing a single pure substances. For mixtures use the
+#                      For samples containing a single pure substance. For mixtures use the
 #                      NXsample_component_set and NXsample_component group in NXsample instead.
 #                 </doc>
 #                 <field name="molecular_formula_hill" recommended="true">
@@ -1398,7 +1439,7 @@ NXmpes(NXobject):
 #                     <item value="reducing atmosphere"/>
 #                 </enumeration>
 #             </field>
-#             <group type="NXsample_history" recommended="true">
+#             <group name="sample_history" type="NXsample_history" recommended="true">
 #                 <doc>
 #                      A set of activities that occurred to the sample prior to/during photoemission
 #                      experiment.
@@ -1433,6 +1474,12 @@ NXmpes(NXobject):
 #                          This should be a link to /entry/instrument/manipulator/sample_heater.
 #                     </doc>
 #                 </group>
+#                 <group name="cryostat" type="NXactuator" optional="true">
+#                     <doc>
+#                          Cryostat for cooling the sample.
+#                          This should be a link to /entry/instrument/manipulator/cryostat.
+#                     </doc>
+#                 </group>
 #             </group>
 #             <group name="gas_pressure" type="NXenvironment" recommended="true">
 #                 <doc>
@@ -1456,13 +1503,20 @@ NXmpes(NXobject):
 #                 </doc>
 #                 <group name="voltmeter" type="NXsensor">
 #                     <doc>
-#                          Sensor setting/measuring the applied voltage.
+#                          Sensor measuring the applied voltage.
 #                          
 #                          This should be a link to /entry/instrument/manipulator/sample_bias_voltmeter.
 #                     </doc>
 #                 </group>
+#                 <group name="potentiostat" type="NXactuator" optional="true">
+#                     <doc>
+#                          Actuator applying a voltage to sample and sample holder.
+#                          
+#                          This should be a link to /entry/instrument/manipulator/sample_bias_potentiostat.
+#                     </doc>
+#                 </group>
 #             </group>
-#             <group name="drain_current" type="NXenvironment" recommended="true">
+#             <group name="drain_current" type="NXenvironment" optional="true">
 #                 <doc>
 #                      Drain current of the sample and sample holder.
 #                 </doc>
@@ -1550,6 +1604,10 @@ NXmpes(NXobject):
 #                             <doc>
 #                                  Calibrated kinetic energy axis.
 #                                  
+#                                  In case the kinetic energy axis is referenced to the Fermi level :math:`E_F`
+#                                  (e.g., in entry/process/energy_referencing), kinetic energies :math:`E` are
+#                                  provided as :math:`E-E_F`.
+#                                  
 #                                  This concept is related to term `3.35`_ of the ISO 18115-1:2023 standard.
 #                                  
 #                                  .. _3.35: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.35
@@ -1571,11 +1629,10 @@ NXmpes(NXobject):
 #             <attribute name="energy_depends" type="NX_CHAR" recommended="true">
 #                 <doc>
 #                      The energy can be dispersed according to different strategies. ``energy_depends`` points to
-#                      the path of a field defining the axis on which the energy axis depends.
+#                      the path of a field defining the calibrated axis on which the energy axis depends.
 #                      
 #                      For example:
-#                        @energy_depends: '/entry/instrument/detector/data/sensor_y' for a 2D detector
-#                        @energy_depends: '/entry/instrument/energydispersion/center_energy' for a swept scan
+#                        @energy_depends: 'entry/process/energy_calibration'
 #                 </doc>
 #             </attribute>
 #         </group>
