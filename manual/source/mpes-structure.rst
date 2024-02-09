@@ -29,5 +29,5 @@ Here's a list of application definitions related to photoemission spectroscopy:
     :ref:`NXmpes`:
        A universal application definition with minimal metadata requirements for describing all photoemission experiments.
 
-    :ref:`NXmpes_xps`:
-       An appdef for xps measurements
+    :ref:`NXxps`:
+       An appdef for XPS/UPS measurements
