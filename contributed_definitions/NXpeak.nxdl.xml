@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 <!--
 # NeXus - Neutron and X-ray Common Data Format
-# 
-# Copyright (C) 2014-2022 NeXus International Advisory Committee (NIAC)
-# 
+#
+# Copyright (C) 2014-2024 NeXus International Advisory Committee (NIAC)
+#
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
@@ -21,7 +21,7 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" name="NXpeak" extends="NXobject" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXpeak" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <symbols>
         <doc>
              The symbols used in the schema to specify e.g. dimensions of arrays.
@@ -33,21 +33,21 @@
         </symbol>
     </symbols>
     <doc>
-         Description of peaks, their functional form or measured support.
+         Base class for spectral peaks, their functional form, and support (values).
     </doc>
-    <field name="label">
+    <field name="label" type="NX_CHAR">
         <doc>
-             Human-readable identifier to specify which concept/entity
+             Human-readable label which specifies which concept/entity
              the peak represents/identifies.
         </doc>
     </field>
-    <field name="peak_model">
+    <field name="description" type="NX_CHAR">
         <doc>
              Is the peak described analytically via a functional form
              or is it empirically defined via measured/reported
              intensity/counts as a function of an independent variable.
              
-             If the functional form is not empirical or gaussian, users
+             If the functional form is not empirical or Gaussians, users
              should enter other for the peak_model and add relevant details
              in the NXcollection.
         </doc>
@@ -55,8 +55,15 @@
             <item value="empirical"/>
             <item value="gaussian"/>
             <item value="lorentzian"/>
+            <item value="voigt"/>
             <item value="other"/>
         </enumeration>
+    </field>
+    <field name="peak_index" type="NX_POSINT">
+        <doc>
+             Index of the peak, for determining the numbering of multiple
+             NXpeak instances. Starts with 1.
+        </doc>
     </field>
     <field name="position" type="NX_NUMBER" units="NX_ANY">
         <doc>
@@ -76,11 +83,108 @@
             <dim index="1" value="n_support"/>
         </dimensions>
     </field>
+    <field name="width" type="NX_NUMBER" units="NX_ANY">
+        <doc>
+             Width of a peak at a defined fraction of the peak height.
+             
+             Usually, this will be the Full Width at Half Maximum of the peak (FWHM).
+             For asymmetrical peaks, convenient measures of peak width are the half-widths of
+             each side of the peak at half maximum intensity.
+        </doc>
+        <attribute name="type">
+            <doc>
+                 Specification of the definition of `width`.
+            </doc>
+            <enumeration>
+                <item value="fwhm">
+                    <doc>
+                         Full Width at Half Maximum of the peak.
+                    </doc>
+                </item>
+                <item value="hwhm">
+                    <doc>
+                         Half Width at Half Maximum of the peak.
+                    </doc>
+                </item>
+                <item value="half_widths_asymmetric">
+                    <doc>
+                         For asymmetrical peaks, the half-widths of each side of the peak at 
+                         half maximum intensity is given.
+                    </doc>
+                </item>
+                <item value="other">
+                    <doc>
+                         For other peak width definitions.
+                    </doc>
+                </item>
+            </enumeration>
+        </attribute>
+    </field>
+    <field name="total_area" type="NX_NUMBER" units="NX_ANY">
+        <doc>
+             Total area under the curve (can also be used for the total area minus any
+             background values.)
+        </doc>
+    </field>
+    <field name="relative_area" type="NX_NUMBER" units="NX_ANY">
+        <doc>
+             Relative area of this peak compared to other peaks in an NXpeak_model.
+             
+             The relative area can simply be derived by dividing the total_area by the total
+             area of all peaks or by a more complicated method (e.g., by additionally dividing
+             by the relative_sensitivity_factor). Details should be stored in the quantification
+             description of NXpeak_model.
+        </doc>
+    </field>
+    <field name="relative_sensitivity_factor" type="NX_NUMBER" units="NX_UNITLESS">
+        <doc>
+             Relative sensitivity for this peak, to be used in quantification in an NXpeak_model.
+             
+             As an example, in X-ray spectroscopy could depend on the energy scale (see position),
+             the ionization cross section, and the element probed.
+        </doc>
+    </field>
+    <group name="area_constraint" type="NXparameters">
+        <doc>
+             doc.
+        </doc>
+        <field name="minimal_value" type="NX_NUMBER" units="NX_ANY"/>
+        <field name="maximal_value" type="NX_NUMBER" units="NX_ANY"/>
+        <field name="depends_on">
+            <doc>
+                 Peak this constraint depends on.
+            </doc>
+        </field>
+    </group>
+    <group name="width_constraint" type="NXparameters">
+        <doc>
+             doc.
+        </doc>
+        <field name="minimal_value" type="NX_NUMBER" units="NX_ANY"/>
+        <field name="maximal_value" type="NX_NUMBER" units="NX_ANY"/>
+        <field name="depends_on">
+            <doc>
+                 Peak this constraint depends on.
+            </doc>
+        </field>
+    </group>
+    <group name="position_constraint" type="NXparameters">
+        <doc>
+             doc.
+        </doc>
+        <field name="minimal_value" type="NX_NUMBER" units="NX_ANY"/>
+        <field name="maximal_value" type="NX_NUMBER" units="NX_ANY"/>
+        <field name="depends_on">
+            <doc>
+                 Peak this constraint depends on.
+            </doc>
+        </field>
+    </group>
     <group type="NXcollection">
         <doc>
-             In the case of an analytical description (or if peak_model is other) this
+             In the case of an analytical description (or if description is other) this
              collection holds parameter of (and eventually) the functional form.
-             For example in the case of Gaussians mu, sigma, cut-off values, 
+             For example in the case of Gaussians mu, sigma, cut-off values,
              and background intensity are relevant parameter.
         </doc>
     </group>
