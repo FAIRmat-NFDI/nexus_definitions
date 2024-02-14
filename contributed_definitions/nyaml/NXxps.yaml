@@ -23,7 +23,7 @@ NXxps(NXmpes):
         .. _ISO 18115-1:2023: https://www.iso.org/standard/74811.html
         .. _Clause 11: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:sec:11
     geometries(NXcoordinate_system_set):
-      coordinate_system(NX_coordinate_system):
+      coordinate_system(NXcoordinate_system):
         doc: |
           Description of the XPS base coordinate system, which is defined such that the positive z-axis
           points towards the analyzer entry, and the x-axis lies within the beam/analyzer plane.
@@ -36,18 +36,19 @@ NXxps(NXmpes):
     (NXtransformations):
       doc: |
         Set of transformations, describing the orientation of the XPS coordinate system with respect to
-         the beam coordinate system (.). These should be links towards the NXtransformations instances
-         defined on the individual parts of NXinstrument.
+        the beam coordinate system (.). These should be links towards the NXtransformations instances
+        defined on the individual parts of NXinstrument.
     (NXinstrument):
       doc: |
-        XPS spectrometer
+        XPS spectrometer.
       (NXelectronanalyser):
         depends_on:
           exists: recommended
           doc: |
             Reference to the transformation describing the orientation of the analyzer
             relative to the beam.
-        (NXtransformations):
+          enumeration: [transformations/angle_beam_analyser]
+        transformations(NXtransformations):
           angle_beam_analyser(NX_NUMBER):
             exists: recommended
             unit: NX_ANGLE
@@ -55,10 +56,10 @@ NXxps(NXmpes):
               Angle between incoming beam and the center analyser axis.
             \@transformation_type:
               enumeration: [rotation]
-            depends_on(link):
-              target: /entry/instrument/geometries/coordinate_system
+            \@depends_on:
               doc: |
                 Link to the XPS base coordinate system.
+              enumeration: [/entry/instrument/geometries/coordinate_system]
       (NXenergydispersion):
         scheme:
           enumeration: [hemispherical, double hemispherical, cylindrical mirror]
@@ -72,7 +73,8 @@ NXxps(NXmpes):
         doc: |
           Reference to the transformation describing the orientation of the sample
           relative to the beam.
-      (NXtransformations):
+        enumeration: [transformations/angle_beam_sample]
+      transformations(NXtransformations):
         angle_beam_sample(NX_NUMBER):
           exists: recommended
           unit: NX_ANGLE
@@ -80,10 +82,10 @@ NXxps(NXmpes):
             Angle between incoming beam and the sample.
           \@transformation_type:
             enumeration: [rotation]
-          depends_on(link):
-            target: /entry/instrument/geometries/coordinate_system
+          \@depends_on:
             doc: |
               Link to the XPS base coordinate system.
+            enumeration: [/entry/instrument/geometries/coordinate_system]
     peak_fitting(NXpeak_model):
       exists: recommended
       doc:
@@ -100,10 +102,44 @@ NXxps(NXmpes):
           unit: NX_ENERGY
         stop(NX_NUMBER):
           unit: NX_ENERGY
+        background(NX_background):
+          doc:
+          - |
+            Functional form of the fitted XPS background.
+          - |
+            xref:
+              spec: ISO 18115-1:2023
+              term: 3.21
+              url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.21
+          label:
+          description:
+            enumeration:
+              linear:
+                doc: |
+                  Linear background, i.e., a simple straight line from the minimal to
+                  the maximal abscissa value.
+              Shirley:
+                doc: |
+                  Shirley background. In the Shirley background, the background intensity at any
+                  given binding energy is proportional to the intensity of the total peak area
+                  above the background in the lower binding energy peak range (i.e., the
+                  background goes up in proportion to the total number of photoelectrons below its
+                  binding energy position).
+              Tougaard:
+                doc: |
+                  Tougaard background (or Tougaard universal cross-section approach) which is a
+                  methodology for integrating the intensity of the background at a given binding
+                  energy from the spectral intensities to higher kinetic energies
+              other:
+                doc: |
+                  In case none of the enumeration items apply, description should be _other_
+                  and the functional form of the background should be given by NXcollection.
+          position:
+            unit: NX_ENERGY
+          intensity:
       peak_PEAK(NXpeak):
         label:
-        description:
-        peak_index:
+        lineshape:
         position:
           unit: NX_ENERGY
         intensity:
@@ -115,11 +151,15 @@ NXxps(NXmpes):
               spec: ISO 18115-1:2023
               term: 3.15
               url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.15
-        fwhm(NX_NUMBER):
+        width(NX_NUMBER):
           exists: recommended
           doc:
           - |
-            Total area under the peak after background removal
+            Width of a peak at a defined fraction of the peak height.
+          - |
+            Usually, this will be the Full Width at Half Maximum of the peak (FWHM).
+            For asymmetric peaks, convenient measures of peak width are the half-widths of
+            each side of the peak at half maximum intensity.
           - |
             xref:
               spec: ISO 18115-1:2023
@@ -129,7 +169,7 @@ NXxps(NXmpes):
           exists: recommended
           doc:
           - |
-            Total area under the peak after background removal
+            Total area under the peak after background removal.
           - |
             xref:
               spec: ISO 18115-1:2023
@@ -137,52 +177,17 @@ NXxps(NXmpes):
               url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.16
         relative_area:
           exists: recommended
-      background(NX_background):
-        doc:
-        - |
-          Functional form of the XPS background signal.
-        - |
-          xref:
-            spec: ISO 18115-1:2023
-            term: 3.21
-            url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.21
-        label:
-        description:
-          enumeration:
-            Linear:
-              doc: |
-                Linear background, i.e., a simple straight line from the minimal to
-                the maximal abscissa value.
-            Shirley:
-              doc:
-              - |
-                Shirley background.
-                In the Shirley background, the background intensity at any given binding energy is proportional to the intensity of the total peak area above the background in the lower binding energy peak range (i.e., the background goes up in proportion to the total number of photoelectrons below its binding energy position).
-              - |
-                xref:
-                  spec: None
-                  term: None
-                  url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.35
-            Tougaard:
-              doc: |
-                Tougaard background (or Tougaard universal cross-section approach) which is a
-                methodology for integrating the intensity of the background at a given binding
-                energy from the spectral intensities to higher kinetic energies
-            other:
-              doc: |
-                In case none of the enumeration items apply, description should be _other_
-                and the functional form of the background should be given by NXcollection.
-        position:
-          unit: NX_ENERGY
-        intensity:
       envelope(NX_NUMBER):
         exists: recommended
       figure_of_merit(NX_NUMBER):
         exists: recommended
+      fitting_method:
+        exists: recommended
       relative_concentration(NX_FLOAT):
+        exists: recommended
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# bfb7f64c8242d3f6679cc7ae3ddaeb383f7326cfd8c98bb61605cb7a899134c5
+# c4d27f5906ade7d0a873b10c66bde54a9b14da69cccbc9ef409ff3b34b99dee0
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -234,7 +239,7 @@ NXxps(NXmpes):
 #             </doc>
 #         </field>
 #         <group name="geometries" type="NXcoordinate_system_set">
-#             <field name="coordinate_system" type="NX_coordinate_system">
+#             <group name="coordinate_system" type="NXcoordinate_system">
 #                 <doc>
 #                      Description of the XPS base coordinate system, which is defined such that the positive z-axis
 #                      points towards the analyzer entry, and the x-axis lies within the beam/analyzer plane.
@@ -254,18 +259,18 @@ NXxps(NXmpes):
 #                         <item value="analyzer entry axis"/>
 #                     </enumeration>
 #                 </field>
-#             </field>
+#             </group>
 #         </group>
 #         <group type="NXtransformations">
 #             <doc>
 #                  Set of transformations, describing the orientation of the XPS coordinate system with respect to
-#                   the beam coordinate system (.). These should be links towards the NXtransformations instances
-#                   defined on the individual parts of NXinstrument.
+#                  the beam coordinate system (.). These should be links towards the NXtransformations instances
+#                  defined on the individual parts of NXinstrument.
 #             </doc>
 #         </group>
 #         <group type="NXinstrument">
 #             <doc>
-#                  XPS spectrometer
+#                  XPS spectrometer.
 #             </doc>
 #             <group type="NXelectronanalyser">
 #                 <field name="depends_on" recommended="true">
@@ -273,8 +278,11 @@ NXxps(NXmpes):
 #                          Reference to the transformation describing the orientation of the analyzer
 #                          relative to the beam.
 #                     </doc>
+#                     <enumeration>
+#                         <item value="transformations/angle_beam_analyser"/>
+#                     </enumeration>
 #                 </field>
-#                 <group type="NXtransformations">
+#                 <group name="transformations" type="NXtransformations">
 #                     <field name="angle_beam_analyser" type="NX_NUMBER" recommended="true" units="NX_ANGLE">
 #                         <doc>
 #                              Angle between incoming beam and the center analyser axis.
@@ -284,11 +292,14 @@ NXxps(NXmpes):
 #                                 <item value="rotation"/>
 #                             </enumeration>
 #                         </attribute>
-#                         <link name="depends_on" target="/entry/instrument/geometries/coordinate_system">
+#                         <attribute name="depends_on">
 #                             <doc>
 #                                  Link to the XPS base coordinate system.
 #                             </doc>
-#                         </link>
+#                             <enumeration>
+#                                 <item value="/entry/instrument/geometries/coordinate_system"/>
+#                             </enumeration>
+#                         </attribute>
 #                     </field>
 #                 </group>
 #             </group>
@@ -317,8 +328,11 @@ NXxps(NXmpes):
 #                      Reference to the transformation describing the orientation of the sample
 #                      relative to the beam.
 #                 </doc>
+#                 <enumeration>
+#                     <item value="transformations/angle_beam_sample"/>
+#                 </enumeration>
 #             </field>
-#             <group type="NXtransformations">
+#             <group name="transformations" type="NXtransformations">
 #                 <field name="angle_beam_sample" type="NX_NUMBER" recommended="true" units="NX_ANGLE">
 #                     <doc>
 #                          Angle between incoming beam and the sample.
@@ -328,11 +342,14 @@ NXxps(NXmpes):
 #                             <item value="rotation"/>
 #                         </enumeration>
 #                     </attribute>
-#                     <link name="depends_on" target="/entry/instrument/geometries/coordinate_system">
+#                     <attribute name="depends_on">
 #                         <doc>
 #                              Link to the XPS base coordinate system.
 #                         </doc>
-#                     </link>
+#                         <enumeration>
+#                             <item value="/entry/instrument/geometries/coordinate_system"/>
+#                         </enumeration>
+#                     </attribute>
 #                 </field>
 #             </group>
 #         </group>
@@ -348,11 +365,54 @@ NXxps(NXmpes):
 #                 <field name="label" type="NX_CHAR"/>
 #                 <field name="start" type="NX_NUMBER" units="NX_ENERGY"/>
 #                 <field name="stop" type="NX_NUMBER" units="NX_ENERGY"/>
+#                 <field name="background" type="NX_background">
+#                     <doc>
+#                          Functional form of the fitted XPS background.
+#                          
+#                          This concept is related to term `3.21`_ of the ISO 18115-1:2023 standard.
+#                          
+#                          .. _3.21: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.21
+#                     </doc>
+#                     <field name="label"/>
+#                     <field name="description">
+#                         <enumeration>
+#                             <item value="linear">
+#                                 <doc>
+#                                      Linear background, i.e., a simple straight line from the minimal to
+#                                      the maximal abscissa value.
+#                                 </doc>
+#                             </item>
+#                             <item value="Shirley">
+#                                 <doc>
+#                                      Shirley background. In the Shirley background, the background intensity at any
+#                                      given binding energy is proportional to the intensity of the total peak area
+#                                      above the background in the lower binding energy peak range (i.e., the
+#                                      background goes up in proportion to the total number of photoelectrons below its
+#                                      binding energy position).
+#                                 </doc>
+#                             </item>
+#                             <item value="Tougaard">
+#                                 <doc>
+#                                      Tougaard background (or Tougaard universal cross-section approach) which is a
+#                                      methodology for integrating the intensity of the background at a given binding
+#                                      energy from the spectral intensities to higher kinetic energies
+#                                 </doc>
+#                             </item>
+#                             <item value="other">
+#                                 <doc>
+#                                      In case none of the enumeration items apply, description should be _other_
+#                                      and the functional form of the background should be given by NXcollection.
+#                                 </doc>
+#                             </item>
+#                         </enumeration>
+#                     </field>
+#                     <field name="position" units="NX_ENERGY"/>
+#                     <field name="intensity"/>
+#                 </field>
 #             </group>
 #             <group name="peak_PEAK" type="NXpeak">
 #                 <field name="label"/>
-#                 <field name="description"/>
-#                 <field name="peak_index"/>
+#                 <field name="lineshape"/>
 #                 <field name="position" units="NX_ENERGY"/>
 #                 <field name="intensity">
 #                     <doc>
@@ -363,9 +423,13 @@ NXxps(NXmpes):
 #                          .. _3.15: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.15
 #                     </doc>
 #                 </field>
-#                 <field name="fwhm" type="NX_NUMBER" recommended="true">
+#                 <field name="width" type="NX_NUMBER" recommended="true">
 #                     <doc>
-#                          Total area under the peak after background removal
+#                          Width of a peak at a defined fraction of the peak height.
+#                          
+#                          Usually, this will be the Full Width at Half Maximum of the peak (FWHM).
+#                          For asymmetric peaks, convenient measures of peak width are the half-widths of
+#                          each side of the peak at half maximum intensity.
 #                          
 #                          This concept is related to term `3.28`_ of the ISO 18115-1:2023 standard.
 #                          
@@ -374,7 +438,7 @@ NXxps(NXmpes):
 #                 </field>
 #                 <field name="total_area" recommended="true">
 #                     <doc>
-#                          Total area under the peak after background removal
+#                          Total area under the peak after background removal.
 #                          
 #                          This concept is related to term `3.16`_ of the ISO 18115-1:2023 standard.
 #                          
@@ -383,54 +447,10 @@ NXxps(NXmpes):
 #                 </field>
 #                 <field name="relative_area" recommended="true"/>
 #             </group>
-#             <field name="background" type="NX_background">
-#                 <doc>
-#                      Functional form of the XPS background signal.
-#                      
-#                      This concept is related to term `3.21`_ of the ISO 18115-1:2023 standard.
-#                      
-#                      .. _3.21: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.21
-#                 </doc>
-#                 <field name="label"/>
-#                 <field name="description">
-#                     <enumeration>
-#                         <item value="Linear">
-#                             <doc>
-#                                  Linear background, i.e., a simple straight line from the minimal to
-#                                  the maximal abscissa value.
-#                             </doc>
-#                         </item>
-#                         <item value="Shirley">
-#                             <doc>
-#                                  Shirley background.
-#                                  In the Shirley background, the background intensity at any given binding energy is proportional to the intensity of the total peak area above the background in the lower binding energy peak range (i.e., the background goes up in proportion to the total number of photoelectrons below its binding energy position).
-#                                  
-#                                  This concept is related to term `None`_ of the None standard.
-#                                  
-#                                  .. _None: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.35
-#                             </doc>
-#                         </item>
-#                         <item value="Tougaard">
-#                             <doc>
-#                                  Tougaard background (or Tougaard universal cross-section approach) which is a
-#                                  methodology for integrating the intensity of the background at a given binding
-#                                  energy from the spectral intensities to higher kinetic energies
-#                             </doc>
-#                         </item>
-#                         <item value="other">
-#                             <doc>
-#                                  In case none of the enumeration items apply, description should be _other_
-#                                  and the functional form of the background should be given by NXcollection.
-#                             </doc>
-#                         </item>
-#                     </enumeration>
-#                 </field>
-#                 <field name="position" units="NX_ENERGY"/>
-#                 <field name="intensity"/>
-#             </field>
 #             <field name="envelope" type="NX_NUMBER" recommended="true"/>
 #             <field name="figure_of_merit" type="NX_NUMBER" recommended="true"/>
-#             <field name="relative_concentration" type="NX_FLOAT"/>
+#             <field name="fitting_method" recommended="true"/>
+#             <field name="relative_concentration" type="NX_FLOAT" recommended="true"/>
 #         </group>
 #     </group>
 # </definition>
