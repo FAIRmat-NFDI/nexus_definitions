@@ -1,27 +1,32 @@
 category: base
 doc: |
-  Base class for spectral peaks, their functional form, and support (values).
+  Base class for describing spectral peaks, their functional form, and support values
+  (i.e., the discretization (points) at which the function has been evaluated).
 symbols:
   doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   n_support: |
-    Number of support points
+    Number of support points.
 type: group
 NXpeak(NXobject):
-  label(NX_CHAR):
+  label:
     doc: |
       Human-readable label which specifies which concept/entity
       the peak represents/identifies.
-  description(NX_CHAR):
+  lineshape:
     doc: |
       Is the peak described analytically via a functional form
       or is it empirically defined via measured/reported
-      intensity/counts as a function of an independent variable.
+      intensity/counts as a function of an independent variable?
       
       If the functional form is not empirical or Gaussians, users
-      should enter other for the peak_model and add relevant details
+      should enter other for the description and add relevant details
       in the NXcollection.
     enumeration: [empirical, gaussian, lorentzian, voigt, other]
+  lineshape_other:
+    doc: |
+      Human-readable descritpion of the lineshape used for the peak if it does
+      not fit into the enumeration given in `lineshape`.
   peak_index(NX_POSINT):
     doc: |
       Index of the peak, for determining the numbering of multiple
@@ -63,10 +68,7 @@ NXpeak(NXobject):
         other:
           doc: |
             For other peak width definitions.
-  line_shape:
-    doc: |
-      Human-readable label of the line shapes used for the peak.
-  functional_form(NX_CHAR):
+  functional_form:
     doc: |
       A formula to describe the line shape using set of parameters as entered
       by the `peak_parameters` fields.
@@ -129,7 +131,7 @@ NXpeak(NXobject):
         Link to a peak the position constraint depends on.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 5f3a59176f7170f5afca8948113e3131ce89461204dd9825de40437863820dd1
+# b4e46ec557f8b6c9ba3541c5581a55cbe8c33d8c6555c46c5e2a8e12160360da
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -160,27 +162,28 @@ NXpeak(NXobject):
 #         </doc>
 #         <symbol name="n_support">
 #             <doc>
-#                  Number of support points
+#                  Number of support points.
 #             </doc>
 #         </symbol>
 #     </symbols>
 #     <doc>
-#          Base class for spectral peaks, their functional form, and support (values).
+#          Base class for describing spectral peaks, their functional form, and support values
+#          (i.e., the discretization (points) at which the function has been evaluated).
 #     </doc>
-#     <field name="label" type="NX_CHAR">
+#     <field name="label">
 #         <doc>
 #              Human-readable label which specifies which concept/entity
 #              the peak represents/identifies.
 #         </doc>
 #     </field>
-#     <field name="description" type="NX_CHAR">
+#     <field name="lineshape">
 #         <doc>
 #              Is the peak described analytically via a functional form
 #              or is it empirically defined via measured/reported
-#              intensity/counts as a function of an independent variable.
+#              intensity/counts as a function of an independent variable?
 #              
 #              If the functional form is not empirical or Gaussians, users
-#              should enter other for the peak_model and add relevant details
+#              should enter other for the description and add relevant details
 #              in the NXcollection.
 #         </doc>
 #         <enumeration>
@@ -190,6 +193,12 @@ NXpeak(NXobject):
 #             <item value="voigt"/>
 #             <item value="other"/>
 #         </enumeration>
+#     </field>
+#     <field name="lineshape_other">
+#         <doc>
+#              Human-readable descritpion of the lineshape used for the peak if it does
+#              not fit into the enumeration given in `lineshape`.
+#         </doc>
 #     </field>
 #     <field name="peak_index" type="NX_POSINT">
 #         <doc>
@@ -252,12 +261,7 @@ NXpeak(NXobject):
 #             </enumeration>
 #         </attribute>
 #     </field>
-#     <field name="line_shape">
-#         <doc>
-#              Human-readable label of the line shapes used for the peak.
-#         </doc>
-#     </field>
-#     <field name="functional_form" type="NX_CHAR">
+#     <field name="functional_form">
 #         <doc>
 #              A formula to describe the line shape using set of parameters as entered
 #              by the `peak_parameters` fields.
