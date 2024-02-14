@@ -31,17 +31,13 @@ NXpeak(NXobject):
     doc: |
       In the case of an empirical description of the peak and its shoulders,
       this array holds the position values for the independent variable.
-    dimensions:
-      rank: 1
-      dim: [[1, n_support]]
+    dim: (n_support,)
   intensity(NX_NUMBER):
     unit: NX_ANY
     doc: |
       In the case of an empirical description of the peak and its shoulders,
       this array holds the intensity/count values at each position.
-    dimensions:
-      rank: 1
-      dim: [[1, n_support]]
+    dim: (n_support,)
   width(NX_NUMBER):
     unit: NX_ANY
     doc: |
@@ -67,6 +63,19 @@ NXpeak(NXobject):
         other:
           doc: |
             For other peak width definitions.
+  line_shape:
+    doc: |
+      Human-readable label of the line shapes used for the peak.
+  functional_form(NX_CHAR):
+    doc: |
+      A formula to describe the line shape using set of parameters as entered
+      by the `peak_parameters` fields.
+  peak_parameters(NXparameters):
+    doc: |
+      In the case of an analytical description (or if description is other) this
+      collection holds parameter of (and eventually) the functional form.
+      For example in the case of Gaussians mu, sigma, cut-off values,
+      and background intensity are relevant parameter.
   total_area(NX_NUMBER):
     unit: NX_ANY
     doc: |
@@ -90,43 +99,37 @@ NXpeak(NXobject):
       the ionization cross section, and the element probed.
   area_constraint(NXparameters):
     doc: |
-      doc.
+      Constraint on the minimum and maximum area of this peak.
     minimal_value(NX_NUMBER):
       unit: NX_ANY
     maximal_value(NX_NUMBER):
       unit: NX_ANY
     depends_on:
       doc: |
-        Peak this constraint depends on.
+        Link to a peak the area constraint depends on.
   width_constraint(NXparameters):
     doc: |
-      doc.
+      Constraint on the minimum and maximum width of this peak.
     minimal_value(NX_NUMBER):
       unit: NX_ANY
     maximal_value(NX_NUMBER):
       unit: NX_ANY
     depends_on:
       doc: |
-        Peak this constraint depends on.
+        Link to a peak the width constraint depends on.
   position_constraint(NXparameters):
     doc: |
-      doc.
+      Constraint on the minimum and maximum position of this peak on the abscissa.
     minimal_value(NX_NUMBER):
       unit: NX_ANY
     maximal_value(NX_NUMBER):
       unit: NX_ANY
     depends_on:
       doc: |
-        Peak this constraint depends on.
-  (NXcollection):
-    doc: |
-      In the case of an analytical description (or if description is other) this
-      collection holds parameter of (and eventually) the functional form.
-      For example in the case of Gaussians mu, sigma, cut-off values,
-      and background intensity are relevant parameter.
+        Link to a peak the position constraint depends on.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 35967eb067c9eee6fd3357ff705fbbd9e77c85ed33526605df1ea1da8f0cb506
+# 5f3a59176f7170f5afca8948113e3131ce89461204dd9825de40437863820dd1
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -237,7 +240,7 @@ NXpeak(NXobject):
 #                 </item>
 #                 <item value="half_widths_asymmetric">
 #                     <doc>
-#                          For asymmetrical peaks, the half-widths of each side of the peak at 
+#                          For asymmetrical peaks, the half-widths of each side of the peak at
 #                          half maximum intensity is given.
 #                     </doc>
 #                 </item>
@@ -249,6 +252,25 @@ NXpeak(NXobject):
 #             </enumeration>
 #         </attribute>
 #     </field>
+#     <field name="line_shape">
+#         <doc>
+#              Human-readable label of the line shapes used for the peak.
+#         </doc>
+#     </field>
+#     <field name="functional_form" type="NX_CHAR">
+#         <doc>
+#              A formula to describe the line shape using set of parameters as entered
+#              by the `peak_parameters` fields.
+#         </doc>
+#     </field>
+#     <group name="peak_parameters" type="NXparameters">
+#         <doc>
+#              In the case of an analytical description (or if description is other) this
+#              collection holds parameter of (and eventually) the functional form.
+#              For example in the case of Gaussians mu, sigma, cut-off values,
+#              and background intensity are relevant parameter.
+#         </doc>
+#     </group>
 #     <field name="total_area" type="NX_NUMBER" units="NX_ANY">
 #         <doc>
 #              Total area under the curve (can also be used for the total area minus any
@@ -275,46 +297,38 @@ NXpeak(NXobject):
 #     </field>
 #     <group name="area_constraint" type="NXparameters">
 #         <doc>
-#              doc.
+#              Constraint on the minimum and maximum area of this peak.
 #         </doc>
 #         <field name="minimal_value" type="NX_NUMBER" units="NX_ANY"/>
 #         <field name="maximal_value" type="NX_NUMBER" units="NX_ANY"/>
 #         <field name="depends_on">
 #             <doc>
-#                  Peak this constraint depends on.
+#                  Link to a peak the area constraint depends on.
 #             </doc>
 #         </field>
 #     </group>
 #     <group name="width_constraint" type="NXparameters">
 #         <doc>
-#              doc.
+#              Constraint on the minimum and maximum width of this peak.
 #         </doc>
 #         <field name="minimal_value" type="NX_NUMBER" units="NX_ANY"/>
 #         <field name="maximal_value" type="NX_NUMBER" units="NX_ANY"/>
 #         <field name="depends_on">
 #             <doc>
-#                  Peak this constraint depends on.
+#                  Link to a peak the width constraint depends on.
 #             </doc>
 #         </field>
 #     </group>
 #     <group name="position_constraint" type="NXparameters">
 #         <doc>
-#              doc.
+#              Constraint on the minimum and maximum position of this peak on the abscissa.
 #         </doc>
 #         <field name="minimal_value" type="NX_NUMBER" units="NX_ANY"/>
 #         <field name="maximal_value" type="NX_NUMBER" units="NX_ANY"/>
 #         <field name="depends_on">
 #             <doc>
-#                  Peak this constraint depends on.
+#                  Link to a peak the position constraint depends on.
 #             </doc>
 #         </field>
-#     </group>
-#     <group type="NXcollection">
-#         <doc>
-#              In the case of an analytical description (or if description is other) this
-#              collection holds parameter of (and eventually) the functional form.
-#              For example in the case of Gaussians mu, sigma, cut-off values,
-#              and background intensity are relevant parameter.
-#         </doc>
 #     </group>
 # </definition>
