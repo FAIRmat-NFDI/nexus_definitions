@@ -22,22 +22,23 @@ NXxps(NXmpes):
         
         .. _ISO 18115-1:2023: https://www.iso.org/standard/74811.html
         .. _Clause 11: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:sec:11
-    geometries(NXcoordinate_system_set):
-      coordinate_system(NXcoordinate_system):
-        doc: |
-          Description of the XPS base coordinate system, which is defined such that the positive z-axis
-          points towards the analyzer entry, and the x-axis lies within the beam/analyzer plane.
-        origin:
-          enumeration: [beam/analyzer plane]
-        handedness:
-          enumeration: [right_handed]
-        z_direction:
-          enumeration: [analyzer entry axis]
-    (NXtransformations):
+    xps_coordinate_system(NXcoordinate_system):
       doc: |
-        Set of transformations, describing the orientation of the XPS coordinate system with respect to
-        the beam coordinate system (.). These should be links towards the NXtransformations instances
-        defined on the individual parts of NXinstrument.
+        Description of the XPS base coordinate system, which is defined such that the positive z-axis
+        points along the sample normal, and the x- and y-axes lie within the sample surface.
+        
+        The fields `x`, `y`, `z`, and `scaling` are used to describe the orientation of the XPS
+        coordinate system with respect to the beam coordinate system (.).
+      origin:
+        enumeration: [sample surface]
+      handedness:
+        enumeration: [right_handed]
+      z_direction:
+        enumeration: [sample normal]
+      x(NX_NUMBER):
+      y(NX_NUMBER):
+      z(NX_NUMBER):
+      offset(NX_NUMBER):
     (NXinstrument):
       doc: |
         XPS spectrometer.
@@ -58,8 +59,8 @@ NXxps(NXmpes):
               enumeration: [rotation]
             \@depends_on:
               doc: |
-                Link to the XPS base coordinate system.
-              enumeration: [/entry/instrument/geometries/coordinate_system]
+                Should be a link to the XPS base coordinate system, e.g.
+                /entry/instrument/xps_coordinate_system.
       (NXenergydispersion):
         scheme:
           enumeration: [hemispherical, double hemispherical, cylindrical mirror]
@@ -84,8 +85,8 @@ NXxps(NXmpes):
             enumeration: [rotation]
           \@depends_on:
             doc: |
-              Link to the XPS base coordinate system.
-            enumeration: [/entry/instrument/geometries/coordinate_system]
+              Should be a link to the XPS base coordinate system, e.g.
+              /entry/instrument/xps_coordinate_system.
     peak_fitting(NXpeak_model):
       exists: recommended
       doc:
@@ -187,7 +188,7 @@ NXxps(NXmpes):
         exists: recommended
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# c4d27f5906ade7d0a873b10c66bde54a9b14da69cccbc9ef409ff3b34b99dee0
+# ebb769a0693ea438893779523ca374d5e888fbb4954c07b6b65cff1bdd85f315
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -238,35 +239,33 @@ NXxps(NXmpes):
 #                  .. _Clause 11: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:sec:11
 #             </doc>
 #         </field>
-#         <group name="geometries" type="NXcoordinate_system_set">
-#             <group name="coordinate_system" type="NXcoordinate_system">
-#                 <doc>
-#                      Description of the XPS base coordinate system, which is defined such that the positive z-axis
-#                      points towards the analyzer entry, and the x-axis lies within the beam/analyzer plane.
-#                 </doc>
-#                 <field name="origin">
-#                     <enumeration>
-#                         <item value="beam/analyzer plane"/>
-#                     </enumeration>
-#                 </field>
-#                 <field name="handedness">
-#                     <enumeration>
-#                         <item value="right_handed"/>
-#                     </enumeration>
-#                 </field>
-#                 <field name="z_direction">
-#                     <enumeration>
-#                         <item value="analyzer entry axis"/>
-#                     </enumeration>
-#                 </field>
-#             </group>
-#         </group>
-#         <group type="NXtransformations">
+#         <group name="xps_coordinate_system" type="NXcoordinate_system">
 #             <doc>
-#                  Set of transformations, describing the orientation of the XPS coordinate system with respect to
-#                  the beam coordinate system (.). These should be links towards the NXtransformations instances
-#                  defined on the individual parts of NXinstrument.
+#                  Description of the XPS base coordinate system, which is defined such that the positive z-axis
+#                  points along the sample normal, and the x- and y-axes lie within the sample surface.
+#                  
+#                  The fields `x`, `y`, `z`, and `scaling` are used to describe the orientation of the XPS 
+#                  coordinate system with respect to the beam coordinate system (.).
 #             </doc>
+#             <field name="origin">
+#                 <enumeration>
+#                     <item value="sample surface"/>
+#                 </enumeration>
+#             </field>
+#             <field name="handedness">
+#                 <enumeration>
+#                     <item value="right_handed"/>
+#                 </enumeration>
+#             </field>
+#             <field name="z_direction">
+#                 <enumeration>
+#                     <item value="sample normal"/>
+#                 </enumeration>
+#             </field>
+#             <field name="x" type="NX_NUMBER"/>
+#             <field name="y" type="NX_NUMBER"/>
+#             <field name="z" type="NX_NUMBER"/>
+#             <field name="offset" type="NX_NUMBER"/>
 #         </group>
 #         <group type="NXinstrument">
 #             <doc>
@@ -294,11 +293,9 @@ NXxps(NXmpes):
 #                         </attribute>
 #                         <attribute name="depends_on">
 #                             <doc>
-#                                  Link to the XPS base coordinate system.
+#                                  Should be a link to the XPS base coordinate system, e.g. 
+#                                  /entry/instrument/xps_coordinate_system.
 #                             </doc>
-#                             <enumeration>
-#                                 <item value="/entry/instrument/geometries/coordinate_system"/>
-#                             </enumeration>
 #                         </attribute>
 #                     </field>
 #                 </group>
@@ -344,11 +341,9 @@ NXxps(NXmpes):
 #                     </attribute>
 #                     <attribute name="depends_on">
 #                         <doc>
-#                              Link to the XPS base coordinate system.
+#                              Should be a link to the XPS base coordinate system, e.g. 
+#                              /entry/instrument/xps_coordinate_system.
 #                         </doc>
-#                         <enumeration>
-#                             <item value="/entry/instrument/geometries/coordinate_system"/>
-#                         </enumeration>
 #                     </attribute>
 #                 </field>
 #             </group>
