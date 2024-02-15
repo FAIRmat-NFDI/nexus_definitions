@@ -22,23 +22,23 @@ NXxps(NXmpes):
         
         .. _ISO 18115-1:2023: https://www.iso.org/standard/74811.html
         .. _Clause 11: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:sec:11
-    xps_coordinate_system(NXcoordinate_system):
-      doc: |
-        Description of the XPS base coordinate system, which is defined such that the positive z-axis
-        points along the sample normal, and the x- and y-axes lie within the sample surface.
-        
-        The fields `x`, `y`, `z`, and `scaling` are used to describe the orientation of the XPS
-        coordinate system with respect to the beam coordinate system (.).
-      origin:
-        enumeration: [sample surface]
-      handedness:
-        enumeration: [right_handed]
-      z_direction:
-        enumeration: [sample normal]
-      x(NX_NUMBER):
-      y(NX_NUMBER):
-      z(NX_NUMBER):
-      offset(NX_NUMBER):
+    geometries(NXcoordinate_system_set):
+      xps_coordinate_system(NXcoordinate_system):
+        doc: |
+          Description of the XPS base coordinate system, which is defined such that the positive z-axis
+          points along the sample normal, and the x- and y-axes lie within the sample surface.
+          
+          The fields `x`, `y`, `z`, and `scaling` are used to describe the orientation of the XPS
+          coordinate system with respect to the beam coordinate system (.).
+        origin:
+          enumeration: [sample surface]
+        handedness:
+          enumeration: [right_handed]
+        z_direction:
+          enumeration: [sample normal]
+        x(NX_NUMBER):
+        y(NX_NUMBER):
+        z(NX_NUMBER):
     (NXinstrument):
       doc: |
         XPS spectrometer.
@@ -61,15 +61,8 @@ NXxps(NXmpes):
               doc: |
                 Should be a link to the XPS base coordinate system, e.g.
                 /entry/instrument/xps_coordinate_system.
-      (NXenergydispersion):
-        scheme:
-          enumeration: [hemispherical, double hemispherical, cylindrical mirror]
-        energy_scan_mode:
-          enumeration: [fixed_analyser_transmission, fixed_retardation_ratio, fixed_energy, snapshot]
-        diameter(NX_FLOAT):
-          exists: recommended
     (NXsample):
-      depends_on(NX_CHAR):
+      depends_on:
         exists: recommended
         doc: |
           Reference to the transformation describing the orientation of the sample
@@ -87,7 +80,7 @@ NXxps(NXmpes):
             doc: |
               Should be a link to the XPS base coordinate system, e.g.
               /entry/instrument/xps_coordinate_system.
-    peak_fitting(NXpeak_model):
+    peak_fitting(NXprocess):
       exists: recommended
       doc:
       - |
@@ -97,13 +90,53 @@ NXxps(NXmpes):
           spec: ISO 18115-1:2023
           term: 3.29
           url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.29
-      region_REGION(NXfit_region):
-        label(NX_CHAR):
-        start(NX_NUMBER):
+      (NXfit):
+        doc: |
+          Description of one peak fit. This is meant to be used for a peak fit in
+          _one_ XPS region. As an eexample, this could be used to describe the
+          fitting of one measured C 1s spectrum.
+        label:
+        region(NX_NUMBER):
           unit: NX_ENERGY
-        stop(NX_NUMBER):
-          unit: NX_ENERGY
-        background(NX_background):
+        peak_PEAK(NXpeak):
+          label:
+          lineshape:
+          position:
+            unit: NX_ENERGY
+          intensity:
+            doc:
+            - |
+              Intensity/count values at each energy in the position field.
+            - |
+              xref:
+                spec: ISO 18115-1:2023
+                term: 3.15
+                url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.15
+          width(NX_NUMBER):
+            exists: recommended
+            doc:
+            - |
+              Width of a peak at a defined fraction of the peak height.
+            - |
+              Usually, this will be the Full Width at Half Maximum of the peak (FWHM).
+              For asymmetric peaks, convenient measures of peak width are the half-widths of
+              each side of the peak at half maximum intensity.
+            - |
+              xref:
+                spec: ISO 18115-1:2023
+                term: 3.28
+                url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.28
+          total_area:
+            exists: recommended
+            doc:
+            - |
+              Total area under the peak after background removal.
+            - |
+              xref:
+                spec: ISO 18115-1:2023
+                term: 3.16
+                url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.16
+        background_BACKGROUND(NXfit_background):
           doc:
           - |
             Functional form of the fitted XPS background.
@@ -113,6 +146,7 @@ NXxps(NXmpes):
               term: 3.21
               url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.21
           label:
+            exists: recommended
           description:
             enumeration:
               linear:
@@ -135,60 +169,25 @@ NXxps(NXmpes):
                 doc: |
                   In case none of the enumeration items apply, description should be _other_
                   and the functional form of the background should be given by NXcollection.
-          position:
-            unit: NX_ENERGY
-          intensity:
-      peak_PEAK(NXpeak):
-        label:
-        lineshape:
-        position:
-          unit: NX_ENERGY
-        intensity:
-          doc:
-          - |
-            Intensity/count values at each energy in the position field.
-          - |
-            xref:
-              spec: ISO 18115-1:2023
-              term: 3.15
-              url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.15
-        width(NX_NUMBER):
+            position:
+              unit: NX_ENERGY
+            intensity:
+        fitting_method:
           exists: recommended
-          doc:
-          - |
-            Width of a peak at a defined fraction of the peak height.
-          - |
-            Usually, this will be the Full Width at Half Maximum of the peak (FWHM).
-            For asymmetric peaks, convenient measures of peak width are the half-widths of
-            each side of the peak at half maximum intensity.
-          - |
-            xref:
-              spec: ISO 18115-1:2023
-              term: 3.28
-              url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.28
-        total_area:
+        envelope(NX_NUMBER):
           exists: recommended
-          doc:
-          - |
-            Total area under the peak after background removal.
-          - |
-            xref:
-              spec: ISO 18115-1:2023
-              term: 3.16
-              url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.16
-        relative_area:
+        figure_of_merit_METRIC(NX_NUMBER):
           exists: recommended
-      envelope(NX_NUMBER):
-        exists: recommended
-      figure_of_merit(NX_NUMBER):
-        exists: recommended
-      fitting_method:
-        exists: recommended
-      relative_concentration(NX_FLOAT):
-        exists: recommended
+          \@metric:
+        relative_concentration(NX_FLOAT):
+          unit: NX_ANY
+          doc: |
+            Atomic concentration of each species defined by one peak in the peak model.
+            This should be an array with the indices pointing to the individual peaks
+            (i.e, peak_0, peak_1, etc.)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# ebb769a0693ea438893779523ca374d5e888fbb4954c07b6b65cff1bdd85f315
+# 2014f7027d3a4cee74004585b9831056092d2b06fbfb85b4d46641c5d7cf6390
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -239,33 +238,34 @@ NXxps(NXmpes):
 #                  .. _Clause 11: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:sec:11
 #             </doc>
 #         </field>
-#         <group name="xps_coordinate_system" type="NXcoordinate_system">
-#             <doc>
-#                  Description of the XPS base coordinate system, which is defined such that the positive z-axis
-#                  points along the sample normal, and the x- and y-axes lie within the sample surface.
-#                  
-#                  The fields `x`, `y`, `z`, and `scaling` are used to describe the orientation of the XPS 
-#                  coordinate system with respect to the beam coordinate system (.).
-#             </doc>
-#             <field name="origin">
-#                 <enumeration>
-#                     <item value="sample surface"/>
-#                 </enumeration>
-#             </field>
-#             <field name="handedness">
-#                 <enumeration>
-#                     <item value="right_handed"/>
-#                 </enumeration>
-#             </field>
-#             <field name="z_direction">
-#                 <enumeration>
-#                     <item value="sample normal"/>
-#                 </enumeration>
-#             </field>
-#             <field name="x" type="NX_NUMBER"/>
-#             <field name="y" type="NX_NUMBER"/>
-#             <field name="z" type="NX_NUMBER"/>
-#             <field name="offset" type="NX_NUMBER"/>
+#         <group name="geometries" type="NXcoordinate_system_set">
+#             <group name="xps_coordinate_system" type="NXcoordinate_system">
+#                 <doc>
+#                      Description of the XPS base coordinate system, which is defined such that the positive z-axis
+#                      points along the sample normal, and the x- and y-axes lie within the sample surface.
+#                      
+#                      The fields `x`, `y`, `z`, and `scaling` are used to describe the orientation of the XPS
+#                      coordinate system with respect to the beam coordinate system (.).
+#                 </doc>
+#                 <field name="origin">
+#                     <enumeration>
+#                         <item value="sample surface"/>
+#                     </enumeration>
+#                 </field>
+#                 <field name="handedness">
+#                     <enumeration>
+#                         <item value="right_handed"/>
+#                     </enumeration>
+#                 </field>
+#                 <field name="z_direction">
+#                     <enumeration>
+#                         <item value="sample normal"/>
+#                     </enumeration>
+#                 </field>
+#                 <field name="x" type="NX_NUMBER"/>
+#                 <field name="y" type="NX_NUMBER"/>
+#                 <field name="z" type="NX_NUMBER"/>
+#             </group>
 #         </group>
 #         <group type="NXinstrument">
 #             <doc>
@@ -293,34 +293,16 @@ NXxps(NXmpes):
 #                         </attribute>
 #                         <attribute name="depends_on">
 #                             <doc>
-#                                  Should be a link to the XPS base coordinate system, e.g. 
+#                                  Should be a link to the XPS base coordinate system, e.g.
 #                                  /entry/instrument/xps_coordinate_system.
 #                             </doc>
 #                         </attribute>
 #                     </field>
 #                 </group>
 #             </group>
-#             <group type="NXenergydispersion">
-#                 <field name="scheme">
-#                     <enumeration>
-#                         <item value="hemispherical"/>
-#                         <item value="double hemispherical"/>
-#                         <item value="cylindrical mirror"/>
-#                     </enumeration>
-#                 </field>
-#                 <field name="energy_scan_mode">
-#                     <enumeration>
-#                         <item value="fixed_analyser_transmission"/>
-#                         <item value="fixed_retardation_ratio"/>
-#                         <item value="fixed_energy"/>
-#                         <item value="snapshot"/>
-#                     </enumeration>
-#                 </field>
-#                 <field name="diameter" type="NX_FLOAT" recommended="true"/>
-#             </group>
 #         </group>
 #         <group type="NXsample">
-#             <field name="depends_on" type="NX_CHAR" recommended="true">
+#             <field name="depends_on" recommended="true">
 #                 <doc>
 #                      Reference to the transformation describing the orientation of the sample
 #                      relative to the beam.
@@ -341,14 +323,14 @@ NXxps(NXmpes):
 #                     </attribute>
 #                     <attribute name="depends_on">
 #                         <doc>
-#                              Should be a link to the XPS base coordinate system, e.g. 
+#                              Should be a link to the XPS base coordinate system, e.g.
 #                              /entry/instrument/xps_coordinate_system.
 #                         </doc>
 #                     </attribute>
 #                 </field>
 #             </group>
 #         </group>
-#         <group name="peak_fitting" type="NXpeak_model" recommended="true">
+#         <group name="peak_fitting" type="NXprocess" recommended="true">
 #             <doc>
 #                  Peak model for XPS fitting.
 #                  
@@ -356,11 +338,51 @@ NXxps(NXmpes):
 #                  
 #                  .. _3.29: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.29
 #             </doc>
-#             <group name="region_REGION" type="NXfit_region">
-#                 <field name="label" type="NX_CHAR"/>
-#                 <field name="start" type="NX_NUMBER" units="NX_ENERGY"/>
-#                 <field name="stop" type="NX_NUMBER" units="NX_ENERGY"/>
-#                 <field name="background" type="NX_background">
+#             <group type="NXfit">
+#                 <doc>
+#                      Description of one peak fit. This is meant to be used for a peak fit in
+#                      _one_ XPS region. As an eexample, this could be used to describe the 
+#                      fitting of one measured C 1s spectrum.
+#                 </doc>
+#                 <field name="label"/>
+#                 <field name="region" type="NX_NUMBER" units="NX_ENERGY"/>
+#                 <group name="peak_PEAK" type="NXpeak">
+#                     <field name="label"/>
+#                     <field name="lineshape"/>
+#                     <field name="position" units="NX_ENERGY"/>
+#                     <field name="intensity">
+#                         <doc>
+#                              Intensity/count values at each energy in the position field.
+#                              
+#                              This concept is related to term `3.15`_ of the ISO 18115-1:2023 standard.
+#                              
+#                              .. _3.15: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.15
+#                         </doc>
+#                     </field>
+#                     <field name="width" type="NX_NUMBER" recommended="true">
+#                         <doc>
+#                              Width of a peak at a defined fraction of the peak height.
+#                              
+#                              Usually, this will be the Full Width at Half Maximum of the peak (FWHM).
+#                              For asymmetric peaks, convenient measures of peak width are the half-widths of
+#                              each side of the peak at half maximum intensity.
+#                              
+#                              This concept is related to term `3.28`_ of the ISO 18115-1:2023 standard.
+#                              
+#                              .. _3.28: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.28
+#                         </doc>
+#                     </field>
+#                     <field name="total_area" recommended="true">
+#                         <doc>
+#                              Total area under the peak after background removal.
+#                              
+#                              This concept is related to term `3.16`_ of the ISO 18115-1:2023 standard.
+#                              
+#                              .. _3.16: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.16
+#                         </doc>
+#                     </field>
+#                 </group>
+#                 <group name="background_BACKGROUND" type="NXfit_background">
 #                     <doc>
 #                          Functional form of the fitted XPS background.
 #                          
@@ -368,7 +390,7 @@ NXxps(NXmpes):
 #                          
 #                          .. _3.21: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.21
 #                     </doc>
-#                     <field name="label"/>
+#                     <field name="label" recommended="true"/>
 #                     <field name="description">
 #                         <enumeration>
 #                             <item value="linear">
@@ -400,52 +422,23 @@ NXxps(NXmpes):
 #                                 </doc>
 #                             </item>
 #                         </enumeration>
+#                         <field name="position" units="NX_ENERGY"/>
+#                         <field name="intensity"/>
 #                     </field>
-#                     <field name="position" units="NX_ENERGY"/>
-#                     <field name="intensity"/>
+#                 </group>
+#                 <field name="fitting_method" recommended="true"/>
+#                 <field name="envelope" type="NX_NUMBER" recommended="true"/>
+#                 <field name="figure_of_merit_METRIC" type="NX_NUMBER" recommended="true">
+#                     <attribute name="metric"/>
+#                 </field>
+#                 <field name="relative_concentration" type="NX_FLOAT" units="NX_ANY">
+#                     <doc>
+#                          Atomic concentration of each species defined by one peak in the peak model.
+#                          This should be an array with the indices pointing to the individual peaks
+#                          (i.e, peak_0, peak_1, etc.)
+#                     </doc>
 #                 </field>
 #             </group>
-#             <group name="peak_PEAK" type="NXpeak">
-#                 <field name="label"/>
-#                 <field name="lineshape"/>
-#                 <field name="position" units="NX_ENERGY"/>
-#                 <field name="intensity">
-#                     <doc>
-#                          Intensity/count values at each energy in the position field.
-#                          
-#                          This concept is related to term `3.15`_ of the ISO 18115-1:2023 standard.
-#                          
-#                          .. _3.15: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.15
-#                     </doc>
-#                 </field>
-#                 <field name="width" type="NX_NUMBER" recommended="true">
-#                     <doc>
-#                          Width of a peak at a defined fraction of the peak height.
-#                          
-#                          Usually, this will be the Full Width at Half Maximum of the peak (FWHM).
-#                          For asymmetric peaks, convenient measures of peak width are the half-widths of
-#                          each side of the peak at half maximum intensity.
-#                          
-#                          This concept is related to term `3.28`_ of the ISO 18115-1:2023 standard.
-#                          
-#                          .. _3.28: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.28
-#                     </doc>
-#                 </field>
-#                 <field name="total_area" recommended="true">
-#                     <doc>
-#                          Total area under the peak after background removal.
-#                          
-#                          This concept is related to term `3.16`_ of the ISO 18115-1:2023 standard.
-#                          
-#                          .. _3.16: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.16
-#                     </doc>
-#                 </field>
-#                 <field name="relative_area" recommended="true"/>
-#             </group>
-#             <field name="envelope" type="NX_NUMBER" recommended="true"/>
-#             <field name="figure_of_merit" type="NX_NUMBER" recommended="true"/>
-#             <field name="fitting_method" recommended="true"/>
-#             <field name="relative_concentration" type="NX_FLOAT" recommended="true"/>
 #         </group>
 #     </group>
 # </definition>
