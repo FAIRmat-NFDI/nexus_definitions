@@ -28,12 +28,13 @@
         </doc>
         <symbol name="n_support">
             <doc>
-                 Number of support points.
+                 Number of discretization points at which the functional form of the peak
+                 has been evaluated.
             </doc>
         </symbol>
     </symbols>
     <doc>
-         Base class for describing spectral peaks, their functional form, and support values
+         Base class for describing a spectral peak, its functional form, and support values
          (i.e., the discretization (points) at which the function has been evaluated).
     </doc>
     <field name="label">
@@ -68,7 +69,7 @@
     </field>
     <field name="position" type="NX_NUMBER" units="NX_ANY">
         <doc>
-             In the case of an empirical description of the peak and its shoulders,
+             In the case of an empirical description of the peak,
              this array holds the position values for the independent variable.
         </doc>
         <dimensions rank="1">
@@ -77,7 +78,7 @@
     </field>
     <field name="intensity" type="NX_NUMBER" units="NX_ANY">
         <doc>
-             In the case of an empirical description of the peak and its shoulders,
+             In the case of an empirical description of the peak,
              this array holds the intensity/count values at each position.
         </doc>
         <dimensions rank="1">
@@ -123,76 +124,21 @@
     </field>
     <field name="functional_form">
         <doc>
-             A formula to describe the line shape using set of parameters as entered
+             A formula to describe the line shape using a set of parameters as entered
              by the `peak_parameters` fields.
         </doc>
     </field>
     <group name="peak_parameters" type="NXparameters">
         <doc>
              In the case of an analytical description (or if description is other) this
-             collection holds parameter of (and eventually) the functional form.
-             For example in the case of Gaussians mu, sigma, cut-off values,
-             and background intensity are relevant parameter.
+             collection holds parameter of the functional form.
+             For example in the case of Gaussians mu, sigma, and cut-off values are
+             relevant parameters.
         </doc>
     </group>
     <field name="total_area" type="NX_NUMBER" units="NX_ANY">
         <doc>
-             Total area under the curve (can also be used for the total area minus any
-             background values.)
+             Total area under the curve.
         </doc>
     </field>
-    <field name="relative_area" type="NX_NUMBER" units="NX_ANY">
-        <doc>
-             Relative area of this peak compared to other peaks in an NXpeak_model.
-             
-             The relative area can simply be derived by dividing the total_area by the total
-             area of all peaks or by a more complicated method (e.g., by additionally dividing
-             by the relative_sensitivity_factor). Details should be stored in the quantification
-             description of NXpeak_model.
-        </doc>
-    </field>
-    <field name="relative_sensitivity_factor" type="NX_NUMBER" units="NX_UNITLESS">
-        <doc>
-             Relative sensitivity for this peak, to be used in quantification in an NXpeak_model.
-             
-             As an example, in X-ray spectroscopy could depend on the energy scale (see position),
-             the ionization cross section, and the element probed.
-        </doc>
-    </field>
-    <group name="area_constraint" type="NXparameters">
-        <doc>
-             Constraint on the minimum and maximum area of this peak.
-        </doc>
-        <field name="minimal_value" type="NX_NUMBER" units="NX_ANY"/>
-        <field name="maximal_value" type="NX_NUMBER" units="NX_ANY"/>
-        <field name="depends_on">
-            <doc>
-                 Link to a peak the area constraint depends on.
-            </doc>
-        </field>
-    </group>
-    <group name="width_constraint" type="NXparameters">
-        <doc>
-             Constraint on the minimum and maximum width of this peak.
-        </doc>
-        <field name="minimal_value" type="NX_NUMBER" units="NX_ANY"/>
-        <field name="maximal_value" type="NX_NUMBER" units="NX_ANY"/>
-        <field name="depends_on">
-            <doc>
-                 Link to a peak the width constraint depends on.
-            </doc>
-        </field>
-    </group>
-    <group name="position_constraint" type="NXparameters">
-        <doc>
-             Constraint on the minimum and maximum position of this peak on the abscissa.
-        </doc>
-        <field name="minimal_value" type="NX_NUMBER" units="NX_ANY"/>
-        <field name="maximal_value" type="NX_NUMBER" units="NX_ANY"/>
-        <field name="depends_on">
-            <doc>
-                 Link to a peak the position constraint depends on.
-            </doc>
-        </field>
-    </group>
 </definition>
