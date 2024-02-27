@@ -1,0 +1,38 @@
+category: base 
+doc: |
+    Transfermatrix relationship between N input beams and M output beams.
+    It contains a table with the relevant matricies to be used for different
+    transmissitted properties (such as polarization, intensity, phase).
+
+    Data structure for all transfermatrices of an optical element in a setup.
+    For each combination of N input and M output beams and for L physical
+    concept (i.e. Beam intensity) one matrices can be defined.
+    In This way, the transfermatrix table has the dimension NxM.
+    For each entry, in this transfermatrix, there are L formalisms.
+    Each formalism has the dimension dim(L_i)xdim(L_i),
+    whereby L_i is the specific physical concept (Intensity, polarization, direction).
+
+    A beamsplitter with two input laser beams, can have a total of
+    four transfermatrices (2 Input x 2 Output).
+    The dimension of the transfermatrix depends on the parameters.
+    Examples are:
+    1x1 for intensity/power
+    2x2 for jones formalism
+    3x3 for direction
+
+transfer_matrix_table(NX_NUMBER): # (NXdata)?
+  # Q: Where to list the input and output beams, for the specific transfermatrices?
+  opt_element:
+    doc: |
+      Specific optical element, to which the transfermatrix table is related.
+  dimensions:
+    doc: |
+      ?
+    # Dont see how these parameters (given by the NXellipsometry definition) result
+    # in python/hdf5 data structures
+    rank: 3 # 1 rank for number of Input/Output Combinations, 2 for the matrix?
+    dim:
+      [
+        [1, N_in_out],        
+        [2, N_variables], 
+      ]

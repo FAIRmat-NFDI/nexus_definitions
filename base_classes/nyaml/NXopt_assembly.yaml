@@ -1,0 +1,46 @@
+category: base 
+doc: |
+  Contains datastructures of an experimental optical setup (i.e Multiple
+  Transfermatrix Tables).
+  These datastructure, are used to relate physical properties of two beams
+  (NXopt_beam) which have one common optical element (NXopt_element) (one 
+  specific transfermatrix).
+  One of these beams in an input beam and the other one is an output beam.
+
+  The data describes the change of beam properties, i.e. The intensity of a
+  beam is reduced, because the transmission coefficient of the opt element is 
+  lower than 1.
+  
+opt_assembly(NXdata):
+  datatype_N:
+    doc: |
+      Select which type of data was recorded, for example Psi and Delta
+      (see: https://en.wikipedia.org/wiki/Ellipsometry#Data_acquisition).
+      It is possible to have multiple selections. Data types may also be
+      converted to each other, e.g. a Mueller matrix contains N,C,S data
+      as well. This selection defines how many columns (N_variables) are
+      stored in the data array.
+      N in the name, is the index number in which order the given
+      property is listed. 
+    enumeration:
+      [
+        aperture,
+        focal length,
+        orientation,
+        jones matrix,
+      ]
+  column_names:
+    doc: |
+      Please list in this array the column names used in your actual data.
+      That is in the case of aperture ['diameter'] or focal length ['focal_length_value']
+      and for orientation ['OM11', 'OM12',.... ,'OM33'] or for jones matrix
+      ['JM11','JM12','JM21','JM22']
+    dimensions:
+      rank: 1
+      dim: [[1, N_variables]]
+
+  TRANSFERMATRIXTABLE(NXtrasnfer_matrix_table):
+    doc: |
+      Contains the datastructure, which relates beam properties of an 
+      input and output beam as result of the input beam interaction
+      with the optical element.
