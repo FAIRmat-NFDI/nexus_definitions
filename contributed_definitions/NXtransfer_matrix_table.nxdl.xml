@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+<!--
+# NeXus - Neutron and X-ray Common Data Format
+#
+# Copyright (C) 2014-2024 NeXus International Advisory Committee (NIAC)
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For further information, see http://www.nexusformat.org
+-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="transfer_matrix_table" extends="NX_NUMBER" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+    <symbols>
+        <symbol name="N_in_out">
+            <doc>
+                 Dimension of number total number of input and output combinations.
+                 i.e. two input and two output --&gt; dim 4
+            </doc>
+        </symbol>
+        <symbol name="N_variables">
+            <doc>
+                 Dimension of the number of colums for the data array, which stores
+                 a scalar (dim1) or vector (dim3)
+            </doc>
+        </symbol>
+    </symbols>
+    <doc>
+         Transfermatrix relationship between N input beams and M output beams.
+         It contains a table with the relevant matricis to be used for different
+         transmissitted properties (such as polarization, intensity, phase).
+         
+         Data structure for all transfermatrices of an optical element in a setup.
+         For each combination of N input and M output beams and for L physical
+         concept (i.e. beam intensity), one matrix can be defined.
+         
+         In this way, the transfermatrix table has the dimension NxM.
+         
+         For each entry, in this transfermatrix, there are L formalisms.
+         Each formalism has the dimension math:`dim(L_i)xdim(L_i)`,
+         whereby math:`L_i` is the specific physical concept (Intensity, polarization, direction).
+         
+         A beamsplitter with two input laser beams can have a total of
+         four transfermatrices (2 Input x 2 Output).
+         
+         The dimension of the transfermatrix depends on the parameters.
+         Examples are:
+         1x1 for intensity/power
+         2x2 for jones formalism
+         3x3 for direction
+    </doc>
+    <!--Q: Where to list the input and output beams, for the specific transfermatrices?-->
+    <field name="opt_element">
+        <doc>
+             Specific optical element to which the transfermatrix table is related.
+        </doc>
+    </field>
+    <!--Dont see how these parameters (given by the NXellipsometry definition) result
+in python/hdf5 data structures-->
+    <dimensions rank="3">
+        <doc>
+             ?
+        </doc>
+        <dim index="1" value="N_in_out"/>
+        <dim index="2" value="N_variables"/>
+    </dimensions>
+</definition>

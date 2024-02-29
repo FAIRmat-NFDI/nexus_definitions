@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+<!--
+# NeXus - Neutron and X-ray Common Data Format
+#
+# Copyright (C) 2014-2024 NeXus International Advisory Committee (NIAC)
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For further information, see http://www.nexusformat.org
+-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" name="NXopt_beam" extends="NXbeam" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+    <doc>
+         A generic optical beam, used in an experimental setup for optical spectroscopy.
+         
+         
+         Characteristics of a beam which is linked to two NXopt_element entries.
+         
+         A "logical direction" of the beam is defined by "prev_opt_element" and "next_opt_element"
+         
+         Example Names: incoming_1, incoming_2, outgoing_1, outgoing_2, input_1, output_1,
+         
+         souce_1, mirror_1
+         
+         Properties of the beam can be stored here: Intensity, polarization, divergence,
+         
+         diameter, electric field strength, spectral intensity distribution, ...
+    </doc>
+    <field name="previous_opt_element">
+        <doc>
+             Indicates the optical element from which this beam originates.
+             This defines, whether the beam in an "input" or "output" beam.
+        </doc>
+    </field>
+    <field name="next_opt_element">
+        <doc>
+             Gives the optical element which this beam will interact with next.
+        </doc>
+    </field>
+</definition>

@@ -1,7 +1,7 @@
 category: base 
 doc: |
     Transfermatrix relationship between N input beams and M output beams.
-    It contains a table with the relevant matricies to be used for different
+    It contains a table with the relevant matricis to be used for different
     transmissitted properties (such as polarization, intensity, phase).
 
     Data structure for all transfermatrices of an optical element in a setup.
@@ -11,8 +11,8 @@ doc: |
     In this way, the transfermatrix table has the dimension NxM.
 
     For each entry, in this transfermatrix, there are L formalisms.
-    Each formalism has the dimension dim(L_i)xdim(L_i),
-    whereby L_i is the specific physical concept (Intensity, polarization, direction).
+    Each formalism has the dimension math:`dim(L_i)xdim(L_i)`,
+    whereby math:`L_i` is the specific physical concept (Intensity, polarization, direction).
 
     A beamsplitter with two input laser beams can have a total of
     four transfermatrices (2 Input x 2 Output).
@@ -22,7 +22,14 @@ doc: |
     1x1 for intensity/power
     2x2 for jones formalism
     3x3 for direction
-
+symbols:
+  N_in_out: |
+    Dimension of number total number of input and output combinations.
+    i.e. two input and two output --> dim 4
+  N_variables: |
+    Dimension of the number of colums for the data array, which stores
+    a scalar (dim1) or vector (dim3)
+type: group
 transfer_matrix_table(NX_NUMBER): # (NXdata)?
   # Q: Where to list the input and output beams, for the specific transfermatrices?
   opt_element:

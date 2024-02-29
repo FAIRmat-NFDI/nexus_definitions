@@ -8,22 +8,24 @@ doc: |
   One of these beams in an input beam and the other one is an output beam.
 
   The data describes the change of beam properties, e.g. the intensity of a beam is reduced because the transmission coefficient of the opt element is lower than 1.
-  
-opt_assembly(NXdata):
+symbols:
+  doc: |
+    Variables used throughout the document, e.g. dimensions or parameters.
+  N_variables: |
+    Length of the array associated to the data type.
+opt_assembly(NXobject): # Which properties of NXdata are required?
   datatype_N:
     doc: |
-      Select which type of data was recorded, for example Psi and Delta
-      (see: https://en.wikipedia.org/wiki/Ellipsometry#Data_acquisition).
-      It is possible to have multiple selections. Data types may also be
-      converted to each other, e.g. a Mueller matrix contains N,C,S data
-      as well. This selection defines how many columns (N_variables) are
-      stored in the data array.
+      Select which type of data was recorded, for example aperture and
+      focal length.
+      It is possible to have multiple selections. This selection defines
+      how many columns (N_variables) are stored in the data array.
       N in the name, is the index number in which order the given
       property is listed. 
     enumeration:
       [
         aperture,
-        focal length,
+        focallength,
         orientation,
         jones matrix,
       ]
