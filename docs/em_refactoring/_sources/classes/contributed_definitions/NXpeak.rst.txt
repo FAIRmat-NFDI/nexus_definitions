@@ -17,7 +17,7 @@ NXpeak
 
 **Description**:
 
-  Description of peaks, their functional form or measured support.
+  Base class for spectral peaks, their functional form, and support (values).
 
 **Symbols**:
 
@@ -26,9 +26,9 @@ NXpeak
   **n_support**: Number of support points
 
 **Groups cited**:
-  :ref:`NXcollection`
+  :ref:`NXparameters`
 
-.. index:: NXcollection (base class); used in base class
+.. index:: NXparameters (base class); used in base class
 
 **Structure**:
 
@@ -38,16 +38,16 @@ NXpeak
 
   **label**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: Human-readable identifier to specify which concept/entity ...
+    .. collapse:: Human-readable label which specifies which concept/entity ...
 
-        Human-readable identifier to specify which concept/entity
+        Human-readable label which specifies which concept/entity
         the peak represents/identifies.
 
-  .. _/NXpeak/peak_model-field:
+  .. _/NXpeak/description-field:
 
-  .. index:: peak_model (field)
+  .. index:: description (field)
 
-  **peak_model**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+  **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
     .. collapse:: Is the peak described analytically via a functional form ...
 
@@ -55,11 +55,22 @@ NXpeak
         or is it empirically defined via measured/reported
         intensity/counts as a function of an independent variable.
 
-        If the functional form is not empirical or gaussian, users
+        If the functional form is not empirical or Gaussians, users
         should enter other for the peak_model and add relevant details
         in the NXcollection.
 
-        Any of these values: ``empirical`` | ``gaussian`` | ``lorentzian`` | ``other``
+        Any of these values:
+
+          * ``empirical``
+
+          * ``gaussian``
+
+          * ``lorentzian``
+
+          * ``voigt``
+
+          * ``other``
+
 
   .. _/NXpeak/position-field:
 
@@ -83,15 +94,15 @@ NXpeak
         In the case of an empirical description of the peak and its shoulders,
         this array holds the intensity/count values at each position.
 
-  .. _/NXpeak/COLLECTION-group:
+  .. _/NXpeak/PARAMETERS-group:
 
-  **COLLECTION**: (optional) :ref:`NXcollection` 
+  **PARAMETERS**: (optional) :ref:`NXparameters` 
 
     .. collapse:: In the case of an analytical description (or if peak_model is other) this ...
 
         In the case of an analytical description (or if peak_model is other) this
         collection holds parameter of (and eventually) the functional form.
-        For example in the case of Gaussians mu, sigma, cut-off values, 
+        For example in the case of Gaussians mu, sigma, cut-off values,
         and background intensity are relevant parameter.
 
 
@@ -102,10 +113,10 @@ List of hypertext anchors for all groups, fields,
 attributes, and links defined in this class.
 
 
-* :ref:`/NXpeak/COLLECTION-group </NXpeak/COLLECTION-group>`
+* :ref:`/NXpeak/description-field </NXpeak/description-field>`
 * :ref:`/NXpeak/intensity-field </NXpeak/intensity-field>`
 * :ref:`/NXpeak/label-field </NXpeak/label-field>`
-* :ref:`/NXpeak/peak_model-field </NXpeak/peak_model-field>`
+* :ref:`/NXpeak/PARAMETERS-group </NXpeak/PARAMETERS-group>`
 * :ref:`/NXpeak/position-field </NXpeak/position-field>`
 
 **NXDL Source**:

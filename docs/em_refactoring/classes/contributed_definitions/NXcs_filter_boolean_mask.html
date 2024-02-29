@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2.3.3.3.85. NXcs_filter_boolean_mask &#8212; NeXus-FAIRmat v2022.07 documentation</title>
+    <title>2.3.3.3.95. NXcs_filter_boolean_mask &#8212; NeXus-FAIRmat v2022.07 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
     <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
@@ -23,8 +23,8 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="next" title="2.3.3.3.86. NXcs_gpu" href="NXcs_gpu.html" />
-    <link rel="prev" title="2.3.3.3.84. NXcs_cpu_sys" href="NXcs_cpu_sys.html" />
+    <link rel="next" title="2.3.3.3.96. NXcs_gpu" href="NXcs_gpu.html" />
+    <link rel="prev" title="2.3.3.3.94. NXcs_cpu_sys" href="NXcs_cpu_sys.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -43,36 +43,35 @@
           <div class="body" role="main">
             
   <section id="nxcs-filter-boolean-mask">
-<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.85. </span>NXcs_filter_boolean_mask<a class="headerlink" href="#nxcs-filter-boolean-mask" title="Link to this heading">¶</a></h1>
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.95. </span>NXcs_filter_boolean_mask<a class="headerlink" href="#nxcs-filter-boolean-mask" title="Link to this heading">¶</a></h1>
 <p><strong>Status</strong>:</p>
 <blockquote>
 <div><p>base class, extends <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
 </div></blockquote>
 <p><strong>Description</strong>:</p>
 <blockquote>
-<div><details class="summary-computer-science-base-class-for-packing-and-unpacking-booleans">
-<summary>Computer science base class for packing and unpacking booleans. ...</summary><p>Computer science base class for packing and unpacking booleans.</p>
+<div><details class="summary-base-class-for-packing-and-unpacking-booleans">
+<summary>Base class for packing and unpacking booleans. ...</summary><p>Base class for packing and unpacking booleans.</p>
 <p>This base class bookkeeps metadata to inform software about necessary modulo
 operations to decode e.g. set membership of objects in sets which are encoded
 as a packed array of boolean values.</p>
-<p>One use case is processing of object sets (point cloud data). When one applies
-e.g. a spatial filter to a set of points to define which points are analyzed
-and which not, one can store this information in a compact manner using an array
-of boolean values. If the value is True the point is taken, otherwise the point
-is not taken.</p>
-<p>The resulting boolean array will be filled with True and False in a manner
-that is often arbitrary and in general case-dependent.</p>
+<p>One use case is processing of object sets (e.g. point cloud data). If e.g. a
+spatial filter has been applied to a set of points we may wish to store
+document efficiently which points were analyzed. Array of boolean values
+is one option to achieve this. A value is true if the point is included.
+The resulting boolean array will be filled with true and false values
+in a manner that is often arbitrary and in general case-dependent.</p>
 <p>Especially when the number of points is large, for instance several thousands
-or more, some situations can be more efficiently stored if one would not store
-the boolean array but just list the identifiers of the points taken.</p>
-<p>For example, if within a set of 1000 points only one point is taken, it would
+or more, some situations can be more efficiently stored if one does not store
+the boolean array but just lists the identifiers of the points taken.</p>
+<p>For example, if within a set of 1000 points only one point is included, it would
 take (naively) 4000 bits to store the array but only 32 bits to store e.g. the
 ID of the single point that is taken. Of course the 4000 bit field is so
 sparse that it could be compressed resulting also in a substantial reduction
 of the storage demands. Therefore, boolean masks are useful in that
 they store compact representation of set memberships.</p>
-<p>The number of encoded pieces of information is not necessarily
-an integer multiple of the bit depth.</p>
+<p>This base class can deal with the situation when the number of objects
+is not an integer multiple of the bit depth used for storing the states.</p>
 </details></div></blockquote>
 <p><strong>Symbols</strong>:</p>
 <blockquote>
@@ -94,11 +93,11 @@ an integer multiple of the bit depth.</p>
 <p>If depends_on is not provided, it is assumed that the mask
 applies to its direct parent.</p>
 </details></div></blockquote>
-<p id="index-2"><span id="nxcs-filter-boolean-mask-number-of-objects-field"></span><strong>number_of_objects</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<p id="index-2"><span id="nxcs-filter-boolean-mask-number-of-objects-field"></span><strong>number_of_objects</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
 <div><p>Number of objects represented by the mask.</p>
 </div></blockquote>
-<p id="index-3"><span id="nxcs-filter-boolean-mask-bitdepth-field"></span><strong>bitdepth</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<p id="index-3"><span id="nxcs-filter-boolean-mask-bitdepth-field"></span><strong>bitdepth</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
 <div><details class="summary-number-of-bits-assumed-matching-on-a-default-datatype">
 <summary>Number of bits assumed matching on a default datatype. ...</summary><p>Number of bits assumed matching on a default datatype.
@@ -106,8 +105,10 @@ applies to its direct parent.</p>
 </details></div></blockquote>
 <p id="index-4"><span id="nxcs-filter-boolean-mask-mask-field"></span><strong>mask</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 1, Dimensions: [n_total]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
-<div><p>The content of the mask. If padding is used, padding bits have to be set to 0.</p>
-</div></blockquote>
+<div><details class="summary-the-content-of-the-mask-if-padding-is-used">
+<summary>The content of the mask. If padding is used,  ...</summary><p>The content of the mask. If padding is used,
+padding bits have to be set to 0.</p>
+</details></div></blockquote>
 <p id="index-5"><span id="nxcs-filter-boolean-mask-identifier-field"></span><strong>identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_object]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
 <div><details class="summary-link-to-or-array-of-identifiers-for-the-objects-the-decoded-mask-is">
@@ -115,7 +116,8 @@ applies to its direct parent.</p>
 interpreted consecutively, i.e. the first bit in the mask matches
 to the first identifier, the second bit in the mask to the second
 identifier and so on and so forth. Resolving of identifier follows
-the conventions made for depends_on, so consult the also its description.</p>
+the conventions made for depends_on, so consult also the description
+of th content to which depends_on refers.</p>
 </details></div></blockquote>
 </div></blockquote>
 <section id="hypertext-anchors">
@@ -169,7 +171,7 @@ attributes, and links defined in this class.</p>
 <li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. Examples of writing and reading NeXus data files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Examples data files I/O</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
@@ -177,11 +179,11 @@ attributes, and links defined in this class.</p>
 <li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. B1: Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ellipsometry-structure.html">5. B4: Optical spectroscopy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. B5: Atom-probe tomography</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport Phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ellipsometry-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sts-structure.html">8. Scanning Tunneling Spectroscopy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
@@ -195,7 +197,7 @@ attributes, and links defined in this class.</p>
   <div>
     <h3><a href="../../index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">2.3.3.3.85. NXcs_filter_boolean_mask</a><ul>
+<li><a class="reference internal" href="#">2.3.3.3.95. NXcs_filter_boolean_mask</a><ul>
 <li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
 </ul>
 </li>
@@ -209,8 +211,8 @@ attributes, and links defined in this class.</p>
   <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
   <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
   <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
-      <li>Previous: <a href="NXcs_cpu_sys.html" title="previous chapter"><span class="section-number">2.3.3.3.84. </span>NXcs_cpu_sys</a></li>
-      <li>Next: <a href="NXcs_gpu.html" title="next chapter"><span class="section-number">2.3.3.3.86. </span>NXcs_gpu</a></li>
+      <li>Previous: <a href="NXcs_cpu_sys.html" title="previous chapter"><span class="section-number">2.3.3.3.94. </span>NXcs_cpu_sys</a></li>
+      <li>Next: <a href="NXcs_gpu.html" title="next chapter"><span class="section-number">2.3.3.3.96. </span>NXcs_gpu</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
