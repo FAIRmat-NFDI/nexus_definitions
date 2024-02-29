@@ -13,7 +13,7 @@ NXem
 
 **Status**:
 
-  application definition, extends :ref:`NXem_base`
+  application definition, extends :ref:`NXobject`
 
 **Description**:
 
@@ -21,36 +21,14 @@ NXem
 
       Application definition for normalized representation of electron microscopy research.
 
-      In line with the idea of NeXus application definitions, this schema is a
-      specialized version of NXem_base in that fields and groups are specifically
-      constrained. This has the effect that some quantities are required, so
-      that a research data management system (RDMS) can rely on the existence of
-      these pieces of information without demanding that RDMS to implement further
-      verification in its own source code or further harmonization or normalization
-      what each piece of information means conceptually.
+      This application definition is a comprehensive example for a general description
+      with which to normalize specific pieces of information and data collected within
+      electron microscopy research.
 
-      This application definition is thus an example of a general description
-      with which to normalize specific pieces of information and data collected
-      within electron microscopy research.
-
-      This application definition is also a blueprint which shows how users
-      can build specific application definitions by reusing - instead of completely
-      reimplementing the wheel from scratch - em-specific base classes - and thus
-      represent electron-microscopy-specific content.
-
-      The constraints of all these application definitions might be different
-      than for the here exemplified application definition NXem.
-
-      Nevertheless, the key benefit remains: Many pieces of information are still
-      conceptually the same, named in the same way and found in the same place
-      in the hierarchy. This supports interoperability of electron microscopy data
-      and is advantageous compared to having everybody using own formatting and
-      conceptually not harmonized terms for describing their electron microscopy
-      research.
-
-      For the detailed rationale and explanation of the concept behind the
-      NeXus electron microscopy class definitions please consult the preamble
-      of the NXem_base base class.
+      NXem is designed to be used for documentation of experiments or computer simulations
+      of controlled electron beams which are used for studying electron-beam matter interaction
+      to explore physical mechanisms and phenomena, or to characterize materials with
+      electron microscopy.
 
 **Symbols**:
 
@@ -65,14 +43,14 @@ NXem
 
   .. _/NXem/ENTRY-group:
 
-  **ENTRY**: (required) :ref:`NXentry` :ref:`⤆ </NXem_base/ENTRY-group>`
+  **ENTRY**: (required) :ref:`NXentry` 
 
 
     .. _/NXem/ENTRY/definition-field:
 
     .. index:: definition (field)
 
-    **definition**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXem_base/ENTRY/definition-field>`
+    **definition**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXentry/definition-field>`
 
 
       Obligatory value: ``NXem``
@@ -81,7 +59,7 @@ NXem
 
       .. index:: version (field attribute)
 
-      **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXem_base/ENTRY/definition@version-attribute>`
+      **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXentry/definition@version-attribute>`
 
 
     .. _/NXem/ENTRY/experiment_alias-field:
@@ -90,35 +68,71 @@ NXem
 
     **experiment_alias**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-      .. collapse:: Either an identifier or an alias that is human-friendly so ...
+      .. collapse:: Either an identifier or an alias that is human-friendly so that scientists f ...
 
-          Either an identifier or an alias that is human-friendly so
-          that scientists find that experiment again.
+          Either an identifier or an alias that is human-friendly so that scientists find
+          that experiment again.
 
     .. _/NXem/ENTRY/experiment_description-field:
 
     .. index:: experiment_description (field)
 
-    **experiment_description**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXem_base/ENTRY/experiment_description-field>`
+    **experiment_description**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXentry/experiment_description-field>`
 
+      .. collapse:: Free-text description about the experiment. ...
+
+          Free-text description about the experiment.
+
+          Users are strongly advised to parameterize the description of their experiment
+          by using respective groups and fields and base classes instead of writing prose
+          into this field.
+
+          The reason is that such free-text field is difficult to machine-interpret.
+          The motivation behind keeping this field for now is to learn in how far the
+          current base classes need extension based on user feedback.
 
     .. _/NXem/ENTRY/start_time-field:
 
     .. index:: start_time (field)
 
-    **start_time**: (required) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXem_base/ENTRY/start_time-field>`
+    **start_time**: (required) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXentry/start_time-field>`
 
+      .. collapse:: ISO 8601 time code with local time zone offset to UTC information included ...
+
+          ISO 8601 time code with local time zone offset to UTC information included
+          when the microscope session started. If the application demands that time
+          codes in this section of the application definition should only be used
+          for specifying when the experiment was performed - and the exact
+          duration is not relevant - this start_time field should be used.
+
+          Often though it is useful to specify a time interval via setting both a start_time
+          and an end_time because this enables software tools and users to collect a
+          more detailed bookkeeping of the experiment.
+
+          Users should be aware though that even with having both time instances
+          specified, it may not be possible to infer how long the experiment took or
+          for how long data were acquired.
+
+          More detailed timing data over the course of the experiment have
+          to be collected to compute this. These computations can take
+          advantage of individual time stamps start_time and end_time
+          in :ref:`NXevent_data_em` instances.
 
     .. _/NXem/ENTRY/end_time-field:
 
     .. index:: end_time (field)
 
-    **end_time**: (recommended) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXem_base/ENTRY/end_time-field>`
+    **end_time**: (recommended) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXentry/end_time-field>`
 
+      .. collapse:: ISO 8601 time code with local time zone offset to UTC included when ...
+
+          ISO 8601 time code with local time zone offset to UTC included when
+          the microscope session ended. See docstring of the start_time field
+          to see how the start_time and end_time should be used together.
 
     .. _/NXem/ENTRY/profiling-group:
 
-    **profiling**: (recommended) :ref:`NXcs_profiling` :ref:`⤆ </NXem_base/ENTRY/profiling-group>`
+    **profiling**: (recommended) :ref:`NXcs_profiling` 
 
       .. collapse:: The configuration of the I/O writer software (e.g. `pynxtools <https://githu ...
 
@@ -134,7 +148,7 @@ NXem
 
       .. _/NXem/ENTRY/profiling/PROGRAM-group:
 
-      **PROGRAM**: (optional) :ref:`NXprogram` :ref:`⤆ </NXem_base/ENTRY/profiling/PROGRAM-group>`
+      **PROGRAM**: (optional) :ref:`NXprogram` 
 
         .. collapse:: A collection of all programs and libraries which are considered relevant ...
 
@@ -169,8 +183,19 @@ NXem
 
     .. _/NXem/ENTRY/experiment_identifier-group:
 
-    **experiment_identifier**: (recommended) :ref:`NXidentifier` :ref:`⤆ </NXem_base/ENTRY/experiment_identifier-group>`
+    **experiment_identifier**: (recommended) :ref:`NXidentifier` 
 
+      .. collapse:: Ideally, a (globally) unique persistent identifier for referring to this exp ...
+
+          Ideally, a (globally) unique persistent identifier for referring to this experiment.
+
+          An experiment should be understood in that this can be an experiment
+          in reality or a computer simulation because also the latter is an experiment
+          (see the Cambridge Dictionary experiment: *a test done in order to find out
+          something, eg if an idea is correct*).
+
+          The identifier is usually issued by the facility, laboratory, or the principle investigator.
+          The identifier enables to link experiments/simulations to e.g. proposals.
 
       .. _/NXem/ENTRY/experiment_identifier/service-field:
 
@@ -195,13 +220,30 @@ NXem
 
     .. _/NXem/ENTRY/CITE-group:
 
-    **CITE**: (optional) :ref:`NXcite` :ref:`⤆ </NXem_base/ENTRY/CITE-group>`
+    **CITE**: (optional) :ref:`NXcite` 
 
 
     .. _/NXem/ENTRY/SERIALIZED-group:
 
-    **SERIALIZED**: (optional) :ref:`NXserialized` :ref:`⤆ </NXem_base/ENTRY/SERIALIZED-group>`
+    **SERIALIZED**: (optional) :ref:`NXserialized` 
 
+      .. collapse:: Possibility to store a collection of serialized resources that are associate ...
+
+          Possibility to store a collection of serialized resources that are associated
+          with the experiment. An example how to use this set could be to document
+          from which files, which have been e.g. generated by software of technology
+          partners, the information in an instance of NXem was filled with.
+
+          If resources from technology partners would also be documented with semantic
+          technology there would not even be a necessity to copy over specific information
+          into other files as one could write inference and information/fact/knowledge retrieval
+          algorithm(s) whereby a specific piece of information that is related to an experiment
+          or simulation is read directly from the respective file of the technology partner.
+
+          The reason why currently this works convincingly in hardly any research data
+          management system (RDMS) is the strong heterogeneity of the information contained
+          in such files and the fact that often context and documentation, specifically
+          rich semantic documentation, and contextualization is missing.
 
       .. _/NXem/ENTRY/SERIALIZED/type-field:
 
@@ -233,20 +275,86 @@ NXem
 
     .. _/NXem/ENTRY/USER-group:
 
-    **USER**: (optional) :ref:`NXuser` :ref:`⤆ </NXem_base/ENTRY/USER-group>`
+    **USER**: (optional) :ref:`NXuser` :ref:`⤆ </NXentry/USER-group>`
 
+      .. collapse:: Contact information and eventually details of at least one person ...
+
+          Contact information and eventually details of at least one person
+          who performed or was involved in the microscope session or simulation run.
+          This can be the principle investigator who performed this experiment or the
+          student who performed the simulation. Adding multiple users if relevant
+          is recommended.
 
       .. _/NXem/ENTRY/USER/name-field:
 
       .. index:: name (field)
 
-      **name**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXem_base/ENTRY/USER/name-field>`
+      **name**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/name-field>`
 
+        Given (first) name and surname of the user.
+
+      .. _/NXem/ENTRY/USER/affiliation-field:
+
+      .. index:: affiliation (field)
+
+      **affiliation**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/affiliation-field>`
+
+        .. collapse:: Name of the affiliation of the user at the point in time ...
+
+            Name of the affiliation of the user at the point in time
+            when the experiment was performed.
+
+      .. _/NXem/ENTRY/USER/address-field:
+
+      .. index:: address (field)
+
+      **address**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/address-field>`
+
+        Postal address of the affiliation.
+
+      .. _/NXem/ENTRY/USER/email-field:
+
+      .. index:: email (field)
+
+      **email**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/email-field>`
+
+        .. collapse:: Email address of the user at the point in time when the experiment ...
+
+            Email address of the user at the point in time when the experiment
+            was performed. Writing the most permanently used email is recommended.
+
+      .. _/NXem/ENTRY/USER/telephone_number-field:
+
+      .. index:: telephone_number (field)
+
+      **telephone_number**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/telephone_number-field>`
+
+        .. collapse:: (Business) (tele)phone number of the user at the point ...
+
+            (Business) (tele)phone number of the user at the point
+            in time when the experiment was performed.
+
+      .. _/NXem/ENTRY/USER/role-field:
+
+      .. index:: role (field)
+
+      **role**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/role-field>`
+
+        .. collapse:: Which role does the user have in the place and at the point ...
+
+            Which role does the user have in the place and at the point
+            in time when the experiment was performed? Technician operating
+            the microscope, student, postdoc, principle investigator, or guest
+            are common examples.
 
       .. _/NXem/ENTRY/USER/identifier-group:
 
-      **identifier**: (recommended) :ref:`NXidentifier` :ref:`⤆ </NXem_base/ENTRY/USER/identifier-group>`
+      **identifier**: (recommended) :ref:`NXidentifier` 
 
+        .. collapse:: Service as another mean of identification of a user other than by its name ...
+
+            Service as another mean of identification of a user other than by its name.
+            Examples could be an ORCID or social media account of the user.
 
         .. _/NXem/ENTRY/USER/identifier/service-field:
 
@@ -271,43 +379,141 @@ NXem
 
     .. _/NXem/ENTRY/sample-group:
 
-    **sample**: (required) :ref:`NXsample` :ref:`⤆ </NXem_base/ENTRY/sample-group>`
+    **sample**: (required) :ref:`NXsample` :ref:`⤆ </NXentry/SAMPLE-group>`
 
+      .. collapse:: A description of the material characterized in the experiment. ...
+
+          A description of the material characterized in the experiment.
+          Sample and specimen are threaded as de facto synonyms.
+          Samples can be real specimens or virtual (see method).
 
       .. _/NXem/ENTRY/sample/method-field:
 
       .. index:: method (field)
 
-      **method**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXem_base/ENTRY/sample/method-field>`
+      **method**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
+        .. collapse:: A qualifier whether the sample is a real one or a ...
 
-        Any of these values: ``experiment`` | ``simulation``
+            A qualifier whether the sample is a real one or a
+            virtual one (in a computer simulation)
+
+            Any of these values: ``experiment`` | ``simulation``
 
       .. _/NXem/ENTRY/sample/preparation_date-field:
 
       .. index:: preparation_date (field)
 
-      **preparation_date**: (required) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXem_base/ENTRY/sample/preparation_date-field>`
+      **preparation_date**: (required) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXsample/preparation_date-field>`
 
+        .. collapse:: ISO 8601 time code with local time zone offset to UTC information ...
+
+            ISO 8601 time code with local time zone offset to UTC information
+            when the specimen was prepared.
+
+            Ideally, report the end of the preparation, i.e. the last known timestamp when
+            the measured specimen surface was actively prepared. Ideally, this matches
+            the last timestamp that is mentioned in the digital resource pointed to by
+            parent_identifier.
+
+            Knowing when the specimen was exposed to e.g. specific atmosphere is especially
+            required for environmentally sensitive material such as specimen charged with hydrogen
+            or experiments including tracers that have a short halflife. Additional time stamps
+            prior to preparation_date should better be placed in resources which describe but
+            which do not pollute the description here with prose. Resolving these connected
+            pieces of information is considered the responsibility of the
+            research data management system not of a NeXus file.
 
       .. _/NXem/ENTRY/sample/name-field:
 
       .. index:: name (field)
 
-      **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXem_base/ENTRY/sample/name-field>`
+      **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsample/name-field>`
 
+        An alias used to refer to the specimen to please readability for humans.
 
       .. _/NXem/ENTRY/sample/atom_types-field:
 
       .. index:: atom_types (field)
 
-      **atom_types**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXem_base/ENTRY/sample/atom_types-field>`
+      **atom_types**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
+        .. collapse:: List of comma-separated elements from the periodic table that are containe ...
+
+            List of comma-separated elements from the periodic table that are contained in the sample.
+            If the sample substance has multiple components, all elements from each component
+            must be included in atom_types.
+
+            The purpose of the field is to offer research data management systems an opportunity
+            to parse the relevant elements without having to interpret these from the resources
+            pointed to by parent_identifier or walk through eventually deeply nested groups in
+            individual data instances.
+
+      .. _/NXem/ENTRY/sample/thickness-field:
+
+      .. index:: thickness (field)
+
+      **thickness**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
+
+        .. collapse:: (Measured) sample thickness. ...
+
+            (Measured) sample thickness.
+
+            The information is recorded to qualify if the beam used was likely
+            able to shine through the specimen. For scanning electron microscopy,
+            in many cases the specimen is typically thicker than what is
+            illuminatable by the electron beam.
+
+            In this case the value should be set to the actual thickness of
+            the specimen viewed for an illumination situation where the nominal
+            surface normal of the specimen is parallel to the optical axis.
+
+      .. _/NXem/ENTRY/sample/density-field:
+
+      .. index:: density (field)
+
+      **density**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANY <NX_ANY>`} 
+
+        .. collapse:: (Measured) density of the specimen. ...
+
+            (Measured) density of the specimen.
+
+            For multi-layered specimens this field should only be used to describe
+            the density of the excited volume. For scanning electron microscopy
+            the usage of this field is discouraged and instead an instance of an 
+            :ref:`NXinteraction_vol_em` within individual :ref:`NXevent_data_em`
+            instances can provide a cleaner description of the relevant details
+            why one may wish to store the density of the specimen.
+
+      .. _/NXem/ENTRY/sample/description-field:
+
+      .. index:: description (field)
+
+      **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsample/description-field>`
+
+        .. collapse:: Discouraged free-text field to provide further detail although adding ...
+
+            Discouraged free-text field to provide further detail although adding
+            parent_identifier and having a working research data management system
+            should provide this contextualization.
 
       .. _/NXem/ENTRY/sample/identifier-group:
 
-      **identifier**: (recommended) :ref:`NXidentifier` :ref:`⤆ </NXem_base/ENTRY/sample/identifier-group>`
+      **identifier**: (recommended) :ref:`NXidentifier` 
 
+        .. collapse:: Ideally, (globally) unique persistent identifier which distinguishes the s ...
+
+            Ideally, (globally) unique persistent identifier which distinguishes the sample from all others
+            and especially the predecessor/origin from where that sample was cut.  The terms sample
+            and specimen are here considered as exact synonyms.
+
+            This field must not be used for an alias! Instead, use name.
+
+            In cases where multiple specimens were loaded into the microscope, the identifier has to resolve
+            the specific sample, whose results are stored by this :ref:`NXentry` instance because a single
+            NXentry should be used for the characterization of a single specimen.
+
+            Details about the specimen preparation should be stored in resources referring to parent_identifier.
 
         .. _/NXem/ENTRY/sample/identifier/service-field:
 
@@ -332,8 +538,14 @@ NXem
 
       .. _/NXem/ENTRY/sample/parent_identifier-group:
 
-      **parent_identifier**: (recommended) :ref:`NXidentifier` :ref:`⤆ </NXem_base/ENTRY/sample/parent_identifier-group>`
+      **parent_identifier**: (recommended) :ref:`NXidentifier` 
 
+        .. collapse:: Identifier of the sample from which the sample was cut or the string *None ...
+
+            Identifier of the sample from which the sample was cut or the string *None*.
+
+            The purpose of this field is to support functionalities for tracking
+            sample provenance in a research data management system.
 
         .. _/NXem/ENTRY/sample/parent_identifier/service-field:
 
@@ -358,7 +570,7 @@ NXem
 
     .. _/NXem/ENTRY/COORDINATE_SYSTEM_SET-group:
 
-    **COORDINATE_SYSTEM_SET**: (required) :ref:`NXcoordinate_system_set` :ref:`⤆ </NXem_base/ENTRY/COORDINATE_SYSTEM_SET-group>`
+    **COORDINATE_SYSTEM_SET**: (required) :ref:`NXcoordinate_system_set` 
 
 
       .. _/NXem/ENTRY/COORDINATE_SYSTEM_SET/COORDINATE_SYSTEM-group:
@@ -417,7 +629,7 @@ NXem
 
     .. _/NXem/ENTRY/measurement-group:
 
-    **measurement**: (optional) :ref:`NXem_msr` :ref:`⤆ </NXem_base/ENTRY/measurement-group>`
+    **measurement**: (optional) :ref:`NXem_msr` 
 
 
       .. _/NXem/ENTRY/measurement/em_lab-group:
@@ -2236,52 +2448,51 @@ NXem
 
     .. _/NXem/ENTRY/simulation-group:
 
-    **simulation**: (optional) :ref:`NXem_sim` :ref:`⤆ </NXem_base/ENTRY/simulation-group>`
+    **simulation**: (optional) :ref:`NXem_sim` 
 
 
     .. _/NXem/ENTRY/ROI-group:
 
-    **ROI**: (optional) :ref:`NXroi` :ref:`⤆ </NXem_base/ENTRY/ROI-group>`
+    **ROI**: (optional) :ref:`NXroi` 
 
-      .. collapse:: A region-of-interest analyzed either during or after the session. ...
+      .. collapse:: A region-of-interest analyzed either during or after the session for which ...
 
-          A region-of-interest analyzed either during or after the session.
-          For which specific processed data of the measured or simulated
-          data are available.
+          A region-of-interest analyzed either during or after the session for which
+          specific processed data are available.
 
       .. _/NXem/ENTRY/ROI/se-group:
 
-      **se**: (optional) :ref:`NXem_img` :ref:`⤆ </NXem_base/ENTRY/ROI/se-group>`
+      **se**: (optional) :ref:`NXem_img` 
 
 
       .. _/NXem/ENTRY/ROI/bse-group:
 
-      **bse**: (optional) :ref:`NXem_img` :ref:`⤆ </NXem_base/ENTRY/ROI/bse-group>`
+      **bse**: (optional) :ref:`NXem_img` 
 
 
       .. _/NXem/ENTRY/ROI/ebsd-group:
 
-      **ebsd**: (optional) :ref:`NXem_ebsd` :ref:`⤆ </NXem_base/ENTRY/ROI/ebsd-group>`
+      **ebsd**: (optional) :ref:`NXem_ebsd` 
 
 
       .. _/NXem/ENTRY/ROI/eds-group:
 
-      **eds**: (optional) :ref:`NXem_eds` :ref:`⤆ </NXem_base/ENTRY/ROI/eds-group>`
+      **eds**: (optional) :ref:`NXem_eds` 
 
 
       .. _/NXem/ENTRY/ROI/adf-group:
 
-      **adf**: (optional) :ref:`NXem_adf` :ref:`⤆ </NXem_base/ENTRY/ROI/adf-group>`
+      **adf**: (optional) :ref:`NXem_adf` 
 
 
       .. _/NXem/ENTRY/ROI/eels-group:
 
-      **eels**: (optional) :ref:`NXem_eels` :ref:`⤆ </NXem_base/ENTRY/ROI/eels-group>`
+      **eels**: (optional) :ref:`NXem_eels` 
 
 
       .. _/NXem/ENTRY/ROI/correlation-group:
 
-      **correlation**: (optional) :ref:`NXem_correlation` :ref:`⤆ </NXem_base/ENTRY/ROI/correlation-group>`
+      **correlation**: (optional) :ref:`NXem_correlation` 
 
 
 
@@ -2600,6 +2811,8 @@ attributes, and links defined in this class.
 * :ref:`/NXem/ENTRY/ROI/se-group </NXem/ENTRY/ROI/se-group>`
 * :ref:`/NXem/ENTRY/sample-group </NXem/ENTRY/sample-group>`
 * :ref:`/NXem/ENTRY/sample/atom_types-field </NXem/ENTRY/sample/atom_types-field>`
+* :ref:`/NXem/ENTRY/sample/density-field </NXem/ENTRY/sample/density-field>`
+* :ref:`/NXem/ENTRY/sample/description-field </NXem/ENTRY/sample/description-field>`
 * :ref:`/NXem/ENTRY/sample/identifier-group </NXem/ENTRY/sample/identifier-group>`
 * :ref:`/NXem/ENTRY/sample/identifier/identifier-field </NXem/ENTRY/sample/identifier/identifier-field>`
 * :ref:`/NXem/ENTRY/sample/identifier/is_persistent-field </NXem/ENTRY/sample/identifier/is_persistent-field>`
@@ -2611,6 +2824,7 @@ attributes, and links defined in this class.
 * :ref:`/NXem/ENTRY/sample/parent_identifier/is_persistent-field </NXem/ENTRY/sample/parent_identifier/is_persistent-field>`
 * :ref:`/NXem/ENTRY/sample/parent_identifier/service-field </NXem/ENTRY/sample/parent_identifier/service-field>`
 * :ref:`/NXem/ENTRY/sample/preparation_date-field </NXem/ENTRY/sample/preparation_date-field>`
+* :ref:`/NXem/ENTRY/sample/thickness-field </NXem/ENTRY/sample/thickness-field>`
 * :ref:`/NXem/ENTRY/SERIALIZED-group </NXem/ENTRY/SERIALIZED-group>`
 * :ref:`/NXem/ENTRY/SERIALIZED/algorithm-field </NXem/ENTRY/SERIALIZED/algorithm-field>`
 * :ref:`/NXem/ENTRY/SERIALIZED/checksum-field </NXem/ENTRY/SERIALIZED/checksum-field>`
@@ -2619,11 +2833,16 @@ attributes, and links defined in this class.
 * :ref:`/NXem/ENTRY/simulation-group </NXem/ENTRY/simulation-group>`
 * :ref:`/NXem/ENTRY/start_time-field </NXem/ENTRY/start_time-field>`
 * :ref:`/NXem/ENTRY/USER-group </NXem/ENTRY/USER-group>`
+* :ref:`/NXem/ENTRY/USER/address-field </NXem/ENTRY/USER/address-field>`
+* :ref:`/NXem/ENTRY/USER/affiliation-field </NXem/ENTRY/USER/affiliation-field>`
+* :ref:`/NXem/ENTRY/USER/email-field </NXem/ENTRY/USER/email-field>`
 * :ref:`/NXem/ENTRY/USER/identifier-group </NXem/ENTRY/USER/identifier-group>`
 * :ref:`/NXem/ENTRY/USER/identifier/identifier-field </NXem/ENTRY/USER/identifier/identifier-field>`
 * :ref:`/NXem/ENTRY/USER/identifier/is_persistent-field </NXem/ENTRY/USER/identifier/is_persistent-field>`
 * :ref:`/NXem/ENTRY/USER/identifier/service-field </NXem/ENTRY/USER/identifier/service-field>`
 * :ref:`/NXem/ENTRY/USER/name-field </NXem/ENTRY/USER/name-field>`
+* :ref:`/NXem/ENTRY/USER/role-field </NXem/ENTRY/USER/role-field>`
+* :ref:`/NXem/ENTRY/USER/telephone_number-field </NXem/ENTRY/USER/telephone_number-field>`
 
 **NXDL Source**:
   https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXem.nxdl.xml
