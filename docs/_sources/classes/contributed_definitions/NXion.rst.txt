@@ -17,13 +17,13 @@ NXion
 
 **Description**:
 
-  Set of atoms of a molecular ion or fragment in e.g. ToF mass spectrometry.
+  Base class for documenting the set of atoms of a (molecular) ion.
 
 **Symbols**:
 
   The symbols used in the schema to specify e.g. dimensions of arrays.
 
-  **n_ivecmax**: Maximum number of atoms/isotopes allowed per (molecular) ion (fragment).
+  **n_ivec_max**: Maximum number of atoms/isotopes allowed per (molecular) ion (fragment).
 
   **n_ranges**: Number of mass-to-charge-state-ratio range intervals for ion type.
 
@@ -67,53 +67,43 @@ NXion
 
         The identifier zero is reserved for the special unknown ion type.
 
-  .. _/NXion/isotope_vector-field:
+  .. _/NXion/nuclide_hash-field:
 
-  .. index:: isotope_vector (field)
+  .. index:: nuclide_hash (field)
 
-  **isotope_vector**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 2, Dimensions: [1, n_ivecmax]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **nuclide_hash**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_ivec_max]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    .. collapse:: A vector of isotope hash values. These values have to be stored in an array, ...
+    .. collapse:: Vector of nuclide hash values. ...
 
-        A vector of isotope hash values. These values have to be stored in an array,
-        sorted in decreasing order. The array is filled with zero hash values
-        indicating unused places. The individual hash values are built with the
-        following hash function:
+        Vector of nuclide hash values.
 
-        The hash value :math:`H` is :math:`H = Z + N*256` with :math:`Z`
-        the number of protons and :math:`N` the number of neutrons
-        of each isotope respectively.
+        Individual hash values :math:`H` is :math:`H = Z + N*256` with :math:`Z`
+        encode the number of protons :math:`Z` and the number of neutrons :math:`N`
+        of each nuclide respectively. :math:`Z` and :math:`N` have to be 8-bit unsigned integers.
 
-        Z and N have to be 8-bit unsigned integers.
-        For the rationale behind this `M. Kühbach et al. (2021) <https://doi.org/10.1017/S1431927621012241>`_
+        The array is sorted in decreasing order. For the rationale behind this see `M. Kühbach et al. (2021) <https://doi.org/10.1017/S1431927621012241>`_
 
-  .. _/NXion/nuclid_list-field:
+  .. _/NXion/nuclide_list-field:
 
-  .. index:: nuclid_list (field)
+  .. index:: nuclide_list (field)
 
-  **nuclid_list**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 2, Dimensions: [2, n_ivecmax]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **nuclide_list**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 2, Dimensions: [n_ivecmax, 2]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    .. collapse:: A supplementary row vector which decodes the isotope_vector into ...
+    .. collapse:: Table which decodes the entries in nuclide_hash into a human-readable matrix o ...
 
-        A supplementary row vector which decodes the isotope_vector into
-        a human-readable matrix of nuclids with the following formatting:
+        Table which decodes the entries in nuclide_hash into a human-readable matrix of instances.
+        The first column specifies the nuclide mass number, i.e. using the hashvalues
+        from the isotope_vector this is :math:`Z + N` or 0. The value 0 documents that no
+        isotope-specific information about the element encoded is relevant.
+        The second row specifies the number of protons :math:`Z` or 0.
+        The value 0 in this case documents a placeholder or that no element-specific
+        information is relevant.
+        Taking a carbon-14 nuclide as an example the mass number is 14.
+        That is encoded as a value pair (14, 6) as one row of the table.
 
-        The first row specifies the isotope mass number, i.e. using the hashvalues
-        from the isotope_vector this is :math:`Z + N`. As an example for a
-        carbon-14 isotope the number is 14.
-        The second row specifies the number of protons :math:`Z`, e.g. 6 for the
-        carbon-14 example. This row matrix is thus mapping the notation of
-        using superscribed isotope mass and subscripted number of protons
-        to identify isotopes.
-        Unused places filling up to n_ivecmax need to be filled with zero.
-
-  .. _/NXion/color-field:
-
-  .. index:: color (field)
-
-  **color**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-    Color code used for visualizing such ions.
+        Therefore, this notation is the typical superscribed nuclide mass number
+        and subscripted number of protons element notation e.g. :math:`^{14}C`.
+        The array is stored matching the order of nuclide_hash.
 
   .. _/NXion/volume-field:
 
@@ -126,9 +116,8 @@ NXion
         Assumed volume of the ion.
 
         In atom probe microscopy this field can be used to store the reconstructed
-        volume per ion (average) which is typically stored in range files and will
-        be used when building a tomographic reconstruction of an atom probe
-        dataset.
+        volume per ion (average) which is typically stored alongside ranging
+        definitions.
 
   .. _/NXion/charge-field:
 
@@ -148,21 +137,18 @@ NXion
 
         Signed charge state of the ion in multiples of electron charge.
 
-        Only positive values will be measured in atom probe microscopy as the
-        ions are accelerated by a negatively signed bias electric field.
-        In the case that the charge state is not explicitly recoverable,
-        the value should be set to zero.
+        In the example of atom probe microscopy, only positive values will be measured
+        as the ions are accelerated by a negatively signed bias electric field.
+        In the case that the charge state is not explicitly recoverable, the value should
+        be set to zero.
 
         In atom probe microscopy this is for example the case when using
-        classical range file formats like RNG, RRNG for atom probe data.
-        These file formats do not document the charge state explicitly.
-        They report the number of atoms of each element per molecular ion
+        classical ranging definition files in formats like RNG, RRNG.
+        These file formats do not document the charge state explicitly
+        but the number of atoms of each element per molecular ion
         surplus the mass-to-charge-state-ratio interval.
-        With this information it is possible to recover the charge state only
-        for specific molecular ions as the accumulated mass of the molecular ion
-        is defined by the isotopes, which without knowing the charge, leads
-        to an underconstrained problem.
-        Details on ranging can be found in the literature: `M. K. Miller <https://doi.org/10.1002/sia.1719>`_
+        Details on ranging definition files can be found in the literature:
+        `M. K. Miller <https://doi.org/10.1002/sia.1719>`_
 
   .. _/NXion/name-field:
 
@@ -177,7 +163,7 @@ NXion
         notation to specify the isotopes, ions, and charge state.
         Examples are 12C + or Al +++.
 
-        To ease automated parsing isotope_vector should be the
+        To ease automated parsing, isotope_vector should be the
         preferred machine-readable information used.
 
   .. _/NXion/mass_to_charge_range-field:
@@ -191,8 +177,8 @@ NXion
         Associated lower (mqmin) and upper (mqmax) bounds of the
         mass-to-charge-state ratio interval(s) [mqmin, mqmax]
         (boundaries inclusive). This field is primarily of interest
-        for documenting :ref:`NXprocess` steps of indexing a ToF/mass-to-charge
-        state histogram.
+        for documenting :ref:`NXprocess` steps of indexing a
+        ToF/mass-to-charge state histogram.
 
 
 Hypertext Anchors
@@ -204,14 +190,13 @@ attributes, and links defined in this class.
 
 * :ref:`/NXion/charge-field </NXion/charge-field>`
 * :ref:`/NXion/charge_state-field </NXion/charge_state-field>`
-* :ref:`/NXion/color-field </NXion/color-field>`
 * :ref:`/NXion/identifier-field </NXion/identifier-field>`
 * :ref:`/NXion/identifier_type-field </NXion/identifier_type-field>`
 * :ref:`/NXion/ion_type-field </NXion/ion_type-field>`
-* :ref:`/NXion/isotope_vector-field </NXion/isotope_vector-field>`
 * :ref:`/NXion/mass_to_charge_range-field </NXion/mass_to_charge_range-field>`
 * :ref:`/NXion/name-field </NXion/name-field>`
-* :ref:`/NXion/nuclid_list-field </NXion/nuclid_list-field>`
+* :ref:`/NXion/nuclide_hash-field </NXion/nuclide_hash-field>`
+* :ref:`/NXion/nuclide_list-field </NXion/nuclide_list-field>`
 * :ref:`/NXion/volume-field </NXion/volume-field>`
 
 **NXDL Source**:

@@ -17,18 +17,21 @@ NXpulser_apm
 
 **Description**:
 
-  Metadata for laser- and/or voltage-pulsing in atom probe microscopy.
+  .. collapse:: Base class for a laser- and/or voltage-pulsing device used in atom probe ...
+
+      Base class for a laser- and/or voltage-pulsing device used in atom probe
+      microscopy.
 
 **Symbols**:
 
   The symbols used in the schema to specify e.g. dimensions of arrays.
 
-  **n_ions**: Total number of ions collected.
+  **p**: Number of pulses collected in between start_time and end_time resolved by an instance of :ref:`NXevent_data_apm`.
 
 **Groups cited**:
-  :ref:`NXbeam`, :ref:`NXcollection`, :ref:`NXfabrication`, :ref:`NXsource`, :ref:`NXtransformations`
+  :ref:`NXbeam`, :ref:`NXfabrication`, :ref:`NXsource`, :ref:`NXtransformations`
 
-.. index:: NXfabrication (base class); used in base class, NXsource (base class); used in base class, NXbeam (base class); used in base class, NXcollection (base class); used in base class, NXtransformations (base class); used in base class
+.. index:: NXfabrication (base class); used in base class, NXsource (base class); used in base class, NXbeam (base class); used in base class, NXtransformations (base class); used in base class
 
 **Structure**:
 
@@ -38,9 +41,9 @@ NXpulser_apm
 
   **pulse_mode**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: How is field evaporation physically triggered. ...
+    .. collapse:: Detail whereby ion extraction is triggered methodologically. ...
 
-        How is field evaporation physically triggered.
+        Detail whereby ion extraction is triggered methodologically.
 
         Any of these values: ``laser`` | ``voltage`` | ``laser_and_voltage``
 
@@ -48,15 +51,23 @@ NXpulser_apm
 
   .. index:: pulse_frequency (field)
 
-  **pulse_frequency**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n_ions]) {units=\ :ref:`NX_FREQUENCY <NX_FREQUENCY>`} 
+  **pulse_frequency**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [p]) {units=\ :ref:`NX_FREQUENCY <NX_FREQUENCY>`} 
 
-    Frequency with which the high voltage or laser pulser fires.
+    Frequency with which the pulser fire(s).
+
+    .. _/NXpulser_apm/pulse_frequency@logged_against-attribute:
+
+    .. index:: logged_against (field attribute)
+
+    **@logged_against**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+      Path to pulse_identifier in an instance of :ref:`NXevent_data_apm`.
 
   .. _/NXpulser_apm/pulse_fraction-field:
 
   .. index:: pulse_fraction (field)
 
-  **pulse_fraction**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n_ions]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
+  **pulse_fraction**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [p]) {units=\ :ref:`NX_DIMENSIONLESS <NX_DIMENSIONLESS>`} 
 
     .. collapse:: Fraction of the pulse_voltage that is applied in addition ...
 
@@ -64,39 +75,68 @@ NXpulser_apm
         to the standing_voltage at peak voltage of a pulse.
 
         If a standing voltage is applied, this gives nominal pulse fraction
-        (as a function of standing voltage). Otherwise this field should not be
-        present.
+        (as a function of standing voltage). Otherwise, this field should
+        not be present.
 
-  .. _/NXpulser_apm/pulsed_voltage-field:
+    .. _/NXpulser_apm/pulse_fraction@logged_against-attribute:
 
-  .. index:: pulsed_voltage (field)
+    .. index:: logged_against (field attribute)
 
-  **pulsed_voltage**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n_ions]) {units=\ :ref:`NX_VOLTAGE <NX_VOLTAGE>`} 
+    **@logged_against**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: In laser pulsing mode the values will be zero so the this field is recommended ...
+      Path to pulse_identifier in an instance of :ref:`NXevent_data_apm`.
 
-        In laser pulsing mode the values will be zero so the this field is recommended.
-        However, for voltage pulsing mode it is highly recommended that users report the pulsed_voltage.
+  .. _/NXpulser_apm/pulse_voltage-field:
+
+  .. index:: pulse_voltage (field)
+
+  **pulse_voltage**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [p]) {units=\ :ref:`NX_VOLTAGE <NX_VOLTAGE>`} 
+
+    Pulsed voltage, in laser pulsing mode this field can be omitted.
+
+    .. _/NXpulser_apm/pulse_voltage@logged_against-attribute:
+
+    .. index:: logged_against (field attribute)
+
+    **@logged_against**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+      Path to pulse_identifier in an instance of :ref:`NXevent_data_apm`.
 
   .. _/NXpulser_apm/pulse_number-field:
 
   .. index:: pulse_number (field)
 
-  **pulse_number**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [n_ions]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **pulse_number**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [p]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
     Absolute number of pulses starting from the beginning of the experiment.
+
+    .. _/NXpulser_apm/pulse_number@logged_against-attribute:
+
+    .. index:: logged_against (field attribute)
+
+    **@logged_against**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+      Path to pulse_identifier in an instance of :ref:`NXevent_data_apm`.
 
   .. _/NXpulser_apm/standing_voltage-field:
 
   .. index:: standing_voltage (field)
 
-  **standing_voltage**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n_ions]) {units=\ :ref:`NX_VOLTAGE <NX_VOLTAGE>`} 
+  **standing_voltage**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [p]) {units=\ :ref:`NX_VOLTAGE <NX_VOLTAGE>`} 
 
     .. collapse:: Direct current voltage between the specimen and the (local electrode) in ...
 
         Direct current voltage between the specimen and the (local electrode) in
-        the case of local electrode atom probe (LEAP) instrument.
-        The standing voltage applied to the sample, relative to system ground.
+        the case of local electrode atom probe (LEAP) instrument. Otherwise, the
+        standing voltage applied to the sample, relative to system ground.
+
+    .. _/NXpulser_apm/standing_voltage@logged_against-attribute:
+
+    .. index:: logged_against (field attribute)
+
+    **@logged_against**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+      Path to pulse_identifier in an instance of :ref:`NXevent_data_apm`.
 
   .. _/NXpulser_apm/FABRICATION-group:
 
@@ -107,12 +147,11 @@ NXpulser_apm
 
   **SOURCE**: (optional) :ref:`NXsource` 
 
-    .. collapse:: Atom probe microscopes use controlled laser, voltage, ...
+    .. collapse:: Atom probe microscopes use controlled laser, voltage, or a combination of ...
 
-        Atom probe microscopes use controlled laser, voltage,
-        or a combination of pulsing strategies to trigger the
-        excitation and eventual field evaporation/emission of
-        an ion during an experiment.
+        Atom probe microscopes use controlled laser, voltage, or a combination of
+        pulsing strategies to trigger ion extraction via exciting and eventual field evaporation
+        field emission of ion at the specimen surface.
 
     .. _/NXpulser_apm/SOURCE/name-field:
 
@@ -142,9 +181,17 @@ NXpulser_apm
 
     .. index:: pulse_energy (field)
 
-    **pulse_energy**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXsource/pulse_energy-field>`
+    **pulse_energy**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [p]) {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXsource/pulse_energy-field>`
 
       Average energy of the laser at peak of each pulse.
+
+      .. _/NXpulser_apm/SOURCE/pulse_energy@logged_against-attribute:
+
+      .. index:: logged_against (field attribute)
+
+      **@logged_against**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+        Path to pulse_identifier in an instance of :ref:`NXevent_data_apm`.
 
     .. _/NXpulser_apm/SOURCE/FABRICATION-group:
 
@@ -155,40 +202,68 @@ NXpulser_apm
 
     **BEAM**: (optional) :ref:`NXbeam` 
 
-      .. collapse:: Details about specific positions along the focused laser beam ...
+      .. collapse:: Details about specific positions along the laser beam ...
 
-          Details about specific positions along the focused laser beam
+          Details about specific positions along the laser beam
           which illuminates the (atom probe) specimen.
 
-      .. _/NXpulser_apm/SOURCE/BEAM/incidence_vector-group:
+      .. _/NXpulser_apm/SOURCE/BEAM/incidence_vector-field:
 
-      **incidence_vector**: (optional) :ref:`NXcollection` 
+      .. index:: incidence_vector (field)
 
-        .. collapse:: Track time-dependent settings over the course of the ...
+      **incidence_vector**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [p, 3]) {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
-            Track time-dependent settings over the course of the
-            measurement how the laser beam in tip space/reconstruction space
-            laser impinges on the sample, i.e. the mean vector is parallel to
-            the laser propagation direction.
+        .. collapse:: Track time-dependent settings over the course of the measurement ...
 
-      .. _/NXpulser_apm/SOURCE/BEAM/pinhole_position-group:
+            Track time-dependent settings over the course of the measurement
+            how the laser beam shines on the specimen, i.e. the mean vector
+            is parallel to the laser propagation direction.
 
-      **pinhole_position**: (optional) :ref:`NXcollection` 
+        .. _/NXpulser_apm/SOURCE/BEAM/incidence_vector@logged_against-attribute:
 
-        .. collapse:: Track time-dependent settings over the course of the ...
+        .. index:: logged_against (field attribute)
 
-            Track time-dependent settings over the course of the
-            measurement where the laser beam exits the 
-            focusing optics.
+        **@logged_against**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-      .. _/NXpulser_apm/SOURCE/BEAM/spot_position-group:
+          Path to pulse_identifier in an instance of :ref:`NXevent_data_apm`.
 
-      **spot_position**: (optional) :ref:`NXcollection` 
+      .. _/NXpulser_apm/SOURCE/BEAM/pinhole_position-field:
+
+      .. index:: pinhole_position (field)
+
+      **pinhole_position**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [p, 3]) {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
+
+        .. collapse:: Track time-dependent settings over the course of the measurement ...
+
+            Track time-dependent settings over the course of the measurement
+            where the laser beam exits the focusing optics.
+
+        .. _/NXpulser_apm/SOURCE/BEAM/pinhole_position@logged_against-attribute:
+
+        .. index:: logged_against (field attribute)
+
+        **@logged_against**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+          Path to pulse_identifier in an instance of :ref:`NXevent_data_apm`.
+
+      .. _/NXpulser_apm/SOURCE/BEAM/spot_position-field:
+
+      .. index:: spot_position (field)
+
+      **spot_position**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [p, 3]) {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
 
         .. collapse:: Track time-dependent settings over the course of the ...
 
             Track time-dependent settings over the course of the
             measurement where the laser hits the specimen.
+
+        .. _/NXpulser_apm/SOURCE/BEAM/spot_position@logged_against-attribute:
+
+        .. index:: logged_against (field attribute)
+
+        **@logged_against**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+          Path to pulse_identifier in an instance of :ref:`NXevent_data_apm`.
 
     .. _/NXpulser_apm/SOURCE/TRANSFORMATIONS-group:
 
@@ -200,9 +275,6 @@ NXpulser_apm
           laser focusing optics/pinhole-attached coordinate system is
           defined, how it has to be transformed so that it aligns with
           the specimen coordinate system.
-          A right-handed Cartesian coordinate system, the so-called laser space,
-          should be assumed, whose positive z-axis points
-          into the direction of the propagating laser beam.
 
 
 Hypertext Anchors
@@ -214,22 +286,31 @@ attributes, and links defined in this class.
 
 * :ref:`/NXpulser_apm/FABRICATION-group </NXpulser_apm/FABRICATION-group>`
 * :ref:`/NXpulser_apm/pulse_fraction-field </NXpulser_apm/pulse_fraction-field>`
+* :ref:`/NXpulser_apm/pulse_fraction@logged_against-attribute </NXpulser_apm/pulse_fraction@logged_against-attribute>`
 * :ref:`/NXpulser_apm/pulse_frequency-field </NXpulser_apm/pulse_frequency-field>`
+* :ref:`/NXpulser_apm/pulse_frequency@logged_against-attribute </NXpulser_apm/pulse_frequency@logged_against-attribute>`
 * :ref:`/NXpulser_apm/pulse_mode-field </NXpulser_apm/pulse_mode-field>`
 * :ref:`/NXpulser_apm/pulse_number-field </NXpulser_apm/pulse_number-field>`
-* :ref:`/NXpulser_apm/pulsed_voltage-field </NXpulser_apm/pulsed_voltage-field>`
+* :ref:`/NXpulser_apm/pulse_number@logged_against-attribute </NXpulser_apm/pulse_number@logged_against-attribute>`
+* :ref:`/NXpulser_apm/pulse_voltage-field </NXpulser_apm/pulse_voltage-field>`
+* :ref:`/NXpulser_apm/pulse_voltage@logged_against-attribute </NXpulser_apm/pulse_voltage@logged_against-attribute>`
 * :ref:`/NXpulser_apm/SOURCE-group </NXpulser_apm/SOURCE-group>`
 * :ref:`/NXpulser_apm/SOURCE/BEAM-group </NXpulser_apm/SOURCE/BEAM-group>`
-* :ref:`/NXpulser_apm/SOURCE/BEAM/incidence_vector-group </NXpulser_apm/SOURCE/BEAM/incidence_vector-group>`
-* :ref:`/NXpulser_apm/SOURCE/BEAM/pinhole_position-group </NXpulser_apm/SOURCE/BEAM/pinhole_position-group>`
-* :ref:`/NXpulser_apm/SOURCE/BEAM/spot_position-group </NXpulser_apm/SOURCE/BEAM/spot_position-group>`
+* :ref:`/NXpulser_apm/SOURCE/BEAM/incidence_vector-field </NXpulser_apm/SOURCE/BEAM/incidence_vector-field>`
+* :ref:`/NXpulser_apm/SOURCE/BEAM/incidence_vector@logged_against-attribute </NXpulser_apm/SOURCE/BEAM/incidence_vector@logged_against-attribute>`
+* :ref:`/NXpulser_apm/SOURCE/BEAM/pinhole_position-field </NXpulser_apm/SOURCE/BEAM/pinhole_position-field>`
+* :ref:`/NXpulser_apm/SOURCE/BEAM/pinhole_position@logged_against-attribute </NXpulser_apm/SOURCE/BEAM/pinhole_position@logged_against-attribute>`
+* :ref:`/NXpulser_apm/SOURCE/BEAM/spot_position-field </NXpulser_apm/SOURCE/BEAM/spot_position-field>`
+* :ref:`/NXpulser_apm/SOURCE/BEAM/spot_position@logged_against-attribute </NXpulser_apm/SOURCE/BEAM/spot_position@logged_against-attribute>`
 * :ref:`/NXpulser_apm/SOURCE/FABRICATION-group </NXpulser_apm/SOURCE/FABRICATION-group>`
 * :ref:`/NXpulser_apm/SOURCE/name-field </NXpulser_apm/SOURCE/name-field>`
 * :ref:`/NXpulser_apm/SOURCE/power-field </NXpulser_apm/SOURCE/power-field>`
 * :ref:`/NXpulser_apm/SOURCE/pulse_energy-field </NXpulser_apm/SOURCE/pulse_energy-field>`
+* :ref:`/NXpulser_apm/SOURCE/pulse_energy@logged_against-attribute </NXpulser_apm/SOURCE/pulse_energy@logged_against-attribute>`
 * :ref:`/NXpulser_apm/SOURCE/TRANSFORMATIONS-group </NXpulser_apm/SOURCE/TRANSFORMATIONS-group>`
 * :ref:`/NXpulser_apm/SOURCE/wavelength-field </NXpulser_apm/SOURCE/wavelength-field>`
 * :ref:`/NXpulser_apm/standing_voltage-field </NXpulser_apm/standing_voltage-field>`
+* :ref:`/NXpulser_apm/standing_voltage@logged_against-attribute </NXpulser_apm/standing_voltage@logged_against-attribute>`
 
 **NXDL Source**:
   https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXpulser_apm.nxdl.xml
