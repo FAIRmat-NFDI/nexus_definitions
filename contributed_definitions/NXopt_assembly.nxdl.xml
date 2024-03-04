@@ -21,7 +21,7 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" name="opt_assembly" extends="NXobject" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" name="NXopt_assembly" extends="NXobject" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <symbols>
         <doc>
              Variables used throughout the document, e.g. dimensions or parameters.
@@ -58,21 +58,20 @@
             <item value="jones matrix"/>
         </enumeration>
     </field>
-    <field name="column_names">
+    <field name="matrix_elements">
         <doc>
-             Please list in this array the column names used in your actual data.
+             Please list in this array the column and row names used in your actual data.
              That is in the case of aperture ['diameter'] or focal length ['focal_length_value']
-             and for orientation ['OM11', 'OM12',.... ,'OM33'] or for jones matrix
-             ['JM11','JM12','JM21','JM22']
+             and for orientation matrix ['OM1', 'OM2', 'OM3'] or for jones matrix
+             ['JM1','JM2']
         </doc>
         <dimensions rank="1">
             <dim index="1" value="N_variables"/>
         </dimensions>
     </field>
-    <group name="TRANSFERMATRIXTABLE" type="NXtransfer_matrix_table">
+    <group type="NXtransfer_matrix_table">
         <doc>
              Contains the datastructure which relates beam properties of an 
-             
              input and output beam as result of the input beam interaction
              with the optical element.
         </doc>
