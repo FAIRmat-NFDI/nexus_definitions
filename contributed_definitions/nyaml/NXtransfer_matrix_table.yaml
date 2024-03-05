@@ -28,7 +28,7 @@ symbols:
     a scalar (dim1) or vector (dim3)
 type: group
 NXtransfer_matrix_table(NXobject):
-  TRANSFER_MATRIX(NXdata):
+  TRANSFER_MATRIX(NX_NUMBER):
     doc: |
       Transfermatrix relationship between N input beams and M output beams.
       It contains a table with the relevant matricis to be used for different
@@ -58,12 +58,13 @@ NXtransfer_matrix_table(NXobject):
     \@output:
       doc: |
         Specific name of output beam which the transfermatrix table is related to.
-    dimensions:
-      doc: |
-        Square matrix with dimension N_variables x N_variables
-      rank: 2
-      dim:
-        [
-          [1, N_variables],        
-          [2, N_variables], 
-        ]
+    data(NX_NUMBER):
+      dimensions:
+        doc: |
+          Square matrix with dimension N_variables x N_variables
+        rank: 2
+        dim:
+          [
+            [1, N_variables],        
+            [2, N_variables], 
+          ]
