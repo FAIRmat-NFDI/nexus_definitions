@@ -49,20 +49,26 @@ NXapm_charge_state_analysis
 
 **Structure**:
 
-  .. _/NXapm_charge_state_analysis/element-field:
+  .. _/NXapm_charge_state_analysis/nuclides-field:
 
-  .. index:: element (field)
+  .. index:: nuclides (field)
 
-  **element**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [i]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+  **nuclides**: (optional) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [i]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    .. collapse:: Input constraint, list of proton numbers for each element of the ranging ...
+    .. collapse:: Input constraint, list of nuclide_hash for typically elements used for the ...
 
-        Input constraint, list of proton numbers for each element of the ranging
-        definition. The list contains each element as many times as its multiplicity.
-        As an example a ranging definition H:2 O:1 demands element vector
-        to be 1, 1, 8. An empty list does not release the constraint. Instead, a list
-        with all elements in the periodic table should be used. Keep in mind though
-        that with such a weakly constrained parameter space the combinatorial
+        Input constraint, list of nuclide_hash for typically elements used for the
+        ranging definition of the ion whose charge state the analyses covered.
+        The list contains each hash as many times as its multiplicity.
+        Nuclides are encoded using the hashing rule that is defined in :ref:`NXion`.
+
+        As an example, a ranging definition H:2 O:1 is configured by setting nuclides to
+        a list with entries :math:`1 + 256 * 0`, :math:`1 + 256 * 0`, :math:`8 + 256 * 0`.
+        An empty list does not release the constraint. Instead, a list with all elements
+        in the periodic table (encoded as nuclide_hash values) should be used, i.e.
+        :math:`1 + 256 * 0`, :math:`2 + 256 * 0`, and so on and so forth.
+
+        Keep in mind that with a weakly constrained parameter space the combinatorial
         analysis may become very time consuming!
 
   .. _/NXapm_charge_state_analysis/mass_to_charge_range-field:
@@ -171,13 +177,13 @@ attributes, and links defined in this class.
 
 
 * :ref:`/NXapm_charge_state_analysis/charge_state-field </NXapm_charge_state_analysis/charge_state-field>`
-* :ref:`/NXapm_charge_state_analysis/element-field </NXapm_charge_state_analysis/element-field>`
 * :ref:`/NXapm_charge_state_analysis/mass-field </NXapm_charge_state_analysis/mass-field>`
 * :ref:`/NXapm_charge_state_analysis/mass_to_charge_range-field </NXapm_charge_state_analysis/mass_to_charge_range-field>`
 * :ref:`/NXapm_charge_state_analysis/min_abundance-field </NXapm_charge_state_analysis/min_abundance-field>`
 * :ref:`/NXapm_charge_state_analysis/min_half_life-field </NXapm_charge_state_analysis/min_half_life-field>`
 * :ref:`/NXapm_charge_state_analysis/natural_abundance_product-field </NXapm_charge_state_analysis/natural_abundance_product-field>`
 * :ref:`/NXapm_charge_state_analysis/nuclide_hash-field </NXapm_charge_state_analysis/nuclide_hash-field>`
+* :ref:`/NXapm_charge_state_analysis/nuclides-field </NXapm_charge_state_analysis/nuclides-field>`
 * :ref:`/NXapm_charge_state_analysis/sacrifice_isotopic_uniqueness-field </NXapm_charge_state_analysis/sacrifice_isotopic_uniqueness-field>`
 * :ref:`/NXapm_charge_state_analysis/shortest_half_life-field </NXapm_charge_state_analysis/shortest_half_life-field>`
 
