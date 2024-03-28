@@ -350,6 +350,21 @@ NXdata(NXobject):
     \@long_name:
       doc: |
         data label
+  \@DATA_depends(NX_CHAR):
+    doc: |
+      Points to the path of a field defining the data on which the `DATA` field depends.
+      
+      This concept allows to link the data to a respective field in the NeXus hierarchy, thereby
+      defining the physical quantity it represents.
+      
+      Here, *DATA* is to be replaced by the name of each
+      data field.
+      
+      Example:
+          If the data corresponds to a readout of a detector, ``@DATA_depends`` links
+          to that detectors data:
+      
+            @DATA_depends: '/entry/instrument/detector/data' for a 2D detector
   errors(NX_NUMBER):
     deprecated: Use ``DATA_errors`` instead (NIAC2018)
     doc: |
