@@ -67,10 +67,24 @@ NXraman
 
   Variables used throughout the document, e.g. dimensions or parameters.
 
-**Groups cited**:
-  :ref:`NXbeam_path`, :ref:`NXdetector`, :ref:`NXentry`, :ref:`NXinstrument`, :ref:`NXlens_opt`, :ref:`NXmonochromator`, :ref:`NXprocess`, :ref:`NXsample`, :ref:`NXsource`, :ref:`NXwaveplate`
+  **N_spectrum**: Length of the spectrum array (e.g. wavelength or energy) of the measured data.
 
-.. index:: NXentry (base class); used in application definition, NXinstrument (base class); used in application definition, NXprocess (base class); used in application definition, NXbeam_path (base class); used in application definition, NXsource (base class); used in application definition, NXlens_opt (base class); used in application definition, NXdetector (base class); used in application definition, NXwaveplate (base class); used in application definition, NXmonochromator (base class); used in application definition, NXsample (base class); used in application definition
+  **N_sensors**: Number of sensors used to measure parameters that influence the sample, such as temperature or pressure.
+
+  **N_measurements**: Number of measurements (1st dimension of measured_data array). This is equal to the number of parameters scanned. For example, if the experiment was performed at three different temperatures and two different pressures N_measurements = 2*3 = 6.
+
+  **N_scattering_configurations**: Number of scattering configurations used in the measurement. It is 1 for only parallel polarization meausement, 2 for parallel and cross  polarization measurement or larger, if i.e. the incident and scattered photon direction is varied.
+
+  **N_observables**: Number of observables that are saved in a measurement. e.g. one for intensity, reflectivity or transmittance, two for Psi and Delta etc. This is equal to the second dimension of the data array 'measured_data' and the number of column names.
+
+  **N_time**: Number of time points measured, the length of NXsample/time_points
+
+  **N_spectrum_filter**: Number of points for a spectral filter used in the setup
+
+**Groups cited**:
+  :ref:`NXbeam_device`, :ref:`NXdetector`, :ref:`NXentry`, :ref:`NXinstrument`, :ref:`NXlens_opt`, :ref:`NXmonochromator`, :ref:`NXprocess`, :ref:`NXsample`, :ref:`NXsource`, :ref:`NXwaveplate`
+
+.. index:: NXentry (base class); used in application definition, NXinstrument (base class); used in application definition, NXprocess (base class); used in application definition, NXbeam_device (base class); used in application definition, NXsource (base class); used in application definition, NXlens_opt (base class); used in application definition, NXdetector (base class); used in application definition, NXwaveplate (base class); used in application definition, NXmonochromator (base class); used in application definition, NXsample (base class); used in application definition
 
 **Structure**:
 
@@ -275,16 +289,241 @@ NXraman
               home written, one can provide the actual steps in the NOTE subfield
               here.
 
-      .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH-group:
+      .. _/NXraman/ENTRY/INSTRUMENT/opt_source-group:
 
-      **BEAM_PATH**: (required) :ref:`NXbeam_path` :ref:`⤆ </NXopt/ENTRY/INSTRUMENT/BEAM_PATH-group>`
+      **opt_source**: (required) :ref:`NXbeam_device` :ref:`⤆ </NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE-group>`
+
+        beam device instance of the optical source.
+
+        .. _/NXraman/ENTRY/INSTRUMENT/opt_source/device-field:
+
+        .. index:: device (field)
+
+        **device**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXbeam_device/device-field>`
+
+          It should contain the name of the Nexus source group.
+
+      .. _/NXraman/ENTRY/INSTRUMENT/SOURCE-group:
+
+      **SOURCE**: (required) :ref:`NXsource` :ref:`⤆ </NXinstrument/SOURCE-group>`
+
+        .. collapse:: Light source with arbitrary choice of name. This shall be referenced ...
+
+            Light source with arbitrary choice of name. This shall be referenced
+            by source(NXbeam_device)
+
+        .. _/NXraman/ENTRY/INSTRUMENT/SOURCE/source_type-field:
+
+        .. index:: source_type (field)
+
+        **source_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
-        .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/polarization_filter-field:
+          Any of these values:
 
-        .. index:: polarization_filter (field)
+            * ``laser``
 
-        **polarization_filter**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+            * ``dye-laser``
+
+            * ``broadband tunable light source``
+
+            * ``other``
+
+
+      .. _/NXraman/ENTRY/INSTRUMENT/incident_light_optics-group:
+
+      **incident_light_optics**: (required) :ref:`NXbeam_device` :ref:`⤆ </NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE-group>`
+
+        Beam device instance of the incident light optics.
+
+        .. _/NXraman/ENTRY/INSTRUMENT/incident_light_optics/device-field:
+
+        .. index:: device (field)
+
+        **device**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXbeam_device/device-field>`
+
+          It should contain the name of the "incident_light_lens(NXlens_opt)" group
+
+      .. _/NXraman/ENTRY/INSTRUMENT/scattered_light_optics-group:
+
+      **scattered_light_optics**: (required) :ref:`NXbeam_device` :ref:`⤆ </NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE-group>`
+
+        Beam device instance of the scattered light optics.
+
+        .. _/NXraman/ENTRY/INSTRUMENT/scattered_light_optics/device-field:
+
+        .. index:: device (field)
+
+        **device**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXbeam_device/device-field>`
+
+          It should contain the name of the "scattered_light_lens(NXlens_opt)" group
+
+      .. _/NXraman/ENTRY/INSTRUMENT/incident_light_lens-group:
+
+      **incident_light_lens**: (recommended) :ref:`NXlens_opt` 
+
+        .. collapse:: This is the optical element used for the incident light in the Raman ...
+
+            This is the optical element used for the incident light in the Raman
+            scattering process.
+
+            This can be for example a simple lens or microscope
+            objective.
+
+        .. _/NXraman/ENTRY/INSTRUMENT/incident_light_lens/type-field:
+
+        .. index:: type (field)
+
+        **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXlens_opt/type-field>`
+
+
+          Any of these values:
+
+            * ``objective``
+
+            * ``lens``
+
+            * ``glass fiber``
+
+            * ``none``
+
+            * ``other``
+
+
+        .. _/NXraman/ENTRY/INSTRUMENT/incident_light_lens/numerical_aperture-field:
+
+        .. index:: numerical_aperture (field)
+
+        **numerical_aperture**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
+
+          The numerical aperture of the used incident light optics.
+
+      .. _/NXraman/ENTRY/INSTRUMENT/scattered_light_lens-group:
+
+      **scattered_light_lens**: (recommended) :ref:`NXlens_opt` 
+
+        .. collapse:: This is the optical element used for the incident light in the Raman ...
+
+            This is the optical element used for the incident light in the Raman
+            scattering process.
+
+            This can be for example a simple lens or microscope
+            objective.
+
+        .. _/NXraman/ENTRY/INSTRUMENT/scattered_light_lens/type-field:
+
+        .. index:: type (field)
+
+        **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXlens_opt/type-field>`
+
+
+          Any of these values:
+
+            * ``objective``
+
+            * ``lens``
+
+            * ``glass fiber``
+
+            * ``none``
+
+            * ``other``
+
+
+        .. _/NXraman/ENTRY/INSTRUMENT/scattered_light_lens/numerical_aperture-field:
+
+        .. index:: numerical_aperture (field)
+
+        **numerical_aperture**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
+
+          The numerical aperture of the used incident light optics.
+
+      .. _/NXraman/ENTRY/INSTRUMENT/opt_detector-group:
+
+      **opt_detector**: (required) :ref:`NXbeam_device` :ref:`⤆ </NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE-group>`
+
+        .. collapse:: Properties of the detector to link it via NXbeam_device to other beam ...
+
+            Properties of the detector to link it via NXbeam_device to other beam
+            elements
+
+        .. _/NXraman/ENTRY/INSTRUMENT/opt_detector/device-field:
+
+        .. index:: device (field)
+
+        **device**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXbeam_device/device-field>`
+
+          It should contain the name of the Nexus detector group
+
+      .. _/NXraman/ENTRY/INSTRUMENT/DETECTOR-group:
+
+      **DETECTOR**: (required) :ref:`NXdetector` :ref:`⤆ </NXinstrument/DETECTOR-group>`
+
+        .. collapse:: Detector with arbitrary choice of the name, which shall be referenced ...
+
+            Detector with arbitrary choice of the name, which shall be referenced
+            by the detector(NXbeam_device).
+
+      .. _/NXraman/ENTRY/INSTRUMENT/polarization_manipulator_NAME-group:
+
+      **polarization_manipulator_NAME**: (optional) :ref:`NXbeam_device` :ref:`⤆ </NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE-group>`
+
+        .. collapse:: Link to the device, that it can be used to generate a beam path via ...
+
+            Link to the device, that it can be used to generate a beam path via
+            NXbeam_device. The string >NAME< in the name of this NXbeam_device
+            has to identical to >NAME< in waveplate_NAME(NXwaveplate).
+
+        .. _/NXraman/ENTRY/INSTRUMENT/polarization_manipulator_NAME/device-field:
+
+        .. index:: device (field)
+
+        **device**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXbeam_device/device-field>`
+
+          .. collapse:: This should contain the name for each halfwave plate used in the ...
+
+              This should contain the name for each halfwave plate used in the
+              NXwaveplate group.
+
+      .. _/NXraman/ENTRY/INSTRUMENT/waveplate_NAME-group:
+
+      **waveplate_NAME**: (required) :ref:`NXwaveplate` 
+
+        .. collapse:: Properties of the device for the manipulation of the state of light which  ...
+
+            Properties of the device for the manipulation of the state of light which is a half wave
+            plate.
+
+        .. _/NXraman/ENTRY/INSTRUMENT/waveplate_NAME/type-field:
+
+        .. index:: type (field)
+
+        **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXwaveplate/type-field>`
+
+
+          Any of these values:
+
+            * ``objective``
+
+            * ``lens``
+
+            * ``glass fiber``
+
+            * ``none``
+
+            * ``other``
+
+
+      .. _/NXraman/ENTRY/INSTRUMENT/polarization_filter-group:
+
+      **polarization_filter**: (required) :ref:`NXbeam_device` :ref:`⤆ </NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE-group>`
+
+
+        .. _/NXraman/ENTRY/INSTRUMENT/polarization_filter/filter_mechanism-field:
+
+        .. index:: filter_mechanism (field)
+
+        **filter_mechanism**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
           .. collapse:: Physical principle of the polarization filter used to create a ...
 
@@ -304,7 +543,7 @@ NXraman
                 * ``other``
 
 
-        .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/specific_polarization_filter_type-field:
+        .. _/NXraman/ENTRY/INSTRUMENT/polarization_filter/specific_polarization_filter_type-field:
 
         .. index:: specific_polarization_filter_type (field)
 
@@ -314,14 +553,19 @@ NXraman
 
               Specific name or type of the polarizer used.
 
-              For example: Glan-Thompson, Glan-Taylor, Rochon Prism, Wollaston
+              Free text, for example: Glan-Thompson, Glan-Taylor, Rochon Prism, Wollaston
               Polarizer...
 
-        .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/laser_line_filter_type-field:
+      .. _/NXraman/ENTRY/INSTRUMENT/spectral_filter_N-group:
 
-        .. index:: laser_line_filter_type (field)
+      **spectral_filter_N**: (required) :ref:`NXbeam_device` :ref:`⤆ </NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE-group>`
 
-        **laser_line_filter_type**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+        .. _/NXraman/ENTRY/INSTRUMENT/spectral_filter_N/filter_type-field:
+
+        .. index:: filter_type (field)
+
+        **filter_type**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
           .. collapse:: Type of laserline filter used to supress the laser, if measurements ...
 
@@ -330,196 +574,109 @@ NXraman
 
               Any of these values:
 
-                * ``Long-pass filter``
+                * ``long-pass filter``
 
-                * ``Short-pass filter``
+                * ``short-pass filter``
 
-                * ``Notch Filter``
+                * ``Notch filter``
 
+                * ``reflection filter``
 
-        .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/laser_line_filter_steepness-field:
+                * ``neutral density filter``
 
-        .. index:: laser_line_filter_steepness (field)
+                * ``other``
 
-        **laser_line_filter_steepness**: (required) :ref:`NX_float <NX_float>` 
 
-          .. collapse:: Steepness of the filter by normal incidence of the light as defined ...
+        .. _/NXraman/ENTRY/INSTRUMENT/spectral_filter_N/intended_use-field:
 
-              Steepness of the filter by normal incidence of the light as defined
-              by 10% - 90% transmittance of the respective filter, given in cm^-1.
+        .. index:: intended_use (field)
 
-        .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/laser_line_filter_strength-field:
+        **intended_use**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-        .. index:: laser_line_filter_strength (field)
+          .. collapse:: Type of laserline filter used to supress the laser, if measurements ...
 
-        **laser_line_filter_strength**: (required) :ref:`NX_float <NX_float>` 
+              Type of laserline filter used to supress the laser, if measurements
+              close to the laserline are performed.
 
-          .. collapse:: Designed supression strength of the laserline at optimal condition ...
+              Any of these values:
 
-              Designed supression strength of the laserline at optimal condition
-              given in orders of magnitude.
+                * ``laser line cleanup``
 
-        .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/light_source-group:
+                * ``raylight line removal``
 
-        **light_source**: (required) :ref:`NXsource` :ref:`⤆ </NXbeam_path/SOURCE-group>`
+                * ``spectral filtering``
 
-          Specify the used light source. Multiple selection possible.
+                * ``intensity manipulation``
 
-          .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/light_source/source_type-field:
+                * ``other``
 
-          .. index:: source_type (field)
 
-          **source_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+        .. _/NXraman/ENTRY/INSTRUMENT/spectral_filter_N/filter_characteristics-field:
 
+        .. index:: filter_characteristics (field)
 
-            Any of these values:
+        **filter_characteristics**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [2, N_spectrum_filter]) 
 
-              * ``laser``
+          .. collapse:: Properties of the spectral filter such as wavelength dependent Transmiss ...
 
-              * ``dye-laser``
+              Properties of the spectral filter such as wavelength dependent Transmission
+              or reflectivity.
 
-              * ``broadband tunable light source``
+          .. _/NXraman/ENTRY/INSTRUMENT/spectral_filter_N/filter_characteristics@characteristics_type-attribute:
 
-              * ``other``
+          .. index:: characteristics_type (field attribute)
 
+          **@characteristics_type**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-        .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/incident_light_optics-group:
+            .. collapse:: Which property is used to form the spectral properties of light, ...
 
-        **incident_light_optics**: (recommended) :ref:`NXlens_opt` 
+                Which property is used to form the spectral properties of light,
+                i.e. transmission or reflection properties.
 
-          .. collapse:: This is the optical element used for the incident light in the Raman ...
+                Any of these values: ``transmission`` | ``reflection``
 
-              This is the optical element used for the incident light in the Raman
-              scattering process.
+      .. _/NXraman/ENTRY/INSTRUMENT/opt_monochromator-group:
 
-              This can be for example a simple lens or microscope
-              objective.
+      **opt_monochromator**: (optional) :ref:`NXbeam_device` :ref:`⤆ </NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE-group>`
 
-          .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/incident_light_optics/type-field:
+        .. collapse:: Dispersive element to create e.g. an energetic resolution used in the  ...
 
-          .. index:: type (field)
+            Dispersive element to create e.g. an energetic resolution used in the 
+            measurement.
 
-          **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXlens_opt/type-field>`
+        .. _/NXraman/ENTRY/INSTRUMENT/opt_monochromator/device-field:
 
+        .. index:: device (field)
 
-            Any of these values:
+        **device**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXbeam_device/device-field>`
 
-              * ``objective``
+          It should contain the name of the Nexus Monochromator group
 
-              * ``lens``
+      .. _/NXraman/ENTRY/INSTRUMENT/MONOCHROMATOR-group:
 
-              * ``glass fiber``
+      **MONOCHROMATOR**: (required) :ref:`NXmonochromator` :ref:`⤆ </NXinstrument/MONOCHROMATOR-group>`
 
-              * ``none``
+        .. collapse:: Monochromator with arbitrary choice of the name, which shall be referenced ...
 
-              * ``other``
+            Monochromator with arbitrary choice of the name, which shall be referenced
+            by the spectrometer(NXbeam_device).
 
+      .. _/NXraman/ENTRY/INSTRUMENT/Sample_as_beam_element-group:
 
-          .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/incident_light_optics/numerical_aperture-field:
+      **Sample_as_beam_element**: (required) :ref:`NXbeam_device` :ref:`⤆ </NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE-group>`
 
-          .. index:: numerical_aperture (field)
+        .. collapse:: Enables beam path description of the sample in the setup. ...
 
-          **numerical_aperture**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
+            Enables beam path description of the sample in the setup.
+            it in a beam path.
 
-            The numerical aperture of the used incident light optics.
+        .. _/NXraman/ENTRY/INSTRUMENT/Sample_as_beam_element/device-field:
 
-        .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/scattered_light_optics-group:
+        .. index:: device (field)
 
-        **scattered_light_optics**: (optional) :ref:`NXlens_opt` 
+        **device**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXbeam_device/device-field>`
 
-          .. collapse:: This is the optical element used for the incident light in the Raman ...
-
-              This is the optical element used for the incident light in the Raman
-              scattering process.
-
-              This can be for example a simple lens or microscope
-              objective.
-
-          .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/scattered_light_optics@is_same_as_for_incident_light-attribute:
-
-          .. index:: is_same_as_for_incident_light (group attribute)
-
-          **@is_same_as_for_incident_light**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-
-          .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/scattered_light_optics/type-field:
-
-          .. index:: type (field)
-
-          **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXlens_opt/type-field>`
-
-
-            Any of these values:
-
-              * ``objective``
-
-              * ``lens``
-
-              * ``glass fiber``
-
-              * ``none``
-
-              * ``other``
-
-
-          .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/scattered_light_optics/numerical_aperture-field:
-
-          .. index:: numerical_aperture (field)
-
-          **numerical_aperture**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
-
-            The numerical aperture of the used incident light optics.
-
-        .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/DETECTOR-group:
-
-        **DETECTOR**: (required) :ref:`NXdetector` 
-
-          .. collapse:: Properties of the detector used. Integration time is the count time ...
-
-              Properties of the detector used. Integration time is the count time
-              field, or the real time field. See their definition.
-
-        .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/polarization_manipulator_N-group:
-
-        **polarization_manipulator_N**: (optional) :ref:`NXwaveplate` :ref:`⤆ </NXbeam_path/WAVEPLATE-group>`
-
-          .. collapse:: Device for the manipulation of the state of light which is a half wave ...
-
-              Device for the manipulation of the state of light which is a half wave
-              plate.
-
-          .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/polarization_manipulator_N/type-field:
-
-          .. index:: type (field)
-
-          **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXwaveplate/type-field>`
-
-
-            Any of these values:
-
-              * ``objective``
-
-              * ``lens``
-
-              * ``glass fiber``
-
-              * ``none``
-
-              * ``other``
-
-
-        .. _/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/spectrometer-group:
-
-        **spectrometer**: (optional) :ref:`NXmonochromator` :ref:`⤆ </NXbeam_path/MONOCHROMATOR-group>`
-
-          .. collapse:: The spectroscope element of the ellipsometer before the detector, ...
-
-              The spectroscope element of the ellipsometer before the detector,
-              but often integrated to form one closed unit. Information on the
-              dispersive element can be specified in the subfield GRATING. Note
-              that different gratings might be used for different wavelength
-              ranges. The dispersion of the grating for each wavelength range can
-              be stored in grating_dispersion.
+          Contains the link to the sample.
 
     .. _/NXraman/ENTRY/SAMPLE-group:
 
@@ -569,32 +726,47 @@ attributes, and links defined in this class.
 * :ref:`/NXraman/ENTRY/experiment_description-field </NXraman/ENTRY/experiment_description-field>`
 * :ref:`/NXraman/ENTRY/experiment_type-field </NXraman/ENTRY/experiment_type-field>`
 * :ref:`/NXraman/ENTRY/INSTRUMENT-group </NXraman/ENTRY/INSTRUMENT-group>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH-group </NXraman/ENTRY/INSTRUMENT/BEAM_PATH-group>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/DETECTOR-group </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/DETECTOR-group>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/incident_light_optics-group </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/incident_light_optics-group>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/incident_light_optics/numerical_aperture-field </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/incident_light_optics/numerical_aperture-field>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/incident_light_optics/type-field </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/incident_light_optics/type-field>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/laser_line_filter_steepness-field </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/laser_line_filter_steepness-field>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/laser_line_filter_strength-field </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/laser_line_filter_strength-field>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/laser_line_filter_type-field </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/laser_line_filter_type-field>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/light_source-group </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/light_source-group>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/light_source/source_type-field </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/light_source/source_type-field>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/polarization_filter-field </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/polarization_filter-field>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/polarization_manipulator_N-group </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/polarization_manipulator_N-group>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/polarization_manipulator_N/type-field </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/polarization_manipulator_N/type-field>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/scattered_light_optics-group </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/scattered_light_optics-group>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/scattered_light_optics/numerical_aperture-field </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/scattered_light_optics/numerical_aperture-field>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/scattered_light_optics/type-field </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/scattered_light_optics/type-field>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/scattered_light_optics@is_same_as_for_incident_light-attribute </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/scattered_light_optics@is_same_as_for_incident_light-attribute>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/specific_polarization_filter_type-field </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/specific_polarization_filter_type-field>`
-* :ref:`/NXraman/ENTRY/INSTRUMENT/BEAM_PATH/spectrometer-group </NXraman/ENTRY/INSTRUMENT/BEAM_PATH/spectrometer-group>`
 * :ref:`/NXraman/ENTRY/INSTRUMENT/company-field </NXraman/ENTRY/INSTRUMENT/company-field>`
 * :ref:`/NXraman/ENTRY/INSTRUMENT/construction_year-field </NXraman/ENTRY/INSTRUMENT/construction_year-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/DETECTOR-group </NXraman/ENTRY/INSTRUMENT/DETECTOR-group>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/incident_light_lens-group </NXraman/ENTRY/INSTRUMENT/incident_light_lens-group>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/incident_light_lens/numerical_aperture-field </NXraman/ENTRY/INSTRUMENT/incident_light_lens/numerical_aperture-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/incident_light_lens/type-field </NXraman/ENTRY/INSTRUMENT/incident_light_lens/type-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/incident_light_optics-group </NXraman/ENTRY/INSTRUMENT/incident_light_optics-group>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/incident_light_optics/device-field </NXraman/ENTRY/INSTRUMENT/incident_light_optics/device-field>`
 * :ref:`/NXraman/ENTRY/INSTRUMENT/incident_source_wavelength-field </NXraman/ENTRY/INSTRUMENT/incident_source_wavelength-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/MONOCHROMATOR-group </NXraman/ENTRY/INSTRUMENT/MONOCHROMATOR-group>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/opt_detector-group </NXraman/ENTRY/INSTRUMENT/opt_detector-group>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/opt_detector/device-field </NXraman/ENTRY/INSTRUMENT/opt_detector/device-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/opt_monochromator-group </NXraman/ENTRY/INSTRUMENT/opt_monochromator-group>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/opt_monochromator/device-field </NXraman/ENTRY/INSTRUMENT/opt_monochromator/device-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/opt_source-group </NXraman/ENTRY/INSTRUMENT/opt_source-group>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/opt_source/device-field </NXraman/ENTRY/INSTRUMENT/opt_source/device-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/polarization_filter-group </NXraman/ENTRY/INSTRUMENT/polarization_filter-group>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/polarization_filter/filter_mechanism-field </NXraman/ENTRY/INSTRUMENT/polarization_filter/filter_mechanism-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/polarization_filter/specific_polarization_filter_type-field </NXraman/ENTRY/INSTRUMENT/polarization_filter/specific_polarization_filter_type-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/polarization_manipulator_NAME-group </NXraman/ENTRY/INSTRUMENT/polarization_manipulator_NAME-group>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/polarization_manipulator_NAME/device-field </NXraman/ENTRY/INSTRUMENT/polarization_manipulator_NAME/device-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/Sample_as_beam_element-group </NXraman/ENTRY/INSTRUMENT/Sample_as_beam_element-group>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/Sample_as_beam_element/device-field </NXraman/ENTRY/INSTRUMENT/Sample_as_beam_element/device-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/scattered_light_lens-group </NXraman/ENTRY/INSTRUMENT/scattered_light_lens-group>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/scattered_light_lens/numerical_aperture-field </NXraman/ENTRY/INSTRUMENT/scattered_light_lens/numerical_aperture-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/scattered_light_lens/type-field </NXraman/ENTRY/INSTRUMENT/scattered_light_lens/type-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/scattered_light_optics-group </NXraman/ENTRY/INSTRUMENT/scattered_light_optics-group>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/scattered_light_optics/device-field </NXraman/ENTRY/INSTRUMENT/scattered_light_optics/device-field>`
 * :ref:`/NXraman/ENTRY/INSTRUMENT/scattering_configuration-field </NXraman/ENTRY/INSTRUMENT/scattering_configuration-field>`
 * :ref:`/NXraman/ENTRY/INSTRUMENT/scattering_configuration@non_orthogonal_base_vectors-attribute </NXraman/ENTRY/INSTRUMENT/scattering_configuration@non_orthogonal_base_vectors-attribute>`
 * :ref:`/NXraman/ENTRY/INSTRUMENT/software-group </NXraman/ENTRY/INSTRUMENT/software-group>`
 * :ref:`/NXraman/ENTRY/INSTRUMENT/software/program-field </NXraman/ENTRY/INSTRUMENT/software/program-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/SOURCE-group </NXraman/ENTRY/INSTRUMENT/SOURCE-group>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/SOURCE/source_type-field </NXraman/ENTRY/INSTRUMENT/SOURCE/source_type-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/spectral_filter_N-group </NXraman/ENTRY/INSTRUMENT/spectral_filter_N-group>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/spectral_filter_N/filter_characteristics-field </NXraman/ENTRY/INSTRUMENT/spectral_filter_N/filter_characteristics-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/spectral_filter_N/filter_characteristics@characteristics_type-attribute </NXraman/ENTRY/INSTRUMENT/spectral_filter_N/filter_characteristics@characteristics_type-attribute>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/spectral_filter_N/filter_type-field </NXraman/ENTRY/INSTRUMENT/spectral_filter_N/filter_type-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/spectral_filter_N/intended_use-field </NXraman/ENTRY/INSTRUMENT/spectral_filter_N/intended_use-field>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/waveplate_NAME-group </NXraman/ENTRY/INSTRUMENT/waveplate_NAME-group>`
+* :ref:`/NXraman/ENTRY/INSTRUMENT/waveplate_NAME/type-field </NXraman/ENTRY/INSTRUMENT/waveplate_NAME/type-field>`
 * :ref:`/NXraman/ENTRY/SAMPLE-group </NXraman/ENTRY/SAMPLE-group>`
 
 **NXDL Source**:

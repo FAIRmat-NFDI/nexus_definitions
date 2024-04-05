@@ -36,9 +36,9 @@ NXopt
   **N_observables**: Number of observables that are saved in a measurement. e.g. one for intensity, reflectivity or transmittance, two for Psi and Delta etc. This is equal to the second dimension of the data array 'measured_data' and the number of column names.
 
 **Groups cited**:
-  :ref:`NXaperture`, :ref:`NXbeam_path`, :ref:`NXdata`, :ref:`NXentry`, :ref:`NXenvironment`, :ref:`NXinstrument`, :ref:`NXprocess`, :ref:`NXprogram`, :ref:`NXsample`, :ref:`NXsensor`, :ref:`NXsubentry`, :ref:`NXuser`
+  :ref:`NXaperture`, :ref:`NXbeam_device`, :ref:`NXbeam`, :ref:`NXdata`, :ref:`NXentry`, :ref:`NXenvironment`, :ref:`NXinstrument`, :ref:`NXprocess`, :ref:`NXprogram`, :ref:`NXsample`, :ref:`NXsensor`, :ref:`NXsubentry`, :ref:`NXuser`
 
-.. index:: NXentry (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXprocess (base class); used in application definition, NXprogram (base class); used in application definition, NXsubentry (base class); used in application definition, NXbeam_path (base class); used in application definition, NXenvironment (base class); used in application definition, NXsensor (base class); used in application definition, NXaperture (base class); used in application definition, NXsample (base class); used in application definition, NXdata (base class); used in application definition
+.. index:: NXentry (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXprocess (base class); used in application definition, NXprogram (base class); used in application definition, NXsubentry (base class); used in application definition, NXbeam_device (base class); used in application definition, NXbeam (base class); used in application definition, NXenvironment (base class); used in application definition, NXsensor (base class); used in application definition, NXaperture (base class); used in application definition, NXsample (base class); used in application definition, NXdata (base class); used in application definition
 
 **Structure**:
 
@@ -181,7 +181,7 @@ NXopt
 
       .. index:: orcid (field)
 
-      **orcid**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/ORCID-field>`
+      **orcid**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
         Author ID defined by https://orcid.org/.
 
@@ -397,22 +397,23 @@ NXopt
 
           Link to the NeXus file containing the calibration data and metadata.
 
-      .. _/NXopt/ENTRY/INSTRUMENT/BEAM_PATH-group:
+      .. _/NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE-group:
 
-      **BEAM_PATH**: (required) :ref:`NXbeam_path` 
+      **BEAM_DEVICE**: (recommended) :ref:`NXbeam_device` 
 
-        .. collapse:: Describes an arrangement of optical or other elements, e.g. the beam ...
 
-            Describes an arrangement of optical or other elements, e.g. the beam
-            path between the light source and the sample, or between the sample
-            and the detector unit (including the sources and detectors
-            themselves).
+        .. _/NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE/previous_devices-field:
 
-            If a beam splitter (i.e. a device that splits the incoming beam into
-            two or more beams) is part of the beam path, two or more NXbeam_path
-            fields may be needed to fully describe the beam paths and the correct
-            sequence of the beam path elements.
-            Use as many beam paths as needed to describe the setup.
+        .. index:: previous_devices (field)
+
+        **previous_devices**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXbeam_device/previous_devices-field>`
+
+
+      .. _/NXopt/ENTRY/INSTRUMENT/BEAM-group:
+
+      **BEAM**: (optional) :ref:`NXbeam` :ref:`⤆ </NXinstrument/BEAM-group>`
+
+        Beam characteristics between two beam_devices.
 
       .. _/NXopt/ENTRY/INSTRUMENT/sample_stage-group:
 
@@ -1251,7 +1252,9 @@ attributes, and links defined in this class.
 * :ref:`/NXopt/ENTRY/INSTRUMENT-group </NXopt/ENTRY/INSTRUMENT-group>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/angle_of_incidence-field </NXopt/ENTRY/INSTRUMENT/angle_of_incidence-field>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/angle_of_incidence@units-attribute </NXopt/ENTRY/INSTRUMENT/angle_of_incidence@units-attribute>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/BEAM_PATH-group </NXopt/ENTRY/INSTRUMENT/BEAM_PATH-group>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/BEAM-group </NXopt/ENTRY/INSTRUMENT/BEAM-group>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE-group </NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE-group>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE/previous_devices-field </NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE/previous_devices-field>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/calibration-group </NXopt/ENTRY/INSTRUMENT/calibration-group>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/calibration/calibration_data_link-field </NXopt/ENTRY/INSTRUMENT/calibration/calibration_data_link-field>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/calibration/calibration_time-field </NXopt/ENTRY/INSTRUMENT/calibration/calibration_time-field>`
