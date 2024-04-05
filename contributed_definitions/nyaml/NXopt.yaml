@@ -182,18 +182,13 @@ NXopt(NXobject):
         calibration_data_link:
           doc: |
             Link to the NeXus file containing the calibration data and metadata.
-      (NXbeam_path):
+      (NXbeam_device):
+        exists: recommended
+        previous_devices:
+      (NXbeam):
+        exists: optional
         doc: |
-          Describes an arrangement of optical or other elements, e.g. the beam
-          path between the light source and the sample, or between the sample
-          and the detector unit (including the sources and detectors
-          themselves).
-          
-          If a beam splitter (i.e. a device that splits the incoming beam into
-          two or more beams) is part of the beam path, two or more NXbeam_path
-          fields may be needed to fully describe the beam paths and the correct
-          sequence of the beam path elements.
-          Use as many beam paths as needed to describe the setup.
+          Beam characteristics between two beam_devices.
       angle_of_incidence(NX_NUMBER):
         unit: NX_ANGLE
         doc: |

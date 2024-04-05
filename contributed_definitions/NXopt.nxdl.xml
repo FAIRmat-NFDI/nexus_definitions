@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 <!--
 # NeXus - Neutron and X-ray Common Data Format
-# 
-# Copyright (C) 2014-2022 NeXus International Advisory Committee (NIAC)
-# 
+#
+# Copyright (C) 2014-2024 NeXus International Advisory Committee (NIAC)
+#
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
@@ -21,14 +21,16 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
-<!--05/2023
+<!--
+05/2023
 Draft of a NeXus application definition which serves as a template for various
 optical spectroscopy experiments-->
-<!--To do:
+<!--
+To do:
 [ ] Check base classes (NXbeam_path + base classes used by it)
 [ ] Harmonize NXopt and NXellipsometry
 [ ] Fix dimensions and ranks-->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" name="NXopt" extends="NXobject" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXopt" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <symbols>
         <doc>
              Variables used throughout the document, e.g. dimensions or parameters.
@@ -277,18 +279,12 @@ optical spectroscopy experiments-->
                     </doc>
                 </field>
             </group>
-            <group type="NXbeam_path">
+            <group type="NXbeam_device" recommended="true">
+                <field name="previous_devices"/>
+            </group>
+            <group type="NXbeam" optional="true">
                 <doc>
-                     Describes an arrangement of optical or other elements, e.g. the beam
-                     path between the light source and the sample, or between the sample
-                     and the detector unit (including the sources and detectors
-                     themselves).
-                     
-                     If a beam splitter (i.e. a device that splits the incoming beam into
-                     two or more beams) is part of the beam path, two or more NXbeam_path
-                     fields may be needed to fully describe the beam paths and the correct
-                     sequence of the beam path elements.
-                     Use as many beam paths as needed to describe the setup.
+                     Beam characteristics between two beam_devices.
                 </doc>
             </group>
             <field name="angle_of_incidence" type="NX_NUMBER" units="NX_ANGLE">

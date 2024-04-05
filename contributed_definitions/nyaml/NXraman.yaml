@@ -46,6 +46,31 @@ doc: |
 symbols:
   doc: |
     Variables used throughout the document, e.g. dimensions or parameters.
+  N_spectrum: |
+    Length of the spectrum array (e.g. wavelength or energy) of the measured
+    data.
+  N_sensors: |
+    Number of sensors used to measure parameters that influence the sample,
+    such as temperature or pressure.
+  N_measurements: |
+    Number of measurements (1st dimension of measured_data array). This is
+    equal to the number of parameters scanned. For example, if the experiment
+    was performed at three different temperatures and two different pressures
+    N_measurements = 2*3 = 6.
+  N_scattering_configurations: |
+    Number of scattering configurations used in the measurement.
+    It is 1 for only parallel polarization meausement, 2 for parallel and cross 
+    polarization measurement or larger, if i.e. the incident and scattered photon
+    direction is varied.
+  N_observables: |
+    Number of observables that are saved in a measurement. e.g. one for
+    intensity, reflectivity or transmittance, two for Psi and Delta etc. This
+    is equal to the second dimension of the data array 'measured_data' and the
+    number of column names.
+  N_time: |
+    Number of time points measured, the length of NXsample/time_points
+  N_spectrum_filter: |
+    Number of points for a spectral filter used in the setup
 
 # 03/2024
 # A draft version of a NeXus application definition for Raman spectroscopy.
@@ -157,51 +182,85 @@ NXraman(NXopt):
               3 x 4 Matrix, which lists the porto notation vectors A, B, C, D.
               A has to be perpendicular to B and C perpendicular to D.
             dim: [[1, 4], [2, 3]]
-      (NXbeam_path):
-        light_source(NXsource):
+      opt_source(NXbeam_device):
+        doc: |
+          beam device instance of the optical source.
+        device:
           doc: |
-            Specify the used light source. Multiple selection possible.
-          source_type:
-            enumeration: [laser, dye-laser, broadband tunable light source, other]
-        incident_light_optics(NXlens_opt):
-          exists: recommended
+            It should contain the name of the Nexus source group.
+      (NXsource):
+        doc: |
+          Light source with arbitrary choice of name. This shall be referenced
+          by source(NXbeam_device)
+        source_type:
+          enumeration: [laser, dye-laser, broadband tunable light source, other]
+      incident_light_optics(NXbeam_device):
+        doc: |
+          Beam device instance of the incident light optics.
+        device:
           doc: |
-            This is the optical element used for the incident light in the Raman
-            scattering process.
-            
-            This can be for example a simple lens or microscope
-            objective.
-          type:
-            enumeration: [objective, lens, glass fiber, none, other]
-          numerical_aperture(NX_NUMBER):
-            doc: |
-              The numerical aperture of the used incident light optics.
-        scattered_light_optics(NXlens_opt):
-          exists: optional
+            It should contain the name of the "incident_light_lens(NXlens_opt)" group
+      scattered_light_optics(NXbeam_device):
+        doc: |
+          Beam device instance of the scattered light optics.
+        device:
           doc: |
-            This is the optical element used for the incident light in the Raman
-            scattering process.
-            
-            This can be for example a simple lens or microscope
-            objective.
-          \@is_same_as_for_incident_light:
-          type:
-            enumeration: [objective, lens, glass fiber, none, other]
-          numerical_aperture(NX_NUMBER):
-            doc: |
-              The numerical aperture of the used incident light optics.
-        (NXdetector):
+            It should contain the name of the "scattered_light_lens(NXlens_opt)" group
+      incident_light_lens(NXlens_opt):        
+        doc: |
+          This is the optical element used for the incident light in the Raman
+          scattering process.
+          
+          This can be for example a simple lens or microscope
+          objective.
+        exists: recommended
+        type:
+          enumeration: [objective, lens, glass fiber, none, other]
+        numerical_aperture(NX_NUMBER):
           doc: |
-            Properties of the detector used. Integration time is the count time
-            field, or the real time field. See their definition.
-        polarization_manipulator_N(NXwaveplate):
-          exists: optional
+            The numerical aperture of the used incident light optics.
+      scattered_light_lens(NXlens_opt):
+        doc: |
+          This is the optical element used for the incident light in the Raman
+          scattering process.
+          
+          This can be for example a simple lens or microscope
+          objective.
+        exists: recommended
+        type:
+          enumeration: [objective, lens, glass fiber, none, other]
+        numerical_aperture(NX_NUMBER):
           doc: |
-            Device for the manipulation of the state of light which is a half wave
-            plate.
-          type:
-            enumeration: [objective, lens, glass fiber, none, other]
-        polarization_filter(NX_CHAR):
+            The numerical aperture of the used incident light optics.
+      opt_detector(NXbeam_device):
+        doc: |
+          Properties of the detector to link it via NXbeam_device to other beam
+          elements
+        device:
+          doc: |
+            It should contain the name of the Nexus detector group
+      (NXdetector):
+        doc: |
+          Detector with arbitrary choice of the name, which shall be referenced
+          by the detector(NXbeam_device). 
+      polarization_manipulator_NAME(NXbeam_device):
+        exists: optional
+        doc: |
+          Link to the device, that it can be used to generate a beam path via
+          NXbeam_device. The string >NAME< in the name of this NXbeam_device
+          has to identical to >NAME< in waveplate_NAME(NXwaveplate).
+        device:
+          doc: |
+            This should contain the name for each halfwave plate used in the
+            NXwaveplate group.
+      waveplate_NAME(NXwaveplate):
+        doc: |
+          Properties of the device for the manipulation of the state of light which is a half wave
+          plate.
+        type:
+          enumeration: [objective, lens, glass fiber, none, other]
+      polarization_filter(NXbeam_device):
+        filter_mechanism(NX_CHAR):
           exists: optional
           doc: |
             Physical principle of the polarization filter used to create a
@@ -211,32 +270,56 @@ NXraman(NXopt):
           doc: |
             Specific name or type of the polarizer used.
             
-            For example: Glan-Thompson, Glan-Taylor, Rochon Prism, Wollaston
+            Free text, for example: Glan-Thompson, Glan-Taylor, Rochon Prism, Wollaston
             Polarizer...
-        laser_line_filter_type:
+      spectral_filter_N(NXbeam_device):
+        filter_type:
           exists: optional
           doc: |
             Type of laserline filter used to supress the laser, if measurements
             close to the laserline are performed.
-          enumeration: [Long-pass filter, Short-pass filter, Notch Filter]
-        laser_line_filter_steepness(NX_float):
-          doc: |
-            Steepness of the filter by normal incidence of the light as defined
-            by 10% - 90% transmittance of the respective filter, given in cm^-1.
-          # for a notch filter in principle two steepness have to be defined..
-        laser_line_filter_strength(NX_float):
-          doc: |
-            Designed supression strength of the laserline at optimal condition
-            given in orders of magnitude.
-        spectrometer(NXmonochromator):
+          enumeration: [long-pass filter, short-pass filter, Notch filter, reflection filter, neutral density filter, other]
+        intended_use:
           exists: optional
           doc: |
-            The spectroscope element of the ellipsometer before the detector,
-            but often integrated to form one closed unit. Information on the
-            dispersive element can be specified in the subfield GRATING. Note
-            that different gratings might be used for different wavelength
-            ranges. The dispersion of the grating for each wavelength range can
-            be stored in grating_dispersion.
+            Type of laserline filter used to supress the laser, if measurements
+            close to the laserline are performed.
+          enumeration: [laser line cleanup, raylight line removal, spectral filtering, intensity manipulation, other]
+        filter_characteristics(NX_NUMBER):
+          exists: optional
+          doc: |
+            Properties of the spectral filter such as wavelength dependent Transmission
+            or reflectivity.
+          dimensions:
+            rank: 2
+            dim: [[1, 2], [2, N_spectrum_filter]]
+            # 2 -> [Wavelength, Transmission]
+            # N_spectrum_filter --> Number of wavelengths
+          \@characteristics_type:
+            exists: optional
+            doc: |
+              Which property is used to form the spectral properties of light,
+              i.e. transmission or reflection properties.
+            enumeration: [transmission, reflection]
+      opt_monochromator(NXbeam_device):
+        exists: optional
+        doc: |
+          Dispersive element to create e.g. an energetic resolution used in the 
+          measurement.
+        device:
+          doc: |
+            It should contain the name of the Nexus Monochromator group
+      (NXmonochromator):
+        doc: |
+          Monochromator with arbitrary choice of the name, which shall be referenced
+          by the spectrometer(NXbeam_device).
+      Sample_as_beam_element(NXbeam_device):
+        doc: |
+          Enables beam path description of the sample in the setup.
+          it in a beam path.
+        device:
+          doc: |
+            Contains the link to the sample.
     (NXsample):
     data_collection(NXprocess):
       data_type:

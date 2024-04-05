@@ -35,6 +35,52 @@ The document has the following main elements:
         <doc>
              Variables used throughout the document, e.g. dimensions or parameters.
         </doc>
+        <symbol name="N_spectrum">
+            <doc>
+                 Length of the spectrum array (e.g. wavelength or energy) of the measured
+                 data.
+            </doc>
+        </symbol>
+        <symbol name="N_sensors">
+            <doc>
+                 Number of sensors used to measure parameters that influence the sample,
+                 such as temperature or pressure.
+            </doc>
+        </symbol>
+        <symbol name="N_measurements">
+            <doc>
+                 Number of measurements (1st dimension of measured_data array). This is
+                 equal to the number of parameters scanned. For example, if the experiment
+                 was performed at three different temperatures and two different pressures
+                 N_measurements = 2*3 = 6.
+            </doc>
+        </symbol>
+        <symbol name="N_scattering_configurations">
+            <doc>
+                 Number of scattering configurations used in the measurement.
+                 It is 1 for only parallel polarization meausement, 2 for parallel and cross 
+                 polarization measurement or larger, if i.e. the incident and scattered photon
+                 direction is varied.
+            </doc>
+        </symbol>
+        <symbol name="N_observables">
+            <doc>
+                 Number of observables that are saved in a measurement. e.g. one for
+                 intensity, reflectivity or transmittance, two for Psi and Delta etc. This
+                 is equal to the second dimension of the data array 'measured_data' and the
+                 number of column names.
+            </doc>
+        </symbol>
+        <symbol name="N_time">
+            <doc>
+                 Number of time points measured, the length of NXsample/time_points
+            </doc>
+        </symbol>
+        <symbol name="N_spectrum_filter">
+            <doc>
+                 Number of points for a spectral filter used in the setup
+            </doc>
+        </symbol>
     </symbols>
     <doc>
          An application definition for Raman spectrocopy experiments.
@@ -223,89 +269,143 @@ unit: NX_LENGTH
                     </dimensions>
                 </attribute>
             </field>
-            <group type="NXbeam_path">
-                <group name="light_source" type="NXsource">
+            <group name="opt_source" type="NXbeam_device">
+                <doc>
+                     beam device instance of the optical source.
+                </doc>
+                <field name="device">
                     <doc>
-                         Specify the used light source. Multiple selection possible.
+                         It should contain the name of the Nexus source group.
                     </doc>
-                    <field name="source_type">
-                        <enumeration>
-                            <item value="laser"/>
-                            <item value="dye-laser"/>
-                            <item value="broadband tunable light source"/>
-                            <item value="other"/>
-                        </enumeration>
-                    </field>
-                </group>
-                <group name="incident_light_optics" type="NXlens_opt" recommended="true">
+                </field>
+            </group>
+            <group type="NXsource">
+                <doc>
+                     Light source with arbitrary choice of name. This shall be referenced
+                     by source(NXbeam_device)
+                </doc>
+                <field name="source_type">
+                    <enumeration>
+                        <item value="laser"/>
+                        <item value="dye-laser"/>
+                        <item value="broadband tunable light source"/>
+                        <item value="other"/>
+                    </enumeration>
+                </field>
+            </group>
+            <group name="incident_light_optics" type="NXbeam_device">
+                <doc>
+                     Beam device instance of the incident light optics.
+                </doc>
+                <field name="device">
                     <doc>
-                         This is the optical element used for the incident light in the Raman
-                         scattering process.
-                         
-                         This can be for example a simple lens or microscope
-                         objective.
+                         It should contain the name of the "incident_light_lens(NXlens_opt)" group
                     </doc>
-                    <field name="type">
-                        <enumeration>
-                            <item value="objective"/>
-                            <item value="lens"/>
-                            <item value="glass fiber"/>
-                            <item value="none"/>
-                            <item value="other"/>
-                        </enumeration>
-                    </field>
-                    <field name="numerical_aperture" type="NX_NUMBER">
-                        <doc>
-                             The numerical aperture of the used incident light optics.
-                        </doc>
-                    </field>
-                </group>
-                <group name="scattered_light_optics" type="NXlens_opt" optional="true">
+                </field>
+            </group>
+            <group name="scattered_light_optics" type="NXbeam_device">
+                <doc>
+                     Beam device instance of the scattered light optics.
+                </doc>
+                <field name="device">
                     <doc>
-                         This is the optical element used for the incident light in the Raman
-                         scattering process.
-                         
-                         This can be for example a simple lens or microscope
-                         objective.
+                         It should contain the name of the "scattered_light_lens(NXlens_opt)" group
                     </doc>
-                    <attribute name="is_same_as_for_incident_light"/>
-                    <field name="type">
-                        <enumeration>
-                            <item value="objective"/>
-                            <item value="lens"/>
-                            <item value="glass fiber"/>
-                            <item value="none"/>
-                            <item value="other"/>
-                        </enumeration>
-                    </field>
-                    <field name="numerical_aperture" type="NX_NUMBER">
-                        <doc>
-                             The numerical aperture of the used incident light optics.
-                        </doc>
-                    </field>
-                </group>
-                <group type="NXdetector">
+                </field>
+            </group>
+            <group name="incident_light_lens" type="NXlens_opt" recommended="true">
+                <doc>
+                     This is the optical element used for the incident light in the Raman
+                     scattering process.
+                     
+                     This can be for example a simple lens or microscope
+                     objective.
+                </doc>
+                <field name="type">
+                    <enumeration>
+                        <item value="objective"/>
+                        <item value="lens"/>
+                        <item value="glass fiber"/>
+                        <item value="none"/>
+                        <item value="other"/>
+                    </enumeration>
+                </field>
+                <field name="numerical_aperture" type="NX_NUMBER">
                     <doc>
-                         Properties of the detector used. Integration time is the count time
-                         field, or the real time field. See their definition.
+                         The numerical aperture of the used incident light optics.
                     </doc>
-                </group>
-                <group name="polarization_manipulator_N" type="NXwaveplate" optional="true">
+                </field>
+            </group>
+            <group name="scattered_light_lens" type="NXlens_opt" recommended="true">
+                <doc>
+                     This is the optical element used for the incident light in the Raman
+                     scattering process.
+                     
+                     This can be for example a simple lens or microscope
+                     objective.
+                </doc>
+                <field name="type">
+                    <enumeration>
+                        <item value="objective"/>
+                        <item value="lens"/>
+                        <item value="glass fiber"/>
+                        <item value="none"/>
+                        <item value="other"/>
+                    </enumeration>
+                </field>
+                <field name="numerical_aperture" type="NX_NUMBER">
                     <doc>
-                         Device for the manipulation of the state of light which is a half wave
-                         plate.
+                         The numerical aperture of the used incident light optics.
                     </doc>
-                    <field name="type">
-                        <enumeration>
-                            <item value="objective"/>
-                            <item value="lens"/>
-                            <item value="glass fiber"/>
-                            <item value="none"/>
-                            <item value="other"/>
-                        </enumeration>
-                    </field>
-                </group>
-                <field name="polarization_filter" type="NX_CHAR" optional="true">
+                </field>
+            </group>
+            <group name="opt_detector" type="NXbeam_device">
+                <doc>
+                     Properties of the detector to link it via NXbeam_device to other beam
+                     elements
+                </doc>
+                <field name="device">
+                    <doc>
+                         It should contain the name of the Nexus detector group
+                    </doc>
+                </field>
+            </group>
+            <group type="NXdetector">
+                <doc>
+                     Detector with arbitrary choice of the name, which shall be referenced
+                     by the detector(NXbeam_device).
+                </doc>
+            </group>
+            <group name="polarization_manipulator_NAME" type="NXbeam_device" optional="true">
+                <doc>
+                     Link to the device, that it can be used to generate a beam path via
+                     NXbeam_device. The string &gt;NAME&lt; in the name of this NXbeam_device
+                     has to identical to &gt;NAME&lt; in waveplate_NAME(NXwaveplate).
+                </doc>
+                <field name="device">
+                    <doc>
+                         This should contain the name for each halfwave plate used in the
+                         NXwaveplate group.
+                    </doc>
+                </field>
+            </group>
+            <group name="waveplate_NAME" type="NXwaveplate">
+                <doc>
+                     Properties of the device for the manipulation of the state of light which is a half wave
+                     plate.
+                </doc>
+                <field name="type">
+                    <enumeration>
+                        <item value="objective"/>
+                        <item value="lens"/>
+                        <item value="glass fiber"/>
+                        <item value="none"/>
+                        <item value="other"/>
+                    </enumeration>
+                </field>
+            </group>
+            <group name="polarization_filter" type="NXbeam_device">
+                <field name="filter_mechanism" type="NX_CHAR" optional="true">
                     <doc>
                          Physical principle of the polarization filter used to create a
                          defined incident or scattered light state.
@@ -322,44 +422,89 @@ unit: NX_LENGTH
                     <doc>
                          Specific name or type of the polarizer used.
                          
-                         For example: Glan-Thompson, Glan-Taylor, Rochon Prism, Wollaston
+                         Free text, for example: Glan-Thompson, Glan-Taylor, Rochon Prism, Wollaston
                          Polarizer...
                     </doc>
                 </field>
-                <field name="laser_line_filter_type" optional="true">
+            </group>
+            <group name="spectral_filter_N" type="NXbeam_device">
+                <field name="filter_type" optional="true">
                     <doc>
                          Type of laserline filter used to supress the laser, if measurements
                          close to the laserline are performed.
                     </doc>
                     <enumeration>
-                        <item value="Long-pass filter"/>
-                        <item value="Short-pass filter"/>
-                        <item value="Notch Filter"/>
+                        <item value="long-pass filter"/>
+                        <item value="short-pass filter"/>
+                        <item value="Notch filter"/>
+                        <item value="reflection filter"/>
+                        <item value="neutral density filter"/>
+                        <item value="other"/>
                     </enumeration>
                 </field>
-                <field name="laser_line_filter_steepness" type="NX_float">
+                <field name="intended_use" optional="true">
                     <doc>
-                         Steepness of the filter by normal incidence of the light as defined
-                         by 10% - 90% transmittance of the respective filter, given in cm^-1.
+                         Type of laserline filter used to supress the laser, if measurements
+                         close to the laserline are performed.
+                    </doc>
+                    <enumeration>
+                        <item value="laser line cleanup"/>
+                        <item value="raylight line removal"/>
+                        <item value="spectral filtering"/>
+                        <item value="intensity manipulation"/>
+                        <item value="other"/>
+                    </enumeration>
+                </field>
+                <field name="filter_characteristics" type="NX_NUMBER" optional="true">
+                    <doc>
+                         Properties of the spectral filter such as wavelength dependent Transmission
+                         or reflectivity.
+                    </doc>
+                    <dimensions rank="2">
+                        <dim index="1" value="2"/>
+                        <dim index="2" value="N_spectrum_filter"/>
+                    </dimensions>
+                    <!--2 -> [Wavelength, Transmission]
+N_spectrum_filter -\-> Number of wavelengths-->
+                    <attribute name="characteristics_type" optional="true">
+                        <doc>
+                             Which property is used to form the spectral properties of light,
+                             i.e. transmission or reflection properties.
+                        </doc>
+                        <enumeration>
+                            <item value="transmission"/>
+                            <item value="reflection"/>
+                        </enumeration>
+                    </attribute>
+                </field>
+            </group>
+            <group name="opt_monochromator" type="NXbeam_device" optional="true">
+                <doc>
+                     Dispersive element to create e.g. an energetic resolution used in the 
+                     measurement.
+                </doc>
+                <field name="device">
+                    <doc>
+                         It should contain the name of the Nexus Monochromator group
                     </doc>
                 </field>
-                <!--for a notch filter in principle two steepness have to be defined..-->
-                <field name="laser_line_filter_strength" type="NX_float">
+            </group>
+            <group type="NXmonochromator">
+                <doc>
+                     Monochromator with arbitrary choice of the name, which shall be referenced
+                     by the spectrometer(NXbeam_device).
+                </doc>
+            </group>
+            <group name="Sample_as_beam_element" type="NXbeam_device">
+                <doc>
+                     Enables beam path description of the sample in the setup.
+                     it in a beam path.
+                </doc>
+                <field name="device">
                     <doc>
-                         Designed supression strength of the laserline at optimal condition
-                         given in orders of magnitude.
+                         Contains the link to the sample.
                     </doc>
                 </field>
-                <group name="spectrometer" type="NXmonochromator" optional="true">
-                    <doc>
-                         The spectroscope element of the ellipsometer before the detector,
-                         but often integrated to form one closed unit. Information on the
-                         dispersive element can be specified in the subfield GRATING. Note
-                         that different gratings might be used for different wavelength
-                         ranges. The dispersion of the grating for each wavelength range can
-                         be stored in grating_dispersion.
-                    </doc>
-                </group>
             </group>
         </group>
         <group type="NXsample"/>
