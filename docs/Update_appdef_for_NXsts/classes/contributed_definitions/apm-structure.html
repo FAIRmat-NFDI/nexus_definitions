@@ -47,15 +47,16 @@
 <section id="introduction">
 <span id="introductionapm"></span><span id="index-0"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
 <p>Set of data schemas to describe the acquisition, i.e. measurement side, the extraction of hits from detector raw data,
-steps to compute mass-to-charge state ratios from uncorrected time of flight data, the reconstruction, and the ranging,
-i.e. identification of peaks in the mass-to-charge-state ratio histogram to detect (molecular) ions.
+steps to compute mass-to-charge state ratios from uncorrected time of flight data, the reconstruction, and the ranging, i.e. identification of peaks in the mass-to-charge-state ratio histogram to detect (molecular) ions.
 The data schemas can be useful to generate data artifacts also for field-ion microscopy experiments.</p>
 </section>
 <section id="application-definition">
 <span id="apmappdef"></span><h2>Application Definition<a class="headerlink" href="#application-definition" title="Link to this heading">¶</a></h2>
 <blockquote>
 <div><dl class="simple">
-<dt><a class="reference internal" href="NXapm.html#nxapm"><span class="std std-ref">NXapm</span></a>:</dt><dd><p>A general application definition with many detailed places for leaving metadata and computational steps described which are commonly used when reporting the measurement of atom probe data including also detector hit data, as well as how to proceed with reconstructing atom positions from these data, and how to store details about definitions made, which describe how mass-to-charge-state ratio values are mapped to iontypes in a process called ranging.</p>
+<dt><a class="reference internal" href="NXapm.html#nxapm"><span class="std std-ref">NXapm</span></a>:</dt><dd><p>A general application definition with many detailed places for leaving metadata and computational steps described which are commonly used when reporting the measurement of atom probe data including also detector hit data, as well as how to proceed with reconstructing atom positions from these data, and how to store details about definitions made, which describe how mass-to-charge-state ratio values are mapped to iontypes in a process called ranging. The structure of the schema has been designed to also document a simulation of an atom probe
+experiment. Having a combined schema for the measurement and the simulation is beneficial to document that
+there are many similarities between the measurement and a computer simulation of it.</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -69,13 +70,13 @@ The data schemas can be useful to generate data artifacts also for field-ion mic
 A chamber may offer a controlled atmosphere to execute an experiment and/or offer functionalities
 for storing and loading specimens.</p>
 </dd>
-<dt><a class="reference internal" href="NXcoordinate_system_set.html#nxcoordinate-system-set"><span class="std std-ref">NXcoordinate_system_set</span></a></dt><dd><p>A base class to describe different coordinate systems used and/or to be harmonized
+<dt><a class="reference internal" href="NXcoordinate_system_set.html#nxcoordinate-system-set"><span class="std std-ref">NXcoordinate_system_set</span></a>, <a class="reference internal" href="NXcoordinate_system.html#nxcoordinate-system"><span class="std std-ref">NXcoordinate_system</span></a>:</dt><dd><p>Base classes to describe different coordinate systems used and/or to be harmonized
 or transformed into one another when interpreting the dataset.</p>
 </dd>
 <dt><a class="reference internal" href="NXion.html#nxion"><span class="std std-ref">NXion</span></a>:</dt><dd><p>A base class to describe molecular ions with an adjustable number of atoms/isotopes building each ion.
 For the usage in atom probe research the maximum number of atoms supported building a molecular ion
 is currently set to a maximum of 32. Suggestions made in reference <a class="reference external" href="https://doi.org/10.1017/S1431927621012241">DOI: 10.1017/S1431927621012241</a> are used to map isotope to hash values with
-which all possible isotopes (stable, radioactive, or synthetically generated ones) can be described.</p>
+which all possible nuclides (stable, radioactive, or synthetically generated ones) can be described.</p>
 </dd>
 <dt><a class="reference internal" href="NXfabrication.html#nxfabrication"><span class="std std-ref">NXfabrication</span></a>:</dt><dd><p>A base class to bundle manufacturer/technology-partner-specific details about
 a component or device of an instrument.</p>
@@ -103,10 +104,44 @@ functionalities and additional components for applying e.g. stimuli on the speci
 <p>Microscopy experiments, not only taking into account those performed on commercial instruments, offer users to apply a set of
 data processing steps. Some of them are frequently applied on-the-fly. For now we represent these steps with specifically named
 instances of the <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a> base class.</p>
-<p>Data processing steps are essential to transform measurements into knowledge. Therefore, these steps
-should be documented to enable reproducible research, ideally numerically, and learn how pieces of information are connected.
-In what follows, an example is presented how an open-source community software can be modified to use descriptions
-of these computational steps.</p>
+<p>Several base classes were defined to document processing of atom probe data with established algorithms:</p>
+<blockquote>
+<div><dl class="simple">
+<dt><a class="reference internal" href="NXapm_hit_finding.html#nxapm-hit-finding"><span class="std std-ref">NXapm_hit_finding</span></a>:</dt><dd><p>A base class to describe hit finding algorithm.</p>
+</dd>
+<dt><a class="reference internal" href="NXapm_volt_and_bowl.html#nxapm-volt-and-bowl"><span class="std std-ref">NXapm_volt_and_bowl</span></a>:</dt><dd><p>A base class to describe the voltage-and-bowl correction.</p>
+</dd>
+<dt><a class="reference internal" href="NXapm_charge_state_analysis.html#nxapm-charge-state-analysis"><span class="std std-ref">NXapm_charge_state_analysis</span></a>:</dt><dd><p>A base class to document the resolving of the charge_state.</p>
+</dd>
+<dt><a class="reference internal" href="NXapm_reconstruction.html#nxapm-reconstruction"><span class="std std-ref">NXapm_reconstruction</span></a>:</dt><dd><p>A base class to document the tomographic reconstruction algorithm.</p>
+</dd>
+<dt><a class="reference internal" href="NXapm_ranging.html#nxapm-ranging"><span class="std std-ref">NXapm_ranging</span></a>:</dt><dd><p>A base class to document the ranging process.</p>
+</dd>
+<dt><a class="reference internal" href="NXapm_msr.html#nxapm-msr"><span class="std std-ref">NXapm_msr</span></a>, <a class="reference internal" href="NXapm_sim.html#nxapm-sim"><span class="std std-ref">NXapm_sim</span></a>:</dt><dd><p>Respective base classes that serve as templates to compose the <a class="reference internal" href="NXapm.html#nxapm"><span class="std std-ref">NXapm</span></a> application definition from.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>These base classes are examples that substantiate that data processing steps are essential to transform atom probe measurements or simulations into knowledge. Therefore, these steps should be documented
+to enable reproducible research, if possible even numerical reproducibility of the results,
+and learn how pieces of information are connected. In what follows, an example is presented how an
+open-source community software can be modified to use descriptions of these computational steps.</p>
+<p>A detailed inspection of spatial and other type of filters frequently used in analysis of atom probe
+data revealed that it is better to define atom-probe-agnostic reusable concepts for filters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt><a class="reference internal" href="NXspatial_filter.html#nxspatial-filter"><span class="std std-ref">NXspatial_filter</span></a>:</dt><dd><p>A base class proposing how a point cloud can be spatially filtered in a specific yet general manner.
+This base class takes advantage of <a class="reference internal" href="NXcg_ellipsoid_set.html#nxcg-ellipsoid-set"><span class="std std-ref">NXcg_ellipsoid_set</span></a>, <a class="reference internal" href="NXcg_cylinder_set.html#nxcg-cylinder-set"><span class="std std-ref">NXcg_cylinder_set</span></a>,
+and <a class="reference internal" href="NXcg_hexahedron_set.html#nxcg-hexahedron-set"><span class="std std-ref">NXcg_hexahedron_set</span></a> to cater for commonly used geometric primitives in atom probe.
+The primitives are used for defining the shape and extent of a region of interest (ROI).</p>
+</dd>
+<dt><a class="reference internal" href="NXsubsampling_filter.html#nxsubsampling-filter"><span class="std std-ref">NXsubsampling_filter</span></a>:</dt><dd><p>A base class for a filter that can also be used for specifying how entries
+like ions can be filtered via sub-sampling.</p>
+</dd>
+<dt><a class="reference internal" href="NXmatch_filter.html#nxmatch-filter"><span class="std std-ref">NXmatch_filter</span></a>:</dt><dd><p>A base class for a filter that can also be used for specifying how entries
+like ions can be filtered based on their type or other descriptors like hit multiplicity.</p>
+</dd>
+</dl>
+</div></blockquote>
 <p>The respective research software here is the <a class="reference external" href="https://paraprobe-toolbox.readthedocs.io/">paraprobe-toolbox</a>
 The software is developed by <a class="reference external" href="https://arxiv.org/abs/2205.13510">M. Kühbach et al.</a>.
 For atom probe research the proposal can also serve as a blue print how computational steps of other software
@@ -167,7 +202,16 @@ this includes Y-junction on a graph which is where multiple input sources are
 combined to generate new results.</p>
 <p>We are convinced that defining, documenting, using, and sharing application definitions
 is useful and future-proof strategy for software development and data analyses as it enables
-automated provenance tracking which happens silently in the background</p>
+automated provenance tracking which happens silently in the background.</p>
+<p>Base classes have been defined to group common pieces of information for each tool of the
+toolbox. For each tool we define a pair of base classes. One for the configuration (input) side
+and one for the results (output) side:</p>
+<blockquote>
+<div><dl class="simple">
+<dt><a class="reference internal" href="NXapm_paraprobe_tool_config.html#nxapm-paraprobe-tool-config"><span class="std std-ref">NXapm_paraprobe_tool_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_tool_results.html#nxapm-paraprobe-tool-results"><span class="std std-ref">NXapm_paraprobe_tool_results</span></a>, <a class="reference internal" href="NXapm_paraprobe_tool_common.html#nxapm-paraprobe-tool-common"><span class="std std-ref">NXapm_paraprobe_tool_common</span></a>:</dt><dd><p>Configuration, results, and common parts respectively useful for the application definitions for tools of the paraprobe-toolbox.</p>
+</dd>
+</dl>
+</div></blockquote>
 </section>
 <section id="application-definitions">
 <span id="apmparaprobeappdef"></span><h2>Application Definitions<a class="headerlink" href="#application-definitions" title="Link to this heading">¶</a></h2>
@@ -176,108 +220,41 @@ One for the configuration (input) side and one for the results (output) side. Fo
 tool one such pair is proposed:</p>
 <blockquote>
 <div><dl class="simple">
-<dt><a class="reference internal" href="NXapm_paraprobe_config_transcoder.html#nxapm-paraprobe-config-transcoder"><span class="std std-ref">NXapm_paraprobe_config_transcoder</span></a>:</dt><dd><p>Configuration of paraprobe-transcoder
-Load POS, ePOS, APSuite APT, RRNG, RNG, and NXapm HDF5 files.</p>
-</dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_results_transcoder.html#nxapm-paraprobe-results-transcoder"><span class="std std-ref">NXapm_paraprobe_results_transcoder</span></a>:</dt><dd><p>Results of paraprobe-transcoder
+<dt><a class="reference internal" href="NXapm_paraprobe_transcoder_config.html#nxapm-paraprobe-transcoder-config"><span class="std std-ref">NXapm_paraprobe_transcoder_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_transcoder_results.html#nxapm-paraprobe-transcoder-results"><span class="std std-ref">NXapm_paraprobe_transcoder_results</span></a>:</dt><dd><p>Configuration and the results respectively of the paraprobe-transcoder tool.
+Load POS, ePOS, APSuite APT, RRNG, RNG, and NeXus NXapm files.
 Store reconstructed positions, ions, and charge states.</p>
 </dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_config_ranger.html#nxapm-paraprobe-config-ranger"><span class="std std-ref">NXapm_paraprobe_config_ranger</span></a>:</dt><dd><p>Configuration of paraprobe-ranger
-Apply ranging definitions and explore possible molecular ions.</p>
+<dt><a class="reference internal" href="NXapm_paraprobe_ranger_config.html#nxapm-paraprobe-ranger-config"><span class="std std-ref">NXapm_paraprobe_ranger_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_ranger_results.html#nxapm-paraprobe-ranger-results"><span class="std std-ref">NXapm_paraprobe_ranger_results</span></a>:</dt><dd><p>Configuration and results respectively of the paraprobe-ranger tool.
+Apply ranging definitions and explore possible molecular ions.
+Store applied ranging definitions and combinatorial analyses of possible iontypes.</p>
 </dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_results_ranger.html#nxapm-paraprobe-results-ranger"><span class="std std-ref">NXapm_paraprobe_results_ranger</span></a>:</dt><dd><p>Results of paraprobe-ranger
-Store applied ranging definitions and combinatorial analyses of all possible iontypes.</p>
-</dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_config_selector.html#nxapm-paraprobe-config-selector"><span class="std std-ref">NXapm_paraprobe_config_selector</span></a>:</dt><dd><p>Configuration of paraprobe-selector
-Defining complex spatial regions-of-interest to filter reconstructed datasets.</p>
-</dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_results_selector.html#nxapm-paraprobe-results-selector"><span class="std std-ref">NXapm_paraprobe_results_selector</span></a>:</dt><dd><p>Results of paraprobe-selector
+<dt><a class="reference internal" href="NXapm_paraprobe_selector_config.html#nxapm-paraprobe-selector-config"><span class="std std-ref">NXapm_paraprobe_selector_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_selector_results.html#nxapm-paraprobe-selector-results"><span class="std std-ref">NXapm_paraprobe_selector_results</span></a>:</dt><dd><p>Configuration and results respectively of the paraprobe-selector tool.
+Defining complex spatial regions-of-interest to filter reconstructed datasets.
 Store which points are inside or on the boundary of complex spatial regions-of-interest.</p>
 </dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_config_surfacer.html#nxapm-paraprobe-config-surfacer"><span class="std std-ref">NXapm_paraprobe_config_surfacer</span></a>:</dt><dd><p>Configuration of paraprobe-surfacer
-Create a model for the edge of a point cloud via convex hulls, alpha shapes.</p>
-</dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_results_surfacer.html#nxapm-paraprobe-results-surfacer"><span class="std std-ref">NXapm_paraprobe_results_surfacer</span></a>:</dt><dd><p>Results of paraprobe-surfacer
+<dt><a class="reference internal" href="NXapm_paraprobe_surfacer_config.html#nxapm-paraprobe-surfacer-config"><span class="std std-ref">NXapm_paraprobe_surfacer_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_surfacer_results.html#nxapm-paraprobe-surfacer-results"><span class="std std-ref">NXapm_paraprobe_surfacer_results</span></a>:</dt><dd><p>Configuration and results respectively of the paraprobe-surfacer tool.
+Create a model for the edge of a point cloud via convex hulls, alpha shapes, or alpha-wrappings.
 Store triangulated surface meshes of models for the edge of a dataset.</p>
 </dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_config_distancer.html#nxapm-paraprobe-config-distancer"><span class="std std-ref">NXapm_paraprobe_config_distancer</span></a>:</dt><dd><p>Configuration of paraprobe-distancer
-Compute analytical distances between ions to a set of triangles.</p>
+<dt><a class="reference internal" href="NXapm_paraprobe_distancer_config.html#nxapm-paraprobe-distancer-config"><span class="std std-ref">NXapm_paraprobe_distancer_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_distancer_results.html#nxapm-paraprobe-distancer-results"><span class="std std-ref">NXapm_paraprobe_distancer_results</span></a>:</dt><dd><p>Configuration and results respectively of the paraprobe-distancer tool.
+Compute and store analytical distances between ions to a set of triangles.</p>
 </dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_results_distancer.html#nxapm-paraprobe-results-distancer"><span class="std std-ref">NXapm_paraprobe_results_distancer</span></a>:</dt><dd><p>Results of paraprobe-distancer
-Store analytical distances between ions to a set of triangles.</p>
+<dt><a class="reference internal" href="NXapm_paraprobe_tessellator_config.html#nxapm-paraprobe-tessellator-config"><span class="std std-ref">NXapm_paraprobe_tessellator_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_tessellator_results.html#nxapm-paraprobe-tessellator-results"><span class="std std-ref">NXapm_paraprobe_tessellator_results</span></a>:</dt><dd><p>Configuration and results respectively of the paraprobe-tessellator tool.
+Compute and store Voronoi cells and properties of these for all ions in a dataset.</p>
 </dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_config_tessellator.html#nxapm-paraprobe-config-tessellator"><span class="std std-ref">NXapm_paraprobe_config_tessellator</span></a>:</dt><dd><p>Configuration of paraprobe-tessellator
-Compute Voronoi cells for if desired all ions in a dataset.</p>
+<dt><a class="reference internal" href="NXapm_paraprobe_spatstat_config.html#nxapm-paraprobe-spatstat-config"><span class="std std-ref">NXapm_paraprobe_spatstat_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_spatstat_results.html#nxapm-paraprobe-spatstat-results"><span class="std std-ref">NXapm_paraprobe_spatstat_results</span></a>:</dt><dd><p>Configuration and results respectively of the paraprobe-spatstat tool.
+Compute spatial statistics on the entire or selected regions of the reconstructed dataset.</p>
 </dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_results_tessellator.html#nxapm-paraprobe-results-tessellator"><span class="std std-ref">NXapm_paraprobe_results_tessellator</span></a>:</dt><dd><p>Results of paraprobe-tessellator
-Store volume of all Voronoi cells about each ion in the dataset.</p>
+<dt><a class="reference internal" href="NXapm_paraprobe_clusterer_config.html#nxapm-paraprobe-clusterer-config"><span class="std std-ref">NXapm_paraprobe_clusterer_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_clusterer_results.html#nxapm-paraprobe-clusterer-results"><span class="std std-ref">NXapm_paraprobe_clusterer_results</span></a>:</dt><dd><p>Configuration and results resepctively of the paraprobe-clusterer tool.
+Compute cluster analyses with established machine learning algorithms using CPU or GPUs.</p>
 </dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_config_nanochem.html#nxapm-paraprobe-config-nanochem"><span class="std std-ref">NXapm_paraprobe_config_nanochem</span></a>:</dt><dd><p>Configuration of paraprobe-nanochem
-Compute delocalization, iso-surfaces, analyze 3D objects, and composition profiles.</p>
+<dt><a class="reference internal" href="NXapm_paraprobe_nanochem_config.html#nxapm-paraprobe-nanochem-config"><span class="std std-ref">NXapm_paraprobe_nanochem_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_nanochem_results.html#nxapm-paraprobe-nanochem-results"><span class="std std-ref">NXapm_paraprobe_nanochem_results</span></a>:</dt><dd><p>Configuration and results resepctively of the paraprobe-nanochem tool.
+Compute delocalization, iso-surfaces, analyze 3D objects, composition profiles, and mesh interfaces.</p>
 </dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_results_nanochem.html#nxapm-paraprobe-results-nanochem"><span class="std std-ref">NXapm_paraprobe_results_nanochem</span></a>:</dt><dd><p>Results of paraprobe-nanochem
-Store all results of delocalization, isosurface, and interface detection algorithms,
-store all extracted triangulated surface meshes of found microstructural features,
-store composition profiles and corresponding geometric primitives (ROIs).</p>
-</dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_config_intersector.html#nxapm-paraprobe-config-intersector"><span class="std std-ref">NXapm_paraprobe_config_intersector</span></a>:</dt><dd><p>Configuration of paraprobe-intersector
-Assess intersections and proximity of 3D triangulated surface meshes in
-continuum space to study the effect the parameterization of surface
-extraction algorithms on the resulting shape, spatial arrangement,
-and colocation of 3D objects via graph-based techniques.</p>
-</dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_results_intersector.html#nxapm-paraprobe-results-intersector"><span class="std std-ref">NXapm_paraprobe_results_intersector</span></a>:</dt><dd><p>Results of paraprobe-intersector
-Store graph of microstructural features and relations/link identified between them.</p>
-</dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_config_spatstat.html#nxapm-paraprobe-config-spatstat"><span class="std std-ref">NXapm_paraprobe_config_spatstat</span></a>:</dt><dd><p>Configuration of paraprobe-spatstat
-Spatial statistics on the entire or selected regions of the reconstructed dataset.</p>
-</dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_results_spatstat.html#nxapm-paraprobe-results-spatstat"><span class="std std-ref">NXapm_paraprobe_results_spatstat</span></a>:</dt><dd><p>Results of paraprobe-spatstat
-Store spatial correlation functions.</p>
-</dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_config_clusterer.html#nxapm-paraprobe-config-clusterer"><span class="std std-ref">NXapm_paraprobe_config_clusterer</span></a>:</dt><dd><p>Configuration of paraprobe-clusterer
-Import cluster analysis results of IVAS/APSuite and perform clustering
-analyses in a Python ecosystem.</p>
-</dd>
-<dt><a class="reference internal" href="NXapm_paraprobe_results_clusterer.html#nxapm-paraprobe-results-clusterer"><span class="std std-ref">NXapm_paraprobe_results_clusterer</span></a>:</dt><dd><p>Results of paraprobe-clusterer
-Store results of cluster analyses.</p>
-</dd>
-</dl>
-</div></blockquote>
-</section>
-<section id="apmparaprobenewbc">
-<span id="id1"></span><h2>Base Classes<a class="headerlink" href="#apmparaprobenewbc" title="Link to this heading">¶</a></h2>
-<p>We envision that the above-mentioned definitions can be useful not only to take
-inspiration for other software tools in the field of atom probe but also to support
-a discussion towards a stronger standardization of the vocabulary used. This is an
-ongoing discussion in the field emission community <a class="reference external" href="http://fieldemission.org/">IFES</a>.
-We are happy for taking comments and suggestions. The use of base classes for atom probe
-is motivated by the observation that the majority of data analyses in atom probe
-use a common set of operations and conditions on the input data:</p>
-<blockquote>
-<div><dl class="simple">
-<dt><a class="reference internal" href="NXapm_input_reconstruction.html#nxapm-input-reconstruction"><span class="std std-ref">NXapm_input_reconstruction</span></a>:</dt><dd><p>A base class documenting from where reconstructed ion positions are imported.</p>
-</dd>
-<dt><a class="reference internal" href="NXapm_input_ranging.html#nxapm-input-ranging"><span class="std std-ref">NXapm_input_ranging</span></a>:</dt><dd><p>A base class documenting from where ranging definitions are imported.
-The design of the ranging definitions is, thanks to <a class="reference internal" href="NXion.html#nxion"><span class="std std-ref">NXion</span></a>, so
-general that all possible nuclids can be considered.</p>
-</dd>
-</dl>
-</div></blockquote>
-<p>A detailed inspection of spatial and other type of filters frequently used in analysis of atom probe
-data revealed that it is better to define atom-probe-agnostic reusable concepts for filters:</p>
-<blockquote>
-<div><dl class="simple">
-<dt><a class="reference internal" href="NXspatial_filter.html#nxspatial-filter"><span class="std std-ref">NXspatial_filter</span></a>:</dt><dd><p>A base class proposing how a point cloud can be spatially filtered in a specific yet general manner.
-This base class takes advantage of <a class="reference internal" href="NXcg_ellipsoid_set.html#nxcg-ellipsoid-set"><span class="std std-ref">NXcg_ellipsoid_set</span></a>, <a class="reference internal" href="NXcg_cylinder_set.html#nxcg-cylinder-set"><span class="std std-ref">NXcg_cylinder_set</span></a>,
-and <a class="reference internal" href="NXcg_hexahedron_set.html#nxcg-hexahedron-set"><span class="std std-ref">NXcg_hexahedron_set</span></a> to cater for commonly used geometric primitives in atom probe.
-The primitives are used for defining the shape and extent of a region of interest (ROI).</p>
-</dd>
-<dt><a class="reference internal" href="NXsubsampling_filter.html#nxsubsampling-filter"><span class="std std-ref">NXsubsampling_filter</span></a>:</dt><dd><p>A base class for a filter that can also be used for specifying how entries
-like ions can be filtered via sub-sampling.</p>
-</dd>
-<dt><a class="reference internal" href="NXmatch_filter.html#nxmatch-filter"><span class="std std-ref">NXmatch_filter</span></a>:</dt><dd><p>A base class for a filter that can also be used for specifying how entries
-like ions can be filtered based on their type or other descriptors like hit multiplicity.</p>
+<dt><a class="reference internal" href="NXapm_paraprobe_intersector_config.html#nxapm-paraprobe-intersector-config"><span class="std std-ref">NXapm_paraprobe_intersector_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_intersector_results.html#nxapm-paraprobe-intersector-results"><span class="std std-ref">NXapm_paraprobe_intersector_results</span></a>:</dt><dd><p>Configuration and results resepctively of the paraprobe-intersector tool.
+Analyze volumetric intersections and proximity of 3D objects discretized as triangulated surface meshes
+in continuum space to study the effect the parameterization of surface extraction algorithms on the resulting shape,
+spatial arrangement, and colocation of 3D objects via graph-based techniques.</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -317,7 +294,7 @@ like ions can be filtered based on their type or other descriptors like hit mult
 <li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. Examples of writing and reading NeXus data files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Examples data files I/O</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
@@ -325,13 +302,13 @@ like ions can be filtered based on their type or other descriptors like hit mult
 <li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. B1: Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ellipsometry-structure.html">5. B4: Optical spectroscopy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. B5: Atom-probe tomography</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport Phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ellipsometry-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sts-structure.html">8. Scanning Tunneling Spectroscopy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Computational geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../laboratory-structure.html">11. Sample preparation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
@@ -350,7 +327,6 @@ like ions can be filtered based on their type or other descriptors like hit mult
 <li><a class="reference internal" href="#apmtools">apmtools</a></li>
 <li><a class="reference internal" href="#what-has-been-achieved-so-far">What has been achieved so far?</a></li>
 <li><a class="reference internal" href="#application-definitions">Application Definitions</a></li>
-<li><a class="reference internal" href="#apmparaprobenewbc">Base Classes</a></li>
 </ul>
 </li>
 </ul>
