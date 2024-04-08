@@ -45,7 +45,7 @@ NXmpes_arpes
     **definition**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXmpes/ENTRY/definition-field>`
 
 
-      Any of these values: ``NXmpes`` | ``NXmpes_arpes``
+      Obligatory value: ``NXmpes_arpes``
 
       .. _/NXmpes_arpes/ENTRY/definition@version-attribute:
 
@@ -619,13 +619,20 @@ NXmpes_arpes
       **@axes**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata_mpes@axes-attribute>`
 
 
-        Obligatory value: ``[angular1, angular2, energy]``
+        Obligatory value: ``[angular0, angular1, energy]``
 
       .. _/NXmpes_arpes/ENTRY/data@energy_indices-attribute:
 
       .. index:: energy_indices (group attribute)
 
       **@energy_indices**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+
+
+      .. _/NXmpes_arpes/ENTRY/data@angular0_indices-attribute:
+
+      .. index:: angular0_indices (group attribute)
+
+      **@angular0_indices**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
       .. _/NXmpes_arpes/ENTRY/data@angular1_indices-attribute:
@@ -635,12 +642,20 @@ NXmpes_arpes
       **@angular1_indices**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
-      .. _/NXmpes_arpes/ENTRY/data@angular2_indices-attribute:
+      .. _/NXmpes_arpes/ENTRY/data@angular0_depends-attribute:
 
-      .. index:: angular2_indices (group attribute)
+      .. index:: angular0_depends (group attribute)
 
-      **@angular2_indices**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+      **@angular0_depends**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata_mpes@AXISNAME_depends-attribute>`
 
+        .. collapse:: Points to the path to a field defining the axis on which the angular axis  ...
+
+            Points to the path to a field defining the axis on which the angular axis depends.
+            For example:
+            @angular0_depends: '/entry/sample/transformations/sample_tilt' for a manipulator angular scan
+            @angular0_depends: '/entry/instrument/detector/sensor_x' for a 2D detector
+            @angular0_depends: '/entry/instrument/collectioncolumn/deflector' for a deflector scan
+            @angular0_depends: '/entry/process/calibration/angular0_calibration/calibrated_axis' for a preprocessed axis.
 
       .. _/NXmpes_arpes/ENTRY/data@angular1_depends-attribute:
 
@@ -652,25 +667,10 @@ NXmpes_arpes
 
             Points to the path to a field defining the axis on which the angular axis depends.
             For example:
-            @angular1_depends: '/entry/sample/transformations/sample_tilt' for a manipulator angular scan
+            @angular1_depends: '/entry/sample/transformations/sample_polar' for a manipulator angular scan
             @angular1_depends: '/entry/instrument/detector/sensor_x' for a 2D detector
             @angular1_depends: '/entry/instrument/collectioncolumn/deflector' for a deflector scan
             @angular1_depends: '/entry/process/calibration/angular1_calibration/calibrated_axis' for a preprocessed axis.
-
-      .. _/NXmpes_arpes/ENTRY/data@angular2_depends-attribute:
-
-      .. index:: angular2_depends (group attribute)
-
-      **@angular2_depends**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata_mpes@AXISNAME_depends-attribute>`
-
-        .. collapse:: Points to the path to a field defining the axis on which the angular axis  ...
-
-            Points to the path to a field defining the axis on which the angular axis depends.
-            For example:
-            @angular2_depends: '/entry/sample/transformations/sample_polar' for a manipulator angular scan
-            @angular2_depends: '/entry/instrument/detector/sensor_x' for a 2D detector
-            @angular2_depends: '/entry/instrument/collectioncolumn/deflector' for a deflector scan
-            @angular2_depends: '/entry/process/calibration/angular2_calibration/calibrated_axis' for a preprocessed axis.
 
       .. _/NXmpes_arpes/ENTRY/data@energy_depends-attribute:
 
@@ -697,22 +697,22 @@ NXmpes_arpes
             Trace of the energy axis. Could be linked from the respective 'AXISNAME_depends'
             field.
 
-      .. _/NXmpes_arpes/ENTRY/data/angular1-field:
+      .. _/NXmpes_arpes/ENTRY/data/angular0-field:
 
-      .. index:: angular1 (field)
+      .. index:: angular0 (field)
 
-      **angular1**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} :ref:`⤆ </NXdata_mpes/AXISNAME-field>`
+      **angular0**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} :ref:`⤆ </NXdata_mpes/AXISNAME-field>`
 
         .. collapse:: Trace of the first angular axis. Could be linked from the respective ...
 
             Trace of the first angular axis. Could be linked from the respective
             'AXISNAME_depends' field.
 
-      .. _/NXmpes_arpes/ENTRY/data/angular2-field:
+      .. _/NXmpes_arpes/ENTRY/data/angular1-field:
 
-      .. index:: angular2 (field)
+      .. index:: angular1 (field)
 
-      **angular2**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=ANX_ANGLE} :ref:`⤆ </NXdata_mpes/AXISNAME-field>`
+      **angular1**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=ANX_ANGLE} :ref:`⤆ </NXdata_mpes/AXISNAME-field>`
 
         .. collapse:: Trace of the second axis. Could be linked from the respective 'AXISNAME_de ...
 
@@ -741,14 +741,14 @@ attributes, and links defined in this class.
 
 * :ref:`/NXmpes_arpes/ENTRY-group </NXmpes_arpes/ENTRY-group>`
 * :ref:`/NXmpes_arpes/ENTRY/data-group </NXmpes_arpes/ENTRY/data-group>`
+* :ref:`/NXmpes_arpes/ENTRY/data/angular0-field </NXmpes_arpes/ENTRY/data/angular0-field>`
 * :ref:`/NXmpes_arpes/ENTRY/data/angular1-field </NXmpes_arpes/ENTRY/data/angular1-field>`
-* :ref:`/NXmpes_arpes/ENTRY/data/angular2-field </NXmpes_arpes/ENTRY/data/angular2-field>`
 * :ref:`/NXmpes_arpes/ENTRY/data/data-field </NXmpes_arpes/ENTRY/data/data-field>`
 * :ref:`/NXmpes_arpes/ENTRY/data/energy-field </NXmpes_arpes/ENTRY/data/energy-field>`
+* :ref:`/NXmpes_arpes/ENTRY/data@angular0_depends-attribute </NXmpes_arpes/ENTRY/data@angular0_depends-attribute>`
+* :ref:`/NXmpes_arpes/ENTRY/data@angular0_indices-attribute </NXmpes_arpes/ENTRY/data@angular0_indices-attribute>`
 * :ref:`/NXmpes_arpes/ENTRY/data@angular1_depends-attribute </NXmpes_arpes/ENTRY/data@angular1_depends-attribute>`
 * :ref:`/NXmpes_arpes/ENTRY/data@angular1_indices-attribute </NXmpes_arpes/ENTRY/data@angular1_indices-attribute>`
-* :ref:`/NXmpes_arpes/ENTRY/data@angular2_depends-attribute </NXmpes_arpes/ENTRY/data@angular2_depends-attribute>`
-* :ref:`/NXmpes_arpes/ENTRY/data@angular2_indices-attribute </NXmpes_arpes/ENTRY/data@angular2_indices-attribute>`
 * :ref:`/NXmpes_arpes/ENTRY/data@axes-attribute </NXmpes_arpes/ENTRY/data@axes-attribute>`
 * :ref:`/NXmpes_arpes/ENTRY/data@energy_depends-attribute </NXmpes_arpes/ENTRY/data@energy_depends-attribute>`
 * :ref:`/NXmpes_arpes/ENTRY/data@energy_indices-attribute </NXmpes_arpes/ENTRY/data@energy_indices-attribute>`
