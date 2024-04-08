@@ -71,11 +71,7 @@ NXsts(NXsensor_scan):
         doc: |
           Type of software used in SPM experiments, such as software version serial number, UI and
           RT probe release method. (e.g. SW Version Generic 5e -- RT Release 10771)
-        version:
-          exists: optional
-          doc: |
-            Version of the software.
-      
+
       # amplification: Current amplifier> factor (V/V): 1E-10
       # crosstalk_compensation: Current amplifier> Capacitive cross-talk compensation: Yes/No
       current_amplifier(NXamplifier):
@@ -173,6 +169,8 @@ NXsts(NXsensor_scan):
       # Sweep Mode is MLS and the flag to configure the Lock-In per segment in the Multiline
       # segment editor is set.
       sample_bias(NXiv_bias):
+        doc: |
+          Bias voltage applied to the sample.
         bias(NX_NUMBER):
           unit: NX_VOLTAGE
           doc: |
@@ -277,9 +275,9 @@ NXsts(NXsensor_scan):
             Use the button to enable or disable the drift compensation. (e.g. FALSE)
       (NXenvironment):
         doc: |
-          Describes an environment setup for a temperature-dependent IV measurement experiment.
-          The temperature and voltage must be present as independently scanned controllers and
-          the current sensor must also be present with its readings.
+          Describes an environmental setup for a temperature-dependent IV measurement experiment.
+          The temperature and voltage must be presented as independently for scan controllers, and
+          the current sensor must also be recorded with temperature and voltage readings.
         current_sensor(NXsensor):
           exists: optional
           current(NX_NUMBER):
@@ -454,59 +452,59 @@ NXsts(NXsensor_scan):
         exists: optional
         unit: NX_TEMPERATURE
         doc: |
-          Link to target:/NXentry/NXinstrument/stm_head_temp
+          Link to target: /NXentry/NXinstrument/stm_head_temp
       
       # Temperature 2>link to Temperature 2 (K) - # Temperature of bottom of LHe helium cryostat.
       cryo_bottom_temp(NX_NUMBER):
         exists: optional
         unit: NX_TEMPERATURE
         doc: |
-          Link to target:/NXentry/NXinstrument/cryo_bottom_temp
+          Link to target: /NXentry/NXinstrument/cryo_bottom_temp
       
       # Temperature 3>link to Temperature 3 (K) - # Temperature of LN2 nitrogen shield.
       cryo_shield_temp(NX_NUMBER):
         exists: optional
         unit: NX_TEMPERATURE
         doc: |
-          Link to target:/NXentry/NXinstrument/temp_cryo_shield
+          Link to target: /NXentry/NXinstrument/temp_cryo_shield
       
       # Lock-in>link to Modulated signal Bias (V) (e.g. 1E-3) # Applied modulation to the bias voltage.
       modulation_signal:
         exists: optional
         unit: NX_VOLTAGE
         doc: |
-          Link to target:/NXentry/NXinstrument/NXlock_in/modulation_signal
+          Link to target: /NXentry/NXinstrument/NXlock_in/modulation_signal
       
       # link to Integration time (s) (e.g. 150E-6)
       # Time during which the spectroscopy data are acquired and averaged.
       integration_time(NX_NUMBER):
         unit: NX_TIME
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/NXintegration_time
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/NXintegration_time
       
       # link to Bias Spectroscopy>Number of sweeps (e.g. 100) Number of sweeps to measure and average.
       number_of_sweeps(NX_NUMBER):
         unit: NX_UNITLESS
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/number_of_sweeps
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/number_of_sweeps
       
       # link to Bias Spectroscopy>Sweep Start (V) (e.g. -300E-3) # The first bias values of the sweep.
       sweep_start(NX_NUMBER):
         unit: NX_VOLTAGE
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/sweep_start
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/sweep_start
       
       # link to Bias Spectroscopy>Sweep End (V) (e.g. 300E-3) # The last bias values of the sweep.
       sweep_end(NX_NUMBER):
         unit: NX_VOLTAGE
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/sweep_end
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/sweep_end
       
       # link to Bias Spectroscopy>Num Pixel (e.g. 4096) # Define the sweep number of points, that is, the maximum spectrum resolution eq. Bias window divide by Num Pixel.
       num_pixel(NX_NUMBER):
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/num_pixel
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/num_pixel
       
       # link to Bias Spectroscopy>Z Avg time (s) (e.g. 100E-3) # Duration over which the Z
       # position is recorded and averaged before and after the sweep (the latter only if Record
@@ -516,14 +514,14 @@ NXsts(NXsensor_scan):
       z_avg_time(NX_NUMBER):
         unit: NX_TIME
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_avg_time
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_avg_time
       
       # link to SoftwareMain>RT Frequency (Hz) (e.g. 20E+3) # The bandwitdh of the
       # Hardware and/or Software
       rt_frequency(NX_NUMBER):
         unit: NX_FREQUENCY
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/rt_frequency
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/rt_frequency
       
       # link to SoftwareMain>Signals Oversampling (e.g. 10) # (Signals Periods)
       # The Signals Period is the rate at which the signals are transferred to the host computer
@@ -533,7 +531,7 @@ NXsts(NXsensor_scan):
       # Spectrum Analyzer.
       signals_oversampling(NX_NUMBER):
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/signals_oversampling
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/signals_oversampling
       
       # link to SoftwareMain>Acquisition Period (s) (e.g. 20E-3) # Update rate for several
       # processes like History Graph, Auto-Approach, and for many Programming Interface functions.
@@ -544,7 +542,7 @@ NXsts(NXsensor_scan):
         unit: NX_TIME
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/acquisition_period
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/acquisition_period
       
       # link to SoftwareMain>Animations Period (s) (e.g. 20E-3) # Update rate of animated
       # graphical indicators. These are e.g. some graphs & sliders. A reasonable value is
@@ -555,7 +553,7 @@ NXsts(NXsensor_scan):
         unit: NX_TIME
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/animations_period
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/animations_period
       
       # link to SoftwareMain>Indicators Period (s) (e.g. 300E-3) # Update rate of digital
       # indicators, e.g. the numbers displayed besides each slider. Here, 3 updates per
@@ -564,7 +562,7 @@ NXsts(NXsensor_scan):
       indicators_period(NX_NUMBER):
         unit: NX_TIME
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/indicators_period
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/indicators_period
       
       # link to SoftwareMain>Measurements Period (s) (e.g. 500E-3) # The Measurements
       # period is the integration time for precise measurements (averaging over specified period),
@@ -576,7 +574,7 @@ NXsts(NXsensor_scan):
         exists: optional
         unit: NX_TIME
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/measurements_period
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/measurements_period
     
     # TODO: Later fix REPRODUCIBILITY_indicator
     # as all of the bellow are linked
@@ -587,24 +585,24 @@ NXsts(NXsensor_scan):
       bias(NX_NUMBER):
         unit: NX_VOLTAGE
         doc: |
-          Link to target:/NXentry/NXinstrument/NXsample_bias/bias
+          Link to target: /NXentry/NXinstrument/NXsample_bias/bias
       
       # Current>Current(NXcircuit) (A) (e.g. -5.3429E-15) # The tunneling current is displayed here.
       current(NX_NUMBER):
         unit: NX_CURRENT
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current
       
       # Bias>Calibration(NXbias) (V/V) (e.g. 1E+0) Calibration of the Bias output. If you have
       # a Range switch the calibration is stored per range setting.
       bias_calibration(NX_NUMBER):
         unit: NX_UNITLESS
         doc: |
-          Link to target:/NXentry/NXnstrument/NXsample_bias/bias_calibration
+          Link to target: /NXentry/NXnstrument/NXsample_bias/bias_calibration
       bias_offset(NX_NUMBER):
         unit: NX_VOLTAGE
         doc: |
-          Link to target:/NXentry/NXinstrument/NXsample_bias/bias_offset
+          Link to target: /NXentry/NXinstrument/NXsample_bias/bias_offset
       
       # Current>Calibration(NXcircuit) (A/V) (e.g. 100E-12)
       # The signals voltages are converted to real world physical values according to the calibration & offset parameters:
@@ -612,19 +610,19 @@ NXsts(NXsensor_scan):
       current_calibration(NX_NUMBER):
         unit: NX_CURRENT
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current_calibration
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current_calibration
       
       # Current>Offset(NXcircuit) (A) (e.g. 16.2897E-15) # The same as "Current>Calibration (A/V)" tag
       current_offset(NX_NUMBER):
         unit: NX_CURRENT
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current_offset
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current_offset
       
       # Current>Gain(NXcircuit) (e.g. Not switchable) # None
       current_gain(NX_NUMBER):
         unit: NX_UNITLESS
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current_gain
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current_gain
       
       # Z offset(NXpositioner_sts) (m) (e.g. 0E+0) # Offset added to the initial averaged position
       # Zaver before starting to sweep. This parameter is disabled when Z-Controller to Hold is
@@ -638,26 +636,26 @@ NXsts(NXsensor_scan):
       z_offset(NX_NUMBER):
         unit: NX_LENGTH
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_offset
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_offset
       settling_time(NX_NUMBER):
         unit: NX_TIME
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/settling_time
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/settling_time
       
       # Z-Ctrl hold(NXpositioner_sts) (e.g. TRUE) # When selected, the Z-Controller is set to hold
       # during the pulse. This means that the controller doesn't control the Z position during the pulse.
       z_control_hold(NX_BOOLEAN):
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_ccontroller_hold
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_ccontroller_hold
       
       # Final Z(NXpositioner_sts) (m) (e.g. N/A)
       final_z(NX_NUMBER):
         unit: NX_LENGTH
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/record_final_z
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/record_final_z
       
       # Start time(NXlog) (e.g.23.11.2022 18:55:16) # Timestamp of the moment
       # when the acquisition starts by pressing the Start button.
@@ -670,7 +668,7 @@ NXsts(NXsensor_scan):
         unit: NX_TIME
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/first_settling_time
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/first_settling_time
       
       # Bias Spectroscopy>Integration time(NXbias) (s) (e.g.150E-6) # Time during which the data
       # are acquired and averaged.
@@ -681,7 +679,7 @@ NXsts(NXsensor_scan):
         unit: NX_TIME
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/end_settling_time
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/end_settling_time
       
       # Bias Spectroscopy>Z control time(NXbias) (s) (e.g.200E-3) # Time during which the
       # Z-Controller is enabled once a sweep has finished. When averaging multiple sweeps
@@ -693,7 +691,7 @@ NXsts(NXsensor_scan):
         unit: NX_TIME
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_control_time
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_control_time
       
       # Bias Spectroscopy>Max Slew rate(NXbias) (V/s) (e.g.1E+0) # Maximum rate at which
       # the bias changes (before, during and after sweeping).
@@ -701,7 +699,7 @@ NXsts(NXsensor_scan):
         unit: NX_ANY
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/max_slew_rate
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/max_slew_rate
       
       # Bias Spectroscopy>backward sweep(NXbias) (e.g.TRUE) # Select whether to measure
       # the backward (return) sweep or the forward only.
@@ -709,20 +707,20 @@ NXsts(NXsensor_scan):
         unit: NX_ANY
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/backward_sweep
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/backward_sweep
       
       # Z-Controller>Controller name(NXpositioner_sts) (e.g.log Current) # Controller name.
       # This name which will be displayed at places where you can select a controller.
       z_controller_name:
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/controller_name
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/controller_name
       
       # Z-Controller>Controller status(NXpositioner_sts) (e.g.OFF) # ON/OFF
       z_controller_status(NX_BOOLEAN):
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/controller_status
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/controller_status
       
       # Z-Controller>Setpoint(NXpositioner_sts) (e.g.50E-12) # Set Point is the desired value
       # of the control signal. It can be set by editing the number or using the slider bar.
@@ -732,7 +730,7 @@ NXsts(NXsensor_scan):
         unit: NX_CURRENT
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/set_point
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/set_point
       
       # Z-Controller>P gain(NXpid) (e.g.6E-12) # The Type switches controller parameters
       # between P/I (proportional gain/integral gain) and P/T (proportional gain/time constant).
@@ -741,20 +739,20 @@ NXsts(NXsensor_scan):
       y_control_p_gain(NX_NUMBER):
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/p_gain
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/p_gain
       
       # Z-Controller>I gain(NXpid) (e.g.39.8241E-9) # See "Z-Controller>P gain" below.
       z_control_i_gain(NX_NUMBER):
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/i_gain
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/i_gain
       
       # Z-Controller>Time const(NXpid) (s) (e.g.150.662E-6) # See "Z-Controller>P gain" below.
       z_control_time_const(NX_NUMBER):
         unit: NX_TIME
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/time_const
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/time_const
       
       # Z-Controller>TipLift(NXpositioner_sts) (m) (e.g.0E+0) # Lifts the tip by the specified
       # amount when then controller is switched off. This can be a positive or a negative number,
@@ -764,7 +762,7 @@ NXsts(NXsensor_scan):
         unit: NX_LENGTH
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/tip_lift
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/tip_lift
       
       # Z-Controller>Switch off delay(NXpositioner_sts) (s) (e.g.0E+0) # Use this parameter for
       # a reproducible position when switching off the Z-controller. When >0 and the Z-controller
@@ -773,7 +771,7 @@ NXsts(NXsensor_scan):
         unit: NX_TIME
         exists: optional
         doc: |
-          Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/switchoff_delay
+          Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/switchoff_delay
     sample(NXsample):
       exists: optional
       doc: |
@@ -828,18 +826,26 @@ NXsts(NXsensor_scan):
     # single point default plot # current(I) vs bias(V)
     single_point(NXdata):
       exists: optional
+      doc: |
+        Plot for a single point (x,y) with I vs. V curve.
     
     # line scan default plot # multi I vs. V curves
     line_scan(NXdata):
       exists: optional
+      doc: |
+        Line scan with multiple I vs. V curves for different single (x,y) co-ordinates.
     
     # alternative plot # current(I) curve in the 2D space of (position(x), bias(V))
     alternative_plot(NXdata):
       exists: optional
+      doc:
+        Plot for current(I) curve in the 2D space of (position(x), bias(V)) which can be derived from the `line_scan` plot.
     
     # mesh scan default plot # 2D slices of the above alternative plot
     mesh_scan(NXdata):
       exists: optional
+      doc: |
+        Mesh scan with 2D slices of the above alternative plot for other y co-ordinates.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
 # 39a08f3d1a71d0ce3410e2ed1aed76a7250f94c8681a93d063c95f5966f79b9d
@@ -1372,56 +1378,56 @@ NXsts(NXsensor_scan):
 #             <!--Temperature 1>link to INSTR/STM/head Temperature 1 (K) (e.g. 4.92997E+0) # Temperature of STM head.-->
 #             <field name="stm_head_temp" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/stm_head_temp
+#                     Link to target: /NXentry/NXinstrument/stm_head_temp
 #                 </doc>
 #             </field>
 #             <!--Temperature 2>link to Temperature 2 (K) - # Temperature of bottom of LHe helium cryostat.-->
 #             <field name="cryo_bottom_temp" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
 #                 <doc>
-#                      Link to target:/NXentry/NXinstrument/cryo_bottom_temp
+#                      Link to target: /NXentry/NXinstrument/cryo_bottom_temp
 #                 </doc>
 #             </field>
 #             <!--Temperature 3>link to Temperature 3 (K) - # Temperature of LN2 nitrogen shield.-->
 #             <field name="cryo_shield_temp" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
 #                 <doc>
-#                      Link to target:/NXentry/NXinstrument/temp_cryo_shield
+#                      Link to target: /NXentry/NXinstrument/temp_cryo_shield
 #                 </doc>
 #             </field>
 #             <!--Lock-in>link to Modulated signal Bias (V) (e.g. 1E-3) # Applied modulation to the bias voltage.-->
 #             <field name="modulation_signal" optional="true" units="NX_VOLTAGE">
 #                 <doc>
-#                      Link to target:/NXentry/NXinstrument/NXlock_in/modulation_signal
+#                      Link to target: /NXentry/NXinstrument/NXlock_in/modulation_signal
 #                 </doc>
 #             </field>
 #             <!--link to Integration time (s) (e.g. 150E-6)
 # Time during which the spectroscopy data are acquired and averaged.-->
 #             <field name="integration_time" type="NX_NUMBER" units="NX_TIME">
 #                 <doc>
-#                      Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/NXintegration_time
+#                      Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/NXintegration_time
 #                 </doc>
 #             </field>
 #             <!--link to Bias Spectroscopy>Number of sweeps (e.g. 100) Number of sweeps to measure and average.-->
 #             <field name="number_of_sweeps" type="NX_NUMBER" units="NX_UNITLESS" optional="true">
 #                 <doc>
-#                      Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/number_of_sweeps
+#                      Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/number_of_sweeps
 #                 </doc>
 #             </field>
 #             <!--link to Bias Spectroscopy>Sweep Start (V) (e.g. -300E-3) # The first bias values of the sweep.-->
 #             <field name="sweep_start" type="NX_NUMBER" units="NX_VOLTAGE">
 #                 <doc>
-#                      Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/sweep_start
+#                      Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/sweep_start
 #                 </doc>
 #             </field>
 #             <!--link to Bias Spectroscopy>Sweep End (V) (e.g. 300E-3) # The last bias values of the sweep.-->
 #             <field name="sweep_end" type="NX_NUMBER" units="NX_VOLTAGE">
 #                 <doc>
-#                      Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/sweep_end
+#                      Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/sweep_end
 #                 </doc>
 #             </field>
 #             <!--link to Bias Spectroscopy>Num Pixel (e.g. 4096) # Define the sweep number of points, that is, the maximum spectrum resolution eq. Bias window divide by Num Pixel.-->
 #             <field name="num_pixel" type="NX_NUMBER">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/num_pixel
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/num_pixel
 #                 </doc>
 #             </field>
 #             <!--link to Bias Spectroscopy>Z Avg time (s) (e.g. 100E-3) # Duration over which the Z
@@ -1431,14 +1437,14 @@ NXsts(NXsensor_scan):
 # set to hold and the tip is placed at the previously averaged Z position (plus Z offset).-->
 #             <field name="z_avg_time" type="NX_NUMBER" units="NX_TIME">
 #                 <doc>
-#                      Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_avg_time
+#                      Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_avg_time
 #                 </doc>
 #             </field>
 #             <!--link to SoftwareMain>RT Frequency (Hz) (e.g. 20E+3) # The bandwitdh of the
 # Hardware and/or Software-->
 #             <field name="rt_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/rt_frequency
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/rt_frequency
 #                 </doc>
 #             </field>
 #             <!--link to SoftwareMain>Signals Oversampling (e.g. 10) # (Signals Periods)
@@ -1449,7 +1455,7 @@ NXsts(NXsensor_scan):
 # Spectrum Analyzer.-->
 #             <field name="signals_oversampling" type="NX_NUMBER">
 #                 <doc>
-#                      Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/signals_oversampling
+#                      Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/signals_oversampling
 #                 </doc>
 #             </field>
 #             <!--link to SoftwareMain>Acquisition Period (s) (e.g. 20E-3) # Update rate for several
@@ -1459,7 +1465,7 @@ NXsts(NXsensor_scan):
 # coerced to a multiple of the Acquisition Period.-->
 #             <field name="acquisition_period" type="NX_NUMBER" units="NX_TIME" optional="true">
 #                 <doc>
-#                      Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/acquisition_period
+#                      Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/acquisition_period
 #                 </doc>
 #             </field>
 #             <!--link to SoftwareMain>Animations Period (s) (e.g. 20E-3) # Update rate of animated
@@ -1469,7 +1475,7 @@ NXsts(NXsensor_scan):
 # user interface update rate and does not affect measurements in any way.-->
 #             <field name="animations_period" type="NX_NUMBER" units="NX_TIME" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/animations_period
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/animations_period
 #                 </doc>
 #             </field>
 #             <!--link to SoftwareMain>Indicators Period (s) (e.g. 300E-3) # Update rate of digital
@@ -1478,7 +1484,7 @@ NXsts(NXsensor_scan):
 # does not affect measurements in any way.-->
 #             <field name="indicators_period" type="NX_NUMBER" units="NX_TIME">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/indicators_period
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/indicators_period
 #                 </doc>
 #             </field>
 #             <!--link to SoftwareMain>Measurements Period (s) (e.g. 500E-3) # The Measurements
@@ -1489,7 +1495,7 @@ NXsts(NXsensor_scan):
 # high-Q cantilever, values of several seconds might be necessary. Usually this parameter doesn’t need to be set from this module; the sweep modules will set this value according to the sweep timings.-->
 #             <field name="measurements_period" type="NX_NUMBER" optional="true" units="NX_TIME">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/measurements_period
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/measurements_period
 #                 </doc>
 #             </field>
 #         </group>
@@ -1499,25 +1505,25 @@ NXsts(NXsensor_scan):
 #             <!--Bias>Bias(NXBias) (V) (e.g. 100E-3) # Applied bias voltage.-->
 #             <field name="bias" type="NX_NUMBER" units="NX_VOLTAGE">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXsample_bias/bias
+#                     Link to target: /NXentry/NXinstrument/NXsample_bias/bias
 #                 </doc>
 #             </field>
 #             <!--Current>Current(NXcircuit) (A) (e.g. -5.3429E-15) # The tunneling current is displayed here.-->
 #             <field name="current" type="NX_NUMBER" units="NX_CURRENT">
 #                 <doc>
-#                      Link to target:/NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current
+#                      Link to target: /NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current
 #                 </doc>
 #             </field>
 #             <!--Bias>Calibration(NXbias) (V/V) (e.g. 1E+0) Calibration of the Bias output. If you have
 # a Range switch the calibration is stored per range setting.-->
 #             <field name="bias_calibration" type="NX_NUMBER" units="NX_UNITLESS">
 #                 <doc>
-#                     Link to target:/NXentry/NXnstrument/NXsample_bias/bias_calibration
+#                     Link to target: /NXentry/NXnstrument/NXsample_bias/bias_calibration
 #                 </doc>
 #             </field>
 #             <field name="bias_offset" type="NX_NUMBER" units="NX_VOLTAGE">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXsample_bias/bias_offset
+#                     Link to target: /NXentry/NXinstrument/NXsample_bias/bias_offset
 #                 </doc>
 #             </field>
 #             <!--Current>Calibration(NXcircuit) (A/V) (e.g. 100E-12)
@@ -1525,19 +1531,19 @@ NXsts(NXsensor_scan):
 # Physical signal = (Voltage * calibration) + offset.-->
 #             <field name="current_calibration" type="NX_NUMBER" units="NX_CURRENT">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current_calibration
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current_calibration
 #                 </doc>
 #             </field>
 #             <!--Current>Offset(NXcircuit) (A) (e.g. 16.2897E-15) # The same as "Current>Calibration (A/V)" tag-->
 #             <field name="current_offset" type="NX_NUMBER" units="NX_CURRENT">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current_offset
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current_offset
 #                 </doc>
 #             </field>
 #             <!--Current>Gain(NXcircuit) (e.g. Not switchable) # None-->
 #             <field name="current_gain" type="NX_NUMBER" units="NX_UNITLESS">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current_gain
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current_gain
 #                 </doc>
 #             </field>
 #             <!--Z offset(NXpositioner_sts) (m) (e.g. 0E+0) # Offset added to the initial averaged position
@@ -1550,25 +1556,25 @@ NXsts(NXsensor_scan):
 # acquired and averaged.-->
 #             <field name="z_offset" type="NX_NUMBER" units="NX_LENGTH">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_offset
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_offset
 #                 </doc>
 #             </field>
 #             <field name="settling_time" type="NX_NUMBER" units="NX_TIME" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/settling_time
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/settling_time
 #                 </doc>
 #             </field>
 #             <!--Z-Ctrl hold(NXpositioner_sts) (e.g. TRUE) # When selected, the Z-Controller is set to hold
 # during the pulse. This means that the controller doesn't control the Z position during the pulse.-->
 #             <field name="z_control_hold" type="NX_BOOLEAN" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_ccontroller_hold
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_ccontroller_hold
 #                 </doc>
 #             </field>
 #             <!--Final Z(NXpositioner_sts) (m) (e.g. N/A)-->
 #             <field name="final_z" type="NX_NUMBER" units="NX_LENGTH" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/record_final_z
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/record_final_z
 #                 </doc>
 #             </field>
 #             <!--Start time(NXlog) (e.g.23.11.2022 18:55:16) # Timestamp of the moment
@@ -1580,7 +1586,7 @@ NXsts(NXsensor_scan):
 # Bias Spectroscopy>1st Settling time(NXbias) (s) (e.g.2.1E-3) # See the "Settling time (s)" below.-->
 #             <field name="first_settling_time" type="NX_NUMBER" units="NX_TIME" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/first_settling_time
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/first_settling_time
 #                 </doc>
 #             </field>
 #             <!--Bias Spectroscopy>Integration time(NXbias) (s) (e.g.150E-6) # Time during which the data
@@ -1590,7 +1596,7 @@ NXsts(NXsensor_scan):
 # Bias Spectroscopy>End Settling time(NXbias) (s) (e.g.4E-3) # Time to wait after the sweep has finished and the bias is ramped to the initial value.-->
 #             <field name="end_settling_time" type="NX_NUMBER" units="NX_TIME" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/end_settling_time
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/end_settling_time
 #                 </doc>
 #             </field>
 #             <!--Bias Spectroscopy>Z control time(NXbias) (s) (e.g.200E-3) # Time during which the
@@ -1601,34 +1607,34 @@ NXsts(NXsensor_scan):
 # disabled when Z-Controller to Hold is deselected in the Advanced section.-->
 #             <field name="z_control_time" type="NX_NUMBER" units="NX_TIME" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_control_time
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_control_time
 #                 </doc>
 #             </field>
 #             <!--Bias Spectroscopy>Max Slew rate(NXbias) (V/s) (e.g.1E+0) # Maximum rate at which
 # the bias changes (before, during and after sweeping).-->
 #             <field name="max_slew_rate" type="NX_NUMBER" units="NX_ANY" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/max_slew_rate
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/max_slew_rate
 #                 </doc>
 #             </field>
 #             <!--Bias Spectroscopy>backward sweep(NXbias) (e.g.TRUE) # Select whether to measure
 # the backward (return) sweep or the forward only.-->
 #             <field name="backward_sweep" type="NX_NUMBER" units="NX_ANY" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/backward_sweep
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/backward_sweep
 #                 </doc>
 #             </field>
 #             <!--Z-Controller>Controller name(NXpositioner_sts) (e.g.log Current) # Controller name.
 # This name which will be displayed at places where you can select a controller.-->
 #             <field name="z_controller_name" optional="true" >
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/controller_name
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/controller_name
 #                 </doc>
 #             </field>
 #             <!--Z-Controller>Controller status(NXpositioner_sts) (e.g.OFF) # ON/OFF-->
 #             <field name="z_controller_status" type="NX_BOOLEAN" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/controller_status
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/controller_status
 #                 </doc>
 #             </field>
 #             <!--Z-Controller>Setpoint(NXpositioner_sts) (e.g.50E-12) # Set Point is the desired value
@@ -1637,7 +1643,7 @@ NXsts(NXsensor_scan):
 # Z-Controller>Setpoint unit(NXpositioner_sts) (e.g.A) # Angstrom-->
 #             <field name="z_controller_setpoint" type="NX_NUMBER" units="NX_CURRENT" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/set_point
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/set_point
 #                 </doc>
 #             </field>
 #             <!--Z-Controller>P gain(NXpid) (e.g.6E-12) # The Type switches controller parameters
@@ -1646,19 +1652,19 @@ NXsts(NXsensor_scan):
 # The integral gain and time constant are related as follows: I = P/T.-->
 #             <field name="y_control_p_gain" type="NX_NUMBER" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/p_gain
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/p_gain
 #                 </doc>
 #             </field>
 #             <!--Z-Controller>I gain(NXpid) (e.g.39.8241E-9) # See "Z-Controller>P gain" below.-->
 #             <field name="z_control_i_gain" type="NX_NUMBER" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/i_gain
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/i_gain
 #                 </doc>
 #             </field>
 #             <!--Z-Controller>Time const(NXpid) (s) (e.g.150.662E-6) # See "Z-Controller>P gain" below.-->
 #             <field name="z_control_time_const" units="NX_TIME" type="NX_NUMBER" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/time_const
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/time_const
 #                 </doc>
 #             </field>
 #             <!--Z-Controller>TipLift(NXpositioner_sts) (m) (e.g.0E+0) # Lifts the tip by the specified
@@ -1667,7 +1673,7 @@ NXsts(NXsensor_scan):
 # using this feature.-->
 #             <field name="z_control_tip_lift" type="NX_NUMBER" units="NX_LENGTH" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/tip_lift
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/tip_lift
 #                 </doc>
 #             </field>
 # 
@@ -1676,7 +1682,7 @@ NXsts(NXsensor_scan):
 # is switched off, it doesn't switch off immediately but continues to run for the specified time and averages the Z position.-->
 #             <field name="z_control_switchoff_delay" type="NX_NUMBER" units="NX_TIME" optional="true">
 #                 <doc>
-#                     Link to target:/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/switchoff_delay
+#                     Link to target: /NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/switchoff_delay
 #                 </doc>
 #             </field>
 #         </group>
