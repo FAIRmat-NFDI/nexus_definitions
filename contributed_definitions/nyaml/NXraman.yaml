@@ -120,20 +120,31 @@ NXraman(NXopt):
     experiment_type:
       doc: |
         Specify the type of Raman measurement.
-      enumeration: [in situ Raman spectroscopy, resonant Raman spectroscopy, non-resonant Raman spectroscopy, Raman imaging, Tip-enhanced Raman spectroscopy (TERS), Surface-enhanced Raman spectroscopy (SERS), Surface plasmon polariton enhanced Raman scattering (SPPERS), Hyper Raman spectroscopy (HRS), Stimulated Raman spectroscopy (SRS), Inverse Raman spectroscopy (IRS), Coherent anti-Stokes Raman spectroscopy (CARS)]
+      enumeration: [in situ Raman spectroscopy, resonant Raman spectroscopy, non-resonant Raman spectroscopy, Raman imaging, Tip-enhanced Raman spectroscopy (TERS), Surface-enhanced Raman spectroscopy (SERS), Surface plasmon polariton enhanced Raman scattering (SPPERS), Hyper Raman spectroscopy (HRS), Stimulated Raman spectroscopy (SRS), Inverse Raman spectroscopy (IRS), Coherent anti-Stokes Raman spectroscopy (CARS), other]
+    experiment_type_other:
+      exists: optional
+      doc: |
+        If the experiment_type is `other`, a name should be specified here.
     (NXinstrument):
       doc: |
-        Properties of the Instruments used for Raman instrumeasurements.
-      company:
-        exists: optional
+         Metadata of the setup, its optical elements and physical properites which
+         defines the Raman measurement.
+      device_information(NXfabrication):      
         doc: |
           Name of the company which build the instrument.
-      construction_year(NX_DATE_TIME):
-        exists: optional
-        doc: |
-          ISO8601 date when the instrument was constructed.
-          UTC offset should be specified.
-      software(NXprocess):
+        exists: recommended
+        vendor:
+          exists: recommended
+        model:
+          exists: recommended
+        identifier:
+          exists: recommended
+        construction_year(NX_DATE_TIME): # is 1 indention ok?
+          exists: optional
+          doc: |
+            ISO8601 date when the instrument was constructed.
+            UTC offset should be specified.
+      software(NXprocess): ## NXChar=
         program:
           doc: |
             Commercial or otherwise defined given name of the program that was
@@ -182,30 +193,90 @@ NXraman(NXopt):
               3 x 4 Matrix, which lists the porto notation vectors A, B, C, D.
               A has to be perpendicular to B and C perpendicular to D.
             dim: [[1, 4], [2, 3]]
+
+      # In the following - Auxillary NXbeam_devices are defined, to enable a 
+      # beam path description of the setup, while using the up now available
+      # Nexus definitions for source, detector, monochromator, ... 
       opt_source(NXbeam_device):
         doc: |
-          beam device instance of the optical source.
-        device:
+          This is the beam device instance of the optical source.
+
+          It enables a description of the optical setup via NXbeam_devices to 
+          be able to connect the components. This connection is then a "beam path".
+
+          The properties of the source are located in a NXsource group.
+          [Note: the idea is to incorporate later NXbeam_device into NXsource]
+
+          This is done similarily with NXlens_opt, NXdetector, NXwaveplate and NXmonochromator.
+        \@device:
           doc: |
             It should contain the name of the Nexus source group.
+      incident_light_optics(NXbeam_device):
+        doc: |
+          Beam device instance of the incident light optics.
+        \@device:
+          doc: |
+            It should contain the name of the "incident_light_lens(NXlens_opt)" group
+      scattered_light_optics(NXbeam_device):
+        doc: |
+          Beam device instance of the scattered light optics.
+        \@device:
+          doc: |
+            It should contain the name of the "scattered_light_lens(NXlens_opt)" group
+      opt_detector(NXbeam_device):
+        doc: |
+          Properties of the detector to link it via NXbeam_device to other beam
+          elements
+        \@device:
+          doc: |
+            It should contain the name of the Nexus detector group
+      polarization_manipulator_NAME(NXbeam_device):
+        exists: optional
+        doc: |
+          Link to the device, that it can be used to generate a beam path via
+          NXbeam_device. The string >NAME< in the name of this NXbeam_device
+          has to identical to >NAME< in waveplate_NAME(NXwaveplate).
+        \@device:
+          doc: |
+            This should contain the name for each halfwave plate used in the
+            NXwaveplate group.
+      opt_monochromator(NXbeam_device):
+        exists: optional
+        doc: |
+          Dispersive element to create e.g. an energetic resolution used in the 
+          measurement.
+        \@device:
+          doc: |
+            It should contain the name of the Nexus Monochromator group
+      sample_as_beam_element(NXbeam_device):
+        doc: |
+          Enables beam path description of the sample in the setup.
+          it in a beam path.
+        \@device:
+          doc: |
+            Contains the link to the sample.
+      # End of Auxillary NXbeam_devices
+
+
+      # Below:
+      # generic NeXus definition for optical elements of the setup
       (NXsource):
         doc: |
           Light source with arbitrary choice of name. This shall be referenced
           by source(NXbeam_device)
         source_type:
           enumeration: [laser, dye-laser, broadband tunable light source, other]
-      incident_light_optics(NXbeam_device):
+      (NXdetector):
         doc: |
-          Beam device instance of the incident light optics.
-        device:
-          doc: |
-            It should contain the name of the "incident_light_lens(NXlens_opt)" group
-      scattered_light_optics(NXbeam_device):
+          Detector with arbitrary choice of the name, which shall be referenced
+          by the detector(NXbeam_device). 
+      (NXmonochromator):
         doc: |
-          Beam device instance of the scattered light optics.
-        device:
-          doc: |
-            It should contain the name of the "scattered_light_lens(NXlens_opt)" group
+          Monochromator with arbitrary choice of the name, which shall be referenced
+          by the spectrometer(NXbeam_device).
+
+      # Below:
+      # NeXus definition derived optical elements of the setup
       incident_light_lens(NXlens_opt):        
         doc: |
           This is the optical element used for the incident light in the Raman
@@ -232,33 +303,15 @@ NXraman(NXopt):
         numerical_aperture(NX_NUMBER):
           doc: |
             The numerical aperture of the used incident light optics.
-      opt_detector(NXbeam_device):
-        doc: |
-          Properties of the detector to link it via NXbeam_device to other beam
-          elements
-        device:
-          doc: |
-            It should contain the name of the Nexus detector group
-      (NXdetector):
-        doc: |
-          Detector with arbitrary choice of the name, which shall be referenced
-          by the detector(NXbeam_device). 
-      polarization_manipulator_NAME(NXbeam_device):
-        exists: optional
-        doc: |
-          Link to the device, that it can be used to generate a beam path via
-          NXbeam_device. The string >NAME< in the name of this NXbeam_device
-          has to identical to >NAME< in waveplate_NAME(NXwaveplate).
-        device:
-          doc: |
-            This should contain the name for each halfwave plate used in the
-            NXwaveplate group.
       waveplate_NAME(NXwaveplate):
         doc: |
           Properties of the device for the manipulation of the state of light which is a half wave
           plate.
         type:
           enumeration: [objective, lens, glass fiber, none, other]
+        
+      # Below:
+      # NXraman specific optical elements
       polarization_filter(NXbeam_device):
         filter_mechanism(NX_CHAR):
           exists: optional
@@ -271,7 +324,7 @@ NXraman(NXopt):
             Specific name or type of the polarizer used.
             
             Free text, for example: Glan-Thompson, Glan-Taylor, Rochon Prism, Wollaston
-            Polarizer...
+            Polarizer...      
       spectral_filter_N(NXbeam_device):
         filter_type:
           exists: optional
@@ -301,26 +354,13 @@ NXraman(NXopt):
               Which property is used to form the spectral properties of light,
               i.e. transmission or reflection properties.
             enumeration: [transmission, reflection]
-      opt_monochromator(NXbeam_device):
-        exists: optional
-        doc: |
-          Dispersive element to create e.g. an energetic resolution used in the 
-          measurement.
-        device:
-          doc: |
-            It should contain the name of the Nexus Monochromator group
-      (NXmonochromator):
-        doc: |
-          Monochromator with arbitrary choice of the name, which shall be referenced
-          by the spectrometer(NXbeam_device).
-      Sample_as_beam_element(NXbeam_device):
-        doc: |
-          Enables beam path description of the sample in the setup.
-          it in a beam path.
-        device:
-          doc: |
-            Contains the link to the sample.
     (NXsample):
+      name:
+        exists: required
+      sample_id:
+        exists: recommended
+      chemical_formula:
+        exists: recommended
     data_collection(NXprocess):
       data_type:
         doc: |

@@ -189,23 +189,33 @@ The document has the following main elements:
                 <item value="Stimulated Raman spectroscopy (SRS)"/>
                 <item value="Inverse Raman spectroscopy (IRS)"/>
                 <item value="Coherent anti-Stokes Raman spectroscopy (CARS)"/>
+                <item value="other"/>
             </enumeration>
+        </field>
+        <field name="experiment_type_other" optional="true">
+            <doc>
+                 If the experiment_type is `other`, a name should be specified here.
+            </doc>
         </field>
         <group type="NXinstrument">
             <doc>
-                 Properties of the Instruments used for Raman instrumeasurements.
+                 Metadata of the setup, its optical elements and physical properites which
+                 defines the Raman measurement.
             </doc>
-            <field name="company" optional="true">
+            <group name="device_information" type="NXfabrication" recommended="true">
                 <doc>
                      Name of the company which build the instrument.
                 </doc>
-            </field>
-            <field name="construction_year" type="NX_DATE_TIME" optional="true">
-                <doc>
-                     ISO8601 date when the instrument was constructed.
-                     UTC offset should be specified.
-                </doc>
-            </field>
+                <field name="vendor" recommended="true"/>
+                <field name="model" recommended="true"/>
+                <field name="identifier" recommended="true"/>
+                <field name="construction_year" type="NX_DATE_TIME" optional="true">
+                    <doc>
+                         ISO8601 date when the instrument was constructed.
+                         UTC offset should be specified.
+                    </doc>
+                </field>
+            </group>
             <group name="software" type="NXprocess">
                 <field name="program">
                     <doc>
@@ -269,16 +279,96 @@ unit: NX_LENGTH
                     </dimensions>
                 </attribute>
             </field>
+            <!--In the following - Auxillary NXbeam_devices are defined, to enable a
+beam path description of the setup, while using the up now available
+Nexus definitions for source, detector, monochromator, ...-->
             <group name="opt_source" type="NXbeam_device">
                 <doc>
-                     beam device instance of the optical source.
+                     This is the beam device instance of the optical source.
+                     
+                     It enables a description of the optical setup via NXbeam_devices to 
+                     be able to connect the components. This connection is then a "beam path".
+                     
+                     The properties of the source are located in a NXsource group.
+                     [Note: the idea is to incorporate later NXbeam_device into NXsource]
+                     
+                     This is done similarily with NXlens_opt, NXdetector, NXwaveplate and NXmonochromator.
                 </doc>
-                <field name="device">
+                <attribute name="device">
                     <doc>
                          It should contain the name of the Nexus source group.
                     </doc>
-                </field>
+                </attribute>
             </group>
+            <group name="incident_light_optics" type="NXbeam_device">
+                <doc>
+                     Beam device instance of the incident light optics.
+                </doc>
+                <attribute name="device">
+                    <doc>
+                         It should contain the name of the "incident_light_lens(NXlens_opt)" group
+                    </doc>
+                </attribute>
+            </group>
+            <group name="scattered_light_optics" type="NXbeam_device">
+                <doc>
+                     Beam device instance of the scattered light optics.
+                </doc>
+                <attribute name="device">
+                    <doc>
+                         It should contain the name of the "scattered_light_lens(NXlens_opt)" group
+                    </doc>
+                </attribute>
+            </group>
+            <group name="opt_detector" type="NXbeam_device">
+                <doc>
+                     Properties of the detector to link it via NXbeam_device to other beam
+                     elements
+                </doc>
+                <attribute name="device">
+                    <doc>
+                         It should contain the name of the Nexus detector group
+                    </doc>
+                </attribute>
+            </group>
+            <group name="polarization_manipulator_NAME" type="NXbeam_device" optional="true">
+                <doc>
+                     Link to the device, that it can be used to generate a beam path via
+                     NXbeam_device. The string &gt;NAME&lt; in the name of this NXbeam_device
+                     has to identical to &gt;NAME&lt; in waveplate_NAME(NXwaveplate).
+                </doc>
+                <attribute name="device">
+                    <doc>
+                         This should contain the name for each halfwave plate used in the
+                         NXwaveplate group.
+                    </doc>
+                </attribute>
+            </group>
+            <group name="opt_monochromator" type="NXbeam_device" optional="true">
+                <doc>
+                     Dispersive element to create e.g. an energetic resolution used in the 
+                     measurement.
+                </doc>
+                <attribute name="device">
+                    <doc>
+                         It should contain the name of the Nexus Monochromator group
+                    </doc>
+                </attribute>
+            </group>
+            <group name="sample_as_beam_element" type="NXbeam_device">
+                <doc>
+                     Enables beam path description of the sample in the setup.
+                     it in a beam path.
+                </doc>
+                <attribute name="device">
+                    <doc>
+                         Contains the link to the sample.
+                    </doc>
+                </attribute>
+            </group>
+            <!--End of Auxillary NXbeam_devices-->
+            <!--Below:
+generic NeXus definition for optical elements of the setup-->
             <group type="NXsource">
                 <doc>
                      Light source with arbitrary choice of name. This shall be referenced
@@ -293,26 +383,20 @@ unit: NX_LENGTH
                     </enumeration>
                 </field>
             </group>
-            <group name="incident_light_optics" type="NXbeam_device">
+            <group type="NXdetector">
                 <doc>
-                     Beam device instance of the incident light optics.
+                     Detector with arbitrary choice of the name, which shall be referenced
+                     by the detector(NXbeam_device).
                 </doc>
-                <field name="device">
-                    <doc>
-                         It should contain the name of the "incident_light_lens(NXlens_opt)" group
-                    </doc>
-                </field>
             </group>
-            <group name="scattered_light_optics" type="NXbeam_device">
+            <group type="NXmonochromator">
                 <doc>
-                     Beam device instance of the scattered light optics.
+                     Monochromator with arbitrary choice of the name, which shall be referenced
+                     by the spectrometer(NXbeam_device).
                 </doc>
-                <field name="device">
-                    <doc>
-                         It should contain the name of the "scattered_light_lens(NXlens_opt)" group
-                    </doc>
-                </field>
             </group>
+            <!--Below:
+NeXus definition derived optical elements of the setup-->
             <group name="incident_light_lens" type="NXlens_opt" recommended="true">
                 <doc>
                      This is the optical element used for the incident light in the Raman
@@ -359,36 +443,6 @@ unit: NX_LENGTH
                     </doc>
                 </field>
             </group>
-            <group name="opt_detector" type="NXbeam_device">
-                <doc>
-                     Properties of the detector to link it via NXbeam_device to other beam
-                     elements
-                </doc>
-                <field name="device">
-                    <doc>
-                         It should contain the name of the Nexus detector group
-                    </doc>
-                </field>
-            </group>
-            <group type="NXdetector">
-                <doc>
-                     Detector with arbitrary choice of the name, which shall be referenced
-                     by the detector(NXbeam_device).
-                </doc>
-            </group>
-            <group name="polarization_manipulator_NAME" type="NXbeam_device" optional="true">
-                <doc>
-                     Link to the device, that it can be used to generate a beam path via
-                     NXbeam_device. The string &gt;NAME&lt; in the name of this NXbeam_device
-                     has to identical to &gt;NAME&lt; in waveplate_NAME(NXwaveplate).
-                </doc>
-                <field name="device">
-                    <doc>
-                         This should contain the name for each halfwave plate used in the
-                         NXwaveplate group.
-                    </doc>
-                </field>
-            </group>
             <group name="waveplate_NAME" type="NXwaveplate">
                 <doc>
                      Properties of the device for the manipulation of the state of light which is a half wave
@@ -404,6 +458,8 @@ unit: NX_LENGTH
                     </enumeration>
                 </field>
             </group>
+            <!--Below:
+NXraman specific optical elements-->
             <group name="polarization_filter" type="NXbeam_device">
                 <field name="filter_mechanism" type="NX_CHAR" optional="true">
                     <doc>
@@ -478,36 +534,12 @@ N_spectrum_filter -\-> Number of wavelengths-->
                     </attribute>
                 </field>
             </group>
-            <group name="opt_monochromator" type="NXbeam_device" optional="true">
-                <doc>
-                     Dispersive element to create e.g. an energetic resolution used in the 
-                     measurement.
-                </doc>
-                <field name="device">
-                    <doc>
-                         It should contain the name of the Nexus Monochromator group
-                    </doc>
-                </field>
-            </group>
-            <group type="NXmonochromator">
-                <doc>
-                     Monochromator with arbitrary choice of the name, which shall be referenced
-                     by the spectrometer(NXbeam_device).
-                </doc>
-            </group>
-            <group name="Sample_as_beam_element" type="NXbeam_device">
-                <doc>
-                     Enables beam path description of the sample in the setup.
-                     it in a beam path.
-                </doc>
-                <field name="device">
-                    <doc>
-                         Contains the link to the sample.
-                    </doc>
-                </field>
-            </group>
         </group>
-        <group type="NXsample"/>
+        <group type="NXsample">
+            <field name="name" optional="false"/>
+            <field name="sample_id" recommended="true"/>
+            <field name="chemical_formula" recommended="true"/>
+        </group>
         <group name="data_collection" type="NXprocess">
             <field name="data_type">
                 <doc>
