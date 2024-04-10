@@ -24,9 +24,9 @@ NXxps
   No symbol table
 
 **Groups cited**:
-  :ref:`NXcoordinate_system_set`, :ref:`NXcoordinate_system`, :ref:`NXdata`, :ref:`NXelectronanalyser`, :ref:`NXentry`, :ref:`NXfit_background`, :ref:`NXfit_function`, :ref:`NXfit`, :ref:`NXinstrument`, :ref:`NXpeak`, :ref:`NXprocess`, :ref:`NXsample`, :ref:`NXtransformations`
+  :ref:`NXcoordinate_system_set`, :ref:`NXcoordinate_system`, :ref:`NXdata_mpes`, :ref:`NXdata`, :ref:`NXelectronanalyser`, :ref:`NXenergydispersion`, :ref:`NXentry`, :ref:`NXfit_background`, :ref:`NXfit_function`, :ref:`NXfit_single_parameter`, :ref:`NXfit`, :ref:`NXinstrument`, :ref:`NXpeak`, :ref:`NXprocess`, :ref:`NXsample`, :ref:`NXtransformations`
 
-.. index:: NXentry (base class); used in application definition, NXcoordinate_system_set (base class); used in application definition, NXcoordinate_system (base class); used in application definition, NXinstrument (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXtransformations (base class); used in application definition, NXsample (base class); used in application definition, NXprocess (base class); used in application definition, NXfit (base class); used in application definition, NXdata (base class); used in application definition, NXpeak (base class); used in application definition, NXfit_function (base class); used in application definition, NXfit_background (base class); used in application definition
+.. index:: NXentry (base class); used in application definition, NXcoordinate_system_set (base class); used in application definition, NXcoordinate_system (base class); used in application definition, NXtransformations (base class); used in application definition, NXinstrument (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXsample (base class); used in application definition, NXprocess (base class); used in application definition, NXfit (base class); used in application definition, NXdata (base class); used in application definition, NXpeak (base class); used in application definition, NXfit_function (base class); used in application definition, NXfit_single_parameter (base class); used in application definition, NXfit_background (base class); used in application definition, NXdata_mpes (base class); used in application definition
 
 **Structure**:
 
@@ -73,15 +73,16 @@ NXxps
 
       .. _/NXxps/ENTRY/geometries/xps_coordinate_system-group:
 
-      **xps_coordinate_system**: (required) :ref:`NXcoordinate_system` :ref:`⤆ </NXcoordinate_system_set/COORDINATE_SYSTEM-group>`
+      **xps_coordinate_system**: (optional) :ref:`NXcoordinate_system` :ref:`⤆ </NXcoordinate_system_set/COORDINATE_SYSTEM-group>`
 
-        .. collapse:: Description of the XPS base coordinate system, which is defined such that  ...
+        .. collapse:: In traditional surface science, the coordinate system is defined such that ...
 
-            Description of the XPS base coordinate system, which is defined such that the positive z-axis
-            points along the sample normal, and the x- and y-axes lie within the sample surface.
+            In traditional surface science, the coordinate system is defined such that the positive z-axis
+            points along the sample normal, and the x- and y-axes lie within the sample surface. However,
+            in NeXus, a coordinate system that is the same as `McStas`_  is used. `xps_coordinate_system`
+            gives the user the opportunity to work in the traditional base coordinate system.
 
-            The fields `x`, `y`, `z`, and `scaling` are used to describe the orientation of the XPS
-            coordinate system with respect to the beam coordinate system (.).
+            .. _McStas: http://mcstas.org/
 
         .. _/NXxps/ENTRY/geometries/xps_coordinate_system/origin-field:
 
@@ -110,26 +111,26 @@ NXxps
 
           Obligatory value: ``sample normal``
 
-        .. _/NXxps/ENTRY/geometries/xps_coordinate_system/x-field:
+        .. _/NXxps/ENTRY/geometries/xps_coordinate_system/depends_on-field:
 
-        .. index:: x (field)
+        .. index:: depends_on (field)
 
-        **x**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXcoordinate_system/x-field>`
+        **depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
+          .. collapse:: Link to transformations defining an XPS base coordinate system, ...
 
-        .. _/NXxps/ENTRY/geometries/xps_coordinate_system/y-field:
+              Link to transformations defining an XPS base coordinate system,
+              which is defined such that the positive z-axis points along the sample normal, and the
+              x- and y-axes lie within the sample surface
 
-        .. index:: y (field)
+        .. _/NXxps/ENTRY/geometries/xps_coordinate_system/TRANSFORMATIONS-group:
 
-        **y**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXcoordinate_system/y-field>`
+        **TRANSFORMATIONS**: (required) :ref:`NXtransformations` 
 
+          .. collapse:: Set of transformations, describing the orientation of the XPS coordinate ...
 
-        .. _/NXxps/ENTRY/geometries/xps_coordinate_system/z-field:
-
-        .. index:: z (field)
-
-        **z**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXcoordinate_system/z-field>`
-
+              Set of transformations, describing the orientation of the XPS coordinate system
+              with respect to the beam coordinate system (.).
 
     .. _/NXxps/ENTRY/INSTRUMENT-group:
 
@@ -154,6 +155,18 @@ NXxps
               relative to the beam.
 
               Obligatory value: ``transformations/angle_beam_analyser``
+
+        .. _/NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION-group:
+
+        **ENERGYDISPERSION**: (required) :ref:`NXenergydispersion` :ref:`⤆ </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION-group>`
+
+
+          .. _/NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/diameter-field:
+
+          .. index:: diameter (field)
+
+          **diameter**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
+
 
         .. _/NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/transformations-group:
 
@@ -183,9 +196,10 @@ NXxps
 
             **@depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXtransformations/AXISNAME@depends_on-attribute>`
 
-              .. collapse:: Should be a link to the XPS base coordinate system, e.g. ...
+              .. collapse:: This could either point to the beam coordinate system (.) or to anot ...
 
-                  Should be a link to the XPS base coordinate system, e.g.
+                  This could either point to the beam coordinate system (.) or to another transformation
+                  that transforms from the beam coordinate system  to the XPS base coordinate system at
                   /entry/instrument/xps_coordinate_system.
 
     .. _/NXxps/ENTRY/SAMPLE-group:
@@ -234,9 +248,10 @@ NXxps
 
           **@depends_on**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXtransformations/AXISNAME@depends_on-attribute>`
 
-            .. collapse:: Should be a link to the XPS base coordinate system, e.g. ...
+            .. collapse:: This could either point to the beam coordinate system (.) or to anothe ...
 
-                Should be a link to the XPS base coordinate system, e.g.
+                This could either point to the beam coordinate system (.) or to another transformation
+                that transforms from the beam coordinate system  to the XPS base coordinate system at
                 /entry/instrument/xps_coordinate_system.
 
     .. _/NXxps/ENTRY/peak_fitting-group:
@@ -268,18 +283,18 @@ NXxps
         **label**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit/label-field>`
 
 
-        .. _/NXxps/ENTRY/peak_fitting/FIT/figure_of_merit_METRIC-field:
+        .. _/NXxps/ENTRY/peak_fitting/FIT/figure_of_meritMETRIC-field:
 
-        .. index:: figure_of_merit_METRIC (field)
+        .. index:: figure_of_meritMETRIC (field)
 
-        **figure_of_merit_METRIC**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXfit/figure_of_merit_METRIC-field>`
+        **figure_of_meritMETRIC**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXfit/figure_of_meritMETRIC-field>`
 
 
-          .. _/NXxps/ENTRY/peak_fitting/FIT/figure_of_merit_METRIC@metric-attribute:
+          .. _/NXxps/ENTRY/peak_fitting/FIT/figure_of_meritMETRIC@metric-attribute:
 
           .. index:: metric (field attribute)
 
-          **@metric**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit/figure_of_merit_METRIC@metric-attribute>`
+          **@metric**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit/figure_of_meritMETRIC@metric-attribute>`
 
 
         .. _/NXxps/ENTRY/peak_fitting/FIT/relative_concentration-field:
@@ -350,13 +365,6 @@ NXxps
           **label**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpeak/label-field>`
 
 
-          .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/lineshape-field:
-
-          .. index:: lineshape (field)
-
-          **lineshape**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-
           .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/total_area-field:
 
           .. index:: total_area (field)
@@ -408,14 +416,18 @@ NXxps
 
             .. index:: formula (field)
 
-            **formula**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_function/formula-field>`
+            **formula**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_function/formula-field>`
 
 
-            .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/width-field:
+            .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/area-group:
 
-            .. index:: width (field)
+            **area**: (optional) :ref:`NXfit_single_parameter` :ref:`⤆ </NXfit_function/FIT_SINGLE_PARAMETER-group>`
 
-            **width**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` 
+              Area of the peak.
+
+            .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/width-group:
+
+            **width**: (optional) :ref:`NXfit_single_parameter` :ref:`⤆ </NXfit_function/FIT_SINGLE_PARAMETER-group>`
 
               .. collapse:: Width of a peak at a defined fraction of the peak height. ...
 
@@ -428,6 +440,26 @@ NXxps
                   This concept is related to term `3.28`_ of the ISO 18115-1:2023 standard.
 
                   .. _3.28: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.28
+
+              .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/width/value-field:
+
+              .. index:: value (field)
+
+              **value**: (required) :ref:`NX_CHAR <NX_CHAR>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} 
+
+
+            .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/position-group:
+
+            **position**: (optional) :ref:`NXfit_single_parameter` :ref:`⤆ </NXfit_function/FIT_SINGLE_PARAMETER-group>`
+
+              Position of the peak on the energy axis.
+
+              .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/position/value-field:
+
+              .. index:: value (field)
+
+              **value**: (required) :ref:`NX_CHAR <NX_CHAR>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} 
+
 
         .. _/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND-group:
 
@@ -494,7 +526,7 @@ NXxps
 
             .. index:: formula (field)
 
-            **formula**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_function/formula-field>`
+            **formula**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_function/formula-field>`
 
 
         .. _/NXxps/ENTRY/peak_fitting/FIT/fit_function-group:
@@ -509,6 +541,32 @@ NXxps
           **description**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit/fit_function/description-field>`
 
 
+    .. _/NXxps/ENTRY/data-group:
+
+    **data**: (required) :ref:`NXdata_mpes` :ref:`⤆ </NXmpes/ENTRY/data-group>`
+
+
+      .. _/NXxps/ENTRY/data@energy_indices-attribute:
+
+      .. index:: energy_indices (group attribute)
+
+      **@energy_indices**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+
+
+      .. _/NXxps/ENTRY/data@energy_depends-attribute:
+
+      .. index:: energy_depends (group attribute)
+
+      **@energy_depends**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXmpes/ENTRY/data@energy_depends-attribute>`
+
+
+      .. _/NXxps/ENTRY/data/energy-field:
+
+      .. index:: energy (field)
+
+      **energy**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+
+
 
 Hypertext Anchors
 -----------------
@@ -518,18 +576,23 @@ attributes, and links defined in this class.
 
 
 * :ref:`/NXxps/ENTRY-group </NXxps/ENTRY-group>`
+* :ref:`/NXxps/ENTRY/data-group </NXxps/ENTRY/data-group>`
+* :ref:`/NXxps/ENTRY/data/energy-field </NXxps/ENTRY/data/energy-field>`
+* :ref:`/NXxps/ENTRY/data@energy_depends-attribute </NXxps/ENTRY/data@energy_depends-attribute>`
+* :ref:`/NXxps/ENTRY/data@energy_indices-attribute </NXxps/ENTRY/data@energy_indices-attribute>`
 * :ref:`/NXxps/ENTRY/definition-field </NXxps/ENTRY/definition-field>`
 * :ref:`/NXxps/ENTRY/geometries-group </NXxps/ENTRY/geometries-group>`
 * :ref:`/NXxps/ENTRY/geometries/xps_coordinate_system-group </NXxps/ENTRY/geometries/xps_coordinate_system-group>`
+* :ref:`/NXxps/ENTRY/geometries/xps_coordinate_system/depends_on-field </NXxps/ENTRY/geometries/xps_coordinate_system/depends_on-field>`
 * :ref:`/NXxps/ENTRY/geometries/xps_coordinate_system/handedness-field </NXxps/ENTRY/geometries/xps_coordinate_system/handedness-field>`
 * :ref:`/NXxps/ENTRY/geometries/xps_coordinate_system/origin-field </NXxps/ENTRY/geometries/xps_coordinate_system/origin-field>`
-* :ref:`/NXxps/ENTRY/geometries/xps_coordinate_system/x-field </NXxps/ENTRY/geometries/xps_coordinate_system/x-field>`
-* :ref:`/NXxps/ENTRY/geometries/xps_coordinate_system/y-field </NXxps/ENTRY/geometries/xps_coordinate_system/y-field>`
-* :ref:`/NXxps/ENTRY/geometries/xps_coordinate_system/z-field </NXxps/ENTRY/geometries/xps_coordinate_system/z-field>`
+* :ref:`/NXxps/ENTRY/geometries/xps_coordinate_system/TRANSFORMATIONS-group </NXxps/ENTRY/geometries/xps_coordinate_system/TRANSFORMATIONS-group>`
 * :ref:`/NXxps/ENTRY/geometries/xps_coordinate_system/z_direction-field </NXxps/ENTRY/geometries/xps_coordinate_system/z_direction-field>`
 * :ref:`/NXxps/ENTRY/INSTRUMENT-group </NXxps/ENTRY/INSTRUMENT-group>`
 * :ref:`/NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER-group </NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER-group>`
 * :ref:`/NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/depends_on-field </NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/depends_on-field>`
+* :ref:`/NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION-group </NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION-group>`
+* :ref:`/NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/diameter-field </NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/diameter-field>`
 * :ref:`/NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/transformations-group </NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/transformations-group>`
 * :ref:`/NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/transformations/angle_beam_analyser-field </NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/transformations/angle_beam_analyser-field>`
 * :ref:`/NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/transformations/angle_beam_analyser@depends_on-attribute </NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/transformations/angle_beam_analyser@depends_on-attribute>`
@@ -550,8 +613,8 @@ attributes, and links defined in this class.
 * :ref:`/NXxps/ENTRY/peak_fitting/FIT/data/input_dependent-field </NXxps/ENTRY/peak_fitting/FIT/data/input_dependent-field>`
 * :ref:`/NXxps/ENTRY/peak_fitting/FIT/data/input_independent-field </NXxps/ENTRY/peak_fitting/FIT/data/input_independent-field>`
 * :ref:`/NXxps/ENTRY/peak_fitting/FIT/data/residual-field </NXxps/ENTRY/peak_fitting/FIT/data/residual-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/figure_of_merit_METRIC-field </NXxps/ENTRY/peak_fitting/FIT/figure_of_merit_METRIC-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/figure_of_merit_METRIC@metric-attribute </NXxps/ENTRY/peak_fitting/FIT/figure_of_merit_METRIC@metric-attribute>`
+* :ref:`/NXxps/ENTRY/peak_fitting/FIT/figure_of_meritMETRIC-field </NXxps/ENTRY/peak_fitting/FIT/figure_of_meritMETRIC-field>`
+* :ref:`/NXxps/ENTRY/peak_fitting/FIT/figure_of_meritMETRIC@metric-attribute </NXxps/ENTRY/peak_fitting/FIT/figure_of_meritMETRIC@metric-attribute>`
 * :ref:`/NXxps/ENTRY/peak_fitting/FIT/fit_function-group </NXxps/ENTRY/peak_fitting/FIT/fit_function-group>`
 * :ref:`/NXxps/ENTRY/peak_fitting/FIT/fit_function/description-field </NXxps/ENTRY/peak_fitting/FIT/fit_function/description-field>`
 * :ref:`/NXxps/ENTRY/peak_fitting/FIT/label-field </NXxps/ENTRY/peak_fitting/FIT/label-field>`
@@ -560,10 +623,13 @@ attributes, and links defined in this class.
 * :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/data/intensity-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/data/intensity-field>`
 * :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/data/position-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/data/position-field>`
 * :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function-group </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function-group>`
+* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/area-group </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/area-group>`
 * :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/formula-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/formula-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/width-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/width-field>`
+* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/position-group </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/position-group>`
+* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/position/value-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/position/value-field>`
+* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/width-group </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/width-group>`
+* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/width/value-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/width/value-field>`
 * :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/label-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/label-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/lineshape-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/lineshape-field>`
 * :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/total_area-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/total_area-field>`
 * :ref:`/NXxps/ENTRY/peak_fitting/FIT/relative_concentration-field </NXxps/ENTRY/peak_fitting/FIT/relative_concentration-field>`
 * :ref:`/NXxps/ENTRY/SAMPLE-group </NXxps/ENTRY/SAMPLE-group>`
