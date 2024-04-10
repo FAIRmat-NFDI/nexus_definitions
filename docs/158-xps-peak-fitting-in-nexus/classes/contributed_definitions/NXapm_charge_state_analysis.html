@@ -19,6 +19,7 @@
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -79,16 +80,20 @@ and a charge state possibly recovered. Combinatorial algorithms are used for thi
 </dl>
 <p><strong>Structure</strong>:</p>
 <blockquote>
-<div><p id="index-1"><span id="nxapm-charge-state-analysis-element-field"></span><strong>element</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<div><p id="index-1"><span id="nxapm-charge-state-analysis-nuclides-field"></span><strong>nuclides</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
-<div><details class="summary-input-constraint-list-of-proton-numbers-for-each-element-of-the-ranging">
-<summary>Input constraint, list of proton numbers for each element of the ranging ...</summary><p>Input constraint, list of proton numbers for each element of the ranging
-definition. The list contains each element as many times as its multiplicity.
-As an example a ranging definition H:2 O:1 demands element vector
-to be 1, 1, 8. An empty list does not release the constraint.
-Instead, a list with all elements in the periodic table should be
-used. Keep in mind though with such a weakly constrained parameter space
-the combinatorial analysis may become very time consuming!</p>
+<div><details class="summary-input-constraint-list-of-nuclide-hash-for-typically-elements-used-for-the">
+<summary>Input constraint, list of nuclide_hash for typically elements used for the ...</summary><p>Input constraint, list of nuclide_hash for typically elements used for the
+ranging definition of the ion whose charge state the analyses covered.
+The list contains each hash as many times as its multiplicity.
+Nuclides are encoded using the hashing rule that is defined in <a class="reference internal" href="NXion.html#nxion"><span class="std std-ref">NXion</span></a>.</p>
+<p>As an example, a ranging definition H:2 O:1 is configured by setting nuclides to
+a list with entries <span class="math notranslate nohighlight">\(1 + 256 * 0\)</span>, <span class="math notranslate nohighlight">\(1 + 256 * 0\)</span>, <span class="math notranslate nohighlight">\(8 + 256 * 0\)</span>.
+An empty list does not release the constraint. Instead, a list with all elements
+in the periodic table (encoded as nuclide_hash values) should be used, i.e.
+<span class="math notranslate nohighlight">\(1 + 256 * 0\)</span>, <span class="math notranslate nohighlight">\(2 + 256 * 0\)</span>, and so on and so forth.</p>
+<p>Keep in mind that with a weakly constrained parameter space the combinatorial
+analysis may become very time consuming!</p>
 </details></div></blockquote>
 <p id="index-2"><span id="nxapm-charge-state-analysis-mass-to-charge-range-field"></span><strong>mass_to_charge_range</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 2, Dimensions: [1, 2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
 <blockquote>
@@ -150,13 +155,13 @@ life.</p>
 attributes, and links defined in this class.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#nxapm-charge-state-analysis-charge-state-field"><span class="std std-ref">/NXapm_charge_state_analysis/charge_state-field</span></a></p></li>
-<li><p><a class="reference internal" href="#nxapm-charge-state-analysis-element-field"><span class="std std-ref">/NXapm_charge_state_analysis/element-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxapm-charge-state-analysis-mass-field"><span class="std std-ref">/NXapm_charge_state_analysis/mass-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxapm-charge-state-analysis-mass-to-charge-range-field"><span class="std std-ref">/NXapm_charge_state_analysis/mass_to_charge_range-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxapm-charge-state-analysis-min-abundance-field"><span class="std std-ref">/NXapm_charge_state_analysis/min_abundance-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxapm-charge-state-analysis-min-half-life-field"><span class="std std-ref">/NXapm_charge_state_analysis/min_half_life-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxapm-charge-state-analysis-natural-abundance-product-field"><span class="std std-ref">/NXapm_charge_state_analysis/natural_abundance_product-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxapm-charge-state-analysis-nuclide-hash-field"><span class="std std-ref">/NXapm_charge_state_analysis/nuclide_hash-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-charge-state-analysis-nuclides-field"><span class="std std-ref">/NXapm_charge_state_analysis/nuclides-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxapm-charge-state-analysis-sacrifice-isotopic-uniqueness-field"><span class="std std-ref">/NXapm_charge_state_analysis/sacrifice_isotopic_uniqueness-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxapm-charge-state-analysis-shortest-half-life-field"><span class="std std-ref">/NXapm_charge_state_analysis/shortest_half_life-field</span></a></p></li>
 </ul>

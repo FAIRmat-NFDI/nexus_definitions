@@ -17,10 +17,10 @@ NXmpes
 
 **Description**:
 
-  .. collapse:: This is the most general application definition for multidimensional ...
+  .. collapse:: This is the most general application definition for ...
 
-      This is the most general application definition for multidimensional
-      photoelectron spectroscopy.
+      This is the most general application definition for
+      photoemission experiments.
 
       Groups and fields are named according to the
       `ISO 18115-1:2023`_ specification as well as the `IUPAC Recommendations 2020`_.
@@ -35,9 +35,9 @@ NXmpes
   **n_transmission_function**: Number of data points in the transmission function.
 
 **Groups cited**:
-  :ref:`NXactuator`, :ref:`NXaperture`, :ref:`NXbeam`, :ref:`NXcalibration`, :ref:`NXcollectioncolumn`, :ref:`NXcoordinate_system_set`, :ref:`NXdata`, :ref:`NXdetector`, :ref:`NXelectron_level`, :ref:`NXelectronanalyser`, :ref:`NXenergydispersion`, :ref:`NXentry`, :ref:`NXenvironment`, :ref:`NXfabrication`, :ref:`NXinstrument`, :ref:`NXlog`, :ref:`NXmanipulator`, :ref:`NXphysical_process`, :ref:`NXpid`, :ref:`NXprocess`, :ref:`NXresolution`, :ref:`NXsample_history`, :ref:`NXsample`, :ref:`NXsensor`, :ref:`NXsource`, :ref:`NXsubstance`, :ref:`NXuser`
+  :ref:`NXactuator`, :ref:`NXaperture`, :ref:`NXbeam`, :ref:`NXcalibration`, :ref:`NXcollectioncolumn`, :ref:`NXcoordinate_system_set`, :ref:`NXdata_mpes_detector`, :ref:`NXdata_mpes`, :ref:`NXdata`, :ref:`NXdetector`, :ref:`NXelectron_level`, :ref:`NXelectronanalyser`, :ref:`NXenergydispersion`, :ref:`NXentry`, :ref:`NXenvironment`, :ref:`NXfabrication`, :ref:`NXhistory`, :ref:`NXinstrument`, :ref:`NXlog`, :ref:`NXmanipulator`, :ref:`NXphysical_process`, :ref:`NXpid`, :ref:`NXprocess_mpes`, :ref:`NXresolution`, :ref:`NXsample`, :ref:`NXsensor`, :ref:`NXsource`, :ref:`NXsubstance`, :ref:`NXuser`
 
-.. index:: NXentry (base class); used in application definition, NXcoordinate_system_set (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXresolution (base class); used in application definition, NXfabrication (base class); used in application definition, NXsource (base class); used in application definition, NXbeam (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXdata (base class); used in application definition, NXcollectioncolumn (base class); used in application definition, NXaperture (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXdetector (base class); used in application definition, NXmanipulator (base class); used in application definition, NXsensor (base class); used in application definition, NXactuator (base class); used in application definition, NXpid (base class); used in application definition, NXlog (base class); used in application definition, NXprocess (base class); used in application definition, NXcalibration (base class); used in application definition, NXelectron_level (base class); used in application definition, NXsample (base class); used in application definition, NXsubstance (base class); used in application definition, NXsample_history (base class); used in application definition, NXphysical_process (base class); used in application definition, NXenvironment (base class); used in application definition
+.. index:: NXentry (base class); used in application definition, NXcoordinate_system_set (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXresolution (base class); used in application definition, NXfabrication (base class); used in application definition, NXsource (base class); used in application definition, NXbeam (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXdata (base class); used in application definition, NXcollectioncolumn (base class); used in application definition, NXaperture (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXdetector (base class); used in application definition, NXdata_mpes_detector (base class); used in application definition, NXmanipulator (base class); used in application definition, NXsensor (base class); used in application definition, NXactuator (base class); used in application definition, NXpid (base class); used in application definition, NXlog (base class); used in application definition, NXhistory (base class); used in application definition, NXprocess_mpes (base class); used in application definition, NXcalibration (base class); used in application definition, NXelectron_level (base class); used in application definition, NXsample (base class); used in application definition, NXsubstance (base class); used in application definition, NXphysical_process (base class); used in application definition, NXenvironment (base class); used in application definition, NXdata_mpes (base class); used in application definition
 
 **Structure**:
 
@@ -124,7 +124,7 @@ NXmpes
 
     .. _/NXmpes/ENTRY/geometries-group:
 
-    **geometries**: (required) :ref:`NXcoordinate_system_set` 
+    **geometries**: (optional) :ref:`NXcoordinate_system_set` 
 
       .. collapse:: Description of one or more coordinate systems that are specific to the setup ...
 
@@ -163,9 +163,9 @@ NXmpes
 
     **INSTRUMENT**: (required) :ref:`NXinstrument` :ref:`⤆ </NXentry/INSTRUMENT-group>`
 
-      .. collapse:: Description of the MPES spectrometer and its individual parts. ...
+      .. collapse:: Description of the photoemission spectrometer and its individual parts. ...
 
-          Description of the MPES spectrometer and its individual parts.
+          Description of the photoemission spectrometer and its individual parts.
 
           This concept is related to term `12.58`_ of the ISO 18115-1:2023 standard.
 
@@ -173,19 +173,9 @@ NXmpes
 
       .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution-group:
 
-      **energy_resolution**: (recommended) :ref:`NXresolution` :ref:`⤆ </NXinstrument/RESOLUTION-group>`
+      **energy_resolution**: (optional) :ref:`NXresolution` :ref:`⤆ </NXinstrument/RESOLUTION-group>`
 
-        .. collapse:: Overall energy resolution of the MPES instrument ...
-
-            Overall energy resolution of the MPES instrument
-
-            This concept is related to term `10.7 ff.`_ of the ISO 18115-1:2023 standard.
-
-            .. _10.7 ff.: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.7
-
-            This concept is related to term `10.24`_ of the ISO 18115-1:2023 standard.
-
-            .. _10.24: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.24
+        Overall energy resolution of the photoemission instrument.
 
         .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution/physical_quantity-field:
 
@@ -209,6 +199,28 @@ NXmpes
 
         **resolution**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXresolution/resolution-field>`
 
+          .. collapse:: Minimum distinguishable energy separation in the energy spectra. ...
+
+              Minimum distinguishable energy separation in the energy spectra.
+
+              This concept is related to term `10.24`_ of the ISO 18115-1:2023 standard.
+
+              .. _10.24: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.24
+
+        .. _/NXmpes/ENTRY/INSTRUMENT/energy_resolution/relative_resolution-field:
+
+        .. index:: relative_resolution (field)
+
+        **relative_resolution**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXresolution/relative_resolution-field>`
+
+          .. collapse:: Ratio of the energy resolution of the photoemission spectrometer at a sp ...
+
+              Ratio of the energy resolution of the photoemission spectrometer at a specified energy
+              value to that energy value.
+
+              This concept is related to term `10.7 ff.`_ of the ISO 18115-1:2023 standard.
+
+              .. _10.7 ff.: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:10.7
 
       .. _/NXmpes/ENTRY/INSTRUMENT/device_information-group:
 
@@ -236,9 +248,9 @@ NXmpes
         **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
 
 
-      .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE-group:
+      .. _/NXmpes/ENTRY/INSTRUMENT/sourceTYPE-group:
 
-      **source_TYPE**: (recommended) :ref:`NXsource` :ref:`⤆ </NXinstrument/SOURCE-group>`
+      **sourceTYPE**: (recommended) :ref:`NXsource` :ref:`⤆ </NXinstrument/SOURCE-group>`
 
         .. collapse:: A source used to generate a beam. Properties refer strictly to parameters  ...
 
@@ -247,11 +259,13 @@ NXmpes
             optical power of the beam, but the energy of the electron beam in a synchrotron
             or similar.
 
-            Note that the uppercase notation in source_TYPE means that multiple sources can
-            be provided. For example, in pump-probe experiments, it is possible to have both
-            a `source_probe` and a `source_pump`
+            Note that the uppercase notation in sourceTYPE means that multiple sources can
+            be provided. The uppercase part can be substituted with any string that consists
+            of alphanumeric characters, including both uppercase and lowercase letters from A to Z
+            and numerical digits from 0 to 9. For example, in pump-probe experiments, it is possible
+            to have both a `source_probe` and a `source_pump`.
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/type-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/type-field:
 
         .. index:: type (field)
 
@@ -285,7 +299,7 @@ NXmpes
             * ``other``
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/type_other-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/type_other-field:
 
         .. index:: type_other (field)
 
@@ -293,47 +307,47 @@ NXmpes
 
           Specification of type, may also go to name.
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/name-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/name-field:
 
         .. index:: name (field)
 
         **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsource/name-field>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/probe-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/probe-field:
 
         .. index:: probe (field)
 
         **probe**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsource/probe-field>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information-group:
+        .. _/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/device_information-group:
 
         **device_information**: (recommended) :ref:`NXfabrication` :ref:`⤆ </NXsource/FABRICATION-group>`
 
 
-          .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/vendor-field:
+          .. _/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/device_information/vendor-field:
 
           .. index:: vendor (field)
 
           **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
-          .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/model-field:
+          .. _/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/device_information/model-field:
 
           .. index:: model (field)
 
           **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/model-field>`
 
 
-          .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/identifier-field:
+          .. _/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/device_information/identifier-field:
 
           .. index:: identifier (field)
 
           **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/source_TYPE/associated_beam-group:
+        .. _/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/associated_beam-group:
 
         **associated_beam**: (required) :ref:`NXbeam` 
 
@@ -342,20 +356,20 @@ NXmpes
               The beam emitted by this source.
               Should be named with the same appendix, e.g.,
               for `source_probe` it should refer to `beam_probe`.
-              Refers to the same concept as /NXentry/NXinstrument/beam_TYPE
+              Refers to the same concept as /NXentry/NXinstrument/beamTYPE
               and may be linked.
 
-      .. _/NXmpes/ENTRY/INSTRUMENT/beam_TYPE-group:
+      .. _/NXmpes/ENTRY/INSTRUMENT/beamTYPE-group:
 
-      **beam_TYPE**: (required) :ref:`NXbeam` :ref:`⤆ </NXinstrument/BEAM-group>`
+      **beamTYPE**: (required) :ref:`NXbeam` :ref:`⤆ </NXinstrument/BEAM-group>`
 
         .. collapse:: Properties of the photon beam at a given location. ...
 
             Properties of the photon beam at a given location.
-            Should be named with the same appendix as source_TYPE, e.g.,
+            Should be named with the same appendix as sourceTYPE, e.g.,
             for `source_probe` it should refer to `beam_probe`.
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/distance-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/beamTYPE/distance-field:
 
         .. index:: distance (field)
 
@@ -368,35 +382,35 @@ NXmpes
               For photoemission, the latter is the point where the the centre of the beam
               touches the sample surface.
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_energy-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/beamTYPE/incident_energy-field:
 
         .. index:: incident_energy (field)
 
         **incident_energy**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXbeam/incident_energy-field>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_energy_spread-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/beamTYPE/incident_energy_spread-field:
 
         .. index:: incident_energy_spread (field)
 
         **incident_energy_spread**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXbeam/incident_energy_spread-field>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_polarization-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/beamTYPE/incident_polarization-field:
 
         .. index:: incident_polarization (field)
 
         **incident_polarization**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXbeam/incident_polarization-field>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/extent-field:
+        .. _/NXmpes/ENTRY/INSTRUMENT/beamTYPE/extent-field:
 
         .. index:: extent (field)
 
         **extent**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXbeam/extent-field>`
 
 
-        .. _/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/associated_source-group:
+        .. _/NXmpes/ENTRY/INSTRUMENT/beamTYPE/associated_source-group:
 
         **associated_source**: (recommended) :ref:`NXsource` 
 
@@ -405,7 +419,7 @@ NXmpes
               The source that emitted this beam.
               Should be named with the same appendix, e.g.,
               for `beam_probe` it should refer to `source_probe`.
-              Refers to the same concept as /NXentry/NXinstrument/source_TYPE
+              Refers to the same concept as /NXentry/NXinstrument/sourceTYPE
               and may be linked.
               Should be specified if an associated source exists.
 
@@ -418,7 +432,7 @@ NXmpes
 
         .. index:: description (field)
 
-        **description**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXelectronanalyser/description-field>`
+        **description**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXelectronanalyser/description-field>`
 
 
         .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/work_function-field:
@@ -470,7 +484,7 @@ NXmpes
 
         .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution-group:
 
-        **energy_resolution**: (recommended) :ref:`NXresolution` :ref:`⤆ </NXelectronanalyser/energy_resolution-group>`
+        **energy_resolution**: (optional) :ref:`NXresolution` :ref:`⤆ </NXelectronanalyser/energy_resolution-group>`
 
 
           .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/energy_resolution/type-field:
@@ -643,8 +657,23 @@ NXmpes
 
           .. index:: pass_energy (field)
 
-          **pass_energy**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXenergydispersion/pass_energy-field>`
+          **pass_energy**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXenergydispersion/pass_energy-field>`
 
+            .. collapse:: Either `pass_energy` or `drift_energy` must be supplied. `pass_energy` ...
+
+                Either `pass_energy` or `drift_energy` must be supplied. `pass_energy` should be used when working
+                with hemispherical analysers.
+
+          .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/drift_energy-field:
+
+          .. index:: drift_energy (field)
+
+          **drift_energy**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXenergydispersion/drift_energy-field>`
+
+            .. collapse:: Either `pass_energy` or `drift_energy` must be supplied. `drift_energy ...
+
+                Either `pass_energy` or `drift_energy` must be supplied. `drift_energy` should be used if a TOF is used in the
+                energy dispersive part of the electron analyzer.
 
           .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/energy_scan_mode-field:
 
@@ -769,7 +798,7 @@ NXmpes
 
           .. _/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/DETECTOR/raw_data-group:
 
-          **raw_data**: (recommended) :ref:`NXdata` :ref:`⤆ </NXdetector/DATA-group>`
+          **raw_data**: (recommended) :ref:`NXdata_mpes_detector` 
 
             .. collapse:: Contains the raw data collected by the detector before calibration. ...
 
@@ -779,8 +808,8 @@ NXmpes
                 This field ideally collects the data with the lowest level of processing
                 possible.
 
-                The naming of fields should follow a convention to ensure compatibility.
-                It is recommend to use the following field names:
+                The naming of fields should follow the convention defined in the
+                :ref:`NXdata_mpes_detector` base class:
 
                 - **pixel_x**: Detector pixel in x direction.
                 - **pixel_y**: Detector pixel in y direction.
@@ -810,7 +839,7 @@ NXmpes
 
             .. index:: signal (group attribute)
 
-            **@signal**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata@signal-attribute>`
+            **@signal**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata_mpes_detector@signal-attribute>`
 
 
               Obligatory value: ``raw``
@@ -819,7 +848,7 @@ NXmpes
 
             .. index:: raw (field)
 
-            **raw**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXdata/AXISNAME-field>`
+            **raw**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXdata_mpes_detector/raw-field>`
 
               Raw data before calibration.
 
@@ -1199,202 +1228,187 @@ NXmpes
                 In the case of an experiment in which the electron current is changed and
                 recorded with time stamps, this is an array of length m of current setpoints.
 
-    .. _/NXmpes/ENTRY/PROCESS-group:
+      .. _/NXmpes/ENTRY/INSTRUMENT/history-group:
 
-    **PROCESS**: (recommended) :ref:`NXprocess` :ref:`⤆ </NXentry/PROCESS-group>`
+      **history**: (optional) :ref:`NXhistory` :ref:`⤆ </NXinstrument/HISTORY-group>`
+
+        .. collapse:: A set of activities that occurred to the instrument prior to/during the ph ...
+
+            A set of activities that occurred to the instrument prior to/during the photoemission
+            experiment, including any activities performed on the individual instrument parts.
+            This group can be used to describe the preparation of the instrument prior to the
+            experiment, e.g. the cleaning procedure for a spin filter crystal.
+
+    .. _/NXmpes/ENTRY/PROCESS_MPES-group:
+
+    **PROCESS_MPES**: (recommended) :ref:`NXprocess_mpes` 
 
       .. collapse:: Document an event of data processing, reconstruction, or analysis for this d ...
 
           Document an event of data processing, reconstruction, or analysis for this data.
-          Describe the appropriate axis calibrations for your experiment using one or more
-          of the following NXcalibrations
+          The appropriate axis calibrations for a given experiment should be described using
+          one or more of the following NXcalibrations. The individual calibrations for a given
+          `AXISNAME` in `data` should be called `AXISNAME_calibration`.
 
-      .. _/NXmpes/ENTRY/PROCESS/energy_calibration-group:
+      .. _/NXmpes/ENTRY/PROCESS_MPES/energy_calibration-group:
 
-      **energy_calibration**: (optional) :ref:`NXcalibration` :ref:`⤆ </NXprocess/CALIBRATION-group>`
+      **energy_calibration**: (optional) :ref:`NXcalibration` :ref:`⤆ </NXprocess_mpes/energy_calibration-group>`
 
-        .. collapse:: Calibration event on the energy axis. ...
 
-            Calibration event on the energy axis.
-
-            For XPS, the calibration should ideally be performed according to
-            `ISO 15472:2010`_ specification.
-
-            .. _ISO 15472:2010: https://www.iso.org/standard/74811.html
-
-        .. _/NXmpes/ENTRY/PROCESS/energy_calibration/calibrated_axis-field:
+        .. _/NXmpes/ENTRY/PROCESS_MPES/energy_calibration/calibrated_axis-field:
 
         .. index:: calibrated_axis (field)
 
-        **calibrated_axis**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXcalibration/calibrated_axis-field>`
-
-          This is the calibrated energy axis to be used for data plotting.
-
-      .. _/NXmpes/ENTRY/PROCESS/angular_calibration-group:
-
-      **angular_calibration**: (optional) :ref:`NXcalibration` :ref:`⤆ </NXprocess/CALIBRATION-group>`
+        **calibrated_axis**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXprocess_mpes/energy_calibration/calibrated_axis-field>`
 
 
-        .. _/NXmpes/ENTRY/PROCESS/angular_calibration/calibrated_axis-field:
+      .. _/NXmpes/ENTRY/PROCESS_MPES/kN_calibration-group:
 
-        .. index:: calibrated_axis (field)
-
-        **calibrated_axis**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXcalibration/calibrated_axis-field>`
-
-          This is the calibrated angular axis to be used for data plotting.
-
-      .. _/NXmpes/ENTRY/PROCESS/spatial_calibration-group:
-
-      **spatial_calibration**: (optional) :ref:`NXcalibration` :ref:`⤆ </NXprocess/CALIBRATION-group>`
+      **kN_calibration**: (optional) :ref:`NXcalibration` :ref:`⤆ </NXprocess_mpes/kN_calibration-group>`
 
 
-        .. _/NXmpes/ENTRY/PROCESS/spatial_calibration/calibrated_axis-field:
+        .. _/NXmpes/ENTRY/PROCESS_MPES/kN_calibration/calibrated_axis-field:
 
         .. index:: calibrated_axis (field)
 
-        **calibrated_axis**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXcalibration/calibrated_axis-field>`
-
-          This is the calibrated spatial axis to be used for data plotting.
-
-      .. _/NXmpes/ENTRY/PROCESS/momentum_calibration-group:
-
-      **momentum_calibration**: (optional) :ref:`NXcalibration` :ref:`⤆ </NXprocess/CALIBRATION-group>`
+        **calibrated_axis**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXprocess_mpes/kN_calibration/calibrated_axis-field>`
 
 
-        .. _/NXmpes/ENTRY/PROCESS/momentum_calibration/calibrated_axis-field:
+      .. _/NXmpes/ENTRY/PROCESS_MPES/angularN_calibration-group:
+
+      **angularN_calibration**: (optional) :ref:`NXcalibration` :ref:`⤆ </NXprocess_mpes/angularN_calibration-group>`
+
+
+        .. _/NXmpes/ENTRY/PROCESS_MPES/angularN_calibration/calibrated_axis-field:
 
         .. index:: calibrated_axis (field)
 
-        **calibrated_axis**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXcalibration/calibrated_axis-field>`
+        **calibrated_axis**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXprocess_mpes/angularN_calibration/calibrated_axis-field>`
 
-          This is the momentum axis to be used for data plotting.
 
-      .. _/NXmpes/ENTRY/PROCESS/energy_referencing-group:
+      .. _/NXmpes/ENTRY/PROCESS_MPES/spatialN_calibration-group:
 
-      **energy_referencing**: (optional) :ref:`NXcalibration` :ref:`⤆ </NXprocess/CALIBRATION-group>`
+      **spatialN_calibration**: (optional) :ref:`NXcalibration` :ref:`⤆ </NXprocess_mpes/spatialN_calibration-group>`
 
-        .. collapse:: For energy referencing, the measured energies are corrected for the chargi ...
 
-            For energy referencing, the measured energies are corrected for the charging potential
-            (i.e., the electrical potential of the surface region of an insulating sample, caused by
-            irradiation) such that those energies correspond to a sample with no surface charge.
-            Usually, the energy axis is adjusted by shifting all energies uniformally until one
-            well-defined emission line peak (or the Fermi edge) is located at a known _correct_ energy.
+        .. _/NXmpes/ENTRY/PROCESS_MPES/spatialN_calibration/calibrated_axis-field:
 
-            This concept is related to term `12.74 ff.`_ of the ISO 18115-1:2023 standard.
+        .. index:: calibrated_axis (field)
 
-            .. _12.74 ff.: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.74
+        **calibrated_axis**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXprocess_mpes/spatialN_calibration/calibrated_axis-field>`
 
-        .. _/NXmpes/ENTRY/PROCESS/energy_referencing/reference_peak-field:
+
+      .. _/NXmpes/ENTRY/PROCESS_MPES/delay_calibration-group:
+
+      **delay_calibration**: (optional) :ref:`NXcalibration` :ref:`⤆ </NXprocess_mpes/delay_calibration-group>`
+
+
+        .. _/NXmpes/ENTRY/PROCESS_MPES/delay_calibration/calibrated_axis-field:
+
+        .. index:: calibrated_axis (field)
+
+        **calibrated_axis**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXprocess_mpes/delay_calibration/calibrated_axis-field>`
+
+
+      .. _/NXmpes/ENTRY/PROCESS_MPES/polarization_angle_calibration-group:
+
+      **polarization_angle_calibration**: (optional) :ref:`NXcalibration` :ref:`⤆ </NXprocess_mpes/polarization_angle_calibration-group>`
+
+
+        .. _/NXmpes/ENTRY/PROCESS_MPES/polarization_angle_calibration/calibrated_axis-field:
+
+        .. index:: calibrated_axis (field)
+
+        **calibrated_axis**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXprocess_mpes/polarization_angle_calibration/calibrated_axis-field>`
+
+
+      .. _/NXmpes/ENTRY/PROCESS_MPES/ellipticity_calibration-group:
+
+      **ellipticity_calibration**: (optional) :ref:`NXcalibration` :ref:`⤆ </NXprocess_mpes/ellipticity_calibration-group>`
+
+
+        .. _/NXmpes/ENTRY/PROCESS_MPES/ellipticity_calibration/calibrated_axis-field:
+
+        .. index:: calibrated_axis (field)
+
+        **calibrated_axis**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXprocess_mpes/ellipticity_calibration/calibrated_axis-field>`
+
+
+      .. _/NXmpes/ENTRY/PROCESS_MPES/energy_referencing-group:
+
+      **energy_referencing**: (optional) :ref:`NXcalibration` :ref:`⤆ </NXprocess_mpes/energy_referencing-group>`
+
+
+        .. _/NXmpes/ENTRY/PROCESS_MPES/energy_referencing/reference_peak-field:
 
         .. index:: reference_peak (field)
 
-        **reference_peak**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+        **reference_peak**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprocess_mpes/energy_referencing/reference_peak-field>`
 
-          .. collapse:: Reference peak that was used for the calibration. ...
 
-              Reference peak that was used for the calibration.
-
-              For example: adventitious carbon | C-C | metallic Au | elemental Si | Fermi edge | vacuum level
-
-        .. _/NXmpes/ENTRY/PROCESS/energy_referencing/binding_energy-field:
+        .. _/NXmpes/ENTRY/PROCESS_MPES/energy_referencing/binding_energy-field:
 
         .. index:: binding_energy (field)
 
-        **binding_energy**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` 
+        **binding_energy**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXprocess_mpes/energy_referencing/binding_energy-field>`
 
-          .. collapse:: The binding energy (in units of eV) that the specified emission line app ...
 
-              The binding energy (in units of eV) that the specified emission line appeared at,
-              after adjusting the binding energy scale.
-
-              This concept is related to term `12.16_ ff.`_ of the ISO 18115-1:2023 standard.
-
-              .. _12.16_ ff.: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16
-
-        .. _/NXmpes/ENTRY/PROCESS/energy_referencing/offset-field:
+        .. _/NXmpes/ENTRY/PROCESS_MPES/energy_referencing/offset-field:
 
         .. index:: offset (field)
 
-        **offset**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXcalibration/offset-field>`
+        **offset**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXprocess_mpes/energy_referencing/offset-field>`
 
-          .. collapse:: Offset between measured binding energy and calibrated binding energy of  ...
 
-              Offset between measured binding energy and calibrated binding energy of the
-              emission line.
-
-        .. _/NXmpes/ENTRY/PROCESS/energy_referencing/calibrated_axis-field:
+        .. _/NXmpes/ENTRY/PROCESS_MPES/energy_referencing/calibrated_axis-field:
 
         .. index:: calibrated_axis (field)
 
-        **calibrated_axis**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXcalibration/calibrated_axis-field>`
+        **calibrated_axis**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXprocess_mpes/energy_referencing/calibrated_axis-field>`
 
-          .. collapse:: This is the calibrated energy axis to be used for data plotting. ...
 
-              This is the calibrated energy axis to be used for data plotting.
+        .. _/NXmpes/ENTRY/PROCESS_MPES/energy_referencing/level-group:
 
-              This should link to /entry/data/energy.
+        **level**: (recommended) :ref:`NXelectron_level` :ref:`⤆ </NXprocess_mpes/energy_referencing/level-group>`
 
-        .. _/NXmpes/ENTRY/PROCESS/energy_referencing/level-group:
 
-        **level**: (recommended) :ref:`NXelectron_level` 
+      .. _/NXmpes/ENTRY/PROCESS_MPES/transmission_correction-group:
 
-          Electronic core or valence level that was used for the calibration.
+      **transmission_correction**: (optional) :ref:`NXcalibration` :ref:`⤆ </NXprocess_mpes/transmission_correction-group>`
 
-      .. _/NXmpes/ENTRY/PROCESS/transmission_correction-group:
 
-      **transmission_correction**: (optional) :ref:`NXcalibration` :ref:`⤆ </NXprocess/CALIBRATION-group>`
+        .. _/NXmpes/ENTRY/PROCESS_MPES/transmission_correction/transmission_function-group:
 
-        .. collapse:: In the transmission correction, each intensity measurement for electrons o ...
+        **transmission_function**: (recommended) :ref:`NXdata` :ref:`⤆ </NXprocess_mpes/transmission_correction/transmission_function-group>`
 
-            In the transmission correction, each intensity measurement for electrons of a given
-            kinetic energy is multiplied by the corresponding value in the relative_intensity
-            field of the transmission_function. This calibration procedure is used to account for
-            the different tranmsission efficiencies when using different lens modes.
 
-        .. _/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function-group:
-
-        **transmission_function**: (recommended) :ref:`NXdata` :ref:`⤆ </NXcalibration/DATA-group>`
-
-          .. collapse:: Transmission function of the electron analyser. ...
-
-              Transmission function of the electron analyser.
-
-              The transmission function (TF) specifies the detection efficiency for electrons of
-              different kinetic energy passing through the electron analyser.
-              This can be a link to /entry/instrument/electronanalyser/transmission_function.
-
-          .. _/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function@signal-attribute:
+          .. _/NXmpes/ENTRY/PROCESS_MPES/transmission_correction/transmission_function@signal-attribute:
 
           .. index:: signal (group attribute)
 
-          **@signal**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata@signal-attribute>`
+          **@signal**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprocess_mpes/transmission_correction/transmission_function@signal-attribute>`
 
 
-            Obligatory value: ``relative_intensity``
-
-          .. _/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function@axes-attribute:
+          .. _/NXmpes/ENTRY/PROCESS_MPES/transmission_correction/transmission_function@axes-attribute:
 
           .. index:: axes (group attribute)
 
-          **@axes**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata@axes-attribute>`
+          **@axes**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprocess_mpes/transmission_correction/transmission_function@axes-attribute>`
 
 
-            Obligatory value: ``kinetic_energy``
-
-          .. _/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function/kinetic_energy-field:
+          .. _/NXmpes/ENTRY/PROCESS_MPES/transmission_correction/transmission_function/kinetic_energy-field:
 
           .. index:: kinetic_energy (field)
 
-          **kinetic_energy**: (required) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n_transmission_function]) {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} 
+          **kinetic_energy**: (required) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n_transmission_function]) {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXprocess_mpes/transmission_correction/transmission_function/kinetic_energy-field>`
 
             Kinetic energy values
 
-          .. _/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function/relative_intensity-field:
+          .. _/NXmpes/ENTRY/PROCESS_MPES/transmission_correction/transmission_function/relative_intensity-field:
 
           .. index:: relative_intensity (field)
 
-          **relative_intensity**: (required) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n_transmission_function]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+          **relative_intensity**: (required) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n_transmission_function]) {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} :ref:`⤆ </NXprocess_mpes/transmission_correction/transmission_function/relative_intensity-field>`
 
             Relative transmission efficiency for the given kinetic energies
 
@@ -1465,45 +1479,48 @@ NXmpes
 
           The chemical formula of the sample (using CIF conventions).
 
-      .. _/NXmpes/ENTRY/SAMPLE/sample_history-group:
+      .. _/NXmpes/ENTRY/SAMPLE/history-group:
 
-      **sample_history**: (recommended) :ref:`NXsample_history` 
+      **history**: (recommended) :ref:`NXhistory` :ref:`⤆ </NXsample/history-group>`
 
         .. collapse:: A set of activities that occurred to the sample prior to/during photoemiss ...
 
             A set of activities that occurred to the sample prior to/during photoemission
             experiment.
 
-        .. _/NXmpes/ENTRY/SAMPLE/sample_history/sample_preparation-group:
+        .. _/NXmpes/ENTRY/SAMPLE/history/sample_preparation-group:
 
-        **sample_preparation**: (recommended) :ref:`NXphysical_process` 
+        **sample_preparation**: (recommended) :ref:`NXphysical_process` :ref:`⤆ </NXhistory/PHYSICAL_PROCESS-group>`
 
-          .. collapse:: Details about the sample preparation for the MPES experiment (e.g. UHV c ...
+          .. collapse:: Details about the sample preparation for the photoemission experiment (e ...
 
-              Details about the sample preparation for the MPES experiment (e.g. UHV cleaving,
+              Details about the sample preparation for the photoemission experiment (e.g. UHV cleaving,
               in-situ growth, sputtering/annealing, etc.).
 
-          .. _/NXmpes/ENTRY/SAMPLE/sample_history/sample_preparation/start_time-field:
+          .. _/NXmpes/ENTRY/SAMPLE/history/sample_preparation/start_time-field:
 
           .. index:: start_time (field)
 
           **start_time**: (required) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXphysical_process/start_time-field>`
 
 
-          .. _/NXmpes/ENTRY/SAMPLE/sample_history/sample_preparation/end_time-field:
+          .. _/NXmpes/ENTRY/SAMPLE/history/sample_preparation/end_time-field:
 
           .. index:: end_time (field)
 
           **end_time**: (recommended) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXphysical_process/end_time-field>`
 
 
-          .. _/NXmpes/ENTRY/SAMPLE/sample_history/sample_preparation/method-field:
+          .. _/NXmpes/ENTRY/SAMPLE/history/sample_preparation/method-field:
 
           .. index:: method (field)
 
           **method**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXphysical_process/method-field>`
 
-            Details about the method of sample preparation before the MPES experiment.
+            .. collapse:: Details about the method of sample preparation before the photoemissio ...
+
+                Details about the method of sample preparation before the photoemission
+                experiment.
 
       .. _/NXmpes/ENTRY/SAMPLE/temperature-group:
 
@@ -1620,19 +1637,21 @@ NXmpes
 
     .. _/NXmpes/ENTRY/data-group:
 
-    **data**: (required) :ref:`NXdata` :ref:`⤆ </NXentry/DATA-group>`
+    **data**: (required) :ref:`NXdata_mpes` 
 
       .. collapse:: The default NXdata field containing a view on the measured data. ...
 
           The default NXdata field containing a view on the measured data.
           This NXdata field contains a collection of the main relevant fields (axes).
-          In NXmpes, it is required to provide an energy axis.
           If you want to provide additional views on your data, you can additionally use
           the generic NXdata group of NXentry.
-          The other data fields inside this NXdata group should be named according to conventions
-          to ensure compatibility. We recommened the following field names
-          for common data fields:
 
+          In NXmpes, it is required to provide an energy axis.
+
+          The naming of fields should follow the convention defined in the
+          :ref:`NXdata_mpes` base class:
+
+          - **energy**: Calibrated energy (kinetic or binding energy). Unit category: NX_ENERGY (e.g., eV).
           - **kx**: Calibrated x axis in k-space. Unit category: NX_ANY (e.g., 1/Angström).
           - **ky**: Calibrated y axis in k-space. Unit category: NX_ANY (1/Angström).
           - **kz**: Calibrated z axis in k-space. Unit category: NX_ANY (1/Angström).
@@ -1659,23 +1678,16 @@ NXmpes
 
       .. index:: signal (group attribute)
 
-      **@signal**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata@signal-attribute>`
+      **@signal**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata_mpes@signal-attribute>`
 
 
         Obligatory value: ``data``
-
-      .. _/NXmpes/ENTRY/data@energy_indices-attribute:
-
-      .. index:: energy_indices (group attribute)
-
-      **@energy_indices**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
-
 
       .. _/NXmpes/ENTRY/data@energy_depends-attribute:
 
       .. index:: energy_depends (group attribute)
 
-      **@energy_depends**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata@AXISNAME_depends-attribute>`
+      **@energy_depends**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata_mpes@AXISNAME_depends-attribute>`
 
         .. collapse:: The energy can be dispersed according to different strategies. ``energy_de ...
 
@@ -1689,7 +1701,7 @@ NXmpes
 
       .. index:: data (field)
 
-      **data**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/DATA-field>`
+      **data**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata_mpes/DATA-field>`
 
         .. collapse:: Represents a measure of one- or more-dimensional photoemission counts, whe ...
 
@@ -1702,31 +1714,14 @@ NXmpes
 
       .. index:: energy (field)
 
-      **energy**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+      **energy**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXdata_mpes/energy-field>`
 
-        .. collapse:: Calibrated energy axis. ...
-
-            Calibrated energy axis.
-
-            This could be a link to either
-            /entry/process/energy_calibration/calibrated_axis or
-            /entry/process/energy_correction/calibrated_axis.
 
         .. _/NXmpes/ENTRY/data/energy@type-attribute:
 
         .. index:: type (field attribute)
 
-        **@type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata/AXISNAME@long_name-attribute>`
-
-          .. collapse:: The energy can be either stored as kinetic or as binding energy. ...
-
-              The energy can be either stored as kinetic or as binding energy.
-
-              Any of these values:
-
-                * ``kinetic``:  Calibrated kinetic energy axis. In case the kinetic energy axis is referenced to the Fermi level :math:`E_F` (e.g., in entry/process/energy_referencing), kinetic energies :math:`E` are provided as :math:`E-E_F`. This concept is related to term `3.35 <https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.35>`_ of the ISO 18115-1:2023 standard.
-
-                * ``binding``:  Calibrated binding energy axis. This concept is related to term `12.16 <https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.16>`_ of the ISO 18115-1:2023 standard.
+        **@type**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata_mpes/energy@type-attribute>`
 
 
 
@@ -1743,20 +1738,19 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/data/energy-field </NXmpes/ENTRY/data/energy-field>`
 * :ref:`/NXmpes/ENTRY/data/energy@type-attribute </NXmpes/ENTRY/data/energy@type-attribute>`
 * :ref:`/NXmpes/ENTRY/data@energy_depends-attribute </NXmpes/ENTRY/data@energy_depends-attribute>`
-* :ref:`/NXmpes/ENTRY/data@energy_indices-attribute </NXmpes/ENTRY/data@energy_indices-attribute>`
 * :ref:`/NXmpes/ENTRY/data@signal-attribute </NXmpes/ENTRY/data@signal-attribute>`
 * :ref:`/NXmpes/ENTRY/definition-field </NXmpes/ENTRY/definition-field>`
 * :ref:`/NXmpes/ENTRY/definition@version-attribute </NXmpes/ENTRY/definition@version-attribute>`
 * :ref:`/NXmpes/ENTRY/end_time-field </NXmpes/ENTRY/end_time-field>`
 * :ref:`/NXmpes/ENTRY/geometries-group </NXmpes/ENTRY/geometries-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT-group </NXmpes/ENTRY/INSTRUMENT-group>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_TYPE-group </NXmpes/ENTRY/INSTRUMENT/beam_TYPE-group>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/associated_source-group </NXmpes/ENTRY/INSTRUMENT/beam_TYPE/associated_source-group>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/distance-field </NXmpes/ENTRY/INSTRUMENT/beam_TYPE/distance-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/extent-field </NXmpes/ENTRY/INSTRUMENT/beam_TYPE/extent-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_energy-field </NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_energy-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_energy_spread-field </NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_energy_spread-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_polarization-field </NXmpes/ENTRY/INSTRUMENT/beam_TYPE/incident_polarization-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/beamTYPE-group </NXmpes/ENTRY/INSTRUMENT/beamTYPE-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/beamTYPE/associated_source-group </NXmpes/ENTRY/INSTRUMENT/beamTYPE/associated_source-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/beamTYPE/distance-field </NXmpes/ENTRY/INSTRUMENT/beamTYPE/distance-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/beamTYPE/extent-field </NXmpes/ENTRY/INSTRUMENT/beamTYPE/extent-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/beamTYPE/incident_energy-field </NXmpes/ENTRY/INSTRUMENT/beamTYPE/incident_energy-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/beamTYPE/incident_energy_spread-field </NXmpes/ENTRY/INSTRUMENT/beamTYPE/incident_energy_spread-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/beamTYPE/incident_polarization-field </NXmpes/ENTRY/INSTRUMENT/beamTYPE/incident_polarization-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/device_information-group </NXmpes/ENTRY/INSTRUMENT/device_information-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/device_information/identifier-field </NXmpes/ENTRY/INSTRUMENT/device_information/identifier-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/device_information/model-field </NXmpes/ENTRY/INSTRUMENT/device_information/model-field>`
@@ -1799,6 +1793,7 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/device_information/identifier-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/device_information/identifier-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/device_information/model-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/device_information/model-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/device_information/vendor-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/device_information/vendor-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/drift_energy-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/drift_energy-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/energy_scan_mode-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/energy_scan_mode-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/entrance_slit-group </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/entrance_slit-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/exit_slit-group </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/ENERGYDISPERSION/exit_slit-group>`
@@ -1810,6 +1805,7 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/work_function-field </NXmpes/ENTRY/INSTRUMENT/ELECTRONANALYSER/work_function-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution-group </NXmpes/ENTRY/INSTRUMENT/energy_resolution-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/physical_quantity-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/physical_quantity-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/relative_resolution-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/relative_resolution-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/resolution-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/energy_resolution/type-field </NXmpes/ENTRY/INSTRUMENT/energy_resolution/type-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/flood_gun-group </NXmpes/ENTRY/INSTRUMENT/flood_gun-group>`
@@ -1819,6 +1815,7 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/flood_gun/name-field </NXmpes/ENTRY/INSTRUMENT/flood_gun/name-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/flood_gun/physical_quantity-field </NXmpes/ENTRY/INSTRUMENT/flood_gun/physical_quantity-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/flood_gun/type-field </NXmpes/ENTRY/INSTRUMENT/flood_gun/type-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/history-group </NXmpes/ENTRY/INSTRUMENT/history-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat-group </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/name-field </NXmpes/ENTRY/INSTRUMENT/MANIPULATOR/cryostat/name-field>`
@@ -1865,38 +1862,44 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/pressure_gauge/value-field </NXmpes/ENTRY/INSTRUMENT/pressure_gauge/value-field>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/pressure_gauge/value_log-group </NXmpes/ENTRY/INSTRUMENT/pressure_gauge/value_log-group>`
 * :ref:`/NXmpes/ENTRY/INSTRUMENT/pressure_gauge/value_log/value-field </NXmpes/ENTRY/INSTRUMENT/pressure_gauge/value_log/value-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE-group </NXmpes/ENTRY/INSTRUMENT/source_TYPE-group>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/associated_beam-group </NXmpes/ENTRY/INSTRUMENT/source_TYPE/associated_beam-group>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information-group </NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information-group>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/identifier-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/identifier-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/model-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/model-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/vendor-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/device_information/vendor-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/name-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/name-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/probe-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/probe-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/type-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/type-field>`
-* :ref:`/NXmpes/ENTRY/INSTRUMENT/source_TYPE/type_other-field </NXmpes/ENTRY/INSTRUMENT/source_TYPE/type_other-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/sourceTYPE-group </NXmpes/ENTRY/INSTRUMENT/sourceTYPE-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/associated_beam-group </NXmpes/ENTRY/INSTRUMENT/sourceTYPE/associated_beam-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/device_information-group </NXmpes/ENTRY/INSTRUMENT/sourceTYPE/device_information-group>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/device_information/identifier-field </NXmpes/ENTRY/INSTRUMENT/sourceTYPE/device_information/identifier-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/device_information/model-field </NXmpes/ENTRY/INSTRUMENT/sourceTYPE/device_information/model-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/device_information/vendor-field </NXmpes/ENTRY/INSTRUMENT/sourceTYPE/device_information/vendor-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/name-field </NXmpes/ENTRY/INSTRUMENT/sourceTYPE/name-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/probe-field </NXmpes/ENTRY/INSTRUMENT/sourceTYPE/probe-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/type-field </NXmpes/ENTRY/INSTRUMENT/sourceTYPE/type-field>`
+* :ref:`/NXmpes/ENTRY/INSTRUMENT/sourceTYPE/type_other-field </NXmpes/ENTRY/INSTRUMENT/sourceTYPE/type_other-field>`
 * :ref:`/NXmpes/ENTRY/method-field </NXmpes/ENTRY/method-field>`
-* :ref:`/NXmpes/ENTRY/PROCESS-group </NXmpes/ENTRY/PROCESS-group>`
-* :ref:`/NXmpes/ENTRY/PROCESS/angular_calibration-group </NXmpes/ENTRY/PROCESS/angular_calibration-group>`
-* :ref:`/NXmpes/ENTRY/PROCESS/angular_calibration/calibrated_axis-field </NXmpes/ENTRY/PROCESS/angular_calibration/calibrated_axis-field>`
-* :ref:`/NXmpes/ENTRY/PROCESS/energy_calibration-group </NXmpes/ENTRY/PROCESS/energy_calibration-group>`
-* :ref:`/NXmpes/ENTRY/PROCESS/energy_calibration/calibrated_axis-field </NXmpes/ENTRY/PROCESS/energy_calibration/calibrated_axis-field>`
-* :ref:`/NXmpes/ENTRY/PROCESS/energy_referencing-group </NXmpes/ENTRY/PROCESS/energy_referencing-group>`
-* :ref:`/NXmpes/ENTRY/PROCESS/energy_referencing/binding_energy-field </NXmpes/ENTRY/PROCESS/energy_referencing/binding_energy-field>`
-* :ref:`/NXmpes/ENTRY/PROCESS/energy_referencing/calibrated_axis-field </NXmpes/ENTRY/PROCESS/energy_referencing/calibrated_axis-field>`
-* :ref:`/NXmpes/ENTRY/PROCESS/energy_referencing/level-group </NXmpes/ENTRY/PROCESS/energy_referencing/level-group>`
-* :ref:`/NXmpes/ENTRY/PROCESS/energy_referencing/offset-field </NXmpes/ENTRY/PROCESS/energy_referencing/offset-field>`
-* :ref:`/NXmpes/ENTRY/PROCESS/energy_referencing/reference_peak-field </NXmpes/ENTRY/PROCESS/energy_referencing/reference_peak-field>`
-* :ref:`/NXmpes/ENTRY/PROCESS/momentum_calibration-group </NXmpes/ENTRY/PROCESS/momentum_calibration-group>`
-* :ref:`/NXmpes/ENTRY/PROCESS/momentum_calibration/calibrated_axis-field </NXmpes/ENTRY/PROCESS/momentum_calibration/calibrated_axis-field>`
-* :ref:`/NXmpes/ENTRY/PROCESS/spatial_calibration-group </NXmpes/ENTRY/PROCESS/spatial_calibration-group>`
-* :ref:`/NXmpes/ENTRY/PROCESS/spatial_calibration/calibrated_axis-field </NXmpes/ENTRY/PROCESS/spatial_calibration/calibrated_axis-field>`
-* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction-group </NXmpes/ENTRY/PROCESS/transmission_correction-group>`
-* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function-group </NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function-group>`
-* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function/kinetic_energy-field </NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function/kinetic_energy-field>`
-* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function/relative_intensity-field </NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function/relative_intensity-field>`
-* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function@axes-attribute </NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function@axes-attribute>`
-* :ref:`/NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function@signal-attribute </NXmpes/ENTRY/PROCESS/transmission_correction/transmission_function@signal-attribute>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES-group </NXmpes/ENTRY/PROCESS_MPES-group>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/angularN_calibration-group </NXmpes/ENTRY/PROCESS_MPES/angularN_calibration-group>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/angularN_calibration/calibrated_axis-field </NXmpes/ENTRY/PROCESS_MPES/angularN_calibration/calibrated_axis-field>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/delay_calibration-group </NXmpes/ENTRY/PROCESS_MPES/delay_calibration-group>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/delay_calibration/calibrated_axis-field </NXmpes/ENTRY/PROCESS_MPES/delay_calibration/calibrated_axis-field>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/ellipticity_calibration-group </NXmpes/ENTRY/PROCESS_MPES/ellipticity_calibration-group>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/ellipticity_calibration/calibrated_axis-field </NXmpes/ENTRY/PROCESS_MPES/ellipticity_calibration/calibrated_axis-field>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/energy_calibration-group </NXmpes/ENTRY/PROCESS_MPES/energy_calibration-group>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/energy_calibration/calibrated_axis-field </NXmpes/ENTRY/PROCESS_MPES/energy_calibration/calibrated_axis-field>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/energy_referencing-group </NXmpes/ENTRY/PROCESS_MPES/energy_referencing-group>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/energy_referencing/binding_energy-field </NXmpes/ENTRY/PROCESS_MPES/energy_referencing/binding_energy-field>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/energy_referencing/calibrated_axis-field </NXmpes/ENTRY/PROCESS_MPES/energy_referencing/calibrated_axis-field>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/energy_referencing/level-group </NXmpes/ENTRY/PROCESS_MPES/energy_referencing/level-group>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/energy_referencing/offset-field </NXmpes/ENTRY/PROCESS_MPES/energy_referencing/offset-field>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/energy_referencing/reference_peak-field </NXmpes/ENTRY/PROCESS_MPES/energy_referencing/reference_peak-field>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/kN_calibration-group </NXmpes/ENTRY/PROCESS_MPES/kN_calibration-group>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/kN_calibration/calibrated_axis-field </NXmpes/ENTRY/PROCESS_MPES/kN_calibration/calibrated_axis-field>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/polarization_angle_calibration-group </NXmpes/ENTRY/PROCESS_MPES/polarization_angle_calibration-group>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/polarization_angle_calibration/calibrated_axis-field </NXmpes/ENTRY/PROCESS_MPES/polarization_angle_calibration/calibrated_axis-field>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/spatialN_calibration-group </NXmpes/ENTRY/PROCESS_MPES/spatialN_calibration-group>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/spatialN_calibration/calibrated_axis-field </NXmpes/ENTRY/PROCESS_MPES/spatialN_calibration/calibrated_axis-field>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/transmission_correction-group </NXmpes/ENTRY/PROCESS_MPES/transmission_correction-group>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/transmission_correction/transmission_function-group </NXmpes/ENTRY/PROCESS_MPES/transmission_correction/transmission_function-group>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/transmission_correction/transmission_function/kinetic_energy-field </NXmpes/ENTRY/PROCESS_MPES/transmission_correction/transmission_function/kinetic_energy-field>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/transmission_correction/transmission_function/relative_intensity-field </NXmpes/ENTRY/PROCESS_MPES/transmission_correction/transmission_function/relative_intensity-field>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/transmission_correction/transmission_function@axes-attribute </NXmpes/ENTRY/PROCESS_MPES/transmission_correction/transmission_function@axes-attribute>`
+* :ref:`/NXmpes/ENTRY/PROCESS_MPES/transmission_correction/transmission_function@signal-attribute </NXmpes/ENTRY/PROCESS_MPES/transmission_correction/transmission_function@signal-attribute>`
 * :ref:`/NXmpes/ENTRY/SAMPLE-group </NXmpes/ENTRY/SAMPLE-group>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/atom_types-field </NXmpes/ENTRY/SAMPLE/atom_types-field>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/bias-group </NXmpes/ENTRY/SAMPLE/bias-group>`
@@ -1908,13 +1911,13 @@ attributes, and links defined in this class.
 * :ref:`/NXmpes/ENTRY/SAMPLE/flood_gun_current/flood_gun-group </NXmpes/ENTRY/SAMPLE/flood_gun_current/flood_gun-group>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/gas_pressure-group </NXmpes/ENTRY/SAMPLE/gas_pressure-group>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/gas_pressure/pressure_gauge-group </NXmpes/ENTRY/SAMPLE/gas_pressure/pressure_gauge-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/history-group </NXmpes/ENTRY/SAMPLE/history-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/history/sample_preparation-group </NXmpes/ENTRY/SAMPLE/history/sample_preparation-group>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/history/sample_preparation/end_time-field </NXmpes/ENTRY/SAMPLE/history/sample_preparation/end_time-field>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/history/sample_preparation/method-field </NXmpes/ENTRY/SAMPLE/history/sample_preparation/method-field>`
+* :ref:`/NXmpes/ENTRY/SAMPLE/history/sample_preparation/start_time-field </NXmpes/ENTRY/SAMPLE/history/sample_preparation/start_time-field>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/name-field </NXmpes/ENTRY/SAMPLE/name-field>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/physical_form-field </NXmpes/ENTRY/SAMPLE/physical_form-field>`
-* :ref:`/NXmpes/ENTRY/SAMPLE/sample_history-group </NXmpes/ENTRY/SAMPLE/sample_history-group>`
-* :ref:`/NXmpes/ENTRY/SAMPLE/sample_history/sample_preparation-group </NXmpes/ENTRY/SAMPLE/sample_history/sample_preparation-group>`
-* :ref:`/NXmpes/ENTRY/SAMPLE/sample_history/sample_preparation/end_time-field </NXmpes/ENTRY/SAMPLE/sample_history/sample_preparation/end_time-field>`
-* :ref:`/NXmpes/ENTRY/SAMPLE/sample_history/sample_preparation/method-field </NXmpes/ENTRY/SAMPLE/sample_history/sample_preparation/method-field>`
-* :ref:`/NXmpes/ENTRY/SAMPLE/sample_history/sample_preparation/start_time-field </NXmpes/ENTRY/SAMPLE/sample_history/sample_preparation/start_time-field>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/situation-field </NXmpes/ENTRY/SAMPLE/situation-field>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/SUBSTANCE-group </NXmpes/ENTRY/SAMPLE/SUBSTANCE-group>`
 * :ref:`/NXmpes/ENTRY/SAMPLE/SUBSTANCE/molecular_formula_hill-field </NXmpes/ENTRY/SAMPLE/SUBSTANCE/molecular_formula_hill-field>`

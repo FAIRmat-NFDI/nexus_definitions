@@ -52,7 +52,7 @@ NXapm
 
       .. index:: version (field attribute)
 
-      **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXentry/definition@version-attribute>`
+      **@version**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXentry/definition@version-attribute>`
 
 
     .. _/NXapm/ENTRY/run_number-field:
@@ -82,6 +82,35 @@ NXapm
           needs to be distinguished with different run numbers.
           We follow this habit of most atom probe groups. Such interrupted runs
           should be stored as individual :ref:`NXentry` instances in one NeXus file.
+
+    .. _/NXapm/ENTRY/experiment_alias-field:
+
+    .. index:: experiment_alias (field)
+
+    **experiment_alias**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+
+      .. collapse:: Either an identifier or an alias that is human-friendly so that scientists f ...
+
+          Either an identifier or an alias that is human-friendly so that scientists find that experiment again.
+          For experiments usually this is the run_number but for simulation typically no run_numbers are issued.
+
+    .. _/NXapm/ENTRY/experiment_description-field:
+
+    .. index:: experiment_description (field)
+
+    **experiment_description**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXentry/experiment_description-field>`
+
+      .. collapse:: Free-text description about the experiment. ...
+
+          Free-text description about the experiment.
+
+          Users are strongly advised to parameterize the description of their experiment
+          by using respective groups and fields and base classes instead of writing prose
+          into this field.
+
+          The reason is that such free-text field is difficult to machine-interpret.
+          The motivation behind keeping this field for now is to learn in how far the
+          current base classes need extension based on user feedback.
 
     .. _/NXapm/ENTRY/start_time-field:
 
@@ -137,20 +166,22 @@ NXapm
           * other should be used in combination with the user specifying details
             in the experiment_documentation field.
 
+          If NXapm is used for storing details about a simulation use other for now.
+
           Any of these values: ``apt`` | ``fim`` | ``apt_fim`` | ``other``
 
     .. _/NXapm/ENTRY/profiling-group:
 
-    **profiling**: (required) :ref:`NXcs_profiling` 
+    **profiling**: (optional) :ref:`NXcs_profiling` 
 
       .. collapse:: The configuration of the I/O writer software (e.g. `pynxtools <https://githu ...
 
-          The configuration of the I/O writer software (e.g. `pynxtools <https://github.com/FAIRmat-NFDI/pynxtools>`_)
+          The configuration of the I/O writer software (e.g. `pynxtools <https://github.com/FAIRmat-NFDI/pynxtools>`_ or its plugins)
           which was used to generate this NeXus file instance.
 
-      .. _/NXapm/ENTRY/profiling/PROGRAM-group:
+      .. _/NXapm/ENTRY/profiling/programID-group:
 
-      **PROGRAM**: (optional) :ref:`NXprogram` 
+      **programID**: (optional) :ref:`NXprogram` 
 
         .. collapse:: A collection of all programs and libraries which are considered relevant ...
 
@@ -169,14 +200,14 @@ NXapm
             research data management system, it makes sense to store e.g. the GitHub
             repository commit and respective submodule references used.
 
-        .. _/NXapm/ENTRY/profiling/PROGRAM/program-field:
+        .. _/NXapm/ENTRY/profiling/programID/program-field:
 
         .. index:: program (field)
 
         **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
-          .. _/NXapm/ENTRY/profiling/PROGRAM/program@version-attribute:
+          .. _/NXapm/ENTRY/profiling/programID/program@version-attribute:
 
           .. index:: version (field attribute)
 
@@ -221,33 +252,33 @@ NXapm
       **doi**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXcite/doi-field>`
 
 
-    .. _/NXapm/ENTRY/SERIALIZED-group:
+    .. _/NXapm/ENTRY/serializedID-group:
 
-    **SERIALIZED**: (optional) :ref:`NXserialized` 
+    **serializedID**: (optional) :ref:`NXserialized` 
 
 
-      .. _/NXapm/ENTRY/SERIALIZED/type-field:
+      .. _/NXapm/ENTRY/serializedID/type-field:
 
       .. index:: type (field)
 
       **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/type-field>`
 
 
-      .. _/NXapm/ENTRY/SERIALIZED/path-field:
+      .. _/NXapm/ENTRY/serializedID/path-field:
 
       .. index:: path (field)
 
       **path**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/path-field>`
 
 
-      .. _/NXapm/ENTRY/SERIALIZED/checksum-field:
+      .. _/NXapm/ENTRY/serializedID/checksum-field:
 
       .. index:: checksum (field)
 
       **checksum**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/checksum-field>`
 
 
-      .. _/NXapm/ENTRY/SERIALIZED/algorithm-field:
+      .. _/NXapm/ENTRY/serializedID/algorithm-field:
 
       .. index:: algorithm (field)
 
@@ -268,7 +299,7 @@ NXapm
 
       .. _/NXapm/ENTRY/USER/identifier-group:
 
-      **identifier**: (recommended) :ref:`NXidentifier` 
+      **identifier**: (recommended) :ref:`NXidentifier` :ref:`⤆ </NXuser/IDENTIFIER-group>`
 
 
         .. _/NXapm/ENTRY/USER/identifier/service-field:
@@ -318,7 +349,7 @@ NXapm
 
       .. index:: method (field)
 
-      **method**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+      **method**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
         .. collapse:: A qualifier whether the sample is a real one ...
 
@@ -452,9 +483,9 @@ NXapm
         **is_persistent**: (required) :ref:`NX_BOOLEAN <NX_BOOLEAN>` :ref:`⤆ </NXidentifier/is_persistent-field>`
 
 
-      .. _/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION-group:
+      .. _/NXapm/ENTRY/sample/chemical_composition-group:
 
-      **CHEMICAL_COMPOSITION**: (recommended) :ref:`NXchemical_composition` 
+      **chemical_composition**: (recommended) :ref:`NXchemical_composition` 
 
         .. collapse:: The chemical composition of the sample. Typically, it is assumed that ...
 
@@ -463,7 +494,7 @@ NXapm
             so that the composition of the typically substantially less voluminous
             specimen probes from the more voluminous sample.
 
-        .. _/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/normalization-field:
+        .. _/NXapm/ENTRY/sample/chemical_composition/normalization-field:
 
         .. index:: normalization (field)
 
@@ -482,12 +513,12 @@ NXapm
 
               Any of these values: ``atom_percent`` | ``weight_percent``
 
-        .. _/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION-group:
+        .. _/NXapm/ENTRY/sample/chemical_composition/ION-group:
 
         **ION**: (required) :ref:`NXion` :ref:`⤆ </NXchemical_composition/ION-group>`
 
 
-          .. _/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION/chemical_symbol-field:
+          .. _/NXapm/ENTRY/sample/chemical_composition/ION/chemical_symbol-field:
 
           .. index:: chemical_symbol (field)
 
@@ -500,7 +531,7 @@ NXapm
                 All symbols in the set of NXion instances inside the group
                 chemical_composition need to be disjoint.
 
-          .. _/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION/composition-field:
+          .. _/NXapm/ENTRY/sample/chemical_composition/ION/composition-field:
 
           .. index:: composition (field)
 
@@ -512,7 +543,7 @@ NXapm
                 The value is normalized based on normalization, i.e. composition
                 is either an atom or weight percent quantity.
 
-          .. _/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION/composition_error-field:
+          .. _/NXapm/ENTRY/sample/chemical_composition/ION/composition_error-field:
 
           .. index:: composition_error (field)
 
@@ -522,19 +553,18 @@ NXapm
 
     .. _/NXapm/ENTRY/specimen-group:
 
-    **specimen**: (recommended) :ref:`NXsample` :ref:`⤆ </NXentry/SAMPLE-group>`
+    **specimen**: (required) :ref:`NXsample` :ref:`⤆ </NXentry/SAMPLE-group>`
 
 
       .. _/NXapm/ENTRY/specimen/method-field:
 
       .. index:: method (field)
 
-      **method**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+      **method**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-        .. collapse:: A qualifier whether the sample is a real one ...
+        .. collapse:: A qualifier whether the specimen is a real one or a virtual one. ...
 
-            A qualifier whether the sample is a real one
-            or a virtual one (in a computer simulation).
+            A qualifier whether the specimen is a real one or a virtual one.
 
             Any of these values: ``experiment`` | ``simulation``
 
@@ -635,7 +665,7 @@ NXapm
 
       .. index:: shank_angle (field)
 
-      **shank_angle**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
+      **shank_angle**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
 
         .. collapse:: Ideally measured otherwise best elaborated guess of the (initial) shank an ...
 
@@ -703,7 +733,7 @@ NXapm
 
     .. _/NXapm/ENTRY/coordinate_system_set-group:
 
-    **coordinate_system_set**: (recommended) :ref:`NXcoordinate_system_set` 
+    **coordinate_system_set**: (required) :ref:`NXcoordinate_system_set` 
 
       .. collapse:: Set to hold different coordinate systems conventions. ...
 
@@ -831,26 +861,26 @@ NXapm
         **status**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXapm_msr/instrument/status-field>`
 
 
-        .. _/NXapm/ENTRY/measurement/instrument/FABRICATION-group:
+        .. _/NXapm/ENTRY/measurement/instrument/fabrication-group:
 
-        **FABRICATION**: (required) :ref:`NXfabrication` :ref:`⤆ </NXapm_msr/instrument/FABRICATION-group>`
+        **fabrication**: (required) :ref:`NXfabrication` :ref:`⤆ </NXapm_msr/instrument/FABRICATION-group>`
 
 
-          .. _/NXapm/ENTRY/measurement/instrument/FABRICATION/vendor-field:
+          .. _/NXapm/ENTRY/measurement/instrument/fabrication/vendor-field:
 
           .. index:: vendor (field)
 
           **vendor**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
-          .. _/NXapm/ENTRY/measurement/instrument/FABRICATION/model-field:
+          .. _/NXapm/ENTRY/measurement/instrument/fabrication/model-field:
 
           .. index:: model (field)
 
           **model**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/model-field>`
 
 
-          .. _/NXapm/ENTRY/measurement/instrument/FABRICATION/identifier-field:
+          .. _/NXapm/ENTRY/measurement/instrument/fabrication/identifier-field:
 
           .. index:: identifier (field)
 
@@ -869,19 +899,19 @@ NXapm
           **status**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXreflectron/status-field>`
 
 
-          .. _/NXapm/ENTRY/measurement/instrument/reflectron/FABRICATION-group:
+          .. _/NXapm/ENTRY/measurement/instrument/reflectron/fabrication-group:
 
-          **FABRICATION**: (recommended) :ref:`NXfabrication` :ref:`⤆ </NXreflectron/FABRICATION-group>`
+          **fabrication**: (recommended) :ref:`NXfabrication` :ref:`⤆ </NXreflectron/FABRICATION-group>`
 
 
-            .. _/NXapm/ENTRY/measurement/instrument/reflectron/FABRICATION/vendor-field:
+            .. _/NXapm/ENTRY/measurement/instrument/reflectron/fabrication/vendor-field:
 
             .. index:: vendor (field)
 
             **vendor**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
-            .. _/NXapm/ENTRY/measurement/instrument/reflectron/FABRICATION/model-field:
+            .. _/NXapm/ENTRY/measurement/instrument/reflectron/fabrication/model-field:
 
             .. index:: model (field)
 
@@ -900,19 +930,19 @@ NXapm
           **name**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXlens_em/name-field>`
 
 
-          .. _/NXapm/ENTRY/measurement/instrument/local_electrode/FABRICATION-group:
+          .. _/NXapm/ENTRY/measurement/instrument/local_electrode/fabrication-group:
 
-          **FABRICATION**: (recommended) :ref:`NXfabrication` :ref:`⤆ </NXlens_em/FABRICATION-group>`
+          **fabrication**: (recommended) :ref:`NXfabrication` :ref:`⤆ </NXlens_em/FABRICATION-group>`
 
 
-            .. _/NXapm/ENTRY/measurement/instrument/local_electrode/FABRICATION/vendor-field:
+            .. _/NXapm/ENTRY/measurement/instrument/local_electrode/fabrication/vendor-field:
 
             .. index:: vendor (field)
 
             **vendor**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
-            .. _/NXapm/ENTRY/measurement/instrument/local_electrode/FABRICATION/model-field:
+            .. _/NXapm/ENTRY/measurement/instrument/local_electrode/fabrication/model-field:
 
             .. index:: model (field)
 
@@ -924,19 +954,19 @@ NXapm
         **ion_detector**: (recommended) :ref:`NXdetector` :ref:`⤆ </NXapm_msr/instrument/ion_detector-group>`
 
 
-          .. _/NXapm/ENTRY/measurement/instrument/ion_detector/FABRICATION-group:
+          .. _/NXapm/ENTRY/measurement/instrument/ion_detector/fabrication-group:
 
-          **FABRICATION**: (recommended) :ref:`NXfabrication` :ref:`⤆ </NXdetector/FABRICATION-group>`
+          **fabrication**: (recommended) :ref:`NXfabrication` :ref:`⤆ </NXdetector/FABRICATION-group>`
 
 
-            .. _/NXapm/ENTRY/measurement/instrument/ion_detector/FABRICATION/vendor-field:
+            .. _/NXapm/ENTRY/measurement/instrument/ion_detector/fabrication/vendor-field:
 
             .. index:: vendor (field)
 
             **vendor**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
-            .. _/NXapm/ENTRY/measurement/instrument/ion_detector/FABRICATION/model-field:
+            .. _/NXapm/ENTRY/measurement/instrument/ion_detector/fabrication/model-field:
 
             .. index:: model (field)
 
@@ -955,31 +985,31 @@ NXapm
           **pulse_mode**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpulser_apm/pulse_mode-field>`
 
 
-          .. _/NXapm/ENTRY/measurement/instrument/pulser/FABRICATION-group:
+          .. _/NXapm/ENTRY/measurement/instrument/pulser/fabrication-group:
 
-          **FABRICATION**: (recommended) :ref:`NXfabrication` :ref:`⤆ </NXpulser_apm/FABRICATION-group>`
+          **fabrication**: (recommended) :ref:`NXfabrication` :ref:`⤆ </NXpulser_apm/FABRICATION-group>`
 
 
-            .. _/NXapm/ENTRY/measurement/instrument/pulser/FABRICATION/vendor-field:
+            .. _/NXapm/ENTRY/measurement/instrument/pulser/fabrication/vendor-field:
 
             .. index:: vendor (field)
 
             **vendor**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
-            .. _/NXapm/ENTRY/measurement/instrument/pulser/FABRICATION/model-field:
+            .. _/NXapm/ENTRY/measurement/instrument/pulser/fabrication/model-field:
 
             .. index:: model (field)
 
             **model**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/model-field>`
 
 
-          .. _/NXapm/ENTRY/measurement/instrument/pulser/SOURCE-group:
+          .. _/NXapm/ENTRY/measurement/instrument/pulser/sourceID-group:
 
-          **SOURCE**: (optional) :ref:`NXsource` :ref:`⤆ </NXpulser_apm/SOURCE-group>`
+          **sourceID**: (optional) :ref:`NXsource` :ref:`⤆ </NXpulser_apm/SOURCE-group>`
 
 
-            .. _/NXapm/ENTRY/measurement/instrument/pulser/SOURCE/wavelength-field:
+            .. _/NXapm/ENTRY/measurement/instrument/pulser/sourceID/wavelength-field:
 
             .. index:: wavelength (field)
 
@@ -987,19 +1017,19 @@ NXapm
 
               The wavelength of the radiation emitted by the source.
 
-            .. _/NXapm/ENTRY/measurement/instrument/pulser/SOURCE/FABRICATION-group:
+            .. _/NXapm/ENTRY/measurement/instrument/pulser/sourceID/fabrication-group:
 
-            **FABRICATION**: (recommended) :ref:`NXfabrication` :ref:`⤆ </NXpulser_apm/SOURCE/FABRICATION-group>`
+            **fabrication**: (recommended) :ref:`NXfabrication` :ref:`⤆ </NXpulser_apm/SOURCE/FABRICATION-group>`
 
 
-              .. _/NXapm/ENTRY/measurement/instrument/pulser/SOURCE/FABRICATION/vendor-field:
+              .. _/NXapm/ENTRY/measurement/instrument/pulser/sourceID/fabrication/vendor-field:
 
               .. index:: vendor (field)
 
               **vendor**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
 
 
-              .. _/NXapm/ENTRY/measurement/instrument/pulser/SOURCE/FABRICATION/model-field:
+              .. _/NXapm/ENTRY/measurement/instrument/pulser/sourceID/fabrication/model-field:
 
               .. index:: model (field)
 
@@ -1027,133 +1057,133 @@ NXapm
       **event_data_apm_set**: (optional) :ref:`NXevent_data_apm_set` 
 
 
-        .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM-group:
+        .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm-group:
 
-        **EVENT_DATA_APM**: (recommended) :ref:`NXevent_data_apm` :ref:`⤆ </NXevent_data_apm_set/EVENT_DATA_APM-group>`
+        **event_data_apm**: (recommended) :ref:`NXevent_data_apm` :ref:`⤆ </NXevent_data_apm_set/EVENT_DATA_APM-group>`
 
 
-          .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument-group:
+          .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument-group:
 
           **instrument**: (recommended) :ref:`NXinstrument` :ref:`⤆ </NXevent_data_apm/instrument-group>`
 
 
-            .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/control-group:
+            .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/control-group:
 
             **control**: (required) :ref:`NXcollection` :ref:`⤆ </NXevent_data_apm/instrument/control-group>`
 
 
-              .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/control/evaporation_control-field:
+              .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/control/evaporation_control-field:
 
               .. index:: evaporation_control (field)
 
               **evaporation_control**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXevent_data_apm/instrument/control/evaporation_control-field>`
 
 
-              .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/control/target_detection_rate-field:
+              .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/control/target_detection_rate-field:
 
               .. index:: target_detection_rate (field)
 
               **target_detection_rate**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXevent_data_apm/instrument/control/target_detection_rate-field>`
 
 
-            .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser-group:
+            .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser-group:
 
             **pulser**: (required) :ref:`NXpulser_apm` :ref:`⤆ </NXevent_data_apm/instrument/pulser-group>`
 
 
-              .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_frequency-field:
+              .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_frequency-field:
 
               .. index:: pulse_frequency (field)
 
               **pulse_frequency**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXpulser_apm/pulse_frequency-field>`
 
 
-                .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_frequency@logged_against-attribute:
+                .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_frequency@logged_against-attribute:
 
                 .. index:: logged_against (field attribute)
 
                 **@logged_against**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpulser_apm/pulse_frequency@logged_against-attribute>`
 
 
-              .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_fraction-field:
+              .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_fraction-field:
 
               .. index:: pulse_fraction (field)
 
               **pulse_fraction**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXpulser_apm/pulse_fraction-field>`
 
 
-                .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_fraction@logged_against-attribute:
+                .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_fraction@logged_against-attribute:
 
                 .. index:: logged_against (field attribute)
 
                 **@logged_against**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpulser_apm/pulse_fraction@logged_against-attribute>`
 
 
-              .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_voltage-field:
+              .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_voltage-field:
 
               .. index:: pulse_voltage (field)
 
               **pulse_voltage**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXpulser_apm/pulse_voltage-field>`
 
 
-                .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_voltage@logged_against-attribute:
+                .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_voltage@logged_against-attribute:
 
                 .. index:: logged_against (field attribute)
 
                 **@logged_against**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpulser_apm/pulse_voltage@logged_against-attribute>`
 
 
-              .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/standing_voltage-field:
+              .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/standing_voltage-field:
 
               .. index:: standing_voltage (field)
 
               **standing_voltage**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXpulser_apm/standing_voltage-field>`
 
 
-                .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/standing_voltage@logged_against-attribute:
+                .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/standing_voltage@logged_against-attribute:
 
                 .. index:: logged_against (field attribute)
 
                 **@logged_against**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpulser_apm/standing_voltage@logged_against-attribute>`
 
 
-              .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/SOURCE-group:
+              .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/SOURCE-group:
 
               **SOURCE**: (optional) :ref:`NXsource` :ref:`⤆ </NXpulser_apm/SOURCE-group>`
 
 
-                .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/SOURCE/pulse_energy-field:
+                .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/SOURCE/pulse_energy-field:
 
                 .. index:: pulse_energy (field)
 
                 **pulse_energy**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXpulser_apm/SOURCE/pulse_energy-field>`
 
 
-                  .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/SOURCE/pulse_energy@logged_against-attribute:
+                  .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/SOURCE/pulse_energy@logged_against-attribute:
 
                   .. index:: logged_against (field attribute)
 
                   **@logged_against**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpulser_apm/SOURCE/pulse_energy@logged_against-attribute>`
 
 
-            .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/stage_lab-group:
+            .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/stage_lab-group:
 
             **stage_lab**: (required) :ref:`NXstage_lab` :ref:`⤆ </NXevent_data_apm/instrument/stage_lab-group>`
 
 
-              .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/stage_lab/base_temperature-field:
+              .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/stage_lab/base_temperature-field:
 
               .. index:: base_temperature (field)
 
               **base_temperature**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXevent_data_apm/instrument/stage_lab/base_temperature-field>`
 
 
-            .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/analysis_chamber-group:
+            .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/analysis_chamber-group:
 
             **analysis_chamber**: (required) :ref:`NXchamber` :ref:`⤆ </NXevent_data_apm/instrument/analysis_chamber-group>`
 
 
-              .. _/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/analysis_chamber/chamber_pressure-field:
+              .. _/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/analysis_chamber/chamber_pressure-field:
 
               .. index:: chamber_pressure (field)
 
@@ -1256,52 +1286,52 @@ NXapm
         **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` 
 
 
-        .. _/NXapm/ENTRY/atom_probe/raw_data/PROGRAM-group:
+        .. _/NXapm/ENTRY/atom_probe/raw_data/programID-group:
 
-        **PROGRAM**: (optional) :ref:`NXprogram` 
+        **programID**: (optional) :ref:`NXprogram` 
 
 
-          .. _/NXapm/ENTRY/atom_probe/raw_data/PROGRAM/program-field:
+          .. _/NXapm/ENTRY/atom_probe/raw_data/programID/program-field:
 
           .. index:: program (field)
 
           **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
-            .. _/NXapm/ENTRY/atom_probe/raw_data/PROGRAM/program@version-attribute:
+            .. _/NXapm/ENTRY/atom_probe/raw_data/programID/program@version-attribute:
 
             .. index:: version (field attribute)
 
             **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
-        .. _/NXapm/ENTRY/atom_probe/raw_data/SERIALIZED-group:
+        .. _/NXapm/ENTRY/atom_probe/raw_data/serialized-group:
 
-        **SERIALIZED**: (recommended) :ref:`NXserialized` 
+        **serialized**: (recommended) :ref:`NXserialized` 
 
 
-          .. _/NXapm/ENTRY/atom_probe/raw_data/SERIALIZED/type-field:
+          .. _/NXapm/ENTRY/atom_probe/raw_data/serialized/type-field:
 
           .. index:: type (field)
 
           **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/type-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/raw_data/SERIALIZED/path-field:
+          .. _/NXapm/ENTRY/atom_probe/raw_data/serialized/path-field:
 
           .. index:: path (field)
 
           **path**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/path-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/raw_data/SERIALIZED/checksum-field:
+          .. _/NXapm/ENTRY/atom_probe/raw_data/serialized/checksum-field:
 
           .. index:: checksum (field)
 
           **checksum**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/checksum-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/raw_data/SERIALIZED/algorithm-field:
+          .. _/NXapm/ENTRY/atom_probe/raw_data/serialized/algorithm-field:
 
           .. index:: algorithm (field)
 
@@ -1369,52 +1399,52 @@ NXapm
         **hit_multiplicity**: (recommended) :ref:`NX_UINT <NX_UINT>` (Rank: 1, Dimensions: [i]) :ref:`⤆ </NXapm_hit_finding/hit_multiplicity-field>`
 
 
-        .. _/NXapm/ENTRY/atom_probe/hit_finding/PROGRAM-group:
+        .. _/NXapm/ENTRY/atom_probe/hit_finding/programID-group:
 
-        **PROGRAM**: (optional) :ref:`NXprogram` :ref:`⤆ </NXapm_hit_finding/PROGRAM-group>`
+        **programID**: (optional) :ref:`NXprogram` :ref:`⤆ </NXapm_hit_finding/PROGRAM-group>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/hit_finding/PROGRAM/program-field:
+          .. _/NXapm/ENTRY/atom_probe/hit_finding/programID/program-field:
 
           .. index:: program (field)
 
           **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
-            .. _/NXapm/ENTRY/atom_probe/hit_finding/PROGRAM/program@version-attribute:
+            .. _/NXapm/ENTRY/atom_probe/hit_finding/programID/program@version-attribute:
 
             .. index:: version (field attribute)
 
             **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
-        .. _/NXapm/ENTRY/atom_probe/hit_finding/SERIALIZED-group:
+        .. _/NXapm/ENTRY/atom_probe/hit_finding/serialized-group:
 
-        **SERIALIZED**: (recommended) :ref:`NXserialized` :ref:`⤆ </NXapm_hit_finding/SERIALIZED-group>`
+        **serialized**: (recommended) :ref:`NXserialized` :ref:`⤆ </NXapm_hit_finding/SERIALIZED-group>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/hit_finding/SERIALIZED/type-field:
+          .. _/NXapm/ENTRY/atom_probe/hit_finding/serialized/type-field:
 
           .. index:: type (field)
 
           **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/type-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/hit_finding/SERIALIZED/path-field:
+          .. _/NXapm/ENTRY/atom_probe/hit_finding/serialized/path-field:
 
           .. index:: path (field)
 
           **path**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/path-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/hit_finding/SERIALIZED/checksum-field:
+          .. _/NXapm/ENTRY/atom_probe/hit_finding/serialized/checksum-field:
 
           .. index:: checksum (field)
 
           **checksum**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/checksum-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/hit_finding/SERIALIZED/algorithm-field:
+          .. _/NXapm/ENTRY/atom_probe/hit_finding/serialized/algorithm-field:
 
           .. index:: algorithm (field)
 
@@ -1468,52 +1498,52 @@ NXapm
               the ions were evaporated but taking into account that a hit_finding
               and spatial_filtering was applied.
 
-        .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/PROGRAM-group:
+        .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/programID-group:
 
-        **PROGRAM**: (required) :ref:`NXprogram` 
+        **programID**: (required) :ref:`NXprogram` 
 
 
-          .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/PROGRAM/program-field:
+          .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/programID/program-field:
 
           .. index:: program (field)
 
           **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
-            .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/PROGRAM/program@version-attribute:
+            .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/programID/program@version-attribute:
 
             .. index:: version (field attribute)
 
             **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
-        .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/SERIALIZED-group:
+        .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/serialized-group:
 
-        **SERIALIZED**: (optional) :ref:`NXserialized` 
+        **serialized**: (optional) :ref:`NXserialized` 
 
 
-          .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/SERIALIZED/type-field:
+          .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/serialized/type-field:
 
           .. index:: type (field)
 
           **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/type-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/SERIALIZED/path-field:
+          .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/serialized/path-field:
 
           .. index:: path (field)
 
           **path**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/path-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/SERIALIZED/checksum-field:
+          .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/serialized/checksum-field:
 
           .. index:: checksum (field)
 
           **checksum**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/checksum-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/SERIALIZED/algorithm-field:
+          .. _/NXapm/ENTRY/atom_probe/hit_spatial_filtering/serialized/algorithm-field:
 
           .. index:: algorithm (field)
 
@@ -1579,52 +1609,52 @@ NXapm
         **calibrated_tof**: (required) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n]) :ref:`⤆ </NXapm_volt_and_bowl/calibrated_tof-field>`
 
 
-        .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/PROGRAM-group:
+        .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/programID-group:
 
-        **PROGRAM**: (required) :ref:`NXprogram` :ref:`⤆ </NXapm_volt_and_bowl/PROGRAM-group>`
+        **programID**: (required) :ref:`NXprogram` :ref:`⤆ </NXapm_volt_and_bowl/PROGRAM-group>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/PROGRAM/program-field:
+          .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/programID/program-field:
 
           .. index:: program (field)
 
           **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
-            .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/PROGRAM/program@version-attribute:
+            .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/programID/program@version-attribute:
 
             .. index:: version (field attribute)
 
             **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
-        .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/SERIALIZED-group:
+        .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/serialized-group:
 
-        **SERIALIZED**: (optional) :ref:`NXserialized` :ref:`⤆ </NXapm_volt_and_bowl/SERIALIZED-group>`
+        **serialized**: (optional) :ref:`NXserialized` :ref:`⤆ </NXapm_volt_and_bowl/SERIALIZED-group>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/SERIALIZED/type-field:
+          .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/serialized/type-field:
 
           .. index:: type (field)
 
           **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/type-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/SERIALIZED/path-field:
+          .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/serialized/path-field:
 
           .. index:: path (field)
 
           **path**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/path-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/SERIALIZED/checksum-field:
+          .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/serialized/checksum-field:
 
           .. index:: checksum (field)
 
           **checksum**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/checksum-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/SERIALIZED/algorithm-field:
+          .. _/NXapm/ENTRY/atom_probe/voltage_and_bowl/serialized/algorithm-field:
 
           .. index:: algorithm (field)
 
@@ -1650,52 +1680,52 @@ NXapm
         **mass_to_charge**: (required) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [n]) 
 
 
-        .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/PROGRAM-group:
+        .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/programID-group:
 
-        **PROGRAM**: (required) :ref:`NXprogram` 
+        **programID**: (required) :ref:`NXprogram` 
 
 
-          .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/PROGRAM/program-field:
+          .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/programID/program-field:
 
           .. index:: program (field)
 
           **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
-            .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/PROGRAM/program@version-attribute:
+            .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/programID/program@version-attribute:
 
             .. index:: version (field attribute)
 
             **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
-        .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/SERIALIZED-group:
+        .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/serialized-group:
 
-        **SERIALIZED**: (recommended) :ref:`NXserialized` 
+        **serialized**: (recommended) :ref:`NXserialized` 
 
 
-          .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/SERIALIZED/type-field:
+          .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/serialized/type-field:
 
           .. index:: type (field)
 
           **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/type-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/SERIALIZED/path-field:
+          .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/serialized/path-field:
 
           .. index:: path (field)
 
           **path**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/path-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/SERIALIZED/checksum-field:
+          .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/serialized/checksum-field:
 
           .. index:: checksum (field)
 
           **checksum**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/checksum-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/SERIALIZED/algorithm-field:
+          .. _/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/serialized/algorithm-field:
 
           .. index:: algorithm (field)
 
@@ -1749,19 +1779,19 @@ NXapm
         **reconstructed_positions**: (required) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 2, Dimensions: [n, 3]) :ref:`⤆ </NXapm_reconstruction/reconstructed_positions-field>`
 
 
-        .. _/NXapm/ENTRY/atom_probe/reconstruction/PROGRAM-group:
+        .. _/NXapm/ENTRY/atom_probe/reconstruction/programID-group:
 
-        **PROGRAM**: (required) :ref:`NXprogram` :ref:`⤆ </NXapm_reconstruction/PROGRAM-group>`
+        **programID**: (required) :ref:`NXprogram` :ref:`⤆ </NXapm_reconstruction/PROGRAM-group>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/reconstruction/PROGRAM/program-field:
+          .. _/NXapm/ENTRY/atom_probe/reconstruction/programID/program-field:
 
           .. index:: program (field)
 
           **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
-            .. _/NXapm/ENTRY/atom_probe/reconstruction/PROGRAM/program@version-attribute:
+            .. _/NXapm/ENTRY/atom_probe/reconstruction/programID/program@version-attribute:
 
             .. index:: version (field attribute)
 
@@ -1979,53 +2009,53 @@ NXapm
         **maximum_number_of_atoms_per_molecular_ion**: (required) :ref:`NX_UINT <NX_UINT>` :ref:`⤆ </NXapm_ranging/maximum_number_of_atoms_per_molecular_ion-field>`
 
 
-        .. _/NXapm/ENTRY/atom_probe/ranging/PROGRAM-group:
+        .. _/NXapm/ENTRY/atom_probe/ranging/programID-group:
 
-        **PROGRAM**: (required) :ref:`NXprogram` :ref:`⤆ </NXapm_ranging/PROGRAM-group>`
+        **programID**: (required) :ref:`NXprogram` :ref:`⤆ </NXapm_ranging/PROGRAM-group>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/ranging/PROGRAM/program-field:
+          .. _/NXapm/ENTRY/atom_probe/ranging/programID/program-field:
 
           .. index:: program (field)
 
           **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
-            .. _/NXapm/ENTRY/atom_probe/ranging/PROGRAM/program@version-attribute:
+            .. _/NXapm/ENTRY/atom_probe/ranging/programID/program@version-attribute:
 
             .. index:: version (field attribute)
 
             **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
-        .. _/NXapm/ENTRY/atom_probe/ranging/SERIALIZED-group:
+        .. _/NXapm/ENTRY/atom_probe/ranging/definitions-group:
 
-        **SERIALIZED**: (recommended) :ref:`NXserialized` :ref:`⤆ </NXapm_ranging/SERIALIZED-group>`
+        **definitions**: (recommended) :ref:`NXserialized` :ref:`⤆ </NXapm_ranging/SERIALIZED-group>`
 
           The respective ranging definitions file RNG/RRNG/ENV/HDF5.
 
-          .. _/NXapm/ENTRY/atom_probe/ranging/SERIALIZED/type-field:
+          .. _/NXapm/ENTRY/atom_probe/ranging/definitions/type-field:
 
           .. index:: type (field)
 
           **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/type-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/ranging/SERIALIZED/path-field:
+          .. _/NXapm/ENTRY/atom_probe/ranging/definitions/path-field:
 
           .. index:: path (field)
 
           **path**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/path-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/ranging/SERIALIZED/checksum-field:
+          .. _/NXapm/ENTRY/atom_probe/ranging/definitions/checksum-field:
 
           .. index:: checksum (field)
 
           **checksum**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXserialized/checksum-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/ranging/SERIALIZED/algorithm-field:
+          .. _/NXapm/ENTRY/atom_probe/ranging/definitions/algorithm-field:
 
           .. index:: algorithm (field)
 
@@ -2051,19 +2081,19 @@ NXapm
           **min_incr_max**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXapm_ranging/mass_to_charge_distribution/min_incr_max-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/PROGRAM-group:
+          .. _/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/programID-group:
 
-          **PROGRAM**: (required) :ref:`NXprogram` :ref:`⤆ </NXapm_ranging/mass_to_charge_distribution/PROGRAM-group>`
+          **programID**: (required) :ref:`NXprogram` :ref:`⤆ </NXapm_ranging/mass_to_charge_distribution/PROGRAM-group>`
 
 
-            .. _/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/PROGRAM/program-field:
+            .. _/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/programID/program-field:
 
             .. index:: program (field)
 
             **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
-              .. _/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/PROGRAM/program@version-attribute:
+              .. _/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/programID/program@version-attribute:
 
               .. index:: version (field attribute)
 
@@ -2173,19 +2203,19 @@ NXapm
 
             MRP, at which mrp_value was specified.
 
-          .. _/NXapm/ENTRY/atom_probe/ranging/background_quantification/PROGRAM-group:
+          .. _/NXapm/ENTRY/atom_probe/ranging/background_quantification/programID-group:
 
-          **PROGRAM**: (required) :ref:`NXprogram` :ref:`⤆ </NXapm_ranging/background_quantification/PROGRAM-group>`
+          **programID**: (required) :ref:`NXprogram` :ref:`⤆ </NXapm_ranging/background_quantification/PROGRAM-group>`
 
 
-            .. _/NXapm/ENTRY/atom_probe/ranging/background_quantification/PROGRAM/program-field:
+            .. _/NXapm/ENTRY/atom_probe/ranging/background_quantification/programID/program-field:
 
             .. index:: program (field)
 
             **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
-              .. _/NXapm/ENTRY/atom_probe/ranging/background_quantification/PROGRAM/program@version-attribute:
+              .. _/NXapm/ENTRY/atom_probe/ranging/background_quantification/programID/program@version-attribute:
 
               .. index:: version (field attribute)
 
@@ -2204,45 +2234,45 @@ NXapm
           **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXprocess/sequence_index-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/PROGRAM-group:
+          .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/programID-group:
 
-          **PROGRAM**: (required) :ref:`NXprogram` 
+          **programID**: (required) :ref:`NXprogram` 
 
 
-            .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/PROGRAM/program-field:
+            .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/programID/program-field:
 
             .. index:: program (field)
 
             **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
-              .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/PROGRAM/program@version-attribute:
+              .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/programID/program@version-attribute:
 
               .. index:: version (field attribute)
 
               **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/PEAK-group:
+          .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/peakID-group:
 
-          **PEAK**: (optional) :ref:`NXpeak` 
+          **peakID**: (optional) :ref:`NXpeak` 
 
 
-            .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/PEAK/label-field:
+            .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/peakID/label-field:
 
             .. index:: label (field)
 
             **label**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpeak/label-field>`
 
 
-            .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/PEAK/description-field:
+            .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/peakID/description-field:
 
             .. index:: description (field)
 
             **description**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
 
-            .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/PEAK/category-field:
+            .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/peakID/category-field:
 
             .. index:: category (field)
 
@@ -2264,7 +2294,7 @@ NXapm
 
                   Any of these values: ``0`` | ``1`` | ``2`` | ``3`` | ``4`` | ``5``
 
-            .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/PEAK/position-field:
+            .. _/NXapm/ENTRY/atom_probe/ranging/peak_search/peakID/position-field:
 
             .. index:: position (field)
 
@@ -2283,19 +2313,19 @@ NXapm
           **sequence_index**: (recommended) :ref:`NX_POSINT <NX_POSINT>` :ref:`⤆ </NXprocess/sequence_index-field>`
 
 
-          .. _/NXapm/ENTRY/atom_probe/ranging/peak_identification/PROGRAM-group:
+          .. _/NXapm/ENTRY/atom_probe/ranging/peak_identification/programID-group:
 
-          **PROGRAM**: (required) :ref:`NXprogram` :ref:`⤆ </NXapm_ranging/peak_identification/PROGRAM-group>`
+          **programID**: (required) :ref:`NXprogram` :ref:`⤆ </NXapm_ranging/peak_identification/PROGRAM-group>`
 
 
-            .. _/NXapm/ENTRY/atom_probe/ranging/peak_identification/PROGRAM/program-field:
+            .. _/NXapm/ENTRY/atom_probe/ranging/peak_identification/programID/program-field:
 
             .. index:: program (field)
 
             **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
 
 
-              .. _/NXapm/ENTRY/atom_probe/ranging/peak_identification/PROGRAM/program@version-attribute:
+              .. _/NXapm/ENTRY/atom_probe/ranging/peak_identification/programID/program@version-attribute:
 
               .. index:: version (field attribute)
 
@@ -2347,11 +2377,11 @@ NXapm
             **charge_state_analysis**: (optional) :ref:`NXapm_charge_state_analysis` 
 
 
-              .. _/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/element-field:
+              .. _/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/nuclides-field:
 
-              .. index:: element (field)
+              .. index:: nuclides (field)
 
-              **element**: (required) :ref:`NX_UINT <NX_UINT>` :ref:`⤆ </NXapm_charge_state_analysis/element-field>`
+              **nuclides**: (required) :ref:`NX_UINT <NX_UINT>` :ref:`⤆ </NXapm_charge_state_analysis/nuclides-field>`
 
 
               .. _/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/mass_to_charge_range-field:
@@ -2442,15 +2472,15 @@ attributes, and links defined in this class.
 * :ref:`/NXapm/ENTRY/atom_probe/hit_finding/hit_quality_identifier-field </NXapm/ENTRY/atom_probe/hit_finding/hit_quality_identifier-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/hit_finding/hit_quality_types-field </NXapm/ENTRY/atom_probe/hit_finding/hit_quality_types-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/hit_finding/number_of_dld_wires-field </NXapm/ENTRY/atom_probe/hit_finding/number_of_dld_wires-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/PROGRAM-group </NXapm/ENTRY/atom_probe/hit_finding/PROGRAM-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/PROGRAM/program-field </NXapm/ENTRY/atom_probe/hit_finding/PROGRAM/program-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/PROGRAM/program@version-attribute </NXapm/ENTRY/atom_probe/hit_finding/PROGRAM/program@version-attribute>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/programID-group </NXapm/ENTRY/atom_probe/hit_finding/programID-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/programID/program-field </NXapm/ENTRY/atom_probe/hit_finding/programID/program-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/programID/program@version-attribute </NXapm/ENTRY/atom_probe/hit_finding/programID/program@version-attribute>`
 * :ref:`/NXapm/ENTRY/atom_probe/hit_finding/sequence_index-field </NXapm/ENTRY/atom_probe/hit_finding/sequence_index-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/SERIALIZED-group </NXapm/ENTRY/atom_probe/hit_finding/SERIALIZED-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/SERIALIZED/algorithm-field </NXapm/ENTRY/atom_probe/hit_finding/SERIALIZED/algorithm-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/SERIALIZED/checksum-field </NXapm/ENTRY/atom_probe/hit_finding/SERIALIZED/checksum-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/SERIALIZED/path-field </NXapm/ENTRY/atom_probe/hit_finding/SERIALIZED/path-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/SERIALIZED/type-field </NXapm/ENTRY/atom_probe/hit_finding/SERIALIZED/type-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/serialized-group </NXapm/ENTRY/atom_probe/hit_finding/serialized-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/serialized/algorithm-field </NXapm/ENTRY/atom_probe/hit_finding/serialized/algorithm-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/serialized/checksum-field </NXapm/ENTRY/atom_probe/hit_finding/serialized/checksum-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/serialized/path-field </NXapm/ENTRY/atom_probe/hit_finding/serialized/path-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_finding/serialized/type-field </NXapm/ENTRY/atom_probe/hit_finding/serialized/type-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering-group </NXapm/ENTRY/atom_probe/hit_spatial_filtering-group>`
 * :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/evaporation_identifier-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/evaporation_identifier-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/evaporation_identifier_offset-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/evaporation_identifier_offset-field>`
@@ -2459,15 +2489,15 @@ attributes, and links defined in this class.
 * :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/hit_filter/identifier-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/hit_filter/identifier-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/hit_filter/mask-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/hit_filter/mask-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/hit_filter/number_of_objects-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/hit_filter/number_of_objects-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/PROGRAM-group </NXapm/ENTRY/atom_probe/hit_spatial_filtering/PROGRAM-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/PROGRAM/program-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/PROGRAM/program-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/PROGRAM/program@version-attribute </NXapm/ENTRY/atom_probe/hit_spatial_filtering/PROGRAM/program@version-attribute>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/programID-group </NXapm/ENTRY/atom_probe/hit_spatial_filtering/programID-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/programID/program-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/programID/program-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/programID/program@version-attribute </NXapm/ENTRY/atom_probe/hit_spatial_filtering/programID/program@version-attribute>`
 * :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/sequence_index-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/sequence_index-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/SERIALIZED-group </NXapm/ENTRY/atom_probe/hit_spatial_filtering/SERIALIZED-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/SERIALIZED/algorithm-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/SERIALIZED/algorithm-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/SERIALIZED/checksum-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/SERIALIZED/checksum-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/SERIALIZED/path-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/SERIALIZED/path-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/SERIALIZED/type-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/SERIALIZED/type-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/serialized-group </NXapm/ENTRY/atom_probe/hit_spatial_filtering/serialized-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/serialized/algorithm-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/serialized/algorithm-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/serialized/checksum-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/serialized/checksum-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/serialized/path-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/serialized/path-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/hit_spatial_filtering/serialized/type-field </NXapm/ENTRY/atom_probe/hit_spatial_filtering/serialized/type-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/initial_specimen-group </NXapm/ENTRY/atom_probe/initial_specimen-group>`
 * :ref:`/NXapm/ENTRY/atom_probe/initial_specimen/image_twod-group </NXapm/ENTRY/atom_probe/initial_specimen/image_twod-group>`
 * :ref:`/NXapm/ENTRY/atom_probe/initial_specimen/image_twod/axis_x-field </NXapm/ENTRY/atom_probe/initial_specimen/image_twod/axis_x-field>`
@@ -2480,24 +2510,29 @@ attributes, and links defined in this class.
 * :ref:`/NXapm/ENTRY/atom_probe/initial_specimen/image_twod@signal-attribute </NXapm/ENTRY/atom_probe/initial_specimen/image_twod@signal-attribute>`
 * :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion-group </NXapm/ENTRY/atom_probe/mass_to_charge_conversion-group>`
 * :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/mass_to_charge-field </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/mass_to_charge-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/PROGRAM-group </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/PROGRAM-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/PROGRAM/program-field </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/PROGRAM/program-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/PROGRAM/program@version-attribute </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/PROGRAM/program@version-attribute>`
+* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/programID-group </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/programID-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/programID/program-field </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/programID/program-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/programID/program@version-attribute </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/programID/program@version-attribute>`
 * :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/sequence_index-field </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/sequence_index-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/SERIALIZED-group </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/SERIALIZED-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/SERIALIZED/algorithm-field </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/SERIALIZED/algorithm-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/SERIALIZED/checksum-field </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/SERIALIZED/checksum-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/SERIALIZED/path-field </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/SERIALIZED/path-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/SERIALIZED/type-field </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/SERIALIZED/type-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/serialized-group </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/serialized-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/serialized/algorithm-field </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/serialized/algorithm-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/serialized/checksum-field </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/serialized/checksum-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/serialized/path-field </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/serialized/path-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/mass_to_charge_conversion/serialized/type-field </NXapm/ENTRY/atom_probe/mass_to_charge_conversion/serialized/type-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging-group </NXapm/ENTRY/atom_probe/ranging-group>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/background_quantification-group </NXapm/ENTRY/atom_probe/ranging/background_quantification-group>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/background_quantification/background-field </NXapm/ENTRY/atom_probe/ranging/background_quantification/background-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/background_quantification/mrp_mass_to_charge-field </NXapm/ENTRY/atom_probe/ranging/background_quantification/mrp_mass_to_charge-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/background_quantification/mrp_value-field </NXapm/ENTRY/atom_probe/ranging/background_quantification/mrp_value-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/background_quantification/PROGRAM-group </NXapm/ENTRY/atom_probe/ranging/background_quantification/PROGRAM-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/background_quantification/PROGRAM/program-field </NXapm/ENTRY/atom_probe/ranging/background_quantification/PROGRAM/program-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/background_quantification/PROGRAM/program@version-attribute </NXapm/ENTRY/atom_probe/ranging/background_quantification/PROGRAM/program@version-attribute>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/background_quantification/programID-group </NXapm/ENTRY/atom_probe/ranging/background_quantification/programID-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/background_quantification/programID/program-field </NXapm/ENTRY/atom_probe/ranging/background_quantification/programID/program-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/background_quantification/programID/program@version-attribute </NXapm/ENTRY/atom_probe/ranging/background_quantification/programID/program@version-attribute>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/background_quantification/sequence_index-field </NXapm/ENTRY/atom_probe/ranging/background_quantification/sequence_index-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/definitions-group </NXapm/ENTRY/atom_probe/ranging/definitions-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/definitions/algorithm-field </NXapm/ENTRY/atom_probe/ranging/definitions/algorithm-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/definitions/checksum-field </NXapm/ENTRY/atom_probe/ranging/definitions/checksum-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/definitions/path-field </NXapm/ENTRY/atom_probe/ranging/definitions/path-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/definitions/type-field </NXapm/ENTRY/atom_probe/ranging/definitions/type-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution-group </NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution-group>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/mass_spectrum-group </NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/mass_spectrum-group>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/mass_spectrum/axis_mass_to_charge-field </NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/mass_spectrum/axis_mass_to_charge-field>`
@@ -2509,9 +2544,9 @@ attributes, and links defined in this class.
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/mass_spectrum@AXISNAME_indices-attribute </NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/mass_spectrum@AXISNAME_indices-attribute>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/mass_spectrum@signal-attribute </NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/mass_spectrum@signal-attribute>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/min_incr_max-field </NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/min_incr_max-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/PROGRAM-group </NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/PROGRAM-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/PROGRAM/program-field </NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/PROGRAM/program-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/PROGRAM/program@version-attribute </NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/PROGRAM/program@version-attribute>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/programID-group </NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/programID-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/programID/program-field </NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/programID/program-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/programID/program@version-attribute </NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/programID/program@version-attribute>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/sequence_index-field </NXapm/ENTRY/atom_probe/ranging/mass_to_charge_distribution/sequence_index-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/maximum_number_of_atoms_per_molecular_ion-field </NXapm/ENTRY/atom_probe/ranging/maximum_number_of_atoms_per_molecular_ion-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification-group </NXapm/ENTRY/atom_probe/ranging/peak_identification-group>`
@@ -2519,7 +2554,6 @@ attributes, and links defined in this class.
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis-group </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis-group>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/charge_state-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/charge_state-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/element-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/element-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/mass-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/mass-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/mass_to_charge_range-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/mass_to_charge_range-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/min_abundance-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/min_abundance-field>`
@@ -2527,45 +2561,41 @@ attributes, and links defined in this class.
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/min_half_life-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/min_half_life-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/natural_abundance_product-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/natural_abundance_product-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/nuclide_hash-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/nuclide_hash-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/nuclides-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/nuclides-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/sacrifice_isotopic_uniqueness-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/sacrifice_isotopic_uniqueness-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/shortest_half_life-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/charge_state_analysis/shortest_half_life-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/mass_to_charge_range-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/mass_to_charge_range-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/name-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/name-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/nuclide_hash-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/nuclide_hash-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/nuclide_list-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/ionID/nuclide_list-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/PROGRAM-group </NXapm/ENTRY/atom_probe/ranging/peak_identification/PROGRAM-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/PROGRAM/program-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/PROGRAM/program-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/PROGRAM/program@version-attribute </NXapm/ENTRY/atom_probe/ranging/peak_identification/PROGRAM/program@version-attribute>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/programID-group </NXapm/ENTRY/atom_probe/ranging/peak_identification/programID-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/programID/program-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/programID/program-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/programID/program@version-attribute </NXapm/ENTRY/atom_probe/ranging/peak_identification/programID/program@version-attribute>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_identification/sequence_index-field </NXapm/ENTRY/atom_probe/ranging/peak_identification/sequence_index-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search-group </NXapm/ENTRY/atom_probe/ranging/peak_search-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/PEAK-group </NXapm/ENTRY/atom_probe/ranging/peak_search/PEAK-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/PEAK/category-field </NXapm/ENTRY/atom_probe/ranging/peak_search/PEAK/category-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/PEAK/description-field </NXapm/ENTRY/atom_probe/ranging/peak_search/PEAK/description-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/PEAK/label-field </NXapm/ENTRY/atom_probe/ranging/peak_search/PEAK/label-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/PEAK/position-field </NXapm/ENTRY/atom_probe/ranging/peak_search/PEAK/position-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/PROGRAM-group </NXapm/ENTRY/atom_probe/ranging/peak_search/PROGRAM-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/PROGRAM/program-field </NXapm/ENTRY/atom_probe/ranging/peak_search/PROGRAM/program-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/PROGRAM/program@version-attribute </NXapm/ENTRY/atom_probe/ranging/peak_search/PROGRAM/program@version-attribute>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/peakID-group </NXapm/ENTRY/atom_probe/ranging/peak_search/peakID-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/peakID/category-field </NXapm/ENTRY/atom_probe/ranging/peak_search/peakID/category-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/peakID/description-field </NXapm/ENTRY/atom_probe/ranging/peak_search/peakID/description-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/peakID/label-field </NXapm/ENTRY/atom_probe/ranging/peak_search/peakID/label-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/peakID/position-field </NXapm/ENTRY/atom_probe/ranging/peak_search/peakID/position-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/programID-group </NXapm/ENTRY/atom_probe/ranging/peak_search/programID-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/programID/program-field </NXapm/ENTRY/atom_probe/ranging/peak_search/programID/program-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/programID/program@version-attribute </NXapm/ENTRY/atom_probe/ranging/peak_search/programID/program@version-attribute>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/peak_search/sequence_index-field </NXapm/ENTRY/atom_probe/ranging/peak_search/sequence_index-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/PROGRAM-group </NXapm/ENTRY/atom_probe/ranging/PROGRAM-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/PROGRAM/program-field </NXapm/ENTRY/atom_probe/ranging/PROGRAM/program-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/PROGRAM/program@version-attribute </NXapm/ENTRY/atom_probe/ranging/PROGRAM/program@version-attribute>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/programID-group </NXapm/ENTRY/atom_probe/ranging/programID-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/programID/program-field </NXapm/ENTRY/atom_probe/ranging/programID/program-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/ranging/programID/program@version-attribute </NXapm/ENTRY/atom_probe/ranging/programID/program@version-attribute>`
 * :ref:`/NXapm/ENTRY/atom_probe/ranging/sequence_index-field </NXapm/ENTRY/atom_probe/ranging/sequence_index-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/SERIALIZED-group </NXapm/ENTRY/atom_probe/ranging/SERIALIZED-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/SERIALIZED/algorithm-field </NXapm/ENTRY/atom_probe/ranging/SERIALIZED/algorithm-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/SERIALIZED/checksum-field </NXapm/ENTRY/atom_probe/ranging/SERIALIZED/checksum-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/SERIALIZED/path-field </NXapm/ENTRY/atom_probe/ranging/SERIALIZED/path-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/ranging/SERIALIZED/type-field </NXapm/ENTRY/atom_probe/ranging/SERIALIZED/type-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/raw_data-group </NXapm/ENTRY/atom_probe/raw_data-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/raw_data/PROGRAM-group </NXapm/ENTRY/atom_probe/raw_data/PROGRAM-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/raw_data/PROGRAM/program-field </NXapm/ENTRY/atom_probe/raw_data/PROGRAM/program-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/raw_data/PROGRAM/program@version-attribute </NXapm/ENTRY/atom_probe/raw_data/PROGRAM/program@version-attribute>`
+* :ref:`/NXapm/ENTRY/atom_probe/raw_data/programID-group </NXapm/ENTRY/atom_probe/raw_data/programID-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/raw_data/programID/program-field </NXapm/ENTRY/atom_probe/raw_data/programID/program-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/raw_data/programID/program@version-attribute </NXapm/ENTRY/atom_probe/raw_data/programID/program@version-attribute>`
 * :ref:`/NXapm/ENTRY/atom_probe/raw_data/sequence_index-field </NXapm/ENTRY/atom_probe/raw_data/sequence_index-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/raw_data/SERIALIZED-group </NXapm/ENTRY/atom_probe/raw_data/SERIALIZED-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/raw_data/SERIALIZED/algorithm-field </NXapm/ENTRY/atom_probe/raw_data/SERIALIZED/algorithm-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/raw_data/SERIALIZED/checksum-field </NXapm/ENTRY/atom_probe/raw_data/SERIALIZED/checksum-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/raw_data/SERIALIZED/path-field </NXapm/ENTRY/atom_probe/raw_data/SERIALIZED/path-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/raw_data/SERIALIZED/type-field </NXapm/ENTRY/atom_probe/raw_data/SERIALIZED/type-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/raw_data/serialized-group </NXapm/ENTRY/atom_probe/raw_data/serialized-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/raw_data/serialized/algorithm-field </NXapm/ENTRY/atom_probe/raw_data/serialized/algorithm-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/raw_data/serialized/checksum-field </NXapm/ENTRY/atom_probe/raw_data/serialized/checksum-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/raw_data/serialized/path-field </NXapm/ENTRY/atom_probe/raw_data/serialized/path-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/raw_data/serialized/type-field </NXapm/ENTRY/atom_probe/raw_data/serialized/type-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/reconstruction-group </NXapm/ENTRY/atom_probe/reconstruction-group>`
 * :ref:`/NXapm/ENTRY/atom_probe/reconstruction/config-group </NXapm/ENTRY/atom_probe/reconstruction/config-group>`
 * :ref:`/NXapm/ENTRY/atom_probe/reconstruction/config/algorithm-field </NXapm/ENTRY/atom_probe/reconstruction/config/algorithm-field>`
@@ -2591,9 +2621,9 @@ attributes, and links defined in this class.
 * :ref:`/NXapm/ENTRY/atom_probe/reconstruction/naive_discretization/PROGRAM/program-field </NXapm/ENTRY/atom_probe/reconstruction/naive_discretization/PROGRAM/program-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/reconstruction/naive_discretization/PROGRAM/program@version-attribute </NXapm/ENTRY/atom_probe/reconstruction/naive_discretization/PROGRAM/program@version-attribute>`
 * :ref:`/NXapm/ENTRY/atom_probe/reconstruction/parameter-field </NXapm/ENTRY/atom_probe/reconstruction/parameter-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/reconstruction/PROGRAM-group </NXapm/ENTRY/atom_probe/reconstruction/PROGRAM-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/reconstruction/PROGRAM/program-field </NXapm/ENTRY/atom_probe/reconstruction/PROGRAM/program-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/reconstruction/PROGRAM/program@version-attribute </NXapm/ENTRY/atom_probe/reconstruction/PROGRAM/program@version-attribute>`
+* :ref:`/NXapm/ENTRY/atom_probe/reconstruction/programID-group </NXapm/ENTRY/atom_probe/reconstruction/programID-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/reconstruction/programID/program-field </NXapm/ENTRY/atom_probe/reconstruction/programID/program-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/reconstruction/programID/program@version-attribute </NXapm/ENTRY/atom_probe/reconstruction/programID/program@version-attribute>`
 * :ref:`/NXapm/ENTRY/atom_probe/reconstruction/protocol_name-field </NXapm/ENTRY/atom_probe/reconstruction/protocol_name-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/reconstruction/reconstructed_positions-field </NXapm/ENTRY/atom_probe/reconstruction/reconstructed_positions-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/reconstruction/results-group </NXapm/ENTRY/atom_probe/reconstruction/results-group>`
@@ -2604,16 +2634,16 @@ attributes, and links defined in this class.
 * :ref:`/NXapm/ENTRY/atom_probe/reconstruction/sequence_index-field </NXapm/ENTRY/atom_probe/reconstruction/sequence_index-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl-group </NXapm/ENTRY/atom_probe/voltage_and_bowl-group>`
 * :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/calibrated_tof-field </NXapm/ENTRY/atom_probe/voltage_and_bowl/calibrated_tof-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/PROGRAM-group </NXapm/ENTRY/atom_probe/voltage_and_bowl/PROGRAM-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/PROGRAM/program-field </NXapm/ENTRY/atom_probe/voltage_and_bowl/PROGRAM/program-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/PROGRAM/program@version-attribute </NXapm/ENTRY/atom_probe/voltage_and_bowl/PROGRAM/program@version-attribute>`
+* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/programID-group </NXapm/ENTRY/atom_probe/voltage_and_bowl/programID-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/programID/program-field </NXapm/ENTRY/atom_probe/voltage_and_bowl/programID/program-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/programID/program@version-attribute </NXapm/ENTRY/atom_probe/voltage_and_bowl/programID/program@version-attribute>`
 * :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/raw_tof-field </NXapm/ENTRY/atom_probe/voltage_and_bowl/raw_tof-field>`
 * :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/sequence_index-field </NXapm/ENTRY/atom_probe/voltage_and_bowl/sequence_index-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/SERIALIZED-group </NXapm/ENTRY/atom_probe/voltage_and_bowl/SERIALIZED-group>`
-* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/SERIALIZED/algorithm-field </NXapm/ENTRY/atom_probe/voltage_and_bowl/SERIALIZED/algorithm-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/SERIALIZED/checksum-field </NXapm/ENTRY/atom_probe/voltage_and_bowl/SERIALIZED/checksum-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/SERIALIZED/path-field </NXapm/ENTRY/atom_probe/voltage_and_bowl/SERIALIZED/path-field>`
-* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/SERIALIZED/type-field </NXapm/ENTRY/atom_probe/voltage_and_bowl/SERIALIZED/type-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/serialized-group </NXapm/ENTRY/atom_probe/voltage_and_bowl/serialized-group>`
+* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/serialized/algorithm-field </NXapm/ENTRY/atom_probe/voltage_and_bowl/serialized/algorithm-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/serialized/checksum-field </NXapm/ENTRY/atom_probe/voltage_and_bowl/serialized/checksum-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/serialized/path-field </NXapm/ENTRY/atom_probe/voltage_and_bowl/serialized/path-field>`
+* :ref:`/NXapm/ENTRY/atom_probe/voltage_and_bowl/serialized/type-field </NXapm/ENTRY/atom_probe/voltage_and_bowl/serialized/type-field>`
 * :ref:`/NXapm/ENTRY/CITE-group </NXapm/ENTRY/CITE-group>`
 * :ref:`/NXapm/ENTRY/CITE/doi-field </NXapm/ENTRY/CITE/doi-field>`
 * :ref:`/NXapm/ENTRY/coordinate_system_set-group </NXapm/ENTRY/coordinate_system_set-group>`
@@ -2628,80 +2658,82 @@ attributes, and links defined in this class.
 * :ref:`/NXapm/ENTRY/definition-field </NXapm/ENTRY/definition-field>`
 * :ref:`/NXapm/ENTRY/definition@version-attribute </NXapm/ENTRY/definition@version-attribute>`
 * :ref:`/NXapm/ENTRY/end_time-field </NXapm/ENTRY/end_time-field>`
+* :ref:`/NXapm/ENTRY/experiment_alias-field </NXapm/ENTRY/experiment_alias-field>`
+* :ref:`/NXapm/ENTRY/experiment_description-field </NXapm/ENTRY/experiment_description-field>`
 * :ref:`/NXapm/ENTRY/experiment_identifier-group </NXapm/ENTRY/experiment_identifier-group>`
 * :ref:`/NXapm/ENTRY/experiment_identifier/identifier-field </NXapm/ENTRY/experiment_identifier/identifier-field>`
 * :ref:`/NXapm/ENTRY/experiment_identifier/is_persistent-field </NXapm/ENTRY/experiment_identifier/is_persistent-field>`
 * :ref:`/NXapm/ENTRY/experiment_identifier/service-field </NXapm/ENTRY/experiment_identifier/service-field>`
 * :ref:`/NXapm/ENTRY/measurement-group </NXapm/ENTRY/measurement-group>`
 * :ref:`/NXapm/ENTRY/measurement/event_data_apm_set-group </NXapm/ENTRY/measurement/event_data_apm_set-group>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM-group </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM-group>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument-group </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument-group>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/analysis_chamber-group </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/analysis_chamber-group>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/analysis_chamber/chamber_pressure-field </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/analysis_chamber/chamber_pressure-field>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/control-group </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/control-group>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/control/evaporation_control-field </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/control/evaporation_control-field>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/control/target_detection_rate-field </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/control/target_detection_rate-field>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser-group </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser-group>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_fraction-field </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_fraction-field>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_fraction@logged_against-attribute </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_fraction@logged_against-attribute>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_frequency-field </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_frequency-field>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_frequency@logged_against-attribute </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_frequency@logged_against-attribute>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_voltage-field </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_voltage-field>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_voltage@logged_against-attribute </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/pulse_voltage@logged_against-attribute>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/SOURCE-group </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/SOURCE-group>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/SOURCE/pulse_energy-field </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/SOURCE/pulse_energy-field>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/SOURCE/pulse_energy@logged_against-attribute </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/SOURCE/pulse_energy@logged_against-attribute>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/standing_voltage-field </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/standing_voltage-field>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/standing_voltage@logged_against-attribute </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/pulser/standing_voltage@logged_against-attribute>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/stage_lab-group </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/stage_lab-group>`
-* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/stage_lab/base_temperature-field </NXapm/ENTRY/measurement/event_data_apm_set/EVENT_DATA_APM/instrument/stage_lab/base_temperature-field>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm-group </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm-group>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument-group </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument-group>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/analysis_chamber-group </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/analysis_chamber-group>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/analysis_chamber/chamber_pressure-field </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/analysis_chamber/chamber_pressure-field>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/control-group </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/control-group>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/control/evaporation_control-field </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/control/evaporation_control-field>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/control/target_detection_rate-field </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/control/target_detection_rate-field>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser-group </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser-group>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_fraction-field </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_fraction-field>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_fraction@logged_against-attribute </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_fraction@logged_against-attribute>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_frequency-field </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_frequency-field>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_frequency@logged_against-attribute </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_frequency@logged_against-attribute>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_voltage-field </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_voltage-field>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_voltage@logged_against-attribute </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/pulse_voltage@logged_against-attribute>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/SOURCE-group </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/SOURCE-group>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/SOURCE/pulse_energy-field </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/SOURCE/pulse_energy-field>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/SOURCE/pulse_energy@logged_against-attribute </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/SOURCE/pulse_energy@logged_against-attribute>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/standing_voltage-field </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/standing_voltage-field>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/standing_voltage@logged_against-attribute </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/pulser/standing_voltage@logged_against-attribute>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/stage_lab-group </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/stage_lab-group>`
+* :ref:`/NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/stage_lab/base_temperature-field </NXapm/ENTRY/measurement/event_data_apm_set/event_data_apm/instrument/stage_lab/base_temperature-field>`
 * :ref:`/NXapm/ENTRY/measurement/instrument-group </NXapm/ENTRY/measurement/instrument-group>`
 * :ref:`/NXapm/ENTRY/measurement/instrument/analysis_chamber-group </NXapm/ENTRY/measurement/instrument/analysis_chamber-group>`
 * :ref:`/NXapm/ENTRY/measurement/instrument/analysis_chamber/flight_path-field </NXapm/ENTRY/measurement/instrument/analysis_chamber/flight_path-field>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/FABRICATION-group </NXapm/ENTRY/measurement/instrument/FABRICATION-group>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/FABRICATION/identifier-field </NXapm/ENTRY/measurement/instrument/FABRICATION/identifier-field>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/FABRICATION/model-field </NXapm/ENTRY/measurement/instrument/FABRICATION/model-field>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/FABRICATION/vendor-field </NXapm/ENTRY/measurement/instrument/FABRICATION/vendor-field>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/fabrication-group </NXapm/ENTRY/measurement/instrument/fabrication-group>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/fabrication/identifier-field </NXapm/ENTRY/measurement/instrument/fabrication/identifier-field>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/fabrication/model-field </NXapm/ENTRY/measurement/instrument/fabrication/model-field>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/fabrication/vendor-field </NXapm/ENTRY/measurement/instrument/fabrication/vendor-field>`
 * :ref:`/NXapm/ENTRY/measurement/instrument/instrument_name-field </NXapm/ENTRY/measurement/instrument/instrument_name-field>`
 * :ref:`/NXapm/ENTRY/measurement/instrument/ion_detector-group </NXapm/ENTRY/measurement/instrument/ion_detector-group>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/ion_detector/FABRICATION-group </NXapm/ENTRY/measurement/instrument/ion_detector/FABRICATION-group>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/ion_detector/FABRICATION/model-field </NXapm/ENTRY/measurement/instrument/ion_detector/FABRICATION/model-field>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/ion_detector/FABRICATION/vendor-field </NXapm/ENTRY/measurement/instrument/ion_detector/FABRICATION/vendor-field>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/ion_detector/fabrication-group </NXapm/ENTRY/measurement/instrument/ion_detector/fabrication-group>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/ion_detector/fabrication/model-field </NXapm/ENTRY/measurement/instrument/ion_detector/fabrication/model-field>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/ion_detector/fabrication/vendor-field </NXapm/ENTRY/measurement/instrument/ion_detector/fabrication/vendor-field>`
 * :ref:`/NXapm/ENTRY/measurement/instrument/local_electrode-group </NXapm/ENTRY/measurement/instrument/local_electrode-group>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/local_electrode/FABRICATION-group </NXapm/ENTRY/measurement/instrument/local_electrode/FABRICATION-group>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/local_electrode/FABRICATION/model-field </NXapm/ENTRY/measurement/instrument/local_electrode/FABRICATION/model-field>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/local_electrode/FABRICATION/vendor-field </NXapm/ENTRY/measurement/instrument/local_electrode/FABRICATION/vendor-field>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/local_electrode/fabrication-group </NXapm/ENTRY/measurement/instrument/local_electrode/fabrication-group>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/local_electrode/fabrication/model-field </NXapm/ENTRY/measurement/instrument/local_electrode/fabrication/model-field>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/local_electrode/fabrication/vendor-field </NXapm/ENTRY/measurement/instrument/local_electrode/fabrication/vendor-field>`
 * :ref:`/NXapm/ENTRY/measurement/instrument/local_electrode/name-field </NXapm/ENTRY/measurement/instrument/local_electrode/name-field>`
 * :ref:`/NXapm/ENTRY/measurement/instrument/pulser-group </NXapm/ENTRY/measurement/instrument/pulser-group>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/FABRICATION-group </NXapm/ENTRY/measurement/instrument/pulser/FABRICATION-group>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/FABRICATION/model-field </NXapm/ENTRY/measurement/instrument/pulser/FABRICATION/model-field>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/FABRICATION/vendor-field </NXapm/ENTRY/measurement/instrument/pulser/FABRICATION/vendor-field>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/fabrication-group </NXapm/ENTRY/measurement/instrument/pulser/fabrication-group>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/fabrication/model-field </NXapm/ENTRY/measurement/instrument/pulser/fabrication/model-field>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/fabrication/vendor-field </NXapm/ENTRY/measurement/instrument/pulser/fabrication/vendor-field>`
 * :ref:`/NXapm/ENTRY/measurement/instrument/pulser/pulse_mode-field </NXapm/ENTRY/measurement/instrument/pulser/pulse_mode-field>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/SOURCE-group </NXapm/ENTRY/measurement/instrument/pulser/SOURCE-group>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/SOURCE/FABRICATION-group </NXapm/ENTRY/measurement/instrument/pulser/SOURCE/FABRICATION-group>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/SOURCE/FABRICATION/model-field </NXapm/ENTRY/measurement/instrument/pulser/SOURCE/FABRICATION/model-field>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/SOURCE/FABRICATION/vendor-field </NXapm/ENTRY/measurement/instrument/pulser/SOURCE/FABRICATION/vendor-field>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/SOURCE/wavelength-field </NXapm/ENTRY/measurement/instrument/pulser/SOURCE/wavelength-field>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/sourceID-group </NXapm/ENTRY/measurement/instrument/pulser/sourceID-group>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/sourceID/fabrication-group </NXapm/ENTRY/measurement/instrument/pulser/sourceID/fabrication-group>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/sourceID/fabrication/model-field </NXapm/ENTRY/measurement/instrument/pulser/sourceID/fabrication/model-field>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/sourceID/fabrication/vendor-field </NXapm/ENTRY/measurement/instrument/pulser/sourceID/fabrication/vendor-field>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/pulser/sourceID/wavelength-field </NXapm/ENTRY/measurement/instrument/pulser/sourceID/wavelength-field>`
 * :ref:`/NXapm/ENTRY/measurement/instrument/reflectron-group </NXapm/ENTRY/measurement/instrument/reflectron-group>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/reflectron/FABRICATION-group </NXapm/ENTRY/measurement/instrument/reflectron/FABRICATION-group>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/reflectron/FABRICATION/model-field </NXapm/ENTRY/measurement/instrument/reflectron/FABRICATION/model-field>`
-* :ref:`/NXapm/ENTRY/measurement/instrument/reflectron/FABRICATION/vendor-field </NXapm/ENTRY/measurement/instrument/reflectron/FABRICATION/vendor-field>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/reflectron/fabrication-group </NXapm/ENTRY/measurement/instrument/reflectron/fabrication-group>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/reflectron/fabrication/model-field </NXapm/ENTRY/measurement/instrument/reflectron/fabrication/model-field>`
+* :ref:`/NXapm/ENTRY/measurement/instrument/reflectron/fabrication/vendor-field </NXapm/ENTRY/measurement/instrument/reflectron/fabrication/vendor-field>`
 * :ref:`/NXapm/ENTRY/measurement/instrument/reflectron/status-field </NXapm/ENTRY/measurement/instrument/reflectron/status-field>`
 * :ref:`/NXapm/ENTRY/measurement/instrument/status-field </NXapm/ENTRY/measurement/instrument/status-field>`
 * :ref:`/NXapm/ENTRY/operation_mode-field </NXapm/ENTRY/operation_mode-field>`
 * :ref:`/NXapm/ENTRY/profiling-group </NXapm/ENTRY/profiling-group>`
-* :ref:`/NXapm/ENTRY/profiling/PROGRAM-group </NXapm/ENTRY/profiling/PROGRAM-group>`
-* :ref:`/NXapm/ENTRY/profiling/PROGRAM/program-field </NXapm/ENTRY/profiling/PROGRAM/program-field>`
-* :ref:`/NXapm/ENTRY/profiling/PROGRAM/program@version-attribute </NXapm/ENTRY/profiling/PROGRAM/program@version-attribute>`
+* :ref:`/NXapm/ENTRY/profiling/programID-group </NXapm/ENTRY/profiling/programID-group>`
+* :ref:`/NXapm/ENTRY/profiling/programID/program-field </NXapm/ENTRY/profiling/programID/program-field>`
+* :ref:`/NXapm/ENTRY/profiling/programID/program@version-attribute </NXapm/ENTRY/profiling/programID/program@version-attribute>`
 * :ref:`/NXapm/ENTRY/run_number-field </NXapm/ENTRY/run_number-field>`
 * :ref:`/NXapm/ENTRY/sample-group </NXapm/ENTRY/sample-group>`
 * :ref:`/NXapm/ENTRY/sample/alias-field </NXapm/ENTRY/sample/alias-field>`
-* :ref:`/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION-group </NXapm/ENTRY/sample/CHEMICAL_COMPOSITION-group>`
-* :ref:`/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION-group </NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION-group>`
-* :ref:`/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION/chemical_symbol-field </NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION/chemical_symbol-field>`
-* :ref:`/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION/composition-field </NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION/composition-field>`
-* :ref:`/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION/composition_error-field </NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/ION/composition_error-field>`
-* :ref:`/NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/normalization-field </NXapm/ENTRY/sample/CHEMICAL_COMPOSITION/normalization-field>`
+* :ref:`/NXapm/ENTRY/sample/chemical_composition-group </NXapm/ENTRY/sample/chemical_composition-group>`
+* :ref:`/NXapm/ENTRY/sample/chemical_composition/ION-group </NXapm/ENTRY/sample/chemical_composition/ION-group>`
+* :ref:`/NXapm/ENTRY/sample/chemical_composition/ION/chemical_symbol-field </NXapm/ENTRY/sample/chemical_composition/ION/chemical_symbol-field>`
+* :ref:`/NXapm/ENTRY/sample/chemical_composition/ION/composition-field </NXapm/ENTRY/sample/chemical_composition/ION/composition-field>`
+* :ref:`/NXapm/ENTRY/sample/chemical_composition/ION/composition_error-field </NXapm/ENTRY/sample/chemical_composition/ION/composition_error-field>`
+* :ref:`/NXapm/ENTRY/sample/chemical_composition/normalization-field </NXapm/ENTRY/sample/chemical_composition/normalization-field>`
 * :ref:`/NXapm/ENTRY/sample/description-field </NXapm/ENTRY/sample/description-field>`
 * :ref:`/NXapm/ENTRY/sample/grain_diameter-field </NXapm/ENTRY/sample/grain_diameter-field>`
 * :ref:`/NXapm/ENTRY/sample/grain_diameter_error-field </NXapm/ENTRY/sample/grain_diameter_error-field>`
@@ -2714,11 +2746,11 @@ attributes, and links defined in this class.
 * :ref:`/NXapm/ENTRY/sample/identifier/is_persistent-field </NXapm/ENTRY/sample/identifier/is_persistent-field>`
 * :ref:`/NXapm/ENTRY/sample/identifier/service-field </NXapm/ENTRY/sample/identifier/service-field>`
 * :ref:`/NXapm/ENTRY/sample/method-field </NXapm/ENTRY/sample/method-field>`
-* :ref:`/NXapm/ENTRY/SERIALIZED-group </NXapm/ENTRY/SERIALIZED-group>`
-* :ref:`/NXapm/ENTRY/SERIALIZED/algorithm-field </NXapm/ENTRY/SERIALIZED/algorithm-field>`
-* :ref:`/NXapm/ENTRY/SERIALIZED/checksum-field </NXapm/ENTRY/SERIALIZED/checksum-field>`
-* :ref:`/NXapm/ENTRY/SERIALIZED/path-field </NXapm/ENTRY/SERIALIZED/path-field>`
-* :ref:`/NXapm/ENTRY/SERIALIZED/type-field </NXapm/ENTRY/SERIALIZED/type-field>`
+* :ref:`/NXapm/ENTRY/serializedID-group </NXapm/ENTRY/serializedID-group>`
+* :ref:`/NXapm/ENTRY/serializedID/algorithm-field </NXapm/ENTRY/serializedID/algorithm-field>`
+* :ref:`/NXapm/ENTRY/serializedID/checksum-field </NXapm/ENTRY/serializedID/checksum-field>`
+* :ref:`/NXapm/ENTRY/serializedID/path-field </NXapm/ENTRY/serializedID/path-field>`
+* :ref:`/NXapm/ENTRY/serializedID/type-field </NXapm/ENTRY/serializedID/type-field>`
 * :ref:`/NXapm/ENTRY/simulation-group </NXapm/ENTRY/simulation-group>`
 * :ref:`/NXapm/ENTRY/specimen-group </NXapm/ENTRY/specimen-group>`
 * :ref:`/NXapm/ENTRY/specimen/alias-field </NXapm/ENTRY/specimen/alias-field>`
