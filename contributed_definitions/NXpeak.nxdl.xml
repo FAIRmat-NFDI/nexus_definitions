@@ -32,6 +32,11 @@
                  has been evaluated.
             </doc>
         </symbol>
+        <symbol name="n_features">
+            <doc>
+                 Number of independent data axes to be fitted (for multidimensional fit.)
+            </doc>
+        </symbol>
     </symbols>
     <doc>
          Base class for describing a spectral peak, its functional form, and support values
@@ -49,7 +54,7 @@
                  This axis holds the position values for the independent variable.
             </doc>
             <dimensions>
-                <dim index="1" value="n_values"/>
+                <dim index="n_features" value="n_values"/>
             </dimensions>
         </field>
         <field name="intensity" type="NX_NUMBER" units="NX_ANY">
@@ -57,7 +62,7 @@
                  This array holds the intensity/count values at each position.
             </doc>
             <dimensions>
-                <dim index="1" value="n_values"/>
+                <dim index="n_features" value="n_values"/>
             </dimensions>
         </field>
     </group>
@@ -69,12 +74,12 @@
         <group type="NXfit_repeated_parameter">
             <field name="parameter_units">
                 <dimensions>
-                    <dim index="1" value="n_values"/>
+                    <dim index="n_features" value="n_values"/>
                 </dimensions>
             </field>
             <field name="values" type="NX_NUMBER">
                 <dimensions>
-                    <dim index="1" value="n_values"/>
+                    <dim index="n_features" value="n_values"/>
                 </dimensions>
             </field>
         </group>
