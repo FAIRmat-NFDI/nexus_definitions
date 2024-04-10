@@ -210,7 +210,22 @@ while the other two dimensions have no fields to be used as dimension scales.</p
 <p>If there are no axes at all (such as with a stack of images),
 the axes attribute can be omitted.</p>
 </details></div></blockquote>
-<p id="index-12"><span id="nxdata-axisname-indices-attribute"></span><strong>&#64;AXISNAME_indices</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a></p>
+<p id="index-12"><span id="nxdata-reference-attribute"></span><strong>&#64;reference</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-points-to-the-path-of-a-field-defining-the-data-to-which-the-data-group-refe">
+<summary>Points to the path of a field defining the data to which the `DATA` group refe ...</summary><p>Points to the path of a field defining the data to which the <cite>DATA</cite> group refers.</p>
+<p>This concept allows to link the data to a respective field in the NeXus hierarchy, thereby
+defining the physical quantity it represents.</p>
+<dl>
+<dt>Example:</dt><dd><p>If the data corresponds to a readout of a detector, <code class="docutils literal notranslate"><span class="pre">&#64;reference</span></code> links
+to that detectors data:</p>
+<blockquote>
+<div><p>&#64;reference: ‘/entry/instrument/detector/data’ for a 2D detector</p>
+</div></blockquote>
+</dd>
+</dl>
+</details></div></blockquote>
+<p id="index-13"><span id="nxdata-axisname-indices-attribute"></span><strong>&#64;AXISNAME_indices</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a></p>
 <blockquote>
 <div><details class="summary-each-axisname-indices-attribute-indicates-the-dependency">
 <summary>Each ``AXISNAME_indices`` attribute indicates the dependency ...</summary><p>Each <code class="docutils literal notranslate"><span class="pre">AXISNAME_indices</span></code> attribute indicates the dependency
@@ -250,51 +265,7 @@ Thus the implementation of the
 to avoid string parsing in reading applications.</p>
 </div>
 </details></div></blockquote>
-<p id="index-13"><span id="nxdata-axisname-depends-attribute"></span><strong>&#64;AXISNAME_depends</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
-<blockquote>
-<div><details class="summary-points-to-the-path-of-a-field-defining-the-axis-on-which-the-axisname-axis">
-<summary>Points to the path of a field defining the axis on which the ``AXISNAME`` axis ...</summary><p>Points to the path of a field defining the axis on which the <code class="docutils literal notranslate"><span class="pre">AXISNAME</span></code> axis depends.</p>
-<p>This concept allows to link an axis to a respective field in the NeXus hierarchy, thereby
-defining the physical quantity it represents.</p>
-<p>Here, <em>AXISNAME</em> is to be replaced by the name of each
-field described in the <code class="docutils literal notranslate"><span class="pre">axes</span></code> attribute.</p>
-<dl>
-<dt>Examples:</dt><dd><p>If a calibration has been performed, <code class="docutils literal notranslate"><span class="pre">&#64;AXISNAME_depends</span></code> links to the result of
-that calibration:</p>
-<blockquote>
-<div><p>&#64;AXISNAME_depends: ‘/entry/process/calibration/calibrated_axis’</p>
-</div></blockquote>
-<p>If the axis corresponds to a coordinate of a detector, <code class="docutils literal notranslate"><span class="pre">&#64;AXISNAME_depends</span></code> links
-to that detector axis:</p>
-<blockquote>
-<div><p>&#64;AXISNAME_depends: ‘/entry/instrument/detector/axis/some_axis’ for a 2D detector</p>
-</div></blockquote>
-<p>If the axis is a scanned motor, <code class="docutils literal notranslate"><span class="pre">&#64;AXISNAME_depends</span></code> links to the transformation
-describing the respective motion, e.g.:</p>
-<blockquote>
-<div><p>&#64;AXISNAME_depends: ‘/entry/instrument/detector/transformations/some_transformation’ for a motion of the detector</p>
-</div></blockquote>
-</dd>
-</dl>
-</details></div></blockquote>
-<p id="index-14"><span id="nxdata-data-depends-attribute"></span><strong>&#64;DATA_depends</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
-<blockquote>
-<div><details class="summary-points-to-the-path-of-a-field-defining-the-data-on-which-the-data-field-depe">
-<summary>Points to the path of a field defining the data on which the `DATA` field depe ...</summary><p>Points to the path of a field defining the data on which the <cite>DATA</cite> field depends.</p>
-<p>This concept allows to link the data to a respective field in the NeXus hierarchy, thereby
-defining the physical quantity it represents.</p>
-<p>Here, <em>DATA</em> is to be replaced by the name of each
-data field.</p>
-<dl>
-<dt>Example:</dt><dd><p>If the data corresponds to a readout of a detector, <code class="docutils literal notranslate"><span class="pre">&#64;DATA_depends</span></code> links
-to that detectors data:</p>
-<blockquote>
-<div><p>&#64;DATA_depends: ‘/entry/instrument/detector/data’ for a 2D detector</p>
-</div></blockquote>
-</dd>
-</dl>
-</details></div></blockquote>
-<p id="index-15"><span id="nxdata-axisname-field"></span><strong>AXISNAME</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n])</p>
+<p id="index-14"><span id="nxdata-axisname-field"></span><strong>AXISNAME</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n])</p>
 <blockquote>
 <div><details class="summary-dimension-scale-defining-an-axis-of-the-data">
 <summary>Dimension scale defining an axis of the data. ...</summary><p>Dimension scale defining an axis of the data.
@@ -302,31 +273,56 @@ Client is responsible for defining the dimensions of the data.
 The name of this field may be changed to fit the circumstances.
 Standard NeXus client tools will use the attributes to determine
 how to use this field.</p>
-</details><p id="index-16"><span id="nxdata-axisname-long-name-attribute"></span><strong>&#64;long_name</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+</details><p id="index-15"><span id="nxdata-axisname-long-name-attribute"></span><strong>&#64;long_name</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
 <blockquote>
 <div><p>Axis label</p>
 </div></blockquote>
-<p id="index-17"><span id="nxdata-axisname-distribution-attribute"></span><strong>&#64;distribution</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<p id="index-16"><span id="nxdata-axisname-distribution-attribute"></span><strong>&#64;distribution</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
 <blockquote>
 <div><details class="summary-false-single-value">
 <summary>``0|false``: single value, ...</summary><p><code class="docutils literal notranslate"><span class="pre">0|false</span></code>: single value,
 <code class="docutils literal notranslate"><span class="pre">1|true</span></code>: multiple values</p>
 </details></div></blockquote>
-<p id="index-18"><span id="nxdata-axisname-first-good-attribute"></span><strong>&#64;first_good</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a></p>
+<p id="index-17"><span id="nxdata-axisname-first-good-attribute"></span><strong>&#64;first_good</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a></p>
 <blockquote>
 <div><p>Index of first good value</p>
 </div></blockquote>
-<p id="index-19"><span id="nxdata-axisname-last-good-attribute"></span><strong>&#64;last_good</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a></p>
+<p id="index-18"><span id="nxdata-axisname-last-good-attribute"></span><strong>&#64;last_good</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a></p>
 <blockquote>
 <div><p>Index of last good value</p>
 </div></blockquote>
-<p id="index-20"><span id="nxdata-axisname-axis-attribute"></span><strong>&#64;axis</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-posint"><span class="std std-ref">NX_POSINT</span></a></p>
+<p id="index-19"><span id="nxdata-axisname-axis-attribute"></span><strong>&#64;axis</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-posint"><span class="std std-ref">NX_POSINT</span></a></p>
 <blockquote>
 <div><details class="summary-index-positive-integer-identifying-this-specific-set-of-numbers">
 <summary>Index (positive integer) identifying this specific set of numbers. ...</summary><p>Index (positive integer) identifying this specific set of numbers.</p>
 <p>N.B. The <code class="docutils literal notranslate"><span class="pre">axis</span></code> attribute is the old way of designating a link.
 Do not use the <code class="docutils literal notranslate"><span class="pre">axes</span></code> attribute with the <code class="docutils literal notranslate"><span class="pre">axis</span></code> attribute.
 The <code class="docutils literal notranslate"><span class="pre">axes</span></code> <em>group</em> attribute is now preferred.</p>
+</details></div></blockquote>
+<p id="index-20"><span id="nxdata-axisname-reference-attribute"></span><strong>&#64;reference</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-points-to-the-path-of-a-field-defining-the-axis-to-which-the-axisname-ax">
+<summary>Points to the path of a field defining the axis to which the ``AXISNAME`` ax ...</summary><p>Points to the path of a field defining the axis to which the <code class="docutils literal notranslate"><span class="pre">AXISNAME</span></code> axis refers.</p>
+<p>This concept allows to link an axis to a respective field in the NeXus hierarchy, thereby
+defining the physical quantity it represents.</p>
+<dl>
+<dt>Examples:</dt><dd><p>If a calibration has been performed, <code class="docutils literal notranslate"><span class="pre">&#64;reference</span></code> links to the result of
+that calibration:</p>
+<blockquote>
+<div><p>&#64;reference: ‘/entry/process/calibration/calibrated_axis’</p>
+</div></blockquote>
+<p>If the axis corresponds to a coordinate of a detector, <code class="docutils literal notranslate"><span class="pre">&#64;reference</span></code> links
+to that detector axis:</p>
+<blockquote>
+<div><p>&#64;reference: ‘/entry/instrument/detector/axis/some_axis’ for a 2D detector</p>
+</div></blockquote>
+<p>If the axis is a scanned motor, <code class="docutils literal notranslate"><span class="pre">&#64;reference</span></code> links to the transformation
+describing the respective motion, e.g.:</p>
+<blockquote>
+<div><p>&#64;reference: ‘/entry/instrument/detector/transformations/some_transformation’ for a motion of the detector</p>
+</div></blockquote>
+</dd>
+</dl>
 </details></div></blockquote>
 </div></blockquote>
 <p id="index-21"><span id="nxdata-fieldname-errors-field"></span><strong>FIELDNAME_errors</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
@@ -369,17 +365,34 @@ Do not use the <code class="docutils literal notranslate"><span class="pre">axes
 <blockquote>
 <div><p>data label</p>
 </div></blockquote>
-</div></blockquote>
-<p id="index-28"><span id="nxdata-errors-field"></span><strong>errors</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: dataRank)</p>
+<p id="index-28"><span id="nxdata-data-reference-attribute"></span><strong>&#64;reference</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
 <blockquote>
-<div><p id="index-29"><strong>DEPRECATED</strong>: Use <code class="docutils literal notranslate"><span class="pre">DATA_errors</span></code> instead (NIAC2018)</p>
+<div><details class="summary-points-to-the-path-of-a-field-defining-the-data-to-which-the-data-field-re">
+<summary>Points to the path of a field defining the data to which the `DATA` field re ...</summary><p>Points to the path of a field defining the data to which the <cite>DATA</cite> field refers.</p>
+<p>This concept allows to link the data to a respective field in the NeXus hierarchy, thereby
+defining the physical quantity it represents.</p>
+<p>Here, <em>DATA</em> is to be replaced by the name of each
+data field.</p>
+<dl>
+<dt>Example:</dt><dd><p>If the data corresponds to a readout of a detector, <code class="docutils literal notranslate"><span class="pre">&#64;reference</span></code> links
+to that detectors data:</p>
+<blockquote>
+<div><p>&#64;reference: ‘/entry/instrument/detector/data’ for a 2D detector</p>
+</div></blockquote>
+</dd>
+</dl>
+</details></div></blockquote>
+</div></blockquote>
+<p id="index-29"><span id="nxdata-errors-field"></span><strong>errors</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: dataRank)</p>
+<blockquote>
+<div><p id="index-30"><strong>DEPRECATED</strong>: Use <code class="docutils literal notranslate"><span class="pre">DATA_errors</span></code> instead (NIAC2018)</p>
 <details class="summary-standard-deviations-of-data-values">
 <summary>Standard deviations of data values - ...</summary><p>Standard deviations of data values -
 the data array is identified by the group attribute <code class="docutils literal notranslate"><span class="pre">signal</span></code>.
 The <code class="docutils literal notranslate"><span class="pre">errors</span></code> array must have the same dimensions as <code class="docutils literal notranslate"><span class="pre">DATA</span></code>.
 Client is responsible for defining the dimensions of the data.</p>
 </details></div></blockquote>
-<p id="index-30"><span id="nxdata-scaling-factor-field"></span><strong>scaling_factor</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a></p>
+<p id="index-31"><span id="nxdata-scaling-factor-field"></span><strong>scaling_factor</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a></p>
 <blockquote>
 <div><details class="summary-the-elements-in-data-are-usually-float-values-really-for">
 <summary>The elements in data are usually float values really. For ...</summary><p>The elements in data are usually float values really. For
@@ -388,27 +401,27 @@ after scaling with a scale factor. This value is the scale
 factor. It is required to get the actual physical value,
 when necessary.</p>
 </details></div></blockquote>
-<p id="index-31"><span id="nxdata-offset-field"></span><strong>offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a></p>
+<p id="index-32"><span id="nxdata-offset-field"></span><strong>offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a></p>
 <blockquote>
 <div><p>An optional offset to apply to the values in data.</p>
 </div></blockquote>
-<p id="index-32"><span id="nxdata-title-field"></span><strong>title</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<p id="index-33"><span id="nxdata-title-field"></span><strong>title</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
 <blockquote>
 <div><p>Title for the plot.</p>
 </div></blockquote>
-<p id="index-33"><span id="nxdata-x-field"></span><strong>x</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 1, Dimensions: [nx]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<p id="index-34"><span id="nxdata-x-field"></span><strong>x</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 1, Dimensions: [nx]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
 <blockquote>
 <div><details class="summary-this-is-an-array-holding-the-values-to-use-for-the-x-axis-of">
 <summary>This is an array holding the values to use for the x-axis of ...</summary><p>This is an array holding the values to use for the x-axis of
 data.  The units must be appropriate for the measurement.</p>
 </details></div></blockquote>
-<p id="index-34"><span id="nxdata-y-field"></span><strong>y</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 1, Dimensions: [ny]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<p id="index-35"><span id="nxdata-y-field"></span><strong>y</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 1, Dimensions: [ny]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
 <blockquote>
 <div><details class="summary-this-is-an-array-holding-the-values-to-use-for-the-y-axis-of">
 <summary>This is an array holding the values to use for the y-axis of ...</summary><p>This is an array holding the values to use for the y-axis of
 data.  The units must be appropriate for the measurement.</p>
 </details></div></blockquote>
-<p id="index-35"><span id="nxdata-z-field"></span><strong>z</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 1, Dimensions: [nz]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<p id="index-36"><span id="nxdata-z-field"></span><strong>z</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 1, Dimensions: [nz]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
 <blockquote>
 <div><details class="summary-this-is-an-array-holding-the-values-to-use-for-the-z-axis-of">
 <summary>This is an array holding the values to use for the z-axis of ...</summary><p>This is an array holding the values to use for the z-axis of
@@ -426,9 +439,11 @@ attributes, and links defined in this class.</p>
 <li><p><a class="reference internal" href="#nxdata-axisname-first-good-attribute"><span class="std std-ref">/NXdata/AXISNAME&#64;first_good-attribute</span></a></p></li>
 <li><p><a class="reference internal" href="#nxdata-axisname-last-good-attribute"><span class="std std-ref">/NXdata/AXISNAME&#64;last_good-attribute</span></a></p></li>
 <li><p><a class="reference internal" href="#nxdata-axisname-long-name-attribute"><span class="std std-ref">/NXdata/AXISNAME&#64;long_name-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxdata-axisname-reference-attribute"><span class="std std-ref">/NXdata/AXISNAME&#64;reference-attribute</span></a></p></li>
 <li><p><a class="reference internal" href="#nxdata-data-field"><span class="std std-ref">/NXdata/DATA-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxdata-data-axes-attribute"><span class="std std-ref">/NXdata/DATA&#64;axes-attribute</span></a></p></li>
 <li><p><a class="reference internal" href="#nxdata-data-long-name-attribute"><span class="std std-ref">/NXdata/DATA&#64;long_name-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxdata-data-reference-attribute"><span class="std std-ref">/NXdata/DATA&#64;reference-attribute</span></a></p></li>
 <li><p><a class="reference internal" href="#nxdata-data-signal-attribute"><span class="std std-ref">/NXdata/DATA&#64;signal-attribute</span></a></p></li>
 <li><p><a class="reference internal" href="#nxdata-errors-field"><span class="std std-ref">/NXdata/errors-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxdata-fieldname-errors-field"><span class="std std-ref">/NXdata/FIELDNAME_errors-field</span></a></p></li>
@@ -440,9 +455,8 @@ attributes, and links defined in this class.</p>
 <li><p><a class="reference internal" href="#nxdata-z-field"><span class="std std-ref">/NXdata/z-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxdata-auxiliary-signals-attribute"><span class="std std-ref">/NXdata&#64;auxiliary_signals-attribute</span></a></p></li>
 <li><p><a class="reference internal" href="#nxdata-axes-attribute"><span class="std std-ref">/NXdata&#64;axes-attribute</span></a></p></li>
-<li><p><a class="reference internal" href="#nxdata-axisname-depends-attribute"><span class="std std-ref">/NXdata&#64;AXISNAME_depends-attribute</span></a></p></li>
 <li><p><a class="reference internal" href="#nxdata-axisname-indices-attribute"><span class="std std-ref">/NXdata&#64;AXISNAME_indices-attribute</span></a></p></li>
-<li><p><a class="reference internal" href="#nxdata-data-depends-attribute"><span class="std std-ref">/NXdata&#64;DATA_depends-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxdata-reference-attribute"><span class="std std-ref">/NXdata&#64;reference-attribute</span></a></p></li>
 <li><p><a class="reference internal" href="#nxdata-signal-attribute"><span class="std std-ref">/NXdata&#64;signal-attribute</span></a></p></li>
 </ul>
 <dl class="simple">

@@ -232,6 +232,25 @@ NXdata
         If there are no axes at all (such as with a stack of images),
         the axes attribute can be omitted.
 
+  .. _/NXdata@reference-attribute:
+
+  .. index:: reference (file attribute)
+
+  **@reference**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+    .. collapse:: Points to the path of a field defining the data to which the `DATA` group refe ...
+
+        Points to the path of a field defining the data to which the `DATA` group refers.
+
+        This concept allows to link the data to a respective field in the NeXus hierarchy, thereby
+        defining the physical quantity it represents.
+
+        Example:
+            If the data corresponds to a readout of a detector, ``@reference`` links
+            to that detectors data:
+
+              @reference: '/entry/instrument/detector/data' for a 2D detector
+
   .. _/NXdata@AXISNAME_indices-attribute:
 
   .. index:: AXISNAME_indices (file attribute)
@@ -277,60 +296,6 @@ NXdata
         .. note::  Attributes potentially containing multiple values
            (axes and _indices) are to be written as string or integer arrays,
            to avoid string parsing in reading applications.
-
-  .. _/NXdata@AXISNAME_depends-attribute:
-
-  .. index:: AXISNAME_depends (file attribute)
-
-  **@AXISNAME_depends**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-    .. collapse:: Points to the path of a field defining the axis on which the ``AXISNAME`` axis ...
-
-        Points to the path of a field defining the axis on which the ``AXISNAME`` axis depends.
-
-        This concept allows to link an axis to a respective field in the NeXus hierarchy, thereby
-        defining the physical quantity it represents.
-
-        Here, *AXISNAME* is to be replaced by the name of each
-        field described in the ``axes`` attribute.
-
-        Examples:
-            If a calibration has been performed, ``@AXISNAME_depends`` links to the result of
-            that calibration:
-
-              @AXISNAME_depends: '/entry/process/calibration/calibrated_axis'
-
-            If the axis corresponds to a coordinate of a detector, ``@AXISNAME_depends`` links
-            to that detector axis:
-
-              @AXISNAME_depends: '/entry/instrument/detector/axis/some_axis' for a 2D detector
-
-            If the axis is a scanned motor, ``@AXISNAME_depends`` links to the transformation
-            describing the respective motion, e.g.:
-
-              @AXISNAME_depends: '/entry/instrument/detector/transformations/some_transformation' for a motion of the detector
-
-  .. _/NXdata@DATA_depends-attribute:
-
-  .. index:: DATA_depends (file attribute)
-
-  **@DATA_depends**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-    .. collapse:: Points to the path of a field defining the data on which the `DATA` field depe ...
-
-        Points to the path of a field defining the data on which the `DATA` field depends.
-
-        This concept allows to link the data to a respective field in the NeXus hierarchy, thereby
-        defining the physical quantity it represents.
-
-        Here, *DATA* is to be replaced by the name of each
-        data field.
-
-        Example:
-            If the data corresponds to a readout of a detector, ``@DATA_depends`` links
-            to that detectors data:
-
-              @DATA_depends: '/entry/instrument/detector/data' for a 2D detector
 
   .. _/NXdata/AXISNAME-field:
 
@@ -394,6 +359,35 @@ NXdata
           N.B. The ``axis`` attribute is the old way of designating a link.
           Do not use the ``axes`` attribute with the ``axis`` attribute.
           The ``axes`` *group* attribute is now preferred.
+
+    .. _/NXdata/AXISNAME@reference-attribute:
+
+    .. index:: reference (field attribute)
+
+    **@reference**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+      .. collapse:: Points to the path of a field defining the axis to which the ``AXISNAME`` ax ...
+
+          Points to the path of a field defining the axis to which the ``AXISNAME`` axis refers.
+
+          This concept allows to link an axis to a respective field in the NeXus hierarchy, thereby
+          defining the physical quantity it represents.
+
+          Examples:
+              If a calibration has been performed, ``@reference`` links to the result of
+              that calibration:
+
+                @reference: '/entry/process/calibration/calibrated_axis'
+
+              If the axis corresponds to a coordinate of a detector, ``@reference`` links
+              to that detector axis:
+
+                @reference: '/entry/instrument/detector/axis/some_axis' for a 2D detector
+
+              If the axis is a scanned motor, ``@reference`` links to the transformation
+              describing the respective motion, e.g.:
+
+                @reference: '/entry/instrument/detector/transformations/some_transformation' for a motion of the detector
 
   .. _/NXdata/FIELDNAME_errors-field:
 
@@ -464,6 +458,28 @@ NXdata
     **@long_name**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
       data label
+
+    .. _/NXdata/DATA@reference-attribute:
+
+    .. index:: reference (field attribute)
+
+    **@reference**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+      .. collapse:: Points to the path of a field defining the data to which the `DATA` field re ...
+
+          Points to the path of a field defining the data to which the `DATA` field refers.
+
+          This concept allows to link the data to a respective field in the NeXus hierarchy, thereby
+          defining the physical quantity it represents.
+
+          Here, *DATA* is to be replaced by the name of each
+          data field.
+
+          Example:
+              If the data corresponds to a readout of a detector, ``@reference`` links
+              to that detectors data:
+
+                @reference: '/entry/instrument/detector/data' for a 2D detector
 
   .. _/NXdata/errors-field:
 
@@ -561,9 +577,11 @@ attributes, and links defined in this class.
 * :ref:`/NXdata/AXISNAME@first_good-attribute </NXdata/AXISNAME@first_good-attribute>`
 * :ref:`/NXdata/AXISNAME@last_good-attribute </NXdata/AXISNAME@last_good-attribute>`
 * :ref:`/NXdata/AXISNAME@long_name-attribute </NXdata/AXISNAME@long_name-attribute>`
+* :ref:`/NXdata/AXISNAME@reference-attribute </NXdata/AXISNAME@reference-attribute>`
 * :ref:`/NXdata/DATA-field </NXdata/DATA-field>`
 * :ref:`/NXdata/DATA@axes-attribute </NXdata/DATA@axes-attribute>`
 * :ref:`/NXdata/DATA@long_name-attribute </NXdata/DATA@long_name-attribute>`
+* :ref:`/NXdata/DATA@reference-attribute </NXdata/DATA@reference-attribute>`
 * :ref:`/NXdata/DATA@signal-attribute </NXdata/DATA@signal-attribute>`
 * :ref:`/NXdata/errors-field </NXdata/errors-field>`
 * :ref:`/NXdata/FIELDNAME_errors-field </NXdata/FIELDNAME_errors-field>`
@@ -575,9 +593,8 @@ attributes, and links defined in this class.
 * :ref:`/NXdata/z-field </NXdata/z-field>`
 * :ref:`/NXdata@auxiliary_signals-attribute </NXdata@auxiliary_signals-attribute>`
 * :ref:`/NXdata@axes-attribute </NXdata@axes-attribute>`
-* :ref:`/NXdata@AXISNAME_depends-attribute </NXdata@AXISNAME_depends-attribute>`
 * :ref:`/NXdata@AXISNAME_indices-attribute </NXdata@AXISNAME_indices-attribute>`
-* :ref:`/NXdata@DATA_depends-attribute </NXdata@DATA_depends-attribute>`
+* :ref:`/NXdata@reference-attribute </NXdata@reference-attribute>`
 * :ref:`/NXdata@signal-attribute </NXdata@signal-attribute>`
 
 **NXDL Source**:
