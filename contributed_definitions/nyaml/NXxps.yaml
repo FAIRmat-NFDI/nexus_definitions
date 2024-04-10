@@ -29,7 +29,7 @@ NXxps(NXmpes):
           In traditional surface science, the coordinate system is defined such that the positive z-axis
           points along the sample normal, and the x- and y-axes lie within the sample surface. However,
           in NeXus, a coordinate system that is the same as `McStas`_  is used. `xps_coordinate_system`
-          gives the user the opportunity to work in the traditional base coordinate system.          .. _McStas: http://mcstas.org/
+          gives the user the opportunity to work in the traditional base coordinate system.         .. _McStas: http://mcstas.org/
         origin:
           enumeration: [sample surface]
         handedness:
@@ -49,6 +49,10 @@ NXxps(NXmpes):
       doc: |
         XPS spectrometer.
       (NXelectronanalyser):
+        (NXenergydispersion):
+          diameter(NX_NUMBER):
+            exists: recommended
+            unit: NX_LENGTH
         depends_on:
           exists: recommended
           doc: |
@@ -231,9 +235,14 @@ NXxps(NXmpes):
             Atomic concentration of each species defined by one peak in the peak model.
             This should be an array with the indices pointing to the individual peaks
             (i.e, peak_0, peak_1, etc.)
+    data(NXdata_mpes):
+      energy:
+      \@energy_indices:
+      \@energy_depends:
+        exists: recommended
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 94d8cb29d96992caf609f6458260eaf52b42e262b3cac1d2fb1a3e796474eb7b
+# 800a108d60c38915af6b9bae514ac99f8e540ae7ede3324597e7a9f13b53af50
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -290,9 +299,7 @@ NXxps(NXmpes):
 #                      In traditional surface science, the coordinate system is defined such that the positive z-axis
 #                      points along the sample normal, and the x- and y-axes lie within the sample surface. However,
 #                      in NeXus, a coordinate system that is the same as `McStas`_  is used. `xps_coordinate_system`
-#                      gives the user the opportunity to work in the traditional base coordinate system.
-#                      
-#                      .. _McStas: http://mcstas.org/
+#                      gives the user the opportunity to work in the traditional base coordinate system.         .. _McStas: http://mcstas.org/
 #                 </doc>
 #                 <field name="origin">
 #                     <enumeration>
@@ -329,6 +336,9 @@ NXxps(NXmpes):
 #                  XPS spectrometer.
 #             </doc>
 #             <group type="NXelectronanalyser">
+#                 <group type="NXenergydispersion">
+#                     <field name="diameter" type="NX_NUMBER" recommended="true" units="NX_LENGTH"/>
+#                 </group>
 #                 <field name="depends_on" recommended="true">
 #                     <doc>
 #                          Reference to the transformation describing the orientation of the analyzer
@@ -546,6 +556,11 @@ NXxps(NXmpes):
 #                     </doc>
 #                 </field>
 #             </group>
+#         </group>
+#         <group name="data" type="NXdata_mpes">
+#             <field name="energy"/>
+#             <attribute name="energy_indices"/>
+#             <attribute name="energy_depends" recommended="true"/>
 #         </group>
 #     </group>
 # </definition>
