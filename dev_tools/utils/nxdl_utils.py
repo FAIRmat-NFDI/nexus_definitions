@@ -109,17 +109,6 @@ def get_nx_class(nxdl_elem):
     return nxdl_elem.attrib.get("type", "NX_CHAR")
 
 
-def __similarity_match(candidates: list, name: str):
-    """
-    Use similarity to find the best match for a name.
-    """
-    similarity: list = [
-        SequenceMatcher(None, v.name.upper(), name.upper()).ratio() for v in candidates
-    ]
-
-    return candidates[similarity.index(max(similarity))]
-
-
 def get_nx_namefit(hdf_name, name, name_any=False):
     """
     Checks if an HDF5 node name corresponds to a child of the NXDL element.
