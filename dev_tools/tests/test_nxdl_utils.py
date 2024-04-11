@@ -23,6 +23,7 @@
 import os
 
 import lxml.etree as ET
+import pytest
 
 from ..utils import nxdl_utils as nexus
 
@@ -136,3 +137,25 @@ def test_get_inherited_nodes():
         nx_name="NXiv_temp",
     )
     assert len(elist) == 4
+
+
+@pytest.mark.parametrize(
+    "hdf_name,concept_name,should_fit",
+    [
+        ("source_pump", "sourceType", False),
+        ("source_pump", "sourceTYPE", True),
+        ("source pump", "sourceTYPE", True),
+        ("source", "sourceTYPE", False),
+        ("same_name", "same_name", True),
+        ("angular_energy_resolution", "angularNresolution", True),
+        ("angularresolution", "angularNresolution", False),
+        ("Name with some whitespaces in it", "ENTRY", True),
+        ("simple_name", "TEST", True)
+    ],
+)
+def test_namefitting(hdf_name, concept_name, should_fit):
+    """Test namefitting of nexus concept names"""
+    if should_fit:
+        assert nexus.get_nx_namefit(hdf_name, concept_name) > -1
+    else:
+        assert nexus.get_nx_namefit(hdf_name, concept_name) == -1
