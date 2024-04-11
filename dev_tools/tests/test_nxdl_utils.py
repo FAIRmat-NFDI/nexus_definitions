@@ -162,11 +162,13 @@ def test_namefitting(hdf_name, concept_name, should_fit):
 
 
 @pytest.mark.parametrize(
-    "better_fit,worse_fit,reference", [("sourcetype", "source_pump", "sourceTYPE")]
+    "better_fit,worse_fit,better_ref,worse_ref",
+    [("sourcetype", "source_pump", "sourceTYPE", "sourceTYPE"),
+     ("source_pump", "source_pump", "sourceTYPE", "TEST")],
 )
-def test_namefitting_precedence(better_fit, worse_fit, reference):
+def test_namefitting_precedence(better_fit, worse_fit, better_ref, worse_ref):
     """Test if namefitting follows proper precedence rules"""
 
-    assert nexus.get_nx_namefit(better_fit, reference) > nexus.get_nx_namefit(
-        worse_fit, reference
+    assert nexus.get_nx_namefit(better_fit, better_ref) > nexus.get_nx_namefit(
+        worse_fit, worse_ref
     )
