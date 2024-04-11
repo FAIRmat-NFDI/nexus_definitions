@@ -2,6 +2,7 @@
 """Parse NeXus definition files
 """
 
+from difflib import SequenceMatcher
 import os
 import re
 import textwrap
@@ -108,6 +109,17 @@ def get_nx_class(nxdl_elem):
     return nxdl_elem.attrib.get("type", "NX_CHAR")
 
 
+def __similarity_match(candidates: list, name: str):
+    """
+    Use similarity to find the best match for a name.
+    """
+    similarity: list = [
+        SequenceMatcher(None, v.name.upper(), name.upper()).ratio() for v in candidates
+    ]
+
+    return candidates[similarity.index(max(similarity))]
+
+
 def get_nx_namefit(hdf_name, name, name_any=False):
     """
     Checks if an HDF5 node name corresponds to a child of the NXDL element.
@@ -131,19 +143,13 @@ def get_nx_namefit(hdf_name, name, name_any=False):
     uppercase_parts = re.findall("[A-Z]+(?:_[A-Z]+)*", name)
 
     for up in uppercase_parts:
-        name = name.replace(up, r"([a-zA-Z0-9_ ]+)")
+        regex_name = name.replace(up, r"([a-zA-Z0-9_ ]+)")
 
-    name_match = re.search(rf"^{name}$", hdf_name)
+    name_match = re.search(rf"^{regex_name}$", hdf_name)
     if name_match is None:
         return 0 if name_any else -1
 
-    fit = 0
-    for up, low in zip(uppercase_parts, name_match.groups()):
-        for i in range(min(len(up), len(low))):
-            if up[i].lower() == low[i]:
-                fit += 1
-
-    return fit
+    return SequenceMatcher(None, hdf_name.upper(), name.upper()).ratio()
 
 
 def get_nx_classes():
