@@ -2,10 +2,10 @@
 """Parse NeXus definition files
 """
 
-from difflib import SequenceMatcher
 import os
 import re
 import textwrap
+from difflib import SequenceMatcher
 from functools import lru_cache
 from glob import glob
 from pathlib import Path
