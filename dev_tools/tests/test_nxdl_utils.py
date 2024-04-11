@@ -150,7 +150,7 @@ def test_get_inherited_nodes():
         ("angular_energy_resolution", "angularNresolution", True),
         ("angularresolution", "angularNresolution", False),
         ("Name with some whitespaces in it", "ENTRY", True),
-        ("simple_name", "TEST", True)
+        ("simple_name", "TEST", True),
     ],
 )
 def test_namefitting(hdf_name, concept_name, should_fit):
@@ -159,3 +159,14 @@ def test_namefitting(hdf_name, concept_name, should_fit):
         assert nexus.get_nx_namefit(hdf_name, concept_name) > -1
     else:
         assert nexus.get_nx_namefit(hdf_name, concept_name) == -1
+
+
+@pytest.mark.parametrize(
+    "better_fit,worse_fit,reference", [("sourcetype", "source_pump", "sourceTYPE")]
+)
+def test_namefitting_precedence(better_fit, worse_fit, reference):
+    """Test if namefitting follows proper precedence rules"""
+
+    assert nexus.get_nx_namefit(better_fit, reference) > nexus.get_nx_namefit(
+        worse_fit, reference
+    )
