@@ -1,6 +1,4 @@
-"""This is a code that performs several tests on nexus tool
-
-"""
+"""This is a code that performs several tests on nexus tool"""
 
 #
 # Copyright The NOMAD Authors.
@@ -144,12 +142,15 @@ def test_get_inherited_nodes():
     [
         ("source_pump", "sourceType", False),
         ("source_pump", "sourceTYPE", True),
-        ("source pump", "sourceTYPE", True),
+        ("source pump", "sourceTYPE", False),
         ("source", "sourceTYPE", False),
+        ("source123", "SOURCE", True),
+        ("1source", "SOURCE", False),
+        ("_source", "SOURCE", True),
         ("same_name", "same_name", True),
         ("angular_energy_resolution", "angularNresolution", True),
         ("angularresolution", "angularNresolution", False),
-        ("Name with some whitespaces in it", "ENTRY", True),
+        ("Name with some whitespaces in it", "ENTRY", False),
         ("simple_name", "TEST", True),
     ],
 )

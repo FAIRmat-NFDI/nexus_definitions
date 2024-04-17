@@ -1,6 +1,5 @@
 # pylint: disable=too-many-lines
-"""Parse NeXus definition files
-"""
+"""Parse NeXus definition files"""
 
 import os
 import re
@@ -129,11 +128,15 @@ def get_nx_namefit(hdf_name, name, name_any=False):
     if name == hdf_name:
         return len(name) * 2
 
-    uppercase_parts = re.findall("[A-Z]+(?:_[A-Z]+)*", name)
+    start_uppercase = re.search("^[A-Z]+(?:_[A-Z]+)*", name)
 
     regex_name = name
+    if start_uppercase is not None:
+        regex_name = regex_name.replace(start_uppercase.group(), r"[a-z_]+")
+
+    uppercase_parts = re.findall("[A-Z]+(?:_[A-Z]+)*", name)
     for up in uppercase_parts:
-        regex_name = regex_name.replace(up, r"([a-zA-Z0-9_ ]+)")
+        regex_name = regex_name.replace(up, r"[a-z0-9_]+")
 
     name_match = re.search(rf"^{regex_name}$", hdf_name)
     if name_match is None:
