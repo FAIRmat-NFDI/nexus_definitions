@@ -127,14 +127,13 @@ def get_nx_namefit(hdf_name, name, name_any=False):
     """
     if name == hdf_name:
         return len(name) * 2
-
-    start_uppercase = re.search("^[A-Z]+(?:_[A-Z]+)*", name)
-
-    regex_name = name
-    if start_uppercase is not None:
-        regex_name = regex_name.replace(start_uppercase.group(), r"[a-z_]+")
+    if re.search(r"^[0-9]", hdf_name) is not None:
+        # Don't match anything if the name starts with a number
+        return -1
 
     uppercase_parts = re.findall("[A-Z]+(?:_[A-Z]+)*", name)
+
+    regex_name = name
     for up in uppercase_parts:
         regex_name = regex_name.replace(up, r"[a-z0-9_]+")
 
@@ -500,9 +499,7 @@ def check_attr_name_nxdl(param):
     return logger, elem, nxdl_path, doc, attr, req_str
 
 
-def try_find_default(
-    logger, orig_elem, elem, nxdl_path, doc, attr
-):  # pylint: disable=too-many-arguments
+def try_find_default(logger, orig_elem, elem, nxdl_path, doc, attr):  # pylint: disable=too-many-arguments
     """Try to find if default is defined as a child of the NXDL element"""
     if elem is not None:
         if doc:
@@ -522,9 +519,7 @@ def try_find_default(
     return logger, elem, nxdl_path, doc, attr
 
 
-def other_attrs(
-    logger, orig_elem, elem, nxdl_path, doc, attr
-):  # pylint: disable=too-many-arguments
+def other_attrs(logger, orig_elem, elem, nxdl_path, doc, attr):  # pylint: disable=too-many-arguments
     """Handle remaining attributes"""
     if elem is not None:
         if doc:
