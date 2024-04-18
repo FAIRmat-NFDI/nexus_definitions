@@ -8,7 +8,7 @@ from functools import lru_cache
 from glob import glob
 from pathlib import Path
 from typing import List
-from typing import Tuple
+from typing import Optional
 
 import lxml.etree as ET
 from lxml.etree import ParseError as xmlER
@@ -595,8 +595,8 @@ def get_doc(node, ntype, nxhtml, nxpath):
     doc_field = node.find("doc")
     if doc_field is not None:
         doc = doc_field.text
-    has_enums, enums = get_enums(node)  # enums
-    if has_enums:
+    enums = get_enums(node)  # enums
+    if enums is not None:
         enum_str = (
             "\n "
             + ("Possible values:" if len(enums) > 1 else "Obligatory value:")
@@ -633,7 +633,7 @@ def get_namespace(element):
     return element.tag[element.tag.index("{") : element.tag.rindex("}") + 1]
 
 
-def get_enums(node: ET._Element) -> Tuple[bool, List[str]]:
+def get_enums(node: ET._Element) -> Optional[List[str]]:
     """
     Makes list of enumerations, if node contains any.
 
@@ -651,8 +651,8 @@ def get_enums(node: ET._Element) -> Tuple[bool, List[str]]:
         for item in enumeration.findall(f"{namespace}item"):
             enums.append(item.attrib["value"])
         if enums:
-            return True, enums
-    return False, []
+            return enums
+    return None
 
 
 def add_base_classes(elist, nx_name=None, elem: ET.Element = None):
