@@ -641,9 +641,9 @@ def get_enums(node: ET._Element) -> Optional[List[str]]:
         node (ET._Element): The node to check for enumerations.
 
     Returns:
-        Tuple[bool, List[str]]:
-            The first tuple element is a boolean whether an enumeration was found.
-            The second tuple element is a list of the enumeration values.
+        Optional[List[str]]:
+            Returns a list of the enumeration values if an enumeration was found.
+            If no enumeration was found it returns None.
     """
     namespace = get_namespace(node)
     enums = []
