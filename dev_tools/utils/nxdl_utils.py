@@ -594,14 +594,14 @@ def get_doc(node, ntype, nxhtml, nxpath):
     doc_field = node.find("doc")
     if doc_field is not None:
         doc = doc_field.text
-    enums = get_enums(node)  # enums
-    if enums:
+    has_enums, enums = get_enums(node)  # enums
+    if has_enums:
         enum_str = (
             "\n "
-            + ("Possible values:" if enums else "Obligatory value:")
+            + ("Possible values:" if len(enums) > 1 else "Obligatory value:")
             + "\n   "
             + "["
-            + enums.join(",")
+            + ",".join(enums)
             + "]"
             + "\n"
         )
