@@ -7,7 +7,7 @@ import textwrap
 from functools import lru_cache
 from glob import glob
 from pathlib import Path
-from typing import List
+from typing import List, Tuple
 
 import lxml.etree as ET
 from lxml.etree import ParseError as xmlER
@@ -632,7 +632,7 @@ def get_namespace(element):
     return element.tag[element.tag.index("{") : element.tag.rindex("}") + 1]
 
 
-def get_enums(node: ET._Element) -> List[str]:
+def get_enums(node: ET._Element) -> Tuple[bool, List[str]]:
     """
     Makes list of enumerations, if node contains any.
 
@@ -640,8 +640,9 @@ def get_enums(node: ET._Element) -> List[str]:
         node (ET._Element): The node to check for enumerations.
 
     Returns:
-        List[str]:
-            A list of the enumeration values. Empty list if no enumerations are found.
+        Tuple[bool, List[str]]:
+            The first tuple element is a boolean whether an enumeration was found.
+            The second tuple element is a list of the enumeration values.
     """
     namespace = get_namespace(node)
     enums = []
@@ -649,8 +650,8 @@ def get_enums(node: ET._Element) -> List[str]:
         for item in enumeration.findall(f"{namespace}item"):
             enums.append(item.attrib["value"])
         if enums:
-            return enums
-    return []
+            return True, enums
+    return False, []
 
 
 def add_base_classes(elist, nx_name=None, elem: ET.Element = None):
