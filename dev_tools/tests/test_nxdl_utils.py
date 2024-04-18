@@ -163,6 +163,22 @@ def test_namefitting(hdf_name, concept_name, should_fit):
 
 
 @pytest.mark.parametrize(
+    "hdf_name,concept_name, score",
+    [
+        ("test_name", "TEST_name", 9),
+        ("te_name", "TEST_name", 7),
+        ("my_other_name", "TEST_name", 5),
+        ("test_name", "test_name", 18),
+        ("test_other", "test_name", -1),
+        ("my_fancy_yet_long_name", "my_SOME_name", 8),
+    ],
+)
+def test_namefitting_scores(hdf_name, concept_name, score):
+    """Test namefitting of nexus concept names"""
+    assert nexus.get_nx_namefit(hdf_name, concept_name) == score
+
+
+@pytest.mark.parametrize(
     "better_fit,better_ref,worse_fit,worse_ref",
     [
         ("sourcetype", "sourceTYPE", "source_pump", "sourceTYPE"),
