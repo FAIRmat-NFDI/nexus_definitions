@@ -119,6 +119,10 @@ def get_nx_namefit(hdf_name: str, name: str, name_any: bool = False) -> int:
     Lowercase matches are independent of uppercase group lengths, e.g.,
     an hdf_name `get_nx_namefit("my_fancy_yet_long_name", "my_SOME_name")` would
     return a score of 8 for the lowercase matches `my_..._name`.
+    All characters in `[a-zA-Z0-9_.]` are considered for matching to an uppercase letter.
+    If you use any other letter in the name, it will not match and return -1.
+    Periods at the beginning or end of the hdf_name are not allowed, only exact
+    matches will be considered.
 
     Examples:
 
@@ -139,12 +143,12 @@ def get_nx_namefit(hdf_name: str, name: str, name_any: bool = False) -> int:
         int: -1 if no match is found or the number of matching
              characters (case insensitive).
     """
-    path_regex = r"([a-z0-9_]+)"
+    path_regex = r"([a-zA-Z0-9_.]+)"
 
     if name == hdf_name:
         return len(name) * 2
-    if re.search(r"^[0-9]", hdf_name) is not None:
-        # Don't match anything if the name starts with a number
+    if hdf_name.startswith(".") or hdf_name.endswith("."):
+        # Don't match anything with a dot at the beginning or end
         return -1
 
     uppercase_parts = re.findall(r"[A-Z]+(?:_[A-Z]+)*", name)
@@ -523,7 +527,9 @@ def check_attr_name_nxdl(param):
     return logger, elem, nxdl_path, doc, attr, req_str
 
 
-def try_find_default(logger, orig_elem, elem, nxdl_path, doc, attr):  # pylint: disable=too-many-arguments
+def try_find_default(
+    logger, orig_elem, elem, nxdl_path, doc, attr
+):  # pylint: disable=too-many-arguments
     """Try to find if default is defined as a child of the NXDL element"""
     if elem is not None:
         if doc:
@@ -543,7 +549,9 @@ def try_find_default(logger, orig_elem, elem, nxdl_path, doc, attr):  # pylint: 
     return logger, elem, nxdl_path, doc, attr
 
 
-def other_attrs(logger, orig_elem, elem, nxdl_path, doc, attr):  # pylint: disable=too-many-arguments
+def other_attrs(
+    logger, orig_elem, elem, nxdl_path, doc, attr
+):  # pylint: disable=too-many-arguments
     """Handle remaining attributes"""
     if elem is not None:
         if doc:

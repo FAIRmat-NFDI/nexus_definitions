@@ -145,13 +145,14 @@ def test_get_inherited_nodes():
         ("source pump", "sourceTYPE", False),
         ("source", "sourceTYPE", False),
         ("source123", "SOURCE", True),
-        ("1source", "SOURCE", False),
+        ("1source", "SOURCE", True),
         ("_source", "SOURCE", True),
         ("same_name", "same_name", True),
         ("angular_energy_resolution", "angularNresolution", True),
         ("angularresolution", "angularNresolution", False),
         ("Name with some whitespaces in it", "ENTRY", False),
         ("simple_name", "TEST", True),
+        (".test", "TEST", False),
     ],
 )
 def test_namefitting(hdf_name, concept_name, should_fit):
