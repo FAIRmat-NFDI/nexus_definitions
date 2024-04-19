@@ -22,7 +22,12 @@
 # For further information, see http://www.nexusformat.org
 -->
 <!--
-03/2024
+N_incident_wavelengths: |
+ Number of the incident wavelen
+N_incident_beams: |
+ to be done....-->
+<!--
+04/2024
 A draft version of a NeXus application definition for Raman spectroscopy.-->
 <!--
 The document has the following main elements:
@@ -146,7 +151,7 @@ The document has the following main elements:
         </doc>
         <field name="definition">
             <doc>
-                 An application definition for ellipsometry.
+                 An application definition for Raman spectrsocopy.
             </doc>
             <attribute name="version">
                 <doc>
@@ -164,7 +169,7 @@ The document has the following main elements:
                 <item value="NXraman"/>
             </enumeration>
         </field>
-        <field name="experiment_description">
+        <field name="experiment_description" optional="true">
             <doc>
                  An optional free-text description of the experiment.
                  
@@ -209,15 +214,15 @@ The document has the following main elements:
                 <field name="vendor" recommended="true"/>
                 <field name="model" recommended="true"/>
                 <field name="identifier" recommended="true"/>
-                <field name="construction_year" type="NX_DATE_TIME" optional="true">
-                    <doc>
-                         ISO8601 date when the instrument was constructed.
-                         UTC offset should be specified.
-                    </doc>
-                </field>
             </group>
-            <group name="software" type="NXprocess">
-                <field name="program">
+            <field name="construction_year" type="NX_DATE_TIME" optional="true">
+                <doc>
+                     ISO8601 date when the instrument was constructed.
+                     UTC offset should be specified.
+                </doc>
+            </field>
+            <group name="software" type="NXfabrication" recommended="true">
+                <field name="program_name">
                     <doc>
                          Commercial or otherwise defined given name of the program that was
                          used to generate the result file(s) with measured data and metadata.
@@ -227,18 +232,15 @@ The document has the following main elements:
                     </doc>
                 </field>
             </group>
-            <field name="incident_source_wavelength" type="NX_NUMBER" units="NX_LENGTH">
+            <field name="incident_beam_wavelength" type="NX_NUMBER" units="NX_WAVELENGTH">
                 <doc>
-                     Which indicent wavelength was used for e.g. a laser source.
+                     Which wavelength the incident beam has, e.g. a single wavelength for a laser source.
                      For multiple excitation wavelengths, please state the specific discret
                      wavelengths (i.e. for dye laser) or the specific contnious range
-                     (i.e for white light laser source)
+                     (i.e for white light laser source).
                 </doc>
             </field>
             <field name="scattering_configuration" type="NX_CHAR">
-                <!--
-unit: NX_LENGTH
--->
                 <doc>
                      Scattering configuration as defined by the porto notation by three
                      states, which are othogonal to each other. Example: z(xx)z for
@@ -257,8 +259,9 @@ unit: NX_LENGTH
                      An orthogonal base is assumed.
                      Linear polarized light is displayed by e.g. "x","y" or "z"
                      Unpolarized light is displayed by "."
+                     For non-orthogonal vectors, use the attribute porto_notation_vectors.
                 </doc>
-                <attribute name="non_orthogonal_base_vectors" type="NX_NUMBER">
+                <attribute name="porto_notation_vectors" type="NX_NUMBER">
                     <!--
 unit: NX_LENGTH
 -->
@@ -282,7 +285,7 @@ unit: NX_LENGTH
             <!--In the following - Auxillary NXbeam_devices are defined, to enable a
 beam path description of the setup, while using the up now available
 Nexus definitions for source, detector, monochromator, ...-->
-            <group name="opt_source" type="NXbeam_device">
+            <group name="opt_source" type="NXbeam_device" optional="true">
                 <doc>
                      This is the beam device instance of the optical source.
                      
@@ -300,7 +303,7 @@ Nexus definitions for source, detector, monochromator, ...-->
                     </doc>
                 </attribute>
             </group>
-            <group name="incident_light_optics" type="NXbeam_device">
+            <group name="incident_light_optics" type="NXbeam_device" optional="true">
                 <doc>
                      Beam device instance of the incident light optics.
                 </doc>
@@ -310,7 +313,7 @@ Nexus definitions for source, detector, monochromator, ...-->
                     </doc>
                 </attribute>
             </group>
-            <group name="scattered_light_optics" type="NXbeam_device">
+            <group name="scattered_light_optics" type="NXbeam_device" optional="true">
                 <doc>
                      Beam device instance of the scattered light optics.
                 </doc>
@@ -320,7 +323,7 @@ Nexus definitions for source, detector, monochromator, ...-->
                     </doc>
                 </attribute>
             </group>
-            <group name="opt_detector" type="NXbeam_device">
+            <group name="opt_detector" type="NXbeam_device" optional="true">
                 <doc>
                      Properties of the detector to link it via NXbeam_device to other beam
                      elements
@@ -355,7 +358,7 @@ Nexus definitions for source, detector, monochromator, ...-->
                     </doc>
                 </attribute>
             </group>
-            <group name="sample_as_beam_element" type="NXbeam_device">
+            <group name="sample_as_beam_element" type="NXbeam_device" optional="true">
                 <doc>
                      Enables beam path description of the sample in the setup.
                      it in a beam path.
@@ -366,9 +369,7 @@ Nexus definitions for source, detector, monochromator, ...-->
                     </doc>
                 </attribute>
             </group>
-            <!--End of Auxillary NXbeam_devices-->
-            <!--Below:
-generic NeXus definition for optical elements of the setup-->
+            <!--Below: generic NeXus definition for optical elements of the setup-->
             <group type="NXsource">
                 <doc>
                      Light source with arbitrary choice of name. This shall be referenced
@@ -382,28 +383,66 @@ generic NeXus definition for optical elements of the setup-->
                         <item value="other"/>
                     </enumeration>
                 </field>
+                <field name="source_polarization">
+                    <doc>
+                         The type of light polarization procuded by the source.
+                    </doc>
+                    <enumeration>
+                        <item value="linear"/>
+                        <item value="unpolarized"/>
+                        <item value="circular"/>
+                        <item value="elliptically"/>
+                        <item value="other"/>
+                    </enumeration>
+                </field>
+                <group name="device_information" type="NXfabrication">
+                    <doc>
+                         Details about the specific device information if available.
+                    </doc>
+                </group>
             </group>
             <group type="NXdetector">
                 <doc>
                      Detector with arbitrary choice of the name, which shall be referenced
                      by the detector(NXbeam_device).
                 </doc>
+                <group name="device_information" type="NXfabrication">
+                    <doc>
+                         Details about the specific device information if available.
+                    </doc>
+                </group>
+                <field name="data_type" optional="true">
+                    <doc>
+                         Select which type of data was recorded, for example a simple spectrum
+                         with intensity vs. Raman shift, CCD image or a set of spectra with
+                         probe, reference and background signals for pump beam on and off.
+                    </doc>
+                    <enumeration>
+                        <item value="Integrated single spectrum"/>
+                        <item value="CCD image"/>
+                        <item value="Probe + Background + Reference for Pump-on and Pump-off (i.e. for FSRS)"/>
+                    </enumeration>
+                </field>
             </group>
-            <group type="NXmonochromator">
+            <group type="NXmonochromator" optional="true">
                 <doc>
                      Monochromator with arbitrary choice of the name, which shall be referenced
                      by the spectrometer(NXbeam_device).
                 </doc>
+                <group name="device_information" type="NXfabrication">
+                    <doc>
+                         Details about the specific device information if available.
+                    </doc>
+                </group>
             </group>
             <!--Below:
 NeXus definition derived optical elements of the setup-->
-            <group name="incident_light_lens" type="NXlens_opt" recommended="true">
+            <group name="incident_light_lens" type="NXlens_opt" optional="true">
                 <doc>
-                     This is the optical element used for the incident light in the Raman
-                     scattering process.
+                     This is the optical element used to focus the incident light in the
+                     Raman scattering process.
                      
-                     This can be for example a simple lens or microscope
-                     objective.
+                     This can be for example a simple lens or microscope objective.
                 </doc>
                 <field name="type">
                     <enumeration>
@@ -419,14 +458,23 @@ NeXus definition derived optical elements of the setup-->
                          The numerical aperture of the used incident light optics.
                     </doc>
                 </field>
+                <field name="magnification">
+                    <doc>
+                         Magnification of the lens.
+                    </doc>
+                </field>
+                <group name="device_information" type="NXfabrication">
+                    <doc>
+                         Details about the optical component, if available.
+                    </doc>
+                </group>
             </group>
-            <group name="scattered_light_lens" type="NXlens_opt" recommended="true">
+            <group name="scattered_light_lens" type="NXlens_opt" optional="true">
                 <doc>
-                     This is the optical element used for the incident light in the Raman
-                     scattering process.
+                     This is the optical element used to collect the scattered light in the
+                     Raman scattering process.
                      
-                     This can be for example a simple lens or microscope
-                     objective.
+                     This can be for example a simple lens or microscope objective.
                 </doc>
                 <field name="type">
                     <enumeration>
@@ -442,25 +490,29 @@ NeXus definition derived optical elements of the setup-->
                          The numerical aperture of the used incident light optics.
                     </doc>
                 </field>
-            </group>
-            <group name="waveplate_NAME" type="NXwaveplate">
-                <doc>
-                     Properties of the device for the manipulation of the state of light which is a half wave
-                     plate.
-                </doc>
-                <field name="type">
-                    <enumeration>
-                        <item value="objective"/>
-                        <item value="lens"/>
-                        <item value="glass fiber"/>
-                        <item value="none"/>
-                        <item value="other"/>
-                    </enumeration>
+                <field name="magnification">
+                    <doc>
+                         Magnification of the lens.
+                    </doc>
                 </field>
+                <group name="device_information" type="NXfabrication">
+                    <doc>
+                         Details about the optical component, if available.
+                    </doc>
+                </group>
             </group>
-            <!--Below:
-NXraman specific optical elements-->
-            <group name="polarization_filter" type="NXbeam_device">
+            <group name="waveplate_N" type="NXwaveplate" optional="true">
+                <doc>
+                     Properties of a wave plate to manipulate the polarization state of light.
+                </doc>
+                <group name="device_information" type="NXfabrication">
+                    <doc>
+                         Details about the optical component, if available.
+                    </doc>
+                </group>
+            </group>
+            <!--Below: NXraman specific optical elements-->
+            <group name="polarization_filter" type="NXbeam_device" optional="true">
                 <field name="filter_mechanism" type="NX_CHAR" optional="true">
                     <doc>
                          Physical principle of the polarization filter used to create a
@@ -474,7 +526,7 @@ NXraman specific optical elements-->
                         <item value="other"/>
                     </enumeration>
                 </field>
-                <field name="specific_polarization_filter_type" type="NX_CHAR">
+                <field name="specific_polarization_filter_type" type="NX_CHAR" optional="true">
                     <doc>
                          Specific name or type of the polarizer used.
                          
@@ -482,8 +534,16 @@ NXraman specific optical elements-->
                          Polarizer...
                     </doc>
                 </field>
+                <group name="device_information" type="NXfabrication">
+                    <doc>
+                         Details about the optical component, if available.
+                    </doc>
+                </group>
             </group>
-            <group name="spectral_filter_N" type="NXbeam_device">
+            <group name="spectral_filter_N" type="NXbeam_device" optional="true">
+                <doc>
+                     Spectral filter used to modify properties of the scattered or incident light.
+                </doc>
                 <field name="filter_type" optional="true">
                     <doc>
                          Type of laserline filter used to supress the laser, if measurements
@@ -533,26 +593,17 @@ N_spectrum_filter -\-> Number of wavelengths-->
                         </enumeration>
                     </attribute>
                 </field>
+                <group name="device_information" type="NXfabrication">
+                    <doc>
+                         Details about the optical component, if available.
+                    </doc>
+                </group>
             </group>
         </group>
         <group type="NXsample">
             <field name="name" optional="false"/>
             <field name="sample_id" recommended="true"/>
             <field name="chemical_formula" recommended="true"/>
-        </group>
-        <group name="data_collection" type="NXprocess">
-            <field name="data_type">
-                <doc>
-                     Select which type of data was recorded, for example a simple spectrum
-                     with intensity vs. Raman shift, CCD image or a set of spectra with
-                     probe, reference and background signals for pump beam on and off.
-                </doc>
-                <enumeration>
-                    <item value="Integrated single spectrum"/>
-                    <item value="CCD image"/>
-                    <item value="Probe + Background + Reference for Pump-on and Pump-off (i.e. for FSRS)"/>
-                </enumeration>
-            </field>
         </group>
     </group>
 </definition>

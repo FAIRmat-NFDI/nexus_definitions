@@ -72,7 +72,12 @@ symbols:
   N_spectrum_filter: |
     Number of points for a spectral filter used in the setup
 
-# 03/2024
+  #N_incident_wavelengths: |
+  #  Number of the incident wavelen
+  #N_incident_beams: |
+  #  to be done....
+
+# 04/2024
 # A draft version of a NeXus application definition for Raman spectroscopy.
 
 # The document has the following main elements:
@@ -100,7 +105,7 @@ NXraman(NXopt):
       * sample description
     definition:
       doc: |
-        An application definition for ellipsometry.
+        An application definition for Raman spectrsocopy.
       \@version:
         doc: |
           Version number to identify which definition of this application
@@ -111,6 +116,7 @@ NXraman(NXopt):
           to the application definition.
       enumeration: [NXraman]
     experiment_description:
+      exists: optional
       doc: |
         An optional free-text description of the experiment.
         
@@ -139,28 +145,28 @@ NXraman(NXopt):
           exists: recommended
         identifier:
           exists: recommended
-        construction_year(NX_DATE_TIME): # is 1 indention ok?
-          exists: optional
-          doc: |
-            ISO8601 date when the instrument was constructed.
-            UTC offset should be specified.
-      software(NXprocess): ## NXChar=
-        program:
+      construction_year(NX_DATE_TIME):
+        exists: optional
+        doc: |
+          ISO8601 date when the instrument was constructed.
+          UTC offset should be specified.
+      software(NXfabrication):
+        exists: recommended
+        program_name:
           doc: |
             Commercial or otherwise defined given name of the program that was
             used to generate the result file(s) with measured data and metadata.
             This program converts the measured signals to Raman data. If
             home written, one can provide the actual steps in the NOTE subfield
             here.
-      incident_source_wavelength(NX_NUMBER):
-        unit: NX_LENGTH
+      incident_beam_wavelength(NX_NUMBER):
+        unit: NX_WAVELENGTH
         doc: |
-          Which indicent wavelength was used for e.g. a laser source.
+          Which wavelength the incident beam has, e.g. a single wavelength for a laser source.
           For multiple excitation wavelengths, please state the specific discret
           wavelengths (i.e. for dye laser) or the specific contnious range
-          (i.e for white light laser source)
+          (i.e for white light laser source).
       scattering_configuration(NX_CHAR):
-        # unit: NX_LENGTH
         doc: |
           Scattering configuration as defined by the porto notation by three
           states, which are othogonal to each other. Example: z(xx)z for
@@ -179,7 +185,8 @@ NXraman(NXopt):
           An orthogonal base is assumed.
           Linear polarized light is displayed by e.g. "x","y" or "z"
           Unpolarized light is displayed by "."
-        \@non_orthogonal_base_vectors(NX_NUMBER):
+          For non-orthogonal vectors, use the attribute porto_notation_vectors.
+        \@porto_notation_vectors(NX_NUMBER):
           # unit: NX_LENGTH
           doc: |
             Scattering configuration as defined by the porto notation given by
@@ -198,6 +205,7 @@ NXraman(NXopt):
       # beam path description of the setup, while using the up now available
       # Nexus definitions for source, detector, monochromator, ... 
       opt_source(NXbeam_device):
+        exists: optional
         doc: |
           This is the beam device instance of the optical source.
 
@@ -212,18 +220,21 @@ NXraman(NXopt):
           doc: |
             It should contain the name of the Nexus source group.
       incident_light_optics(NXbeam_device):
+        exists: optional
         doc: |
           Beam device instance of the incident light optics.
         \@device:
           doc: |
             It should contain the name of the "incident_light_lens(NXlens_opt)" group
       scattered_light_optics(NXbeam_device):
+        exists: optional
         doc: |
           Beam device instance of the scattered light optics.
         \@device:
           doc: |
             It should contain the name of the "scattered_light_lens(NXlens_opt)" group
       opt_detector(NXbeam_device):
+        exists: optional
         doc: |
           Properties of the detector to link it via NXbeam_device to other beam
           elements
@@ -249,70 +260,100 @@ NXraman(NXopt):
           doc: |
             It should contain the name of the Nexus Monochromator group
       sample_as_beam_element(NXbeam_device):
+        exists: optional
         doc: |
           Enables beam path description of the sample in the setup.
           it in a beam path.
         \@device:
           doc: |
             Contains the link to the sample.
-      # End of Auxillary NXbeam_devices
 
-
-      # Below:
-      # generic NeXus definition for optical elements of the setup
+      # Below: generic NeXus definition for optical elements of the setup
       (NXsource):
         doc: |
           Light source with arbitrary choice of name. This shall be referenced
           by source(NXbeam_device)
         source_type:
           enumeration: [laser, dye-laser, broadband tunable light source, other]
+        source_polarization:
+          doc: |
+            The type of light polarization procuded by the source.
+          enumeration: [linear, unpolarized, circular, elliptically, other]
+        device_information(NXfabrication):
+          doc: |
+            Details about the specific device information if available. 
       (NXdetector):
         doc: |
           Detector with arbitrary choice of the name, which shall be referenced
-          by the detector(NXbeam_device). 
+          by the detector(NXbeam_device).
+        device_information(NXfabrication):
+          doc: |
+            Details about the specific device information if available.
+        data_type:
+          exists: optional
+          doc: |
+            Select which type of data was recorded, for example a simple spectrum
+            with intensity vs. Raman shift, CCD image or a set of spectra with
+            probe, reference and background signals for pump beam on and off.
+          enumeration: [Integrated single spectrum, CCD image, Probe + Background + Reference for Pump-on and Pump-off (i.e. for FSRS)]
       (NXmonochromator):
+        exists: optional
         doc: |
           Monochromator with arbitrary choice of the name, which shall be referenced
           by the spectrometer(NXbeam_device).
+        device_information(NXfabrication):
+          doc: |
+            Details about the specific device information if available. 
 
       # Below:
       # NeXus definition derived optical elements of the setup
-      incident_light_lens(NXlens_opt):        
+      incident_light_lens(NXlens_opt):
         doc: |
-          This is the optical element used for the incident light in the Raman
-          scattering process.
+          This is the optical element used to focus the incident light in the
+          Raman scattering process.
           
-          This can be for example a simple lens or microscope
-          objective.
-        exists: recommended
+          This can be for example a simple lens or microscope objective.
+        exists: optional
         type:
           enumeration: [objective, lens, glass fiber, none, other]
         numerical_aperture(NX_NUMBER):
           doc: |
             The numerical aperture of the used incident light optics.
+        magnification:
+          doc: |
+            Magnification of the lens.
+        device_information(NXfabrication):
+          doc: |
+            Details about the optical component, if available. 
       scattered_light_lens(NXlens_opt):
         doc: |
-          This is the optical element used for the incident light in the Raman
-          scattering process.
+          This is the optical element used to collect the scattered light in the
+          Raman scattering process.
           
-          This can be for example a simple lens or microscope
-          objective.
-        exists: recommended
+          This can be for example a simple lens or microscope objective.
+        exists: optional
         type:
           enumeration: [objective, lens, glass fiber, none, other]
         numerical_aperture(NX_NUMBER):
           doc: |
             The numerical aperture of the used incident light optics.
-      waveplate_NAME(NXwaveplate):
+        magnification:
+          doc: |
+            Magnification of the lens.
+        device_information(NXfabrication):
+          doc: |
+            Details about the optical component, if available. 
+      waveplate_N(NXwaveplate):
+        exists: optional
         doc: |
-          Properties of the device for the manipulation of the state of light which is a half wave
-          plate.
-        type:
-          enumeration: [objective, lens, glass fiber, none, other]
+          Properties of a wave plate to manipulate the polarization state of light.
+        device_information(NXfabrication):
+          doc: |
+            Details about the optical component, if available. 
         
-      # Below:
-      # NXraman specific optical elements
+      # Below: NXraman specific optical elements
       polarization_filter(NXbeam_device):
+        exists: optional
         filter_mechanism(NX_CHAR):
           exists: optional
           doc: |
@@ -320,12 +361,19 @@ NXraman(NXopt):
             defined incident or scattered light state.
           enumeration: [Polarization by Fresnel reflection, Birefringent polarizers, Thin film polarizers, Wire-grid polarizers, other]
         specific_polarization_filter_type(NX_CHAR):
+          exists: optional
           doc: |
             Specific name or type of the polarizer used.
             
             Free text, for example: Glan-Thompson, Glan-Taylor, Rochon Prism, Wollaston
             Polarizer...      
+        device_information(NXfabrication):
+          doc: |
+            Details about the optical component, if available. 
       spectral_filter_N(NXbeam_device):
+        exists: optional
+        doc: |
+          Spectral filter used to modify properties of the scattered or incident light.
         filter_type:
           exists: optional
           doc: |
@@ -354,20 +402,16 @@ NXraman(NXopt):
               Which property is used to form the spectral properties of light,
               i.e. transmission or reflection properties.
             enumeration: [transmission, reflection]
-    (NXsample):
+        device_information(NXfabrication):
+          doc: |
+            Details about the optical component, if available. 
+    (NXsample): 
       name:
         exists: required
       sample_id:
         exists: recommended
       chemical_formula:
         exists: recommended
-    data_collection(NXprocess):
-      data_type:
-        doc: |
-          Select which type of data was recorded, for example a simple spectrum
-          with intensity vs. Raman shift, CCD image or a set of spectra with
-          probe, reference and background signals for pump beam on and off.
-        enumeration: [Integrated single spectrum, CCD image, Probe + Background + Reference for Pump-on and Pump-off (i.e. for FSRS)]
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
 # 80b03b96b60b3c124d11d834654b3e57e09716088e8dca121f7903148c7b06e3
