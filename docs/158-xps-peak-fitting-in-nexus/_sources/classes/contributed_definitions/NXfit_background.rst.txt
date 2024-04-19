@@ -23,9 +23,9 @@ NXfit_background
 
   The symbols used in the schema to specify e.g. dimensions of arrays.
 
-  **n_values**: Number of discretization points at which the functional form of the background has been evaluated.
+  **n_points**: Number of discretization points at which the functional form of the background has been evaluated.
 
-  **n_features**: Number of independent data axes to be fitted (for multidimensional fit.)
+  **n_dependent**: Number of dependent variables to be fitted (for multidimensional/multivariate fit.)
 
 **Groups cited**:
   :ref:`NXdata`, :ref:`NXfit_function`
@@ -54,7 +54,7 @@ NXfit_background
 
     .. index:: position (field)
 
-    **position**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_values]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+    **position**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_points]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
       This axis holds the position values for the independent variable.
 
@@ -62,9 +62,12 @@ NXfit_background
 
     .. index:: intensity (field)
 
-    **intensity**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_features, n_values]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+    **intensity**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_points, n_dependent]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
-      This array holds the intensity/count values at each position.
+      .. collapse:: This array holds the intensity/count values of the fitted background at each ...
+
+          This array holds the intensity/count values of the fitted background at each
+          position.
 
   .. _/NXfit_background/function-group:
 

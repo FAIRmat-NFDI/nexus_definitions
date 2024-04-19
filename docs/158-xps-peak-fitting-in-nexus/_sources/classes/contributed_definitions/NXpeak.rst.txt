@@ -26,14 +26,14 @@ NXpeak
 
   The symbols used in the schema to specify e.g. dimensions of arrays.
 
-  **n_values**: Number of discretization points at which the functional form of the peak has been evaluated.
+  **n_points**: Number of discretization points at which the functional form of the peak has been evaluated.
 
-  **n_features**: Number of independent data axes to be fitted (for multidimensional fit.)
+  **n_dependent**: Number of dependent variables to be fitted (for multidimensional/multivariate fit.)
 
 **Groups cited**:
-  :ref:`NXdata`, :ref:`NXfit_function`, :ref:`NXfit_repeated_parameter`
+  :ref:`NXdata`, :ref:`NXfit_function`
 
-.. index:: NXdata (base class); used in base class, NXfit_function (base class); used in base class, NXfit_repeated_parameter (base class); used in base class
+.. index:: NXdata (base class); used in base class, NXfit_function (base class); used in base class
 
 **Structure**:
 
@@ -65,7 +65,7 @@ NXpeak
 
     .. index:: position (field)
 
-    **position**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_features, n_values]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+    **position**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_points]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
       This axis holds the position values for the independent variable.
 
@@ -73,9 +73,9 @@ NXpeak
 
     .. index:: intensity (field)
 
-    **intensity**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_features, n_values]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+    **intensity**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_points, n_dependent]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
-      This array holds the intensity/count values at each position.
+      This array holds the intensity/count values of the fitted peak at each position.
 
   .. _/NXpeak/function-group:
 
@@ -85,25 +85,6 @@ NXpeak
 
         The functional form of the peak. This could be a Gaussian, Lorentzian,
         Voigt, etc.
-
-    .. _/NXpeak/function/FIT_REPEATED_PARAMETER-group:
-
-    **FIT_REPEATED_PARAMETER**: (optional) :ref:`NXfit_repeated_parameter` :ref:`⤆ </NXfit_function/FIT_REPEATED_PARAMETER-group>`
-
-
-      .. _/NXpeak/function/FIT_REPEATED_PARAMETER/parameter_units-field:
-
-      .. index:: parameter_units (field)
-
-      **parameter_units**: (optional) :ref:`NX_CHAR <NX_CHAR>` (Rank: 2, Dimensions: [n_features, n_values]) :ref:`⤆ </NXfit_function/FIT_REPEATED_PARAMETER/parameter_units-field>`
-
-
-      .. _/NXpeak/function/FIT_REPEATED_PARAMETER/values-field:
-
-      .. index:: values (field)
-
-      **values**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_features, n_values]) :ref:`⤆ </NXfit_function/FIT_REPEATED_PARAMETER/values-field>`
-
 
 
 Hypertext Anchors
@@ -117,9 +98,6 @@ attributes, and links defined in this class.
 * :ref:`/NXpeak/data/intensity-field </NXpeak/data/intensity-field>`
 * :ref:`/NXpeak/data/position-field </NXpeak/data/position-field>`
 * :ref:`/NXpeak/function-group </NXpeak/function-group>`
-* :ref:`/NXpeak/function/FIT_REPEATED_PARAMETER-group </NXpeak/function/FIT_REPEATED_PARAMETER-group>`
-* :ref:`/NXpeak/function/FIT_REPEATED_PARAMETER/parameter_units-field </NXpeak/function/FIT_REPEATED_PARAMETER/parameter_units-field>`
-* :ref:`/NXpeak/function/FIT_REPEATED_PARAMETER/values-field </NXpeak/function/FIT_REPEATED_PARAMETER/values-field>`
 * :ref:`/NXpeak/label-field </NXpeak/label-field>`
 * :ref:`/NXpeak/total_area-field </NXpeak/total_area-field>`
 

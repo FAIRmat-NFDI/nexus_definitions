@@ -25,7 +25,7 @@ NXfit
 
   **n_points**: Number of discretization points inside the fitting region.
 
-  **n_independent**: Number of independent axes for this fit procedure.
+  **n_dependent**: Number of dependent variables to be fitted (for multidimensional/multivariate fit.)
 
 **Groups cited**:
   :ref:`NXdata`, :ref:`NXfit_background`, :ref:`NXfit_function`, :ref:`NXpeak`
@@ -65,7 +65,7 @@ NXfit
       .. collapse:: Metric used to determine the goodness of fit. Examples include: ...
 
           Metric used to determine the goodness of fit. Examples include:
-          - :math:`\chi^2`, the standard deviation of the residuals
+          - :math:`\chi^2`, the squared sum of the sigma-weighted residuals
           - reduced :math:`\chi^2`:, :math:`\chi^2`: per degree of freedom
           - :math:`R^2`, the coefficient of determination
 
@@ -87,7 +87,7 @@ NXfit
 
     .. index:: input_independent (field)
 
-    **input_independent**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_independent, n_points]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+    **input_independent**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_points, n_dependent]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
       Independent axis for this fit procedure.
 
@@ -95,7 +95,7 @@ NXfit
 
     .. index:: envelope (field)
 
-    **envelope**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_independent, n_points]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+    **envelope**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_points, n_dependent]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
       .. collapse:: Resulting envelope of all NXpeak instances. ...
 
@@ -106,7 +106,7 @@ NXfit
 
     .. index:: residual (field)
 
-    **residual**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_independent, n_points]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+    **residual**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_points, n_dependent]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
       Difference between the envelope and the data to be fitted.
 

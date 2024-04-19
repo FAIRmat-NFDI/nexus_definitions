@@ -57,11 +57,11 @@
 <p><strong>Symbols</strong>:</p>
 <blockquote>
 <div><p>The symbols used in the schema to specify e.g. dimensions of arrays.</p>
-<p><strong>n_values</strong>: Number of discretization points at which the functional form of the peak has been evaluated.</p>
-<p><strong>n_features</strong>: Number of independent data axes to be fitted (for multidimensional fit.)</p>
+<p><strong>n_points</strong>: Number of discretization points at which the functional form of the peak has been evaluated.</p>
+<p><strong>n_dependent</strong>: Number of dependent variables to be fitted (for multidimensional/multivariate fit.)</p>
 </div></blockquote>
 <dl class="simple">
-<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a>, <a class="reference internal" href="NXfit_function.html#nxfit-function"><span class="std std-ref">NXfit_function</span></a>, <a class="reference internal" href="NXfit_repeated_parameter.html#nxfit-repeated-parameter"><span class="std std-ref">NXfit_repeated_parameter</span></a></p>
+<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a>, <a class="reference internal" href="NXfit_function.html#nxfit-function"><span class="std std-ref">NXfit_function</span></a></p>
 </dd>
 </dl>
 <p id="index-1"><strong>Structure</strong>:</p>
@@ -78,13 +78,13 @@ the peak represents/identifies.</p>
 </div></blockquote>
 <p id="nxpeak-data-group"><strong>data</strong>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a></p>
 <blockquote>
-<div><p id="index-4"><span id="nxpeak-data-position-field"></span><strong>position</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [n_features, n_values]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-4"><span id="nxpeak-data-position-field"></span><strong>position</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n_points]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>This axis holds the position values for the independent variable.</p>
 </div></blockquote>
-<p id="index-5"><span id="nxpeak-data-intensity-field"></span><strong>intensity</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [n_features, n_values]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-5"><span id="nxpeak-data-intensity-field"></span><strong>intensity</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [n_points, n_dependent]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p>This array holds the intensity/count values at each position.</p>
+<div><p>This array holds the intensity/count values of the fitted peak at each position.</p>
 </div></blockquote>
 </div></blockquote>
 <p id="nxpeak-function-group"><strong>function</strong>: (optional) <a class="reference internal" href="NXfit_function.html#nxfit-function"><span class="std std-ref">NXfit_function</span></a></p>
@@ -92,12 +92,7 @@ the peak represents/identifies.</p>
 <div><details class="summary-the-functional-form-of-the-peak-this-could-be-a-gaussian-lorentzian">
 <summary>The functional form of the peak. This could be a Gaussian, Lorentzian, ...</summary><p>The functional form of the peak. This could be a Gaussian, Lorentzian,
 Voigt, etc.</p>
-</details><p id="nxpeak-function-fit-repeated-parameter-group"><strong>FIT_REPEATED_PARAMETER</strong>: (optional) <a class="reference internal" href="NXfit_repeated_parameter.html#nxfit-repeated-parameter"><span class="std std-ref">NXfit_repeated_parameter</span></a> <a class="reference internal" href="NXfit_function.html#nxfit-function-fit-repeated-parameter-group"><span class="std std-ref">⤆</span></a></p>
-<blockquote>
-<div><p id="index-6"><span id="nxpeak-function-fit-repeated-parameter-parameter-units-field"></span><strong>parameter_units</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> (Rank: 2, Dimensions: [n_features, n_values]) <a class="reference internal" href="NXfit_function.html#nxfit-function-fit-repeated-parameter-parameter-units-field"><span class="std std-ref">⤆</span></a></p>
-<p id="index-7"><span id="nxpeak-function-fit-repeated-parameter-values-field"></span><strong>values</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [n_features, n_values]) <a class="reference internal" href="NXfit_function.html#nxfit-function-fit-repeated-parameter-values-field"><span class="std std-ref">⤆</span></a></p>
-</div></blockquote>
-</div></blockquote>
+</details></div></blockquote>
 </div></blockquote>
 <section id="hypertext-anchors">
 <h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
@@ -108,9 +103,6 @@ attributes, and links defined in this class.</p>
 <li><p><a class="reference internal" href="#nxpeak-data-intensity-field"><span class="std std-ref">/NXpeak/data/intensity-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxpeak-data-position-field"><span class="std std-ref">/NXpeak/data/position-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxpeak-function-group"><span class="std std-ref">/NXpeak/function-group</span></a></p></li>
-<li><p><a class="reference internal" href="#nxpeak-function-fit-repeated-parameter-group"><span class="std std-ref">/NXpeak/function/FIT_REPEATED_PARAMETER-group</span></a></p></li>
-<li><p><a class="reference internal" href="#nxpeak-function-fit-repeated-parameter-parameter-units-field"><span class="std std-ref">/NXpeak/function/FIT_REPEATED_PARAMETER/parameter_units-field</span></a></p></li>
-<li><p><a class="reference internal" href="#nxpeak-function-fit-repeated-parameter-values-field"><span class="std std-ref">/NXpeak/function/FIT_REPEATED_PARAMETER/values-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxpeak-label-field"><span class="std std-ref">/NXpeak/label-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxpeak-total-area-field"><span class="std std-ref">/NXpeak/total_area-field</span></a></p></li>
 </ul>
