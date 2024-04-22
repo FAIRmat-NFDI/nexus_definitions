@@ -26,5 +26,8 @@ such as spin- and time-resolution, near-ambient pressure conditions, dichroism, 
 
 Here's a list of application definitions related to photoemission spectroscopy:
 
-    :ref:`NXmpes`:
-       A universal application definition with minimal metadata requirements for describing all photoemission experiments.
+   :ref:`NXmpes`:
+      A universal application definition with minimal metadata requirements for describing all photoemission experiments.
+
+   :ref:`NXmpes_liquid`:
+      An appdef for mpes measurements with liquids (jets)

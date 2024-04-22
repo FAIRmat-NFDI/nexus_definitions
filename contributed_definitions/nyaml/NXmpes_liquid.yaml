@@ -1,0 +1,186 @@
+doc: |
+  This is the application definition for multidimensional photoelectron spectroscopy on liquids.
+  It extends the NXmpes application definition by metadata for characterizing liquidjet composition
+  and geometry.
+category: application
+NXmpes_liquid(NXmpes):
+  (NXentry):
+    definition:
+      \@version:
+      enumeration: ["NXmpes_liquid"]
+    (NXinstrument):
+      instrument_orientation(NXtransformations):
+        doc: |
+          Transformations describing base geometry in the experiment.
+          Usually defaults to the beam in z direction and gravity in -y direction.
+        exists: optional
+        analyzer_optical_axis(NX_NUMBER):
+          exists: recommended
+          doc: |
+            The coordinate system frame of the analyzer.
+            If no direction attribute is specified,
+            the optical axis of the analyzer follows the positive z-direction.
+          \@gravity:
+            doc: |
+              Direction of gravity in the analyzer coordinate system.
+          \@beam_direction:
+            doc: |
+              Direction of the photon beam in the analyzer coordinate system. 
+          \@direction:
+            doc: |
+              The direction of the analyzer optical axis.
+              If this is not specified the optical axis points
+              in the positive jet direction.
+              It is recommended to always specify the axis
+              direction explicitly (even for the default case).
+    (NXsample):
+      thickness(NX_FLOAT):
+        exists: recommended
+        unit: NX_LENGTH
+        doc: |
+          Thickness of the sample in normal direction to the surface that is probed,
+          e.g., diameter of capillary (round jets) or thickness of the leaf (flat jets).
+      flow_rate(NX_FLOAT):
+        exists: recommended
+        unit: NX_ANY
+        doc: |
+          Flow rate of the liquid into the chamber, i.e.,
+          through the microjet capillary (or in case of a flat jet: both capillaries).
+          Unit should be NX_VOLUME / NX_TIME.
+      shape(NX_CHAR):
+        enumeration: ["round", "flat"]
+      nozzle_material(NX_CHAR):
+        exists: recommended
+        doc: |
+          Material the microjet nozzle is made of
+          (users are encouraged to expand on that in group preparation_description).
+      temperature(NX_NUMBER):
+        exists: optional
+        doc: |
+          The temperature set for the liquid jet or the injection assembly.
+          Details may be added to the preparation description how this
+          temperature value is obtained
+          (whether a chiller unit was used, point of cooling, temperature reading etc.)
+          and where this value would be expected
+          (estimate for the jet assembly, the liquid prior to injection,
+          or at the interaction point taking into account evaporative cooling etc.).
+      gas_pressure(NX_NUMBER):
+        exists: optional
+        doc: |
+          Pressure reading in the interaction chamber under operation conditions.
+      depends_on:
+        exists: recommended
+        doc: |
+          Connects this liquidjet to its transformation chain.
+      liquidjet_orientation(NXtransformations):
+        doc: |
+          Transformations describing the transformation chain of the liquid jet flow direction
+          and optionally the flat jet normal. The vector of the major flow direction of the
+          liquid jet from the point of injection into the chamber.
+          Along the cylinder axis for single, cylindrical jets, and parallel to the leaf plane for flatjets.
+        jet_direction(NX_NUMBER):
+          doc: |
+            The coordinate system frame of the liquid jet direction.
+            If no direction attribute is specified,
+            the jet points in the positive z-direction.
+          unit: NX_ANGLE
+          \@gravity(NX_NUMBER):
+            doc: |
+              The direction of gravity in the coordinate system
+              of `jet_direction`.
+            exists: recommended
+            dimensions:
+              rank: 1
+              dim: [[1, 3]]
+          \@transformation_type(NX_CHAR):
+            enumeration: ["rotation"]
+          \@direction(NX_NUMBER):
+            doc: |
+              The direction of the liqud jet.
+              If this is not specified the jet points
+              in the positive jet direction.
+              It is recommended to always specify the jet
+              direction explicitly (even for the default case).
+            exists: recommended
+            dimensions:
+              rank: 1
+              dim: [[1, 3]]
+        leaf_normal(NX_NUMBER):
+          doc: |
+            Coordinate frame for the surface normal of the first leaf on the side of solvent #1.
+            If no direction is specified,
+            the surface leaf normal vector points in the positive z-direction.
+            The value of this field is the angle between the
+            analyzer optical axis and the leaf normal.
+            If you only want to collect the angle between the leaf normal
+            and the analyzer optical axis the `depends_on` attribute may be omitted.
+            If a transformation chain is provided (with the `depends_on` attribute)
+            it should depend on the analyzer optical axis or the jet direction depending
+            on the use case.
+          unit: NX_ANGLE
+          \@transformation_type:
+            enumeration: ["rotation"]
+          \@direction(NX_NUMBER):
+            doc: |
+              Direction of surface normal vector of the first leaf on the side of solvent #1.
+              If this is not specified it defaults to the positve z-direction which should
+              be parallel to the detection direction.
+              It is recommended to always specify the leaf normal direction
+              explicitly (even for the default case).
+            exists: recommended
+            dimensions:
+              rank: 1
+              dim: [[1, 3]]
+      solventSOLVENT(NXsample_component):
+        doc: |
+          Solvent substance of the liquid jet.
+          For flat jets, this group may appear more than once.
+          If a mixture of solvents is used,
+          the one with the highest mol fraction should be designated solvent,
+          and the other(s) solute(s) (see solute group).
+        description(NX_CHAR):
+          exists: recommended
+        name(NX_CHAR):
+        chemical_formula(NX_CHAR):
+          doc: |
+            Molecular or structural formula of the solvent.
+        chem_id_cas(NX_CHAR):
+          exists: recommended
+        ph_value(NX_FLOAT):
+          exists: optional
+          unit: NX_UNITLESS
+          doc: |
+            Measured pH value of the solution.
+        ph_adjustment(NX_BOOLEAN):
+          exists: optional
+          doc: |
+            Whether or not agents for pH adjustment were added to the solution.
+            In this case, users are encouraged to expand on that in preparation_description
+            or add a corresponding solute group.
+        mol_fraction(NX_FLOAT):
+          exists: optional
+          unit: NX_ANY
+          doc: |
+            Molarity of the solvent in the solution.
+            Unit should be 1 / NX_VOLUME.
+      soluteSOLUTE(NXsample_component):
+        doc: |
+          Solute substance solved in a given solvent.
+          This also accounts for multiple solutes if more than one is given.
+        description(NX_CHAR):
+          exists: recommended
+        name(NX_CHAR):
+        chemical_formula(NX_CHAR):
+          doc: |
+            Molecular or structural formula of the solute.
+        chem_id_cas(NX_CHAR):
+          exists: recommended
+        mol_fraction(NX_FLOAT):
+          exists: recommended
+          unit: NX_ANY
+          doc: |
+            Molarity of the solute in the solution.
+            Unit should be 1 / NX_VOLUME
+        solvent(NX_CHAR):
+          doc: |
+            Specifies the parent solvent entry of the solution.
