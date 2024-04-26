@@ -29,9 +29,9 @@ NXsource
   No symbol table
 
 **Groups cited**:
-  :ref:`NXdata`, :ref:`NXfabrication`, :ref:`NXgeometry`, :ref:`NXnote`, :ref:`NXoff_geometry`, :ref:`NXtransformations`
+  :ref:`NXaperture`, :ref:`NXdata`, :ref:`NXdeflector`, :ref:`NXfabrication`, :ref:`NXgeometry`, :ref:`NXlens_em`, :ref:`NXnote`, :ref:`NXoff_geometry`, :ref:`NXtransformations`
 
-.. index:: NXnote (base class); used in base class, NXdata (base class); used in base class, NXgeometry (base class); used in base class, NXfabrication (base class); used in base class, NXoff_geometry (base class); used in base class, NXtransformations (base class); used in base class
+.. index:: NXnote (base class); used in base class, NXdata (base class); used in base class, NXgeometry (base class); used in base class, NXaperture (base class); used in base class, NXdeflector (base class); used in base class, NXlens_em (base class); used in base class, NXfabrication (base class); used in base class, NXoff_geometry (base class); used in base class, NXtransformations (base class); used in base class
 
 **Structure**:
 
@@ -205,11 +205,11 @@ NXsource
 
   **energy**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} 
 
-    .. collapse:: Source energy. ...
+    .. collapse:: Source energy. Typically, this would be the energy of ...
 
-        Source energy.
-        For storage rings, this would be the particle beam energy.
-        For X-ray tubes, this would be the excitation voltage.
+        Source energy. Typically, this would be the energy of
+        the emitted beam. For storage rings, this would be
+        the particle beam energy.
 
   .. _/NXsource/current-field:
 
@@ -370,6 +370,38 @@ NXsource
         For pulsed sources, the pulse energy divided
         by the pulse duration
 
+  .. _/NXsource/anode_material-field:
+
+  .. index:: anode_material (field)
+
+  **anode_material**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+    Material of the anode (for X-ray tubes).
+
+  .. _/NXsource/filament_current-field:
+
+  .. index:: filament_current (field)
+
+  **filament_current**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_CURRENT <NX_CURRENT>`} 
+
+    Filament current (for X-ray tubes).
+
+  .. _/NXsource/emission_current-field:
+
+  .. index:: emission_current (field)
+
+  **emission_current**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_CURRENT <NX_CURRENT>`} 
+
+    Emission current of the generated beam.
+
+  .. _/NXsource/gas_pressure-field:
+
+  .. index:: gas_pressure (field)
+
+  **gas_pressure**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_PRESSURE <NX_PRESSURE>`} 
+
+    Gas pressure inside ionization source.
+
   .. _/NXsource/depends_on-field:
 
   .. index:: depends_on (field)
@@ -435,6 +467,24 @@ NXsource
 
     "Engineering" location of source.
 
+  .. _/NXsource/APERTURE-group:
+
+  **APERTURE**: (optional) :ref:`NXaperture` 
+
+    The size and position of an aperture inside the source.
+
+  .. _/NXsource/DEFLECTOR-group:
+
+  **DEFLECTOR**: (optional) :ref:`NXdeflector` 
+
+    Deflectors inside the source.
+
+  .. _/NXsource/LENS_EM-group:
+
+  **LENS_EM**: (optional) :ref:`NXlens_em` 
+
+    Individual electromagnetic lenses inside the source.
+
   .. _/NXsource/FABRICATION-group:
 
   **FABRICATION**: (optional) :ref:`NXfabrication` 
@@ -471,23 +521,30 @@ List of hypertext anchors for all groups, fields,
 attributes, and links defined in this class.
 
 
+* :ref:`/NXsource/anode_material-field </NXsource/anode_material-field>`
+* :ref:`/NXsource/APERTURE-group </NXsource/APERTURE-group>`
 * :ref:`/NXsource/bunch_distance-field </NXsource/bunch_distance-field>`
 * :ref:`/NXsource/bunch_length-field </NXsource/bunch_length-field>`
 * :ref:`/NXsource/bunch_pattern-group </NXsource/bunch_pattern-group>`
 * :ref:`/NXsource/bunch_pattern/title-field </NXsource/bunch_pattern/title-field>`
 * :ref:`/NXsource/current-field </NXsource/current-field>`
+* :ref:`/NXsource/DEFLECTOR-group </NXsource/DEFLECTOR-group>`
 * :ref:`/NXsource/depends_on-field </NXsource/depends_on-field>`
 * :ref:`/NXsource/distance-field </NXsource/distance-field>`
 * :ref:`/NXsource/distribution-group </NXsource/distribution-group>`
+* :ref:`/NXsource/emission_current-field </NXsource/emission_current-field>`
 * :ref:`/NXsource/emittance_x-field </NXsource/emittance_x-field>`
 * :ref:`/NXsource/emittance_y-field </NXsource/emittance_y-field>`
 * :ref:`/NXsource/energy-field </NXsource/energy-field>`
 * :ref:`/NXsource/FABRICATION-group </NXsource/FABRICATION-group>`
+* :ref:`/NXsource/filament_current-field </NXsource/filament_current-field>`
 * :ref:`/NXsource/flux-field </NXsource/flux-field>`
 * :ref:`/NXsource/frequency-field </NXsource/frequency-field>`
+* :ref:`/NXsource/gas_pressure-field </NXsource/gas_pressure-field>`
 * :ref:`/NXsource/geometry-group </NXsource/geometry-group>`
 * :ref:`/NXsource/last_fill-field </NXsource/last_fill-field>`
 * :ref:`/NXsource/last_fill@time-attribute </NXsource/last_fill@time-attribute>`
+* :ref:`/NXsource/LENS_EM-group </NXsource/LENS_EM-group>`
 * :ref:`/NXsource/mode-field </NXsource/mode-field>`
 * :ref:`/NXsource/name-field </NXsource/name-field>`
 * :ref:`/NXsource/name@short_name-attribute </NXsource/name@short_name-attribute>`
