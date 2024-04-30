@@ -41,9 +41,9 @@ NXopt
   **N_incident_angles**: Number of angles of incidence of the incident beam.
 
 **Groups cited**:
-  :ref:`NXactuator`, :ref:`NXaperture`, :ref:`NXbeam_device`, :ref:`NXbeam`, :ref:`NXcalibration`, :ref:`NXcoordinate_system_set`, :ref:`NXdata`, :ref:`NXdetector`, :ref:`NXentry`, :ref:`NXenvironment`, :ref:`NXfabrication`, :ref:`NXhistory`, :ref:`NXidentifier`, :ref:`NXinstrument`, :ref:`NXlens_opt`, :ref:`NXmanipulator`, :ref:`NXmonochromator`, :ref:`NXpid`, :ref:`NXprocess`, :ref:`NXprogram`, :ref:`NXresolution`, :ref:`NXsample`, :ref:`NXsensor`, :ref:`NXsource`, :ref:`NXsubentry`, :ref:`NXuser`, :ref:`NXwaveplate`
+  :ref:`NXactuator`, :ref:`NXbeam_device`, :ref:`NXbeam`, :ref:`NXcalibration`, :ref:`NXcoordinate_system_set`, :ref:`NXdata`, :ref:`NXdetector`, :ref:`NXentry`, :ref:`NXenvironment`, :ref:`NXfabrication`, :ref:`NXhistory`, :ref:`NXidentifier`, :ref:`NXinstrument`, :ref:`NXlens_opt`, :ref:`NXmanipulator`, :ref:`NXmonochromator`, :ref:`NXopt_window`, :ref:`NXpid`, :ref:`NXprocess`, :ref:`NXprogram`, :ref:`NXresolution`, :ref:`NXsample`, :ref:`NXsensor`, :ref:`NXsource`, :ref:`NXsubentry`, :ref:`NXuser`, :ref:`NXwaveplate`
 
-.. index:: NXentry (base class); used in application definition, NXidentifier (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXfabrication (base class); used in application definition, NXprogram (base class); used in application definition, NXcoordinate_system_set (base class); used in application definition, NXresolution (base class); used in application definition, NXsubentry (base class); used in application definition, NXdata (base class); used in application definition, NXbeam (base class); used in application definition, NXsource (base class); used in application definition, NXdetector (base class); used in application definition, NXmonochromator (base class); used in application definition, NXlens_opt (base class); used in application definition, NXwaveplate (base class); used in application definition, NXaperture (base class); used in application definition, NXprocess (base class); used in application definition, NXbeam_device (base class); used in application definition, NXmanipulator (base class); used in application definition, NXsensor (base class); used in application definition, NXactuator (base class); used in application definition, NXpid (base class); used in application definition, NXsample (base class); used in application definition, NXhistory (base class); used in application definition, NXenvironment (base class); used in application definition, NXcalibration (base class); used in application definition
+.. index:: NXentry (base class); used in application definition, NXidentifier (base class); used in application definition, NXcoordinate_system_set (base class); used in application definition, NXuser (base class); used in application definition, NXinstrument (base class); used in application definition, NXfabrication (base class); used in application definition, NXprogram (base class); used in application definition, NXresolution (base class); used in application definition, NXsubentry (base class); used in application definition, NXdata (base class); used in application definition, NXbeam (base class); used in application definition, NXsource (base class); used in application definition, NXdetector (base class); used in application definition, NXmonochromator (base class); used in application definition, NXlens_opt (base class); used in application definition, NXwaveplate (base class); used in application definition, NXopt_window (base class); used in application definition, NXbeam_device (base class); used in application definition, NXmanipulator (base class); used in application definition, NXsensor (base class); used in application definition, NXactuator (base class); used in application definition, NXpid (base class); used in application definition, NXsample (base class); used in application definition, NXhistory (base class); used in application definition, NXenvironment (base class); used in application definition, NXprocess (base class); used in application definition, NXcalibration (base class); used in application definition
 
 **Structure**:
 
@@ -145,7 +145,7 @@ NXopt
 
           Specify the type of the optical experiment.
 
-          Chose other if non of these methods are suitable. You may specify
+          Chose other if none of these methods are suitable. You may specify
           fundamental characteristics or properties in the experimental sub-type.
 
           Any of these values:
@@ -167,7 +167,7 @@ NXopt
 
     .. index:: experiment_sub_type (field)
 
-    **experiment_sub_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+    **experiment_sub_type**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
       .. collapse:: Specify a special property or characteristic of the experiment, which specif ...
 
@@ -180,12 +180,13 @@ NXopt
 
     .. index:: experiment_type_other (field)
 
-    **experiment_type_other**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+    **experiment_type_other**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-      .. collapse:: If "other" was selected in "experiment_type", specify the experiment here ...
+      .. collapse:: If "other" was selected in "experiment_type" and/or in "experiment_sub_type" ...
 
-          If "other" was selected in "experiment_type", specify the experiment here
-          with a free text name, which is knwon in the respective community of interest.
+          If "other" was selected in "experiment_type" and/or in "experiment_sub_type",
+          specify the experiment here with a free text name, which is knwon in the
+          respective community of interest.
 
     .. _/NXopt/ENTRY/experiment_identifier-group:
 
@@ -202,22 +203,31 @@ NXopt
 
       .. index:: service (field)
 
-      **service**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXidentifier/service-field>`
+      **service**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXidentifier/service-field>`
 
 
       .. _/NXopt/ENTRY/experiment_identifier/identifier-field:
 
       .. index:: identifier (field)
 
-      **identifier**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXidentifier/identifier-field>`
+      **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXidentifier/identifier-field>`
 
 
       .. _/NXopt/ENTRY/experiment_identifier/is_persistent-field:
 
       .. index:: is_persistent (field)
 
-      **is_persistent**: (required) :ref:`NX_BOOLEAN <NX_BOOLEAN>` :ref:`⤆ </NXidentifier/is_persistent-field>`
+      **is_persistent**: (optional) :ref:`NX_BOOLEAN <NX_BOOLEAN>` :ref:`⤆ </NXidentifier/is_persistent-field>`
 
+
+    .. _/NXopt/ENTRY/reference_frames-group:
+
+    **reference_frames**: (optional) :ref:`NXcoordinate_system_set` 
+
+      .. collapse:: Description of one or more coordinate systems that are specific to the ...
+
+          Description of one or more coordinate systems that are specific to the
+          experiment.
 
     .. _/NXopt/ENTRY/USER-group:
 
@@ -227,110 +237,11 @@ NXopt
 
           Contact information and eventually details of at persons who
           performed the measurements. This can be for example the principal
-          investigator or student.
+          investigator or student. Examples are: name, affiliation, address, telephone
+          number, email, role as well as identifiers such as orcid or similar. 
           It is recommended to add multiple users if relevant.
 
           Due to data privacy concerns, there is no minimum requirement.
-
-      .. _/NXopt/ENTRY/USER/name-field:
-
-      .. index:: name (field)
-
-      **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/name-field>`
-
-        Given (first) name and surname of the user.
-
-      .. _/NXopt/ENTRY/USER/affiliation-field:
-
-      .. index:: affiliation (field)
-
-      **affiliation**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/affiliation-field>`
-
-        .. collapse:: Name of the affiliation of the user at the point in time ...
-
-            Name of the affiliation of the user at the point in time
-            when the experiment was performed.
-
-      .. _/NXopt/ENTRY/USER/address-field:
-
-      .. index:: address (field)
-
-      **address**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/address-field>`
-
-        Postal address of the user's affiliation.
-
-      .. _/NXopt/ENTRY/USER/email-field:
-
-      .. index:: email (field)
-
-      **email**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/email-field>`
-
-        .. collapse:: Email address of the user at the point in time when the experiment ...
-
-            Email address of the user at the point in time when the experiment
-            was performed. Writing the most permanently used email is recommended.
-
-      .. _/NXopt/ENTRY/USER/orcid-field:
-
-      .. index:: orcid (field)
-
-      **orcid**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
-
-        Author ID defined by https://orcid.org/.
-
-      .. _/NXopt/ENTRY/USER/telephone_number-field:
-
-      .. index:: telephone_number (field)
-
-      **telephone_number**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/telephone_number-field>`
-
-        .. collapse:: (Business) (tele)phone number of the user at the point ...
-
-            (Business) (tele)phone number of the user at the point
-            in time when the experiment was performed.
-
-      .. _/NXopt/ENTRY/USER/role-field:
-
-      .. index:: role (field)
-
-      **role**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXuser/role-field>`
-
-        .. collapse:: Which role does the user have in the place and at the point ...
-
-            Which role does the user have in the place and at the point
-            in time when the experiment was performed? Technician operating
-            the setup, student, PhD-student, postdoc, principle investigator, or guest
-            are common examples.
-
-      .. _/NXopt/ENTRY/USER/identifier-group:
-
-      **identifier**: (recommended) :ref:`NXidentifier` :ref:`⤆ </NXuser/IDENTIFIER-group>`
-
-        .. collapse:: Service as another mean of identification of a user other than by its name ...
-
-            Service as another mean of identification of a user other than by its name.
-            Examples could be an ORCID or social media account of the user.
-
-        .. _/NXopt/ENTRY/USER/identifier/service-field:
-
-        .. index:: service (field)
-
-        **service**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXidentifier/service-field>`
-
-
-        .. _/NXopt/ENTRY/USER/identifier/identifier-field:
-
-        .. index:: identifier (field)
-
-        **identifier**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXidentifier/identifier-field>`
-
-
-        .. _/NXopt/ENTRY/USER/identifier/is_persistent-field:
-
-        .. index:: is_persistent (field)
-
-        **is_persistent**: (required) :ref:`NX_BOOLEAN <NX_BOOLEAN>` :ref:`⤆ </NXidentifier/is_persistent-field>`
-
 
     .. _/NXopt/ENTRY/INSTRUMENT-group:
 
@@ -508,14 +419,8 @@ NXopt
 
         .. index:: construction_year (field)
 
-        **construction_year**: (recommended) :ref:`NX_DATE_TIME <NX_DATE_TIME>` 
+        **construction_year**: (optional) :ref:`NX_DATE_TIME <NX_DATE_TIME>` :ref:`⤆ </NXfabrication/construction_year-field>`
 
-          .. collapse:: Datetime of setup's initial construction. This refers to the date of ...
-
-              Datetime of setup's initial construction. This refers to the date of
-              first measurement after new construction  or relocation of the setup.
-              Should be a ISO8601 date/time stamp. It is recommended to add an explicit time zone,
-              otherwise the local time zone is assumed per ISO8601.
 
       .. _/NXopt/ENTRY/INSTRUMENT/software_TYPE-group:
 
@@ -540,7 +445,7 @@ NXopt
 
           .. index:: version (field attribute)
 
-          **@version**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
+          **@version**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program@version-attribute>`
 
             .. collapse:: Either version with build number, commit hash, or description of a ...
 
@@ -560,15 +465,6 @@ NXopt
 
                 Description of the software by persistent resource, where the program,
                 code, script etc. can be found.
-
-      .. _/NXopt/ENTRY/INSTRUMENT/reference_frames-group:
-
-      **reference_frames**: (optional) :ref:`NXcoordinate_system_set` 
-
-        .. collapse:: Description of one or more coordinate systems that are specific to the ...
-
-            Description of one or more coordinate systems that are specific to the
-            experiment.
 
       .. _/NXopt/ENTRY/INSTRUMENT/wavelength_resolution-group:
 
@@ -607,7 +503,9 @@ NXopt
         .. collapse:: Pre-calibration of an arbitrary device of the instrumental setup, which ...
 
             Pre-calibration of an arbitrary device of the instrumental setup, which
-            has the name DEVICE. You can specify here at which point
+            has the name DEVICE. You can specify here how, at which time by which method
+            the calibration was done. As well the accuracy and a link to the calibration
+            dataset.
 
         .. _/NXopt/ENTRY/INSTRUMENT/instrument_calibration_DEVICE/device_path-field:
 
@@ -691,29 +589,29 @@ NXopt
 
             Beam characteristics between two beam_devices.
 
-            It is recommended, to at least define one incident and one detection beam.
-            If this beam is directly connected to an source, chose here the same
+            It is recommended to at least define one incident and one detection beam.
+            If this beam is directly connected to a source, chose here the same
             name appendix as for the NXsource (e.g. TYPE=532nm)
 
         .. _/NXopt/ENTRY/INSTRUMENT/beam_TYPE/incident_wavelength-field:
 
         .. index:: incident_wavelength (field)
 
-        **incident_wavelength**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_WAVELENGTH <NX_WAVELENGTH>`} :ref:`⤆ </NXbeam/incident_wavelength-field>`
+        **incident_wavelength**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
         .. _/NXopt/ENTRY/INSTRUMENT/beam_TYPE/incident_wavelength_spread-field:
 
         .. index:: incident_wavelength_spread (field)
 
-        **incident_wavelength_spread**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_WAVELENGTH <NX_WAVELENGTH>`} 
+        **incident_wavelength_spread**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` 
 
 
         .. _/NXopt/ENTRY/INSTRUMENT/beam_TYPE/incident_polarization-field:
 
         .. index:: incident_polarization (field)
 
-        **incident_polarization**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXbeam/incident_polarization-field>`
+        **incident_polarization**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXbeam/incident_polarization-field>`
 
 
         .. _/NXopt/ENTRY/INSTRUMENT/beam_TYPE/extent-field:
@@ -727,15 +625,18 @@ NXopt
 
         .. index:: associated_source (field)
 
-        **associated_source**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+        **associated_source**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-          .. collapse:: The path to a the source, which emitted this beam. ...
+          .. collapse:: The path to the source which emitted this beam. ...
 
-              The path to a the source, which emitted this beam.
-              Should be named with the same appendix as the source, e.g.,
-              for TYPE=532nmlaser, there should as well be
-              a NXsource named "source_532nmlaser" aside of this Beam
-              instance named "beam_532nmlaser"
+              The path to the source which emitted this beam.
+
+              Is recommended, if the previous optical element is a photon source.
+              In this way, the properties of the laser or light souce can be described
+              and associated.
+              The beam should be named with the same appendix as the source, e.g.,
+              for TYPE=532nmlaser, there should be both a NXsource named
+              "source_532nmlaser" and a NXbeam named "beam_532nmlaser".
 
               Example: /entry/instrument/source_532nmlaser
 
@@ -799,6 +700,12 @@ NXopt
 
             * ``X-ray Source``
 
+            * ``arc lamp``
+
+            * ``halogen lamp``
+
+            * ``LED``
+
             * ``other``
 
 
@@ -817,29 +724,6 @@ NXopt
         **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsource/name-field>`
 
 
-        .. _/NXopt/ENTRY/INSTRUMENT/source_TYPE/source_polarization-field:
-
-        .. index:: source_polarization (field)
-
-        **source_polarization**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
-
-          .. collapse:: The type of light polarization produced by the source. ...
-
-              The type of light polarization produced by the source.
-
-              Any of these values:
-
-                * ``linear``
-
-                * ``unpolarized``
-
-                * ``circular``
-
-                * ``elliptically``
-
-                * ``other``
-
-
         .. _/NXopt/ENTRY/INSTRUMENT/source_TYPE/associated_beam-field:
 
         .. index:: associated_beam (field)
@@ -851,7 +735,7 @@ NXopt
               The path to a beam emitted by this source.
               Should be named with the same appendix, e.g.,
               for TYPE=532nmlaser, there should as well be
-              a NXbeam named "beam_532nmlaser" aside of this source
+              a NXbeam named "beam_532nmlaser" together with this source
               instance named "source_532nmlaser"
 
               Example: /entry/instrument/beam_532nmlaser
@@ -864,8 +748,13 @@ NXopt
 
         .. _/NXopt/ENTRY/INSTRUMENT/source_TYPE/device_characteristics-group:
 
-        **device_characteristics**: (required) :ref:`NXdata` 
+        **device_characteristics**: (optional) :ref:`NXdata` 
 
+          .. collapse:: You may add here data which characterises the source in more detail, ...
+
+              You may add here data which characterises the source in more detail,
+              such as spectral power density, power dependency on line width, line-shape
+              of the laser line, etc.
 
       .. _/NXopt/ENTRY/INSTRUMENT/detector_TYPE-group:
 
@@ -907,11 +796,25 @@ NXopt
 
                 * ``Pyroelectric Detector``
 
+                * ``other``
+
+
+        .. _/NXopt/ENTRY/INSTRUMENT/detector_TYPE/detector_type_other-field:
+
+        .. index:: detector_type_other (field)
+
+        **detector_type_other**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+          Type of detector, if "other" was selected in "detector_type".
 
         .. _/NXopt/ENTRY/INSTRUMENT/detector_TYPE/device_characteristics-group:
 
-        **device_characteristics**: (required) :ref:`NXdata` :ref:`⤆ </NXdetector/DATA-group>`
+        **device_characteristics**: (optional) :ref:`NXdata` :ref:`⤆ </NXdetector/DATA-group>`
 
+          .. collapse:: You may add here data which characterizes the detector, such as quantum ...
+
+              You may add here data which characterizes the detector, such as quantum
+              efficiency as function of wavelength or angular dependency of intenty.
 
         .. _/NXopt/ENTRY/INSTRUMENT/detector_TYPE/device_information-group:
 
@@ -975,13 +878,90 @@ NXopt
 
         .. _/NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR/device_characteristics-group:
 
-        **device_characteristics**: (required) :ref:`NXdata` 
+        **device_characteristics**: (optional) :ref:`NXdata` 
+
+          .. collapse:: Characteristics of the monochromator as diffraction efficiency as  ...
+
+              Characteristics of the monochromator as diffraction efficiency as 
+              wavelength and polarization dependence
+
+        .. _/NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR/device_information-group:
+
+        **device_information**: (recommended) :ref:`NXfabrication` 
+
+
+          .. _/NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR/device_information/vendor-field:
+
+          .. index:: vendor (field)
+
+          **vendor**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/vendor-field>`
+
+
+          .. _/NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR/device_information/model-field:
+
+          .. index:: model (field)
+
+          **model**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/model-field>`
+
+
+          .. _/NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR/device_information/identifier-field:
+
+          .. index:: identifier (field)
+
+          **identifier**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfabrication/identifier-field>`
 
 
       .. _/NXopt/ENTRY/INSTRUMENT/LENS_OPT-group:
 
       **LENS_OPT**: (optional) :ref:`NXlens_opt` 
 
+        .. collapse:: This is the optical element used to focus or collect light. This may ...
+
+            This is the optical element used to focus or collect light. This may
+            be a genereic lens or microcope objectives which are used for the
+            Raman scattering process.
+
+        .. _/NXopt/ENTRY/INSTRUMENT/LENS_OPT/type-field:
+
+        .. index:: type (field)
+
+        **type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXlens_opt/type-field>`
+
+
+          Any of these values:
+
+            * ``objective``
+
+            * ``lens``
+
+            * ``glass fiber``
+
+            * ``none``
+
+            * ``other``
+
+
+        .. _/NXopt/ENTRY/INSTRUMENT/LENS_OPT/numerical_aperture-field:
+
+        .. index:: numerical_aperture (field)
+
+        **numerical_aperture**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
+
+          The numerical aperture of the used incident light optics.
+
+        .. _/NXopt/ENTRY/INSTRUMENT/LENS_OPT/magnification-field:
+
+        .. index:: magnification (field)
+
+        **magnification**: (required) :ref:`NX_FLOAT <NX_FLOAT>` 
+
+          Magnification of the lens.
+
+        .. _/NXopt/ENTRY/INSTRUMENT/LENS_OPT/device_information-group:
+
+        **device_information**: (recommended) :ref:`NXfabrication` 
+
+          Details about the optical component, if available.
 
         .. _/NXopt/ENTRY/INSTRUMENT/LENS_OPT/device_characteristics-group:
 
@@ -998,136 +978,150 @@ NXopt
         **device_characteristics**: (required) :ref:`NXdata` 
 
 
-      .. _/NXopt/ENTRY/INSTRUMENT/WINDOW-group:
+      .. _/NXopt/ENTRY/INSTRUMENT/OPT_WINDOW-group:
 
-      **WINDOW**: (optional) :ref:`NXaperture` :ref:`⤆ </NXinstrument/APERTURE-group>`
+      **OPT_WINDOW**: (required) :ref:`NXopt_window` 
 
-        .. collapse:: For environmental measurements, the environment (liquid, vapor ...
 
-            For environmental measurements, the environment (liquid, vapor
-            etc.) is enclosed in a cell, which has windows both in the
-            direction of the source (entry window) and the detector (exit
-            window) (looking from the sample). In case that the entry and exit
-            windows are not the same type and do not have the same properties,
-            use a second 'WINDOW(MXaperture)' field.
+      .. _/NXopt/ENTRY/INSTRUMENT/polfilter_TYPE-group:
 
-            The windows also add a phase shift to the light altering the
-            measured signal. This shift has to be corrected based on measuring
-            a known sample (reference sample) or the actual sample of interest
-            in the environmental cell. State if a window correction has been
-            performed in 'window_effects_corrected'. Reference data should be
-            considered as a separate experiment, and a link to the NeXus file
-            should be added in reference_data_link in measured_data.
+      **polfilter_TYPE**: (optional) :ref:`NXbeam_device` 
 
-            The window is considered to be a part of the sample stage but also
-            beam path. Hence, its position within the beam path should be
-            defined by the 'depends_on' field.
+        .. collapse:: polarization filter to prepare light to be measured or to be incident  ...
 
-        .. _/NXopt/ENTRY/INSTRUMENT/WINDOW/window_effects_corrected-field:
+            polarization filter to prepare light to be measured or to be incident 
+            on the sample.
+            Genereric polarization filter porperties may be implemented via NXfilter_pol
+            at a later stage.
 
-        .. index:: window_effects_corrected (field)
+        .. _/NXopt/ENTRY/INSTRUMENT/polfilter_TYPE/filter_mechanism-field:
 
-        **window_effects_corrected**: (required) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
+        .. index:: filter_mechanism (field)
 
-          .. collapse:: Was a window correction performed? If 'True' describe the window ...
+        **filter_mechanism**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-              Was a window correction performed? If 'True' describe the window
-              correction procedure in 'window_correction/procedure'.
+          .. collapse:: Physical principle of the polarization filter used to create a ...
 
-        .. _/NXopt/ENTRY/INSTRUMENT/WINDOW/material-field:
-
-        .. index:: material (field)
-
-        **material**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXaperture/material-field>`
-
-          .. collapse:: The material of the window. ...
-
-              The material of the window.
+              Physical principle of the polarization filter used to create a
+              defined incident or scattered light state.
 
               Any of these values:
 
-                * ``quartz``
+                * ``Polarization by Fresnel reflection``
 
-                * ``diamond``
+                * ``Birefringent polarizers``
 
-                * ``calcium fluoride``
+                * ``Thin film polarizers``
 
-                * ``zinc selenide``
-
-                * ``thallium bromoiodide``
-
-                * ``alkali halide compound``
-
-                * ``Mylar``
+                * ``Wire-grid polarizers``
 
                 * ``other``
 
 
-        .. _/NXopt/ENTRY/INSTRUMENT/WINDOW/material_other-field:
+        .. _/NXopt/ENTRY/INSTRUMENT/polfilter_TYPE/specific_polarization_filter_type-field:
 
-        .. index:: material_other (field)
+        .. index:: specific_polarization_filter_type (field)
 
-        **material_other**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+        **specific_polarization_filter_type**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-          If you specified 'other' as material, decsribe here what it is.
+          .. collapse:: Specific name or type of the polarizer used. ...
 
-        .. _/NXopt/ENTRY/INSTRUMENT/WINDOW/thickness-field:
+              Specific name or type of the polarizer used.
 
-        .. index:: thickness (field)
+              Free text, for example: Glan-Thompson, Glan-Taylor, Rochon Prism, Wollaston
+              Polarizer...
 
-        **thickness**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
+        .. _/NXopt/ENTRY/INSTRUMENT/polfilter_TYPE/device_information-group:
 
-          Thickness of the window.
+        **device_information**: (required) :ref:`NXfabrication` 
 
-        .. _/NXopt/ENTRY/INSTRUMENT/WINDOW/orientation_angle-field:
 
-        .. index:: orientation_angle (field)
+      .. _/NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE-group:
 
-        **orientation_angle**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
+      **spectralfilter_TYPE**: (optional) :ref:`NXbeam_device` 
 
-          .. collapse:: Angle of the window normal (outer) vs. the substrate normal ...
+        .. collapse:: Spectral filter used to modify properties of the scattered or incident lig ...
 
-              Angle of the window normal (outer) vs. the substrate normal
-              (similar to the angle of incidence).
+            Spectral filter used to modify properties of the scattered or incident light.
+            Genereric spectral filter porperties may be implemented via NXfilter_spec
+            at a later stage.
 
-        .. _/NXopt/ENTRY/INSTRUMENT/WINDOW/window_correction-group:
+        .. _/NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE/filter_type-field:
 
-        **window_correction**: (optional) :ref:`NXprocess` 
+        .. index:: filter_type (field)
 
-          .. collapse:: Was a window correction performed? If 'True' describe the ...
+        **filter_type**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-              Was a window correction performed? If 'True' describe the
-              window correction procedure in ''
+          .. collapse:: Type of laserline filter used to supress the laser, if measurements ...
 
-          .. _/NXopt/ENTRY/INSTRUMENT/WINDOW/window_correction/procedure-field:
+              Type of laserline filter used to supress the laser, if measurements
+              close to the laserline are performed.
 
-          .. index:: procedure (field)
+              Any of these values:
 
-          **procedure**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+                * ``long-pass filter``
 
-            .. collapse:: Describe when (before or after the main measurement + time ...
+                * ``short-pass filter``
 
-                Describe when (before or after the main measurement + time
-                stamp in 'date') and how the window effects have been
-                corrected, i.e. either mathematically or by performing a
-                reference measurement. In the latter case, provide the link to
-                to the reference data in 'reference_data_link'.
+                * ``Notch filter``
 
-          .. _/NXopt/ENTRY/INSTRUMENT/WINDOW/window_correction/reference_data_link-field:
+                * ``reflection filter``
 
-          .. index:: reference_data_link (field)
+                * ``neutral density filter``
 
-          **reference_data_link**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+                * ``other``
 
-            .. collapse:: Link to the NeXus file which describes the reference data if a ...
 
-                Link to the NeXus file which describes the reference data if a
-                reference measurement for window correction was performed.
-                Ideally, the reference measurement was performed on a reference
-                sample and on the same sample, and using the same conditions as
-                for the actual measurement with and without windows. It should
-                have been conducted as close in time to the actual measurement
-                as possible.
+        .. _/NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE/intended_use-field:
+
+        .. index:: intended_use (field)
+
+        **intended_use**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+          .. collapse:: Type of laserline filter used to supress the laser, if measurements ...
+
+              Type of laserline filter used to supress the laser, if measurements
+              close to the laserline are performed.
+
+              Any of these values:
+
+                * ``laser line cleanup``
+
+                * ``raylight line removal``
+
+                * ``spectral filtering``
+
+                * ``intensity manipulation``
+
+                * ``other``
+
+
+        .. _/NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE/filter_characteristics-group:
+
+        **filter_characteristics**: (optional) :ref:`NXdata` 
+
+          .. collapse:: Properties of the spectral filter such as wavelength dependent Transmiss ...
+
+              Properties of the spectral filter such as wavelength dependent Transmission
+              or reflectivity.
+
+          .. _/NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE/filter_characteristics@characteristics_type-attribute:
+
+          .. index:: characteristics_type (group attribute)
+
+          **@characteristics_type**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+            .. collapse:: Which property is used to form the spectral properties of light, ...
+
+                Which property is used to form the spectral properties of light,
+                i.e. transmission or reflection properties.
+
+                Any of these values: ``transmission`` | ``reflection``
+
+        .. _/NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE/device_information-group:
+
+        **device_information**: (required) :ref:`NXfabrication` 
+
 
       .. _/NXopt/ENTRY/INSTRUMENT/BEAM_DEVICE-group:
 
@@ -1314,14 +1308,14 @@ NXopt
 
           Obligatory value: ``temperature``
 
-        .. _/NXopt/ENTRY/INSTRUMENT/temp_control_TYPE/cryo_or_heater-field:
+        .. _/NXopt/ENTRY/INSTRUMENT/temp_control_TYPE/cooler_or_heater-field:
 
-        .. index:: cryo_or_heater (field)
+        .. index:: cooler_or_heater (field)
 
-        **cryo_or_heater**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+        **cooler_or_heater**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
 
-          Any of these values: ``cryostat`` | ``heater``
+          Any of these values: ``cooler`` | ``heater``
 
         .. _/NXopt/ENTRY/INSTRUMENT/temp_control_TYPE/type-field:
 
@@ -1344,89 +1338,6 @@ NXopt
 
 
         .. _/NXopt/ENTRY/INSTRUMENT/temp_control_TYPE/device_information-group:
-
-        **device_information**: (required) :ref:`NXfabrication` :ref:`⤆ </NXactuator/FABRICATION-group>`
-
-
-      .. _/NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR-group:
-
-      **PARAMETER_SENSOR**: (recommended) :ref:`NXsensor` :ref:`⤆ </NXinstrument/SENSOR-group>`
-
-
-        .. _/NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR/name-field:
-
-        .. index:: name (field)
-
-        **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsensor/name-field>`
-
-
-        .. _/NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR/measurement-field:
-
-        .. index:: measurement (field)
-
-        **measurement**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsensor/measurement-field>`
-
-
-        .. _/NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR/type-field:
-
-        .. index:: type (field)
-
-        **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsensor/type-field>`
-
-
-        .. _/NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR/value-field:
-
-        .. index:: value (field)
-
-        **value**: (required) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXsensor/value-field>`
-
-
-        .. _/NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR/device_information-group:
-
-        **device_information**: (required) :ref:`NXfabrication` :ref:`⤆ </NXsensor/FABRICATION-group>`
-
-
-      .. _/NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR-group:
-
-      **PARAMETER_ACTUATOR**: (optional) :ref:`NXactuator` :ref:`⤆ </NXinstrument/ACTUATOR-group>`
-
-        Control of arbitrary parameter - compare to temperature above.
-
-        .. _/NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/name-field:
-
-        .. index:: name (field)
-
-        **name**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXactuator/name-field>`
-
-
-        .. _/NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/physical_quantity-field:
-
-        .. index:: physical_quantity (field)
-
-        **physical_quantity**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXactuator/physical_quantity-field>`
-
-
-        .. _/NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/type-field:
-
-        .. index:: type (field)
-
-        **type**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXactuator/type-field>`
-
-          Hardware used for actuation
-
-        .. _/NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/PID-group:
-
-        **PID**: (required) :ref:`NXpid` :ref:`⤆ </NXactuator/PID-group>`
-
-
-          .. _/NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/PID/setpoint-field:
-
-          .. index:: setpoint (field)
-
-          **setpoint**: (recommended) :ref:`NX_FLOAT <NX_FLOAT>` :ref:`⤆ </NXactuator/PID/setpoint-field>`
-
-
-        .. _/NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/device_information-group:
 
         **device_information**: (required) :ref:`NXfabrication` :ref:`⤆ </NXactuator/FABRICATION-group>`
 
@@ -1459,7 +1370,7 @@ NXopt
 
       **sample_id**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsample/sample_id-field>`
 
-        Uniquely identifying name of the sample.
+        Uniquely identifying ID of the sample.
 
       .. _/NXopt/ENTRY/SAMPLE/physical_form-field:
 
@@ -1480,32 +1391,6 @@ NXopt
       **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsample/description-field>`
 
         Free text description of the sample.
-
-      .. _/NXopt/ENTRY/SAMPLE/situation-field:
-
-      .. index:: situation (field)
-
-      **situation**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXsample/situation-field>`
-
-
-        Any of these values:
-
-          * ``air``
-
-          * ``vacuum``
-
-          * ``inert atmosphere``
-
-          * ``oxidising atmosphere``
-
-          * ``reducing atmosphere``
-
-          * ``sealed can``
-
-          * ``water``
-
-          * ``other``
-
 
       .. _/NXopt/ENTRY/SAMPLE/chemical_formula-field:
 
@@ -1620,17 +1505,6 @@ NXopt
 
         A set of activities that occurred to the sample prior to/during the experiment.
 
-        .. _/NXopt/ENTRY/SAMPLE/history/history_id-group:
-
-        **history_id**: (required) :ref:`NXidentifier` 
-
-          .. collapse:: A reference to the location or a unique (globally ...
-
-              A reference to the location or a unique (globally
-              persistent) identifier (e.g.) of e.g. another file which gives
-              as many as possible details of the material, its microstructure,
-              and its thermo-chemo-mechanical processing/preparation history.
-
       .. _/NXopt/ENTRY/SAMPLE/temperature-group:
 
       **temperature**: (recommended) :ref:`NXenvironment` 
@@ -1655,13 +1529,13 @@ NXopt
               Device to heat the sample.
               This should be a link to /entry/instrument/manipulator/sample_heater.
 
-        .. _/NXopt/ENTRY/SAMPLE/temperature/cryostat-group:
+        .. _/NXopt/ENTRY/SAMPLE/temperature/sample_cooler-group:
 
-        **cryostat**: (optional) :ref:`NXactuator` :ref:`⤆ </NXenvironment/ACTUATOR-group>`
+        **sample_cooler**: (optional) :ref:`NXactuator` :ref:`⤆ </NXenvironment/ACTUATOR-group>`
 
-          .. collapse:: Cryostat for cooling the sample. ...
+          .. collapse:: Device for cooling the sample (Cryostat, Airflow cooler, etc.). ...
 
-              Cryostat for cooling the sample.
+              Device for cooling the sample (Cryostat, Airflow cooler, etc.).
               This should be a link to /entry/instrument/manipulator/cryostat.
 
       .. _/NXopt/ENTRY/SAMPLE/ENVIRONMENT-group:
@@ -1674,14 +1548,30 @@ NXopt
             and controlled by a device. Examples are pressure, voltage, magnetic field etc.
             Similar to the temperautre description of the sample.
 
-        .. _/NXopt/ENTRY/SAMPLE/ENVIRONMENT/SENSOR-group:
+        .. _/NXopt/ENTRY/SAMPLE/ENVIRONMENT/sample_medium-field:
 
-        **SENSOR**: (optional) :ref:`NXsensor` :ref:`⤆ </NXenvironment/SENSOR-group>`
+        .. index:: sample_medium (field)
+
+        **sample_medium**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
 
-        .. _/NXopt/ENTRY/SAMPLE/ENVIRONMENT/ACTUATOR-group:
+          Any of these values:
 
-        **ACTUATOR**: (optional) :ref:`NXactuator` :ref:`⤆ </NXenvironment/ACTUATOR-group>`
+            * ``air``
+
+            * ``vacuum``
+
+            * ``inert atmosphere``
+
+            * ``oxidising atmosphere``
+
+            * ``reducing atmosphere``
+
+            * ``sealed can``
+
+            * ``water``
+
+            * ``other``
 
 
     .. _/NXopt/ENTRY/DATA-group:
@@ -1858,6 +1748,7 @@ attributes, and links defined in this class.
 * :ref:`/NXopt/ENTRY/INSTRUMENT/detector_TYPE-group </NXopt/ENTRY/INSTRUMENT/detector_TYPE-group>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/detector_TYPE/detector_channel_type-field </NXopt/ENTRY/INSTRUMENT/detector_TYPE/detector_channel_type-field>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/detector_TYPE/detector_type-field </NXopt/ENTRY/INSTRUMENT/detector_TYPE/detector_type-field>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/detector_TYPE/detector_type_other-field </NXopt/ENTRY/INSTRUMENT/detector_TYPE/detector_type_other-field>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/detector_TYPE/device_characteristics-group </NXopt/ENTRY/INSTRUMENT/detector_TYPE/device_characteristics-group>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/detector_TYPE/device_information-group </NXopt/ENTRY/INSTRUMENT/detector_TYPE/device_information-group>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/detector_TYPE/device_information/identifier-field </NXopt/ENTRY/INSTRUMENT/detector_TYPE/device_information/identifier-field>`
@@ -1881,22 +1772,21 @@ attributes, and links defined in this class.
 * :ref:`/NXopt/ENTRY/INSTRUMENT/lateral_focal_point_offset-field </NXopt/ENTRY/INSTRUMENT/lateral_focal_point_offset-field>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/LENS_OPT-group </NXopt/ENTRY/INSTRUMENT/LENS_OPT-group>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/LENS_OPT/device_characteristics-group </NXopt/ENTRY/INSTRUMENT/LENS_OPT/device_characteristics-group>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/LENS_OPT/device_information-group </NXopt/ENTRY/INSTRUMENT/LENS_OPT/device_information-group>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/LENS_OPT/magnification-field </NXopt/ENTRY/INSTRUMENT/LENS_OPT/magnification-field>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/LENS_OPT/numerical_aperture-field </NXopt/ENTRY/INSTRUMENT/LENS_OPT/numerical_aperture-field>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/LENS_OPT/type-field </NXopt/ENTRY/INSTRUMENT/LENS_OPT/type-field>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR-group </NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR-group>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR/device_characteristics-group </NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR/device_characteristics-group>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR-group </NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR-group>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/device_information-group </NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/device_information-group>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/name-field </NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/name-field>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/physical_quantity-field </NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/physical_quantity-field>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/PID-group </NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/PID-group>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/PID/setpoint-field </NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/PID/setpoint-field>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/type-field </NXopt/ENTRY/INSTRUMENT/PARAMETER_ACTUATOR/type-field>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR-group </NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR-group>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR/device_information-group </NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR/device_information-group>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR/measurement-field </NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR/measurement-field>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR/name-field </NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR/name-field>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR/type-field </NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR/type-field>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR/value-field </NXopt/ENTRY/INSTRUMENT/PARAMETER_SENSOR/value-field>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/reference_frames-group </NXopt/ENTRY/INSTRUMENT/reference_frames-group>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR/device_information-group </NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR/device_information-group>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR/device_information/identifier-field </NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR/device_information/identifier-field>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR/device_information/model-field </NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR/device_information/model-field>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR/device_information/vendor-field </NXopt/ENTRY/INSTRUMENT/MONOCHROMATOR/device_information/vendor-field>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/OPT_WINDOW-group </NXopt/ENTRY/INSTRUMENT/OPT_WINDOW-group>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/polfilter_TYPE-group </NXopt/ENTRY/INSTRUMENT/polfilter_TYPE-group>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/polfilter_TYPE/device_information-group </NXopt/ENTRY/INSTRUMENT/polfilter_TYPE/device_information-group>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/polfilter_TYPE/filter_mechanism-field </NXopt/ENTRY/INSTRUMENT/polfilter_TYPE/filter_mechanism-field>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/polfilter_TYPE/specific_polarization_filter_type-field </NXopt/ENTRY/INSTRUMENT/polfilter_TYPE/specific_polarization_filter_type-field>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/sample_medium_refractive_indices-field </NXopt/ENTRY/INSTRUMENT/sample_medium_refractive_indices-field>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/sample_stage-group </NXopt/ENTRY/INSTRUMENT/sample_stage-group>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/sample_stage/beam_sample_relation-field </NXopt/ENTRY/INSTRUMENT/sample_stage/beam_sample_relation-field>`
@@ -1913,11 +1803,16 @@ attributes, and links defined in this class.
 * :ref:`/NXopt/ENTRY/INSTRUMENT/source_TYPE/device_characteristics-group </NXopt/ENTRY/INSTRUMENT/source_TYPE/device_characteristics-group>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/source_TYPE/device_information-group </NXopt/ENTRY/INSTRUMENT/source_TYPE/device_information-group>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/source_TYPE/name-field </NXopt/ENTRY/INSTRUMENT/source_TYPE/name-field>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/source_TYPE/source_polarization-field </NXopt/ENTRY/INSTRUMENT/source_TYPE/source_polarization-field>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/source_TYPE/type-field </NXopt/ENTRY/INSTRUMENT/source_TYPE/type-field>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/source_TYPE/type_other-field </NXopt/ENTRY/INSTRUMENT/source_TYPE/type_other-field>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE-group </NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE-group>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE/device_information-group </NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE/device_information-group>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE/filter_characteristics-group </NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE/filter_characteristics-group>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE/filter_characteristics@characteristics_type-attribute </NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE/filter_characteristics@characteristics_type-attribute>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE/filter_type-field </NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE/filter_type-field>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE/intended_use-field </NXopt/ENTRY/INSTRUMENT/spectralfilter_TYPE/intended_use-field>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/temp_control_TYPE-group </NXopt/ENTRY/INSTRUMENT/temp_control_TYPE-group>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/temp_control_TYPE/cryo_or_heater-field </NXopt/ENTRY/INSTRUMENT/temp_control_TYPE/cryo_or_heater-field>`
+* :ref:`/NXopt/ENTRY/INSTRUMENT/temp_control_TYPE/cooler_or_heater-field </NXopt/ENTRY/INSTRUMENT/temp_control_TYPE/cooler_or_heater-field>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/temp_control_TYPE/device_information-group </NXopt/ENTRY/INSTRUMENT/temp_control_TYPE/device_information-group>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/temp_control_TYPE/name-field </NXopt/ENTRY/INSTRUMENT/temp_control_TYPE/name-field>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/temp_control_TYPE/physical_quantity-field </NXopt/ENTRY/INSTRUMENT/temp_control_TYPE/physical_quantity-field>`
@@ -1936,37 +1831,26 @@ attributes, and links defined in this class.
 * :ref:`/NXopt/ENTRY/INSTRUMENT/wavelength_resolution/type-field </NXopt/ENTRY/INSTRUMENT/wavelength_resolution/type-field>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/WAVEPLATE-group </NXopt/ENTRY/INSTRUMENT/WAVEPLATE-group>`
 * :ref:`/NXopt/ENTRY/INSTRUMENT/WAVEPLATE/device_characteristics-group </NXopt/ENTRY/INSTRUMENT/WAVEPLATE/device_characteristics-group>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/WINDOW-group </NXopt/ENTRY/INSTRUMENT/WINDOW-group>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/WINDOW/material-field </NXopt/ENTRY/INSTRUMENT/WINDOW/material-field>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/WINDOW/material_other-field </NXopt/ENTRY/INSTRUMENT/WINDOW/material_other-field>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/WINDOW/orientation_angle-field </NXopt/ENTRY/INSTRUMENT/WINDOW/orientation_angle-field>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/WINDOW/thickness-field </NXopt/ENTRY/INSTRUMENT/WINDOW/thickness-field>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/WINDOW/window_correction-group </NXopt/ENTRY/INSTRUMENT/WINDOW/window_correction-group>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/WINDOW/window_correction/procedure-field </NXopt/ENTRY/INSTRUMENT/WINDOW/window_correction/procedure-field>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/WINDOW/window_correction/reference_data_link-field </NXopt/ENTRY/INSTRUMENT/WINDOW/window_correction/reference_data_link-field>`
-* :ref:`/NXopt/ENTRY/INSTRUMENT/WINDOW/window_effects_corrected-field </NXopt/ENTRY/INSTRUMENT/WINDOW/window_effects_corrected-field>`
 * :ref:`/NXopt/ENTRY/measurement_data_calibration-group </NXopt/ENTRY/measurement_data_calibration-group>`
 * :ref:`/NXopt/ENTRY/measurement_data_calibration/wavelength_calibration-group </NXopt/ENTRY/measurement_data_calibration/wavelength_calibration-group>`
 * :ref:`/NXopt/ENTRY/measurement_data_calibration/wavelength_calibration/calibrated_axis-field </NXopt/ENTRY/measurement_data_calibration/wavelength_calibration/calibrated_axis-field>`
+* :ref:`/NXopt/ENTRY/reference_frames-group </NXopt/ENTRY/reference_frames-group>`
 * :ref:`/NXopt/ENTRY/SAMPLE-group </NXopt/ENTRY/SAMPLE-group>`
 * :ref:`/NXopt/ENTRY/SAMPLE/atom_types-field </NXopt/ENTRY/SAMPLE/atom_types-field>`
 * :ref:`/NXopt/ENTRY/SAMPLE/chemical_formula-field </NXopt/ENTRY/SAMPLE/chemical_formula-field>`
 * :ref:`/NXopt/ENTRY/SAMPLE/description-field </NXopt/ENTRY/SAMPLE/description-field>`
 * :ref:`/NXopt/ENTRY/SAMPLE/ENVIRONMENT-group </NXopt/ENTRY/SAMPLE/ENVIRONMENT-group>`
-* :ref:`/NXopt/ENTRY/SAMPLE/ENVIRONMENT/ACTUATOR-group </NXopt/ENTRY/SAMPLE/ENVIRONMENT/ACTUATOR-group>`
-* :ref:`/NXopt/ENTRY/SAMPLE/ENVIRONMENT/SENSOR-group </NXopt/ENTRY/SAMPLE/ENVIRONMENT/SENSOR-group>`
+* :ref:`/NXopt/ENTRY/SAMPLE/ENVIRONMENT/sample_medium-field </NXopt/ENTRY/SAMPLE/ENVIRONMENT/sample_medium-field>`
 * :ref:`/NXopt/ENTRY/SAMPLE/history-group </NXopt/ENTRY/SAMPLE/history-group>`
-* :ref:`/NXopt/ENTRY/SAMPLE/history/history_id-group </NXopt/ENTRY/SAMPLE/history/history_id-group>`
 * :ref:`/NXopt/ENTRY/SAMPLE/layer_structure-field </NXopt/ENTRY/SAMPLE/layer_structure-field>`
 * :ref:`/NXopt/ENTRY/SAMPLE/physical_form-field </NXopt/ENTRY/SAMPLE/physical_form-field>`
 * :ref:`/NXopt/ENTRY/SAMPLE/preparation_date-field </NXopt/ENTRY/SAMPLE/preparation_date-field>`
 * :ref:`/NXopt/ENTRY/SAMPLE/sample_id-field </NXopt/ENTRY/SAMPLE/sample_id-field>`
 * :ref:`/NXopt/ENTRY/SAMPLE/sample_name-field </NXopt/ENTRY/SAMPLE/sample_name-field>`
 * :ref:`/NXopt/ENTRY/SAMPLE/sample_orientation-field </NXopt/ENTRY/SAMPLE/sample_orientation-field>`
-* :ref:`/NXopt/ENTRY/SAMPLE/situation-field </NXopt/ENTRY/SAMPLE/situation-field>`
 * :ref:`/NXopt/ENTRY/SAMPLE/substrate-field </NXopt/ENTRY/SAMPLE/substrate-field>`
 * :ref:`/NXopt/ENTRY/SAMPLE/temperature-group </NXopt/ENTRY/SAMPLE/temperature-group>`
-* :ref:`/NXopt/ENTRY/SAMPLE/temperature/cryostat-group </NXopt/ENTRY/SAMPLE/temperature/cryostat-group>`
+* :ref:`/NXopt/ENTRY/SAMPLE/temperature/sample_cooler-group </NXopt/ENTRY/SAMPLE/temperature/sample_cooler-group>`
 * :ref:`/NXopt/ENTRY/SAMPLE/temperature/sample_heater-group </NXopt/ENTRY/SAMPLE/temperature/sample_heater-group>`
 * :ref:`/NXopt/ENTRY/SAMPLE/temperature/temperature_sensor-group </NXopt/ENTRY/SAMPLE/temperature/temperature_sensor-group>`
 * :ref:`/NXopt/ENTRY/SAMPLE/thickness-field </NXopt/ENTRY/SAMPLE/thickness-field>`
@@ -1974,17 +1858,6 @@ attributes, and links defined in this class.
 * :ref:`/NXopt/ENTRY/start_time-field </NXopt/ENTRY/start_time-field>`
 * :ref:`/NXopt/ENTRY/title-field </NXopt/ENTRY/title-field>`
 * :ref:`/NXopt/ENTRY/USER-group </NXopt/ENTRY/USER-group>`
-* :ref:`/NXopt/ENTRY/USER/address-field </NXopt/ENTRY/USER/address-field>`
-* :ref:`/NXopt/ENTRY/USER/affiliation-field </NXopt/ENTRY/USER/affiliation-field>`
-* :ref:`/NXopt/ENTRY/USER/email-field </NXopt/ENTRY/USER/email-field>`
-* :ref:`/NXopt/ENTRY/USER/identifier-group </NXopt/ENTRY/USER/identifier-group>`
-* :ref:`/NXopt/ENTRY/USER/identifier/identifier-field </NXopt/ENTRY/USER/identifier/identifier-field>`
-* :ref:`/NXopt/ENTRY/USER/identifier/is_persistent-field </NXopt/ENTRY/USER/identifier/is_persistent-field>`
-* :ref:`/NXopt/ENTRY/USER/identifier/service-field </NXopt/ENTRY/USER/identifier/service-field>`
-* :ref:`/NXopt/ENTRY/USER/name-field </NXopt/ENTRY/USER/name-field>`
-* :ref:`/NXopt/ENTRY/USER/orcid-field </NXopt/ENTRY/USER/orcid-field>`
-* :ref:`/NXopt/ENTRY/USER/role-field </NXopt/ENTRY/USER/role-field>`
-* :ref:`/NXopt/ENTRY/USER/telephone_number-field </NXopt/ENTRY/USER/telephone_number-field>`
 
 **NXDL Source**:
   https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXopt.nxdl.xml

@@ -17,9 +17,16 @@ NXellipsometry
 
 **Description**:
 
-  .. collapse:: Ellipsometry, complex systems, up to variable angle spectroscopy. ...
+  .. collapse:: This is the application definition describing ellipsometry experiments. ...
 
-      Ellipsometry, complex systems, up to variable angle spectroscopy.
+      This is the application definition describing ellipsometry experiments.
+
+      Such experiments may be as simple as identifying how a reflected
+      beam of light with a single wavelength changes its polarization state,
+      to a variable angle spectroscopic ellipsometry experiment.
+
+      The application definition specifies optical spectroscopy (NXopt), by extending
+      the terms and setting specific requirements.
 
       Information on ellipsometry is provided, e.g. in:
 
@@ -60,22 +67,16 @@ NXellipsometry
 
   **N_spectrum**: Length of the spectrum array (e.g. wavelength or energy) of the measured data.
 
-  **N_sensors**: Number of sensors used to measure parameters that influence the sample, such as temperature or pressure.
-
   **N_measurements**: Number of measurements (1st dimension of measured_data array). This is equal to the number of parameters scanned. For example, if the experiment was performed at three different temperatures and two different pressures N_measurements = 2*3 = 6.
 
   **N_detection_angles**: Number of detection angles of the beam reflected or scattered off the sample.
 
   **N_incident_angles**: Number of angles of incidence of the incident beam.
 
-  **N_observables**: Number of observables that are saved in a measurement. e.g. one for intensity, reflectivity or transmittance, two for Psi and Delta etc. This is equal to the second dimension of the data array 'measured_data' and the number of column names.
-
-  **N_time**: Number of time points measured, the length of NXsample/time_points
-
 **Groups cited**:
-  :ref:`NXbeam_path`, :ref:`NXdetector`, :ref:`NXentry`, :ref:`NXinstrument`, :ref:`NXlens_opt`, :ref:`NXmonochromator`, :ref:`NXprocess`, :ref:`NXsample`, :ref:`NXsource`, :ref:`NXwaveplate`
+  :ref:`NXbeam_path`, :ref:`NXdata`, :ref:`NXentry`, :ref:`NXinstrument`, :ref:`NXlens_opt`, :ref:`NXsample`, :ref:`NXwaveplate`
 
-.. index:: NXentry (base class); used in application definition, NXinstrument (base class); used in application definition, NXprocess (base class); used in application definition, NXbeam_path (base class); used in application definition, NXsource (base class); used in application definition, NXlens_opt (base class); used in application definition, NXdetector (base class); used in application definition, NXwaveplate (base class); used in application definition, NXmonochromator (base class); used in application definition, NXsample (base class); used in application definition
+.. index:: NXentry (base class); used in application definition, NXinstrument (base class); used in application definition, NXbeam_path (base class); used in application definition, NXlens_opt (base class); used in application definition, NXwaveplate (base class); used in application definition, NXsample (base class); used in application definition, NXdata (base class); used in application definition
 
 **Structure**:
 
@@ -83,20 +84,6 @@ NXellipsometry
 
   **ENTRY**: (required) :ref:`NXentry` :ref:`⤆ </NXopt/ENTRY-group>`
 
-    .. collapse:: This is the application definition describing ellipsometry experiments. ...
-
-        This is the application definition describing ellipsometry experiments.
-
-        Such experiments may be as simple as identifying how a reflected
-        beam of light with a single wavelength changes its polarization state,
-        to a variable angle spectroscopic ellipsometry experiment.
-
-        The application definition defines:
-
-        * elements of the experimental instrument
-        * calibration information if available
-        * parameters used to tune the state of the sample
-        * sample description
 
     .. _/NXellipsometry/ENTRY/definition-field:
 
@@ -132,25 +119,32 @@ NXellipsometry
             URL where to find further material (documentation, examples) relevant
             to the application definition.
 
-    .. _/NXellipsometry/ENTRY/experiment_description-field:
+    .. _/NXellipsometry/ENTRY/title-field:
 
-    .. index:: experiment_description (field)
+    .. index:: title (field)
 
-    **experiment_description**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXopt/ENTRY/experiment_description-field>`
+    **title**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXopt/ENTRY/title-field>`
 
-      .. collapse:: An optional free-text description of the experiment. ...
-
-          An optional free-text description of the experiment.
-
-          However, details of the experiment should be defined in the specific
-          fields of this application definition rather than in this experiment
-          description.
 
     .. _/NXellipsometry/ENTRY/experiment_type-field:
 
     .. index:: experiment_type (field)
 
     **experiment_type**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXopt/ENTRY/experiment_type-field>`
+
+      .. collapse:: Specify the type of the optical experiment. ...
+
+          Specify the type of the optical experiment.
+
+          You may specify fundamental characteristics or properties in the experimental sub-type.
+
+          Obligatory value: ``ellipsometry``
+
+    .. _/NXellipsometry/ENTRY/ellipsometry_experiment_type-field:
+
+    .. index:: ellipsometry_experiment_type (field)
+
+    **ellipsometry_experiment_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
       .. collapse:: Specify the type of ellipsometry. ...
 
@@ -170,33 +164,22 @@ NXellipsometry
 
             * ``NIR-Vis-UV spectroscopic ellipsometry``
 
-            * ``imaging ellipsometry``
+            * ``other``
 
+
+    .. _/NXellipsometry/ENTRY/ellipsometry_experiment_type_other-field:
+
+    .. index:: ellipsometry_experiment_type_other (field)
+
+    **ellipsometry_experiment_type_other**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+      If the ellipsometry_experiment_type is `other`, a name should be specified here.
 
     .. _/NXellipsometry/ENTRY/INSTRUMENT-group:
 
     **INSTRUMENT**: (required) :ref:`NXinstrument` :ref:`⤆ </NXopt/ENTRY/INSTRUMENT-group>`
 
       Properties of the ellipsometry equipment.
-
-      .. _/NXellipsometry/ENTRY/INSTRUMENT/company-field:
-
-      .. index:: company (field)
-
-      **company**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-        Name of the company which build the instrument.
-
-      .. _/NXellipsometry/ENTRY/INSTRUMENT/construction_year-field:
-
-      .. index:: construction_year (field)
-
-      **construction_year**: (optional) :ref:`NX_DATE_TIME <NX_DATE_TIME>` 
-
-        .. collapse:: ISO8601 date when the instrument was constructed. ...
-
-            ISO8601 date when the instrument was constructed.
-            UTC offset should be specified.
 
       .. _/NXellipsometry/ENTRY/INSTRUMENT/ellipsometer_type-field:
 
@@ -256,44 +239,10 @@ NXellipsometry
               * ``compensator (detector side)``
 
 
-      .. _/NXellipsometry/ENTRY/INSTRUMENT/software-group:
-
-      **software**: (required) :ref:`NXprocess` 
-
-
-        .. _/NXellipsometry/ENTRY/INSTRUMENT/software/program-field:
-
-        .. index:: program (field)
-
-        **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprocess/program-field>`
-
-          .. collapse:: Commercial or otherwise defined given name of the program that was ...
-
-              Commercial or otherwise defined given name of the program that was
-              used to generate the result file(s) with measured data and metadata.
-              This program converts the measured signals to ellipsometry data. If
-              home written, one can provide the actual steps in the NOTE subfield
-              here.
-
       .. _/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH-group:
 
       **BEAM_PATH**: (required) :ref:`NXbeam_path` 
 
-
-        .. _/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/light_source-group:
-
-        **light_source**: (required) :ref:`NXsource` :ref:`⤆ </NXbeam_path/SOURCE-group>`
-
-          Specify the used light source. Multiple selection possible.
-
-          .. _/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/light_source/source_type-field:
-
-          .. index:: source_type (field)
-
-          **source_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
-
-
-            Any of these values: ``arc lamp`` | ``halogen lamp`` | ``LED`` | ``other``
 
         .. _/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes-group:
 
@@ -322,15 +271,6 @@ NXellipsometry
           **angular_spread**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
 
             Specify the angular spread caused by the focussing probes.
-
-        .. _/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/DETECTOR-group:
-
-        **DETECTOR**: (required) :ref:`NXdetector` 
-
-          .. collapse:: Properties of the detector used. Integration time is the count time ...
-
-              Properties of the detector used. Integration time is the count time
-              field, or the real time field. See their definition.
 
         .. _/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element-group:
 
@@ -376,19 +316,6 @@ NXellipsometry
                 Specify the maximum value of revolutions of the rotating element
                 for each measurement.
 
-        .. _/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/spectrometer-group:
-
-        **spectrometer**: (optional) :ref:`NXmonochromator` :ref:`⤆ </NXbeam_path/MONOCHROMATOR-group>`
-
-          .. collapse:: The spectroscope element of the ellipsometer before the detector, ...
-
-              The spectroscope element of the ellipsometer before the detector,
-              but often integrated to form one closed unit. Information on the
-              dispersive element can be specified in the subfield GRATING. Note
-              that different gratings might be used for different wavelength
-              ranges. The dispersion of the grating for each wavelength range can
-              be stored in grating_dispersion.
-
     .. _/NXellipsometry/ENTRY/SAMPLE-group:
 
     **SAMPLE**: (required) :ref:`NXsample` :ref:`⤆ </NXopt/ENTRY/SAMPLE-group>`
@@ -398,19 +325,19 @@ NXellipsometry
 
       .. index:: backside_roughness (field)
 
-      **backside_roughness**: (required) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
+      **backside_roughness**: (recommended) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
         .. collapse:: Was the backside of the sample roughened? Relevant for infrared ...
 
             Was the backside of the sample roughened? Relevant for infrared
             ellipsometry.
 
-    .. _/NXellipsometry/ENTRY/data_collection-group:
+    .. _/NXellipsometry/ENTRY/DATA-group:
 
-    **data_collection**: (required) :ref:`NXprocess` :ref:`⤆ </NXentry/PROCESS-group>`
+    **DATA**: (required) :ref:`NXdata` :ref:`⤆ </NXopt/ENTRY/DATA-group>`
 
 
-      .. _/NXellipsometry/ENTRY/data_collection/data_type-field:
+      .. _/NXellipsometry/ENTRY/DATA/data_type-field:
 
       .. index:: data_type (field)
 
@@ -422,8 +349,7 @@ NXellipsometry
             (see: https://en.wikipedia.org/wiki/Ellipsometry#Data_acquisition).
             It is possible to have multiple selections. Data types may also be
             converted to each other, e.g. a Mueller matrix contains N,C,S data
-            as well. This selection defines how many columns (N_observables) are
-            stored in the data array.
+            as well.
 
             Any of these values:
 
@@ -449,34 +375,28 @@ attributes, and links defined in this class.
 
 
 * :ref:`/NXellipsometry/ENTRY-group </NXellipsometry/ENTRY-group>`
-* :ref:`/NXellipsometry/ENTRY/data_collection-group </NXellipsometry/ENTRY/data_collection-group>`
-* :ref:`/NXellipsometry/ENTRY/data_collection/data_type-field </NXellipsometry/ENTRY/data_collection/data_type-field>`
+* :ref:`/NXellipsometry/ENTRY/DATA-group </NXellipsometry/ENTRY/DATA-group>`
+* :ref:`/NXellipsometry/ENTRY/DATA/data_type-field </NXellipsometry/ENTRY/DATA/data_type-field>`
 * :ref:`/NXellipsometry/ENTRY/definition-field </NXellipsometry/ENTRY/definition-field>`
 * :ref:`/NXellipsometry/ENTRY/definition@url-attribute </NXellipsometry/ENTRY/definition@url-attribute>`
 * :ref:`/NXellipsometry/ENTRY/definition@version-attribute </NXellipsometry/ENTRY/definition@version-attribute>`
-* :ref:`/NXellipsometry/ENTRY/experiment_description-field </NXellipsometry/ENTRY/experiment_description-field>`
+* :ref:`/NXellipsometry/ENTRY/ellipsometry_experiment_type-field </NXellipsometry/ENTRY/ellipsometry_experiment_type-field>`
+* :ref:`/NXellipsometry/ENTRY/ellipsometry_experiment_type_other-field </NXellipsometry/ENTRY/ellipsometry_experiment_type_other-field>`
 * :ref:`/NXellipsometry/ENTRY/experiment_type-field </NXellipsometry/ENTRY/experiment_type-field>`
 * :ref:`/NXellipsometry/ENTRY/INSTRUMENT-group </NXellipsometry/ENTRY/INSTRUMENT-group>`
 * :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH-group </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH-group>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/DETECTOR-group </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/DETECTOR-group>`
 * :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes-group </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes-group>`
 * :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes/angular_spread-field </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes/angular_spread-field>`
 * :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes/data_correction-field </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes/data_correction-field>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/light_source-group </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/light_source-group>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/light_source/source_type-field </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/light_source/source_type-field>`
 * :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element-group </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element-group>`
 * :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element/fixed_revolutions-field </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element/fixed_revolutions-field>`
 * :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element/max_revolutions-field </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element/max_revolutions-field>`
 * :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element/revolutions-field </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element/revolutions-field>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/spectrometer-group </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/spectrometer-group>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/company-field </NXellipsometry/ENTRY/INSTRUMENT/company-field>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/construction_year-field </NXellipsometry/ENTRY/INSTRUMENT/construction_year-field>`
 * :ref:`/NXellipsometry/ENTRY/INSTRUMENT/ellipsometer_type-field </NXellipsometry/ENTRY/INSTRUMENT/ellipsometer_type-field>`
 * :ref:`/NXellipsometry/ENTRY/INSTRUMENT/rotating_element_type-field </NXellipsometry/ENTRY/INSTRUMENT/rotating_element_type-field>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/software-group </NXellipsometry/ENTRY/INSTRUMENT/software-group>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/software/program-field </NXellipsometry/ENTRY/INSTRUMENT/software/program-field>`
 * :ref:`/NXellipsometry/ENTRY/SAMPLE-group </NXellipsometry/ENTRY/SAMPLE-group>`
 * :ref:`/NXellipsometry/ENTRY/SAMPLE/backside_roughness-field </NXellipsometry/ENTRY/SAMPLE/backside_roughness-field>`
+* :ref:`/NXellipsometry/ENTRY/title-field </NXellipsometry/ENTRY/title-field>`
 
 **NXDL Source**:
   https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXellipsometry.nxdl.xml
