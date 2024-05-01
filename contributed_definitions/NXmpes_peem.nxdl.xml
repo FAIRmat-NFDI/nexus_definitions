@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 <!--
 # NeXus - Neutron and X-ray Common Data Format
-# 
-# Copyright (C) 2014-2022 NeXus International Advisory Committee (NIAC)
-# 
+#
+# Copyright (C) 2014-2024 NeXus International Advisory Committee (NIAC)
+#
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
@@ -28,9 +28,9 @@
     </doc>
     <group type="NXentry">
         <field name="definition">
-            <attribute name="version" />
+            <attribute name="version"/>
             <enumeration>
-                <item value="NXmpes_peem" />
+                <item value="NXmpes_peem"/>
             </enumeration>
         </field>
         <group type="NXmonitor" recommended="true">
@@ -39,10 +39,17 @@
             </doc>
         </group>
         <group type="NXinstrument">
-            <group type="NXinsertion_device" optional="true" />
-            <group type="NXmonochromator" recommended="true" />
+            <group type="NXinsertion_device" optional="true"/>
+            <group type="NXmonochromator" recommended="true"/>
+            <group name="source_probe" type="NXsource" optional="true">
+                <field name="associated_beam" optional="true">
+                    <enumeration>
+                        <item value="beam_probe"/>
+                    </enumeration>
+                </field>
+            </group>
             <group name="beam_probe" type="NXbeam" optional="true">
-                <attribute name="flux" />
+                <attribute name="flux"/>
                 <field name="incident_energy" type="NX_FLOAT" units="NX_ENERGY">
                     <doc>
                          this should be a link to monochromator energy
@@ -53,13 +60,13 @@
                          use this or **incident_polarization**
                     </doc>
                 </field>
-                <field name="depends_on" />
+                <field name="depends_on"/>
                 <group type="NXtransformations">
-                    <group name="direction" type="NX_number" recommended="true">
+                    <field name="direction" type="NX_number" recommended="true">
                         <doc>
                              default is [0,0,1]
                         </doc>
-                    </group>
+                    </field>
                     <field name="reference_plane" type="NX_NUMBER" recommended="true">
                         <doc>
                              defined as normal to the plane used to measure azimuth. Default is [0,1,0]
@@ -75,22 +82,40 @@
                          fast pixel dimensions.
                     </doc>
                 </field>
-                <field name="working_distance" type="NX_FLOAT" units="NX_LENGTH" />
-                <field name="magnification" type="NX_FLOAT" />
+                <field name="working_distance" type="NX_FLOAT" units="NX_LENGTH"/>
+                <field name="magnification" type="NX_FLOAT"/>
             </group>
             <group type="NXelectronanalyser">
                 <group type="NXcollectioncolumn">
+                    <field name="scheme">
+                        <doc>
+                             Scheme of the electron collection column.
+                        </doc>
+                        <enumeration>
+                            <item value="standard"/>
+                            <item value="angular dispersive"/>
+                            <item value="selective area"/>
+                            <item value="deflector"/>
+                            <item value="PEEM"/>
+                            <item value="PEEM dark-field"/>
+                            <item value="LEEM"/>
+                            <item value="LEEM dark-field"/>
+                            <item value="LEED"/>
+                            <item value="dispersive plane"/>
+                            <item value="momentum microscope"/>
+                        </enumeration>
+                    </field>
                     <field name="projection">
                         <doc>
                              The space projected in the angularly dispersive direction
                         </doc>
                         <enumeration>
-                            <item value="real" />
-                            <item value="reciprocal" />
-                            <item value="energy" />
+                            <item value="real"/>
+                            <item value="reciprocal"/>
+                            <item value="energy"/>
                         </enumeration>
                     </field>
-                    <field name="extractor_voltage" type="NX_FLOAT" units="NX_VOLTAGE" />
+                    <field name="extractor_voltage" type="NX_FLOAT" units="NX_VOLTAGE"/>
                     <group name="objective_lens" type="NXlens_em">
                         <doc>
                              list of electromagnetic lenses of the microscope column.
@@ -99,8 +124,8 @@
                 </group>
                 <!--other EM lenses in column-->
                 <group name="electron_gun" type="NXebeam_column" optional="true">
-                    <group name="field_aperture" type="NXaperture_em" />
-                    <group name="beam" type="NXbeam" />
+                    <group name="field_aperture" type="NXaperture_em"/>
+                    <group name="beam" type="NXbeam"/>
                 </group>
                 <group type="NXenergydispersion" optional="true">
                     <field name="energy_interval" type="NX_FLOAT" optional="true" units="NX_ENERGY">
@@ -115,7 +140,7 @@
                     </field>
                 </group>
                 <group type="NXdetector">
-                    <field name="depends_on" />
+                    <field name="depends_on"/>
                     <group name="transformations" type="NXtransformations">
                         <doc>
                              Virtual transformations to sample that map the pixels onto sample coordinates.
@@ -136,7 +161,7 @@
                              external link to a flat field image.
                         </doc>
                     </field>
-                    <field name="data" type="NX_NUMBER" />
+                    <field name="data" type="NX_NUMBER"/>
                 </group>
                 <group type="NXmanipulator">
                     <doc>
@@ -156,13 +181,22 @@
                 </group>
             </group>
         </group>
-        <group name="coordinate_system_set" type="NXcoordinate_system_set">
+        <group name="geometries" type="NXcoordinate_system_set">
             <doc>
                  Collection of useful coordinate system. The common reference system should be
                  the sample with all the positioner set to zero. Define at least the beam
                  reference at sample position and the gravity direction. Add the crystal cell
                  orientation if necessary.
             </doc>
+        </group>
+        <group type="NXsample">
+            <field name="depends_on"/>
+            <group type="NXtransformations">
+                <doc>
+                     The origin is at the sample position in the center of the detector field of
+                     view, with all the manipulator positioners set to zero.
+                </doc>
+            </group>
         </group>
     </group>
 </definition>
