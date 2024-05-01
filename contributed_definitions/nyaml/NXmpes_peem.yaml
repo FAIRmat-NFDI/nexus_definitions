@@ -11,14 +11,19 @@ NXmpes_peem(NXmpes):
       doc: contains field named in the **flux** attribute of :ref:`NXbeam`
     (NXinstrument):
       (NXinsertion_device):
-          exists: optional # only when PEEM uses synchrotron light
+        exists: optional # only when PEEM uses synchrotron light
       (NXmonochromator): # incoming_beam_monochromator
-          exists: recommended
+        exists: recommended
+      source_probe(NXsource):
+        exists: optional # only when PEEM uses synchrotron light
+        associated_beam:
+          exists: optional # only when PEEM uses synchrotron light
+          enumeration: [beam_probe]
       beam_probe(NXbeam):
         exists: optional # as we record it in NXsample
         \@flux: # that will point to the NXmonitor data field
         incident_energy(NX_FLOAT):
-          units: NX_ENERGY
+          unit: NX_ENERGY
           doc: this should be a link to monochromator energy
         incident_polarization_stokes(NX_NUMBER):
           exists: recommended
@@ -35,24 +40,24 @@ NXmpes_peem(NXmpes):
               defined as normal to the plane used to measure azimuth. Default is [0,1,0] through the origin
       (NXoptical_system_em): 
         field_of_view(NX_FLOAT):
-          units: NX_LENGTH
+          unit: NX_LENGTH
           doc:
             One or two values for size of image on sample or in another space along slow and fast pixel dimensions.
         working_distance(NX_FLOAT):
-          units: NX_LENGTH
+          unit: NX_LENGTH
         magnification(NX_FLOAT):
       (NXelectronanalyser):
         (NXcollectioncolumn): # supplement base application definition
-         scheme:
-           doc: |
-             Scheme of the electron collection column.
-           enumeration: [standard, angular dispersive, selective area, deflector, PEEM, PEEM dark-field, LEEM, LEEM dark-field, LEED, dispersive plane, momentum microscope]
+          scheme:
+            doc: |
+              Scheme of the electron collection column.
+            enumeration: [standard, angular dispersive, selective area, deflector, PEEM, PEEM dark-field, LEEM, LEEM dark-field, LEED, dispersive plane, momentum microscope]
           projection:
             doc:
               The space projected in the angularly dispersive direction
             enumeration: [real, reciprocal, energy]
           extractor_voltage(NX_FLOAT):
-            units: NX_VOLTAGE
+            unit: NX_VOLTAGE
           objective_lens(NXlens_em):
             doc:
               list of electromagnetic lenses of the microscope column.
@@ -65,12 +70,12 @@ NXmpes_peem(NXmpes):
           exists: optional
           energy_interval(NX_FLOAT):
             exists: optional
-            units: NX_ENERGY
+            unit: NX_ENERGY
             doc:
               only in dispersive mode
           center_energy(NX_FLOAT):
             exists: optional
-            units: NX_ENERGY
+            unit: NX_ENERGY
             doc:
               Center of the energy window (only in dispersive mode)
         (NXdetector):
@@ -96,18 +101,18 @@ NXmpes_peem(NXmpes):
               One of a group of sample positioners
           # other NXpositioners
           sample_bias(NX_FLOAT):
-            units: NX_VOLTAGE
+            unit: NX_VOLTAGE
             doc:
               Start voltage (sample retarding potential).
-    coordinate_system_set(NXcoordinate_system_set):
+    geometries(NXcoordinate_system_set):
       doc:
         Collection of useful coordinate system. The common reference system should 
         be the sample with all the positioner set to zero. Define at least the beam
         reference at sample position and the gravity direction. 
         Add the crystal cell orientation if necessary.
-   (NXsample):
-     depends_on:
-     (NXtransformations): # links to fields in NXmanipulator
-       doc:
-         The origin is at the sample position in the center of the detector field of view,
-         with all the manipulator positioners set to zero.
+    (NXsample):
+      depends_on:
+      (NXtransformations): # links to fields in NXmanipulator
+        doc:
+          The origin is at the sample position in the center of the detector field of view,
+          with all the manipulator positioners set to zero.
