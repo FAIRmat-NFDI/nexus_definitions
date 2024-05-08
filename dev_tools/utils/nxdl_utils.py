@@ -7,8 +7,7 @@ import textwrap
 from functools import lru_cache
 from glob import glob
 from pathlib import Path
-from typing import List
-from typing import Optional
+from typing import List, Optional
 
 import lxml.etree as ET
 from lxml.etree import ParseError as xmlER
@@ -345,18 +344,6 @@ def get_own_nxdl_child(
     for child in nxdl_elem:
         if not isinstance(child.tag, str):
             continue
-        if child.attrib.get("name") == name:
-            return set_nxdlpath(child, nxdl_elem)
-    for child in nxdl_elem:
-        if not isinstance(child.tag, str):
-            continue
-        if child.attrib.get("name") == name:
-            child.set("nxdlbase", nxdl_elem.get("nxdlbase"))
-            return child
-
-    for child in nxdl_elem:
-        if not isinstance(child.tag, str):
-            continue
         result = get_own_nxdl_child_reserved_elements(child, name, nxdl_elem)
         if result is not False:
             return result
@@ -529,9 +516,7 @@ def check_attr_name_nxdl(param):
     return logger, elem, nxdl_path, doc, attr, req_str
 
 
-def try_find_default(
-    logger, orig_elem, elem, nxdl_path, doc, attr
-):  # pylint: disable=too-many-arguments
+def try_find_default(logger, orig_elem, elem, nxdl_path, doc, attr):  # pylint: disable=too-many-arguments
     """Try to find if default is defined as a child of the NXDL element"""
     if elem is not None:
         if doc:
@@ -551,9 +536,7 @@ def try_find_default(
     return logger, elem, nxdl_path, doc, attr
 
 
-def other_attrs(
-    logger, orig_elem, elem, nxdl_path, doc, attr
-):  # pylint: disable=too-many-arguments
+def other_attrs(logger, orig_elem, elem, nxdl_path, doc, attr):  # pylint: disable=too-many-arguments
     """Handle remaining attributes"""
     if elem is not None:
         if doc:
