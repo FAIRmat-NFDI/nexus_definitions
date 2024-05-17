@@ -74,9 +74,9 @@ NXellipsometry
   **N_incident_angles**: Number of angles of incidence of the incident beam.
 
 **Groups cited**:
-  :ref:`NXbeam_path`, :ref:`NXdata`, :ref:`NXentry`, :ref:`NXinstrument`, :ref:`NXlens_opt`, :ref:`NXsample`, :ref:`NXwaveplate`
+  :ref:`NXdata`, :ref:`NXentry`, :ref:`NXinstrument`, :ref:`NXlens_opt`, :ref:`NXprogram`, :ref:`NXsample`, :ref:`NXwaveplate`
 
-.. index:: NXentry (base class); used in application definition, NXinstrument (base class); used in application definition, NXbeam_path (base class); used in application definition, NXlens_opt (base class); used in application definition, NXwaveplate (base class); used in application definition, NXsample (base class); used in application definition, NXdata (base class); used in application definition
+.. index:: NXentry (base class); used in application definition, NXinstrument (base class); used in application definition, NXlens_opt (base class); used in application definition, NXwaveplate (base class); used in application definition, NXsample (base class); used in application definition, NXdata (base class); used in application definition, NXprogram (base class); used in application definition
 
 **Structure**:
 
@@ -239,82 +239,77 @@ NXellipsometry
               * ``compensator (detector side)``
 
 
-      .. _/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH-group:
+      .. _/NXellipsometry/ENTRY/INSTRUMENT/focussing_probes-group:
 
-      **BEAM_PATH**: (required) :ref:`NXbeam_path` 
+      **focussing_probes**: (optional) :ref:`NXlens_opt` :ref:`⤆ </NXopt/ENTRY/INSTRUMENT/LENS_OPT-group>`
 
+        .. collapse:: If focussing probes (lenses) were used, please state if the data ...
 
-        .. _/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes-group:
+            If focussing probes (lenses) were used, please state if the data
+            were corrected for the window effects.
 
-        **focussing_probes**: (optional) :ref:`NXlens_opt` :ref:`⤆ </NXbeam_path/LENS_OPT-group>`
+        .. _/NXellipsometry/ENTRY/INSTRUMENT/focussing_probes/data_correction-field:
 
-          .. collapse:: If focussing probes (lenses) were used, please state if the data ...
+        .. index:: data_correction (field)
 
-              If focussing probes (lenses) were used, please state if the data
-              were corrected for the window effects.
+        **data_correction**: (required) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
-          .. _/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes/data_correction-field:
+          .. collapse:: Were the recorded data corrected by the window effects of the ...
 
-          .. index:: data_correction (field)
+              Were the recorded data corrected by the window effects of the
+              focussing probes (lenses)?
 
-          **data_correction**: (required) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
+        .. _/NXellipsometry/ENTRY/INSTRUMENT/focussing_probes/angular_spread-field:
 
-            .. collapse:: Were the recorded data corrected by the window effects of the ...
+        .. index:: angular_spread (field)
 
-                Were the recorded data corrected by the window effects of the
-                focussing probes (lenses)?
+        **angular_spread**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
 
-          .. _/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes/angular_spread-field:
+          Specify the angular spread caused by the focussing probes.
 
-          .. index:: angular_spread (field)
+      .. _/NXellipsometry/ENTRY/INSTRUMENT/rotating_element-group:
 
-          **angular_spread**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
+      **rotating_element**: (optional) :ref:`NXwaveplate` :ref:`⤆ </NXopt/ENTRY/INSTRUMENT/WAVEPLATE-group>`
 
-            Specify the angular spread caused by the focussing probes.
+        .. collapse:: Properties of the rotating element defined in ...
 
-        .. _/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element-group:
+            Properties of the rotating element defined in
+            'instrument/rotating_element_type'.
 
-        **rotating_element**: (optional) :ref:`NXwaveplate` :ref:`⤆ </NXbeam_path/WAVEPLATE-group>`
+        .. _/NXellipsometry/ENTRY/INSTRUMENT/rotating_element/revolutions-field:
 
-          .. collapse:: Properties of the rotating element defined in ...
+        .. index:: revolutions (field)
 
-              Properties of the rotating element defined in
-              'instrument/rotating_element_type'.
+        **revolutions**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_COUNT <NX_COUNT>`} 
 
-          .. _/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element/revolutions-field:
+          .. collapse:: Define how many revolutions of the rotating element were averaged ...
 
-          .. index:: revolutions (field)
+              Define how many revolutions of the rotating element were averaged
+              for each measurement. If the number of revolutions was fixed to a
+              certain value use the field 'fixed_revolutions' instead.
 
-          **revolutions**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_COUNT <NX_COUNT>`} 
+        .. _/NXellipsometry/ENTRY/INSTRUMENT/rotating_element/fixed_revolutions-field:
 
-            .. collapse:: Define how many revolutions of the rotating element were averaged ...
+        .. index:: fixed_revolutions (field)
 
-                Define how many revolutions of the rotating element were averaged
-                for each measurement. If the number of revolutions was fixed to a
-                certain value use the field 'fixed_revolutions' instead.
+        **fixed_revolutions**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_COUNT <NX_COUNT>`} 
 
-          .. _/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element/fixed_revolutions-field:
+          .. collapse:: Define how many revolutions of the rotating element were taken ...
 
-          .. index:: fixed_revolutions (field)
+              Define how many revolutions of the rotating element were taken
+              into account for each measurement (if number of revolutions was
+              fixed to a certain value, i.e. not averaged).
 
-          **fixed_revolutions**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_COUNT <NX_COUNT>`} 
+        .. _/NXellipsometry/ENTRY/INSTRUMENT/rotating_element/max_revolutions-field:
 
-            .. collapse:: Define how many revolutions of the rotating element were taken ...
+        .. index:: max_revolutions (field)
 
-                Define how many revolutions of the rotating element were taken
-                into account for each measurement (if number of revolutions was
-                fixed to a certain value, i.e. not averaged).
+        **max_revolutions**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_COUNT <NX_COUNT>`} 
 
-          .. _/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element/max_revolutions-field:
+          .. collapse:: Specify the maximum value of revolutions of the rotating element ...
 
-          .. index:: max_revolutions (field)
-
-          **max_revolutions**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_COUNT <NX_COUNT>`} 
-
-            .. collapse:: Specify the maximum value of revolutions of the rotating element ...
-
-                Specify the maximum value of revolutions of the rotating element
-                for each measurement.
+              Specify the maximum value of revolutions of the rotating element
+              for each measurement.
 
     .. _/NXellipsometry/ENTRY/SAMPLE-group:
 
@@ -325,33 +320,64 @@ NXellipsometry
 
       .. index:: backside_roughness (field)
 
-      **backside_roughness**: (recommended) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
+      **backside_roughness**: (optional) :ref:`NX_BOOLEAN <NX_BOOLEAN>` 
 
         .. collapse:: Was the backside of the sample roughened? Relevant for infrared ...
 
             Was the backside of the sample roughened? Relevant for infrared
             ellipsometry.
 
-    .. _/NXellipsometry/ENTRY/DATA-group:
+    .. _/NXellipsometry/ENTRY/data_collection-group:
 
-    **DATA**: (required) :ref:`NXdata` :ref:`⤆ </NXopt/ENTRY/DATA-group>`
+    **data_collection**: (required) :ref:`NXdata` :ref:`⤆ </NXopt/ENTRY/DATA-group>`
 
+      .. collapse:: Measured data, data errors, and varied parameters. This may be used to descr ...
 
-      .. _/NXellipsometry/ENTRY/DATA/data_type-field:
+          Measured data, data errors, and varied parameters. This may be used to describe
+          indirectly derived data or data transformed between different descriptions,
+          such as:
+          Raw Data --> Psi
+          Delta Psi, Delta --> N,C,S
+          Mueller matrix --> N,C,S
+          Mueller matrix --> Psi, Delta
+          etc.
+
+          Other types of data, such as temperature or sample location, may be saved
+          in a generic (NXdata) concept from NXopt, or better directly in the
+          location of the sample positioner or temperature sensor.
+
+      .. _/NXellipsometry/ENTRY/data_collection/data_identifier-field:
+
+      .. index:: data_identifier (field)
+
+      **data_identifier**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXdata/DATA-field>`
+
+        .. collapse:: An identifier to correlate data to the experimental conditions, ...
+
+            An identifier to correlate data to the experimental conditions,
+            if several were used in this measurement; typically an index of 0-N.
+
+      .. _/NXellipsometry/ENTRY/data_collection/data_type-field:
 
       .. index:: data_type (field)
 
       **data_type**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-        .. collapse:: Select which type of data was recorded, for example Psi and Delta ...
+        .. collapse:: Select which type of data was recorded, for example intensity, ...
 
-            Select which type of data was recorded, for example Psi and Delta
-            (see: https://en.wikipedia.org/wiki/Ellipsometry#Data_acquisition).
-            It is possible to have multiple selections. Data types may also be
-            converted to each other, e.g. a Mueller matrix contains N,C,S data
-            as well.
+            Select which type of data was recorded, for example intensity,
+            reflectivity, transmittance, Psi and Delta etc.
+            It is possible to have multiple selections. The enumeration list
+            depends on the type of experiment and may differ for different
+            application definitions.
 
             Any of these values:
+
+              * ``intensity``
+
+              * ``reflectivity``
+
+              * ``transmittance``
 
               * ``Psi/Delta``
 
@@ -366,6 +392,151 @@ NXellipsometry
               * ``raw data``
 
 
+      .. _/NXellipsometry/ENTRY/data_collection/NAME_spectrum-field:
+
+      .. index:: NAME_spectrum (field)
+
+      **NAME_spectrum**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 1, Dimensions: [N_spectrum]) {units=\ :ref:`NX_ANY <NX_ANY>`} 
+
+        .. collapse:: Spectral values (e.g. wavelength or energy) used for the measurement. ...
+
+            Spectral values (e.g. wavelength or energy) used for the measurement.
+            An array of 1 or more elements. Length defines N_spectrum. Replace
+            'SPECTRUM' by the physical quantity that is used, e.g. wavelength.
+
+        .. _/NXellipsometry/ENTRY/data_collection/NAME_spectrum@units-attribute:
+
+        .. index:: units (field attribute)
+
+        **@units**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+          .. collapse:: If applicable, change 'unit: NX_ANY' to the appropriate NXDL unit. ...
+
+              If applicable, change 'unit: NX_ANY' to the appropriate NXDL unit.
+              If the unit of the measured data is not covered by NXDL units state
+              here which unit was used.
+
+      .. _/NXellipsometry/ENTRY/data_collection/measured_data-field:
+
+      .. index:: measured_data (field)
+
+      **measured_data**: (required) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 3, Dimensions: [N_measurements, N_observables, N_spectrum]) {units=\ :ref:`NX_ANY <NX_ANY>`} 
+
+        .. collapse:: Resulting data from the measurement, described by 'data_type'. ...
+
+            Resulting data from the measurement, described by 'data_type'.
+
+            The first dimension is defined by the number of measurements taken,
+            (N_measurements). The instructions on how to order the values
+            contained in the parameter vectors given in the doc string of
+            INSTRUMENT/sample_stage/environment_conditions/PARAMETER/values,
+            define the N_measurements parameter sets. For example, if the
+            experiment was performed at three different temperatures
+            (T1, T2, T3), two different pressures (p1, p2) and two different
+            angles of incidence (a1, a2), the first measurement was taken at the
+            parameters {a1,p1,T1}, the second measurement at {a1,p1,T2} etc.
+
+        .. _/NXellipsometry/ENTRY/data_collection/measured_data@units-attribute:
+
+        .. index:: units (field attribute)
+
+        **@units**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+          .. collapse:: If applicable, change 'unit: NX_ANY' to the appropriate NXDL unit. ...
+
+              If applicable, change 'unit: NX_ANY' to the appropriate NXDL unit.
+              If the unit of the measured data is not covered by NXDL units state
+              here which unit was used.
+
+      .. _/NXellipsometry/ENTRY/data_collection/measured_data_errors-field:
+
+      .. index:: measured_data_errors (field)
+
+      **measured_data_errors**: (optional) :ref:`NX_FLOAT <NX_FLOAT>` (Rank: 3, Dimensions: [N_measurements, N_observables, N_spectrum]) {units=\ :ref:`NX_ANY <NX_ANY>`} 
+
+        .. collapse:: Specified uncertainties (errors) of the data described by 'data_type' ...
+
+            Specified uncertainties (errors) of the data described by 'data_type'
+            and provided in 'measured_data'.
+
+        .. _/NXellipsometry/ENTRY/data_collection/measured_data_errors@units-attribute:
+
+        .. index:: units (field attribute)
+
+        **@units**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+          .. collapse:: If applicable, change 'unit: NX_ANY' to the appropriate NXDL unit. ...
+
+              If applicable, change 'unit: NX_ANY' to the appropriate NXDL unit.
+              If the unit of the measured data is not covered by NXDL units state
+              here which unit was used.
+
+      .. _/NXellipsometry/ENTRY/data_collection/varied_parameter_link-field:
+
+      .. index:: varied_parameter_link (field)
+
+      **varied_parameter_link**: (optional) :ref:`NX_CHAR <NX_CHAR>` (Rank: 1, Dimensions: [N_sensors]) 
+
+        .. collapse:: List of links to the values of the sensors. Add a link for each ...
+
+            List of links to the values of the sensors. Add a link for each
+            varied parameter (i.e. for each sensor).
+
+      .. _/NXellipsometry/ENTRY/data_collection/reference_data_link-field:
+
+      .. index:: reference_data_link (field)
+
+      **reference_data_link**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+        .. collapse:: Link to the NeXus file which describes the reference data if a ...
+
+            Link to the NeXus file which describes the reference data if a
+            reference measurement was performed. Ideally, the reference
+            measurement was performed using the same conditions as the actual
+            measurement and should be as close in time to the actual measurement
+            as possible.
+
+      .. _/NXellipsometry/ENTRY/data_collection/data_software-group:
+
+      **data_software**: (optional) :ref:`NXprogram` 
+
+
+        .. _/NXellipsometry/ENTRY/data_collection/data_software@url-attribute:
+
+        .. index:: url (group attribute)
+
+        **@url**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+          Website of the software.
+
+        .. _/NXellipsometry/ENTRY/data_collection/data_software/program-field:
+
+        .. index:: program (field)
+
+        **program**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXprogram/program-field>`
+
+          .. collapse:: Commercial or otherwise defined given name of the program that was ...
+
+              Commercial or otherwise defined given name of the program that was
+              used to generate the result file(s) with measured data and/or
+              metadata (in most cases, this is the same as INSTRUMENT/software).
+              If home written, one can provide the actual steps in the NOTE
+              subfield here.
+
+        .. _/NXellipsometry/ENTRY/data_collection/data_software/version-field:
+
+        .. index:: version (field)
+
+        **version**: (required) :ref:`NX_CHAR <NX_CHAR>` 
+
+          .. collapse:: Either version with build number, commit hash, or description of a ...
+
+              Either version with build number, commit hash, or description of a
+              (online) repository where the source code of the program and build
+              instructions can be found so that the program can be configured in
+              such a way that result files can be created ideally in a
+              deterministic manner.
+
 
 Hypertext Anchors
 -----------------
@@ -375,8 +546,21 @@ attributes, and links defined in this class.
 
 
 * :ref:`/NXellipsometry/ENTRY-group </NXellipsometry/ENTRY-group>`
-* :ref:`/NXellipsometry/ENTRY/DATA-group </NXellipsometry/ENTRY/DATA-group>`
-* :ref:`/NXellipsometry/ENTRY/DATA/data_type-field </NXellipsometry/ENTRY/DATA/data_type-field>`
+* :ref:`/NXellipsometry/ENTRY/data_collection-group </NXellipsometry/ENTRY/data_collection-group>`
+* :ref:`/NXellipsometry/ENTRY/data_collection/data_identifier-field </NXellipsometry/ENTRY/data_collection/data_identifier-field>`
+* :ref:`/NXellipsometry/ENTRY/data_collection/data_software-group </NXellipsometry/ENTRY/data_collection/data_software-group>`
+* :ref:`/NXellipsometry/ENTRY/data_collection/data_software/program-field </NXellipsometry/ENTRY/data_collection/data_software/program-field>`
+* :ref:`/NXellipsometry/ENTRY/data_collection/data_software/version-field </NXellipsometry/ENTRY/data_collection/data_software/version-field>`
+* :ref:`/NXellipsometry/ENTRY/data_collection/data_software@url-attribute </NXellipsometry/ENTRY/data_collection/data_software@url-attribute>`
+* :ref:`/NXellipsometry/ENTRY/data_collection/data_type-field </NXellipsometry/ENTRY/data_collection/data_type-field>`
+* :ref:`/NXellipsometry/ENTRY/data_collection/measured_data-field </NXellipsometry/ENTRY/data_collection/measured_data-field>`
+* :ref:`/NXellipsometry/ENTRY/data_collection/measured_data@units-attribute </NXellipsometry/ENTRY/data_collection/measured_data@units-attribute>`
+* :ref:`/NXellipsometry/ENTRY/data_collection/measured_data_errors-field </NXellipsometry/ENTRY/data_collection/measured_data_errors-field>`
+* :ref:`/NXellipsometry/ENTRY/data_collection/measured_data_errors@units-attribute </NXellipsometry/ENTRY/data_collection/measured_data_errors@units-attribute>`
+* :ref:`/NXellipsometry/ENTRY/data_collection/NAME_spectrum-field </NXellipsometry/ENTRY/data_collection/NAME_spectrum-field>`
+* :ref:`/NXellipsometry/ENTRY/data_collection/NAME_spectrum@units-attribute </NXellipsometry/ENTRY/data_collection/NAME_spectrum@units-attribute>`
+* :ref:`/NXellipsometry/ENTRY/data_collection/reference_data_link-field </NXellipsometry/ENTRY/data_collection/reference_data_link-field>`
+* :ref:`/NXellipsometry/ENTRY/data_collection/varied_parameter_link-field </NXellipsometry/ENTRY/data_collection/varied_parameter_link-field>`
 * :ref:`/NXellipsometry/ENTRY/definition-field </NXellipsometry/ENTRY/definition-field>`
 * :ref:`/NXellipsometry/ENTRY/definition@url-attribute </NXellipsometry/ENTRY/definition@url-attribute>`
 * :ref:`/NXellipsometry/ENTRY/definition@version-attribute </NXellipsometry/ENTRY/definition@version-attribute>`
@@ -384,15 +568,14 @@ attributes, and links defined in this class.
 * :ref:`/NXellipsometry/ENTRY/ellipsometry_experiment_type_other-field </NXellipsometry/ENTRY/ellipsometry_experiment_type_other-field>`
 * :ref:`/NXellipsometry/ENTRY/experiment_type-field </NXellipsometry/ENTRY/experiment_type-field>`
 * :ref:`/NXellipsometry/ENTRY/INSTRUMENT-group </NXellipsometry/ENTRY/INSTRUMENT-group>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH-group </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH-group>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes-group </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes-group>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes/angular_spread-field </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes/angular_spread-field>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes/data_correction-field </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/focussing_probes/data_correction-field>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element-group </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element-group>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element/fixed_revolutions-field </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element/fixed_revolutions-field>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element/max_revolutions-field </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element/max_revolutions-field>`
-* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element/revolutions-field </NXellipsometry/ENTRY/INSTRUMENT/BEAM_PATH/rotating_element/revolutions-field>`
 * :ref:`/NXellipsometry/ENTRY/INSTRUMENT/ellipsometer_type-field </NXellipsometry/ENTRY/INSTRUMENT/ellipsometer_type-field>`
+* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/focussing_probes-group </NXellipsometry/ENTRY/INSTRUMENT/focussing_probes-group>`
+* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/focussing_probes/angular_spread-field </NXellipsometry/ENTRY/INSTRUMENT/focussing_probes/angular_spread-field>`
+* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/focussing_probes/data_correction-field </NXellipsometry/ENTRY/INSTRUMENT/focussing_probes/data_correction-field>`
+* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/rotating_element-group </NXellipsometry/ENTRY/INSTRUMENT/rotating_element-group>`
+* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/rotating_element/fixed_revolutions-field </NXellipsometry/ENTRY/INSTRUMENT/rotating_element/fixed_revolutions-field>`
+* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/rotating_element/max_revolutions-field </NXellipsometry/ENTRY/INSTRUMENT/rotating_element/max_revolutions-field>`
+* :ref:`/NXellipsometry/ENTRY/INSTRUMENT/rotating_element/revolutions-field </NXellipsometry/ENTRY/INSTRUMENT/rotating_element/revolutions-field>`
 * :ref:`/NXellipsometry/ENTRY/INSTRUMENT/rotating_element_type-field </NXellipsometry/ENTRY/INSTRUMENT/rotating_element_type-field>`
 * :ref:`/NXellipsometry/ENTRY/SAMPLE-group </NXellipsometry/ENTRY/SAMPLE-group>`
 * :ref:`/NXellipsometry/ENTRY/SAMPLE/backside_roughness-field </NXellipsometry/ENTRY/SAMPLE/backside_roughness-field>`
