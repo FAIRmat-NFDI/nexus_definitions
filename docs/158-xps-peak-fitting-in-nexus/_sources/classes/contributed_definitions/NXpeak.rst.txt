@@ -26,9 +26,7 @@ NXpeak
 
   The symbols used in the schema to specify e.g. dimensions of arrays.
 
-  **n_points**: Number of discretization points at which the functional form of the peak has been evaluated.
-
-  **n_dependent**: Number of dependent variables to be fitted (for multidimensional/multivariate fit.)
+  **dimRank**: Rank of the dependent and independent data arrays (for multidimensional/multivariate fit.)
 
 **Groups cited**:
   :ref:`NXdata`, :ref:`NXfit_function`
@@ -65,15 +63,18 @@ NXpeak
 
     .. index:: position (field)
 
-    **position**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_points]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+    **position**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: dimRank) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
-      This axis holds the position values for the independent variable.
+      .. collapse:: Position values along one or more data dimensions (to hold the ...
+
+          Position values along one or more data dimensions (to hold the
+          values for the independent variable).
 
     .. _/NXpeak/data/intensity-field:
 
     .. index:: intensity (field)
 
-    **intensity**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_points, n_dependent]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+    **intensity**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: dimRank) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
       This array holds the intensity/count values of the fitted peak at each position.
 

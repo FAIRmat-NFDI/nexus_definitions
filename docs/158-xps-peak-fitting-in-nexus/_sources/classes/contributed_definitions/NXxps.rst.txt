@@ -24,9 +24,9 @@ NXxps
   No symbol table
 
 **Groups cited**:
-  :ref:`NXcoordinate_system_set`, :ref:`NXcoordinate_system`, :ref:`NXdata_mpes`, :ref:`NXdata`, :ref:`NXelectronanalyser`, :ref:`NXenergydispersion`, :ref:`NXentry`, :ref:`NXfit_background`, :ref:`NXfit_function`, :ref:`NXfit_single_parameter`, :ref:`NXfit`, :ref:`NXinstrument`, :ref:`NXpeak`, :ref:`NXprocess`, :ref:`NXsample`, :ref:`NXtransformations`
+  :ref:`NXcoordinate_system_set`, :ref:`NXcoordinate_system`, :ref:`NXdata_mpes`, :ref:`NXdata`, :ref:`NXelectronanalyser`, :ref:`NXenergydispersion`, :ref:`NXentry`, :ref:`NXfit_background`, :ref:`NXfit_function`, :ref:`NXfit_parameter`, :ref:`NXfit`, :ref:`NXinstrument`, :ref:`NXpeak`, :ref:`NXsample`, :ref:`NXtransformations`
 
-.. index:: NXentry (base class); used in application definition, NXcoordinate_system_set (base class); used in application definition, NXcoordinate_system (base class); used in application definition, NXtransformations (base class); used in application definition, NXinstrument (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXsample (base class); used in application definition, NXprocess (base class); used in application definition, NXfit (base class); used in application definition, NXdata (base class); used in application definition, NXpeak (base class); used in application definition, NXfit_function (base class); used in application definition, NXfit_single_parameter (base class); used in application definition, NXfit_background (base class); used in application definition, NXdata_mpes (base class); used in application definition
+.. index:: NXentry (base class); used in application definition, NXcoordinate_system_set (base class); used in application definition, NXcoordinate_system (base class); used in application definition, NXtransformations (base class); used in application definition, NXinstrument (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXsample (base class); used in application definition, NXfit (base class); used in application definition, NXdata (base class); used in application definition, NXpeak (base class); used in application definition, NXfit_function (base class); used in application definition, NXfit_parameter (base class); used in application definition, NXfit_background (base class); used in application definition, NXdata_mpes (base class); used in application definition
 
 **Structure**:
 
@@ -257,283 +257,315 @@ NXxps
                 that transforms from the beam coordinate system  to the XPS base coordinate system at
                 /entry/instrument/xps_coordinate_system.
 
-    .. _/NXxps/ENTRY/peak_fitting-group:
+    .. _/NXxps/ENTRY/FIT-group:
 
-    **peak_fitting**: (recommended) :ref:`NXprocess` :ref:`⤆ </NXentry/PROCESS-group>`
+    **FIT**: (recommended) :ref:`NXfit` 
 
-      .. collapse:: Peak model for XPS fitting. ...
+      .. collapse:: Peak model for XPS fitting. Each `NXfit` instance shall be used for the desc ...
 
-          Peak model for XPS fitting.
+          Peak model for XPS fitting. Each `NXfit` instance shall be used for the description of
+          _one_ peak fit in _one_ XPS region. As an example, this could be used to describe the
+          fitting of one measured C 1s spectrum.
 
           This concept is related to term `3.29`_ of the ISO 18115-1:2023 standard.
 
           .. _3.29: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.29
 
-      .. _/NXxps/ENTRY/peak_fitting/FIT-group:
+      .. _/NXxps/ENTRY/FIT/label-field:
 
-      **FIT**: (required) :ref:`NXfit` 
+      .. index:: label (field)
 
-        .. collapse:: Description of one peak fit. This is meant to be used for a peak fit in ...
-
-            Description of one peak fit. This is meant to be used for a peak fit in
-            _one_ XPS region. As an example, this could be used to describe the
-            fitting of one measured C 1s spectrum.
-
-        .. _/NXxps/ENTRY/peak_fitting/FIT/label-field:
-
-        .. index:: label (field)
-
-        **label**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit/label-field>`
+      **label**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit/label-field>`
 
 
-        .. _/NXxps/ENTRY/peak_fitting/FIT/figure_of_meritMETRIC-field:
+      .. _/NXxps/ENTRY/FIT/figure_of_meritMETRIC-field:
 
-        .. index:: figure_of_meritMETRIC (field)
+      .. index:: figure_of_meritMETRIC (field)
 
-        **figure_of_meritMETRIC**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXfit/figure_of_meritMETRIC-field>`
-
-
-          .. _/NXxps/ENTRY/peak_fitting/FIT/figure_of_meritMETRIC@metric-attribute:
-
-          .. index:: metric (field attribute)
-
-          **@metric**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit/figure_of_meritMETRIC@metric-attribute>`
+      **figure_of_meritMETRIC**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXfit/figure_of_meritMETRIC-field>`
 
 
-        .. _/NXxps/ENTRY/peak_fitting/FIT/relative_concentration-field:
+        .. _/NXxps/ENTRY/FIT/figure_of_meritMETRIC@metric-attribute:
 
-        .. index:: relative_concentration (field)
+        .. index:: metric (field attribute)
 
-        **relative_concentration**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ANY <NX_ANY>`} 
-
-          .. collapse:: Atomic concentration of each species defined by one peak in the peak mod ...
-
-              Atomic concentration of each species defined by one peak in the peak model.
-              This should be an array with the indices pointing to the individual peaks
-              (i.e, peak_0, peak_1, etc.)
-
-        .. _/NXxps/ENTRY/peak_fitting/FIT/data-group:
-
-        **data**: (required) :ref:`NXdata` :ref:`⤆ </NXfit/data-group>`
-
-          Input data and results of the fit.
-
-          .. _/NXxps/ENTRY/peak_fitting/FIT/data/input_dependent-field:
-
-          .. index:: input_dependent (field)
-
-          **input_dependent**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXfit/data/input_dependent-field>`
-
-            .. collapse:: Dependent variable for this fit procedure. ...
-
-                Dependent variable for this fit procedure.
-
-                This could be a link to entry/data/data.
-
-          .. _/NXxps/ENTRY/peak_fitting/FIT/data/input_independent-field:
-
-          .. index:: input_independent (field)
-
-          **input_independent**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXfit/data/input_independent-field>`
-
-            .. collapse:: Independent variable for this fit procedure. ...
-
-                Independent variable for this fit procedure.
-
-                This could be a link to entry/data/energy.
-
-          .. _/NXxps/ENTRY/peak_fitting/FIT/data/envelope-field:
-
-          .. index:: envelope (field)
-
-          **envelope**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXfit/data/envelope-field>`
+        **@metric**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit/figure_of_meritMETRIC@metric-attribute>`
 
 
-          .. _/NXxps/ENTRY/peak_fitting/FIT/data/residual-field:
+      .. _/NXxps/ENTRY/FIT/relative_concentration-field:
 
-          .. index:: residual (field)
+      .. index:: relative_concentration (field)
 
-          **residual**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXfit/data/residual-field>`
+      **relative_concentration**: (required) :ref:`NX_FLOAT <NX_FLOAT>` {units=\ :ref:`NX_ANY <NX_ANY>`} 
 
+        .. collapse:: Atomic concentration of each species defined by one peak in the peak model ...
 
-        .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK-group:
+            Atomic concentration of each species defined by one peak in the peak model.
+            This should be an array with the indices pointing to the individual peaks
+            (i.e, peak_0, peak_1, etc.)
 
-        **peakPEAK**: (required) :ref:`NXpeak` :ref:`⤆ </NXfit/peakPEAK-group>`
+      .. _/NXxps/ENTRY/FIT/data-group:
 
+      **data**: (required) :ref:`NXdata` :ref:`⤆ </NXfit/data-group>`
 
-          .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/label-field:
+        Input data and results of the fit.
 
-          .. index:: label (field)
+        .. _/NXxps/ENTRY/FIT/data/input_dependent-field:
 
-          **label**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpeak/label-field>`
+        .. index:: input_dependent (field)
 
+        **input_dependent**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXfit/data/input_dependent-field>`
 
-          .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/total_area-field:
+          .. collapse:: Dependent variable for this fit procedure. ...
 
-          .. index:: total_area (field)
+              Dependent variable for this fit procedure.
 
-          **total_area**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
+              This could be a link to entry/data/data.
 
-            .. collapse:: Total area under the peak after background removal. ...
+        .. _/NXxps/ENTRY/FIT/data/input_independent-field:
 
-                Total area under the peak after background removal.
+        .. index:: input_independent (field)
 
-                This concept is related to term `3.16`_ of the ISO 18115-1:2023 standard.
+        **input_independent**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXfit/data/input_independent-field>`
 
-                .. _3.16: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.16
+          .. collapse:: Independent variable for this fit procedure. ...
 
-          .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/data-group:
-
-          **data**: (required) :ref:`NXdata` :ref:`⤆ </NXpeak/data-group>`
-
-
-            .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/data/position-field:
-
-            .. index:: position (field)
-
-            **position**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXpeak/data/position-field>`
+              Independent variable for this fit procedure.
 
               This could be a link to entry/data/energy.
 
-            .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/data/intensity-field:
+        .. _/NXxps/ENTRY/FIT/data/envelope-field:
 
-            .. index:: intensity (field)
+        .. index:: envelope (field)
 
-            **intensity**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXpeak/data/intensity-field>`
+        **envelope**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXfit/data/envelope-field>`
 
-              .. collapse:: Intensity values of the fitted function at each energy in the positi ...
 
-                  Intensity values of the fitted function at each energy in the position field.
+        .. _/NXxps/ENTRY/FIT/data/residual-field:
 
-                  This concept is related to term `3.15`_ of the ISO 18115-1:2023 standard.
+        .. index:: residual (field)
 
-                  .. _3.15: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.15
+        **residual**: (recommended) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXfit/data/residual-field>`
 
-          .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function-group:
 
-          **function**: (required) :ref:`NXfit_function` :ref:`⤆ </NXpeak/function-group>`
+      .. _/NXxps/ENTRY/FIT/peakPEAK-group:
 
+      **peakPEAK**: (required) :ref:`NXpeak` :ref:`⤆ </NXfit/peakPEAK-group>`
 
-            .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/formula-field:
 
-            .. index:: formula (field)
+        .. _/NXxps/ENTRY/FIT/peakPEAK/label-field:
 
-            **formula**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_function/formula-field>`
+        .. index:: label (field)
 
+        **label**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXpeak/label-field>`
 
-            .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/area-group:
 
-            **area**: (optional) :ref:`NXfit_single_parameter` :ref:`⤆ </NXfit_function/FIT_SINGLE_PARAMETER-group>`
+        .. _/NXxps/ENTRY/FIT/peakPEAK/total_area-field:
 
-              Area of the peak.
+        .. index:: total_area (field)
 
-            .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/width-group:
+        **total_area**: (recommended) :ref:`NX_CHAR <NX_CHAR>` 
 
-            **width**: (optional) :ref:`NXfit_single_parameter` :ref:`⤆ </NXfit_function/FIT_SINGLE_PARAMETER-group>`
+          .. collapse:: Total area under the peak after background removal. ...
 
-              .. collapse:: Width of a peak at a defined fraction of the peak height. ...
+              Total area under the peak after background removal.
 
-                  Width of a peak at a defined fraction of the peak height.
+              This concept is related to term `3.16`_ of the ISO 18115-1:2023 standard.
 
-                  Usually, this will be the Full Width at Half Maximum of the peak (FWHM).
-                  For asymmetric peaks, convenient measures of peak width are the half-widths of
-                  each side of the peak at half maximum intensity.
+              .. _3.16: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.16
 
-                  This concept is related to term `3.28`_ of the ISO 18115-1:2023 standard.
+        .. _/NXxps/ENTRY/FIT/peakPEAK/data-group:
 
-                  .. _3.28: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.28
+        **data**: (required) :ref:`NXdata` :ref:`⤆ </NXpeak/data-group>`
 
-              .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/width/value-field:
 
-              .. index:: value (field)
+          .. _/NXxps/ENTRY/FIT/peakPEAK/data/position-field:
 
-              **value**: (required) :ref:`NX_CHAR <NX_CHAR>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} 
+          .. index:: position (field)
 
+          **position**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXpeak/data/position-field>`
 
-            .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/position-group:
+            This could be a link to entry/data/energy.
 
-            **position**: (optional) :ref:`NXfit_single_parameter` :ref:`⤆ </NXfit_function/FIT_SINGLE_PARAMETER-group>`
+          .. _/NXxps/ENTRY/FIT/peakPEAK/data/intensity-field:
 
-              Position of the peak on the energy axis.
+          .. index:: intensity (field)
 
-              .. _/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/position/value-field:
+          **intensity**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXpeak/data/intensity-field>`
 
-              .. index:: value (field)
+            .. collapse:: Intensity values of the fitted function at each energy in the position ...
 
-              **value**: (required) :ref:`NX_CHAR <NX_CHAR>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} 
+                Intensity values of the fitted function at each energy in the position field.
 
+                This concept is related to term `3.15`_ of the ISO 18115-1:2023 standard.
 
-        .. _/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND-group:
+                .. _3.15: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.15
 
-        **backgroundBACKGROUND**: (required) :ref:`NXfit_background` :ref:`⤆ </NXfit/backgroundBACKGROUND-group>`
+        .. _/NXxps/ENTRY/FIT/peakPEAK/function-group:
 
-          .. collapse:: Functional form of the fitted XPS background. ...
+        **function**: (recommended) :ref:`NXfit_function` :ref:`⤆ </NXpeak/function-group>`
 
-              Functional form of the fitted XPS background.
 
-              This concept is related to term `3.21`_ of the ISO 18115-1:2023 standard.
+          .. _/NXxps/ENTRY/FIT/peakPEAK/function/description-field:
 
-              .. _3.21: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.21
+          .. index:: description (field)
 
-          .. _/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/label-field:
+          **description**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_function/description-field>`
 
-          .. index:: label (field)
 
-          **label**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_background/label-field>`
+          .. _/NXxps/ENTRY/FIT/peakPEAK/function/formula-field:
 
+          .. index:: formula (field)
 
-          .. _/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/data-group:
+          **formula**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_function/formula-field>`
 
-          **data**: (required) :ref:`NXdata` :ref:`⤆ </NXfit_background/data-group>`
 
+          .. _/NXxps/ENTRY/FIT/peakPEAK/function/area-group:
 
-            .. _/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/data/position-field:
+          **area**: (optional) :ref:`NXfit_parameter` :ref:`⤆ </NXfit_function/FIT_PARAMETER-group>`
 
-            .. index:: position (field)
+            Area of the peak.
 
-            **position**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXfit_background/data/position-field>`
+          .. _/NXxps/ENTRY/FIT/peakPEAK/function/width-group:
 
+          **width**: (optional) :ref:`NXfit_parameter` :ref:`⤆ </NXfit_function/FIT_PARAMETER-group>`
 
-            .. _/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/data/intensity-field:
+            .. collapse:: Width of a peak at a defined fraction of the peak height. ...
 
-            .. index:: intensity (field)
+                Width of a peak at a defined fraction of the peak height.
 
-            **intensity**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXfit_background/data/intensity-field>`
+                Usually, this will be the Full Width at Half Maximum of the peak (FWHM).
+                For asymmetric peaks, convenient measures of peak width are the half-widths of
+                each side of the peak at half maximum intensity.
 
+                This concept is related to term `3.28`_ of the ISO 18115-1:2023 standard.
 
-          .. _/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/function-group:
+                .. _3.28: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.28
 
-          **function**: (required) :ref:`NXfit_function` :ref:`⤆ </NXfit_background/function-group>`
+            .. _/NXxps/ENTRY/FIT/peakPEAK/function/width/value-field:
 
+            .. index:: value (field)
 
-            .. _/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/function/description-field:
+            **value**: (required) :ref:`NX_CHAR <NX_CHAR>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} 
 
-            .. index:: description (field)
 
-            **description**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_function/description-field>`
+          .. _/NXxps/ENTRY/FIT/peakPEAK/function/position-group:
 
+          **position**: (optional) :ref:`NXfit_parameter` :ref:`⤆ </NXfit_function/FIT_PARAMETER-group>`
 
-              Any of these values:
+            Position of the peak on the energy axis.
 
-                * ``linear``: Linear background, i.e., a simple straight line from the minimal to the maximal abscissa value.
+            .. _/NXxps/ENTRY/FIT/peakPEAK/function/position/value-field:
 
-                * ``Shirley``: Shirley background. In the Shirley background, the background intensity at any given binding energy is proportional to the intensity of the total peak area above the background in the lower binding energy peak range (i.e., the background goes up in proportion to the total number of photoelectrons below its binding energy position).
+            .. index:: value (field)
 
-                * ``Tougaard``: Tougaard background (or Tougaard universal cross-section approach) which is a methodology for integrating the intensity of the background at a given binding energy from the spectral intensities to higher kinetic energies
+            **value**: (required) :ref:`NX_CHAR <NX_CHAR>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} 
 
-                * ``other``: In case none of the enumeration items apply, description should be _other_ and the functional form of the background should be given by the `formula` field.
 
+      .. _/NXxps/ENTRY/FIT/backgroundBACKGROUND-group:
 
-            .. _/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/function/formula-field:
+      **backgroundBACKGROUND**: (required) :ref:`NXfit_background` :ref:`⤆ </NXfit/backgroundBACKGROUND-group>`
 
-            .. index:: formula (field)
+        .. collapse:: Functional form of the fitted XPS background. ...
 
-            **formula**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_function/formula-field>`
+            Functional form of the fitted XPS background.
 
+            This concept is related to term `3.21`_ of the ISO 18115-1:2023 standard.
 
-        .. _/NXxps/ENTRY/peak_fitting/FIT/fit_function-group:
+            .. _3.21: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.21
 
-        **fit_function**: (recommended) :ref:`NXfit_function` :ref:`⤆ </NXfit/fit_function-group>`
+        .. _/NXxps/ENTRY/FIT/backgroundBACKGROUND/label-field:
+
+        .. index:: label (field)
+
+        **label**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_background/label-field>`
+
+
+        .. _/NXxps/ENTRY/FIT/backgroundBACKGROUND/data-group:
+
+        **data**: (required) :ref:`NXdata` :ref:`⤆ </NXfit_background/data-group>`
+
+
+          .. _/NXxps/ENTRY/FIT/backgroundBACKGROUND/data/position-field:
+
+          .. index:: position (field)
+
+          **position**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ENERGY <NX_ENERGY>`} :ref:`⤆ </NXfit_background/data/position-field>`
+
+
+          .. _/NXxps/ENTRY/FIT/backgroundBACKGROUND/data/intensity-field:
+
+          .. index:: intensity (field)
+
+          **intensity**: (required) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXfit_background/data/intensity-field>`
+
+
+        .. _/NXxps/ENTRY/FIT/backgroundBACKGROUND/function-group:
+
+        **function**: (recommended) :ref:`NXfit_function` :ref:`⤆ </NXfit_background/function-group>`
+
+
+          .. _/NXxps/ENTRY/FIT/backgroundBACKGROUND/function/description-field:
+
+          .. index:: description (field)
+
+          **description**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_function/description-field>`
+
+
+            Any of these values:
+
+              * ``linear``: Linear background, i.e., a simple straight line from the minimal to the maximal abscissa value.
+
+              * ``Shirley``: Shirley background. In the Shirley background, the background intensity at any given binding energy is proportional to the intensity of the total peak area above the background in the lower binding energy peak range (i.e., the background goes up in proportion to the total number of photoelectrons below its binding energy position).
+
+              * ``Tougaard``: Tougaard background (or Tougaard universal cross-section approach) which is a methodology for integrating the intensity of the background at a given binding energy from the spectral intensities to higher kinetic energies
+
+              * ``other``: In case none of the enumeration items apply, description should be _other_ and the functional form of the background should be given by the `formula` field.
+
+
+          .. _/NXxps/ENTRY/FIT/backgroundBACKGROUND/function/formula-field:
+
+          .. index:: formula (field)
+
+          **formula**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_function/formula-field>`
+
+
+      .. _/NXxps/ENTRY/FIT/global_fit_function-group:
+
+      **global_fit_function**: (recommended) :ref:`NXfit_function` :ref:`⤆ </NXfit/global_fit_function-group>`
+
+
+        .. _/NXxps/ENTRY/FIT/global_fit_function/description-field:
+
+        .. index:: description (field)
+
+        **description**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_function/description-field>`
+
+
+        .. _/NXxps/ENTRY/FIT/global_fit_function/formula-field:
+
+        .. index:: formula (field)
+
+        **formula**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit/global_fit_function/formula-field>`
+
+
+      .. _/NXxps/ENTRY/FIT/error_function-group:
+
+      **error_function**: (recommended) :ref:`NXfit_function` :ref:`⤆ </NXfit/error_function-group>`
+
+
+        .. _/NXxps/ENTRY/FIT/error_function/description-field:
+
+        .. index:: description (field)
+
+        **description**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit/error_function/description-field>`
+
+
+        .. _/NXxps/ENTRY/FIT/error_function/formula-field:
+
+        .. index:: formula (field)
+
+        **formula**: (recommended) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit/error_function/formula-field>`
 
 
     .. _/NXxps/ENTRY/data-group:
@@ -576,6 +608,44 @@ attributes, and links defined in this class.
 * :ref:`/NXxps/ENTRY/data@energy_depends-attribute </NXxps/ENTRY/data@energy_depends-attribute>`
 * :ref:`/NXxps/ENTRY/data@energy_indices-attribute </NXxps/ENTRY/data@energy_indices-attribute>`
 * :ref:`/NXxps/ENTRY/definition-field </NXxps/ENTRY/definition-field>`
+* :ref:`/NXxps/ENTRY/FIT-group </NXxps/ENTRY/FIT-group>`
+* :ref:`/NXxps/ENTRY/FIT/backgroundBACKGROUND-group </NXxps/ENTRY/FIT/backgroundBACKGROUND-group>`
+* :ref:`/NXxps/ENTRY/FIT/backgroundBACKGROUND/data-group </NXxps/ENTRY/FIT/backgroundBACKGROUND/data-group>`
+* :ref:`/NXxps/ENTRY/FIT/backgroundBACKGROUND/data/intensity-field </NXxps/ENTRY/FIT/backgroundBACKGROUND/data/intensity-field>`
+* :ref:`/NXxps/ENTRY/FIT/backgroundBACKGROUND/data/position-field </NXxps/ENTRY/FIT/backgroundBACKGROUND/data/position-field>`
+* :ref:`/NXxps/ENTRY/FIT/backgroundBACKGROUND/function-group </NXxps/ENTRY/FIT/backgroundBACKGROUND/function-group>`
+* :ref:`/NXxps/ENTRY/FIT/backgroundBACKGROUND/function/description-field </NXxps/ENTRY/FIT/backgroundBACKGROUND/function/description-field>`
+* :ref:`/NXxps/ENTRY/FIT/backgroundBACKGROUND/function/formula-field </NXxps/ENTRY/FIT/backgroundBACKGROUND/function/formula-field>`
+* :ref:`/NXxps/ENTRY/FIT/backgroundBACKGROUND/label-field </NXxps/ENTRY/FIT/backgroundBACKGROUND/label-field>`
+* :ref:`/NXxps/ENTRY/FIT/data-group </NXxps/ENTRY/FIT/data-group>`
+* :ref:`/NXxps/ENTRY/FIT/data/envelope-field </NXxps/ENTRY/FIT/data/envelope-field>`
+* :ref:`/NXxps/ENTRY/FIT/data/input_dependent-field </NXxps/ENTRY/FIT/data/input_dependent-field>`
+* :ref:`/NXxps/ENTRY/FIT/data/input_independent-field </NXxps/ENTRY/FIT/data/input_independent-field>`
+* :ref:`/NXxps/ENTRY/FIT/data/residual-field </NXxps/ENTRY/FIT/data/residual-field>`
+* :ref:`/NXxps/ENTRY/FIT/error_function-group </NXxps/ENTRY/FIT/error_function-group>`
+* :ref:`/NXxps/ENTRY/FIT/error_function/description-field </NXxps/ENTRY/FIT/error_function/description-field>`
+* :ref:`/NXxps/ENTRY/FIT/error_function/formula-field </NXxps/ENTRY/FIT/error_function/formula-field>`
+* :ref:`/NXxps/ENTRY/FIT/figure_of_meritMETRIC-field </NXxps/ENTRY/FIT/figure_of_meritMETRIC-field>`
+* :ref:`/NXxps/ENTRY/FIT/figure_of_meritMETRIC@metric-attribute </NXxps/ENTRY/FIT/figure_of_meritMETRIC@metric-attribute>`
+* :ref:`/NXxps/ENTRY/FIT/global_fit_function-group </NXxps/ENTRY/FIT/global_fit_function-group>`
+* :ref:`/NXxps/ENTRY/FIT/global_fit_function/description-field </NXxps/ENTRY/FIT/global_fit_function/description-field>`
+* :ref:`/NXxps/ENTRY/FIT/global_fit_function/formula-field </NXxps/ENTRY/FIT/global_fit_function/formula-field>`
+* :ref:`/NXxps/ENTRY/FIT/label-field </NXxps/ENTRY/FIT/label-field>`
+* :ref:`/NXxps/ENTRY/FIT/peakPEAK-group </NXxps/ENTRY/FIT/peakPEAK-group>`
+* :ref:`/NXxps/ENTRY/FIT/peakPEAK/data-group </NXxps/ENTRY/FIT/peakPEAK/data-group>`
+* :ref:`/NXxps/ENTRY/FIT/peakPEAK/data/intensity-field </NXxps/ENTRY/FIT/peakPEAK/data/intensity-field>`
+* :ref:`/NXxps/ENTRY/FIT/peakPEAK/data/position-field </NXxps/ENTRY/FIT/peakPEAK/data/position-field>`
+* :ref:`/NXxps/ENTRY/FIT/peakPEAK/function-group </NXxps/ENTRY/FIT/peakPEAK/function-group>`
+* :ref:`/NXxps/ENTRY/FIT/peakPEAK/function/area-group </NXxps/ENTRY/FIT/peakPEAK/function/area-group>`
+* :ref:`/NXxps/ENTRY/FIT/peakPEAK/function/description-field </NXxps/ENTRY/FIT/peakPEAK/function/description-field>`
+* :ref:`/NXxps/ENTRY/FIT/peakPEAK/function/formula-field </NXxps/ENTRY/FIT/peakPEAK/function/formula-field>`
+* :ref:`/NXxps/ENTRY/FIT/peakPEAK/function/position-group </NXxps/ENTRY/FIT/peakPEAK/function/position-group>`
+* :ref:`/NXxps/ENTRY/FIT/peakPEAK/function/position/value-field </NXxps/ENTRY/FIT/peakPEAK/function/position/value-field>`
+* :ref:`/NXxps/ENTRY/FIT/peakPEAK/function/width-group </NXxps/ENTRY/FIT/peakPEAK/function/width-group>`
+* :ref:`/NXxps/ENTRY/FIT/peakPEAK/function/width/value-field </NXxps/ENTRY/FIT/peakPEAK/function/width/value-field>`
+* :ref:`/NXxps/ENTRY/FIT/peakPEAK/label-field </NXxps/ENTRY/FIT/peakPEAK/label-field>`
+* :ref:`/NXxps/ENTRY/FIT/peakPEAK/total_area-field </NXxps/ENTRY/FIT/peakPEAK/total_area-field>`
+* :ref:`/NXxps/ENTRY/FIT/relative_concentration-field </NXxps/ENTRY/FIT/relative_concentration-field>`
 * :ref:`/NXxps/ENTRY/geometries-group </NXxps/ENTRY/geometries-group>`
 * :ref:`/NXxps/ENTRY/geometries/xps_coordinate_system-group </NXxps/ENTRY/geometries/xps_coordinate_system-group>`
 * :ref:`/NXxps/ENTRY/geometries/xps_coordinate_system/depends_on-field </NXxps/ENTRY/geometries/xps_coordinate_system/depends_on-field>`
@@ -594,39 +664,6 @@ attributes, and links defined in this class.
 * :ref:`/NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/transformations/angle_beam_analyser@transformation_type-attribute </NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/transformations/angle_beam_analyser@transformation_type-attribute>`
 * :ref:`/NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/work_function-field </NXxps/ENTRY/INSTRUMENT/ELECTRONANALYSER/work_function-field>`
 * :ref:`/NXxps/ENTRY/method-field </NXxps/ENTRY/method-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting-group </NXxps/ENTRY/peak_fitting-group>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT-group </NXxps/ENTRY/peak_fitting/FIT-group>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND-group </NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND-group>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/data-group </NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/data-group>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/data/intensity-field </NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/data/intensity-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/data/position-field </NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/data/position-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/function-group </NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/function-group>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/function/description-field </NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/function/description-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/function/formula-field </NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/function/formula-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/label-field </NXxps/ENTRY/peak_fitting/FIT/backgroundBACKGROUND/label-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/data-group </NXxps/ENTRY/peak_fitting/FIT/data-group>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/data/envelope-field </NXxps/ENTRY/peak_fitting/FIT/data/envelope-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/data/input_dependent-field </NXxps/ENTRY/peak_fitting/FIT/data/input_dependent-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/data/input_independent-field </NXxps/ENTRY/peak_fitting/FIT/data/input_independent-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/data/residual-field </NXxps/ENTRY/peak_fitting/FIT/data/residual-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/figure_of_meritMETRIC-field </NXxps/ENTRY/peak_fitting/FIT/figure_of_meritMETRIC-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/figure_of_meritMETRIC@metric-attribute </NXxps/ENTRY/peak_fitting/FIT/figure_of_meritMETRIC@metric-attribute>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/fit_function-group </NXxps/ENTRY/peak_fitting/FIT/fit_function-group>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/label-field </NXxps/ENTRY/peak_fitting/FIT/label-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK-group </NXxps/ENTRY/peak_fitting/FIT/peakPEAK-group>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/data-group </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/data-group>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/data/intensity-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/data/intensity-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/data/position-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/data/position-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function-group </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function-group>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/area-group </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/area-group>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/formula-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/formula-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/position-group </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/position-group>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/position/value-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/position/value-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/width-group </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/width-group>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/width/value-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/function/width/value-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/label-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/label-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/peakPEAK/total_area-field </NXxps/ENTRY/peak_fitting/FIT/peakPEAK/total_area-field>`
-* :ref:`/NXxps/ENTRY/peak_fitting/FIT/relative_concentration-field </NXxps/ENTRY/peak_fitting/FIT/relative_concentration-field>`
 * :ref:`/NXxps/ENTRY/SAMPLE-group </NXxps/ENTRY/SAMPLE-group>`
 * :ref:`/NXxps/ENTRY/SAMPLE/depends_on-field </NXxps/ENTRY/SAMPLE/depends_on-field>`
 * :ref:`/NXxps/ENTRY/SAMPLE/transformations-group </NXxps/ENTRY/SAMPLE/transformations-group>`

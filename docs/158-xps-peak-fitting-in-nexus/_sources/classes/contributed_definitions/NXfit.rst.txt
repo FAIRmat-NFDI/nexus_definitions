@@ -13,7 +13,7 @@ NXfit
 
 **Status**:
 
-  base class, extends :ref:`NXobject`
+  base class, extends :ref:`NXprocess`
 
 **Description**:
 
@@ -23,9 +23,7 @@ NXfit
 
   The symbols used in the schema to specify e.g. dimensions of arrays.
 
-  **n_points**: Number of discretization points inside the fitting region.
-
-  **n_dependent**: Number of dependent variables to be fitted (for multidimensional/multivariate fit.)
+  **dimRank**: Rank of the dependent and independent data arrays (for multidimensional/multivariate fit.)
 
 **Groups cited**:
   :ref:`NXdata`, :ref:`NXfit_background`, :ref:`NXfit_function`, :ref:`NXpeak`
@@ -79,45 +77,49 @@ NXfit
 
     .. index:: input_dependent (field)
 
-    **input_dependent**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_points]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+    **input_dependent**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: dimRank) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
-      Dependent axis for this fit procedure.
+      .. collapse:: Position values along one or more data dimensions (to hold the ...
+
+          Position values along one or more data dimensions (to hold the
+          values for the independent variable for this fit procedure).
 
     .. _/NXfit/data/input_independent-field:
 
     .. index:: input_independent (field)
 
-    **input_independent**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_points, n_dependent]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+    **input_independent**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: dimRank) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
-      Independent axis for this fit procedure.
+      Independent input axis for this fit procedure.
 
     .. _/NXfit/data/envelope-field:
 
     .. index:: envelope (field)
 
-    **envelope**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_points, n_dependent]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+    **envelope**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: dimRank) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
-      .. collapse:: Resulting envelope of all NXpeak instances. ...
+      .. collapse:: Resulting envelope of applying the `global_fit_function` with its parameter  ...
 
-          Resulting envelope of all NXpeak instances.
-          Should have the same dimension as the `position` axes of the individual peaks.
+          Resulting envelope of applying the `global_fit_function` with its parameter to the data stored
+          in `input_independent`.
 
     .. _/NXfit/data/residual-field:
 
     .. index:: residual (field)
 
-    **residual**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 2, Dimensions: [n_points, n_dependent]) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
+    **residual**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: dimRank) {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
-      Difference between the envelope and the data to be fitted.
+      Difference between the envelope and the `input_independent` data to be fitted.
 
   .. _/NXfit/peakPEAK-group:
 
   **peakPEAK**: (optional) :ref:`NXpeak` 
 
-    .. collapse:: One spectral peak of the peak model. ...
+    .. collapse:: One peak of the peak model. ...
 
-        One spectral peak of the peak model.
-        It is envisioned that peaks are labeled as peak_0, peak_1, and so on.
+        One peak of the peak model.
+        If there is no characteristic name for each peak component, is envisioned that peaks
+        are labeled as peak_0, peak_1, and so on.
 
     .. _/NXfit/peakPEAK/total_area-field:
 
@@ -157,25 +159,47 @@ NXfit
           The relative area can simply be derived by dividing the total_area by the
           total area of all peaks or by a more complicated method (e.g., by
           additionally dividing by the relative sensitivity factors). Details shall
-          be given in fitting_method.
+          be given in `global_fit_function`.
 
   .. _/NXfit/backgroundBACKGROUND-group:
 
   **backgroundBACKGROUND**: (optional) :ref:`NXfit_background` 
 
-    .. collapse:: One fitted background (functional, position, and intensities) of the peak fit. ...
+    .. collapse:: One fitted background (functional form, position, and intensities) of the peak ...
 
-        One fitted background (functional, position, and intensities) of the peak fit.
-        It is envisioned that peaks are labeled as background_0, background_1, and
-        so on.
+        One fitted background (functional form, position, and intensities) of the peak fit.
+        If there is no characteristic name for each peak component, it is envisioned that backgrounds are labeled
+        as background_0, background_1, and so on.
 
-  .. _/NXfit/fit_function-group:
+  .. _/NXfit/global_fit_function-group:
 
-  **fit_function**: (optional) :ref:`NXfit_function` 
+  **global_fit_function**: (optional) :ref:`NXfit_function` 
+
+    .. collapse:: Function used to describe the overall fit to the data, taking into account the ...
+
+        Function used to describe the overall fit to the data, taking into account the parameters of the
+        individual `NXpeak` and `NXfit_background` components.
+
+    .. _/NXfit/global_fit_function/formula-field:
+
+    .. index:: formula (field)
+
+    **formula**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_function/formula-field>`
+
+      .. collapse:: Oftentimes, if the peaks and fit backgrounds are defined independently (i.e, ...
+
+          Oftentimes, if the peaks and fit backgrounds are defined independently (i.e, with their own
+          parameter sets), the resulting global fit is a function of the form
+          :math:`model = peak_1(p_1) + peak2(p_2) + backgr(p_3).`, where each :math:`p_x` describes the
+          set of parameters for one peak/background.
+
+  .. _/NXfit/error_function-group:
+
+  **error_function**: (optional) :ref:`NXfit_function` 
 
     Function used to optimize the parameters during peak fitting.
 
-    .. _/NXfit/fit_function/description-field:
+    .. _/NXfit/error_function/description-field:
 
     .. index:: description (field)
 
@@ -191,6 +215,21 @@ NXfit
           - linear regression
           - Bayesian linear regression
 
+    .. _/NXfit/error_function/formula-field:
+
+    .. index:: formula (field)
+
+    **formula**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXfit_function/formula-field>`
+
+      .. collapse:: For the optimization, the formula is any optimization process on the `global ...
+
+          For the optimization, the formula is any optimization process on the `global_fit_function` given above.
+          As an example, for a linear least squared algorithm on independent components, the formula of the error_function
+          would be :math:`LLS(peak_1(p_1) + peak2(p_2) + backgr(p_3))`, where each :math:`p_x` describes the set
+          of parameters for one peak/background.
+
+          It is however also possible to supply more involved formulas (e.g., in the case of constrained fits).
+
 
 Hypertext Anchors
 -----------------
@@ -205,10 +244,13 @@ attributes, and links defined in this class.
 * :ref:`/NXfit/data/input_dependent-field </NXfit/data/input_dependent-field>`
 * :ref:`/NXfit/data/input_independent-field </NXfit/data/input_independent-field>`
 * :ref:`/NXfit/data/residual-field </NXfit/data/residual-field>`
+* :ref:`/NXfit/error_function-group </NXfit/error_function-group>`
+* :ref:`/NXfit/error_function/description-field </NXfit/error_function/description-field>`
+* :ref:`/NXfit/error_function/formula-field </NXfit/error_function/formula-field>`
 * :ref:`/NXfit/figure_of_meritMETRIC-field </NXfit/figure_of_meritMETRIC-field>`
 * :ref:`/NXfit/figure_of_meritMETRIC@metric-attribute </NXfit/figure_of_meritMETRIC@metric-attribute>`
-* :ref:`/NXfit/fit_function-group </NXfit/fit_function-group>`
-* :ref:`/NXfit/fit_function/description-field </NXfit/fit_function/description-field>`
+* :ref:`/NXfit/global_fit_function-group </NXfit/global_fit_function-group>`
+* :ref:`/NXfit/global_fit_function/formula-field </NXfit/global_fit_function/formula-field>`
 * :ref:`/NXfit/label-field </NXfit/label-field>`
 * :ref:`/NXfit/peakPEAK-group </NXfit/peakPEAK-group>`
 * :ref:`/NXfit/peakPEAK/relative_area-field </NXfit/peakPEAK/relative_area-field>`

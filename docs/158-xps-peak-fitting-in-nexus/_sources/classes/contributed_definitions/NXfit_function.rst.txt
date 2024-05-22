@@ -17,17 +17,23 @@ NXfit_function
 
 **Description**:
 
-  This describes a fit function to be used inside an NXfit instance.
+  .. collapse:: This describes a fit function that is used to fit data to any functional form. ...
+
+      This describes a fit function that is used to fit data to any functional form.
+
+      A fit function is used to describe a set of data :math:`y_{\mathrm{k}, k = 1 ... M`,  which are collected as a function
+      of one or more independent variables :math:`x` at the points :math:`x_{\mathrm{k}`. The fit function :math:`f` describes
+      these data in an approximative way as :math:`y_{\mathrm{k} \approx f(a_{\mathrm{0}, . . . a__{\mathrm{n}, x_{\mathrm{k})`, where math:`a_{\mathrm{i}, i = 0 . . . n` are
+      the *fit parameters* (which are stored the instances of ``NXfit_parameter``).
 
 **Symbols**:
 
-
-  **n_repetitions**: The number of repetitions for the repeated parameters.
+  No symbol table
 
 **Groups cited**:
-  :ref:`NXfit_repeated_parameter`, :ref:`NXfit_single_parameter`
+  :ref:`NXfit_parameter`
 
-.. index:: NXfit_single_parameter (base class); used in base class, NXfit_repeated_parameter (base class); used in base class
+.. index:: NXfit_parameter (base class); used in base class
 
 **Structure**:
 
@@ -37,7 +43,7 @@ NXfit_function
 
   **description**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    Description of this fit function.
+    Human-readable description of this fit function.
 
   .. _/NXfit_function/formula-field:
 
@@ -45,34 +51,16 @@ NXfit_function
 
   **formula**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
 
-    .. collapse:: This should be a python parsable function. ...
+    .. collapse:: Mathematical formula of the function, taking into account the instances of ``N ...
 
-        This should be a python parsable function.
-        Here we should provide which keywords are available
+        Mathematical formula of the function, taking into account the instances of ``NXfit_parameter``.
+
+        This should be a python parsable function. Here we should provide which keywords are available
         and a BNF of valid grammar.
 
-  .. _/NXfit_function/FIT_SINGLE_PARAMETER-group:
+  .. _/NXfit_function/FIT_PARAMETER-group:
 
-  **FIT_SINGLE_PARAMETER**: (optional) :ref:`NXfit_single_parameter` 
-
-
-  .. _/NXfit_function/FIT_REPEATED_PARAMETER-group:
-
-  **FIT_REPEATED_PARAMETER**: (optional) :ref:`NXfit_repeated_parameter` 
-
-
-    .. _/NXfit_function/FIT_REPEATED_PARAMETER/parameter_units-field:
-
-    .. index:: parameter_units (field)
-
-    **parameter_units**: (optional) :ref:`NX_CHAR <NX_CHAR>` (Rank: 1, Dimensions: [n_repetitions]) :ref:`⤆ </NXfit_repeated_parameter/parameter_units-field>`
-
-
-    .. _/NXfit_function/FIT_REPEATED_PARAMETER/values-field:
-
-    .. index:: values (field)
-
-    **values**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` (Rank: 1, Dimensions: [n_repetitions]) :ref:`⤆ </NXfit_repeated_parameter/values-field>`
+  **FIT_PARAMETER**: (optional) :ref:`NXfit_parameter` 
 
 
 
@@ -84,10 +72,7 @@ attributes, and links defined in this class.
 
 
 * :ref:`/NXfit_function/description-field </NXfit_function/description-field>`
-* :ref:`/NXfit_function/FIT_REPEATED_PARAMETER-group </NXfit_function/FIT_REPEATED_PARAMETER-group>`
-* :ref:`/NXfit_function/FIT_REPEATED_PARAMETER/parameter_units-field </NXfit_function/FIT_REPEATED_PARAMETER/parameter_units-field>`
-* :ref:`/NXfit_function/FIT_REPEATED_PARAMETER/values-field </NXfit_function/FIT_REPEATED_PARAMETER/values-field>`
-* :ref:`/NXfit_function/FIT_SINGLE_PARAMETER-group </NXfit_function/FIT_SINGLE_PARAMETER-group>`
+* :ref:`/NXfit_function/FIT_PARAMETER-group </NXfit_function/FIT_PARAMETER-group>`
 * :ref:`/NXfit_function/formula-field </NXfit_function/formula-field>`
 
 **NXDL Source**:

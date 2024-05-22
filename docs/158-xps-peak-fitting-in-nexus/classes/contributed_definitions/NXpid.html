@@ -62,19 +62,29 @@
 </dl>
 <p id="index-1"><strong>Structure</strong>:</p>
 <blockquote>
-<div><p id="index-2"><span id="nxpid-description-field"></span><strong>description</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<div><p id="index-2"><span id="nxpid-default-attribute"></span><strong>&#64;default</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-declares-which-child-group-contains-a-path-leading">
+<summary>Declares which child group contains a path leading ...</summary><p id="index-3">Declares which child group contains a path leading
+to a <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> group.</p>
+<p>It is recommended (as of NIAC2014) to use this attribute
+to help define the path to the default dataset to be plotted.
+See <a class="reference external" href="https://www.nexusformat.org/2014_How_to_find_default_data.html">https://www.nexusformat.org/2014_How_to_find_default_data.html</a>
+for a summary of the discussion.</p>
+</details></div></blockquote>
+<p id="index-4"><span id="nxpid-description-field"></span><strong>description</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
 <blockquote>
 <div><details class="summary-description-of-how-the-process-value-for-the-pid-controller-is-produced-by-sen">
 <summary>Description of how the Process Value for the PID controller is produced by sen ...</summary><p>Description of how the Process Value for the PID controller is produced by sensor(s) in the setup.</p>
 <p>For example, a set of sensors could be averaged over before feeding it back into the loop.</p>
 </details></div></blockquote>
-<p id="index-3"><span id="nxpid-setpoint-field"></span><strong>setpoint</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<p id="index-5"><span id="nxpid-setpoint-field"></span><strong>setpoint</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
 <blockquote>
 <div><details class="summary-the-setpoint-s-used-as-an-input-for-the-pid-controller">
 <summary>The Setpoint(s) used as an input for the PID controller. ...</summary><p>The Setpoint(s) used as an input for the PID controller.</p>
 <p>It can also be a link to an NXsensor.value field.</p>
 </details></div></blockquote>
-<p id="index-4"><span id="nxpid-k-p-value-field"></span><strong>K_p_value</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<p id="index-6"><span id="nxpid-k-p-value-field"></span><strong>K_p_value</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
 <blockquote>
 <div><details class="summary-proportional-term-the-proportional-term-produces-an-output-value">
 <summary>Proportional term. The proportional term produces an output value ...</summary><p>Proportional term. The proportional term produces an output value
@@ -83,7 +93,7 @@ The proportional response can be adjusted by multiplying the error
 by a constant Kp, called the proportional gain constant.
 The Type switches controller parameters between P/I (proportional gain/integral gain) and P/T (proportional gain/time constant). The formula for the controller in the frequency domain is G(s) = P + I/s = P(1 + 1/(Ts)). The integral gain and time constant are related as follows I = P/T.</p>
 </details></div></blockquote>
-<p id="index-5"><span id="nxpid-k-i-value-field"></span><strong>K_i_value</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<p id="index-7"><span id="nxpid-k-i-value-field"></span><strong>K_i_value</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
 <blockquote>
 <div><details class="summary-the-contribution-from-the-integral-term-is-proportional-to-both">
 <summary>The contribution from the integral term is proportional to both ...</summary><p>The contribution from the integral term is proportional to both
@@ -94,7 +104,7 @@ been corrected previously. The accumulated error is then
 multiplied by the integral gain (Ki) and added to the
 controller output.</p>
 </details></div></blockquote>
-<p id="index-6"><span id="nxpid-k-d-value-field"></span><strong>K_d_value</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<p id="index-8"><span id="nxpid-k-d-value-field"></span><strong>K_d_value</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
 <blockquote>
 <div><details class="summary-the-derivative-of-the-process-error-is-calculated-by-determining">
 <summary>The derivative of the process error is calculated by determining ...</summary><p>The derivative of the process error is calculated by determining
@@ -103,7 +113,7 @@ change by the derivative gain K_d. The magnitude of the
 contribution of the derivative term to the overall control
 action is termed the derivative gain, K_d</p>
 </details></div></blockquote>
-<p id="index-7"><span id="nxpid-k-t-const-field"></span><strong>K_t_const</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<p id="index-9"><span id="nxpid-k-t-const-field"></span><strong>K_t_const</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
 <blockquote>
 <div><details class="summary-the-type-switches-controller-parameters-between-p-i-proportional-gain-integra">
 <summary>The Type switches controller parameters between P/I (proportional gain/integra ...</summary><p>The Type switches controller parameters between P/I (proportional gain/integral
@@ -118,7 +128,7 @@ time constant are related as follows I = P/T.</p>
 <p>In case multiple sensors were used, this NXsensor should contain the proper calculated/aggregated value.</p>
 </details><p id="nxpid-pv-sensor-value-log-group"><strong>value_log</strong>: (optional) <a class="reference internal" href="../base_classes/NXlog.html#nxlog"><span class="std std-ref">NXlog</span></a> <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor-value-log-group"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
-<div><p id="index-8"><span id="nxpid-pv-sensor-value-log-value-field"></span><strong>value</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXlog.html#nxlog-value-field"><span class="std std-ref">⤆</span></a></p>
+<div><p id="index-10"><span id="nxpid-pv-sensor-value-log-value-field"></span><strong>value</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXlog.html#nxlog-value-field"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>The actual timeseries data fed back to the PID loop.</p>
 </div></blockquote>
@@ -144,6 +154,7 @@ attributes, and links defined in this class.</p>
 <li><p><a class="reference internal" href="#nxpid-pv-sensor-value-log-value-field"><span class="std std-ref">/NXpid/pv_sensor/value_log/value-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxpid-setpoint-field"><span class="std std-ref">/NXpid/setpoint-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxpid-setpoint-log-group"><span class="std std-ref">/NXpid/setpoint_log-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxpid-default-attribute"><span class="std std-ref">/NXpid&#64;default-attribute</span></a></p></li>
 </ul>
 <dl class="simple">
 <dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXpid.nxdl.xml">https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXpid.nxdl.xml</a></p>
