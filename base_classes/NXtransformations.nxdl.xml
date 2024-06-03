@@ -22,6 +22,17 @@
 # For further information, see http://www.nexusformat.org
 -->
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" ignoreExtraGroups="true" ignoreExtraFields="true" ignoreExtraAttributes="true" name="NXtransformations" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+    <symbols>
+        <doc>
+             These symbols will be used below to coordinate fields with the same
+             shape.
+        </doc>
+        <symbol name="n_dim">
+            <doc>
+                 number of dimension in the coordinate_system (typically 3).
+            </doc>
+        </symbol>
+    </symbols>
     <doc>
          Collection of axis-based translations and rotations to describe a geometry.
          May also contain axes that do not move and therefore do not have a transformation
@@ -210,47 +221,87 @@
                vertical:NXdetector
                  depends_on=position/distance
                  position:NXtransformations
-                   distance=10         # move downstream from the sample
+                   distance=10          # move downstream from the sample
                      @depends_on=polar
                      @units=cm
                      @vector=[1 0 0]
-                   polar=5             # title above the horizontal plane
+                   polar=5              # title above the horizontal plane
                      @depends_on=azimuth
                      @units=degrees
                      @vector=[0 -1 0]
-                   azimuth=0         # stay in the vertical plane
+                   azimuth=0        # stay in the vertical plane
                      @depends_on=/entry/coordinate_system/beam
                      @units=degrees
                      @vector=[-1 0 0]
                horizontal:NXdetector
                  depends_on=position/distance
                  position:NXtransformations
-                   distance=11         # move downstream from the sample
+                   distance=11          # move downstream from the sample
                      @depends_on=polar
                      @units=cm
                      @vector=[1 0 0]
-                   polar=6             # title above the horizontal plane
+                   polar=6              # title above the horizontal plane
                      @depends_on=azimuth
                      @units=degrees
                      @vector=[0 -1 0]
-                   azimuth=90           # rotate to the horizontal plane
+                   azimuth=90             # rotate to the horizontal plane
                      @depends_on=/entry/coordinate_system/beam
                      @units=degrees
                      @vector=[-1 0 0]
                transmission:NXdetector
                  depends_on=position/distance
                  position:NXtransformations
-                   distance=20         # move downstream from the sample
+                   distance=20          # move downstream from the sample
                      @depends_on=/entry/coordinate_system/beam
                      @units=cm
                      @vector=[1 0 0]
              coordinate_system:NXtransformations
                beam=NaN               # value is never used
                  @depends_on=gravity
-                 @vector=[1 0 0]     # X-axis points in the beam direction
-               gravity=NaN             # value is never used
-                 @depends_on=.         # end of the chain
-                 @vector=[0 0 -1]       # Z-axis points up
+                 @vector=[1 0 0]
+                 @direction=X-axis points in the beam direction
+               gravity=NaN
+                 @depends_on=/entry/analyser_cs/gravity  # end of the chain
+                 @vector=[1 0 0]
+                 @transformation_type=rotation
+                 @direction=Z-axis points up
+         
+         **Example 3: base changes between different coordinate systems**
+         
+         Define transformations to change bases from the NeXus coordinate frame (McStas)
+         with the Z-axis along the beam to a new laboratory reference based on X-, Y-, and Z-axes of
+         the sample stage. The new coordinate system is left-handed, whereas McStas is defined as
+         right-handed. Thus, the following transformatios need to be applied:
+         
+         - rotation about y-axis by `180-source_polar_angle`, where `source_polar_angle` is the angle between the Z-axis
+           of the new CS and the beam axis.
+         - rotation about z-axis (by the azimuthal angle of the source w.r.t the projection
+           of the source axis of the new CS)
+         - change of handedness: x = - x
+         
+         .. code-block::
+         
+           entry:NXentry
+             transformations:NXtransformations
+               sample_stage_coordinate_system:NaN # value is never used
+                 @depends_on=y_rotation
+                 @direction="X-axis points in sample stage x direction,
+                             Y-Axis points in sample stage y direction (towards the operator),
+                             Z-axis points upwards,
+                             forming a left-handed coordinate_system"
+                @matrix = [[1 0 0], [0 1 0], [0 0 1]]
+               y_rotation:180-source_polar_angle
+                 @transformation_type=rotation
+                 @depends_on=sample_stage_cs
+                 @vector=[0, 1, 0]
+               z_rotation:source_azimuth_angle
+                 @transformation_type=rotation
+                 @depends_on=base_change
+                 @vector=[0, 0, 1]
+               base_change=1 # no magnification
+                 @transformation_type=base_change
+                 @depends_on=.
+                 @matrix = [[-1 0 0], [0 1 0], [0 0 1]]
     </doc>
     <field name="AXISNAME" type="NX_NUMBER" nameType="any" units="NX_TRANSFORMATION" maxOccurs="unbounded">
         <doc>
@@ -271,14 +322,18 @@
                  in which case the values are angular rotations around the axis.
                  
                  If this attribute is omitted, this is an axis for which there
-                 is no motion to be specifies, such as the direction of gravity,
+                 is no motion to be specified, such as the direction of gravity,
                  or the direction to the source, or a basis vector of a
                  coordinate frame.
+                 
+                 The transformation_type may be ``base_change``, in which case a matrix containing
+                 n_dim column vectors of n_dim length should be supplied.
             </doc>
             <!--<item value="general" />-->
             <enumeration>
                 <item value="translation"/>
                 <item value="rotation"/>
+                <item value="base_change"/>
             </enumeration>
         </attribute>
         <attribute name="vector" optional="true" type="NX_NUMBER">
@@ -292,7 +347,27 @@
                  should be chosen.
             </doc>
             <dimensions rank="1">
-                <dim index="1" value="3"/>
+                <dim index="1" value="n_dim"/>
+            </dimensions>
+        </attribute>
+        <attribute name="direction">
+            <doc>
+                 Human-readable field telling in which direction the axis points. This is to be used
+                 to a define a reference frame (i.e, for axes with no transformation_type).
+                 
+                 If `@matrix` is filled, then this field shall contain the direction of all n-dim matrix
+                 elements.
+                 
+                 Exemplar values for one axis could be the direction of gravity.
+            </doc>
+        </attribute>
+        <attribute name="matrix" optional="true" type="NX_NUMBER">
+            <doc>
+                 For axes of transformation_type ``base_change``, this matrix contains n_dim column vectors
+                 of n_dim length.
+            </doc>
+            <dimensions rank="2">
+                <dim index="n_dim" value="n_dim"/>
             </dimensions>
         </attribute>
         <attribute name="offset" type="NX_NUMBER">
@@ -302,7 +377,7 @@
                  as the mechanical offset from mounting the axis to its dependency.
             </doc>
             <dimensions rank="1">
-                <dim index="1" value="3"/>
+                <dim index="1" value="n_dim"/>
             </dimensions>
         </attribute>
         <attribute name="offset_units" type="NX_CHAR">
@@ -312,9 +387,8 @@
         </attribute>
         <attribute name="depends_on" type="NX_CHAR">
             <doc>
-                 Points to the path of a field defining the axis on which this instance of
-                 NXtransformations depends or the string ".". It can also point to an instance of
-                 ``NX_coordinate_system`` if this transformation depends on it.
+                 Points to the path to a field defining the axis on which this
+                 depends or the string "." when at the end of the chain.
             </doc>
         </attribute>
         <attribute name="equipment_component" type="NX_CHAR">
@@ -345,7 +419,7 @@
              the corresponding axis moves during the exposure of a frame.  Ideally, the
              value of this field added to each value of ``AXISNAME`` would agree with the
              corresponding values of ``AXISNAME_end``, but there is a possibility of significant
-             differences. Use of ``AXISNAME_end`` is recommended.
+             differences.  Use of ``AXISNAME_end`` is recommended.
         </doc>
     </field>
     <attribute name="default">
