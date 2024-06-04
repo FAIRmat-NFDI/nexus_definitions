@@ -27,9 +27,9 @@ NXmpes_arpes
   No symbol table
 
 **Groups cited**:
-  :ref:`NXaperture`, :ref:`NXcollectioncolumn`, :ref:`NXcoordinate_system_set`, :ref:`NXcoordinate_system`, :ref:`NXdata_mpes`, :ref:`NXelectronanalyser`, :ref:`NXenergydispersion`, :ref:`NXentry`, :ref:`NXinstrument`, :ref:`NXresolution`, :ref:`NXsample`, :ref:`NXtransformations`
+  :ref:`NXaperture`, :ref:`NXcollectioncolumn`, :ref:`NXcoordinate_system_set`, :ref:`NXcoordinate_system`, :ref:`NXdata`, :ref:`NXelectronanalyser`, :ref:`NXenergydispersion`, :ref:`NXentry`, :ref:`NXinstrument`, :ref:`NXresolution`, :ref:`NXsample`, :ref:`NXtransformations`
 
-.. index:: NXentry (base class); used in application definition, NXcoordinate_system_set (base class); used in application definition, NXcoordinate_system (base class); used in application definition, NXtransformations (base class); used in application definition, NXinstrument (base class); used in application definition, NXresolution (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXcollectioncolumn (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXaperture (base class); used in application definition, NXsample (base class); used in application definition, NXdata_mpes (base class); used in application definition
+.. index:: NXentry (base class); used in application definition, NXcoordinate_system_set (base class); used in application definition, NXcoordinate_system (base class); used in application definition, NXtransformations (base class); used in application definition, NXinstrument (base class); used in application definition, NXresolution (base class); used in application definition, NXelectronanalyser (base class); used in application definition, NXcollectioncolumn (base class); used in application definition, NXenergydispersion (base class); used in application definition, NXaperture (base class); used in application definition, NXsample (base class); used in application definition, NXdata (base class); used in application definition
 
 **Structure**:
 
@@ -600,17 +600,20 @@ NXmpes_arpes
 
     .. _/NXmpes_arpes/ENTRY/data-group:
 
-    **data**: (required) :ref:`NXdata_mpes` 
+    **data**: (required) :ref:`NXdata` :ref:`⤆ </NXmpes/ENTRY/data-group>`
 
 
       .. _/NXmpes_arpes/ENTRY/data@signal-attribute:
 
       .. index:: signal (group attribute)
 
-      **@signal**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata@signal-attribute>`
+      **@signal**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXmpes/ENTRY/data@signal-attribute>`
 
+        .. collapse:: There is an object named data that contains the signal. ...
 
-        Obligatory value: ``data``
+            There is an object named data that contains the signal.
+
+            Obligatory value: ``data``
 
       .. _/NXmpes_arpes/ENTRY/data@axes-attribute:
 
@@ -618,8 +621,12 @@ NXmpes_arpes
 
       **@axes**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata@axes-attribute>`
 
+        .. collapse:: There are three dimensions, one energy and two angular coordinates. Any co ...
 
-        Obligatory value: ``[angular0, angular1, energy]``
+            There are three dimensions, one energy and two angular coordinates. Any coordinates that do not move,
+            are represented by one point.
+
+            Obligatory value: ``['angular0', 'angular1', 'energy']``
 
       .. _/NXmpes_arpes/ENTRY/data@energy_indices-attribute:
 
@@ -676,7 +683,7 @@ NXmpes_arpes
 
       .. index:: energy_depends (group attribute)
 
-      **@energy_depends**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXdata@AXISNAME_depends-attribute>`
+      **@energy_depends**: (required) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXmpes/ENTRY/data@energy_depends-attribute>`
 
         .. collapse:: Points to the path to a field defining the axis on which the energy axis d ...
 
@@ -690,7 +697,7 @@ NXmpes_arpes
 
       .. index:: energy (field)
 
-      **energy**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=NY_ENERGY} :ref:`⤆ </NXdata_mpes/energy-field>`
+      **energy**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=NY_ENERGY} :ref:`⤆ </NXmpes/ENTRY/data/energy-field>`
 
         .. collapse:: Trace of the energy axis. Could be linked from the respective 'AXISNAME_de ...
 
@@ -701,7 +708,7 @@ NXmpes_arpes
 
       .. index:: angular0 (field)
 
-      **angular0**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} :ref:`⤆ </NXdata_mpes/angularN-field>`
+      **angular0**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} :ref:`⤆ </NXdata/AXISNAME-field>`
 
         .. collapse:: Trace of the first angular axis. Could be linked from the respective ...
 
@@ -712,7 +719,7 @@ NXmpes_arpes
 
       .. index:: angular1 (field)
 
-      **angular1**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=ANX_ANGLE} :ref:`⤆ </NXdata_mpes/angularN-field>`
+      **angular1**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=ANX_ANGLE} :ref:`⤆ </NXdata/AXISNAME-field>`
 
         .. collapse:: Trace of the second axis. Could be linked from the respective 'AXISNAME_de ...
 
@@ -723,7 +730,7 @@ NXmpes_arpes
 
       .. index:: data (field)
 
-      **data**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXdata/DATA-field>`
+      **data**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANY <NX_ANY>`} :ref:`⤆ </NXmpes/ENTRY/data/data-field>`
 
         .. collapse:: Represents a measure of three-dimensional photoemission counts, where ...
 
