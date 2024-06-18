@@ -29,7 +29,9 @@ doc: |
 
 # 2023.19.7 This Nexus file is currently only for STS data, it will be updated to handle the
 type: group
-NXsts(NXsensor_scan):
+#### discuss-3
+# NXsts(NXsensor_scan):
+NXspm(NXobject)
   (NXentry):
     definition:
       enumeration: [NXsts]
@@ -306,24 +308,120 @@ NXsts(NXsensor_scan):
             exists: optional
           value(NX_NUMBER):
             exists: optional
-        position(NXpositioner_sts):
+        position(NXpositioner_spm):
           doc: |
             Clarify the frame laboratory frame.
           x(NX_NUMBER):
             exists: optional
             unit: NX_LENGTH
             doc: |
-              The scanning area in x position in the frame. (e.g. -890.53E-12)
+              The scanning area in x position in the frame. (e.g. -890.53E-12).
           y(NX_NUMBER):
             exists: optional
             unit: NX_LENGTH
             doc: |
-              The scanning area in y position in the frame. (e.g. 29.6968E-9)
+              The scanning area in y position in the frame. (e.g. 29.6968E-9).
           z(NX_NUMBER):
             exists: optional
             unit: NX_LENGTH
             doc: |
-              The scanning area in z position in the frame. (e.g. 130.5E-9)
+              The scanning area in z position in the frame. (e.g. 130.5E-9).
+          final_z(NX_NUMBER):
+            unit: NX_LENGTH
+            doc: |
+              The final z-position during the bias spectroscopy scan. The availability of values is
+              related to the mode of scanning.
+          z_controller(NXpid):
+            k_p_gain(NX_NUMBER):
+              unit: NX_UNITLESS
+              doc: |
+                The Type switches controller parameters between :math:`P/I` (proportional gain (P gain) /integral gain (I gain)) and :math:`P/T`
+                (proportional gain/time constant). The formula for the controller in the frequency domain is:
+                :math:`G(s) = P + I/s = P(1 + 1/(Ts))`.
+                The integral gain and time constant are related as follows: :math:`I = P/T`.
+
+            k_i_gain(NX_NUMBER):
+              unit: NX_UNITLESS
+              doc: |
+                The Type switches controller parameters between :math:`P/I` (proportional gain/integral gain) and
+                P/T (proportional gain/time constant). The formula for the controller in the frequency
+                domain is: :math:`G(s) = P + I/s = P(1 + 1/(Ts))`. The integral gain and time constant are related
+                as follows: `:math:I = P/T`.
+            z_controller_hold(NX_BOOLEAN):
+              doc: |
+                (In bias spectroscopy) Select whether to set the Z-Controller on hold (i.e. disabled) during
+                the sweep. It is selected by default. When deselected, Z-offset and Z control time parameters
+                are disabled.
+            time_const(NX_NUMBER):
+              unit: NX_TIME
+              doc: |
+                The Type switches controller parameters between :math:`P/I` (proportional gain/integral gain) and
+                :math:`P/T` (proportional gain/time constant). The formula for the controller in the frequency
+                domain is: :math:`G(s) = P + I/s = P(1 + 1/(Ts))`. The integral gain and time constant are related
+                as follows: :math:`I = P/T`.
+
+            tip_lift(NX_NUMBER):
+              unit: NX_LENGTH
+              doc: |
+                Lifts the tip by the specified amount when then controller is switched off. This can be
+                a positive or a negative number, i.e. the tip can also be moved towards the sample. Be
+                careful with sign and value when using this feature.
+            switch_off_delay(NX_NUMBER):
+              unit: NX_TIME
+              doc: |
+                Use this parameter for a reproducible position when switching off the Z-controller.
+                When >0 and the Z-controller is switched off, it doesn't switch off immediately but continues
+                to run for the specified time and averages the Z position.
+          ###  Discuss-1  this part should go to scan_control
+          scanfield(NX_NUMBER):
+            unit: NX_LENGTH
+            doc: |
+              Configure the scan frame like x position; y position; width; height.
+          pixels_line(NX_NUMBER):
+            unit: NX_COUNT
+            doc: |
+              Scan resolution by setting the Lines equal to Pixels.
+          lines(NX_NUMBER):
+            unit: NX_ANY
+            doc: |
+              Define the image resolution.
+          speed_forw(NX_NUMBER):
+            unit: NX_ANY
+            doc: |
+              Define the scan forward speed in the forward direction.
+          speed_backw(NX_NUMBER):
+            unit: NX_ANY
+            doc: |
+              Define the scan backward speed in the forward direction.
+          ###  Discuss-1  this part should go to scan_control
+          
+          ### Discuss -2 this part already discussed in piezo_config
+          piezo_calibration:
+            doc: |
+              Piezo calibration module is used to define the X Y Z piezos calibration.
+          active_calib(NX_CHAR):
+            doc: |
+              The name of caliberation type.
+          calib_N(NX_NUMBER):
+
+          scan_contronller(NX_NUMBER):
+            doc: |
+              There are 2 parameters in X and Y directions. If you know them, you can enter the 2nd order
+              piezo characteristics to compensate for it. The following equation shows the interpretation
+              of the 2nd order correction parameter: For the X-piezo:
+              :math:`Ux = 1/cx · X + cxx · X2`; with units: :math:`[V] = [V/m] · [m] + [V/m2] · [m2]`
+              where cx is the calibration of the piezo X and cxx is the 2nd order correction. :math:`(V/m^2)`
+          drift(NX_NUMBER):
+            unit: NX_ANY
+            doc: |
+              There are 2 parameters in X and Y directions. Define the drift speed for all three axes.
+              When the compensation is on, the piezos will start to move at that speed.
+          drift_correction_status(NX_CHAR):
+            doc: |
+              Use the button to turn on/off the drift compensation.
+
+          ### Discuss -2 this part already discussed in piezo_config
+
           z_controller(NXcollection):
             z(NX_NUMBER):
               unit: NX_LENGTH
@@ -421,7 +519,47 @@ NXsts(NXsensor_scan):
         # parameters how to change the location from measurement to measurement during the scan
         scan_control(NXcollection):
           exists: optional
-          roi(NXtransformations):
+          scan_range(NX_NUMBER):
+            unit: NX_LENGTH
+            exists: optional
+            doc: |
+              The scan range (in STM experiment) is the area that the tip will scan. (e.g.
+              5.000000E-9 5.000000E-9)
+          scan_offset(NX_NUMBER):
+            unit: NX_LENGTH
+            exists: optional
+            doc: |
+              The scan offset (in STM experiment) is the position of the tip in the scan area.
+              (e.g. -2.354637E-7 1.267476E-)
+          scan_direction:
+            exists: optional
+            doc: |
+              The scan direction (in STM experiment) is the direction from which side of the
+              sample the tip starts scanning.
+            enumeration: [down, up, top, bottom]
+          scan_angle(NX_NUMBER):
+            unit: NX_ANGLE
+            exists: optional
+            doc: |
+              The angle of scan (in STM experiment) with the bottom or top side (depends on the scan_direction
+              field) of the sample. (e.g. 0.000E+0).
+          scanfield(NX_NUMBER):
+            doc: |
+              Configure the scan frame like x position; y position; width; height. (e.g.
+              3.11737E-9;29.1583E-9;15E-9;15E-9;0E+0)
+          pixels_line(NX_NUMBER):
+            doc: |
+              Scan resolution by setting the Lines equal to Pixels.  (e.g. 512)
+          lines(NX_NUMBER):
+            doc: |
+              Define the image resolution. (e.g. 512)
+          speed_forw(NX_NUMBER):
+            doc: |
+              Define the scan forward speed in the forward direction. (m/s) (e.g. 11.7187E-9)
+          speed_backw(NX_NUMBER):
+            doc: |
+              Define the scan backward speed in the forward direction. (m/s) (e.g. 11.7187E-9)
+                    roi(NXtransformations):
             exists: optional
             frame:
               doc: |
@@ -433,23 +571,6 @@ NXsts(NXsensor_scan):
               doc: |
                 The scan channels are selected by users. (e.g. (A);Bias (V);Z (m);LI Demod 2 X
                 (A);LI Demod 2 Y (A);LI Demod 1 X (A);LI Demod 1 Y (A))
-          positioner(NXcollection):
-            scanfield(NX_NUMBER):
-              doc: |
-                Configure the scan frame like x position; y position; width; height. (e.g.
-                3.11737E-9;29.1583E-9;15E-9;15E-9;0E+0)
-            pixels_line(NX_NUMBER):
-              doc: |
-                Scan resolution by setting the Lines equal to Pixels.  (e.g. 512)
-            lines(NX_NUMBER):
-              doc: |
-                Define the image resolution. (e.g. 512)
-            speed_forw(NX_NUMBER):
-              doc: |
-                Define the scan forward speed in the forward direction. (m/s) (e.g. 11.7187E-9)
-            speed_backw(NX_NUMBER):
-              doc: |
-                Define the scan backward speed in the forward direction. (m/s) (e.g. 11.7187E-9)
     
     # RESOLUTION (calculation input)
     # TODO: After fix resolution_indicators back to required
