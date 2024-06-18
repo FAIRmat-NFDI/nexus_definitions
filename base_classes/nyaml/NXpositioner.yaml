@@ -64,19 +64,10 @@ NXpositioner(NXobject):
     unit: NX_ANY
     doc: |
       time to ramp the velocity up to full speed
-  positioning_sensor(NXsensor):
-    doc: |
-      A sensor to track the position of the interaction point.
-  rotation_sensor(NXsensor):
-    doc: |
-      If present, a sensor for the polar coordinates system.
-
-  #### note: Need a potioning sensor or rotating sensor, data to the positioning sensor driver
   # TODO other parameters: settling time, backlash, link to readback channel
   controller_record:
     doc: |
     Hardware device record, e.g. EPICS process variable, taco/tango ...
-
   depends_on(NX_CHAR):
     doc: |
       NeXus positions components by applying a set of translations and rotations
@@ -94,13 +85,16 @@ NXpositioner(NXobject):
       and rotation operations necessary to position the component within
       the instrument. The dependency chain may however traverse similar groups in
       other component groups.
-  feedback(NXpid):
+  actuator(NXactuator):
     doc: |
-      The feedback of the actual position of the positioner.
-    pv_sensor(NXsensor):
+      The actuator of the positioner which is responsible for the movement of the probe.
+    feedback(NXpid):
       doc: |
-        If present, the value and the value_log of this pv_sensor is the same as
-        the value and raw_value of the position itself.
+        The feedback of the actual position of the positioner.
+      pv_sensor(NXsensor):
+        doc: |
+          If present, the value and the value_log of this pv_sensor is the same as
+          the value and raw_value of the position itself.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
 # 9e3dc1962303ddef4d403e479bfde3b47cdd8a9fa15c57bf2fadfb6e55ff541f
