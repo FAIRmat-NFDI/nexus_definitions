@@ -3,6 +3,17 @@ doc: |
   A generic positioner such as a motor or piezo-electric transducer.
 type: group
 NXpositioner(NXobject):
+  \@default:
+    doc: |
+      .. index:: plotting
+      
+      Declares which child group contains a path leading
+      to a :ref:`NXdata` group.
+      
+      It is recommended (as of NIAC2014) to use this attribute
+      to help define the path to the default dataset to be plotted.
+      See https://www.nexusformat.org/2014_How_to_find_default_data.html
+      for a summary of the discussion.  
   name:
     doc: |
       symbolic or mnemonic name (one word)
@@ -53,22 +64,19 @@ NXpositioner(NXobject):
     unit: NX_ANY
     doc: |
       time to ramp the velocity up to full speed
-  
+  positioning_sensor(NXsensor):
+    doc: |
+      A sensor to track the position of the interaction point.
+  rotationing_sensor(NXsensor):
+    doc: |
+      If present, a sensor for the polar coordinates system.
+
+  #### note: Need a potioning sensor or rotating sensor, data to the positioning sensor driver
   # TODO other parameters: settling time, backlash, link to readback channel
   controller_record:
     doc: |
-      Hardware device record, e.g. EPICS process variable, taco/tango ...
-  \@default:
-    doc: |
-      .. index:: plotting
-      
-      Declares which child group contains a path leading
-      to a :ref:`NXdata` group.
-      
-      It is recommended (as of NIAC2014) to use this attribute
-      to help define the path to the default dataset to be plotted.
-      See https://www.nexusformat.org/2014_How_to_find_default_data.html
-      for a summary of the discussion.
+    Hardware device record, e.g. EPICS process variable, taco/tango ...
+
   depends_on(NX_CHAR):
     doc: |
       NeXus positions components by applying a set of translations and rotations
@@ -86,6 +94,13 @@ NXpositioner(NXobject):
       and rotation operations necessary to position the component within
       the instrument. The dependency chain may however traverse similar groups in
       other component groups.
+  feedback(NXpid):
+    doc: |
+      The feedback of the actual position of the positioner.
+    pv_sensor(NXsensor):
+      doc: |
+        If present, the value and the value_log of this pv_sensor is the same as
+        the value and raw_value of the position itself.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
 # 9e3dc1962303ddef4d403e479bfde3b47cdd8a9fa15c57bf2fadfb6e55ff541f
