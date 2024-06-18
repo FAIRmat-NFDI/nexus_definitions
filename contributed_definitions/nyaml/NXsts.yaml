@@ -370,63 +370,7 @@ NXspm(NXsensor_scan):
                 Use this parameter for a reproducible position when switching off the Z-controller.
                 When >0 and the Z-controller is switched off, it doesn't switch off immediately but continues
                 to run for the specified time and averages the Z position.
-          ###  Discuss-1  this part should go to scan_control
-          scanfield(NX_NUMBER):
-            unit: NX_LENGTH
-            doc: |
-              Configure the scan frame like x position; y position; width; height.
-          pixels_line(NX_NUMBER):
-            unit: NX_COUNT
-            doc: |
-              Scan resolution by setting the Lines equal to Pixels.
-          lines(NX_NUMBER):
-            unit: NX_ANY
-            doc: |
-              Define the image resolution.
-          speed_forw(NX_NUMBER):
-            unit: NX_ANY
-            doc: |
-              Define the scan forward speed in the forward direction.
-          speed_backw(NX_NUMBER):
-            unit: NX_ANY
-            doc: |
-              Define the scan backward speed in the forward direction.
-          ###  Discuss-1  this part should go to scan_control
-          
-          ### Discuss -2 this part already discussed in piezo_config
-          piezo_calibration:
-            doc: |
-              Piezo calibration module is used to define the X Y Z piezos calibration.
-          active_calib(NX_CHAR):
-            doc: |
-              The name of caliberation type.
-          calib_N(NX_NUMBER):
-
-          scan_contronller(NX_NUMBER):
-            doc: |
-              There are 2 parameters in X and Y directions. If you know them, you can enter the 2nd order
-              piezo characteristics to compensate for it. The following equation shows the interpretation
-              of the 2nd order correction parameter: For the X-piezo:
-              :math:`Ux = 1/cx · X + cxx · X2`; with units: :math:`[V] = [V/m] · [m] + [V/m2] · [m2]`
-              where cx is the calibration of the piezo X and cxx is the 2nd order correction. :math:`(V/m^2)`
-          drift(NX_NUMBER):
-            unit: NX_ANY
-            doc: |
-              There are 2 parameters in X and Y directions. Define the drift speed for all three axes.
-              When the compensation is on, the piezos will start to move at that speed.
-          drift_correction_status(NX_CHAR):
-            doc: |
-              Use the button to turn on/off the drift compensation.
-
-          ### Discuss -2 this part already discussed in piezo_config
-
-          z_controller(NXcollection):
-            z(NX_NUMBER):
-              unit: NX_LENGTH
-              doc: |
-                Indicate the relative tip position z between tip and sample. The tip position can also
-                be varied when the z_controller is not running. (e.g. 130.5E-9)
-        
+                  
         # TODO: Is if this are uncomment than getting error.
         # voltage_controller(NXsensor):
         # temperature_controller(NXsensor):
