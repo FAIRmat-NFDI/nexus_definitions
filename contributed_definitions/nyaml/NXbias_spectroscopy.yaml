@@ -7,7 +7,7 @@ type: group
 NXbias_spectroscopy(NXobject):
   channels:
     doc: |
-      Select the channels to record.
+      Selected channels to collect data.
   reset_bias(NX_BOOLEAN):
     doc: |
       If chosen, the Bias voltage resets to its initial value (before the sweep initiation) at
@@ -19,7 +19,7 @@ NXbias_spectroscopy(NXobject):
       and then turn on the z-Controller.
   record_final_z(NX_BOOLEAN):
     doc: |
-      Select whether to record the Z position during Z averaging time at the end of
+      Select whether to record the final Z position during Z averaging time at the end of
       the sweep (after Z control time) and store the average value in the header of
       the file when saving. Using this option increases the sweep time by Z averaging
       time.
@@ -33,7 +33,7 @@ NXbias_spectroscopy(NXobject):
   integration_time(NX_NUMBER):
     unit: NX_TIME
     doc: |
-      Time during which the spectroscopy data are acquired and averaged.
+      The time during which the spectroscopy data are acquired and averaged.
   number_of_sweeps(NX_NUMBER):
     doc: |
       Number of sweeps to measure and average.
@@ -47,13 +47,13 @@ NXbias_spectroscopy(NXobject):
       The last bias values of the sweep.
   num_pixel(NX_NUMBER):
     doc: |
-      Define the sweep number of points, that is, the maximum spectrum resolution eq.
-      Bias window divide by Num Pixel.
+      Define the number of points for sweep, that is, the maximum spectrum resolution eq.
+      Bias window divided by Num Pixel.
   z_avg_time(NX_NUMBER):
     unit: NX_TIME
     doc: |
       Duration over which the Z position is recorded and averaged before and after the
-      sweep (the latter only if Record final Z position is selected in the Advanced
+      sweep (the later one only if the record final Z position is selected in the Advanced
       section). After the initial z averaging time, if Z-Controller to Hold is
       selected in the Advanced section, the z-Controller is set to hold and the tip is
       placed at the previously averaged z position (plus z offset).
@@ -63,15 +63,15 @@ NXbias_spectroscopy(NXobject):
       filtered data are saved to file along with the unfiltered data.
   sw_filter_order(NX_NUMBER):
     doc: |
-      Filter order of a dynamic filter or width (in number of points) for the Gaussian
+      Numerical filter order of a dynamic filter or width (in number of points) for the Gaussian
       filter.
   sw_filter_cutoff_frq(NX_NUMBER):
     doc: |
-      Cutoff frequency for dynamic filters.
+      The cutoff frequency for dynamic filters.
   z_offset(NX_NUMBER):
     unit: NX_LENGTH
     doc: |
-      Offset added to the initial averaged position Zaver before starting to sweep.
+      Offset added to the initial averaged Z position of tip before starting to sweep.
       This parameter is disabled when Z-Controller to Hold is deselected in the
       Advanced section. The LED “Alt” next to the Z offset indicates if an alternate
       Z-controller setpoint is enabled.
@@ -82,7 +82,7 @@ NXbias_spectroscopy(NXobject):
       starting to acquire data.
   first_settling_time(NX_NUMBER):
     doc: |
-      No doc yet.
+      Time to wait to settle bias voltage before starting sweep if needed.
   end_settling_time(NX_NUMBER):
     unit: NX_TIME
     doc: |
@@ -91,7 +91,7 @@ NXbias_spectroscopy(NXobject):
   z_control_time(NX_NUMBER):
     unit: NX_TIME
     doc: |
-      Time during which the Z-Controller is enabled once a sweep has finished.
+      The time during which the Z-Controller is enabled once a sweep has finished.
       When averaging multiple sweeps (i.e. Sweeps>1), the Z-Controller is enabled
       for this duration between each sweep. After the last sweep, it will wait the
       specified time before continuing a running scan. This ensures each sweep
@@ -99,15 +99,19 @@ NXbias_spectroscopy(NXobject):
       Z-Controller to Hold is deselected in the Advanced section.
   max_slew_rate(NX_NUMBER):
     doc: |
-      Maximum rate at which the bias changes (before, during and after sweeping).
+      The maximum rate at which the bias changes (before, during and after sweeping).
+      (V/s)
+  max_slew_rate_backward(NX_NUMBER):
+    doc: |
+      TODO: modify the docMaximum rate at which the bias changes (before, during and after sweeping).
       (V/s)
   backward_sweep(NX_BOOLEAN):
     doc: |
       Select whether to measure the backward (return) sweep or the forward only.
-  z_ccontroller_hold(NX_BOOLEAN):
+  z_controller_hold(NX_BOOLEAN):
     doc: |
       Select whether to set the Z-Controller on hold (i.e. disabled) during the sweep.
-      It is selected by default. When deselected, Z-offset and Z control time parameters
+      It is selected by default. When deselected, Z-offset and Z-control time parameters
       are disabled.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++

@@ -375,43 +375,17 @@ NXspm(NXsensor_scan):
         # voltage_controller(NXsensor):
         # temperature_controller(NXsensor):
         # parameters for a measurement at a single location during the scan
-        sweep_control(NXcollection):
+        sweep_control(NXobject):
           bias_spectroscopy(NXbias_spectroscopy):
             exists: optional
-            integration_time(NX_NUMBER):
-              unit: NX_TIME
-              doc: |
-                Time during which the spectroscopy data are acquired and averaged. (e.g. 150E-6)
-            number_of_sweeps(NX_NUMBER):
-              doc: |
-                Number of sweeps to measure and average. (e.g. 100)
-            sweep_start(NX_NUMBER):
-              unit: NX_VOLTAGE
-              doc: |
-                The start bias values of the sweep. (e.g. -300E-3)
-            sweep_end(NX_NUMBER):
-              unit: NX_VOLTAGE
-              doc: |
-                The end bias values of the sweep. (e.g. 300E-3)
-            num_pixel(NX_NUMBER):
-              doc: |
-                The sweep number of points is defined as the maximum spectrum resolution, which
-                is equal to the bias sweep window divided by the number of pixels. (e.g. 4096)
-            z_avg_time(NX_NUMBER):
-              unit: NX_TIME
-              doc: |
-                The Z position is recorded and averaged for a certain duration both before and
-                after the sweep. After the initial Z averaging time, if "Z-Controller to Hold"
-                is selected, the Z-Controller is set to hold mode, and the tip is positioned at
-                the previously averaged Z position (adjusted by the Z offset). (e.g. 100E-3)
-          circuit(NXcollection):
+          circuit(NXobject):
             exists: optional
             rt_frequency(NX_NUMBER):
               unit: NX_FREQUENCY
               doc: |
                 The bandwidth of the Hardware and/or Software is instrument specific.
                 For example, Nanonis Generic 5 has 'RT Frequency' (e.g. 20E+3).
-            signals_oversampling(NX_NUMBER):
+            signals_oversampling_parameter(NX_NUMBER):
               doc: |
                 The Signals Period represents the rate at which signals are transferred to
                 the host computer, which operates the control software. This rate may
@@ -427,7 +401,7 @@ NXspm(NXsensor_scan):
                 configured to a 20 ms interval. Any additional timings must strictly be integer
                 multiples of this base value. While it is possible to set these additional
                 timings to different values, the actual timing value will automatically be
-                adjusted to become a multiple of the Acquisition Period. (e.g. 20E-3)
+                adjusted to become a multiple of the Acquisition Period (e.g. 20E-3).
             animations_period(NX_NUMBER):
               unit: NX_TIME
               exists: optional
@@ -456,8 +430,7 @@ NXspm(NXsensor_scan):
                 resonance of a high-Q cantilever, longer values in the range of several seconds
                 might be necessary. Usually, this parameter does not require manual adjustment
                 within this module, as the sweep modules automatically set this value according
-                to the sweep timings. (e.g. 500E-3)
-        
+                to the sweep timings (e.g. 500E-3). 
         # parameters how to change the location from measurement to measurement during the scan
         scan_control(NXcollection):
           exists: optional
