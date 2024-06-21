@@ -1,63 +1,240 @@
 category: base
 doc: |
-  The scan_control group contains information about the scan control over a certain area.
+  This group contains information about the scan control over a hyperdimensional space or 
+  subspace of an N-dimensional region in which the scan is performed
+  step_scan_types: 
+        Trajectory: List of N-dimensional vectors describing all the scan points sequentially
+        Mesh: In each dimension walking in a fixed region in a fixed direction. When a region is 
+              scanned then a step in the next dimension is taken. As such we are speaking 
+              about the fastest and slowest scan axis.
+        Snake: A mesh scan where the scanning direction is reversed after each line. 
+        Spiral: A spiral scan is a scan where the scanning direction is a spiral.
+        Tilt: At each step, a proportional movement is done in all dimensions.
+
+  Scan_control_types: 
+      Stepping: Before the measurement at the scan points a movement to the given is performed. 
+                Correction (for example backlash) or active regulation (feedback loop) may or 
+                may not be applied.    
+      Continues: The scanning each line in an N-dimensional space is done without stopping. 
+      oscillating: Scanning over a scan point continuously and then returning to start scanning the next point.
+
+type: group
 scan_control(NXobject):
-  exists: optional
-  scan_range(NX_NUMBER):
-    unit: NX_LENGTH
-    exists: optional
+  step_scan_type:
     doc: |
-      The scan range (in STM experiment) is the area that the tip will scan (e.g.
-      5.000000E-9 5.000000E-9).
-  scan_offset(NX_NUMBER):
-    unit: NX_LENGTH
-    exists: optional
+      The step scan types are the types of scan that can be performed in trajectory, mesh, snake, 
+      or spiral manner.
+    enumeration: [trajectory, mesh, snake, spiral]
+  scan_control_type:
     doc: |
-      The scan offset (in STM experiment) is the position of the tip in the scan area 
-      (e.g. -2.354637E-7 1.267476E-).
-  scan_direction:
-    exists: optional
+      The scan control type is the type of control that can be applied to the scan in stepping, 
+      continues, or oscillating manner.
+    enumeration: [stepping, continues, oscillating]
+  independent_scan_axes:
     doc: |
-      The scan direction (in STM experiment) is the direction from which side of the
-      sample the tip starts scanning.
-    enumeration: [down, up, top, bottom]
+      A list of independent scan axes are controlled independently of each other.
+      (e.g. X, Y, Z, or other physical dimensions)
+      Each axis name should if possible point to an actual controlled device under the instrument environment.
+      In the case of mesh, scan list the scan axis from fastest to slowest.
+  # In SPM it will be X and Y piezo.
+  scan_type: 
+    enumeration: [trajectory, mesh, snake, spiral]
+    \@trajectory_points:
+      doc: |
+        List of N-dimensional verctors
+    \@mesh_ranges:
+      doc: |
+        List of ranges in N-dimensions. Each range is given by an offset and a signed length.
+  
+  # scan_range(NX_NUMBER):
+  #   unit: NX_LENGTH
+  #   exists: optional
+  #   doc: |
+  #   In STM experiment, the scan range is the area that the tip will scan (e.g.
+  #     5.000000E-9 5.000000E-9).
+  # dimentionality:
+
+  # scan_offset(NX_NUMBER):
+  #   unit: NX_LENGTH
+  #   exists: optional
+  #   doc: |
+  #     The scan offset (in STM experiment) is the position of the tip in the scan area 
+  #     (e.g. -2.354637E-7 1.267476E-).
+
+  # scan_direction:
+  #   exists: optional
+  #   doc: |
+  #     The scan direction (in STM experiment) is the direction from which side of the
+  #     sample the tip starts scanning.
+  #   enumeration: [down, up, top, bottom]
+
+  # scan_type:
+  # spiral type, raster type, mesh scan, snack scan etc. 
   scan_angle(NX_NUMBER):
     unit: NX_ANGLE
     exists: optional
     doc: |
       The angle of scan (in STM experiment) with the bottom or top side (depends on the scan_direction
       field) of the sample. (e.g. 0.000E+0).
-  scanfield(NX_NUMBER):
+  # Nanonis SPM apecific fields 
+  # scanfield(NX_NUMBER):
+  #   doc: |
+  #     Configure the scan frame like x position; y position; width; and height. (e.g.
+  #     3.11737E-9;29.1583E-9;15E-9;15E-9;0E+0)
+  # equiavlent_to_scan_resolution
+  # pixels_line(NX_NUMBER):
+  #   doc: |
+  #     Scan resolution by setting the Lines equal to Pixels.  (e.g. 512)
+  scan_resolution(NX_NUMBER):
     doc: |
-      Configure the scan frame like x position; y position; width; height. (e.g.
-      3.11737E-9;29.1583E-9;15E-9;15E-9;0E+0)
-  pixels_line(NX_NUMBER):
+      Define the scan resolution along each dimension.
+
+      List of numbers, one for each dimension.
+
+  # For Mesh scan
+  active_meash(NXobject):
     doc: |
-      Scan resolution by setting the Lines equal to Pixels.  (e.g. 512)
-  lines(NX_NUMBER):
+      The active scan axis is the axis that is used for the scan. Use this group for the mesh scan.
+    scan_speed(NX_NUMBER):
+      doc: |
+        Define the scan speed in the forward directions.
+        
+        If the scan goes in the negative direction, the speed should be negative.
+
+      \@unit: NX_VELOCITY
+      \@forward_speed(NX_BOOLEAN):
+        doc: |
+          Define the scan speed in the forward directions. The default value is True.
+      \@backward_speed(NX_BOOLEAN):
+        doc: |
+          Define the scan speed in the backward directions. The default value is False.
+    scan_points(NX_NUMBER):
+      doc: |
+        Define the total number of points in the given axis. The number can not be greater than the
+        scan resolution on that axis.
+    stepping(NX_BOOLEAN):
+      doc: |
+        If the scan probe steps over a number of scan points, use True. The default value is False.
+      \@step_value(NX_NUMBER):
+        doc: |
+          Define the number of points that the scan probe steps over.
+      \@frog_leap_scan(NX_BOOLEAN):
+        doc: |
+          If the scan probe jumps over a number of scan points, use True. The default value is False.
+      \@backlash_correction(NX_NUMBER):
+        doc: |
+          If the scanning probe moves back to the previous scan point, mention the number of points 
+          that the scan probe moves back.
+    continuous(NX_BOOLEAN):
+      doc: |
+        If the scan probe moves continuously over the scan points, use True. The default value is False.
+    oscillating(NX_BOOLEAN):
+      doc: |
+        If the scan probe oscillates over the scan line, use True. The default value is False.
+      \@oscillation_frequency(NX_NUMBER):
+        doc: |
+          Number of oscillation on each scanning line per second.
+      \@units(NX_FREQUENCY):
+        doc: |
+          Unit of the oscillation frequency.
+
+  # For spiral scan
+  active_spiral(NXobject): 
     doc: |
-      Define the image resolution. (e.g. 512)
-  speed_forw(NX_NUMBER):
+      To define the spiral or circular scan, use this group.
+    scan_speed(NX_NUMBER):
+      doc: |
+        Define the scan speed in the clockwise directions.
+        
+        If the scan goes in the anticlockwise direction, the speed value should be negative.
+      \@unit: NX_VELOCITY
+      \@spiral_direction:
+        doc: |
+          Define the direction of the spiral scan. (e.g. clockwise, anticlockwise)
+        enumeration: [clockwise, anticlockwise]
+    spiral_radius(NX_NUMBER):
+      doc: |
+        Define the radius of the spiral scanning.
+
+        A list of the radius values for each circle.
+      \@unit: NX_LENGTH
+    stepping(NX_BOOLEAN):
+      doc: |
+        If the scan probe steps over a number of scan points, use True. The default value is False.
+      \@step_value(NX_NUMBER):
+        doc: |
+          Define the number of points that the scan probe steps over.
+      \@frog_leap_scan(NX_BOOLEAN):
+        doc: |
+          If the scan probe jumps over a number of scan points, use True. The default value is False.
+      \@backlash_correction(NX_NUMBER):
+        doc: |
+          If the scanning probe moves back to the previous scan point, mention the number of points 
+          that the scan probe moves back.
+    continuous(NX_BOOLEAN):
+      doc: |
+        If the scan probe moves continuously over the scan points, use True. The default value is False.
+    oscillating(NX_BOOLEAN):
+      doc: |
+        If the scan probe oscillates over the scan line, use True. The default value is False.
+      \@oscillation_frequency(NX_NUMBER):
+        doc: |
+          Number of oscillation on each scanning line per second.
+      \@units(NX_FREQUENCY):
+        doc: |
+          Unit of the oscillation frequency.
+  # This active_snake, active_mesh and active_trajectory could be explained under the same group
+  active_snake(NXobject):
     doc: |
-      Define the scan forward speed in the forward direction. (m/s) (e.g. 11.7187E-9)
-  speed_backw(NX_NUMBER):
-    exists: optional
-    doc: |
-      Define the scan backward speed in the forward direction. (m/s) (e.g. 11.7187E-9)
-            roi(NXtransformations):
+      To define the snake scan, use this group.
+    scan_speed(NX_NUMBER):
+      doc: |
+        Define the scan speed in the positive direction.
+        
+        If the scan goes in the negative direction, the speed should be negative.
+      \@unit: NX_VELOCITY
+      \@forward_speed(NX_BOOLEAN):
+        doc: |
+          If the scan speed in the forward directions. The default value is True.
+      \@backward_speed(NX_BOOLEAN):
+        doc: |
+          If the scan speed in the backward directions. The default value is False.
+    scan_points(NX_NUMBER):
+      doc: |
+        The total number of points in the given axis. The number can not be greater than the
+        scan resolution on that axis.
+    stepping(NX_BOOLEAN):
+      doc: |
+        If the scan probe steps over a number of scan points, use True. The default value is False.
+      \@step_value(NX_NUMBER):
+        doc: |
+          The number of points that the scan probe steps over.
+      \@frog_leap_scan(NX_BOOLEAN):
+        doc: |
+          If the scan probe jumps over a number of scan points, use True. The default value is False.
+      \@backlash_correction(NX_NUMBER):
+        doc: |
+          If the scanning probe moves back to the previous scan point, mention the number of points 
+          that the scan probe moves back.
+    continuous(NX_BOOLEAN):
+      doc: |
+        If the scan probe moves continuously over the scan points, use True. The default value is False.
+    oscillating(NX_BOOLEAN):
+      doc: |
+        If the scan probe oscillates over the scan line, use True. The default value is False.
+      \@oscillation_frequency(NX_NUMBER):
+        doc: |
+          Number of oscillation on each scanning line per second.
+      \@units(NX_FREQUENCY):
+        doc: |
+          Unit of the oscillation frequency.
+
+  scan_channels:
+      doc: |
+        A list of channels, if the scan happens through different channels. 
   scan_DATA(NXdata):
     exists: optional
     data:
       doc: |
         The scan data is the data collected during the scan. If the scan has several channels or derivatives from the channel data, please
         duplicate this NXdata group for each. 
-  circuit(NXcollection):
-    exists: optional
-  scan_channels:
-      doc: |
-        The scan channels are selected by users. (e.g. (A);Bias (V);Z (m);LI Demod 2 X
-        (A);LI Demod 2 Y (A);LI Demod 1 X (A);LI Demod 1 Y (A)).
-  scan_mode:
-    doc: |
-      The scan mode is the mode of the scan. (e.g. STM, AFM, etc.)
-    enumeration: [STM, AFM, STS]
