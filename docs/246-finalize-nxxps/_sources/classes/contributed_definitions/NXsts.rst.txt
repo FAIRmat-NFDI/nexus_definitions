@@ -212,20 +212,6 @@ NXsts
 
           Status of Lock-in device whether while performing the experiment
 
-        .. _/NXsts/ENTRY/INSTRUMENT/lock_in/run-field:
-
-        .. index:: run (field)
-
-        **run**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
-
-          .. collapse:: Select whether to set the Lock-In to run during the measurement. When us ...
-
-              Select whether to set the Lock-In to run during the measurement. When using this
-              feature, make sure the Lock-In is configured correctly and settling times are
-              set to twice the Lock-In period at least. This option is ignored when Lock-In is
-              already running. This option is disabled if the Sweep Mode is MLS and the flag
-              to configure the Lock-In per segment in the Multiline segment editor is set.
-
         .. _/NXsts/ENTRY/INSTRUMENT/lock_in/modulation_signal-field:
 
         .. index:: modulation_signal (field)
@@ -463,9 +449,12 @@ NXsts
 
           .. index:: current_calibration (field)
 
-          **current_calibration**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANY <NX_ANY>`} 
+          **current_calibration**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_CURRENT <NX_CURRENT>`} 
 
-            Value of calibration that comes as A/V.
+            .. collapse:: Value of calibration that comes as A/V. The value for this concept can ...
+
+                Value of calibration that comes as A/V. The value for this concept can be read
+                as current per unit voltage.
 
           .. _/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/current_sensor/current_offset-field:
 
@@ -478,7 +467,7 @@ NXsts
 
           .. index:: current_gain (field)
 
-          **current_gain**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
+          **current_gain**: (required) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
 
           .. _/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/current_sensor/calibration_time-field:
@@ -702,9 +691,55 @@ NXsts
         **scan_control**: (optional) :ref:`NXcollection` 
 
 
+          .. _/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_range-field:
+
+          .. index:: scan_range (field)
+
+          **scan_range**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
+
+            .. collapse:: In STM experiment, the scan range is the coordinate (x,y) along the X  ...
+
+                In STM experiment, the scan range is the coordinate (x,y) along the X and Y axis from the origin (scan_offset) of 
+                the scan area (e.g. 5.000000E-9 5.000000E-9).
+
+          .. _/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_offset-field:
+
+          .. index:: scan_offset (field)
+
+          **scan_offset**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_LENGTH <NX_LENGTH>`} 
+
+            .. collapse:: In STM experiment, the scan offset is the position of the tip at the s ...
+
+                In STM experiment, the scan offset is the position of the tip at the starting point of scan area.
+                (e.g. -2.354637E-7 1.267476E-)
+
+          .. _/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_direction-field:
+
+          .. index:: scan_direction (field)
+
+          **scan_direction**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+
+            .. collapse:: In STM experiment, the scan direction is the direction from which side ...
+
+                In STM experiment, the scan direction is the direction from which side of the
+                sample the tip starts scanning.
+
+                Any of these values: ``down`` | ``up`` | ``top`` | ``bottom``
+
+          .. _/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_angle-field:
+
+          .. index:: scan_angle (field)
+
+          **scan_angle**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_ANGLE <NX_ANGLE>`} 
+
+            .. collapse:: The angle of scan with the bottom or top side (depends on the scan_dir ...
+
+                The angle of scan with the bottom or top side (depends on the scan_direction
+                field) of the sample. (e.g. 0.000E+0).
+
           .. _/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/roi-group:
 
-          **roi**: (optional) :ref:`NXtransformations` 
+          **roi**: (required) :ref:`NXtransformations` 
 
 
             .. _/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/roi/frame-field:
@@ -720,7 +755,7 @@ NXsts
 
           .. _/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/circuit-group:
 
-          **circuit**: (optional) :ref:`NXcollection` 
+          **circuit**: (required) :ref:`NXcollection` 
 
 
             .. _/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/circuit/channels_current-field:
@@ -743,12 +778,13 @@ NXsts
 
             .. index:: scanfield (field)
 
-            **scanfield**: (required) :ref:`NX_NUMBER <NX_NUMBER>` 
+            **scanfield**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` 
 
               .. collapse:: Configure the scan frame like x position; y position; width; height. ...
 
                   Configure the scan frame like x position; y position; width; height. (e.g.
-                  3.11737E-9;29.1583E-9;15E-9;15E-9;0E+0)
+                  3.11737E-9;29.1583E-9;15E-9;15E-9;0E+0). If the 'scanfield' is not considered, use
+                  the 'scan_range' and 'scan_offset' from 'scan_control' group
 
             .. _/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/positioner/pixels_line-field:
 
@@ -1212,21 +1248,18 @@ NXsts
 
     **sample**: (optional) :ref:`NXsample` :ref:`⤆ </NXsensor_scan/ENTRY/SAMPLE-group>`
 
-      .. collapse:: To describe the sample and other constraints that are applied to that sample ...
+      .. collapse:: This describes the sample and its properties, as well as constraints that ar ...
 
-          To describe the sample and other constraints that are applied to that sample
-          before scanning.
+          This describes the sample and its properties, as well as constraints that are
+          applied to the sample before scanning.
 
       .. _/NXsts/ENTRY/sample/sample_prep_descripton-field:
 
       .. index:: sample_prep_descripton (field)
 
-      **sample_prep_descripton**: (optional) :ref:`NX_CHAR <NX_CHAR>` 
+      **sample_prep_descripton**: (required) :ref:`NX_CHAR <NX_CHAR>` 
 
-        .. collapse:: At this moment no base class is available that can track entire sample ...
-
-            At this moment no base class is available that can track entire sample
-            preparation.
+        At this moment no base class available that can track entire sample preparation.
 
     .. _/NXsts/ENTRY/DATA-group:
 
@@ -1317,6 +1350,10 @@ attributes, and links defined in this class.
 * :ref:`/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/positioner/speed_forw-field </NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/positioner/speed_forw-field>`
 * :ref:`/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/roi-group </NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/roi-group>`
 * :ref:`/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/roi/frame-field </NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/roi/frame-field>`
+* :ref:`/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_angle-field </NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_angle-field>`
+* :ref:`/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_direction-field </NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_direction-field>`
+* :ref:`/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_offset-field </NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_offset-field>`
+* :ref:`/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_range-field </NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_range-field>`
 * :ref:`/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control-group </NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control-group>`
 * :ref:`/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/bias_spectroscopy-group </NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/bias_spectroscopy-group>`
 * :ref:`/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/bias_spectroscopy/integration_time-field </NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/bias_spectroscopy/integration_time-field>`
@@ -1341,7 +1378,6 @@ attributes, and links defined in this class.
 * :ref:`/NXsts/ENTRY/INSTRUMENT/lock_in/modulation_frequency-field </NXsts/ENTRY/INSTRUMENT/lock_in/modulation_frequency-field>`
 * :ref:`/NXsts/ENTRY/INSTRUMENT/lock_in/modulation_signal-field </NXsts/ENTRY/INSTRUMENT/lock_in/modulation_signal-field>`
 * :ref:`/NXsts/ENTRY/INSTRUMENT/lock_in/ref_phase_N-field </NXsts/ENTRY/INSTRUMENT/lock_in/ref_phase_N-field>`
-* :ref:`/NXsts/ENTRY/INSTRUMENT/lock_in/run-field </NXsts/ENTRY/INSTRUMENT/lock_in/run-field>`
 * :ref:`/NXsts/ENTRY/INSTRUMENT/lock_in/status-field </NXsts/ENTRY/INSTRUMENT/lock_in/status-field>`
 * :ref:`/NXsts/ENTRY/INSTRUMENT/output_cabling-group </NXsts/ENTRY/INSTRUMENT/output_cabling-group>`
 * :ref:`/NXsts/ENTRY/INSTRUMENT/piezo_config-group </NXsts/ENTRY/INSTRUMENT/piezo_config-group>`
