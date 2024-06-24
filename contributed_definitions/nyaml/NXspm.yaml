@@ -378,59 +378,60 @@ NXspm(NXsensor_scan):
         sweep_control(NXobject):
           bias_spectroscopy(NXbias_spectroscopy):
             exists: optional
-          circuit(NXobject):
+          rt_frequency(NX_NUMBER):
+            unit: NX_FREQUENCY
             exists: optional
-            rt_frequency(NX_NUMBER):
-              unit: NX_FREQUENCY
-              doc: |
-                The bandwidth of the Hardware and/or Software is instrument specific.
-                For example, Nanonis Generic 5 has 'RT Frequency' (e.g. 20E+3).
-            signals_oversampling_parameter(NX_NUMBER):
-              doc: |
-                The Signals Period represents the rate at which signals are transferred to
-                the host computer, which operates the control software. This rate may
-                be 10 times lower than the sampling rate, as the real-time engine internally
-                oversamples the signal. If desired, you may have the option to reduce the oversampling
-                to 1, enabling higher frequency resolution in the Spectrum Analyzer. (e.g. 10)
-            acquisition_period(NX_NUMBER):
-              unit: NX_TIME
-              exists: optional
-              doc: |
-                The update rate is utilized in various processes, including the History Graph,
-                Auto-Approach, and multiple Programming Interface functions. It may be
-                configured to a 20 ms interval. Any additional timings must strictly be integer
-                multiples of this base value. While it is possible to set these additional
-                timings to different values, the actual timing value will automatically be
-                adjusted to become a multiple of the Acquisition Period (e.g. 20E-3).
-            animations_period(NX_NUMBER):
-              unit: NX_TIME
-              exists: optional
-              doc: |
-                The update rate of animated graphical indicators, such as graphs and sliders,
-                can be adjusted. A normal value may be 40 ms, which corresponds to 25 updates
-                per second. Increasing this period can help reduce the processor load on the
-                graphical user interface, particularly on slower computers. It is important to
-                note that this update rate solely impacts the user interface and does not affect
-                measurements in any manner. (e.g. 20E-3)
-            indicators_period(NX_NUMBER):
-              unit: NX_TIME
-              doc: |
-                The update rate of digital indicators, such as the numbers displayed, can be set
-                to 3 updates per second, equivalent to 300 ms. This interval is sufficient for
-                the user interface and does not impact measurements in any manner. (e.g. 300E-3)
-            measurements_period(NX_NUMBER):
-              exists: optional
-              unit: NX_TIME
-              doc: |
-                The Measurements period determines the integration time required for precise
-                measurements, primarily utilized in sweep modules. It is particularly useful for
-                tasks such as recording force-distance curves or cantilever resonances. For
-                swift measurements with small steps, a value of 40 ms is often adequate. For
-                regular use, a range of 300-500 ms may be recommended, but when capturing the
-                resonance of a high-Q cantilever, longer values in the range of several seconds
-                might be necessary. Usually, this parameter does not require manual adjustment
-                within this module, as the sweep modules automatically set this value according
-                to the sweep timings (e.g. 500E-3). 
+            doc: |
+              The bandwidth of the Hardware and/or Software is instrument specific.
+              For example, Nanonis Generic 5 has 'RT Frequency' (e.g. 20E+3).
+          signals_oversampling_parameter(NX_NUMBER):
+            exists: optional
+            doc: |
+              The Signals Period represents the rate at which signals are transferred to
+              the host computer, which operates the control software. This rate may
+              be 10 times lower than the sampling rate, as the real-time engine internally
+              oversamples the signal. If desired, you may have the option to reduce the oversampling
+              to 1, enabling higher frequency resolution in the Spectrum Analyzer. (e.g. 10)
+          acquisition_period(NX_NUMBER):
+            unit: NX_TIME
+            exists: optional
+            doc: |
+              The update rate is utilized in various processes, including the History Graph,
+              Auto-Approach, and multiple Programming Interface functions. It may be
+              configured to a 20 ms interval. Any additional timings must strictly be integer
+              multiples of this base value. While it is possible to set these additional
+              timings to different values, the actual timing value will automatically be
+              adjusted to become a multiple of the Acquisition Period (e.g. 20E-3).
+          animations_period(NX_NUMBER):
+            unit: NX_TIME
+            exists: optional
+            doc: |
+              The update rate of animated graphical indicators, such as graphs and sliders,
+              can be adjusted. A normal value may be 40 ms, which corresponds to 25 updates
+              per second. Increasing this period can help reduce the processor load on the
+              graphical user interface, particularly on slower computers. It is important to
+              note that this update rate solely impacts the user interface and does not affect
+              measurements in any manner. (e.g. 20E-3)
+          indicators_period(NX_NUMBER):
+            unit: NX_TIME
+            exists: optional
+            doc: |
+              The update rate of digital indicators, such as the numbers displayed, can be set
+              to 3 updates per second, equivalent to 300 ms. This interval is sufficient for
+              the user interface and does not impact measurements in any manner. (e.g. 300E-3)
+          measurements_period(NX_NUMBER):
+            exists: optional
+            unit: NX_TIME
+            doc: |
+              The Measurements period determines the integration time required for precise
+              measurements, primarily utilized in sweep modules. It is particularly useful for
+              tasks such as recording force-distance curves or cantilever resonances. For
+              swift measurements with small steps, a value of 40 ms is often adequate. For
+              regular use, a range of 300-500 ms may be recommended, but when capturing the
+              resonance of a high-Q cantilever, longer values in the range of several seconds
+              might be necessary. Usually, this parameter does not require manual adjustment
+              within this module, as the sweep modules automatically set this value according
+              to the sweep timings (e.g. 500E-3).
         # parameters how to change the location from measurement to measurement during the scan
         scan_control(NXcollection):
           exists: optional
