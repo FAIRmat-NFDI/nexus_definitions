@@ -20,6 +20,12 @@ doc: |
 
 type: group
 scan_control(NXobject):
+  independent_scan_axes:
+    doc: |
+      A list of independent scan axes are controlled independently of each other.
+      (e.g. X, Y, Z, or other physical dimensions)
+      Each axis name should if possible point to an actual controlled device under the instrument environment.
+      In the case of mesh, scan list the scan axis from fastest to slowest.
   step_scan_type:
     doc: |
       The step scan types are the types of scan that can be performed in trajectory, mesh, snake, 
@@ -30,12 +36,6 @@ scan_control(NXobject):
       The scan control type is the type of control that can be applied to the scan in stepping, 
       continues, or oscillating manner.
     enumeration: [stepping, continues, oscillating]
-  independent_scan_axes:
-    doc: |
-      A list of independent scan axes are controlled independently of each other.
-      (e.g. X, Y, Z, or other physical dimensions)
-      Each axis name should if possible point to an actual controlled device under the instrument environment.
-      In the case of mesh, scan list the scan axis from fastest to slowest.
   # In SPM it will be X and Y piezo.
   scan_type: 
     enumeration: [trajectory, mesh, snake, spiral]
