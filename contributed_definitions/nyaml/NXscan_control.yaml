@@ -2,7 +2,7 @@ category: base
 doc: |
   This group contains information about the scan control over a hyperdimensional space or 
   subspace of an N-dimensional region in which the scan is performed
-  step_scan_types: 
+  scan_types: 
         Trajectory: List of N-dimensional vectors describing all the scan points sequentially
         Mesh: In each dimension walking in a fixed region in a fixed direction. When a region is 
               scanned then a step in the next dimension is taken. As such we are speaking 
@@ -15,7 +15,7 @@ doc: |
       Stepping: Before the measurement at the scan points a movement to the given is performed. 
                 Correction (for example backlash) or active regulation (feedback loop) may or 
                 may not be applied.    
-      Continues: The scanning each line in an N-dimensional space is done without stopping. 
+      Continues: The scanning each line in an N-dimensional space is done without stopping.
       oscillating: Scanning over a scan point continuously and then returning to start scanning the next point.
 
 type: group
@@ -26,7 +26,7 @@ NXscan_control(NXobject):
       (e.g. X, Y, Z, or other physical dimensions)
       Each axis name should if possible point to an actual controlled device under the instrument environment.
       In the case of mesh, scan list the scan axis from fastest to slowest.
-  step_scan_type:
+  scan_type:
     doc: |
       The step scan types are the types of scan that can be performed in trajectory, mesh, snake, 
       or spiral manner.
@@ -36,65 +36,67 @@ NXscan_control(NXobject):
       The scan control type is the type of control that can be applied to the scan in stepping, 
       continues, or oscillating manner.
     enumeration: [stepping, continues, oscillating]
-  # In SPM it will be X and Y piezo.
-  scan_type: 
-    enumeration: [trajectory, mesh, snake, spiral]
-    \@trajectory_points:
-      doc: |
-        List of N-dimensional verctors
-    \@mesh_ranges:
-      doc: |
-        List of ranges in N-dimensions. Each range is given by an offset and a signed length.
-  
-  # scan_type:
-  # spiral type, raster type, mesh scan, snack scan etc. 
+  # scan_type: 
+  #   enumeration: [trajectory, mesh, snake, spiral]
+  #   \@trajectory_points:
+  #     doc: |
+  #       List of N-dimensional verctors
+  #   \@mesh_ranges:
+  #     doc: |
+  #       List of ranges in N-dimensions. Each range is given by an offset and a signed length.
+
+  # Discussion: 
   scan_angle(NX_NUMBER):
     unit: NX_ANGLE
     exists: optional
     doc: |
-      The angle of scan (in STM experiment) with the bottom or top side (depends on the scan_direction
-      field) of the sample. (e.g. 0.000E+0).
-  
-  scan_resolution(NX_NUMBER):
-    doc: |
-      Define the scan resolution along each dimension.
-
-      List of numbers, one for each dimension.
+      The angle of scan in the positive axis.
 
   # For Mesh scan
   active_meash(NXobject):
     doc: |
-      The active scan axis is the axis that is used for the scan. Use this group for the mesh scan.
+      The mesh scan is a scan where the scanning direction is a meshed manner.
     scan_speed(NX_NUMBER):
       doc: |
-        Define the scan speed in the forward directions.
+        Define the scan speed in the forward directions. Use a list of speeds for multiple dimensions.
         
         If the scan goes in the negative direction, the speed should be negative.
 
-      \@unit: NX_VELOCITY
-      \@forward_speed(NX_BOOLEAN):
-        doc: |
-          Define the scan speed in the forward directions. The default value is True.
-      \@backward_speed(NX_BOOLEAN):
-        doc: |
-          Define the scan speed in the backward directions. The default value is False.
+      \@units: NX_VELOCITY
+    forward_speed(NX_NUMBER):
+      doc: |
+        Define the scan speed in the forward directions. Use a list of speeds for multiple dimensions.
+      \@units: NX_VELOCITY
+    backward_speed(NX_NUMBER):
+      doc: |
+        Define the scan speed in the backward directions. Use a list of speeds for multiple dimensions.
+      \@units: NX_VELOCITY
+    scan_resolution(NX_NUMBER):
+      doc: |
+        Define the scan resolution along each dimension.
+
+        List of numbers, one for each dimension.
     scan_points(NX_NUMBER):
       doc: |
         Define the total number of points in the given axis. The number can not be greater than the
         scan resolution on that axis.
+  
+        List of numbers, one for each dimension.
     stepping(NX_BOOLEAN):
       doc: |
         If the scan probe steps over a number of scan points, use True. The default value is False.
-      \@step_value(NX_NUMBER):
+      \@frog_leap_scan(NX_NUMBER):
         doc: |
-          Define the number of points that the scan probe steps over.
-      \@frog_leap_scan(NX_BOOLEAN):
-        doc: |
-          If the scan probe jumps over a number of scan points, use True. The default value is False.
-      \@backlash_correction(NX_NUMBER):
-        doc: |
-          If the scanning probe moves back to the previous scan point, mention the number of points 
-          that the scan probe moves back.
+          If the scan probe jumps over a number of scan points.  List of numbers, one for each dimension.
+    step_value(NX_NUMBER):
+      doc: |
+        Define the number of points that the scan probe steps over. If different for all the dimension
+        list of numbers, one for each dimension.
+      \@units: NX_LENGTH
+    backlash_correction(NX_NUMBER):
+      doc: |
+        If the scanning probe moves back to the previous scan point, mention the number of points 
+        that the scan probe moves back.
     continuous(NX_BOOLEAN):
       doc: |
         If the scan probe moves continuously over the scan points, use True. The default value is False.
@@ -104,9 +106,7 @@ NXscan_control(NXobject):
       \@oscillation_frequency(NX_NUMBER):
         doc: |
           Number of oscillation on each scanning line per second.
-      \@units(NX_FREQUENCY):
-        doc: |
-          Unit of the oscillation frequency.
+      \@units: NX_FREQUENCY
 
   # For spiral scan
   active_spiral(NXobject): 
