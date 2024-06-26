@@ -1,11 +1,10 @@
 category: base
 doc: |
-  Base classes definition for bias spectroscopy.
+  Base class definition for bias spectroscopy.
   
   The Scanning Tunneling Spectroscopy (STS), an extension of Scanning Tunneling Microscopy (STM),
   is used to measure I(V) curves at each point of the surface. The dI/dV(V) can also be measured
-  numerical differentiation of the I(V) curve or from Lock-in amplifier.
-
+  with the help of numerical differentiation of the I(V) curve or from Lock-in amplifier.
 type: group
 NXbias_spectroscopy(NXobject):
   measurement_type:
@@ -13,31 +12,49 @@ NXbias_spectroscopy(NXobject):
       The measurement of the I(V) curve can come in two ways:
         1. Constant Spacing: The bias voltage is swept from the start to the end with a constant
            spacing between the tip and surface.
-        2. Variadic Spacing: The bias voltage is swept from the start to the end ni different spacing
+        2. Variadic Spacing: The bias voltage is swept from the start to the end in a discretized spacing
            between the tip and surface.
     enumeration: [constant_spacing, variadic_spacing]
-  forward_sweep(NX_BOOLEAN):
-    doc: |
-      Choose true (for Variadic Spacing) if the distance between the probe and the surface is
-      decreasing during the sweep. 
-
-      Choose false (for Variadic Spacing) if the distance between the probe and the surface is
-      increasing during the sweep.
-  sweep_velocity(NX_NUMBER):
+  probe_speed(NX_NUMBER):
     unit: NX_VELOCITY
     doc: |
-      The velocity of the tip during the sweep.
+      The speed of probe during the sweep (in variadic_spacing). In the variadic spacing process, the probe moves to the
+      different distances from the surface with a constant velocity.
+  Z_offset(NX_NUMBER):
+    unit: NX_LENGTH
+    doc: |
+      Initial position of the probe before starting the sweep.
+  Z_positions(NX_NUMBER):
+    unit: NX_LENGTH
+    doc: |
+      The position of the probe during the sweep. In the variadic spacing process, the probe moves to the
+      different z positions (say nZ positions) and perform a full sweep individual position. 
+    dimensions:
+      rank: 1
+      dim: [1, nZ]
   modulation_frequency(NX_NUMBER):
     unit: NX_FREQUENCY
     doc: |
       The frequency of the AC voltage (modulation voltage) that is applied to the DC voltage 
       subjected to the surface.
-  channels:
+  Z_avg_time(NX_NUMBER):
+    unit: NX_TIME
     doc: |
-      A list of Selected channels to collect data.
+      The time that is needed to stabilize the probe position at a desired distance from 
+      the subject of scanning. 
+  settling_time(NX_NUMBER):
+    unit: NX_TIME
+    doc: |
+      Time to wait after changing the bias, in the sweep process, to the next level and before
+      starting to acquire data.
+  forward_sweep(NX_BOOLEAN):
+    doc: |
+      The sweep variable, especially voltage, can change from lower to higher value and vice-versa. 
+
+      If the sweep variable changes from lower to higher value, then it is called a forward sweep else backward sweep.
   reset_bias(NX_BOOLEAN):
     doc: |
-      Choose true if the Bias voltage reset to the initial value before each sweep.
+      Choose true if the bias voltage is reset to the initial value before each sweep.
   number_of_sweeps(NX_NUMBER):
     doc: |
       Number of sweeps to measure and average in one sweep round.
@@ -49,28 +66,17 @@ NXbias_spectroscopy(NXobject):
     unit: NX_VOLTAGE
     doc: |
       The last bias values of the sweep.
-
-  Z_avg_time(NX_NUMBER):
-    unit: NX_TIME
+  channels:
     doc: |
-      The time that is needed to stabilize the prob position at a desired distance from 
-      the subject of scanning. 
-
-  Z_offset(NX_NUMBER):
-    unit: NX_LENGTH
-    doc: |
-      Initial position of the probe before starting the sweep.
-  settling_time(NX_NUMBER):
-    unit: NX_TIME
-    doc: |
-      Time to wait after changing the bias, in the sweep process, to the next level and before
-      starting to acquire data.
+      A list of selected channels to collect data.
   DATA(NXdata):
     doc: |
-      Use this group to store the data from several channels.
+      Use this group to store the data from several channels as well as for several z-positions.
 
-      The data I(V) and dI/dV(V) wrt the forward sweep or backward sweep should be stored in 
+      The data I(V) and dI/dV(V) concerning the forward sweep or backward sweep should be stored in 
       this group.
+
+
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
 # a3079d513b63e99022e710b15756f7cd46a7101b306d34339dc6d6b3c7d685b1
