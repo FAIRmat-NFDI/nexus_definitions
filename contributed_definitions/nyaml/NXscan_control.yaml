@@ -25,11 +25,11 @@ NXscan_control(NXobject):
   scan_time_start(NX_DATE_TIME):
     doc: |
       The start time of the scan.
-    \@units: NX_TIME
+    unit: NX_TIME
   scan_time_end(NX_DATE_TIME):
     doc: |
       The end time of the scan.
-    \@units: NX_TIME
+    unit: NX_TIME
   independent_scan_axes:
     doc: |
       A list of independent scan axes are controlled independently of each other.
@@ -41,11 +41,11 @@ NXscan_control(NXobject):
       Define the scan resolution along each dimension. The number of steps per unit dimension parameters.
 
       Rename the field, according to the name of the independent dimension (e.g. scan_resolution_x, scan_resolution_voltage).
-    \@unit: NX_ANY
+    unit: NX_ANY
   accuracy(NX_NUMBER):
     doc: |
       Define the accuracy of the scan and the value should be in [0, 1].
-    \@unit: NX_LENGTH
+    unit: NX_LENGTH
   scan_type:
     doc: |
       The scan types are the types of scan that can be performed in trajectory, mesh, snake, 
@@ -69,7 +69,7 @@ NXscan_control(NXobject):
       dimensions:
         rank: 1
         dim: [[1, nD]]
-      \@unit: NX_ANY
+      unit: NX_ANY
     scan_range(NX_NUMBER):
       doc: |
         The range of the scan is the length of the scan region on each dimension.
@@ -79,7 +79,7 @@ NXscan_control(NXobject):
         rank: 1
         dim: [[1, nD]]
 
-      \@unit: NX_ANY
+      unit: NX_ANY
     scan_angles(NX_NUMBER):
       doc: |
         The orientation of the scan region or subspace. Usually, the scan_offset and scan_range are enough 
@@ -87,7 +87,7 @@ NXscan_control(NXobject):
         with respect to the frame of reference.
         
         For N-dimensional, it is a list of N numbers.
-      \@unit: NX_ANGLE
+      unit: NX_ANGLE
       dimensions:
         rank: 1
         dim: [[1, nD]]
@@ -102,17 +102,17 @@ NXscan_control(NXobject):
         If the scan goes in the negative direction, the speed should be negative.
 
         Rename the field, according to the name of the dimension (e.g. scan_speed_x, scan_speed_voltage).
-      \@unit: NX_ANY
+      unit: NX_ANY
     forward_speed_N(NX_NUMBER):
       doc: |
         Define the scan speed in the forward directions. 
         Rename the field, according to the name of the dimension.
-      \@unit: NX_ANY
+      unit: NX_ANY
     backward_speed_N(NX_NUMBER):
       doc: |
         Define the scan speed in the backward directions. 
         Rename the field, according to the name of the dimension.
-      \@unit: NX_ANY
+      unit: NX_ANY
     CHANNAL_NAME_N: 
       doc: |
         Name of the channel that records the scan data for the given dimension. The ending annotation 'N' is 
@@ -138,7 +138,7 @@ NXscan_control(NXobject):
         The length of each step in the scan on each dimension.
         
         Rename the field, according to the name of the dimension (e.g. step_size_x, step_size_voltage).
-      \@unit: NX_ANY
+      unit: NX_ANY
 
     continuous_N(NX_BOOLEAN):
       doc: |
@@ -155,7 +155,7 @@ NXscan_control(NXobject):
       \@oscillation_frequency(NX_NUMBER):
         doc: |
           The number of oscillations on each scanning point per second.
-      \@unit: NX_FREQUENCY
+      unit: NX_FREQUENCY
 
   # For spiral scan
   active_spiral(NXobject): 
@@ -169,7 +169,7 @@ NXscan_control(NXobject):
 
         Rename the field, according to the circle index. The circle near the center starts with 0.
         In case, the speed is the same for all the circles, replace 'N' by 'all'.
-      \@unit: NX_ANY
+      unit: NX_ANY
       \@spiral_direction:
         doc: |
           Define the direction of the spiral scan. (e.g. clockwise, anticlockwise)
@@ -180,16 +180,16 @@ NXscan_control(NXobject):
         Rename the field, according to the circle index. The circle near the center starts with 0.
 
         In case, the speed is the same for all the circles, replace 'N' by 'all'.
-      \@unit: NX_ANY
+      unit: NX_ANY
     backward_speed_N(NX_NUMBER):
-      \@unit: NX_ANY
+      unit: NX_ANY
       doc: |
         Define the scan speed in the backward (anti-clockwise) directions. 
         Rename the field, according to the circle index. The circle near the center starts with 0.
 
         In case, the speed is the same for all the circles, replace 'N' by 'all'.
     spiral_radius_N(NX_NUMBER):
-      \@unit: NX_ANY
+      unit: NX_ANY
       doc: |
         Define the radius of the spiral circle of scanning.
 
@@ -217,7 +217,7 @@ NXscan_control(NXobject):
         Rename the field, according to the circle index. The circle near the center or lowest value of a 
         parameter starts with 0.
         In case, the step size is the same for all the circles, replace 'N' by 'all'.
-      \@unit: NX_ANY
+      unit: NX_ANY
     continuous_N(NX_BOOLEAN):
       doc: |
         If the scan probe moves continuously over the scan points, use True. The default value is False.
@@ -232,7 +232,7 @@ NXscan_control(NXobject):
       \@oscillation_frequency(NX_NUMBER):
         doc: |
           Number of oscillation on each scanning point per second.
-      \@unit: NX_FREQUENCY
+      unit: NX_FREQUENCY
 
   # This active_trajectory could be explained under the same group
   active_snake(NXobject):
@@ -245,19 +245,19 @@ NXscan_control(NXobject):
         positive and negative directions, use a single number
 
         Rename the field, according to the name of the fast and slow axis e.g. scan_speed_x.
-      \@unit: NX_ANY
+      unit: NX_ANY
     forward_speed(NX_NUMBER):
       doc: |
         The field defines the scan speed in the positive direction on the fast axis.
 
         Rename the field, according to the name of the fast axis.
-      \@unit: NX_ANY
+      unit: NX_ANY
     backward_speed(NX_NUMBER):
       doc: |
         The field defines the scan speed in the negative direction on the fast axis.
 
         Rename the field, according to the name of the fast axis.
-      \@unit: NX_ANY
+      unit: NX_ANY
     scan_points_N(NX_NUMBER):
       doc: |
         Define the total number of points in the given axis scan to be performed.
@@ -279,7 +279,7 @@ NXscan_control(NXobject):
         The length of each step in the scan on each dimension.
         
         Rename the field, according to the name of the dimension (e.g. step_size_x, step_size_voltage).
-      \@unit: NX_ANY
+      unit: NX_ANY
     CHANNAL_NAME_N: 
       doc: |
         Name of the channel that records the scan data for the given dimension. The ending annotation 'N' is 
@@ -301,22 +301,22 @@ NXscan_control(NXobject):
       \@oscillation_frequency(NX_NUMBER):
         doc: |
           The number of oscillations on each scanning point per second.
-      \@unit: NX_FREQUENCY
+      unit: NX_FREQUENCY
   active_trajectory(NXobject):
     doc: |
       To define the trajectory scan, use this group.
     scan_speed(NX_NUMBER):
       doc: |
         Define the scan speed through the trajectory points.
-      \@unit: NX_ANY
+      unit: NX_ANY
     forward_speed(NX_NUMBER):
       doc: |
         The field defines the scan speed in the forward directions through the trajectory points. 
-      \@unit: NX_ANY
+      unit: NX_ANY
     backward_speed(NX_NUMBER):
       doc: |
         The field defines the scan speed in the backward directions (backtracking) through the trajectory points. 
-      \@unit: NX_ANY
+      unit: NX_ANY
     CHANNAL_NAME_N: 
       doc: |
         Name of the channel that records the scan data for the given dimension. The ending annotation 'N' is 
@@ -356,7 +356,7 @@ NXscan_control(NXobject):
     step_size(NX_NUMBER):
       doc: |
         The length of each step along the entire trajectory line.
-      \@unit: NX_ANY
+      unit: NX_ANY
     continuous(NX_BOOLEAN):
       doc: |
         If the scan probe moves continuously over the scan points or steps between two trajectory points, use True. 
@@ -367,7 +367,7 @@ NXscan_control(NXobject):
       \@oscillation_frequency(NX_NUMBER):
         doc: |
           The number of oscillations on each scanning point per second.
-      \@unit: NX_FREQUENCY
+      unit: NX_FREQUENCY
   scan_DATA(NXdata):
     exists: optional
     data:
