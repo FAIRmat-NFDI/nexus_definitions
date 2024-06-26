@@ -2,7 +2,7 @@ category: base
 # Correction: region (use: phase space)
 doc: |
   This group contains information about the scan control over a hyperdimensional space or 
-  subspace of an N-dimensional phase space in which the scan is performed.
+  sub-space of an N-dimensional phase space in which the scan is performed.
 
   scan_types: 
         Trajectory: List of N-dimensional vectors describing all the scan points sequentially.
@@ -36,6 +36,16 @@ NXscan_control(NXobject):
       (e.g. X, Y, Z, or other physical dimensions)
 
       The list is the order of axis of the scan from fastest to slowest.
+  scan_resolution_N(NX_NUMBER):
+    doc: |
+      Define the scan resolution along each dimension. The number of steps per unit dimension parameters.
+
+      Rename the field, according to the name of the independent dimension (e.g. scan_resolution_x, scan_resolution_voltage).
+    \@unit: NX_ANY
+  accuracy(NX_NUMBER):
+    doc: |
+      Define the accuracy of the scan and the value should be in [0, 1].
+    \@unit: NX_LENGTH
   scan_type:
     doc: |
       The scan types are the types of scan that can be performed in trajectory, mesh, snake, 
@@ -56,12 +66,19 @@ NXscan_control(NXobject):
         of the scan region (phase space or subphase space).
         
         For N-dimensional, it is a list of N numbers.
+      dimensions:
+        rank: 1
+        dim: [[1, nD]]
       \@unit: NX_ANY
     scan_range(NX_NUMBER):
       doc: |
         The range of the scan is the length of the scan region on each dimension.
         
         For N-dimensional, it is a list of N numbers.
+      dimensions:
+        rank: 1
+        dim: [[1, nD]]
+
       \@unit: NX_ANY
     scan_angles(NX_NUMBER):
       doc: |
@@ -71,6 +88,9 @@ NXscan_control(NXobject):
         
         For N-dimensional, it is a list of N numbers.
       \@unit: NX_ANGLE
+      dimensions:
+        rank: 1
+        dim: [[1, nD]]
   # For Mesh scan
   active_meash(NXobject):
     doc: |
@@ -82,7 +102,6 @@ NXscan_control(NXobject):
         If the scan goes in the negative direction, the speed should be negative.
 
         Rename the field, according to the name of the dimension (e.g. scan_speed_x, scan_speed_voltage).
-
       \@unit: NX_ANY
     forward_speed_N(NX_NUMBER):
       doc: |
@@ -96,7 +115,8 @@ NXscan_control(NXobject):
       \@unit: NX_ANY
     CHANNAL_NAME_N: 
       doc: |
-        Name of the channel that records the scan data for the given dimension.
+        Name of the channel that records the scan data for the given dimension. The ending annotation 'N' is 
+        to represent the name of the dimensions.
 
         Rename the field, according to the name of the channel and dimension (e.g. piezo_scanner_x).
     # # TODO: 
@@ -104,11 +124,7 @@ NXscan_control(NXobject):
     #   doc: |
     #     Define the accuracy of the scan. The default value is 0.1.
     #   \@unit: NX_LENGTH
-    scan_resolution_N(NX_NUMBER):
-      doc: |
-        Define the scan resolution along each dimension. The number of steps dimension parameters.
 
-        Rename the field, according to the name of the dimension (e.g. scan_resolution_x, scan_resolution_voltage).
     scan_points_N(NX_NUMBER):
       doc: |
         Define the total number of points in the given axis scan to be performed.
@@ -119,11 +135,10 @@ NXscan_control(NXobject):
         The number of steps the probe moves over the scan steps or points.
 
         Rename the field, according to the name of the dimension (e.g. stepping_x, stepping_voltage).
-      \@frog_leap_scan_N(NX_BOOLEAN):
+      \@frog_leap_scan(NX_BOOLEAN):
         doc: |
-          If the scan probe jumps over a number of scan steps or points to perform each scan. By default, it is False.
-
-          Rename the field, according to the name of the dimension (e.g. frog_leap_scan_x, frog_leap_scan_voltage).
+          If the scan probe jumps over a number of scan steps or points (more than one) 
+          to perform each scan. By default, it is False.
     step_size_N(NX_NUMBER):
       doc: |
         The length of each step in the scan on each dimension.
@@ -131,11 +146,6 @@ NXscan_control(NXobject):
         Rename the field, according to the name of the dimension (e.g. step_size_x, step_size_voltage).
       \@unit: NX_ANY
 
-    # backlash_corrction could be added in actuator
-    # backlash_correction(NX_NUMBER):
-    #   doc: |
-    #     If the scanning probe moves back to the previous scan point, mention the number of points 
-    #     that the scan probe moves back. If needed use a list of numbers, one for each dimension.
     continuous_N(NX_BOOLEAN):
       doc: |
         If the scan probe moves continuously over the scan points or steps, use True. The default value is False.
@@ -146,118 +156,229 @@ NXscan_control(NXobject):
 
     oscillating_N(NX_BOOLEAN):
       doc: |
-        If the scan probe oscillates over the scan line or scan points or scan steps, use True. 
+        If the scan probe oscillates over the scan point, use True. 
         The default value is False.
       \@oscillation_frequency(NX_NUMBER):
         doc: |
-          Number of oscillations on each scanning line per second. If needed use a list of numbers for each dimension.
+          The number of oscillations on each scanning point per second.
       \@unit: NX_FREQUENCY
 
   # For spiral scan
   active_spiral(NXobject): 
     doc: |
       To define the spiral or circular scan, use this group.
-    scan_speed(NX_NUMBER):
+    scan_speed_N(NX_NUMBER):
       doc: |
-        Define the scan speed in the clockwise directions.
+        Define the scan speed in forward (clockwise) directions.
         
-        If the scan goes in the anticlockwise direction, the speed value should be negative.
-      \@unit: NX_VELOCITY
+        If the scan goes in the negative (anti-clockwise) direction, the speed should be negative.
+
+        Rename the field, according to the circle index. The circle near the center starts with 0.
+        In case, the speed is the same for all the circles, replace 'N' by 'all'.
+      \@unit: NX_ANY
       \@spiral_direction:
         doc: |
           Define the direction of the spiral scan. (e.g. clockwise, anticlockwise)
         enumeration: [clockwise, anticlockwise]
-    spiral_radius(NX_NUMBER):
+    forward_speed_N(NX_NUMBER):
       doc: |
-        Define the radius of the spiral scanning.
+        Define the scan speed in the forward (clockwise) directions. 
+        Rename the field, according to the circle index. The circle near the center starts with 0.
 
-        A list of the radius values for each circle.
-      \@unit: NX_LENGTH
-    stepping(NX_NUMBER):
+        In case, the speed is the same for all the circles, replace 'N' by 'all'.
+      \@unit: NX_ANY
+    backward_speed_N(NX_NUMBER):
+      \@unit: NX_ANY
       doc: |
-        If the scan probe steps over a number of scan points, use True. The default value is False.
-      \@step_value(NX_NUMBER):
-        doc: |
-          Define the number of points that the scan probe steps over.
+        Define the scan speed in the backward (anti-clockwise) directions. 
+        Rename the field, according to the circle index. The circle near the center starts with 0.
+
+        In case, the speed is the same for all the circles, replace 'N' by 'all'.
+    spiral_radius_N(NX_NUMBER):
+      \@unit: NX_ANY
+      doc: |
+        Define the radius of the spiral circle of scanning.
+
+        Rename the field, according to the circle order, the nearest circle to the center is 0.
+    scan_points_N(NX_NUMBER):
+      doc: |
+        Define the total number of points in a given circle scan to be performed.
+  
+        Rename the field, according to the circle order, the nearest circle to the center 
+        is 0 (e.g. scan_points_2).
+    stepping_N(NX_NUMBER):
+      doc: |
+        If the scan probe steps over a number of scan points.
+
+        Rename the field, according to the circle index. The circle near the center starts with 0.
+        In case, the stepping is the same for all the circles, replace 'N' by 'all'. 
       \@frog_leap_scan(NX_BOOLEAN):
         doc: |
-          If the scan probe jumps over a number of scan points, use True. The default value is False.
-      \@backlash_correction(NX_NUMBER):
-        doc: |
-          If the scanning probe moves back to the previous scan point, mention the number of points 
-          that the scan probe moves back.
-    continuous(NX_BOOLEAN):
+          If the scan probe jumps over a number of scan steps or points (more than one), use True.
+          The default value is False.
+    step_size_N(NX_NUMBER):
+      doc: |
+        Define the number of points that the scan probe steps over.
+
+        Rename the field, according to the circle index. The circle near the center or lowest value of a 
+        parameter starts with 0.
+        In case, the step size is the same for all the circles, replace 'N' by 'all'.
+      \@unit: NX_ANY
+    continuous_N(NX_BOOLEAN):
       doc: |
         If the scan probe moves continuously over the scan points, use True. The default value is False.
-    oscillating(NX_BOOLEAN):
+        A scan process can run continuously in the spatial dimension but can be discretized in time or 
+        other physical dimensions (e.g. voltage).
+
+        Rename this field according to the dimensions, considering continuous scan in a two-dimensional space 
+        rename the field as continuous_x_y.
+    oscillating_N(NX_BOOLEAN):
       doc: |
-        If the scan probe oscillates over the scan line, use True. The default value is False.
+        If the scan probe oscillates over the scan point, use True. The default value is False.
       \@oscillation_frequency(NX_NUMBER):
         doc: |
-          Number of oscillation on each scanning line per second.
+          Number of oscillation on each scanning point per second.
       \@unit: NX_FREQUENCY
 
   # This active_trajectory could be explained under the same group
   active_snake(NXobject):
     doc: |
       To define the snake scan, use this group.
-    # scan direction
-    scan_speed(NX_NUMBER):
-      doc: |
-        Define the scan speed in the positive direction (clockwise).
-        If the scan goes in the negative direction, the speed should be negative.
 
-        If multiple circles are scanned and speeds are different, use a list of numbers for each circle.
-      \@unit: NX_VELOCITY
+    scan_speed_N(NX_NUMBER):
+      doc: |
+        Define the scan speed for the type of snake scan. For the same speed along the
+        positive and negative directions, use a single number
+
+        Rename the field, according to the name of the fast and slow axis e.g. scan_speed_x.
+      \@unit: NX_ANY
     forward_speed(NX_NUMBER):
       doc: |
-        If the scan speed in the forward direction (clockwise). The default value is True.
+        The field defines the scan speed in the positive direction on the fast axis.
 
-        If multiple circles are scanned and speeds are different, use a list of numbers for each circle.
-      \@unit: NX_VELOCITY
+        Rename the field, according to the name of the fast axis.
+      \@unit: NX_ANY
     backward_speed(NX_NUMBER):
       doc: |
-        If the scan speed in backward directions (anti-clockwise).
+        The field defines the scan speed in the negative direction on the fast axis.
 
-        If multiple circles are scanned and speeds are different, use a list of numbers for each circle.
-      \@unit: NX_VELOCITY
-    scan_points(NX_NUMBER):
+        Rename the field, according to the name of the fast axis.
+      \@unit: NX_ANY
+    scan_points_N(NX_NUMBER):
       doc: |
-        The total number of points in the given circles. 
+        Define the total number of points in the given axis scan to be performed.
+  
+        Rename the field, according to the name of the dimension (e.g. scan_points_x, scan_points_voltage).
+    stepping_N(NX_NUMBER):
+      doc: |
+        The number of steps the probe moves over the scan steps or points.
 
-        If multiple circles are scanned and points are different, use a list of numbers for each circle.
-    stepping(NX_BOOLEAN):
-      doc: |
-        If the scan probe steps over a number of scan points, use True. The default value is False.
-      \@step_value(NX_NUMBER):
-        doc: |
-          The number of points that the scan probe steps over.
-          If multiple circles are scanned and steps are different, use a list of numbers for each circle.
+        Rename the field, according to the name of the dimension (e.g. stepping_x, stepping_voltage).
       \@frog_leap_scan(NX_BOOLEAN):
         doc: |
-          If the scan probe jumps over a number of scan points, use True. The default value is False.
-      \@backlash_correction(NX_NUMBER):
-        doc: |
-          If the scanning probe moves back to the previous scan point, mention the number of points 
-          that the scan probe moves back.
+          If the scan probe jumps over a number of scan steps or points (more than one) 
+          to perform each scan. By default, it is False.
 
-          If multiple circles are scanned and backlash corrections are different, use a list of numbers for each circle.
-    continuous(NX_BOOLEAN):
+          Rename the field, according to the name of the dimension.
+    step_size_N(NX_NUMBER):
       doc: |
-        If the scan probe moves continuously over the scan points, use True. The default value is False.
-    oscillating(NX_BOOLEAN):
+        The length of each step in the scan on each dimension.
+        
+        Rename the field, according to the name of the dimension (e.g. step_size_x, step_size_voltage).
+      \@unit: NX_ANY
+    CHANNAL_NAME_N: 
       doc: |
-        If the scan probe oscillates over the scan line, use True. The default value is False.
+        Name of the channel that records the scan data for the given dimension. The ending annotation 'N' is 
+        to represent the name of the dimensions.
+
+        Rename the field, according to the name of the channel and dimension (e.g. piezo_scanner_x).
+    continuous_N(NX_BOOLEAN):
+      doc: |
+        If the scan probe moves continuously over the scan points or steps, use True. The default value is False.
+        Usually, continuous scanning is possible in one dimension. On other dimensions, the scan probe moves
+        in a stepping manner.
+
+        Rename the field, according to the name of the dimension (e.g. continuous_voltage).
+
+    oscillating_N(NX_BOOLEAN):
+      doc: |
+        If the scan probe oscillates over the scan point, use True. 
+        The default value is False.
       \@oscillation_frequency(NX_NUMBER):
         doc: |
-          Number of oscillation on each scanning line per second.
-
-          If multiple circles are scanned and oscillation frequencies are different, use a list of numbers for each circle.
+          The number of oscillations on each scanning point per second.
       \@unit: NX_FREQUENCY
-
-  scan_channels:
+  active_trajectory(NXobject):
+    doc: |
+      To define the trajectory scan, use this group.
+    scan_speed(NX_NUMBER):
       doc: |
-        A list of channels, if the scan happens through different channels. 
+        Define the scan speed through the trajectory points.
+      \@unit: NX_ANY
+    forward_speed(NX_NUMBER):
+      doc: |
+        The field defines the scan speed in the forward directions through the trajectory points. 
+      \@unit: NX_ANY
+    backward_speed(NX_NUMBER):
+      doc: |
+        The field defines the scan speed in the backward directions (backtracking) through the trajectory points. 
+      \@unit: NX_ANY
+    CHANNAL_NAME_N: 
+      doc: |
+        Name of the channel that records the scan data for the given dimension. The ending annotation 'N' is 
+        to represent the name of the dimensions.
+
+        Rename the field, according to the name of the channel and dimension (e.g. piezo_scanner_x).
+    # # TODO: 
+    # acuracy(NX_NUMBER):
+    #   doc: |
+    #     Define the accuracy of the scan. The default value is 0.1.
+    #   \@unit: NX_LENGTH
+    number_of_trajectory_points(NX_NUMBER):
+      doc: |
+        The number of trajectory points in the entire scan.
+    trajectory_points(NX_NUMBER):
+      doc: |
+        The trajectory points are the N-dimensional vectors describing all the scan points sequentially.
+
+        The second rank dataset should contain total number of trajectory points (nTraj) and 
+        a full coordinate (nD) of each trajectory point.
+
+      dimensions:
+        rank: 2
+        dim: [[1, nTraj], [2, nD]]
+    scan_points_N(NX_NUMBER):
+      doc: |
+        Define the total number of scan points between two trajectory points.
+  
+        Rename the field, according to the index of the second trajectory points.
+        For example, scan_points_1 is the number of points between the starting(zero) and first trajectory points.
+    stepping_N(NX_NUMBER):
+      doc: |
+        The number of steps the probe moves over the scan steps or points along the trajectory line from between two trajectory points.
+
+        Rename the field, according to the index of the second trajectory points.
+        For example, scan_points_1 is the number of points between the starting(zero) and first trajectory points.
+      \@frog_leap_scan(NX_BOOLEAN):
+        doc: |
+          If the scan probe jumps over a number of scan steps or points (more than one) 
+          to perform each scan. By default, it is False.
+
+    step_size(NX_NUMBER):
+      doc: |
+        The length of each step along the entire trajectory line.
+      \@unit: NX_ANY
+    continuous(NX_BOOLEAN):
+      doc: |
+        If the scan probe moves continuously over the scan points or steps between two trajectory points, use True. 
+    oscillating_N(NX_BOOLEAN):
+      doc: |
+        If the scan probe oscillates over the scan point, use True. 
+        The default value is False.
+      \@oscillation_frequency(NX_NUMBER):
+        doc: |
+          The number of oscillations on each scanning point per second.
+      \@unit: NX_FREQUENCY
   scan_DATA(NXdata):
     exists: optional
     data:
