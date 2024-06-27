@@ -13,6 +13,16 @@ NXcalibration(NXobject):
   description(NX_CHAR):
     doc: |
       A description of the procedures employed.
+  start_time(NX_DATE):
+    doc: |
+      The start time of the calibration.
+  end_time(NX_DATE):
+    doc: |
+      The end time of the calibration.
+  validity_period(NX_DATE):
+    doc: |
+      The period for which the calibration is valid. Usually, every instrument or part of the
+      needs to be calibrated at regular intervals.
   physical_quantity:
     doc: |
       The physical quantity of the calibration, e.g.,
@@ -21,6 +31,9 @@ NXcalibration(NXobject):
     doc: |
       A digital persistent identifier (e.g., DOI, ISO standard) referring to a detailed description of a
       calibration method but no actual calibration data.
+    calibration_type(NX_CHAR):
+      doc: |
+        The type of calibration.
   calibration_reference(NXidentifier):
     doc: |
       A digital persistent identifier (e.g., a DOI) referring to a publicly available calibration measurement
@@ -121,7 +134,7 @@ NXcalibration(NXobject):
       
       This can be used to map data points from uncalibrated to calibrated values,
       i.e., by multiplying each point in the input axis by the corresponding point in the mapping data.
-  calibrated_axis(NX_FLOAT):
+  calibrated_AXIS(NX_FLOAT):
     unit: NX_ANY
     doc: |
       A vector representing the axis after calibration, matching the data length

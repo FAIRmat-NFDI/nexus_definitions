@@ -4,43 +4,43 @@ doc: |
 
   The material of the Piezoelectric scanner is composed of polycrystalline solids and 
   attached at the head of the tip. The material is highly sensitive to applied voltage. 
-# No need to create this ´base class rather we can define in spm application definition.
+# Discussion: No need to create this base class rather we can define in spm application definition.
 NXpiezo_config_spm(NXobject):
   piezo_material(NXpiezoelectric_material):
     doc: |
       The material description and properties of the piezoelectric scanner materials.
-  active_calib:
-    doc: |
-      The name of the calibration type (e.g. LHe).
-  calib_N(NX_NUMBER):
-    exists: optional
-    doc: |
-      N denotes X or Y or Z. There are three directions X, Y, and Z for calibration, along with
-      three available controls: Calibration (m/V), Range (m), and HV gain each. Only
-      two of these parameters are required to define the calibration. Consequently, when any
-      value is changed, one of the other values will be automatically updated. (e.g. calib_X = 3.8E-9)
-  hv_gain_N(NX_NUMBER):
-    exists: optional
-    doc: |
-      N denotes X or Y or Z. In some systems, there is an HV gain readout feature. For
-      these systems, the HV gain should be automatically adjusted whenever the gain is
-      changed at the high voltage amplifier (e.g. 14.5).
-    # (e.g. 0.318343)
-  tilt_N(NX_NUMBER):
-    exists: optional
-    unit: NX_ANGLE
-    doc: |
-      N denotes X or Y. There are 2 parameters in X and Y directions, and tilt needs to be
-      adjusted according to the actual surface. (in degrees, first order correction).
+  calibration(NXcalibration):
+  
+    calibration_method(NXidentifier):
+      doc: |
+        The method used for calibration .
+      calibration_type(NX_CHAR):
+        doc: |
+          The name of the calibration type, sometimes it is called `active calibration`, (e.g. LHe).
+    calibrated_AXIS(NX_NUMBER):
+      doc: |
+        The N (substring) denotes X, Y or Z. There are three directions X, Y, and Z for calibration, along with
+        three available controls: Calibration (m/V), Range (m), and HV gain each. Only
+        two of these parameters are required to define the calibration. Consequently, when any
+        value is changed, one of the other values will be automatically updated. (e.g. calib_X = 3.8E-9)
+    hv_gain_N(NX_NUMBER):
+      doc: |
+        N denotes X or Y or Z. In some systems, there is an HV gain readout feature. For
+        these systems, the HV gain should be automatically adjusted whenever the gain is
+        changed at the high voltage amplifier (e.g. 14.5).
+      # (e.g. 0.318343)
+    tilt_N(NX_NUMBER):
+      unit: NX_ANGLE
+      doc: |
+        N denotes X or Y. There are 2 parameters in X and Y directions, and tilt needs to be
+        adjusted according to the actual surface. (in degrees, first order correction).
   
   curvature_radius_N(NX_NUMBER):
-    exists: optional
     unit: NX_LENGTH
     doc: |
       N denotes X or Y. There are 2 parameters in X and Y directions. It can be set
       approximately to the length of the piezo tube.
   2nd_order_corr_N(NX_NUMBER):
-    exists: optional
     doc: |
       N denotes X or Y. There are 2 parameters in X and Y directions. If you know them,
       you can enter the 2nd order piezo characteristics to compensate for it. The
@@ -48,12 +48,13 @@ NXpiezo_config_spm(NXobject):
       For the X-piezo: "Ux = 1/cx · X + cxx · X2" with units:
       [V] = [V/m] · [m] + [V/m2] · [m2] where cx is the calibration of the piezo X and cxx
       is the 2nd order correction. (V/m^2) (e.g. 0E+0).
+    unit: NX_ANY
   drift_N(NX_NUMBER):
-    exists: optional
     doc: |
       N denotes X, Y or Z. There are 3 parameters in X, Y and Z directions. Define the
       drift speed for all three axes. When the compensation is on, the piezo will start to
       move at that speed. (e.g. 0E+0)
+    unit: NX_VELOCITY
   drift_correction_status(NX_BOOLEAN):
     doc: |
-      Use the button to enable or disable the drift compensation (e.g. FALSE).
+      Set up the settings to enable or disable the drift compensation (e.g. FALSE).
