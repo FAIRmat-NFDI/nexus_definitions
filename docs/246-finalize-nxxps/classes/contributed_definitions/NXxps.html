@@ -132,6 +132,29 @@ x- and y-axes lie in the plane of the sample stage.</p>
 <div><details class="summary-set-of-transformations-describing-the-orientation-of-the-xps-coordinate">
 <summary>Set of transformations, describing the orientation of the XPS coordinate ...</summary><p>Set of transformations, describing the orientation of the XPS coordinate system
 with respect to the beam coordinate system (.).</p>
+<p>The transformations in <cite>coordinate_system_transformations</cite> depend on the actual instrument geometry.
+If the z-axis is pointing in the direction of gravity (i.e., if the sample is mounted horizontally),
+the following transformations can be used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xps_coordinate_system</span><span class="p">:</span><span class="n">NXcoordinate_system</span>
+  <span class="n">depends_on</span><span class="o">=</span><span class="n">entry</span><span class="o">/</span><span class="n">geometries</span><span class="o">/</span><span class="n">xps_coordinate_system</span><span class="o">/</span><span class="n">coordinate_transformations</span><span class="o">/</span><span class="n">z_rotation</span>
+  <span class="n">coordinate_system_transformations</span><span class="p">:</span><span class="n">NXtransformations</span>
+    <span class="n">z_rotation</span><span class="o">=</span><span class="n">beam_azimuth_angle</span>
+      <span class="nd">@depends_on</span><span class="o">=</span><span class="n">y_flip</span>
+      <span class="nd">@transformation_type</span><span class="o">=</span><span class="n">rotation</span>
+      <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+      <span class="nd">@units</span><span class="o">=</span><span class="n">degree</span>
+    <span class="n">y_flip</span><span class="o">=</span><span class="mi">180</span>
+      <span class="nd">@depends_on</span><span class="o">=</span><span class="n">y_rotation</span>
+      <span class="nd">@transformation_type</span><span class="o">=</span><span class="n">rotation</span>
+      <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+      <span class="nd">@units</span><span class="o">=</span><span class="n">degree</span>
+    <span class="n">y_rotation</span><span class="o">=</span><span class="n">beam_polar_angle_of_incidence</span>
+      <span class="nd">@depends_on</span><span class="o">=.</span>
+      <span class="nd">@transformation_type</span><span class="o">=</span><span class="n">rotation</span>
+      <span class="nd">@vector</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+      <span class="nd">@units</span><span class="o">=</span><span class="n">degree</span>
+</pre></div>
+</div>
 </details></div></blockquote>
 </div></blockquote>
 </div></blockquote>
@@ -220,6 +243,11 @@ relative to a defined coordinate system.</p>
 <div><details class="summary-polar-tilt-of-the-analyser-with-respect-to-the-upward-z-direction-def">
 <summary>Polar tilt of the analyser with respect to the upward z-direction, def ...</summary><p>Polar tilt of the analyser with respect to the upward z-direction, defined by
 the sample stage.</p>
+<p>The angle between the incoming beam and the analyser is given by
+beam_analyser_angle = beam_polar_angle_of_incidence + analyser_take_off_polar_angle.
+In practice, the analyser axis is often set as the z axis (analyser_take_off_polar_angle = 0),
+so that beam_analyser_angle = beam_polar_angle_of_incidence. For magic angle configurations,
+this angle is 54.5°.</p>
 </details><p id="index-27"><span id="nxxps-entry-instrument-electronanalyser-transformations-analyser-take-off-polar-angle-transformation-type-attribute"></span><strong>&#64;transformation_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-transformation-type-attribute"><span class="std std-ref">⤆</span></a></p>
 <blockquote>
 <div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">rotation</span></code></p>
