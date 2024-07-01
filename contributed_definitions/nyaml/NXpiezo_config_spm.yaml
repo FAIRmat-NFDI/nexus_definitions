@@ -12,8 +12,8 @@ NXpiezo_config_spm(NXobject):
     curvature_radius_N(NX_NUMBER):
       unit: NX_LENGTH
       doc: |
-        N denotes X or Y. There are 2 parameters in X and Y directions. It can be set
-        approximately to the length of the piezo tube. (e.g. 0.1)
+        The N (substring) denotes X or Y. There are 2 parameters in X and Y directions. It can be set
+        approximately to the length of the piezo tube.
   calibration(NXcalibration):
     calibration_type(NX_CHAR):
       doc: |
@@ -22,39 +22,50 @@ NXpiezo_config_spm(NXobject):
       enum: [active, passive]
       \@name: 
         doc: |
-          A specific name of the calibration type (e.g. active type with name LHe).  
+          A specific name of the calibration type (e.g. active type with name 'LHe').  
     calibrated_AXIS(NX_NUMBER):
       doc: |
-        The N (substring) denotes X, Y or Z. There are three directions X, Y, and Z for calibration, along with
-        three available controls: Calibration (m/V), Range (m), and HV gain each. Only
+        The AXIS (substring) denotes X, Y or Z. There are three directions X, Y, and Z for calibration, 
+        along with three available controls: Calibration (m/V), Range (m), and HV gain each. Only
         two of these parameters are required to define the calibration. Consequently, when any
-        value is changed, one of the other values will be automatically updated. (e.g. calib_X = 3.8E-9)
+        value is changed, one of the other values will be automatically updated.
     hv_gain_N(NX_NUMBER):
       doc: |
-        N denotes X or Y or Z. In some systems, there is an HV gain readout feature. For
+        THe N (substring) denotes X or Y or Z. In some systems, there is an HV gain readout feature. For
         these systems, the HV gain should be automatically adjusted whenever the gain is
-        changed at the high voltage amplifier (e.g. 14.5).
-      # (e.g. 0.318343)
+        changed at the high voltage amplifier.
+    range_N(NX_NUMBER):
+      doc: |
+        The N (substring) denotes X or Y or Z. There are 3 parameters in X, Y and Z directions. The range
+        is the maximum distance the piezo can move.
+      unit: NX_LENGTH
+    calibration_coeffecient_N(NX_NUMBER):
+      doc: |
+        The calibration coefficient is the ratio of the actual distance moved by the piezo to
+        the voltage applied to the piezo. It is also called first-order correction.
+      unit: NX_ANY
     tilt_N(NX_NUMBER):
       unit: NX_ANGLE
       doc: |
-        N denotes X or Y. There are 2 parameters in X and Y directions, and tilt needs to be
-        adjusted according to the actual surface. (in degrees, first order correction).
+        The N (substring) denotes X and Y directions, and for both directions tilt needs to be adjusted according
+        to the actual surface.
     2nd_order_corr_N(NX_NUMBER):
       doc: |
-        N denotes X or Y. There are 2 parameters in X and Y directions. If you know them,
-        you can enter the 2nd order piezo characteristics to compensate the error for that axis. The
-        following equation shows the interpretation of the 2nd order correction parameter:
-        For the X-piezo: "Ux = 1/cx · X + cxx · X2" with units:
-        [V] = [V/m] · [m] + [V/m2] · [m2] where cx is the calibration of the piezo X and cxx
-        is the 2nd order correction. (V/m^2) (e.g. 0E+0).
+        The N (substring) denotes X and Y directions. If you know them, you can enter the 2nd order piezo 
+        characteristics to compensate the error for that axis. The following equation shows the 
+        interpretation of the 2nd order correction parameters, For the X-piezo: 
+            "Ux = 1/cx · X + cxx · X2" 
+        with units:
+            "[V] = [V/m] · [m] + [V/m2] · [m2]" 
+        where cx is the calibration of the piezo X and cxx is the 2nd order correction. The unit for
+        such the second-order correction is (V/m^2).
       unit: NX_ANY
+    drift_correction_status(NX_BOOLEAN):
+      doc: |
+        Set up the settings to enable or disable the drift compensation.
   drift_N(NX_NUMBER):
     doc: |
-      N denotes X, Y or Z. There are 3 parameters in X, Y and Z directions. Define the
+      The N (substring) denotes X, Y and Z directions. Define the
       drift speed for all three axes. When the compensation is on, the piezo will start to
-      move at that speed. (e.g. 0E+0)
+      move at that speed.
     unit: NX_VELOCITY
-  drift_correction_status(NX_BOOLEAN):
-    doc: |
-      Set up the settings to enable or disable the drift compensation (e.g. FALSE).
