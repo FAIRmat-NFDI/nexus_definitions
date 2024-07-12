@@ -2,9 +2,9 @@
 <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 <!--
 # NeXus - Neutron and X-ray Common Data Format
-# 
-# Copyright (C) 2014-2023 NeXus International Advisory Committee (NIAC)
-# 
+#
+# Copyright (C) 2014-2024 NeXus International Advisory Committee (NIAC)
+#
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
@@ -22,231 +22,230 @@
 # For further information, see http://www.nexusformat.org
 -->
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" name="NXmpes_liquid" extends="NXmpes" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
-  <doc>
-       This is the application definition for multidimensional photoelectron spectroscopy on liquids.
-       It extends the NXmpes application definition by metadata for characterizing liquidjet composition
-       and geometry.
-  </doc>
-  <group type="NXentry">
-    <field name="definition">
-      <attribute name="version"/>
-      <enumeration>
-        <item value="NXmpes_liquid"/>
-      </enumeration>
-    </field>
-    <group type="NXinstrument">
-      <group name="instrument_orientation" type="NXtransformations" optional="true">
-        <doc>
-             Transformations describing base geometry in the experiment.
-             Usually defaults to the beam in z direction and gravity in -y direction.
-        </doc>
-        <field name="analyzer_optical_axis" type="NX_NUMBER" recommended="true">
-          <doc>
-               The coordinate system frame of the analyzer.
-               If no direction attribute is specified,
-               the optical axis of the analyzer follows the positive z-direction.
-          </doc>
-          <attribute name="gravity">
-            <doc>
-                 Direction of gravity in the analyzer coordinate system.
-            </doc>
-          </attribute>
-          <attribute name="beam_direction">
-            <doc>
-                 Direction of the photon beam in the analyzer coordinate system.
-            </doc>
-          </attribute>
-          <attribute name="direction">
-            <doc>
-                 The direction of the analyzer optical axis.
-                 If this is not specified the optical axis points
-                 in the positive jet direction.
-                 It is recommended to always specify the axis
-                 direction explicitly (even for the default case).
-            </doc>
-          </attribute>
-        </field>
-      </group>
-    </group>
-    <group type="NXsample">
-      <field name="thickness" type="NX_FLOAT" recommended="true" units="NX_LENGTH">
-        <doc>
-             Thickness of the sample in normal direction to the surface that is probed,
-             e.g., diameter of capillary (round jets) or thickness of the leaf (flat jets).
-        </doc>
-      </field>
-      <field name="flow_rate" type="NX_FLOAT" recommended="true" units="NX_ANY">
-        <doc>
-             Flow rate of the liquid into the chamber, i.e.,
-             through the microjet capillary (or in case of a flat jet: both capillaries).
-             Unit should be NX_VOLUME / NX_TIME.
-        </doc>
-      </field>
-      <field name="shape" type="NX_CHAR">
-        <enumeration>
-          <item value="round"/>
-          <item value="flat"/>
-        </enumeration>
-      </field>
-      <field name="nozzle_material" type="NX_CHAR" recommended="true">
-        <doc>
-             Material the microjet nozzle is made of
-             (users are encouraged to expand on that in group preparation_description).
-        </doc>
-      </field>
-      <field name="temperature" type="NX_NUMBER" optional="true">
-        <doc>
-             The temperature set for the liquid jet or the injection assembly.
-             Details may be added to the preparation description how this
-             temperature value is obtained
-             (whether a chiller unit was used, point of cooling, temperature reading etc.)
-             and where this value would be expected
-             (estimate for the jet assembly, the liquid prior to injection,
-             or at the interaction point taking into account evaporative cooling etc.).
-        </doc>
-      </field>
-      <field name="gas_pressure" type="NX_NUMBER" optional="true">
-        <doc>
-             Pressure reading in the interaction chamber under operation conditions.
-        </doc>
-      </field>
-      <field name="depends_on" recommended="true">
-        <doc>
-             Connects this liquidjet to its transformation chain.
-        </doc>
-      </field>
-      <group name="liquidjet_orientation" type="NXtransformations">
-        <doc>
-             Transformations describing the transformation chain of the liquid jet flow direction
-             and optionally the flat jet normal. The vector of the major flow direction of the
-             liquid jet from the point of injection into the chamber.
-             Along the cylinder axis for single, cylindrical jets, and parallel to the leaf plane for flatjets.
-        </doc>
-        <field name="jet_direction" type="NX_NUMBER" units="NX_ANGLE">
-          <doc>
-               The coordinate system frame of the liquid jet direction.
-               If no direction attribute is specified,
-               the jet points in the positive z-direction.
-          </doc>
-          <attribute name="gravity" type="NX_NUMBER" recommended="true">
-            <doc>
-                 The direction of gravity in the coordinate system
-                 of `jet_direction`.
-            </doc>
-            <dimensions rank="1">
-              <dim index="1" value="3"/>
-            </dimensions>
-          </attribute>
-          <attribute name="transformation_type" type="NX_CHAR">
+    <doc>
+         This is the application definition for multidimensional photoelectron spectroscopy on liquids.
+         It extends the NXmpes application definition by metadata for characterizing liquidjet composition
+         and geometry.
+    </doc>
+    <group type="NXentry">
+        <field name="definition">
+            <attribute name="version"/>
             <enumeration>
-              <item value="rotation"/>
+                <item value="NXmpes_liquid"/>
             </enumeration>
-          </attribute>
-          <attribute name="direction" type="NX_NUMBER" recommended="true">
-            <doc>
-                 The direction of the liqud jet.
-                 If this is not specified the jet points
-                 in the positive jet direction.
-                 It is recommended to always specify the jet
-                 direction explicitly (even for the default case).
-            </doc>
-            <dimensions rank="1">
-              <dim index="1" value="3"/>
-            </dimensions>
-          </attribute>
         </field>
-        <field name="leaf_normal" type="NX_NUMBER" units="NX_ANGLE">
-          <doc>
-               Coordinate frame for the surface normal of the first leaf on the side of solvent #1.
-               If no direction is specified,
-               the surface leaf normal vector points in the positive z-direction.
-               The value of this field is the angle between the
-               analyzer optical axis and the leaf normal.
-               If you only want to collect the angle between the leaf normal
-               and the analyzer optical axis the `depends_on` attribute may be omitted.
-               If a transformation chain is provided (with the `depends_on` attribute)
-               it should depend on the analyzer optical axis or the jet direction depending
-               on the use case.
-          </doc>
-          <attribute name="transformation_type">
-            <enumeration>
-              <item value="rotation"/>
-            </enumeration>
-          </attribute>
-          <attribute name="direction" type="NX_NUMBER" recommended="true">
-            <doc>
-                 Direction of surface normal vector of the first leaf on the side of solvent #1.
-                 If this is not specified it defaults to the positve z-direction which should
-                 be parallel to the detection direction.
-                 It is recommended to always specify the leaf normal direction
-                 explicitly (even for the default case).
-            </doc>
-            <dimensions rank="1">
-              <dim index="1" value="3"/>
-            </dimensions>
-          </attribute>
-        </field>
-      </group>
-      <group name="solventSOLVENT" type="NXsample_component">
-        <doc>
-             Solvent substance of the liquid jet.
-             For flat jets, this group may appear more than once.
-             If a mixture of solvents is used,
-             the one with the highest mol fraction should be designated solvent,
-             and the other(s) solute(s) (see solute group).
-        </doc>
-        <field name="description" type="NX_CHAR" recommended="true"/>
-        <field name="name" type="NX_CHAR"/>
-        <field name="chemical_formula" type="NX_CHAR">
-          <doc>
-               Molecular or structural formula of the solvent.
-          </doc>
-        </field>
-        <field name="chem_id_cas" type="NX_CHAR" recommended="true"/>
-        <field name="ph_value" type="NX_FLOAT" optional="true" units="NX_UNITLESS">
-          <doc>
-               Measured pH value of the solution.
-          </doc>
-        </field>
-        <field name="ph_adjustment" type="NX_BOOLEAN" optional="true">
-          <doc>
-               Whether or not agents for pH adjustment were added to the solution.
-               In this case, users are encouraged to expand on that in preparation_description
-               or add a corresponding solute group.
-          </doc>
-        </field>
-        <field name="mol_fraction" type="NX_FLOAT" optional="true" units="NX_ANY">
-          <doc>
-               Molarity of the solvent in the solution.
-               Unit should be 1 / NX_VOLUME.
-          </doc>
-        </field>
-      </group>
-      <group name="soluteSOLUTE" type="NXsample_component">
-        <doc>
-             Solute substance solved in a given solvent.
-             This also accounts for multiple solutes if more than one is given.
-        </doc>
-        <field name="description" type="NX_CHAR" recommended="true"/>
-        <field name="name" type="NX_CHAR"/>
-        <field name="chemical_formula" type="NX_CHAR">
-          <doc>
-               Molecular or structural formula of the solute.
-          </doc>
-        </field>
-        <field name="chem_id_cas" type="NX_CHAR" recommended="true"/>
-        <field name="mol_fraction" type="NX_FLOAT" recommended="true" units="NX_ANY">
-          <doc>
-               Molarity of the solute in the solution.
-               Unit should be 1 / NX_VOLUME
-          </doc>
-        </field>
-        <field name="solvent" type="NX_CHAR">
-          <doc>
-               Specifies the parent solvent entry of the solution.
-          </doc>
-        </field>
-      </group>
+        <group type="NXinstrument">
+            <group name="instrument_orientation" type="NXtransformations" optional="true">
+                <doc>
+                     Transformations describing base geometry in the experiment.
+                     Usually defaults to the beam in z direction and gravity in -y direction.
+                </doc>
+                <field name="analyzer_optical_axis" type="NX_NUMBER" recommended="true">
+                    <doc>
+                         The coordinate system frame of the analyzer.
+                         If no direction attribute is specified,
+                         the optical axis of the analyzer follows the positive z-direction.
+                    </doc>
+                    <attribute name="gravity">
+                        <doc>
+                             Direction of gravity in the analyzer coordinate system.
+                        </doc>
+                    </attribute>
+                    <attribute name="beam_direction">
+                        <doc>
+                             Direction of the photon beam in the analyzer coordinate system.
+                        </doc>
+                    </attribute>
+                    <attribute name="direction">
+                        <doc>
+                             The direction of the analyzer optical axis.
+                             If this is not specified the optical axis points
+                             in the positive jet direction.
+                             It is recommended to always specify the axis
+                             direction explicitly (even for the default case).
+                        </doc>
+                    </attribute>
+                </field>
+            </group>
+        </group>
+        <group type="NXsample">
+            <field name="thickness" type="NX_FLOAT" recommended="true" units="NX_LENGTH">
+                <doc>
+                     Thickness of the sample in normal direction to the surface that is probed,
+                     e.g., diameter of capillary (round jets) or thickness of the leaf (flat jets).
+                </doc>
+            </field>
+            <field name="flow_rate" type="NX_FLOAT" recommended="true" units="NX_ANY">
+                <doc>
+                     Flow rate of the liquid into the chamber, i.e.,
+                     through the microjet capillary (or in case of a flat jet: both capillaries).
+                     Unit should be NX_VOLUME / NX_TIME.
+                </doc>
+            </field>
+            <field name="shape" type="NX_CHAR">
+                <enumeration>
+                    <item value="round"/>
+                    <item value="flat"/>
+                </enumeration>
+            </field>
+            <field name="nozzle_material" type="NX_CHAR" recommended="true">
+                <doc>
+                     Material the microjet nozzle is made of
+                     (users are encouraged to expand on that in group history/sample_preparation).
+                </doc>
+            </field>
+            <field name="temperature_env" type="NX_NUMBER" optional="true">
+                <doc>
+                     The temperature set for the liquid jet or the injection assembly.
+                     Details may be added through instances of NXsensor/NXactuator the how this temperature
+                     value is obtained (whether a chiller unit was used, point of cooling, temperature reading
+                     etc.) and where this value would be expected (estimate for the jet assembly, the liquid
+                     prior to injection,  or at the interaction point taking into account evaporative cooling etc.).
+                </doc>
+            </field>
+            <field name="gas_pressure_env" type="NX_NUMBER" optional="true">
+                <doc>
+                     Pressure in the interaction chamber under operation conditions and actuators/sensors
+                     controlling/measuring it.
+                </doc>
+            </field>
+            <field name="depends_on" recommended="true">
+                <doc>
+                     Connects this liquidjet to its transformation chain.
+                </doc>
+            </field>
+            <group name="liquidjet_orientation" type="NXtransformations">
+                <doc>
+                     Transformations describing the transformation chain of the liquid jet flow direction
+                     and optionally the flat jet normal. The vector of the major flow direction of the
+                     liquid jet from the point of injection into the chamber.
+                     Along the cylinder axis for single, cylindrical jets, and parallel to the leaf plane for flatjets.
+                </doc>
+                <field name="jet_direction" type="NX_NUMBER" units="NX_ANGLE">
+                    <doc>
+                         The coordinate system frame of the liquid jet direction.
+                         If no direction attribute is specified,
+                         the jet points in the positive z-direction.
+                    </doc>
+                    <attribute name="gravity" type="NX_NUMBER" recommended="true">
+                        <doc>
+                             The direction of gravity in the coordinate system
+                             of `jet_direction`.
+                        </doc>
+                        <dimensions rank="1">
+                            <dim index="1" value="3"/>
+                        </dimensions>
+                    </attribute>
+                    <attribute name="transformation_type" type="NX_CHAR">
+                        <enumeration>
+                            <item value="rotation"/>
+                        </enumeration>
+                    </attribute>
+                    <attribute name="direction" type="NX_NUMBER" recommended="true">
+                        <doc>
+                             The direction of the liqud jet.
+                             If this is not specified the jet points
+                             in the positive jet direction.
+                             It is recommended to always specify the jet
+                             direction explicitly (even for the default case).
+                        </doc>
+                        <dimensions rank="1">
+                            <dim index="1" value="3"/>
+                        </dimensions>
+                    </attribute>
+                </field>
+                <field name="leaf_normal" type="NX_NUMBER" units="NX_ANGLE">
+                    <doc>
+                         Coordinate frame for the surface normal of the first leaf on the side of solvent #1.
+                         If no direction is specified,
+                         the surface leaf normal vector points in the positive z-direction.
+                         The value of this field is the angle between the
+                         analyzer optical axis and the leaf normal.
+                         If you only want to collect the angle between the leaf normal
+                         and the analyzer optical axis the `depends_on` attribute may be omitted.
+                         If a transformation chain is provided (with the `depends_on` attribute)
+                         it should depend on the analyzer optical axis or the jet direction depending
+                         on the use case.
+                    </doc>
+                    <attribute name="transformation_type">
+                        <enumeration>
+                            <item value="rotation"/>
+                        </enumeration>
+                    </attribute>
+                    <attribute name="direction" type="NX_NUMBER" recommended="true">
+                        <doc>
+                             Direction of surface normal vector of the first leaf on the side of solvent #1.
+                             If this is not specified it defaults to the positve z-direction which should
+                             be parallel to the detection direction.
+                             It is recommended to always specify the leaf normal direction
+                             explicitly (even for the default case).
+                        </doc>
+                        <dimensions rank="1">
+                            <dim index="1" value="3"/>
+                        </dimensions>
+                    </attribute>
+                </field>
+            </group>
+            <group name="solventSOLVENT" type="NXsample_component">
+                <doc>
+                     Solvent substance of the liquid jet.
+                     For flat jets, this group may appear more than once.
+                     If a mixture of solvents is used,
+                     the one with the highest mol fraction should be designated solvent,
+                     and the other(s) solute(s) (see solute group).
+                </doc>
+                <field name="description" type="NX_CHAR" recommended="true"/>
+                <field name="name" type="NX_CHAR"/>
+                <field name="chemical_formula" type="NX_CHAR">
+                    <doc>
+                         Molecular or structural formula of the solvent.
+                    </doc>
+                </field>
+                <field name="chem_id_cas" type="NX_CHAR" recommended="true"/>
+                <field name="ph_value" type="NX_FLOAT" optional="true" units="NX_UNITLESS">
+                    <doc>
+                         Measured pH value of the solution.
+                    </doc>
+                </field>
+                <field name="ph_adjustment" type="NX_BOOLEAN" optional="true">
+                    <doc>
+                         Whether or not agents for pH adjustment were added to the solution.
+                         In this case, users are encouraged to expand on that in the ``history`` group
+                         or add a corresponding solute group.
+                    </doc>
+                </field>
+                <field name="mol_fraction" type="NX_FLOAT" optional="true" units="NX_ANY">
+                    <doc>
+                         Molarity of the solvent in the solution.
+                         Unit should be 1 / NX_VOLUME.
+                    </doc>
+                </field>
+            </group>
+            <group name="soluteSOLUTE" type="NXsample_component">
+                <doc>
+                     Solute substance solved in a given solvent.
+                     This also accounts for multiple solutes if more than one is given.
+                </doc>
+                <field name="description" type="NX_CHAR" recommended="true"/>
+                <field name="name" type="NX_CHAR"/>
+                <field name="chemical_formula" type="NX_CHAR">
+                    <doc>
+                         Molecular or structural formula of the solute.
+                    </doc>
+                </field>
+                <field name="chem_id_cas" type="NX_CHAR" recommended="true"/>
+                <field name="mol_fraction" type="NX_FLOAT" recommended="true" units="NX_ANY">
+                    <doc>
+                         Molarity of the solute in the solution.
+                         Unit should be 1 / NX_VOLUME
+                    </doc>
+                </field>
+                <field name="solvent" type="NX_CHAR">
+                    <doc>
+                         Specifies the parent solvent entry of the solution.
+                    </doc>
+                </field>
+            </group>
+        </group>
     </group>
-  </group>
 </definition>
