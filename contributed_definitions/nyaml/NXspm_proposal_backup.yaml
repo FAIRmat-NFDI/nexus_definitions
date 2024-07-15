@@ -1,0 +1,214 @@
+category: application
+doc: |
+  The SPM application definition has been developed for STS, STM and AFM 
+  scanning mode of the SPM family.
+
+  With this application definition, we will address 
+
+    - STS (Scanning Tunneling Spectroscopy) technique: Temperature-dependent I-V spectroscopy
+        For a predefined temperature value, after reaching to that temperature
+        with a voltage sweep on the sample is applied and the corresponding current
+        is measured. The current is plotted against the voltage to get the I-V curve.
+    - STM technique: Scanning Tunneling Microscopy
+        The STM technique is used to image the surface of the sample. The STM tip
+        is scanned over the sample surface and the tunneling current is measured.
+        
+        Two modes: The 'constant current' and 'constant height' are used to image 
+                  the surface and can explained with this application definition.
+    - AFM technique: Atomic Force Microscopy
+        The AFM technique is used to image the surface of the sample. The AFM tip
+        is scanned over the sample surface and the deflection of the cantilever with
+        the help of deflected laser light.
+        
+        Two modes: The 'contact mode' and 'tapping mode' are used to image the surface
+                  and can be explained with this application definition.
+type: group
+NXspm(NXsensor_scan):
+  (NXentry):
+    definition: 
+      doc:
+        Name of the definition that is used for the application.
+      enumeration:
+        - NXspm
+    entry_identifier:
+      doc:
+        The unique identifier for the entry. The identifier is mainly lab-defined 
+        and can be a combination of the sample name, date and time,
+        experiment condition (such as temperature) or instrument-generated
+        unique identifier.
+    collection_identifier:
+      doc:
+        The unique identifier for the collection. The identifier is used to
+        group a number of the experiments run upon the same setup and/or same sample.
+    experiment_indentification:
+      doc:
+        The unique identifier for the experiment. The identifier is used to distinguish
+        an experiment from the other experiments grouped in the same collection.
+    (NXinstrument):
+      doc:
+        The name of the instrument used for the experiment. This group can come
+        multiple times depending on how many instruments are used for the given experiment.
+      hardware(NXfabrication):
+        exists: optional
+        doc:
+          The hardware description of the core instrument setup of the experiment.
+          Usually, the entire instrument is supplied by a single manufacturer. 
+
+          To describe the hardware from any sub-components, use the hardware group that
+          sub-component (child group of the NXinstrument group) group.
+      software(NXfabrication):
+        exists: optional
+        doc:
+          The software description of the core instrument setup of the experiment.
+          Usually, the entire instrument is supplied by a single name/manufacturer/model/etc.
+
+          To describe the software from any sub-components, use the software group
+      current_amplifier(NXamplifier):
+        exists: optional
+        doc:
+          In STM or STS tunneling current, current between tip and sample, gets applified by
+          current applifier.
+      lock_in(NXlockin): 
+        doc: 
+          The lock-in amplifier device of STM or STS is used to analyse the noisy signal (current) between
+          tip and sample. In mechanism, lock-in applifier add a reference signal of frequency of 
+          interest  to the input signal or tunneling current, which is called moulation. After appling 
+          a low-pass fiter on the mix signal all other frequencies except a band of signal around the 
+          frequency reference signal is passed. After, analysing the filter signal the final outcomes
+          of the lock-in amplifier is the applitude and phase of the input signal.
+      (NXenvironment):
+        position(NXpositioner_spm): 
+          doc:
+            In SPM a positioner needs to be fixed at a certain z-positoin satisfying experiment Variables
+            such as z-postion of tip to fix the current (for STM in constant mode), z-position of the cantiliver
+            to resonate the cantiliver oscilation with the sample in (tapping mode of AFM).
+        scan_control(NXscan_control):
+          doc:
+            To define a scan region, orientation of the region (via sample orientation) and type of scan
+            (such as mesh, line, spiral, etc.) in the SPM experiment, this group is used.
+        piezo_config(NXpiezo_config_spm): 
+          doc:
+            The Piezo-electric material of STM / STS gets deformed due to the applied electric field.
+            Before using that piezo electric device the device needs to be configured like calibration 
+            of the tips orientation or behavior due to the piezo electric materials deformation.
+        sample_bias(NXiv_bias): 
+          doc:
+            An applied voltage between the tip and sample that incentivize the sample and tip to 
+            produce tunneling current.
+        sweep_control(NXobject): 
+          doc:
+            In a specific operation mode of STM called STS, the bias voltage is controlled in a certain
+            range in a sequential discrete manner. The corresponding current between the tip and sample
+            is measured. This group is used to explain such operation in STM expaeiment. 
+      stm_instruments(NXinstrument):
+        exists: optional
+        doc:
+          Specific group of the instrument. This group can come
+          multiple times depending on how many instruments are used for the given experiment.
+
+      
+      afm_instruments(NXinstrument):
+        exists: optional
+        doc:
+          The name of the instrument used for the AFM technique. This group can come
+          multiple times depending on how many instruments are used for the given experiment.
+        detector(NXdetector):
+          exists: optional
+          doc:
+            The detector of the AFM technique is used to detect the deflection of the cantilever
+            with the help of deflected laser light.
+          detector_positioner(NXpositioner): 
+            doc:
+              The positioner of the detector is used to fix the detector at a certain orientaion to 
+              detect the deflection of the cantilever.
+          # signal_amplifier(NXamplifier): 
+          signal_amplifier(NXobject): 
+            doc:
+              The signal amplifier of the detector is used to amplify the signal of the detector.
+        cantilever_oscilator(NXobject): 
+          doc:
+            The cantilever oscilator is one of the core insturment of the AFM technique. After calibration
+            of the cantilever with respect to the reference frequency and reference amplitude, the cantilever
+            is used to measure surface force.
+
+            At a certain scan point on the cerface, the cantilever is approaches to the sample. After a certain 
+            height (z_c), the cantilever feels atractive force and cantilever pressed further to the sample until 
+            user defined force is reached. After that the cantilever is retracted from the sample until the cantilever
+            out of the surface force. The defection of the cantilever is measured by the detector (photo diode) and 
+            the signal is converted to the electric signal and passed through the feedback loop to the piezo electric,
+            so that the piezo electric moves the sample in z-x direction.
+          reference_amplitude(NX_NUMBER): 
+            doc:
+              # The reference amplitude of the cantilever is used to calibrate the cantilever with respect to the 
+              # reference amplitude.
+            unit: "NX_ANY"
+          reference_frequency(NX_NUMBER): 
+            doc:
+              # The reference frequency of the cantilever is used to calibrate the cantilever with respect to the 
+              # reference frequency.
+            unit: "NX_FREQUENCY"
+          freqquency_band_range(NX_NUMBER): 
+            doc:
+              # The frequency bandwidth of the cantilever is used to calibrate the cantilever with respect to the 
+              # reference frequency.
+            unit: "NX_FREQUENCY"
+          frequency_bandwith(NX_NUMBER): 
+            doc:
+              # The frequency bandwidth of the cantilever is used to calibrate the cantilever with respect to the 
+              # reference frequency.
+            unit: "NX_FREQUENCY"
+          frequency_cutoff(NX_NUMBER): 
+            doc:
+              # The frequency cutoff of the cantilever is used to calibrate the cantilever with respect to the 
+              # reference frequency.
+            unit: "NX_FREQUENCY"
+          frequency_harmonic(NX_NUMBER): 
+            doc:
+              # The frequency harmonic of the cantilever is used to calibrate the cantilever with respect to the 
+              # reference frequency.
+            unit: "NX_FREQUENCY"
+          frequency_shift(NX_NUMBER): 
+            doc:
+              # The frequency shift of the cantilever is used to calibrate the cantilever with respect to the 
+              # reference frequency.
+            unit: "NX_FREQUENCY"
+          cantilever_excitation(NX_NUMBER): 
+            doc:
+              # The excitation of the cantilever is used to excite the cantilever at a certain frequency to 
+              # measure the surface force.
+            unit: "NX_ANY"
+          cantilever_phase_positioner(NXpositioner): 
+            # doc:
+              # The positioner of the cantilever is used to fix the cantilever at a certain orientaion to 
+              # measure the surface force.
+          cantilever_frequency_positioner(NXpositioner): 
+            # doc:
+              # The positioner of the cantilever is used to fix the cantilever at a certain orientaion to 
+              # measure the surface force.
+          cantilever_calibration(NXcalibration):
+            doc:
+              # The calibration of the cantilever is used to calibrate the cantilever with respect to the 
+              # reference amplitude and reference frequency.
+            unit: "NX_ANY"
+          phase_locked_loop(NXlockin): 
+            doc:
+              # The phase locked loop of the cantilever is used to lock the phase of the cantilever with respect to the 
+              # reference frequency.
+          
+        laser(NXbeam): 
+          doc:
+            The laser beam is used to perform the AFM experiment. The laser beam comes to the cantilever
+            and the deflection of the cantilever is measured by detector.
+    sample(NXsample): 
+      doc:
+        The description of the sample that is subject to the scanning probe microscopy.  
+      sample_history(NXhistory): 
+        doc:
+          The history of the sample that is subject to the scanning probe microscopy.
+    (NXdata): 
+      doc: 
+        The data group is used to store the data of the experiment. The data group can come multiple times
+        depending on how many data sets are generated during the experiment.
+    (NXuser):
+      doc:
+        # The user group is used to store the information of the user who performed the experiment.

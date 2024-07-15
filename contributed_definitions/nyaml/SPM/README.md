@@ -1,6 +1,6 @@
 # Application Definition for SPM Domain
 
-# Plan for General SPM App Def
+# General SPM Base Class
 
 
 ```mermaid
@@ -8,24 +8,27 @@ graph TD;
   subgraph SPM
     %%hh%%
     id1["ENTRY"]
-    id0["SPM Common App Def"]
-    id2["Common NXinstrument"]
-    id3["Common NXdata"]
+    id0["NXspm"]
+    id3["NXdata"]
     id4["Reproducibility Indicators"]
+    id2["NXinstrument"]
     id5["Resolution Indicators"]
+    id6["NXsample"] 
 
   end
 
   subgraph NXinstrument
         %%NXinstrument Part%%
-    id6["hardware(NXfabrication)"]
-    id7["software(NXfabrication)"]
-    id8["current_amplifier(NXamplicon)"]
-    id9["lock_in(NXlockin)"]
-    id10["sample_bias(NXiv_bias)"]
-    id11["output_cabling(NXciruit)"]
-    id12["piezo_config(NXcollection)"]
-    id13["environment(NXenvironment)"]
+    id16["(NXamplifier)"]
+    id14["(NXlockin)"]
+    id13["(NXenvironment)"]
+  end
+
+  subgraph NXenvironment
+    id21["SAMPLE_BIAS(NXiv_bias)"]
+    id22["(NXpositioner_spm)"]
+    id23["(NXscan_control)"]
+    id24["(NXpiezo_config_spm)"]
   end
 
   id0 --> id1
@@ -33,49 +36,40 @@ graph TD;
   id1 --> id3
   id1 --> id4
   id1 --> id5
+  id1 --> id6
 
-  id2 --> id6
-  id2 --> id7
-  id2 --> id8
-  id2 --> id9
-  id2 --> id10
-  id2 --> id11
-  id2 --> id12
   id2 --> id13
+  id2 --> id14
+  id2 --> id16
 
-
+  id13 --> id21
+  id13 --> id22
+  id13 --> id23
+  id13 --> id24
+  
 ```
 
-<div>
-<h1>Graphical View</h1>
-<table>
-  <!-- Row -->
-  <tr class=0>
-    <!-- coloum -->
-    <td style="background:red; color:black;">(00)</td>
-    <td style="background:green;  color:black;">(01)</td>
-    <td style="background:white;  color:black;">(02)</td>
-    <td style="background:yellow;  color:black;">(03)</td>
-  </tr>
-  <tr class=1>
-    <!-- coloum -->
-    <td style="background:red; color:black;">(10)</td>
-    <td style="background:green;  color:black;">(11)</td>
-    <td style="background:white;  color:black;">(12)</td>
-    <td style="background:yellow;  color:black;">(13)</td>
-  </tr  <tr class=2>
-    <!-- coloum -->
-    <td style="background:red; color:black;">(20)</td>
-    <td style="background:green;  color:black;">(21)</td>
-    <td style="background:white;  color:black;">(22)</td>
-    <td style="background:yellow;  color:black;">(23)</td>
-  </tr>
-  <tr class=3>
-    <!-- coloum -->
-    <td style="background:red; color:black;">(30)</td>
-    <td style="background:green;  color:black;">(31)</td>
-    <td style="background:white;  color:black;">(32)</td>
-    <td style="background:yellow;  color:black;">(33)</td>
-  </tr>
-</table>
-</div>
+## STM App Def
+```mermaid
+graph TD;
+  subgraph STM
+    %%hh%%
+    id1["NXstm(NXspm)"]
+    id2["ENTRY"]
+  end
+  subgraph NXinstrument
+    id6["(NXinstrument)"]
+  end
+
+  subgraph NXenvironment
+    %%hh%%
+    id12["sweep_control"]
+  end
+
+
+  id1 --> id2
+
+  id2 --> id6
+  id6 --> id12
+
+```

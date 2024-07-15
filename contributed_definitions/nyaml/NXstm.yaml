@@ -1,0 +1,464 @@
+category: application
+doc: |
+  An application definition to describe Scanning Tunneling Microscopy (STM).
+# https://thesis.library.caltech.edu/1943/4/03chapter3.pdf
+
+type: group
+NXstm(NXspm):
+  (NXentry):
+    definition: 
+      doc: |
+        Name of the definition that is used for the application.
+      enumeration:
+        - NXstm
+    scan_mode:
+      doc: |
+        The that is performed. Sometimes under the 
+        same experiment setup, both constant height and current are measured.
+      enumeration: 
+        - "constant height"
+        - "constant current"
+        - "single point scan (sts)"
+        - "constant height and current"
+    (NXinstrument): 
+      doc: |
+        The group explains the instrumentation of the STM experiment as well as the environment setup such 
+        as the temperature of the tip and other sensors of the corresponding instruments.
+      hardware(NXfabrication):
+        doc: |
+          The hardware description of the core instrument setup of the experiment.
+          Usually, the entire instrument is supplied by a single manufacturer. 
+          To describe the hardware from any sub-components, use the hardware group of that
+          sub-component (child group of the NXinstrument group) group.
+        vendor:
+          doc: |
+            Company name of the manufacturer.
+        model:
+          doc: |
+            Version or model of the component named by the manufacturer.
+          \@version:
+            exists: optional
+            doc: |
+              If different versions exist are possible, the value in this field should be made
+              specific enough to resolve the version.
+        real_time_controller_version:
+          exists: optional
+          doc:
+            The Real Time (RT) System Release of the hardware that defines the processing load of the 
+            hardware.
+          unit: NX_ANY
+        real_time_frequency(NX_NUMBER):
+          exists: optional
+          doc:
+            The Real Time (RT) Frequency of the Hardware to define the processing load of the 
+            hardware.
+          unit: NX_FREQUENCY
+      software(NXfabrication):
+        doc: |
+          The software description of the core instrument setup of the experiment.
+          Usually, the entire instrument is supplied by a single name/manufacturer/model/etc.
+          To describe the software from any sub-components, use the software group.
+        vendor:
+          doc: |
+            Company name of the manufacturer.
+        model:
+          doc: |
+            Version or model of the component named by the manufacturer.
+          \@version:
+            exists: optional
+            doc: |
+              If different versions exist are possible, the value in this field should be made
+              specific enough to resolve the version.
+
+      lock-in(NXlockin):
+        doc: |
+          The lock-in amplifier information. The device is being used to extract the signal information
+          (e.g. amplitude, phase) from the input signal. 
+
+          The input noise signal is passed to the lock-in amplifier, the lock-in amplifier modulates the signal by a reference signal then 
+          the modulated signal is passed to the high-pass filter and low-pass filter and cuts the signal around a reference frequency band. After applying the 
+          demodulation techniques to the filtered signal, and applying other mathematical tools, the lock-in amplifier extracts the amplitude
+          and phase of the input signal.
+        status(NX_BOOLEAN):
+          exists: optional
+          doc: |
+            Status of Lock-in device whether it is on while performing the experiment
+        run(NX_BOOLEAN):
+          exists: optional
+          doc: |
+            Select whether to set the Lock-In to run during the measurement. 
+              
+        modulation_signal_type:
+          doc: |
+            This is the signal on which the modulation voltage or current will be added.
+          unit: NX_UNITLESS
+        
+        modulation_frequency(NX_NUMBER):
+          doc: |
+            The frequency of the sine modulation that is used to modulate the signal in lock-in. 
+            
+        modulation_amplitude(NX_NUMBER):
+          exists: optional
+          doc: |
+            The amplitude (in physical units of modulated signal) of the sine modulation.
+          unit: NX_ANY
+        demodulated_signal_type:
+          exists: optional          
+          doc: |
+            The input signal (STS signal) will be demodulated, in order to determine the amplitude
+            and phase at the frequency set in the Frequency field or harmonics, such as current,
+            bias.
+          unit: NX_UNITLESS
+        harmonic_order_N(NX_NUMBER):
+          doc: |
+            N denotes 1 or 2. The order of the harmonic oscillation to be detected in the demodulated
+            signal should be considered relative to the modulation frequency. When dealing with
+            higher harmonics, it's essential to ensure that their frequencies do not surpass
+            the analogue signal bandwidth.
+        ref_phase_N(NX_NUMBER):
+          exists: optional
+          doc: |
+            Reference phase for the sine on the demodulated signal with respect to the
+            modulation signal. The determined phase is displayed with respect to the
+            reference phase.
+        lock_in_data_flip_number(NX_NUMBER):
+          exists: optional
+          doc: |
+            After demodulation if the lock-in signal is flipped by an angle then the value of 
+            the cosine of the angle is stored in this field.
+          unit: NX_UNITLESS
+
+      (NXenvironment):
+        doc: |
+            The environment information.
+
+        stm_head_temp(NX_NUMBER):
+          exists: optional
+          unit: NX_TEMPERATURE
+          doc: |
+            Temperature of STM head. Note: At least one field from stm_head_temperature,
+            cryo_bottom_temp and cryo_sheild_temp must be provided.
+        cryo_bottom_temp(NX_NUMBER):
+          exists: optional
+          unit: NX_TEMPERATURE
+          doc: |
+            Temperature of liquid helium cryostat. Note: At least one field from
+            stm_head_temperature, cryo_bottom_temp and cryo_sheild_temp must be provided.
+        cryo_shield_temp(NX_NUMBER):
+          exists: optional
+          unit: NX_TEMPERATURE
+          doc: |
+            Temperature of liquid nitrogen shield. Note: At
+            least one field from stm_head_temperature, cryo_bottom_temp and cryo_sheild_temp.
+        current_sensor(NXsensor):
+          doc:
+            The sensor information.
+          current(NX_NUMBER):
+            doc: |
+              The tunneling current between tip and sample after application of bias voltage.
+            unit: NX_CURRENT
+          current_offset(NX_NUMBER):
+            doc: |
+              Offset of the current measurement.
+            unit: NX_CURRENT
+          current_calibration(NXcalibration):
+            doc: |
+              Calibration of the current measurement.
+            caliberation_time(NX_DATE_TIME):
+              doc: |
+                The time or period is taken by the calibration to setup to acquire the data for the calibration.
+              unit: NX_TIME
+            coefficients(NX_NUMBER):
+              doc: |
+                The coefficients of the calibration.
+              unit: NX_ANY
+          (NXamplifier):
+            doc:
+              An amplifier information for the input signal (e.g. from tip).
+            current_gain(NX_NUMBER):
+              doc: |
+                Proportional relationship between the probe output voltage and the actual
+                tunneling current when measuring the tunneling current.
+              unit: NX_UNITLESS
+        voltage_sensor(NXsensor):
+          doc:
+            The sensor information for the voltage device.
+          (NXamplifier):
+            exists: optional
+            doc:
+              An amplifier information for input voltage to the piezo device.
+        sample_bias(NXsensor):
+          doc:
+            The DC bias voltage that is applied to the sample.
+          bias_voltage(NX_NUMBER):
+            doc: |
+              The bias voltage (DC) applied to the sample.
+            unit: NX_VOLTAGE
+          bias_offset(NX_NUMBER):
+            exists: optional
+            doc: |
+              Offset value of the bias voltage.
+            unit: NX_VOLTAGE
+          bias_calibration(NXcalibration):
+            doc: |
+              Calibration of the bias voltage measurement (V/V).
+            caliberation_time(NX_DATE_TIME):
+              exists: optional
+              doc: |
+                The time or period is taken by the calibration to setup to acquire the data for the calibration.
+              unit: NX_TIME
+            coefficients(NX_NUMBER):
+              exists: optional
+              doc: |
+                The coefficients of the calibration.
+              unit: NX_ANY
+        bias_spectroscopy(NXsensor):
+          doc:
+            To explain bias (sweep measurement) voltage applied to the sample.
+          bias_offset(NX_NUMBER):
+            exists: optional
+            doc: |
+              The offset of the bias voltage that considered as the starting of the sweep.
+            unit: NX_VOLTAGE
+          (NXbias_sweep):
+            doc:
+              The bias sweep information.
+            (NXcircuit):
+              exists: optional
+              acquisition_time(NX_DATE_TIME):
+                exists: optional
+                doc: |
+                  The time or period is taken by a bias sweep to setup to acquire the data for the bias sweep.
+                unit: NX_TIME
+              animation_time(NX_DATE_TIME):
+                exists: optional
+                doc: |
+                  The time or period is taken by a bias sweep to be displayed.
+                unit: NX_TIME
+              measurement_time(NX_DATE_TIME):
+                exists: optional
+                doc: |
+                  The time or period is taken by the circuit to measure the bias sweep voltage.
+                unit: NX_TIME
+              indicators_period(NX_DATE_TIME):
+                exists: optional
+                doc: |
+                  The time or period is taken by the circuit to indicate the bias sweep voltage
+                  after measuring the voltage.
+                unit: NX_TIME
+          first_settling_time(NX_DATE_TIME):
+            exists: optional
+            doc: |
+              The initial time is taken to settle the bias voltage at the desired value. On each sweep usually, the system 
+              takes time to settle to the bias voltage at the next value.
+            unit: NX_TIME
+          end_settling_time(NX_DATE_TIME):
+            exists: optional
+            doc: |
+              The time is taken to settle the bias voltage at the desired value. The time (at the last sweep) 
+              to settle for the last value of the sweep.
+            unit: NX_TIME
+          max_slew_rate(NX_NUMBER):
+            exists: optional
+            doc: |
+              The rate at which the amplifier responds to the voltage change (to reach at the desired value). 
+              It defines if the tip and voltage weep are synchronized.
+            unit: NX_ANY
+          z_offset(NX_NUMBER):
+            doc: |
+              The z-offset is a starting tip position before the sweep starts.
+            unit: NX_LENGTH
+          final_z(NX_NUMBER):
+            doc: |
+              The z position after weeps are done.
+          z_controller_time(NX_DATE_TIME):
+            exists: optional
+            doc: |
+              The total time of the Z-controller is taken for entire voltage sweep.
+            unit: NX_TIME
+        piazo_sensor(NXsensor):
+          doc:
+            The sensor information for the piezo device.
+          x(NX_NUMBER):
+            doc: |
+              The x position of the piezo. In STS experiment, the piezo stays fixed at 
+              x,y and z and the the tunneling current is measured with respect to the
+              bias voltage (sweep voltage).
+            unit: NX_LENGTH
+          y(NX_NUMBER):
+            doc: |
+              The y position of the piezo.
+            unit: NX_LENGTH
+          z(NX_NUMBER):
+            doc: |
+              The z position of the piezo.
+            unit: NX_LENGTH
+          (NXpiezo_config_spm): 
+            doc:
+              The piezo configuration information like piezoelectric device calibration and material properties.
+            2nd_order_corr_N(NX_NUMBER):
+              doc: |
+                The N (substring) denotes X and Y directions. If one know them, he/she can enter the 2nd order piezo 
+                characteristics to compensate the error for that axis. The following equation shows the 
+                interpretation of the 2nd order correction parameters, For the X-piezo: 
+                    "Ux = 1/cx · X + cxx · X2" 
+                with units:
+                    "[V] = [V/m] · [m] + [V/m2] · [m2]" 
+                where cx is the calibration of the piezo X and cxx is the 2nd order correction. The unit for
+                such the second-order correction is (V/m^2).
+              unit: NX_ANY
+            calibration_type(NX_CHAR):
+              doc: |
+                The name of the calibration type, sometimes it is called 
+                e.g active calibration, passive calibration.
+            calibration_coeffecient_N(NX_NUMBER):
+              doc: |
+                The calibration coefficient is the ratio of the actual distance moved by the piezo to
+                the voltage applied to the piezo. It is also called first-order correction.
+              unit: NX_ANY
+            drift_N(NX_NUMBER):
+              doc: |
+                Set up the settings to enable or disable the drift compensation.
+            drift_correction_status(NX_BOOLEAN):
+              exists: optional
+              doc: |
+                Whether the drift has been corrected in case there is a deviation in the
+                drift.
+            tilt_N(NX_NUMBER):
+              unit: NX_ANGLE
+              doc: |
+                The N (substring) denotes X and Y directions, and for both directions tilt needs to be adjusted according
+                to the actual surface.
+            hv_gain_N(NX_NUMBER):
+              doc: |
+                The N (substring) denotes X or Y or Z. In some systems, there is an HV gain readout feature. For
+                these systems, the HV gain should be automatically adjusted whenever the gain is
+                changed at the high voltage amplifier.
+          piezo_material(NXpiezoelectric_material):
+            exists: optional
+            doc: |
+              The material description and properties of the piezoelectric scanner materials.
+            curvature_radius_N(NX_NUMBER):
+              exists: optional
+              unit: NX_LENGTH
+              doc: |
+                The N (substring) denotes X or Y. There are 2 parameters in X and Y directions. It can be set
+                approximately to the length of the piezo tube.
+                    
+          (NXpositioner_spm):
+            doc:
+              The positioner information like the position of the tip, the position of the sample, 
+              PID loop feedback etc.
+            z_controller(NXpid):
+              doc: |
+                The PID controller information for the z-axis.
+              z(NX_NUMBER): 
+                doc: |
+                To indicate the relative tip position z between tip and sample. The tip position 
+                can also be varied when the z_controller is not running.
+              set_point(NX_NUMBER):
+                doc: |
+                  The set point for the z-controller to be fixed and the target value could be 
+                  height or current.
+                unit: NX_ANY
+              controller_name:
+                exists: recommended
+                doc: |
+                  The name of the controller or channels.
+              controller_status(NX_BOOLEAN):
+                exists: recommended
+                doc: |
+                  The status of the controller to say was PID has been used or not.
+              p_gain(NX_NUMBER):
+                doc: |
+                  The proportional gain of the controller or PID.
+                unit: NX_UNITLESS
+              i_gain(NX_NUMBER):
+                doc: |
+                  The integral gain of the controller or PID.
+                unit: NX_UNITLESS
+              time_const(NX_DATE_TIME):
+                exists: recommended
+                doc: |
+                  The time constant variable of the controller.
+                unit: NX_TIME
+              tip_lift(NX_NUMBER):
+                exists: optional
+                doc: |
+                  If the tip is lifted from the stable point.
+                unit: NX_LENGTH
+              switch_off_delay:
+                exists: optional
+                doc: |
+                  The switch-off delay of the controller from its stable point.
+                unit: NX_TIME
+        (NXscan_control):
+          doc: |      
+            The scan control information like scan region or phase space, type of scan
+            (e.g. mesh, spiral, etc.), and scan speed, etc.
+          scan_type:
+            doc: |
+              The type of scan like mesh, spiral, etc. For STS experiment, the scan type is
+              usually a single-point scan (trajectory scan).
+            enumeration: ["mesh", "trajectory"]
+
+          scan_region(NX_CHAR):
+            doc: |
+              The region of the scan area.
+            scan_range(NX_NUMBER):
+              doc: |
+                The range of the scan area.
+              unit: NX_ANY
+              dimensions:
+                dim: [1, 2]
+            scan_offset(NX_NUMBER):
+              doc: |
+                The offset of the scan area in 2D (X and Y) space.
+              unit: NX_ANY
+            scan_angle_N(NX_NUMBER):
+              exists: optional
+              doc: |
+                The N (substring) denotes the angle of the scan area with different physical axes.
+              unit: NX_ANGLE
+          mesh_SCAN(NXobject):
+            doc: |
+              The mesh scan information for STM experiment.
+            scan_speed(NX_NUMBER):
+              optional: true
+              doc: |
+                The speed of the scanner or the tip during the scan.
+              unit: NX_ANY
+            scan_time(NX_DATE_TIME):
+              optional: true
+              doc: |
+                The time taken by the scanner to scan the entire area.
+              unit: NX_TIME
+            forward_speed_N(NX_NUMBER):
+              optional: true
+              doc: |
+                The N (substring) denotes the forward speed of the scanner.
+              unit: NX_ANY
+            backward_speed_N(NX_NUMBER):
+              optional: true
+              doc: |
+                The N (substring) denotes the backward speed of the scanner.
+              unit: NX_ANY
+            SCAN_DATA(NXdata):
+
+      (NXsample): 
+        doc: |
+          The sample information.
+        (NXhistory):
+          exists: optional
+          doc: |
+            The history of the sample.
+      (NXdata): 
+        doc: |
+          The data collected from the experiment for example scan data.
+      (NXuser): 
+        doc: |
+          The user information.
+      (NXnote):
+        exists: optional 
+        doc: |
+          The note collection from experiment.

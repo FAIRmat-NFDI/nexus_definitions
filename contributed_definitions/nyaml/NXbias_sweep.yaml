@@ -1,0 +1,72 @@
+category: base
+doc: |
+  A base class to explain baise_sweep which mainly define how the bias voltage sweep is performed in the experiment.
+
+  The bais voltage sweep is a common technique used on the substance or sample or environment to study the change 
+  in the behavior of the sample or substance or environment with the help of the probe.
+
+# TODO: delete the iv_bias and bias_spectroscopy base classes.
+type: group
+NXbias_sweep(NXobject):
+  bias_start(NX_NUMBER): 
+    doc: |
+      The starting value of the bias voltage.
+    unit: NX_VOLTAGE
+  bias_end(NX_NUMBER):
+    doc: |
+      The ending value of the bias voltage.
+    unit: NX_VOLTAGE
+  sweep_start(NX_NUMBER):
+    doc: |
+      The starting value of the sweep. 
+      Usually, the sweep starts at the starting value of the bias voltage (which means both the bias_start and 
+      sweep_start are the same). But, in some cases, the sweep can start at a different value might be intentional
+      or due to the instrument's fault.
+    unit: NX_VOLTAGE
+  sweep_end(NX_NUMBER):
+    doc: |
+      The ending value of the sweep. 
+      Usually, the sweep ends at the ending value of the bias voltage (which means both the bias_end and 
+      sweep_end are the same). But, in some cases, the sweep can end at a different value might be intentional
+      or due to the instrument's fault.
+    unit: NX_VOLTAGE
+  sweep_number(NX_NUMBER):
+    doc: |
+      The number of sweeps that are performed. 
+      The number of sweeps is the number of times the bias voltage is swept from the starting value (sweep_start) to the 
+      ending value  (sweep_end).
+    unit: number of sweeps
+  sweep_step(NX_NUMBER):
+    doc: |
+      The step size of the sweep. 
+      The step size is the difference between the two consecutive bias voltage values during the sweep.
+    unit: NX_VOLTAGE
+  sweep_rate(NX_NUMBER):
+    doc: |
+      The rate at which the bias voltage is swept. 
+      The rate is the speed at which the bias voltage is swept from the starting value to the ending value
+      to perform a complete sweep.
+    unit: NX_VOLTAGE/NX_TIME
+  forward_sweep(NX_BOOL):
+    doc: |
+      The direction of the sweep. 
+      If the forward_sweep is true, the sweep is performed from the higher value to the lower value 
+      and false for vice-versa.
+  settling_time(NX_NUMBER):
+    doc: |
+      The time is taken to settle the bias voltage at the desired value. On each sweep usually, the system 
+      takes time to settle the bias voltage at the next value.
+    unit: NX_TIME
+  reset_bias(NX_BOOL):
+    doc: |
+      The reset_bias is used to reset the bias voltage to the starting value after the sweep is completed.
+  channels:
+    doc: |
+      The channels that are used to measure the data during the sweep.
+  (NXpid):
+    doc: |
+      The PID controller data that is used to control the bias voltage at a desired value.  
+  (NXdata): 
+    doc: |
+      The data collected from the experiment for example current, voltage, etc.
+  

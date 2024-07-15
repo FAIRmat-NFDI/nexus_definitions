@@ -1,0 +1,269 @@
+category: application
+doc: |
+  An application definition to describe Atomic Force Microscopy (AFM).
+type: group
+NXafm(NXspm):
+  (NXentry):
+    definition: 
+      doc: |
+        Name of the definition that is used for the application.
+      enumeration:
+        - NXafm
+    scan_mode:
+      doc: |
+        The mode of the scan.
+      enumeration: ["tapping mode", "contact mode", "dynamic mode"]
+    (NXinstrument): 
+      doc: |
+        The group explains the core instrument setup of the AFM experiment as well as the environment of the corresponding
+        instruments.
+      hardware(NXfabrication):
+        exists: optional
+        doc: |
+          The hardware description of the core instrument setup of the experiment.
+          Usually, the entire instrument is supplied by a single manufacturer. 
+          To describe the hardware from any sub-components, use the hardware group of that
+          sub-component (child group of the NXinstrument group) group.
+        vendor:
+          doc: |
+            Company name of the manufacturer.
+        model:
+          doc: |
+            Version or model of the component named by the manufacturer.
+          \@version:
+            exists: optional
+            doc: |
+              If different versions exist are possible, the value in this field should be made
+              specific enough to resolve the version.
+        real_time_controller_version(NX_NUMBER):
+          exists: optional
+          doc:
+            The Real Time (RT) System Release of the hardware that defines the processing load of the 
+            hardware.
+          unit: NX_ANY
+        real_time_frequency(NX_NUMBER):
+          exists: optional
+          doc:
+            The Real Time (RT) Frequency of the Hardware to define the processing load of the 
+            hardware.
+          unit: NX_FREQUENCY
+      software(NXfabrication):
+        exists: optional
+        doc: |
+          The software description of the core instrument setup of the experiment.
+          Usually, the entire instrument is supplied by a single name/manufacturer/model/etc.
+          To describe the software from any sub-components, use the software group.
+        vendor:
+          doc: |
+            Company name of the manufacturer.
+        model:
+          doc: |
+            Version or model of the component named by the manufacturer.
+          \@version:
+            exists: optional
+            doc: |
+              If different versions exist are possible, the value in this field should be made
+              specific enough to resolve the version.
+      lock-in(NXlockin):
+        exists: optional
+        doc: |
+          The lock-in amplifier information. The device is being used to extract the signal information
+          (e.g. amplitude, phase) from the input signal. 
+
+          The input noise signal is passed to the lock-in amplifier, the lock-in amplifier modulates the 
+          signal by a reference signal then the modulated signal is passed to the high-pass filter and 
+          low-pass filter and cuts the signal around a reference frequency band. After applying the 
+          demodulation techniques to the filtered signal, and applying other mathematical tools, the 
+          lock-in amplifier extracts the amplitude and phase of the input signal.
+        status:
+          exists: optional
+          doc: |
+            Status of Lock-in device whether it is on while performing the experiment
+        run:
+          exists: optional
+          doc: |
+            Select whether to set the Lock-In to run during the measurement. 
+              
+        modulation_signal_type:
+          exists: optional
+          doc: |
+            This is the signal on which the modulation voltage or current will be added.
+          unit: NX_UNITLESS
+        
+        modulation_frequency(NX_NUMBER):
+          exists: optional
+          doc: |
+            The frequency of the sine modulation that is used to modulate the signal in lock-in. 
+            
+        modulation_amplitude(NX_NUMBER):
+          exists: optional
+          doc: |
+            The amplitude (in physical units of modulation signal) of the sine modulation.
+          unit: NX_ANY
+        demodulated_signal_type:
+          exists: optional          
+          doc: |
+            The modulated signal will be demodulated, in order to determine the amplitude
+            and phase for the input signal, such as current or bias.
+          unit: NX_UNITLESS
+        harmonic_order_N(NX_NUMBER):
+          exists: optional
+          doc: |
+            N denotes 1 or 2. The order of the harmonic oscillation to be detected in the demodulated
+            signal should be considered relative to the modulation frequency. When dealing with
+            higher harmonics, it's essential to ensure that their frequencies do not surpass
+            the analogue signal bandwidth.
+        ref_phase_N(NX_NUMBER):
+          exists: optional
+          doc: |
+            Reference phase for the sine on the demodulated signal with respect to the
+            modulation signal. The determined phase is displayed with respect to the
+            reference phase.
+        lock_in_data_flip_number(NX_NUMBER):
+          exists: optional
+          doc: |
+            After demodulation if the lock-in signal is flipped by an angle then the value of 
+            the cosine of the angle is stored in this field.
+          unit: NX_UNITLESS
+      laser(NXbeam):
+        exists: optional
+        doc: |
+          The laser information.
+      photo_detector(NXdetector):
+        exists: optional
+        doc: |
+          The detector information.
+      (NXenvironment):
+        doc: |
+          The environment information.
+        experiment_temperature(NXsensor):
+          exists: optional
+          doc: |
+            The temperature of the scan environment or tip of the cantilever.
+        cantilever_config(NXobject):
+          exists: optional
+          doc: |
+            The cantilever configuration information.
+          (NXcalibration):
+            exists: optional
+            doc: |
+              The calibration information of the cantilever.
+        cantilever_oscilator(NXobject):
+          exists: optional
+          doc:
+            A cantilever is a resemblance to a Simple Oscillator.
+
+            In a typical AFM scan, the cantilever approaches the sample. After a certain height 
+            (z_c), the cantilever feels an attractive or repulsive force and the cantilever gets
+            further closer to the sample until a user-defined force is reached. Later, the 
+            cantilever is retracted from the sample until the cantilever out of the surface force. 
+            The defection of the cantilever is measured by the detector (photo-diode) and the 
+            signal is converted to the electric signal and passed through the PID feedback loop,
+            so that the piezo-electric controller moves on top of the sample in the X-Y plan.
+          reference_amplitude(NX_NUMBER):
+            exists: recommended
+            doc:
+              The reference amplitude of the cantilever.
+            unit: "NX_ANY"
+          reference_frequency(NX_NUMBER):
+            exists: recommended
+            doc:
+              The reference frequency of the cantilever.
+            unit: "NX_FREQUENCY"
+          frequency_band_range(NX_NUMBER): 
+            exists: recommended
+            doc:
+              The range of frequency a cantilever can respond to.
+            unit: "NX_FREQUENCY"
+          frequency_bandwith(NX_NUMBER):
+            exists: recommended
+            doc:
+              The bandwidth of the resonance frequency.
+            unit: "NX_FREQUENCY"
+          frequency_cutoff(NX_NUMBER):
+            exists: recommended
+            doc:
+              The cutoff frequency of the cantilever.
+            unit: "NX_FREQUENCY"
+          frequency_harmonic(NX_NUMBER):
+            exists: recommended
+            doc:
+              The harmonic frequency of the cantilever.
+            unit: "NX_FREQUENCY"
+          frequency_shift(NX_NUMBER):
+            exists: recommended
+            doc:
+              Shift in the resonance frequency of the cantilever.
+            unit: "NX_FREQUENCY"
+          cantilever_phase_positioner(NXpositioner):
+            exists: recommended
+            doc:
+              Describes the cantilever phase positioner, if it exists.
+          cantilever_frequency_positioner(NXpositioner):
+            exists: recommended
+            doc:
+              Describes the cantilever frequency positioner, if it exists.
+          cantilever_calibration(NXcalibration):
+            exists: recommended
+            doc:
+              Calibration information and data of the cantilever.
+            unit: "NX_ANY"
+          phase_locked_loop(NXlockin):
+            exists: recommended
+            doc:
+              Phase locked loop information from cantilever lock-in device.
+          spring_constant(NX_NUMBER):
+            exists: recommended
+            doc:
+              The spring constant coefficient for the cantilever.
+            unit: "NX_ANY"  
+        sample_bias(NXsensor):
+          exists: optional
+          doc: |
+            The bias voltage applied to the sample.
+        height_piezo_sensor(NXsensor):
+          exists: optional
+          doc: |
+            The sensor information for the height piezo device.
+          (NXpiezo_config_spm): 
+            doc: |
+              The piezo configuration information like piezoelectric calibration and material properties.
+        XY_piezo_sensor(NXsensor):
+          exists: optional
+          doc: |
+            The sensor information for the xy piezo device.
+          (NXpiezo_config_spm): 
+            doc: |
+              The piezo configuration information like piezoelectric calibration and material properties.
+        (NXscan_control):
+          doc: |
+            The scan control information like scan region or phase space, type of scan
+            (e.g. mesh, spiral, etc.), and scan speed, etc.
+    (NXuser):
+      doc: |
+        The group explains the user information.
+      user_name:
+        doc: |
+          The name of the user.
+      user_email:
+        doc: |
+          The email of the user.
+      user_affiliation:
+        doc: |
+          The affiliation of the user.
+    (NXsample):
+      exists: optional
+      doc: |
+        The group explains the sample information.
+      sample_name:
+        doc: |
+          The name of the sample.
+      sample_history(NXhistory):
+        exists: optional
+        doc: |
+          The history of the sample.
+    (NXdata):
+      doc: |
+        The data group is used to store the data of the experiment. 
+        The data group can come in repetitions depending on how many
+        data sets are generated during the experiment. 

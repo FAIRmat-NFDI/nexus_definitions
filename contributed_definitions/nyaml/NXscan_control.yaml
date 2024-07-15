@@ -67,8 +67,7 @@ NXscan_control(NXobject):
         
         For N-dimensional, it is a list of N numbers.
       dimensions:
-        rank: 1
-        dim: [[1, nD]]
+        dim: [1, nD]
       unit: NX_ANY
     scan_range(NX_NUMBER):
       doc: |
@@ -76,8 +75,7 @@ NXscan_control(NXobject):
         
         For N-dimensional, it is a list of N numbers.
       dimensions:
-        rank: 1
-        dim: [[1, nD]]
+        dim: [1, nD]
 
       unit: NX_ANY
     scan_angle_N(NX_NUMBER):
@@ -89,8 +87,7 @@ NXscan_control(NXobject):
         Rename the field describing the angle with an axis of the phase space 
         or sub-phase space (e.g. scan_angle_X).
       unit: NX_ANGLE
-  # For Mesh scan
-  active_mesh(NXobject):
+  mesh_SCAN(NXobject):
     doc: |
       The mesh scan is a scan where the scanning direction is a meshed manner.
     scan_speed_N(NX_NUMBER):
@@ -154,9 +151,15 @@ NXscan_control(NXobject):
         doc: |
           The number of oscillations on each scanning point per second.
       unit: NX_FREQUENCY
+    SCAN_DATA(NXdata):
+      data:
+        doc: |
+          The scan data is the data collected during the scan. 
+          If the scan has several channels or derivatives from the channel data, please
+          duplicate this NXdata group for each.
 
   # For spiral scan
-  active_spiral(NXobject): 
+  spiral_SCAN(NXobject): 
     doc: |
       To define the spiral or circular scan, use this group.
     scan_speed_N(NX_NUMBER):
@@ -231,9 +234,14 @@ NXscan_control(NXobject):
         doc: |
           Number of oscillation on each scanning point per second.
       unit: NX_FREQUENCY
+    SCAN_DATA(NXdata):
+      doc: |
+        The scan data is the data collected during the scan. 
+        If the scan has several channels or derivatives from the channel data, please
+        duplicate this NXdata group for each.
 
   # This active_trajectory could be explained under the same group
-  active_snake(NXobject):
+  snake_SCAN(NXobject):
     doc: |
       To define the snake scan, use this group.
 
@@ -300,7 +308,12 @@ NXscan_control(NXobject):
         doc: |
           The number of oscillations on each scanning point per second.
       unit: NX_FREQUENCY
-  active_trajectory(NXobject):
+    SCAN_DATA(NXdata):
+      doc: |
+        The scan data is the data collected during the scan. 
+        If the scan has several channels or derivatives from the channel data, please
+        duplicate this NXdata group for each.
+  traj_SCAN(NXobject):
     doc: |
       To define the trajectory scan, use this group.
     scan_speed(NX_NUMBER):
@@ -366,10 +379,9 @@ NXscan_control(NXobject):
         doc: |
           The number of oscillations on each scanning point per second.
       unit: NX_FREQUENCY
-  scan_DATA(NXdata):
-    exists: optional
-    data:
+    SCAN_DATA(NXdata):
       doc: |
-        The scan data is the data collected during the scan. If the scan has several channels or derivatives from the channel data, please
+        The scan data is the data collected during the scan. 
+        If the scan has several channels or derivatives from the channel data, please
         duplicate this NXdata group for each.
-  
+ 
