@@ -136,7 +136,7 @@ NXxrd_pan(NXxrd):
         unit: NX_TIME
         doc: |
           Total time of count.
-    two_theta_plot(NXdata):
+    experiment_result(NXdata):
       doc: |
         Desired plot would be two_theta vs intensity.
       intensity(NX_FLOAT):
@@ -161,7 +161,7 @@ NXxrd_pan(NXxrd):
       phi(NX_FLOAT):
         exists: optional
         doc: |
-          The phi range of the difractogram
+          The phi range of the diffractogram.
         dimensions:
           rank: 1
           dim: (nDet,)
@@ -172,16 +172,37 @@ NXxrd_pan(NXxrd):
         dimensions:
           rank: 1
           dim: (nDet,)
-    q_plot(NXdata):
+      q_parallel(NX_FLOAT):
+        doc: |
+          The scattering vector component parallel to the sample surface.
+      q_perpendicular(NX_FLOAT):
+        doc: |
+          The scattering vector component perpendicular to the sample surface.
+      q_norm(NX_FLOAT):
+        doc: |
+          The norm of scattering vector q.
+    q_data(NXdata):
       exists: optional
       doc: |
         Desired plot would be q_vector vs intensity.
       q(NX_FLOAT):
         doc: |
-          Axis scale representing wavevector for scatter energy.
+          Scattering vector link to the 'q_norm' of experiment_result.
       intensity(NX_FLOAT):
         doc: |
-          Number of scattered electrons per unit time.
+          Number of scattered electrons per unit time at each q value.
+
+          Link to the 'intensity' of experiment_result.
+      q_parallel(NX_FLOAT):
+        doc: |
+          The scattering vector component parallel to the sample surface.
+          
+          Link to the 'q_parallel' of experiment_result. 
+      q_perpendicular(NX_FLOAT):
+        doc: |
+          The scattering vector component perpendicular to the sample surface.
+
+          Link to the 'q_perpendicular' of experiment_result.
     (NXsample):
       exists: optional
       doc: |
