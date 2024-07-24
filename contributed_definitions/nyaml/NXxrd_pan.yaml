@@ -144,34 +144,34 @@ NXxrd_pan(NXxrd):
           Number of scattered electrons per unit time.
         dimensions:
           rank: 1
-          dim: (nDet,)
+          dim: (nDet, )
       two_theta(NX_FLOAT):
         doc: |
           Axis scale represeting the 2-theta range of the difractogram.
         dimensions:
           rank: 1
-          dim: (nDet,)
+          dim: (nDet, )
       omega(NX_FLOAT):
         exists: optional
         doc: |
           The omega range of the difractogram.
         dimensions:
           rank: 1
-          dim: (nDet,)
+          dim: (nDet, )
       phi(NX_FLOAT):
         exists: optional
         doc: |
           The phi range of the diffractogram.
         dimensions:
           rank: 1
-          dim: (nDet,)
+          dim: (nDet, )
       chi(NX_FLOAT):
         exists: optional
         doc: |
           The chi range of the difractogram
         dimensions:
           rank: 1
-          dim: (nDet,)
+          dim: (nDet, )
       q_parallel(NX_FLOAT):
         doc: |
           The scattering vector component parallel to the sample surface.
@@ -191,19 +191,19 @@ NXxrd_pan(NXxrd):
       intensity(NX_FLOAT):
         doc: |
           Number of scattered electrons per unit time at each q value.
-
+          
           Link to the 'intensity' of experiment_result.
       q_parallel(NX_FLOAT):
         exists: optional
         doc: |
           The scattering vector component parallel to the sample surface.
           
-          Link to the 'q_parallel' of experiment_result. 
+          Link to the 'q_parallel' of experiment_result.
       q_perpendicular(NX_FLOAT):
         exists: optional
         doc: |
           The scattering vector component perpendicular to the sample surface.
-
+          
           Link to the 'q_perpendicular' of experiment_result.
     (NXsample):
       exists: optional
@@ -221,7 +221,7 @@ NXxrd_pan(NXxrd):
           assumed name or given name.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 26a7372651ba3ec8be938e09c1b54c9af5c6d031dc2cca78a9f4a39d3231f7ea
+# 65dca2debe2927470e97f766afd7e9df192130efc4b365371a01f8f7612d9418
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -247,7 +247,7 @@ NXxrd_pan(NXxrd):
 # -->
 # <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXxrd_pan" extends="NXxrd" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <doc>
-#          NXxrd_pan is a specialisation of NXxrd with extra properties 
+#          NXxrd_pan is a specialisation of NXxrd with extra properties
 #          for the PANalytical XRD data format.
 #     </doc>
 #     <group type="NXentry">
@@ -433,7 +433,7 @@ NXxrd_pan(NXxrd):
 #                 </doc>
 #             </field>
 #         </group>
-#         <group name="two_theta_plot" type="NXdata">
+#         <group name="experiment_result" type="NXdata">
 #             <doc>
 #                  Desired plot would be two_theta vs intensity.
 #             </doc>
@@ -443,6 +443,7 @@ NXxrd_pan(NXxrd):
 #                 </doc>
 #                 <dimensions rank="1">
 #                     <dim index="1" value="nDet"/>
+#                     <dim index="2" value=""/>
 #                 </dimensions>
 #             </field>
 #             <field name="two_theta" type="NX_FLOAT">
@@ -451,6 +452,7 @@ NXxrd_pan(NXxrd):
 #                 </doc>
 #                 <dimensions rank="1">
 #                     <dim index="1" value="nDet"/>
+#                     <dim index="2" value=""/>
 #                 </dimensions>
 #             </field>
 #             <field name="omega" type="NX_FLOAT" optional="true">
@@ -459,14 +461,16 @@ NXxrd_pan(NXxrd):
 #                 </doc>
 #                 <dimensions rank="1">
 #                     <dim index="1" value="nDet"/>
+#                     <dim index="2" value=""/>
 #                 </dimensions>
 #             </field>
 #             <field name="phi" type="NX_FLOAT" optional="true">
 #                 <doc>
-#                      The phi range of the difractogram
+#                      The phi range of the diffractogram.
 #                 </doc>
 #                 <dimensions rank="1">
 #                     <dim index="1" value="nDet"/>
+#                     <dim index="2" value=""/>
 #                 </dimensions>
 #             </field>
 #             <field name="chi" type="NX_FLOAT" optional="true">
@@ -475,21 +479,53 @@ NXxrd_pan(NXxrd):
 #                 </doc>
 #                 <dimensions rank="1">
 #                     <dim index="1" value="nDet"/>
+#                     <dim index="2" value=""/>
 #                 </dimensions>
 #             </field>
+#             <field name="q_parallel" type="NX_FLOAT">
+#                 <doc>
+#                      The scattering vector component parallel to the sample surface.
+#                 </doc>
+#             </field>
+#             <field name="q_perpendicular" type="NX_FLOAT">
+#                 <doc>
+#                      The scattering vector component perpendicular to the sample surface.
+#                 </doc>
+#             </field>
+#             <field name="q_norm" type="NX_FLOAT">
+#                 <doc>
+#                      The norm of scattering vector q.
+#                 </doc>
+#             </field>
 #         </group>
-#         <group name="q_plot" type="NXdata" optional="true">
+#         <group name="q_data" type="NXdata" optional="true">
 #             <doc>
 #                  Desired plot would be q_vector vs intensity.
 #             </doc>
 #             <field name="q" type="NX_FLOAT">
 #                 <doc>
-#                      Axis scale representing wavevector for scatter energy.
+#                      Scattering vector link to the 'q_norm' of experiment_result.
 #                 </doc>
 #             </field>
 #             <field name="intensity" type="NX_FLOAT">
 #                 <doc>
-#                      Number of scattered electrons per unit time.
+#                      Number of scattered electrons per unit time at each q value.
+#                      
+#                      Link to the 'intensity' of experiment_result.
+#                 </doc>
+#             </field>
+#             <field name="q_parallel" type="NX_FLOAT" optional="true">
+#                 <doc>
+#                      The scattering vector component parallel to the sample surface.
+#                      
+#                      Link to the 'q_parallel' of experiment_result.
+#                 </doc>
+#             </field>
+#             <field name="q_perpendicular" type="NX_FLOAT" optional="true">
+#                 <doc>
+#                      The scattering vector component perpendicular to the sample surface.
+#                      
+#                      Link to the 'q_perpendicular' of experiment_result.
 #                 </doc>
 #             </field>
 #         </group>

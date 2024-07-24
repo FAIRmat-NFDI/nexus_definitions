@@ -23,7 +23,7 @@
 -->
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXxrd_pan" extends="NXxrd" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <doc>
-         NXxrd_pan is a specialisation of NXxrd with extra properties 
+         NXxrd_pan is a specialisation of NXxrd with extra properties
          for the PANalytical XRD data format.
     </doc>
     <group type="NXentry">
@@ -209,7 +209,7 @@ defracted_beam(NXbeam):-->
                 </doc>
             </field>
         </group>
-        <group name="two_theta_plot" type="NXdata">
+        <group name="experiment_result" type="NXdata">
             <doc>
                  Desired plot would be two_theta vs intensity.
             </doc>
@@ -219,6 +219,7 @@ defracted_beam(NXbeam):-->
                 </doc>
                 <dimensions rank="1">
                     <dim index="1" value="nDet"/>
+                    <dim index="2" value=""/>
                 </dimensions>
             </field>
             <field name="two_theta" type="NX_FLOAT">
@@ -227,6 +228,7 @@ defracted_beam(NXbeam):-->
                 </doc>
                 <dimensions rank="1">
                     <dim index="1" value="nDet"/>
+                    <dim index="2" value=""/>
                 </dimensions>
             </field>
             <field name="omega" type="NX_FLOAT" optional="true">
@@ -235,14 +237,16 @@ defracted_beam(NXbeam):-->
                 </doc>
                 <dimensions rank="1">
                     <dim index="1" value="nDet"/>
+                    <dim index="2" value=""/>
                 </dimensions>
             </field>
             <field name="phi" type="NX_FLOAT" optional="true">
                 <doc>
-                     The phi range of the difractogram
+                     The phi range of the diffractogram.
                 </doc>
                 <dimensions rank="1">
                     <dim index="1" value="nDet"/>
+                    <dim index="2" value=""/>
                 </dimensions>
             </field>
             <field name="chi" type="NX_FLOAT" optional="true">
@@ -251,21 +255,53 @@ defracted_beam(NXbeam):-->
                 </doc>
                 <dimensions rank="1">
                     <dim index="1" value="nDet"/>
+                    <dim index="2" value=""/>
                 </dimensions>
             </field>
+            <field name="q_parallel" type="NX_FLOAT">
+                <doc>
+                     The scattering vector component parallel to the sample surface.
+                </doc>
+            </field>
+            <field name="q_perpendicular" type="NX_FLOAT">
+                <doc>
+                     The scattering vector component perpendicular to the sample surface.
+                </doc>
+            </field>
+            <field name="q_norm" type="NX_FLOAT">
+                <doc>
+                     The norm of scattering vector q.
+                </doc>
+            </field>
         </group>
-        <group name="q_plot" type="NXdata" optional="true">
+        <group name="q_data" type="NXdata" optional="true">
             <doc>
                  Desired plot would be q_vector vs intensity.
             </doc>
             <field name="q" type="NX_FLOAT">
                 <doc>
-                     Axis scale representing wavevector for scatter energy.
+                     Scattering vector link to the 'q_norm' of experiment_result.
                 </doc>
             </field>
             <field name="intensity" type="NX_FLOAT">
                 <doc>
-                     Number of scattered electrons per unit time.
+                     Number of scattered electrons per unit time at each q value.
+                     
+                     Link to the 'intensity' of experiment_result.
+                </doc>
+            </field>
+            <field name="q_parallel" type="NX_FLOAT" optional="true">
+                <doc>
+                     The scattering vector component parallel to the sample surface.
+                     
+                     Link to the 'q_parallel' of experiment_result.
+                </doc>
+            </field>
+            <field name="q_perpendicular" type="NX_FLOAT" optional="true">
+                <doc>
+                     The scattering vector component perpendicular to the sample surface.
+                     
+                     Link to the 'q_perpendicular' of experiment_result.
                 </doc>
             </field>
         </group>
