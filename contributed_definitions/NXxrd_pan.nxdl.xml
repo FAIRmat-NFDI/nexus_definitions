@@ -211,7 +211,8 @@ defracted_beam(NXbeam):-->
         </group>
         <group name="experiment_result" type="NXdata">
             <doc>
-                 Desired plot would be two_theta vs intensity.
+                 All the experiment results data such as scattering angle (2theta),
+                 intensity, incident angle, scattering vector, etc will be stored here.
             </doc>
             <field name="intensity" type="NX_FLOAT">
                 <doc>
@@ -223,7 +224,7 @@ defracted_beam(NXbeam):-->
             </field>
             <field name="two_theta" type="NX_FLOAT" units="NX_ANGLE">
                 <doc>
-                     Axis scale represeting the 2-theta range of the difractogram.
+                     The axis scale represents the 2-theta (scattering angle) of the diffractogram.
                 </doc>
                 <dimensions rank="1">
                     <dim index="1" value="nDet"/>
@@ -231,7 +232,7 @@ defracted_beam(NXbeam):-->
             </field>
             <field name="omega" type="NX_FLOAT" optional="true" units="NX_ANGLE">
                 <doc>
-                     The omega range of the difractogram.
+                     The axis scale corresponds to the incident angle of the diffractogram.
                 </doc>
                 <dimensions rank="1">
                     <dim index="1" value="nDet"/>
@@ -247,7 +248,7 @@ defracted_beam(NXbeam):-->
             </field>
             <field name="chi" type="NX_FLOAT" optional="true" units="NX_ANGLE">
                 <doc>
-                     The chi range of the difractogram
+                     The chi range of the diffractogram
                 </doc>
                 <dimensions rank="1">
                     <dim index="1" value="nDet"/>
@@ -255,48 +256,54 @@ defracted_beam(NXbeam):-->
             </field>
             <field name="q_parallel" type="NX_FLOAT" optional="true" units="NX_ANY">
                 <doc>
-                     The scattering vector component parallel to the sample surface.
+                     The scattering vector component is parallel to the sample surface.
                 </doc>
             </field>
             <field name="q_perpendicular" type="NX_FLOAT" optional="true" units="NX_ANY">
                 <doc>
-                     The scattering vector component perpendicular to the sample surface.
+                     The scattering vector component is perpendicular to the sample surface.
                 </doc>
             </field>
             <field name="q_norm" type="NX_FLOAT" optional="true" units="NX_ANY">
                 <doc>
-                     The norm of scattering vector q.
+                     The concept represents the norm value of the scattering vector, q.
                 </doc>
             </field>
         </group>
         <group name="q_data" type="NXdata" optional="true">
             <doc>
-                 Desired plot would be q_vector vs intensity.
+                 The desired plot would be for scattering vectors.
             </doc>
-            <field name="q" type="NX_FLOAT">
+            <field name="q" type="NX_FLOAT" optional="true">
                 <doc>
-                     Scattering vector link to the 'q_norm' of experiment_result.
+                     This concept corresponds to the norm value of the scattering vector(q).
+                     The concept is the same as 'q_norm' of 'xperiment_result'
+                     and is a link to /entry[ENTRY]/experiment_result/q_norm.
                 </doc>
             </field>
-            <field name="intensity" type="NX_FLOAT">
+            <field name="intensity" type="NX_FLOAT" optional="true">
                 <doc>
                      Number of scattered electrons per unit time at each q value.
-                     
-                     Link to the 'intensity' of experiment_result.
+                     The concept is the same as the 'intensity' of experiment_result
+                     and is a link to /entry[ENTRY]/experiment_result/intensity.
                 </doc>
             </field>
             <field name="q_parallel" type="NX_FLOAT" optional="true">
                 <doc>
-                     The scattering vector component parallel to the sample surface.
+                     The scattering vector (q) component is parallel to the sample surface.
+                     This component is used in the Reciprocal Space Mapping (RSM) technique of
+                     X-ray diffraction method.
                      
-                     Link to the 'q_parallel' of experiment_result.
+                     The concept is the same as 'q_parallel' of experiment_result,
+                     and is a link to /entry[ENTRY]/experiment_result/q_parallel.
                 </doc>
             </field>
             <field name="q_perpendicular" type="NX_FLOAT" optional="true">
                 <doc>
-                     The scattering vector component perpendicular to the sample surface.
+                     The scattering vector component is perpendicular to the sample surface.
                      
-                     Link to the 'q_perpendicular' of experiment_result.
+                     The concept is the same as  'q_perpendicular' of experiment_result,
+                     and is a link to /entry[ENTRY]/experiment_result/q_perpendicular.
                 </doc>
             </field>
         </group>
