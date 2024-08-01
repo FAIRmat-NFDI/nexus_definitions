@@ -29,26 +29,32 @@
     <field name="measurement_type">
         <doc>
              The measurement of the I(V) curve can come in two ways:
-               1. Constant Spacing: The bias voltage is swept from the start to the end with a constant
-                  spacing between the tip and surface.
-               2. Variadic Spacing: The bias voltage is swept from the start to the end in a discretized spacing
-                  between the tip and surface.
+             1. Constant Spacing: The bias voltage is swept from the start to the end with a constant
+             spacing between the tip and surface.
+             2. Variadic Spacing: The bias voltage is swept from the start to the end in a discretized
+             spacing between the tip and surface.
         </doc>
         <enumeration>
             <item value="constant_spacing"/>
             <item value="variadic_spacing"/>
         </enumeration>
     </field>
-    <field name="z_offset" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
+    <group type="NXpositioner_spm">
         <doc>
-             The z-offset is a starting tip position before the sweep starts.
+             The pid positioner information while running bias voltage-tunneling current
+             measurement.
         </doc>
-    </field>
+        <field name="z_offset" type="NX_NUMBER" units="NX_LENGTH">
+            <doc>
+                 The z-offset is a starting tip position before the sweep starts.
+            </doc>
+        </field>
+    </group>
     <group type="NXcircuit" optional="true">
         <field name="acquisition_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
             <doc>
-                 The time or period is taken by a bias sweep to setup to acquire the data for the
-                 bias sweep.
+                 The time or period is taken by a bias sweep to acquire the data for
+                 a bias sweep.
             </doc>
         </field>
         <field name="animation_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
@@ -58,7 +64,8 @@
         </field>
         <field name="measurement_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
             <doc>
-                 The time or period is taken by the circuit to measure the bias sweep voltage.
+                 The time or period is taken by the circuit to measure the bias sweep voltage or
+                 bias current.
             </doc>
         </field>
         <field name="indicators_period" type="NX_DATE_TIME" optional="true" units="NX_TIME">
@@ -80,7 +87,43 @@
             <enumeration>
                 <item value="mesh"/>
                 <item value="trajectory"/>
+                <item value="linear"/>
             </enumeration>
+        </field>
+        <field name="sweep_number" type="NX_NUMBER">
+            <doc>
+                 The number of sweeps taken during the bias spectroscopy.
+            </doc>
+        </field>
+        <field name="first_settling_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
+            <doc>
+                 The initial time is taken to settle the bias voltage at the desired value.
+                 On each sweep usually, the system takes time to settle to the bias voltage
+                 at the next value.
+            </doc>
+        </field>
+        <field name="end_settling_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
+            <doc>
+                 The time is taken to settle the bias voltage at the desired value.
+                 The time (at the last sweep) to settle for the last value of the sweep.
+            </doc>
+        </field>
+        <field name="max_slew_rate" type="NX_NUMBER" optional="true" units="NX_ANY">
+            <doc>
+                 The rate at which the amplifier responds to the voltage change
+                 (to reach at the desired value). It defines if the tip and
+                 voltage weep are synchronized.
+            </doc>
+        </field>
+        <field name="final_z" type="NX_NUMBER" recommended="true">
+            <doc>
+                 The z position after weeps are done.
+            </doc>
+        </field>
+        <field name="total_spectroscopy_time" type="NX_DATE_TIME" recommended="true" units="NX_TIME">
+            <doc>
+                 The total time of the Z-controller is taken for entire voltage sweep.
+            </doc>
         </field>
         <group name="scan_region" type="NXobject">
             <doc>
@@ -103,9 +146,9 @@
                 </doc>
             </field>
         </group>
-        <group name="mesh_SCAN" type="NXobject">
+        <group name="linear_sweep" type="NXobject">
             <doc>
-                 The mesh scan information for scanning of a smaple e.g. STM experiment.
+                 The linear scan information for scanning of a smaple.
             </doc>
             <field name="scan_speed" type="NX_NUMBER" units="NX_ANY">
                 <doc>
@@ -117,14 +160,14 @@
                      The time taken by the scanner to scan the entire area.
                 </doc>
             </field>
-            <field name="forward_speed_N" type="NX_NUMBER" units="NX_ANY">
+            <field name="forward_speed_bias" type="NX_NUMBER" units="NX_ANY">
                 <doc>
-                     The N (substring) denotes the forward speed of the scanner.
+                     Speed of the scanner or the probe moves forward direction.
                 </doc>
             </field>
-            <field name="backward_speed_N" type="NX_NUMBER" units="NX_ANY">
+            <field name="backward_speed_bias" type="NX_NUMBER" units="NX_ANY">
                 <doc>
-                     The N (substring) denotes the backward speed of the scanner.
+                     Speed of the scanner or the probe that moves backward direction.
                 </doc>
             </field>
             <group name="SCAN_DATA" type="NXdata">
@@ -133,33 +176,5 @@
                 </doc>
             </group>
         </group>
-        <field name="first_settling_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
-            <doc>
-                 The initial time is taken to settle the bias voltage at the desired value. On each sweep usually, the system
-                 takes time to settle to the bias voltage at the next value.
-            </doc>
-        </field>
-        <field name="end_settling_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
-            <doc>
-                 The time is taken to settle the bias voltage at the desired value. The time (at the last sweep)
-                 to settle for the last value of the sweep.
-            </doc>
-        </field>
-        <field name="max_slew_rate" type="NX_NUMBER" optional="true" units="NX_ANY">
-            <doc>
-                 The rate at which the amplifier responds to the voltage change (to reach at the desired value).
-                 It defines if the tip and voltage weep are synchronized.
-            </doc>
-        </field>
-        <field name="final_z" type="NX_NUMBER" recommended="true">
-            <doc>
-                 The z position after weeps are done.
-            </doc>
-        </field>
-        <field name="total_spectroscopy_time" type="NX_DATE_TIME" recommended="true" units="NX_TIME">
-            <doc>
-                 The total time of the Z-controller is taken for entire voltage sweep.
-            </doc>
-        </field>
     </group>
 </definition>

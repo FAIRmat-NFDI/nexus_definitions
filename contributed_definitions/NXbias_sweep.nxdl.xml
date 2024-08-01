@@ -25,7 +25,7 @@
     <doc>
          A base class to explain baise_sweep which mainly define how the bias voltage sweep is performed in the experiment.
          
-         The bais voltage sweep is a common technique used on the substance or sample or environment to study the change 
+         The bais voltage sweep is a common technique used on the substance or sample or environment to study the change
          in the behavior of the sample or substance or environment with the help of the probe.
     </doc>
     <group name="scan_region" type="NXobject">
@@ -57,9 +57,15 @@
     </group>
     <group name="linear_sweep" type="NXobject">
         <doc>
-             The linear sweep is a type of sweep where the bias voltage is swept 
+             The linear sweep is a type of sweep where the bias voltage is swept
              linearly from the starting value to the ending value.
         </doc>
+        <field name="backward_sweep" type="NX_BOOLEAN">
+            <doc>
+                 If the sweep (bias voltage) perform in the oposite direction as well
+                 the end value to the start value.
+            </doc>
+        </field>
         <field name="scan_points_bias" type="NX_NUMBER">
             <doc>
                  The number of voltage points the sweep scan to be performed.
@@ -67,27 +73,22 @@
         </field>
         <field name="step_size_bias" type="NX_NUMBER" units="NX_VOLTAGE">
             <doc>
-                 The step size of the sweep. 
-                 The step size is the difference between the two consecutive bias voltage values during the sweep.
+                 The step size of the sweep. The step size is the difference
+                 between the two consecutive bias voltage values during the sweep.
             </doc>
         </field>
-        <field name="settling_time" type="NX_NUMBER" units="NX_TIME">
+        <field name="reset_bias" type="NX_BOOLEAN">
             <doc>
-                 The time is taken to settle the bias voltage at the desired value. On each sweep usually, the system 
-                 takes time to settle the bias voltage at the next value.
+                 The reset_bias is used to reset the bias voltage to the starting 
+                 value after a complete sweep is completed.
             </doc>
         </field>
-        <field name="reset_bias" type="NX_BOOL">
+        <group name="SCAN_DATA" type="NXdata">
             <doc>
-                 The reset_bias is used to reset the bias voltage to the starting value after the
-                 sweep is completed.
+                 The scan data is the data collected during the scan.
+                 If the scan has several channels or derivatives from the channel data, 
+                 please duplicate this NXdata group for each.
             </doc>
-        </field>
-    </group>
-    <group type="NXpid">
-        <doc>
-             The PID controller data that is used to control the bias voltage at a desired
-             value.
-        </doc>
+        </group>
     </group>
 </definition>

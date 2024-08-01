@@ -44,7 +44,7 @@
                 <item value="non-contact mode"/>
             </enumeration>
         </field>
-        <group type="NXinstrument">
+        <group name="experiment_instrument" type="NXinstrument">
             <doc>
                  The group explains the core instrument setup of the AFM experiment as well as the environment of the corresponding
                  instruments.
@@ -58,8 +58,34 @@
                 <doc>
                      The cantilever information.
                 </doc>
+                <group name="cantilever_oscillator" type="NXobject" optional="true">
+                    <doc>
+                         A cantilever is a resemblance to a Simple Oscillator.
+                         In a typical AFM scan, the cantilever approaches the sample. After a certain height (z_c), the
+                         cantilever feels an attractive or repulsive force and the cantilever gets further closer to
+                         the sample until a user-defined force is reached. Later, the cantilever is retracted from the
+                         sample until the cantilever out of the surface force. The defection of the cantilever is measured
+                         by the detector (photo-diode) and the signal is converted to the electric signal and passed
+                         through the PID feedback loop.
+                    </doc>
+                    <field name="oscillator_excitation" type="NX_NUMBER" optional="true" units="NX_ANY">
+                        <doc>
+                             The threshold voltage for oscillator excitation.
+                        </doc>
+                    </field>
+                    <group name="phase_lock_loop" type="NXlockin" optional="true">
+                        <doc>
+                             Phase locked loop for cantilever lock-in device. sample in the X-Y plan.
+                        </doc>
+                        <field name="amplitude_excitation" type="NX_NUMBER" optional="true" units="NX_ANY">
+                            <doc>
+                                 The reference amplitude (also called drive amplitude) of the cantilever.
+                            </doc>
+                        </field>
+                    </group>
+                </group>
             </group>
-            <group type="NXenvironment">
+            <group name="scan_environment" type="NXenvironment">
                 <doc>
                      The environment information.
                 </doc>
@@ -83,21 +109,21 @@
                 <doc>
                      The sensor information for the height piezo device.
                 </doc>
-                <group type="NXpiezo_config_spm">
+                <group name="piezo_configuration" type="NXpiezo_config_spm">
                     <doc>
                          The piezo configuration information like piezoelectric calibration and material
                          properties.
                     </doc>
+                    <group name="piezo_material" type="NXpiezoelectric_material" optional="true">
+                        <doc>
+                             The material description and properties of the piezoelectric scanner materials.
+                        </doc>
+                    </group>
                 </group>
                 <group type="NXpositioner_spm">
                     <doc>
                          The positioner information like the position of the tip, the position of the
                          sample, PID loop feedback etc.
-                    </doc>
-                </group>
-                <group name="piezo_material" type="NXpiezoelectric_material" optional="true">
-                    <doc>
-                         The material description and properties of the piezoelectric scanner materials.
                     </doc>
                 </group>
             </group>
@@ -105,21 +131,21 @@
                 <doc>
                      The sensor information for the xy piezo device.
                 </doc>
-                <group type="NXpiezo_config_spm">
+                <group name="piezo_configuration" type="NXpiezo_config_spm">
                     <doc>
                          The piezo configuration information like piezoelectric calibration and material
                          properties.
                     </doc>
+                    <group name="piezo_material" type="NXpiezoelectric_material" optional="true">
+                        <doc>
+                             The material description and properties of the piezoelectric scanner materials.
+                        </doc>
+                    </group>
                 </group>
                 <group type="NXpositioner_spm">
                     <doc>
                          The positioner information like the position of the tip, the position of the
                          sample, PID loop feedback etc.
-                    </doc>
-                </group>
-                <group name="piezo_material" type="NXpiezoelectric_material" optional="true">
-                    <doc>
-                         The material description and properties of the piezoelectric scanner materials.
                     </doc>
                 </group>
             </group>

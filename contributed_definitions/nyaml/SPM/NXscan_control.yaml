@@ -6,22 +6,22 @@ doc: |
   sub-space of an N-dimensional phase space in which the scan is performed.
   
   scan_types:
-        Trajectory: List of N-dimensional sequential vectors describing the trajectory line for a full scan.
-        Mesh: In each dimension walking in a fixed phase space in a fixed direction. When a phase space
-              or a subspace is scanned then a step in the next dimension is taken. As such we are
-              speaking about the fastest and slowest scan axis.
-        Snake: A mesh scan where the scanning direction is reversed after each line.
-        Spiral: A spiral scan is a scan where the scanning direction is a spiral.
-        Tilt: At each step, a proportional movement is done in all dimensions.
-        Linear: A linear scan is a scan where the scanning direction will be performed on a single independent
-              data axis.
+  Trajectory: List of N-dimensional sequential vectors describing the trajectory line for a full scan.
+  Mesh: In each dimension walking in a fixed phase space in a fixed direction. When a phase space
+  or a subspace is scanned then a step in the next dimension is taken. As such we are
+  speaking about the fastest and slowest scan axis.
+  Snake: A mesh scan where the scanning direction is reversed after each line.
+  Spiral: A spiral scan is a scan where the scanning direction is a spiral.
+  Tilt: At each step, a proportional movement is done in all dimensions.
+  Linear: A linear scan is a scan where the scanning direction will be performed on a single independent
+  data axis.
   
   Scan_control_types:
-      Stepping: Before the measurement at the scan points a movement to the given is performed.
-                Correction (for example backlash) or active regulation (feedback loop) may or
-                may not be applied.
-      Continuous: The scanning each line in an N-dimensional phase space is done without stopping.
-      Oscillating: Scanning over a scan point continuously and then moving to start scanning on the next point.
+  Stepping: Before the measurement at the scan points a movement to the given is performed.
+  Correction (for example backlash) or active regulation (feedback loop) may or
+  may not be applied.
+  Continuous: The scanning each line in an N-dimensional phase space is done without stopping.
+  Oscillating: Scanning over a scan point continuously and then moving to start scanning on the next point.
 type: group
 NXscan_control(NXobject):
   scan_time_start(NX_DATE_TIME):
@@ -44,7 +44,7 @@ NXscan_control(NXobject):
       Define the scan resolution along each dimension. The number of steps per unit dimension parameters.
       
       Rename the field, according to the name of the independent dimension (e.g. scan_resolution_x, scan_resolution_voltage).
-  accuracy(NX_NUMBER):
+  accuracy_N(NX_NUMBER):
     unit: NX_LENGTH
     doc: |
       Define the accuracy of the scan and the value should be in [0, 1].
@@ -149,7 +149,7 @@ NXscan_control(NXobject):
         Rename the field, according to the name of the dimension (e.g. step_size_x, step_size_voltage).
     continuous_N(NX_BOOLEAN):
       doc: |
-        If the scan probe moves continuously over the scan points or steps, use True. The default value is False.
+        If the scan probe moves continuously over the scan points or steps, use True. The default value is True.
         Usually, continuous scanning is possible in one dimension. On other dimensions, the scan probe moves
         in a stepping manner.
         
@@ -234,7 +234,7 @@ NXscan_control(NXobject):
         In case, the step size is the same for all the circles, replace 'N' by 'all'.
     continuous_N(NX_BOOLEAN):
       doc: |
-        If the scan probe moves continuously over the scan points, use True. The default value is False.
+        If the scan probe moves continuously over the scan points, use True. The default value is True.
         A scan process can run continuously in the spatial dimension but can be discretized in time or
         other physical dimensions (e.g. voltage).
         
@@ -309,7 +309,7 @@ NXscan_control(NXobject):
         Rename the field, according to the name of the channel and dimension (e.g. piezo_scanner_x).
     continuous_N(NX_BOOLEAN):
       doc: |
-        If the scan probe moves continuously over the scan points or steps, use True. The default value is False.
+        If the scan probe moves continuously over the scan points or steps, use True. The default value is True.
         Usually, continuous scanning is possible in one dimension. On other dimensions, the scan probe moves
         in a stepping manner.
         
@@ -362,7 +362,7 @@ NXscan_control(NXobject):
         a full coordinate (nD) of each trajectory point.
       dimensions:
         rank: 2
-        dim: (nTraj, nD)
+        dim: [[1, nTraj], [2, nD]]
     scan_points_N(NX_NUMBER):
       doc: |
         Define the total number of scan points between two trajectory points.
@@ -387,7 +387,7 @@ NXscan_control(NXobject):
     continuous(NX_BOOLEAN):
       doc: |
         If the scan probe moves continuously over the scan points or steps between two
-        trajectory points, use True.
+        trajectory points, use True. The default value is True.
     oscillating_N(NX_BOOLEAN):
       unit: NX_FREQUENCY
       doc: |
@@ -444,7 +444,7 @@ NXscan_control(NXobject):
         Rename the field, according to the name of the dimension (e.g. step_size_x, step_size_voltage).
     continuous_N(NX_BOOLEAN):
       doc: |
-        If the scan probe moves continuously over the scan points or steps, use True. The default value is False.
+        If the scan probe moves continuously over the scan points or steps, use True. The default value is True.
         Usually, continuous scanning is possible in one dimension. On other dimensions, the scan probe moves
         in a stepping manner.
         
@@ -465,7 +465,7 @@ NXscan_control(NXobject):
         duplicate this NXdata group for each.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 54706bb0e2f4ff85fc650f9875658f1d74219fcb169e3b67f3dc39991ddcaa95
+# 253cd535f629deaeb70084d0b6122553b3a98cb0fe721817509bd0a05a4fc13a
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -492,26 +492,26 @@ NXscan_control(NXobject):
 # <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXscan_control" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <!--Correction: region (use: phase space)-->
 #     <doc>
-#          This group contains information about the scan control over a hyperdimensional space or 
+#          This group contains information about the scan control over a hyperdimensional space or
 #          sub-space of an N-dimensional phase space in which the scan is performed.
 #          
-#          scan_types: 
-#                Trajectory: List of N-dimensional sequential vectors describing the trajectory line for a full scan.
-#                Mesh: In each dimension walking in a fixed phase space in a fixed direction. When a phase space
-#                      or a subspace is scanned then a step in the next dimension is taken. As such we are 
-#                      speaking about the fastest and slowest scan axis.
-#                Snake: A mesh scan where the scanning direction is reversed after each line. 
-#                Spiral: A spiral scan is a scan where the scanning direction is a spiral.
-#                Tilt: At each step, a proportional movement is done in all dimensions.
-#                Linear: A linear scan is a scan where the scanning direction will be performed on a single independent
-#                      data axis.
+#          scan_types:
+#          Trajectory: List of N-dimensional sequential vectors describing the trajectory line for a full scan.
+#          Mesh: In each dimension walking in a fixed phase space in a fixed direction. When a phase space
+#          or a subspace is scanned then a step in the next dimension is taken. As such we are
+#          speaking about the fastest and slowest scan axis.
+#          Snake: A mesh scan where the scanning direction is reversed after each line.
+#          Spiral: A spiral scan is a scan where the scanning direction is a spiral.
+#          Tilt: At each step, a proportional movement is done in all dimensions.
+#          Linear: A linear scan is a scan where the scanning direction will be performed on a single independent
+#          data axis.
 #          
-#          Scan_control_types: 
-#              Stepping: Before the measurement at the scan points a movement to the given is performed. 
-#                        Correction (for example backlash) or active regulation (feedback loop) may or 
-#                        may not be applied.   
-#              Continuous: The scanning each line in an N-dimensional phase space is done without stopping.
-#              Oscillating: Scanning over a scan point continuously and then moving to start scanning on the next point.
+#          Scan_control_types:
+#          Stepping: Before the measurement at the scan points a movement to the given is performed.
+#          Correction (for example backlash) or active regulation (feedback loop) may or
+#          may not be applied.
+#          Continuous: The scanning each line in an N-dimensional phase space is done without stopping.
+#          Oscillating: Scanning over a scan point continuously and then moving to start scanning on the next point.
 #     </doc>
 #     <field name="scan_time_start" type="NX_DATE_TIME" units="NX_TIME">
 #         <doc>
@@ -538,14 +538,14 @@ NXscan_control(NXobject):
 #              Rename the field, according to the name of the independent dimension (e.g. scan_resolution_x, scan_resolution_voltage).
 #         </doc>
 #     </field>
-#     <field name="accuracy" type="NX_NUMBER" units="NX_LENGTH">
+#     <field name="accuracy_N" type="NX_NUMBER" units="NX_LENGTH">
 #         <doc>
 #              Define the accuracy of the scan and the value should be in [0, 1].
 #         </doc>
 #     </field>
 #     <field name="scan_type">
 #         <doc>
-#              The scan types are the types of scan that can be performed in trajectory, mesh, snake, 
+#              The scan types are the types of scan that can be performed in trajectory, mesh, snake,
 #              or spiral manner.
 #         </doc>
 #         <enumeration>
@@ -557,7 +557,7 @@ NXscan_control(NXobject):
 #     </field>
 #     <field name="scan_control_type">
 #         <doc>
-#              The scan control type is the type of control that can be applied to the scan in stepping, 
+#              The scan control type is the type of control that can be applied to the scan in stepping,
 #              continuous, or oscillating manner.
 #         </doc>
 #         <enumeration>
@@ -574,8 +574,8 @@ NXscan_control(NXobject):
 #         </doc>
 #         <field name="scan_offset_N" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
-#                  The offset of the scan is the origin (a starting point where the subjective scan region has been started) 
-#                  of the scan region (phase space or subphase space). 
+#                  The offset of the scan is the origin (a starting point where the subjective scan region has been started)
+#                  of the scan region (phase space or subphase space).
 #                  
 #                  The 'N' denotes the name of the independent scan axis.
 #             </doc>
@@ -587,11 +587,11 @@ NXscan_control(NXobject):
 #         </field>
 #         <field name="scan_angle_N" type="NX_NUMBER" units="NX_ANGLE">
 #             <doc>
-#                  The orientation of the scan region or subspace. Usually, the scan_offset and scan_range are enough 
+#                  The orientation of the scan region or subspace. Usually, the scan_offset and scan_range are enough
 #                  to define the scan region. This field defines how the subspace is oriented in the N-dimensional space
 #                  with respect to the frame of reference.
 #                  
-#                  Rename the field describing the angle with an axis of the phase space 
+#                  Rename the field describing the angle with an axis of the phase space
 #                  or sub-phase space (e.g. scan_angle_X).
 #             </doc>
 #         </field>
@@ -629,19 +629,19 @@ NXscan_control(NXobject):
 #         </field>
 #         <field name="forward_speed_N" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
-#                  Define the scan speed in the forward directions. 
+#                  Define the scan speed in the forward directions.
 #                  Rename the field, according to the name of the dimension.
 #             </doc>
 #         </field>
 #         <field name="backward_speed_N" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
-#                  Define the scan speed in the backward directions. 
+#                  Define the scan speed in the backward directions.
 #                  Rename the field, according to the name of the dimension.
 #             </doc>
 #         </field>
 #         <field name="channel_NAME_N">
 #             <doc>
-#                  Name of the channel that records the scan data for the given dimension. The ending annotation 'N' is 
+#                  Name of the channel that records the scan data for the given dimension. The ending annotation 'N' is
 #                  to represent the name of the dimensions.
 #                  
 #                  Rename the field, according to the name of the channel and dimension (e.g. piezo_scanner_x).
@@ -662,7 +662,7 @@ NXscan_control(NXobject):
 #             </doc>
 #             <attribute name="frog_leap_scan" type="NX_BOOLEAN">
 #                 <doc>
-#                      If the scan probe jumps over a number of scan steps or points (more than one) 
+#                      If the scan probe jumps over a number of scan steps or points (more than one)
 #                      to perform each scan. By default, it is False.
 #                 </doc>
 #             </attribute>
@@ -676,7 +676,7 @@ NXscan_control(NXobject):
 #         </field>
 #         <field name="continuous_N" type="NX_BOOLEAN">
 #             <doc>
-#                  If the scan probe moves continuously over the scan points or steps, use True. The default value is False.
+#                  If the scan probe moves continuously over the scan points or steps, use True. The default value is True.
 #                  Usually, continuous scanning is possible in one dimension. On other dimensions, the scan probe moves
 #                  in a stepping manner.
 #                  
@@ -685,7 +685,7 @@ NXscan_control(NXobject):
 #         </field>
 #         <field name="oscillating_N" type="NX_BOOLEAN" units="NX_FREQUENCY">
 #             <doc>
-#                  If the scan probe oscillates over the scan point, use True. 
+#                  If the scan probe oscillates over the scan point, use True.
 #                  The default value is False.
 #             </doc>
 #             <attribute name="oscillation_frequency" type="NX_NUMBER">
@@ -697,7 +697,7 @@ NXscan_control(NXobject):
 #         <group name="SCAN_DATA" type="NXdata">
 #             <field name="data">
 #                 <doc>
-#                      The scan data is the data collected during the scan. 
+#                      The scan data is the data collected during the scan.
 #                      If the scan has several channels or derivatives from the channel data, please
 #                      duplicate this NXdata group for each.
 #                 </doc>
@@ -730,7 +730,7 @@ NXscan_control(NXobject):
 #         </field>
 #         <field name="forward_speed_N" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
-#                  Define the scan speed in the forward (clockwise) directions. 
+#                  Define the scan speed in the forward (clockwise) directions.
 #                  Rename the field, according to the circle index. The circle near the center starts with 0.
 #                  
 #                  In case, the speed is the same for all the circles, replace 'N' by 'all'.
@@ -738,7 +738,7 @@ NXscan_control(NXobject):
 #         </field>
 #         <field name="backward_speed_N" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
-#                  Define the scan speed in the backward (anti-clockwise) directions. 
+#                  Define the scan speed in the backward (anti-clockwise) directions.
 #                  Rename the field, according to the circle index. The circle near the center starts with 0.
 #                  
 #                  In case, the speed is the same for all the circles, replace 'N' by 'all'.
@@ -755,7 +755,7 @@ NXscan_control(NXobject):
 #             <doc>
 #                  Define the total number of points in a given circle scan to be performed.
 #                  
-#                  Rename the field, according to the circle order, the nearest circle to the center 
+#                  Rename the field, according to the circle order, the nearest circle to the center
 #                  is 0 (e.g. scan_points_2).
 #             </doc>
 #         </field>
@@ -777,18 +777,18 @@ NXscan_control(NXobject):
 #             <doc>
 #                  Define the number of points that the scan probe steps over.
 #                  
-#                  Rename the field, according to the circle index. The circle near the center or lowest value of a 
+#                  Rename the field, according to the circle index. The circle near the center or lowest value of a
 #                  parameter starts with 0.
 #                  In case, the step size is the same for all the circles, replace 'N' by 'all'.
 #             </doc>
 #         </field>
 #         <field name="continuous_N" type="NX_BOOLEAN">
 #             <doc>
-#                  If the scan probe moves continuously over the scan points, use True. The default value is False.
-#                  A scan process can run continuously in the spatial dimension but can be discretized in time or 
+#                  If the scan probe moves continuously over the scan points, use True. The default value is True.
+#                  A scan process can run continuously in the spatial dimension but can be discretized in time or
 #                  other physical dimensions (e.g. voltage).
 #                  
-#                  Rename this field according to the dimensions, considering continuous scan in a two-dimensional space 
+#                  Rename this field according to the dimensions, considering continuous scan in a two-dimensional space
 #                  rename the field as continuous_x_y.
 #             </doc>
 #         </field>
@@ -805,7 +805,7 @@ NXscan_control(NXobject):
 #         </field>
 #         <group name="SCAN_DATA" type="NXdata">
 #             <doc>
-#                  The scan data is the data collected during the scan. 
+#                  The scan data is the data collected during the scan.
 #                  If the scan has several channels or derivatives from the channel data, please
 #                  duplicate this NXdata group for each.
 #             </doc>
@@ -853,7 +853,7 @@ NXscan_control(NXobject):
 #             </doc>
 #             <attribute name="frog_leap_scan" type="NX_BOOLEAN">
 #                 <doc>
-#                      If the scan probe jumps over a number of scan steps or points (more than one) 
+#                      If the scan probe jumps over a number of scan steps or points (more than one)
 #                      to perform each scan. By default, it is False.
 #                      
 #                      Rename the field, according to the name of the dimension.
@@ -869,7 +869,7 @@ NXscan_control(NXobject):
 #         </field>
 #         <field name="channel_NAME_N">
 #             <doc>
-#                  Name of the channel that records the scan data for the given dimension. The ending annotation 'N' is 
+#                  Name of the channel that records the scan data for the given dimension. The ending annotation 'N' is
 #                  to represent the name of the dimensions.
 #                  
 #                  Rename the field, according to the name of the channel and dimension (e.g. piezo_scanner_x).
@@ -877,7 +877,7 @@ NXscan_control(NXobject):
 #         </field>
 #         <field name="continuous_N" type="NX_BOOLEAN">
 #             <doc>
-#                  If the scan probe moves continuously over the scan points or steps, use True. The default value is False.
+#                  If the scan probe moves continuously over the scan points or steps, use True. The default value is True.
 #                  Usually, continuous scanning is possible in one dimension. On other dimensions, the scan probe moves
 #                  in a stepping manner.
 #                  
@@ -886,7 +886,7 @@ NXscan_control(NXobject):
 #         </field>
 #         <field name="oscillating_N" type="NX_BOOLEAN" units="NX_FREQUENCY">
 #             <doc>
-#                  If the scan probe oscillates over the scan point, use True. 
+#                  If the scan probe oscillates over the scan point, use True.
 #                  The default value is False.
 #             </doc>
 #             <attribute name="oscillation_frequency" type="NX_NUMBER">
@@ -897,7 +897,7 @@ NXscan_control(NXobject):
 #         </field>
 #         <group name="SCAN_DATA" type="NXdata">
 #             <doc>
-#                  The scan data is the data collected during the scan. 
+#                  The scan data is the data collected during the scan.
 #                  If the scan has several channels or derivatives from the channel data, please
 #                  duplicate this NXdata group for each.
 #             </doc>
@@ -926,7 +926,7 @@ NXscan_control(NXobject):
 #         </field>
 #         <field name="channel_NAME_N">
 #             <doc>
-#                  Name of the channel that records the scan data for the given dimension. The ending annotation 'N' is 
+#                  Name of the channel that records the scan data for the given dimension. The ending annotation 'N' is
 #                  to represent the name of the dimensions.
 #                  
 #                  Rename the field, according to the name of the channel and dimension (e.g. piezo_scanner_x).
@@ -941,7 +941,7 @@ NXscan_control(NXobject):
 #             <doc>
 #                  The trajectory points are the N-dimensional vectors describing all the scan points sequentially.
 #                  
-#                  The second rank dataset should contain total number of trajectory points (nTraj) and 
+#                  The second rank dataset should contain total number of trajectory points (nTraj) and
 #                  a full coordinate (nD) of each trajectory point.
 #             </doc>
 #             <dimensions rank="2">
@@ -966,7 +966,7 @@ NXscan_control(NXobject):
 #             </doc>
 #             <attribute name="frog_leap_scan" type="NX_BOOLEAN">
 #                 <doc>
-#                      If the scan probe jumps over a number of scan steps or points (more than one) 
+#                      If the scan probe jumps over a number of scan steps or points (more than one)
 #                      to perform each scan. By default, it is False.
 #                 </doc>
 #             </attribute>
@@ -979,12 +979,12 @@ NXscan_control(NXobject):
 #         <field name="continuous" type="NX_BOOLEAN">
 #             <doc>
 #                  If the scan probe moves continuously over the scan points or steps between two
-#                  trajectory points, use True.
+#                  trajectory points, use True. The default value is True.
 #             </doc>
 #         </field>
 #         <field name="oscillating_N" type="NX_BOOLEAN" units="NX_FREQUENCY">
 #             <doc>
-#                  If the scan probe oscillates over the scan point, use True. 
+#                  If the scan probe oscillates over the scan point, use True.
 #                  The default value is False.
 #             </doc>
 #             <attribute name="oscillation_frequency" type="NX_NUMBER">
@@ -995,7 +995,7 @@ NXscan_control(NXobject):
 #         </field>
 #         <group name="SCAN_DATA" type="NXdata">
 #             <doc>
-#                  The scan data is the data collected during the scan. 
+#                  The scan data is the data collected during the scan.
 #                  If the scan has several channels or derivatives from the channel data, please
 #                  duplicate this NXdata group for each.
 #             </doc>
@@ -1041,7 +1041,7 @@ NXscan_control(NXobject):
 #             </doc>
 #             <attribute name="frog_leap_scan" type="NX_BOOLEAN">
 #                 <doc>
-#                      If the scan probe jumps over a number of scan steps or points (more than one) 
+#                      If the scan probe jumps over a number of scan steps or points (more than one)
 #                      to perform each scan. By default, it is False.
 #                 </doc>
 #             </attribute>
@@ -1055,7 +1055,7 @@ NXscan_control(NXobject):
 #         </field>
 #         <field name="continuous_N" type="NX_BOOLEAN">
 #             <doc>
-#                  If the scan probe moves continuously over the scan points or steps, use True. The default value is False.
+#                  If the scan probe moves continuously over the scan points or steps, use True. The default value is True.
 #                  Usually, continuous scanning is possible in one dimension. On other dimensions, the scan probe moves
 #                  in a stepping manner.
 #                  
@@ -1064,7 +1064,7 @@ NXscan_control(NXobject):
 #         </field>
 #         <field name="oscillating_N" type="NX_BOOLEAN" units="NX_FREQUENCY">
 #             <doc>
-#                  If the scan probe oscillates over the scan point, use True. 
+#                  If the scan probe oscillates over the scan point, use True.
 #                  The default value is False.
 #             </doc>
 #             <attribute name="oscillation_frequency" type="NX_NUMBER">
@@ -1075,7 +1075,7 @@ NXscan_control(NXobject):
 #         </field>
 #         <group name="SCAN_DATA" type="NXdata">
 #             <doc>
-#                  The scan data is the data collected during the scan. 
+#                  The scan data is the data collected during the scan.
 #                  If the scan has several channels or derivatives from the channel data, please
 #                  duplicate this NXdata group for each.
 #             </doc>

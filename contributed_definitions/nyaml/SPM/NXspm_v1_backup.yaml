@@ -18,6 +18,9 @@ doc: |
   x has (NXsoftware_Scan_offset)
   y has (NXsoftware_Scan_offset)
   z has (NXsoftware_Scan_offset)
+
+# 2023.19.7 This Nexus file is currently only for STS data, it will be updated to handle the
+
 # 2023.19.7 This Nexus file is currently only for STS data, it will be updated to handle the
 
 # 2023.19.7 This Nexus file is currently only for STS data, it will be updated to handle the
@@ -331,7 +334,6 @@ NXspm(NXsensor_scan):
                 (proportional gain/time constant). The formula for the controller in the frequency domain is:
                 :math:`G(s) = P + I/s = P(1 + 1/(Ts))`.
                 The integral gain and time constant are related as follows: :math:`I = P/T`.
-
             k_i_gain(NX_NUMBER):
               unit: NX_UNITLESS
               doc: |
@@ -351,7 +353,6 @@ NXspm(NXsensor_scan):
                 :math:`P/T` (proportional gain/time constant). The formula for the controller in the frequency
                 domain is: :math:`G(s) = P + I/s = P(1 + 1/(Ts))`. The integral gain and time constant are related
                 as follows: :math:`I = P/T`.
-
             tip_lift(NX_NUMBER):
               unit: NX_LENGTH
               doc: |
@@ -364,7 +365,7 @@ NXspm(NXsensor_scan):
                 Use this parameter for a reproducible position when switching off the Z-controller.
                 When >0 and the Z-controller is switched off, it doesn't switch off immediately but continues
                 to run for the specified time and averages the Z position.
-                  
+        
         # TODO: Is if this are uncomment than getting error.
         # voltage_controller(NXsensor):
         # temperature_controller(NXsensor):
@@ -426,6 +427,7 @@ NXspm(NXsensor_scan):
               might be necessary. Usually, this parameter does not require manual adjustment
               within this module, as the sweep modules automatically set this value according
               to the sweep timings (e.g. 500E-3).
+        
         # parameters how to change the location from measurement to measurement during the scan
         scan_control(NXcollection):
           exists: optional
@@ -435,45 +437,6 @@ NXspm(NXsensor_scan):
             doc: |
               The scan range (in STM experiment) is the area that the tip will scan. (e.g.
               5.000000E-9 5.000000E-9)
-          scan_offset(NX_NUMBER):
-            unit: NX_LENGTH
-            exists: optional
-            doc: |
-              The scan offset (in STM experiment) is the position of the tip in the scan area.
-              (e.g. -2.354637E-7 1.267476E-)
-          scan_direction:
-            exists: optional
-            doc: |
-              The scan direction (in STM experiment) is the direction from which side of the
-              sample the tip starts scanning.
-            enumeration: [down, up, top, bottom]
-          scan_angle(NX_NUMBER):
-            unit: NX_ANGLE
-            exists: optional
-            doc: |
-              The angle of scan (in STM experiment) with the bottom or top side (depends on the scan_direction
-              field) of the sample. (e.g. 0.000E+0).
-          scanfield(NX_NUMBER):
-            doc: |
-              Configure the scan frame like x position; y position; width; height. (e.g.
-              3.11737E-9;29.1583E-9;15E-9;15E-9;0E+0)
-          pixels_line(NX_NUMBER):
-            doc: |
-              Scan resolution by setting the Lines equal to Pixels.  (e.g. 512)
-          lines(NX_NUMBER):
-            doc: |
-              Define the image resolution. (e.g. 512)
-          speed_forw(NX_NUMBER):
-            doc: |
-              Define the scan forward speed in the forward direction. (m/s) (e.g. 11.7187E-9)
-          speed_backw(NX_NUMBER):
-            doc: |
-              Define the scan backward speed in the forward direction. (m/s) (e.g. 11.7187E-9)
-                    roi(NXtransformations):
-            exists: optional
-            doc: |
-              In STM experiment, the scan range is the coordinate (x,y) along the X and Y axis from the origin (scan_offset) of
-              the scan area (e.g. 5.000000E-9 5.000000E-9).
           scan_offset(NX_NUMBER):
             unit: NX_LENGTH
             exists: optional
@@ -492,6 +455,24 @@ NXspm(NXsensor_scan):
             doc: |
               The angle of scan with the bottom or top side (depends on the scan_direction
               field) of the sample. (e.g. 0.000E+0).
+          scanfield(NX_NUMBER):
+            doc: |
+              Configure the scan frame like x position; y position; width; height. (e.g.
+              3.11737E-9;29.1583E-9;15E-9;15E-9;0E+0)
+          pixels_line(NX_NUMBER):
+            doc: |
+              Scan resolution by setting the Lines equal to Pixels.  (e.g. 512)
+          lines(NX_NUMBER):
+            doc: |
+              Define the image resolution. (e.g. 512)
+          speed_forw(NX_NUMBER):
+            doc: |
+              Define the scan forward speed in the forward direction. (m/s) (e.g. 11.7187E-9)
+          speed_backw(NX_NUMBER):
+            exists: optional
+            doc: |
+              In STM experiment, the scan range is the coordinate (x,y) along the X and Y axis from the origin (scan_offset) of
+              the scan area (e.g. 5.000000E-9 5.000000E-9).
           roi(NXtransformations):
             frame:
               doc: |
@@ -942,7 +923,7 @@ NXspm(NXsensor_scan):
         Mesh scan with 2D slices of the above alternative plot for other y co-ordinates.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 9b03474c63a6c51c01d31f3cbd3ec65c6f18db027dd4b72cbca8e92c52e34f03
+# 4741e3c32caf73d454e99db73d0df2e40f21ce20fad2127c283a4216d06e4f09
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -972,7 +953,9 @@ NXspm(NXsensor_scan):
 # 2023.19.7 This Nexus file is currently only for STS data, it will be updated to handle the-->
 # <!--
 # 2023.19.7 This Nexus file is currently only for STS data, it will be updated to handle the-->
-# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXsts" extends="NXsensor_scan" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+# <!--
+# 2023.19.7 This Nexus file is currently only for STS data, it will be updated to handle the-->
+# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXspm" extends="NXsensor_scan" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <doc>
 #          Application definition for temperature-dependent IV curve measurements
 #          #2023.19.7 This Nexus file is currently only for STS data, it will be updated to handle the
@@ -1021,24 +1004,24 @@ NXspm(NXsensor_scan):
 #                 <item value="sample"/>
 #             </enumeration>
 #         </field>
-#         <field name="entry_identifier" optional="true">
+#         <group name="entry_identifier" type="NXidentifier" optional="true">
 #             <doc>
 #                  The name of the output file, with the number of scans at the end. (e.g.
 #                  221122_Au_5K00014)
 #             </doc>
-#         </field>
-#         <field name="collection_identifier">
+#         </group>
+#         <group name="collection_identifier" type="NXidentifier">
 #             <doc>
 #                  The name of the series output file, which represents only the public part of the
 #                  output file. (e.g. 221122_Au_5K)
 #             </doc>
-#         </field>
-#         <field name="experiment_identifier" optional="true">
+#         </group>
+#         <group name="experiment_identifier" type="NXidentifier" optional="true">
 #             <doc>
 #                  Path to storage of output files.
 #                  (e.g. Path C:\Users\SPM-PEEM\Desktop\DATA_Nanonis\20220711_CreaTec_Service_Benchmarks_LHe\Nanonis-Session-PMD100-HVHU_CreaTec_Service_PalmaLabBerlin220711)
 #             </doc>
-#         </field>
+#         </group>
 #         <field name="experiment_description" optional="true">
 #             <doc>
 #                  Descriptive comments for this experiment, added by the experimenter, coming from the
@@ -1205,7 +1188,7 @@ NXspm(NXsensor_scan):
 # doc: User outputs whose name can be modified in the corresponding module. (e.g. Input 24 (V))
 # output_slew_rate(NX_NUMBER):
 # doc: The rate at which the one of the signal changes when ramping to the starting point. (V/s) (e.g. Inf)-->
-#             <group name="piezo_config" type="NXcollection" optional="true">
+#             <group name="piezo_config" type="NXobject" optional="true">
 #                 <doc>
 #                      Configuration for piezoelectric scanner used to move tip along X and Y direction. The
 #                      material of the Piezoelectric scanner composed of polycrystalline solids and sensitive to
@@ -1291,30 +1274,75 @@ NXspm(NXsensor_scan):
 #                     <field name="calibration_time" type="NX_DATE_TIME" optional="true"/>
 #                     <field name="value" type="NX_NUMBER" optional="true"/>
 #                 </group>
-#                 <group name="position" type="NXpositioner_sts">
+#                 <group name="position" type="NXpositioner_spm">
 #                     <doc>
 #                          Clarify the frame laboratory frame.
 #                     </doc>
 #                     <field name="x" type="NX_NUMBER" optional="true" units="NX_LENGTH">
 #                         <doc>
-#                              The scanning area in x position in the frame. (e.g. -890.53E-12)
+#                              The scanning area in x position in the frame. (e.g. -890.53E-12).
 #                         </doc>
 #                     </field>
 #                     <field name="y" type="NX_NUMBER" optional="true" units="NX_LENGTH">
 #                         <doc>
-#                              The scanning area in y position in the frame. (e.g. 29.6968E-9)
+#                              The scanning area in y position in the frame. (e.g. 29.6968E-9).
 #                         </doc>
 #                     </field>
 #                     <field name="z" type="NX_NUMBER" optional="true" units="NX_LENGTH">
 #                         <doc>
-#                              The scanning area in z position in the frame. (e.g. 130.5E-9)
+#                              The scanning area in z position in the frame. (e.g. 130.5E-9).
 #                         </doc>
 #                     </field>
-#                     <group name="z_controller" type="NXcollection">
-#                         <field name="z" type="NX_NUMBER" units="NX_LENGTH">
+#                     <field name="final_z" type="NX_NUMBER" units="NX_LENGTH">
+#                         <doc>
+#                              The final z-position during the bias spectroscopy scan. The availability of values is
+#                              related to the mode of scanning.
+#                         </doc>
+#                     </field>
+#                     <group name="z_controller" type="NXpid">
+#                         <field name="k_p_gain" type="NX_NUMBER" units="NX_UNITLESS">
 #                             <doc>
-#                                  Indicate the relative tip position z between tip and sample. The tip position can also
-#                                  be varied when the z_controller is not running. (e.g. 130.5E-9)
+#                                  The Type switches controller parameters between :math:`P/I` (proportional gain (P gain) /integral gain (I gain)) and :math:`P/T`
+#                                  (proportional gain/time constant). The formula for the controller in the frequency domain is:
+#                                  :math:`G(s) = P + I/s = P(1 + 1/(Ts))`.
+#                                  The integral gain and time constant are related as follows: :math:`I = P/T`.
+#                             </doc>
+#                         </field>
+#                         <field name="k_i_gain" type="NX_NUMBER" units="NX_UNITLESS">
+#                             <doc>
+#                                  The Type switches controller parameters between :math:`P/I` (proportional gain/integral gain) and
+#                                  P/T (proportional gain/time constant). The formula for the controller in the frequency
+#                                  domain is: :math:`G(s) = P + I/s = P(1 + 1/(Ts))`. The integral gain and time constant are related
+#                                  as follows: `:math:I = P/T`.
+#                             </doc>
+#                         </field>
+#                         <field name="z_controller_hold" type="NX_BOOLEAN">
+#                             <doc>
+#                                  (In bias spectroscopy) Select whether to set the Z-Controller on hold (i.e. disabled) during
+#                                  the sweep. It is selected by default. When deselected, Z-offset and Z control time parameters
+#                                  are disabled.
+#                             </doc>
+#                         </field>
+#                         <field name="time_const" type="NX_NUMBER" units="NX_TIME">
+#                             <doc>
+#                                  The Type switches controller parameters between :math:`P/I` (proportional gain/integral gain) and
+#                                  :math:`P/T` (proportional gain/time constant). The formula for the controller in the frequency
+#                                  domain is: :math:`G(s) = P + I/s = P(1 + 1/(Ts))`. The integral gain and time constant are related
+#                                  as follows: :math:`I = P/T`.
+#                             </doc>
+#                         </field>
+#                         <field name="tip_lift" type="NX_NUMBER" units="NX_LENGTH">
+#                             <doc>
+#                                  Lifts the tip by the specified amount when then controller is switched off. This can be
+#                                  a positive or a negative number, i.e. the tip can also be moved towards the sample. Be
+#                                  careful with sign and value when using this feature.
+#                             </doc>
+#                         </field>
+#                         <field name="switch_off_delay" type="NX_NUMBER" units="NX_TIME">
+#                             <doc>
+#                                  Use this parameter for a reproducible position when switching off the Z-controller.
+#                                  When &gt;0 and the Z-controller is switched off, it doesn't switch off immediately but continues
+#                                  to run for the specified time and averages the Z position.
 #                             </doc>
 #                         </field>
 #                     </group>
@@ -1323,107 +1351,70 @@ NXspm(NXsensor_scan):
 # voltage_controller(NXsensor):
 # temperature_controller(NXsensor):
 # parameters for a measurement at a single location during the scan-->
-#                 <group name="sweep_control" type="NXcollection">
-#                     <group name="bias_spectroscopy" type="NXbias_spectroscopy" optional="true">
-#                         <field name="integration_time" type="NX_NUMBER" units="NX_TIME">
-#                             <doc>
-#                                  Time during which the spectroscopy data are acquired and averaged. (e.g. 150E-6)
-#                             </doc>
-#                         </field>
-#                         <field name="number_of_sweeps" type="NX_NUMBER">
-#                             <doc>
-#                                  Number of sweeps to measure and average. (e.g. 100)
-#                             </doc>
-#                         </field>
-#                         <field name="sweep_start" type="NX_NUMBER" units="NX_VOLTAGE">
-#                             <doc>
-#                                  The start bias values of the sweep. (e.g. -300E-3)
-#                             </doc>
-#                         </field>
-#                         <field name="sweep_end" type="NX_NUMBER" units="NX_VOLTAGE">
-#                             <doc>
-#                                  The end bias values of the sweep. (e.g. 300E-3)
-#                             </doc>
-#                         </field>
-#                         <field name="num_pixel" type="NX_NUMBER">
-#                             <doc>
-#                                  The sweep number of points is defined as the maximum spectrum resolution, which
-#                                  is equal to the bias sweep window divided by the number of pixels. (e.g. 4096)
-#                             </doc>
-#                         </field>
-#                         <field name="z_avg_time" type="NX_NUMBER" units="NX_TIME">
-#                             <doc>
-#                                  The Z position is recorded and averaged for a certain duration both before and
-#                                  after the sweep. After the initial Z averaging time, if "Z-Controller to Hold"
-#                                  is selected, the Z-Controller is set to hold mode, and the tip is positioned at
-#                                  the previously averaged Z position (adjusted by the Z offset). (e.g. 100E-3)
-#                             </doc>
-#                         </field>
-#                     </group>
-#                     <group name="circuit" type="NXcollection" optional="true">
-#                         <field name="rt_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
-#                             <doc>
-#                                  The bandwidth of the Hardware and/or Software is instrument specific.
-#                                  For example, Nanonis Generic 5 has 'RT Frequency' (e.g. 20E+3).
-#                             </doc>
-#                         </field>
-#                         <field name="signals_oversampling" type="NX_NUMBER">
-#                             <doc>
-#                                  The Signals Period represents the rate at which signals are transferred to
-#                                  the host computer, which operates the control software. This rate may
-#                                  be 10 times lower than the sampling rate, as the real-time engine internally
-#                                  oversamples the signal. If desired, you may have the option to reduce the oversampling
-#                                  to 1, enabling higher frequency resolution in the Spectrum Analyzer. (e.g. 10)
-#                             </doc>
-#                         </field>
-#                         <field name="acquisition_period" type="NX_NUMBER" units="NX_TIME" optional="true">
-#                             <doc>
-#                                  The update rate is utilized in various processes, including the History Graph,
-#                                  Auto-Approach, and multiple Programming Interface functions. It may be
-#                                  configured to a 20 ms interval. Any additional timings must strictly be integer
-#                                  multiples of this base value. While it is possible to set these additional
-#                                  timings to different values, the actual timing value will automatically be
-#                                  adjusted to become a multiple of the Acquisition Period. (e.g. 20E-3)
-#                             </doc>
-#                         </field>
-#                         <field name="animations_period" type="NX_NUMBER" units="NX_TIME" optional="true">
-#                             <doc>
-#                                  The update rate of animated graphical indicators, such as graphs and sliders,
-#                                  can be adjusted. A normal value may be 40 ms, which corresponds to 25 updates
-#                                  per second. Increasing this period can help reduce the processor load on the
-#                                  graphical user interface, particularly on slower computers. It is important to
-#                                  note that this update rate solely impacts the user interface and does not affect
-#                                  measurements in any manner. (e.g. 20E-3)
-#                             </doc>
-#                         </field>
-#                         <field name="indicators_period" type="NX_NUMBER" units="NX_TIME">
-#                             <doc>
-#                                  The update rate of digital indicators, such as the numbers displayed, can be set
-#                                  to 3 updates per second, equivalent to 300 ms. This interval is sufficient for
-#                                  the user interface and does not impact measurements in any manner. (e.g. 300E-3)
-#                             </doc>
-#                         </field>
-#                         <field name="measurements_period" type="NX_NUMBER" optional="true" units="NX_TIME">
-#                             <doc>
-#                                  The Measurements period determines the integration time required for precise
-#                                  measurements, primarily utilized in sweep modules. It is particularly useful for
-#                                  tasks such as recording force-distance curves or cantilever resonances. For
-#                                  swift measurements with small steps, a value of 40 ms is often adequate. For
-#                                  regular use, a range of 300-500 ms may be recommended, but when capturing the
-#                                  resonance of a high-Q cantilever, longer values in the range of several seconds
-#                                  might be necessary. Usually, this parameter does not require manual adjustment
-#                                  within this module, as the sweep modules automatically set this value according
-#                                  to the sweep timings. (e.g. 500E-3)
-#                             </doc>
-#                         </field>
-#                     </group>
+#                 <group name="sweep_control" type="NXobject">
+#                     <group name="bias_spectroscopy" type="NXbias_spectroscopy" optional="true"/>
+#                     <field name="rt_frequency" type="NX_NUMBER" units="NX_FREQUENCY" optional="true">
+#                         <doc>
+#                              The bandwidth of the Hardware and/or Software is instrument specific.
+#                              For example, Nanonis Generic 5 has 'RT Frequency' (e.g. 20E+3).
+#                         </doc>
+#                     </field>
+#                     <field name="signals_oversampling_parameter" type="NX_NUMBER" optional="true">
+#                         <doc>
+#                              The Signals Period represents the rate at which signals are transferred to
+#                              the host computer, which operates the control software. This rate may
+#                              be 10 times lower than the sampling rate, as the real-time engine internally
+#                              oversamples the signal. If desired, you may have the option to reduce the oversampling
+#                              to 1, enabling higher frequency resolution in the Spectrum Analyzer. (e.g. 10)
+#                         </doc>
+#                     </field>
+#                     <field name="acquisition_period" type="NX_NUMBER" units="NX_TIME" optional="true">
+#                         <doc>
+#                              The update rate is utilized in various processes, including the History Graph,
+#                              Auto-Approach, and multiple Programming Interface functions. It may be
+#                              configured to a 20 ms interval. Any additional timings must strictly be integer
+#                              multiples of this base value. While it is possible to set these additional
+#                              timings to different values, the actual timing value will automatically be
+#                              adjusted to become a multiple of the Acquisition Period (e.g. 20E-3).
+#                         </doc>
+#                     </field>
+#                     <field name="animations_period" type="NX_NUMBER" units="NX_TIME" optional="true">
+#                         <doc>
+#                              The update rate of animated graphical indicators, such as graphs and sliders,
+#                              can be adjusted. A normal value may be 40 ms, which corresponds to 25 updates
+#                              per second. Increasing this period can help reduce the processor load on the
+#                              graphical user interface, particularly on slower computers. It is important to
+#                              note that this update rate solely impacts the user interface and does not affect
+#                              measurements in any manner. (e.g. 20E-3)
+#                         </doc>
+#                     </field>
+#                     <field name="indicators_period" type="NX_NUMBER" units="NX_TIME" optional="true">
+#                         <doc>
+#                              The update rate of digital indicators, such as the numbers displayed, can be set
+#                              to 3 updates per second, equivalent to 300 ms. This interval is sufficient for
+#                              the user interface and does not impact measurements in any manner. (e.g. 300E-3)
+#                         </doc>
+#                     </field>
+#                     <field name="measurements_period" type="NX_NUMBER" optional="true" units="NX_TIME">
+#                         <doc>
+#                              The Measurements period determines the integration time required for precise
+#                              measurements, primarily utilized in sweep modules. It is particularly useful for
+#                              tasks such as recording force-distance curves or cantilever resonances. For
+#                              swift measurements with small steps, a value of 40 ms is often adequate. For
+#                              regular use, a range of 300-500 ms may be recommended, but when capturing the
+#                              resonance of a high-Q cantilever, longer values in the range of several seconds
+#                              might be necessary. Usually, this parameter does not require manual adjustment
+#                              within this module, as the sweep modules automatically set this value according
+#                              to the sweep timings (e.g. 500E-3).
+#                         </doc>
+#                     </field>
 #                 </group>
 #                 <!--parameters how to change the location from measurement to measurement during the scan-->
 #                 <group name="scan_control" type="NXcollection" optional="true">
 #                     <field name="scan_range" type="NX_NUMBER" units="NX_LENGTH" optional="true">
 #                         <doc>
-#                              In STM experiment, the scan range is the coordinate (x,y) along the X and Y axis from the origin (scan_offset) of 
-#                              the scan area (e.g. 5.000000E-9 5.000000E-9).
+#                              The scan range (in STM experiment) is the area that the tip will scan. (e.g.
+#                              5.000000E-9 5.000000E-9)
 #                         </doc>
 #                     </field>
 #                     <field name="scan_offset" type="NX_NUMBER" units="NX_LENGTH" optional="true">
@@ -1450,6 +1441,33 @@ NXspm(NXsensor_scan):
 #                              field) of the sample. (e.g. 0.000E+0).
 #                         </doc>
 #                     </field>
+#                     <field name="scanfield" type="NX_NUMBER">
+#                         <doc>
+#                              Configure the scan frame like x position; y position; width; height. (e.g.
+#                              3.11737E-9;29.1583E-9;15E-9;15E-9;0E+0)
+#                         </doc>
+#                     </field>
+#                     <field name="pixels_line" type="NX_NUMBER">
+#                         <doc>
+#                              Scan resolution by setting the Lines equal to Pixels.  (e.g. 512)
+#                         </doc>
+#                     </field>
+#                     <field name="lines" type="NX_NUMBER">
+#                         <doc>
+#                              Define the image resolution. (e.g. 512)
+#                         </doc>
+#                     </field>
+#                     <field name="speed_forw" type="NX_NUMBER">
+#                         <doc>
+#                              Define the scan forward speed in the forward direction. (m/s) (e.g. 11.7187E-9)
+#                         </doc>
+#                     </field>
+#                     <field name="speed_backw" type="NX_NUMBER" optional="true">
+#                         <doc>
+#                              In STM experiment, the scan range is the coordinate (x,y) along the X and Y axis from the origin (scan_offset) of
+#                              the scan area (e.g. 5.000000E-9 5.000000E-9).
+#                         </doc>
+#                     </field>
 #                     <group name="roi" type="NXtransformations">
 #                         <field name="frame">
 #                             <doc>
@@ -1463,35 +1481,6 @@ NXspm(NXsensor_scan):
 #                             <doc>
 #                                  The scan channels are selected by users. (e.g. (A);Bias (V);Z (m);LI Demod 2 X
 #                                  (A);LI Demod 2 Y (A);LI Demod 1 X (A);LI Demod 1 Y (A))
-#                             </doc>
-#                         </field>
-#                     </group>
-#                     <group name="positioner" type="NXcollection">
-#                         <field name="scanfield" type="NX_NUMBER" optional="true">
-#                             <doc>
-#                                  Configure the scan frame like x position; y position; width; height. (e.g.
-#                                  3.11737E-9;29.1583E-9;15E-9;15E-9;0E+0). If the 'scanfield' is not considered, use
-#                                  the 'scan_range' and 'scan_offset' from 'scan_control' group
-#                             </doc>
-#                         </field>
-#                         <field name="pixels_line" type="NX_NUMBER">
-#                             <doc>
-#                                  Scan resolution by setting the Lines equal to Pixels.  (e.g. 512)
-#                             </doc>
-#                         </field>
-#                         <field name="lines" type="NX_NUMBER">
-#                             <doc>
-#                                  Define the image resolution. (e.g. 512)
-#                             </doc>
-#                         </field>
-#                         <field name="speed_forw" type="NX_NUMBER">
-#                             <doc>
-#                                  Define the scan forward speed in the forward direction. (m/s) (e.g. 11.7187E-9)
-#                             </doc>
-#                         </field>
-#                         <field name="speed_backw" type="NX_NUMBER">
-#                             <doc>
-#                                  Define the scan backward speed in the forward direction. (m/s) (e.g. 11.7187E-9)
 #                             </doc>
 #                         </field>
 #                     </group>

@@ -31,30 +31,30 @@ NXbias_sweep(NXscan_control):
     doc: |
       The linear sweep is a type of sweep where the bias voltage is swept
       linearly from the starting value to the ending value.
+    backward_sweep(NX_BOOLEAN):
+      doc: |
+        If the sweep (bias voltage) perform in the oposite direction as well
+        the end value to the start value.
     scan_points_bias(NX_NUMBER):
       doc: |
         The number of voltage points the sweep scan to be performed.
     step_size_bias(NX_NUMBER):
       unit: NX_VOLTAGE
       doc: |
-        The step size of the sweep.
-        The step size is the difference between the two consecutive bias voltage values during the sweep.
-    settling_time(NX_NUMBER):
-      unit: NX_TIME
+        The step size of the sweep. The step size is the difference
+        between the two consecutive bias voltage values during the sweep.
+    reset_bias(NX_BOOLEAN):
       doc: |
-        The time is taken to settle the bias voltage at the desired value. On each sweep usually, the system
-        takes time to settle the bias voltage at the next value.
-    reset_bias(NX_BOOL):
+        The reset_bias is used to reset the bias voltage to the starting
+        value after a complete sweep is completed.
+    SCAN_DATA(NXdata):
       doc: |
-        The reset_bias is used to reset the bias voltage to the starting value after the
-        sweep is completed.
-  (NXpid):
-    doc: |
-      The PID controller data that is used to control the bias voltage at a desired
-      value.
+        The scan data is the data collected during the scan.
+        If the scan has several channels or derivatives from the channel data,
+        please duplicate this NXdata group for each.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# cd56813844a1c64865ec8c43714d236f17a687ba1014a8be82f8d23417dbc5ae
+# 71de06e52a2f26d6a223a16e693a168601a158e2449c3828aad6fd7ffaf49e63
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -82,7 +82,7 @@ NXbias_sweep(NXscan_control):
 #     <doc>
 #          A base class to explain baise_sweep which mainly define how the bias voltage sweep is performed in the experiment.
 #          
-#          The bais voltage sweep is a common technique used on the substance or sample or environment to study the change 
+#          The bais voltage sweep is a common technique used on the substance or sample or environment to study the change
 #          in the behavior of the sample or substance or environment with the help of the probe.
 #     </doc>
 #     <group name="scan_region" type="NXobject">
@@ -114,9 +114,15 @@ NXbias_sweep(NXscan_control):
 #     </group>
 #     <group name="linear_sweep" type="NXobject">
 #         <doc>
-#              The linear sweep is a type of sweep where the bias voltage is swept 
+#              The linear sweep is a type of sweep where the bias voltage is swept
 #              linearly from the starting value to the ending value.
 #         </doc>
+#         <field name="backward_sweep" type="NX_BOOLEAN">
+#             <doc>
+#                  If the sweep (bias voltage) perform in the oposite direction as well
+#                  the end value to the start value.
+#             </doc>
+#         </field>
 #         <field name="scan_points_bias" type="NX_NUMBER">
 #             <doc>
 #                  The number of voltage points the sweep scan to be performed.
@@ -124,27 +130,22 @@ NXbias_sweep(NXscan_control):
 #         </field>
 #         <field name="step_size_bias" type="NX_NUMBER" units="NX_VOLTAGE">
 #             <doc>
-#                  The step size of the sweep. 
-#                  The step size is the difference between the two consecutive bias voltage values during the sweep.
+#                  The step size of the sweep. The step size is the difference
+#                  between the two consecutive bias voltage values during the sweep.
 #             </doc>
 #         </field>
-#         <field name="settling_time" type="NX_NUMBER" units="NX_TIME">
+#         <field name="reset_bias" type="NX_BOOLEAN">
 #             <doc>
-#                  The time is taken to settle the bias voltage at the desired value. On each sweep usually, the system 
-#                  takes time to settle the bias voltage at the next value.
+#                  The reset_bias is used to reset the bias voltage to the starting 
+#                  value after a complete sweep is completed.
 #             </doc>
 #         </field>
-#         <field name="reset_bias" type="NX_BOOL">
+#         <group name="SCAN_DATA" type="NXdata">
 #             <doc>
-#                  The reset_bias is used to reset the bias voltage to the starting value after the
-#                  sweep is completed.
+#                  The scan data is the data collected during the scan.
+#                  If the scan has several channels or derivatives from the channel data, 
+#                  please duplicate this NXdata group for each.
 #             </doc>
-#         </field>
-#     </group>
-#     <group type="NXpid">
-#         <doc>
-#              The PID controller data that is used to control the bias voltage at a desired
-#              value.
-#         </doc>
+#         </group>
 #     </group>
 # </definition>

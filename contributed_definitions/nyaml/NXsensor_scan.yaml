@@ -26,16 +26,13 @@ NXsensor_scan(NXobject):
       doc: |
         The unique identifier for the collection. The identifier is used to group a
         number of the experiments run upon the same setup and/or same sample.
-    experiment_identifier:
-      exists: recommended
-      doc: |
-        The unique identifier for the experiment. The identifier is used to distinguish
-        an experiment from the other experiments grouped in the same collection.
-    experiment_description(NX_CHAR):
+    experiment_description:
       exists: recommended
     start_time(NX_DATE_TIME):
+      unit: NX_TIME
       exists: recommended
     end_time(NX_DATE_TIME):
+      unit: NX_TIME
       exists: recommended
     (NXprocess):
       doc: |
@@ -157,7 +154,7 @@ NXsensor_scan(NXobject):
         Plot of every measured signal as a function of the timestamp of when they have been acquired is also possible.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 08456bd6a4961dcd8f3b80ae7c78548973fba7cae314dfc763d8508ed8258295
+# 96e814305ea805ca70b9363e9a117e9bcdc8566928d9bc6c2de8c66b78b03f0b
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -205,28 +202,22 @@ NXsensor_scan(NXobject):
 #                 <item value="NXsensor_scan"/>
 #             </enumeration>
 #         </field>
-#         <field name="entry_identifier" recommended="true">
+#         <group name="experiment_identifier" type="NXidentifier" recommended="true">
 #             <doc>
 #                  The unique identifier for the entry. The identifier is mainly lab-defined and
 #                  can be a combination of the sample name, date and time, experiment condition
 #                  (such as temperature) or instrument-generated unique identifier.
 #             </doc>
-#         </field>
+#         </group>
 #         <field name="collection_identifier" optional="true">
 #             <doc>
 #                  The unique identifier for the collection. The identifier is used to group a
 #                  number of the experiments run upon the same setup and/or same sample.
 #             </doc>
 #         </field>
-#         <field name="experiment_identifier" recommended="true">
-#             <doc>
-#                  The unique identifier for the experiment. The identifier is used to distinguish
-#                  an experiment from the other experiments grouped in the same collection.
-#             </doc>
-#         </field>
-#         <field name="experiment_description" type="NX_CHAR" recommended="true"/>
-#         <field name="start_time" type="NX_DATE_TIME" recommended="true"/>
-#         <field name="end_time" type="NX_DATE_TIME" recommended="true"/>
+#         <field name="experiment_description" recommended="true"/>
+#         <field name="start_time" type="NX_DATE_TIME" units="NX_TIME" recommended="true"/>
+#         <field name="end_time" type="NX_DATE_TIME" units="NX_TIME" recommended="true"/>
 #         <group type="NXprocess">
 #             <doc>
 #                  Define the program that was used to generate the results file(s)

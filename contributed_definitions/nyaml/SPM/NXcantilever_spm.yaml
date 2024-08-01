@@ -21,13 +21,16 @@ NXcantilever_spm(NXobject):
       unit: NX_FREQUENCY
       doc: |
         The harmonic frequency of the cantilever.
+    cantilever_amplitude_positioner(NXpositioner):
+      doc: |
+        Describes the cantilever frequency positioner, if it exists.
     cantilever_phase_positioner(NXpositioner):
       doc: |
         Describes the cantilever phase positioner, if it exists.
     cantilever_frequency_positioner(NXpositioner):
       doc: |
         Describes the cantilever frequency positioner, if it exists.
-    phase_locked_loop(NXlockin):
+    phase_lock_loop(NXlockin):
       doc: |
         Phase locked loop for cantilever lock-in device.
     frequency_shift(NX_NUMBER):
@@ -50,6 +53,10 @@ NXcantilever_spm(NXobject):
       unit: NX_FREQUENCY
       doc: |
         The executive frequency of the cantilever in the experiment.
+    reference_phase(NX_NUMBER):
+      unit: NX_ANGLE
+      doc: |
+        The reference phase of the cantilever oscillator.
   cantilever_config(NXobject):
     doc: |
       The configuration information of the cantilever such calibration information,
@@ -78,7 +85,7 @@ NXcantilever_spm(NXobject):
           The spring constant coefficient for the cantilever.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# c31a8aa6b4efb3fe5964eca7c0c03af31c94ce0ddb815b9235eb411398f44f81
+# 345f5b1a62dfa97201122259ee7b1bae83d80a8dd4dfb66d213dc52e0186741b
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -128,6 +135,11 @@ NXcantilever_spm(NXobject):
 #                  The harmonic frequency of the cantilever.
 #             </doc>
 #         </field>
+#         <group name="cantilever_amplitude_positioner" type="NXpositioner">
+#             <doc>
+#                  Describes the cantilever frequency positioner, if it exists.
+#             </doc>
+#         </group>
 #         <group name="cantilever_phase_positioner" type="NXpositioner">
 #             <doc>
 #                  Describes the cantilever phase positioner, if it exists.
@@ -138,7 +150,7 @@ NXcantilever_spm(NXobject):
 #                  Describes the cantilever frequency positioner, if it exists.
 #             </doc>
 #         </group>
-#         <group name="phase_locked_loop" type="NXlockin">
+#         <group name="phase_lock_loop" type="NXlockin">
 #             <doc>
 #                  Phase locked loop for cantilever lock-in device.
 #             </doc>
@@ -168,6 +180,11 @@ NXcantilever_spm(NXobject):
 #                  The executive frequency of the cantilever in the experiment.
 #             </doc>
 #         </field>
+#         <field name="reference_phase" type="NX_NUMBER" units="NX_ANGLE">
+#             <doc>
+#                  The reference phase of the cantilever oscillator.
+#             </doc>
+#         </field>
 #     </group>
 #     <group name="cantilever_config" type="NXobject">
 #         <doc>
@@ -195,7 +212,7 @@ NXcantilever_spm(NXobject):
 #             </doc>
 #             <field name="sensitivity" type="NX_NUMBER" units="NX_ANY">
 #                 <doc>
-#                      The sensitivity of the cantilever which is calculated as the change in cantilever amplitude (in dynamic mode) or 
+#                      The sensitivity of the cantilever which is calculated as the change in cantilever amplitude (in dynamic mode) or
 #                      deflection of the cantilever due to the exerted force on cantilever tip.
 #                 </doc>
 #             </field>
