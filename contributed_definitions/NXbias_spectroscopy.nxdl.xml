@@ -23,8 +23,11 @@
 -->
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXbias_spectroscopy" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <doc>
-         A base class for bias spectroscopy to describe the change in the physical properties
-         of the sample with respect to the sweep voltage applied on a sample of STM/AFM/... experiment.
+         Base class definition for bias spectroscopy.
+         
+         The Scanning Tunneling Spectroscopy (STS), a type of Scanning Probe Microscopy (SPM),
+         is used to measure I(V) curves at each point of the surface. The dI/dV(V) can also be measured
+         with the help of numerical differentiation of the I(V) curve or from Lock-in amplifier.
     </doc>
     <field name="measurement_type">
         <doc>
@@ -39,127 +42,102 @@
             <item value="variadic_spacing"/>
         </enumeration>
     </field>
-    <field name="z_offset" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
+    <field name="probe_speed" type="NX_NUMBER" units="NX_ANY">
         <doc>
-             The z-offset is a starting tip position before the sweep starts.
+             The speed of probe during the sweep (in variadic_spacing). In the variadic spacing process, the probe moves to the
+             different distances from the surface with a constant velocity.
         </doc>
     </field>
-    <group type="NXcircuit" optional="true">
-        <field name="acquisition_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
-            <doc>
-                 The time or period is taken by a bias sweep to setup to acquire the data for the
-                 bias sweep.
-            </doc>
-        </field>
-        <field name="animation_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
-            <doc>
-                 The time or period is taken by a bias sweep to be displayed.
-            </doc>
-        </field>
-        <field name="measurement_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
-            <doc>
-                 The time or period is taken by the circuit to measure the bias sweep voltage.
-            </doc>
-        </field>
-        <field name="indicators_period" type="NX_DATE_TIME" optional="true" units="NX_TIME">
-            <doc>
-                 The time or period is taken by the circuit to indicate the bias sweep voltage
-                 after measuring the voltage.
-            </doc>
-        </field>
-    </group>
-    <group type="NXbias_sweep">
+    <field name="z_offset" type="NX_NUMBER" units="NX_LENGTH">
         <doc>
-             The bias sweep information.
+             Initial position of the probe before starting the sweep.
         </doc>
-        <field name="scan_type">
-            <doc>
-                 The type of scan like mesh, spiral, etc. For STS experiment, the scan type is
-                 usually a single-point scan (trajectory scan).
-            </doc>
-            <enumeration>
-                <item value="mesh"/>
-                <item value="trajectory"/>
-            </enumeration>
-        </field>
-        <group name="scan_region" type="NXobject">
-            <doc>
-                 The region of the scan area.
-            </doc>
-            <field name="scan_range" type="NX_NUMBER" units="NX_ANY">
-                <doc>
-                     The range of the scan area.
-                </doc>
-            </field>
-            <field name="scan_offset" type="NX_NUMBER" units="NX_ANY">
-                <doc>
-                     The offset of the scan area in 2D (X and Y) space.
-                </doc>
-            </field>
-            <field name="scan_angle_N" type="NX_NUMBER" units="NX_ANGLE">
-                <doc>
-                     The N (substring) denotes the angle of the scan area with different physical
-                     axes.
-                </doc>
-            </field>
-        </group>
-        <group name="mesh_SCAN" type="NXobject">
-            <doc>
-                 The mesh scan information for scanning of a smaple e.g. STM experiment.
-            </doc>
-            <field name="scan_speed" type="NX_NUMBER" units="NX_ANY">
-                <doc>
-                     The speed of the scanner or the probe during the scan.
-                </doc>
-            </field>
-            <field name="scan_time" type="NX_DATE_TIME" units="NX_TIME">
-                <doc>
-                     The time taken by the scanner to scan the entire area.
-                </doc>
-            </field>
-            <field name="forward_speed_N" type="NX_NUMBER" units="NX_ANY">
-                <doc>
-                     The N (substring) denotes the forward speed of the scanner.
-                </doc>
-            </field>
-            <field name="backward_speed_N" type="NX_NUMBER" units="NX_ANY">
-                <doc>
-                     The N (substring) denotes the backward speed of the scanner.
-                </doc>
-            </field>
-            <group name="SCAN_DATA" type="NXdata">
-                <doc>
-                     The data that comes from scanning the area.
-                </doc>
-            </group>
-        </group>
-        <field name="first_settling_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
-            <doc>
-                 The initial time is taken to settle the bias voltage at the desired value. On each sweep usually, the system
-                 takes time to settle to the bias voltage at the next value.
-            </doc>
-        </field>
-        <field name="end_settling_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
-            <doc>
-                 The time is taken to settle the bias voltage at the desired value. The time (at the last sweep)
-                 to settle for the last value of the sweep.
-            </doc>
-        </field>
-        <field name="max_slew_rate" type="NX_NUMBER" optional="true" units="NX_ANY">
-            <doc>
-                 The rate at which the amplifier responds to the voltage change (to reach at the desired value).
-                 It defines if the tip and voltage weep are synchronized.
-            </doc>
-        </field>
-        <field name="final_z" type="NX_NUMBER" recommended="true">
-            <doc>
-                 The z position after weeps are done.
-            </doc>
-        </field>
-        <field name="total_spectroscopy_time" type="NX_DATE_TIME" recommended="true" units="NX_TIME">
-            <doc>
-                 The total time of the Z-controller is taken for entire voltage sweep.
-            </doc>
-        </field>
+    </field>
+    <field name="z_positions" type="NX_NUMBER" units="NX_LENGTH">
+        <doc>
+             The position of the probe during the sweep. In the variadic spacing process, the probe moves to the
+             different z positions (say nZ positions) and perform a full sweep on individual positions.
+        </doc>
+        <dimensions rank="1">
+            <dim index="1" value="1"/>
+            <dim index="2" value="nZ"/>
+        </dimensions>
+    </field>
+    <field name="mudulation_signal">
+        <doc>
+             The modulation signal is used to modulate the DC voltage applied to the surface. The modulation signal
+             can be a sine wave, square wave, or triangle wave.
+        </doc>
+        <enumeration>
+            <item value="sine"/>
+            <item value="square"/>
+            <item value="triangle"/>
+        </enumeration>
+    </field>
+    <!--TODO: use reference_aplitude instead of modulation_amplitude-->
+    <field name="modulation_amplitude" type="NX_NUMBER" units="NX_VOLTAGE">
+        <doc>
+             The amplitude of the AC voltage (modulation voltage) that is applied to the DC voltage 
+             subjected to the surface.
+        </doc>
+    </field>
+    <!--TODO: same is here, use reference_frequency instead of modulation_frequency-->
+    <field name="modulation_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
+        <doc>
+             The frequency of the AC voltage (modulation voltage) that is applied to the DC voltage 
+             subjected to the surface.
+        </doc>
+    </field>
+    <field name="z_avg_time" type="NX_NUMBER" units="NX_TIME">
+        <doc>
+             The time that is needed to stabilize the probe position at a desired distance from 
+             the subject of scanning.
+        </doc>
+    </field>
+    <field name="settling_time" type="NX_NUMBER" units="NX_TIME">
+        <doc>
+             Time to wait after changing the bias, in the sweep process, to the next level and before
+             starting to acquire data.
+        </doc>
+    </field>
+    <field name="forward_sweep" type="NX_BOOLEAN">
+        <doc>
+             The sweep variable, especially voltage, can change from lower to higher value and vice-versa. 
+             
+             If the sweep variable changes from lower to higher value, then it is called a forward sweep else backward sweep.
+        </doc>
+    </field>
+    <field name="reset_bias" type="NX_BOOLEAN">
+        <doc>
+             Choose true if the bias voltage is reset to the initial value before each sweep.
+        </doc>
+    </field>
+    <field name="number_of_sweeps" type="NX_NUMBER">
+        <doc>
+             The number of sweeps to measure in one sweep round.
+        </doc>
+    </field>
+    <field name="sweep_start_voltage" type="NX_NUMBER" units="NX_VOLTAGE">
+        <doc>
+             The first bias values of the sweep.
+        </doc>
+    </field>
+    <field name="sweep_end_voltage" type="NX_NUMBER" units="NX_VOLTAGE">
+        <doc>
+             The last bias values of the sweep.
+        </doc>
+    </field>
+    <field name="channels">
+        <doc>
+             A list of selected channels to collect data.
+        </doc>
+    </field>
+    <group name="DATA" type="NXdata">
+        <doc>
+             Use this group to store the data from several channels as well as for several z-positions.
+             
+             The data I(V) and dI/dV(V) concerning the forward sweep or backward sweep should also be stored in 
+             this group.
+        </doc>
     </group>
 </definition>
