@@ -41,12 +41,17 @@ nexus_def_path = get_nexus_definitions_path()
 
 def get_app_defs_names():
     """Returns all the AppDef names without their extension: .nxdl.xml"""
+    print(" ################ ", nexus_def_path)
     app_def_path_glob = nexus_def_path / "applications" / "*.nxdl*"
 
     contrib_def_path_glob = Path(nexus_def_path) / "contributed_definitions" / "*.nxdl*"
+    test_def_path_glob = Path(nexus_def_path) / "dev_tools/tests/test_nxdls" / "*.nxdl*"
 
     files = sorted(glob(str(app_def_path_glob)))
-    for nexus_file in sorted(glob(str(contrib_def_path_glob))):
+    delte_files = sorted(glob(str(contrib_def_path_glob))) + sorted(glob(str(test_def_path_glob)))
+    print(" ################ ", delte_files)
+    for nexus_file in (sorted(glob(str(contrib_def_path_glob))) +
+                       sorted(glob(str(test_def_path_glob)))):
         root = get_xml_root(nexus_file)
         if root.attrib["category"] == "application":
             files.append(nexus_file)
@@ -363,7 +368,7 @@ def find_definition_file(bc_name):
     Note that it first checks in contributed and goes beyond only if no contributed found
     """
     bc_filename = None
-    for nxdl_folder in ["contributed_definitions", "base_classes", "applications"]:
+    for nxdl_folder in ["contributed_definitions", "base_classes", "applications", "dev_tools/tests/test_nxdls"]:
         nxdl_file = nexus_def_path / nxdl_folder / f"{bc_name}.nxdl.xml"
         if nxdl_file.exists():
             bc_filename = nexus_def_path / nxdl_folder / f"{bc_name}.nxdl.xml"
