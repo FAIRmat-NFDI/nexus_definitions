@@ -45,13 +45,16 @@ def get_app_defs_names():
     app_def_path_glob = nexus_def_path / "applications" / "*.nxdl*"
 
     contrib_def_path_glob = Path(nexus_def_path) / "contributed_definitions" / "*.nxdl*"
-    test_def_path_glob = Path(nexus_def_path) / "dev_tools/tests/test_nxdls" / "*.nxdl*"
+    test_def_path_glob = Path(nexus_def_path) / "dev_tools/tests/data" / "*.nxdl*"
 
     files = sorted(glob(str(app_def_path_glob)))
-    delte_files = sorted(glob(str(contrib_def_path_glob))) + sorted(glob(str(test_def_path_glob)))
+    delte_files = sorted(glob(str(contrib_def_path_glob))) + sorted(
+        glob(str(test_def_path_glob))
+    )
     print(" ################ ", delte_files)
-    for nexus_file in (sorted(glob(str(contrib_def_path_glob))) +
-                       sorted(glob(str(test_def_path_glob)))):
+    for nexus_file in sorted(glob(str(contrib_def_path_glob))) + sorted(
+        glob(str(test_def_path_glob))
+    ):
         root = get_xml_root(nexus_file)
         if root.attrib["category"] == "application":
             files.append(nexus_file)
@@ -368,7 +371,12 @@ def find_definition_file(bc_name):
     Note that it first checks in contributed and goes beyond only if no contributed found
     """
     bc_filename = None
-    for nxdl_folder in ["contributed_definitions", "base_classes", "applications", "dev_tools/tests/test_nxdls"]:
+    for nxdl_folder in [
+        "contributed_definitions",
+        "base_classes",
+        "applications",
+        "dev_tools/tests/data",
+    ]:
         nxdl_file = nexus_def_path / nxdl_folder / f"{bc_name}.nxdl.xml"
         if nxdl_file.exists():
             bc_filename = nexus_def_path / nxdl_folder / f"{bc_name}.nxdl.xml"
@@ -522,9 +530,7 @@ def check_attr_name_nxdl(param):
     return logger, elem, nxdl_path, doc, attr, req_str
 
 
-def try_find_default(
-    logger, orig_elem, elem, nxdl_path, doc, attr
-):  # pylint: disable=too-many-arguments
+def try_find_default(logger, orig_elem, elem, nxdl_path, doc, attr):  # pylint: disable=too-many-arguments
     """Try to find if default is defined as a child of the NXDL element"""
     if elem is not None:
         if doc:
@@ -544,9 +550,7 @@ def try_find_default(
     return logger, elem, nxdl_path, doc, attr
 
 
-def other_attrs(
-    logger, orig_elem, elem, nxdl_path, doc, attr
-):  # pylint: disable=too-many-arguments
+def other_attrs(logger, orig_elem, elem, nxdl_path, doc, attr):  # pylint: disable=too-many-arguments
     """Handle remaining attributes"""
     if elem is not None:
         if doc:
