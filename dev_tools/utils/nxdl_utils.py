@@ -41,7 +41,6 @@ nexus_def_path = get_nexus_definitions_path()
 
 def get_app_defs_names():
     """Returns all the AppDef names without their extension: .nxdl.xml"""
-    print(" ################ ", nexus_def_path)
     app_def_path_glob = nexus_def_path / "applications" / "*.nxdl*"
 
     contrib_def_path_glob = Path(nexus_def_path) / "contributed_definitions" / "*.nxdl*"
@@ -51,7 +50,6 @@ def get_app_defs_names():
     delte_files = sorted(glob(str(contrib_def_path_glob))) + sorted(
         glob(str(test_def_path_glob))
     )
-    print(" ################ ", delte_files)
     for nexus_file in sorted(glob(str(contrib_def_path_glob))) + sorted(
         glob(str(test_def_path_glob))
     ):
@@ -530,9 +528,7 @@ def check_attr_name_nxdl(param):
     return logger, elem, nxdl_path, doc, attr, req_str
 
 
-def try_find_default(
-    logger, orig_elem, elem, nxdl_path, doc, attr
-):  # pylint: disable=too-many-arguments
+def try_find_default(logger, orig_elem, elem, nxdl_path, doc, attr):  # pylint: disable=too-many-arguments
     """Try to find if default is defined as a child of the NXDL element"""
     if elem is not None:
         if doc:
@@ -552,9 +548,7 @@ def try_find_default(
     return logger, elem, nxdl_path, doc, attr
 
 
-def other_attrs(
-    logger, orig_elem, elem, nxdl_path, doc, attr
-):  # pylint: disable=too-many-arguments
+def other_attrs(logger, orig_elem, elem, nxdl_path, doc, attr):  # pylint: disable=too-many-arguments
     """Handle remaining attributes"""
     if elem is not None:
         if doc:
