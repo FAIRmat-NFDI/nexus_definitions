@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+<!--
+# NeXus - Neutron and X-ray Common Data Format
+#
+# Copyright (C) 2014-2024 NeXus International Advisory Committee (NIAC)
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For further information, see http://www.nexusformat.org
+-->
+<!--
+https://thesis.library.caltech.edu/1943/4/03chapter3.pdf-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXspm" extends="NXsensor_scan" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+    <doc>
+         Scanning Probe Microscopy (SPM) is a branch of microscopy to study the surface of
+         materials at the Atomic level. The technique is mainly motivated from the quantum 
+         tunneling effect theory though a few of it successor techniques such AFM uses 
+         electrostatic forces or atomic forces to study the surface of the materials.
+         
+         This base class mainly is designed as a sckeleton or contains common concepts for 
+         other SPM sub-techniques such as STM, STS, AFM, etc.
+    </doc>
+    <group type="NXentry">
+        <field name="definition">
+            <doc>
+                 Name of the definition that is used for the application.
+            </doc>
+            <enumeration>
+                <item value="NXspm"/>
+            </enumeration>
+        </field>
+        <field name="scan_mode">
+            <doc>
+                 The mode of the scan.
+            </doc>
+        </field>
+        <group name="experiment_insturment" type="NXinstrument">
+            <doc>
+                 The instrument information.
+            </doc>
+            <group name="hardware" type="NXfabrication">
+                <doc>
+                     The hardware description of the core instrument setup of the experiment.
+                     Usually, the entire instrument is supplied by a single manufacturer. 
+                     To describe the hardware from any sub-components, use the hardware group of that
+                     sub-component (child group of the NXinstrument group) group.
+                </doc>
+                <field name="vendor">
+                    <doc>
+                         Company name of the manufacturer.
+                    </doc>
+                </field>
+                <field name="model">
+                    <doc>
+                         Version or model of the component named by the manufacturer.
+                    </doc>
+                    <attribute name="version" optional="true">
+                        <doc>
+                             If different versions exist are possible, the value in this field should be made
+                             specific enough to resolve the version.
+                        </doc>
+                    </attribute>
+                </field>
+            </group>
+            <group name="software" type="NXfabrication">
+                <doc>
+                     The software description of the core instrument setup of the experiment.
+                     Usually, the entire instrument is supplied by a single name/manufacturer/model/etc.
+                     To describe the software from any sub-components, use the software group.
+                </doc>
+                <field name="vendor">
+                    <doc>
+                         Company name of the manufacturer.
+                    </doc>
+                </field>
+                <field name="model">
+                    <doc>
+                         Version or model of the component named by the manufacturer.
+                    </doc>
+                    <attribute name="version" optional="true">
+                        <doc>
+                             If different versions exist are possible, the value in this field should be made
+                             specific enough to resolve the version.
+                        </doc>
+                    </attribute>
+                </field>
+            </group>
+            <group name="real_time_controller" type="NXrcs" optional="true">
+                <doc>
+                     The real-time controller information.
+                </doc>
+            </group>
+            <group type="NXlockin" optional="true">
+                <doc>
+                     The lock-in amplifier information.
+                </doc>
+            </group>
+            <group type="NXenvironment">
+                <doc>
+                     The environment information.
+                </doc>
+                <group name="current_sensor" type="NXsensor" optional="true">
+                    <doc>
+                         This is a link to the current_sensor under the instrument group.
+                    </doc>
+                </group>
+                <group name="volatage_sensor" type="NXsensor" optional="true">
+                    <doc>
+                         This is a link to the voltage_sensor under the instrument group.
+                    </doc>
+                </group>
+                <group name="piazo_sensor" type="NXsensor" optional="true">
+                    <doc>
+                         This is a link to the piazo_sensor under the instrument group.
+                    </doc>
+                </group>
+                <group type="NXscan_control">
+                    <doc>
+                         The scan control information like scan region or phase space, type of scan (e.g.
+                         mesh, spiral, etc.), and scan speed, etc. This group mainly stores the raw scan
+                         data. For processed data or final experimental data would go to NXdata group.
+                    </doc>
+                </group>
+            </group>
+            <group name="current_sensor" type="NXsensor" optional="true">
+                <doc>
+                     The sensor information.
+                </doc>
+                <group type="NXamplifier" optional="true">
+                    <doc>
+                         An amplifier information for the input signal (e.g. from tip).
+                    </doc>
+                </group>
+            </group>
+            <group name="volatage_sensor" type="NXsensor" optional="true">
+                <doc>
+                     The sensor information for the voltage device.
+                </doc>
+                <group type="NXamplifier" optional="true"/>
+            </group>
+            <group name="piazo_sensor" type="NXsensor">
+                <group type="NXpiezo_config_spm">
+                    <doc>
+                         The piezo configuration information like piezoelectric calibration and material
+                         properties.
+                    </doc>
+                </group>
+                <group type="NXpositioner_spm">
+                    <doc>
+                         The positioner information like the position of the tip, the position of the
+                         sample, PID loop feedback etc.
+                    </doc>
+                </group>
+                <group name="piezo_material" type="NXpiezoelectric_material" optional="true">
+                    <doc>
+                         The material description and properties of the piezoelectric scanner materials.
+                    </doc>
+                </group>
+            </group>
+            <group name="TEMPERATURE" type="NXsensor" optional="true">
+                <doc>
+                     A group handling the temperature such as cryo, shield and tip. For different
+                     type of temperature sensors repeat this group.
+                </doc>
+                <field name="temperature" type="NX_NUMBER" units="NX_TEMPERATURE">
+                    <doc>
+                         The temperature of the sample.
+                    </doc>
+                </field>
+                <field name="CHANNEL_temp" type="NX_CHAR" optional="true">
+                    <doc>
+                         The name of the channel to measure the temperature.
+                    </doc>
+                </field>
+                <group name="temperature_calibration" type="NXcalibration" optional="true">
+                    <doc>
+                         Calibration of the temperature measurement.
+                    </doc>
+                    <field name="caliberation_time" type="NX_DATE_TIME" units="NX_TIME">
+                        <doc>
+                             The time or period is taken by the calibration to setup to acquire the data for
+                             the calibration.
+                        </doc>
+                    </field>
+                    <field name="coefficients" type="NX_NUMBER" units="NX_ANY">
+                        <doc>
+                             The coefficients of the calibration.
+                        </doc>
+                    </field>
+                </group>
+            </group>
+            <group name="sample_bias_votage" type="NXsensor" optional="true">
+                <doc>
+                     The DC bias voltage that is applied to the sample.
+                </doc>
+                <field name="bias_voltage" type="NX_NUMBER" units="NX_VOLTAGE">
+                    <doc>
+                         The bias voltage (DC) applied to the sample.
+                    </doc>
+                </field>
+                <field name="bias_offset" type="NX_NUMBER" optional="true" units="NX_VOLTAGE">
+                    <doc>
+                         Offset value of the bias voltage.
+                    </doc>
+                </field>
+                <group name="bias_calibration" type="NXcalibration" optional="true">
+                    <doc>
+                         Calibration of the bias voltage measurement (V/V).
+                    </doc>
+                    <field name="caliberation_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
+                        <doc>
+                             The time or period is taken by the calibration to setup to acquire the data for
+                             the calibration.
+                        </doc>
+                    </field>
+                    <field name="coefficients" type="NX_NUMBER" optional="true" units="NX_ANY">
+                        <doc>
+                             The coefficients of the calibration.
+                        </doc>
+                    </field>
+                </group>
+            </group>
+        </group>
+        <group type="NXsample">
+            <doc>
+                 The sample information.
+            </doc>
+            <group name="sample_environment" type="NXenvironment">
+                <doc>
+                     Information of environment around the sample.
+                </doc>
+                <group name="sample_bias_voltage" type="NXsensor">
+                    <doc>
+                         Link to the sample_bias_voltage sensor under the instrument.
+                    </doc>
+                </group>
+            </group>
+        </group>
+        <group name="reproducibility_indicators" type="NXobject">
+            <doc>
+                 The reproducibility indicators are the indicators (links to the existing fields in different groups) that are used to measure the reproducibility of the 
+                 experiment. The reproducibility is the ability of the experiment to produce the same results when 
+                 performed under the same conditions.
+            </doc>
+        </group>
+        <group name="resolution_indicators" type="NXobject">
+            <doc>
+                 The resolution indicators are the indicators (links to the existing fields in different groups) that are used to measure the resolution of the 
+                 experiment. The resolution is the ability of the experiment to generate fine plots or images from the scan data.
+            </doc>
+        </group>
+    </group>
+</definition>
