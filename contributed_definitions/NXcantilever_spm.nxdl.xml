@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+<!--
+# NeXus - Neutron and X-ray Common Data Format
+#
+# Copyright (C) 2014-2024 NeXus International Advisory Committee (NIAC)
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For further information, see http://www.nexusformat.org
+-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXcantilever_spm" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+    <doc>
+         A base class to describe the cantilever used in Scanning Probe Microscopy (SPM)
+         techniques.
+    </doc>
+    <group name="cantilever_oscillator" type="NXobject">
+        <doc>
+             A cantilever is a resemblance to a Simple Oscillator.
+             In a typical AFM scan, the cantilever approaches the sample. After a certain height (z_c), the cantilever feels an attractive or repulsive force and the cantilever gets further closer to the sample until a user-defined force is reached. Later, the cantilever is retracted from the sample until the cantilever out of the surface force. The defection of the cantilever is measured by the detector (photo-diode) and the signal is converted to the electric signal and passed through the PID feedback loop, so that the piezo-electric controller moves on top of the sample in the X-Y plan.
+        </doc>
+        <field name="reference_amplitude" type="NX_NUMBER" units="NX_ANY">
+            <doc>
+                 The reference amplitude (also called drive amplitude) of the cantilever.
+            </doc>
+        </field>
+        <field name="reference_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
+            <doc>
+                 The reference frequency (also called drive frequency or resonance frequency) of
+                 the cantilever.
+            </doc>
+        </field>
+        <field name="frequency_harmonic" type="NX_NUMBER" units="NX_FREQUENCY">
+            <doc>
+                 The harmonic frequency of the cantilever.
+            </doc>
+        </field>
+        <group name="cantilever_phase_positioner" type="NXpositioner">
+            <doc>
+                 Describes the cantilever phase positioner, if it exists.
+            </doc>
+        </group>
+        <group name="cantilever_frequency_positioner" type="NXpositioner">
+            <doc>
+                 Describes the cantilever frequency positioner, if it exists.
+            </doc>
+        </group>
+        <group name="phase_locked_loop" type="NXlockin">
+            <doc>
+                 Phase locked loop for cantilever lock-in device.
+            </doc>
+        </group>
+        <field name="frequency_shift" type="NX_NUMBER" units="NX_FREQUENCY">
+            <doc>
+                 Shift in the resonance frequency of the cantilever.
+            </doc>
+        </field>
+        <field name="frequency_cutoff" type="NX_NUMBER" units="NX_FREQUENCY">
+            <doc>
+                 The cutoff frequency of the cantilever.
+            </doc>
+        </field>
+        <field name="frequency_bandwith" type="NX_NUMBER" units="NX_FREQUENCY">
+            <doc>
+                 The bandwidth of the resonance frequency.
+            </doc>
+        </field>
+        <field name="target_amplitude" type="NX_NUMBER" units="NX_ANY">
+            <doc>
+                 The executive amplitude of the cantilever in the experiment.
+            </doc>
+        </field>
+        <field name="active_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
+            <doc>
+                 The executive frequency of the cantilever in the experiment.
+            </doc>
+        </field>
+    </group>
+    <group name="cantilever_config" type="NXobject">
+        <doc>
+             The configuration information of the cantilever such calibration information,
+             material properties, etc.
+        </doc>
+        <field name="cantilever_coating">
+            <doc>
+                 The coating name of the cantilever.
+            </doc>
+        </field>
+        <field name="curvature_radius" type="NX_NUMBER" units="NX_ANY">
+            <doc>
+                 The radius of curvature of the cantilever tip.
+            </doc>
+        </field>
+        <group type="NXfabrication">
+            <doc>
+                 The fabrication information of the cantilever such as the name of the producer.
+            </doc>
+        </group>
+        <group type="NXcalibration">
+            <doc>
+                 The calibration information of the cantilever.
+            </doc>
+            <field name="sensitivity" type="NX_NUMBER" units="NX_ANY">
+                <doc>
+                     The sensitivity of the cantilever which is calculated as the change in cantilever amplitude (in dynamic mode) or 
+                     deflection of the cantilever due to the exerted force on cantilever tip.
+                </doc>
+            </field>
+            <field name="spring_constant" type="NX_NUMBER" units="NX_ANY">
+                <doc>
+                     The spring constant coefficient for the cantilever.
+                </doc>
+            </field>
+        </group>
+    </group>
+</definition>

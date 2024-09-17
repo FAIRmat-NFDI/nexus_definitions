@@ -48,7 +48,7 @@
              Switch the lock-in moulation on or off.
         </doc>
     </field>
-    <field name="modulation_signal">
+    <field name="modulation_signal" type="NX_CHAR">
         <doc>
              A modulation signal (such as bias, current et.al.) is a periodic voltage signal,
              usually applied to the surface of a sample, which serves to modify the physical
@@ -68,62 +68,53 @@
              Sets the frequency of the sine modulation added to the signal to modulate.
         </doc>
     </field>
-    <field name="demodulated_signal">
+    <field name="demodulated_signal" type="NX_CHAR">
         <doc>
              The input signal (STS signal) will be demodulated, in order to determine the amplitude
              and phase at the frequency set in the Frequency field or harmonics, such as current,
              bias, et.al.
         </doc>
     </field>
-    <!--output (demodulated signal) characterisation (foreach channel, like demodulation, a separate sensor output, e.g. X,Y)-->
-    <field name="number_of_demodulator_channels" type="NX_NUMBER">
+    <field name="demodulated_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
         <doc>
-             The number of signals which will be demodulated.
+             The frequency of the demodulated signal.
         </doc>
     </field>
-    <field name="low_pass" type="NX_NUMBER" units="NX_FREQUENCY">
+    <field name="demodulated_amplitude" type="NX_NUMBER" units="NX_VOLTAGE">
         <doc>
-             Order and cut-off frequency of the low-pass filter applied on the demodulated
-             signals (X,Y). Cut-off frq (low pass filter) (foreach DemodulatorChannels)
+             The amplitude of the demodulated signal.
         </doc>
     </field>
-    <field name="hi_pass" type="NX_NUMBER" units="NX_FREQUENCY">
+    <field name="demodulator_channels" type="NX_CHAR">
         <doc>
-             Order and cut-off frequency of the high-pass filter applied on the demodulation
-             signal. Cut-off frq (hi pass filter) (foreach DemodulatorChannels)
+             List of the demodulator channels.
         </doc>
     </field>
-    <field name="lp_filter_cutoff" type="NX_NUMBER" units="NX_FREQUENCY">
+    <field name="low_pass_N" type="NX_NUMBER" units="NX_FREQUENCY">
         <doc>
-             Sets the cut-off frequency of the low-pass filter (affects the displayed TC (s)
-             value) for D1. The filter is applied to the demodulated signals (X,Y).
+             Frequency of the low-pass filter applied on the demodulated
+             signals (X,Y). Cut-off frq (low pass filter) (for each DemodulatorChannels)
         </doc>
     </field>
-    <field name="lp_filter_order" type="NX_NUMBER">
+    <field name="hi_pass_N" type="NX_NUMBER" units="NX_FREQUENCY">
         <doc>
-             Order and cut-off frequency of the low-pass filter applied on the demodulated
-             signals (X,Y). Reducing the bandwidth or increasing the order reduces noise on
-             the demodulated signals, but will require longer settling and measurement times.
+             Frequency of the high-pass filter applied on the demodulation
+             signal. Cut-off frq (hi pass filter) (for each DemodulatorChannels)
         </doc>
     </field>
-    <field name="hp_filter_cutoff" type="NX_NUMBER" units="NX_FREQUENCY">
+    <field name="lp_filter_order_N" type="NX_NUMBER">
         <doc>
-             Sets the cut-off frequency of the high-pass filter (affects the displayed TC (s)
-             value) for D1. The filter is applied to the demodulated signals (X,Y).
+             Order of the low-pass filter applied on the demodulated signals (X, Y). 
+             Reducing the bandwidth or increasing the order reduces noise on the demodulated signals, 
+             but will require longer settling and measurement times.
         </doc>
     </field>
-    <field name="hp_filter_order" type="NX_NUMBER">
+    <field name="hp_filter_order_N" type="NX_NUMBER">
         <doc>
-             Order and cut-off frequency of the high-pass filter applied on the demodulation
-             signal of D!. This is used mainly to suppress a DC component of the demodulation
+             Order of the high-pass filter applied on the demodulation
+             signal. This is used mainly to suppress a DC component of the demodulation
              signal, which would lead to a component at modulation frequency in the
              demodulated signals.
-        </doc>
-    </field>
-    <field name="sync" type="NX_BOOLEAN">
-        <doc>
-             Switch on/off the Sync filter on the demodulated signals (X,Y) on or off.
-             (foreach DemodulatorChannels)
         </doc>
     </field>
     <field name="ref_phase_N" type="NX_NUMBER" units="NX_ANGLE">
