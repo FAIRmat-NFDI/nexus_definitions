@@ -34,5 +34,3 @@ Here's a list of application definitions related to photoemission spectroscopy:
 
     :ref:`NXxps`:
        An application definition for XPS/UPS measurements.
-
-More information about the classes developed for MPES experiments can be found here: :ref:`Mpes-Structure`.
