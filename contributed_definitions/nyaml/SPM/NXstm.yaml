@@ -16,7 +16,13 @@ NXstm(NXspm):
         The that is performed. Sometimes under the
         same experiment setup, both constant height and current are measured.
       enumeration: [constant height, constant current, single point scan (sts), constant height and current]
-    experiment_insturment(NXinstrument):
+    experiment_identifier(NXidentifier):
+      doc: |
+        The unique identifier for the experiment.
+    experiment_description:
+      doc: |
+        The description of the experiment like comments, ontes from from the experiment.
+    experiment_instrument(NXinstrument):
       doc: |
         The group explains the instrumentation of the STM experiment as well as the environment setup such
         as the temperature of the tip and other sensors of the corresponding instruments.
@@ -175,6 +181,12 @@ NXstm(NXspm):
         doc: |
           To explain bias (sweep measurement) voltage applied to the sample.
         (NXbias_spectroscopy):
+          exists: optional
+          doc: |
+            Setup and scan data for continuous measurement of bias-voltage on the subject of experiment 
+            vs tunneling current from probe.
+            Data from from this experiment can also be used to calculate the dI/dV spectra.
+
       piazo_sensor(NXsensor):
         doc: |
           The sensor information for the piezo device.
@@ -256,19 +268,6 @@ NXstm(NXspm):
               exists: recommended
               doc: |
                 The status of the controller to say was PID has been used or not.
-            p_gain(NX_NUMBER):
-              unit: NX_UNITLESS
-              doc: |
-                The proportional gain of the controller or PID.
-            i_gain(NX_NUMBER):
-              unit: NX_UNITLESS
-              doc: |
-                The integral gain of the controller or PID.
-            time_const(NX_DATE_TIME):
-              exists: recommended
-              unit: NX_TIME
-              doc: |
-                The time constant variable of the controller.
             tip_lift(NX_NUMBER):
               exists: optional
               unit: NX_LENGTH

@@ -19,7 +19,7 @@ NXspm(NXsensor_scan):
     scan_mode:
       doc: |
         The mode of the scan.
-    experiment_insturment(NXinstrument):
+    experiment_instrument(NXinstrument):
       doc: |
         The instrument information.
       hardware(NXfabrication):
@@ -63,9 +63,14 @@ NXspm(NXsensor_scan):
         exists: optional
         doc: |
           The lock-in amplifier information.
-      (NXenvironment):
+      scan_environment(NXenvironment):
         doc: |
           The environment information.
+        scan_name:
+          exists: optional
+          doc: |
+            The name of the scan, mainly lab defined, that helps to differentiate among different
+            scans performed in lab.
         current_sensor(NXsensor):
           exists: optional
           doc: |
@@ -108,6 +113,13 @@ NXspm(NXsensor_scan):
           doc: |
             The positioner information like the position of the tip, the position of the
             sample, PID loop feedback etc.
+          z_controller(NXpid):
+            doc: |
+              The PID controller information for the z-axis.
+            z(NX_NUMBER):
+              doc: |
+                To indicate the relative tip position z between tip and sample. The tip position
+                can also be varied when the z_controller is not running.
         piezo_material(NXpiezoelectric_material):
           exists: optional
           doc: |
@@ -138,6 +150,89 @@ NXspm(NXsensor_scan):
             unit: NX_ANY
             doc: |
               The coefficients of the calibration.
+      bias_spectroscopy_environment(NXenvironment):
+        doc: |
+          To explain bias (sweep measurement) voltage applied to the sample.
+        (NXbias_spectroscopy):
+          doc: |
+            Setup and scan data for continuous measurement of bias-voltage on the subject of experiment 
+            vs tunneling current from probe.
+          (NXpositioner_spm):
+            exists: optional
+            doc: |
+              The positioner information like the position of the tip, PID loop feedback etc.
+            z_controller(NXpid):
+              exists: optional
+              doc: |
+                The PID controller information for the z-axis.
+              z_average_time(NX_DATE_TIME):
+                exists: optional
+                unit: NX_TIME
+                doc: |
+                  The average time taken by the z-controller to stabilize the tip.
+              z_controller_time(NX_DATE_TIME):
+                exists: optional
+                unit: NX_TIME
+                doc: |
+                  The time taken by the z-controller to measure physical properties.
+              z_controller_hold(NX_BOOLEAN):
+                exists: optional
+                doc: |
+                  The status of the controller to be held on the previous value, before going to the 
+                  next scan point to measure the physical properties.
+              record_final_z(NX_BOOLEAN):
+                exists: optional
+                doc: |
+                  The status of the controller to record the final z position after the scan.
+          bias_sweep(NXbias_sweep):
+            doc: |
+              The bais voltage sweep is a common technique used on the substance or sample or environment
+              to study the change in the behavior of the sample or substance or environment due to change
+               in applied  bias voltage.
+            settling_time(NX_NUMBER):
+              unit: NX_TIME
+              doc: |
+                The time is taken to settle the bias voltage at the desired value. On each sweep usually, the system
+                takes time to settle the bias voltage at the next value.
+            scan_region(NXobject):
+              doc: |
+                The scan region (phase space or sub-phase space) is the region where the scan is
+                performed.
+              scan_offset_bias(NX_NUMBER):
+                unit: NX_VOLTAGE
+                doc: |
+                  The offset of the bias voltage for bias sweep.
+              scan_range_bias(NX_NUMBER):
+                unit: NX_VOLTAGE
+                doc: |
+                  The range of the scan is the length of the bias voltage over which the sweep
+                  scan will be performed.
+              scan_start_bias(NX_NUMBER):
+                unit: NX_VOLTAGE
+                doc: |
+                  The start of the bias scan voltage.
+              scan_end_bias(NX_NUMBER):
+                unit: NX_VOLTAGE
+                doc: |
+                  The end of the bias scan voltage.
+            linear_sweep(NXobject):
+              doc: |
+                The linear sweep is a type of sweep where the bias voltage is swept
+                linearly from the starting value to the ending value.
+              scan_points_bias(NX_NUMBER):
+                doc: |
+                  The number of voltage points the sweep scan to be performed.
+              step_size_bias(NX_NUMBER):
+                unit: NX_VOLTAGE
+                doc: |
+                  The step size of the sweep.
+                  The step size is the difference between the two consecutive bias voltage values during the sweep.
+              reset_bias(NX_BOOLEAN):
+                doc: |
+                  The reset_bias is used to reset the bias voltage to the starting value after the
+                  sweep is completed.
+                  
+
       sample_bias_votage(NXsensor):
         exists: optional
         doc: |

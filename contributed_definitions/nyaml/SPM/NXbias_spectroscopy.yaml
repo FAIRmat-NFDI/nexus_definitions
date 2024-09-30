@@ -12,11 +12,13 @@ NXbias_spectroscopy(NXobject):
       2. Variadic Spacing: The bias voltage is swept from the start to the end in a discretized spacing
       between the tip and surface.
     enumeration: [constant_spacing, variadic_spacing]
-  z_offset(NX_NUMBER):
-    exists: recommended
-    unit: NX_LENGTH
+  (NXpositioner_spm):
     doc: |
-      The z-offset is a starting tip position before the sweep starts.
+      The pid positioner information while running bias voltage-tunneling current measurement.
+    z_offset(NX_NUMBER):
+      unit: NX_LENGTH
+      doc: |
+        The z-offset is a starting tip position before the sweep starts.
   (NXcircuit):
     exists: optional
     acquisition_time(NX_DATE_TIME):
@@ -49,44 +51,9 @@ NXbias_spectroscopy(NXobject):
         The type of scan like mesh, spiral, etc. For STS experiment, the scan type is
         usually a single-point scan (trajectory scan).
       enumeration: [mesh, trajectory]
-    scan_region(NXobject):
+    sweep_number(NX_NUMBER):
       doc: |
-        The region of the scan area.
-      scan_range(NX_NUMBER):
-        unit: NX_ANY
-        doc: |
-          The range of the scan area.
-      scan_offset(NX_NUMBER):
-        unit: NX_ANY
-        doc: |
-          The offset of the scan area in 2D (X and Y) space.
-      scan_angle_N(NX_NUMBER):
-        unit: NX_ANGLE
-        doc: |
-          The N (substring) denotes the angle of the scan area with different physical
-          axes.
-    mesh_SCAN(NXobject):
-      doc: |
-        The mesh scan information for scanning of a smaple e.g. STM experiment.
-      scan_speed(NX_NUMBER):
-        unit: NX_ANY
-        doc: |
-          The speed of the scanner or the probe during the scan.
-      scan_time(NX_DATE_TIME):
-        unit: NX_TIME
-        doc: |
-          The time taken by the scanner to scan the entire area.
-      forward_speed_N(NX_NUMBER):
-        unit: NX_ANY
-        doc: |
-          The N (substring) denotes the forward speed of the scanner.
-      backward_speed_N(NX_NUMBER):
-        unit: NX_ANY
-        doc: |
-          The N (substring) denotes the backward speed of the scanner.
-      SCAN_DATA(NXdata):
-        doc: |
-          The data that comes from scanning the area.
+        The number of sweeps taken during the bias spectroscopy.
     first_settling_time(NX_DATE_TIME):
       exists: optional
       unit: NX_TIME
@@ -114,6 +81,45 @@ NXbias_spectroscopy(NXobject):
       unit: NX_TIME
       doc: |
         The total time of the Z-controller is taken for entire voltage sweep.
+    scan_region(NXobject):
+      doc: |
+        The region of the scan area.
+      scan_range(NX_NUMBER):
+        unit: NX_ANY
+        doc: |
+          The range of the scan area.
+      scan_offset(NX_NUMBER):
+        unit: NX_ANY
+        doc: |
+          The offset of the scan area in 2D (X and Y) space.
+      scan_angle_N(NX_NUMBER):
+        unit: NX_ANGLE
+        doc: |
+          The N (substring) denotes the angle of the scan area with different physical
+          axes.
+    mesh_SCAN(NXobject):
+      doc: |
+        The mesh scan information for scanning of a smaple e.g. STM experiment.
+      scan_speed(NX_NUMBER):
+        unit: NX_ANY
+        doc: |
+          The speed of the scanner or the probe during the scan.
+      scan_time(NX_DATE_TIME):
+        unit: NX_TIME
+        doc: |
+          The time taken by the scanner to scan the entire area.
+      forward_speed_bias(NX_NUMBER):
+        unit: NX_ANY
+        doc: |
+          The N (substring) denotes the forward speed of the scanner.
+      backward_speed_bias(NX_NUMBER):
+        unit: NX_ANY
+        doc: |
+          The N (substring) denotes the backward speed of the scanner.
+      SCAN_DATA(NXdata):
+        doc: |
+          The data that comes from scanning the area.
+
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
 # 34d7b4be593bdb503010b23bbc01ebc5688b8c697e2e6b6024c20cf3e4abae50
