@@ -14,7 +14,8 @@ NXbias_spectroscopy(NXobject):
     enumeration: [constant_spacing, variadic_spacing]
   (NXpositioner_spm):
     doc: |
-      The pid positioner information while running bias voltage-tunneling current measurement.
+      The pid positioner information while running bias voltage-tunneling current
+      measurement.
     z_offset(NX_NUMBER):
       unit: NX_LENGTH
       doc: |
@@ -120,9 +121,8 @@ NXbias_spectroscopy(NXobject):
         doc: |
           The data that comes from scanning the area.
 
-
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 34d7b4be593bdb503010b23bbc01ebc5688b8c697e2e6b6024c20cf3e4abae50
+# b336dda36d21a79fa8d21d23da540dd4422f54c2ef66957b73d3e68d1ba985be
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -164,11 +164,17 @@ NXbias_spectroscopy(NXobject):
 #             <item value="variadic_spacing"/>
 #         </enumeration>
 #     </field>
-#     <field name="z_offset" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
+#     <group type="NXpositioner_spm">
 #         <doc>
-#              The z-offset is a starting tip position before the sweep starts.
+#              The pid positioner information while running bias voltage-tunneling current
+#              measurement.
 #         </doc>
-#     </field>
+#         <field name="z_offset" type="NX_NUMBER" units="NX_LENGTH">
+#             <doc>
+#                  The z-offset is a starting tip position before the sweep starts.
+#             </doc>
+#         </field>
+#     </group>
 #     <group type="NXcircuit" optional="true">
 #         <field name="acquisition_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
 #             <doc>
@@ -207,6 +213,39 @@ NXbias_spectroscopy(NXobject):
 #                 <item value="trajectory"/>
 #             </enumeration>
 #         </field>
+#         <field name="sweep_number" type="NX_NUMBER">
+#             <doc>
+#                  The number of sweeps taken during the bias spectroscopy.
+#             </doc>
+#         </field>
+#         <field name="first_settling_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
+#             <doc>
+#                  The initial time is taken to settle the bias voltage at the desired value. On each sweep usually, the system
+#                  takes time to settle to the bias voltage at the next value.
+#             </doc>
+#         </field>
+#         <field name="end_settling_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
+#             <doc>
+#                  The time is taken to settle the bias voltage at the desired value. The time (at the last sweep)
+#                  to settle for the last value of the sweep.
+#             </doc>
+#         </field>
+#         <field name="max_slew_rate" type="NX_NUMBER" optional="true" units="NX_ANY">
+#             <doc>
+#                  The rate at which the amplifier responds to the voltage change (to reach at the desired value).
+#                  It defines if the tip and voltage weep are synchronized.
+#             </doc>
+#         </field>
+#         <field name="final_z" type="NX_NUMBER" recommended="true">
+#             <doc>
+#                  The z position after weeps are done.
+#             </doc>
+#         </field>
+#         <field name="total_spectroscopy_time" type="NX_DATE_TIME" recommended="true" units="NX_TIME">
+#             <doc>
+#                  The total time of the Z-controller is taken for entire voltage sweep.
+#             </doc>
+#         </field>
 #         <group name="scan_region" type="NXobject">
 #             <doc>
 #                  The region of the scan area.
@@ -242,12 +281,12 @@ NXbias_spectroscopy(NXobject):
 #                      The time taken by the scanner to scan the entire area.
 #                 </doc>
 #             </field>
-#             <field name="forward_speed_N" type="NX_NUMBER" units="NX_ANY">
+#             <field name="forward_speed_bias" type="NX_NUMBER" units="NX_ANY">
 #                 <doc>
 #                      The N (substring) denotes the forward speed of the scanner.
 #                 </doc>
 #             </field>
-#             <field name="backward_speed_N" type="NX_NUMBER" units="NX_ANY">
+#             <field name="backward_speed_bias" type="NX_NUMBER" units="NX_ANY">
 #                 <doc>
 #                      The N (substring) denotes the backward speed of the scanner.
 #                 </doc>
@@ -258,33 +297,5 @@ NXbias_spectroscopy(NXobject):
 #                 </doc>
 #             </group>
 #         </group>
-#         <field name="first_settling_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
-#             <doc>
-#                  The initial time is taken to settle the bias voltage at the desired value. On each sweep usually, the system
-#                  takes time to settle to the bias voltage at the next value.
-#             </doc>
-#         </field>
-#         <field name="end_settling_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
-#             <doc>
-#                  The time is taken to settle the bias voltage at the desired value. The time (at the last sweep)
-#                  to settle for the last value of the sweep.
-#             </doc>
-#         </field>
-#         <field name="max_slew_rate" type="NX_NUMBER" optional="true" units="NX_ANY">
-#             <doc>
-#                  The rate at which the amplifier responds to the voltage change (to reach at the desired value).
-#                  It defines if the tip and voltage weep are synchronized.
-#             </doc>
-#         </field>
-#         <field name="final_z" type="NX_NUMBER" recommended="true">
-#             <doc>
-#                  The z position after weeps are done.
-#             </doc>
-#         </field>
-#         <field name="total_spectroscopy_time" type="NX_DATE_TIME" recommended="true" units="NX_TIME">
-#             <doc>
-#                  The total time of the Z-controller is taken for entire voltage sweep.
-#             </doc>
-#         </field>
 #     </group>
 # </definition>

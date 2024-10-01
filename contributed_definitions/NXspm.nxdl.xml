@@ -26,11 +26,11 @@ https://thesis.library.caltech.edu/1943/4/03chapter3.pdf-->
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXspm" extends="NXsensor_scan" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <doc>
          Scanning Probe Microscopy (SPM) is a branch of microscopy to study the surface of
-         materials at the Atomic level. The technique is mainly motivated from the quantum 
-         tunneling effect theory though a few of it successor techniques such AFM uses 
+         materials at the Atomic level. The technique is mainly motivated from the quantum
+         tunneling effect theory though a few of it successor techniques such AFM uses
          electrostatic forces or atomic forces to study the surface of the materials.
          
-         This base class mainly is designed as a sckeleton or contains common concepts for 
+         This base class mainly is designed as a sckeleton or contains common concepts for
          other SPM sub-techniques such as STM, STS, AFM, etc.
     </doc>
     <group type="NXentry">
@@ -47,14 +47,25 @@ https://thesis.library.caltech.edu/1943/4/03chapter3.pdf-->
                  The mode of the scan.
             </doc>
         </field>
-        <group name="experiment_insturment" type="NXinstrument">
+        <group name="experiment_identifier" type="NXidentifier">
+            <doc>
+                 Group to keep unique identifier for the experiment that 
+                 could ne a DOI or orcid.
+            </doc>
+        </group>
+        <field name="experiment_description">
+            <doc>
+                 The description of the experiment like comments, ontes from from the experiment.
+            </doc>
+        </field>
+        <group name="experiment_instrument" type="NXinstrument">
             <doc>
                  The instrument information.
             </doc>
             <group name="hardware" type="NXfabrication">
                 <doc>
                      The hardware description of the core instrument setup of the experiment.
-                     Usually, the entire instrument is supplied by a single manufacturer. 
+                     Usually, the entire instrument is supplied by a single manufacturer.
                      To describe the hardware from any sub-components, use the hardware group of that
                      sub-component (child group of the NXinstrument group) group.
                 </doc>
@@ -102,16 +113,23 @@ https://thesis.library.caltech.edu/1943/4/03chapter3.pdf-->
                 <doc>
                      The real-time controller information.
                 </doc>
+                <field name="rcs_frequency" type="NX_NUMBER" optional="true"/>
             </group>
             <group type="NXlockin" optional="true">
                 <doc>
                      The lock-in amplifier information.
                 </doc>
             </group>
-            <group type="NXenvironment">
+            <group name="scan_environment" type="NXenvironment">
                 <doc>
                      The environment information.
                 </doc>
+                <field name="scan_name" optional="true">
+                    <doc>
+                         The name of the scan, mainly lab defined, that helps to differentiate among different
+                         scans performed in lab.
+                    </doc>
+                </field>
                 <group name="current_sensor" type="NXsensor" optional="true">
                     <doc>
                          This is a link to the current_sensor under the instrument group.
@@ -152,6 +170,10 @@ https://thesis.library.caltech.edu/1943/4/03chapter3.pdf-->
                 <group type="NXamplifier" optional="true"/>
             </group>
             <group name="piazo_sensor" type="NXsensor">
+                <doc>
+                     The piezo sensor refers to the height (or Z) piezo sensor if nothing is
+                     mentioned along the X and Y directions.
+                </doc>
                 <group type="NXpiezo_config_spm">
                     <doc>
                          The piezo configuration information like piezoelectric calibration and material
@@ -163,6 +185,22 @@ https://thesis.library.caltech.edu/1943/4/03chapter3.pdf-->
                          The positioner information like the position of the tip, the position of the
                          sample, PID loop feedback etc.
                     </doc>
+                    <group name="z_controller" type="NXpid">
+                        <doc>
+                             The PID controller information for the z-axis.
+                        </doc>
+                        <field name="z" type="NX_NUMBER">
+                            <doc>
+                                 To indicate the relative tip position z between tip and sample. The tip position
+                                 can also be varied when the z_controller is not running.
+                            </doc>
+                        </field>
+                        <field name="controller_status" type="NX_BOOLEAN">
+                            <doc>
+                                 Status if controller is active.
+                            </doc>
+                        </field>
+                    </group>
                 </group>
                 <group name="piezo_material" type="NXpiezoelectric_material" optional="true">
                     <doc>
@@ -200,6 +238,111 @@ https://thesis.library.caltech.edu/1943/4/03chapter3.pdf-->
                              The coefficients of the calibration.
                         </doc>
                     </field>
+                </group>
+            </group>
+            <group name="bias_spectroscopy_environment" type="NXenvironment">
+                <doc>
+                     To explain bias (sweep measurement) voltage applied to the sample.
+                </doc>
+                <group type="NXbias_spectroscopy">
+                    <doc>
+                         Setup and scan data for continuous measurement of bias-voltage on the subject of experiment 
+                         vs tunneling current from probe.
+                    </doc>
+                    <group type="NXpositioner_spm" optional="true">
+                        <doc>
+                             The positioner information like the position of the tip, PID loop feedback etc.
+                        </doc>
+                        <group name="z_controller" type="NXpid" optional="true">
+                            <doc>
+                                 The PID controller information for the z-axis.
+                            </doc>
+                            <field name="z_average_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
+                                <doc>
+                                     The average time taken by the z-controller to stabilize the tip.
+                                </doc>
+                            </field>
+                            <field name="z_controller_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
+                                <doc>
+                                     The time taken by the z-controller to measure physical properties.
+                                </doc>
+                            </field>
+                            <field name="z_controller_hold" type="NX_BOOLEAN" optional="true">
+                                <doc>
+                                     The status of the controller to be held on the previous value, before going to the 
+                                     next scan point to measure the physical properties.
+                                </doc>
+                            </field>
+                            <field name="record_final_z" type="NX_BOOLEAN" optional="true">
+                                <doc>
+                                     The status of the controller to record the final z position after the scan.
+                                </doc>
+                            </field>
+                        </group>
+                    </group>
+                    <group name="bias_sweep" type="NXbias_sweep">
+                        <doc>
+                             The bais voltage sweep is a common technique used on the substance or sample or environment
+                             to study the change in the behavior of the sample or substance or environment due to change
+                              in applied  bias voltage.
+                        </doc>
+                        <field name="settling_time" type="NX_NUMBER" units="NX_TIME">
+                            <doc>
+                                 The time is taken to settle the bias voltage at the desired value. On each sweep usually, the system
+                                 takes time to settle the bias voltage at the next value.
+                            </doc>
+                        </field>
+                        <group name="scan_region" type="NXobject">
+                            <doc>
+                                 The scan region (phase space or sub-phase space) is the region where the scan is
+                                 performed.
+                            </doc>
+                            <field name="scan_offset_bias" type="NX_NUMBER" units="NX_VOLTAGE">
+                                <doc>
+                                     The offset of the bias voltage for bias sweep.
+                                </doc>
+                            </field>
+                            <field name="scan_range_bias" type="NX_NUMBER" units="NX_VOLTAGE">
+                                <doc>
+                                     The range of the scan is the length of the bias voltage over which the sweep
+                                     scan will be performed.
+                                </doc>
+                            </field>
+                            <field name="scan_start_bias" type="NX_NUMBER" units="NX_VOLTAGE">
+                                <doc>
+                                     The start of the bias scan voltage.
+                                </doc>
+                            </field>
+                            <field name="scan_end_bias" type="NX_NUMBER" units="NX_VOLTAGE">
+                                <doc>
+                                     The end of the bias scan voltage.
+                                </doc>
+                            </field>
+                        </group>
+                        <group name="linear_sweep" type="NXobject">
+                            <doc>
+                                 The linear sweep is a type of sweep where the bias voltage is swept
+                                 linearly from the starting value to the ending value.
+                            </doc>
+                            <field name="scan_points_bias" type="NX_NUMBER">
+                                <doc>
+                                     The number of voltage points the sweep scan to be performed.
+                                </doc>
+                            </field>
+                            <field name="step_size_bias" type="NX_NUMBER" units="NX_VOLTAGE">
+                                <doc>
+                                     The step size of the sweep.
+                                     The step size is the difference between the two consecutive bias voltage values during the sweep.
+                                </doc>
+                            </field>
+                            <field name="reset_bias" type="NX_BOOLEAN">
+                                <doc>
+                                     The reset_bias is used to reset the bias voltage to the starting value after the
+                                     sweep is completed.
+                                </doc>
+                            </field>
+                        </group>
+                    </group>
                 </group>
             </group>
             <group name="sample_bias_votage" type="NXsensor" optional="true">
@@ -251,14 +394,14 @@ https://thesis.library.caltech.edu/1943/4/03chapter3.pdf-->
         </group>
         <group name="reproducibility_indicators" type="NXobject">
             <doc>
-                 The reproducibility indicators are the indicators (links to the existing fields in different groups) that are used to measure the reproducibility of the 
-                 experiment. The reproducibility is the ability of the experiment to produce the same results when 
+                 The reproducibility indicators are the indicators (links to the existing fields in different groups) that are used to measure the reproducibility of the
+                 experiment. The reproducibility is the ability of the experiment to produce the same results when
                  performed under the same conditions.
             </doc>
         </group>
         <group name="resolution_indicators" type="NXobject">
             <doc>
-                 The resolution indicators are the indicators (links to the existing fields in different groups) that are used to measure the resolution of the 
+                 The resolution indicators are the indicators (links to the existing fields in different groups) that are used to measure the resolution of the
                  experiment. The resolution is the ability of the experiment to generate fine plots or images from the scan data.
             </doc>
         </group>

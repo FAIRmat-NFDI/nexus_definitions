@@ -177,10 +177,9 @@ NXstm(NXspm):
         (NXbias_spectroscopy):
           exists: optional
           doc: |
-            Setup and scan data for continuous measurement of bias-voltage on the subject of experiment 
+            Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
             vs tunneling current from probe.
             Data from from this experiment can also be used to calculate the dI/dV spectra.
-
       piazo_sensor(NXsensor):
         doc: |
           The sensor information for the piezo device.
@@ -338,7 +337,7 @@ NXstm(NXspm):
           link to the target: /ENTRY[entry]/INSTRUMENT[instrument]/LOCKIN[lockin]/modulation_frequency
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 2e62e07f35a55c3f118d366de6bdc974b7f1c00c29e71399e8a4263b07ee089b
+# 8ade1506b241a24204033dc33ac300787e4e1f9d67eec7a125e15edf424b2f98
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -363,7 +362,8 @@ NXstm(NXspm):
 # # For further information, see http://www.nexusformat.org
 # -->
 # <!--
-# https://thesis.library.caltech.edu/1943/4/03chapter3.pdf-->
+# https://thesis.library.caltech.edu/1943/4/03chapter3.pdf
+# TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and NXafm-->
 # <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXstm" extends="NXspm" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <doc>
 #          An application definition to describe Scanning Tunneling Microscopy (STM).
@@ -389,7 +389,7 @@ NXstm(NXspm):
 #                 <item value="constant height and current"/>
 #             </enumeration>
 #         </field>
-#         <group type="NXinstrument">
+#         <group name="experiment_instrument" type="NXinstrument">
 #             <doc>
 #                  The group explains the instrumentation of the STM experiment as well as the environment setup such
 #                  as the temperature of the tip and other sensors of the corresponding instruments.
@@ -586,7 +586,13 @@ NXstm(NXspm):
 #                 <doc>
 #                      To explain bias (sweep measurement) voltage applied to the sample.
 #                 </doc>
-#                 <group type="NXbias_spectroscopy"/>
+#                 <group type="NXbias_spectroscopy" optional="true">
+#                     <doc>
+#                          Setup and scan data for continuous measurement of bias-voltage on the subject of experiment 
+#                          vs tunneling current from probe.
+#                          Data from from this experiment can also be used to calculate the dI/dV spectra.
+#                     </doc>
+#                 </group>
 #             </group>
 #             <group name="piazo_sensor" type="NXsensor">
 #                 <doc>
@@ -690,21 +696,6 @@ NXstm(NXspm):
 #                         <field name="controller_status" type="NX_BOOLEAN" recommended="true">
 #                             <doc>
 #                                  The status of the controller to say was PID has been used or not.
-#                             </doc>
-#                         </field>
-#                         <field name="p_gain" type="NX_NUMBER" units="NX_UNITLESS">
-#                             <doc>
-#                                  The proportional gain of the controller or PID.
-#                             </doc>
-#                         </field>
-#                         <field name="i_gain" type="NX_NUMBER" units="NX_UNITLESS">
-#                             <doc>
-#                                  The integral gain of the controller or PID.
-#                             </doc>
-#                         </field>
-#                         <field name="time_const" type="NX_DATE_TIME" recommended="true" units="NX_TIME">
-#                             <doc>
-#                                  The time constant variable of the controller.
 #                             </doc>
 #                         </field>
 #                         <field name="tip_lift" type="NX_NUMBER" optional="true" units="NX_LENGTH">
