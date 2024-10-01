@@ -19,6 +19,13 @@ NXspm(NXsensor_scan):
     scan_mode:
       doc: |
         The mode of the scan.
+    experiment_identifier(NXidentifier):
+      doc: |
+        Group to keep unique identifier for the experiment that 
+        could ne a DOI or orcid.
+    experiment_description:
+      doc: |
+        The description of the experiment like comments, ontes from from the experiment.
     experiment_instrument(NXinstrument):
       doc: |
         The instrument information.
@@ -59,6 +66,9 @@ NXspm(NXsensor_scan):
         exists: optional
         doc: |
           The real-time controller information.
+        rcs_frequency(NX_NUMBER):
+          exists: optional
+          
       (NXlockin):
         exists: optional
         doc: |
@@ -120,6 +130,9 @@ NXspm(NXsensor_scan):
               doc: |
                 To indicate the relative tip position z between tip and sample. The tip position
                 can also be varied when the z_controller is not running.
+            controller_status(NX_BOOLEAN):
+              doc: |
+                Status if controller is active.
         piezo_material(NXpiezoelectric_material):
           exists: optional
           doc: |
@@ -231,8 +244,6 @@ NXspm(NXsensor_scan):
                 doc: |
                   The reset_bias is used to reset the bias voltage to the starting value after the
                   sweep is completed.
-                  
-
       sample_bias_votage(NXsensor):
         exists: optional
         doc: |
