@@ -75,6 +75,24 @@ NXspm(NXsensor_scan):
       scan_environment(NXenvironment):
         doc: |
           The environment information.
+        tip_temp(NX_NUMBER):
+          exists: optional
+          unit: NX_TEMPERATURE
+          doc: |
+            Temperature of STM head. Note: At least one field from stm_head_temperature,
+            cryo_bottom_temp and cryo_sheild_temp must be provided.
+        cryo_bottom_temp(NX_NUMBER):
+          exists: optional
+          unit: NX_TEMPERATURE
+          doc: |
+            Temperature of liquid helium cryostat. Note: At least one field from
+            stm_head_temperature, cryo_bottom_temp and cryo_sheild_temp must be provided.
+        cryo_shield_temp(NX_NUMBER):
+          exists: optional
+          unit: NX_TEMPERATURE
+          doc: |
+            Temperature of liquid nitrogen shield. Note: At
+            least one field from stm_head_temperature, cryo_bottom_temp and cryo_sheild_temp.
         scan_name:
           exists: optional
           doc: |
@@ -143,6 +161,7 @@ NXspm(NXsensor_scan):
           A group handling the temperature such as cryo, shield and tip. For different
           type of temperature sensors repeat this group.
         temperature(NX_NUMBER):
+          exists: optional
           unit: NX_TEMPERATURE
           doc: |
             The temperature of the sample.
@@ -154,15 +173,14 @@ NXspm(NXsensor_scan):
           exists: optional
           doc: |
             Calibration of the temperature measurement.
-          caliberation_time(NX_DATE_TIME):
-            unit: NX_TIME
-            doc: |
-              The time or period is taken by the calibration to setup to acquire the data for
-              the calibration.
           coefficients(NX_NUMBER):
             unit: NX_ANY
             doc: |
               The coefficients of the calibration.
+        TEMPERATURE_DATA(NXdata):
+          exists: optional
+          doc: Data (e.g, record from SPM head temperature) from temperature sensor.
+
       bias_spectroscopy_environment(NXenvironment):
         doc: |
           To explain bias (sweep measurement) voltage applied to the sample.
