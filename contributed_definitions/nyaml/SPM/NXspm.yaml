@@ -179,8 +179,8 @@ NXspm(NXsensor_scan):
               The coefficients of the calibration.
         TEMPERATURE_DATA(NXdata):
           exists: optional
-          doc: Data (e.g, record from SPM head temperature) from temperature sensor.
-
+          doc: |
+            Data (e.g, record from SPM head temperature) from temperature sensor.
       bias_spectroscopy_environment(NXenvironment):
         doc: |
           To explain bias (sweep measurement) voltage applied to the sample.
@@ -310,7 +310,7 @@ NXspm(NXsensor_scan):
         experiment. The resolution is the ability of the experiment to generate fine plots or images from the scan data.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 109ce2b67477b3e687bc3a7aa7d10c7df4729f21e26ee32ec170fad2130b04ff
+# 4f7473b6f858ba4ca5f2c4320e05b567fafbece4da25dd1815b5476ccd01f539
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -362,7 +362,7 @@ NXspm(NXsensor_scan):
 #         </field>
 #         <group name="experiment_identifier" type="NXidentifier">
 #             <doc>
-#                  Group to keep unique identifier for the experiment that 
+#                  Group to keep unique identifier for the experiment that
 #                  could ne a DOI or orcid.
 #             </doc>
 #         </group>
@@ -437,6 +437,24 @@ NXspm(NXsensor_scan):
 #                 <doc>
 #                      The environment information.
 #                 </doc>
+#                 <field name="tip_temp" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
+#                     <doc>
+#                          Temperature of STM head. Note: At least one field from stm_head_temperature,
+#                          cryo_bottom_temp and cryo_sheild_temp must be provided.
+#                     </doc>
+#                 </field>
+#                 <field name="cryo_bottom_temp" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
+#                     <doc>
+#                          Temperature of liquid helium cryostat. Note: At least one field from
+#                          stm_head_temperature, cryo_bottom_temp and cryo_sheild_temp must be provided.
+#                     </doc>
+#                 </field>
+#                 <field name="cryo_shield_temp" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
+#                     <doc>
+#                          Temperature of liquid nitrogen shield. Note: At
+#                          least one field from stm_head_temperature, cryo_bottom_temp and cryo_sheild_temp.
+#                     </doc>
+#                 </field>
 #                 <field name="scan_name" optional="true">
 #                     <doc>
 #                          The name of the scan, mainly lab defined, that helps to differentiate among different
@@ -526,7 +544,7 @@ NXspm(NXsensor_scan):
 #                      A group handling the temperature such as cryo, shield and tip. For different
 #                      type of temperature sensors repeat this group.
 #                 </doc>
-#                 <field name="temperature" type="NX_NUMBER" units="NX_TEMPERATURE">
+#                 <field name="temperature" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
 #                     <doc>
 #                          The temperature of the sample.
 #                     </doc>
@@ -540,17 +558,16 @@ NXspm(NXsensor_scan):
 #                     <doc>
 #                          Calibration of the temperature measurement.
 #                     </doc>
-#                     <field name="caliberation_time" type="NX_DATE_TIME" units="NX_TIME">
-#                         <doc>
-#                              The time or period is taken by the calibration to setup to acquire the data for
-#                              the calibration.
-#                         </doc>
-#                     </field>
 #                     <field name="coefficients" type="NX_NUMBER" units="NX_ANY">
 #                         <doc>
 #                              The coefficients of the calibration.
 #                         </doc>
 #                     </field>
+#                 </group>
+#                 <group name="TEMPERATURE_DATA" type="NXdata" optional="true">
+#                     <doc>
+#                          Data (e.g, record from SPM head temperature) from temperature sensor.
+#                     </doc>
 #                 </group>
 #             </group>
 #             <group name="bias_spectroscopy_environment" type="NXenvironment">
@@ -559,7 +576,7 @@ NXspm(NXsensor_scan):
 #                 </doc>
 #                 <group type="NXbias_spectroscopy">
 #                     <doc>
-#                          Setup and scan data for continuous measurement of bias-voltage on the subject of experiment 
+#                          Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
 #                          vs tunneling current from probe.
 #                     </doc>
 #                     <group type="NXpositioner_spm" optional="true">
@@ -582,7 +599,7 @@ NXspm(NXsensor_scan):
 #                             </field>
 #                             <field name="z_controller_hold" type="NX_BOOLEAN" optional="true">
 #                                 <doc>
-#                                      The status of the controller to be held on the previous value, before going to the 
+#                                      The status of the controller to be held on the previous value, before going to the
 #                                      next scan point to measure the physical properties.
 #                                 </doc>
 #                             </field>
