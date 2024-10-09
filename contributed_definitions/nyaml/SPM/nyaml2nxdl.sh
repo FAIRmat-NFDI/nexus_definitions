@@ -29,5 +29,5 @@ done
 rm ../../NXbias_spectroscopy_old.nxdl.xml
 rm ../../NXspm_v1_backup.nxdl.xml
 
-git add -- ../.. # :!*.sh
+# git add -- ../.. # :!*.sh
 
