@@ -57,20 +57,25 @@
         </doc>
     </field>
     <!--(For bais modulate signal, it depands on the modulate type)-->
-    <field name="modulation_amplitude" type="NX_NUMBER" units="NX_VOLTAGE">
+    <!--unit could be NX_VOLTAGE or NX_CURRENT-->
+    <field name="reference_amplitude" type="NX_NUMBER" units="NX_ANY">
         <doc>
-             Sets the amplitude (in physical units of the modulated signal) of the sine
-             modulation.
+             Amplitude of the reference signal for the lock-in amplifier.
         </doc>
     </field>
-    <field name="modulation_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
+    <field name="reference_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
         <doc>
-             Sets the frequency of the sine modulation added to the signal to modulate.
+             Frequency of the reference signal for the lock-in amplifier.
+        </doc>
+    </field>
+    <field name="reference_phase" type="NX_NUMBER" units="NX_ANGLE">
+        <doc>
+             Frequency of the reference signal for the lock-in amplifier.
         </doc>
     </field>
     <field name="demodulated_signal" type="NX_CHAR">
         <doc>
-             The input signal (STS signal) will be demodulated, in order to determine the amplitude
+             The modulated output signal will be demodulated, in order to determine the amplitude
              and phase at the frequency set in the Frequency field or harmonics, such as current,
              bias, et.al.
         </doc>
@@ -80,9 +85,33 @@
              The frequency of the demodulated signal.
         </doc>
     </field>
-    <field name="demodulated_amplitude" type="NX_NUMBER" units="NX_VOLTAGE">
+    <field name="frequency_demodulation_bandwidth" type="NX_NUMBER" units="NX_FREQUENCY">
+        <doc>
+             The bandwidth of the modulated signal that can be applied in frequency
+             demodulation mechanism.
+        </doc>
+    </field>
+    <!--unit could be NX_VOLTAGE or NX_CURRENT-->
+    <field name="demodulated_amplitude" type="NX_NUMBER" units="NX_ANY">
         <doc>
              The amplitude of the demodulated signal.
+        </doc>
+    </field>
+    <field name="amplitude_demodulation_bandwidth" type="NX_NUMBER" units="NX_ANY">
+        <doc>
+             The bandwidth of the modulated signal that can be applied in amplitude
+             demodulation mechanism.
+        </doc>
+    </field>
+    <field name="demodulated_phase" type="NX_NUMBER" units="NX_ANGLE">
+        <doc>
+             The phase of the demodulated signal.
+        </doc>
+    </field>
+    <field name="phase_demodulation_bandwidth" type="NX_NUMBER" units="NX_FREQUENCY">
+        <doc>
+             The bandwidth of the modulated signal that can be applied in phase demodulation
+             mechanism.
         </doc>
     </field>
     <field name="demodulator_channels" type="NX_CHAR">
@@ -104,8 +133,8 @@
     </field>
     <field name="lp_filter_order_N" type="NX_NUMBER">
         <doc>
-             Order of the low-pass filter applied on the demodulated signals (X, Y). 
-             Reducing the bandwidth or increasing the order reduces noise on the demodulated signals, 
+             Order of the low-pass filter applied on the demodulated signals (X, Y).
+             Reducing the bandwidth or increasing the order reduces noise on the demodulated signals,
              but will require longer settling and measurement times.
         </doc>
     </field>
@@ -136,7 +165,8 @@
     </field>
     <field name="sensitivity_factor" type="NX_NUMBER">
         <doc>
-             Ratio of output signal amplitude to input signal amplitue (V/V). (input gain)
+             Ratio of output signal amplitude to input signal amplitue (V/V) or Q-factor to measure the sharpness or damping of 
+             a oscillating signal.
         </doc>
     </field>
 </definition>
