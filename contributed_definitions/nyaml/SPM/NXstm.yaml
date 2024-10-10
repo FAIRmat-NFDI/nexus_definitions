@@ -20,7 +20,7 @@ NXstm(NXspm):
       doc: |
         The group explains the instrumentation of the STM experiment as well as the environment setup such
         as the temperature of the tip and other sensors of the corresponding instruments.
-      (NXlockin):
+      lockin_amplifier(NXlockin):
         doc: |
           The lock-in amplifier information. The device is being used to extract the signal information
           (e.g. amplitude, phase) from the input signal.
@@ -40,24 +40,6 @@ NXstm(NXspm):
       scan_environment(NXenvironment):
         doc: |
           The environment information for stm or sts experiment.
-        tip_temp(NX_NUMBER):
-          exists: optional
-          unit: NX_TEMPERATURE
-          doc: |
-            Temperature of STM head. Note: At least one field from stm_head_temperature,
-            cryo_bottom_temp and cryo_sheild_temp must be provided.
-        cryo_bottom_temp(NX_NUMBER):
-          exists: optional
-          unit: NX_TEMPERATURE
-          doc: |
-            Temperature of liquid helium cryostat. Note: At least one field from
-            stm_head_temperature, cryo_bottom_temp and cryo_sheild_temp must be provided.
-        cryo_shield_temp(NX_NUMBER):
-          exists: optional
-          unit: NX_TEMPERATURE
-          doc: |
-            Temperature of liquid nitrogen shield. Note: At
-            least one field from stm_head_temperature, cryo_bottom_temp and cryo_sheild_temp.
         (NXscan_control):
           doc: |
             The scan control information like scan region or phase space, type of scan
@@ -197,7 +179,7 @@ NXstm(NXspm):
           unit: NX_LENGTH
           doc: |
             The z position of the piezo.
-        (NXpiezo_config_spm):
+        piezo_configuration(NXpiezo_config_spm):
           doc: |
             The piezo configuration information like piezoelectric device calibration and
             material properties.

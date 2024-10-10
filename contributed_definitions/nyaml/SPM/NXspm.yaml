@@ -19,6 +19,10 @@ NXspm(NXsensor_scan):
     scan_mode:
       doc: |
         The mode of the scan.
+    scan_type:
+      doc: |
+        The type of the scan. It could be different value for different tapping mode, 
+        contact mode, background etc.
     experiment_identifier(NXidentifier):
       doc: |
         Group to keep unique identifier for the experiment that
@@ -68,7 +72,7 @@ NXspm(NXsensor_scan):
           The real-time controller information.
         rcs_frequency(NX_NUMBER):
           exists: optional
-      (NXlockin):
+      lockin_amplifier(NXlockin):
         exists: optional
         doc: |
           The lock-in amplifier information.
@@ -115,6 +119,11 @@ NXspm(NXsensor_scan):
             The scan control information like scan region or phase space, type of scan (e.g.
             mesh, spiral, etc.), and scan speed, etc. This group mainly stores the raw scan
             data. For processed data or final experimental data would go to NXdata group.
+          scan_name:
+            exists: optional
+            doc: |
+              The name of the scan, mainly lab defined, that helps to differentiate among different
+              scans performed in lab.
       current_sensor(NXsensor):
         exists: optional
         doc: |
@@ -133,7 +142,21 @@ NXspm(NXsensor_scan):
         doc: |
           The piezo sensor refers to the height (or Z) piezo sensor if nothing is
           mentioned along the X and Y directions.
-        (NXpiezo_config_spm):
+        x(NX_NUMBER):
+          unit: NX_LENGTH
+          doc: |
+            The x position of the piezo. In STS experiment, the piezo stays fixed at
+            x,y and z and the the tunneling current is measured with respect to the
+            bias voltage (sweep voltage).
+        y(NX_NUMBER):
+          unit: NX_LENGTH
+          doc: |
+            The y position of the piezo.
+        z(NX_NUMBER):
+          unit: NX_LENGTH
+          doc: |
+            The z position of the piezo.
+        piezo_configuration(NXpiezo_config_spm):
           doc: |
             The piezo configuration information like piezoelectric calibration and material
             properties.
@@ -188,6 +211,11 @@ NXspm(NXsensor_scan):
           doc: |
             Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
             vs tunneling current from probe.
+          bias_flip_value(NX_NUMBER):
+            exists: optional
+            doc: |
+              The flip value of the bias voltage. Depending on the bias voltage direction
+              current can be flipped or same.
           (NXpositioner_spm):
             exists: optional
             doc: |
