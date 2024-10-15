@@ -47,6 +47,12 @@ https://thesis.library.caltech.edu/1943/4/03chapter3.pdf-->
                  The mode of the scan.
             </doc>
         </field>
+        <field name="scan_type">
+            <doc>
+                 The type of the scan. It could be different value for different tapping mode, 
+                 contact mode, background etc.
+            </doc>
+        </field>
         <group name="experiment_identifier" type="NXidentifier">
             <doc>
                  Group to keep unique identifier for the experiment that
@@ -115,7 +121,7 @@ https://thesis.library.caltech.edu/1943/4/03chapter3.pdf-->
                 </doc>
                 <field name="rcs_frequency" type="NX_NUMBER" optional="true"/>
             </group>
-            <group type="NXlockin" optional="true">
+            <group name="lockin_amplifier" type="NXlockin" optional="true">
                 <doc>
                      The lock-in amplifier information.
                 </doc>
@@ -169,6 +175,12 @@ https://thesis.library.caltech.edu/1943/4/03chapter3.pdf-->
                          mesh, spiral, etc.), and scan speed, etc. This group mainly stores the raw scan
                          data. For processed data or final experimental data would go to NXdata group.
                     </doc>
+                    <field name="scan_name" optional="true">
+                        <doc>
+                             The name of the scan, mainly lab defined, that helps to differentiate among different
+                             scans performed in lab.
+                        </doc>
+                    </field>
                 </group>
             </group>
             <group name="current_sensor" type="NXsensor" optional="true">
@@ -192,7 +204,24 @@ https://thesis.library.caltech.edu/1943/4/03chapter3.pdf-->
                      The piezo sensor refers to the height (or Z) piezo sensor if nothing is
                      mentioned along the X and Y directions.
                 </doc>
-                <group type="NXpiezo_config_spm">
+                <field name="x" type="NX_NUMBER" units="NX_LENGTH">
+                    <doc>
+                         The x position of the piezo. In STS experiment, the piezo stays fixed at
+                         x,y and z and the the tunneling current is measured with respect to the
+                         bias voltage (sweep voltage).
+                    </doc>
+                </field>
+                <field name="y" type="NX_NUMBER" units="NX_LENGTH">
+                    <doc>
+                         The y position of the piezo.
+                    </doc>
+                </field>
+                <field name="z" type="NX_NUMBER" units="NX_LENGTH">
+                    <doc>
+                         The z position of the piezo.
+                    </doc>
+                </field>
+                <group name="piezo_configuration" type="NXpiezo_config_spm">
                     <doc>
                          The piezo configuration information like piezoelectric calibration and material
                          properties.
@@ -266,6 +295,12 @@ https://thesis.library.caltech.edu/1943/4/03chapter3.pdf-->
                          Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
                          vs tunneling current from probe.
                     </doc>
+                    <field name="bias_flip_value" type="NX_NUMBER" optional="true">
+                        <doc>
+                             The flip value of the bias voltage. Depending on the bias voltage direction
+                             current can be flipped or same.
+                        </doc>
+                    </field>
                     <group type="NXpositioner_spm" optional="true">
                         <doc>
                              The positioner information like the position of the tip, PID loop feedback etc.
