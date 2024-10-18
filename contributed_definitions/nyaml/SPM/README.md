@@ -72,4 +72,10 @@ graph TD;
   id2 --> id6
   id6 --> id12
 
-``` -->
+``` 
+-->
+
+## Revised App Def and Base Class for SPM Domain
+1. SPM, STM,
+2. Lockin, Bias_spectorscopy, Bias_sweep, Scan_control
+
