@@ -1,7 +1,7 @@
 .. _Spm-Structure-Fairmat:
 
 ===============================
-Scanning Probe Spectroscopy
+Scanning Probe Microscopy
 ===============================
 
 Scientists of the scanning Probe Microscopy community and FAIRmat have worked 
