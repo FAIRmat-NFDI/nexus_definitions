@@ -26,8 +26,15 @@ for file in *; do
     fi
 done
 
+for file in *; do
+    if [[ $file == *.yaml ]]; then
+        cp $file ../
+    fi
+done
+
 rm ../../NXbias_spectroscopy_old.nxdl.xml
 rm ../../NXspm_v1_backup.nxdl.xml
+rm ../NXbias_spectroscopy_old.yaml
+rm ../NXspm_v1_backup.yaml
 
 # git add -- ../.. # :!*.sh
-
