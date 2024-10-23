@@ -76,6 +76,7 @@ graph TD;
 -->
 
 ## Revised App Def and Base Class for SPM Domain
-1. SPM, STM,
-2. Lockin, Bias_spectorscopy, Bias_sweep, Scan_control
+1. SPM, STM, AFM, STS
+2. Lockin, Bias_spectorscopy, Bias_sweep, Scan_control, Positioner_spm, 
+3. piezoelectric_material, piezo_config_spm, rcs, cantilever_spm
 

@@ -1,13 +1,18 @@
 category: base
 doc: |
-  A base class to describe the cantilever used in Scanning Probe Microscopy (SPM)
+  A base class to describe the cantilever used in Atomic Force Microscopy (AFM)
   techniques.
 type: group
 NXcantilever_spm(NXobject):
   cantilever_oscillator(NXobject):
     doc: |
-      A cantilever is a resemblance to a Simple Oscillator.
-      In a typical AFM scan, the cantilever approaches the sample. After a certain height (z_c), the cantilever feels an attractive or repulsive force and the cantilever gets further closer to the sample until a user-defined force is reached. Later, the cantilever is retracted from the sample until the cantilever out of the surface force. The defection of the cantilever is measured by the detector (photo-diode) and the signal is converted to the electric signal and passed through the PID feedback loop, so that the piezo-electric controller moves on top of the sample in the X-Y plan.
+      A cantilever is a resemblance to a Simple Harmonic Oscillator.
+      In a typical AFM scan, the cantilever approaches the sample. After a certain interdistance
+      between sample and cantilever tip, the cantilever feels an attractive or repulsive force
+      and the cantilever gets further closer to the sample until a user-defined force is reached.
+      Later, the cantilever is retracted from the sample until the cantilever out of the surface
+      force. The defection of the cantilever is measured by the detector (photo-diode) and the
+      signal is converted to the electric signal and passed through the PID feedback loop.
     reference_amplitude(NX_NUMBER):
       unit: NX_ANY
       doc: |
@@ -33,6 +38,11 @@ NXcantilever_spm(NXobject):
     phase_lock_loop(NXlockin):
       doc: |
         Phase locked loop for cantilever lock-in device.
+    phase_shift(NX_NUMBER):
+      unit: NX_ANGLE
+      doc: |
+        The phase difference between the reference signal of cantilever and response
+        signal.
     frequency_shift(NX_NUMBER):
       unit: NX_FREQUENCY
       doc: |
@@ -64,28 +74,26 @@ NXcantilever_spm(NXobject):
     cantilever_coating:
       doc: |
         The coating name of the cantilever.
-    curvature_radius(NX_NUMBER):
+    curvature_radius_N(NX_NUMBER):
       unit: NX_ANY
       doc: |
-        The radius of curvature of the cantilever tip.
-    (NXfabrication):
-      doc: |
-        The fabrication information of the cantilever such as the name of the producer.
+        The radius of curvature of the cantilever tip. The (substring) N denotes X or Y.
     (NXcalibration):
       doc: |
         The calibration information of the cantilever.
       sensitivity(NX_NUMBER):
         unit: NX_ANY
         doc: |
-          The sensitivity of the cantilever which is calculated as the change in cantilever amplitude (in dynamic mode) or
-          deflection of the cantilever due to the exerted force on cantilever tip.
+          The sensitivity of the cantilever which is calculated as the change in
+          cantilever amplitude (in dynamic mode) or deflection of the cantilever
+          due to the exerted force on cantilever tip.
       spring_constant(NX_NUMBER):
         unit: NX_ANY
         doc: |
           The spring constant coefficient for the cantilever.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 345f5b1a62dfa97201122259ee7b1bae83d80a8dd4dfb66d213dc52e0186741b
+# ae7fcbcd2e795ee1c27cda463c69f83848731dcf5c186f58e8340994c9390041
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -111,13 +119,18 @@ NXcantilever_spm(NXobject):
 # -->
 # <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXcantilever_spm" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <doc>
-#          A base class to describe the cantilever used in Scanning Probe Microscopy (SPM)
+#          A base class to describe the cantilever used in Atomic Force Microscopy (AFM)
 #          techniques.
 #     </doc>
 #     <group name="cantilever_oscillator" type="NXobject">
 #         <doc>
-#              A cantilever is a resemblance to a Simple Oscillator.
-#              In a typical AFM scan, the cantilever approaches the sample. After a certain height (z_c), the cantilever feels an attractive or repulsive force and the cantilever gets further closer to the sample until a user-defined force is reached. Later, the cantilever is retracted from the sample until the cantilever out of the surface force. The defection of the cantilever is measured by the detector (photo-diode) and the signal is converted to the electric signal and passed through the PID feedback loop, so that the piezo-electric controller moves on top of the sample in the X-Y plan.
+#              A cantilever is a resemblance to a Simple Harmonic Oscillator.
+#              In a typical AFM scan, the cantilever approaches the sample. After a certain interdistance
+#              between sample and cantilever tip, the cantilever feels an attractive or repulsive force
+#              and the cantilever gets further closer to the sample until a user-defined force is reached.
+#              Later, the cantilever is retracted from the sample until the cantilever out of the surface
+#              force. The defection of the cantilever is measured by the detector (photo-diode) and the
+#              signal is converted to the electric signal and passed through the PID feedback loop.
 #         </doc>
 #         <field name="reference_amplitude" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
@@ -155,6 +168,12 @@ NXcantilever_spm(NXobject):
 #                  Phase locked loop for cantilever lock-in device.
 #             </doc>
 #         </group>
+#         <field name="phase_shift" type="NX_NUMBER" units="NX_ANGLE">
+#             <doc>
+#                  The phase difference between the reference signal of cantilever and response
+#                  signal.
+#             </doc>
+#         </field>
 #         <field name="frequency_shift" type="NX_NUMBER" units="NX_FREQUENCY">
 #             <doc>
 #                  Shift in the resonance frequency of the cantilever.
@@ -196,24 +215,20 @@ NXcantilever_spm(NXobject):
 #                  The coating name of the cantilever.
 #             </doc>
 #         </field>
-#         <field name="curvature_radius" type="NX_NUMBER" units="NX_ANY">
+#         <field name="curvature_radius_N" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
-#                  The radius of curvature of the cantilever tip.
+#                  The radius of curvature of the cantilever tip. The (substring) N denotes X or Y.
 #             </doc>
 #         </field>
-#         <group type="NXfabrication">
-#             <doc>
-#                  The fabrication information of the cantilever such as the name of the producer.
-#             </doc>
-#         </group>
 #         <group type="NXcalibration">
 #             <doc>
 #                  The calibration information of the cantilever.
 #             </doc>
 #             <field name="sensitivity" type="NX_NUMBER" units="NX_ANY">
 #                 <doc>
-#                      The sensitivity of the cantilever which is calculated as the change in cantilever amplitude (in dynamic mode) or
-#                      deflection of the cantilever due to the exerted force on cantilever tip.
+#                      The sensitivity of the cantilever which is calculated as the change in
+#                      cantilever amplitude (in dynamic mode) or deflection of the cantilever
+#                      due to the exerted force on cantilever tip.
 #                 </doc>
 #             </field>
 #             <field name="spring_constant" type="NX_NUMBER" units="NX_ANY">

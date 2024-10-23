@@ -1,6 +1,7 @@
 category: application
 doc: |
-  An application definition to describe Atomic Force Microscopy (AFM).
+  An application definition to describe Atomic Force Microscopy (AFM) scanning
+  technique.
 type: group
 NXafm(NXspm):
   (NXentry):
@@ -14,12 +15,12 @@ NXafm(NXspm):
       enumeration: [contact mode, tapping mode, non-contact mode]
     experiment_instrument(NXinstrument):
       doc: |
-        The group explains the core instrument setup of the AFM experiment as well as the environment of the corresponding
+        The group explains the core instruments' setup of the AFM experiment as well as the environment of the corresponding
         instruments.
       photo_detector(NXdetector):
         exists: optional
         doc: |
-          The detector information.
+          The photo detector instrument information.
       (NXcantilever_spm):
         exists: optional
         doc: |
@@ -27,13 +28,13 @@ NXafm(NXspm):
         cantilever_oscillator(NXobject):
           exists: optional
           doc: |
-            A cantilever is a resemblance to a Simple Oscillator.
-            In a typical AFM scan, the cantilever approaches the sample. After a certain height (z_c), the
-            cantilever feels an attractive or repulsive force and the cantilever gets further closer to
-            the sample until a user-defined force is reached. Later, the cantilever is retracted from the
-            sample until the cantilever out of the surface force. The defection of the cantilever is measured
-            by the detector (photo-diode) and the signal is converted to the electric signal and passed
-            through the PID feedback loop.
+            A cantilever is a resemblance to a Simple Harmonic Oscillator.
+            In a typical AFM scan, the cantilever approaches the sample. After a certain interdistance
+            between sample and cantilever tip, the cantilever feels an attractive or repulsive force
+            and the cantilever gets further closer to the sample until a user-defined force is reached.
+            Later, the cantilever is retracted from the sample until the cantilever out of the surface
+            force. The defection of the cantilever is measured by the detector (photo-diode) and the
+            signal is converted to the electric signal and passed through the PID feedback loop.
           oscillator_excitation(NX_NUMBER):
             exists: optional
             unit: NX_ANY
@@ -42,7 +43,7 @@ NXafm(NXspm):
           phase_lock_loop(NXlockin):
             exists: optional
             doc: |
-              Phase locked loop for cantilever lock-in device. sample in the X-Y plan.
+              Phase locked loop for cantilever lock-in device.
             amplitude_excitation(NX_NUMBER):
               exists: optional
               unit: NX_ANY
@@ -53,13 +54,13 @@ NXafm(NXspm):
           The environment information.
         height_piezo_sensor(NXsensor):
           doc: |
-            Link to the group height_piezo_sensor.
+            Link to the group ENTRY[entry]/experiment_instrument/height_piezo_sensor.
         XY_piezo_sensor(NXsensor):
           doc: |
-            Link to the group XY_piezo_sensor.
+            Link to the group ENTRY[entry]/experiment_instrument/XY_piezo_sensor.
         tip_temperature(NXsensor):
           doc: |
-            Link to the group cantilever_temperature.
+            Link to the group ENTRY[entry]/experiment_instrument/cantilever_temperature.
       height_piezo_sensor(NXsensor):
         exists: optional
         doc: |
@@ -98,7 +99,7 @@ NXafm(NXspm):
           The temperature of the scan environment or tip of the cantilever.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# fe50296ca0bf9b813d6c60ccee3a6d52b7e7474e0be3f090524242bb6b5b36cc
+# e1d65edd98abe0cb5cf804f9a7173dee93f18285f25f604b518ece4293aeadc2
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -124,7 +125,8 @@ NXafm(NXspm):
 # -->
 # <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXafm" extends="NXspm" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <doc>
-#          An application definition to describe Atomic Force Microscopy (AFM).
+#          An application definition to describe Atomic Force Microscopy (AFM) scanning
+#          technique.
 #     </doc>
 #     <group type="NXentry">
 #         <field name="definition">
@@ -147,12 +149,12 @@ NXafm(NXspm):
 #         </field>
 #         <group name="experiment_instrument" type="NXinstrument">
 #             <doc>
-#                  The group explains the core instrument setup of the AFM experiment as well as the environment of the corresponding
+#                  The group explains the core instruments' setup of the AFM experiment as well as the environment of the corresponding
 #                  instruments.
 #             </doc>
 #             <group name="photo_detector" type="NXdetector" optional="true">
 #                 <doc>
-#                      The detector information.
+#                      The photo detector instrument information.
 #                 </doc>
 #             </group>
 #             <group type="NXcantilever_spm" optional="true">
@@ -161,13 +163,13 @@ NXafm(NXspm):
 #                 </doc>
 #                 <group name="cantilever_oscillator" type="NXobject" optional="true">
 #                     <doc>
-#                          A cantilever is a resemblance to a Simple Oscillator.
-#                          In a typical AFM scan, the cantilever approaches the sample. After a certain height (z_c), the
-#                          cantilever feels an attractive or repulsive force and the cantilever gets further closer to
-#                          the sample until a user-defined force is reached. Later, the cantilever is retracted from the
-#                          sample until the cantilever out of the surface force. The defection of the cantilever is measured
-#                          by the detector (photo-diode) and the signal is converted to the electric signal and passed
-#                          through the PID feedback loop.
+#                          A cantilever is a resemblance to a Simple Harmonic Oscillator.
+#                          In a typical AFM scan, the cantilever approaches the sample. After a certain interdistance 
+#                          between sample and cantilever tip, the cantilever feels an attractive or repulsive force 
+#                          and the cantilever gets further closer to the sample until a user-defined force is reached.
+#                          Later, the cantilever is retracted from the sample until the cantilever out of the surface
+#                          force. The defection of the cantilever is measured by the detector (photo-diode) and the 
+#                          signal is converted to the electric signal and passed through the PID feedback loop.
 #                     </doc>
 #                     <field name="oscillator_excitation" type="NX_NUMBER" optional="true" units="NX_ANY">
 #                         <doc>
@@ -176,7 +178,7 @@ NXafm(NXspm):
 #                     </field>
 #                     <group name="phase_lock_loop" type="NXlockin" optional="true">
 #                         <doc>
-#                              Phase locked loop for cantilever lock-in device. sample in the X-Y plan.
+#                              Phase locked loop for cantilever lock-in device.
 #                         </doc>
 #                         <field name="amplitude_excitation" type="NX_NUMBER" optional="true" units="NX_ANY">
 #                             <doc>
@@ -192,17 +194,17 @@ NXafm(NXspm):
 #                 </doc>
 #                 <group name="height_piezo_sensor" type="NXsensor">
 #                     <doc>
-#                          Link to the group height_piezo_sensor.
+#                          Link to the group ENTRY[entry]/experiment_instrument/height_piezo_sensor.
 #                     </doc>
 #                 </group>
 #                 <group name="XY_piezo_sensor" type="NXsensor">
 #                     <doc>
-#                          Link to the group XY_piezo_sensor.
+#                          Link to the group ENTRY[entry]/experiment_instrument/XY_piezo_sensor.
 #                     </doc>
 #                 </group>
 #                 <group name="tip_temperature" type="NXsensor">
 #                     <doc>
-#                          Link to the group cantilever_temperature.
+#                          Link to the group ENTRY[entry]/experiment_instrument/cantilever_temperature.
 #                     </doc>
 #                 </group>
 #             </group>
