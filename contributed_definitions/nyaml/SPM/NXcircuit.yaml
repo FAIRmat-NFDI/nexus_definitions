@@ -1,12 +1,24 @@
 category: base
 doc: |
   Application definition for circuit devices.
-type: group
+
+  Electronic circuits are hardware components connecting several electronic components to achieve
+  specific functionality, e.g. amplifying a voltage or convert a voltage to binary numbers, etc.
+
+symbol:
+  doc: |
+    constants used in the definition: the number of channels of the circuit board
+  N_channel: |
+    number of channels of the circuit board
+  
+type: group  
 NXcircuit(NXobject):
   hardware(NXfabrication):
     doc: |
-      Hardware where the circuit is implanted; includes hardware manufacturers and
-      type
+      Hardware where the circuit is implanted; includes information about the hardware manufacturers and
+      type (e.g. part number)
+      All the elements below may be single numbers of an array of values with length N_channel
+      describing multiple input and output channels.
   components:
     doc: |
       List of components used in the circuit, e.g., resistors, capacitors, transistors or any
@@ -24,10 +36,14 @@ NXcircuit(NXobject):
       Type of signal (input signal) the circuit is designed to handle, e.g., analog,
       digital, mixed-signal.
   operating_frequency(NX_NUMBER):
+  # should this be a min / max range?
     unit: NX_FREQUENCY
     doc: |
-      The operating frequency range of the circuit.
+      The operating frequency of the circuit, see also bandwidth below, which is possibly
+      centered around this frequency. However, not necessarily (e.g. running a 100 kHz bandwidth
+      amplifier at low, audio frequencies 1 - 20,000 Hz)
   input_impedance(NX_NUMBER):
+  # we may need an NX_RESISTANCE defined
     unit: NX_ANY
     doc: |
       Input impedance of the circuit.
@@ -43,16 +59,16 @@ NXcircuit(NXobject):
   noise_level(NX_NUMBER):
     unit: NX_ANY
     doc: |
-      Noise level (in current or voltage) in the circuit.
+      RMS noise level (in current or voltage) in the circuit in voltage or current.
   bandwidth(NX_NUMBER):
     unit: NX_FREQUENCY
     doc: |
-      If circuit handles AC current or signal it may have a band Bandwidth of the circuit to be
-      responded.
+      The bandwidth of the frequency response of the circuit.
   temperature_range(NX_NUMBER):
     unit: NX_ANY
     doc: |
       Operating temperature range of the circuit.
+
   calibration(NXcalibration):
     doc: |
       Calibration data for the circuit.
@@ -62,7 +78,7 @@ NXcircuit(NXobject):
       Offset value for current or voltage.
   output_channels(NX_NUMBER):
     doc: |
-      Number of output channels collected to this circuit.
+      Number of output channels collected to this circuit. Most probably N_channel.
   output_signal(NX_NUMBER):
     unit: NX_ANY
     doc: |
