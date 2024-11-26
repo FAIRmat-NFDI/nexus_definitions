@@ -1,7 +1,8 @@
 category: base
 doc: |
   Extending positioner from NXpositioner to maintain a measurement signal through
-  a feedback loop.
+  a feedback loop, specialized for scanning probe microscopy applications.
+
 type: group
 NXpositioner_spm(NXpositioner):
   z_controller(NXpid):
@@ -15,6 +16,7 @@ NXpositioner_spm(NXpositioner):
       p_gain (proportional gain) from z_controller is the same as K_p_value from PID controller.
       i_gain (integral gain) from z_controller is the same as K_i_value from PID controller.
       setpoint from z_controller is the same as setpoint from PID controller.
+  
   z_offset(NX_NUMBER):
     unit: NX_LENGTH
     doc: |
@@ -23,8 +25,9 @@ NXpositioner_spm(NXpositioner):
   tip_position_z(NX_NUMBER):
     unit: NX_LENGTH
     doc: |
-      Indicate the tip position Z between tip and sample. The tip position can also be varied when
-      the controller is not running. This is the final position after the tip reaches an equilibrium state.
+      Indicate the tip position Z. The tip position can also be varied when the controller is not running.
+      This is the final position after the tip reaches an equilibrium state.
+  
   controller_name(NX_CHAR):
     doc: |
       Controller name. This name which will be displayed at places where you can select a
