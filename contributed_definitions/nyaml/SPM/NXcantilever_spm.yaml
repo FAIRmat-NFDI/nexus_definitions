@@ -9,6 +9,8 @@ NXcantilever_spm(NXobject):
       Generally speaking, the cantilever resembles a simple harmonic oscillator.
       When the cantilever tip is close to the surface of the sample, an attractive or repulsive force appears between the cantilever and the sample, deforming the cantilever. The detector (typically a photodiode) measures this deformation and, therefore, the force acting on the cantilever.
       In a typical AFM scan cantilever moves toward the surface of the sample until a user-defined value of force acting on the cantilever is reached. The measured force is used as an input of a PID feedback loop, and the output of this loop controls the vertical position of the cantilever.
+      This part describes the oscillator driving the oscillations of a cantilever in an AFM or other experiment.
+
     reference_amplitude(NX_NUMBER):
       unit: NX_ANY
       doc: |
@@ -64,10 +66,11 @@ NXcantilever_spm(NXobject):
       unit: NX_ANGLE
       doc: |
         The reference phase of the cantilever oscillator.
+
   cantilever_config(NXobject):
     doc: |
       The configuration information of the cantilever such as calibration information,
-      material properties, etc.
+      material properties, size, resonance, etc.
     cantilever_coating:
       doc: |
         The coating material of the cantilever.
@@ -75,6 +78,27 @@ NXcantilever_spm(NXobject):
       unit: NX_ANY
       doc: |
         The radius of curvature of the cantilever tip. The (substring) N denotes X or Y.
+    cantilever_type:
+      doc: |
+        The shape of the cantilever as a general text, such as A-shape, beam, or arrow
+
+    cantilever_length(NX_NUMBER):
+      doc: |
+        Nominal length between base and end of the cantilever in micrometers
+      unit: NX_LENGTH
+    cantilever_width(NX_NUMBER):
+      doc: |
+        Nominal width of the cantilever in microns
+      unit: NX_LENGTH
+    cantilever_thickness(NX_NUMBER):
+      doc: |
+        Nominal thickness of the cantilever in microns
+      unit: NX_LENGTH
+    cantilever_resonance_frequency(NX_NUMBER):
+      doc: |
+        Nominal free resonance frequency of the cantilever in air, in kHz
+      unit: NX_FREQUENCY
+      
     (NXcalibration):
       doc: |
         The calibration information of the cantilever.
