@@ -30,19 +30,6 @@
          for specific SPM sub-techniques such as STM, STS, AFM etc.
     </doc>
     <group type="NXentry">
-        <attribute name="default">
-            <doc>
-                 .. index:: plotting
-                 
-                 Declares which child group contains a path leading
-                 to a :ref:`NXdata` group.
-                 
-                 It is recommended (as of NIAC2014) to use this attribute
-                 to help define the path to the default dataset to be visualised upon entry.
-                 See https://www.nexusformat.org/2014_How_to_find_default_data.html
-                 for a summary of the discussion.
-            </doc>
-        </attribute>
         <field name="definition">
             <doc>
                  Name of the definition that is used for the application.
@@ -337,12 +324,12 @@
                             <doc>
                                  The PID controller information for the z-axis.
                             </doc>
-                            <field name="z_average_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
+                            <field name="z_average_time" type="NX_NUMBER" optional="true" units="NX_TIME">
                                 <doc>
                                      The average time taken by the z-controller to stabilize the tip.
                                 </doc>
                             </field>
-                            <field name="z_controller_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
+                            <field name="z_controller_time" type="NX_NUMBER" optional="true" units="NX_TIME">
                                 <doc>
                                      The time taken by the z-controller to measure physical properties.
                                 </doc>
@@ -443,7 +430,7 @@
                     <doc>
                          Calibration of the bias voltage measurement (V/V).
                     </doc>
-                    <field name="calibration_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
+                    <field name="calibration_time" type="NX_NUMBER" optional="true" units="NX_TIME">
                         <doc>
                              The time or period is taken by the calibration to setup to acquire the data for
                              the calibration.
@@ -483,7 +470,7 @@
                  the reproducibility of the experiment.
             </doc>
         </group>
-        <group name="resolution_indicators" type="NXobject">
+        <group name="resolution_indicators" type="NXobject" optional="true">
             <doc>
                  The group of indicators (links to the existing fields in different groups) that
                  are used to measure the resolution of the experiment results.
