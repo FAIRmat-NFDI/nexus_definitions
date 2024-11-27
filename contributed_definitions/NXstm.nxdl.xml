@@ -90,57 +90,6 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                             <item value="spiral"/>
                         </enumeration>
                     </field>
-                    <group name="scan_region" type="NXobject">
-                        <doc>
-                             The region of the scan area.
-                        </doc>
-                        <field name="scan_range" type="NX_NUMBER" units="NX_ANY">
-                            <doc>
-                                 The range of the scan area.
-                            </doc>
-                        </field>
-                        <field name="scan_offset" type="NX_NUMBER" units="NX_ANY">
-                            <doc>
-                                 The offset of the scan area in 2D (X and Y) space.
-                            </doc>
-                        </field>
-                        <field name="scan_angle_N" type="NX_NUMBER" optional="true" units="NX_ANGLE">
-                            <doc>
-                                 The N (substring) denotes the angle of the scan area with different physical
-                                 axes.
-                            </doc>
-                        </field>
-                    </group>
-                    <group name="mesh_SCAN" type="NXobject">
-                        <doc>
-                             The scan information for mesh scan type for STM experiment.
-                        </doc>
-                        <field name="scan_speed" type="NX_NUMBER" optional="true" units="NX_ANY">
-                            <doc>
-                                 The speed of the scanner or the tip during the scan.
-                            </doc>
-                        </field>
-                        <field name="scan_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
-                            <doc>
-                                 The time taken by the scanner to scan the entire area.
-                            </doc>
-                        </field>
-                        <field name="forward_speed_N" type="NX_NUMBER" optional="true" units="NX_ANY">
-                            <doc>
-                                 The N (substring) denotes the forward speed of the scanner.
-                            </doc>
-                        </field>
-                        <field name="backward_speed_N" type="NX_NUMBER" optional="true" units="NX_ANY">
-                            <doc>
-                                 The N (substring) denotes the backward speed of the scanner.
-                            </doc>
-                        </field>
-                        <group name="SCAN_data" type="NXdata">
-                            <doc>
-                                 The data that comes from scanning the area.
-                            </doc>
-                        </group>
-                    </group>
                 </group>
                 <group name="tip_temp_sensor" type="NXsensor" optional="true">
                     <doc>
@@ -195,7 +144,7 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                     <doc>
                          Calibration of the current measurement.
                     </doc>
-                    <field name="calibration_time" type="NX_DATE_TIME" optional="true" units="NX_TIME">
+                    <field name="calibration_time" type="NX_NUMBER" optional="true" units="NX_TIME">
                         <doc>
                              The time or period is taken by the calibration to setup to acquire the data for
                              the calibration.
@@ -235,23 +184,6 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                 <doc>
                      The sensor information for the piezo device.
                 </doc>
-                <field name="x" type="NX_NUMBER" units="NX_LENGTH">
-                    <doc>
-                         The x position of the piezo. In STS experiment or at the starting,
-                         the piezo stays fixed at x,y and z and the the tunneling current
-                         is measured with respect to the bias voltage (sweep voltage).
-                    </doc>
-                </field>
-                <field name="y" type="NX_NUMBER" units="NX_LENGTH">
-                    <doc>
-                         The y position of the piezo.
-                    </doc>
-                </field>
-                <field name="z" type="NX_NUMBER" units="NX_LENGTH">
-                    <doc>
-                         The z position of the piezo.
-                    </doc>
-                </field>
                 <group name="piezo_configuration" type="NXpiezo_config_spm" optional="true">
                     <doc>
                          The piezo configuration information like piezoelectric device calibration and
@@ -356,7 +288,7 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                 </group>
             </group>
         </group>
-        <group name="reproducibility_indicators" type="NXobject">
+        <group name="reproducibility_indicators" type="NXobject" optional="true">
             <doc>
                  The group's concepts hold the link to the related concepts that define the
                  reproducibility of the STM experiment.
@@ -399,29 +331,29 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                 </doc>
             </field>
         </group>
-        <group name="resolution_indicators" type="NXobject">
+        <group name="resolution_indicators" type="NXobject" optional="true">
             <doc>
                  The group's concepts hold the link to the related concepts that define the
                  resolution of the STM experiment.
             </doc>
-            <group name="stm_head_temp" type="NXsensor">
+            <group name="stm_head_temp" type="NXsensor" optional="true">
                 <doc>
                      Link to target: /ENTRY[entry]/experiment_instrument/scan_environment/tip_temp
                 </doc>
             </group>
-            <group name="cryo_bottom_temp" type="NXsensor">
+            <group name="cryo_bottom_temp" type="NXsensor" optional="true">
                 <doc>
                      Link to target:
                      /ENTRY[entry]/experiment_instrument/scan_environment/cryo_bottom_temp
                 </doc>
             </group>
-            <group name="cryo_shield_temp" type="NXsensor">
+            <group name="cryo_shield_temp" type="NXsensor" optional="true">
                 <doc>
                      Link to target:
                      /ENTRY[entry]/experiment_instrument/scan_environment/cryo_shield_temperature
                 </doc>
             </group>
-            <group name="bias_sweep" type="NXobject">
+            <group name="bias_sweep" type="NXobject" optional="true">
                 <doc>
                      Link to target:
                      /ENTRY[entry]/experiment_instrument/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/BIAS_SWEEP[bias_sweep]
