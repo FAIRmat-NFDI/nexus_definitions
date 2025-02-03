@@ -4,17 +4,26 @@ doc: |
 symbols:
   doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
+  n_ht: |
+    Number of hit qualities (hit types) distinguished.
+  n_dld: |
+    Number of delay-line wires of the detector.
+  n_bins: |
+    Number of bins used in the mass-to-charge-state-ratio spectrum.
   p: |
     Number of pulses collected in between start_time and end_time resolved by an
     instance of :ref:`NXevent_data_apm`. If this is not defined, p is the number of
     ions included in the reconstructed volume if the application definition is used
     to store results of an already reconstructed datasets.
+  p_out: |
+    Number of pulses returned by the hit finding algorithm.
+    Neither necessarily equal to p nor to n.
   n: |
     Number of ions spatially filtered from results of the hit_finding algorithm
     from which an instance of a reconstructed volume has been generated.
     These ions get new identifier assigned in the process (the so-called
     evaporation_identifier). This identifier must not be confused with
-    the pulse_identifier.
+    the pulse_identifier. Typically smaller than both p_out and p_out.
 type: group
 NXapm(NXobject):
   (NXentry):  # entryID
@@ -54,7 +63,7 @@ NXapm(NXobject):
       service(NX_CHAR):
       identifier(NX_CHAR):
       is_persistent(NX_BOOLEAN):
-    run_number(NX_CHAR):
+    run_number(NX_UINT):
       exists: recommended
       # cannot be made required as for simulations you do not have a run number!
       doc: |
@@ -77,7 +86,9 @@ NXapm(NXobject):
         needs to be distinguished with different run numbers.
         We follow this habit of most atom probe groups. Such interrupted runs
         should be stored as individual :ref:`NXentry` instances in one NeXus file.
+      unit: NX_UNITLESS
     experiment_alias(NX_CHAR):
+      exists: recommended
       doc: |
         Either an identifier or an alias that is human-friendly so that scientists find that experiment again.
         For experiments usually this is the run_number but for simulation typically no run_numbers are issued.
@@ -124,6 +135,11 @@ NXapm(NXobject):
       doc: |
         ISO 8601 time code with local time zone offset to UTC included
         when the atom probe session ended.
+    elapsed_time(NX_FLOAT):
+      exists: recommended
+      doc: |
+        How long did the measurement take e.g. use CRunHeader.CAnalysis.fElapsedTime
+      unit: NX_TIME
     (NXcite):
       exists: [min, 0, max, infty]
       doi(NX_CHAR):
@@ -373,6 +389,7 @@ NXapm(NXobject):
         unit: NX_ANGLE
       # describing the geometry of the specimen
     coordinate_system_set(NXcoordinate_system_set):
+      exists: recommended  # should be made required
       doc: |
         Set to hold different coordinate systems conventions.
         Inspect the description of the :ref:`NXcoordinate_system_set`
@@ -429,156 +446,233 @@ NXapm(NXobject):
         y_direction(NX_CHAR):
         z_direction(NX_CHAR):
 
-    measurement(NXapm_msr):
+    measurement(NXobject):
       exists: optional
-      instrument(NXinstrument):
-        instrument_name(NX_CHAR):
-          exists: optional
+      doc: |
+        Base class for collecting a session with a real atom probe or field-ion microscope.
+        
+        Workflows used during experiments or simulations of atom probe and related field-evaporation
+        research should be documented in more detail and be better contextualized not only because of
+        ongoing developments and the tighter becoming connection between atom probe and other
+        methods for material characterization foremost electron microscopy see e.g.:
+        
+        * `T. Kelly et al. <https://doi.org/10.1017/S1431927620022205>`_
+        * `C. Fleischmann et al. <https://doi.org/10.1016/j.ultramic.2018.08.010>`_
+        * `W. Windl et al. <https://doi.org/10.1093/micmic/ozad067.294>`_
+        * `C. Freysoldt et al. <https://doi.org/10.1103/PhysRevLett.124.176801>`_
+        * `G. da Costa et al. <https://doi.org/10.1038/s41467-024-54169-2>`_
+        
+        to mention but a few.
+        
+        To arrive at a design of base classes and an application definition that can be used
+        for both real and simulated atom probe experiments it is worthwhile to recall concepts that are
+        related to events and (molecular) ions:
+        
+        * Pulsing events which are used to trigger ion extraction events.
+        * Physical events and corresponding signal triggered by an ion hitting the detector.
+          Some of these events are not necessarily caused by or directly correlated with an identifiable pulsing event.
+        * Processed ion hits which are the result of an algorithm that took the physical and pulsing events as input
+          and qualified some of these events as to be of sufficiently high quality to call them (molecular) ions that are
+          wortwhile to be considered further and eventually included in the reconstructed volume.
+        * Calibration and signal filtering steps applied to these processed ion hits as input which results in actually
+          selected (molecular) ions based on which an instance of a reconstruction is created.
+        * Correlation of these ions with a statistics and theoretical model of mass-to-charge-state ratio values
+          and charge states of the (molecular) ions to substantiate that some of these ions can be considered
+          as rangable ions and hence an iontype can be assigned to these via running peak finding algorithms
+          and subsequent peak labeling. In the field of atom probe this these peak identification methods
+          are known as ranging definitions.
+        
+        Not only in AMETEK/Cameca's IVAS/APSuite software, which the majority of atom probers use, these concepts
+        are well distinguished. However, the algorithms used to transform correlations between pulses and physical events
+        into actual events (detector hits) ions is a proprietary one - the so-called hit finding algorithm.
+        
+        Due to this practical inaccessibility of details, virtually all atom probe studies currently use a reporting scheme
+        where the course of the specimen evaporation is documented such that quantities are a function of evaporation identifier
+        i.e. actual event/ion, i.e. after having the hit finding algorithm and correlations applied.
+        That is evaporation_identifier values take the role of an implicit time and course of the experiment given that
+        ion extraction physically is a sequential process.
+        
+        There is a number of research groups who build own instruments and share different aspects of their technical
+        specifications and approaches how they apply data processing e.g.:
+        
+        * `M. Monajem et al. <https://doi.org/10.1017/S1431927622003397>`_
+        * `P. Stender et al. <https://doi.org/10.1017/S1431927621013982>`_ 
+        * `I. Dimkou et al. <https://doi.org/10.1093/micmic/ozac051>`_
+        
+        to name but a few.
+        
+        Despite some of these activities embrace practices of open-source development, they use essentially the same
+        workflow that has been proposed by AMETEK/Cameca and its forerunner company Imago: A graphical user interface
+        software is used to explore and thus analyze reconstructed atom probe datasets.
+        
+        Specifically, software is used to correlate and interpret pulsing and physical events into processed ion hits.
+        Some of these ion hits are reported as (molecular) ions with ranged iontypes to yield a dataset based on which
+        scientific conclusions about the characterized material volume are made. Also here a reconstruction is 
+        point cloud that serves as the proxy for the characterized material volume, i.e. the reconstruction is a model.
+        
+        By contrast, simulations of field-evaporation have the luxury to document the flight path and allow a following of all
+        the whereabouts of each ion evaporated if this is desired. This level of detail is currently not characterizable in experiment.
+        Thus, there is a divide between schemas describing simulations of atom probe vs measurements of atom probe.
+        We argue that this divide can be bridged with realizing the above-mentioned context and the realization that
+        similar concepts are used in both research realms with many concepts not only being similar but being exactly the same.
+        
+        A further argument to support this view is that computer simulations of atom probe usually are compared to reconstructed
+        datasets, either to the input configuration that served as the virtual specimen or to a real world atom probe experiment
+        and reconstructions computed from these. In both cases, the recorded simulated physical events of simulated ions hitting
+        a simulated detector is not the end of the research workflow but typically the input to apply additional algorithms such as
+        (spatial) filtering and reconstruction algorithms.
+        
+        Only the practical need for making ranging definitions is (at least as of now) not as much needed in field-evaporation
+        simulations than it is in real world measurements because each ion has a prescribed iontype in the simulation.
+        Be it a specifically charged nuclid or a molecular ion whose flight path the simulation resolves.
+        Although, in principle simpler though, we have to consider that this is caused by many assumptions made in the simulations.
+        Indeed, the multi-scale (time and space) aspects of the challenge that is the simulating of field-evaporation often require
+        simplifications because of otherwise too high becoming computing resource demands and existent knowledge gaps
+        in how to deal with all quantum physics complexities. Molecular ion dissociation upon flight is one such complexity.
+        Also the complexity of simulation setups is typically defined simpler in simulation (e.g. straight flight path assumption)
+        than in a measurement with a real instrument. In addition, simulation often also ignore objects and fields in the flight path
+        such as local electrodes or physical obstacles and electric fields (controlled or stray fields).
+      instrument(NXinstrument_apm):
+        type(NX_CHAR):
+          exists: recommended
         fabrication(NXfabrication):
+          exists: recommended
           vendor(NX_CHAR):
           model(NX_CHAR):
-          identifier(NXidentifier):
-            exists: recommended
-        reflectron(NXreflectron):
+          serial_number(NX_CHAR):
+        reflectron(NXobject):
+          exists: optional
           status(NX_CHAR):
-          fabrication(NXfabrication):
-            exists: recommended
-            vendor(NX_CHAR):
-            model(NX_CHAR):
-        # decelerate_electrode(NXlens_em):
         local_electrode(NXlens_em):
-          # add flat test status
+          exists: recommended
           name(NX_CHAR):
           fabrication(NXfabrication):
-            exists: recommended
+            exists: optional
             vendor(NX_CHAR):
             model(NX_CHAR):
         ion_detector(NXdetector):
           exists: recommended
           fabrication(NXfabrication):
-            exists: recommended  # for LEAP systems they come shipped configured
+            exists: optional
             vendor(NX_CHAR):
             model(NX_CHAR):
-        pulser(NXpulser_apm):
+        pulser(NXobject):
+          exists: recommended
           fabrication(NXfabrication):
-            exists: recommended
+            exists: optional
             vendor(NX_CHAR):
             model(NX_CHAR):
-          pulse_mode(NX_CHAR):
           sourceID(NXsource):
-            exists: [min, 0, max, 2]  # conditionally required if pulse_mode is not voltage!
+            exists: [min, 0, max, 2]  # conditionally required, sourceID only if pulse_mode is not voltage!
             fabrication(NXfabrication):
               exists: recommended
               vendor(NX_CHAR):
               model(NX_CHAR):
-            wavelength(NX_FLOAT):
-              doc: |
-                The wavelength of the radiation emitted by the source.
-              unit: NX_WAVELENGTH
-            # use NXbeam in the future
-        # stage_lab(NXstage_lab):
-        analysis_chamber(NXchamber):
-          exists: recommended
-          flight_path(NX_FLOAT):
-            exists: recommended
-            doc: |
-              The space inside the atom probe along which ions pass nominally
-              when they leave the specimen and travel to the detector.
-            unit: NX_LENGTH
-        # atmosphere(NXcollection):
-        # buffer_chamber(NXchamber):
-        # load_lock_chamber(NXchamber):
-        # getter_pump(NXpump):
-        # roughening_pump(NXpump):
-        # turbomolecular_pump(NXpump):
-        status(NX_CHAR):
-      event_data_apm_set(NXevent_data_apm_set):
+            # wavelength and pulse_energy as dynamic/volatile quantities stored in event data part
+        comment(NX_CHAR):
+          doc: |
+            Free text field for additional comments.
+      status(NX_CHAR):
+        exists: recommended
+        doc: |
+          A statement whether the measurement was successful or failed prematurely.
+      quality(NX_CHAR):
+        exists: recommended
+        doc: |
+          CAnalysis.CResults.fQuality
+      events(NXobject):
         exists: optional
         # the case of allowing to not have event_data but only the above-mentioned instrument
         # details can be useful to convey details about an atom probe instrument in general
-        event_data_apm(NXevent_data_apm):
-          exists: recommended
+        doc: |
+          Group to hold instances of :ref:`NXevent_data_apm`.
+          
+          Which temporal granularity is adequate depends on the situation and research
+          question. Using a model which enables a collection of events offers the most
+          flexible way to cater for both atom probe experiments or simulation.
+          
+          To monitor the course of an ion extraction experiment (or simulation)
+          it makes sense to track time explicitly via time stamps or implicitly
+          via e.g. a clock inside the instrument, such as the clock of the pulser
+          and respective pulsing event identifier.
+          
+          As set and measured quantities typically change over time and we do not
+          yet know during the measurement which of the events have associated
+          (molecular) ions that will end up in the reconstructed volume, we must not
+          document quantities as a function of the evaporated_identifier but as a
+          function of the (pulsing) event_identifier.
+        eventID(NXevent_data_apm):
+          exists: [min, 0, max, infty]
           # all these cannot be made required because for LEAP only stored in RHIT/HITS
           # but for M-TAP and Oxcart these pieces of information are available.
-          # start_time(NX_DATE_TIME):
-          # end_time(NX_DATE_TIME):
+          start_time(NX_DATE_TIME):
+            exists: recommended
+          end_time(NX_DATE_TIME):
+            exists: recommended
           # delta_time(NX_NUMBER):
           # pulse_identifier_offset(NX_INT):
           # pulse_identifier(NX_INT):
-          instrument(NXinstrument):
+          instrument(NXinstrument_apm):
             exists: recommended
-            control(NXcollection):
-              evaporation_control(NX_CHAR):
-              target_detection_rate(NX_FLOAT):
-            # optional groups can always be added but they will not be annotated eventually properly by pynxtools
-            # reflectron(NXreflectron):
+            reflectron(NXobject):
+              exists: recommended
+              voltage(NX_FLOAT):
             # decelerate_electrode(NXlens_em):
-            # local_electrode(NXlens_em):
+            local_electrode(NXlens_em):
+              exists: recommended
+              voltage(NX_FLOAT):
             # ion_detector(NXdetector):
-              # exists: optional
-              # signal_amplitude(NX_FLOAT):
-            pulser(NXpulser_apm):
+            pulser(NXobject):
+              exists: recommended
+              pulse_mode(NX_CHAR):
               pulse_frequency(NX_FLOAT):
-                # unit: NX_FREQUENCY
-                # dim: (p,)
-                \@logged_against(NX_CHAR):
+                # \@logged_against(NX_CHAR):
               pulse_fraction(NX_FLOAT):
-                # unit: NX_DIMENSIONLESS
-                # dim: (p,)
-                \@logged_against(NX_CHAR):
-              pulse_voltage(NX_FLOAT):  # pulsed voltage
-                exists: recommended  # not required for voltage pulsing
-                # unit: NX_VOLTAGE
-                # dim: (p,)
-                \@logged_against(NX_CHAR):
-              # pulse_number(NX_UINT):
-              standing_voltage(NX_FLOAT):
-                # unit: NX_VOLTAGE
-                # dim: (p,)
-                \@logged_against(NX_CHAR):
-              (NXsource):
+                # \@logged_against(NX_CHAR):
+              pulse_voltage(NX_FLOAT):  # ePOS, APT pulsed voltage
+                exists: optional  # not required for voltage pulsing
+                dim: (n,)
+                # \@logged_against(NX_CHAR):
+              pulse_number(NX_UINT):
+                exists: optional
+                dim: (n,)
+                # \@logged_against(NX_CHAR):
+              standing_voltage(NX_FLOAT):  #  ePOS, APT standing voltage
+                exists: optional
+                dim: (n,)
+                # \@logged_against(NX_CHAR):
+              sourceID(NXsource):
                 exists: [min, 0, max, 2]  # not required for voltage pulsing
                 pulse_energy(NX_FLOAT):
-                  # unit: NX_ENERGY
-                  # dim: (p,)
-                  \@logged_against(NX_CHAR):
-              # laser geometry at the moment has no example nor any feedback from the community
-              # but NXpulser_apm base class shows how this could be done, plus examples for NXmpes
-            stage_lab(NXstage_lab):
-              # setpoint_temperature(NX_FLOAT):
-              base_temperature(NX_FLOAT):
+                  dim: (n,)
+                  # \@logged_against(NX_CHAR):
+              # laser geometry at the moment has neither a worked out example
+              # nor any feedback from the community despite the work from B. Gault
+              # on laser atom probe was granted a Leibnitz award
+            stage(NXstage_lab):
+              specimen_temperature(NX_FLOAT):
             analysis_chamber(NXchamber):
-              chamber_pressure(NX_FLOAT):
-            # buffer_chamber(NXchamber):
-            # load_lock_chamber(NXchamber):
-            # getter_pump(NXpump):
-            # roughening_pump(NXpump):
-            # turbomolecular_pump(NXpump):
-
-    simulation(NXapm_sim):
+              pressure(NX_FLOAT):
+            control(NXcollection):
+              exists: recommended
+              evaporation_control(NX_CHAR):
+              target_detection_rate(NX_NUMBER):
+    simulation(NXobject):
       exists: optional
-
+      doc: |
+        Simulation of ion extraction from matter via laser and/or voltage pulsing.
+      # future possibility to reuse concepts from NXinstrument_apm again without
+      # the need for defining them again
     atom_probe(NXroi):
       exists: recommended  # [min, 0, max, infty]
       doc: |
         A region-of-interest analyzed either during or after the session for which
         specific processed data of the measured or simulated data are available.
-      # add a default plot V = f(time/evaporation_id), essentially for each quantity
-      # NEW ISSUE: check also here the PYCCAPT pipeline from P. Felfer's group
-      # all other details are instances of NXprocess as steps along the pipeline
-
-      # NEW ISSUE: hit_quality table 
-      # NEW ISSUE: pyccapt
-      # NEW ISSUE: add section for propagation_delay(NXprocess) ?
-      # NEW ISSUE: make recon an own subentry NXapm_reconstruction
-      # NEW ISSUE: different algorithms used one could create a class for each reconstruction method
-      # NEW ISSUE: make this rather an own subentry NXapm_ranging
-
+      # earlier comments here https://github.com/FAIRmat-NFDI/nexus_definitions/commit/a8602870f13f04b8befc902efb345afe650d8dd3
       initial_specimen(NXimage_set):
         exists: recommended
         doc: |
-          SEM or TEM image of the initial specimen i.e.
-          ideally taken prior to the data acquisition.
+          SEM or TEM image of the initial specimen (ideally taken prior data acquisition).
         image_2d(NXdata):
           \@signal(NX_CHAR):
           \@axes(NX_CHAR):
@@ -590,11 +684,17 @@ NXapm(NXobject):
           axis_i(NX_NUMBER):
             dim: (n_i,)
             \@long_name(NX_CHAR):
-       # one could use a stack_3d(NXdata) to record
-       # a time series of the specimen shape evolution
-
+       # could use a stack_3d(NXdata) to record time series of specimen shape evolution
       raw_data(NXprocess):
         exists: recommended
+        doc: |
+          For almost atom probe instruments (meta)data about raw data follow proprietary semantics.
+          Therefore, this group can currently be used only to point to these digital artifacts
+          in an effort to document all step of an analysis workflow.
+          
+          The physical quantities measured in an atom probe experiment are time-of-flight and
+          tuples of arrival_time_pairs as a function of the event chain on the pulser.
+          From these tuples hits are computed in a process called hit_finding.
         sequence_index(NX_POSINT):
           exists: recommended
         programID(NXprogram):
@@ -607,10 +707,33 @@ NXapm(NXobject):
           type(NX_CHAR):
           path(NX_CHAR):
           checksum(NX_CHAR):
+            exists: optional
           algorithm(NX_CHAR):
-
-      hit_finding(NXapm_hit_finding):
+            exists: optional
+        # technical details of data the ion_detector collects
+        number_of_dld_wires(NX_UINT):
+          exists: recommended
+          doc: |
+            The number of wires in the detector.
+          unit: NX_UNITLESS
+          enumeration: [1, 2, 3]
+        dld_wire_names(NX_CHAR):
+          exists: optional
+          doc: |
+            Alias tuple (begin, end) of each DLD wire of the detector.
+            Order follows arrival_time_pairs.
+          dim: (n_dld, 2)
+        arrival_time_pairs(NX_NUMBER):
+          exists: optional
+          doc: |
+            Raw readings from the analog-to-digital-converter
+            timing circuits of the detector wires.
+          unit: NX_TIME
+          dim: (p, n_dld, 2)
+      hit_finding(NXprocess):
         exists: recommended
+        doc: |
+          Configuration of and results obtained from a hit finding algorithm.
         # we careful how we go about doing this here, we recommended to make some details of the hit_finding
         # algorithm open namely the input and the output what the black box then does by AMETEK/Cameca
         # does not have to be exposed (although this clearly is against FAIR principles but the scientific community
@@ -629,40 +752,75 @@ NXapm(NXobject):
           path(NX_CHAR):
           checksum(NX_CHAR):
           algorithm(NX_CHAR):
-        number_of_dld_wires(NX_UINT):
-          exists: recommended
-        arrival_time_pairs(NX_NUMBER):
-          exists: optional
         # results of the hit_finding algorithm
-        hit_quality_types(NX_CHAR):
-          exists: optional
-        hit_quality_identifier(NX_UINT):
-          exists: optional
         hit_positions(NX_NUMBER):
           exists: recommended
-          dim: (i, 2)
+          doc: |
+            Evaluated ion impact coordinates on the detector.
+            Use the depends_on field to specify which reference
+            frame the positions are defined.
+          unit: NX_LENGTH
+          dim: (p_out, 2)
+          \@depends_on(NX_CHAR):
+            doc: |
+              Defines in which reference frame the positions are defined.
+        total_event_golden(NX_UINT):
+          exists: optional
+          doc: |
+            CRunHeader.fTotalEventGolden
+          unit: NX_UNITLESS
+        total_event_incomplete(NX_UINT):
+          exists: optional
+          doc: |
+            CRunHeader.fTotalEventIncomplete
+          unit: NX_UNITLESS
+        total_event_multiple(NX_UINT):
+          exists: optional
+          doc: |
+            CRunHeader.fTotalEventMultiple
+          unit: NX_UNITLESS
+        total_event_partial(NX_UINT):
+          exists: optional
+          doc: |
+            CRunHeader.fTotalEventPartials
+          unit: NX_UNITLESS
+        total_event_record(NX_UINT):
+          exists: optional
+          doc: |
+            CRunHeader.fTotalEventRecords
+          unit: NX_UNITLESS
+        hit_quality_identifier(NX_UINT):
+          exists: optional
+          doc: |
+            Identifier used for each hit_quality type.
+            Following the order of hit_quality_types.
+          dim: (n_ht,)
         hit_quality(NX_UINT):
           exists: optional
-          dim: (i,)
+          doc: |
+            Hit quality identifier for each pulse.
+            Identifier have to be within hit_quality_identifier.
+          unit: NX_UNITLESS
+          dim: (p_out,)
         hit_multiplicity(NX_UINT):
-          exists: recommended
-          dim: (i,)
-        # statistics(NXprocess):
-        #   multiples(NX_FLOAT):
-        #     doc: |
-        #       Fraction of multiple hits.
-        #     unit: NX_DIMENSIONLESS
-        # the following two quantities are relicts from ePOS files used to give some
-        # insight into the results of the hit_finding algorithm of IVAS/APSuite but typically
-        # used only in the context to learn about the multiplicity of an ion.
-        # pulses_since_last_ion(NX_UINT):
-        #   exists: optional
-        #   dim: (i,)
-        # pulse_identifier(NX_INT):  # this is the pulse on which they came
-        #   exists: optional
-        #   dim: (i,)
-        # i number of hits after hits finding but prior calibrations
-
+          exists: optional
+          doc: |
+            This processing yields for each ion with how many others it evaporated
+            if these were collected on the same pulse. Extraction of multiple ions
+            on one pulse on different or even the same pixel of the detector are possible.
+            
+            Multiplicity must not be confused with how many atoms of the same element
+            a molecular ion contains.
+          unit: NX_UNITLESS
+          dim: (p_out,)
+          # the following two quantities are relicts from ePOS files used to give some
+          # insight into the results of the hit_finding algorithm of IVAS/APSuite but typically
+          # used only in the context to learn about the multiplicity of an ion.
+          # pulses_since_last_ion(NX_UINT):
+          #   dim: (n,)
+          # pulse_identifier(NX_INT):
+          #   dim: (n,)
+      # at this point the original set of events p has been filtered down to p_out
       hit_spatial_filtering(NXprocess):
         exists: recommended
         sequence_index(NX_POSINT):
@@ -708,10 +866,14 @@ NXapm(NXobject):
           bitdepth(NX_UINT):
           mask(NX_UINT):
           identifier(NX_INT):
-
-      # at this point the original set of events p has been filtered down to n
-      voltage_and_bowl(NXapm_volt_and_bowl):
+      # at this point the set of events p_out has been filtered down to n
+      voltage_and_bowl(NXprocess):
         exists: recommended
+        doc: |
+          Configuration of and results obtained from a voltage-and-bowl time-of-flight correction algorithm.
+          
+          The voltage-and-bowl correction is a data post-processing step to correct ion impact
+          positions for flight path differences, detector biases, and nonlinearities.
         sequence_index(NX_POSINT):
           exists: recommended
         programID(NXprogram):
@@ -724,18 +886,24 @@ NXapm(NXobject):
           path(NX_CHAR):
           checksum(NX_CHAR):
           algorithm(NX_CHAR):
-        # config/input to the algorithm
-        # NEW ISSUE: realistic is that currently scientists can pull always a calibrated time-of-flight
-        # but not necessarily unprocessed timing data from the detector (unless individuals built the instrument).
-        # Relevant for ranging are the calibrated data, thats why only these
-        # (as an intermediate/compromise solution) are required in this version of the application definition
         raw_tof(NX_FLOAT):
+          # currently cannot be made required because of being a quantity measured
+          # by proprietary hardware with proprietary semantics
           exists: recommended
+          doc: |
+            Raw time-of-flight data without corrections.
           dim: (n,)
         # result
+        tof_zero_estimate(NX_FLOAT):
+          exists: optional
+          doc: |
+            The parameter :math:`t_0`, CAnalysis.CCalibMass.fT0Estimate
+          unit: NX_TIME
         calibrated_tof(NX_FLOAT):
+          exists: recommended
+          doc: |
+            Calibrated time-of-flight.
           dim: (n,)
-
       mass_to_charge_conversion(NXprocess):
         exists: recommended
         sequence_index(NX_POSINT):
@@ -754,7 +922,6 @@ NXapm(NXobject):
         # results
         mass_to_charge(NX_FLOAT):
           dim: (n,)
-
       reconstruction(NXapm_reconstruction):
         exists: recommended
         sequence_index(NX_POSINT):
@@ -795,6 +962,7 @@ NXapm(NXobject):
           algorithm(NX_CHAR):
         # config/input
         parameter(NX_CHAR):
+          exists: recommended
         protocol_name(NX_CHAR):
           exists: recommended
         crystallographic_calibration(NX_CHAR):
@@ -828,7 +996,6 @@ NXapm(NXobject):
             axis_x(NX_FLOAT):
               dim: (n_x,)
               \@long_name(NX_CHAR):
-
       ranging(NXapm_ranging):
         exists: recommended
         sequence_index(NX_POSINT):
@@ -845,9 +1012,6 @@ NXapm(NXobject):
           path(NX_CHAR):
           checksum(NX_CHAR):
           algorithm(NX_CHAR):
-        # number_of_ion_types(NX_UINT):
-        maximum_number_of_atoms_per_molecular_ion(NX_UINT):
-
         mass_to_charge_distribution(NXprocess):
           exists: recommended
           sequence_index(NX_POSINT):
@@ -857,7 +1021,6 @@ NXapm(NXobject):
             program(NX_CHAR):
               \@version(NX_CHAR):
           min_incr_max(NX_FLOAT):
-            # dim: (3,)  # u
           mass_spectrum(NXdata):
             \@signal(NX_CHAR):
             \@axes(NX_CHAR):
@@ -870,7 +1033,6 @@ NXapm(NXobject):
             axis_mass_to_charge(NX_FLOAT):
               dim: (n_bins,)
               \@long_name(NX_CHAR):
-
         background_quantification(NXprocess):
           exists: recommended
           sequence_index(NX_POSINT):
@@ -932,7 +1094,6 @@ NXapm(NXobject):
             position(NX_NUMBER):
 
         # peak deconvolution(NXprocess):
-
         peak_identification(NXprocess):  # aka specify ranging definitions i.e. mqmin, mqmax intervals (ranges) and (molecular) ion candidates
           exists: recommended
           sequence_index(NX_POSINT):
@@ -941,6 +1102,8 @@ NXapm(NXobject):
             exists: [min, 1, max, infty]
             program(NX_CHAR):
               \@version(NX_CHAR):
+          number_of_ion_types(NX_UINT):
+          maximum_number_of_atoms_per_molecular_ion(NX_UINT):
           ionID(NXion):
             exists: [min, 1, max, 256]
             nuclide_hash(NX_UINT):
