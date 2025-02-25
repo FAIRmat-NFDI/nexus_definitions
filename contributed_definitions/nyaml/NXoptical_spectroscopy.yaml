@@ -49,6 +49,7 @@ NXoptical_spectroscopy(NXobject):
           Version number to identify which definition of this application
           definition was used for this entry/data.
       \@URL:
+        exists: recommended
         doc: |
           URL where to find further material (documentation, examples) relevant
           to the application definition.
@@ -239,6 +240,7 @@ NXoptical_spectroscopy(NXobject):
       detector_TYPE(NXdetector):
         exists: ['min', '1', 'max', 'unbounded']
         detector_channel_type:
+          exists: recommended
           enumeration: [single-channel, multichannel]
         detector_type:
           exists: recommended
@@ -780,7 +782,7 @@ NXoptical_spectroscopy(NXobject):
         exists: recommended
         doc: |
           A set of activities that occurred to the sample prior to/during the experiment.
-      temperature(NXenvironment):
+      temperature_env(NXenvironment):
         exists: recommended
         doc: |
           Sample temperature (either controlled or just measured).
@@ -796,21 +798,6 @@ NXoptical_spectroscopy(NXobject):
           doc: |
             If temperature_nominal is "other", enter here a nominal/assumed/estimated
             sample temperature.
-        temperature_sensor(NXsensor):
-          exists: recommended
-          doc: |
-            Temperature sensor measuring the sample temperature.
-            This should be a link to /entry/instrument/manipulator/temperature_sensor.
-        sample_heater(NXactuator):
-          exists: optional
-          doc: |
-            Device to heat the sample.
-            This should be a link to /entry/instrument/manipulator/sample_heater.
-        sample_cooler(NXactuator):
-          exists: optional
-          doc: |
-            Device for cooling the sample (Cryostat, Airflow cooler, etc.).
-            This should be a link to /entry/instrument/manipulator/cryostat.
       (NXenvironment):
         exists: optional
         doc: |
