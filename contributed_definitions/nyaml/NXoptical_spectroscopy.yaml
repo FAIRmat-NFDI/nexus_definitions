@@ -71,18 +71,14 @@ NXoptical_spectroscopy(NXobject):
         otherwise the local time zone is assumed per ISO8601.
         
         It is required to enter at least one of both measurement times, either "start_time" or "end_time".
-    experiment_identifier(NXidentifier):
+    identifier_experiment:
       exists: recommended
       doc: |
         A (globally persistent) unique identifier of the experiment.
         (i) The identifier is usually defined by the facility, laboratory or
         principal investigator.
         (ii) The identifier enables to link experiments to e.g. proposals.
-      service(NX_CHAR):
-        exists: optional
-      identifier(NX_CHAR):
-        exists: recommended
-      identifier_type:
+      \@validity_range:
         exists: recommended
         doc: |
           Select the range of validity of this identier.
@@ -90,8 +86,6 @@ NXoptical_spectroscopy(NXobject):
           Global: Unique identification of with by unique location and unique
           globally persistent time stamp.
         enumeration: [local, global]
-      is_persistent(NX_BOOLEAN):
-        exists: optional
     experiment_description:
       exists: optional
       doc: |
@@ -185,6 +179,7 @@ NXoptical_spectroscopy(NXobject):
         - Stages(NXmanipulator)
         - Sensors and actuators to control or measure sample or beam properties
       beam_TYPE(NXbeam):
+        nameType: partial
         exists: ['min', '1', 'max', 'unbounded']
         nameType: partial
         doc: |
@@ -238,6 +233,7 @@ NXoptical_spectroscopy(NXobject):
             cooridnate systems for beam and sample normal is done. If coordinate systems
             are defined, refer to beam "incident_polarization".
       detector_TYPE(NXdetector):
+        nameType: partial
         exists: ['min', '1', 'max', 'unbounded']
         nameType: partial
         detector_channel_type:
@@ -299,6 +295,7 @@ NXoptical_spectroscopy(NXobject):
         device_information(NXfabrication):
           exists: recommended
       source_TYPE(NXsource):
+        nameType: partial
         exists: recommended
         nameType: partial
         type:
@@ -414,6 +411,7 @@ NXoptical_spectroscopy(NXobject):
           of the angle to a specific sample property (i.e. crystallographic axis or sample
           shape such as wafer flat)
       generic_beam_sample_angle_TYPE(NXtransformations):
+        nameType: partial
         exists: recommended
         nameType: partial
         doc: |
@@ -512,6 +510,7 @@ NXoptical_spectroscopy(NXobject):
       (NXopt_window):
         exists: optional
       polfilter_TYPE(NXbeam_device):
+        nameType: partial
         exists: optional
         nameType: partial
         doc: |
@@ -535,6 +534,7 @@ NXoptical_spectroscopy(NXobject):
         device_information(NXfabrication):
           exists: optional
       spectralfilter_TYPE(NXbeam_device):
+        nameType: partial
         exists: optional
         nameType: partial
         doc: |
@@ -620,6 +620,7 @@ NXoptical_spectroscopy(NXobject):
         device_information(NXfabrication):
           exists: optional
       temp_control_TYPE(NXactuator):
+        nameType: partial
         exists: optional
         nameType: partial
         doc: |
@@ -636,7 +637,7 @@ NXoptical_spectroscopy(NXobject):
           exists: optional
           doc: |
             Hardware used for actuation, i.e. laser, gas lamp, filament, resistive
-        (NXpid):
+        (NXpid_controller):
           exists: recommended
           setpoint(NX_FLOAT):
             exists: recommended
@@ -652,11 +653,12 @@ NXoptical_spectroscopy(NXobject):
           exists: recommended
         model:
           exists: recommended
-        identifier(NXidentifier):
+        identifier:
           exists: recommended
         construction_year(NX_DATE_TIME):
           exists: optional
       software_TYPE(NXprogram):
+        nameType: partial
         exists: recommended
         nameType: partial
         program:
@@ -680,6 +682,7 @@ NXoptical_spectroscopy(NXobject):
               Description of the software by persistent resource, where the program,
               code, script etc. can be found.
       instrument_calibration_DEVICE(NXcalibration):
+        nameType: partial
         exists: recommended
         nameType: partial
         doc: |
@@ -887,6 +890,7 @@ NXoptical_spectroscopy(NXobject):
         doc: |
           Spectrum, i.e. y-axis of the data (e.g. counts, intensity)
     measurement_data_calibration_TYPE(NXprocess):
+      nameType: partial
       exists: recommended
       nameType: partial
       wavelength_calibration(NXcalibration):
@@ -937,8 +941,8 @@ NXoptical_spectroscopy(NXobject):
           rank: 3
           dim: (N_measurements, 1, N_spectrum)
       ANALYSIS_program(NXprocess):
-        exists: optional
         nameType: partial
+        exists: optional
         program:
           doc: |
             Commercial or otherwise defined given name of the program that was
@@ -954,13 +958,13 @@ NXoptical_spectroscopy(NXobject):
             deterministic manner.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# d0ea1acbff2cfb9fec06a5ce25c1a46e06de24438024a92eaf4b256081034dc9
+# f2aea01ad70de075b5169d9c8f47b0654b084580d72c841e2f58d0f6bfbfd4b6
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
 # # NeXus - Neutron and X-ray Common Data Format
 # #
-# # Copyright (C) 2014-2024 NeXus International Advisory Committee (NIAC)
+# # Copyright (C) 2023-2025 NeXus International Advisory Committee (NIAC)
 # #
 # # This library is free software; you can redistribute it and/or
 # # modify it under the terms of the GNU Lesser General Public
@@ -1067,16 +1071,14 @@ NXoptical_spectroscopy(NXobject):
 #                 It is required to enter at least one of both measurement times, either "start_time" or "end_time".
 #             </doc>
 #         </field>
-#         <group name="experiment_identifier" type="NXidentifier" recommended="true">
+#         <field name="identifier_experiment" recommended="true">
 #             <doc>
 #                 A (globally persistent) unique identifier of the experiment.
 #                 (i) The identifier is usually defined by the facility, laboratory or
 #                 principal investigator.
 #                 (ii) The identifier enables to link experiments to e.g. proposals.
 #             </doc>
-#             <field name="service" type="NX_CHAR" optional="true"/>
-#             <field name="identifier" type="NX_CHAR" recommended="true"/>
-#             <field name="identifier_type" recommended="true">
+#             <attribute name="validity_range" recommended="true">
 #                 <doc>
 #                     Select the range of validity of this identier.
 #                     Local: Setup#1 at Institute building #2 in Room #3
@@ -1087,9 +1089,8 @@ NXoptical_spectroscopy(NXobject):
 #                     <item value="local"/>
 #                     <item value="global"/>
 #                 </enumeration>
-#             </field>
-#             <field name="is_persistent" type="NX_BOOLEAN" optional="true"/>
-#         </group>
+#             </attribute>
+#         </field>
 #         <field name="experiment_description" optional="true">
 #             <doc>
 #                 An optional free-text description of the experiment.
@@ -1208,7 +1209,7 @@ NXoptical_spectroscopy(NXobject):
 #                 - Stages(NXmanipulator)
 #                 - Sensors and actuators to control or measure sample or beam properties
 #             </doc>
-#             <group name="beam_TYPE" type="NXbeam" minOccurs="1" maxOccurs="unbounded" nameType="partial">
+#             <group name="beam_TYPE" type="NXbeam" nameType="partial" minOccurs="1" maxOccurs="unbounded">
 #                 <doc>
 #                     This can be used to describe properties of a photon beam.
 #                     A beam is always defined between two beam_devices, via
@@ -1267,7 +1268,7 @@ NXoptical_spectroscopy(NXobject):
 #                     </doc>
 #                 </field>
 #             </group>
-#             <group name="detector_TYPE" type="NXdetector" minOccurs="1" maxOccurs="unbounded" nameType="partial">
+#             <group name="detector_TYPE" type="NXdetector" nameType="partial" minOccurs="1" maxOccurs="unbounded">
 #                 <field name="detector_channel_type">
 #                     <enumeration>
 #                         <item value="single-channel"/>
@@ -1349,7 +1350,7 @@ NXoptical_spectroscopy(NXobject):
 #                 </field>
 #                 <group name="device_information" type="NXfabrication" recommended="true"/>
 #             </group>
-#             <group name="source_TYPE" type="NXsource" recommended="true" nameType="partial">
+#             <group name="source_TYPE" type="NXsource" nameType="partial" recommended="true">
 #                 <field name="type" recommended="true">
 #                     <enumeration>
 #                         <item value="Synchrotron X-ray Source"/>
@@ -1485,7 +1486,7 @@ NXoptical_spectroscopy(NXobject):
 #                     shape such as wafer flat)
 #                 </doc>
 #             </field>
-#             <group name="generic_beam_sample_angle_TYPE" type="NXtransformations" recommended="true" nameType="partial">
+#             <group name="generic_beam_sample_angle_TYPE" type="NXtransformations" nameType="partial" recommended="true">
 #                 <doc>
 #                     Set of transformations, describing the relative orientation of different
 #                     parts of the experiment (beams or sample). You may select one of the specified
@@ -1615,7 +1616,7 @@ NXoptical_spectroscopy(NXobject):
 #             </group>
 #             <group type="NXwaveplate" optional="true"/>
 #             <group type="NXopt_window" optional="true"/>
-#             <group name="polfilter_TYPE" type="NXbeam_device" optional="true" nameType="partial">
+#             <group name="polfilter_TYPE" type="NXbeam_device" nameType="partial" optional="true">
 #                 <doc>
 #                     polarization filter to prepare light to be measured or to be incident
 #                     on the sample.
@@ -1645,7 +1646,7 @@ NXoptical_spectroscopy(NXobject):
 #                 </field>
 #                 <group name="device_information" type="NXfabrication" optional="true"/>
 #             </group>
-#             <group name="spectralfilter_TYPE" type="NXbeam_device" optional="true" nameType="partial">
+#             <group name="spectralfilter_TYPE" type="NXbeam_device" nameType="partial" optional="true">
 #                 <doc>
 #                     Spectral filter used to modify properties of the scattered or incident light.
 #                     Genereric spectral filter porperties may be implemented via NXfilter_spec
@@ -1761,7 +1762,7 @@ NXoptical_spectroscopy(NXobject):
 #                 <field name="value" type="NX_FLOAT"/>
 #                 <group name="device_information" type="NXfabrication" optional="true"/>
 #             </group>
-#             <group name="temp_control_TYPE" type="NXactuator" optional="true" nameType="partial">
+#             <group name="temp_control_TYPE" type="NXactuator" nameType="partial" optional="true">
 #                 <doc>
 #                     Type of control for the sample temperature. Replace TYPE by "cryostat" or
 #                     "heater" to specify it.
@@ -1783,7 +1784,7 @@ NXoptical_spectroscopy(NXobject):
 #                         Hardware used for actuation, i.e. laser, gas lamp, filament, resistive
 #                     </doc>
 #                 </field>
-#                 <group type="NXpid" recommended="true">
+#                 <group type="NXpid_controller" recommended="true">
 #                     <field name="setpoint" type="NX_FLOAT" recommended="true"/>
 #                 </group>
 #                 <group name="device_information" type="NXfabrication" optional="true"/>
@@ -1796,10 +1797,10 @@ NXoptical_spectroscopy(NXobject):
 #                 </doc>
 #                 <field name="vendor" recommended="true"/>
 #                 <field name="model" recommended="true"/>
-#                 <group name="identifier" type="NXidentifier" recommended="true"/>
+#                 <field name="identifier" recommended="true"/>
 #                 <field name="construction_year" type="NX_DATE_TIME" optional="true"/>
 #             </group>
-#             <group name="software_TYPE" type="NXprogram" recommended="true" nameType="partial">
+#             <group name="software_TYPE" type="NXprogram" nameType="partial" recommended="true">
 #                 <field name="program">
 #                     <doc>
 #                         Commercial or otherwise defined given name of the program that was
@@ -1825,7 +1826,7 @@ NXoptical_spectroscopy(NXobject):
 #                     </attribute>
 #                 </field>
 #             </group>
-#             <group name="instrument_calibration_DEVICE" type="NXcalibration" recommended="true" nameType="partial">
+#             <group name="instrument_calibration_DEVICE" type="NXcalibration" nameType="partial" recommended="true">
 #                 <doc>
 #                     Pre-calibration of an arbitrary device of the instrumental setup, which
 #                     has the name DEVICE. You can specify here how, at which time by which method
@@ -2087,7 +2088,7 @@ NXoptical_spectroscopy(NXobject):
 #                 </doc>
 #             </attribute>
 #         </group>
-#         <group name="measurement_data_calibration_TYPE" type="NXprocess" recommended="true" nameType="partial">
+#         <group name="measurement_data_calibration_TYPE" type="NXprocess" nameType="partial" recommended="true">
 #             <group name="wavelength_calibration" type="NXcalibration" optional="true">
 #                 <field name="calibrated_axis" type="NX_FLOAT" recommended="true">
 #                     <doc>
@@ -2144,7 +2145,7 @@ NXoptical_spectroscopy(NXobject):
 #                     <dim index="3" value="N_spectrum"/>
 #                 </dimensions>
 #             </field>
-#             <group name="ANALYSIS_program" type="NXprocess" optional="true" nameType="partial">
+#             <group name="ANALYSIS_program" type="NXprocess" nameType="partial" optional="true">
 #                 <field name="program">
 #                     <doc>
 #                         Commercial or otherwise defined given name of the program that was
