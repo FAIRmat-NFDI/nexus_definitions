@@ -7,8 +7,7 @@ import textwrap
 from functools import lru_cache
 from glob import glob
 from pathlib import Path
-from typing import List
-from typing import Optional
+from typing import List, Optional
 
 import lxml.etree as ET
 from lxml.etree import ParseError as xmlER
@@ -556,9 +555,7 @@ def check_attr_name_nxdl(param):
     return logger, elem, nxdl_path, doc, attr, req_str
 
 
-def try_find_default(
-    logger, orig_elem, elem, nxdl_path, doc, attr
-):  # pylint: disable=too-many-arguments
+def try_find_default(logger, orig_elem, elem, nxdl_path, doc, attr):  # pylint: disable=too-many-arguments
     """Try to find if default is defined as a child of the NXDL element"""
     if elem is not None:
         if doc:
@@ -578,9 +575,7 @@ def try_find_default(
     return logger, elem, nxdl_path, doc, attr
 
 
-def other_attrs(
-    logger, orig_elem, elem, nxdl_path, doc, attr
-):  # pylint: disable=too-many-arguments
+def other_attrs(logger, orig_elem, elem, nxdl_path, doc, attr):  # pylint: disable=too-many-arguments
     """Handle remaining attributes"""
     if elem is not None:
         if doc:
@@ -603,7 +598,7 @@ def other_attrs(
 
 def get_node_concept_path(elem):
     """get the short version of nxdlbase:nxdlpath"""
-    return f'{elem.get("nxdlbase").split("/")[-1]}:{elem.get("nxdlpath")}'
+    return f"{elem.get('nxdlbase').split('/')[-1]}:{elem.get('nxdlpath')}"
 
 
 def get_doc(node, ntype, nxhtml, nxpath):
@@ -716,7 +711,7 @@ def add_base_classes(elist, nx_name=None, elem: ET.Element = None):
     elem.set("nxdlpath", "")
     elist.append(elem)
     # add inherited base class
-    if "extends" in elem.attrib and elem.attrib["extends"] != "NXobject":
+    if "extends" in elem.attrib:
         add_base_classes(elist, elem.attrib["extends"])
     else:
         add_base_classes(elist)
