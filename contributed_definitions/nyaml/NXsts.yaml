@@ -91,78 +91,65 @@ NXsts(NXspm):
               The gain of the voltage sensor.
       piezo_sensor(NXsensor):
         doc: |
-          The piezo sensor refers to the height (or Z) piezo sensor if nothing is
-          mentioned along the X and Y directions.
-        x(NX_NUMBER):
-          unit: NX_LENGTH
-          doc: |
-            The x position of the piezo. In STS experiment, the piezo stays fixed at
-            x,y and z and the the tunneling current is measured with respect to the
-            bias voltage (sweep voltage).
-        y(NX_NUMBER):
-          unit: NX_LENGTH
-          doc: |
-            The y position of the piezo.
-        z(NX_NUMBER):
-          unit: NX_LENGTH
-          doc: |
-            The z position of the piezo.
+          The sensor information for the piezo device.
         piezo_configuration(NXpiezo_config_spm):
           exists: optional
           doc: |
-            The piezo configuration information like piezoelectric calibration and material
-            properties.
+            The piezo configuration information like piezoelectric device calibration and
+            material properties.
           calibration(NXcalibration):
             exists: optional
             doc: |
               Calibration of the piezo device.
-        (NXpositioner_spm):
-          doc: |
-            The positioner information like the position of the tip, the position of the
-            sample, PID loop feedback etc.
-          z_controller(NXpid_controller):
-            doc: |
-              The PID controller information for the z-axis.
-            z(NX_NUMBER):
+            second_order_correction_N(NX_NUMBER):
+              nameType: partial
+              exists: optional
+              unit: NX_ANY
               doc: |
-                To indicate the relative tip position z between tip and sample. The tip position
-                can also be varied when the z_controller is not running.
-            controller_status(NX_BOOLEAN):
+                The N (substring) denotes X and Y directions. The 2nd order piezo
+                compensate the error for that axis. The following equation shows the
+                interpretation of the 2nd order correction parameters,
+                For the X-piezo: "Ux = 1/cx · X + cxx · X2"
+                with units: "[V] = [V/m] · [m] + [V/m2] · [m2]"
+                where cx is the calibration of the piezo X and cxx is the 2nd order
+                correction. The unit for such the second-order correction is (V/m^2).
+            calibration_type(NX_CHAR):
+              exists: optional
               doc: |
-                Status if controller is active.
-        piezo_material(NXpiezoelectric_material):
-          exists: optional
-          doc: |
-            The material description and properties of the piezoelectric scanner materials.
-      TEMPERATURE(NXsensor):
-        nameType: any
-        exists: optional
-        doc: |
-          A group handling the temperature such as cryo, shield and tip. For different
-          type of temperature sensors repeat this group.
-        temperature(NX_NUMBER):
-          exists: optional
-          unit: NX_TEMPERATURE
-          doc: |
-            The temperature of the sample.
-        CHANNEL_temp(NX_CHAR):
-          nameType: partial
-          exists: optional
-          doc: |
-            The name of the channel to measure the temperature.
-        temperature_calibration(NXcalibration):
-          exists: optional
-          doc: |
-            Calibration of the temperature measurement.
-          coefficients(NX_NUMBER):
-            unit: NX_ANY
-            doc: |
-              The coefficients of the calibration.
-        TEMPERATURE_DATA(NXdata):
-          nameType: any
-          exists: optional
-          doc: |
-            Data (e.g, record from SPM head temperature) from temperature sensor.
+                The name of the calibration type, sometimes it is called
+                e.g active calibration, passive calibration.
+            calibration_coefficient_N(NX_NUMBER):
+              nameType: partial
+              exists: optional
+              unit: NX_ANY
+              doc: |
+                The calibration coefficient is the ratio of the actual distance moved by the piezo to
+                the voltage applied to the piezo. It is also called first-order correction.
+            drift_N(NX_NUMBER):
+              nameType: partial
+              exists: optional
+              unit: NX_ANY
+              doc: |
+                Set up the settings to enable or disable the drift compensation.
+            drift_correction_status(NX_BOOLEAN):
+              exists: optional
+              doc: |
+                Whether the drift has been corrected in case there is a deviation in the
+                drift.
+            tilt_N(NX_NUMBER):
+              nameType: partial
+              exists: optional
+              unit: NX_ANGLE
+              doc: |
+                The N (substring) denotes X and Y directions, and for both directions
+                tilt needs to be adjusted according to the actual surface.
+            hv_gain_N(NX_NUMBER):
+              nameType: partial
+              doc: |
+                The N (substring) denotes X or Y or Z. In some systems,
+                there is an HV gain readout feature. For these systems,
+                the HV gain should be automatically adjusted whenever
+                the gain is changed at the high voltage amplifier.
       bias_spectroscopy_environment(NXenvironment):
         doc: |
           To explain bias (sweep measurement) voltage applied to the sample.
@@ -170,100 +157,6 @@ NXsts(NXspm):
           doc: |
             Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
             vs tunneling current from probe.
-          (NXpositioner_spm):
-            exists: optional
-            doc: |
-              The positioner information like the position of the tip, PID loop feedback etc.
-            z_controller(NXpid_controller):
-              exists: optional
-              doc: |
-                The PID controller information for the z-axis.
-              z_average_time(NX_NUMBER):
-                exists: optional
-                unit: NX_TIME
-                doc: |
-                  The average time taken by the z-controller to stabilize the tip.
-              z_controller_time(NX_NUMBER):
-                exists: optional
-                unit: NX_TIME
-                doc: |
-                  The time taken by the z-controller to measure physical properties.
-              z_controller_hold(NX_BOOLEAN):
-                exists: optional
-                doc: |
-                  The status of the controller to be held on the previous position, before going to the
-                  next scan point or line to measure the physical properties.
-              record_final_z(NX_BOOLEAN):
-                exists: optional
-                doc: |
-                  The status of the controller to record the final z position after the scan.
-          bias_sweep(NXbias_sweep):
-            doc: |
-              The bais voltage sweep is a common technique used on the substance or sample or environment
-              to study the change in the behavior of the sample or substance or environment due to change
-              in applied  bias voltage.
-            scan_region(NXobject):
-              doc: |
-                The scan region (phase space or sub-phase space) is the region where the scan is
-                performed.
-              scan_offset_bias(NX_NUMBER):
-                exists: optional
-                unit: NX_VOLTAGE
-                doc: |
-                  The offset of the bias voltage for bias sweep.
-              scan_range_bias(NX_NUMBER):
-                exists: optional
-                unit: NX_VOLTAGE
-                doc: |
-                  The range of the scan is the length of the bias voltage over which the sweep
-                  scan will be performed.
-              scan_start_bias(NX_NUMBER):
-                unit: NX_VOLTAGE
-                doc: |
-                  The start of the bias scan voltage.
-              scan_end_bias(NX_NUMBER):
-                unit: NX_VOLTAGE
-                doc: |
-                  The end of the bias scan voltage.
-            linear_sweep(NXobject):
-              doc: |
-                The linear sweep is a type of scan where the bias voltage is swept
-                linearly from the starting voltage to the ending voltage.
-              scan_points_bias(NX_NUMBER):
-                doc: |
-                  The number of voltage points the sweep scan to be performed.
-              step_size_bias(NX_NUMBER):
-                unit: NX_VOLTAGE
-                doc: |
-                  The step size of the sweep.
-                  The step size is the difference between the two consecutive bias voltage during the sweep.
-              reset_bias(NX_BOOLEAN):
-                exists: optional
-                doc: |
-                  The reset_bias is used to reset the bias voltage to the starting value after a
-                  sweep is completed.
-      sample_bias_votage(NXsensor):
-        exists: optional
-        doc: |
-          The DC bias voltage that is applied to the sample.
-        bias_voltage(NX_NUMBER):
-          unit: NX_VOLTAGE
-          doc: |
-            The bias voltage (DC) applied to the sample.
-        bias_offset(NX_NUMBER):
-          exists: optional
-          unit: NX_VOLTAGE
-          doc: |
-            Offset value of the bias voltage.
-        bias_calibration(NXcalibration):
-          exists: optional
-          doc: |
-            Calibration of the bias voltage measurement (V/V).
-          coefficients(NX_NUMBER):
-            exists: optional
-            unit: NX_ANY
-            doc: |
-              The coefficients of the calibration.
     reproducibility_indicators(NXcollection):
       exists: optional
       doc: |
@@ -367,7 +260,7 @@ NXsts(NXspm):
           /ENTRY[entry]/experiment_instrument/lockin_amplifier/modulation_frequency
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# c7bec6ff8476e325ca186a85621a6b08e0200f14cba6b0be21cf468ed6c19d8a
+# c05bd78315499801ebbc5d76879bdd9140ad0fe6ee1a8a0acac6f942228c6ee0
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -501,94 +394,66 @@ NXsts(NXspm):
 #             </group>
 #             <group name="piezo_sensor" type="NXsensor">
 #                 <doc>
-#                     The piezo sensor refers to the height (or Z) piezo sensor if nothing is
-#                     mentioned along the X and Y directions.
+#                     The sensor information for the piezo device.
 #                 </doc>
-#                 <field name="x" type="NX_NUMBER" units="NX_LENGTH">
-#                     <doc>
-#                         The x position of the piezo. In STS experiment, the piezo stays fixed at
-#                         x,y and z and the the tunneling current is measured with respect to the
-#                         bias voltage (sweep voltage).
-#                     </doc>
-#                 </field>
-#                 <field name="y" type="NX_NUMBER" units="NX_LENGTH">
-#                     <doc>
-#                         The y position of the piezo.
-#                     </doc>
-#                 </field>
-#                 <field name="z" type="NX_NUMBER" units="NX_LENGTH">
-#                     <doc>
-#                         The z position of the piezo.
-#                     </doc>
-#                 </field>
 #                 <group name="piezo_configuration" type="NXpiezo_config_spm" optional="true">
 #                     <doc>
-#                         The piezo configuration information like piezoelectric calibration and material
-#                         properties.
+#                         The piezo configuration information like piezoelectric device calibration and
+#                         material properties.
 #                     </doc>
 #                     <group name="calibration" type="NXcalibration" optional="true">
 #                         <doc>
 #                             Calibration of the piezo device.
 #                         </doc>
-#                     </group>
-#                 </group>
-#                 <group type="NXpositioner_spm">
-#                     <doc>
-#                         The positioner information like the position of the tip, the position of the
-#                         sample, PID loop feedback etc.
-#                     </doc>
-#                     <group name="z_controller" type="NXpid_controller">
-#                         <doc>
-#                             The PID controller information for the z-axis.
-#                         </doc>
-#                         <field name="z" type="NX_NUMBER">
+#                         <field name="second_order_correction_N" type="NX_NUMBER" nameType="partial" optional="true" units="NX_ANY">
 #                             <doc>
-#                                 To indicate the relative tip position z between tip and sample. The tip position
-#                                 can also be varied when the z_controller is not running.
+#                                 The N (substring) denotes X and Y directions. The 2nd order piezo
+#                                 compensate the error for that axis. The following equation shows the
+#                                 interpretation of the 2nd order correction parameters,
+#                                 For the X-piezo: "Ux = 1/cx · X + cxx · X2"
+#                                 with units: "[V] = [V/m] · [m] + [V/m2] · [m2]"
+#                                 where cx is the calibration of the piezo X and cxx is the 2nd order
+#                                 correction. The unit for such the second-order correction is (V/m^2).
 #                             </doc>
 #                         </field>
-#                         <field name="controller_status" type="NX_BOOLEAN">
+#                         <field name="calibration_type" type="NX_CHAR" optional="true">
 #                             <doc>
-#                                 Status if controller is active.
+#                                 The name of the calibration type, sometimes it is called
+#                                 e.g active calibration, passive calibration.
+#                             </doc>
+#                         </field>
+#                         <field name="calibration_coefficient_N" type="NX_NUMBER" nameType="partial" optional="true" units="NX_ANY">
+#                             <doc>
+#                                 The calibration coefficient is the ratio of the actual distance moved by the piezo to
+#                                 the voltage applied to the piezo. It is also called first-order correction.
+#                             </doc>
+#                         </field>
+#                         <field name="drift_N" type="NX_NUMBER" nameType="partial" optional="true" units="NX_ANY">
+#                             <doc>
+#                                 Set up the settings to enable or disable the drift compensation.
+#                             </doc>
+#                         </field>
+#                         <field name="drift_correction_status" type="NX_BOOLEAN" optional="true">
+#                             <doc>
+#                                 Whether the drift has been corrected in case there is a deviation in the
+#                                 drift.
+#                             </doc>
+#                         </field>
+#                         <field name="tilt_N" type="NX_NUMBER" nameType="partial" optional="true" units="NX_ANGLE">
+#                             <doc>
+#                                 The N (substring) denotes X and Y directions, and for both directions
+#                                 tilt needs to be adjusted according to the actual surface.
+#                             </doc>
+#                         </field>
+#                         <field name="hv_gain_N" type="NX_NUMBER" nameType="partial">
+#                             <doc>
+#                                 The N (substring) denotes X or Y or Z. In some systems,
+#                                 there is an HV gain readout feature. For these systems,
+#                                 the HV gain should be automatically adjusted whenever
+#                                 the gain is changed at the high voltage amplifier.
 #                             </doc>
 #                         </field>
 #                     </group>
-#                 </group>
-#                 <group name="piezo_material" type="NXpiezoelectric_material" optional="true">
-#                     <doc>
-#                         The material description and properties of the piezoelectric scanner materials.
-#                     </doc>
-#                 </group>
-#             </group>
-#             <group name="TEMPERATURE" type="NXsensor" nameType="any" optional="true">
-#                 <doc>
-#                     A group handling the temperature such as cryo, shield and tip. For different
-#                     type of temperature sensors repeat this group.
-#                 </doc>
-#                 <field name="temperature" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
-#                     <doc>
-#                         The temperature of the sample.
-#                     </doc>
-#                 </field>
-#                 <field name="CHANNEL_temp" type="NX_CHAR" nameType="partial" optional="true">
-#                     <doc>
-#                         The name of the channel to measure the temperature.
-#                     </doc>
-#                 </field>
-#                 <group name="temperature_calibration" type="NXcalibration" optional="true">
-#                     <doc>
-#                         Calibration of the temperature measurement.
-#                     </doc>
-#                     <field name="coefficients" type="NX_NUMBER" units="NX_ANY">
-#                         <doc>
-#                             The coefficients of the calibration.
-#                         </doc>
-#                     </field>
-#                 </group>
-#                 <group name="TEMPERATURE_DATA" type="NXdata" nameType="any" optional="true">
-#                     <doc>
-#                         Data (e.g, record from SPM head temperature) from temperature sensor.
-#                     </doc>
 #                 </group>
 #             </group>
 #             <group name="bias_spectroscopy_environment" type="NXenvironment">
@@ -600,119 +465,6 @@ NXsts(NXspm):
 #                         Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
 #                         vs tunneling current from probe.
 #                     </doc>
-#                     <group type="NXpositioner_spm" optional="true">
-#                         <doc>
-#                             The positioner information like the position of the tip, PID loop feedback etc.
-#                         </doc>
-#                         <group name="z_controller" type="NXpid_controller" optional="true">
-#                             <doc>
-#                                 The PID controller information for the z-axis.
-#                             </doc>
-#                             <field name="z_average_time" type="NX_NUMBER" optional="true" units="NX_TIME">
-#                                 <doc>
-#                                     The average time taken by the z-controller to stabilize the tip.
-#                                 </doc>
-#                             </field>
-#                             <field name="z_controller_time" type="NX_NUMBER" optional="true" units="NX_TIME">
-#                                 <doc>
-#                                     The time taken by the z-controller to measure physical properties.
-#                                 </doc>
-#                             </field>
-#                             <field name="z_controller_hold" type="NX_BOOLEAN" optional="true">
-#                                 <doc>
-#                                     The status of the controller to be held on the previous position, before going to the
-#                                     next scan point or line to measure the physical properties.
-#                                 </doc>
-#                             </field>
-#                             <field name="record_final_z" type="NX_BOOLEAN" optional="true">
-#                                 <doc>
-#                                     The status of the controller to record the final z position after the scan.
-#                                 </doc>
-#                             </field>
-#                         </group>
-#                     </group>
-#                     <group name="bias_sweep" type="NXbias_sweep">
-#                         <doc>
-#                             The bais voltage sweep is a common technique used on the substance or sample or environment
-#                             to study the change in the behavior of the sample or substance or environment due to change
-#                             in applied  bias voltage.
-#                         </doc>
-#                         <group name="scan_region" type="NXobject">
-#                             <doc>
-#                                 The scan region (phase space or sub-phase space) is the region where the scan is
-#                                 performed.
-#                             </doc>
-#                             <field name="scan_offset_bias" type="NX_NUMBER" optional="true" units="NX_VOLTAGE">
-#                                 <doc>
-#                                     The offset of the bias voltage for bias sweep.
-#                                 </doc>
-#                             </field>
-#                             <field name="scan_range_bias" type="NX_NUMBER" optional="true" units="NX_VOLTAGE">
-#                                 <doc>
-#                                     The range of the scan is the length of the bias voltage over which the sweep
-#                                     scan will be performed.
-#                                 </doc>
-#                             </field>
-#                             <field name="scan_start_bias" type="NX_NUMBER" units="NX_VOLTAGE">
-#                                 <doc>
-#                                     The start of the bias scan voltage.
-#                                 </doc>
-#                             </field>
-#                             <field name="scan_end_bias" type="NX_NUMBER" units="NX_VOLTAGE">
-#                                 <doc>
-#                                     The end of the bias scan voltage.
-#                                 </doc>
-#                             </field>
-#                         </group>
-#                         <group name="linear_sweep" type="NXobject">
-#                             <doc>
-#                                 The linear sweep is a type of scan where the bias voltage is swept
-#                                 linearly from the starting voltage to the ending voltage.
-#                             </doc>
-#                             <field name="scan_points_bias" type="NX_NUMBER">
-#                                 <doc>
-#                                     The number of voltage points the sweep scan to be performed.
-#                                 </doc>
-#                             </field>
-#                             <field name="step_size_bias" type="NX_NUMBER" units="NX_VOLTAGE">
-#                                 <doc>
-#                                     The step size of the sweep.
-#                                     The step size is the difference between the two consecutive bias voltage during the sweep.
-#                                 </doc>
-#                             </field>
-#                             <field name="reset_bias" type="NX_BOOLEAN" optional="true">
-#                                 <doc>
-#                                     The reset_bias is used to reset the bias voltage to the starting value after a
-#                                     sweep is completed.
-#                                 </doc>
-#                             </field>
-#                         </group>
-#                     </group>
-#                 </group>
-#             </group>
-#             <group name="sample_bias_votage" type="NXsensor" optional="true">
-#                 <doc>
-#                     The DC bias voltage that is applied to the sample.
-#                 </doc>
-#                 <field name="bias_voltage" type="NX_NUMBER" units="NX_VOLTAGE">
-#                     <doc>
-#                         The bias voltage (DC) applied to the sample.
-#                     </doc>
-#                 </field>
-#                 <field name="bias_offset" type="NX_NUMBER" optional="true" units="NX_VOLTAGE">
-#                     <doc>
-#                         Offset value of the bias voltage.
-#                     </doc>
-#                 </field>
-#                 <group name="bias_calibration" type="NXcalibration" optional="true">
-#                     <doc>
-#                         Calibration of the bias voltage measurement (V/V).
-#                     </doc>
-#                     <field name="coefficients" type="NX_NUMBER" optional="true" units="NX_ANY">
-#                         <doc>
-#                             The coefficients of the calibration.
-#                         </doc>
-#                     </field>
 #                 </group>
 #             </group>
 #         </group>

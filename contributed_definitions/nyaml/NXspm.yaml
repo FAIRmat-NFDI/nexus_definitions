@@ -30,14 +30,10 @@ NXspm(NXsensor_scan):
       doc: |
         The type of the scan. It mainly describes how scan probe moves in the scan region, e.g.
         forward, backward, or both (if scan is repeated).
-    experiment_identifier:
+    identifier_experiment:
       exists: optional
       doc: |
         The identifiers for the experiment which should be unique at least in lab.
-    experiment_description:
-      exists: optional
-      doc: |
-        The description of the experiment like comments, ontes from from the experiment.
     experiment_instrument(NXinstrument):
       doc: |
         The instrument information.
@@ -204,35 +200,6 @@ NXspm(NXsensor_scan):
           exists: optional
           doc: |
             The material description and properties of the piezoelectric scanner materials.
-      TEMPERATURE(NXsensor):
-        nameType: any
-        exists: optional
-        doc: |
-          A group handling the temperature such as cryo, shield and tip. For different
-          type of temperature sensors repeat this group.
-        temperature(NX_NUMBER):
-          exists: optional
-          unit: NX_TEMPERATURE
-          doc: |
-            The temperature of the sample.
-        CHANNEL_temp(NX_CHAR):
-          nameType: partial
-          exists: optional
-          doc: |
-            The name of the channel to measure the temperature.
-        temperature_calibration(NXcalibration):
-          exists: optional
-          doc: |
-            Calibration of the temperature measurement.
-          coefficients(NX_NUMBER):
-            unit: NX_ANY
-            doc: |
-              The coefficients of the calibration.
-        TEMPERATURE_DATA(NXdata):
-          nameType: any
-          exists: optional
-          doc: |
-            Data (e.g, record from SPM head temperature) from temperature sensor.
       bias_spectroscopy_environment(NXenvironment):
         doc: |
           To explain bias (sweep measurement) voltage applied to the sample.
@@ -312,6 +279,35 @@ NXspm(NXsensor_scan):
                 doc: |
                   The reset_bias is used to reset the bias voltage to the starting value after a
                   sweep is completed.
+      TEMPERATURE(NXsensor):
+        nameType: any
+        exists: optional
+        doc: |
+          A group handling the temperature such as cryo, shield and tip. For different
+          type of temperature sensors repeat this group.
+        temperature(NX_NUMBER):
+          exists: optional
+          unit: NX_TEMPERATURE
+          doc: |
+            The temperature of the sample.
+        CHANNEL_temp(NX_CHAR):
+          nameType: partial
+          exists: optional
+          doc: |
+            The name of the channel to measure the temperature.
+        temperature_calibration(NXcalibration):
+          exists: optional
+          doc: |
+            Calibration of the temperature measurement.
+          coefficients(NX_NUMBER):
+            unit: NX_ANY
+            doc: |
+              The coefficients of the calibration.
+        TEMPERATURE_DATA(NXdata):
+          nameType: any
+          exists: optional
+          doc: |
+            Data (e.g, record from SPM head temperature) from temperature sensor.
       sample_bias_votage(NXsensor):
         exists: optional
         doc: |
@@ -359,7 +355,7 @@ NXspm(NXsensor_scan):
         are used to measure the resolution of the experiment results.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 5606a3a4070587e38b1c5ab3de23155be8460dddcee919ca9fb67ad064c30162
+# 3453ddc435ceeaef9d821d08636a6a982a899820ec2fe9cda10f67625df013c1
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -432,14 +428,9 @@ NXspm(NXsensor_scan):
 #                 forward, backward, or both (if scan is repeated).
 #             </doc>
 #         </field>
-#         <field name="experiment_identifier" optional="true">
+#         <field name="identifier_experiment" optional="true">
 #             <doc>
 #                 The identifiers for the experiment which should be unique at least in lab.
-#             </doc>
-#         </field>
-#         <field name="experiment_description" optional="true">
-#             <doc>
-#                 The description of the experiment like comments, ontes from from the experiment.
 #             </doc>
 #         </field>
 #         <group name="experiment_instrument" type="NXinstrument">
@@ -653,37 +644,6 @@ NXspm(NXsensor_scan):
 #                     </doc>
 #                 </group>
 #             </group>
-#             <group name="TEMPERATURE" type="NXsensor" nameType="any" optional="true">
-#                 <doc>
-#                     A group handling the temperature such as cryo, shield and tip. For different
-#                     type of temperature sensors repeat this group.
-#                 </doc>
-#                 <field name="temperature" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
-#                     <doc>
-#                         The temperature of the sample.
-#                     </doc>
-#                 </field>
-#                 <field name="CHANNEL_temp" type="NX_CHAR" nameType="partial" optional="true">
-#                     <doc>
-#                         The name of the channel to measure the temperature.
-#                     </doc>
-#                 </field>
-#                 <group name="temperature_calibration" type="NXcalibration" optional="true">
-#                     <doc>
-#                         Calibration of the temperature measurement.
-#                     </doc>
-#                     <field name="coefficients" type="NX_NUMBER" units="NX_ANY">
-#                         <doc>
-#                             The coefficients of the calibration.
-#                         </doc>
-#                     </field>
-#                 </group>
-#                 <group name="TEMPERATURE_DATA" type="NXdata" nameType="any" optional="true">
-#                     <doc>
-#                         Data (e.g, record from SPM head temperature) from temperature sensor.
-#                     </doc>
-#                 </group>
-#             </group>
 #             <group name="bias_spectroscopy_environment" type="NXenvironment">
 #                 <doc>
 #                     To explain bias (sweep measurement) voltage applied to the sample.
@@ -781,6 +741,37 @@ NXspm(NXsensor_scan):
 #                             </field>
 #                         </group>
 #                     </group>
+#                 </group>
+#             </group>
+#             <group name="TEMPERATURE" type="NXsensor" nameType="any" optional="true">
+#                 <doc>
+#                     A group handling the temperature such as cryo, shield and tip. For different
+#                     type of temperature sensors repeat this group.
+#                 </doc>
+#                 <field name="temperature" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
+#                     <doc>
+#                         The temperature of the sample.
+#                     </doc>
+#                 </field>
+#                 <field name="CHANNEL_temp" type="NX_CHAR" nameType="partial" optional="true">
+#                     <doc>
+#                         The name of the channel to measure the temperature.
+#                     </doc>
+#                 </field>
+#                 <group name="temperature_calibration" type="NXcalibration" optional="true">
+#                     <doc>
+#                         Calibration of the temperature measurement.
+#                     </doc>
+#                     <field name="coefficients" type="NX_NUMBER" units="NX_ANY">
+#                         <doc>
+#                             The coefficients of the calibration.
+#                         </doc>
+#                     </field>
+#                 </group>
+#                 <group name="TEMPERATURE_DATA" type="NXdata" nameType="any" optional="true">
+#                     <doc>
+#                         Data (e.g, record from SPM head temperature) from temperature sensor.
+#                     </doc>
 #                 </group>
 #             </group>
 #             <group name="sample_bias_votage" type="NXsensor" optional="true">
