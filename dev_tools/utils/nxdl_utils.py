@@ -857,13 +857,12 @@ def get_best_child(nxdl_elem, hdf_node, hdf_name, hdf_class_name, nexus_type):
         ):
             name_any = is_name_type(child, "any")
             name_partial = is_name_type(child, "partial")
-            if name_partial or name_any:
-                fit = get_nx_namefit(
-                    hdf_name,
-                    get_node_name(child),
-                    name_any=name_any,
-                    name_partial=name_partial,
-                )
+            fit = get_nx_namefit(
+                hdf_name,
+                get_node_name(child),
+                name_any=name_any,
+                name_partial=name_partial,
+            )
         if fit > bestfit:
             bestfit = fit
             bestchild = set_nxdlpath(child, nxdl_elem)
