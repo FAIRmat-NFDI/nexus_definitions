@@ -378,7 +378,8 @@ def belongs_to(nxdl_elem, child, name, class_type=None, hdf_name=None):
 
 def get_local_name_from_xml(element):
     """Helper function to extract the element tag without the namespace."""
-    return remove_namespace_from_tag(element.tag)
+    type = remove_namespace_from_tag(element.tag)
+    return "field" if type == "link" else type
 
 
 def get_own_nxdl_child_reserved_elements(child, name, nxdl_elem):
