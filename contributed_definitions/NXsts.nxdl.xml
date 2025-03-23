@@ -75,8 +75,28 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                 <group name="piezo_configuration" type="NXpiezo_config_spm" optional="true">
                     <doc>
                         The piezo configuration information like piezoelectric device calibration and
-                        material properties.
                     </doc>
+                </group>
+                <group type="NXpositioner_spm">
+                    <doc>
+                        The positioner information like the position of the tip,
+                        PID loop feedback etc.
+                    </doc>
+                    <group name="z_controller" type="NXpid_controller">
+                        <doc>
+                            The PID controller information for the z-axis.
+                        </doc>
+                        <field name="tip_lift" type="NX_NUMBER" optional="true" units="NX_LENGTH">
+                            <doc>
+                                If the tip is lifted from the stable point.
+                            </doc>
+                        </field>
+                        <field name="switch_off_delay" type="NX_CHAR_OR_NUMBER" optional="true" units="NX_TIME">
+                            <doc>
+                                The switch-off delay of the controller from its stable point.
+                            </doc>
+                        </field>
+                    </group>
                 </group>
             </group>
             <group name="bias_spectroscopy_environment" type="NXenvironment">
