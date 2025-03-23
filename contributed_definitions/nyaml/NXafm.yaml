@@ -15,7 +15,7 @@ NXafm(NXspm):
       enumeration:
         open_enum: true
         items: [contact mode, tapping mode, non-contact mode, Kelvin probe, electric force, lateral force mode]
-    experiment_instrument(NXinstrument):
+    (NXinstrument):
       doc: |
         The group explains the core instruments' setup of the AFM experiment as well as the environment of the corresponding
         instruments.
@@ -48,8 +48,6 @@ NXafm(NXspm):
           oscillator_excitation(NX_NUMBER):
             exists: optional
             unit: NX_ANY
-            
-            # is this correct? I would expect a driving voltage...
             doc: |
               The threshold voltage for oscillator excitation.
           phase_lock_loop(NXlockin):
@@ -129,28 +127,28 @@ NXafm(NXspm):
         exists: optional
         doc: |
           Link to target:
-          /ENTRY[entry]/experiment_instrument/scan_environment/tip_temp
+          /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/tip_temp
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
       cryo_bottom_temp(NX_NUMBER):
         exists: optional
         doc: |
           Link to target:
-          /ENTRY[entry]/experiment_instrument/scan_environment/cryo_bottom_temp
+          /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_bottom_temp
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
       cryo_shield_temp(NX_NUMBER):
         exists: optional
         doc: |
           Link to target:
-          /ENTRY[entry]/experiment_instrument/scan_environment/cryo_shield_temp
+          /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_shield_temp
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
       cantilever_oscillator(NXcomponent):
         exists: optional
         doc: |
           Link to target:
-          /ENTRY[entry]/experiment_instrument/cantilever_spm/cantilever_oscillator
+          /ENTRY[entry]/INSTRUMENT[instrument]/cantilever_spm/cantilever_oscillator
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
     resolution_indicators(NXcollection):
@@ -161,40 +159,40 @@ NXafm(NXspm):
         exists: optional
         doc: |
           Link to target:
-          /ENTRY[entry]/experiment_instrument/scan_environment/tip_temp
+          /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/tip_temp
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
       cryo_bottom_temp(NXsensor):
         exists: optional
         doc: |
           Link to target:
-          /ENTRY[entry]/experiment_instrument/scan_environment/cryo_bottom_temp
+          /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_bottom_temp
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
       cryo_shield_temp(NXsensor):
         exists: optional
         doc: |
           Link to target:
-          /ENTRY[entry]/experiment_instrument/scan_environment/cryo_shield_temp
+          /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_shield_temp
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
       oscillator_excitation(NX_NUMBER):
         exists: optional
         doc: |
           Link to target:
-          /ENTRY[entry]/experiment_instrument/cantilever_spm/cantilever_oscillator/oscillator_excitation
+          /ENTRY[entry]/INSTRUMENT[instrument]/cantilever_spm/cantilever_oscillator/oscillator_excitation
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
       amplitude_excitation(NX_NUMBER):
         exists: optional
         doc: |
           Link to target:
-          /ENTRY[entry]/experiment_instrument/cantilever_spm/cantilever_oscillator/phase_lock_loop/amplitude_excitation
+          /ENTRY[entry]/INSTRUMENT[instrument]/cantilever_spm/cantilever_oscillator/phase_lock_loop/amplitude_excitation
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 477c1b83ba1c206283d97557c761cadcdfd463bc70ec8ec5303824e547c65a9f
+# f0ebb21120ebc51eed22116821cc9593b6d4dd782a4efd43919106caa2872499
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -245,7 +243,7 @@ NXafm(NXspm):
 #                 <item value="lateral force mode"/>
 #             </enumeration>
 #         </field>
-#         <group name="experiment_instrument" type="NXinstrument">
+#         <group type="NXinstrument">
 #             <doc>
 #                 The group explains the core instruments' setup of the AFM experiment as well as the environment of the corresponding
 #                 instruments.
@@ -278,7 +276,6 @@ NXafm(NXspm):
 #                         various measurement modes, such as non-contact or intermittent-contact (tapping) modes.
 #                     </doc>
 #                     <field name="oscillator_excitation" type="NX_NUMBER" optional="true" units="NX_ANY">
-#                         <!--is this correct? I would expect a driving voltage...-->
 #                         <doc>
 #                             The threshold voltage for oscillator excitation.
 #                         </doc>
@@ -382,7 +379,7 @@ NXafm(NXspm):
 #             <field name="cantilever_tip_temp" type="NX_NUMBER" optional="true">
 #                 <doc>
 #                     Link to target:
-#                     /ENTRY[entry]/experiment_instrument/scan_environment/tip_temp
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/tip_temp
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -390,7 +387,7 @@ NXafm(NXspm):
 #             <field name="cryo_bottom_temp" type="NX_NUMBER" optional="true">
 #                 <doc>
 #                     Link to target:
-#                     /ENTRY[entry]/experiment_instrument/scan_environment/cryo_bottom_temp
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_bottom_temp
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -398,7 +395,7 @@ NXafm(NXspm):
 #             <field name="cryo_shield_temp" type="NX_NUMBER" optional="true">
 #                 <doc>
 #                     Link to target:
-#                     /ENTRY[entry]/experiment_instrument/scan_environment/cryo_shield_temp
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_shield_temp
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -406,7 +403,7 @@ NXafm(NXspm):
 #             <group name="cantilever_oscillator" type="NXcomponent" optional="true">
 #                 <doc>
 #                     Link to target:
-#                     /ENTRY[entry]/experiment_instrument/cantilever_spm/cantilever_oscillator
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/cantilever_spm/cantilever_oscillator
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -419,7 +416,7 @@ NXafm(NXspm):
 #             <group name="cantilever_tip_temp" type="NXsensor" optional="true">
 #                 <doc>
 #                     Link to target:
-#                     /ENTRY[entry]/experiment_instrument/scan_environment/tip_temp
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/tip_temp
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -427,7 +424,7 @@ NXafm(NXspm):
 #             <group name="cryo_bottom_temp" type="NXsensor" optional="true">
 #                 <doc>
 #                     Link to target:
-#                     /ENTRY[entry]/experiment_instrument/scan_environment/cryo_bottom_temp
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_bottom_temp
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -435,7 +432,7 @@ NXafm(NXspm):
 #             <group name="cryo_shield_temp" type="NXsensor" optional="true">
 #                 <doc>
 #                     Link to target:
-#                     /ENTRY[entry]/experiment_instrument/scan_environment/cryo_shield_temp
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_shield_temp
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -443,7 +440,7 @@ NXafm(NXspm):
 #             <field name="oscillator_excitation" type="NX_NUMBER" optional="true">
 #                 <doc>
 #                     Link to target:
-#                     /ENTRY[entry]/experiment_instrument/cantilever_spm/cantilever_oscillator/oscillator_excitation
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/cantilever_spm/cantilever_oscillator/oscillator_excitation
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -451,7 +448,7 @@ NXafm(NXspm):
 #             <field name="amplitude_excitation" type="NX_NUMBER" optional="true">
 #                 <doc>
 #                     Link to target:
-#                     /ENTRY[entry]/experiment_instrument/cantilever_spm/cantilever_oscillator/phase_lock_loop/amplitude_excitation
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/cantilever_spm/cantilever_oscillator/phase_lock_loop/amplitude_excitation
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>

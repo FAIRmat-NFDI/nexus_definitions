@@ -19,7 +19,7 @@ NXsts(NXspm):
       enumeration:
         open_enum: true
         items: [constant_height, constant_current, constant_spacing]
-    experiment_instrument(NXinstrument):
+    (NXinstrument):
       doc: |
         The instrument information.
       lockin_amplifier(NXlockin):
@@ -42,59 +42,6 @@ NXsts(NXspm):
           doc: |
             The piezo configuration information like piezoelectric device calibration and
             material properties.
-          calibration(NXcalibration):
-            exists: optional
-            doc: |
-              Calibration of the piezo device.
-            second_order_correction_N(NX_NUMBER):
-              nameType: partial
-              exists: optional
-              unit: NX_ANY
-              doc: |
-                The N (substring) denotes X and Y directions. The 2nd order piezo
-                compensate the error for that axis. The following equation shows the
-                interpretation of the 2nd order correction parameters,
-                For the X-piezo: "Ux = 1/cx · X + cxx · X2"
-                with units: "[V] = [V/m] · [m] + [V/m2] · [m2]"
-                where cx is the calibration of the piezo X and cxx is the 2nd order
-                correction. The unit for such the second-order correction is (V/m^2).
-            calibration_type(NX_CHAR):
-              exists: optional
-              doc: |
-                The name of the calibration type, sometimes it is called
-                e.g active calibration, passive calibration.
-            calibration_coefficient_N(NX_NUMBER):
-              nameType: partial
-              exists: optional
-              unit: NX_ANY
-              doc: |
-                The calibration coefficient is the ratio of the actual distance moved by the piezo to
-                the voltage applied to the piezo. It is also called first-order correction.
-            drift_N(NX_NUMBER):
-              nameType: partial
-              exists: optional
-              unit: NX_ANY
-              doc: |
-                Set up the settings to enable or disable the drift compensation.
-            drift_correction_status(NX_BOOLEAN):
-              exists: optional
-              doc: |
-                Whether the drift has been corrected in case there is a deviation in the
-                drift.
-            tilt_N(NX_NUMBER):
-              nameType: partial
-              exists: optional
-              unit: NX_ANGLE
-              doc: |
-                The N (substring) denotes X and Y directions, and for both directions
-                tilt needs to be adjusted according to the actual surface.
-            hv_gain_N(NX_NUMBER):
-              nameType: partial
-              doc: |
-                The N (substring) denotes X or Y or Z. In some systems,
-                there is an HV gain readout feature. For these systems,
-                the HV gain should be automatically adjusted whenever
-                the gain is changed at the high voltage amplifier.
       bias_spectroscopy_environment(NXenvironment):
         doc: |
           To explain bias (sweep measurement) voltage applied to the sample.
@@ -112,7 +59,7 @@ NXsts(NXspm):
         doc: |
           The tunneling current between tip and sample after application of bias voltage.
           link to the target:
-          /ENTRY[entry]/experiment_instrument/current_sensor/current
+          /ENTRY[entry]/INSTRUMENT[instrument]/current_sensor/current
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
       current_offset(NX_NUMBER):
@@ -120,7 +67,7 @@ NXsts(NXspm):
         doc: |
           The offset in tunneling current between tip and sample after application of bias voltage.
           link to the target:
-          /ENTRY[entry]/experiment_instrument/current_sensor/current
+          /ENTRY[entry]/INSTRUMENT[instrument]/current_sensor/current
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
       current_gain(NX_NUMBER):
@@ -129,15 +76,15 @@ NXsts(NXspm):
           Proportional relationship between the probe output voltage and the actual
           tunneling current when measuring the tunneling current.
           link to the target:
-          /ENTRY[entry]/experiment_instrument/current_sensor/amplifier/current_gain
+          /ENTRY[entry]/INSTRUMENT[instrument]/current_sensor/amplifier/current_gain
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
-      bias_sweep(NXobject):
+      bias_sweep(NXscan_control):
         exists: optional
         doc: |
           Bias sweep measurement in bias spectroscopy.
           Link to target:
-          /ENTRY[entry]/experiment_instrument/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/BIAS_SWEEP[bias_sweep]
+          /ENTRY[entry]/INSTRUMENT[instrument]/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
       modulation_signal_type:
@@ -145,7 +92,7 @@ NXsts(NXspm):
         doc: |
           This is the signal on which the modulation voltage or current will be added.
           link to the target:
-          /ENTRY[entry]/experiment_instrument/lockin_amplifier/modulation_signal_type
+          /ENTRY[entry]/INSTRUMENT[instrument]/lockin_amplifier/modulation_signal_type
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
       reference_frequency(NX_NUMBER):
@@ -153,7 +100,7 @@ NXsts(NXspm):
         doc: |
           The frequency of the sine modulation that is used as carrier signal of input signal in lock-in.
           link to the target:
-          /ENTRY[entry]/experiment_instrument/lockin_amplifier/reference_frequency
+          /ENTRY[entry]/INSTRUMENT[instrument]/lockin_amplifier/reference_frequency
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
     resolution_indicators(NXcollection):
@@ -165,28 +112,28 @@ NXsts(NXspm):
         exists: optional
         doc: |
           Link to target:
-          /ENTRY[entry]/experiment_instrument/scan_environment/tip_temp
+          /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/tip_temp
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
       cryo_bottom_temp(NX_NUMBER):
         exists: optional
         doc: |
           Link to target:
-          /ENTRY[entry]/experiment_instrument/scan_environment/cryo_bottom_temp
+          /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_bottom_temp
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
       cryo_shield_temp(NX_NUMBER):
         exists: optional
         doc: |
           Link to target:
-          /ENTRY[entry]/experiment_instrument/scan_environment/cryo_shield_temp
+          /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_shield_temp
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
-      bias_sweep(NXobject):
+      bias_sweep(NXscan_control):
         exists: optional
         doc: |
           Link to target:
-          /ENTRY[entry]/experiment_instrument/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/BIAS_SWEEP[bias_sweep]
+          /ENTRY[entry]/INSTRUMENT[instrument]/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
       modulation_signal_type:
@@ -194,7 +141,7 @@ NXsts(NXspm):
         doc: |
           This is the signal on which the modulation voltage or current will be added.
           link to the target:
-          /ENTRY[entry]/experiment_instrument/lockin_amplifier/modulation_signal_type
+          /ENTRY[entry]/INSTRUMENT[instrument]/lockin_amplifier/modulation_signal_type
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
       modulation_frequency(NX_NUMBER):
@@ -202,10 +149,10 @@ NXsts(NXspm):
         doc: |
           The frequency of the sine modulation that is used to modulate the signal in lock-in.
           link to the target:
-          /ENTRY[entry]/experiment_instrument/lockin_amplifier/modulation_frequency
+          /ENTRY[entry]/INSTRUMENT[instrument]/lockin_amplifier/modulation_frequency
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 24db05a8cbe1431d49dea02f93295916d0a52f4288a8f2e8f75fd11e0144882e
+# 673a8282698f430fff43c13111c8abf02afcbaa142446c5fc0a59bab4b68c35b
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -257,7 +204,7 @@ NXsts(NXspm):
 #                 <item value="constant_spacing"/>
 #             </enumeration>
 #         </field>
-#         <group name="experiment_instrument" type="NXinstrument">
+#         <group type="NXinstrument">
 #             <doc>
 #                 The instrument information.
 #             </doc>
@@ -285,59 +232,6 @@ NXsts(NXspm):
 #                         The piezo configuration information like piezoelectric device calibration and
 #                         material properties.
 #                     </doc>
-#                     <group name="calibration" type="NXcalibration" optional="true">
-#                         <doc>
-#                             Calibration of the piezo device.
-#                         </doc>
-#                         <field name="second_order_correction_N" type="NX_NUMBER" nameType="partial" optional="true" units="NX_ANY">
-#                             <doc>
-#                                 The N (substring) denotes X and Y directions. The 2nd order piezo
-#                                 compensate the error for that axis. The following equation shows the
-#                                 interpretation of the 2nd order correction parameters,
-#                                 For the X-piezo: "Ux = 1/cx · X + cxx · X2"
-#                                 with units: "[V] = [V/m] · [m] + [V/m2] · [m2]"
-#                                 where cx is the calibration of the piezo X and cxx is the 2nd order
-#                                 correction. The unit for such the second-order correction is (V/m^2).
-#                             </doc>
-#                         </field>
-#                         <field name="calibration_type" type="NX_CHAR" optional="true">
-#                             <doc>
-#                                 The name of the calibration type, sometimes it is called
-#                                 e.g active calibration, passive calibration.
-#                             </doc>
-#                         </field>
-#                         <field name="calibration_coefficient_N" type="NX_NUMBER" nameType="partial" optional="true" units="NX_ANY">
-#                             <doc>
-#                                 The calibration coefficient is the ratio of the actual distance moved by the piezo to
-#                                 the voltage applied to the piezo. It is also called first-order correction.
-#                             </doc>
-#                         </field>
-#                         <field name="drift_N" type="NX_NUMBER" nameType="partial" optional="true" units="NX_ANY">
-#                             <doc>
-#                                 Set up the settings to enable or disable the drift compensation.
-#                             </doc>
-#                         </field>
-#                         <field name="drift_correction_status" type="NX_BOOLEAN" optional="true">
-#                             <doc>
-#                                 Whether the drift has been corrected in case there is a deviation in the
-#                                 drift.
-#                             </doc>
-#                         </field>
-#                         <field name="tilt_N" type="NX_NUMBER" nameType="partial" optional="true" units="NX_ANGLE">
-#                             <doc>
-#                                 The N (substring) denotes X and Y directions, and for both directions
-#                                 tilt needs to be adjusted according to the actual surface.
-#                             </doc>
-#                         </field>
-#                         <field name="hv_gain_N" type="NX_NUMBER" nameType="partial">
-#                             <doc>
-#                                 The N (substring) denotes X or Y or Z. In some systems,
-#                                 there is an HV gain readout feature. For these systems,
-#                                 the HV gain should be automatically adjusted whenever
-#                                 the gain is changed at the high voltage amplifier.
-#                             </doc>
-#                         </field>
-#                     </group>
 #                 </group>
 #             </group>
 #             <group name="bias_spectroscopy_environment" type="NXenvironment">
@@ -361,7 +255,7 @@ NXsts(NXspm):
 #                 <doc>
 #                     The tunneling current between tip and sample after application of bias voltage.
 #                     link to the target:
-#                     /ENTRY[entry]/experiment_instrument/current_sensor/current
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/current_sensor/current
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -370,7 +264,7 @@ NXsts(NXspm):
 #                 <doc>
 #                     The offset in tunneling current between tip and sample after application of bias voltage.
 #                     link to the target:
-#                     /ENTRY[entry]/experiment_instrument/current_sensor/current
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/current_sensor/current
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -380,16 +274,16 @@ NXsts(NXspm):
 #                     Proportional relationship between the probe output voltage and the actual
 #                     tunneling current when measuring the tunneling current.
 #                     link to the target:
-#                     /ENTRY[entry]/experiment_instrument/current_sensor/amplifier/current_gain
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/current_sensor/amplifier/current_gain
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
 #             </field>
-#             <group name="bias_sweep" type="NXobject" optional="true">
+#             <group name="bias_sweep" type="NXscan_control" optional="true">
 #                 <doc>
 #                     Bias sweep measurement in bias spectroscopy.
 #                     Link to target:
-#                     /ENTRY[entry]/experiment_instrument/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/BIAS_SWEEP[bias_sweep]
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -398,7 +292,7 @@ NXsts(NXspm):
 #                 <doc>
 #                     This is the signal on which the modulation voltage or current will be added.
 #                     link to the target:
-#                     /ENTRY[entry]/experiment_instrument/lockin_amplifier/modulation_signal_type
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/lockin_amplifier/modulation_signal_type
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -407,7 +301,7 @@ NXsts(NXspm):
 #                 <doc>
 #                     The frequency of the sine modulation that is used as carrier signal of input signal in lock-in.
 #                     link to the target:
-#                     /ENTRY[entry]/experiment_instrument/lockin_amplifier/reference_frequency
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/lockin_amplifier/reference_frequency
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -421,7 +315,7 @@ NXsts(NXspm):
 #             <field name="tip_temp" type="NX_NUMBER" optional="true">
 #                 <doc>
 #                     Link to target:
-#                     /ENTRY[entry]/experiment_instrument/scan_environment/tip_temp
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/tip_temp
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -429,7 +323,7 @@ NXsts(NXspm):
 #             <field name="cryo_bottom_temp" type="NX_NUMBER" optional="true">
 #                 <doc>
 #                     Link to target:
-#                     /ENTRY[entry]/experiment_instrument/scan_environment/cryo_bottom_temp
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_bottom_temp
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -437,15 +331,15 @@ NXsts(NXspm):
 #             <field name="cryo_shield_temp" type="NX_NUMBER" optional="true">
 #                 <doc>
 #                     Link to target:
-#                     /ENTRY[entry]/experiment_instrument/scan_environment/cryo_shield_temp
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_shield_temp
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
 #             </field>
-#             <group name="bias_sweep" type="NXobject" optional="true">
+#             <group name="bias_sweep" type="NXscan_control" optional="true">
 #                 <doc>
 #                     Link to target:
-#                     /ENTRY[entry]/experiment_instrument/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/BIAS_SWEEP[bias_sweep]
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -454,7 +348,7 @@ NXsts(NXspm):
 #                 <doc>
 #                     This is the signal on which the modulation voltage or current will be added.
 #                     link to the target:
-#                     /ENTRY[entry]/experiment_instrument/lockin_amplifier/modulation_signal_type
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/lockin_amplifier/modulation_signal_type
 #                     
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
@@ -463,7 +357,7 @@ NXsts(NXspm):
 #                 <doc>
 #                     The frequency of the sine modulation that is used to modulate the signal in lock-in.
 #                     link to the target:
-#                     /ENTRY[entry]/experiment_instrument/lockin_amplifier/modulation_frequency
+#                     /ENTRY[entry]/INSTRUMENT[instrument]/lockin_amplifier/modulation_frequency
 #                 </doc>
 #             </field>
 #         </group>
