@@ -27,7 +27,7 @@
         
         Instances of phases can be crystalline.
     </doc>
-    <field name="identifier" type="NX_INT" units="NX_UNITLESS">
+    <field name="phase_identifier" type="NX_INT" units="NX_UNITLESS">
         <doc>
             Identifier for each phase.
             
@@ -37,8 +37,9 @@
             
             The identifier_phase value should match with the integer suffix of the
             group name which represents that instance in a NeXus/HDF5 file, i.e.
-            if three phases were used e.g. 0, 1, and 2, three instances of :ref:`NXphase`
-            named phase0, phase1, and phase2 should be stored in that HDF5 file.
+            if three phases were used e.g. 0, 1, and 2, three instances of 
+            :ref:`NXphase` named phase0, phase1, and phase2 should be stored
+            in that HDF5 file.
         </doc>
     </field>
     <field name="name" type="NX_CHAR">
@@ -52,9 +53,25 @@
     <!--group reference replaced by concept identifierNAME inherited from NXobject-->
     <group type="NXunit_cell"/>
     <group type="NXatom"/>
-    <!--support for microstructures that are not proposed to the NIAC in this PR
-<group name="microstructureID" type="NXmicrostructure" nameType="partial"/>
-<group name="ipfID" type="NXmicrostructure_ipf" nameType="partial"/>
-<group name="pfID" type="NXmicrostructure_pf" nameType="partial"/>
-<group name="odfID" type="NXmicrostructure_odf" nameType="partial"/>-->
+    <!--support for microstructures that are not proposed to the NIAC in this PR-->
+    <group type="NXmicrostructure">
+        <doc>
+            Instance names should use microstructure as a prefix.
+        </doc>
+    </group>
+    <group type="NXmicrostructure_ipf">
+        <doc>
+            Instance names should use ipf as a prefix.
+        </doc>
+    </group>
+    <group type="NXmicrostructure_pf">
+        <doc>
+            Instance names should use pf as a prefix.
+        </doc>
+    </group>
+    <group type="NXmicrostructure_odf">
+        <doc>
+            Instance names should use odf as a prefix.
+        </doc>
+    </group>
 </definition>

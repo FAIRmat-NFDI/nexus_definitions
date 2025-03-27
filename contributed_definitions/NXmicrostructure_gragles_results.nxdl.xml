@@ -242,14 +242,14 @@ the typical lean summary statistics flattened-->
                     <field name="representation" recommended="true"/>
                     <field name="number_of_crystals" type="NX_UINT"/>
                     <field name="number_of_phases" type="NX_UINT"/>
-                    <field name="identifier_crystal_offset" type="NX_INT"/>
-                    <field name="identifier_crystal" type="NX_INT">
+                    <field name="index_offset_crystal" type="NX_INT"/>
+                    <field name="indices_crystal" type="NX_INT">
                         <dimensions rank="1">
                             <dim index="1" value="n_grains"/>
                         </dimensions>
                     </field>
-                    <field name="identifier_phase_offset" type="NX_INT"/>
-                    <field name="identifier_phase" type="NX_INT">
+                    <field name="index_offset_phase" type="NX_INT"/>
+                    <field name="indices_phase" type="NX_INT">
                         <dimensions rank="1">
                             <dim index="1" value="n_grains"/>
                         </dimensions>
@@ -268,10 +268,15 @@ the typical lean summary statistics flattened-->
                 <group name="interface" type="NXobject" optional="true">
                     <field name="representation" type="NX_CHAR" recommended="true"/>
                     <field name="number_of_interfaces" type="NX_UINT"/>
-                    <field name="identifier_offset" type="NX_INT"/>
-                    <field name="identifier_crystal" type="NX_INT" units="NX_UNITLESS">
+                    <field name="index_offset_interface" type="NX_INT"/>
+                    <field name="indices_interface" type="NX_INT">
+                        <dimensions rank="1">
+                            <dim index="1" value="n_interfaces"/>
+                        </dimensions>
+                    </field>
+                    <field name="indices_crystal" type="NX_INT" units="NX_UNITLESS">
                         <doc>
-                            Set of pairs of identifier_crystal for each interface.
+                            One pair of indices_crystal values for each interface.
                         </doc>
                         <dimensions rank="2">
                             <dim index="1" value="n_interfaces"/>

@@ -5,6 +5,8 @@ doc: |
   Such a data structure can be used to efficiently circulate around faces
   and iterate over vertices of a planar graph. The data structure is also
   known as a doubly connected edge list.
+  
+  Indices can be used as identifier and thus names for individual instances.
 
 # holes in the polygon mesh can be handled
 symbols:
@@ -46,7 +48,7 @@ NXcg_half_edge_data_structure(NXcg_primitive):
     dimensions:
       rank: 1
       dim: (n_he,)
-  identifier_vertex_offset(NX_INT):
+  index_offset_vertex(NX_INT):
     unit: NX_UNITLESS
     doc: |
       Integer offset whereby the identifier of the first member
@@ -54,7 +56,7 @@ NXcg_half_edge_data_structure(NXcg_primitive):
       
       Identifier can be defined explicitly or implicitly.
       Inspect the definition of :ref:`NXcg_primitive` for further details.
-  identifier_edge_offset(NX_INT):
+  index_offset_edge(NX_INT):
     unit: NX_UNITLESS
     doc: |
       Integer offset whereby the identifier of the first member
@@ -62,7 +64,7 @@ NXcg_half_edge_data_structure(NXcg_primitive):
       
       Identifier can be defined explicitly or implicitly.
       Inspect the definition of :ref:`NXcg_primitive` for further details.
-  identifier_face_offset(NX_INT):
+  index_offset_face(NX_INT):
     doc: |
       Integer offset whereby the identifier of the first member
       of the faces differs from zero.
@@ -70,7 +72,7 @@ NXcg_half_edge_data_structure(NXcg_primitive):
       Identifier can be defined explicitly or implicitly.
       Inspect the definition of :ref:`NXcg_primitive` for further details.
   
-  # therefore, identifier_ -vertex, -face, -half_edge are implicit
+  # therefore, indices_ -vertex, -face, -half_edge are implicit
   position(NX_NUMBER):
     unit: NX_ANY
     doc: |
@@ -141,7 +143,7 @@ NXcg_half_edge_data_structure(NXcg_primitive):
       of microstructural objects like crystals/grains.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 6984d4a73236b8d8843788fecf74cd41114a16880a4a9a2f14e78f667a075d41
+# 18d27d46ae4ed64433baf02f09174dc4cc71eac48e42c1d001dcba99dd0ba54c
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -198,6 +200,8 @@ NXcg_half_edge_data_structure(NXcg_primitive):
 #         Such a data structure can be used to efficiently circulate around faces
 #         and iterate over vertices of a planar graph. The data structure is also
 #         known as a doubly connected edge list.
+#         
+#         Indices can be used as identifier and thus names for individual instances.
 #     </doc>
 #     <field name="dimensionality" type="NX_POSINT" units="NX_UNITLESS">
 #         <doc>
@@ -227,7 +231,7 @@ NXcg_half_edge_data_structure(NXcg_primitive):
 #             <dim index="1" value="n_he"/>
 #         </dimensions>
 #     </field>
-#     <field name="identifier_vertex_offset" type="NX_INT" units="NX_UNITLESS">
+#     <field name="index_offset_vertex" type="NX_INT" units="NX_UNITLESS">
 #         <doc>
 #             Integer offset whereby the identifier of the first member
 #             of the vertices differs from zero.
@@ -236,7 +240,7 @@ NXcg_half_edge_data_structure(NXcg_primitive):
 #             Inspect the definition of :ref:`NXcg_primitive` for further details.
 #         </doc>
 #     </field>
-#     <field name="identifier_edge_offset" type="NX_INT" units="NX_UNITLESS">
+#     <field name="index_offset_edge" type="NX_INT" units="NX_UNITLESS">
 #         <doc>
 #             Integer offset whereby the identifier of the first member
 #             of the edges differs from zero.
@@ -245,7 +249,7 @@ NXcg_half_edge_data_structure(NXcg_primitive):
 #             Inspect the definition of :ref:`NXcg_primitive` for further details.
 #         </doc>
 #     </field>
-#     <field name="identifier_face_offset" type="NX_INT">
+#     <field name="index_offset_face" type="NX_INT">
 #         <doc>
 #             Integer offset whereby the identifier of the first member
 #             of the faces differs from zero.
@@ -254,7 +258,7 @@ NXcg_half_edge_data_structure(NXcg_primitive):
 #             Inspect the definition of :ref:`NXcg_primitive` for further details.
 #         </doc>
 #     </field>
-#     <!--therefore, identifier_ -vertex, -face, -half_edge are implicit-->
+#     <!--therefore, indices_ -vertex, -face, -half_edge are implicit-->
 #     <field name="position" type="NX_NUMBER" units="NX_ANY">
 #         <doc>
 #             The position of the vertices.

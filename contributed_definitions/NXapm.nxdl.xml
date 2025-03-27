@@ -60,8 +60,8 @@
                 Number of ions spatially filtered from results of the hit_finding algorithm
                 from which an instance of a reconstructed volume has been generated.
                 These ions get new identifier assigned in the process (the so-called
-                identifier_evaporation). This identifier must not be confused with
-                the identifier_pulse. Typically smaller than both p_out and p_out.
+                evaporation_id). This identifier must not be confused with
+                the pulse_id. Typically smaller than both p_out and p_out.
             </doc>
         </symbol>
     </symbols>
@@ -103,7 +103,7 @@
                 </field>
             </group>
         </group>
-        <!--\@url:-->
+        <!--<field name="identifier_experiment" type="NX_CHAR" optional="true"/>-->        
         <field name="run_number" type="NX_UINT" recommended="true" units="NX_UNITLESS">
             <!--cannot be made required as for simulations you do not have a run number!-->
             <doc>
@@ -584,7 +584,7 @@ the application definition here is nothing else then the documentation of this f
                 Due to this practical inaccessibility of details, virtually all atom probe studies currently use a reporting scheme
                 where the course of the specimen evaporation is documented such that quantities are a function of evaporation identifier
                 i.e. actual event/ion, i.e. after having the hit finding algorithm and correlations applied.
-                That is identifier_evaporation values take the role of an implicit time and course of the experiment given that
+                That is evaporation_id values take the role of an implicit time and course of the experiment given that
                 ion extraction physically is a sequential process.
                 
                 There is a number of research groups who build own instruments and share different aspects of their technical
@@ -707,7 +707,7 @@ details can be useful to convey details about an atom probe instrument in genera
                     As set and measured quantities typically change over time and we do not
                     yet know during the measurement which of the events have associated
                     (molecular) ions that will end up in the reconstructed volume, we must not
-                    document quantities as a function of the identifier_evaporation but as a
+                    document quantities as a function of the evaporation_id but as a
                     function of the (pulsing) identifier_event.
                 </doc>
                 <group type="NXevent_data_apm" minOccurs="0" maxOccurs="unbounded">
@@ -719,8 +719,8 @@ but for M-TAP and Oxcart these pieces of information are available.-->
                     <field name="start_time" type="NX_DATE_TIME" recommended="true"/>
                     <field name="end_time" type="NX_DATE_TIME" recommended="true"/>
                     <!--delta_time(NX_NUMBER):
-identifier_pulse_offset(NX_INT):
-identifier_pulse(NX_INT):-->
+pulse_id_offset(NX_INT):
+pulse_id(NX_INT):-->
                     <group name="instrument" type="NXinstrument_apm" recommended="true">
                         <group name="reflectron" type="NXcomponent" recommended="true">
                             <field name="voltage" type="NX_FLOAT"/>
@@ -945,7 +945,7 @@ we can only make recommendations-->
                         CRunHeader.fTotalEventRecords
                     </doc>
                 </field>
-                <field name="identifier_hit_quality" type="NX_UINT" optional="true">
+                <field name="hit_quality" type="NX_UINT" optional="true">
                     <doc>
                         Identifier used for each hit_quality type.
                         Following the order of hit_quality_types.
@@ -957,7 +957,7 @@ we can only make recommendations-->
                 <field name="hit_quality" type="NX_UINT" optional="true" units="NX_UNITLESS">
                     <doc>
                         Hit quality identifier for each pulse.
-                        Identifier have to be within identifier_hit_quality.
+                        Identifier have to be within hit_quality.
                     </doc>
                     <dimensions rank="1">
                         <dim index="1" value="p_out"/>
@@ -982,7 +982,7 @@ insight into the results of the hit_finding algorithm of IVAS/APSuite but typica
 used only in the context to learn about the multiplicity of an ion.
 pulses_since_last_ion(NX_UINT):
 dim: (n,)
-identifier_pulse(NX_INT):
+pulse_id(NX_INT):
 dim: (n,)
 at this point the original set of events p has been filtered down to p_out-->
             <group name="hit_spatial_filtering" type="NXprocess" recommended="true">
@@ -998,25 +998,25 @@ at this point the original set of events p has been filtered down to p_out-->
                     <field name="checksum" type="NX_CHAR"/>
                     <field name="algorithm" type="NX_CHAR"/>
                 </group>
-                <field name="identifier_evaporation_offset" type="NX_INT" units="NX_UNITLESS">
+                <field name="evaporation_id_offset" type="NX_INT" units="NX_UNITLESS">
                     <doc>
                         Integer used to name the first pulse to know if there is an
-                        offset of the identifier_evaporation to zero.
+                        offset of the evaporation_id to zero.
                         
                         Identifiers can be defined either implicitly or explicitly.
                         For implicit indexing identifiers are defined on the interval
                         :math:`[identifier\_offset, identifier\_offset + c - 1]`.
                         
                         Therefore, implicit identifier are completely defined by the value of
-                        identifier_offset and cardinality. For example if identifier run from
-                        -2 to 3 the value for identifier_offset is -2.
+                        evaporation_id_offset and cardinality. For example if identifier run from
+                        -2 to 3 the value for evaporation_id_offset is -2.
                         
                         For explicit indexing the field identifier has to be used.
                         Fortran-/Matlab- and C-/Python-style indexing have specific implicit
-                        identifier conventions where identifier_offset is 1 and 0 respectively.
+                        identifier conventions where evaporation_id_offset is 1 and 0 respectively.
                     </doc>
                 </field>
-                <field name="identifier_evaporation" type="NX_INT" units="NX_UNITLESS">
+                <field name="evaporation_id" type="NX_INT" units="NX_UNITLESS">
                     <doc>
                         (Molecular) ion identifier which resolves the sequence in which
                         the ions were evaporated but taking into account that a hit_finding

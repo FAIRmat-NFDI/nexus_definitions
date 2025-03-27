@@ -13,6 +13,8 @@ doc: |
   
   Having an own base class for the data structure how primitives are stored is
   useful to embrace both users with small or detailed specification demands.
+  
+  Indices can be used as identifier and thus names for individual instances.
 symbols:
   doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
@@ -56,7 +58,7 @@ NXcg_face_list_data_structure(NXcg_primitive):
     unit: NX_UNITLESS
     doc: |
       Number of faces of the primitives.
-  identifier_vertex_offset(NX_INT):
+  index_offset_vertex(NX_INT):
     unit: NX_UNITLESS
     doc: |
       Integer offset whereby the identifier of the first member
@@ -64,7 +66,7 @@ NXcg_face_list_data_structure(NXcg_primitive):
       
       Identifier can be defined explicitly or implicitly.
       Inspect the definition of NXcg_primitive for further details.
-  identifier_edge_offset(NX_INT):
+  index_offset_edge(NX_INT):
     unit: NX_UNITLESS
     doc: |
       Integer offset whereby the identifier of the first member
@@ -72,7 +74,7 @@ NXcg_face_list_data_structure(NXcg_primitive):
       
       Identifier can be defined explicitly or implicitly.
       Inspect the definition of NXcg_primitive for further details.
-  identifier_face_offset(NX_INT):
+  index_offset_face(NX_INT):
     unit: NX_UNITLESS
     doc: |
       Integer offset whereby the identifier of the first member
@@ -80,21 +82,21 @@ NXcg_face_list_data_structure(NXcg_primitive):
       
       Identifier can be defined explicitly or implicitly.
       Inspect the definition of NXcg_primitive for further details.
-  identifier_vertex(NX_INT):
+  indices_vertex(NX_INT):
     unit: NX_UNITLESS
     doc: |
       Integer identifier to distinguish all vertices explicitly.
     dimensions:
       rank: 1
       dim: (n_v,)
-  identifier_edge(NX_INT):
+  indices_edge(NX_INT):
     unit: NX_UNITLESS
     doc: |
       Integer used to distinguish all edges explicitly.
     dimensions:
       rank: 1
       dim: (n_e,)
-  identifier_face(NX_INT):
+  indices_face(NX_INT):
     unit: NX_UNITLESS
     doc: |
       Integer used to distinguish all faces explicitly.
@@ -165,7 +167,7 @@ NXcg_face_list_data_structure(NXcg_primitive):
       dim: (n_f,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 5995e7b7684abe457db2bc9ed0f30a7993a6d8e39238eb2e19f454fa18ec19db
+# a89812b8950cc4daff0418fe7872a1e2386a204386e6d2be0226beea5a3579ce
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -236,6 +238,8 @@ NXcg_face_list_data_structure(NXcg_primitive):
 #          
 #          Having an own base class for the data structure how primitives are stored is
 #          useful to embrace both users with small or detailed specification demands.
+#          
+#          Indices can be used as identifier and thus names for individual instances.
 #     </doc>
 #     <!--resulting in a design similar to that of NXoff_geometry and the XDMF mixed primitive topology-->
 #     <field name="number_of_vertices" type="NX_INT" units="NX_UNITLESS">
@@ -265,7 +269,7 @@ NXcg_face_list_data_structure(NXcg_primitive):
 #              Number of faces of the primitives.
 #         </doc>
 #     </field>
-#     <field name="identifier_vertex_offset" type="NX_INT" units="NX_UNITLESS">
+#     <field name="index_offset_vertex" type="NX_INT" units="NX_UNITLESS">
 #         <doc>
 #              Integer offset whereby the identifier of the first member
 #              of the vertices differs from zero.
@@ -274,7 +278,7 @@ NXcg_face_list_data_structure(NXcg_primitive):
 #              Inspect the definition of NXcg_primitive for further details.
 #         </doc>
 #     </field>
-#     <field name="identifier_edge_offset" type="NX_INT" units="NX_UNITLESS">
+#     <field name="index_offset_edge" type="NX_INT" units="NX_UNITLESS">
 #         <doc>
 #              Integer offset whereby the identifier of the first member
 #              of the edges differs from zero.
@@ -283,7 +287,7 @@ NXcg_face_list_data_structure(NXcg_primitive):
 #              Inspect the definition of NXcg_primitive for further details.
 #         </doc>
 #     </field>
-#     <field name="identifier_face_offset" type="NX_INT" units="NX_UNITLESS">
+#     <field name="index_offset_face" type="NX_INT" units="NX_UNITLESS">
 #         <doc>
 #              Integer offset whereby the identifier of the first member
 #              of the faces differs from zero.
@@ -292,7 +296,7 @@ NXcg_face_list_data_structure(NXcg_primitive):
 #              Inspect the definition of NXcg_primitive for further details.
 #         </doc>
 #     </field>
-#     <field name="identifier_vertex" type="NX_INT" units="NX_UNITLESS">
+#     <field name="indices_vertex" type="NX_INT" units="NX_UNITLESS">
 #         <doc>
 #              Integer identifier to distinguish all vertices explicitly.
 #         </doc>
@@ -300,7 +304,7 @@ NXcg_face_list_data_structure(NXcg_primitive):
 #             <dim index="1" value="n_v"/>
 #         </dimensions>
 #     </field>
-#     <field name="identifier_edge" type="NX_INT" units="NX_UNITLESS">
+#     <field name="indices_edge" type="NX_INT" units="NX_UNITLESS">
 #         <doc>
 #              Integer used to distinguish all edges explicitly.
 #         </doc>
@@ -308,7 +312,7 @@ NXcg_face_list_data_structure(NXcg_primitive):
 #             <dim index="1" value="n_e"/>
 #         </dimensions>
 #     </field>
-#     <field name="identifier_face" type="NX_INT" units="NX_UNITLESS">
+#     <field name="indices_face" type="NX_INT" units="NX_UNITLESS">
 #         <doc>
 #              Integer used to distinguish all faces explicitly.
 #         </doc>

@@ -115,7 +115,7 @@ NXmicrostructure_score_results(NXobject):
         symmetry(NX_CHAR):
         cell_dimensions(NX_NUMBER):
         extent(NX_UINT):
-        identifier_offset(NX_INT):
+        index_offset(NX_INT):
       boundary(NXcg_hexahedron):
         doc: |
           A tight bounding box or sphere or bounding primitive about the grid.
@@ -292,19 +292,19 @@ NXmicrostructure_score_results(NXobject):
         # optional places to store the grid for instance if it changes
         grid(NXcg_grid):
           exists: recommended
-          identifier_crystal(NX_UINT):
+          indices_crystal(NX_UINT):
             exists: recommended
             unit: NX_UNITLESS
             doc: |
-              Grain identifier for each cell.
+              Index for each crystal whereby its metadata can be retrieved.
             dimensions:
               rank: 3
               dim: (n_x, n_y, n_z)
-          identifier_thread(NX_UINT):
+          thread_id(NX_UINT):
             exists: optional
             unit: NX_UNITLESS
             doc: |
-              Identifier of the OpenMP thread which processed this part of the grid.
+              Identifier of the OpenMP thread that processed this part of the grid.
             dimensions:
               rank: 3
               dim: (n_x, n_y, n_z)
@@ -315,16 +315,16 @@ NXmicrostructure_score_results(NXobject):
             exists: recommended
           number_of_phases(NX_UINT):
             exists: recommended
-          identifier_crystal_offset(NX_INT):
+          index_offset_crystal(NX_INT):
             exists: recommended
-          identifier_crystal(NX_INT):
+          indices_crystal(NX_INT):
             exists: recommended
             dimensions:
               rank: 1
               dim: (n_grains,)
-          identifier_phase_offset(NX_INT):
+          index_offset_phase(NX_INT):
             exists: recommended
-          identifier_phase(NX_INT):
+          indices_phase(NX_INT):
             exists: recommended
             dimensions:
               rank: 1
@@ -399,7 +399,7 @@ NXmicrostructure_score_results(NXobject):
             dimensions:
               rank: 2
               dim: (n_front, 3)
-          identifier_deformed_grain(NX_UINT):
+          deformed_grain_id(NX_UINT):
             exists: recommended
             unit: NX_UNITLESS
             doc: |
@@ -407,7 +407,7 @@ NXmicrostructure_score_results(NXobject):
             dimensions:
               rank: 1
               dim: (n_front,)
-          identifier_recrystallized_grain(NX_UINT):
+          recrystallized_grain_id(NX_UINT):
             exists: recommended
             unit: NX_UNITLESS
             doc: |
@@ -416,7 +416,7 @@ NXmicrostructure_score_results(NXobject):
             dimensions:
               rank: 1
               dim: (n_front,)
-          identifier_thread(NX_UINT):
+          thread_id(NX_UINT):
             exists: optional
             unit: NX_UNITLESS
             doc: |
@@ -435,7 +435,7 @@ NXmicrostructure_score_results(NXobject):
               dim: (n_front,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 877d375485ae7b31492b80b0d566d3f88f0068aedcb70825c5bef0802cc1a62a
+# d86467cb085bf2a8559b1dfc6a4d4e938d1a782e85b3bfc02cd04ebcdd397c85
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -641,7 +641,7 @@ NXmicrostructure_score_results(NXobject):
 #                 <field name="symmetry" type="NX_CHAR"/>
 #                 <field name="cell_dimensions" type="NX_NUMBER"/>
 #                 <field name="extent" type="NX_UINT"/>
-#                 <field name="identifier_offset" type="NX_INT"/>
+#                 <field name="index_offset" type="NX_INT"/>
 #             </group>
 #             <group name="boundary" type="NXcg_hexahedron">
 #                 <doc>
@@ -847,9 +847,9 @@ NXmicrostructure_score_results(NXobject):
 #                 </field>
 #                 <!--optional places to store the grid for instance if it changes-->
 #                 <group name="grid" type="NXcg_grid" recommended="true">
-#                     <field name="identifier_crystal" type="NX_UINT" recommended="true" units="NX_UNITLESS">
+#                     <field name="indices_crystal" type="NX_UINT" recommended="true" units="NX_UNITLESS">
 #                         <doc>
-#                             Grain identifier for each cell.
+#                             Index for each crystal whereby its metadata can be retrieved.
 #                         </doc>
 #                         <dimensions rank="3">
 #                             <dim index="1" value="n_x"/>
@@ -857,9 +857,9 @@ NXmicrostructure_score_results(NXobject):
 #                             <dim index="3" value="n_z"/>
 #                         </dimensions>
 #                     </field>
-#                     <field name="identifier_thread" type="NX_UINT" optional="true" units="NX_UNITLESS">
+#                     <field name="thread_id" type="NX_UINT" optional="true" units="NX_UNITLESS">
 #                         <doc>
-#                             Identifier of the OpenMP thread which processed this part of the grid.
+#                             Identifier of the OpenMP thread that processed this part of the grid.
 #                         </doc>
 #                         <dimensions rank="3">
 #                             <dim index="1" value="n_x"/>
@@ -872,14 +872,14 @@ NXmicrostructure_score_results(NXobject):
 #                     <field name="representation" type="NX_CHAR" recommended="true"/>
 #                     <field name="number_of_crystals" type="NX_UINT" recommended="true"/>
 #                     <field name="number_of_phases" type="NX_UINT" recommended="true"/>
-#                     <field name="identifier_crystal_offset" type="NX_INT" recommended="true"/>
-#                     <field name="identifier_crystal" type="NX_INT" recommended="true">
+#                     <field name="index_offset_crystal" type="NX_INT" recommended="true"/>
+#                     <field name="indices_crystal" type="NX_INT" recommended="true">
 #                         <dimensions rank="1">
 #                             <dim index="1" value="n_grains"/>
 #                         </dimensions>
 #                     </field>
-#                     <field name="identifier_phase_offset" type="NX_INT" recommended="true"/>
-#                     <field name="identifier_phase" type="NX_INT" recommended="true">
+#                     <field name="index_offset_phase" type="NX_INT" recommended="true"/>
+#                     <field name="indices_phase" type="NX_INT" recommended="true">
 #                         <dimensions rank="1">
 #                             <dim index="1" value="n_grains"/>
 #                         </dimensions>
@@ -960,7 +960,7 @@ NXmicrostructure_score_results(NXobject):
 #                             <dim index="2" value="3"/>
 #                         </dimensions>
 #                     </field>
-#                     <field name="identifier_deformed_grain" type="NX_UINT" recommended="true" units="NX_UNITLESS">
+#                     <field name="deformed_grain_id" type="NX_UINT" recommended="true" units="NX_UNITLESS">
 #                         <doc>
 #                             Grain identifier assigned to each cell in the recrystallization front.
 #                         </doc>
@@ -968,7 +968,7 @@ NXmicrostructure_score_results(NXobject):
 #                             <dim index="1" value="n_front"/>
 #                         </dimensions>
 #                     </field>
-#                     <field name="identifier_recrystallized_grain" type="NX_UINT" recommended="true" units="NX_UNITLESS">
+#                     <field name="recrystallized_grain_id" type="NX_UINT" recommended="true" units="NX_UNITLESS">
 #                         <doc>
 #                             Grain identifier assigned to each nucleus which affected that cell in the
 #                             recrystallization front.
@@ -977,7 +977,7 @@ NXmicrostructure_score_results(NXobject):
 #                             <dim index="1" value="n_front"/>
 #                         </dimensions>
 #                     </field>
-#                     <field name="identifier_thread" type="NX_UINT" optional="true" units="NX_UNITLESS">
+#                     <field name="thread_id" type="NX_UINT" optional="true" units="NX_UNITLESS">
 #                         <doc>
 #                             Identifier of the OpenMP thread processing each cell in the recrystallization
 #                             front.
