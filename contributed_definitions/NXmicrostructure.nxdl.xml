@@ -144,8 +144,9 @@ The number of line defects.-->
         The description attempt here took inspiration from `E. E. Underwood &lt;https://doi.org/10.1111/j.1365-2818.1972.tb03709.x&gt;`_
         and E. E. Underwood's book on Quantitative Stereology published 1970 to categorize features based on their dimensionality.
         
-        Identifiers can be defined either implicitly or explicitly. Identifiers for implicit indexing are defined
-        on the interval :math:`[identifier\_offset, identifier\_offset + cardinality - 1]`.
+        Indices can be defined either implicitly or explicitly. Indices for implicit indexing are defined
+        on the interval :math:`[index\_offset, index\_offset + cardinality - 1]`. Indices can be used as identifiers
+        for distinguishing instances, i.e. indices are equivalent to instance names of individual crystals. 
     </doc>
     <!--as e.g. a result of one grain reconstruction with an algorithm with MTex or the grain/phase i.e. interface network reconstruction software in commercial tools
 the idea is we may wish to run as many grain reconstructions as we want and add details about the processing used for each of them if needed-->
@@ -279,12 +280,12 @@ examples for specific frequently discussed microstructural features-->
                 Phases are typically distinguished based on statistical thermodynamics argument and crystal structure.
             </doc>
         </field>
-        <field name="identifier_offset_crystal" type="NX_INT" units="NX_UNITLESS">
+        <field name="index_offset_crystal" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 First identifier whereby to identify crystals implicitly.
             </doc>
         </field>
-        <field name="identifier_crystal" type="NX_INT" units="NX_UNITLESS">
+        <field name="indices_crystal" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 Identifier whereby to identify each crystal explicitly.
             </doc>
@@ -292,12 +293,12 @@ examples for specific frequently discussed microstructural features-->
                 <dim index="1" value="i"/>
             </dimensions>
         </field>
-        <field name="identifier_offset_phase" type="NX_INT" units="NX_UNITLESS">
+        <field name="index_offset_phase" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 First identifier whereby to identify phases implicitly.
             </doc>
         </field>
-        <field name="identifier_phase" type="NX_INT" units="NX_UNITLESS">
+        <field name="indices_phase" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 Identifier whereby to identify phase for each crystal explicitly.
             </doc>
@@ -376,23 +377,27 @@ examples for specific frequently discussed microstructural features-->
                 How many interfaces are distinguished.
             </doc>
         </field>
-        <field name="identifier_offset" type="NX_INT" units="NX_UNITLESS">
+        <field name="index_offset_interface" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 First identifier whereby to identify interfaces implicitly.
             </doc>
         </field>
-        <field name="identifier" type="NX_INT" units="NX_UNITLESS">
+        <field name="indices_interface" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 Identifier whereby to identify each interface explicitly.
+                
+                An array with as many entries as interfaces or their projections.
             </doc>
             <dimensions>
                 <dim index="1" value="i"/>
             </dimensions>
         </field>
         <!--topological view, interface specification through the the pair of crystals sharing an interface-->
-        <field name="identifier_crystal" type="NX_INT" units="NX_UNITLESS">
+        <field name="indices_crystal" type="NX_INT" units="NX_UNITLESS">
             <doc>
-                Set of pairs of identifier_crystal for each interface.
+                Set of pairs of indices_crystal values, for each interface one value pair.
+                
+                An array with as many pairs as interfaces or their projections.
             </doc>
             <dimensions>
                 <dim index="1" value="i"/>
@@ -404,9 +409,11 @@ examples for specific frequently discussed microstructural features-->
                 </doc>
             </attribute>
         </field>
-        <field name="identifier_phase" type="NX_INT" units="NX_UNITLESS">
+        <field name="indices_phase" type="NX_INT" units="NX_UNITLESS">
             <doc>
-                Set of pairs of identifier_phase for each interface.
+                Set of pairs of indices_phase values, for each interface one value pair.
+                
+                An array with as many pairs as interfaces or their projections.
             </doc>
             <dimensions>
                 <dim index="1" value="i"/>
@@ -419,13 +426,32 @@ examples for specific frequently discussed microstructural features-->
             </attribute>
         </field>
         <!--topological view, interface specification through the pair of triple line projections (i.e. triple points) adjoining the interface-->
-        <field name="identifier_triple_junction" type="NX_INT" units="NX_UNITLESS">
+        <field name="number_of_triple_junctions" type="NX_UINT" units="NX_UNITLESS">
             <doc>
-                Set of pairs of identifier_triple_junction for each interface.
+                Interfaces can be the physical three-dimensional surfaces or two- or one-dimensional
+                projections of these as those typically measured in electron microscopy.
+                In the case of a two-dimensional projection interfaces are interface traces and hence
+                they have two terminating junctions while in reality the interface is a surface patch
+                that is bounded by several triple lines.
+                
+                Number of triple_junctions adjoining each interface. This array resolves the number of
+                values along the second dimension for the field indices_triple_junctions.
+            </doc>
+            <dimensions>
+                <dim index="1" value="n_interfaces"/>
+            </dimensions>    
+        </field>
+        <field name="indices_triple_junction" type="NX_INT" units="NX_UNITLESS">
+            <doc>
+                Set of pairs of indices_triple_junction for each interface.
+                
+                An array with as many tuples along the first dimension i
+                as interfaces or their projections.
+                An array with as many values
             </doc>
             <dimensions>
                 <dim index="1" value="i"/>
-                <dim index="2" value="2"/>
+                <dim index="2" value="j"/>
             </dimensions>
             <attribute name="use_these" type="NX_CHAR">
                 <doc>
@@ -506,12 +532,12 @@ examples for specific frequently discussed microstructural features-->
                 Number of triple junctions.
             </doc>
         </field>
-        <field name="identifier_offset" type="NX_INT" units="NX_UNITLESS">
+        <field name="index_offset_triple_junction" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 First identifier to identify triple junctions implicitly.
             </doc>
         </field>
-        <field name="identifier" type="NX_INT" units="NX_UNITLESS">
+        <field name="indices_triple_junction" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 Identifier to identify each triple junction explicitly.
             </doc>
@@ -544,7 +570,7 @@ example i) triple points as projections of triple lines have locations-->
                 <dim index="2" value="d"/>
             </dimensions>
         </field>
-        <field name="identifier_crystal" type="NX_INT" units="NX_UNITLESS">
+        <field name="indices_crystal" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 Set of tuples of identifier of crystals connected to the junction for each
                 triple junction.
@@ -555,7 +581,7 @@ example i) triple points as projections of triple lines have locations-->
             </dimensions>
         </field>
         <!--example ii) three interfaces (maybe projections of them) meet at a triple junction-->
-        <field name="identifier_interface" type="NX_INT" units="NX_UNITLESS">
+        <field name="indices_interface" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 Set of tuples of identifier of interfaces connected to the junction for each
                 triple junction.
@@ -571,7 +597,7 @@ example i) triple points as projections of triple lines have locations-->
             </attribute>
         </field>
         <!--example iii) three polyline segments meet at a triple junction, polyline segments of discretized interface segments-->
-        <field name="identifier_polyline" type="NX_INT" units="NX_UNITLESS">
+        <field name="indices_polyline" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 Set of tuples of identifier for polyline segments connected to the junction for
                 each triple junction.
@@ -582,7 +608,7 @@ example i) triple points as projections of triple lines have locations-->
             </dimensions>
             <attribute name="use_these" type="NX_CHAR">
                 <doc>
-                    The specific identifier_polyline whereby to resolve ambiguities.
+                    The specific indices_polyline whereby to resolve ambiguities.
                 </doc>
             </attribute>
         </field>
@@ -652,12 +678,12 @@ EXAMPLES FOR DESCRIPTOR VALUES-->
                 Number of quadruple junctions.
             </doc>
         </field>
-        <field name="identifier_offset" type="NX_INT" units="NX_UNITLESS">
+        <field name="index_offset_quadruple_junction" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 First identifier to identify quadruple junctions implicitly.
             </doc>
         </field>
-        <field name="identifier" type="NX_INT" units="NX_UNITLESS">
+        <field name="indices_quadruple_junction" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 Identifier to identify each quadruple junction explicitly.
             </doc>
@@ -691,7 +717,7 @@ example i) quadruple point locations explicitly-->
             </dimensions>
         </field>
         <!--example ii) four crystals meet at a quadruple junction-->
-        <field name="identifier_crystal" type="NX_INT" units="NX_UNITLESS">
+        <field name="indices_crystal" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 Set of tuples of identifier of crystals connected to the junction for each
                 junction.
@@ -707,7 +733,7 @@ example i) quadruple point locations explicitly-->
                 </doc>
             </attribute>
         </field>
-        <field name="identifier_interface" type="NX_INT" units="NX_UNITLESS">
+        <field name="indices_interface" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 Set of tuples of identifier of interfaces connected to the junction for each
                 junction.
@@ -724,7 +750,7 @@ example i) quadruple point locations explicitly-->
             </attribute>
         </field>
         <!--example iii) e.g. three triple lines meet at a quadruple junction-->
-        <field name="identifier_triple_junction" type="NX_INT" units="NX_UNITLESS">
+        <field name="indices_triple_junction" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 Set of tuples of identifier for triple junctions connected to the junction for
                 each quadruple junction.
@@ -741,7 +767,7 @@ example i) quadruple point locations explicitly-->
             </attribute>
         </field>
         <!--example iv) crystals of eventually four different phases meet at a quadruple junction-->
-        <field name="identifier_phase" type="NX_INT" units="NX_UNITLESS">
+        <field name="indices_phase" type="NX_INT" units="NX_UNITLESS">
             <doc>
                 Set of tuples of identifier for phases of crystals connected to the junction for
                 each quadruple junction.

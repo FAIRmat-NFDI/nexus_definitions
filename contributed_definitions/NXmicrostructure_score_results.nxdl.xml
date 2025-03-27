@@ -84,6 +84,7 @@ inspect comments behind NXmicrostructure-->
         * `M. Kühbach et al. &lt;https://doi.org/10.1016/j.actamat.2016.01.068&gt;`_
         * `C. Haase et al. &lt;https://doi.org/10.1016/j.actamat.2015.08.057&gt;`_
         * `M. Diehl et al. &lt;https://doi.org/10.1088/1361-651X/ab51bd&gt;`_
+        
     </doc>
     <group type="NXentry">
         <field name="definition" type="NX_CHAR">
@@ -203,7 +204,7 @@ inspect comments behind NXmicrostructure-->
                 <field name="symmetry" type="NX_CHAR"/>
                 <field name="cell_dimensions" type="NX_NUMBER"/>
                 <field name="extent" type="NX_UINT"/>
-                <field name="identifier_offset" type="NX_INT"/>
+                <field name="index_offset" type="NX_INT"/>
             </group>
             <group name="boundary" type="NXcg_hexahedron">
                 <doc>
@@ -211,7 +212,7 @@ inspect comments behind NXmicrostructure-->
                 </doc>
                 <!--a good example for a general bounding box description for such a grids of triclinic cells
 https://docs.lammps.org/Howto_triclinic.html NXcg_polyhedron because a parallelepiped-->
-                <field name="number_of_boundaries" type="NX_POSINT" units="NX_UNITLESS">
+                <field name="number_of_boundaries" type="NX_UINT" units="NX_UNITLESS">
                     <doc>
                         How many distinct boundaries are distinguished?
                         Most grids discretize a cubic or cuboidal region. In this case
@@ -228,6 +229,7 @@ https://docs.lammps.org/Howto_triclinic.html NXcg_polyhedron because a parallele
                         * 3 - mirror
                         * 4 - von Neumann
                         * 5 - Dirichlet
+
                     </doc>
                     <dimensions rank="1">
                         <dim index="1" value="6"/>
@@ -258,7 +260,7 @@ https://docs.lammps.org/Howto_triclinic.html NXcg_polyhedron because a parallele
             <group name="summary_statistics" type="NXprocess">
                 <doc>
                     Summary quantities which are the result of some post-processing of the snapshot data
-                    (averaging, integrating, interpolating) happening for practical and performance reasons 
+                    (averaging, integrating, interpolating) happening for practical and performance reasons
                     during the simulation. Place used for storing descriptors from continuum mechanics
                     and thermodynamics at the scale of the entire ROI.
                 </doc>
@@ -409,9 +411,9 @@ the typically storage-costlier snapshot data-->
                 </field>
                 <!--optional places to store the grid for instance if it changes-->
                 <group name="grid" type="NXcg_grid" recommended="true">
-                    <field name="identifier_crystal" type="NX_UINT" recommended="true" units="NX_UNITLESS">
+                    <field name="indices_crystal" type="NX_INT" recommended="true" units="NX_UNITLESS">
                         <doc>
-                            Grain identifier for each cell.
+                            Index for each crystal whereby its metadata can be retrieved.
                         </doc>
                         <dimensions rank="3">
                             <dim index="1" value="n_x"/>
@@ -419,9 +421,9 @@ the typically storage-costlier snapshot data-->
                             <dim index="3" value="n_z"/>
                         </dimensions>
                     </field>
-                    <field name="identifier_thread" type="NX_UINT" optional="true" units="NX_UNITLESS">
+                    <field name="thread_id" type="NX_UINT" optional="true" units="NX_UNITLESS">
                         <doc>
-                            Identifier of the OpenMP thread which processed this part of the grid.
+                            Identifier of the OpenMP thread that processed this part of the grid.
                         </doc>
                         <dimensions rank="3">
                             <dim index="1" value="n_x"/>
@@ -434,14 +436,14 @@ the typically storage-costlier snapshot data-->
                     <field name="representation" type="NX_CHAR" recommended="true"/>
                     <field name="number_of_crystals" type="NX_UINT" recommended="true"/>
                     <field name="number_of_phases" type="NX_UINT" recommended="true"/>
-                    <field name="identifier_crystal_offset" type="NX_INT" recommended="true"/>
-                    <field name="identifier_crystal" type="NX_INT" recommended="true">
+                    <field name="index_offset_crystal" type="NX_INT" recommended="true"/>
+                    <field name="indices_crystal" type="NX_INT" recommended="true">
                         <dimensions rank="1">
                             <dim index="1" value="n_grains"/>
                         </dimensions>
                     </field>
-                    <field name="identifier_phase_offset" type="NX_INT" recommended="true"/>
-                    <field name="identifier_phase" type="NX_INT" recommended="true">
+                    <field name="index_offset_phase" type="NX_INT" recommended="true"/>
+                    <field name="indices_phase" type="NX_INT" recommended="true">
                         <dimensions rank="1">
                             <dim index="1" value="n_grains"/>
                         </dimensions>
@@ -522,7 +524,7 @@ the typically storage-costlier snapshot data-->
                             <dim index="2" value="3"/>
                         </dimensions>
                     </field>
-                    <field name="identifier_deformed_grain" type="NX_UINT" recommended="true" units="NX_UNITLESS">
+                    <field name="deformed_grain_id" type="NX_UINT" recommended="true" units="NX_UNITLESS">
                         <doc>
                             Grain identifier assigned to each cell in the recrystallization front.
                         </doc>
@@ -530,7 +532,7 @@ the typically storage-costlier snapshot data-->
                             <dim index="1" value="n_front"/>
                         </dimensions>
                     </field>
-                    <field name="identifier_recrystallized_grain" type="NX_UINT" recommended="true" units="NX_UNITLESS">
+                    <field name="recrystallized_grain_id" type="NX_UINT" recommended="true" units="NX_UNITLESS">
                         <doc>
                             Grain identifier assigned to each nucleus which affected that cell in the
                             recrystallization front.
@@ -539,7 +541,7 @@ the typically storage-costlier snapshot data-->
                             <dim index="1" value="n_front"/>
                         </dimensions>
                     </field>
-                    <field name="identifier_thread" type="NX_UINT" optional="true" units="NX_UNITLESS">
+                    <field name="thread_id" type="NX_UINT" optional="true" units="NX_UNITLESS">
                         <doc>
                             Identifier of the OpenMP thread processing each cell in the recrystallization
                             front.

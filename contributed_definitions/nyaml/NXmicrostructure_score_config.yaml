@@ -49,7 +49,8 @@ NXmicrostructure_score_config(NXobject):
       exists: ['min', '0', 'max', 'unbounded']
     sample(NXsample):
       exists: recommended
-      dimensionality(NX_UINT):
+      dimensionality(NX_POSINT):
+        unit: NX_UNITLESS
         doc: |
           Dimensionality of the simulation.
         enumeration: [3]
@@ -66,8 +67,7 @@ NXmicrostructure_score_config(NXobject):
           
           The purpose of the field is to offer research data management systems an
           opportunity to parse the relevant elements without having to interpret
-          these from the resources pointed to by identifier_parent or walk through
-          eventually deeply nested groups in data instances.
+          these from other sources.
     program1(NXprogram):
       exists: recommended
       doc: |
@@ -535,7 +535,7 @@ NXmicrostructure_score_config(NXobject):
           Into how many time steps should the real time interval be discretized upon
           during post-processing the results with the solitary unit modeling approach.
   
-  # identifier_domain(NX_UINT):
+  # domain_id(NX_UINT):
   # doc: |
   # List of identifier for those CAs domains which should be sampled.
   # Identifier start from 1.
@@ -543,7 +543,7 @@ NXmicrostructure_score_config(NXobject):
   # dim: (n_su,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 03ff6c1cc0bd458dd25c5847ee92f44c307e0f1cc54c41ac6f07e702b5ef5d01
+# c30a6a2ec88459a497c72482d0641780ecf302b27d54a81ac120a52ac739b3a0
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -621,6 +621,7 @@ NXmicrostructure_score_config(NXobject):
 #         
 #         * `M. Kühbach et al. &lt;https://doi.org/10.1016/j.actamat.2016.01.068&gt;`_
 #         * `M. Diehl et al. &lt;https://doi.org/10.1088/1361-651X/ab51bd&gt;`_
+#         
 #     </doc>
 #     <group type="NXentry">
 #         <field name="definition" type="NX_CHAR">
@@ -649,7 +650,7 @@ NXmicrostructure_score_config(NXobject):
 #         <group name="profiling" type="NXcs_profiling" optional="true"/>
 #         <group type="NXuser" minOccurs="0" maxOccurs="unbounded"/>
 #         <group name="sample" type="NXsample" recommended="true">
-#             <field name="dimensionality" type="NX_UINT">
+#             <field name="dimensionality" type="NX_POSINT" units="NX_UNITLESS">
 #                 <doc>
 #                     Dimensionality of the simulation.
 #                 </doc>
@@ -675,8 +676,7 @@ NXmicrostructure_score_config(NXobject):
 #                     
 #                     The purpose of the field is to offer research data management systems an
 #                     opportunity to parse the relevant elements without having to interpret
-#                     these from the resources pointed to by identifier_parent or walk through
-#                     eventually deeply nested groups in data instances.
+#                     these from other sources.
 #                 </doc>
 #             </field>
 #         </group>
@@ -737,6 +737,7 @@ NXmicrostructure_score_config(NXobject):
 #                     * poisson_voronoi, a discretized poisson voronoi
 #                     * ebsd, a microstructure synthesized based on a simulated or measured EBSD orientation map
 #                     * damask, the result of a simulation from `DAMASK &lt;https://damask-multiphysics.org&gt;`_.
+#                     
 #                 </doc>
 #                 <enumeration>
 #                     <item value="cuboidal"/>
@@ -839,6 +840,7 @@ NXmicrostructure_score_config(NXobject):
 #                     * csr, complete spatial randomness
 #                     * custom, implementation-specific
 #                     * gb, nuclei placed at grain boundaries
+#                     
 #                 </doc>
 #                 <enumeration>
 #                     <item value="csr"/>
@@ -860,6 +862,7 @@ NXmicrostructure_score_config(NXobject):
 #                     * ensemble, picking randomly one from ensemble/bunge_euler
 #                     * random, picking randomly on the SO3
 #                     * damask, picking based on information provided in deformation/damask
+#                     
 #                 </doc>
 #                 <enumeration>
 #                     <item value="ensemble"/>
@@ -1271,7 +1274,7 @@ NXmicrostructure_score_config(NXobject):
 #             </field>
 #         </group>
 #     </group>
-#     <!--identifier_domain(NX_UINT):
+#     <!--domain_id(NX_UINT):
 # doc: |
 # List of identifier for those CAs domains which should be sampled.
 # Identifier start from 1.
