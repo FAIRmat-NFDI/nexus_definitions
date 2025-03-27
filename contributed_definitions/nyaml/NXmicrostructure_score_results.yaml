@@ -122,7 +122,7 @@ NXmicrostructure_score_results(NXobject):
         
         # a good example for a general bounding box description for such a grids of triclinic cells
         # https://docs.lammps.org/Howto_triclinic.html NXcg_polyhedron because a parallelepiped
-        number_of_boundaries(NX_POSINT):
+        number_of_boundaries(NX_UINT):
           unit: NX_UNITLESS
           doc: |
             How many distinct boundaries are distinguished?
@@ -292,7 +292,7 @@ NXmicrostructure_score_results(NXobject):
         # optional places to store the grid for instance if it changes
         grid(NXcg_grid):
           exists: recommended
-          indices_crystal(NX_UINT):
+          indices_crystal(NX_INT):
             exists: recommended
             unit: NX_UNITLESS
             doc: |
@@ -435,7 +435,7 @@ NXmicrostructure_score_results(NXobject):
               dim: (n_front,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# d86467cb085bf2a8559b1dfc6a4d4e938d1a782e85b3bfc02cd04ebcdd397c85
+# a320be56a25af3f446f52036613675dd547906e0f92efd90c0845bff135ad72b
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -510,15 +510,15 @@ NXmicrostructure_score_results(NXobject):
 #     </symbols>
 #     <doc>
 #         Application definition for storing results of the SCORE cellular automata model.
-#         
+# 
 #         The SCORE cellular automata model for primary recrystallization is an example
 #         of a typical materials engineering application used within the field of so-called
 #         Integral Computational Materials Engineering (ICME) whereby one can simulate
 #         the evolution of microstructures.
-#         
+# 
 #         Specifically the SCORE model can be used to simulate the growth of nuclei during
 #         static recrystallization. The model is described in the literature:
-#         
+# 
 #         * `M. Kühbach et al. &lt;https://doi.org/10.1016/j.actamat.2016.01.068&gt;`_
 #         * `C. Haase et al. &lt;https://doi.org/10.1016/j.actamat.2015.08.057&gt;`_
 #         * `M. Diehl et al. &lt;https://doi.org/10.1088/1361-651X/ab51bd&gt;`_
@@ -649,7 +649,7 @@ NXmicrostructure_score_results(NXobject):
 #                 </doc>
 #                 <!--a good example for a general bounding box description for such a grids of triclinic cells
 # https://docs.lammps.org/Howto_triclinic.html NXcg_polyhedron because a parallelepiped-->
-#                 <field name="number_of_boundaries" type="NX_POSINT" units="NX_UNITLESS">
+#                 <field name="number_of_boundaries" type="NX_UINT" units="NX_UNITLESS">
 #                     <doc>
 #                         How many distinct boundaries are distinguished?
 #                         Most grids discretize a cubic or cuboidal region. In this case
@@ -659,7 +659,7 @@ NXmicrostructure_score_results(NXobject):
 #                 <field name="boundary_conditions" type="NX_INT" units="NX_UNITLESS">
 #                     <doc>
 #                         The boundary conditions for each boundary:
-#                         
+# 
 #                         * 0 - undefined
 #                         * 1 - open
 #                         * 2 - periodic
@@ -685,18 +685,18 @@ NXmicrostructure_score_results(NXobject):
 #         <group name="SPATIOTEMPORAL" type="NXobject" nameType="any" minOccurs="1" maxOccurs="unbounded">
 #             <doc>
 #                 Documentation of the spatiotemporal evolution for each CA domain.
-#                 
+# 
 #                 SCORE is a hybrid parallelized code that can evolve multiple replicas
 #                 in parallel. The set of replicas is distributed across MPI processes.
 #                 Each such replica is then evolved via OpenMP multi-threading.
-#                 
+# 
 #                 Instances should use spatiotemporal as a name prefix.
 #             </doc>
 #             <!--the typical lean summary statistics flattened-->
 #             <group name="summary_statistics" type="NXprocess">
 #                 <doc>
 #                     Summary quantities which are the result of some post-processing of the snapshot data
-#                     (averaging, integrating, interpolating) happening for practical and performance reasons 
+#                     (averaging, integrating, interpolating) happening for practical and performance reasons
 #                     during the simulation. Place used for storing descriptors from continuum mechanics
 #                     and thermodynamics at the scale of the entire ROI.
 #                 </doc>
@@ -847,7 +847,7 @@ NXmicrostructure_score_results(NXobject):
 #                 </field>
 #                 <!--optional places to store the grid for instance if it changes-->
 #                 <group name="grid" type="NXcg_grid" recommended="true">
-#                     <field name="indices_crystal" type="NX_UINT" recommended="true" units="NX_UNITLESS">
+#                     <field name="indices_crystal" type="NX_INT" recommended="true" units="NX_UNITLESS">
 #                         <doc>
 #                             Index for each crystal whereby its metadata can be retrieved.
 #                         </doc>

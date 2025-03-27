@@ -114,7 +114,7 @@ NXapm_compositionspace_results(NXobject):
             dim: (n_voxels, grid_dim)
         
         # bounding box if needed
-        indices_voxel(NX_UINT):
+        indices_voxel(NX_INT):
           unit: NX_UNITLESS
           doc: |
             For each ion, the identifier of the voxel into which the ion binned.
@@ -307,13 +307,9 @@ NXapm_compositionspace_results(NXobject):
       end_time(NX_DATE_TIME):
         exists: recommended
       total_elapsed_time(NX_NUMBER):
-  
-  # number_of_processes(NX_POSINT):
-  # number_of_threads(NX_POSINT):
-  # number_of_gpus(NX_POSINT):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 44de80f832d91d1e0c30e3aea4a7621a8c65052abd16d001a2e77e8752d19dca
+# 60ae27662203a3ce6017f6d4d8edf21ecca9ad00c312d50c594d06e684a6dd08
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -360,9 +356,9 @@ NXapm_compositionspace_results(NXobject):
 #     </symbols>
 #     <doc>
 #         Application definition for results of the CompositionSpace tool used in atom probe.
-#         
+# 
 #         * `A. Saxena et al. &lt;https://www.github.com/eisenforschung/CompositionSpace.git&gt;`_
-#         
+# 
 #         This is an application definition for the common NFDI-MatWerk/FAIRmat infrastructure
 #         use case IUC09 that explores how to improve the organization and results storage of the
 #         CompositionSpace software using NeXus.
@@ -416,7 +412,7 @@ NXapm_compositionspace_results(NXobject):
 #                     contained in the specimen. If the specimen substance has multiple
 #                     components, all elements from each component must be included in
 #                     `atom_types`.
-#                     
+# 
 #                     The purpose of the field is to offer research data management systems an
 #                     opportunity to parse the relevant elements without having to interpret
 #                     these from the resources pointed to by identifier_parent or walk through
@@ -429,7 +425,7 @@ NXapm_compositionspace_results(NXobject):
 #                 Step during which the point cloud is discretized to compute element-specific composition fields.
 #                 Iontypes are atomically decomposed to correctly account for the multiplicity of each element that
 #                 was ranged for each ion.
-#                 
+# 
 #                 Using a discretization grid that is larger than the average distance between reconstructed ion positions
 #                 reduces computational costs. This is the key idea of the CompositionSpace tool compared to other methods
 #                 used in atom probe for characterizing microstructural features that use the ion position data directly.
@@ -486,7 +482,7 @@ NXapm_compositionspace_results(NXobject):
 #                     </dimensions>
 #                 </field>
 #                 <!--bounding box if needed-->
-#                 <field name="indices_voxel" type="NX_UINT" units="NX_UNITLESS">
+#                 <field name="indices_voxel" type="NX_INT" units="NX_UNITLESS">
 #                     <doc>
 #                         For each ion, the identifier of the voxel into which the ion binned.
 #                     </doc>
@@ -617,7 +613,7 @@ NXapm_compositionspace_results(NXobject):
 #                 <group name="CLUSTER_ANALYSIS" type="NXprocess" nameType="any">
 #                     <doc>
 #                         Results of the Gaussian mixture analysis for n_components equal to n_ic_cluster.
-#                         
+# 
 #                         Instances should use cluster_analysis as a name prefix.
 #                     </doc>
 #                     <field name="n_ic_cluster" type="NX_UINT" units="NX_UNITLESS">
@@ -694,7 +690,7 @@ NXapm_compositionspace_results(NXobject):
 #                             <doc>
 #                                 The maximum distance between voxel pairs in a neighborhood
 #                                 to be considered connected.
-#                                 
+# 
 #                                 Instances should use dbscan as a name prefix.
 #                             </doc>
 #                         </field>
@@ -715,7 +711,7 @@ NXapm_compositionspace_results(NXobject):
 #                         <field name="voxel" type="NX_UINT" units="NX_UNITLESS">
 #                             <doc>
 #                                 Voxel identifier
-#                                 
+# 
 #                                 Using these identifiers correlated element-wise with the values in the label array
 #                                 specifies for which voxel in the grid clusters from this process were found.
 #                             </doc>
@@ -734,7 +730,4 @@ NXapm_compositionspace_results(NXobject):
 #             <field name="total_elapsed_time" type="NX_NUMBER"/>
 #         </group>
 #     </group>
-#     <!--number_of_processes(NX_POSINT):
-# number_of_threads(NX_POSINT):
-# number_of_gpus(NX_POSINT):-->
 # </definition>

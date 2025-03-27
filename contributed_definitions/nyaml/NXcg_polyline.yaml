@@ -27,15 +27,15 @@ NXcg_polyline(NXcg_primitive):
       Reference to an instance of :ref:`NXcg_point` which defines the
       location of the vertices that are referred to in this
       NXcg_polyline instance.
-  number_of_unique_vertices(NX_POSINT):
+  number_of_unique_vertices(NX_UINT):
     unit: NX_UNITLESS
     doc: |
       The total number of vertices that have different positions.
-  number_of_total_vertices(NX_INT):
+  number_of_total_vertices(NX_UINT):
     unit: NX_UNITLESS
     doc: |
       The total number of vertices, irrespective of their eventual uniqueness.
-  number_of_vertices(NX_INT):
+  number_of_vertices(NX_UINT):
     unit: NX_UNITLESS
     doc: |
       The total number of vertices of each polyline, irrespectively
@@ -95,7 +95,7 @@ NXcg_polyline(NXcg_primitive):
       dim: (n_total,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# f838ec9411d9e75d720c6e986fbaa571e08927458a68c6e48d9272421b5742b9
+# b14cc08d68ff1d70e5adca4bb17904235e53d9c9d2fd6c3aa5438efa188a2fed
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -149,7 +149,7 @@ NXcg_polyline(NXcg_primitive):
 #     </symbols>
 #     <doc>
 #          Computational geometry description of a set of polylines.
-#          
+# 
 #          Each polyline is built from a sequence of vertices (points with identifiers).
 #          Each polyline must have a start and an end point.
 #          The sequence describes the traversal along the polyline when
@@ -162,17 +162,17 @@ NXcg_polyline(NXcg_primitive):
 #              NXcg_polyline instance.
 #         </doc>
 #     </field>
-#     <field name="number_of_unique_vertices" type="NX_POSINT" units="NX_UNITLESS">
+#     <field name="number_of_unique_vertices" type="NX_UINT" units="NX_UNITLESS">
 #         <doc>
 #              The total number of vertices that have different positions.
 #         </doc>
 #     </field>
-#     <field name="number_of_total_vertices" type="NX_INT" units="NX_UNITLESS">
+#     <field name="number_of_total_vertices" type="NX_UINT" units="NX_UNITLESS">
 #         <doc>
 #              The total number of vertices, irrespective of their eventual uniqueness.
 #         </doc>
 #     </field>
-#     <field name="number_of_vertices" type="NX_INT" units="NX_UNITLESS">
+#     <field name="number_of_vertices" type="NX_UINT" units="NX_UNITLESS">
 #         <doc>
 #              The total number of vertices of each polyline, irrespectively
 #              whether vertices are shared by vertices or not.
@@ -188,7 +188,7 @@ NXcg_polyline(NXcg_primitive):
 #     <field name="vertices" type="NX_NUMBER" units="NX_ANY">
 #         <doc>
 #              Positions of the vertices which support the members of the polyline set.
-#              
+# 
 #              Users are encouraged to reduce the vertices to unique positions and vertices
 #              as this often supports with storing geometry data more efficiently.
 #              It is also possible though to store the vertex positions naively
@@ -212,22 +212,22 @@ NXcg_polyline(NXcg_primitive):
 #     <field name="polylines" type="NX_INT" units="NX_UNITLESS">
 #         <doc>
 #              Sequence of identifier for vertices how they build each polyline.
-#              
+# 
 #              A trivial example is a set with two polylines with three vertices each.
 #              If the polylines meet at a vertex (assume for example that the second vertex
 #              is shared and marking the junction between the two polylines), it is possible
 #              that there are only five unique positions. This suggests to store five
 #              unique vertices.
-#              
+# 
 #              A non-trivial example is a set with several polylines. Assume that each
 #              has a different number of vertices. The array stores the identifier of
 #              the vertices in the sequence how the polylines are visited:
-#              
+# 
 #              The first entry is the identifier of the first vertex of the first polyline,
 #              followed by the second vertex of the first polyline, until the last vertex
 #              of the first polyline.
 #              Thereafter, the first vertex of the second polyline, and so on and so forth.
-#              Using the (cumulated) counts in number_of_vertices (:math:`n^v_i`), 
+#              Using the (cumulated) counts in number_of_vertices (:math:`n^v_i`),
 #              the vertices of the N-th polyline can be accessed on the array
 #              index interval :math:`[\sum_{i=0}^{i=N-1} n^v_i, \sum_{i=0}^{i=N} n^v_i]`.
 #         </doc>

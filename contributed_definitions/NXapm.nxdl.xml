@@ -945,10 +945,18 @@ we can only make recommendations-->
                         CRunHeader.fTotalEventRecords
                     </doc>
                 </field>
-                <field name="hit_quality" type="NX_UINT" optional="true">
+                <field name="hit_quality_type" type="NX_CHAR" optional="true">
                     <doc>
-                        Identifier used for each hit_quality type.
-                        Following the order of hit_quality_types.
+                        Hit quality is an integer that specifies which category/type a hit was assigned to.
+                        This field lists the human-readable, possibly though proprietary types distinguished.
+                        The indices of this array are used in hit_quality to encode hit_quality for each
+                        pulse in a more efficient way than by repeating the string that is used for each
+                        type as it is provided in this field.
+                        
+                        As an example assume two types golden and partial are distinguished.
+                        If hit_quality_type stores the array "golden", "partial", the index 0
+                        in hit_quality identifies all those pulses of category golden,
+                        while the index 1 in hit_quality identifies all of category partial.
                     </doc>
                     <dimensions rank="1">
                         <dim index="1" value="n_ht"/>

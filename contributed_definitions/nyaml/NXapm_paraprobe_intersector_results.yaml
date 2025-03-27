@@ -36,7 +36,7 @@ NXapm_paraprobe_intersector_results(NXobject):
       current_to_next_link(NX_UINT):
         unit: NX_UNITLESS
         doc: |
-          A matrix of identifier_feature that specifies which named features
+          A matrix of indices_feature that specifies which named features
           from the current_set have directed link(s) pointing to which named
           feature(s) from the next_set.
         dimensions:
@@ -55,7 +55,7 @@ NXapm_paraprobe_intersector_results(NXobject):
         exists: optional
         unit: NX_UNITLESS
         doc: |
-          A matrix of identifier_feature which specifies which named feature(s)
+          A matrix of indices_feature which specifies which named feature(s)
           from the next_set have directed link(s) pointing to which named
           feature(s) from the current_set. Only if the mapping whereby the
           links are defined is symmetric it holds that next_to_current maps
@@ -95,7 +95,7 @@ NXapm_paraprobe_intersector_results(NXobject):
           The third comparison is the current_set against the next_set.
           
           Once the (forward) links for these comparisons are ready, pair relations
-          are analyzed with respect to which objects with identifier_feature
+          are analyzed with respect to which objects with indices_feature
           cluster in identifier space. Thereby, a logical connection (link) is
           established between the features in the current_set and the next_set.
           Recall that these two sets typically represent different features
@@ -113,8 +113,8 @@ NXapm_paraprobe_intersector_results(NXobject):
         current_set_feature_to_cluster(NX_UINT):
           unit: NX_UNITLESS
           doc: |
-            Matrix of identifier_feature and identifier_cluster pairs which
-            encodes the cluster to which each identifier_feature was assigned.
+            Matrix of indices_feature and cluster_id pairs which
+            encodes the cluster to which each indices_feature was assigned.
             Here for features of the current_set.
           dimensions:
             rank: 2
@@ -122,13 +122,13 @@ NXapm_paraprobe_intersector_results(NXobject):
         next_set_feature_to_cluster(NX_UINT):
           unit: NX_UNITLESS
           doc: |
-            Matrix of identifier_feature and identifier_cluster pairs which
-            encodes the cluster to which each identifier_feature was assigned.
+            Matrix of indices_feature and cluster_id pairs which
+            encodes the cluster to which each indices_feature was assigned.
             Here for features of the next_set.
           dimensions:
             rank: 2
             dim: (n_features_next, 2)
-        identifier_cluster(NX_UINT):
+        cluster_id(NX_UINT):
           unit: NX_UNITLESS
           doc: |
             The identifier (names) of the cluster.
@@ -180,9 +180,9 @@ NXapm_paraprobe_intersector_results(NXobject):
         end_time(NX_DATE_TIME):
         total_elapsed_time(NX_FLOAT):
         current_working_directory(NX_CHAR):
-        number_of_processes(NX_POSINT):
-        number_of_threads(NX_POSINT):
-        number_of_gpus(NX_POSINT):
+        number_of_processes(NX_UINT):
+        number_of_threads(NX_UINT):
+        number_of_gpus(NX_UINT):
       (NXuser):
         exists: ['min', '0', 'max', 'unbounded']
         doc: |
@@ -210,7 +210,7 @@ NXapm_paraprobe_intersector_results(NXobject):
               dim: (3,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 9ae3964e8fb32d3c3ded86f695523c44b46639ee4a4f01528fe7b8d62a8f9579
+# 74f802b5eda5707493de0c5d4cf30d2e2e43a8cef7cfe50461d222e90cb414c4
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -272,7 +272,7 @@ NXapm_paraprobe_intersector_results(NXobject):
 #     </symbols>
 #     <doc>
 #         Application definition for results files of the paraprobe-intersector tool.
-#         
+# 
 #         This tool is part of the paraprobe-toolbox. Inspect the base class :ref:`NXapm_paraprobe_tool_results`.
 #     </doc>
 #     <group type="NXentry" minOccurs="1" maxOccurs="1">
@@ -290,7 +290,7 @@ NXapm_paraprobe_intersector_results(NXobject):
 #             <!--results-->
 #             <field name="current_to_next_link" type="NX_UINT" units="NX_UNITLESS">
 #                 <doc>
-#                     A matrix of identifier_feature that specifies which named features
+#                     A matrix of indices_feature that specifies which named features
 #                     from the current_set have directed link(s) pointing to which named
 #                     feature(s) from the next_set.
 #                 </doc>
@@ -311,7 +311,7 @@ NXapm_paraprobe_intersector_results(NXobject):
 #             </field>
 #             <field name="next_to_current_link" type="NX_UINT" optional="true" units="NX_UNITLESS">
 #                 <doc>
-#                     A matrix of identifier_feature which specifies which named feature(s)
+#                     A matrix of indices_feature which specifies which named feature(s)
 #                     from the next_set have directed link(s) pointing to which named
 #                     feature(s) from the current_set. Only if the mapping whereby the
 #                     links are defined is symmetric it holds that next_to_current maps
@@ -347,32 +347,32 @@ NXapm_paraprobe_intersector_results(NXobject):
 #                     During coprecipitation analysis the current and next set are analyzed
 #                     for links in a special way. Three set comparisons are made. Members
 #                     of the set in each comparison are analyzed for overlap and proximity:
-#                     
+# 
 #                     The first comparison is the current_set against the current_set.
 #                     The second comparison is the next_set against the next_set.
 #                     The third comparison is the current_set against the next_set.
-#                     
+# 
 #                     Once the (forward) links for these comparisons are ready, pair relations
-#                     are analyzed with respect to which objects with identifier_feature
+#                     are analyzed with respect to which objects with indices_feature
 #                     cluster in identifier space. Thereby, a logical connection (link) is
 #                     established between the features in the current_set and the next_set.
 #                     Recall that these two sets typically represent different features
 #                     within an observed system for otherwise the same parameterization.
-#                     
+# 
 #                     Examples include two sets of e.g. precipitates with differing
 #                     chemical composition that were characterized in the same material
 #                     volume representing a snapshot of an e.g. microstructure at the same
 #                     point in time. Researchers may have performed two analyses, one to
 #                     characterize precipitates A and another one for precipitates B.
-#                     
+# 
 #                     Coprecipitation analysis now logically connects these independent
 #                     characterization results to establish spatial correlations of e.g.
 #                     the precipitates' spatial arrangement.
 #                 </doc>
 #                 <field name="current_set_feature_to_cluster" type="NX_UINT" units="NX_UNITLESS">
 #                     <doc>
-#                         Matrix of identifier_feature and identifier_cluster pairs which
-#                         encodes the cluster to which each identifier_feature was assigned.
+#                         Matrix of indices_feature and cluster_id pairs which
+#                         encodes the cluster to which each indices_feature was assigned.
 #                         Here for features of the current_set.
 #                     </doc>
 #                     <dimensions rank="2">
@@ -382,8 +382,8 @@ NXapm_paraprobe_intersector_results(NXobject):
 #                 </field>
 #                 <field name="next_set_feature_to_cluster" type="NX_UINT" units="NX_UNITLESS">
 #                     <doc>
-#                         Matrix of identifier_feature and identifier_cluster pairs which
-#                         encodes the cluster to which each identifier_feature was assigned.
+#                         Matrix of indices_feature and cluster_id pairs which
+#                         encodes the cluster to which each indices_feature was assigned.
 #                         Here for features of the next_set.
 #                     </doc>
 #                     <dimensions rank="2">
@@ -391,7 +391,7 @@ NXapm_paraprobe_intersector_results(NXobject):
 #                         <dim index="2" value="2"/>
 #                     </dimensions>
 #                 </field>
-#                 <field name="identifier_cluster" type="NX_UINT" units="NX_UNITLESS">
+#                 <field name="cluster_id" type="NX_UINT" units="NX_UNITLESS">
 #                     <doc>
 #                         The identifier (names) of the cluster.
 #                     </doc>
@@ -404,10 +404,10 @@ NXapm_paraprobe_intersector_results(NXobject):
 #                         Pivot table as a matrix.
 #                         The first column encodes how many members from the current_set
 #                         are in each cluster, one row per cluster.
-#                         
+# 
 #                         The second column encodes how many members from the next_set
 #                         are in each cluster, in the same row per cluster respectively.
-#                         
+# 
 #                         The third column encodes the total number of members in the cluster.
 #                     </doc>
 #                     <dimensions rank="2">
@@ -418,10 +418,10 @@ NXapm_paraprobe_intersector_results(NXobject):
 #                 <field name="cluster_statistics" type="NX_UINT" units="NX_UNITLESS">
 #                     <doc>
 #                         Pivot table as a matrix.
-#                         
+# 
 #                         The first column encodes the different types of
 #                         clusters based on their number of members in the sub-graph.
-#                         
+# 
 #                         The second column encodes how many clusters with
 #                         as many members exist.
 #                     </doc>
@@ -451,9 +451,9 @@ NXapm_paraprobe_intersector_results(NXobject):
 #                 <field name="end_time" type="NX_DATE_TIME"/>
 #                 <field name="total_elapsed_time" type="NX_FLOAT"/>
 #                 <field name="current_working_directory" type="NX_CHAR"/>
-#                 <field name="number_of_processes" type="NX_POSINT"/>
-#                 <field name="number_of_threads" type="NX_POSINT"/>
-#                 <field name="number_of_gpus" type="NX_POSINT"/>
+#                 <field name="number_of_processes" type="NX_UINT"/>
+#                 <field name="number_of_threads" type="NX_UINT"/>
+#                 <field name="number_of_gpus" type="NX_UINT"/>
 #             </group>
 #             <group type="NXuser" minOccurs="0" maxOccurs="unbounded">
 #                 <doc>

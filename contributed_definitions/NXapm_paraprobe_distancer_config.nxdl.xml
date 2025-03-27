@@ -29,7 +29,7 @@
     </symbols>
     <doc>
          Application definition for a configuration file of the paraprobe-distancer tool.
-         
+
          This tool is part of the paraprobe-toolbox. Inspect :ref:`NXapm_paraprobe_tool_config` for details.
     </doc>
     <group type="NXentry" minOccurs="1" maxOccurs="1">
@@ -62,7 +62,7 @@
                 <group name="hexahedron_set" type="NXcg_hexahedron" optional="true">
                     <field name="dimensionality" type="NX_POSINT"/>
                     <field name="cardinality" type="NX_POSINT"/>
-                    <field name="identifier_offset" type="NX_INT"/>
+                    <field name="index_offset" type="NX_INT"/>
                     <group name="hexahedra" type="NXcg_face_list_data_structure">
                         <field name="vertices" type="NX_UINT"/>
                     </group>
@@ -70,7 +70,7 @@
                 <group name="cylinder_set" type="NXcg_cylinder" optional="true">
                     <field name="dimensionality" type="NX_POSINT"/>
                     <field name="cardinality" type="NX_POSINT"/>
-                    <field name="identifier_offset" type="NX_INT"/>
+                    <field name="index_offset" type="NX_INT"/>
                     <field name="center" type="NX_NUMBER"/>
                     <field name="height" type="NX_NUMBER"/>
                     <field name="radii" type="NX_NUMBER"/>
@@ -78,7 +78,7 @@
                 <group name="ellipsoid_set" type="NXcg_ellipsoid" optional="true">
                     <field name="dimensionality" type="NX_POSINT"/>
                     <field name="cardinality" type="NX_POSINT"/>
-                    <field name="identifier_offset" type="NX_INT"/>
+                    <field name="index_offset" type="NX_INT"/>
                     <field name="center" type="NX_NUMBER"/>
                     <field name="half_axes_radii" type="NX_NUMBER"/>
                     <field name="orientation" type="NX_NUMBER"/>
@@ -89,9 +89,7 @@
                     <field name="number_of_objects" type="NX_UINT"/>
                     <field name="bitdepth" type="NX_UINT"/>
                     <field name="mask" type="NX_UINT"/>
-                    <!--leave open if scalar or matrix
-  dim: (i,)-->
-                    <field name="identifier" type="NX_UINT"/>
+                    <!--<field name="identifier" type="NX_UINT"/>-->
                 </group>
             </group>
             <group name="evaporation_id_filter" type="NXsubsampling_filter" optional="true">
@@ -109,7 +107,7 @@
             <field name="method" type="NX_CHAR">
                 <doc>
                      Specifies for which point the tool will compute distances.
-                     
+
                      The value *default* configures that distances are computed for all points.
                      The value *skin* configures that distances are computed only for those
                      points which are not farther away located to a triangle than
@@ -139,9 +137,9 @@
                      Each triangle_set that is referred to here should be a face_list_data_structure,
                      i.e. an array of (n_vertices, 3) of NX_FLOAT for vertex coordinates, an (n_facets, 3)
                      array of NX_UINT incident vertices of each facet. Vertex indices are assumed to
-                     start at zero and must not exceed n_vertices - 1, i.e. the identifier_offset is 0.
+                     start at zero and must not exceed n_vertices - 1, i.e. the index_offset is 0.
                      Facet normal have to be provided as an array of (n_facets, 3) of NX_FLOAT.
-                      
+
                      Instances should use triangle_set as a name prefix.
                 </doc>
                 <field name="type" type="NX_CHAR"/>
@@ -172,7 +170,7 @@
                          of facet normal vectors for the triangles in that triangle_set.
                     </doc>
                 </field>
-                <field name="identifier_patch" type="NX_CHAR" optional="true">
+                <field name="indices_patch" type="NX_CHAR" optional="true">
                     <doc>
                          Absolute path in the (HDF5) file that points to the array
                          of identifier for the triangles in that triangle_set.

@@ -52,16 +52,16 @@ NXapm_paraprobe_distancer_results(NXobject):
         dimensions:
           rank: 1
           dim: (n_ions,)
-      identifier_triangle(NX_UINT):
+      indices_triangle(NX_INT):
         exists: optional
         unit: NX_UNITLESS
         doc: |
           For each point the identifier of the triangle for which the
-          shortest distance was found
+          shortest distance was found.
         dimensions:
           rank: 1
           dim: (n_ions,)
-      identifier_point(NX_UINT):
+      indices_point(NX_INT):
         exists: optional
         unit: NX_UNITLESS
         doc: |
@@ -128,9 +128,9 @@ NXapm_paraprobe_distancer_results(NXobject):
         end_time(NX_DATE_TIME):
         total_elapsed_time(NX_FLOAT):
         current_working_directory(NX_CHAR):
-        number_of_processes(NX_POSINT):
-        number_of_threads(NX_POSINT):
-        number_of_gpus(NX_POSINT):
+        number_of_processes(NX_UINT):
+        number_of_threads(NX_UINT):
+        number_of_gpus(NX_UINT):
       (NXuser):
         exists: ['min', '0', 'max', 'unbounded']
         doc: |
@@ -158,7 +158,7 @@ NXapm_paraprobe_distancer_results(NXobject):
               dim: (3,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 215366866eee513ec55b3569917e5355f9b9cb96cfbbb1042d9f6087c368a7cc
+# dd19c39460ee00e71df643b973731be56829f99741ceee5f79c9b03f2f147906
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -200,16 +200,16 @@ NXapm_paraprobe_distancer_results(NXobject):
 #     </symbols>
 #     <doc>
 #         Application definition for results files of the paraprobe-distancer tool.
-#         
+# 
 #         This tool is part of the paraprobe-toolbox. Inspect the base class :ref:`NXapm_paraprobe_tool_results`.
 #         The paraprobe-distancer tool can be used for the computing of the shortest Euclidean distance for each
 #         member of a set of points against a set of triangles. In contrast to most approaches in atom probe where the
 #         distance is computed as the projected distance, this tool evaluates robustly the exact distance between
 #         a point and a triangle.
-#         
+# 
 #         Triangles can represent for instance the facets of a triangulated surface mesh like those returned by
 #         paraprobe-surfacer or any other set of triangles. Triangles do not have to be connected.
-#         
+# 
 #         Currently, paraprobe-distancer does not check if the respectively specified triangle sets are consistent,
 #         what their topology is, or whether or not these triangles are consistently oriented.
 #     </doc>
@@ -244,16 +244,16 @@ NXapm_paraprobe_distancer_results(NXobject):
 #                     <dim index="1" value="n_ions"/>
 #                 </dimensions>
 #             </field>
-#             <field name="identifier_triangle" type="NX_UINT" optional="true" units="NX_UNITLESS">
+#             <field name="indices_triangle" type="NX_INT" optional="true" units="NX_UNITLESS">
 #                 <doc>
 #                     For each point the identifier of the triangle for which the
-#                     shortest distance was found
+#                     shortest distance was found.
 #                 </doc>
 #                 <dimensions rank="1">
 #                     <dim index="1" value="n_ions"/>
 #                 </dimensions>
 #             </field>
-#             <field name="identifier_point" type="NX_UINT" optional="true" units="NX_UNITLESS">
+#             <field name="indices_point" type="NX_INT" optional="true" units="NX_UNITLESS">
 #                 <doc>
 #                     A support field to enable the visualization of each point
 #                     by an explicit identifier on the interval [0, n_ions - 1].
@@ -269,7 +269,7 @@ NXapm_paraprobe_distancer_results(NXobject):
 #                     A bitmask that identifies which of the distance values is
 #                     assumed to have a consistent sign because the closest
 #                     triangle had a consistent outer unit normal defined.
-#                     
+# 
 #                     For points whose bit is set to 0 the distance is correct
 #                     but the sign is not reliable.
 #                 </doc>
@@ -326,9 +326,9 @@ NXapm_paraprobe_distancer_results(NXobject):
 #                 <field name="end_time" type="NX_DATE_TIME"/>
 #                 <field name="total_elapsed_time" type="NX_FLOAT"/>
 #                 <field name="current_working_directory" type="NX_CHAR"/>
-#                 <field name="number_of_processes" type="NX_POSINT"/>
-#                 <field name="number_of_threads" type="NX_POSINT"/>
-#                 <field name="number_of_gpus" type="NX_POSINT"/>
+#                 <field name="number_of_processes" type="NX_UINT"/>
+#                 <field name="number_of_threads" type="NX_UINT"/>
+#                 <field name="number_of_gpus" type="NX_UINT"/>
 #             </group>
 #             <group type="NXuser" minOccurs="0" maxOccurs="unbounded">
 #                 <doc>

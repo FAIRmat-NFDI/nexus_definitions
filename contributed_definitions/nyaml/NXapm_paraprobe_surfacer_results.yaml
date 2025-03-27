@@ -87,8 +87,7 @@ NXapm_paraprobe_surfacer_results(NXobject):
             dimensions:
               rank: 1
               dim: (n_ions,)
-        dimensionality(NX_UINT):
-          unit: NX_UNITLESS
+        dimensionality(NX_POSINT):
           enumeration: [2, 3]
         type(NX_CHAR):
           enumeration: [convex_hull, alpha_shape, alpha_wrapping, other, undefined]
@@ -104,20 +103,19 @@ NXapm_paraprobe_surfacer_results(NXobject):
           doc: |
             The set of triangles in the coordinate system paraprobe
             which discretizes the exterior surface of the alpha complex.
-          identifier_offset(NX_INT):
+          index_offset(NX_INT):
           triangles(NXcg_face_list_data_structure):
             dimensionality(NX_POSINT):
-            number_of_vertices(NX_POSINT):
-            number_of_faces(NX_POSINT):
-            identifier_vertex_offset(NX_INT):
-            identifier_face_offset(NX_INT):
+            number_of_vertices(NX_UINT):
+            number_of_faces(NX_UINT):
+            indices_offset_vertex(NX_INT):
+            indices_offset_face(NX_INT):
             vertices(NX_FLOAT):
               unit: NX_LENGTH
               dimensions:
                 rank: 2
                 dim: (n_v_tri, 3)
             faces(NX_UINT):
-              unit: NX_UNITLESS
               dimensions:
                 rank: 2
                 dim: (n_f_tri, 3)
@@ -145,8 +143,7 @@ NXapm_paraprobe_surfacer_results(NXobject):
           doc: |
             The set of tetrahedra which represent the interior volume
             of the complex if that is a closed two-manifold.
-          identifier_offset(NX_INT):
-            unit: NX_UNITLESS
+          index_offset(NX_INT):
           volume(NX_FLOAT):
             exists: optional
             unit: NX_VOLUME
@@ -154,10 +151,10 @@ NXapm_paraprobe_surfacer_results(NXobject):
               The accumulated volume of all interior tetrahedra.
           tetrahedra(NXcg_face_list_data_structure):
             exists: optional
-            number_of_vertices(NX_POSINT):
-            number_of_faces(NX_POSINT):
-            identifier_vertex_offset(NX_INT):
-            identifier_face_offset(NX_INT):
+            number_of_vertices(NX_UINT):
+            number_of_faces(NX_UINT):
+            indices_offset_vertex(NX_INT):
+            indices_offset_face(NX_INT):
             vertices(NX_FLOAT):
               unit: NX_LENGTH
               dimensions:
@@ -193,9 +190,9 @@ NXapm_paraprobe_surfacer_results(NXobject):
         end_time(NX_DATE_TIME):
         total_elapsed_time(NX_FLOAT):
         current_working_directory(NX_CHAR):
-        number_of_processes(NX_POSINT):
-        number_of_threads(NX_POSINT):
-        number_of_gpus(NX_POSINT):
+        number_of_processes(NX_UINT):
+        number_of_threads(NX_UINT):
+        number_of_gpus(NX_UINT):
       (NXuser):
         exists: ['min', '0', 'max', 'unbounded']
         doc: |
@@ -223,7 +220,7 @@ NXapm_paraprobe_surfacer_results(NXobject):
               dim: (3,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 70ef1ca628d46da1063790e57688160ba48efd56019f0405af5ef7448dc8ecdb
+# 76304ef075492d347e86ff81f03576460015c8e07852b382c88baf747879b06a
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -280,7 +277,7 @@ NXapm_paraprobe_surfacer_results(NXobject):
 #     </symbols>
 #     <doc>
 #         Application definition for results files of the paraprobe-surfacer tool.
-#         
+# 
 #         This tool is part of the paraprobe-toolbox. Inspect the base class :ref:`NXapm_paraprobe_tool_results`.
 #         The purpose and need of the paraprobe-surfacer tool is the generation of meshed
 #         representation of the surface of the the reconstructed volume (or a portion) of it
@@ -301,11 +298,11 @@ NXapm_paraprobe_surfacer_results(NXobject):
 #                 the tool computes a triangulated surface mesh which encloses the
 #                 ROI/point cloud. This mesh can be seen as a model for the edge of
 #                 the dataset.
-#                 
+# 
 #                 Different algorithms can be used with paraprobe-surfacer to create
 #                 this mesh such as convex hulls, alpha-shapes as their generalization,
 #                 or alpha wrappings.
-#                 
+# 
 #                 Ideally, the resulting mesh should be a watertight polyhedron.
 #                 This polyhedron is not necessarily convex. For some algorithms there
 #                 is no guarantee that the resulting mesh yields a watertight mesh.
@@ -328,7 +325,7 @@ NXapm_paraprobe_surfacer_results(NXobject):
 #                         A bitmask which identifies exactly all those ions whose positions
 #                         were considered when defining the filtered point set from which
 #                         that alpha_complex instance was computed.
-#                         
+# 
 #                         This window can be different to the window of the *point_set_wrapping*
 #                         parent group because irrelevant ions might have been filtered out in addition
 #                         to the window defined in *point_set_wrapping* to reduce e.g. computational
@@ -355,7 +352,7 @@ NXapm_paraprobe_surfacer_results(NXobject):
 #                         </dimensions>
 #                     </field>
 #                 </group>
-#                 <field name="dimensionality" type="NX_UINT" units="NX_UNITLESS">
+#                 <field name="dimensionality" type="NX_POSINT">
 #                     <enumeration>
 #                         <item value="2"/>
 #                         <item value="3"/>
@@ -383,20 +380,20 @@ NXapm_paraprobe_surfacer_results(NXobject):
 #                         The set of triangles in the coordinate system paraprobe
 #                         which discretizes the exterior surface of the alpha complex.
 #                     </doc>
-#                     <field name="identifier_offset" type="NX_INT"/>
+#                     <field name="index_offset" type="NX_INT"/>
 #                     <group name="triangles" type="NXcg_face_list_data_structure">
 #                         <field name="dimensionality" type="NX_POSINT"/>
-#                         <field name="number_of_vertices" type="NX_POSINT"/>
-#                         <field name="number_of_faces" type="NX_POSINT"/>
-#                         <field name="identifier_vertex_offset" type="NX_INT"/>
-#                         <field name="identifier_face_offset" type="NX_INT"/>
+#                         <field name="number_of_vertices" type="NX_UINT"/>
+#                         <field name="number_of_faces" type="NX_UINT"/>
+#                         <field name="indices_offset_vertex" type="NX_INT"/>
+#                         <field name="indices_offset_face" type="NX_INT"/>
 #                         <field name="vertices" type="NX_FLOAT" units="NX_LENGTH">
 #                             <dimensions rank="2">
 #                                 <dim index="1" value="n_v_tri"/>
 #                                 <dim index="2" value="3"/>
 #                             </dimensions>
 #                         </field>
-#                         <field name="faces" type="NX_UINT" units="NX_UNITLESS">
+#                         <field name="faces" type="NX_UINT">
 #                             <dimensions rank="2">
 #                                 <dim index="1" value="n_f_tri"/>
 #                                 <dim index="2" value="3"/>
@@ -430,17 +427,17 @@ NXapm_paraprobe_surfacer_results(NXobject):
 #                         The set of tetrahedra which represent the interior volume
 #                         of the complex if that is a closed two-manifold.
 #                     </doc>
-#                     <field name="identifier_offset" type="NX_INT" units="NX_UNITLESS"/>
+#                     <field name="index_offset" type="NX_INT"/>
 #                     <field name="volume" type="NX_FLOAT" optional="true" units="NX_VOLUME">
 #                         <doc>
 #                             The accumulated volume of all interior tetrahedra.
 #                         </doc>
 #                     </field>
 #                     <group name="tetrahedra" type="NXcg_face_list_data_structure" optional="true">
-#                         <field name="number_of_vertices" type="NX_POSINT"/>
-#                         <field name="number_of_faces" type="NX_POSINT"/>
-#                         <field name="identifier_vertex_offset" type="NX_INT"/>
-#                         <field name="identifier_face_offset" type="NX_INT"/>
+#                         <field name="number_of_vertices" type="NX_UINT"/>
+#                         <field name="number_of_faces" type="NX_UINT"/>
+#                         <field name="indices_offset_vertex" type="NX_INT"/>
+#                         <field name="indices_offset_face" type="NX_INT"/>
 #                         <field name="vertices" type="NX_FLOAT" units="NX_LENGTH">
 #                             <dimensions rank="2">
 #                                 <dim index="1" value="n_v_tet"/>
@@ -482,9 +479,9 @@ NXapm_paraprobe_surfacer_results(NXobject):
 #                 <field name="end_time" type="NX_DATE_TIME"/>
 #                 <field name="total_elapsed_time" type="NX_FLOAT"/>
 #                 <field name="current_working_directory" type="NX_CHAR"/>
-#                 <field name="number_of_processes" type="NX_POSINT"/>
-#                 <field name="number_of_threads" type="NX_POSINT"/>
-#                 <field name="number_of_gpus" type="NX_POSINT"/>
+#                 <field name="number_of_processes" type="NX_UINT"/>
+#                 <field name="number_of_threads" type="NX_UINT"/>
+#                 <field name="number_of_gpus" type="NX_UINT"/>
 #             </group>
 #             <group type="NXuser" minOccurs="0" maxOccurs="unbounded">
 #                 <doc>

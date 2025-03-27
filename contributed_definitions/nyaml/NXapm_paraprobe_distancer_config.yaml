@@ -38,14 +38,14 @@ NXapm_paraprobe_distancer_config(NXobject):
           exists: optional
           dimensionality(NX_POSINT):
           cardinality(NX_POSINT):
-          identifier_offset(NX_INT):
+          index_offset(NX_INT):
           hexahedra(NXcg_face_list_data_structure):
             vertices(NX_UINT):
         cylinder_set(NXcg_cylinder):
           exists: optional
           dimensionality(NX_POSINT):
           cardinality(NX_POSINT):
-          identifier_offset(NX_INT):
+          index_offset(NX_INT):
           center(NX_NUMBER):
           height(NX_NUMBER):
           radii(NX_NUMBER):
@@ -53,7 +53,7 @@ NXapm_paraprobe_distancer_config(NXobject):
           exists: optional
           dimensionality(NX_POSINT):
           cardinality(NX_POSINT):
-          identifier_offset(NX_INT):
+          index_offset(NX_INT):
           center(NX_NUMBER):
           half_axes_radii(NX_NUMBER):
           orientation(NX_NUMBER):
@@ -67,9 +67,7 @@ NXapm_paraprobe_distancer_config(NXobject):
           bitdepth(NX_UINT):
           mask(NX_UINT):
           
-          # leave open if scalar or matrix
-          # dim: (i,)
-          identifier(NX_UINT):
+          # <field name="identifier" type="NX_UINT"/>
       evaporation_id_filter(NXsubsampling_filter):
         exists: optional
         min_incr_max(NX_INT):
@@ -113,9 +111,9 @@ NXapm_paraprobe_distancer_config(NXobject):
           Each triangle_set that is referred to here should be a face_list_data_structure,
           i.e. an array of (n_vertices, 3) of NX_FLOAT for vertex coordinates, an (n_facets, 3)
           array of NX_UINT incident vertices of each facet. Vertex indices are assumed to
-          start at zero and must not exceed n_vertices - 1, i.e. the identifier_offset is 0.
+          start at zero and must not exceed n_vertices - 1, i.e. the index_offset is 0.
           Facet normal have to be provided as an array of (n_facets, 3) of NX_FLOAT.
-           
+          
           Instances should use triangle_set as a name prefix.
         type(NX_CHAR):
         algorithm(NX_CHAR):
@@ -139,7 +137,7 @@ NXapm_paraprobe_distancer_config(NXobject):
           doc: |
             Absolute path in the (HDF5) file that points to the array
             of facet normal vectors for the triangles in that triangle_set.
-        identifier_patch(NX_CHAR):
+        indices_patch(NX_CHAR):
           exists: optional
           doc: |
             Absolute path in the (HDF5) file that points to the array
@@ -164,7 +162,7 @@ NXapm_paraprobe_distancer_config(NXobject):
         current_working_directory(NX_CHAR):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 156d418f0810f31078f74822927ab70cbc2bbc8b2d0bf91bb2d29c2a0eb828af
+# 200950d379de89698f4f6e3cc83c5bf15af90e0f7b15a92dc9bdeaf85762d91b
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -196,7 +194,7 @@ NXapm_paraprobe_distancer_config(NXobject):
 #     </symbols>
 #     <doc>
 #          Application definition for a configuration file of the paraprobe-distancer tool.
-#          
+# 
 #          This tool is part of the paraprobe-toolbox. Inspect :ref:`NXapm_paraprobe_tool_config` for details.
 #     </doc>
 #     <group type="NXentry" minOccurs="1" maxOccurs="1">
@@ -229,7 +227,7 @@ NXapm_paraprobe_distancer_config(NXobject):
 #                 <group name="hexahedron_set" type="NXcg_hexahedron" optional="true">
 #                     <field name="dimensionality" type="NX_POSINT"/>
 #                     <field name="cardinality" type="NX_POSINT"/>
-#                     <field name="identifier_offset" type="NX_INT"/>
+#                     <field name="index_offset" type="NX_INT"/>
 #                     <group name="hexahedra" type="NXcg_face_list_data_structure">
 #                         <field name="vertices" type="NX_UINT"/>
 #                     </group>
@@ -237,7 +235,7 @@ NXapm_paraprobe_distancer_config(NXobject):
 #                 <group name="cylinder_set" type="NXcg_cylinder" optional="true">
 #                     <field name="dimensionality" type="NX_POSINT"/>
 #                     <field name="cardinality" type="NX_POSINT"/>
-#                     <field name="identifier_offset" type="NX_INT"/>
+#                     <field name="index_offset" type="NX_INT"/>
 #                     <field name="center" type="NX_NUMBER"/>
 #                     <field name="height" type="NX_NUMBER"/>
 #                     <field name="radii" type="NX_NUMBER"/>
@@ -245,7 +243,7 @@ NXapm_paraprobe_distancer_config(NXobject):
 #                 <group name="ellipsoid_set" type="NXcg_ellipsoid" optional="true">
 #                     <field name="dimensionality" type="NX_POSINT"/>
 #                     <field name="cardinality" type="NX_POSINT"/>
-#                     <field name="identifier_offset" type="NX_INT"/>
+#                     <field name="index_offset" type="NX_INT"/>
 #                     <field name="center" type="NX_NUMBER"/>
 #                     <field name="half_axes_radii" type="NX_NUMBER"/>
 #                     <field name="orientation" type="NX_NUMBER"/>
@@ -256,9 +254,7 @@ NXapm_paraprobe_distancer_config(NXobject):
 #                     <field name="number_of_objects" type="NX_UINT"/>
 #                     <field name="bitdepth" type="NX_UINT"/>
 #                     <field name="mask" type="NX_UINT"/>
-#                     <!--leave open if scalar or matrix
-#   dim: (i,)-->
-#                     <field name="identifier" type="NX_UINT"/>
+#                     <!--<field name="identifier" type="NX_UINT"/>-->
 #                 </group>
 #             </group>
 #             <group name="evaporation_id_filter" type="NXsubsampling_filter" optional="true">
@@ -276,7 +272,7 @@ NXapm_paraprobe_distancer_config(NXobject):
 #             <field name="method" type="NX_CHAR">
 #                 <doc>
 #                      Specifies for which point the tool will compute distances.
-#                      
+# 
 #                      The value *default* configures that distances are computed for all points.
 #                      The value *skin* configures that distances are computed only for those
 #                      points which are not farther away located to a triangle than
@@ -306,9 +302,9 @@ NXapm_paraprobe_distancer_config(NXobject):
 #                      Each triangle_set that is referred to here should be a face_list_data_structure,
 #                      i.e. an array of (n_vertices, 3) of NX_FLOAT for vertex coordinates, an (n_facets, 3)
 #                      array of NX_UINT incident vertices of each facet. Vertex indices are assumed to
-#                      start at zero and must not exceed n_vertices - 1, i.e. the identifier_offset is 0.
+#                      start at zero and must not exceed n_vertices - 1, i.e. the index_offset is 0.
 #                      Facet normal have to be provided as an array of (n_facets, 3) of NX_FLOAT.
-#                       
+# 
 #                      Instances should use triangle_set as a name prefix.
 #                 </doc>
 #                 <field name="type" type="NX_CHAR"/>
@@ -339,7 +335,7 @@ NXapm_paraprobe_distancer_config(NXobject):
 #                          of facet normal vectors for the triangles in that triangle_set.
 #                     </doc>
 #                 </field>
-#                 <field name="identifier_patch" type="NX_CHAR" optional="true">
+#                 <field name="indices_patch" type="NX_CHAR" optional="true">
 #                     <doc>
 #                          Absolute path in the (HDF5) file that points to the array
 #                          of identifier for the triangles in that triangle_set.

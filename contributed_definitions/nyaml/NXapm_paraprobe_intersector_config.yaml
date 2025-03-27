@@ -87,7 +87,7 @@ NXapm_paraprobe_intersector_config(NXobject):
           which will be checked for proximity and/or volumetric intersection,
           to members of the current_set.
           The meshes were generated as a result of some other meshing process.
-        identifier_set(NX_UINT):
+        set_identifier(NX_UINT):
           unit: NX_ANY
           doc: |
             This identifier can be used to label the current set. The label effectively can be interpreted as the time/iteration (i.e. :math:`k`)
@@ -129,7 +129,7 @@ NXapm_paraprobe_intersector_config(NXobject):
               path.
           
           # currently groupname_geometry_prefix/object<ID>/polyhedron.
-          identifier_feature(NX_UINT):
+          indices_feature(NX_INT):
             unit: NX_UNITLESS
             doc: |
               Array of identifier whereby the path to the geometry data can be inferred
@@ -143,7 +143,7 @@ NXapm_paraprobe_intersector_config(NXobject):
           which will be checked for proximity and/or volumetric intersection,
           to members of the next_set.
           The meshes were generated as a result of some other meshing process.
-        identifier_set(NX_UINT):
+        set_identifier(NX_UINT):
           unit: NX_ANY
           doc: |
             This identifier can be used to label the current set. The label effectively can be interpreted as the time/iteration (i.e. :math:`k + 1`)
@@ -182,7 +182,7 @@ NXapm_paraprobe_intersector_config(NXobject):
               path.
           
           # currently groupname_geometry_prefix/object<ID>/polyhedron.
-          identifier_feature(NX_UINT):
+          indices_feature(NX_INT):
             unit: NX_UNITLESS
             doc: |
               Array of identifier whereby the path to the geometry data can be inferred
@@ -207,7 +207,7 @@ NXapm_paraprobe_intersector_config(NXobject):
         current_working_directory(NX_CHAR):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 7a9ff99e17a1ae8a9745f8c5f529db91d57d966ae2c529602a419817fe9d5a53
+# 90b204336d75c2a35a5cbdc8eab1afd56565b64a9ce267cdb4c0a8a9a6ba2e03
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -244,7 +244,7 @@ NXapm_paraprobe_intersector_config(NXobject):
 #     </symbols>
 #     <doc>
 #         Application definition for a configuration file of the paraprobe-intersector tool.
-#         
+# 
 #         This tool is part of the paraprobe-toolbox. Inspect :ref:`NXapm_paraprobe_tool_config` for details.
 #     </doc>
 #     <group type="NXentry" minOccurs="1" maxOccurs="1">
@@ -264,13 +264,13 @@ NXapm_paraprobe_intersector_config(NXobject):
 #                 Tracking volume_volume_spatial_correlations (v_v) is the process of building logical
 #                 relations between objects, their proximity and eventual volumetric intersections.
 #                 Here, objects are assumed to be represented as a set of triangulated surface meshes.
-#                 
+# 
 #                 Volumetric overlap and proximity of volumetric features is identified for members of
 #                 sets of features to members of other sets of volumetric features. Specifically, for each time
 #                 step :math:`k` pairs of sets are compared:
 #                 Members of a so-called current_set to members of a so-called next_set.
 #                 Members can be different types of volumetric features.
-#                 
+# 
 #                 Instances should use v_v_spatial_correlation as a name prefix.
 #             </doc>
 #             <!--config-->
@@ -279,14 +279,14 @@ NXapm_paraprobe_intersector_config(NXobject):
 #                     Specifies the method whereby to decide if two objects intersect volumetrically.
 #                     For reasons which are detailed in the supplementary material of `M. Kühbach et al. &lt;https://arxiv.org/abs/2205.13510&gt;`_,
 #                     it is assumed by default that two objects intersect if they share at least one ion with the same evaporation ID (shared_ion).
-#                     
+# 
 #                     Alternatively, with specifying tetrahedra_intersections, the tool can perform an intersection analysis which attempts to
 #                     tetrahedralize first each polyhedron. If successful, the tool then checks for at least one pair of intersecting tetrahedra
 #                     to identify if two objects intersect or not. However, we found that these geometrical analyses can result in corner
 #                     cases which the tetrahedralization library used in the tests (TetGen) was not unable to tetrahedralize successfully.
 #                     These cases were virtually always associated with complicated non-convex polyhedra which had portions
 #                     of the mesh that were connected by almost point like tubes of triangles.
-#                     
+# 
 #                     Finding more robust methods for computing intersections between not necessarily convex polyhedra might improve
 #                     the situation in the future. For practical reasons we have thus deactivated the functionality of tetrahedra-tetrahedron
 #                     intersections in paraprobe-intersector.
@@ -340,7 +340,7 @@ NXapm_paraprobe_intersector_config(NXobject):
 #                     to members of the current_set.
 #                     The meshes were generated as a result of some other meshing process.
 #                 </doc>
-#                 <field name="identifier_set" type="NX_UINT" units="NX_ANY">
+#                 <field name="set_identifier" type="NX_UINT" units="NX_ANY">
 #                     <doc>
 #                         This identifier can be used to label the current set. The label effectively can be interpreted as the time/iteration (i.e. :math:`k`)
 #                         step when the current set was taken (see `M. Kühbach et al. 2022 &lt;https://arxiv.org/abs/2205.13510&gt;`_).
@@ -392,7 +392,7 @@ NXapm_paraprobe_intersector_config(NXobject):
 #                         </doc>
 #                     </field>
 #                     <!--currently groupname_geometry_prefix/object<ID>/polyhedron.-->
-#                     <field name="identifier_feature" type="NX_UINT" units="NX_UNITLESS">
+#                     <field name="indices_feature" type="NX_INT" units="NX_UNITLESS">
 #                         <doc>
 #                             Array of identifier whereby the path to the geometry data can be inferred
 #                             automatically.
@@ -410,7 +410,7 @@ NXapm_paraprobe_intersector_config(NXobject):
 #                     to members of the next_set.
 #                     The meshes were generated as a result of some other meshing process.
 #                 </doc>
-#                 <field name="identifier_set" type="NX_UINT" units="NX_ANY">
+#                 <field name="set_identifier" type="NX_UINT" units="NX_ANY">
 #                     <doc>
 #                         This identifier can be used to label the current set. The label effectively can be interpreted as the time/iteration (i.e. :math:`k + 1`)
 #                         step when the current set was taken (see `M. Kühbach et al. 2022 &lt;https://arxiv.org/abs/2205.13510&gt;`_).
@@ -457,7 +457,7 @@ NXapm_paraprobe_intersector_config(NXobject):
 #                         </doc>
 #                     </field>
 #                     <!--currently groupname_geometry_prefix/object<ID>/polyhedron.-->
-#                     <field name="identifier_feature" type="NX_UINT" units="NX_UNITLESS">
+#                     <field name="indices_feature" type="NX_INT" units="NX_UNITLESS">
 #                         <doc>
 #                             Array of identifier whereby the path to the geometry data can be inferred
 #                             automatically.

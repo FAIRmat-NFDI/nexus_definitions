@@ -97,14 +97,14 @@ NXapm_paraprobe_spatstat_config(NXobject):
           exists: optional
           dimensionality(NX_POSINT):
           cardinality(NX_POSINT):
-          identifier_offset(NX_INT):
+          index_offset(NX_INT):
           hexahedra(NXcg_face_list_data_structure):
             vertices(NX_UINT):
         cylinder_set(NXcg_cylinder):
           exists: optional
           dimensionality(NX_POSINT):
           cardinality(NX_POSINT):
-          identifier_offset(NX_INT):
+          index_offset(NX_INT):
           center(NX_NUMBER):
           height(NX_NUMBER):
           radii(NX_NUMBER):
@@ -112,7 +112,7 @@ NXapm_paraprobe_spatstat_config(NXobject):
           exists: optional
           dimensionality(NX_POSINT):
           cardinality(NX_POSINT):
-          identifier_offset(NX_INT):
+          index_offset(NX_INT):
           center(NX_NUMBER):
           half_axes_radii(NX_NUMBER):
           orientation(NX_NUMBER):
@@ -163,7 +163,7 @@ NXapm_paraprobe_spatstat_config(NXobject):
           how iontypes are interpreted given an iontype represents
           in general a (molecular) ion with different isotopes that have
           individually different multiplicity.
-            
+          
           The value resolve_all will set an ion active in the analysis regardless
           of which iontype it is. Each active ion is accounted for once.
           
@@ -268,7 +268,7 @@ NXapm_paraprobe_spatstat_config(NXobject):
         current_working_directory(NX_CHAR):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# d602335e6a72fa9ebafe4bbcfed5575b8859d3f25337018aa229db26002f8ddf
+# 60357bb9e6a1e5ad0e17322c6d3cda6c930022f7e1ee84712fcfed49ad377771
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -315,7 +315,7 @@ NXapm_paraprobe_spatstat_config(NXobject):
 #     </symbols>
 #     <doc>
 #         Application definition for a configuration file of the paraprobe-spatstat tool.
-#         
+# 
 #         This tool is part of the paraprobe-toolbox. Inspect :ref:`NXapm_paraprobe_tool_config` for details.
 #     </doc>
 #     <group type="NXentry" minOccurs="1" maxOccurs="1">
@@ -365,10 +365,10 @@ NXapm_paraprobe_spatstat_config(NXobject):
 #                         of the dataset so that the ion can act as a source. This means that
 #                         an ROI is placed at the location of the ion and its neighbors are
 #                         analyzed how they contribute to the computed statistics.
-#                         
+# 
 #                         The edge_distance threshold can be combined with the feature_distance threshold. This threshold defines defines up to which distance to a
 #                         microstructural feature an ROI is placed.
-#                         
+# 
 #                         The threshold is useful to process the dataset such that ROIs do
 #                         not protrude out of the dataset as this would add bias.
 #                     </doc>
@@ -398,7 +398,7 @@ NXapm_paraprobe_spatstat_config(NXobject):
 #                         the ion can at all qualify as a source, i.e. that an ROI is placed
 #                         at the location of the ion and its neighbors are then analyzed
 #                         how they contribute to the computed statistics.
-#                         
+# 
 #                         Recall that this feature_distance threshold is used in combination
 #                         with the edge_distance threshold when placing ROI about source ions.
 #                     </doc>
@@ -409,7 +409,7 @@ NXapm_paraprobe_spatstat_config(NXobject):
 #                 <group name="hexahedron_set" type="NXcg_hexahedron" optional="true">
 #                     <field name="dimensionality" type="NX_POSINT"/>
 #                     <field name="cardinality" type="NX_POSINT"/>
-#                     <field name="identifier_offset" type="NX_INT"/>
+#                     <field name="index_offset" type="NX_INT"/>
 #                     <group name="hexahedra" type="NXcg_face_list_data_structure">
 #                         <field name="vertices" type="NX_UINT"/>
 #                     </group>
@@ -417,7 +417,7 @@ NXapm_paraprobe_spatstat_config(NXobject):
 #                 <group name="cylinder_set" type="NXcg_cylinder" optional="true">
 #                     <field name="dimensionality" type="NX_POSINT"/>
 #                     <field name="cardinality" type="NX_POSINT"/>
-#                     <field name="identifier_offset" type="NX_INT"/>
+#                     <field name="index_offset" type="NX_INT"/>
 #                     <field name="center" type="NX_NUMBER"/>
 #                     <field name="height" type="NX_NUMBER"/>
 #                     <field name="radii" type="NX_NUMBER"/>
@@ -425,7 +425,7 @@ NXapm_paraprobe_spatstat_config(NXobject):
 #                 <group name="ellipsoid_set" type="NXcg_ellipsoid" optional="true">
 #                     <field name="dimensionality" type="NX_POSINT"/>
 #                     <field name="cardinality" type="NX_POSINT"/>
-#                     <field name="identifier_offset" type="NX_INT"/>
+#                     <field name="index_offset" type="NX_INT"/>
 #                     <field name="center" type="NX_NUMBER"/>
 #                     <field name="half_axes_radii" type="NX_NUMBER"/>
 #                     <field name="orientation" type="NX_NUMBER"/>
@@ -476,25 +476,25 @@ NXapm_paraprobe_spatstat_config(NXobject):
 #                     how iontypes are interpreted given an iontype represents
 #                     in general a (molecular) ion with different isotopes that have
 #                     individually different multiplicity.
-#                       
+# 
 #                     The value resolve_all will set an ion active in the analysis regardless
 #                     of which iontype it is. Each active ion is accounted for once.
-#                     
+# 
 #                     The value resolve_unknown will set an ion active when the ion is
 #                     of the UNKNOWNTYPE type. Each active ion is accounted for once.
-#                     
+# 
 #                     The value resolve_ion will set an ion active if it is of the specific
 #                     iontype, irregardless of its elemental or isotopic details.
 #                     Each active ion is counted once.
-#                     
+# 
 #                     The value resolve_element will set an ion active, and most importantly,
 #                     account for each as many times as the (molecular) ion contains
 #                     atoms of elements in the whitelist ion_query_isotope_vector.
-#                     
+# 
 #                     The value resolve_isotope will set an ion active, and most importantly,
 #                     account for each as many times as the (molecular) ion contains
 #                     isotopes in the whitelist ion_query_isotope_vector.
-#                     
+# 
 #                     In effect, ion_query_isotope_vector acts as a whitelist to filter
 #                     which ions are considered as source ions of the correlation statistics
 #                     and how the multiplicity of each ion will be factorized, i.e. how
