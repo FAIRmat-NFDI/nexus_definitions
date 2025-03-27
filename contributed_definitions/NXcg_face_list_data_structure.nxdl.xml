@@ -56,26 +56,26 @@ duplicate of an NXoff_geometry ?-->
     </symbols>
     <doc>
          Computational geometry of primitives via a face-and-edge-list data structure.
-
+         
          Primitives must neither be degenerated nor self-intersect but can have different
          properties. A face-and-edge-list-based description of primitives is
          frequently used for triangles and polyhedra to store them on disk for
          visualization purposes (see OFF, PLY, VTK, or STL file formats).
-
+         
          Although this description is storage efficient, it is not well-suited for
          topological analyses. In this case using a half-edge data structure is
          an alternative.
-
+         
          Having an own base class for the data structure how primitives are stored is
          useful to embrace both users with small or detailed specification demands.
-
+         
          Indices can be used as identifier and thus names for individual instances.
     </doc>
     <!--resulting in a design similar to that of NXoff_geometry and the XDMF mixed primitive topology-->
     <field name="number_of_vertices" type="NX_UINT" units="NX_UNITLESS">
         <doc>
              Number of vertices for each face.
-
+             
              Each entry represents the total number of vertices for that face,
              irrespectively whether vertices are shared among faces or not.
         </doc>
@@ -86,7 +86,7 @@ duplicate of an NXoff_geometry ?-->
     <field name="number_of_edges" type="NX_UINT" units="NX_UNITLESS">
         <doc>
              Number of edges for each face.
-
+             
              Each entry represents the total number of edges for that face,
              irrespectively whether edges are shared across faces or not.
         </doc>
@@ -103,7 +103,7 @@ duplicate of an NXoff_geometry ?-->
         <doc>
              Integer offset whereby the identifier of the first member
              of the vertices differs from zero.
-
+             
              Identifier can be defined explicitly or implicitly.
              Inspect the definition of NXcg_primitive for further details.
         </doc>
@@ -112,7 +112,7 @@ duplicate of an NXoff_geometry ?-->
         <doc>
              Integer offset whereby the identifier of the first member
              of the edges differs from zero.
-
+             
              Identifier can be defined explicitly or implicitly.
              Inspect the definition of NXcg_primitive for further details.
         </doc>
@@ -121,7 +121,7 @@ duplicate of an NXoff_geometry ?-->
         <doc>
              Integer offset whereby the identifier of the first member
              of the faces differs from zero.
-
+             
              Identifier can be defined explicitly or implicitly.
              Inspect the definition of NXcg_primitive for further details.
         </doc>
@@ -153,7 +153,7 @@ duplicate of an NXoff_geometry ?-->
     <field name="vertices" type="NX_NUMBER" units="NX_ANY">
         <doc>
              Positions of the vertices.
-
+             
              Users are encouraged to reduce the vertices to a unique set as this may
              result in more efficient storage. Alternatively, storing vertex positions naively
              should be indicated with setting vertices_are_unique to False.
@@ -177,12 +177,12 @@ duplicate of an NXoff_geometry ?-->
     <field name="faces" type="NX_INT" units="NX_UNITLESS">
         <doc>
              The faces are stored as a concatenated array of vertex identifier tuples.
-
+             
              The first entry is the identifier of the start vertex of the first face,
              followed by the second vertex of the first face, until the last vertex
              of the first face. Thereafter, the start vertex of the second face, the
              second vertex of the second face, and so on and so forth.
-
+             
              Therefore, summating over the number_of_vertices, allows to extract
              the vertex identifiers for the i-th face on the following index interval
              of the faces array: :math:`[\sum_{i = 0}^{i = n-1}, \sum_{i=0}^{i = n}]`.
@@ -202,7 +202,7 @@ duplicate of an NXoff_geometry ?-->
     <field name="edges_are_unique" type="NX_BOOLEAN">
         <doc>
              If true, indicates that no edge is stored more than once.
-
+             
              Users are encouraged to consider using a half_edge_data_structure instead.
         </doc>
     </field>
@@ -214,10 +214,11 @@ duplicate of an NXoff_geometry ?-->
     <field name="winding_order" type="NX_INT" units="NX_UNITLESS">
         <doc>
              Specifies for each face which winding order was used if any:
-
+             
              * 0 - undefined
              * 1 - counter-clockwise (CCW)
              * 2 - clock-wise (CW)
+             
         </doc>
         <dimensions rank="1">
             <dim index="1" value="n_f"/>

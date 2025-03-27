@@ -26,8 +26,7 @@
         <doc>
             The symbols used in the schema to specify e.g. dimensions of arrays.
         </doc>
-        <!--n_positions: Number of position values.
-n_disjoint_clusters: Number of disjoint cluster.-->
+        <!--n_positions, n_disjoint_clusters-->
         <symbol name="n_ivec_max">
             <doc>
                 Maximum number of atoms per molecular ion. Should be 32 for paraprobe.
@@ -46,7 +45,7 @@ n_disjoint_clusters: Number of disjoint cluster.-->
     </symbols>
     <doc>
         Application definition for a configuration file of the paraprobe-clusterer tool.
-
+        
         This tool is part of the paraprobe-toolbox. Inspect :ref:`NXapm_paraprobe_tool_config` for details.
     </doc>
     <group type="NXentry" minOccurs="1" maxOccurs="1">
@@ -105,7 +104,7 @@ n_disjoint_clusters: Number of disjoint cluster.-->
         <!--recover_bitmask(NX_BOOLEAN):
 doc: |
 Specifies if the tool should try to recover, after a recovery of the
-evaporation IDs a bitmask which identifies which of the positions
+evaporation_id a bitmask which identifies which of the positions
 in dataset/dataset/dataset_name_reconstruction where covered
 by the IVAS/APSuite cluster analysis. This can be useful to recover
 the region of interest.-->
@@ -113,7 +112,7 @@ the region of interest.-->
             <doc>
                 This process performs a cluster analysis on a
                 reconstructed dataset or a ROI within it.
-
+                
                 Instances should use cluster_analysis as a name prefix.
             </doc>
             <group name="reconstruction" type="NXnote">
@@ -190,28 +189,28 @@ the region of interest.-->
             <field name="ion_type_filter" type="NX_CHAR">
                 <doc>
                     How should iontypes be considered during the cluster analysis.
-
+                    
                     The value resolve_all will set an ion active
                     in the analysis regardless of which iontype it is.
-
+                    
                     The value resolve_unknown will set an ion active
                     when it is of the UNKNOWNTYPE.
-
+                    
                     The value resolve_ion will set an ion active
                     if it is of the specific iontype, irregardless of its nuclide structure.
-
+                    
                     The value resolve_element will set an ion active and account as many times
                     for it, as the (molecular) ion contains atoms of elements in the whitelist
                     ion_query_nuclide_vector.
-
+                    
                     The value resolve_isotope will set an ion active and account as many times
                     for it, as the (molecular) ion contains nuclides in the whitelist
                     ion_query_nuclide_vector.
-
+                    
                     In effect, ion_query_nuclide_vector acts as a whitelist to filter which ions are
                     considered as source ions of the correlation statistics and how the multiplicity
                     of each ion will be factorized.
-
+                    
                     This is relevant as in atom probe we have the situation that an ion of a molecular
                     ion with more than one nuclide, say Ti O for example is counted potentially several
                     times because at that position (reconstructed) position it has been assumed  that
@@ -240,10 +239,10 @@ the region of interest.-->
                 <doc>
                     Settings for DBScan clustering algorithm. For original details about the
                     algorithm and (performance-relevant) details consider:
-
+                    
                     * `M. Ester et al. &lt;https://dx.doi.org/10.5555/3001460.3001507&gt;`_
                     * `M. Götz et al. &lt;https://dx.doi.org/10.1145/2834892.2834894&gt;`_
-
+                    
                     For details about how the DBScan algorithms is the key behind the
                     specific modification known as the maximum-separation method in the
                     atom probe community consider `E. Jägle et al. &lt;https://dx.doi.org/10.1017/S1431927614013294&gt;`_
@@ -251,16 +250,16 @@ the region of interest.-->
                 <field name="high_throughput_method" type="NX_CHAR">
                     <doc>
                         Strategy how a set of cluster analyses with different parameter is executed:
-
+                        
                         * For tuple as many runs are performed as parameter values have been defined.
                         * For combinatorics individual parameter arrays are looped over.
-
+                        
                         As an example we may provide ten entries for eps and three entries for min_pts.
                         If high_throughput_method is set to tuple, the analysis is invalid because we have
                         an insufficient number of min_pts values to pair them with our ten eps values.
                         By contrast, if high_throughput_method is set to combinatorics, the tool will run three
                         individual min_pts runs for each eps value, resulting in a total of 30 analyses.
-
+                        
                         A typical example from the literature `M. Kühbach et al. &lt;https://dx.doi.org/10.1038/s41524-020-00486-1&gt;`_
                         can be instructed via setting eps to an array of values np.linspace(0.2, 5.0, nums=241, endpoint=True),
                         one min_pts value that is equal to 1, and high_throughput_method set to combinatorics.
@@ -311,10 +310,10 @@ dim: (j,)-->
             <group name="hdbscan" type="NXprocess">
                 <doc>
                     Settings for the HPDBScan clustering algorithm.
-
+                    
                     * L. McInnes et al. &lt;https://dx.doi.org/10.21105/joss.00205&gt;`_
                     * scikit-learn hdbscan library `&lt;https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html&gt;`_
-
+                    
                     See also this documentation for details about the parameter.
                     Here we use the terminology of the hdbscan documentation.
                 </doc>

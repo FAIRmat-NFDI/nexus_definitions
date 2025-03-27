@@ -967,8 +967,7 @@ NXapm(NXobject):
           checksum(NX_CHAR):
           algorithm(NX_CHAR):
         
-        # currently cannot be made required because of being a quantity measured
-        # by proprietary hardware with proprietary semantics
+        # currently cannot be made required proprietary hardware and semantics
         raw_tof(NX_FLOAT):
           exists: recommended
           doc: |
@@ -1004,9 +1003,6 @@ NXapm(NXobject):
           file_name(NX_CHAR):
           checksum(NX_CHAR):
           algorithm(NX_CHAR):
-        
-        # config/input
-        # results
         mass_to_charge(NX_FLOAT):
           dimensions:
             rank: 1
@@ -1069,16 +1065,12 @@ NXapm(NXobject):
             program(NX_CHAR):
               \@version(NX_CHAR):
           
-          # config/input
           # results
           (NXdata):
             \@signal(NX_CHAR):
             \@axes(NX_CHAR):
             \@AXISNAME_indices(NX_UINT):
               nameType: partial
-            
-            # dim: (3,)
-            # \@long_name:
             title(NX_CHAR):
               exists: recommended
             intensity(NX_NUMBER):
@@ -1170,10 +1162,7 @@ NXapm(NXobject):
             doc: |
               MRP, at which mrp_value was specified.
         
-        # config/input
-        # results
-        # NEW ISSUE: add parameters of the background model
-        # in an e.g. work of A. London et al.
+        # TODO add description of background models and fit like in XPS
         peak_search(NXprocess):
           exists: recommended
           sequence_index(NX_POSINT):
@@ -1245,7 +1234,7 @@ NXapm(NXobject):
               exists: recommended
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# aea11bb9aa74ed5e31c1738b97420a496268f2571756bc53119e74cc2b082014
+# 60b2bc45c73a1c8918e6bbd792bd2fc603c0fbfe0f054bb53350b2f4d3f6a3a1
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -2310,8 +2299,7 @@ NXapm(NXobject):
 #                     <field name="checksum" type="NX_CHAR"/>
 #                     <field name="algorithm" type="NX_CHAR"/>
 #                 </group>
-#                 <!--currently cannot be made required because of being a quantity measured
-# by proprietary hardware with proprietary semantics-->
+#                 <!--currently cannot be made required proprietary hardware and semantics-->
 #                 <field name="raw_tof" type="NX_FLOAT" recommended="true">
 #                     <doc>
 #                         Raw time-of-flight data without corrections.
@@ -2348,8 +2336,6 @@ NXapm(NXobject):
 #                     <field name="checksum" type="NX_CHAR"/>
 #                     <field name="algorithm" type="NX_CHAR"/>
 #                 </group>
-#                 <!--config/input
-# results-->
 #                 <field name="mass_to_charge" type="NX_FLOAT">
 #                     <dimensions rank="1">
 #                         <dim index="1" value="n"/>
@@ -2412,14 +2398,11 @@ NXapm(NXobject):
 #                             <attribute name="version" type="NX_CHAR"/>
 #                         </field>
 #                     </group>
-#                     <!--config/input
-# results-->
+#                     <!--results-->
 #                     <group type="NXdata">
 #                         <attribute name="signal" type="NX_CHAR"/>
 #                         <attribute name="axes" type="NX_CHAR"/>
 #                         <attribute name="AXISNAME_indices" type="NX_UINT" nameType="partial"/>
-#                         <!--dim: (3,)
-# \@long_name:-->
 #                         <field name="title" type="NX_CHAR" recommended="true"/>
 #                         <field name="intensity" type="NX_NUMBER">
 #                             <dimensions rank="3">
@@ -2518,10 +2501,7 @@ NXapm(NXobject):
 #                         </doc>
 #                     </field>
 #                 </group>
-#                 <!--config/input
-# results
-# NEW ISSUE: add parameters of the background model
-# in an e.g. work of A. London et al.-->
+#                 <!--TODO add description of background models and fit like in XPS-->
 #                 <group name="peak_search" type="NXprocess" recommended="true">
 #                     <field name="sequence_index" type="NX_POSINT" recommended="true"/>
 #                     <group type="NXprogram" minOccurs="1" maxOccurs="unbounded">

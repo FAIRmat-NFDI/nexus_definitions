@@ -7,8 +7,7 @@ symbols:
   doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
 
-  # n_positions: Number of position values.
-  # n_disjoint_clusters: Number of disjoint cluster.
+  # n_positions, n_disjoint_clusters
   n_ivec_max: |
     Maximum number of atoms per molecular ion. Should be 32 for paraprobe.
   n_clust_algos: |
@@ -65,7 +64,7 @@ NXapm_paraprobe_clusterer_config(NXobject):
     # recover_bitmask(NX_BOOLEAN):
     # doc: |
     # Specifies if the tool should try to recover, after a recovery of the
-    # evaporation IDs a bitmask which identifies which of the positions
+    # evaporation_id a bitmask which identifies which of the positions
     # in dataset/dataset/dataset_name_reconstruction where covered
     # by the IVAS/APSuite cluster analysis. This can be useful to recover
     # the region of interest.
@@ -313,7 +312,7 @@ NXapm_paraprobe_clusterer_config(NXobject):
         current_working_directory(NX_CHAR):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# d03710e6b442eac4b69a38a86f9a82157658d23a31610dfeba414aa5c1e686e6
+# 1691c2daa6cb56352236811442d1bd014249aa443f9e7361ba4f99106665d071
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -342,8 +341,7 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #         <doc>
 #             The symbols used in the schema to specify e.g. dimensions of arrays.
 #         </doc>
-#         <!--n_positions: Number of position values.
-# n_disjoint_clusters: Number of disjoint cluster.-->
+#         <!--n_positions, n_disjoint_clusters-->
 #         <symbol name="n_ivec_max">
 #             <doc>
 #                 Maximum number of atoms per molecular ion. Should be 32 for paraprobe.
@@ -362,7 +360,7 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #     </symbols>
 #     <doc>
 #         Application definition for a configuration file of the paraprobe-clusterer tool.
-# 
+#         
 #         This tool is part of the paraprobe-toolbox. Inspect :ref:`NXapm_paraprobe_tool_config` for details.
 #     </doc>
 #     <group type="NXentry" minOccurs="1" maxOccurs="1">
@@ -421,7 +419,7 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #         <!--recover_bitmask(NX_BOOLEAN):
 # doc: |
 # Specifies if the tool should try to recover, after a recovery of the
-# evaporation IDs a bitmask which identifies which of the positions
+# evaporation_id a bitmask which identifies which of the positions
 # in dataset/dataset/dataset_name_reconstruction where covered
 # by the IVAS/APSuite cluster analysis. This can be useful to recover
 # the region of interest.-->
@@ -429,7 +427,7 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #             <doc>
 #                 This process performs a cluster analysis on a
 #                 reconstructed dataset or a ROI within it.
-# 
+#                 
 #                 Instances should use cluster_analysis as a name prefix.
 #             </doc>
 #             <group name="reconstruction" type="NXnote">
@@ -506,28 +504,28 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #             <field name="ion_type_filter" type="NX_CHAR">
 #                 <doc>
 #                     How should iontypes be considered during the cluster analysis.
-# 
+#                     
 #                     The value resolve_all will set an ion active
 #                     in the analysis regardless of which iontype it is.
-# 
+#                     
 #                     The value resolve_unknown will set an ion active
 #                     when it is of the UNKNOWNTYPE.
-# 
+#                     
 #                     The value resolve_ion will set an ion active
 #                     if it is of the specific iontype, irregardless of its nuclide structure.
-# 
+#                     
 #                     The value resolve_element will set an ion active and account as many times
 #                     for it, as the (molecular) ion contains atoms of elements in the whitelist
 #                     ion_query_nuclide_vector.
-# 
+#                     
 #                     The value resolve_isotope will set an ion active and account as many times
 #                     for it, as the (molecular) ion contains nuclides in the whitelist
 #                     ion_query_nuclide_vector.
-# 
+#                     
 #                     In effect, ion_query_nuclide_vector acts as a whitelist to filter which ions are
 #                     considered as source ions of the correlation statistics and how the multiplicity
 #                     of each ion will be factorized.
-# 
+#                     
 #                     This is relevant as in atom probe we have the situation that an ion of a molecular
 #                     ion with more than one nuclide, say Ti O for example is counted potentially several
 #                     times because at that position (reconstructed) position it has been assumed  that
@@ -556,10 +554,10 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #                 <doc>
 #                     Settings for DBScan clustering algorithm. For original details about the
 #                     algorithm and (performance-relevant) details consider:
-# 
+#                     
 #                     * `M. Ester et al. &lt;https://dx.doi.org/10.5555/3001460.3001507&gt;`_
 #                     * `M. Götz et al. &lt;https://dx.doi.org/10.1145/2834892.2834894&gt;`_
-# 
+#                     
 #                     For details about how the DBScan algorithms is the key behind the
 #                     specific modification known as the maximum-separation method in the
 #                     atom probe community consider `E. Jägle et al. &lt;https://dx.doi.org/10.1017/S1431927614013294&gt;`_
@@ -567,16 +565,16 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #                 <field name="high_throughput_method" type="NX_CHAR">
 #                     <doc>
 #                         Strategy how a set of cluster analyses with different parameter is executed:
-# 
+#                         
 #                         * For tuple as many runs are performed as parameter values have been defined.
 #                         * For combinatorics individual parameter arrays are looped over.
-# 
+#                         
 #                         As an example we may provide ten entries for eps and three entries for min_pts.
 #                         If high_throughput_method is set to tuple, the analysis is invalid because we have
 #                         an insufficient number of min_pts values to pair them with our ten eps values.
 #                         By contrast, if high_throughput_method is set to combinatorics, the tool will run three
 #                         individual min_pts runs for each eps value, resulting in a total of 30 analyses.
-# 
+#                         
 #                         A typical example from the literature `M. Kühbach et al. &lt;https://dx.doi.org/10.1038/s41524-020-00486-1&gt;`_
 #                         can be instructed via setting eps to an array of values np.linspace(0.2, 5.0, nums=241, endpoint=True),
 #                         one min_pts value that is equal to 1, and high_throughput_method set to combinatorics.
@@ -627,10 +625,10 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #             <group name="hdbscan" type="NXprocess">
 #                 <doc>
 #                     Settings for the HPDBScan clustering algorithm.
-# 
+#                     
 #                     * L. McInnes et al. &lt;https://dx.doi.org/10.21105/joss.00205&gt;`_
 #                     * scikit-learn hdbscan library `&lt;https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html&gt;`_
-# 
+#                     
 #                     See also this documentation for details about the parameter.
 #                     Here we use the terminology of the hdbscan documentation.
 #                 </doc>

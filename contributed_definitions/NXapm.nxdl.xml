@@ -1062,8 +1062,7 @@ at this point the original set of events p has been filtered down to p_out-->
                     <field name="checksum" type="NX_CHAR"/>
                     <field name="algorithm" type="NX_CHAR"/>
                 </group>
-                <!--currently cannot be made required because of being a quantity measured
-by proprietary hardware with proprietary semantics-->
+                <!--currently cannot be made required proprietary hardware and semantics-->
                 <field name="raw_tof" type="NX_FLOAT" recommended="true">
                     <doc>
                         Raw time-of-flight data without corrections.
@@ -1100,8 +1099,6 @@ by proprietary hardware with proprietary semantics-->
                     <field name="checksum" type="NX_CHAR"/>
                     <field name="algorithm" type="NX_CHAR"/>
                 </group>
-                <!--config/input
-results-->
                 <field name="mass_to_charge" type="NX_FLOAT">
                     <dimensions rank="1">
                         <dim index="1" value="n"/>
@@ -1164,14 +1161,11 @@ results-->
                             <attribute name="version" type="NX_CHAR"/>
                         </field>
                     </group>
-                    <!--config/input
-results-->
+                    <!--results-->
                     <group type="NXdata">
                         <attribute name="signal" type="NX_CHAR"/>
                         <attribute name="axes" type="NX_CHAR"/>
                         <attribute name="AXISNAME_indices" type="NX_UINT" nameType="partial"/>
-                        <!--dim: (3,)
-\@long_name:-->
                         <field name="title" type="NX_CHAR" recommended="true"/>
                         <field name="intensity" type="NX_NUMBER">
                             <dimensions rank="3">
@@ -1270,10 +1264,7 @@ results-->
                         </doc>
                     </field>
                 </group>
-                <!--config/input
-results
-NEW ISSUE: add parameters of the background model
-in an e.g. work of A. London et al.-->
+                <!--TODO add description of background models and fit like in XPS-->
                 <group name="peak_search" type="NXprocess" recommended="true">
                     <field name="sequence_index" type="NX_POSINT" recommended="true"/>
                     <group type="NXprogram" minOccurs="1" maxOccurs="unbounded">

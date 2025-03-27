@@ -1170,7 +1170,7 @@ NXapm_paraprobe_nanochem_results(NXobject):
 #     </symbols>
 #     <doc>
 #         Application definition for results files of the paraprobe-nanochem tool.
-# 
+#         
 #         This tool is part of the paraprobe-toolbox. Inspect the base class :ref:`NXapm_paraprobe_tool_results`.
 #     </doc>
 #     <group type="NXentry" minOccurs="1" maxOccurs="1">
@@ -1363,12 +1363,12 @@ NXapm_paraprobe_nanochem_results(NXobject):
 #                         <field name="faces" type="NX_NUMBER" units="NX_UNITLESS">
 #                             <doc>
 #                                 Array of identifiers from vertices which describe each face.
-# 
+#                                 
 #                                 The first entry is the identifier of the start vertex of the first face,
 #                                 followed by the second vertex of the first face, until the last vertex
 #                                 of the first face. Thereafter, the start vertex of the second face, the
 #                                 second vertex of the second face, and so on and so forth.
-# 
+#                                 
 #                                 Therefore, summating over the number_of_vertices, allows to extract
 #                                 the vertex identifiers for the i-th face on the following index interval
 #                                 of the faces array: :math:`[\sum_{i = 0}^{i = n-1}, \sum_{i=0}^{i = n}]`.
@@ -1408,13 +1408,14 @@ NXapm_paraprobe_nanochem_results(NXobject):
 #                         <field name="boundary_conditions" type="NX_INT" optional="true" units="NX_UNITLESS">
 #                             <doc>
 #                                 The boundary conditions for each boundary:
-# 
+#                                 
 #                                 0 - undefined
 #                                 1 - open
 #                                 2 - periodic
 #                                 3 - mirror
 #                                 4 - von Neumann
 #                                 5 - Dirichlet
+#                                 
 #                             </doc>
 #                             <dimensions rank="1">
 #                                 <dim index="1" value="6"/>
@@ -1427,10 +1428,10 @@ NXapm_paraprobe_nanochem_results(NXobject):
 #                     <doc>
 #                         The result of the delocalization :math:`\Phi = f(x, y, z)` based on which subsequent iso-surfaces
 #                         will be computed. In commercial software so far there is no possibility to export this information.
-# 
+#                         
 #                         If the intensity for all matches of the weighting_model are summarized name this NXdata instance
 #                         scalar_field_magn_total.
-# 
+#                         
 #                         If the intensity is reported for each iontype one can avoid many subsequent
 #                         computations as individual intensities can be reinterpreted using a different weighting_model in
 #                         down-stream usage of the here reported values (e.g. with Python scripting).
@@ -1586,12 +1587,12 @@ NXapm_paraprobe_nanochem_results(NXobject):
 #                     <doc>
 #                         An iso-surface is the boundary between two regions across which the magnitude of a
 #                         scalar field falls below/exceeds a threshold magnitude :math:`\varphi`.
-# 
+#                         
 #                         Instances should iso_surface as a name prefix.
-# 
+#                         
 #                         For applications in atom probe microscopy, the location and shape of such a boundary (set)
 #                         is typically approximated by discretization - triangulation to be specific.
-# 
+#                         
 #                         This yields a complex of not necessarily connected geometric primitives.
 #                         Paraprobe-nanochem approximates this complex with a soup of triangles.
 #                     </doc>
@@ -1625,7 +1626,7 @@ NXapm_paraprobe_nanochem_results(NXobject):
 #                             <field name="vertices" type="NX_NUMBER" units="NX_LENGTH">
 #                                 <doc>
 #                                     Positions of the vertices.
-# 
+#                                     
 #                                     Users are encouraged to reduce the vertices to a unique set as this may
 #                                     result in a more efficient storage of the geometry data.
 #                                     It is also possible though to store the vertex positions naively in which
@@ -1640,12 +1641,12 @@ NXapm_paraprobe_nanochem_results(NXobject):
 #                             <field name="faces" type="NX_INT" units="NX_UNITLESS">
 #                                 <doc>
 #                                     Array of identifiers from vertices which describe each face.
-# 
+#                                     
 #                                     The first entry is the identifier of the start vertex of the first face,
 #                                     followed by the second vertex of the first face, until the last vertex
 #                                     of the first face. Thereafter, the start vertex of the second face, the
 #                                     second vertex of the second face, and so on and so forth.
-# 
+#                                     
 #                                     Therefore, summating over the number_of_vertices, allows to extract
 #                                     the vertex identifiers for the i-th face on the following index interval
 #                                     of the faces array: :math:`[\sum_{i = 0}^{i = n-1}, \sum_{i=0}^{i = n}]`.
@@ -1678,10 +1679,11 @@ NXapm_paraprobe_nanochem_results(NXobject):
 #                                     <doc>
 #                                         Qualifier how which specifically oriented normal to its
 #                                         primitive each normal represents.
-# 
+#                                         
 #                                         * 0 - undefined
 #                                         * 1 - outer
 #                                         * 2 - inner
+#                                         
 #                                     </doc>
 #                                     <dimensions rank="1">
 #                                         <dim index="1" value="j"/>
@@ -1704,10 +1706,11 @@ NXapm_paraprobe_nanochem_results(NXobject):
 #                                     <doc>
 #                                         Qualifier how which specifically oriented normal to its
 #                                         primitive each normal represents.
-# 
+#                                         
 #                                         * 0 - undefined
 #                                         * 1 - outer
 #                                         * 2 - inner
+#                                         
 #                                     </doc>
 #                                     <dimensions rank="1">
 #                                         <dim index="1" value="k"/>
@@ -1792,9 +1795,9 @@ NXapm_paraprobe_nanochem_results(NXobject):
 #                                     This may yield a set of connected features whose individual surfaces are discretized
 #                                     by a triangulated mesh each.  Such volumetric features can be processed further using
 #                                     paraprobe-nanochem using a workflow with at most two steps.
-# 
+#                                     
 #                                     In the first step, the tool distinguishes three types of (v) i.e. volumetric features:
-# 
+#                                     
 #                                     1. So-called objects, i.e. necessarily watertight features represented by polyhedra.
 #                                         These objects were already watertight within the triangulated iso-surface.
 #                                     2. So-called proxies, i.e. features that were not necessarily watertight within the triangulated
@@ -1803,11 +1806,11 @@ NXapm_paraprobe_nanochem_results(NXobject):
 #                                     3. Remaining triangle surface meshes or parts of these of arbitrary shape and cardinality
 #                                         that are not transformable into proxies or for which no transformation into proxies was
 #                                         instructed.
-# 
+#                                     
 #                                     These features can be interpreted as microstructural features. Some of them may be precipitates,
 #                                     some of them may be poles, some of them may be segments of dislocation lines or other
 #                                     crystal defects which are decorated (or not) with solutes.
-# 
+#                                     
 #                                     In the second step, the tool can be used to analyze the proximity of these objects to a
 #                                     model of the surface (edge) of the dataset.
 #                                 </doc>
@@ -1862,13 +1865,14 @@ NXapm_paraprobe_nanochem_results(NXobject):
 #                                         In all situations instances of the parent NXprocess group are returned with a very similar
 #                                         information structuring and thus we here replace the template name FEATURE
 #                                         with one of the following types feature-specific group names:
-# 
+#                                         
 #                                         * objects, objects, irrespective their distance to the surface
 #                                         * objects_close_to_edge, sub-set of v_feature_object close surface
 #                                         * objects_far_from_edge, sub-set of v_feature_object not close to the surface
 #                                         * proxies, proxies, irrespective their distance to the surface
 #                                         * proxies_close_to_edge, sub-set of v_feature_proxies, close to surface
 #                                         * proxies_far_from_edge, sub-set of v_feature_proxies, not close to surface
+#                                         
 #                                     </doc>
 #                                     <field name="indices_feature" type="NX_INT" units="NX_UNITLESS">
 #                                         <doc>
@@ -2073,7 +2077,7 @@ NXapm_paraprobe_nanochem_results(NXobject):
 #                 <doc>
 #                     The triangle surface mesh representing the interface model.
 #                     Exported at state before or after the next DCOM step.
-# 
+#                     
 #                     Instances should use mesh_state as a name prefix.
 #                 </doc>
 #                 <field name="state" type="NX_CHAR">
@@ -2119,10 +2123,11 @@ NXapm_paraprobe_nanochem_results(NXobject):
 #                         <doc>
 #                             Qualifier which details how specifically oriented the
 #                             face normal is with respect to its primitive (triangle):
-# 
+#                             
 #                             * 0 - undefined
 #                             * 1 - outer
 #                             * 2 - inner
+#                             
 #                         </doc>
 #                         <dimensions rank="1">
 #                             <dim index="1" value="i"/>
@@ -2147,10 +2152,11 @@ NXapm_paraprobe_nanochem_results(NXobject):
 #                         <doc>
 #                             Qualifier which details how specifically oriented the
 #                             face normal is with respect to its primitive (triangle):
-# 
+#                             
 #                             * 0 - undefined
 #                             * 1 - outer
 #                             * 2 - inner
+# 
 #                         </doc>
 #                         <dimensions rank="1">
 #                             <dim index="1" value="j"/>
