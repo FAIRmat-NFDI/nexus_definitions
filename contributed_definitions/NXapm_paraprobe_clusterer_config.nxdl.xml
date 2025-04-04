@@ -26,8 +26,7 @@
         <doc>
             The symbols used in the schema to specify e.g. dimensions of arrays.
         </doc>
-        <!--n_positions: Number of position values.
-n_disjoint_clusters: Number of disjoint cluster.-->
+        <!--n_positions, n_disjoint_clusters-->
         <symbol name="n_ivec_max">
             <doc>
                 Maximum number of atoms per molecular ion. Should be 32 for paraprobe.
@@ -105,7 +104,7 @@ n_disjoint_clusters: Number of disjoint cluster.-->
         <!--recover_bitmask(NX_BOOLEAN):
 doc: |
 Specifies if the tool should try to recover, after a recovery of the
-evaporation IDs a bitmask which identifies which of the positions
+evaporation_id a bitmask which identifies which of the positions
 in dataset/dataset/dataset_name_reconstruction where covered
 by the IVAS/APSuite cluster analysis. This can be useful to recover
 the region of interest.-->
@@ -146,7 +145,7 @@ the region of interest.-->
                 <group name="hexahedron_set" type="NXcg_hexahedron" optional="true">
                     <field name="dimensionality" type="NX_POSINT"/>
                     <field name="cardinality" type="NX_POSINT"/>
-                    <field name="identifier_offset" type="NX_INT"/>
+                    <field name="index_offset" type="NX_INT"/>
                     <group name="hexahedra" type="NXcg_face_list_data_structure">
                         <field name="vertices" type="NX_UINT"/>
                     </group>
@@ -154,7 +153,7 @@ the region of interest.-->
                 <group name="cylinder_set" type="NXcg_cylinder" optional="true">
                     <field name="dimensionality" type="NX_POSINT"/>
                     <field name="cardinality" type="NX_POSINT"/>
-                    <field name="identifier_offset" type="NX_INT"/>
+                    <field name="index_offset" type="NX_INT"/>
                     <field name="center" type="NX_NUMBER"/>
                     <field name="height" type="NX_NUMBER"/>
                     <field name="radii" type="NX_NUMBER"/>
@@ -162,7 +161,7 @@ the region of interest.-->
                 <group name="ellipsoid_set" type="NXcg_ellipsoid" optional="true">
                     <field name="dimensionality" type="NX_POSINT"/>
                     <field name="cardinality" type="NX_POSINT"/>
-                    <field name="identifier_offset" type="NX_INT"/>
+                    <field name="index_offset" type="NX_INT"/>
                     <field name="center" type="NX_NUMBER"/>
                     <field name="half_axes_radii" type="NX_NUMBER"/>
                     <field name="orientation" type="NX_NUMBER"/>
@@ -175,9 +174,6 @@ the region of interest.-->
                     <field name="mask" type="NX_UINT"/>
                 </group>
             </group>
-            <!--leave open if scalar or matrix
-dim: (i,)
-identifier(NX_UINT):-->
             <group name="evaporation_id_filter" type="NXsubsampling_filter" optional="true">
                 <field name="min_incr_max" type="NX_INT"/>
             </group>
