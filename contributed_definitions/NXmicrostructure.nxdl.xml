@@ -148,7 +148,7 @@ The number of line defects.-->
         
         For crystals the number of typically used technical terms are smaller than for interfaces or line like defects and
         junctions of different types of crystal defects. The term grain describes a contiguous region of material that is
-        delineated by interphases (phase or grain boundaries). With its origin motivated by light optical microscopy though
+        delineated by interfaces (phase or grain boundaries). With its origin motivated by light optical microscopy though
         a grain is not necessarily a single crystal but can have an internal structure of defect such as dislocations.
         In this base class we use the term and respective group crystals though for single crystals and grains.
         The reason why this is possible is that when e.g. materials engineers talk about grains they inherently assume
@@ -163,8 +163,8 @@ The number of line defects.-->
         phases. There is a substantial variety of interfaces whose distinction was classically based on geometrical arguments
         but considers that atomic segregation is an equally important structural aspect to consider when classifying grain
         boundaries. A concise overview on theoretical aspect of and the semantics for characterizing interfaces and their properties
-        is provided in e.g. `W. Bollmann &lt;https://doi.org/10.1007/978-3-642-49173-3&gt;`_ and 
-        `A. Sutton and R. W. Baluffi Interfaces in Crystalline Materials`_.
+        is provided in e.g. `W. Bollmann &lt;https://doi.org/10.1007/978-3-642-49173-3&gt;`_ and A. Sutton and R. W. Baluffi,
+        Interfaces in Crystalline Materials, Clarendon Press, ISBN 9780198500612.
         
         Also for junctions between crystal defects there is a considerable variety of terms. Junctions are features in
         three-dimensional Euclidean space even if they are formed maybe only through a monolayer or a pearl chain of atoms.
@@ -178,7 +178,7 @@ The number of line defects.-->
         description such as a triple line or a triple point as the projection of a line. Therefore, different representations can
         be used to describe the location, shape, and structure of such defect.
         
-        This base class provides definitions for crystals, grains, interphases, triple junctions, and quadruple junctions thus covering,
+        This base class provides definitions for crystals, grains, interfaces, triple junctions, and quadruple junctions thus covering,
         volumetric, patch, line, and point like features that can serve as examples for future extension.
         
         As different types of crystal defects can interact, there is a substantial number of in principle characterizable and representable
@@ -266,9 +266,9 @@ the idea is we may wish to run as many grain reconstructions as we want and add 
     <group type="NXcg_grid"/>
     <group type="NXcg_point"/>
     <group type="NXcg_polyline"/>
-    <!-- \@use_these(NX_CHAR):
-   doc: |
-     The specific identifiers whereby to resolve ambiguities.-->
+    <!--\@use_these(NX_CHAR):
+doc: |
+The specific identifiers whereby to resolve ambiguities.-->
     <group type="NXcg_triangle"/>
     <group type="NXcg_polygon"/>
     <group type="NXcg_polyhedron"/>
@@ -325,7 +325,6 @@ examples for specific frequently discussed microstructural features-->
                 * :ref:`NXcg_polyline` for a one-dimensional representation as only a projection is available (like in linear intercept analysis)
                 * :ref:`NXcg_polygon` for a two-dimensional representation as only a projection is available (like in most experiments)
                 * :ref:`NXcg_polyhedron` or :ref:`NXcg_grid` for regularly pixelated (in 1D, 2D) or voxelated representations (in 3D)
-                (like in computer simulations or 3D experiments)
                 
                 which represent the geometrical entities of the discretization.
             </doc>
@@ -753,6 +752,8 @@ EXAMPLES FOR DESCRIPTOR VALUES-->
                 
                 * :ref:`NXcg_point`
                 * :ref:`NXcg_grid` for regularly pixelated (in 1D, 2D) or voxelated representations (in 3D) using (boolean) masks
+                
+                which represent the geometrical entities of the discretization.
             </doc>
         </field>
         <field name="number_of_junctions" type="NX_UINT" units="NX_UNITLESS">
