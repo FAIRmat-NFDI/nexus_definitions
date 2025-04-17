@@ -51,10 +51,33 @@ NXobject:
       doc: |
         This attribute can be used to describe that this field is connected to another field.
         For links, this must be set to the path of the target of the link.
+        
+        Declares the absolute path of an existing field or group.
+        
+        Matching regular expression::
+        
+            (/[a-zA-Z_][\w_]*(:[a-zA-Z_][\w_]*)?)+
+            
+        For example, given a ``/entry/instrument/detector/polar_angle`` field which is to be
+        connected/linked to /entry/data/polar_angle`` in an ``NXdata`` group, this would be the
+        NeXus data file structure::
+        
+            /: NeXus data file
+                /entry:NXentry
+                    /data:NXdata
+                        /polar_angle:NX_NUMBER
+                            @target="/entry/instrument/detector/polar_angle"
+                    /instrument:NXinstrument
+                        /detector:NXdetector
+                            /polar_angle:NX_NUMBER
+                                @target="/entry/instrument/detector/polar_angle"
   \@target(NX_CHAR):
     doc: |
       This attribute can be used to describe that this field is connected to another field.
       For links, this must be set to the path of the target of the link.
+      
+      See :ref:`FIELDNAME/@target <//NXobject/FIELDNAME@target-attribute>` for more information
+      how to use this attribute.
   identifierNAME(NX_CHAR):
     nameType: partial
     doc: |
@@ -208,7 +231,7 @@ NXobject:
       for a summary of the discussion.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 92364f1dfb7bb7e2243aa0a371fbc4029e7dcbc90f67e8bc7b3319a943855540
+# e924c30f9e3ea1c23a0ea392f45bf9fbe2bd68aaf777c6c0355698c3c3525c8c
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--
@@ -283,6 +306,26 @@ NXobject:
 #             <doc>
 #                 This attribute can be used to describe that this field is connected to another field.
 #                 For links, this must be set to the path of the target of the link.
+# 
+# 				Declares the absolute path of an existing field or group.
+# 			
+# 				Matching regular expression::
+# 				
+# 					(/[a-zA-Z_][\w_]*(:[a-zA-Z_][\w_]*)?)+
+# 					
+# 				For example, given a ``/entry/instrument/detector/polar_angle`` field which is to be
+# 				connected/linked to /entry/data/polar_angle`` in an ``NXdata`` group, this would be the
+# 				NeXus data file structure::
+# 				
+# 					/: NeXus data file
+# 						/entry:NXentry
+# 							/data:NXdata
+# 								/polar_angle:NX_NUMBER
+# 									@target="/entry/instrument/detector/polar_angle"
+# 							/instrument:NXinstrument
+# 								/detector:NXdetector
+# 									/polar_angle:NX_NUMBER
+# 										@target="/entry/instrument/detector/polar_angle"
 #             </doc>
 #         </attribute>
 #     </field>
@@ -290,6 +333,9 @@ NXobject:
 # 		<doc>
 # 			This attribute can be used to describe that this field is connected to another field.
 # 			For links, this must be set to the path of the target of the link.
+# 
+# 			See :ref:`FIELDNAME/@target &lt;//NXobject/FIELDNAME@target-attribute&gt;` for more information
+# 			how to use this attribute.
 # 		</doc>
 # 	</attribute>
 # 	<field name="identifierNAME" type="NX_CHAR" nameType="partial">
