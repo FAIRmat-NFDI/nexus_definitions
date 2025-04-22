@@ -1,0 +1,216 @@
+category: base
+doc: |
+  This base class handles the scan pattern describing the movement of the probe
+  in the confined phase space.
+type: group
+NXscan_pattern(NXobject):
+  SPEED(NX_NUMBER):
+    nameType: partial
+    unit: NX_ANY
+    doc: |
+      Define the scan speed in the different directions (e.g. forward or backward) along the axis.
+      
+      Rename the field, according to the name of the dimension or direction (e.g. forward_speed_x,
+      forward_speed_y).
+  repeats(NX_BOOLEAN):
+    doc: |
+      If scan repeats over the same scan region, use True, else False by default.
+  scan_order(NX_CHAR_OR_NUMBER):
+    doc: |
+      On the same scan region a scan can be repeated over several times and the mesh scan group
+      needs to be initialized multiple times with an specific scan order (e.g. A, B, ...,
+      First, Second ...) which will be considered as a tag to each scan.
+  NOTE(NXnote):
+    nameType: any
+    doc: |
+      Takes note for individual scan or scan_order.
+    description(NX_CHAR):
+      doc: |
+        The note, comment or description of the corresponding scan or scan_oder.
+  channel_NAME:
+    nameType: partial
+    doc: |
+      Name of the channel that records the scan data for the given dimension. The ending annotation 'N' is
+      to represent the name of the dimensions.
+      
+      Rename the field, according to the name of the channel and dimension (e.g. piezo_scanner_x).
+  scan_points_N(NX_NUMBER):
+    nameType: partial
+    doc: |
+      Define the total number of points in the given axis scan to be performed.
+      
+      Rename the field, according to the name of the dimension (e.g. scan_points_x, scan_points_voltage).
+  stepping_N(NX_NUMBER):
+    nameType: partial
+    doc: |
+      The number of steps the probe jumps over the scan steps or points. This describes when not
+      every point from the scan_points is measured along an axis.
+      
+      Rename the field, according to the name of the dimension (e.g. stepping_x, stepping_voltage).
+    \@frog_leap_scan(NX_BOOLEAN):
+      doc: |
+        If the scan probe jumps over a number of scan steps or points (more than one)
+        to perform each scan. By default, it is False.
+  step_size_N(NX_NUMBER):
+    nameType: partial
+    unit: NX_ANY
+    doc: |
+      The length of each step in the scan on each dimension.
+      
+      Rename the field, according to the name of the dimension (e.g. step_size_x, step_size_voltage).
+  continuous_N(NX_BOOLEAN):
+    nameType: partial
+    doc: |
+      If the scan probe moves continuously over the scan points or steps, use True. The default value is False.
+      Usually, continuous scanning is possible in one dimension. On other dimensions, the scan probe moves
+      in steps.
+      
+      Rename the field, according to the name of the dimension (e.g. continuous_voltage).
+  oscillating_N(NX_BOOLEAN):
+    nameType: partial
+    doc: |
+      If the scan probe oscillates over the scan point, use True.
+      The default value is False.
+  oscillation_frequency(NX_NUMBER):
+    doc: |
+      The number of oscillations on each scanning point per second.
+  SCAN_data(NXdata):
+    nameType: partial
+    doc: |
+      The scan data is the data collected during the scan.
+      If the scan has several channels or derivatives from the channel data, please
+      duplicate this NXdata group for each.
+    DATA(NX_NUMBER):
+      unit: NX_ANY
+      doc: |
+        The scan data is the data collected during the scan.
+
+# ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
+# d3c69715fcef0d61f4f387a90d1145230b6286ac7181cf312298422e98a57ef8
+# <?xml version='1.0' encoding='UTF-8'?>
+# <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+# <!--
+# # NeXus - Neutron and X-ray Common Data Format
+# #
+# # Copyright (C) 2025-2025 NeXus International Advisory Committee (NIAC)
+# #
+# # This library is free software; you can redistribute it and/or
+# # modify it under the terms of the GNU Lesser General Public
+# # License as published by the Free Software Foundation; either
+# # version 3 of the License, or (at your option) any later version.
+# #
+# # This library is distributed in the hope that it will be useful,
+# # but WITHOUT ANY WARRANTY; without even the implied warranty of
+# # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# # Lesser General Public License for more details.
+# #
+# # You should have received a copy of the GNU Lesser General Public
+# # License along with this library; if not, write to the Free Software
+# # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# #
+# # For further information, see http://www.nexusformat.org
+# -->
+# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXscan_pattern" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+#     <doc>
+#         This base class handles the scan pattern describing the movement of the probe
+#         in the confined phase space.
+#     </doc>
+#     <field name="SPEED" type="NX_NUMBER" nameType="partial" units="NX_ANY">
+#         <doc>
+#             Define the scan speed in the different directions (e.g. forward or backward) along the axis.
+#             
+#             Rename the field, according to the name of the dimension or direction (e.g. forward_speed_x, 
+#             forward_speed_y).
+#         </doc>
+#     </field>
+#     <field name="repeats" type="NX_BOOLEAN">
+#         <doc>
+#             If scan repeats over the same scan region, use True, else False by default.
+#         </doc>
+#     </field>
+#     <field name="scan_order" type="NX_CHAR_OR_NUMBER">
+#         <doc>
+#             On the same scan region a scan can be repeated over several times and the mesh scan group
+#             needs to be initialized multiple times with an specific scan order (e.g. A, B, ...,
+#             First, Second ...) which will be considered as a tag to each scan.
+#         </doc>
+#     </field>
+#     <group name="NOTE" type="NXnote" nameType="any">
+#         <doc>
+#             Takes note for individual scan or scan_order.
+#         </doc>
+#         <field name="description" type="NX_CHAR">
+#             <doc>
+#                 The note, comment or description of the corresponding scan or scan_oder.
+#             </doc>
+#         </field>
+#     </group>
+#     <field name="channel_NAME" nameType="partial">
+#         <doc>
+#             Name of the channel that records the scan data for the given dimension. The ending annotation 'N' is
+#             to represent the name of the dimensions.
+#             
+#             Rename the field, according to the name of the channel and dimension (e.g. piezo_scanner_x).
+#         </doc>
+#     </field>
+#     <field name="scan_points_N" type="NX_NUMBER" nameType="partial">
+#         <doc>
+#             Define the total number of points in the given axis scan to be performed.
+#             
+#             Rename the field, according to the name of the dimension (e.g. scan_points_x, scan_points_voltage).
+#         </doc>
+#     </field>
+#     <field name="stepping_N" type="NX_NUMBER" nameType="partial">
+#         <doc>
+#             The number of steps the probe jumps over the scan steps or points. This describes when not
+#             every point from the scan_points is measured along an axis.
+#             
+#             Rename the field, according to the name of the dimension (e.g. stepping_x, stepping_voltage).
+#         </doc>
+#         <attribute name="frog_leap_scan" type="NX_BOOLEAN">
+#             <doc>
+#                 If the scan probe jumps over a number of scan steps or points (more than one)
+#                 to perform each scan. By default, it is False.
+#             </doc>
+#         </attribute>
+#     </field>
+#     <field name="step_size_N" type="NX_NUMBER" nameType="partial" units="NX_ANY">
+#         <doc>
+#             The length of each step in the scan on each dimension.
+#             
+#             Rename the field, according to the name of the dimension (e.g. step_size_x, step_size_voltage).
+#         </doc>
+#     </field>
+#     <field name="continuous_N" type="NX_BOOLEAN" nameType="partial">
+#         <doc>
+#             If the scan probe moves continuously over the scan points or steps, use True. The default value is False.
+#             Usually, continuous scanning is possible in one dimension. On other dimensions, the scan probe moves
+#             in steps.
+#             
+#             Rename the field, according to the name of the dimension (e.g. continuous_voltage).
+#         </doc>
+#     </field>
+#     <field name="oscillating_N" type="NX_BOOLEAN" nameType="partial">
+#         <doc>
+#             If the scan probe oscillates over the scan point, use True.
+#             The default value is False.
+#         </doc>
+#     </field>
+#     <field name="oscillation_frequency" type="NX_NUMBER">
+#         <doc>
+#             The number of oscillations on each scanning point per second.
+#         </doc>
+#     </field>
+#     <group name="SCAN_data" type="NXdata" nameType="partial">
+#         <doc>
+#             The scan data is the data collected during the scan.
+#             If the scan has several channels or derivatives from the channel data, please
+#             duplicate this NXdata group for each.
+#         </doc>
+#         <field name="DATA" type="NX_NUMBER" units="NX_ANY">
+#             <doc>
+#                 The scan data is the data collected during the scan.
+#             </doc>
+#         </field>
+#     </group>
+# </definition>
