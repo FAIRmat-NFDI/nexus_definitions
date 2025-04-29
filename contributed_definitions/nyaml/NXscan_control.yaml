@@ -7,13 +7,14 @@ doc: |
   Mesh: For each dimension a range and a direction are chosen. When a scan along a dimension is done, a single step in the next dimension is taken, and then the scan in the previous dimension is repeated. As such we can speak about the fastest and the slowest scan axes.
   Snake: Similar to a mesh scan but with the scanning direction reversed after each line.
   Spiral: A scan taken along a spiral trajectory.
-  Tilt: At each step, a proportional movement is done in all dimensions.
   Linear: A scan where the scanning will be performed along a single independent axis.
   
   Scan_control_types:
   Stepping: At each step, a movement to the next point is performed; correction (for example backlash) or active regulation (feedback loop) may or may not be applied. After the movement is done, the measurement is performed without the movement.
   Continuous: The scanning of each line in an N-dimensional phase space is done without stopping; measurements are done simultaneously with the movement.
   Oscillating: Scanning over a scan point continuously and then moving to start scanning at the next position.
+# Tilt: At each step, a proportional movement is done in all dimensions.
+
 type: group
 NXscan_control(NXobject):
   scan_time_start(NX_DATE_TIME):
@@ -45,7 +46,7 @@ NXscan_control(NXobject):
   scan_type:
     doc: |
       This group specifies how the trajectory of the scan is defined.
-    enumeration: [trajectory, mesh, snake, spiral]
+    enumeration: [trajectory, mesh, snake, spiral, linear]
   scan_control_type:
     doc: |
       This string describes how the scan was performed.
@@ -284,8 +285,9 @@ NXscan_control(NXobject):
       unit: NX_ANY
       doc: |
         Define the scan speed for the type of snake scan. For the same speed along the
-        positive and negative directions, use a single number
-        
+        positive and negative directions, use a single number. Positive for clockwise
+        and negative for anti-clockwise.
+
         Rename the field, according to the name of the fast and slow axis e.g. scan_speed_x.
     forward_speed(NX_NUMBER):
       unit: NX_ANY
@@ -395,14 +397,7 @@ NXscan_control(NXobject):
       dimensions:
         rank: 2
         dim: (nTraj, nD)
-    scan_points_N(NX_NUMBER):
-      nameType: partial
-      doc: |
-        Define the total number of scan points between two trajectory points.
-        
-        Rename the field, according to the index of the second trajectory points.
-        For example, scan_points_1 is the number of points between the starting(zero) and first trajectory points.
-    stepping_N(NX_NUMBER):
+    stepping(NX_NUMBER):
       nameType: partial
       doc: |
         The number of steps the probe jumps over the scan steps or points along the trajectory line from between two trajectory points.
@@ -421,7 +416,7 @@ NXscan_control(NXobject):
       doc: |
         If the scan probe moves continuously over the scan points or steps between two
         trajectory points, use True. The default value is True.
-    oscillating_N(NX_BOOLEAN):
+    oscillating(NX_BOOLEAN):
       nameType: partial
       doc: |
         If the scan probe oscillates over the scan point, use True.

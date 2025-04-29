@@ -21,6 +21,8 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
+<!--
+Tilt: At each step, a proportional movement is done in all dimensions.-->
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXscan_control" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <doc>
         A scan is performed inside an N-dimensional phase space, where each dimension can correspond not only to real space coordinates (x,y) but also to any other parameter. This class contains detailed information about controlling the scan in such a phase space (or its subspace).
@@ -30,7 +32,6 @@
         Mesh: For each dimension a range and a direction are chosen. When a scan along a dimension is done, a single step in the next dimension is taken, and then the scan in the previous dimension is repeated. As such we can speak about the fastest and the slowest scan axes.
         Snake: Similar to a mesh scan but with the scanning direction reversed after each line.
         Spiral: A scan taken along a spiral trajectory.
-        Tilt: At each step, a proportional movement is done in all dimensions.
         Linear: A scan where the scanning will be performed along a single independent axis.
         
         Scan_control_types:
@@ -77,6 +78,7 @@
             <item value="mesh"/>
             <item value="snake"/>
             <item value="spiral"/>
+            <item value="linear"/>
         </enumeration>
     </field>
     <field name="scan_control_type">
@@ -349,7 +351,8 @@
         <field name="scan_speed_N" type="NX_NUMBER" nameType="partial" units="NX_ANY">
             <doc>
                 Define the scan speed for the type of snake scan. For the same speed along the
-                positive and negative directions, use a single number
+                positive and negative directions, use a single number. Positive for clockwise
+                and negative for anti-clockwise.
                 
                 Rename the field, according to the name of the fast and slow axis e.g. scan_speed_x.
             </doc>
@@ -484,15 +487,7 @@
                 <dim index="2" value="nD"/>
             </dimensions>
         </field>
-        <field name="scan_points_N" type="NX_NUMBER" nameType="partial">
-            <doc>
-                Define the total number of scan points between two trajectory points.
-                
-                Rename the field, according to the index of the second trajectory points.
-                For example, scan_points_1 is the number of points between the starting(zero) and first trajectory points.
-            </doc>
-        </field>
-        <field name="stepping_N" type="NX_NUMBER" nameType="partial">
+        <field name="stepping" type="NX_NUMBER" nameType="partial">
             <doc>
                 The number of steps the probe jumps over the scan steps or points along the trajectory line from between two trajectory points.
                 
@@ -517,7 +512,7 @@
                 trajectory points, use True. The default value is True.
             </doc>
         </field>
-        <field name="oscillating_N" type="NX_BOOLEAN" nameType="partial">
+        <field name="oscillating" type="NX_BOOLEAN" nameType="partial">
             <doc>
                 If the scan probe oscillates over the scan point, use True.
                 The default value is False.
