@@ -3,7 +3,7 @@
 <!--
 # NeXus - Neutron and X-ray Common Data Format
 #
-# Copyright (C) 2024-2025 NeXus International Advisory Committee (NIAC)
+# Copyright (C) 2025-2025 NeXus International Advisory Committee (NIAC)
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -63,7 +63,7 @@ type: group-->
                 <attribute name="url" recommended="true"/>
             </field>
         </group>
-        <group name="environment" type="NXobject" optional="true">
+        <group name="environment" type="NXcollection" optional="true">
             <doc>
                 Programs and libraries representing the computational environment
             </doc>
@@ -103,7 +103,7 @@ read the next three from input file
                 </doc>
             </field>
         </group>
-        <group name="sampling" type="NXobject">
+        <group name="sampling" type="NXparameters">
             <doc>
                 Configuration when snapshots of the system should be taken.
                 
@@ -127,7 +127,7 @@ read the next three from input file
         </group>
         <!--<DiscreteSamplingRate>31</DiscreteSamplingRate> no more sampling <!-\- MODF number of bins-\->
 <NeighbourTracking>1</NeighbourTracking>-->
-        <group name="simulation_control" type="NXobject">
+        <group name="simulation_control" type="NXparameters">
             <doc>
                 Configuration when the simulation should be stopped in a controlled manner.
                 Whichever criterion is fulfilled first triggers the controlled stop of
@@ -145,7 +145,7 @@ read the next three from input file
                 </doc>
             </field>
         </group>
-        <group name="numerics" type="NXobject">
+        <group name="numerics" type="NXparameters">
             <doc>
                 Configuration of numerical details of the solver.
             </doc>
@@ -181,7 +181,7 @@ only guru i.e. in C++ code configurable options
 <GrainScheduler>1</GrainScheduler>  # 0, E_ITERATIVE, 1, E_SQUARES
 <BoxDefaultStoredElasticEnergy>0.0</BoxDefaultStoredElasticEnergy>
 <!-\- USAGE: set to 0.0 unless mode is DecoupleGrains and make studies of isolated circular grains under capillary and stored elastic energy evolution-\->-->
-        <group name="grid_coarsement" type="NXobject">
+        <group name="grid_coarsement" type="NXparameters">
             <doc>
                 Configuration of the grid coarsement algorithm whereby the representation
                 of the system is continuously rediscretized such that on average grains
@@ -217,7 +217,7 @@ only guru i.e. in C++ code configurable options
 <ConstantSectorRadius>3</ConstantSectorRadius>
 <InterpolatingSectorRadius>2</InterpolatingSectorRadius>
 <DecoupleGrains>0</DecoupleGrains>  # 0, DEFAULT, 1 skips comparison and let grains shring isolated-->
-        <group name="grain_boundary_mobility" type="NXobject">
+        <group name="grain_boundary_mobility" type="NXparameters">
             <doc>
                 Physically-based model of the assumed mobility of the grain boundaries.
                 
@@ -262,7 +262,7 @@ only guru i.e. in C++ code configurable options
                 </doc>
             </field>
         </group>
-        <group name="grain_boundary_energy" type="NXobject">
+        <group name="grain_boundary_energy" type="NXparameters">
             <doc>
                 Physically-based model of the assumed grain boundary surface energy.
                 
@@ -302,7 +302,7 @@ only guru i.e. in C++ code configurable options
 <EnergyModelScalingB>0.01</EnergyModelScalingB>
 <!-\- INFORMATION: Scaling A is the disorientation angle cutoff in degrees, B the value assigned when nan-s occurred
 these Scaling parameter are not read as well but utilized in the ReadShockley energy model-\->-->
-        <group name="curvature_driving_force" type="NXobject">
+        <group name="curvature_driving_force" type="NXparameters">
             <doc>
                 A continuum-scale curvature of an interface causes the interface to
                 migrate towards the center of the curvature radius.
@@ -313,7 +313,7 @@ these Scaling parameter are not read as well but utilized in the ReadShockley en
                 </doc>
             </field>
         </group>
-        <group name="stored_elastic_energy" type="NXobject">
+        <group name="stored_elastic_energy" type="NXparameters">
             <doc>
                 A continuum-scale difference of the stored elastic energy in dislocation
                 configurations across a grain boundary can exert a driving force on the
@@ -332,7 +332,7 @@ these Scaling parameter are not read as well but utilized in the ReadShockley en
                 </doc>
             </field>
         </group>
-        <group name="magnetic_field" type="NXobject">
+        <group name="magnetic_field" type="NXparameters">
             <doc>
                 In case of an applied magnetic field, a difference of the magnetic
                 susceptibility can exert a driving force on the grain boundary such that
@@ -346,7 +346,7 @@ these Scaling parameter are not read as well but utilized in the ReadShockley en
         </group>
         <!--<MagneticParams> MagneticField.xml </MagneticParams>
 https://github.com/GraGLeS/GraGLeS2D/blob/master/params/MagneticField.xml-->
-        <group name="triple_line_mobility" type="NXobject">
+        <group name="triple_line_mobility" type="NXparameters">
             <doc>
                 A triple line mediates the atomic arrangement differences between three
                 interface patches. Therefore, the triple line is a defect that may not

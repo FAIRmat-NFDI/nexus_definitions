@@ -3,7 +3,7 @@
 <!--
 # NeXus - Neutron and X-ray Common Data Format
 #
-# Copyright (C) 2022-2025 NeXus International Advisory Committee (NIAC)
+# Copyright (C) 2025-2025 NeXus International Advisory Committee (NIAC)
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -71,7 +71,7 @@
                 <attribute name="url" recommended="true"/>
             </field>
         </group>
-        <group name="environment" type="NXobject" optional="true">
+        <group name="environment" type="NXcollection" optional="true">
             <doc>
                 Programs and libraries representing the computational environment
             </doc>
@@ -81,25 +81,18 @@
                 </field>
             </group>
         </group>
-        <group name="coordinate_system_set" type="NXcoordinate_system_set">
-            <field name="rotation_handedness"/>
-            <field name="rotation_convention"/>
-            <field name="euler_angle_convention"/>
-            <field name="axis_angle_convention"/>
-            <field name="sign_convention"/>
-            <group name="sample_reference_frame" type="NXcoordinate_system">
-                <field name="type"/>
-                <field name="handedness"/>
-                <field name="origin"/>
-                <field name="x_alias"/>
-                <field name="x_direction"/>
-                <field name="y_alias"/>
-                <field name="y_direction"/>
-                <field name="z_alias"/>
-                <field name="z_direction"/>
-            </group>
+        <group name="sample_reference_frame" type="NXcoordinate_system">
+            <field name="type"/>
+            <field name="handedness"/>
+            <field name="origin"/>
+            <field name="x_alias"/>
+            <field name="x_direction"/>
+            <field name="y_alias"/>
+            <field name="y_direction"/>
+            <field name="z_alias"/>
+            <field name="z_direction"/>
         </group>
-        <group name="SPATIOTEMPORAL" type="NXobject" nameType="any">
+        <group name="SPATIOTEMPORAL" type="NXprocess" nameType="any">
             <doc>
                 Documentation of the spatiotemporal evolution
                 
@@ -107,7 +100,7 @@
             </doc>
             <!--static quantities for which no change is modelled
 the typical lean summary statistics flattened-->
-            <group name="summary_statistics" type="NXobject">
+            <group name="summary_statistics" type="NXprocess">
                 <doc>
                     Summary quantities which are the result of some post-processing of the snapshot data
                     (averaging, integrating, interpolating) happening in for practical reasons though in while
@@ -238,7 +231,7 @@ the typical lean summary statistics flattened-->
                     </doc>
                 </field>
                 <group name="grid" type="NXcg_grid" optional="true"/>
-                <group name="crystal" type="NXobject">
+                <group name="crystal" type="NXmicrostructure_feature">
                     <field name="representation" recommended="true"/>
                     <field name="number_of_crystals" type="NX_UINT"/>
                     <field name="number_of_phases" type="NX_UINT"/>
@@ -265,7 +258,7 @@ the typical lean summary statistics flattened-->
                         </dimensions>
                     </field>
                 </group>
-                <group name="interface" type="NXobject" optional="true">
+                <group name="interface" type="NXmicrostructure_feature" optional="true">
                     <field name="representation" type="NX_CHAR" recommended="true"/>
                     <field name="number_of_interfaces" type="NX_UINT"/>
                     <field name="index_offset_interface" type="NX_INT"/>
