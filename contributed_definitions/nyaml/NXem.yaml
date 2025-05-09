@@ -153,9 +153,8 @@ NXem(NXobject):
           
           Examples are technician operating the microscope, student, postdoc,
           principle investigator, or guest.
-    SAMPLE(NXsample):
+    (NXsample):
       exists: ['min', '1', 'max', 'unbounded']
-      nameType: any
       doc:
       - |
         A physical entity which contains material intended to be investigated.
@@ -714,588 +713,510 @@ NXem(NXobject):
           exists: ['min', '0', 'max', 'unbounded']
           doc: |
             Instances should use actuator as a name prefix.
-      events(NXevent_em):
-        exists: ['min', '0', 'max', '1']
-        # an instance must not have an NXevent_data_em_set but if it has one it must not be more than 1 !
-        doc: |
-          To avoid that static instrument-related metadata need to be stored
-          repetitively, the NXem application definitions splits the storage of the
-          dynamic (meta)data that typically change for each image and spectrum
-          from the static one.
-        eventID(NXevent_data_em):
-          nameType: partial
+      eventID(NXevent_data_em):
+        nameType: partial
+        exists: ['min', '0', 'max', 'unbounded']
+        start_time(NX_DATE_TIME):
+          exists: recommended
+        end_time(NX_DATE_TIME):
+          exists: recommended
+        identifier_sample(NX_CHAR):
+          exists: recommended
+        # above field is another example for lacking support to define conditional existence constraints
+        (NXimage):
           exists: ['min', '0', 'max', 'unbounded']
-          start_time(NX_DATE_TIME):
+          doc: |
+            Instances should use image as a name prefix.
+            Each NXimage instance must use only one image or stack instance.
+          (NXprocess):
             exists: recommended
-          end_time(NX_DATE_TIME):
-            exists: recommended
-          identifier_sample(NX_CHAR):
-            exists: recommended
-          # above field is another example for lacking support to define conditional existence constraints
-          (NXimage):
-            exists: ['min', '0', 'max', 'unbounded']
-            doc: |
-              Instances should use image as a name prefix.
-              Each NXimage instance must use only one image or stack instance.
-            (NXprocess):
+            input(NXnote):
               exists: recommended
-              input(NXnote):
-                exists: recommended
-                type(NX_CHAR):
-                file_name(NX_CHAR):
-                checksum(NX_CHAR):
-                algorithm(NX_CHAR):
-                context(NX_CHAR):
-              detector_identifier(NX_CHAR):
-            image_1d(NXdata):
-              exists: optional
-              \@signal(NX_CHAR):
-              \@axes(NX_CHAR):
-              \@AXISNAME_indices(NX_UINT):
-                nameType: partial
-              title(NX_CHAR):
-                exists: recommended
-              real(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              imag(NX_NUMBER):
-                exists: optional
-                \@long_name(NX_CHAR):
-              magnitude(NX_NUMBER):
-                exists: optional
-                \@long_name(NX_CHAR):
-              intensity(NX_COMPLEX):
-                exists: optional
-                \@long_name(NX_CHAR):
-              axis_i(NX_NUMBER):
-                \@long_name(NX_CHAR):
-            image_2d(NXdata):
-              exists: optional
-              \@signal(NX_CHAR):
-              \@axes(NX_CHAR):
-              \@AXISNAME_indices(NX_UINT):
-                nameType: partial
-              title(NX_CHAR):
-                exists: recommended
-              real(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              imag(NX_NUMBER):
-                exists: optional
-                \@long_name(NX_CHAR):
-              magnitude(NX_NUMBER):
-                exists: optional
-                \@long_name(NX_CHAR):
-              intensity(NX_COMPLEX):
-                exists: optional
-                \@long_name(NX_CHAR):
-              axis_j(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_i(NX_NUMBER):
-                \@long_name(NX_CHAR):
-            image_3d(NXdata):
-              exists: optional
-              \@signal(NX_CHAR):
-              \@axes(NX_CHAR):
-              \@AXISNAME_indices(NX_UINT):
-                nameType: partial
-              title(NX_CHAR):
-                exists: recommended
-              real(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              imag(NX_NUMBER):
-                exists: optional
-                \@long_name(NX_CHAR):
-              magnitude(NX_NUMBER):
-                exists: optional
-                \@long_name(NX_CHAR):
-              intensity(NX_COMPLEX):
-                exists: optional
-                \@long_name(NX_CHAR):
-              axis_k(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_j(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_i(NX_NUMBER):
-                \@long_name(NX_CHAR):
-            stack_1d(NXdata):
-              exists: optional
-              \@signal(NX_CHAR):
-              \@axes(NX_CHAR):
-              \@AXISNAME_indices(NX_UINT):
-                nameType: partial
-              title(NX_CHAR):
-                exists: recommended
-              real(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              imag(NX_NUMBER):
-                exists: optional
-                \@long_name(NX_CHAR):
-              magnitude(NX_NUMBER):
-                exists: optional
-                \@long_name(NX_CHAR):
-              intensity(NX_NUMBER):
-                exists: optional
-                \@long_name(NX_CHAR):
-              indices_group(NX_INT):
-                exists: optional
-                \@long_name(NX_CHAR):
-              indices_image(NX_INT):
-                \@long_name(NX_CHAR):
-              axis_i(NX_NUMBER):
-                \@long_name(NX_CHAR):
-            stack_2d(NXdata):
-              exists: optional
-              \@signal(NX_CHAR):
-              \@axes(NX_CHAR):
-              \@AXISNAME_indices(NX_UINT):
-                nameType: partial
-              title(NX_CHAR):
-                exists: recommended
-              real(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              imag(NX_NUMBER):
-                exists: optional
-                \@long_name(NX_CHAR):
-              magnitude(NX_NUMBER):
-                exists: optional
-                \@long_name(NX_CHAR):
-              intensity(NX_NUMBER):
-                exists: optional
-                \@long_name(NX_CHAR):
-              indices_group(NX_INT):
-                exists: optional
-                \@long_name(NX_CHAR):
-              indices_image(NX_INT):
-                \@long_name(NX_CHAR):
-              axis_j(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_i(NX_NUMBER):
-                \@long_name(NX_CHAR):
-            stack_3d(NXdata):
-              exists: optional
-              \@signal(NX_CHAR):
-              \@axes(NX_CHAR):
-              \@AXISNAME_indices(NX_UINT):
-                nameType: partial
-              title(NX_CHAR):
-                exists: recommended
-              real(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              imag(NX_NUMBER):
-                exists: optional
-                \@long_name(NX_CHAR):
-              magnitude(NX_NUMBER):
-                exists: optional
-                \@long_name(NX_CHAR):
-              intensity(NX_NUMBER):
-                exists: optional
-                \@long_name(NX_CHAR):
-              indices_group(NX_INT):
-                exists: optional
-                \@long_name(NX_CHAR):
-              indices_image(NX_INT):
-                \@long_name(NX_CHAR):
-              axis_k(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_j(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_i(NX_NUMBER):
-                \@long_name(NX_CHAR):
-          (NXspectrum):
-            exists: ['min', '0', 'max', 'unbounded']
-            doc: |
-              Instances should use spectrum as a name prefix.
-              Each NXspectrum instance must use only one spectrum or stack instance.
-            (NXprocess):
+              type(NX_CHAR):
+              file_name(NX_CHAR):
+              checksum(NX_CHAR):
+              algorithm(NX_CHAR):
+              context(NX_CHAR):
+            detector_identifier(NX_CHAR):
+          image_1d(NXdata):
+            exists: optional
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
               exists: recommended
-              input(NXnote):
-                exists: recommended
-                type(NX_CHAR):
-                file_name(NX_CHAR):
-                checksum(NX_CHAR):
-                algorithm(NX_CHAR):
-                context(NX_CHAR):
-              detector_identifier(NX_CHAR):
-            spectrum_0d(NXdata):
+            real(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            imag(NX_NUMBER):
               exists: optional
-              \@signal(NX_CHAR):
-              \@axes(NX_CHAR):
-              \@AXISNAME_indices(NX_UINT):
-                nameType: partial
-              title(NX_CHAR):
-                exists: recommended
-              intensity(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_energy(NX_NUMBER):
-                \@long_name(NX_CHAR):
-            spectrum_1d(NXdata):
+              \@long_name(NX_CHAR):
+            magnitude(NX_NUMBER):
               exists: optional
-              \@signal(NX_CHAR):
-              \@axes(NX_CHAR):
-              \@AXISNAME_indices(NX_UINT):
-                nameType: partial
-              title(NX_CHAR):
-                exists: recommended
-              intensity(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_i(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_energy(NX_NUMBER):
-                \@long_name(NX_CHAR):
-            spectrum_2d(NXdata):
+              \@long_name(NX_CHAR):
+            intensity(NX_COMPLEX):
               exists: optional
-              \@signal(NX_CHAR):
-              \@axes(NX_CHAR):
-              \@AXISNAME_indices(NX_UINT):
-                nameType: partial
-              title(NX_CHAR):
-                exists: recommended
-              intensity(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_j(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_i(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_energy(NX_NUMBER):
-                \@long_name(NX_CHAR):
-            spectrum_3d(NXdata):
+              \@long_name(NX_CHAR):
+            axis_i(NX_NUMBER):
+              \@long_name(NX_CHAR):
+          image_2d(NXdata):
+            exists: optional
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
+              exists: recommended
+            real(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            imag(NX_NUMBER):
               exists: optional
-              \@signal(NX_CHAR):
-              \@axes(NX_CHAR):
-              \@AXISNAME_indices(NX_UINT):
-                nameType: partial
-              title(NX_CHAR):
-                exists: recommended
-              intensity(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_k(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_j(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_i(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_energy(NX_NUMBER):
-                \@long_name(NX_CHAR):
-            stack_0d(NXdata):
+              \@long_name(NX_CHAR):
+            magnitude(NX_NUMBER):
               exists: optional
-              \@signal(NX_CHAR):
-              \@axes(NX_CHAR):
-              \@AXISNAME_indices(NX_UINT):
-                nameType: partial
-              title(NX_CHAR):
-                exists: recommended
-              intensity(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              indices_spectrum(NX_INT):
-                \@long_name(NX_CHAR):
-              axis_energy(NX_NUMBER):
-                \@long_name(NX_CHAR):
-            stack_1d(NXdata):
+              \@long_name(NX_CHAR):
+            intensity(NX_COMPLEX):
               exists: optional
-              \@signal(NX_CHAR):
-              \@axes(NX_CHAR):
-              \@AXISNAME_indices(NX_UINT):
-                nameType: partial
-              title(NX_CHAR):
-                exists: recommended
-              intensity(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              indices_spectrum(NX_INT):
-                \@long_name(NX_CHAR):
-              axis_i(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_energy(NX_NUMBER):
-                \@long_name(NX_CHAR):
-            stack_2d(NXdata):
+              \@long_name(NX_CHAR):
+            axis_j(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_i(NX_NUMBER):
+              \@long_name(NX_CHAR):
+          image_3d(NXdata):
+            exists: optional
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
+              exists: recommended
+            real(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            imag(NX_NUMBER):
               exists: optional
-              \@signal(NX_CHAR):
-              \@axes(NX_CHAR):
-              \@AXISNAME_indices(NX_UINT):
-                nameType: partial
-              title(NX_CHAR):
-                exists: recommended
-              intensity(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              indices_spectrum(NX_INT):
-                \@long_name(NX_CHAR):
-              axis_j(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_i(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_energy(NX_NUMBER):
-                \@long_name(NX_CHAR):
-            stack_3d(NXdata):
+              \@long_name(NX_CHAR):
+            magnitude(NX_NUMBER):
               exists: optional
-              \@signal(NX_CHAR):
-              \@axes(NX_CHAR):
-              \@AXISNAME_indices(NX_UINT):
-                nameType: partial
-              title(NX_CHAR):
-                exists: recommended
-              intensity(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              indices_spectrum(NX_INT):
-                \@long_name(NX_CHAR):
-              axis_k(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_j(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_i(NX_NUMBER):
-                \@long_name(NX_CHAR):
-              axis_energy(NX_NUMBER):
-                \@long_name(NX_CHAR):
-          instrument(NXinstrument_em):
+              \@long_name(NX_CHAR):
+            intensity(NX_COMPLEX):
+              exists: optional
+              \@long_name(NX_CHAR):
+            axis_k(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_j(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_i(NX_NUMBER):
+              \@long_name(NX_CHAR):
+          stack_1d(NXdata):
+            exists: optional
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
+              exists: recommended
+            real(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            imag(NX_NUMBER):
+              exists: optional
+              \@long_name(NX_CHAR):
+            magnitude(NX_NUMBER):
+              exists: optional
+              \@long_name(NX_CHAR):
+            intensity(NX_NUMBER):
+              exists: optional
+              \@long_name(NX_CHAR):
+            indices_group(NX_INT):
+              exists: optional
+              \@long_name(NX_CHAR):
+            indices_image(NX_INT):
+              \@long_name(NX_CHAR):
+            axis_i(NX_NUMBER):
+              \@long_name(NX_CHAR):
+          stack_2d(NXdata):
+            exists: optional
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
+              exists: recommended
+            real(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            imag(NX_NUMBER):
+              exists: optional
+              \@long_name(NX_CHAR):
+            magnitude(NX_NUMBER):
+              exists: optional
+              \@long_name(NX_CHAR):
+            intensity(NX_NUMBER):
+              exists: optional
+              \@long_name(NX_CHAR):
+            indices_group(NX_INT):
+              exists: optional
+              \@long_name(NX_CHAR):
+            indices_image(NX_INT):
+              \@long_name(NX_CHAR):
+            axis_j(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_i(NX_NUMBER):
+              \@long_name(NX_CHAR):
+          stack_3d(NXdata):
+            exists: optional
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
+              exists: recommended
+            real(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            imag(NX_NUMBER):
+              exists: optional
+              \@long_name(NX_CHAR):
+            magnitude(NX_NUMBER):
+              exists: optional
+              \@long_name(NX_CHAR):
+            intensity(NX_NUMBER):
+              exists: optional
+              \@long_name(NX_CHAR):
+            indices_group(NX_INT):
+              exists: optional
+              \@long_name(NX_CHAR):
+            indices_image(NX_INT):
+              \@long_name(NX_CHAR):
+            axis_k(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_j(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_i(NX_NUMBER):
+              \@long_name(NX_CHAR):
+        (NXspectrum):
+          exists: ['min', '0', 'max', 'unbounded']
+          doc: |
+            Instances should use spectrum as a name prefix.
+            Each NXspectrum instance must use only one spectrum or stack instance.
+          (NXprocess):
             exists: recommended
-            ebeam_column(NXebeam_column):
-              operation_mode(NX_CHAR):
-              electron_source(NXsource):
+            input(NXnote):
+              exists: recommended
+              type(NX_CHAR):
+              file_name(NX_CHAR):
+              checksum(NX_CHAR):
+              algorithm(NX_CHAR):
+              context(NX_CHAR):
+            detector_identifier(NX_CHAR):
+          spectrum_0d(NXdata):
+            exists: optional
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
+              exists: recommended
+            intensity(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_energy(NX_NUMBER):
+              \@long_name(NX_CHAR):
+          spectrum_1d(NXdata):
+            exists: optional
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
+              exists: recommended
+            intensity(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_i(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_energy(NX_NUMBER):
+              \@long_name(NX_CHAR):
+          spectrum_2d(NXdata):
+            exists: optional
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
+              exists: recommended
+            intensity(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_j(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_i(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_energy(NX_NUMBER):
+              \@long_name(NX_CHAR):
+          spectrum_3d(NXdata):
+            exists: optional
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
+              exists: recommended
+            intensity(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_k(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_j(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_i(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_energy(NX_NUMBER):
+              \@long_name(NX_CHAR):
+          stack_0d(NXdata):
+            exists: optional
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
+              exists: recommended
+            intensity(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            indices_spectrum(NX_INT):
+              \@long_name(NX_CHAR):
+            axis_energy(NX_NUMBER):
+              \@long_name(NX_CHAR):
+          stack_1d(NXdata):
+            exists: optional
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
+              exists: recommended
+            intensity(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            indices_spectrum(NX_INT):
+              \@long_name(NX_CHAR):
+            axis_i(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_energy(NX_NUMBER):
+              \@long_name(NX_CHAR):
+          stack_2d(NXdata):
+            exists: optional
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
+              exists: recommended
+            intensity(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            indices_spectrum(NX_INT):
+              \@long_name(NX_CHAR):
+            axis_j(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_i(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_energy(NX_NUMBER):
+              \@long_name(NX_CHAR):
+          stack_3d(NXdata):
+            exists: optional
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
+              exists: recommended
+            intensity(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            indices_spectrum(NX_INT):
+              \@long_name(NX_CHAR):
+            axis_k(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_j(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_i(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_energy(NX_NUMBER):
+              \@long_name(NX_CHAR):
+        instrument(NXinstrument_em):
+          exists: recommended
+          ebeam_column(NXebeam_column):
+            operation_mode(NX_CHAR):
+            electron_source(NXsource):
+              exists: optional
+              voltage(NX_NUMBER):
+              extraction_voltage(NX_NUMBER):
                 exists: optional
-                voltage(NX_NUMBER):
-                extraction_voltage(NX_NUMBER):
-                  exists: optional
-                emission_current(NX_NUMBER):
-                  exists: optional
-                filament_current(NX_NUMBER):
-                  exists: optional
-              (NXlens_em):
-                exists: ['min', '0', 'max', 'unbounded']
-                doc: |
-                  Instances should use lens as a name prefix.
-                power_setting(NX_CHAR_OR_NUMBER):
-              (NXaperture):
-                exists: ['min', '0', 'max', 'unbounded']
-                doc: |
-                  Instances should use aperture as a name prefix.
-                setting(NX_CHAR_OR_NUMBER):
-                  exists: recommended
-                  doc: |
-                    Descriptor for the aperture setting when the exact technical details
-                    are unknown or not directly controllable as the control software of
-                    the microscope does not enable or was not configured to display these
-                    values for users.
-              
-              # size can be used as a fallback
-              (NXmonochromator):
-                exists: ['min', '0', 'max', 'unbounded']
-                doc: |
-                  Instances should use monochromator as a name prefix.
-                applied(NX_BOOLEAN):
-                dispersion(NX_NUMBER):
-                  exists: recommended
-                voltage(NX_NUMBER):
-                  exists: recommended
-              corrector_cs(NXcorrector_cs):
-                exists: ['min', '0', 'max', '1']
-                applied(NX_BOOLEAN):
-                  exists: recommended
-                TABLEAU(NXprocess):
-                  nameType: any
-                  exists: ['min', '1', 'max', 'unbounded']
-                  
-                  # model(NX_CHAR):
-                  
-                  # ceos
-                  doc: |
-                    Instances should use tableau as a name prefix.
-                  c_1(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  a_1(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  b_2(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  a_2(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_3(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  s_3(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  a_3(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  b_4(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  d_4(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  a_4(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_5(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  s_5(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  r_5(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  a_6(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  
-                  # nion
-                  c_1_0(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_1_2_a(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_1_2_b(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_2_1_a(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_2_1_b(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_2_3_a(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_2_3_b(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_3_0(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_3_2_a(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_3_2_b(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_3_4_a(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_3_4_b(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_4_1_a(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_4_1_b(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_4_3_a(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_4_3_b(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_4_5_a(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_4_5_b(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_5_0(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_5_2_a(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_5_2_b(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_5_4_a(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_5_4_b(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_5_6_a(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-                  c_5_6_b(NXaberration):
-                    exists: optional
-                    magnitude(NX_NUMBER):
-              
-              # we could write down how to store the aberrations but we should not force to add aberrations
-              # basically optional use of NXaberration therein at least some value required
-              corrector_ax(NXcomponent):
-                exists: ['min', '0', 'max', '1']
-                applied(NX_BOOLEAN):
-                value_x(NX_NUMBER):
-                value_y(NX_NUMBER):
-              
-              # biprism(NXcomponent):
-              
-              # phaseplateID(NXcomponent):
-              (NXsensor):
-                exists: ['min', '0', 'max', 'unbounded']
-                doc: |
-                  Instances should use sensor as a name prefix.
-              (NXactuator):
-                exists: ['min', '0', 'max', 'unbounded']
-                doc: |
-                  Instances should use actuator as a name prefix.
-              (NXbeam):
-                exists: ['min', '0', 'max', 'unbounded']
-                doc: |
-                  Instances should use beam as a name prefix.
-              (NXdeflector):
-                exists: ['min', '0', 'max', 'unbounded']
-                doc: |
-                  Instances should use deflector as a name prefix.
-            ibeam_column(NXibeam_column):
-              exists: ['min', '0', 'max', '1']
-              ion_source(NXsource):
-                probe(NXatom):
-                voltage(NX_NUMBER):
-                flux(NX_NUMBER):
-              (NXlens_em):
-                exists: ['min', '0', 'max', 'unbounded']
-                doc: |
-                  Instances should use lens as a name prefix.
-                power_setting(NX_CHAR_OR_NUMBER):
-              (NXaperture):
-                exists: ['min', '0', 'max', 'unbounded']
-                doc: |
-                  Instances should use aperture as a name prefix.
-                setting(NX_CHAR_OR_NUMBER):
-                  doc: |
-                    Descriptor for the aperture setting when the exact technical details
-                    are unknown or not directly controllable as the control software of
-                    the microscope does not enable or was not configured to display these
-                    values for users.
-              (NXmonochromator):
-                exists: ['min', '0', 'max', 'unbounded']
-                doc: |
-                  Instances should use monochromator as a name prefix.
-                applied(NX_BOOLEAN):
-              (NXsensor):
-                exists: ['min', '0', 'max', 'unbounded']
-                doc: |
-                  Instances should use sensor as a name prefix.
-              (NXactuator):
-                exists: ['min', '0', 'max', 'unbounded']
-                doc: |
-                  Instances should use actuator as a name prefix.
-              (NXbeam):
-                exists: ['min', '0', 'max', 'unbounded']
-                doc: |
-                  Instances should use beam as a name prefix.
-              (NXdeflector):
-                exists: ['min', '0', 'max', 'unbounded']
-                doc: |
-                  Instances should use deflector as a name prefix.
-            (NXdetector):
+              emission_current(NX_NUMBER):
+                exists: optional
+              filament_current(NX_NUMBER):
+                exists: optional
+            (NXlens_em):
               exists: ['min', '0', 'max', 'unbounded']
               doc: |
-                Instances should use detector as a name prefix.
-              mode(NX_CHAR):
+                Instances should use lens as a name prefix.
+              power_setting(NX_CHAR_OR_NUMBER):
+            (NXaperture):
+              exists: ['min', '0', 'max', 'unbounded']
+              doc: |
+                Instances should use aperture as a name prefix.
+              setting(NX_CHAR_OR_NUMBER):
+                exists: recommended
                 doc: |
-                  Operation mode of the detector as displayed by the control software.
-            scan_controller(NXscanbox_em):
-              exists: optional
-              scan_schema(NX_CHAR):
-              dwell_time(NX_NUMBER):
+                  Descriptor for the aperture setting when the exact technical details
+                  are unknown or not directly controllable as the control software of
+                  the microscope does not enable or was not configured to display these
+                  values for users.
+              # NXaperture/size can be used as a fallback
+            (NXmonochromator):
+              exists: ['min', '0', 'max', 'unbounded']
+              doc: |
+                Instances should use monochromator as a name prefix.
+              applied(NX_BOOLEAN):
+              dispersion(NX_NUMBER):
+                exists: recommended
+              voltage(NX_NUMBER):
+                exists: recommended
+            corrector_cs(NXcorrector_cs):
+              exists: ['min', '0', 'max', '1']
+              applied(NX_BOOLEAN):
+                exists: recommended
+              TABLEAU(NXprocess):
+                nameType: any
+                exists: ['min', '1', 'max', 'unbounded']
+                
+                # model(NX_CHAR):
+                
+                # ceos
+                doc: |
+                  Instances should use tableau as a name prefix.
+                c_1(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                a_1(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                b_2(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                a_2(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_3(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                s_3(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                a_3(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                b_4(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                d_4(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                a_4(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_5(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                s_5(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                r_5(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                a_6(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                
+                # nion
+                c_1_0(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_1_2_a(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_1_2_b(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_2_1_a(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_2_1_b(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_2_3_a(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_2_3_b(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_3_0(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_3_2_a(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_3_2_b(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_3_4_a(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_3_4_b(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_4_1_a(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_4_1_b(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_4_3_a(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_4_3_b(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_4_5_a(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_4_5_b(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_5_0(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_5_2_a(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_5_2_b(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_5_4_a(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_5_4_b(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_5_6_a(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+                c_5_6_b(NXaberration):
+                  exists: optional
+                  magnitude(NX_NUMBER):
+            
+            # we could write down how to store the aberrations but we should not force to add aberrations
+            # basically optional use of NXaberration therein at least some value required
+            corrector_ax(NXcomponent):
+              exists: ['min', '0', 'max', '1']
+              applied(NX_BOOLEAN):
+              value_x(NX_NUMBER):
+              value_y(NX_NUMBER):
+            
+            # biprism(NXcomponent):
+            
+            # phaseplateID(NXcomponent):
             (NXsensor):
               exists: ['min', '0', 'max', 'unbounded']
               doc: |
@@ -1304,31 +1225,100 @@ NXem(NXobject):
               exists: ['min', '0', 'max', 'unbounded']
               doc: |
                 Instances should use actuator as a name prefix.
-            stage(NXmanipulator):
+            (NXbeam):
               exists: ['min', '0', 'max', 'unbounded']
-              design(NX_CHAR):
-                exists: recommended
-              tilt1(NX_NUMBER):
-              tilt2(NX_NUMBER):
-              rotation(NX_NUMBER):
-              position(NX_NUMBER):
-              sample_heater(NXactuator):
-                exists: optional
-                physical_quantity(NX_CHAR):
-                heater_current(NX_NUMBER):
-                  exists: optional
-                  unit: NX_CURRENT
-                  doc: |
-                    Nominal current of the heater.
-                heater_voltage(NX_NUMBER):
-                  exists: optional
-                  unit: NX_VOLTAGE
-                  doc: |
-                    Nominal voltage of the heater.
-                heater_power(NX_NUMBER):
-                  unit: NX_POWER
-            optics(NXoptical_system_em):
+              doc: |
+                Instances should use beam as a name prefix.
+            (NXdeflector):
+              exists: ['min', '0', 'max', 'unbounded']
+              doc: |
+                Instances should use deflector as a name prefix.
+          ibeam_column(NXibeam_column):
+            exists: ['min', '0', 'max', '1']
+            ion_source(NXsource):
+              probe(NXatom):
+              voltage(NX_NUMBER):
+              flux(NX_NUMBER):
+            (NXlens_em):
+              exists: ['min', '0', 'max', 'unbounded']
+              doc: |
+                Instances should use lens as a name prefix.
+              power_setting(NX_CHAR_OR_NUMBER):
+            (NXaperture):
+              exists: ['min', '0', 'max', 'unbounded']
+              doc: |
+                Instances should use aperture as a name prefix.
+              setting(NX_CHAR_OR_NUMBER):
+                doc: |
+                  Descriptor for the aperture setting when the exact technical details
+                  are unknown or not directly controllable as the control software of
+                  the microscope does not enable or was not configured to display these
+                  values for users.
+            (NXmonochromator):
+              exists: ['min', '0', 'max', 'unbounded']
+              doc: |
+                Instances should use monochromator as a name prefix.
+              applied(NX_BOOLEAN):
+            (NXsensor):
+              exists: ['min', '0', 'max', 'unbounded']
+              doc: |
+                Instances should use sensor as a name prefix.
+            (NXactuator):
+              exists: ['min', '0', 'max', 'unbounded']
+              doc: |
+                Instances should use actuator as a name prefix.
+            (NXbeam):
+              exists: ['min', '0', 'max', 'unbounded']
+              doc: |
+                Instances should use beam as a name prefix.
+            (NXdeflector):
+              exists: ['min', '0', 'max', 'unbounded']
+              doc: |
+                Instances should use deflector as a name prefix.
+          (NXdetector):
+            exists: ['min', '0', 'max', 'unbounded']
+            doc: |
+              Instances should use detector as a name prefix.
+            mode(NX_CHAR):
+              doc: |
+                Operation mode of the detector as displayed by the control software.
+          scan_controller(NXscanbox_em):
+            exists: optional
+            scan_schema(NX_CHAR):
+            dwell_time(NX_NUMBER):
+          (NXsensor):
+            exists: ['min', '0', 'max', 'unbounded']
+            doc: |
+              Instances should use sensor as a name prefix.
+          (NXactuator):
+            exists: ['min', '0', 'max', 'unbounded']
+            doc: |
+              Instances should use actuator as a name prefix.
+          stage(NXmanipulator):
+            exists: ['min', '0', 'max', 'unbounded']
+            design(NX_CHAR):
               exists: recommended
+            tilt1(NX_NUMBER):
+            tilt2(NX_NUMBER):
+            rotation(NX_NUMBER):
+            position(NX_NUMBER):
+            sample_heater(NXactuator):
+              exists: optional
+              physical_quantity(NX_CHAR):
+              heater_current(NX_NUMBER):
+                exists: optional
+                unit: NX_CURRENT
+                doc: |
+                  Nominal current of the heater.
+              heater_voltage(NX_NUMBER):
+                exists: optional
+                unit: NX_VOLTAGE
+                doc: |
+                  Nominal voltage of the heater.
+              heater_power(NX_NUMBER):
+                unit: NX_POWER
+          optics(NXoptical_system_em):
+            exists: recommended
     simulation(NXem_simulation):
       exists: optional
       doc: |

@@ -2,6 +2,18 @@ category: base
 doc: |
   Base class to store state and (meta)data of events for electron microscopy.
   
+  To avoid that static instrument-related metadata need to be stored repetitively
+  (for each image and spectrum) the NXem application definitions splits the
+  storage of the (meta)data into those that typically do not change for a session
+  with the microscope and those which are often different for data that is collected
+  with the microscope.
+  
+  Which temporal granularity is adequate to log events depends on the situation and
+  research question. Using a model which enables a collection of events offers
+  the most flexible way to cater for both experiments with controlled electron
+  beams in a real microscope or the simulation of such experiments or
+  individual aspects of such experiments.
+  
   Electron microscopes are dynamic. Scientists often report that microscopes
   *perform differently* across sessions. That *they* perform differently from
   one day or another. In some cases, root causes for performance differences
@@ -9,12 +21,6 @@ doc: |
   or *too poor*, and thus abort their session. Alternatively, users may try to
   bring the microscope into a state where conditions are considered better
   or of whatever high enough quality for starting or continuing the measurement.
-  
-  Which temporal granularity is adequate to log events depends on the situation and
-  research question. Using a model which enables a collection of events offers
-  the most flexible way to cater for both experiments with controlled electron
-  beams in a real microscope or the simulation of such experiments or
-  individual aspects of such experiments.
   
   In all these use cases it is useful to have a mechanism whereby time-dependent
   data of the instrument state can be stored and documented in an representation

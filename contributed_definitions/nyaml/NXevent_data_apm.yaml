@@ -4,12 +4,24 @@ doc: |
   
   Having at least one instance for an instance of NXapm is recommended.
   
-  This base class applies the concept of the NXevent_data_em base class to the specific needs
+  This base class applies the concept of the :ref:`NXevent_data_em` base class to the specific needs
   of atom probe research. Against static and dynamic quantities are split to avoid a duplication
   of information. Specifically, the time interval considered is the entire time
   starting at start_time until end_time during which we assume the pulser triggered named pulses.
   These pulses are identified via the pulse_id field. The point in time when each was issued
   is specified via the combination of start_time and delta_time.
+  
+  Which temporal granularity is adequate depends on the situation and research question.
+  Using a model which enables a collection of events offers the most flexible way to cater for
+  both atom probe experiments or simulation. To monitor the course of an ion extraction experiment
+  (or simulation) it makes sense to track time explicitly via time stamps or implicitly
+  via e.g. a clock inside the instrument, such as the clock of the pulser and respective pulsing event
+  identifier.
+  
+  As set and measured quantities typically change over time and we do not yet know during the
+  measurement which of the events have associated (molecular) ions that will end up in the
+  reconstructed volume, we must not document quantities as a function of the evaporation_id but
+  as a function of the (pulsing) identifier_event.
   
   Conceptually and technically NeXus currently stores tensorial information as arrays of values
   (with each value of the same datatype). For instance, a field temperature(NX_FLOAT) stores

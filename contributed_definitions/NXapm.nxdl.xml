@@ -3,7 +3,7 @@
 <!--
 # NeXus - Neutron and X-ray Common Data Format
 #
-# Copyright (C) 2022-2025 NeXus International Advisory Committee (NIAC)
+# Copyright (C) 2025-2025 NeXus International Advisory Committee (NIAC)
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -103,7 +103,7 @@
                 </field>
             </group>
         </group>
-        <!--<field name="identifier_experiment" type="NX_CHAR" optional="true"/>-->        
+        <!--<field name="identifier_experiment" type="NX_CHAR" optional="true"/>-->
         <field name="run_number" type="NX_UINT" recommended="true" units="NX_UNITLESS">
             <!--cannot be made required as for simulations you do not have a run number!-->
             <doc>
@@ -417,7 +417,7 @@ the application definition here is nothing else then the documentation of this f
                 </doc>
             </field>
         </group>
-        <group name="consistent_rotations" type="NXobject" recommended="true">
+        <group name="consistent_rotations" type="NXparameters" recommended="true">
             <doc>
                 The conventions used when reporting crystal orientations.
                 We follow the best practices of the Material Science community
@@ -542,7 +542,7 @@ the application definition here is nothing else then the documentation of this f
             <field name="y_direction" type="NX_CHAR"/>
             <field name="z_direction" type="NX_CHAR"/>
         </group>
-        <group name="measurement" type="NXobject" optional="true">
+        <group name="measurement" type="NXapm_measurement" optional="true">
             <doc>
                 Base class for collecting a session with a real atom probe or field-ion microscope.
                 
@@ -689,113 +689,85 @@ the application definition here is nothing else then the documentation of this f
                     </doc>
                 </field>
             </group>
-            <group name="events" type="NXobject" optional="true">
-                <!--the case of allowing to not have event_data but only the above-mentioned instrument
-details can be useful to convey details about an atom probe instrument in general-->
-                <doc>
-                    Group to hold instances of :ref:`NXevent_data_apm`.
-                    
-                    Which temporal granularity is adequate depends on the situation and research
-                    question. Using a model which enables a collection of events offers the most
-                    flexible way to cater for both atom probe experiments or simulation.
-                    
-                    To monitor the course of an ion extraction experiment (or simulation)
-                    it makes sense to track time explicitly via time stamps or implicitly
-                    via e.g. a clock inside the instrument, such as the clock of the pulser
-                    and respective pulsing event identifier.
-                    
-                    As set and measured quantities typically change over time and we do not
-                    yet know during the measurement which of the events have associated
-                    (molecular) ions that will end up in the reconstructed volume, we must not
-                    document quantities as a function of the evaporation_id but as a
-                    function of the (pulsing) identifier_event.
-                </doc>
-                <group type="NXevent_data_apm" minOccurs="0" maxOccurs="unbounded">
-                    <!--all these cannot be made required because for LEAP only stored in RHIT/HITS
+            <group type="NXevent_data_apm" minOccurs="0" maxOccurs="unbounded">
+                <!--all these cannot be made required because for LEAP only stored in RHIT/HITS
 but for M-TAP and Oxcart these pieces of information are available.-->
-                    <doc>
-                        Instances should use event as a name prefix.
-                    </doc>
-                    <field name="start_time" type="NX_DATE_TIME" recommended="true"/>
-                    <field name="end_time" type="NX_DATE_TIME" recommended="true"/>
-                    <!--delta_time(NX_NUMBER):
+                <doc>
+                    Instances should use event as a name prefix.
+                </doc>
+                <field name="start_time" type="NX_DATE_TIME" recommended="true"/>
+                <field name="end_time" type="NX_DATE_TIME" recommended="true"/>
+                <!--delta_time(NX_NUMBER):
 pulse_id_offset(NX_INT):
 pulse_id(NX_INT):-->
-                    <group name="instrument" type="NXinstrument_apm" recommended="true">
-                        <group name="reflectron" type="NXcomponent" recommended="true">
-                            <field name="voltage" type="NX_FLOAT"/>
-                        </group>
-                        <!--decelerate_electrode(NXlens_em):-->
-                        <group name="local_electrode" type="NXlens_em" recommended="true">
-                            <field name="voltage" type="NX_FLOAT"/>
-                        </group>
-                        <!--ion_detector(NXdetector):-->
-                        <group name="pulser" type="NXcomponent" recommended="true">
-                            <field name="pulse_mode" type="NX_CHAR"/>
-                            <field name="pulse_frequency" type="NX_FLOAT"/>
-                            <!--\@logged_against(NX_CHAR):-->
-                            <field name="pulse_fraction" type="NX_FLOAT"/>
-                            <!--\@logged_against(NX_CHAR):-->
-                            <field name="pulse_voltage" type="NX_FLOAT" optional="true">
+                <group name="instrument" type="NXinstrument_apm" recommended="true">
+                    <group name="reflectron" type="NXcomponent" recommended="true">
+                        <field name="voltage" type="NX_FLOAT"/>
+                    </group>
+                    <!--decelerate_electrode(NXlens_em):-->
+                    <group name="local_electrode" type="NXlens_em" recommended="true">
+                        <field name="voltage" type="NX_FLOAT"/>
+                    </group>
+                    <!--ion_detector(NXdetector):-->
+                    <group name="pulser" type="NXcomponent" recommended="true">
+                        <field name="pulse_mode" type="NX_CHAR"/>
+                        <field name="pulse_frequency" type="NX_FLOAT"/>
+                        <field name="pulse_fraction" type="NX_FLOAT"/>
+                        <field name="pulse_voltage" type="NX_FLOAT" optional="true">
+                            <dimensions rank="1">
+                                <dim index="1" value="n"/>
+                            </dimensions>
+                        </field>
+                        <field name="pulse_number" type="NX_UINT" optional="true">
+                            <dimensions rank="1">
+                                <dim index="1" value="n"/>
+                            </dimensions>
+                        </field>
+                        <field name="standing_voltage" type="NX_FLOAT" optional="true">
+                            <dimensions rank="1">
+                                <dim index="1" value="n"/>
+                            </dimensions>
+                        </field>
+                        <group type="NXsource" minOccurs="0" maxOccurs="2">
+                            <field name="wavelength" type="NX_FLOAT" recommended="true" units="NX_WAVELENGTH"/>
+                            <field name="power" type="NX_FLOAT" units="NX_POWER"/>
+                            <field name="pulse_energy" type="NX_FLOAT">
                                 <dimensions rank="1">
                                     <dim index="1" value="n"/>
                                 </dimensions>
                             </field>
-                            <!--\@logged_against(NX_CHAR):-->
-                            <field name="pulse_number" type="NX_UINT" optional="true">
-                                <dimensions rank="1">
-                                    <dim index="1" value="n"/>
-                                </dimensions>
-                            </field>
-                            <!--\@logged_against(NX_CHAR):-->
-                            <field name="standing_voltage" type="NX_FLOAT" optional="true">
-                                <dimensions rank="1">
-                                    <dim index="1" value="n"/>
-                                </dimensions>
-                            </field>
-                            <!--\@logged_against(NX_CHAR):-->
-                            <group type="NXsource" minOccurs="0" maxOccurs="2">
-                                <field name="wavelength" type="NX_FLOAT" recommended="true" units="NX_WAVELENGTH"/>
-                                <field name="power" type="NX_FLOAT" units="NX_POWER"/>
-                                <field name="pulse_energy" type="NX_FLOAT">
-                                    <dimensions rank="1">
-                                        <dim index="1" value="n"/>
-                                    </dimensions>
-                                </field>
-                            </group>
                         </group>
-                        <!--\@logged_against(NX_CHAR):
-laser geometry at the moment has neither a worked out example
+                    </group>
+                    <!--laser geometry at the moment has neither a worked out example
 nor any feedback from the community despite the work from B. Gault
 on laser atom probe was granted a Leibnitz award-->
-                        <group name="stage" type="NXmanipulator">
-                            <group name="temperature_sensor" type="NXsensor">
-                                <field name="measurement" type="NX_CHAR"/>
-                                <field name="value" type="NX_FLOAT"/>
-                            </group>
+                    <group name="stage" type="NXmanipulator">
+                        <group name="temperature_sensor" type="NXsensor">
+                            <field name="measurement" type="NX_CHAR"/>
+                            <field name="value" type="NX_FLOAT"/>
                         </group>
-                        <group name="analysis_chamber" type="NXcomponent">
-                            <group name="pressure_sensor" type="NXsensor">
-                                <field name="measurement" type="NX_CHAR"/>
-                                <field name="value" type="NX_FLOAT"/>
-                            </group>
+                    </group>
+                    <group name="analysis_chamber" type="NXcomponent">
+                        <group name="pressure_sensor" type="NXsensor">
+                            <field name="measurement" type="NX_CHAR"/>
+                            <field name="value" type="NX_FLOAT"/>
                         </group>
-                        <group name="control" type="NXcollection" recommended="true">
-                            <field name="evaporation_control" type="NX_CHAR"/>
-                            <field name="target_detection_rate" type="NX_NUMBER"/>
-                        </group>
+                    </group>
+                    <group name="control" type="NXparameters" recommended="true">
+                        <field name="evaporation_control" type="NX_CHAR"/>
+                        <field name="target_detection_rate" type="NX_NUMBER"/>
                     </group>
                 </group>
             </group>
         </group>
-        <group name="simulation" type="NXobject" optional="true">
+        <group name="simulation" type="NXapm_simulation" optional="true">
             <doc>
                 Simulation of ion extraction from matter via laser and/or voltage pulsing.
             </doc>
         </group>
         <!--future possibility to reuse concepts from NXinstrument_apm again without
 the need for defining them again-->
-        <group name="atom_probe" type="NXobject" recommended="true">
+        <group name="atom_probe" type="NXroi" recommended="true">
             <doc>
                 A region-of-interest analyzed either during or after the session for which
                 specific processed data of the measured or simulated data are available.
