@@ -32,7 +32,7 @@ type: group
 NXcg_polyhedron(NXcg_primitive):
   
   # qualifiers and properties of polyhedra
-  number_of_faces(NX_INT):
+  number_of_faces(NX_UINT):
     unit: NX_UNITLESS
     doc: |
       The number of faces for each polyhedron. Faces of adjoining polyhedra
@@ -47,7 +47,7 @@ NXcg_polyhedron(NXcg_primitive):
     dimensions:
       rank: 1
       dim: (n_f_total,)
-  number_of_edges(NX_INT):
+  number_of_edges(NX_UINT):
     doc: |
       The number of edges for each polyhedron. Edges of adjoining polyhedra
       are counted for each polyhedron.
@@ -63,21 +63,17 @@ NXcg_polyhedron(NXcg_primitive):
   polyhedra(NXcg_face_list_data_structure):
     doc: |
       Combined storage of all primitives of all polyhedra.
-  POLYHEDRON(NXcg_face_list_data_structure):
-    nameType: any
+  polyhedronID(NXcg_face_list_data_structure):
+    nameType: partial
     doc: |
       Individual storage of each polyhedron.
-      
-      Instances should use polyhedron as a name prefix.
-  POLYHEDRON_HALF_EDGE(NXcg_half_edge_data_structure):
-    nameType: any
+  polyhedron_half_edgeID(NXcg_half_edge_data_structure):
+    nameType: partial
     doc: |
       Individual storage of each polygon as a graph.
-      
-      Instances should use cluster_analysis as a name prefix.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 59836c499259273600f4e8e9ecf9eb5f6810c21501fbe79a284e17e8ad8e9f90
+# 2268cd65f210df7756fba0491d0e970f7155b246640a0695d05778ef3de5ee93
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -144,7 +140,7 @@ NXcg_polyhedron(NXcg_primitive):
 #         by creating customized instances of an :ref:`NXcg_polygon`.
 #     </doc>
 #     <!--qualifiers and properties of polyhedra-->
-#     <field name="number_of_faces" type="NX_INT" units="NX_UNITLESS">
+#     <field name="number_of_faces" type="NX_UINT" units="NX_UNITLESS">
 #         <doc>
 #             The number of faces for each polyhedron. Faces of adjoining polyhedra
 #             are counted for each polyhedron.
@@ -161,7 +157,7 @@ NXcg_polyhedron(NXcg_primitive):
 #             <dim index="1" value="n_f_total"/>
 #         </dimensions>
 #     </field>
-#     <field name="number_of_edges" type="NX_INT">
+#     <field name="number_of_edges" type="NX_UINT">
 #         <doc>
 #             The number of edges for each polyhedron. Edges of adjoining polyhedra
 #             are counted for each polyhedron.
@@ -181,18 +177,14 @@ NXcg_polyhedron(NXcg_primitive):
 #             Combined storage of all primitives of all polyhedra.
 #         </doc>
 #     </group>
-#     <group name="POLYHEDRON" type="NXcg_face_list_data_structure" nameType="any">
+#     <group name="polyhedronID" type="NXcg_face_list_data_structure" nameType="partial">
 #         <doc>
 #             Individual storage of each polyhedron.
-#             
-#             Instances should use polyhedron as a name prefix.
 #         </doc>
 #     </group>
-#     <group name="POLYHEDRON_HALF_EDGE" type="NXcg_half_edge_data_structure" nameType="any">
+#     <group name="polyhedron_half_edgeID" type="NXcg_half_edge_data_structure" nameType="partial">
 #         <doc>
 #             Individual storage of each polygon as a graph.
-#             
-#             Instances should use cluster_analysis as a name prefix.
 #         </doc>
 #     </group>
 # </definition>
