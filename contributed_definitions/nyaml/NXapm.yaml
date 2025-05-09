@@ -592,12 +592,11 @@ NXapm(NXobject):
         comment(NX_CHAR):
           doc: |
             Free text field for additional comments.
-      (NXevent_data_apm):
+      eventID(NXevent_data_apm):
+        nameType: partial
         exists: ['min', '0', 'max', 'unbounded']
         # all these cannot be made required because for LEAP only stored in RHIT/HITS
         # but for M-TAP and Oxcart these pieces of information are available.
-        doc: |
-          Instances should use event as a name prefix.
         start_time(NX_DATE_TIME):
           exists: recommended
         end_time(NX_DATE_TIME):
@@ -1163,10 +1162,9 @@ NXapm(NXobject):
               \@version(NX_CHAR):
           number_of_ion_types(NX_UINT):
           maximum_number_of_atoms_per_molecular_ion(NX_UINT):
-          (NXion):
+          ionID(NXion):
+            nameType: partial
             exists: ['min', '1', 'max', '256']
-            doc: |
-              Instances should use ion as a name prefix.
             nuclide_hash(NX_UINT):
             charge_state(NX_INT):
             charge_state_analysis(NXapm_charge_state_analysis):

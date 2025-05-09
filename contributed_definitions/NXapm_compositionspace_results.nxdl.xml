@@ -310,11 +310,9 @@
                         <item value="4"/>
                     </enumeration>
                 </field>
-                <group name="CLUSTER_ANALYSIS" type="NXprocess" nameType="any">
+                <group name="cluster_analysisID" type="NXprocess" nameType="partial">
                     <doc>
                         Results of the Gaussian mixture analysis for n_components equal to n_ic_cluster.
-                        
-                        Instances should use cluster_analysis as a name prefix.
                     </doc>
                     <field name="n_ic_cluster" type="NX_UINT" units="NX_UNITLESS">
                         <doc>
@@ -381,17 +379,12 @@
                 <doc>
                     Respective DBScan clustering result for each segmentation/ic_opt case.
                 </doc>
-                <group name="CLUSTER_ANALYSIS" type="NXprocess" minOccurs="0" maxOccurs="unbounded" nameType="any">
-                    <doc>
-                        Instances should use cluster_analysis as a name prefix.
-                    </doc>
-                    <group name="DBSCAN" type="NXprocess" minOccurs="1" maxOccurs="unbounded" nameType="any">
+                <group name="cluster_analysisID" type="NXprocess" minOccurs="0" maxOccurs="unbounded" nameType="partial">
+                    <group name="dbscanID" type="NXprocess" minOccurs="1" maxOccurs="unbounded" nameType="partial">
                         <field name="epsilon" type="NX_FLOAT" units="NX_LENGTH">
                             <doc>
                                 The maximum distance between voxel pairs in a neighborhood
                                 to be considered connected.
-                                
-                                Instances should use dbscan as a name prefix.
                             </doc>
                         </field>
                         <field name="min_samples" type="NX_UINT" units="NX_UNITLESS">

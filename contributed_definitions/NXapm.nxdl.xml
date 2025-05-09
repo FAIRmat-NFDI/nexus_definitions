@@ -689,12 +689,9 @@ the application definition here is nothing else then the documentation of this f
                     </doc>
                 </field>
             </group>
-            <group type="NXevent_data_apm" minOccurs="0" maxOccurs="unbounded">
+            <group name="eventID" type="NXevent_data_apm" nameType="partial" minOccurs="0" maxOccurs="unbounded">
                 <!--all these cannot be made required because for LEAP only stored in RHIT/HITS
 but for M-TAP and Oxcart these pieces of information are available.-->
-                <doc>
-                    Instances should use event as a name prefix.
-                </doc>
                 <field name="start_time" type="NX_DATE_TIME" recommended="true"/>
                 <field name="end_time" type="NX_DATE_TIME" recommended="true"/>
                 <!--delta_time(NX_NUMBER):
@@ -1283,10 +1280,7 @@ at this point the original set of events p has been filtered down to p_out-->
                     </group>
                     <field name="number_of_ion_types" type="NX_UINT"/>
                     <field name="maximum_number_of_atoms_per_molecular_ion" type="NX_UINT"/>
-                    <group type="NXion" minOccurs="1" maxOccurs="256">
-                        <doc>
-                            Instances should use ion as a name prefix.
-                        </doc>
+                    <group name="ionID" type="NXion" nameType="partial" minOccurs="1" maxOccurs="256">
                         <field name="nuclide_hash" type="NX_UINT"/>
                         <field name="charge_state" type="NX_INT"/>
                         <group name="charge_state_analysis" type="NXapm_charge_state_analysis" optional="true">

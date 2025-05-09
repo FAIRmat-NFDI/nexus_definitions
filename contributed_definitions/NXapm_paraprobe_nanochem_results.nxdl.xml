@@ -3,7 +3,7 @@
 <!--
 # NeXus - Neutron and X-ray Common Data Format
 #
-# Copyright (C) 2023-2025 NeXus International Advisory Committee (NIAC)
+# Copyright (C) 2025-2025 NeXus International Advisory Committee (NIAC)
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -97,10 +97,7 @@ The cardinality/total number of triangles in the triangle soup.-->
             </enumeration>
         </field>
         <!--tasks-->
-        <group type="NXdelocalization" minOccurs="0" maxOccurs="unbounded">
-            <doc>
-                Instances should use delocalization as a name prefix.
-            </doc>
+        <group name="delocalizationID" type="NXdelocalization" minOccurs="0" maxOccurs="unbounded" nameType="partial">
             <group name="window" type="NXcs_filter_boolean_mask">
                 <field name="number_of_ions" type="NX_UINT"/>
                 <field name="bitdepth" type="NX_UINT"/>
@@ -331,7 +328,6 @@ The cardinality/total number of triangles in the triangle soup.-->
                                 3 - mirror
                                 4 - von Neumann
                                 5 - Dirichlet
-                                
                             </doc>
                             <dimensions rank="1">
                                 <dim index="1" value="6"/>
@@ -499,12 +495,10 @@ The cardinality/total number of triangles in the triangle soup.-->
                     </field>
                 </group>
                 <!--MK::-->
-                <group type="NXisocontour" minOccurs="0" maxOccurs="unbounded">
+                <group name="iso_surfaceID" type="NXisocontour" minOccurs="0" maxOccurs="unbounded" nameType="partial">
                     <doc>
                         An iso-surface is the boundary between two regions across which the magnitude of a
                         scalar field falls below/exceeds a threshold magnitude :math:`\varphi`.
-                        
-                        Instances should iso_surface as a name prefix.
                         
                         For applications in atom probe microscopy, the location and shape of such a boundary (set)
                         is typically approximated by discretization - triangulation to be specific.
@@ -599,7 +593,6 @@ The cardinality/total number of triangles in the triangle soup.-->
                                         * 0 - undefined
                                         * 1 - outer
                                         * 2 - inner
-                                        
                                     </doc>
                                     <dimensions rank="1">
                                         <dim index="1" value="j"/>
@@ -626,7 +619,6 @@ exists: optional-->
                                         * 0 - undefined
                                         * 1 - outer
                                         * 2 - inner
-                                        
                                     </doc>
                                     <dimensions rank="1">
                                         <dim index="1" value="k"/>
@@ -788,7 +780,6 @@ dim: (k,)-->
                                         * proxies, proxies, irrespective their distance to the surface
                                         * proxies_close_to_edge, sub-set of v_feature_proxies, close to surface
                                         * proxies_far_from_edge, sub-set of v_feature_proxies, not close to surface
-                                        
                                     </doc>
                                     <field name="indices_feature" type="NX_INT" units="NX_UNITLESS">
                                         <doc>
@@ -866,10 +857,7 @@ MK::namely k != i each OBB has eight vertices-->
                                             </field>
                                         </group>
                                     </group>
-                                    <group name="OBJECT" type="NXcg_polyhedron" nameType="any" minOccurs="0" maxOccurs="unbounded">
-                                        <doc>
-                                            Instances should use object as a name prefix.
-                                        </doc>
+                                    <group name="objectID" type="NXcg_polyhedron" nameType="partial" minOccurs="0" maxOccurs="unbounded">
                                         <group name="polyhedron" type="NXcg_face_list_data_structure">
                                             <field name="vertices" type="NX_FLOAT" units="NX_LENGTH">
                                                 <dimensions rank="2">
@@ -989,12 +977,10 @@ MK::namely k != i each OBB has eight vertices-->
                     </dimensions>
                 </field>
             </group>
-            <group name="MESH_STATE" type="NXcg_triangle" nameType="any" minOccurs="0" maxOccurs="unbounded">
+            <group name="mesh_stateID" type="NXcg_triangle" nameType="partial" minOccurs="0" maxOccurs="unbounded">
                 <doc>
                     The triangle surface mesh representing the interface model.
                     Exported at state before or after the next DCOM step.
-                    
-                    Instances should use mesh_state as a name prefix.
                 </doc>
                 <field name="state" type="NX_CHAR">
                     <doc>
@@ -1043,7 +1029,6 @@ MK::namely k != i each OBB has eight vertices-->
                             * 0 - undefined
                             * 1 - outer
                             * 2 - inner
-                            
                         </doc>
                         <dimensions rank="1">
                             <dim index="1" value="i"/>
@@ -1072,7 +1057,6 @@ MK::namely k != i each OBB has eight vertices-->
                             * 0 - undefined
                             * 1 - outer
                             * 2 - inner
-
                         </doc>
                         <dimensions rank="1">
                             <dim index="1" value="j"/>
@@ -1195,10 +1179,7 @@ MK::namely k != i each OBB has eight vertices-->
                         are only expected to display pairwise the same values respectively,
                         if all ions are built from a single atom only.
                     </doc>
-                    <group name="ROI" type="NXcg_roi" nameType="any" minOccurs="0" maxOccurs="unbounded">
-                        <doc>
-                            Instances should use roi as a name prefix.
-                        </doc>
+                    <group name="roiID" type="NXcg_roi" nameType="partial" minOccurs="0" maxOccurs="unbounded">
                         <field name="signed_distance" type="NX_FLOAT" units="NX_LENGTH">
                             <doc>
                                 Sorted in increasing order projected along the positive direction

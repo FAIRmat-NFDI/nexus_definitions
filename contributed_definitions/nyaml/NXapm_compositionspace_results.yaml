@@ -222,12 +222,10 @@ NXapm_compositionspace_results(NXobject):
           Information criterion minimization.
         sequence_index(NX_POSINT):
           enumeration: [3, 4]
-        CLUSTER_ANALYSIS(NXprocess):
-          nameType: any
+        cluster_analysisID(NXprocess):
+          nameType: partial
           doc: |
             Results of the Gaussian mixture analysis for n_components equal to n_ic_cluster.
-            
-            Instances should use cluster_analysis as a name prefix.
           n_ic_cluster(NX_UINT):
             unit: NX_UNITLESS
             doc: |
@@ -277,21 +275,17 @@ NXapm_compositionspace_results(NXobject):
       ic_opt(NXprocess):
         doc: |
           Respective DBScan clustering result for each segmentation/ic_opt case.
-        CLUSTER_ANALYSIS(NXprocess):
+        cluster_analysisID(NXprocess):
           exists: ['min', '0', 'max', 'unbounded']
-          nameType: any
-          doc: |
-            Instances should use cluster_analysis as a name prefix.
-          DBSCAN(NXprocess):
+          nameType: partial
+          dbscanID(NXprocess):
             exists: ['min', '1', 'max', 'unbounded']
-            nameType: any
+            nameType: partial
             epsilon(NX_FLOAT):
               unit: NX_LENGTH
               doc: |
                 The maximum distance between voxel pairs in a neighborhood
                 to be considered connected.
-                
-                Instances should use dbscan as a name prefix.
             min_samples(NX_UINT):
               unit: NX_UNITLESS
               doc: |
