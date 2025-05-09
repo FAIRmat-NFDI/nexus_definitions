@@ -9,9 +9,6 @@ NXcs_computer(NXobject):
   operating_system(NX_CHAR):
     doc: |
       Name of the operating system, e.g. Windows, Linux, Mac, Android.
-    enumeration:
-      open_enum: true
-      items: [windows, unix, macintosh]
     \@version(NX_CHAR):
       doc: |
         Version plus build number, commit hash, or description of an ever
@@ -25,62 +22,6 @@ NXcs_computer(NXobject):
     doc: |
       A globally unique persistent identifier of the computer, i.e.
       the Universally Unique Identifier (UUID) of the computing node.
-  
-  # when it comes to performance monitoring
-  processing(NXnote):
-    doc: |
-      Details about the system of processing units e.g. (classical) processing units (CPUs),
-      coprocessor, graphic cards, accelerator processing units or a system of these.
-    (NXcircuit):
-      doc: |
-        Granularizing the processing units. Typical examples, a desktop computer
-        with a single CPU; describe using one instance of NXcircuit.
-        A dual-socket server; describe using two instances of NXcircuit.
-        A server with two dual-socket server nodes; describe with four
-        instances of NXcircuit surplus a field that defines their level
-        in the hierarchy.
-      type(NX_CHAR):
-        enumeration:
-          open_enum: true
-          items: [cpu, gpu, fpga]
-        doc: |
-          General type of the processing unit
-      name(NX_CHAR):
-        doc: |
-          Given name
-  memory(NXnote):
-    doc: |
-      Details about the memory system.
-    (NXcircuit):
-      doc: |
-        Granularizing the components of the memory system.
-      type(NX_CHAR):
-        doc: |
-          Qualifier for the type of random access memory.
-        enumeration:
-          open_enum: true
-          items: [ddr4, ddr5]
-      max_physical_capacity(NX_POSINT):
-        unit: NX_ANY
-        doc: |
-          Total amount of data which the medium can hold.
-      name(NX_CHAR):
-        doc: |
-          Given name
-  storage(NXnote):
-    doc: |
-      Details about the I/O system.
-    (NXcircuit):
-      doc: |
-        Granularizing the components of the I/O system.
-      type(NX_CHAR):
-        doc: |
-          Qualifier for the type of storage medium used.
-        enumeration: [solid_state_disk, hard_disk, tape]
-      max_physical_capacity(NX_POSINT):
-        unit: NX_ANY
-        doc: |
-          Total amount of data which the medium can hold.
-      name(NX_CHAR):
-        doc: |
-          Given name
+  (NXcs_process):
+  (NXcs_memory):
+  (NXcs_storage):
