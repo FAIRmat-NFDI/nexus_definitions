@@ -3,7 +3,7 @@
 <!--
 # NeXus - Neutron and X-ray Common Data Format
 #
-# Copyright (C) 2024-2025 NeXus International Advisory Committee (NIAC)
+# Copyright (C) 2025-2025 NeXus International Advisory Committee (NIAC)
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -121,7 +121,28 @@
             CAnalysis.CSpatial.fVoltage0
         </doc>
     </field>
-    <group name="obb" type="NXobject">
+    <field name="protocol_name" type="NX_CHAR">
+        <doc>
+            Qualitative statement about which reconstruction protocol was used.
+        </doc>
+        <enumeration open="true">
+            <item value="bas"/>
+            <item value="geiser"/>
+            <item value="gault"/>
+            <item value="cameca"/>
+        </enumeration>
+    </field>
+    <field name="crystallographic_calibration" type="NX_CHAR">
+        <doc>
+            Different strategies for crystallographic calibration of the
+            reconstruction are possible. Therefore, we collect first such
+            feedback before parametrizing this further.
+            
+            If no crystallographic calibration was performed, the field
+            should be filled with the n/a, meaning not applied.
+        </doc>
+    </field>
+    <group name="obb" type="NXcollection">
         <doc>
             Tight, axis-aligned bounding box about the point cloud of the reconstruction.
         </doc>
@@ -156,27 +177,6 @@
             </doc>
         </field>
     </group>
-    <field name="protocol_name" type="NX_CHAR">
-        <doc>
-            Qualitative statement about which reconstruction protocol was used.
-        </doc>
-        <enumeration open="true">
-            <item value="bas"/>
-            <item value="geiser"/>
-            <item value="gault"/>
-            <item value="cameca"/>
-        </enumeration>
-    </field>
-    <field name="crystallographic_calibration" type="NX_CHAR">
-        <doc>
-            Different strategies for crystallographic calibration of the
-            reconstruction are possible. Therefore, we collect first such
-            feedback before parametrizing this further.
-            
-            If no crystallographic calibration was performed, the field
-            should be filled with the n/a, meaning not applied.
-        </doc>
-    </field>
     <!--results-->
     <field name="field_of_view" type="NX_FLOAT" units="NX_LENGTH">
         <!--typically in nm reconstruction space not detector coordinates-->

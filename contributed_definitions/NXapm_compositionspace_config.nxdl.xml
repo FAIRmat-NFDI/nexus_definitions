@@ -128,77 +128,71 @@
                     </doc>
                 </group>
             </group>
-            <group name="segmentation" type="NXprocess">
+        </group>
+        <group name="segmentation" type="NXprocess">
+            <doc>
+                Step during which the voxel set is segmented into voxel sets with different
+                chemical composition.
+            </doc>
+            <group name="pca" type="NXprocess" optional="true">
                 <doc>
-                    Step during which the voxel set is segmented into voxel sets with different
-                    chemical composition.
+                    A principal component analysis of the chemical space to guide a decision into how many sets of voxels
+                    with different chemical composition the machine learning algorithm suggests to split the voxel set.
                 </doc>
-                <group name="pca" type="NXprocess" optional="true">
-                    <doc>
-                        A principal component analysis of the chemical space to guide a decision into how many sets of voxels
-                        with different chemical composition the machine learning algorithm suggests to split the voxel set.
-                    </doc>
-                </group>
-                <group name="ic_opt" type="NXprocess">
-                    <doc>
-                        The decision is guided through the evaluation of the information criterion
-                        minimization.
-                    </doc>
-                    <field name="n_max_ic_cluster" type="NX_POSINT" units="NX_UNITLESS">
-                        <doc>
-                            The maximum number of chemical classes to probe with the Gaussian mixture model
-                            with which the voxel set is segmented into a mixture of voxels with that many different
-                            chemical compositions.
-                        </doc>
-                    </field>
-                    <group name="gaussian_mixture" type="NXprocess" optional="true">
-                        <doc>
-                            Configuration for the Gaussian mixture model that is used in the segmentation
-                            step.
-                        </doc>
-                    </group>
-                </group>
             </group>
-            <group name="clustering" type="NXprocess">
+            <group name="ic_opt" type="NXprocess">
                 <doc>
-                    Step during which the chemically segmented voxel sets are analyzed for their
-                    spatial organization.
+                    The decision is guided through the evaluation of the information criterion
+                    minimization.
                 </doc>
-                <group name="dbscan" type="NXparameters">
+                <field name="n_max_ic_cluster" type="NX_POSINT" units="NX_UNITLESS">
                     <doc>
-                        Configuration for the DBScan algorithm that is used in the clustering step.
-                    </doc>
-                    <field name="eps" type="NX_FLOAT" units="NX_LENGTH">
-                        <doc>
-                            The maximum distance between voxel pairs in a neighborhood to be considered
-                            connected.
-                        </doc>
-                    </field>
-                    <field name="min_samples" type="NX_UINT" units="NX_UNITLESS">
-                        <doc>
-                            The number of voxels in a neighborhood for a
-                            voxel to be considered as a core point.
-                        </doc>
-                    </field>
-                </group>
-            </group>
-            <group name="meshing" type="NXprocess">
-                <doc>
-                    TODO
-                </doc>
-                <field name="distance_cut" type="NX_NUMBER">
-                    <doc>
-                        TODO
+                        The maximum number of chemical classes to probe with the Gaussian mixture model
+                        with which the voxel set is segmented into a mixture of voxels with that many different
+                        chemical compositions.
                     </doc>
                 </field>
-                <!--units: NX_ANY-->
-                <field name="normal_end_length" type="NX_NUMBER">
+                <group name="gaussian_mixture" type="NXprocess" optional="true">
                     <doc>
-                        TODO
+                        Configuration for the Gaussian mixture model that is used in the segmentation
+                        step.
+                    </doc>
+                </group>
+            </group>
+        </group>
+        <group name="clustering" type="NXprocess">
+            <doc>
+                Step during which the chemically segmented voxel sets are analyzed for their
+                spatial organization.
+            </doc>
+            <group name="dbscan" type="NXparameters">
+                <doc>
+                    Configuration for the DBScan algorithm that is used in the clustering step.
+                </doc>
+                <field name="eps" type="NX_FLOAT" units="NX_LENGTH">
+                    <doc>
+                        The maximum distance between voxel pairs in a neighborhood to be considered
+                        connected.
+                    </doc>
+                </field>
+                <field name="min_samples" type="NX_UINT" units="NX_UNITLESS">
+                    <doc>
+                        The number of voxels in a neighborhood for a voxel to be considered as a core
+                        point.
                     </doc>
                 </field>
             </group>
         </group>
     </group>
-    <!--units: NX_ANY-->
+    <!--meshing(NXprocess):
+  doc: |
+     TODO
+  distance_cut(NX_NUMBER):
+    doc: |
+      TODO
+    units: NX_ANY
+  normal_end_length(NX_NUMBER):
+    doc: |
+      TODO
+    units: NX_ANY-->
 </definition>
