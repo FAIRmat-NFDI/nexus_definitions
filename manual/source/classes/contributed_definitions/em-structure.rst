@@ -96,7 +96,7 @@ The following base classes are proposed to support modularizing the storage of p
 
 Contextualizing and defining definitions of reference frames and transformations of these and rotations and orientations defined within such reference frames:
 
-    :ref:`NXcoordinate_system_set`, :ref:`NXcoordinate_system`, :ref:`NXtransformations`:
+    :ref:`NXcoordinate_system`, :ref:`NXtransformations`:
         Base classes to describe different coordinate systems used and/or to be harmonized
         or transformed into one another and respective transformations.
 
