@@ -22,9 +22,6 @@
 # For further information, see http://www.nexusformat.org
 -->
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXem_eds" extends="NXprocess" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
-    <!--NEW ISSUE: use computational geometry to offer arbitrary scan pattern
-NEW ISSUE: make the binning flexible per scan point
-energy typically the fastest direction-->
     <symbols>
         <symbol name="n_photon_energy">
             <doc>
@@ -108,9 +105,6 @@ energy typically the fastest direction-->
                 However, a collection of instances of NXpeak with individual NXatom
                 can be used to add isotopic information and other relevant context.
             </doc>
-            <dimensions rank="1">
-                <dim index="1" value="n_elements"/>
-            </dimensions>
         </field>
         <group type="NXpeak">
             <doc>
@@ -144,7 +138,7 @@ energy typically the fastest direction-->
                 </field>
             </group>
         </group>
-        <group type="NXimage">
+        <group name="ELEMENT_SPECIFIC_MAP" type="NXimage" nameType="any">
             <doc>
                 Individual element-specific EDS/EDX/EDXS/SXES mapping
                 
