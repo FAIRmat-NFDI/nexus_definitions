@@ -2,9 +2,16 @@ category: base
 doc: |
   Base class for documenting a set of atoms.
   
-  Atoms in the set may be bonded.
-  The set may have a net charge to represent
-  an ion. Ions can be molecular ions.
+  Atoms in the set may be bonded. The set may have
+  a net charge to represent an ion.
+  Ions can be molecular ions.
+symbols:
+  doc: |
+    The symbols used in the schema to specify e.g. dimensions of arrays.
+  n_pos: |
+    Number of atom positions.
+  d: |
+    Dimensionality
 type: group
 NXatom(NXobject):
   name(NX_CHAR):
@@ -12,9 +19,8 @@ NXatom(NXobject):
       Given name for the set.
       
       This field could for example be used in the research field
-      of atom probe tomography for storing a standardized
-      human-readable name of the element or (molecular) ion
-      like such as Al +++ or 12C +.
+      of atom probe tomography to store a standardized human-readable
+      name of the element or (molecular) ion like such as Al +++ or 12C +.
   identifier_chemical(NX_CHAR):
     doc: |
       Identifier used to refer to if the set of atoms represents a substance.
@@ -47,8 +53,6 @@ NXatom(NXobject):
       
       Neither individual atoms nor a set of cluster of these have a volume
       that is unique as a some cut-off criterion is required.
-  
-  # <group type="NXcg_point"/>
   indices(NX_CHAR):
     doc: |
       Index for each atom at locations as detailed by position.
@@ -61,8 +65,8 @@ NXatom(NXobject):
     doc: |
       Nuclide information for each atom at locations as detailed by position.
       
-      One `approach <https://doi.org/10.1017/S1431927621012241>`_ for storing nuclide information efficiently
-      is via hashing with the following formula
+      One `approach <https://doi.org/10.1017/S1431927621012241>`_ for storing nuclide information
+      efficiently is via hashing with the following formula
       
       :math:`H` is :math:`H = Z + N \cdot 256` with :math:`Z`
       

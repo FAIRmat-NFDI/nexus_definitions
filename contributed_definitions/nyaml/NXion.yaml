@@ -9,7 +9,7 @@ symbols:
   n_ranges: |
     Number of mass-to-charge-state-ratio range intervals for ion type.
 type: group
-NXion(NXobject):
+NXion(NXatom):
   id(NX_CHAR):
     doc: |
       A unique identifier whereby such an ion can be referred to
@@ -56,48 +56,6 @@ NXion(NXobject):
     dimensions:
       rank: 2
       dim: (n_ivecmax, 2)
-  
-  # color(NX_CHAR):
-  # doc: |
-  # Color code used for visualizing such ions.
-  volume(NX_NUMBER):
-    unit: NX_VOLUME
-    doc: |
-      Assumed volume of the ion.
-      
-      In atom probe microscopy this field can be used to store the reconstructed
-      volume per ion (average) which is typically stored alongside ranging
-      definitions.
-  charge(NX_NUMBER):
-    unit: NX_CHARGE
-    doc: |
-      Charge of the ion.
-  charge_state(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
-      Signed charge state of the ion in multiples of electron charge.
-      
-      In the example of atom probe microscopy, only positive values will be measured
-      as the ions are accelerated by a negatively signed bias electric field.
-      In the case that the charge state is not explicitly recoverable, the value should
-      be set to zero.
-      
-      In atom probe microscopy this is for example the case when using
-      classical ranging definition files in formats like RNG, RRNG.
-      These file formats do not document the charge state explicitly
-      but the number of atoms of each element per molecular ion
-      surplus the mass-to-charge-state-ratio interval.
-      Details on ranging definition files can be found in the literature:
-      `M. K. Miller <https://doi.org/10.1002/sia.1719>`_
-  name(NX_CHAR):
-    doc: |
-      Human-readable ion type name (e.g. Al +++)
-      The string should consists of UTF-8 characters, ideally using LaTeX
-      notation to specify the isotopes, ions, and charge state.
-      Examples are 12C + or Al +++.
-      
-      To ease automated parsing, isotope_vector should be the
-      preferred machine-readable information used.
   mass_to_charge_range(NX_NUMBER):
     unit: NX_ANY
     doc: |

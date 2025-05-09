@@ -1,36 +1,36 @@
 category: base
 doc: |
-  Application definition for circuit devices.
+  Base class for documenting circuit devices.
   
-  Electronic circuits are hardware components connecting several electronic components to achieve
+  Electronic circuits are hardware components that connect several electronic components to achieve
   specific functionality, e.g. amplifying a voltage or convert a voltage to binary numbers, etc.
 symbols:
   doc: |
     Constant to be used in the definition: the number of channels of the
     circuit board.
   N_channel: |
-    number of channels of the circuit board.
+    Number of channels of the circuit board.
 type: group
 NXcircuit(NXcomponent):
   hardware(NXfabrication):
     doc: |
-      Hardware where the circuit is implanted; includes information about the hardware manufacturers and
-      type (e.g. part number)
+      Hardware where the circuit is implanted; includes information about the
+      hardware manufacturers and type (e.g. part number)
       All the elements below may be single numbers of an array of values with length N_channel
       describing multiple input and output channels.
-  components:
+  components(NX_CHAR):
     doc: |
       List of components used in the circuit, e.g., resistors, capacitors, transistors or any
       other complex components.
-  connections:
+  connections(NX_CHAR):
     doc: |
       Description of how components are interconnected, including connection points
       and wiring.
-  power_source:
+  power_source(NX_CHAR):
     doc: |
       Details of the power source for the circuit, including voltage and current
       ratings.
-  signal_type:
+  signal_type(NX_CHAR):
     doc: |
       Type of signal (input signal) the circuit is designed to handle, e.g., analog,
       digital, mixed-signal.
@@ -39,10 +39,13 @@ NXcircuit(NXcomponent):
   operating_frequency(NX_NUMBER):
     unit: NX_FREQUENCY
     doc: |
-      The operating frequency of the circuit, see also bandwidth below, which is possibly
-      centered around this frequency. However, not necessarily (e.g. running a 100 kHz bandwidth
-      amplifier at low, audio frequencies 1 - 20,000 Hz)
-  
+      The operating frequency of the circuit, see also bandwidth, which is possibly
+      but not necessarily centered around this frequency (e.g. running a 100 kHz bandwidth
+      amplifier at low, audio frequencies 1 - 20,000 Hz).
+  bandwidth(NX_NUMBER):
+    unit: NX_FREQUENCY
+    doc: |
+      The bandwidth of the frequency response of the circuit.
   # we may need an NX_RESISTANCE defined
   input_impedance(NX_NUMBER):
     unit: NX_ANY
@@ -55,16 +58,13 @@ NXcircuit(NXcomponent):
   gain(NX_NUMBER):
     unit: NX_UNITLESS
     doc: |
-      Gain of the circuit, if applicable, usually all instruments have a gain which might be
-      important or not.
+      Gain of the circuit, if applicable, usually all instruments have a gain
+      which might be important or not.
   noise_level(NX_NUMBER):
     unit: NX_ANY
     doc: |
-      RMS noise level (in current or voltage) in the circuit in voltage or current.
-  bandwidth(NX_NUMBER):
-    unit: NX_FREQUENCY
-    doc: |
-      The bandwidth of the frequency response of the circuit.
+      Root-mean-square (RMS) noise level (in current or voltage)
+      in the circuit in voltage or current.
   temperature_range(NX_NUMBER):
     unit: NX_ANY
     doc: |
@@ -87,7 +87,7 @@ NXcircuit(NXcomponent):
     unit: NX_ANY
     doc: |
       Power consumption of the circuit per unit time.
-  status_indicators:
+  status_indicators(NX_CHAR):
     doc: |
       Status indicators for the circuit, e.g., LEDs, display readouts.
   protection_features(NX_CHAR):

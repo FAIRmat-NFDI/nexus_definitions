@@ -3,7 +3,7 @@
 <!--
 # NeXus - Neutron and X-ray Common Data Format
 #
-# Copyright (C) 2022-2025 NeXus International Advisory Committee (NIAC)
+# Copyright (C) 2025-2025 NeXus International Advisory Committee (NIAC)
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -27,22 +27,22 @@
         
         The idea behind defining NXebeam_column as an own base class vs. adding these
         concepts in NXinstrument_em is that the electron beam generating component
-        might be worthwhile to use in other experiments also.
+        might be worthwhile to use also in other types of experiments.
     </doc>
     <field name="operation_mode" type="NX_CHAR">
         <doc>
             Tech-partner, microscope-, and control-software-specific name of the
-            specific operation mode how the ebeam_column and its components are controlled
-            to achieve specific illumination conditions.
+            specific operation mode how the ebeam_column and its components are
+            controlled to achieve specific illumination conditions.
             
             In many cases the users of an instrument do not or can not be expected to know
-            all intricate spatiotemporal dynamics of their hardware. Instead, they rely of
+            all intricate spatiotemporal dynamics of their hardware. Instead, they rely on
             assumptions that the instrument, its control software, and components work as
             expected to focus on their research questions.
             
             For these cases, having a place for documenting the operation_mode is useful
             in as much as at least some constraints on how the illumination conditions were
-            get documented.
+            is documented.
         </doc>
     </field>
     <group name="electron_source" type="NXsource">
@@ -190,13 +190,12 @@
             </doc>
         </field>
     </group>
-    <group name="BIPRISM" type="NXcomponent" nameType="any">
+    <group name="biprismID" type="NXcomponent" nameType="partial">
         <doc>
             Electron biprism as it is used e.g. for electron holography.
         </doc>
-        <group type="NXfabrication"/>
     </group>
-    <group name="PHASEPLATE" type="NXcomponent" nameType="any">
+    <group name="phaseplateID" type="NXcomponent" nameType="partial">
         <doc>
             Device that causes a change in the phase of an electron wave.
             
@@ -212,9 +211,7 @@
                 <item value="electrostatic"/>
             </enumeration>
         </field>
-        <group type="NXfabrication"/>
     </group>
-    <group type="NXcomponent"/>
     <group type="NXsensor"/>
     <group type="NXactuator"/>
     <group type="NXbeam">
@@ -230,4 +227,5 @@
             .. _Electron Beam: https://purls.helmholtz-metadaten.de/emg/EMG_00000021
         </doc>
     </group>
+    <group type="NXcomponent"/>
 </definition>

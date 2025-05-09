@@ -9,7 +9,10 @@ NXcs_computer(NXobject):
   operating_system(NX_CHAR):
     doc: |
       Name of the operating system, e.g. Windows, Linux, Mac, Android.
-    \@version:
+    enumeration:
+      open_enum: true
+      items: [windows, unix, macintosh]
+    \@version(NX_CHAR):
       doc: |
         Version plus build number, commit hash, or description of an ever
         persistent resource where the source code of the program and build
@@ -20,7 +23,7 @@ NXcs_computer(NXobject):
   # difference e.g. in Win11 between hardware ID, UUID, and device ID
   uuid(NX_CHAR):
     doc: |
-      Ideally a (globally) unique persistent identifier of the computer, i.e.
+      A globally unique persistent identifier of the computer, i.e.
       the Universally Unique Identifier (UUID) of the computing node.
   
   # when it comes to performance monitoring
@@ -31,16 +34,17 @@ NXcs_computer(NXobject):
     (NXcircuit):
       doc: |
         Granularizing the processing units. Typical examples, a desktop computer
-        with a single CPU one could describe using one instance of NXcircuit.
-        A dual-socket server one could describe using two instances NXcircuit
-        A server with two dual-socket server nodes one could describe with
-        four instances of NXcircuit surplus a field with their level in the hierarchy.
+        with a single CPU; describe using one instance of NXcircuit.
+        A dual-socket server; describe using two instances of NXcircuit.
+        A server with two dual-socket server nodes; describe with four
+        instances of NXcircuit surplus a field that defines their level
+        in the hierarchy.
       type(NX_CHAR):
-        doc: |
-          General type of the processing unit
         enumeration:
           open_enum: true
           items: [cpu, gpu, fpga]
+        doc: |
+          General type of the processing unit
       name(NX_CHAR):
         doc: |
           Given name
@@ -53,7 +57,9 @@ NXcs_computer(NXobject):
       type(NX_CHAR):
         doc: |
           Qualifier for the type of random access memory.
-        enumeration: [ddr4, ddr5]
+        enumeration:
+          open_enum: true
+          items: [ddr4, ddr5]
       max_physical_capacity(NX_POSINT):
         unit: NX_ANY
         doc: |

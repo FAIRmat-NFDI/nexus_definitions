@@ -34,7 +34,12 @@
         <doc>
             Name of the operating system, e.g. Windows, Linux, Mac, Android.
         </doc>
-        <attribute name="version">
+        <enumeration open="true">
+            <item value="windows"/>
+            <item value="unix"/>
+            <item value="macintosh"/>
+        </enumeration>
+        <attribute name="version" type="NX_CHAR">
             <doc>
                 Version plus build number, commit hash, or description of an ever
                 persistent resource where the source code of the program and build
@@ -47,7 +52,7 @@
     <!--difference e.g. in Win11 between hardware ID, UUID, and device ID-->
     <field name="uuid" type="NX_CHAR">
         <doc>
-            Ideally a (globally) unique persistent identifier of the computer, i.e.
+            A globally unique persistent identifier of the computer, i.e.
             the Universally Unique Identifier (UUID) of the computing node.
         </doc>
     </field>
@@ -60,10 +65,11 @@
         <group type="NXcircuit">
             <doc>
                 Granularizing the processing units. Typical examples, a desktop computer
-                with a single CPU one could describe using one instance of NXcircuit.
-                A dual-socket server one could describe using two instances NXcircuit
-                A server with two dual-socket server nodes one could describe with
-                four instances of NXcircuit surplus a field with their level in the hierarchy.
+                with a single CPU; describe using one instance of NXcircuit.
+                A dual-socket server; describe using two instances of NXcircuit.
+                A server with two dual-socket server nodes; describe with four
+                instances of NXcircuit surplus a field that defines their level
+                in the hierarchy.
             </doc>
             <field name="type" type="NX_CHAR">
                 <doc>
@@ -94,7 +100,7 @@
                 <doc>
                     Qualifier for the type of random access memory.
                 </doc>
-                <enumeration>
+                <enumeration open="true">
                     <item value="ddr4"/>
                     <item value="ddr5"/>
                 </enumeration>
