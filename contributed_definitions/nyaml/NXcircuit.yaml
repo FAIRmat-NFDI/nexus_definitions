@@ -46,6 +46,7 @@ NXcircuit(NXcomponent):
     unit: NX_FREQUENCY
     doc: |
       The bandwidth of the frequency response of the circuit.
+  
   # we may need an NX_RESISTANCE defined
   input_impedance(NX_NUMBER):
     unit: NX_ANY
@@ -105,7 +106,7 @@ NXcircuit(NXcomponent):
       value.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 0354df665f0472e82c72fe2a66dc6d31749f36bfc9d1ac2302192f406d297b75
+# 618f030e81428fff01c66c2a4af66d1697e51dd87d955b2a63f08628a6c316ff
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -137,43 +138,43 @@ NXcircuit(NXcomponent):
 #         </doc>
 #         <symbol name="N_channel">
 #             <doc>
-#                 number of channels of the circuit board.
+#                 Number of channels of the circuit board.
 #             </doc>
 #         </symbol>
 #     </symbols>
 #     <doc>
-#         Application definition for circuit devices.
+#         Base class for documenting circuit devices.
 #         
-#         Electronic circuits are hardware components connecting several electronic components to achieve
+#         Electronic circuits are hardware components that connect several electronic components to achieve
 #         specific functionality, e.g. amplifying a voltage or convert a voltage to binary numbers, etc.
 #     </doc>
 #     <group name="hardware" type="NXfabrication">
 #         <doc>
-#             Hardware where the circuit is implanted; includes information about the hardware manufacturers and
-#             type (e.g. part number)
+#             Hardware where the circuit is implanted; includes information about the
+#             hardware manufacturers and type (e.g. part number)
 #             All the elements below may be single numbers of an array of values with length N_channel
 #             describing multiple input and output channels.
 #         </doc>
 #     </group>
-#     <field name="components">
+#     <field name="components" type="NX_CHAR">
 #         <doc>
 #             List of components used in the circuit, e.g., resistors, capacitors, transistors or any
 #             other complex components.
 #         </doc>
 #     </field>
-#     <field name="connections">
+#     <field name="connections" type="NX_CHAR">
 #         <doc>
 #             Description of how components are interconnected, including connection points
 #             and wiring.
 #         </doc>
 #     </field>
-#     <field name="power_source">
+#     <field name="power_source" type="NX_CHAR">
 #         <doc>
 #             Details of the power source for the circuit, including voltage and current
 #             ratings.
 #         </doc>
 #     </field>
-#     <field name="signal_type">
+#     <field name="signal_type" type="NX_CHAR">
 #         <doc>
 #             Type of signal (input signal) the circuit is designed to handle, e.g., analog,
 #             digital, mixed-signal.
@@ -182,9 +183,14 @@ NXcircuit(NXcomponent):
 #     <!--should this be a min / max range?-->
 #     <field name="operating_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
 #         <doc>
-#             The operating frequency of the circuit, see also bandwidth below, which is possibly
-#             centered around this frequency. However, not necessarily (e.g. running a 100 kHz bandwidth
-#             amplifier at low, audio frequencies 1 - 20,000 Hz)
+#             The operating frequency of the circuit, see also bandwidth, which is possibly
+#             but not necessarily centered around this frequency (e.g. running a 100 kHz bandwidth
+#             amplifier at low, audio frequencies 1 - 20,000 Hz).
+#         </doc>
+#     </field>
+#     <field name="bandwidth" type="NX_NUMBER" units="NX_FREQUENCY">
+#         <doc>
+#             The bandwidth of the frequency response of the circuit.
 #         </doc>
 #     </field>
 #     <!--we may need an NX_RESISTANCE defined-->
@@ -200,18 +206,14 @@ NXcircuit(NXcomponent):
 #     </field>
 #     <field name="gain" type="NX_NUMBER" units="NX_UNITLESS">
 #         <doc>
-#             Gain of the circuit, if applicable, usually all instruments have a gain which might be
-#             important or not.
+#             Gain of the circuit, if applicable, usually all instruments have a gain
+#             which might be important or not.
 #         </doc>
 #     </field>
 #     <field name="noise_level" type="NX_NUMBER" units="NX_ANY">
 #         <doc>
-#             RMS noise level (in current or voltage) in the circuit in voltage or current.
-#         </doc>
-#     </field>
-#     <field name="bandwidth" type="NX_NUMBER" units="NX_FREQUENCY">
-#         <doc>
-#             The bandwidth of the frequency response of the circuit.
+#             Root-mean-square (RMS) noise level (in current or voltage)
+#             in the circuit in voltage or current.
 #         </doc>
 #     </field>
 #     <field name="temperature_range" type="NX_NUMBER" units="NX_ANY">
@@ -244,7 +246,7 @@ NXcircuit(NXcomponent):
 #             Power consumption of the circuit per unit time.
 #         </doc>
 #     </field>
-#     <field name="status_indicators">
+#     <field name="status_indicators" type="NX_CHAR">
 #         <doc>
 #             Status indicators for the circuit, e.g., LEDs, display readouts.
 #         </doc>
