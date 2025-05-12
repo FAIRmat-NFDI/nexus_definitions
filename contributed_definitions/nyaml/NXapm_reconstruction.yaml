@@ -13,7 +13,7 @@ symbols:
     Number of ions spatially filtered from results of the hit_finding algorithm
     from which an instance of a reconstructed volume has been generated.
     These ions get new identifier assigned in the process - the so-called
-    identifier_evaporation, which must not be confused with the identifier_pulse!
+    evaporation_id, which must not be confused with the pulse_id!
 type: group
 NXapm_reconstruction(NXprocess):
   
@@ -82,7 +82,21 @@ NXapm_reconstruction(NXprocess):
     unit: NX_VOLTAGE
     doc: |
       CAnalysis.CSpatial.fVoltage0
-  obb(NXobject):
+  protocol_name(NX_CHAR):
+    doc: |
+      Qualitative statement about which reconstruction protocol was used.
+    enumeration:
+      open_enum: true
+      items: [bas, geiser, gault, cameca]
+  crystallographic_calibration(NX_CHAR):
+    doc: |
+      Different strategies for crystallographic calibration of the
+      reconstruction are possible. Therefore, we collect first such
+      feedback before parametrizing this further.
+      
+      If no crystallographic calibration was performed, the field
+      should be filled with the n/a, meaning not applied.
+  obb(NXcollection):
     doc: |
       Tight, axis-aligned bounding box about the point cloud of the reconstruction.
     xmin(NX_FLOAT):
@@ -109,20 +123,6 @@ NXapm_reconstruction(NXprocess):
       unit: NX_LENGTH
       doc: |
         TODO
-  protocol_name(NX_CHAR):
-    doc: |
-      Qualitative statement about which reconstruction protocol was used.
-    enumeration:
-      open_enum: true
-      items: [bas, geiser, gault, cameca]
-  crystallographic_calibration(NX_CHAR):
-    doc: |
-      Different strategies for crystallographic calibration of the
-      reconstruction are possible. Therefore, we collect first such
-      feedback before parametrizing this further.
-      
-      If no crystallographic calibration was performed, the field
-      should be filled with the n/a, meaning not applied.
   
   # results
   field_of_view(NX_FLOAT):
@@ -157,7 +157,7 @@ NXapm_reconstruction(NXprocess):
         algorithms during the histogram computation.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# ce13067901785fc95c428e78fece576b9c8a8a1342276e5811d5640cae5dfdbd
+# b9d8e611a7239b4bc62f3a49ee204e09c48988bed02f99b8479d34e41f5565fb
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -191,7 +191,7 @@ NXapm_reconstruction(NXprocess):
 #                 Number of ions spatially filtered from results of the hit_finding algorithm
 #                 from which an instance of a reconstructed volume has been generated.
 #                 These ions get new identifier assigned in the process - the so-called
-#                 identifier_evaporation, which must not be confused with the identifier_pulse!
+#                 evaporation_id, which must not be confused with the pulse_id!
 #             </doc>
 #         </symbol>
 #     </symbols>
@@ -281,7 +281,28 @@ NXapm_reconstruction(NXprocess):
 #             CAnalysis.CSpatial.fVoltage0
 #         </doc>
 #     </field>
-#     <group name="obb" type="NXobject">
+#     <field name="protocol_name" type="NX_CHAR">
+#         <doc>
+#             Qualitative statement about which reconstruction protocol was used.
+#         </doc>
+#         <enumeration open="true">
+#             <item value="bas"/>
+#             <item value="geiser"/>
+#             <item value="gault"/>
+#             <item value="cameca"/>
+#         </enumeration>
+#     </field>
+#     <field name="crystallographic_calibration" type="NX_CHAR">
+#         <doc>
+#             Different strategies for crystallographic calibration of the
+#             reconstruction are possible. Therefore, we collect first such
+#             feedback before parametrizing this further.
+#             
+#             If no crystallographic calibration was performed, the field
+#             should be filled with the n/a, meaning not applied.
+#         </doc>
+#     </field>
+#     <group name="obb" type="NXcollection">
 #         <doc>
 #             Tight, axis-aligned bounding box about the point cloud of the reconstruction.
 #         </doc>
@@ -316,27 +337,6 @@ NXapm_reconstruction(NXprocess):
 #             </doc>
 #         </field>
 #     </group>
-#     <field name="protocol_name" type="NX_CHAR">
-#         <doc>
-#             Qualitative statement about which reconstruction protocol was used.
-#         </doc>
-#         <enumeration open="true">
-#             <item value="bas"/>
-#             <item value="geiser"/>
-#             <item value="gault"/>
-#             <item value="cameca"/>
-#         </enumeration>
-#     </field>
-#     <field name="crystallographic_calibration" type="NX_CHAR">
-#         <doc>
-#             Different strategies for crystallographic calibration of the
-#             reconstruction are possible. Therefore, we collect first such
-#             feedback before parametrizing this further.
-#             
-#             If no crystallographic calibration was performed, the field
-#             should be filled with the n/a, meaning not applied.
-#         </doc>
-#     </field>
 #     <!--results-->
 #     <field name="field_of_view" type="NX_FLOAT" units="NX_LENGTH">
 #         <!--typically in nm reconstruction space not detector coordinates-->

@@ -4,23 +4,23 @@ doc: |
   
   The idea behind defining NXebeam_column as an own base class vs. adding these
   concepts in NXinstrument_em is that the electron beam generating component
-  might be worthwhile to use in other experiments also.
+  might be worthwhile to use also in other types of experiments.
 type: group
 NXebeam_column(NXcomponent):
   operation_mode(NX_CHAR):
     doc: |
       Tech-partner, microscope-, and control-software-specific name of the
-      specific operation mode how the ebeam_column and its components are controlled
-      to achieve specific illumination conditions.
+      specific operation mode how the ebeam_column and its components are
+      controlled to achieve specific illumination conditions.
       
       In many cases the users of an instrument do not or can not be expected to know
-      all intricate spatiotemporal dynamics of their hardware. Instead, they rely of
+      all intricate spatiotemporal dynamics of their hardware. Instead, they rely on
       assumptions that the instrument, its control software, and components work as
       expected to focus on their research questions.
       
       For these cases, having a place for documenting the operation_mode is useful
       in as much as at least some constraints on how the illumination conditions were
-      get documented.
+      is documented.
   electron_source(NXsource):
     doc:
     - |
@@ -99,6 +99,12 @@ NXebeam_column(NXcomponent):
   (NXlens_em):
   (NXaperture):
   (NXdeflector):
+  blankerID(NXdeflector):
+    nameType: partial
+    doc: |
+      A component for blanking the beam or generating pulsed electron beams.
+      See e.g . `I. G. C. Weppelman et al. <https://doi.org/10.1016/j.ultramic.2017.10.002>`_
+      or `Y. Liao <https://www.globalsino.com/EM/page2464.html>`_ for details.
   (NXmonochromator):
     doc: |
       Device to improve energy resolution or chromatic aberration.
@@ -146,13 +152,12 @@ NXebeam_column(NXcomponent):
         Descriptor for the correction strength along the second direction when exact technical details
         are unknown or not directly controllable as the control software of the microscope does not
         enable or was not configured to display these values for users.
-  BIPRISM(NXcomponent):
-    nameType: any
+  biprismID(NXcomponent):
+    nameType: partial
     doc: |
       Electron biprism as it is used e.g. for electron holography.
-    (NXfabrication):
-  PHASEPLATE(NXcomponent):
-    nameType: any
+  phaseplateID(NXcomponent):
+    nameType: partial
     doc: |
       Device that causes a change in the phase of an electron wave.
       
@@ -164,8 +169,6 @@ NXebeam_column(NXcomponent):
       enumeration:
         open_enum: true
         items: [thin_film, electrostatic]
-    (NXfabrication):
-  (NXcomponent):
   (NXsensor):
   (NXactuator):
   (NXbeam):
@@ -181,9 +184,10 @@ NXebeam_column(NXcomponent):
         spec: EMglossary
         term: Electron Beam
         url: https://purls.helmholtz-metadaten.de/emg/EMG_00000021
+  (NXcomponent):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# bad370dd2f91335848079fa63885c75bcb1b443ee4c7fb9b45c4a4f32c8d9159
+# 1a0b8cfa31f7ddb34bf2c8001383fd77768103af9b0be227befcde88466d3c8e
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -213,22 +217,22 @@ NXebeam_column(NXcomponent):
 #         
 #         The idea behind defining NXebeam_column as an own base class vs. adding these
 #         concepts in NXinstrument_em is that the electron beam generating component
-#         might be worthwhile to use in other experiments also.
+#         might be worthwhile to use also in other types of experiments.
 #     </doc>
 #     <field name="operation_mode" type="NX_CHAR">
 #         <doc>
 #             Tech-partner, microscope-, and control-software-specific name of the
-#             specific operation mode how the ebeam_column and its components are controlled
-#             to achieve specific illumination conditions.
+#             specific operation mode how the ebeam_column and its components are
+#             controlled to achieve specific illumination conditions.
 #             
 #             In many cases the users of an instrument do not or can not be expected to know
-#             all intricate spatiotemporal dynamics of their hardware. Instead, they rely of
+#             all intricate spatiotemporal dynamics of their hardware. Instead, they rely on
 #             assumptions that the instrument, its control software, and components work as
 #             expected to focus on their research questions.
 #             
 #             For these cases, having a place for documenting the operation_mode is useful
 #             in as much as at least some constraints on how the illumination conditions were
-#             get documented.
+#             is documented.
 #         </doc>
 #     </field>
 #     <group name="electron_source" type="NXsource">
@@ -312,6 +316,13 @@ NXebeam_column(NXcomponent):
 #     <group type="NXlens_em"/>
 #     <group type="NXaperture"/>
 #     <group type="NXdeflector"/>
+#     <group name="blankerID" type="NXdeflector" nameType="partial">
+#         <doc>
+#             A component for blanking the beam or generating pulsed electron beams.
+#             See e.g . `I. G. C. Weppelman et al. &lt;https://doi.org/10.1016/j.ultramic.2017.10.002&gt;`_
+#             or `Y. Liao &lt;https://www.globalsino.com/EM/page2464.html&gt;`_ for details.
+#         </doc>
+#     </group>
 #     <group type="NXmonochromator">
 #         <doc>
 #             Device to improve energy resolution or chromatic aberration.
@@ -376,13 +387,12 @@ NXebeam_column(NXcomponent):
 #             </doc>
 #         </field>
 #     </group>
-#     <group name="BIPRISM" type="NXcomponent" nameType="any">
+#     <group name="biprismID" type="NXcomponent" nameType="partial">
 #         <doc>
 #             Electron biprism as it is used e.g. for electron holography.
 #         </doc>
-#         <group type="NXfabrication"/>
 #     </group>
-#     <group name="PHASEPLATE" type="NXcomponent" nameType="any">
+#     <group name="phaseplateID" type="NXcomponent" nameType="partial">
 #         <doc>
 #             Device that causes a change in the phase of an electron wave.
 #             
@@ -398,9 +408,7 @@ NXebeam_column(NXcomponent):
 #                 <item value="electrostatic"/>
 #             </enumeration>
 #         </field>
-#         <group type="NXfabrication"/>
 #     </group>
-#     <group type="NXcomponent"/>
 #     <group type="NXsensor"/>
 #     <group type="NXactuator"/>
 #     <group type="NXbeam">
@@ -416,4 +424,5 @@ NXebeam_column(NXcomponent):
 #             .. _Electron Beam: https://purls.helmholtz-metadaten.de/emg/EMG_00000021
 #         </doc>
 #     </group>
+#     <group type="NXcomponent"/>
 # </definition>

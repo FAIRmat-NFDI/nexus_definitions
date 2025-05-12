@@ -23,13 +23,13 @@ NXmicrostructure_imm_config(NXobject):
   (NXentry):
     definition(NX_CHAR):
       enumeration: [NXmicrostructure_imm_config]
-    roi(NXobject):
+    roi(NXparameters):
       doc: |
         The computational domain will be synthesized either as a square (for dimensionality = 2)
         or a cube (for dimensionality = 3) with axis-aligned cuboidal parent grains. The domain is
         discretized into material points using either square pixel or cubic voxel as the tessellating
         unit cells.
-      dimensionality(NX_UINT):
+      dimensionality(NX_POSINT):
         doc: |
           Two-dimensional or three-dimensional simulation.
         enumeration: [2, 3]
@@ -76,7 +76,7 @@ NXmicrostructure_imm_config(NXobject):
     # remove 0 all the time <RandomnessX>0.00</RandomnessX>
     # remove 0 all the time <RandomnessY>0.00</RandomnessY>
     # <!-\- in the case of MicroGenMode 0 (E_VORONOI) this sets dimensions of the average 0.1/0.2cdeformed grain relative to its dimensions in x which is 1.0, randomness controls how the seed points are misplaced -\->
-    component_analysis(NXobject):
+    component_analysis(NXparameters):
       exists: optional
       doc: |
         In texture research component analyses set on the idea that properties
@@ -108,7 +108,7 @@ NXmicrostructure_imm_config(NXobject):
         dimensions:
           rank: 1
           dim: (n_components,)
-    dislocation_distribution(NXobject):
+    dislocation_distribution(NXparameters):
       doc: |
         Dislocations are modelled as Rayleigh-distributed mean-field density that
         can differ between but is constant within grains and sub-grains.
@@ -144,7 +144,7 @@ NXmicrostructure_imm_config(NXobject):
         dimensions:
           rank: 1
           dim: (n_categories,)
-    orientation_distribution(NXprocess):
+    orientation_distribution(NXparameters):
       doc: |
         Orientations of the grains are sampled from a set of Bunge-Euler angle triplets.
         Orientations of the sub-grains are sampled by scattering the orientation
@@ -176,7 +176,7 @@ NXmicrostructure_imm_config(NXobject):
   # <!-\-IPF plotting renders a plane-parallel section in the NXNY coordinates
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 697ad688742a9fa86bb8db4cf38bf3321c5e75a3d938504ea645d5ec7a8ae42f
+# 3dcfe0b3e781fc71c2e6b3e50a386cf56828368112d19c1ef32a99f106aa1498
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -237,14 +237,14 @@ NXmicrostructure_imm_config(NXobject):
 #                 <item value="NXmicrostructure_imm_config"/>
 #             </enumeration>
 #         </field>
-#         <group name="roi" type="NXobject">
+#         <group name="roi" type="NXparameters">
 #             <doc>
 #                 The computational domain will be synthesized either as a square (for dimensionality = 2)
 #                 or a cube (for dimensionality = 3) with axis-aligned cuboidal parent grains. The domain is
 #                 discretized into material points using either square pixel or cubic voxel as the tessellating
 #                 unit cells.
 #             </doc>
-#             <field name="dimensionality" type="NX_UINT">
+#             <field name="dimensionality" type="NX_POSINT">
 #                 <doc>
 #                     Two-dimensional or three-dimensional simulation.
 #                 </doc>
@@ -303,7 +303,7 @@ NXmicrostructure_imm_config(NXobject):
 # remove 0 all the time <RandomnessX>0.00</RandomnessX>
 # remove 0 all the time <RandomnessY>0.00</RandomnessY>
 # <!-\- in the case of MicroGenMode 0 (E_VORONOI) this sets dimensions of the average 0.1/0.2cdeformed grain relative to its dimensions in x which is 1.0, randomness controls how the seed points are misplaced -\->-->
-#         <group name="component_analysis" type="NXobject" optional="true">
+#         <group name="component_analysis" type="NXparameters" optional="true">
 #             <doc>
 #                 In texture research component analyses set on the idea that properties
 #                 of grains different based on orientation with certain regions in orientation
@@ -341,7 +341,7 @@ NXmicrostructure_imm_config(NXobject):
 #                 </dimensions>
 #             </field>
 #         </group>
-#         <group name="dislocation_distribution" type="NXobject">
+#         <group name="dislocation_distribution" type="NXparameters">
 #             <doc>
 #                 Dislocations are modelled as Rayleigh-distributed mean-field density that
 #                 can differ between but is constant within grains and sub-grains.
@@ -383,7 +383,7 @@ NXmicrostructure_imm_config(NXobject):
 #                 </dimensions>
 #             </field>
 #         </group>
-#         <group name="orientation_distribution" type="NXprocess">
+#         <group name="orientation_distribution" type="NXparameters">
 #             <doc>
 #                 Orientations of the grains are sampled from a set of Bunge-Euler angle triplets.
 #                 Orientations of the sub-grains are sampled by scattering the orientation

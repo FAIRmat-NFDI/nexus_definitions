@@ -36,7 +36,7 @@ NXmicrostructure_imm_results(NXobject):
         \@version(NX_CHAR):
         \@url(NX_CHAR):
           exists: recommended
-    environment(NXobject):
+    environment(NXcollection):
       exists: optional
       doc: |
         Programs and libraries representing the computational environment
@@ -44,9 +44,8 @@ NXmicrostructure_imm_results(NXobject):
         exists: ['min', '1', 'max', 'unbounded']
         program(NX_CHAR):
           \@version(NX_CHAR):
-    (NXmicrostructure):
-      doc: |
-        Instances should use microstructure as a name prefix.
+    microstructureID(NXmicrostructure):
+      nameType: partial
       grid(NXcg_grid):
         extent(NX_UINT):
         cell_dimensions(NX_NUMBER):
@@ -58,7 +57,7 @@ NXmicrostructure_imm_results(NXobject):
           \@AXISNAME_indices(NX_UINT):
             nameType: partial
           title(NX_CHAR):
-          identifier_crystal(NX_NUMBER):
+          indices_crystal(NX_INT):
             unit: NX_UNITLESS
             doc: |
               Crystal identifier that was assigned to each material point.
@@ -95,10 +94,10 @@ NXmicrostructure_imm_results(NXobject):
             \@long_name(NX_CHAR):
               doc: |
                 Coordinate along x direction.
-      crystal(NXobject):
+      crystals(NXmicrostructure_feature):
         reference(NX_CHAR):
         number_of_crystals(NX_UINT):
-        identifier_crystal(NX_INT):
+        indices_crystal(NX_INT):
           dimensions:
             rank: 1
             dim: (c,)
@@ -138,7 +137,7 @@ NXmicrostructure_imm_results(NXobject):
             dim: (c,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 1002d3c0f7c125dd73ccace4e9e47a6d93c9f8d75c273033ec5d0d23468a411d
+# f8a8ae246a82288cbe1dffe13e542acca67b88bdf48c0c56c9f2b33c300af7ad
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -209,7 +208,7 @@ NXmicrostructure_imm_results(NXobject):
 #                 <attribute name="url" type="NX_CHAR" recommended="true"/>
 #             </field>
 #         </group>
-#         <group name="environment" type="NXobject" optional="true">
+#         <group name="environment" type="NXcollection" optional="true">
 #             <doc>
 #                 Programs and libraries representing the computational environment
 #             </doc>
@@ -219,10 +218,7 @@ NXmicrostructure_imm_results(NXobject):
 #                 </field>
 #             </group>
 #         </group>
-#         <group type="NXmicrostructure">
-#             <doc>
-#                 Instances should use microstructure as a name prefix.
-#             </doc>
+#         <group name="microstructureID" type="NXmicrostructure" nameType="partial">
 #             <group name="grid" type="NXcg_grid">
 #                 <field name="extent" type="NX_UINT"/>
 #                 <field name="cell_dimensions" type="NX_NUMBER"/>
@@ -234,7 +230,7 @@ NXmicrostructure_imm_results(NXobject):
 #                     <attribute name="axes" type="NX_CHAR"/>
 #                     <attribute name="AXISNAME_indices" type="NX_UINT" nameType="partial"/>
 #                     <field name="title" type="NX_CHAR"/>
-#                     <field name="identifier_crystal" type="NX_NUMBER" units="NX_UNITLESS">
+#                     <field name="indices_crystal" type="NX_INT" units="NX_UNITLESS">
 #                         <doc>
 #                             Crystal identifier that was assigned to each material point.
 #                         </doc>
@@ -281,10 +277,10 @@ NXmicrostructure_imm_results(NXobject):
 #                     </field>
 #                 </group>
 #             </group>
-#             <group name="crystal" type="NXobject">
+#             <group name="crystals" type="NXmicrostructure_feature">
 #                 <field name="reference" type="NX_CHAR"/>
 #                 <field name="number_of_crystals" type="NX_UINT"/>
-#                 <field name="identifier_crystal" type="NX_INT">
+#                 <field name="indices_crystal" type="NX_INT">
 #                     <dimensions rank="1">
 #                         <dim index="1" value="c"/>
 #                     </dimensions>

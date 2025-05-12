@@ -36,7 +36,7 @@ NXmicrostructure_gragles_config(NXobject):
         \@version:
         \@url:
           exists: recommended
-    environment(NXobject):
+    environment(NXcollection):
       exists: optional
       doc: |
         Programs and libraries representing the computational environment
@@ -56,7 +56,7 @@ NXmicrostructure_gragles_config(NXobject):
         doc: |
           From which file should the microstructure be instantiated.
         type:
-        identifier:
+        file_name:
         algorithm:
         checksum:
       edge_length(NX_FLOAT):
@@ -71,7 +71,7 @@ NXmicrostructure_gragles_config(NXobject):
           
           Edge_length is the length of the entire domain along its edge not
           the length of the Wigner-Seitz cell about each material point!
-    sampling(NXobject):
+    sampling(NXparameters):
       doc: |
         Configuration when snapshots of the system should be taken.
         
@@ -92,7 +92,7 @@ NXmicrostructure_gragles_config(NXobject):
     
     # <DiscreteSamplingRate>31</DiscreteSamplingRate> no more sampling <!-\- MODF number of bins-\->
     # <NeighbourTracking>1</NeighbourTracking>
-    simulation_control(NXobject):
+    simulation_control(NXparameters):
       doc: |
         Configuration when the simulation should be stopped in a controlled manner.
         Whichever criterion is fulfilled first triggers the controlled stop of
@@ -106,7 +106,7 @@ NXmicrostructure_gragles_config(NXobject):
         unit: NX_UNITLESS
         doc: |
           The simulation stops if more iterations than this criterion have been computed.
-    numerics(NXobject):
+    numerics(NXparameters):
       doc: |
         Configuration of numerical details of the solver.
       
@@ -135,7 +135,7 @@ NXmicrostructure_gragles_config(NXobject):
     # <GrainScheduler>1</GrainScheduler>  # 0, E_ITERATIVE, 1, E_SQUARES
     # <BoxDefaultStoredElasticEnergy>0.0</BoxDefaultStoredElasticEnergy>
     # <!-\- USAGE: set to 0.0 unless mode is DecoupleGrains and make studies of isolated circular grains under capillary and stored elastic energy evolution-\->
-    grid_coarsement(NXobject):
+    grid_coarsement(NXparameters):
       doc: |
         Configuration of the grid coarsement algorithm whereby the representation
         of the system is continuously rediscretized such that on average grains
@@ -166,7 +166,7 @@ NXmicrostructure_gragles_config(NXobject):
     # <ConstantSectorRadius>3</ConstantSectorRadius>
     # <InterpolatingSectorRadius>2</InterpolatingSectorRadius>
     # <DecoupleGrains>0</DecoupleGrains>  # 0, DEFAULT, 1 skips comparison and let grains shring isolated
-    grain_boundary_mobility(NXobject):
+    grain_boundary_mobility(NXparameters):
       doc: |
         Physically-based model of the assumed mobility of the grain boundaries.
         
@@ -204,7 +204,7 @@ NXmicrostructure_gragles_config(NXobject):
         unit: NX_UNITLESS
         doc: |
           Mobility scaling factor :math:`c_3`. Typically 9.
-    grain_boundary_energy(NXobject):
+    grain_boundary_energy(NXparameters):
       doc: |
         Physically-based model of the assumed grain boundary surface energy.
         
@@ -233,14 +233,14 @@ NXmicrostructure_gragles_config(NXobject):
     # <EnergyModelScalingB>0.01</EnergyModelScalingB>
     # <!-\- INFORMATION: Scaling A is the disorientation angle cutoff in degrees, B the value assigned when nan-s occurred
     # these Scaling parameter are not read as well but utilized in the ReadShockley energy model-\->
-    curvature_driving_force(NXobject):
+    curvature_driving_force(NXparameters):
       doc: |
         A continuum-scale curvature of an interface causes the interface to
         migrate towards the center of the curvature radius.
       is_active(NX_BOOLEAN):
         doc: |
           If true the curvature_driving_force is considered, otherwise it is not.
-    stored_elastic_energy(NXobject):
+    stored_elastic_energy(NXparameters):
       doc: |
         A continuum-scale difference of the stored elastic energy in dislocation
         configurations across a grain boundary can exert a driving force on the
@@ -254,7 +254,7 @@ NXmicrostructure_gragles_config(NXobject):
         doc: |
           Prefactor :math:`0.5Gb^2` that factorizes the average
           stored elastic energy per length dislocation line.
-    magnetic_field(NXobject):
+    magnetic_field(NXparameters):
       doc: |
         In case of an applied magnetic field, a difference of the magnetic
         susceptibility can exert a driving force on the grain boundary such that
@@ -265,7 +265,7 @@ NXmicrostructure_gragles_config(NXobject):
     
     # <MagneticParams> MagneticField.xml </MagneticParams>
     # https://github.com/GraGLeS/GraGLeS2D/blob/master/params/MagneticField.xml
-    triple_line_mobility(NXobject):
+    triple_line_mobility(NXparameters):
       doc: |
         A triple line mediates the atomic arrangement differences between three
         interface patches. Therefore, the triple line is a defect that may not
@@ -284,7 +284,7 @@ NXmicrostructure_gragles_config(NXobject):
   # <!-\- USAGE: If UseTexture == 1, Orientations are sampled by randomly misorienting from a fixed ori with a maximum angle. -\->
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 98d39a09a15b012a1cde431e9a83bfbf35dea5f844294b32b6cdd87826cbb53c
+# 4019d30d296ef8868c338bcbdbfd01d5c68a2e3e11d2bc66294c36161c18606c
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -350,7 +350,7 @@ NXmicrostructure_gragles_config(NXobject):
 #                 <attribute name="url" recommended="true"/>
 #             </field>
 #         </group>
-#         <group name="environment" type="NXobject" optional="true">
+#         <group name="environment" type="NXcollection" optional="true">
 #             <doc>
 #                 Programs and libraries representing the computational environment
 #             </doc>
@@ -372,7 +372,7 @@ NXmicrostructure_gragles_config(NXobject):
 #                     From which file should the microstructure be instantiated.
 #                 </doc>
 #                 <field name="type"/>
-#                 <field name="identifier"/>
+#                 <field name="file_name"/>
 #                 <field name="algorithm"/>
 #                 <field name="checksum"/>
 #             </group>
@@ -390,7 +390,7 @@ NXmicrostructure_gragles_config(NXobject):
 #                 </doc>
 #             </field>
 #         </group>
-#         <group name="sampling" type="NXobject">
+#         <group name="sampling" type="NXparameters">
 #             <doc>
 #                 Configuration when snapshots of the system should be taken.
 #                 
@@ -414,7 +414,7 @@ NXmicrostructure_gragles_config(NXobject):
 #         </group>
 #         <!--<DiscreteSamplingRate>31</DiscreteSamplingRate> no more sampling <!-\- MODF number of bins-\->
 # <NeighbourTracking>1</NeighbourTracking>-->
-#         <group name="simulation_control" type="NXobject">
+#         <group name="simulation_control" type="NXparameters">
 #             <doc>
 #                 Configuration when the simulation should be stopped in a controlled manner.
 #                 Whichever criterion is fulfilled first triggers the controlled stop of
@@ -432,7 +432,7 @@ NXmicrostructure_gragles_config(NXobject):
 #                 </doc>
 #             </field>
 #         </group>
-#         <group name="numerics" type="NXobject">
+#         <group name="numerics" type="NXparameters">
 #             <doc>
 #                 Configuration of numerical details of the solver.
 #             </doc>
@@ -468,7 +468,7 @@ NXmicrostructure_gragles_config(NXobject):
 # <GrainScheduler>1</GrainScheduler>  # 0, E_ITERATIVE, 1, E_SQUARES
 # <BoxDefaultStoredElasticEnergy>0.0</BoxDefaultStoredElasticEnergy>
 # <!-\- USAGE: set to 0.0 unless mode is DecoupleGrains and make studies of isolated circular grains under capillary and stored elastic energy evolution-\->-->
-#         <group name="grid_coarsement" type="NXobject">
+#         <group name="grid_coarsement" type="NXparameters">
 #             <doc>
 #                 Configuration of the grid coarsement algorithm whereby the representation
 #                 of the system is continuously rediscretized such that on average grains
@@ -504,7 +504,7 @@ NXmicrostructure_gragles_config(NXobject):
 # <ConstantSectorRadius>3</ConstantSectorRadius>
 # <InterpolatingSectorRadius>2</InterpolatingSectorRadius>
 # <DecoupleGrains>0</DecoupleGrains>  # 0, DEFAULT, 1 skips comparison and let grains shring isolated-->
-#         <group name="grain_boundary_mobility" type="NXobject">
+#         <group name="grain_boundary_mobility" type="NXparameters">
 #             <doc>
 #                 Physically-based model of the assumed mobility of the grain boundaries.
 #                 
@@ -549,7 +549,7 @@ NXmicrostructure_gragles_config(NXobject):
 #                 </doc>
 #             </field>
 #         </group>
-#         <group name="grain_boundary_energy" type="NXobject">
+#         <group name="grain_boundary_energy" type="NXparameters">
 #             <doc>
 #                 Physically-based model of the assumed grain boundary surface energy.
 #                 
@@ -589,7 +589,7 @@ NXmicrostructure_gragles_config(NXobject):
 # <EnergyModelScalingB>0.01</EnergyModelScalingB>
 # <!-\- INFORMATION: Scaling A is the disorientation angle cutoff in degrees, B the value assigned when nan-s occurred
 # these Scaling parameter are not read as well but utilized in the ReadShockley energy model-\->-->
-#         <group name="curvature_driving_force" type="NXobject">
+#         <group name="curvature_driving_force" type="NXparameters">
 #             <doc>
 #                 A continuum-scale curvature of an interface causes the interface to
 #                 migrate towards the center of the curvature radius.
@@ -600,7 +600,7 @@ NXmicrostructure_gragles_config(NXobject):
 #                 </doc>
 #             </field>
 #         </group>
-#         <group name="stored_elastic_energy" type="NXobject">
+#         <group name="stored_elastic_energy" type="NXparameters">
 #             <doc>
 #                 A continuum-scale difference of the stored elastic energy in dislocation
 #                 configurations across a grain boundary can exert a driving force on the
@@ -619,7 +619,7 @@ NXmicrostructure_gragles_config(NXobject):
 #                 </doc>
 #             </field>
 #         </group>
-#         <group name="magnetic_field" type="NXobject">
+#         <group name="magnetic_field" type="NXparameters">
 #             <doc>
 #                 In case of an applied magnetic field, a difference of the magnetic
 #                 susceptibility can exert a driving force on the grain boundary such that
@@ -633,7 +633,7 @@ NXmicrostructure_gragles_config(NXobject):
 #         </group>
 #         <!--<MagneticParams> MagneticField.xml </MagneticParams>
 # https://github.com/GraGLeS/GraGLeS2D/blob/master/params/MagneticField.xml-->
-#         <group name="triple_line_mobility" type="NXobject">
+#         <group name="triple_line_mobility" type="NXparameters">
 #             <doc>
 #                 A triple line mediates the atomic arrangement differences between three
 #                 interface patches. Therefore, the triple line is a defect that may not
