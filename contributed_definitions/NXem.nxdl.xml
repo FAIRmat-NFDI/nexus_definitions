@@ -793,7 +793,7 @@
                         <field name="serial_number" type="NX_CHAR" recommended="true"/>
                     </group>
                 </group>
-                <group name="stageID" type="NXmanipulator" minOccurs="0" maxOccurs="unbounded">
+                <group name="stageID" type="NXmanipulator" nameType="partial" minOccurs="0" maxOccurs="unbounded">
                     <field name="design" type="NX_CHAR" recommended="true"/>
                     <!--add enumeration values from old NXstage_lab-->
                     <group name="fabrication" type="NXfabrication" recommended="true">
@@ -802,7 +802,7 @@
                         <field name="serial_number" type="NX_CHAR" recommended="true"/>
                     </group>
                 </group>
-                <group name="nanoprobeID" type="NXmanipulator" optional="true">
+                <group name="nanoprobeID" type="NXmanipulator" nameType="partial" optional="true">
                     <group name="fabrication" type="NXfabrication" recommended="true">
                         <field name="vendor" type="NX_CHAR"/>
                         <field name="model" type="NX_CHAR"/>
@@ -1178,7 +1178,7 @@
                             <field name="dispersion" type="NX_NUMBER" recommended="true"/>
                             <field name="voltage" type="NX_NUMBER" recommended="true"/>
                         </group>
-                        <group name="corrector_csID" type="NXcorrector_cs" minOccurs="0" maxOccurs="unbounded">
+                        <group name="corrector_csID" type="NXcorrector_cs" nameType="partial" minOccurs="0" maxOccurs="unbounded">
                             <field name="applied" type="NX_BOOLEAN" recommended="true"/>
                             <group name="tableauID" type="NXprocess" nameType="partial" minOccurs="1" maxOccurs="unbounded">
                                 <!--model(NX_CHAR):-->
@@ -1357,7 +1357,7 @@ basically optional use of NXaberration therein at least some value required-->
                     </group>
                     <group name="sensorID" type="NXsensor" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
                     <group name="actuatorID" type="NXactuator" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
-                    <group name="stageID" type="NXmanipulator" minOccurs="0" maxOccurs="unbounded">
+                    <group name="stageID" type="NXmanipulator" nameType="partial" minOccurs="0" maxOccurs="unbounded">
                         <field name="design" type="NX_CHAR" recommended="true"/>
                         <field name="tilt1" type="NX_NUMBER"/>
                         <field name="tilt2" type="NX_NUMBER"/>
@@ -1378,7 +1378,7 @@ basically optional use of NXaberration therein at least some value required-->
                             <field name="heater_power" type="NX_NUMBER" units="NX_POWER"/>
                         </group>
                     </group>
-                    <group name="nanoprobeID" type="NXmanipulator" minOccurs="0" maxOccurs="unbounded"/>
+                    <group name="nanoprobeID" type="NXmanipulator" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
                     <group name="optics" type="NXoptical_system_em" recommended="true"/>
                 </group>
             </group>
@@ -1441,7 +1441,7 @@ is required to provide such information in this way!-->
                 </group>
             </group>
             <!--(NXmicrostructure):
-  exists: optional-->
+exists: optional-->
             <group name="ebsd" type="NXem_ebsd" optional="true">
                 <group name="gnomonic_reference_frame" type="NXcoordinate_system" recommended="true">
                     <field name="alias" type="NX_CHAR" optional="true"/>
@@ -1506,49 +1506,49 @@ not wish to duplicate all payload data-->
                     </group>
                     <!--foreseen place for phase-specific texture and microstructure representations and statistics
 ipfID(NXmicrostructure_ipf):
-  nameType: partial
-  exists: ['min', '1', 'max', 'unbounded']
-  color_model(NX_CHAR):
-  projection_direction(NX_NUMBER):
-  map(NXdata):
-    \@signal(NX_CHAR):
-    \@axes(NX_CHAR):
-    \@AXISNAME_indices(NX_UINT):
-      nameType: partial
-    title(NX_CHAR):
-      exists: recommended
-    data(NX_NUMBER):
-      \@long_name(NX_CHAR):
-    axis_x(NX_NUMBER):
-      \@long_name(NX_CHAR):
-    axis_y(NX_NUMBER):
-      exists: optional
-      \@long_name(NX_CHAR):
-    axis_z(NX_NUMBER):
-      exists: optional
-      \@long_name(NX_CHAR):
-  legend(NXdata):
-    \@signal(NX_CHAR):
-    \@axes(NX_CHAR):
-    \@AXISNAME_indices(NX_UINT):
-      nameType: partial
-    title(NX_CHAR):
-      exists: recommended
-    data(NX_NUMBER):
-      \@long_name(NX_CHAR):
-    axis_x(NX_NUMBER):
-      \@long_name(NX_CHAR):
-    axis_y(NX_NUMBER):
-      \@long_name(NX_CHAR):
+nameType: partial
+exists: ['min', '1', 'max', 'unbounded']
+color_model(NX_CHAR):
+projection_direction(NX_NUMBER):
+map(NXdata):
+\@signal(NX_CHAR):
+\@axes(NX_CHAR):
+\@AXISNAME_indices(NX_UINT):
+nameType: partial
+title(NX_CHAR):
+exists: recommended
+data(NX_NUMBER):
+\@long_name(NX_CHAR):
+axis_x(NX_NUMBER):
+\@long_name(NX_CHAR):
+axis_y(NX_NUMBER):
+exists: optional
+\@long_name(NX_CHAR):
+axis_z(NX_NUMBER):
+exists: optional
+\@long_name(NX_CHAR):
+legend(NXdata):
+\@signal(NX_CHAR):
+\@axes(NX_CHAR):
+\@AXISNAME_indices(NX_UINT):
+nameType: partial
+title(NX_CHAR):
+exists: recommended
+data(NX_NUMBER):
+\@long_name(NX_CHAR):
+axis_x(NX_NUMBER):
+\@long_name(NX_CHAR):
+axis_y(NX_NUMBER):
+\@long_name(NX_CHAR):
 odfID(NXmicrostructure_odf):
-  nameType: partial
-  exists: optional
+nameType: partial
+exists: optional
 pfID(NXmicrostructure_pf):
-  nameType: partial
-  exists: optional
+nameType: partial
+exists: optional
 microstructureID(NXmicrostructure):
-  nameType: partial
-  exists: optional-->
+nameType: partial
+exists: optional-->
                     <group name="roi" type="NXdata" recommended="true">
                         <attribute name="signal" type="NX_CHAR"/>
                         <attribute name="axes" type="NX_CHAR"/>
