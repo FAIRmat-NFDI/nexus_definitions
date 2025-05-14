@@ -1,6 +1,6 @@
-.. index:: !EPICS; examples
+.. index:: !EPICS; instrument examples
 
-.. _EPICS_Area_Detector.examples.HDF5:
+.. _Example-EPICS:
 
 EPICS Area Detector Examples
 ############################
@@ -198,6 +198,28 @@ were arrays rather than single values.  That was due to an error in the original
 ``attributes.xml`` file, which had ``type="PARAM"`` instead of ``type="EPICS_PV"``.
 This has been fixed in the ``attributes.xml`` file presented here.
 
+
+.. _EPICS_Area_Detector.examples.validate-xml:
+
+Validate the XML files
+**********************
+
+To validate an XML file, you'll need the associated ``.xsd`` (XML Schema) file,
+then use this command::
+
+   xmllint --noout --schema path/to/local/schema/file.xsd  file_to_validate.xml
+
+These are the XML Schema files to use:
+
+===================  ===================================
+to validate ...      ... use this XML Schema file
+===================  ===================================
+``attributes.xml``   `NDAttributes.xsd <https://github.com/areaDetector/ADCore/blob/master/XML_schema/NDAttributes.xsd>`_
+``layout.xml``       `hdf5_xml_layout_schema.xsd <https://github.com/areaDetector/ADCore/blob/master/XML_schema/hdf5_xml_layout_schema.xsd>`_
+``nxdl.xsd``         `XMLSchema.xsd <https://www.w3.org/2012/04/XMLSchema.xsd>`_
+``nxdlTypes.xsd``    `XMLSchema.xsd <https://www.w3.org/2012/04/XMLSchema.xsd>`_
+any NXDL file        ``nxdl.xsd``
+===================  ===================================
 
 .. _EPICS_Area_Detector.examples.python:
 
