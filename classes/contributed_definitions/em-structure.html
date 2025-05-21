@@ -71,7 +71,7 @@ i.e. interdisciplinary manner.</p>
 <p>A microscope session ends with the scientist removing the specimen from the instrument or parking it so that the next user can start a session. Occasionally, service technicians perform calibrations and maintenance which also can be described as a session on the microscope. We have provided base classes to describe these steps and events and an application definition for electron microscopy.</p>
 <blockquote>
 <div><dl class="simple">
-<dt><a class="reference internal" href="NXem.html#nxem"><span class="std std-ref">NXem</span></a>:</dt><dd><p>A general application definition which explores the possibilities of electron microscopes.</p>
+<dt><a class="reference internal" href="../applications/NXem.html#nxem"><span class="std std-ref">NXem</span></a>:</dt><dd><p>A general application definition which explores the possibilities of electron microscopes.</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -81,24 +81,30 @@ i.e. interdisciplinary manner.</p>
 <p>The following base classes are proposed to support modularizing the storage of pieces of information with a focus on EM:</p>
 <blockquote>
 <div><dl class="simple">
-<dt><a class="reference internal" href="NXaberration.html#nxaberration"><span class="std std-ref">NXaberration</span></a> and :ref:NXcorrector_cs`:</dt><dd><p>Base class to describe procedures and values for the calibration of (spherical) aberrations and the devices for achieving this technically.</p>
+<dt><a class="reference internal" href="../base_classes/NXaberration.html#nxaberration"><span class="std std-ref">NXaberration</span></a> and :ref:NXcorrector_cs`:</dt><dd><p>Base class to describe procedures and values for the calibration of (spherical) aberrations and the devices for achieving this technically.</p>
 </dd>
 <dt><a class="reference internal" href="../base_classes/NXcoordinate_system.html#nxcoordinate-system"><span class="std std-ref">NXcoordinate_system</span></a>:</dt><dd><p>A base class to describe different coordinate systems used and/or to be harmonized
 or transformed into one another when interpreting the dataset.</p>
 </dd>
-<dt><a class="reference internal" href="NXcorrector_cs.html#nxcorrector-cs"><span class="std std-ref">NXcorrector_cs</span></a>:</dt><dd><p>A base class to describe details about corrective lens or compound lens devices
+<dt><a class="reference internal" href="../base_classes/NXcorrector_cs.html#nxcorrector-cs"><span class="std std-ref">NXcorrector_cs</span></a>:</dt><dd><p>A base class to describe details about corrective lens or compound lens devices
 which reduce the aberration of an electron beam.</p>
 </dd>
-<dt><a class="reference internal" href="NXebeam_column.html#nxebeam-column"><span class="std std-ref">NXebeam_column</span></a>:</dt><dd><p>A base class serving the possibility to group the components relevant for generating
+<dt><a class="reference internal" href="../base_classes/NXebeam_column.html#nxebeam-column"><span class="std std-ref">NXebeam_column</span></a>:</dt><dd><p>A base class serving the possibility to group the components relevant for generating
 and shaping the electron beam.</p>
 </dd>
-<dt><a class="reference internal" href="NXevent_data_em.html#nxevent-data-em"><span class="std std-ref">NXevent_data_em</span></a>:</dt><dd><p>A base class representing a container to hold time-stamped and microscope-state-
+<dt><a class="reference internal" href="../base_classes/NXevent_data_em.html#nxevent-data-em"><span class="std std-ref">NXevent_data_em</span></a>:</dt><dd><p>A base class representing a container to hold time-stamped and microscope-state-
 annotated data during a session at an electron microscope.</p>
 </dd>
-<dt><a class="reference internal" href="NXibeam_column.html#nxibeam-column"><span class="std std-ref">NXibeam_column</span></a>:</dt><dd><p>A base class serving the possibility to group the components relevant for generating
+<dt><a class="reference internal" href="../base_classes/NXibeam_column.html#nxibeam-column"><span class="std std-ref">NXibeam_column</span></a>:</dt><dd><p>A base class serving the possibility to group the components relevant for generating
 and shaping an ion beam of an instrument to offer focused-ion beam (milling) capabilities.</p>
 </dd>
 <dt><a class="reference internal" href="../base_classes/NXimage.html#nximage"><span class="std std-ref">NXimage</span></a>:</dt><dd><p>Base class for storing acquisition details for individual images or stacks of images. Specialized versions can be defined and use controlled vocabulary terms for group name prefixes like <strong>adf</strong> annular dark field, <strong>bf</strong> bright field, <strong>bse</strong> backscattered electron, <strong>chamber</strong> camera to monitor the stage and chamber, <strong>df</strong> darkfield, <strong>diffrac</strong> diffraction, <strong>ecci</strong> electron channeling contrast imaging, <strong>kikuchi</strong> electron backscatter diffraction, <strong>ronchigram</strong> - convergent beam diffraction pattern, or <strong>se</strong> secondary electron.</p>
+</dd>
+<dt><a class="reference internal" href="../base_classes/NXinstrument_em.html#nxinstrument-em"><span class="std std-ref">NXinstrument_em</span></a>:</dt><dd><p>A base class which defines all modular parts that make up an instrument (real or simulated) for studying
+electron matter interaction. This base class is used in NXem in two places: One that is placed inside an ENTRY.measurement.instrument
+group. This group holds all those (meta)data which do not change during a session, i.e. instrument name, typically identifier of
+hardware components or version of control software. Another one that is placed inside an ENTRY.measurements.events group.
+This group holds all those (meta)data data change when collecting data during a session.</p>
 </dd>
 <dt><a class="reference internal" href="../base_classes/NXatom.html#nxatom"><span class="std std-ref">NXatom</span></a> and <a class="reference internal" href="../base_classes/NXion.html#nxion"><span class="std std-ref">NXion</span></a>:</dt><dd><p>A base class to describe charged molecular ions with an adjustable number of atoms/isotopes building each ion. Right now the maximum number of atoms supported building a molecular ion is 32. Suggestions made in reference <a class="reference external" href="https://doi.org/10.1017/S1431927621012241">DOI: 10.1017/S1431927621012241</a> are used to map isotope to hash values with which all possible isotopes can be described.</p>
 </dd>
@@ -107,7 +113,7 @@ and shaping an ion beam of an instrument to offer focused-ion beam (milling) cap
 <dt><a class="reference internal" href="../base_classes/NXfabrication.html#nxfabrication"><span class="std std-ref">NXfabrication</span></a>:</dt><dd><p>A base class to bundle manufacturer/technology-partner-specific details about
 a component or device of an instrument.</p>
 </dd>
-<dt><a class="reference internal" href="NXoptical_system_em.html#nxoptical-system-em"><span class="std std-ref">NXoptical_system_em</span></a>:</dt><dd><p>A base class to store for now qualitative and quantitative values of frequent interest
+<dt><a class="reference internal" href="../base_classes/NXoptical_system_em.html#nxoptical-system-em"><span class="std std-ref">NXoptical_system_em</span></a>:</dt><dd><p>A base class to store for now qualitative and quantitative values of frequent interest
 which are affected by the interplay of the components and state of an electron microscope.
 Examples are the semiconvergence angle or the depth of field and depth of focus, the magnification, or the camera length.</p>
 </dd>
@@ -115,9 +121,22 @@ Examples are the semiconvergence angle or the depth of field and depth of focus,
 </dd>
 <dt><a class="reference internal" href="../base_classes/NXpump.html#nxpump"><span class="std std-ref">NXpump</span></a>:</dt><dd><p>A base class to describe details about a pump in an instrument.</p>
 </dd>
-<dt><a class="reference internal" href="NXscanbox_em.html#nxscanbox-em"><span class="std std-ref">NXscanbox_em</span></a>:</dt><dd><p>A base class to represent the component of an electron microscope which realizes a controlled deflection (and eventually shift, blanking, and/or descanning) of the electron beam to illuminate the specimen in a controlled manner. This can be used to document the scan pattern.</p>
+<dt><a class="reference internal" href="../base_classes/NXscanbox_em.html#nxscanbox-em"><span class="std std-ref">NXscanbox_em</span></a>:</dt><dd><p>A base class to represent the component of an electron microscope which realizes a controlled deflection (and eventually shift, blanking, and/or descanning) of the electron beam to illuminate the specimen in a controlled manner. This can be used to document the scan pattern.</p>
 </dd>
 <dt><a class="reference internal" href="../base_classes/NXspectrum.html#nxspectrum"><span class="std std-ref">NXspectrum</span></a>:</dt><dd><p>Base class and specializations comparable to NXimage but for storing spectra. Specialized base classes should use controlled vocabulary items as prefixes such as <strong>eels</strong> electron energy loss spectroscopy, <strong>xray</strong> X-ray spectroscopy (EDS/STEM, EDX, SEM/EDX, SEM/EDS), <strong>auger</strong> Auger spectroscopy, or <strong>cathodolum</strong> for cathodoluminescence spectra.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="method-specific-concepts-and-their-usage-in-application-definitions">
+<h2>Method-specific concepts and their usage in application definitions<a class="headerlink" href="#method-specific-concepts-and-their-usage-in-application-definitions" title="Link to this heading">¶</a></h2>
+<p>It became clear during the design of the electron-microscopy-specific additions to NeXus that there are sets of pieces of information (data and metadata) which are relevant for a given experiment but have usually only few connections to the detailed description of the workflow of processing these data into knowledge, motivating the granularization of these pieces of information in their own application definition. In fact, one limitation of application definitions in NeXus is that they define a set of constraints on their graph of controlled concepts and terms. If we take for example diffraction experiments with an electron microscope it is usually the case that (diffraction) patterns are collected in the session at the microscope but all scientifically relevant conclusions are drawn later, i.e. through post-processing these data. These numerical and algorithmic steps define computational workflows where data from the application definitions such as NXem are used as input but many additional concepts and constraints may apply without any need for changing constraints on fields or groups of NXem. If we were to modify NXem for these cases, NXem would likely combinatorially diverge as every different combination of required constraints would demand having their own but almost similar application definition. For this reason, we propose to define the following base classes:</p>
+<p>More consolidation through the use of NXsubentry classes should be considered in the future.</p>
+<blockquote>
+<div><dl class="simple">
+<dt><a class="reference internal" href="../base_classes/NXem_ebsd.html#nxem-ebsd"><span class="std std-ref">NXem_ebsd</span></a>, <a class="reference internal" href="../base_classes/NXem_eds.html#nxem-eds"><span class="std std-ref">NXem_eds</span></a>, <a class="reference internal" href="../base_classes/NXem_eels.html#nxem-eels"><span class="std std-ref">NXem_eels</span></a>, <a class="reference internal" href="../base_classes/NXem_img.html#nxem-img"><span class="std std-ref">NXem_img</span></a>:</dt><dd><p>Base class providing concepts for specific data acquistion modes and associated analysis used in electron microscopy
+such as collecting and indexing Kikuchi pattern into orientation maps for the two-dimensional, three-, X-ray spectrscopy,
+different imaging modes, or electron energy loss spectroscopy (EELS).</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -138,6 +157,7 @@ Examples are the semiconvergence angle or the depth of field and depth of focus,
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#application-definitions">Application Definitions</a></li>
 <li><a class="reference internal" href="#base-classes">Base Classes</a></li>
+<li><a class="reference internal" href="#method-specific-concepts-and-their-usage-in-application-definitions">Method-specific concepts and their usage in application definitions</a></li>
 </ul>
 </li>
 </ul>

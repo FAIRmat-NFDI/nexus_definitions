@@ -14,6 +14,8 @@ NXbeam
 ..
     Contributors List
 
+    .. |contrib_name| replace:: Peter Chang|PeterC-DLS|https://avatars.githubusercontent.com/u/1381719?v=4|2025-05-16
+
     .. |contrib_name| replace:: Lukas Pielsticker|lukaspie|https://avatars.githubusercontent.com/u/50139597?v=4|2025-02-17
 
     .. |contrib_name| replace:: Peter Chang|PeterC-DLS|https://avatars.githubusercontent.com/u/1381719?v=4|2024-09-28
@@ -21,8 +23,6 @@ NXbeam
     .. |contrib_name| replace:: Pete R Jemian|prjemian|https://avatars.githubusercontent.com/u/2279984?v=4|2024-02-18
 
     .. |contrib_name| replace:: Aaron Brewster|phyy-nx|https://avatars.githubusercontent.com/u/13471434?v=4|2022-06-17
-
-    .. |contrib_name| replace:: Peter Chang|PeterC-DLS|https://avatars.githubusercontent.com/u/1381719?v=4|2022-06-17
 
 **Status**:
 
@@ -467,27 +467,19 @@ NXbeam
         Direction (and location) for the beam. The location of the beam can be given by
         any point which it passes through as its offset attribute.
 
-    .. _/NXbeam/TRANSFORMATIONS/DIRECTION-field:
+    .. _/NXbeam/TRANSFORMATIONS/BEAMdirection-field:
 
-    .. index:: DIRECTION (field)
+    .. index:: BEAMdirection (field)
 
-    :bolditalic:`DIRECTION`: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_TRANSFORMATION <NX_TRANSFORMATION>`} :ref:`⤆ </NXtransformations/AXISNAME-field>`
+    :bolditalic:`BEAM`\ **direction**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} :ref:`⤆ </NXtransformations/AXISNAME-field>`
 
       .. collapse:: Direction of beam vector, its value is ignored. If missing, then the beam di ...
 
           Direction of beam vector, its value is ignored. If missing, then the beam direction is defined as [0,0,1]
-          and passes through the origin
+          and passes through the origin. Note, this field should be referenced by the parent group's ``depends_on`` field; also,
+          as this field is a direction, its ``transformation_type`` attribute should be omitted.
 
-      .. _/NXbeam/TRANSFORMATIONS/DIRECTION@transformation_type-attribute:
-
-      .. index:: transformation_type (field attribute)
-
-      **@transformation_type**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXtransformations/AXISNAME@transformation_type-attribute>`
-
-
-        Obligatory value: ``translation``
-
-      .. _/NXbeam/TRANSFORMATIONS/DIRECTION@vector-attribute:
+      .. _/NXbeam/TRANSFORMATIONS/BEAMdirection@vector-attribute:
 
       .. index:: vector (field attribute)
 
@@ -495,7 +487,7 @@ NXbeam
 
         Three values that define the direction of beam vector
 
-      .. _/NXbeam/TRANSFORMATIONS/DIRECTION@offset-attribute:
+      .. _/NXbeam/TRANSFORMATIONS/BEAMdirection@offset-attribute:
 
       .. index:: offset (field attribute)
 
@@ -503,7 +495,7 @@ NXbeam
 
         Three values that define the location of a point through which the beam passes
 
-      .. _/NXbeam/TRANSFORMATIONS/DIRECTION@depends_on-attribute:
+      .. _/NXbeam/TRANSFORMATIONS/BEAMdirection@depends_on-attribute:
 
       .. index:: depends_on (field attribute)
 
@@ -518,22 +510,14 @@ NXbeam
 
     .. index:: reference_plane (field)
 
-    **reference_plane**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_TRANSFORMATION <NX_TRANSFORMATION>`} :ref:`⤆ </NXtransformations/AXISNAME-field>`
+    **reference_plane**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} :ref:`⤆ </NXtransformations/AXISNAME-field>`
 
       .. collapse:: Direction of normal to reference plane used to measure azimuth relative to t ...
 
           Direction of normal to reference plane used to measure azimuth relative to the beam, its value is ignored.
           This also defines the parallel and perpendicular components of the beam's polarization.
-          If missing, then the reference plane normal is defined as [0,1,0] and passes through the origin
-
-      .. _/NXbeam/TRANSFORMATIONS/reference_plane@transformation_type-attribute:
-
-      .. index:: transformation_type (field attribute)
-
-      **@transformation_type**: (optional) :ref:`NX_CHAR <NX_CHAR>` :ref:`⤆ </NXtransformations/AXISNAME@transformation_type-attribute>`
-
-
-        Obligatory value: ``translation``
+          If missing, then the reference plane normal is defined as [0,1,0].
+          Note, as this field is a direction, its ``transformation_type`` attribute should be omitted.
 
       .. _/NXbeam/TRANSFORMATIONS/reference_plane@vector-attribute:
 
@@ -542,14 +526,6 @@ NXbeam
       **@vector**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXtransformations/AXISNAME@vector-attribute>`
 
         Three values that define the direction of reference plane normal
-
-      .. _/NXbeam/TRANSFORMATIONS/reference_plane@offset-attribute:
-
-      .. index:: offset (field attribute)
-
-      **@offset**: (optional) :ref:`NX_NUMBER <NX_NUMBER>` :ref:`⤆ </NXtransformations/AXISNAME@offset-attribute>`
-
-        Not required as beam direction offset locates the plane
 
       .. _/NXbeam/TRANSFORMATIONS/reference_plane@depends_on-attribute:
 
@@ -603,15 +579,12 @@ attributes, and links defined in this class.
 * :ref:`/NXbeam/pulse_duration-field </NXbeam/pulse_duration-field>`
 * :ref:`/NXbeam/pulse_energy-field </NXbeam/pulse_energy-field>`
 * :ref:`/NXbeam/TRANSFORMATIONS-group </NXbeam/TRANSFORMATIONS-group>`
-* :ref:`/NXbeam/TRANSFORMATIONS/DIRECTION-field </NXbeam/TRANSFORMATIONS/DIRECTION-field>`
-* :ref:`/NXbeam/TRANSFORMATIONS/DIRECTION@depends_on-attribute </NXbeam/TRANSFORMATIONS/DIRECTION@depends_on-attribute>`
-* :ref:`/NXbeam/TRANSFORMATIONS/DIRECTION@offset-attribute </NXbeam/TRANSFORMATIONS/DIRECTION@offset-attribute>`
-* :ref:`/NXbeam/TRANSFORMATIONS/DIRECTION@transformation_type-attribute </NXbeam/TRANSFORMATIONS/DIRECTION@transformation_type-attribute>`
-* :ref:`/NXbeam/TRANSFORMATIONS/DIRECTION@vector-attribute </NXbeam/TRANSFORMATIONS/DIRECTION@vector-attribute>`
+* :ref:`/NXbeam/TRANSFORMATIONS/BEAMdirection-field </NXbeam/TRANSFORMATIONS/BEAMdirection-field>`
+* :ref:`/NXbeam/TRANSFORMATIONS/BEAMdirection@depends_on-attribute </NXbeam/TRANSFORMATIONS/BEAMdirection@depends_on-attribute>`
+* :ref:`/NXbeam/TRANSFORMATIONS/BEAMdirection@offset-attribute </NXbeam/TRANSFORMATIONS/BEAMdirection@offset-attribute>`
+* :ref:`/NXbeam/TRANSFORMATIONS/BEAMdirection@vector-attribute </NXbeam/TRANSFORMATIONS/BEAMdirection@vector-attribute>`
 * :ref:`/NXbeam/TRANSFORMATIONS/reference_plane-field </NXbeam/TRANSFORMATIONS/reference_plane-field>`
 * :ref:`/NXbeam/TRANSFORMATIONS/reference_plane@depends_on-attribute </NXbeam/TRANSFORMATIONS/reference_plane@depends_on-attribute>`
-* :ref:`/NXbeam/TRANSFORMATIONS/reference_plane@offset-attribute </NXbeam/TRANSFORMATIONS/reference_plane@offset-attribute>`
-* :ref:`/NXbeam/TRANSFORMATIONS/reference_plane@transformation_type-attribute </NXbeam/TRANSFORMATIONS/reference_plane@transformation_type-attribute>`
 * :ref:`/NXbeam/TRANSFORMATIONS/reference_plane@vector-attribute </NXbeam/TRANSFORMATIONS/reference_plane@vector-attribute>`
 
 **NXDL Source**:
