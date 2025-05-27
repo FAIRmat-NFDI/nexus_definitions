@@ -132,18 +132,18 @@ NXcs_profiling
 
   **number_of_processes**: (optional) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    .. collapse:: Qualifier which specifies with how many nominal processes the app was ...
+    .. collapse:: The number of nominal processes that the app invoked at runtime. ...
 
-        Qualifier which specifies with how many nominal processes the app was
-        invoked. The main idea behind this field e.g. for apps which use e.g. MPI
+        The number of nominal processes that the app invoked at runtime.
+
+        The main idea behind this field e.g. for apps which use e.g. MPI
         (Message Passing Interface) parallelization is to communicate
         how many processes were used.
 
         For sequentially running apps number_of_processes and number_of_threads
         is 1. If the app uses exclusively GPU parallelization number_of_gpus
-        can be larger than 1. If no GPU is used number_of_gpus is 0 even though
-        the hardware may have GPUs installed, thus indicating these were not
-        used though.
+        can be larger than 1. If no GPU is used, number_of_gpus is 0, even though
+        the hardware may have GPUs installed.
 
   .. _/NXcs_profiling/number_of_threads-field:
 
@@ -151,9 +151,9 @@ NXcs_profiling
 
   **number_of_threads**: (optional) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    .. collapse:: Qualifier how many nominal threads were used at runtime. ...
+    .. collapse:: The number of nominal threads that the app invoked at runtime. ...
 
-        Qualifier how many nominal threads were used at runtime.
+        The number of nominal threads that the app invoked at runtime.
         Specifically here the maximum number of threads used for the
         high-level threading library used (e.g. OMP_NUM_THREADS), posix.
 
@@ -163,7 +163,7 @@ NXcs_profiling
 
   **number_of_gpus**: (optional) :ref:`NX_UINT <NX_UINT>` {units=\ :ref:`NX_UNITLESS <NX_UNITLESS>`} 
 
-    Qualifier with how many nominal GPUs the app was invoked at runtime.
+    The number of nominal GPUs that the app invoked at runtime.
 
   .. _/NXcs_profiling/CS_COMPUTER-group:
 
@@ -174,15 +174,16 @@ NXcs_profiling
         A collection with one or more computing nodes each with own resources.
         This can be as simple as a laptop or the nodes of a cluster computer.
 
-  .. _/NXcs_profiling/CS_PROFILING_EVENT-group:
+  .. _/NXcs_profiling/eventID-group:
 
-  :bolditalic:`CS_PROFILING_EVENT`: (optional) :ref:`NXcs_profiling_event` 
+  **event**\ :bolditalic:`ID`: (optional) :ref:`NXcs_profiling_event` 
 
     .. collapse:: A collection of individual profiling event data which detail e.g. how ...
 
         A collection of individual profiling event data which detail e.g. how
         much time the app took for certain computational steps and/or how much
         memory was consumed during these operations.
+        ID is an increasing unsigned integer starting at 1.
 
 
 Hypertext Anchors
@@ -194,9 +195,9 @@ attributes, and links defined in this class.
 
 * :ref:`/NXcs_profiling/command_line_call-field </NXcs_profiling/command_line_call-field>`
 * :ref:`/NXcs_profiling/CS_COMPUTER-group </NXcs_profiling/CS_COMPUTER-group>`
-* :ref:`/NXcs_profiling/CS_PROFILING_EVENT-group </NXcs_profiling/CS_PROFILING_EVENT-group>`
 * :ref:`/NXcs_profiling/current_working_directory-field </NXcs_profiling/current_working_directory-field>`
 * :ref:`/NXcs_profiling/end_time-field </NXcs_profiling/end_time-field>`
+* :ref:`/NXcs_profiling/eventID-group </NXcs_profiling/eventID-group>`
 * :ref:`/NXcs_profiling/number_of_gpus-field </NXcs_profiling/number_of_gpus-field>`
 * :ref:`/NXcs_profiling/number_of_processes-field </NXcs_profiling/number_of_processes-field>`
 * :ref:`/NXcs_profiling/number_of_threads-field </NXcs_profiling/number_of_threads-field>`

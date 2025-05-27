@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3.3.1.5. NXatom &#8212; nexus v2024.02 documentation</title>
+    <title>3.3.1.9. NXatom &#8212; nexus v2024.02 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css?v=34905f61" />
     <link rel="stylesheet" type="text/css" href="../../_static/details_summary_hide.css?v=30df4bca" />
@@ -28,8 +28,8 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="copyright" title="Copyright" href="../../copyright.html" />
-    <link rel="next" title="3.3.1.6. NXattenuator" href="NXattenuator.html" />
-    <link rel="prev" title="3.3.1.4. NXaperture" href="NXaperture.html" /> 
+    <link rel="next" title="3.3.1.10. NXattenuator" href="NXattenuator.html" />
+    <link rel="prev" title="3.3.1.8. NXapm_simulation" href="NXapm_simulation.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
@@ -38,16 +38,16 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="NXattenuator.html" title="3.3.1.6. NXattenuator"
+          <a href="NXattenuator.html" title="3.3.1.10. NXattenuator"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="NXaperture.html" title="3.3.1.4. NXaperture"
+          <a href="NXapm_simulation.html" title="3.3.1.8. NXapm_simulation"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">nexus v2024.02 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../ref_doc.html" ><span class="section-number">3. </span>NeXus: Reference Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../index.html" ><span class="section-number">3.3. </span>NeXus Class Definitions</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="index.html" accesskey="U"><span class="section-number">3.3.1. </span>Base Class Definitions</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><span class="section-number">3.3.1.5. </span>NXatom</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">3.3.1.9. </span>NXatom</a></li> 
       </ul>
     </div>  
 
@@ -57,7 +57,7 @@
           <div class="body" role="main">
             
   <section id="nxatom">
-<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">3.3.1.5. </span>NXatom<a class="headerlink" href="#nxatom" title="Link to this heading">¶</a></h1>
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">3.3.1.9. </span>NXatom<a class="headerlink" href="#nxatom" title="Link to this heading">¶</a></h1>
 <p><strong>Status</strong>:</p>
 <blockquote>
 <div><p>base class, extends <a class="reference internal" href="NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
@@ -75,6 +75,8 @@ An ion can be a molecular ion.</p>
 <div><p>The symbols used in the schema to specify e.g. dimensions of arrays.</p>
 <p><strong>n_pos</strong>: Number of atom positions.</p>
 <p><strong>d</strong>: Dimensionality</p>
+<p><strong>n_ivec_max</strong>: Maximum number of atoms/isotopes allowed per (molecular) ion (fragment).</p>
+<p><strong>n_ranges</strong>: Number of mass-to-charge-state-ratio range intervals for ion type.</p>
 </div></blockquote>
 <dl class="simple">
 <dt><strong>Groups cited</strong>:</dt><dd><p>none</p>
@@ -90,13 +92,19 @@ An ion can be a molecular ion.</p>
 of atom probe tomography to store a standardized human-readable
 name of the element or (molecular) ion like such as Al +++ or 12C +.</p>
 </details></div></blockquote>
-<p id="index-2"><span id="nxatom-identifier-chemical-field"></span><strong>identifier_chemical</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<p id="index-2"><span id="nxatom-id-field"></span><strong>id</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-given-numerical-identifier-for-the-set">
+<summary>Given numerical identifier for  the set. ...</summary><p>Given numerical identifier for  the set.</p>
+<p>The identifier zero is reserved for the special unknown ion type.</p>
+</details></div></blockquote>
+<p id="index-3"><span id="nxatom-identifier-chemical-field"></span><strong>identifier_chemical</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
 <blockquote>
 <div><details class="summary-identifier-used-to-refer-to-if-the-set-of-atoms-represents-a-substance">
 <summary>Identifier used to refer to if the set of atoms represents a substance. ...</summary><p>Identifier used to refer to if the set of atoms represents a substance.</p>
 <p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">inchi</span></code></p>
 </details></div></blockquote>
-<p id="index-3"><span id="nxatom-charge-field"></span><strong>charge</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-charge"><span class="std std-ref">NX_CHARGE</span></a>}</p>
+<p id="index-4"><span id="nxatom-charge-field"></span><strong>charge</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-charge"><span class="std std-ref">NX_CHARGE</span></a>}</p>
 <blockquote>
 <div><details class="summary-signed-net-partial-charge-of-the-molecular-ion">
 <summary>Signed net (partial) charge of the (molecular) ion. ...</summary><p>Signed net (partial) charge of the (molecular) ion.</p>
@@ -104,7 +112,7 @@ name of the element or (molecular) ion like such as Al +++ or 12C +.</p>
 Care needs to be exercised with respect to the integration.
 <a class="reference external" href="10.1039/c6ra04656h">T. A. Manz</a> and <a class="reference external" href="10.1039/C6RA05507A">N. G. Limas</a> discuss computational details.</p>
 </details></div></blockquote>
-<p id="index-4"><span id="nxatom-charge-state-field"></span><strong>charge_state</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<p id="index-5"><span id="nxatom-charge-state-field"></span><strong>charge_state</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
 <div><details class="summary-charge-reported-in-multiples-of-the-charge-of-an-electron">
 <summary>Charge reported in multiples of the charge of an electron. ...</summary><p>Charge reported in multiples of the charge of an electron.</p>
@@ -116,20 +124,20 @@ the number of atoms of each element per molecular ion surplus the
 respective mass-to-charge-state-ratio interval.</p>
 <p>Details on ranging definition files in the literature are <a class="reference external" href="https://doi.org/10.1002/sia.1719">M. K. Miller</a>.</p>
 </details></div></blockquote>
-<p id="index-5"><span id="nxatom-volume-field"></span><strong>volume</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-volume"><span class="std std-ref">NX_VOLUME</span></a>}</p>
+<p id="index-6"><span id="nxatom-volume-field"></span><strong>volume</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-volume"><span class="std std-ref">NX_VOLUME</span></a>}</p>
 <blockquote>
 <div><details class="summary-assumed-volume-affected-by-the-set-of-atoms">
 <summary>Assumed volume affected by the set of atoms. ...</summary><p>Assumed volume affected by the set of atoms.</p>
 <p>Neither individual atoms nor a set of cluster of these have a volume
 that is unique as a some cut-off criterion is required.</p>
 </details></div></blockquote>
-<p id="index-6"><span id="nxatom-indices-field"></span><strong>indices</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> (Rank: 1, Dimensions: [n_pos])</p>
+<p id="index-7"><span id="nxatom-indices-field"></span><strong>indices</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> (Rank: 1, Dimensions: [n_pos])</p>
 <blockquote>
 <div><details class="summary-index-for-each-atom-at-locations-as-detailed-by-position">
 <summary>Index for each atom at locations as detailed by position. ...</summary><p>Index for each atom at locations as detailed by position.
 Indices can be used as identifier and thus names for individual atoms.</p>
 </details></div></blockquote>
-<p id="index-7"><span id="nxatom-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 1, Dimensions: [n_pos]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<p id="index-8"><span id="nxatom-type-field"></span><strong>type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 1, Dimensions: [n_pos]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
 <blockquote>
 <div><details class="summary-nuclide-information-for-each-atom-at-locations-as-detailed-by-position">
 <summary>Nuclide information for each atom at locations as detailed by position. ...</summary><p>Nuclide information for each atom at locations as detailed by position.</p>
@@ -139,10 +147,10 @@ efficiently is via hashing with the following formula</p>
 <p>the number of protons and <span class="math notranslate nohighlight">\(N\)</span> the number of neutrons
 of each nuclide given as 8-bit unsigned integer values.</p>
 </details></div></blockquote>
-<p id="index-8"><span id="nxatom-position-field"></span><strong>position</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [n_pos, d]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<p id="index-9"><span id="nxatom-position-field"></span><strong>position</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [n_pos, d]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
 <blockquote>
 <div><p>Position of each atom.</p>
-<p id="index-9"><span id="nxatom-position-reference-frame-attribute"></span><strong>&#64;reference_frame</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<p id="index-10"><span id="nxatom-position-reference-frame-attribute"></span><strong>&#64;reference_frame</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
 <blockquote>
 <div><details class="summary-path-to-a-reference-frame-in-which-positions-are-defined">
 <summary>Path to a reference frame in which positions are defined ...</summary><p>Path to a reference frame in which positions are defined
@@ -150,12 +158,47 @@ to resolve ambiguity when the reference frame is different
 to the NeXus default reference frame (McStas).</p>
 </details></div></blockquote>
 </div></blockquote>
-<p id="index-10"><span id="nxatom-occupancy-field"></span><strong>occupancy</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n_pos]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a>}</p>
+<p id="index-11"><span id="nxatom-occupancy-field"></span><strong>occupancy</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n_pos]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-dimensionless"><span class="std std-ref">NX_DIMENSIONLESS</span></a>}</p>
 <blockquote>
 <div><details class="summary-relative-occupancy-of-the-atom-position">
 <summary>Relative occupancy of the atom position. ...</summary><p>Relative occupancy of the atom position.</p>
 <p>This field is useful for specifying the atomic motif in
 instances of <a class="reference internal" href="NXunit_cell.html#nxunit-cell"><span class="std std-ref">NXunit_cell</span></a>.</p>
+</details></div></blockquote>
+<p id="index-12"><span id="nxatom-nuclide-hash-field"></span><strong>nuclide_hash</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 1, Dimensions: [n_ivec_max]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-vector-of-nuclide-hash-values">
+<summary>Vector of nuclide hash values. ...</summary><p>Vector of nuclide hash values.</p>
+<p>Individual hash values :math:H is :math:H = Z + N cdot 256 with :math:Z
+encoding the number of protons and :math:N the number of neutrons for
+each nuclide respectively. :math:Z and :math:N must be 8-bit unsigned integers.</p>
+<p>Exemplified for tritium (<span class="math notranslate nohighlight">\(Z = 1\)</span>, <span class="math notranslate nohighlight">\(N = 2\)</span>), its hash value is <span class="math notranslate nohighlight">\(H = 513\)</span>.</p>
+<p>The array is sorted in decreasing order. For the rationale behind this see <a class="reference external" href="https://doi.org/10.1017/S1431927621012241">M. Kühbach et al. (2021)</a></p>
+</details></div></blockquote>
+<p id="index-13"><span id="nxatom-nuclide-list-field"></span><strong>nuclide_list</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 2, Dimensions: [n_ivec_max, 2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-table-which-decodes-the-entries-in-nuclide-hash-into-a-human-readable-matrix-o">
+<summary>Table which decodes the entries in nuclide_hash into a human-readable matrix o ...</summary><p>Table which decodes the entries in nuclide_hash into a human-readable matrix of instances.
+The first column specifies the nuclide mass number, i.e. using the hashvalues
+from the isotope_vector this is <span class="math notranslate nohighlight">\(Z + N\)</span> or 0. The value 0 documents that no
+isotope-specific information about the element encoded is relevant.
+The second row specifies the number of protons <span class="math notranslate nohighlight">\(Z\)</span> or 0.
+The value 0 in this case documents a placeholder or that no element-specific
+information is relevant.
+Taking a carbon-14 nuclide as an example the mass number is 14.
+That is encoded as a value pair (14, 6) as one row of the table.</p>
+<p>Therefore, this notation is the typical superscribed nuclide mass number
+and subscripted number of protons element notation e.g. <span class="math notranslate nohighlight">\(^{14}C\)</span>.
+The array is stored matching the order of nuclide_hash.</p>
+</details></div></blockquote>
+<p id="index-14"><span id="nxatom-mass-to-charge-range-field"></span><strong>mass_to_charge_range</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [n_ranges, 2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-associated-lower-mqmin-and-upper-mqmax-bounds-of-the">
+<summary>Associated lower (mqmin) and upper (mqmax) bounds of the ...</summary><p>Associated lower (mqmin) and upper (mqmax) bounds of the
+mass-to-charge-state ratio interval(s) [mqmin, mqmax]
+(boundaries inclusive). This field is primarily of interest
+for documenting <a class="reference internal" href="NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a> steps of indexing a
+ToF/mass-to-charge state histogram.</p>
 </details></div></blockquote>
 </div></blockquote>
 <section id="hypertext-anchors">
@@ -165,9 +208,13 @@ attributes, and links defined in this class.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#nxatom-charge-field"><span class="std std-ref">/NXatom/charge-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxatom-charge-state-field"><span class="std std-ref">/NXatom/charge_state-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxatom-id-field"><span class="std std-ref">/NXatom/id-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxatom-identifier-chemical-field"><span class="std std-ref">/NXatom/identifier_chemical-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxatom-indices-field"><span class="std std-ref">/NXatom/indices-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxatom-mass-to-charge-range-field"><span class="std std-ref">/NXatom/mass_to_charge_range-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxatom-name-field"><span class="std std-ref">/NXatom/name-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxatom-nuclide-hash-field"><span class="std std-ref">/NXatom/nuclide_hash-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxatom-nuclide-list-field"><span class="std std-ref">/NXatom/nuclide_list-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxatom-occupancy-field"><span class="std std-ref">/NXatom/occupancy-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxatom-position-field"><span class="std std-ref">/NXatom/position-field</span></a></p></li>
 <li><p><a class="reference internal" href="#nxatom-position-reference-frame-attribute"><span class="std std-ref">/NXatom/position&#64;reference_frame-attribute</span></a></p></li>
@@ -191,7 +238,7 @@ attributes, and links defined in this class.</p>
   <div>
     <h3><a href="../../index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">3.3.1.5. NXatom</a><ul>
+<li><a class="reference internal" href="#">3.3.1.9. NXatom</a><ul>
 <li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
 </ul>
 </li>
@@ -200,13 +247,13 @@ attributes, and links defined in this class.</p>
   </div>
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="NXaperture.html"
-                          title="previous chapter"><span class="section-number">3.3.1.4. </span>NXaperture</a></p>
+    <p class="topless"><a href="NXapm_simulation.html"
+                          title="previous chapter"><span class="section-number">3.3.1.8. </span>NXapm_simulation</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
     <p class="topless"><a href="NXattenuator.html"
-                          title="next chapter"><span class="section-number">3.3.1.6. </span>NXattenuator</a></p>
+                          title="next chapter"><span class="section-number">3.3.1.10. </span>NXattenuator</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -277,16 +324,16 @@ attributes, and links defined in this class.</p>
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="NXattenuator.html" title="3.3.1.6. NXattenuator"
+          <a href="NXattenuator.html" title="3.3.1.10. NXattenuator"
              >next</a> |</li>
         <li class="right" >
-          <a href="NXaperture.html" title="3.3.1.4. NXaperture"
+          <a href="NXapm_simulation.html" title="3.3.1.8. NXapm_simulation"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">nexus v2024.02 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../ref_doc.html" ><span class="section-number">3. </span>NeXus: Reference Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../index.html" ><span class="section-number">3.3. </span>NeXus Class Definitions</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="index.html" ><span class="section-number">3.3.1. </span>Base Class Definitions</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><span class="section-number">3.3.1.5. </span>NXatom</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">3.3.1.9. </span>NXatom</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
