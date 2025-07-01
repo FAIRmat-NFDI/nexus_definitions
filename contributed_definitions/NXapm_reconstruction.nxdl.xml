@@ -31,7 +31,7 @@
                 Number of ions spatially filtered from results of the hit_finding algorithm
                 from which an instance of a reconstructed volume has been generated.
                 These ions get new identifier assigned in the process - the so-called
-                identifier_evaporation, which must not be confused with the identifier_pulse!
+                evaporation_id, which must not be confused with the pulse_id!
             </doc>
         </symbol>
     </symbols>
@@ -121,7 +121,28 @@
             CAnalysis.CSpatial.fVoltage0
         </doc>
     </field>
-    <group name="obb" type="NXobject">
+    <field name="protocol_name" type="NX_CHAR">
+        <doc>
+            Qualitative statement about which reconstruction protocol was used.
+        </doc>
+        <enumeration open="true">
+            <item value="bas"/>
+            <item value="geiser"/>
+            <item value="gault"/>
+            <item value="cameca"/>
+        </enumeration>
+    </field>
+    <field name="crystallographic_calibration" type="NX_CHAR">
+        <doc>
+            Different strategies for crystallographic calibration of the
+            reconstruction are possible. Therefore, we collect first such
+            feedback before parametrizing this further.
+            
+            If no crystallographic calibration was performed, the field
+            should be filled with the n/a, meaning not applied.
+        </doc>
+    </field>
+    <group name="obb" type="NXcollection">
         <doc>
             Tight, axis-aligned bounding box about the point cloud of the reconstruction.
         </doc>
@@ -156,27 +177,6 @@
             </doc>
         </field>
     </group>
-    <field name="protocol_name" type="NX_CHAR">
-        <doc>
-            Qualitative statement about which reconstruction protocol was used.
-        </doc>
-        <enumeration open="true">
-            <item value="bas"/>
-            <item value="geiser"/>
-            <item value="gault"/>
-            <item value="cameca"/>
-        </enumeration>
-    </field>
-    <field name="crystallographic_calibration" type="NX_CHAR">
-        <doc>
-            Different strategies for crystallographic calibration of the
-            reconstruction are possible. Therefore, we collect first such
-            feedback before parametrizing this further.
-            
-            If no crystallographic calibration was performed, the field
-            should be filled with the n/a, meaning not applied.
-        </doc>
-    </field>
     <!--results-->
     <field name="field_of_view" type="NX_FLOAT" units="NX_LENGTH">
         <!--typically in nm reconstruction space not detector coordinates-->

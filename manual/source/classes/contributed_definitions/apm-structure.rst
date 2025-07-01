@@ -39,7 +39,7 @@ Base Classes
 The following base classes are proposed to support modularizing the storage of pieces of information:
 
 
-    :ref:`NXcoordinate_system_set`, :ref:`NXcoordinate_system`:
+    :ref:`NXcoordinate_system` and :ref:`NXtransformations`:
         Base classes to describe different coordinate systems used and/or to be harmonized
         or transformed into one another when interpreting the dataset.
 
