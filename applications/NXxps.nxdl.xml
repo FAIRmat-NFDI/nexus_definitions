@@ -1,9 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 <!--
 # NeXus - Neutron and X-ray Common Data Format
 #
-# Copyright (C) 2024-2025 NeXus International Advisory Committee (NIAC)
+# Copyright (C) 2023-2025 NeXus International Advisory Committee (NIAC)
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -66,11 +66,6 @@
                     <item value="sample stage"/>
                 </enumeration>
             </field>
-            <field name="handedness">
-                <enumeration>
-                    <item value="left_handed"/>
-                </enumeration>
-            </field>
             <field name="z_direction">
                 <enumeration>
                     <item value="sample stage normal"/>
@@ -98,12 +93,12 @@
                     x- and y-axes lie in the plane of the sample stage.
                 </doc>
             </field>
-            <group name="coordinate_system_transformations" type="NXtransformations" optional="true">
+            <group type="NXtransformations" optional="true">
                 <doc>
                     Set of transformations, describing the orientation of the XPS coordinate system
-                    with respect to the beam coordinate system (.) or any other coordinate system.
-                    
-                    The transformations in `coordinate_system_transformations` depend on the actual instrument geometry.
+                    with respect to the beam coordinate system (.) or another coordinate system.
+                    The transformations in the ``NXtransformations`` group depend on the actual instrument
+                    geometry.
                     If the z-axis is pointing in the direction of gravity (i.e., if the sample is mounted horizontally),
                     the following transformations can be used for describing the XPS coordinate system
                     with respect to the beam coordinate system (.):
@@ -111,23 +106,23 @@
                     .. code-block::
                     
                         xps_coordinate_system:NXcoordinate_system
-                        depends_on=entry/geometries/xps_coordinate_system/coordinate_transformations/z_rotation
-                        coordinate_system_transformations:NXtransformations
-                            z_rotation=beam_azimuth_angle
-                            @depends_on=y_flip
-                            @transformation_type=rotation
-                            @vector=[0, 0, 1]
-                            @units=degree
-                            y_flip=180
-                            @depends_on=y_rotation
-                            @transformation_type=rotation
-                            @vector=[0, 1, 0]
-                            @units=degree
-                            y_rotation=beam_polar_angle_of_incidence
-                            @depends_on=.
-                            @transformation_type=rotation
-                            @vector=[0, 1, 0]
-                            @units=degree
+                          depends_on=coordinate_transformations/sample_stage_to_source_azimuth
+                          coordinate_transformations:NXtransformations
+                            sample_stage_to_source_azimuth=beam_azimuth_angle
+                              @depends_on=sample_stage_to_source_polar
+                              @transformation_type=rotation
+                              @vector=[0, 0, -1]
+                              @units=degree
+                            sample_stage_to_source_polar=beam_polar_angle_of_incidence
+                              @depends_on=.
+                              @transformation_type=rotation
+                              @vector=[1, 0, 0]
+                              @units=degree
+                    
+                    Note that this ``NXtransformations``  group is not needed when the defined
+                    :ref:`transformations in beam_probe &lt;/NXxps/ENTRY/INSTRUMENT/beam_probe/transformations-group&gt;`
+                    are used. In this case, this group shall not be written here to avoid circular references in the
+                    transformations chain.
                 </doc>
             </group>
         </group>
@@ -145,11 +140,28 @@
             <group name="beam_probe" type="NXbeam">
                 <field name="depends_on" recommended="true">
                     <doc>
-                        Reference to the transformation describing the orientation of the beam
+                        Reference to the transformation describing the direction of the beam
                         relative to a defined coordinate system.
+
+                        Should point to /entry/instrument/beam_probe/transformations/beam_direction.
                     </doc>
                 </field>
                 <group name="transformations" type="NXtransformations" recommended="true">
+                    <field name="beam_direction" type="NX_NUMBER" units="NX_UNITLESS">
+                        <doc>
+                            Beam direction in the XPS coordinate system after rotation.
+                        </doc>
+                        <attribute name="vector" type="NX_NUMBER">
+                            <enumeration>
+                                <item value="[0, 0, -1]"/>
+                            </enumeration>
+                        </attribute>
+                        <attribute name="depends_on">
+                            <enumeration>
+                                <item value="beam_polar_angle_of_incidence"/>
+                            </enumeration>
+                        </attribute>
+                    </field>
                     <field name="beam_polar_angle_of_incidence" type="NX_NUMBER" units="NX_ANGLE">
                         <doc>
                             Incidence angle of the beam with respect to the upward z-direction, defined by
@@ -162,7 +174,7 @@
                         </attribute>
                         <attribute name="vector" type="NX_NUMBER">
                             <enumeration>
-                                <item value="[0, -1, 0]"/>
+                                <item value="[-1, 0, 0]"/>
                             </enumeration>
                         </attribute>
                         <attribute name="depends_on">
@@ -173,8 +185,7 @@
                     </field>
                     <field name="beam_azimuth_angle" type="NX_NUMBER" units="NX_ANGLE">
                         <doc>
-                            Azimuthal rotation of the beam from the y-direction towards the operator, defined
-                            by the sample stage.
+                            Azimuthal rotation of the beam from the y-direction defined by the sample stage.
                         </doc>
                         <attribute name="transformation_type">
                             <enumeration>
@@ -183,13 +194,12 @@
                         </attribute>
                         <attribute name="vector" type="NX_NUMBER">
                             <enumeration>
-                                <item value="[0, 0, -1]"/>
+                                <item value="[0, 0, 1]"/>
                             </enumeration>
                         </attribute>
                         <attribute name="depends_on">
                             <doc>
-                                This should point to the last element of the coordinate system transformations defined in
-                                /entry/geometries/xps_coordinate_system/coordinate_system_transformations.
+                                This should point to the coordinate system defined in /entry/xps_coordinate_system.
                             </doc>
                         </attribute>
                     </field>
@@ -230,7 +240,7 @@
                         </attribute>
                         <attribute name="vector" type="NX_NUMBER">
                             <enumeration>
-                                <item value="[0, -1, 0]"/>
+                                <item value="[-1, 0, 0]"/>
                             </enumeration>
                         </attribute>
                         <attribute name="depends_on">
@@ -241,8 +251,7 @@
                     </field>
                     <field name="analyzer_take_off_azimuth_angle" type="NX_NUMBER" units="NX_ANGLE">
                         <doc>
-                            Azimuthal rotation of the analyzer from the y-direction towards the operator,
-                            defined by the sample stage.
+                            Azimuthal rotation of the analyzer from the y-direction defined by the sample stage.
                         </doc>
                         <attribute name="transformation_type">
                             <enumeration>
@@ -251,13 +260,12 @@
                         </attribute>
                         <attribute name="vector" type="NX_NUMBER">
                             <enumeration>
-                                <item value="[0, 0, -1]"/>
+                                <item value="[0, 0, 1]"/>
                             </enumeration>
                         </attribute>
                         <attribute name="depends_on">
                             <doc>
-                                This should point to the last element of the coordinate system transformations defined in
-                                /entry/geometries/xps_coordinate_system/coordinate_system_transformations.
+                                This should point to the coordinate system defined in /entry/xps_coordinate_system.
                             </doc>
                         </attribute>
                     </field>
@@ -295,7 +303,7 @@
                         This could be a link to entry/data/energy.
                     </doc>
                 </field>
-                <field name="envelope" type="NX_NUMBER" units="NX_ANY"/>
+                <field name="fit_sum" type="NX_NUMBER" units="NX_ANY"/>
                 <field name="residual" type="NX_NUMBER" recommended="true" units="NX_ANY"/>
             </group>
             <group name="peakPEAK" type="NXpeak" nameType="partial">
@@ -468,12 +476,12 @@
                     </field>
                     <field name="formula_description" recommended="true"/>
                     <group name="fit_parameters" type="NXparameters" recommended="true">
-                        <field name="area" units="NX_ANY" optional="true">
+                        <field name="area" type="NX_NUMBER" units="NX_ANY" optional="true">
                             <doc>
                                 Area of the peak.
                             </doc>
                         </field>
-                        <field name="width" units="NX_ENERGY" optional="true">
+                         <field name="width" type="NX_NUMBER" units="NX_ENERGY" optional="true">
                             <doc>
                                 Width of a peak at a defined fraction of the peak height.
                                 
@@ -486,14 +494,14 @@
                                 .. _3.28: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.28
                             </doc>
                         </field>
-                        <field name="position" units="NX_ENERGY" optional="true">
+                        <field name="position" type="NX_NUMBER" units="NX_ENERGY" optional="true">
                             <doc>
                                 Position of the peak on the energy axis.
                             </doc>
                         </field>
                     </group>
                 </group>
-                <field name="total_area" recommended="true">
+                <field name="total_area" type="NX_NUMBER" recommended="true" units="NX_ANY">
                     <doc>
                         Total area under the peak after background removal.
                         
@@ -509,7 +517,7 @@
                     </doc>
                 </field>
             </group>
-            <group name="backgroundBACKGROUND" type="NXfit_background" nameType="partial">
+            <group name="backgroundBACKGROUND" type="NXpeak" nameType="partial">
                 <doc>
                     Functional form of one of the fitted XPS backgrounds.
                     
@@ -659,7 +667,7 @@
             <group name="transformations" type="NXtransformations" recommended="true">
                 <field name="sample_rotation_angle" type="NX_NUMBER" units="NX_ANGLE">
                     <doc>
-                        Clockwise rotation about the sample normal.
+                        Rotation about the sample normal.
                     </doc>
                     <attribute name="transformation_type">
                         <enumeration>
@@ -668,7 +676,7 @@
                     </attribute>
                     <attribute name="vector" type="NX_NUMBER">
                         <enumeration>
-                            <item value="[0, 0, -1]"/>
+                            <item value="[0, 0, 1]"/>
                         </enumeration>
                     </attribute>
                     <attribute name="depends_on">
@@ -689,7 +697,7 @@
                     </attribute>
                     <attribute name="vector" type="NX_NUMBER">
                         <enumeration>
-                            <item value="[0, -1, 0]"/>
+                            <item value="[-1, 0, 0]"/>
                         </enumeration>
                     </attribute>
                     <attribute name="depends_on">
@@ -700,8 +708,7 @@
                 </field>
                 <field name="sample_normal_tilt_azimuth_angle" type="NX_NUMBER" units="NX_ANGLE">
                     <doc>
-                        Azimuthal rotation of the sample from the y-direction towards the operator,
-                        defined by the sample stage.
+                        Azimuthal rotation of the sample from the y-direction defined by the sample stage.
                     </doc>
                     <attribute name="transformation_type">
                         <enumeration>
@@ -710,22 +717,19 @@
                     </attribute>
                     <attribute name="vector" type="NX_NUMBER">
                         <enumeration>
-                            <item value="[0, 0, -1]"/>
+                            <item value="[0, 0, 1]"/>
                         </enumeration>
                     </attribute>
                     <attribute name="depends_on">
                         <doc>
-                            This should point to the last element of the coordinate system transformations defined in
-                            /entry/geometries/xps_coordinate_system/coordinate_system_transformations.
+                            This should point to the coordinate system defined in /entry/xps_coordinate_system.
                         </doc>
                     </attribute>
                 </field>
             </group>
         </group>
-        <group name="data" type="NXdata">
-            <field name="energy" type="NX_NUMBER">
-                <attribute name="reference" recommended="true"/>
-            </field>
+        <group type="NXdata">
+            <field name="energy" type="NX_NUMBER"/>
             <attribute name="energy_indices" type="NX_INT"/>
         </group>
     </group>
