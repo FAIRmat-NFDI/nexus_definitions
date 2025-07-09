@@ -7,52 +7,109 @@ on:
     branches: [fairmat]
 
 jobs:
-  pages:
+  build:
+    name: Build documentation
     runs-on: ubuntu-latest
+    outputs:
+      is_default: ${{ steps.branch-name.outputs.is_default }}
+      current_branch: ${{ steps.branch-name.outputs.current_branch }}
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.9"
-    - name: install dependencies
-      run: pip install -r requirements.txt
-    - name: Get branch name
-      id: branch-name
-      uses: tj-actions/branch-names@v7
-    - name: test
-      run: make test
-    - name: prepare
-      run: make prepare
-    - name: html
-      run: make html
-    - name: Remove build artifacts
-      run: rm -rf build/manual/build/html/.doctrees build/manual/build/html/_sources
-    - name: Checkout fairmat-docs branch
-      run: |
-        git fetch origin fairmat-docs
-        git checkout fairmat-docs || git checkout --orphan fairmat-docs
-    
-    - name: Move default branch build into fairmat-docs
-      if: steps.branch-name.outputs.is_default == 'true'
-      run: |
-        mkdir -p docs
-        cp -r build/manual/build/html/* docs 
-        rm -R build/manual/build/html/*
-    - name: Move PR build into fairmat-docs
-      if: steps.branch-name.outputs.is_default == 'false'
-      run: |
-        mkdir -p docs/${{ steps.branch-name.outputs.current_branch }}
-        cp -r build/manual/build/html/* docs/${{ steps.branch-name.outputs.current_branch }}
-        rm -R build/manual/build/html/*
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: docs
-        publish_branch: fairmat-docs
-        destination_dir: docs
-        force_orphan: true
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v7
+
+      - name: Test
+        run: make test
+
+      - name: Prepare
+        run: make prepare
+
+      - name: Build HTML
+        run: make html
+
+      - name: Remove unneeded artifacts from build
+        run: rm -rf build/manual/build/html/.doctrees build/manual/build/html/_sources
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-build
+          path: build/manual/build/html
+
+  cleanup:
+    name: Cleanup existing docs
+    runs-on: ubuntu-latest
+    needs: build
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout fairmat-docs branch
+        run: |
+          git fetch origin fairmat-docs
+          git checkout fairmat-docs || git checkout --orphan fairmat-docs
+
+      - name: Cleanup docs folder - keep open branch docs
+        if: needs.build.outputs.is_default == 'true'
+        run: |
+          open_branches=$(gh api repos/FAIRmat-NFDI/nexus_definitions/branches --jq '.[].name')
+          cd docs || exit 1
+
+          # Remove all files in docs root
+          find . -maxdepth 1 -type f -exec rm -f {} +
+
+          # Remove any directory not matching open branch names
+          for dir in */ ; do
+            dir=${dir%/}
+            if ! echo "$open_branches" | grep -qw "$dir"; then
+              rm -rf "$dir"
+            fi
+          done
+
+      - name: Cleanup branch docs folder
+        if: needs.build.outputs.is_default == 'false'
+        run: |
+          rm -rf docs/${{ needs.build.outputs.current_branch }}
+
+  deploy:
+    name: Deploy docs to GH Pages
+    runs-on: ubuntu-latest
+    needs: [build, cleanup]
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: html-build
+          path: build/manual/build/html
+      - name: Move default branch build into docs root
+        if: needs.build.outputs.is_default == 'true'
+        run: |
+          rm -rf docs/*
+          cp -r build/manual/build/html/* docs/
+
+      - name: Move feature/PR branch build into branch-named subfolder
+        if: needs.build.outputs.is_default == 'false'
+        run: |
+          mkdir -p docs/${{ needs.build.outputs.current_branch }}
+          rm -rf docs/${{ needs.build.outputs.current_branch }}/*
+          cp -r build/manual/build/html/* docs/${{ needs.build.outputs.current_branch }}/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs
+          publish_branch: fairmat-docs
+          force_orphan: true
