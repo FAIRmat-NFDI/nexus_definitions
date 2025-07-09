@@ -13,6 +13,7 @@ jobs:
     outputs:
       is_default: ${{ steps.branch-name.outputs.is_default }}
       current_branch: ${{ steps.branch-name.outputs.current_branch }}
+      sanitized_branch: ${{ steps.sanitize.outputs.slug }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -30,6 +31,11 @@ jobs:
       - name: Get branch name
         id: branch-name
         uses: tj-actions/branch-names@v7
+
+      - name: Slugify branch name
+        id: sanitize
+        run: |
+          echo "slug=$(echo '${{ steps.branch-name.outputs.current_branch }}' | tr '/' '-')" >> $GITHUB_OUTPUT
 
       - name: Test
         run: make test
@@ -64,7 +70,7 @@ jobs:
       - name: Cleanup docs folder - keep open branch docs
         if: needs.build.outputs.is_default == 'true'
         run: |
-          open_branches=$(gh api repos/FAIRmat-NFDI/nexus_definitions/branches --jq '.[].name')
+          open_branches=$(gh api repos/FAIRmat-NFDI/nexus_definitions/branches --jq '.[].name' | tr '/' '-')
           cd docs || exit 1
 
           # Remove all files in docs root
@@ -81,7 +87,7 @@ jobs:
       - name: Cleanup branch docs folder
         if: needs.build.outputs.is_default == 'false'
         run: |
-          rm -rf docs/${{ needs.build.outputs.current_branch }}
+          rm -rf docs/${{ needs.build.outputs.sanitized_branch }}
 
   deploy:
     name: Deploy docs to GH Pages
@@ -93,18 +99,20 @@ jobs:
         with:
           name: html-build
           path: build/manual/build/html
+
       - name: Move default branch build into docs root
         if: needs.build.outputs.is_default == 'true'
         run: |
-          rm -rf docs/*
+          mkdir -p docs/
           cp -r build/manual/build/html/* docs/
+          rm -R build/manual/build/html/*
 
       - name: Move feature/PR branch build into branch-named subfolder
         if: needs.build.outputs.is_default == 'false'
         run: |
-          mkdir -p docs/${{ needs.build.outputs.current_branch }}
-          rm -rf docs/${{ needs.build.outputs.current_branch }}/*
-          cp -r build/manual/build/html/* docs/${{ needs.build.outputs.current_branch }}/
+          mkdir -p docs/${{ needs.build.outputs.sanitized_branch }}
+          cp -r build/manual/build/html/* docs/${{ needs.build.outputs.sanitized_branch }}/
+          rm -R build/manual/build/html/*
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
