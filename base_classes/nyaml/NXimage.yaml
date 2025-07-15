@@ -10,10 +10,9 @@ doc: |
   pixel and voxel identify the smallest discretization unit. In this case, pixel and voxel are polygonal
   or polyhedral unit cells respectively of the underlying tiling of the ROI within the reference space.
   For all other tilings e.g. non-equispaced, the shape and size of pixel and voxel differs. Using the term
-  image point is eventually more appropriate when working with such tilings.
+  (image) point is eventually more appropriate when working with such tilings.
   
-  Therefore, all docstrings in this base class refer to points. Points are considered
-  exact synonyms for pixel and voxel, which are terms used for regular tilings.
+  Therefore, all docstrings in this base class refer to points (including pixel and voxel i.e. regular tilings).
   
   Point coordinates identify the location of the barycenter.
   
@@ -39,13 +38,26 @@ doc: |
   That is indices_image are always counting from offset in increments of one
   as each image is its own entity. By contrast, a group may contain no, or several images.
   Consequently, indices_group are not required to be contiguous.
+  
+  Classically, images depict objects in real space. Such usage of NXimage essentially is equivalent to
+  storing pictures. For this purpose the image_1d, image_2d, or image_3d NXdata instances respectively
+  should be used with all their axes axis_i, axis_j, axis_k constrained to NeXus Unit Category NX_LENGTH.
+  
+  Imaging modes in electron microscopy are typically more versatile, specifically for use cases
+  in scanning transmission electron microscopy, so-called 4DSTEM. In this case, one two-dimensional
+  diffraction image is taken for each point that gets scanned in real space. Consequently,
+  image_3d and image_4d NXdata instances should be used for these cases with axis_k and axis_m
+  respectively of NeXus Unit Category NX_LENGTH and axis_i and axis_j respectively of
+  NeXus Unit Category NX_WAVENUMBER.
 
 # set of frequently made specializations of NXdata instances for images
 symbols:
   n_img: |
     Number of images in the stack, for stacks the slowest dimension.
+  n_m: |
+    Number of image points along the slowest dimension.
   n_k: |
-    Number of image points along the slow dimension (k equivalent to z).
+    Number of image points along the slow dimension.
   n_j: |
     Number of image points along the fast dimension (j equivalent to y).
   n_i: |
@@ -111,9 +123,14 @@ NXimage(NXobject):
         rank: 1
         dim: (n_i,)
     axis_i(NX_NUMBER):
-      unit: NX_LENGTH
+      unit: NX_ANY
       doc: |
         Point coordinate along the fastest dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
       dimensions:
         rank: 1
         dim: (n_i,)
@@ -154,9 +171,14 @@ NXimage(NXobject):
         rank: 2
         dim: (n_j, n_i)
     axis_j(NX_NUMBER):
-      unit: NX_LENGTH
+      unit: NX_ANY
       doc: |
         Point coordinate along the fast dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
       dimensions:
         rank: 1
         dim: (n_j,)
@@ -164,9 +186,14 @@ NXimage(NXobject):
         doc: |
           Point coordinate along the fast dimension.
     axis_i(NX_NUMBER):
-      unit: NX_LENGTH
+      unit: NX_ANY
       doc: |
         Point coordinate along the fastest dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
       dimensions:
         rank: 1
         dim: (n_i,)
@@ -207,9 +234,14 @@ NXimage(NXobject):
         rank: 3
         dim: (n_k, n_j, n_i)
     axis_k(NX_NUMBER):
-      unit: NX_LENGTH
+      unit: NX_ANY
       doc: |
         Point coordinate along the slow dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
       dimensions:
         rank: 1
         dim: (n_k,)
@@ -217,9 +249,14 @@ NXimage(NXobject):
         doc: |
           Point coordinate along the slow dimension.
     axis_j(NX_NUMBER):
-      unit: NX_LENGTH
+      unit: NX_ANY
       doc: |
         Point coordinate along the fast dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
       dimensions:
         rank: 1
         dim: (n_j,)
@@ -227,9 +264,107 @@ NXimage(NXobject):
         doc: |
           Point coordinate along the fast dimension.
     axis_i(NX_NUMBER):
-      unit: NX_LENGTH
+      unit: NX_ANY
       doc: |
         Point coordinate along the fastest dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
+      dimensions:
+        rank: 1
+        dim: (n_i,)
+      \@long_name(NX_CHAR):
+        doc: |
+          Point coordinate along the fastest dimension.
+  image_4d(NXdata):
+    doc: |
+      Four-dimensional image.
+    intensity(NX_NUMBER):
+      unit: NX_UNITLESS
+      doc: |
+        Intensity for real-valued images as an alternative for real.
+        Magnitude of the image intensity for complex-valued data.
+      dimensions:
+        rank: 4
+        dim: (n_m, n_k, n_j, n_i)
+    real(NX_NUMBER):
+      unit: NX_UNITLESS
+      doc: |
+        Real part of the image intensity per point.
+      dimensions:
+        rank: 4
+        dim: (n_m, n_k, n_j, n_i)
+    imag(NX_NUMBER):
+      unit: NX_UNITLESS
+      doc: |
+        Imaginary part of the image intensity per point.
+      dimensions:
+        rank: 4
+        dim: (n_m, n_k, n_j, n_i)
+    complex(NX_COMPLEX):
+      unit: NX_UNITLESS
+      doc: |
+        Image intensity as a complex number as an alternative to real and
+        imag fields if values are stored as interleaved complex numbers.
+      dimensions:
+        rank: 4
+        dim: (n_m, n_k, n_j, n_i)
+    axis_m(NX_NUMBER):
+      unit: NX_ANY
+      doc: |
+        Point coordinate along the slowest dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
+      dimensions:
+        rank: 1
+        dim: (n_m,)
+      \@long_name(NX_CHAR):
+        doc: |
+          Point coordinate along the slowest dimension.
+    axis_k(NX_NUMBER):
+      unit: NX_ANY
+      doc: |
+        Point coordinate along the slow dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
+      dimensions:
+        rank: 1
+        dim: (n_k,)
+      \@long_name(NX_CHAR):
+        doc: |
+          Point coordinate along the slow dimension.
+    axis_j(NX_NUMBER):
+      unit: NX_ANY
+      doc: |
+        Point coordinate along the fast dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
+      dimensions:
+        rank: 1
+        dim: (n_j,)
+      \@long_name(NX_CHAR):
+        doc: |
+          Point coordinate along the fast dimension.
+    axis_i(NX_NUMBER):
+      unit: NX_ANY
+      doc: |
+        Point coordinate along the fastest dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
       dimensions:
         rank: 1
         dim: (n_i,)
@@ -290,9 +425,14 @@ NXimage(NXobject):
         doc: |
           Image identifier
     axis_i(NX_NUMBER):
-      unit: NX_LENGTH
+      unit: NX_ANY
       doc: |
         Point coordinate along the fastest dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
       dimensions:
         rank: 1
         dim: (n_i,)
@@ -353,9 +493,14 @@ NXimage(NXobject):
         doc: |
           Image identifier.
     axis_j(NX_NUMBER):
-      unit: NX_LENGTH
+      unit: NX_ANY
       doc: |
         Point coordinate along the fast dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
       dimensions:
         rank: 1
         dim: (n_j,)
@@ -363,9 +508,14 @@ NXimage(NXobject):
         doc: |
           Point coordinate along the fast dimension.
     axis_i(NX_NUMBER):
-      unit: NX_LENGTH
+      unit: NX_ANY
       doc: |
         Point coordinate along the fastest dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
       dimensions:
         rank: 1
         dim: (n_i,)
@@ -426,9 +576,14 @@ NXimage(NXobject):
         doc: |
           Image identifier
     axis_k(NX_NUMBER):
-      unit: NX_LENGTH
+      unit: NX_ANY
       doc: |
         Point coordinate along the slow dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
       dimensions:
         rank: 1
         dim: (n_k,)
@@ -436,9 +591,14 @@ NXimage(NXobject):
         doc: |
           Point coordinate along the slow dimension.
     axis_j(NX_NUMBER):
-      unit: NX_LENGTH
+      unit: NX_ANY
       doc: |
         Point coordinate along the fast dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
       dimensions:
         rank: 1
         dim: (n_j,)
@@ -446,9 +606,14 @@ NXimage(NXobject):
         doc: |
           Point coordinate along the fast dimension.
     axis_i(NX_NUMBER):
-      unit: NX_LENGTH
+      unit: NX_ANY
       doc: |
         Point coordinate along the fastest dimension.
+        
+        Different NeXus Unit Category are allowed:
+        
+        * NX_LENGTH for images slicing real space.
+        * NX_WAVENUMBER for images slicing reciprocal space.
       dimensions:
         rank: 1
         dim: (n_i,)
@@ -457,7 +622,7 @@ NXimage(NXobject):
           Point coordinate along the fastest dimension.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 53d9ce9754bf5da4922a7f90786b4ddbff14bbd5846e6bbb2836bdf0480ae2cf
+# 43dd29e12e292bdbdc94021d51a153557efdcf3a308f9f900e3cbebcf4d5766e
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -489,9 +654,14 @@ NXimage(NXobject):
 #                 Number of images in the stack, for stacks the slowest dimension.
 #             </doc>
 #         </symbol>
+#         <symbol name="n_m">
+#             <doc>
+#                 Number of image points along the slowest dimension.
+#             </doc>
+#         </symbol>
 #         <symbol name="n_k">
 #             <doc>
-#                 Number of image points along the slow dimension (k equivalent to z).
+#                 Number of image points along the slow dimension.
 #             </doc>
 #         </symbol>
 #         <symbol name="n_j">
@@ -516,10 +686,9 @@ NXimage(NXobject):
 #         pixel and voxel identify the smallest discretization unit. In this case, pixel and voxel are polygonal
 #         or polyhedral unit cells respectively of the underlying tiling of the ROI within the reference space.
 #         For all other tilings e.g. non-equispaced, the shape and size of pixel and voxel differs. Using the term
-#         image point is eventually more appropriate when working with such tilings.
+#         (image) point is eventually more appropriate when working with such tilings.
 #         
-#         Therefore, all docstrings in this base class refer to points. Points are considered
-#         exact synonyms for pixel and voxel, which are terms used for regular tilings.
+#         Therefore, all docstrings in this base class refer to points (including pixel and voxel i.e. regular tilings).
 #         
 #         Point coordinates identify the location of the barycenter.
 #         
@@ -545,6 +714,17 @@ NXimage(NXobject):
 #         That is indices_image are always counting from offset in increments of one
 #         as each image is its own entity. By contrast, a group may contain no, or several images.
 #         Consequently, indices_group are not required to be contiguous.
+#         
+#         Classically, images depict objects in real space. Such usage of NXimage essentially is equivalent to
+#         storing pictures. For this purpose the image_1d, image_2d, or image_3d NXdata instances respectively
+#         should be used with all their axes axis_i, axis_j, axis_k constrained to NeXus Unit Category NX_LENGTH.
+#         
+#         Imaging modes in electron microscopy are typically more versatile, specifically for use cases
+#         in scanning transmission electron microscopy, so-called 4DSTEM. In this case, one two-dimensional
+#         diffraction image is taken for each point that gets scanned in real space. Consequently,
+#         image_3d and image_4d NXdata instances should be used for these cases with axis_k and axis_m
+#         respectively of NeXus Unit Category NX_LENGTH and axis_i and axis_j respectively of
+#         NeXus Unit Category NX_WAVENUMBER.
 #     </doc>
 #     <group type="NXprocess">
 #         <doc>
@@ -619,9 +799,14 @@ NXimage(NXobject):
 #                 <dim index="1" value="n_i"/>
 #             </dimensions>
 #         </field>
-#         <field name="axis_i" type="NX_NUMBER" units="NX_LENGTH">
+#         <field name="axis_i" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
 #                 Point coordinate along the fastest dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
 #             </doc>
 #             <dimensions rank="1">
 #                 <dim index="1" value="n_i"/>
@@ -675,9 +860,14 @@ NXimage(NXobject):
 #                 <dim index="2" value="n_i"/>
 #             </dimensions>
 #         </field>
-#         <field name="axis_j" type="NX_NUMBER" units="NX_LENGTH">
+#         <field name="axis_j" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
 #                 Point coordinate along the fast dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
 #             </doc>
 #             <dimensions rank="1">
 #                 <dim index="1" value="n_j"/>
@@ -688,9 +878,14 @@ NXimage(NXobject):
 #                 </doc>
 #             </attribute>
 #         </field>
-#         <field name="axis_i" type="NX_NUMBER" units="NX_LENGTH">
+#         <field name="axis_i" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
 #                 Point coordinate along the fastest dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
 #             </doc>
 #             <dimensions rank="1">
 #                 <dim index="1" value="n_i"/>
@@ -748,9 +943,14 @@ NXimage(NXobject):
 #                 <dim index="3" value="n_i"/>
 #             </dimensions>
 #         </field>
-#         <field name="axis_k" type="NX_NUMBER" units="NX_LENGTH">
+#         <field name="axis_k" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
 #                 Point coordinate along the slow dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
 #             </doc>
 #             <dimensions rank="1">
 #                 <dim index="1" value="n_k"/>
@@ -761,9 +961,14 @@ NXimage(NXobject):
 #                 </doc>
 #             </attribute>
 #         </field>
-#         <field name="axis_j" type="NX_NUMBER" units="NX_LENGTH">
+#         <field name="axis_j" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
 #                 Point coordinate along the fast dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
 #             </doc>
 #             <dimensions rank="1">
 #                 <dim index="1" value="n_j"/>
@@ -774,9 +979,137 @@ NXimage(NXobject):
 #                 </doc>
 #             </attribute>
 #         </field>
-#         <field name="axis_i" type="NX_NUMBER" units="NX_LENGTH">
+#         <field name="axis_i" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
 #                 Point coordinate along the fastest dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
+#             </doc>
+#             <dimensions rank="1">
+#                 <dim index="1" value="n_i"/>
+#             </dimensions>
+#             <attribute name="long_name" type="NX_CHAR">
+#                 <doc>
+#                     Point coordinate along the fastest dimension.
+#                 </doc>
+#             </attribute>
+#         </field>
+#     </group>
+#     <group name="image_4d" type="NXdata">
+#         <doc>
+#             Four-dimensional image.
+#         </doc>
+#         <field name="intensity" type="NX_NUMBER" units="NX_UNITLESS">
+#             <doc>
+#                 Intensity for real-valued images as an alternative for real.
+#                 Magnitude of the image intensity for complex-valued data.
+#             </doc>
+#             <dimensions rank="4">
+#                 <dim index="1" value="n_m"/>
+#                 <dim index="2" value="n_k"/>
+#                 <dim index="3" value="n_j"/>
+#                 <dim index="4" value="n_i"/>
+#             </dimensions>
+#         </field>
+#         <field name="real" type="NX_NUMBER" units="NX_UNITLESS">
+#             <doc>
+#                 Real part of the image intensity per point.
+#             </doc>
+#             <dimensions rank="4">
+#                 <dim index="1" value="n_m"/>
+#                 <dim index="2" value="n_k"/>
+#                 <dim index="3" value="n_j"/>
+#                 <dim index="4" value="n_i"/>
+#             </dimensions>
+#         </field>
+#         <field name="imag" type="NX_NUMBER" units="NX_UNITLESS">
+#             <doc>
+#                 Imaginary part of the image intensity per point.
+#             </doc>
+#             <dimensions rank="4">
+#                 <dim index="1" value="n_m"/>
+#                 <dim index="2" value="n_k"/>
+#                 <dim index="3" value="n_j"/>
+#                 <dim index="4" value="n_i"/>
+#             </dimensions>
+#         </field>
+#         <field name="complex" type="NX_COMPLEX" units="NX_UNITLESS">
+#             <doc>
+#                 Image intensity as a complex number as an alternative to real and
+#                 imag fields if values are stored as interleaved complex numbers.
+#             </doc>
+#             <dimensions rank="4">
+#                 <dim index="1" value="n_m"/>
+#                 <dim index="2" value="n_k"/>
+#                 <dim index="3" value="n_j"/>
+#                 <dim index="4" value="n_i"/>
+#             </dimensions>
+#         </field>
+#         <field name="axis_m" type="NX_NUMBER" units="NX_ANY">
+#             <doc>
+#                 Point coordinate along the slowest dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
+#             </doc>
+#             <dimensions rank="1">
+#                 <dim index="1" value="n_m"/>
+#             </dimensions>
+#             <attribute name="long_name" type="NX_CHAR">
+#                 <doc>
+#                     Point coordinate along the slowest dimension.
+#                 </doc>
+#             </attribute>
+#         </field>
+#         <field name="axis_k" type="NX_NUMBER" units="NX_ANY">
+#             <doc>
+#                 Point coordinate along the slow dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
+#             </doc>
+#             <dimensions rank="1">
+#                 <dim index="1" value="n_k"/>
+#             </dimensions>
+#             <attribute name="long_name" type="NX_CHAR">
+#                 <doc>
+#                     Point coordinate along the slow dimension.
+#                 </doc>
+#             </attribute>
+#         </field>
+#         <field name="axis_j" type="NX_NUMBER" units="NX_ANY">
+#             <doc>
+#                 Point coordinate along the fast dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
+#             </doc>
+#             <dimensions rank="1">
+#                 <dim index="1" value="n_j"/>
+#             </dimensions>
+#             <attribute name="long_name" type="NX_CHAR">
+#                 <doc>
+#                     Point coordinate along the fast dimension.
+#                 </doc>
+#             </attribute>
+#         </field>
+#         <field name="axis_i" type="NX_NUMBER" units="NX_ANY">
+#             <doc>
+#                 Point coordinate along the fastest dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
 #             </doc>
 #             <dimensions rank="1">
 #                 <dim index="1" value="n_i"/>
@@ -856,9 +1189,14 @@ NXimage(NXobject):
 #                 </doc>
 #             </attribute>
 #         </field>
-#         <field name="axis_i" type="NX_NUMBER" units="NX_LENGTH">
+#         <field name="axis_i" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
 #                 Point coordinate along the fastest dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
 #             </doc>
 #             <dimensions rank="1">
 #                 <dim index="1" value="n_i"/>
@@ -942,9 +1280,14 @@ NXimage(NXobject):
 #                 </doc>
 #             </attribute>
 #         </field>
-#         <field name="axis_j" type="NX_NUMBER" units="NX_LENGTH">
+#         <field name="axis_j" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
 #                 Point coordinate along the fast dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
 #             </doc>
 #             <dimensions rank="1">
 #                 <dim index="1" value="n_j"/>
@@ -955,9 +1298,14 @@ NXimage(NXobject):
 #                 </doc>
 #             </attribute>
 #         </field>
-#         <field name="axis_i" type="NX_NUMBER" units="NX_LENGTH">
+#         <field name="axis_i" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
 #                 Point coordinate along the fastest dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
 #             </doc>
 #             <dimensions rank="1">
 #                 <dim index="1" value="n_i"/>
@@ -1045,9 +1393,14 @@ NXimage(NXobject):
 #                 </doc>
 #             </attribute>
 #         </field>
-#         <field name="axis_k" type="NX_NUMBER" units="NX_LENGTH">
+#         <field name="axis_k" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
 #                 Point coordinate along the slow dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
 #             </doc>
 #             <dimensions rank="1">
 #                 <dim index="1" value="n_k"/>
@@ -1058,9 +1411,14 @@ NXimage(NXobject):
 #                 </doc>
 #             </attribute>
 #         </field>
-#         <field name="axis_j" type="NX_NUMBER" units="NX_LENGTH">
+#         <field name="axis_j" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
 #                 Point coordinate along the fast dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
 #             </doc>
 #             <dimensions rank="1">
 #                 <dim index="1" value="n_j"/>
@@ -1071,9 +1429,14 @@ NXimage(NXobject):
 #                 </doc>
 #             </attribute>
 #         </field>
-#         <field name="axis_i" type="NX_NUMBER" units="NX_LENGTH">
+#         <field name="axis_i" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
 #                 Point coordinate along the fastest dimension.
+#                 
+#                 Different NeXus Unit Category are allowed:
+#                 
+#                 * NX_LENGTH for images slicing real space.
+#                 * NX_WAVENUMBER for images slicing reciprocal space.
 #             </doc>
 #             <dimensions rank="1">
 #                 <dim index="1" value="n_i"/>
