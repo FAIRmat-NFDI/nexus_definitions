@@ -638,7 +638,7 @@ NXem(NXobject):
               model(NX_CHAR):
               serial_number(NX_CHAR):
                 exists: recommended
-          lensID(NXlens_em):
+          lensID(NXelectromagnetic_lens):
             exists: ['min', '0', 'max', 'unbounded']
             nameType: partial
             name(NX_CHAR):
@@ -742,7 +742,7 @@ NXem(NXobject):
           beamID(NXbeam):
             nameType: partial
             exists: ['min', '0', 'max', 'unbounded']
-          scan_controller(NXscanbox_em):
+          scan_controller(NXscan_controller):
             exists: optional
             fabrication(NXfabrication):
               exists: recommended
@@ -767,7 +767,7 @@ NXem(NXobject):
               model(NX_CHAR):
               serial_number(NX_CHAR):
                 exists: recommended
-          lensID(NXlens_em):
+          lensID(NXelectromagnetic_lens):
             nameType: partial
             exists: ['min', '0', 'max', 'unbounded']
             name(NX_CHAR):
@@ -829,7 +829,7 @@ NXem(NXobject):
           beamID(NXbeam):
             nameType: partial
             exists: ['min', '0', 'max', 'unbounded']
-          scan_controller(NXscanbox_em):
+          scan_controller(NXscan_controller):
             exists: optional
             fabrication(NXfabrication):
               exists: optional
@@ -924,10 +924,10 @@ NXem(NXobject):
             imag(NX_NUMBER):
               exists: optional
               \@long_name(NX_CHAR):
-            magnitude(NX_NUMBER):
+            intensity(NX_NUMBER):
               exists: optional
               \@long_name(NX_CHAR):
-            intensity(NX_COMPLEX):
+            complex(NX_COMPLEX):
               exists: optional
               \@long_name(NX_CHAR):
             axis_i(NX_NUMBER):
@@ -945,10 +945,10 @@ NXem(NXobject):
             imag(NX_NUMBER):
               exists: optional
               \@long_name(NX_CHAR):
-            magnitude(NX_NUMBER):
+            intensity(NX_NUMBER):
               exists: optional
               \@long_name(NX_CHAR):
-            intensity(NX_COMPLEX):
+            magnitude(NX_COMPLEX):
               exists: optional
               \@long_name(NX_CHAR):
             axis_j(NX_NUMBER):
@@ -968,11 +968,38 @@ NXem(NXobject):
             imag(NX_NUMBER):
               exists: optional
               \@long_name(NX_CHAR):
-            magnitude(NX_NUMBER):
+            intensity(NX_NUMBER):
               exists: optional
               \@long_name(NX_CHAR):
-            intensity(NX_COMPLEX):
+            complex(NX_COMPLEX):
               exists: optional
+              \@long_name(NX_CHAR):
+            axis_k(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_j(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            axis_i(NX_NUMBER):
+              \@long_name(NX_CHAR):
+          image_4d(NXdata):
+            exists: optional
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
+              exists: recommended
+            real(NX_NUMBER):
+              \@long_name(NX_CHAR):
+            imag(NX_NUMBER):
+              exists: optional
+              \@long_name(NX_CHAR):
+            intensity(NX_NUMBER):
+              exists: optional
+              \@long_name(NX_CHAR):
+            complex(NX_COMPLEX):
+              exists: optional
+              \@long_name(NX_CHAR):
+            axis_m(NX_NUMBER):
               \@long_name(NX_CHAR):
             axis_k(NX_NUMBER):
               \@long_name(NX_CHAR):
@@ -993,10 +1020,10 @@ NXem(NXobject):
             imag(NX_NUMBER):
               exists: optional
               \@long_name(NX_CHAR):
-            magnitude(NX_NUMBER):
+            intensity(NX_NUMBER):
               exists: optional
               \@long_name(NX_CHAR):
-            intensity(NX_NUMBER):
+            complex(NX_COMPLEX):
               exists: optional
               \@long_name(NX_CHAR):
             indices_group(NX_INT):
@@ -1019,10 +1046,10 @@ NXem(NXobject):
             imag(NX_NUMBER):
               exists: optional
               \@long_name(NX_CHAR):
-            magnitude(NX_NUMBER):
+            intensity(NX_NUMBER):
               exists: optional
               \@long_name(NX_CHAR):
-            intensity(NX_NUMBER):
+            complex(NX_COMPLEX):
               exists: optional
               \@long_name(NX_CHAR):
             indices_group(NX_INT):
@@ -1047,10 +1074,10 @@ NXem(NXobject):
             imag(NX_NUMBER):
               exists: optional
               \@long_name(NX_CHAR):
-            magnitude(NX_NUMBER):
+            intensity(NX_NUMBER):
               exists: optional
               \@long_name(NX_CHAR):
-            intensity(NX_NUMBER):
+            complex(NX_COMPLEX):
               exists: optional
               \@long_name(NX_CHAR):
             indices_group(NX_INT):
@@ -1219,7 +1246,7 @@ NXem(NXobject):
                 exists: optional
               filament_current(NX_NUMBER):
                 exists: optional
-            lensID(NXlens_em):
+            lensID(NXelectromagnetic_lens):
               nameType: partial
               exists: ['min', '0', 'max', 'unbounded']
               power_setting(NX_CHAR_OR_NUMBER):
@@ -1401,7 +1428,7 @@ NXem(NXobject):
             beamID(NXbeam):
               nameType: partial
               exists: ['min', '0', 'max', 'unbounded']
-            scan_controller(NXscanbox_em):
+            scan_controller(NXscan_controller):
               exists: recommended
               scan_schema(NX_CHAR):
               dwell_time(NX_NUMBER):
@@ -1413,7 +1440,7 @@ NXem(NXobject):
               probe(NXatom):
               voltage(NX_NUMBER):
               flux(NX_NUMBER):
-            lensID(NXlens_em):
+            lensID(NXelectromagnetic_lens):
               nameType: partial
               exists: ['min', '0', 'max', 'unbounded']
               power_setting(NX_CHAR_OR_NUMBER):
@@ -1445,11 +1472,11 @@ NXem(NXobject):
             beamID(NXbeam):
               nameType: partial
               exists: ['min', '0', 'max', 'unbounded']
-            scan_controller(NXscanbox_em):
+            scan_controller(NXscan_controller):
               exists: recommended
               scan_schema(NX_CHAR):
               dwell_time(NX_NUMBER):
-          optics(NXoptical_system_em):
+          optics(NXem_optical_system):
             exists: recommended
           detectorID(NXdetector):
             nameType: partial
@@ -1526,7 +1553,7 @@ NXem(NXobject):
           exists: ['min', '0', 'max', 'unbounded']
         (NXspectrum):
           exists: ['min', '0', 'max', 'unbounded']
-        interaction_volumeID(NXinteraction_volume_em):
+        interaction_volumeID(NXem_interaction_volume):
           nameType: partial
           exists: ['min', '0', 'max', 'unbounded']
           (NXdata):
@@ -1747,7 +1774,7 @@ NXem(NXobject):
   # in https://github.com/FAIRmat-NFDI/nexus_definitions/commit/0b928c4352bc5636f673b5fb25ce990f1af8a099
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 088f012252ec11ab2c0e39934800192e6831472728e0c3a2120a8d4998576d5b
+# 4509f84562bb5c1924b0a273ef8f0b20b5b6c1ef84fbd7e68442c94e679da134
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -2530,7 +2557,7 @@ NXem(NXobject):
 #                             <field name="serial_number" type="NX_CHAR" recommended="true"/>
 #                         </group>
 #                     </group>
-#                     <group name="lensID" type="NXlens_em" minOccurs="0" maxOccurs="unbounded" nameType="partial">
+#                     <group name="lensID" type="NXelectromagnetic_lens" minOccurs="0" maxOccurs="unbounded" nameType="partial">
 #                         <field name="name" type="NX_CHAR"/>
 #                         <group name="fabrication" type="NXfabrication" optional="true">
 #                             <field name="vendor" type="NX_CHAR"/>
@@ -2613,7 +2640,7 @@ NXem(NXobject):
 #                     <group name="sensorID" type="NXsensor" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
 #                     <group name="actuatorID" type="NXactuator" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
 #                     <group name="beamID" type="NXbeam" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
-#                     <group name="scan_controller" type="NXscanbox_em" optional="true">
+#                     <group name="scan_controller" type="NXscan_controller" optional="true">
 #                         <group name="fabrication" type="NXfabrication" recommended="true">
 #                             <field name="vendor" type="NX_CHAR"/>
 #                             <field name="model" type="NX_CHAR"/>
@@ -2636,7 +2663,7 @@ NXem(NXobject):
 #                             <field name="serial_number" type="NX_CHAR" recommended="true"/>
 #                         </group>
 #                     </group>
-#                     <group name="lensID" type="NXlens_em" nameType="partial" minOccurs="0" maxOccurs="unbounded">
+#                     <group name="lensID" type="NXelectromagnetic_lens" nameType="partial" minOccurs="0" maxOccurs="unbounded">
 #                         <field name="name" type="NX_CHAR"/>
 #                         <group name="fabrication" type="NXfabrication" optional="true">
 #                             <field name="vendor" type="NX_CHAR"/>
@@ -2681,7 +2708,7 @@ NXem(NXobject):
 #                     <group name="sensorID" type="NXsensor" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
 #                     <group name="actuatorID" type="NXactuator" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
 #                     <group name="beamID" type="NXbeam" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
-#                     <group name="scan_controller" type="NXscanbox_em" optional="true">
+#                     <group name="scan_controller" type="NXscan_controller" optional="true">
 #                         <group name="fabrication" type="NXfabrication" optional="true">
 #                             <field name="vendor" type="NX_CHAR"/>
 #                             <field name="model" type="NX_CHAR"/>
@@ -2753,10 +2780,10 @@ NXem(NXobject):
 #                         <field name="imag" type="NX_NUMBER" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
-#                         <field name="magnitude" type="NX_NUMBER" optional="true">
+#                         <field name="intensity" type="NX_NUMBER" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
-#                         <field name="intensity" type="NX_COMPLEX" optional="true">
+#                         <field name="complex" type="NX_COMPLEX" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
 #                         <field name="axis_i" type="NX_NUMBER">
@@ -2774,10 +2801,10 @@ NXem(NXobject):
 #                         <field name="imag" type="NX_NUMBER" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
-#                         <field name="magnitude" type="NX_NUMBER" optional="true">
+#                         <field name="intensity" type="NX_NUMBER" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
-#                         <field name="intensity" type="NX_COMPLEX" optional="true">
+#                         <field name="magnitude" type="NX_COMPLEX" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
 #                         <field name="axis_j" type="NX_NUMBER">
@@ -2798,10 +2825,40 @@ NXem(NXobject):
 #                         <field name="imag" type="NX_NUMBER" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
-#                         <field name="magnitude" type="NX_NUMBER" optional="true">
+#                         <field name="intensity" type="NX_NUMBER" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
-#                         <field name="intensity" type="NX_COMPLEX" optional="true">
+#                         <field name="complex" type="NX_COMPLEX" optional="true">
+#                             <attribute name="long_name" type="NX_CHAR"/>
+#                         </field>
+#                         <field name="axis_k" type="NX_NUMBER">
+#                             <attribute name="long_name" type="NX_CHAR"/>
+#                         </field>
+#                         <field name="axis_j" type="NX_NUMBER">
+#                             <attribute name="long_name" type="NX_CHAR"/>
+#                         </field>
+#                         <field name="axis_i" type="NX_NUMBER">
+#                             <attribute name="long_name" type="NX_CHAR"/>
+#                         </field>
+#                     </group>
+#                     <group name="image_4d" type="NXdata" optional="true">
+#                         <attribute name="signal" type="NX_CHAR"/>
+#                         <attribute name="axes" type="NX_CHAR"/>
+#                         <attribute name="AXISNAME_indices" type="NX_UINT" nameType="partial"/>
+#                         <field name="title" type="NX_CHAR" recommended="true"/>
+#                         <field name="real" type="NX_NUMBER">
+#                             <attribute name="long_name" type="NX_CHAR"/>
+#                         </field>
+#                         <field name="imag" type="NX_NUMBER" optional="true">
+#                             <attribute name="long_name" type="NX_CHAR"/>
+#                         </field>
+#                         <field name="intensity" type="NX_NUMBER" optional="true">
+#                             <attribute name="long_name" type="NX_CHAR"/>
+#                         </field>
+#                         <field name="complex" type="NX_COMPLEX" optional="true">
+#                             <attribute name="long_name" type="NX_CHAR"/>
+#                         </field>
+#                         <field name="axis_m" type="NX_NUMBER">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
 #                         <field name="axis_k" type="NX_NUMBER">
@@ -2825,10 +2882,10 @@ NXem(NXobject):
 #                         <field name="imag" type="NX_NUMBER" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
-#                         <field name="magnitude" type="NX_NUMBER" optional="true">
+#                         <field name="intensity" type="NX_NUMBER" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
-#                         <field name="intensity" type="NX_NUMBER" optional="true">
+#                         <field name="complex" type="NX_COMPLEX" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
 #                         <field name="indices_group" type="NX_INT" optional="true">
@@ -2852,10 +2909,10 @@ NXem(NXobject):
 #                         <field name="imag" type="NX_NUMBER" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
-#                         <field name="magnitude" type="NX_NUMBER" optional="true">
+#                         <field name="intensity" type="NX_NUMBER" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
-#                         <field name="intensity" type="NX_NUMBER" optional="true">
+#                         <field name="complex" type="NX_COMPLEX" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
 #                         <field name="indices_group" type="NX_INT" optional="true">
@@ -2882,10 +2939,10 @@ NXem(NXobject):
 #                         <field name="imag" type="NX_NUMBER" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
-#                         <field name="magnitude" type="NX_NUMBER" optional="true">
+#                         <field name="intensity" type="NX_NUMBER" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
-#                         <field name="intensity" type="NX_NUMBER" optional="true">
+#                         <field name="complex" type="NX_COMPLEX" optional="true">
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
 #                         <field name="indices_group" type="NX_INT" optional="true">
@@ -3070,7 +3127,7 @@ NXem(NXobject):
 #                             <field name="emission_current" type="NX_NUMBER" optional="true"/>
 #                             <field name="filament_current" type="NX_NUMBER" optional="true"/>
 #                         </group>
-#                         <group name="lensID" type="NXlens_em" nameType="partial" minOccurs="0" maxOccurs="unbounded">
+#                         <group name="lensID" type="NXelectromagnetic_lens" nameType="partial" minOccurs="0" maxOccurs="unbounded">
 #                             <field name="power_setting" type="NX_CHAR_OR_NUMBER"/>
 #                         </group>
 #                         <group name="apertureID" type="NXaperture" nameType="partial" minOccurs="0" maxOccurs="unbounded">
@@ -3227,7 +3284,7 @@ NXem(NXobject):
 #                         <group name="sensorID" type="NXsensor" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
 #                         <group name="actuatorID" type="NXactuator" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
 #                         <group name="beamID" type="NXbeam" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
-#                         <group name="scan_controller" type="NXscanbox_em" recommended="true">
+#                         <group name="scan_controller" type="NXscan_controller" recommended="true">
 #                             <field name="scan_schema" type="NX_CHAR"/>
 #                             <field name="dwell_time" type="NX_NUMBER"/>
 #                         </group>
@@ -3239,7 +3296,7 @@ NXem(NXobject):
 #                             <field name="voltage" type="NX_NUMBER"/>
 #                             <field name="flux" type="NX_NUMBER"/>
 #                         </group>
-#                         <group name="lensID" type="NXlens_em" nameType="partial" minOccurs="0" maxOccurs="unbounded">
+#                         <group name="lensID" type="NXelectromagnetic_lens" nameType="partial" minOccurs="0" maxOccurs="unbounded">
 #                             <field name="power_setting" type="NX_CHAR_OR_NUMBER"/>
 #                         </group>
 #                         <group name="apertureID" type="NXaperture" nameType="partial" minOccurs="0" maxOccurs="unbounded">
@@ -3260,12 +3317,12 @@ NXem(NXobject):
 #                         <group name="sensorID" type="NXsensor" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
 #                         <group name="actuatorID" type="NXactuator" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
 #                         <group name="beamID" type="NXbeam" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
-#                         <group name="scan_controller" type="NXscanbox_em" recommended="true">
+#                         <group name="scan_controller" type="NXscan_controller" recommended="true">
 #                             <field name="scan_schema" type="NX_CHAR"/>
 #                             <field name="dwell_time" type="NX_NUMBER"/>
 #                         </group>
 #                     </group>
-#                     <group name="optics" type="NXoptical_system_em" recommended="true"/>
+#                     <group name="optics" type="NXem_optical_system" recommended="true"/>
 #                     <group name="detectorID" type="NXdetector" nameType="partial" minOccurs="0" maxOccurs="unbounded">
 #                         <field name="operation_mode" type="NX_CHAR">
 #                             <doc>
@@ -3335,7 +3392,7 @@ NXem(NXobject):
 #                 </doc>
 #                 <group type="NXimage" minOccurs="0" maxOccurs="unbounded"/>
 #                 <group type="NXspectrum" minOccurs="0" maxOccurs="unbounded"/>
-#                 <group name="interaction_volumeID" type="NXinteraction_volume_em" nameType="partial" minOccurs="0" maxOccurs="unbounded">
+#                 <group name="interaction_volumeID" type="NXem_interaction_volume" nameType="partial" minOccurs="0" maxOccurs="unbounded">
 #                     <group type="NXdata" recommended="true"/>
 #                     <group type="NXprocess" recommended="true"/>
 #                 </group>
