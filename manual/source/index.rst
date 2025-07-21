@@ -32,8 +32,8 @@ https://www.nexusformat.org/
 
 .. rubric:: Publishing Information
 
-| This commit time code <<AUTO_INJECT_COMMIT_TC>>.
-| This commit identifier <<AUTO_INJECT_COMMIT_ID>>.
+| This commit time code |commit_time|.
+| This commit identifier |commit_hash|.
 | This manual built |today|.
 
 .. rubric:: Acknowledgements
@@ -64,7 +64,7 @@ https://www.nexusformat.org/
 
    FAIRmat website:
 
-   `<https://www.fair-di.eu/fairmat/fairmat_/consortium>`_
+   `<https://www.fairmat-nfdi.eu/fairmat/about-fairmat/consortium-fairmat>`_
 
    NOMAD website:
 
