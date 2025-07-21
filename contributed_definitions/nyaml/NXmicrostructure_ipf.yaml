@@ -2,42 +2,48 @@ category: base
 doc: |
   Base class to store an inverse pole figure (IPF) mapping (IPF map).
 symbols:
+  v: |
+    Number of pixel along the slow direction used for the IPF color key.
+  u: |
+    Number of pixel along the fast direction used for the IPF color key.
   n_z: |
-    Number of pixel along the z slowest direction.
+    Number of pixel along the slowest direction, typically labeled z or k.
   n_y: |
-    Number of pixel along the y slow direction.
+    Number of pixel along the slow direction, typically labeled y or j.
   n_x: |
-    Number of pixel along the x fast direction.
+    Number of pixel along the fast direction, typically labeled x or i.
   n_rgb: |
     Number of RGB values along the fastest direction, always three.
 type: group
 NXmicrostructure_ipf(NXprocess):
   depends_on(NX_CHAR):
     doc: |
-      Reference to an :ref:`NXcoordinate_system` in which the projection_direction is defined.
-      
-      If the field depends_on is not provided but parents of the instance of this base class or its
-      specializations define an instance of :ref:`NXcoordinate_system`, projection_direction
-      is defined in this coordinate system.
-      
-      If nothing is provided it is assumed that projection_direction is defined in the McStas coordinate system.
+      Reference to an instance of :ref:`NXcoordinate_system` in which the axes axis_z,
+      axis_y, and axis_x are defined.
   color_model(NX_CHAR):
     doc: |
       The algorithm whereby orientations are colored.
-    enumeration: [is_open, values]
+    enumeration: [tsl, mtex]
   projection_direction(NX_NUMBER):
     unit: NX_UNITLESS
     doc: |
-      The direction along which orientations are projected.
+      The direction normal vector along which orientations are projected.
     dimensions:
       rank: 1
       dim: (3,)
+    \@depends_on(NX_CHAR):
+      doc: |
+        Reference to an instance of :ref:`NXcoordinate_system` in which the projection_direction is defined.
+        
+        If the field depends_on is not provided but parents of the instance of this base class or its
+        specializations define an instance of :ref:`NXcoordinate_system`, projection_direction
+        is defined in this coordinate system.
+        
+        If nothing is provided, it is assumed that projection_direction is defined in the McStas coordinate system.
   input_grid(NXcg_grid):
     doc: |
-      Details about the original grid.
-      
-      Here original grid means the grid for which the IPF map was computed when that
-      IPF map was exported from the tech partner's file format representation.
+      Details about the original grid, i.e. the grid for which the IPF map was computed
+      when that IPF map was exported from the tech partner's file format representation.
   output_grid(NXcg_grid):
     doc: |
       Details about the grid onto which the IPF is recomputed.
@@ -64,40 +70,37 @@ NXmicrostructure_ipf(NXprocess):
       
       The main purpose of this map is to offer a normalized default representation
       of the IPF map for consumption by a research data management system (RDMS).
-      This is aligned with the first aim of :ref:`NXmicrostructure_ipf`, to bring colleagues
-      and users of IPF maps together to discuss which pieces of information need storage.
-      
-      We are convinced a step-by-step design and community-driven discussion is a practical
-      strategy to work towards an interoperable description and data model for exchanging
-      IPF maps as a specific community-accepted method to convey orientation maps.
-      
-      With this design the individual RDMS solutions and tools can still continue
-      to support specific custom data analyses workflow and routes but at least
-      there is one common understanding which enables also those users who are
-      not necessarily experts in all the details of the underlying techniques an
-      understanding if the dataset is worth to become reused or repurposed.
-    
-    # \@signal: data
-    # \@axes: [axis_y, axis_x]
-    # \@axis_x_indices: 0
-    # \@axis_y_indices: 1
     data(NX_NUMBER):
       unit: NX_UNITLESS
-      
-      # assume a mapping with step size 0.5 micron
-      # we need to distinguish
-      # pixel position, i.e. 0, 1, 2, 3, unit px
-      # answers in which pixel on the map but map is disconnected from sample surface context
-      # calibrated pixel position 0., 0.5, 1.0, 1.5, unit micron
-      # answers in addition physical dimensions (relevant to get crystal extent etc.) but still disconnected from sample surface context
-      # calibrated pixel position including the offset of the original coordinate system
-      # answers everything would enable one to point if still in the microscope where on the sample surface each pixel is located
-      # tech partners oftentimes do not report to more than calibrated pixel position
       doc: |
         Inverse pole figure color code for each map coordinate.
-      dimensions:
-        rank: 3
-        dim: (n_y, n_x, 3)
+        
+        Different types of AXISNAME dimensional scale axes are found in practice. A few examples:
+        
+        * No scaling, e.g. pixel position values like 0, 1, 2, 3 pixel.
+          Pixels on the map can be distinguished but that map is disconnected from
+          any sample surface context and eventually physical scaling
+        * Scaling but no offset, e.g. calibrated pixel position 0., 0.5, 1.0, 1.5 micron.
+          Pixels on the map can be compared for their distance to obtain e.g. size of features
+          but the position of the map relative to the e.g. the sample surface is unclear.
+          For IPF maps this is the most frequently reported situation.
+        * Scaling and offset, which resolves also the absolute position of the map in
+          relation to the sample surface. This is useful information for stitching multiple
+          mappings together and other processing where precise and accurate
+          position data are relevant e.g. for correlative materials characterization.
+        
+        Three types of dimensional constraints for maps are possible:
+        
+        * (n_x, 3), a one-dimensional map,
+          typically used for coarse sampling and crystal size statistics.
+        * (n_y, n_x, 3), a two-dimensional map,
+          the most frequently found reported
+        * (n_z, n_y, n_x, 3), a three-dimensional map,
+          these are commonly generated using computational methods,
+          or in cases multiple EBSD maps have been stitched/reconstructed
+          into a three-dimensional map.
+        
+    # strictly speaking unit must not be constraint for AXISNAME no scaling
     axis_z(NX_NUMBER):
       unit: NX_LENGTH
       doc: |
@@ -105,8 +108,6 @@ NXmicrostructure_ipf(NXprocess):
       dimensions:
         rank: 1
         dim: (n_z,)
-    
-    # \@long_name(NX_CHAR):
     axis_y(NX_NUMBER):
       unit: NX_LENGTH
       doc: |
@@ -114,8 +115,6 @@ NXmicrostructure_ipf(NXprocess):
       dimensions:
         rank: 1
         dim: (n_y,)
-    
-    # \@long_name(NX_CHAR):
     axis_x(NX_NUMBER):
       unit: NX_LENGTH
       doc: |
@@ -123,12 +122,9 @@ NXmicrostructure_ipf(NXprocess):
       dimensions:
         rank: 1
         dim: (n_x,)
-  
-  # \@long_name(NX_CHAR):
-  # title:
   legend(NXdata):
     doc: |
-      The color code which maps colors to orientation in the fundamental zone.
+      The color code which maps color to orientation in the fundamental zone.
       
       For each stereographic standard triangle (SST), i.e. a rendering of the
       fundamental zone of the crystal-symmetry-reduced orientation space
@@ -147,56 +143,46 @@ NXmicrostructure_ipf(NXprocess):
       * [S. Patala et al.](https://doi.org/10.1016/j.pmatsci.2012.04.002).
       
       Details are implementation-specific and not standardized yet.
-      
-      Given that the SST has a complicated geometry, it can not yet be
-      visualized using tools like H5Web, which is why for now the matrix
-      of a rasterized image which is rendered by the backend tool gets
-      copied into an RGB matrix to offer a default plot.
     
-    # \@signal: data
-    # \@axes: [axis_y, axis_x]
-    # \@axis_x_indices: 0
-    # \@axis_y_indices: 1
+    # Given that the SST has a complicated geometry, it can not yet be
+    # visualized using tools like H5Web, which is why for now the matrix
+    # of a rasterized image which is rendered by the backend tool gets
+    # copied into an RGB matrix to offer a default plot.
     data(NX_NUMBER):
-      unit: NX_UNITLESS
+      unit: NX_ANY
       
-      # hehe, but can be larger than one but could also be an NX_DIMENSIONLESS !
+      # NX_UNITLESS or NX_DIMENSIONLESS
       doc: |
         Inverse pole figure color code for each map coordinate.
       dimensions:
         rank: 3
-        dim: (n_y, n_x, 3)
+        dim: (v, u, 3)
     axis_y(NX_NUMBER):
       unit: NX_UNITLESS
       doc: |
         Pixel along the y-axis.
       dimensions:
         rank: 1
-        dim: (n_y,)
-    
-    # \@long_name(NX_CHAR):
+        dim: (v,)
     axis_x(NX_NUMBER):
       unit: NX_UNITLESS
       doc: |
         Pixel along the x-axis.
       dimensions:
         rank: 1
-        dim: (n_x,)
-  
-  # \@long_name(NX_CHAR):
-  # title:
+        dim: (u,)
   
   # for further contextualization see comments in NXms_ipf.yaml
   # https://github.com/FAIRmat-NFDI/nexus_definitions/commit/26d4faa5c6950161e48f0672f3fdfd8c9bc907e2
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 58c563eb017c564647c865ff741671f98c3ce2663396d770586802f51abfa741
+# 2fd54fed9b66a852517a7bd63c55551423a58b045b7ece77f1aecfb07b0347bb
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
 # # NeXus - Neutron and X-ray Common Data Format
 # #
-# # Copyright (C) 2023-2025 NeXus International Advisory Committee (NIAC)
+# # Copyright (C) 2025-2025 NeXus International Advisory Committee (NIAC)
 # #
 # # This library is free software; you can redistribute it and/or
 # # modify it under the terms of the GNU Lesser General Public
@@ -216,19 +202,29 @@ NXmicrostructure_ipf(NXprocess):
 # -->
 # <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXmicrostructure_ipf" extends="NXprocess" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <symbols>
+#         <symbol name="v">
+#             <doc>
+#                 Number of pixel along the slow direction used for the IPF color key.
+#             </doc>
+#         </symbol>
+#         <symbol name="u">
+#             <doc>
+#                 Number of pixel along the fast direction used for the IPF color key.
+#             </doc>
+#         </symbol>
 #         <symbol name="n_z">
 #             <doc>
-#                 Number of pixel along the z slowest direction.
+#                 Number of pixel along the slowest direction, typically labeled z or k.
 #             </doc>
 #         </symbol>
 #         <symbol name="n_y">
 #             <doc>
-#                 Number of pixel along the y slow direction.
+#                 Number of pixel along the slow direction, typically labeled y or j.
 #             </doc>
 #         </symbol>
 #         <symbol name="n_x">
 #             <doc>
-#                 Number of pixel along the x fast direction.
+#                 Number of pixel along the fast direction, typically labeled x or i.
 #             </doc>
 #         </symbol>
 #         <symbol name="n_rgb">
@@ -242,13 +238,8 @@ NXmicrostructure_ipf(NXprocess):
 #     </doc>
 #     <field name="depends_on" type="NX_CHAR">
 #         <doc>
-#             Reference to an :ref:`NXcoordinate_system` in which the projection_direction is defined.
-#             
-#             If the field depends_on is not provided but parents of the instance of this base class or its
-#             specializations define an instance of :ref:`NXcoordinate_system`, projection_direction
-#             is defined in this coordinate system.
-#             
-#             If nothing is provided it is assumed that projection_direction is defined in the McStas coordinate system.
+#             Reference to an instance of :ref:`NXcoordinate_system` in which the axes axis_z,
+#             axis_y, and axis_x are defined.
 #         </doc>
 #     </field>
 #     <field name="color_model" type="NX_CHAR">
@@ -256,24 +247,33 @@ NXmicrostructure_ipf(NXprocess):
 #             The algorithm whereby orientations are colored.
 #         </doc>
 #         <enumeration>
-#             <item value="is_open"/>
-#             <item value="values"/>
+#             <item value="tsl"/>
+#             <item value="mtex"/>
 #         </enumeration>
 #     </field>
 #     <field name="projection_direction" type="NX_NUMBER" units="NX_UNITLESS">
 #         <doc>
-#             The direction along which orientations are projected.
+#             The direction normal vector along which orientations are projected.
 #         </doc>
 #         <dimensions rank="1">
 #             <dim index="1" value="3"/>
 #         </dimensions>
+#         <field name="depends_on" type="NX_CHAR">
+#             <doc>
+#                 Reference to an instance of :ref:`NXcoordinate_system` in which the projection_direction is defined.
+#                 
+#                 If the field depends_on is not provided but parents of the instance of this base class or its
+#                 specializations define an instance of :ref:`NXcoordinate_system`, projection_direction
+#                 is defined in this coordinate system.
+#                 
+#                 If nothing is provided, it is assumed that projection_direction is defined in the McStas coordinate system.
+#             </doc>
+#         </field>
 #     </field>
 #     <group name="input_grid" type="NXcg_grid">
 #         <doc>
-#             Details about the original grid.
-#             
-#             Here original grid means the grid for which the IPF map was computed when that
-#             IPF map was exported from the tech partner's file format representation.
+#             Details about the original grid, i.e. the grid for which the IPF map was computed
+#             when that IPF map was exported from the tech partner's file format representation.
 #         </doc>
 #     </group>
 #     <group name="output_grid" type="NXcg_grid">
@@ -308,42 +308,38 @@ NXmicrostructure_ipf(NXprocess):
 #             
 #             The main purpose of this map is to offer a normalized default representation
 #             of the IPF map for consumption by a research data management system (RDMS).
-#             This is aligned with the first aim of :ref:`NXmicrostructure_ipf`, to bring colleagues
-#             and users of IPF maps together to discuss which pieces of information need storage.
-#             
-#             We are convinced a step-by-step design and community-driven discussion is a practical
-#             strategy to work towards an interoperable description and data model for exchanging
-#             IPF maps as a specific community-accepted method to convey orientation maps.
-#             
-#             With this design the individual RDMS solutions and tools can still continue
-#             to support specific custom data analyses workflow and routes but at least
-#             there is one common understanding which enables also those users who are
-#             not necessarily experts in all the details of the underlying techniques an
-#             understanding if the dataset is worth to become reused or repurposed.
 #         </doc>
-#         <!--\@signal: data
-# \@axes: [axis_y, axis_x]
-# \@axis_x_indices: 0
-# \@axis_y_indices: 1-->
 #         <field name="data" type="NX_NUMBER" units="NX_UNITLESS">
-#             <!--assume a mapping with step size 0.5 micron
-# we need to distinguish
-# pixel position, i.e. 0, 1, 2, 3, unit px
-# answers in which pixel on the map but map is disconnected from sample surface context
-# calibrated pixel position 0., 0.5, 1.0, 1.5, unit micron
-# answers in addition physical dimensions (relevant to get crystal extent etc.) but still disconnected from sample surface context
-# calibrated pixel position including the offset of the original coordinate system
-# answers everything would enable one to point if still in the microscope where on the sample surface each pixel is located
-# tech partners oftentimes do not report to more than calibrated pixel position-->
 #             <doc>
 #                 Inverse pole figure color code for each map coordinate.
+#                 
+#                 Different types of AXISNAME dimensional scale axes are found in practice. A few examples:
+#                 
+#                 * No scaling, e.g. pixel position values like 0, 1, 2, 3 pixel.
+#                   Pixels on the map can be distinguished but that map is disconnected from
+#                   any sample surface context and eventually physical scaling
+#                 * Scaling but no offset, e.g. calibrated pixel position 0., 0.5, 1.0, 1.5 micron.
+#                   Pixels on the map can be compared for their distance to obtain e.g. size of features
+#                   but the position of the map relative to the e.g. the sample surface is unclear.
+#                   For IPF maps this is the most frequently reported situation.
+#                 * Scaling and offset, which resolves also the absolute position of the map in
+#                   relation to the sample surface. This is useful information for stitching multiple
+#                   mappings together and other processing where precise and accurate
+#                   position data are relevant e.g. for correlative materials characterization.
+#                 
+#                 Three types of dimensional constraints for maps are possible:
+#                 
+#                 * (n_x, 3), a one-dimensional map,
+#                   typically used for coarse sampling and crystal size statistics.
+#                 * (n_y, n_x, 3), a two-dimensional map,
+#                   the most frequently found reported
+#                 * (n_z, n_y, n_x, 3), a three-dimensional map,
+#                   these are commonly generated using computational methods,
+#                   or in cases multiple EBSD maps have been stitched/reconstructed
+#                   into a three-dimensional map.
 #             </doc>
-#             <dimensions rank="3">
-#                 <dim index="1" value="n_y"/>
-#                 <dim index="2" value="n_x"/>
-#                 <dim index="3" value="3"/>
-#             </dimensions>
 #         </field>
+#         <!--strictly speaking unit must not be constraint for AXISNAME no scaling-->
 #         <field name="axis_z" type="NX_NUMBER" units="NX_LENGTH">
 #             <doc>
 #                 Pixel center coordinate calibrated for step size along the z axis of the map.
@@ -352,7 +348,6 @@ NXmicrostructure_ipf(NXprocess):
 #                 <dim index="1" value="n_z"/>
 #             </dimensions>
 #         </field>
-#         <!--\@long_name(NX_CHAR):-->
 #         <field name="axis_y" type="NX_NUMBER" units="NX_LENGTH">
 #             <doc>
 #                 Pixel center coordinate calibrated for step size along the y axis of the map.
@@ -361,7 +356,6 @@ NXmicrostructure_ipf(NXprocess):
 #                 <dim index="1" value="n_y"/>
 #             </dimensions>
 #         </field>
-#         <!--\@long_name(NX_CHAR):-->
 #         <field name="axis_x" type="NX_NUMBER" units="NX_LENGTH">
 #             <doc>
 #                 Pixel center coordinate calibrated for step size along the x axis of the map.
@@ -371,11 +365,9 @@ NXmicrostructure_ipf(NXprocess):
 #             </dimensions>
 #         </field>
 #     </group>
-#     <!--\@long_name(NX_CHAR):
-# title:-->
 #     <group name="legend" type="NXdata">
 #         <doc>
-#             The color code which maps colors to orientation in the fundamental zone.
+#             The color code which maps color to orientation in the fundamental zone.
 #             
 #             For each stereographic standard triangle (SST), i.e. a rendering of the
 #             fundamental zone of the crystal-symmetry-reduced orientation space
@@ -394,24 +386,19 @@ NXmicrostructure_ipf(NXprocess):
 #             * [S. Patala et al.](https://doi.org/10.1016/j.pmatsci.2012.04.002).
 #             
 #             Details are implementation-specific and not standardized yet.
-#             
-#             Given that the SST has a complicated geometry, it can not yet be
-#             visualized using tools like H5Web, which is why for now the matrix
-#             of a rasterized image which is rendered by the backend tool gets
-#             copied into an RGB matrix to offer a default plot.
 #         </doc>
-#         <!--\@signal: data
-# \@axes: [axis_y, axis_x]
-# \@axis_x_indices: 0
-# \@axis_y_indices: 1-->
-#         <field name="data" type="NX_NUMBER" units="NX_UNITLESS">
-#             <!--hehe, but can be larger than one but could also be an NX_DIMENSIONLESS !-->
+#         <!--Given that the SST has a complicated geometry, it can not yet be
+# visualized using tools like H5Web, which is why for now the matrix
+# of a rasterized image which is rendered by the backend tool gets
+# copied into an RGB matrix to offer a default plot.-->
+#         <field name="data" type="NX_NUMBER" units="NX_ANY">
+#             <!--NX_UNITLESS or NX_DIMENSIONLESS-->
 #             <doc>
 #                 Inverse pole figure color code for each map coordinate.
 #             </doc>
 #             <dimensions rank="3">
-#                 <dim index="1" value="n_y"/>
-#                 <dim index="2" value="n_x"/>
+#                 <dim index="1" value="v"/>
+#                 <dim index="2" value="u"/>
 #                 <dim index="3" value="3"/>
 #             </dimensions>
 #         </field>
@@ -420,21 +407,18 @@ NXmicrostructure_ipf(NXprocess):
 #                 Pixel along the y-axis.
 #             </doc>
 #             <dimensions rank="1">
-#                 <dim index="1" value="n_y"/>
+#                 <dim index="1" value="v"/>
 #             </dimensions>
 #         </field>
-#         <!--\@long_name(NX_CHAR):-->
 #         <field name="axis_x" type="NX_NUMBER" units="NX_UNITLESS">
 #             <doc>
 #                 Pixel along the x-axis.
 #             </doc>
 #             <dimensions rank="1">
-#                 <dim index="1" value="n_x"/>
+#                 <dim index="1" value="u"/>
 #             </dimensions>
 #         </field>
 #     </group>
-#     <!--\@long_name(NX_CHAR):
-# title:-->
 #     <!--for further contextualization see comments in NXms_ipf.yaml
 # https://github.com/FAIRmat-NFDI/nexus_definitions/commit/26d4faa5c6950161e48f0672f3fdfd8c9bc907e2-->
 # </definition>
