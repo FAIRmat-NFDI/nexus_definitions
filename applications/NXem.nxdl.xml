@@ -1702,47 +1702,48 @@ not wish to duplicate all payload data-->
                             <field name="gamma" type="NX_NUMBER"/>
                             <field name="space_group" type="NX_CHAR"/>
                         </group>
-                    </group>
-                    <!--foreseen place for phase-specific texture and microstructure representations and statistics-->
-                    <group name="ipfID" type="NXmicrostructure_ipf" nameType="partial" minOccurs="1" maxOccurs="unbounded">
-                        <field name="color_model" type="NX_CHAR"/>
-                        <field name="projection_direction" type="NX_NUMBER"/>
-                        <group name="map" type="NXdata">
-                            <attribute name="signal" type="NX_CHAR"/>
-                            <attribute name="axes" type="NX_CHAR"/>
-                            <attribute name="AXISNAME_indices" type="NX_UINT" nameType="partial"/>
-                            <field name="title" type="NX_CHAR" recommended="true"/>
-                            <field name="data" type="NX_NUMBER">
-                                <attribute name="long_name" type="NX_CHAR"/>
-                            </field>
-                            <field name="axis_x" type="NX_NUMBER">
-                                <attribute name="long_name" type="NX_CHAR"/>
-                            </field>
-                            <field name="axis_y" type="NX_NUMBER" optional="true">
-                                <attribute name="long_name" type="NX_CHAR"/>
-                            </field>
-                            <field name="axis_z" type="NX_NUMBER" optional="true">
-                                <attribute name="long_name" type="NX_CHAR"/>
-                            </field>
+                        <!--phase-specific texture-->
+                        <group name="ipfID" type="NXmicrostructure_ipf" nameType="partial" minOccurs="1" maxOccurs="unbounded">
+                            <field name="color_model" type="NX_CHAR"/>
+                            <field name="projection_direction" type="NX_NUMBER"/>
+                            <group name="map" type="NXdata">
+                                <attribute name="signal" type="NX_CHAR"/>
+                                <attribute name="axes" type="NX_CHAR"/>
+                                <attribute name="AXISNAME_indices" type="NX_UINT" nameType="partial"/>
+                                <field name="title" type="NX_CHAR" recommended="true"/>
+                                <field name="data" type="NX_NUMBER">
+                                    <attribute name="long_name" type="NX_CHAR"/>
+                                </field>
+                                <field name="axis_x" type="NX_NUMBER">
+                                    <attribute name="long_name" type="NX_CHAR"/>
+                                </field>
+                                <field name="axis_y" type="NX_NUMBER" optional="true">
+                                    <attribute name="long_name" type="NX_CHAR"/>
+                                </field>
+                                <field name="axis_z" type="NX_NUMBER" optional="true">
+                                    <attribute name="long_name" type="NX_CHAR"/>
+                                </field>
+                            </group>
+                            <group name="legend" type="NXdata">
+                                <attribute name="signal" type="NX_CHAR"/>
+                                <attribute name="axes" type="NX_CHAR"/>
+                                <attribute name="AXISNAME_indices" type="NX_UINT" nameType="partial"/>
+                                <field name="title" type="NX_CHAR" recommended="true"/>
+                                <field name="data" type="NX_NUMBER">
+                                    <attribute name="long_name" type="NX_CHAR"/>
+                                </field>
+                                <field name="axis_x" type="NX_NUMBER">
+                                    <attribute name="long_name" type="NX_CHAR"/>
+                                </field>
+                                <field name="axis_y" type="NX_NUMBER">
+                                    <attribute name="long_name" type="NX_CHAR"/>
+                                </field>
+                            </group>
                         </group>
-                        <group name="legend" type="NXdata">
-                            <attribute name="signal" type="NX_CHAR"/>
-                            <attribute name="axes" type="NX_CHAR"/>
-                            <attribute name="AXISNAME_indices" type="NX_UINT" nameType="partial"/>
-                            <field name="title" type="NX_CHAR" recommended="true"/>
-                            <field name="data" type="NX_NUMBER">
-                                <attribute name="long_name" type="NX_CHAR"/>
-                            </field>
-                            <field name="axis_x" type="NX_NUMBER">
-                                <attribute name="long_name" type="NX_CHAR"/>
-                            </field>
-                            <field name="axis_y" type="NX_NUMBER">
-                                <attribute name="long_name" type="NX_CHAR"/>
-                            </field>
-                        </group>
+                        <group name="odfID" type="NXmicrostructure_odf" nameType="partial" optional="true"/>
+                        <group name="pfID" type="NXmicrostructure_pf" nameType="partial" optional="true"/>
                     </group>
-                    <group name="odfID" type="NXmicrostructure_odf" nameType="partial" optional="true"/>
-                    <group name="pfID" type="NXmicrostructure_pf" nameType="partial" optional="true"/>
+                    <!--microstructure of the entire ROI-->
                     <group name="microstructureID" type="NXmicrostructure" nameType="partial" optional="true"/>
                     <group name="roi" type="NXdata" recommended="true">
                         <attribute name="signal" type="NX_CHAR"/>
