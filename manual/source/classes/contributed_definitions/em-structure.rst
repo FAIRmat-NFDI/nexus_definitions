@@ -65,7 +65,7 @@ The following base classes are proposed to support modularizing the storage of p
         A base class serving the possibility to group the components relevant for generating
         and shaping an ion beam of an instrument to offer focused-ion beam (milling) capabilities.
 
-    :ref:`NXlens_em`:
+    :ref:`NXelectromagnetic_lens`:
         A base class to detail an electro-magnetic lens. In practice, an electron microscope has many such lenses. It is possible to specify as many lenses as necessary to represent eventually each single lens of the microscope and thus describe how the lenses are affecting the electron beam. This can offer opportunities for developers of software tools which strive to model the instrument e.g. to create digital twins of the instrument. We understand there is still a way to go with this to arrive there though. Consequently, we suggest to focus first on which details should be collected for a lens as a component so that developers of application definitions can take immediate advantage of this work.
 
     :ref:`NXdeflector`:
@@ -80,7 +80,7 @@ The following base classes are proposed to support modularizing the storage of p
         to describe details about corrective lens or compound lens devices which reduce
         (spherical) aberrations of an electron beam.
 
-    :ref:`NXscanbox_em`:
+    :ref:`NXscan_controller`:
         A base class to represent the component of an electron microscope which realizes a controlled deflection
         (and eventually shift, blanking, and/or descanning) of the electron beam to illuminate the specimen in a controlled manner
         This base class can be used to document the scan pattern. The base class focuses mostly on the concept idea that there
@@ -113,7 +113,7 @@ Contextualizing and defining definitions of reference frames and transformations
     :ref:`NXatom`:
         A base class to elements, ions, and clusters of atoms be these charged or not.
 
-    :ref:`NXoptical_system_em`:
+    :ref:`NXem_optical_system`:
         A base class to store for now qualitative and quantitative values of frequent interest
         which are affected by the interplay of the components and state of an electron microscope.
         Examples are the semiconvergence angle or the depth of field and depth of focus, the magnification, or the camera length.
