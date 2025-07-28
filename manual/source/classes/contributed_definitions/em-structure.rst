@@ -110,8 +110,8 @@ Contextualizing and defining definitions of reference frames and transformations
     :ref:`NXspectrum`:
         A base class and specializations comparable to :ref:`NXimage` but for storing spectra.
 
-    :ref:`NXion` (about to become replaced by :ref:`NXatom`):
-        A base class to describe molecular ions with an adjustable number of atoms/isotopes building each ion. Right now the maximum number of atoms supported building a molecular ion is 32. Suggestions made in reference `DOI: 10.1017/S1431927621012241 <https://doi.org/10.1017/S1431927621012241>`_ are used to map isotope to hash values with which all possible isotopes can be described.
+    :ref:`NXatom`:
+        A base class to elements, ions, and clusters of atoms be these charged or not.
 
     :ref:`NXoptical_system_em`:
         A base class to store for now qualitative and quantitative values of frequent interest
