@@ -150,18 +150,19 @@
                 <field name="rcs_frequency" type="NX_NUMBER" optional="true">
                     <doc>
                         The frequency of the real-time controller system which indicated the number of close-loop process
-                        (gathering data, process data and update system) control cycles per second.
+                        (gathering data, process data and update system) control cycles per unit time.
                     </doc>
                 </field>
             </group>
-            <group name="lockin_amplifier" type="NXlockin" optional="true">
+            <group name="lockin_amplifier" type="NXspm_lockin" optional="true">
                 <doc>
                     The lock-in amplifier information.
                 </doc>
             </group>
             <group name="scan_environment" type="NXenvironment">
                 <doc>
-                    Information of the scan environment.
+                    Information of the scan environment holding concpet for
+                    temperature, setpoint (current or height), scan area and scan data.
                 </doc>
                 <field name="tip_temp" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
                     <doc>
@@ -211,7 +212,7 @@
                         Note: group name (e.g. entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
                     </doc>
                 </group>
-                <group type="NXscan_control">
+                <group type="NXspm_scan_control">
                     <doc>
                         The scan control information like scan region or phase space, type of scan (e.g.
                         mesh, spiral, etc.), and scan speed, etc. This group mainly stores the raw scan
@@ -409,7 +410,7 @@
                         The z position of the piezo.
                     </doc>
                 </field>
-                <group name="piezo_configuration" type="NXpiezo_config_spm" optional="true">
+                <group name="piezo_configuration" type="NXspm_piezo_config" optional="true">
                     <doc>
                         The piezo configuration information like piezoelectric calibration and material
                         properties.
@@ -420,13 +421,13 @@
                         </doc>
                     </group>
                 </group>
-                <group type="NXpositioner_spm">
+                <group type="NXspm_positioner">
                     <doc>
                         The positioner information like the position of the tip, the position of the
                         sample, PID loop feedback etc.
                     </doc>
                 </group>
-                <group name="piezo_material" type="NXpiezoelectric_material" optional="true">
+                <group name="piezo_material" type="NXspm_piezoelectric_material" optional="true">
                     <doc>
                         The material description and properties of the piezoelectric scanner materials.
                     </doc>
@@ -439,7 +440,7 @@
                 </doc>
                 <field name="temperature" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
                     <doc>
-                        The temperature of the sample.
+                        The temperature of the sample as a single value or an array of values.
                     </doc>
                 </field>
                 <field name="CHANNEL_temp" type="NX_CHAR" nameType="partial" optional="true">
@@ -467,12 +468,12 @@
                 <doc>
                     To explain bias (sweep measurement) voltage applied to the sample.
                 </doc>
-                <group type="NXbias_spectroscopy">
+                <group type="NXspm_bias_spectroscopy">
                     <doc>
                         Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
                         vs tunneling current from probe.
                     </doc>
-                    <group type="NXpositioner_spm" optional="true">
+                    <group type="NXspm_positioner" optional="true">
                         <doc>
                             The positioner information like the position of the tip, PID loop feedback etc.
                         </doc>
@@ -503,7 +504,7 @@
                             </field>
                         </group>
                     </group>
-                    <group name="bias_sweep" type="NXscan_control">
+                    <group name="bias_sweep" type="NXspm_scan_control">
                         <doc>
                             The bias voltage sweep is a common technique used on the substance or sample or environment
                             to study the change in the behavior of the sample or substance or environment due to change
@@ -602,7 +603,7 @@
                 </group>
             </group>
         </group>
-        <group type="NXdata" optional="true">
+        <group type="NXdata">
             <doc>
                 The data group.
             </doc>

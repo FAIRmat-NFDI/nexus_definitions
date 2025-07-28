@@ -91,14 +91,15 @@ NXspm(NXsensor_scan):
           exists: optional
           doc: |
             The frequency of the real-time controller system which indicated the number of close-loop process
-            (gathering data, process data and update system) control cycles per second.
-      lockin_amplifier(NXlockin):
+            (gathering data, process data and update system) control cycles per unit time.
+      lockin_amplifier(NXspm_lockin):
         exists: optional
         doc: |
           The lock-in amplifier information.
       scan_environment(NXenvironment):
         doc: |
-          Information of the scan environment.
+          Information of the scan environment holding concpet for
+          temperature, setpoint (current or height), scan area and scan data.
         tip_temp(NX_NUMBER):
           exists: optional
           unit: NX_TEMPERATURE
@@ -143,7 +144,7 @@ NXspm(NXsensor_scan):
             ENTRY[entry]/experiment_instrument/piezo_sensor.
             
             Note: group name (e.g. entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
-        (NXscan_control):
+        (NXspm_scan_control):
           doc: |
             The scan control information like scan region or phase space, type of scan (e.g.
             mesh, spiral, etc.), and scan speed, etc. This group mainly stores the raw scan
@@ -309,7 +310,7 @@ NXspm(NXsensor_scan):
           unit: NX_LENGTH
           doc: |
             The z position of the piezo.
-        piezo_configuration(NXpiezo_config_spm):
+        piezo_configuration(NXspm_piezo_config):
           exists: optional
           doc: |
             The piezo configuration information like piezoelectric calibration and material
@@ -318,11 +319,11 @@ NXspm(NXsensor_scan):
             exists: optional
             doc: |
               Calibration of the piezo device.
-        (NXpositioner_spm):
+        (NXspm_positioner):
           doc: |
             The positioner information like the position of the tip, the position of the
             sample, PID loop feedback etc.
-        piezo_material(NXpiezoelectric_material):
+        piezo_material(NXspm_piezoelectric_material):
           exists: optional
           doc: |
             The material description and properties of the piezoelectric scanner materials.
@@ -336,7 +337,7 @@ NXspm(NXsensor_scan):
           exists: optional
           unit: NX_TEMPERATURE
           doc: |
-            The temperature of the sample.
+            The temperature of the sample as a single value or an array of values.
         CHANNEL_temp(NX_CHAR):
           nameType: partial
           exists: optional
@@ -358,11 +359,11 @@ NXspm(NXsensor_scan):
       bias_spectroscopy_environment(NXenvironment):
         doc: |
           To explain bias (sweep measurement) voltage applied to the sample.
-        (NXbias_spectroscopy):
+        (NXspm_bias_spectroscopy):
           doc: |
             Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
             vs tunneling current from probe.
-          (NXpositioner_spm):
+          (NXspm_positioner):
             exists: optional
             doc: |
               The positioner information like the position of the tip, PID loop feedback etc.
@@ -389,7 +390,7 @@ NXspm(NXsensor_scan):
                 exists: optional
                 doc: |
                   The status of the controller to record the final z position after the scan.
-          bias_sweep(NXscan_control):
+          bias_sweep(NXspm_scan_control):
             doc: |
               The bias voltage sweep is a common technique used on the substance or sample or environment
               to study the change in the behavior of the sample or substance or environment due to change
@@ -465,7 +466,6 @@ NXspm(NXsensor_scan):
           doc: |
             Link to the sample_bias_voltage sensor under the instrument.
     (NXdata):
-      exists: optional
       doc: |
         The data group.
       DATA(NX_NUMBER):
@@ -486,7 +486,7 @@ NXspm(NXsensor_scan):
         are used to measure the resolution of the experiment results.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# bfafc9f360abd4e952045d0c76a324baba31f76228dd4b7c51c98a1b14f5f012
+# c1969460e31e70ac65a1f50a96878127b452e56db5a7f90b9b7d5bc8ceac057c
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -639,18 +639,19 @@ NXspm(NXsensor_scan):
 #                 <field name="rcs_frequency" type="NX_NUMBER" optional="true">
 #                     <doc>
 #                         The frequency of the real-time controller system which indicated the number of close-loop process
-#                         (gathering data, process data and update system) control cycles per second.
+#                         (gathering data, process data and update system) control cycles per unit time.
 #                     </doc>
 #                 </field>
 #             </group>
-#             <group name="lockin_amplifier" type="NXlockin" optional="true">
+#             <group name="lockin_amplifier" type="NXspm_lockin" optional="true">
 #                 <doc>
 #                     The lock-in amplifier information.
 #                 </doc>
 #             </group>
 #             <group name="scan_environment" type="NXenvironment">
 #                 <doc>
-#                     Information of the scan environment.
+#                     Information of the scan environment holding concpet for 
+#                     temperature, setpoint (current or height), scan area and scan data.
 #                 </doc>
 #                 <field name="tip_temp" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
 #                     <doc>
@@ -700,7 +701,7 @@ NXspm(NXsensor_scan):
 #                         Note: group name (e.g. entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
 #                     </doc>
 #                 </group>
-#                 <group type="NXscan_control">
+#                 <group type="NXspm_scan_control">
 #                     <doc>
 #                         The scan control information like scan region or phase space, type of scan (e.g.
 #                         mesh, spiral, etc.), and scan speed, etc. This group mainly stores the raw scan
@@ -898,7 +899,7 @@ NXspm(NXsensor_scan):
 #                         The z position of the piezo.
 #                     </doc>
 #                 </field>
-#                 <group name="piezo_configuration" type="NXpiezo_config_spm" optional="true">
+#                 <group name="piezo_configuration" type="NXspm_piezo_config" optional="true">
 #                     <doc>
 #                         The piezo configuration information like piezoelectric calibration and material
 #                         properties.
@@ -909,13 +910,13 @@ NXspm(NXsensor_scan):
 #                         </doc>
 #                     </group>
 #                 </group>
-#                 <group type="NXpositioner_spm">
+#                 <group type="NXspm_positioner">
 #                     <doc>
 #                         The positioner information like the position of the tip, the position of the
 #                         sample, PID loop feedback etc.
 #                     </doc>
 #                 </group>
-#                 <group name="piezo_material" type="NXpiezoelectric_material" optional="true">
+#                 <group name="piezo_material" type="NXspm_piezoelectric_material" optional="true">
 #                     <doc>
 #                         The material description and properties of the piezoelectric scanner materials.
 #                     </doc>
@@ -928,7 +929,7 @@ NXspm(NXsensor_scan):
 #                 </doc>
 #                 <field name="temperature" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
 #                     <doc>
-#                         The temperature of the sample.
+#                         The temperature of the sample as a single value or an array of values.
 #                     </doc>
 #                 </field>
 #                 <field name="CHANNEL_temp" type="NX_CHAR" nameType="partial" optional="true">
@@ -956,12 +957,12 @@ NXspm(NXsensor_scan):
 #                 <doc>
 #                     To explain bias (sweep measurement) voltage applied to the sample.
 #                 </doc>
-#                 <group type="NXbias_spectroscopy">
+#                 <group type="NXspm_bias_spectroscopy">
 #                     <doc>
 #                         Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
 #                         vs tunneling current from probe.
 #                     </doc>
-#                     <group type="NXpositioner_spm" optional="true">
+#                     <group type="NXspm_positioner" optional="true">
 #                         <doc>
 #                             The positioner information like the position of the tip, PID loop feedback etc.
 #                         </doc>
@@ -992,7 +993,7 @@ NXspm(NXsensor_scan):
 #                             </field>
 #                         </group>
 #                     </group>
-#                     <group name="bias_sweep" type="NXscan_control">
+#                     <group name="bias_sweep" type="NXspm_scan_control">
 #                         <doc>
 #                             The bias voltage sweep is a common technique used on the substance or sample or environment
 #                             to study the change in the behavior of the sample or substance or environment due to change
@@ -1091,7 +1092,7 @@ NXspm(NXsensor_scan):
 #                 </group>
 #             </group>
 #         </group>
-#         <group type="NXdata" optional="true">
+#         <group type="NXdata">
 #             <doc>
 #                 The data group.
 #             </doc>

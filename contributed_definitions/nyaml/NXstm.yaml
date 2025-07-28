@@ -20,7 +20,7 @@ NXstm(NXspm):
       doc: |
         The group explains the instrumentation of the STM experiment such
         as current sensor, lock-in amplifier etc.
-      lockin_amplifier(NXlockin):
+      lockin_amplifier(NXspm_lockin):
         doc: |
           The lock-in amplifier information. The device is being used to extract
           the very weak signal buried in noisy signals.
@@ -37,14 +37,10 @@ NXstm(NXspm):
       scan_environment(NXenvironment):
         doc: |
           The environment information for stm or sts experiment.
-        (NXscan_control):
+        (NXspm_scan_control):
           doc: |
             The scan control information like scan region or phase space, e.g. pattern of scan
-            (e.g. mesh, spiral, etc.), scanner speed, etc.
-          scan_type:
-            doc: |
-              The type of scan like mesh, spiral, etc.
-            enumeration: [mesh, trajectory, snake, spiral]
+            (e.g. mesh), scanner speed, etc.
         tip_temp_sensor(NXsensor):
           exists: optional
           doc: |
@@ -85,7 +81,7 @@ NXstm(NXspm):
         exists: optional
         doc: |
           To explain bias (sweep measurement) voltage applied to the sample.
-        (NXbias_spectroscopy):
+        (NXspm_bias_spectroscopy):
           exists: optional
           doc: |
             Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
@@ -93,12 +89,12 @@ NXstm(NXspm):
       piezo_sensor(NXsensor):
         doc: |
           The sensor information for the piezo device.
-        piezo_configuration(NXpiezo_config_spm):
+        piezo_configuration(NXspm_piezo_config):
           exists: optional
           doc: |
             The piezo configuration information like piezoelectric device calibration and
             material properties.
-        (NXpositioner_spm):
+        (NXspm_positioner):
           doc: |
             The positioner information like the position of the tip,
             PID loop feedback etc.
@@ -132,7 +128,7 @@ NXstm(NXspm):
           link to the target: /ENTRY[entry]/INSTRUMENT[instrument]/current_sensor/AMPLIFIER[amplifier]/current_gain
           
           Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
-      bias_sweep(NXscan_control):
+      bias_sweep(NXspm_scan_control):
         exists: optional
         doc: |
           Bias sweep measurement in bias spectroscopy.
@@ -174,7 +170,7 @@ NXstm(NXspm):
         doc: |
           Link to target:
           /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_shield_temp
-      bias_sweep(NXscan_control):
+      bias_sweep(NXspm_scan_control):
         exists: optional
         doc: |
           Link to target:
@@ -192,7 +188,7 @@ NXstm(NXspm):
           link to the target: /ENTRY[entry]/INSTRUMENT[instrument]/lockin_amplifier/modulation_frequency
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 1b535572d68688fd0984ca39ed6e4e91dad23a0fb7543d368ee70420a262d10e
+# 2a384a9d111abec6d3394439e9a87aa9ed7aef130e5c10408085cec8d4f59cae
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -247,7 +243,7 @@ NXstm(NXspm):
 #                 The group explains the instrumentation of the STM experiment such
 #                 as current sensor, lock-in amplifier etc.
 #             </doc>
-#             <group name="lockin_amplifier" type="NXlockin">
+#             <group name="lockin_amplifier" type="NXspm_lockin">
 #                 <doc>
 #                     The lock-in amplifier information. The device is being used to extract
 #                     the very weak signal buried in noisy signals.
@@ -268,22 +264,11 @@ NXstm(NXspm):
 #                 <doc>
 #                     The environment information for stm or sts experiment.
 #                 </doc>
-#                 <group type="NXscan_control">
+#                 <group type="NXspm_scan_control">
 #                     <doc>
 #                         The scan control information like scan region or phase space, e.g. pattern of scan
-#                         (e.g. mesh, spiral, etc.), scanner speed, etc.
+#                         (e.g. mesh), scanner speed, etc.
 #                     </doc>
-#                     <field name="scan_type">
-#                         <doc>
-#                             The type of scan like mesh, spiral, etc.
-#                         </doc>
-#                         <enumeration>
-#                             <item value="mesh"/>
-#                             <item value="trajectory"/>
-#                             <item value="snake"/>
-#                             <item value="spiral"/>
-#                         </enumeration>
-#                     </field>
 #                 </group>
 #                 <group name="tip_temp_sensor" type="NXsensor" optional="true">
 #                     <doc>
@@ -332,7 +317,7 @@ NXstm(NXspm):
 #                 <doc>
 #                     To explain bias (sweep measurement) voltage applied to the sample.
 #                 </doc>
-#                 <group type="NXbias_spectroscopy" optional="true">
+#                 <group type="NXspm_bias_spectroscopy" optional="true">
 #                     <doc>
 #                         Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
 #                         vs tunneling current from probe.
@@ -343,13 +328,13 @@ NXstm(NXspm):
 #                 <doc>
 #                     The sensor information for the piezo device.
 #                 </doc>
-#                 <group name="piezo_configuration" type="NXpiezo_config_spm" optional="true">
+#                 <group name="piezo_configuration" type="NXspm_piezo_config" optional="true">
 #                     <doc>
 #                         The piezo configuration information like piezoelectric device calibration and
 #                         material properties.
 #                     </doc>
 #                 </group>
-#                 <group type="NXpositioner_spm">
+#                 <group type="NXspm_positioner">
 #                     <doc>
 #                         The positioner information like the position of the tip,
 #                         PID loop feedback etc.
@@ -392,7 +377,7 @@ NXstm(NXspm):
 #                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
 #                 </doc>
 #             </field>
-#             <group name="bias_sweep" type="NXscan_control" optional="true">
+#             <group name="bias_sweep" type="NXspm_scan_control" optional="true">
 #                 <doc>
 #                     Bias sweep measurement in bias spectroscopy.
 #                     Link to target:
@@ -441,7 +426,7 @@ NXstm(NXspm):
 #                     /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_shield_temp
 #                 </doc>
 #             </field>
-#             <group name="bias_sweep" type="NXscan_control" optional="true">
+#             <group name="bias_sweep" type="NXspm_scan_control" optional="true">
 #                 <doc>
 #                     Link to target:
 #                     /ENTRY[entry]/INSTRUMENT[instrument]/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep

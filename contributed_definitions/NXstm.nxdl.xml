@@ -52,7 +52,7 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                 The group explains the instrumentation of the STM experiment such
                 as current sensor, lock-in amplifier etc.
             </doc>
-            <group name="lockin_amplifier" type="NXlockin">
+            <group name="lockin_amplifier" type="NXspm_lockin">
                 <doc>
                     The lock-in amplifier information. The device is being used to extract
                     the very weak signal buried in noisy signals.
@@ -73,22 +73,11 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                 <doc>
                     The environment information for stm or sts experiment.
                 </doc>
-                <group type="NXscan_control">
+                <group type="NXspm_scan_control">
                     <doc>
                         The scan control information like scan region or phase space, e.g. pattern of scan
-                        (e.g. mesh, spiral, etc.), scanner speed, etc.
+                        (e.g. mesh), scanner speed, etc.
                     </doc>
-                    <field name="scan_type">
-                        <doc>
-                            The type of scan like mesh, spiral, etc.
-                        </doc>
-                        <enumeration>
-                            <item value="mesh"/>
-                            <item value="trajectory"/>
-                            <item value="snake"/>
-                            <item value="spiral"/>
-                        </enumeration>
-                    </field>
                 </group>
                 <group name="tip_temp_sensor" type="NXsensor" optional="true">
                     <doc>
@@ -137,7 +126,7 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                 <doc>
                     To explain bias (sweep measurement) voltage applied to the sample.
                 </doc>
-                <group type="NXbias_spectroscopy" optional="true">
+                <group type="NXspm_bias_spectroscopy" optional="true">
                     <doc>
                         Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
                         vs tunneling current from probe.
@@ -148,13 +137,13 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                 <doc>
                     The sensor information for the piezo device.
                 </doc>
-                <group name="piezo_configuration" type="NXpiezo_config_spm" optional="true">
+                <group name="piezo_configuration" type="NXspm_piezo_config" optional="true">
                     <doc>
                         The piezo configuration information like piezoelectric device calibration and
                         material properties.
                     </doc>
                 </group>
-                <group type="NXpositioner_spm">
+                <group type="NXspm_positioner">
                     <doc>
                         The positioner information like the position of the tip,
                         PID loop feedback etc.
@@ -197,7 +186,7 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                     Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
                 </doc>
             </field>
-            <group name="bias_sweep" type="NXscan_control" optional="true">
+            <group name="bias_sweep" type="NXspm_scan_control" optional="true">
                 <doc>
                     Bias sweep measurement in bias spectroscopy.
                     Link to target:
@@ -246,7 +235,7 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                     /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_shield_temp
                 </doc>
             </field>
-            <group name="bias_sweep" type="NXscan_control" optional="true">
+            <group name="bias_sweep" type="NXspm_scan_control" optional="true">
                 <doc>
                     Link to target:
                     /ENTRY[entry]/INSTRUMENT[instrument]/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep
