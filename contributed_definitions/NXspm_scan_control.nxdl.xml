@@ -56,14 +56,14 @@
             The list is in the order of axes of the scan from the fastest to the slowest.
         </doc>
     </field>
-    <field name="scan_resolution_N" type="NX_NUMBER" nameType="partial" units="NX_ANY">
+    <field name="scan_resolutionN" type="NX_NUMBER" nameType="partial" units="NX_ANY">
         <doc>
             Define the scan resolution along each dimension as the number of steps per unit of the dimension parameters.
             
             Rename the field according to the name of the independent dimension (e.g. scan_resolution_x, scan_resolution_voltage).
         </doc>
     </field>
-    <field name="accuracy_N" type="NX_NUMBER" nameType="partial" units="NX_LENGTH">
+    <field name="accuracyN" type="NX_NUMBER" nameType="partial" units="NX_LENGTH">
         <doc>
             Define the accuracy of the scan probe.
         </doc>
@@ -107,14 +107,14 @@
         <doc>
             To define the spiral or circular scan, use this group.
         </doc>
-        <field name="spiral_radius_N" type="NX_NUMBER" nameType="partial" units="NX_ANY">
+        <field name="spiral_radiusN" type="NX_NUMBER" nameType="partial" units="NX_ANY">
             <doc>
                 Define the radius of the spiral circle of scanning.
                 
                 Rename the field, according to the circle order, the nearest circle to the center is 0.
             </doc>
         </field>
-        <field name="scan_points_N" type="NX_NUMBER" nameType="partial">
+        <field name="scan_pointsN" type="NX_NUMBER" nameType="partial">
             <doc>
                 Define the total number of points in a given circle scan to be performed.
                 
@@ -132,81 +132,11 @@
         <doc>
             To define the trajectory scan, use this group.
             nameType: any
-            doc: |
-              The scan data is the data collected during the scan.
-              If the scan has several channels or derivatives from the channel data, please
-              duplicate this NXdata group for each.
-            DATA(NX_NUMBER):
-              nameType: any
-              unit: NX_ANY
-              doc: |
-                The scan data is the data collected during the scan.
         </doc>
     </group>
     <group name="linear_SCAN" type="NXspm_scan_pattern" nameType="partial">
         <doc>
-            Define the scan mode that is performed for a single independent data axis.
+            
         </doc>
-        <field name="scan_speed" type="NX_NUMBER" units="NX_ANY">
-            <doc>
-                Define the scan speed of the scan disregarding the forward or backward
-                direction.
-            </doc>
-        </field>
-        <field name="forward_speed" type="NX_NUMBER" units="NX_ANY">
-            <doc>
-                Define the scan speed in the forward directions.
-            </doc>
-        </field>
-        <field name="backward_speed" type="NX_NUMBER" units="NX_ANY">
-            <doc>
-                Define the scan speed in the backward directions.
-            </doc>
-        </field>
-        <field name="channel_NAME" type="NX_CHAR" nameType="partial">
-            <doc>
-                Name of the channel that records the scan data for the given dimension.
-            </doc>
-        </field>
-        <field name="scan_points" type="NX_NUMBER">
-            <doc>
-                Define the total number of points in the independent axis scan to be performed.
-            </doc>
-        </field>
-        <field name="stepping" type="NX_NUMBER">
-            <doc>
-                The number of steps the probe jumps over the scan steps or points.
-            </doc>
-            <attribute name="frog_leap_scan" type="NX_BOOLEAN">
-                <doc>
-                    If the scan probe jumps over a number of scan steps or points (more than one)
-                    to perform each scan. By default, it is False.
-                </doc>
-            </attribute>
-        </field>
-        <field name="step_size" type="NX_NUMBER" units="NX_ANY">
-            <doc>
-                The length of each step in the scan on independent axis.
-                
-                Rename the field, according to the name of the dimension (e.g. step_size_x, step_size_voltage).
-            </doc>
-        </field>
-        <field name="continuous" type="NX_BOOLEAN">
-            <doc>
-                If the scan probe moves continuously over the scan points or steps, use True.
-                The default value is True.
-            </doc>
-        </field>
-        <field name="oscillating" type="NX_BOOLEAN">
-            <doc>
-                If the scan probe oscillates over the scan point, use True.
-                The default value is False.
-            </doc>
-        </field>
-        <field name="oscillation_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
-            <doc>
-                The number of oscillations on each scanning point per second.
-            </doc>
-        </field>
     </group>
 </definition>
