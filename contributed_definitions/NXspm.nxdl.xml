@@ -190,24 +190,24 @@
                 </field>
                 <group name="current_sensor" type="NXsensor" optional="true">
                     <doc>
-                        This is a link to the current_sensor under the instrument group:
-                        ENTRY[entry]/experiment_instrument/current_sensor.
+                        This should be a link to the current_sensor under the instrument group:
+                        ENTRY[entry]/INSTRUMENT[instrument]/current_sensor.
                         
                         Note: group name (e.g. entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
                     </doc>
                 </group>
                 <group name="voltage_SENSOR" type="NXsensor" optional="true">
                     <doc>
-                        This is a link to the voltage_SENSOR under the instrument group:
-                        ENTRY[entry]/experiment_instrument/voltage_SENSOR.
+                        This should be a link to the voltage_SENSOR under the instrument group:
+                        ENTRY[entry]/INSTRUMENT[instrument]/voltage_SENSOR[*].
                         
                         Note: group name (e.g. entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
                     </doc>
                 </group>
                 <group name="piezo_sensor" type="NXsensor" optional="true">
                     <doc>
-                        This is a link to the piezo_sensor under the instrument group:
-                        ENTRY[entry]/experiment_instrument/piezo_sensor.
+                        This should be a link to the piezo_sensor under the instrument group:
+                        ENTRY[entry]/INSTRUMENT[instrument]/piezo_sensor.
                         
                         Note: group name (e.g. entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
                     </doc>
@@ -315,7 +315,7 @@
                 </doc>
                 <field name="current" type="NX_NUMBER" units="NX_CURRENT">
                     <doc>
-                        The DC current between tip and sample or current setpoint.
+                        A constant DC current between tip and sample, so-called current setpoint.
                     </doc>
                 </field>
                 <field name="current_offset" type="NX_NUMBER" optional="true" units="NX_CURRENT">
@@ -335,7 +335,7 @@
                 </group>
                 <group type="NXamplifier" optional="true">
                     <doc>
-                        An amplifier information for the input signal (e.g. from tip).
+                        An amplifier information that amplifies the input signal.
                     </doc>
                     <field name="current_gain" type="NX_NUMBER" units="NX_UNITLESS" optional="true">
                         <doc>
@@ -344,11 +344,13 @@
                     </field>
                 </group>
             </group>
-            <group name="voltage_SENSOR" type="NXsensor" nameType="partial" optional="true">
+            <group name="voltage_sensorTAG" type="NXsensor" nameType="partial" optional="true">
                 <doc>
-                    The sensor information for the voltage device. Any other voltage sensor involved in the
-                    experiment can be registered under this group that is used for any specialized measurement
-                    or in any specialized experimentcomponent.
+                    The sensor information for the voltage device. Any voltage sensor involved in the
+                    experiment or in any special measurement or in any specialized experiment component 
+                    can be registered under this group. 
+                    
+                    For this purpose, replace the TAG with the specific name or ID of the voltage sensor.
                     
                     Do not register this group for sample bias voltage (DC), for that we have sample_bias_voltage group.
                 </doc>
@@ -359,12 +361,13 @@
                 </field>
                 <field name="voltage" type="NX_NUMBER" units="NX_VOLTAGE" optional="true">
                     <doc>
-                        The DC voltage an array of voltages.
+                        Voltage value the voltage sensor measures.
                     </doc>
                 </field>
                 <field name="voltage_offset" type="NX_NUMBER" optional="true" units="NX_VOLTAGE">
                     <doc>
-                        The offset voltage
+                        The offset voltage. The real voltage is the sum of the voltage and the offset
+                        voltage.
                     </doc>
                 </field>
                 <group name="voltage_calibration" type="NXcalibration" optional="true">
@@ -379,7 +382,7 @@
                 </group>
                 <group type="NXamplifier" optional="true">
                     <doc>
-                        An amplifier information for the input signal.
+                        An amplifier information that amplifies the input signal.
                     </doc>
                     <field name="voltage_gain" type="NX_NUMBER" units="NX_UNITLESS" optional="true">
                         <doc>
@@ -598,7 +601,9 @@
                 </doc>
                 <group name="sample_bias_voltage" type="NXsensor">
                     <doc>
-                        Link to the sample_bias_voltage sensor under the instrument.
+                        This should be a linkto the ENTRY[entry]/INSTRUMENT[instrument]/sample_bias_voltage sensor under the instrument.
+                        
+                        Note: group name (e.g. entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
                     </doc>
                 </group>
             </group>
