@@ -28,7 +28,7 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
     <doc>
         An application definition to describe Scanning Tunneling Spectroscopy (STS).
         
-        The NXsts application definition extends the NXapm and is dedicated for Scanning Tunneling Spectroscopy (STS) technique.
+        The NXsts application definition is specialization of NXapm and is dedicated for Scanning Tunneling Spectroscopy (STS) technique.
     </doc>
     <group type="NXentry">
         <field name="definition">
@@ -53,12 +53,12 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
             <doc>
                 The instrument information.
             </doc>
-            <group name="lockin_amplifier" type="NXspm_lockin" optional="true">
+            <group name="lockin_amplifier" type="NXspm_lockin" recommended="true">
                 <doc>
                     The lock-in amplifier information.
                 </doc>
             </group>
-            <group name="current_sensor" type="NXsensor" optional="true">
+            <group name="current_sensor" type="NXsensor" recommended="true">
                 <doc>
                     Information for current sensor.
                 </doc>
@@ -67,11 +67,11 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                 <doc>
                     The sensor information for the piezo device.
                 </doc>
-                <group type="NXspm_positioner" optional="true">
+                <group type="NXspm_positioner" recommended="true">
                     <doc>
                         The positioner information like the position of the tip, the position of the
                         sample, PID loop feedback etc.
-
+                        
                         For STS experiment, use the positioner_spm under bias_spectroscopy group.
                     </doc>
                 </group>
@@ -108,18 +108,20 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                 <doc>
                     The tunneling current between tip and sample after application of bias voltage.
                     link to the target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/current_sensor/current
+                    /ENTRY[*]/INSTRUMENT[*]/current_sensor/current
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
             <field name="current_offset" type="NX_NUMBER" optional="true">
                 <doc>
                     The offset in tunneling current between tip and sample after application of bias voltage.
                     link to the target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/current_sensor/current
+                    /ENTRY[*]/INSTRUMENT[instrumen*]/current_sensor/current
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
             <field name="current_gain" type="NX_NUMBER" optional="true">
@@ -127,36 +129,40 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                     Proportional relationship between the probe output voltage and the actual
                     tunneling current when measuring the tunneling current.
                     link to the target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/current_sensor/amplifier/current_gain
+                    /ENTRY[*]/INSTRUMENT[*]/current_sensor/amplifier/current_gain
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
             <group name="bias_sweep" type="NXspm_scan_control" optional="true">
                 <doc>
                     Bias sweep measurement in bias spectroscopy.
                     Link to target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep
+                    /ENTRY[*]/INSTRUMENT[*]/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </group>
             <field name="modulation_signal_type" optional="true">
                 <doc>
                     This is the signal on which the modulation voltage or current will be added.
                     link to the target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/lockin_amplifier/modulation_signal_type
+                    /ENTRY[*]/INSTRUMENT[*]/lockin_amplifier/modulation_signal_type
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
             <field name="reference_frequency" type="NX_NUMBER" optional="true">
                 <doc>
                     The frequency of the sine modulation that is used as carrier signal of input signal in lock-in.
                     link to the target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/lockin_amplifier/reference_frequency
+                    /ENTRY[*]/INSTRUMENT[*]/lockin_amplifier/reference_frequency
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
         </group>
@@ -168,49 +174,56 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
             <field name="tip_temp" type="NX_NUMBER" optional="true">
                 <doc>
                     Link to target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/tip_temp
+                    /ENTRY[*]/INSTRUMENT[*]/scan_environment/tip_temp
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
             <field name="cryo_bottom_temp" type="NX_NUMBER" optional="true">
                 <doc>
                     Link to target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_bottom_temp
+                    /ENTRY[*]/INSTRUMENT[*]/scan_environment/cryo_bottom_temp
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
             <field name="cryo_shield_temp" type="NX_NUMBER" optional="true">
                 <doc>
                     Link to target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_shield_temp
+                    /ENTRY[*]/INSTRUMENT[*]/scan_environment/cryo_shield_temp
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
             <group name="bias_sweep" type="NXspm_scan_control" optional="true">
                 <doc>
                     Link to target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep
+                    /ENTRY[*]/INSTRUMENT[*]/bias_spectroscopy_environment/SPM_BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </group>
             <field name="modulation_signal_type" optional="true">
                 <doc>
                     This is the signal on which the modulation voltage or current will be added.
                     link to the target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/lockin_amplifier/modulation_signal_type
+                    /ENTRY[*]/INSTRUMENT[*]/lockin_amplifier/modulation_signal_type
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
             <field name="modulation_frequency" type="NX_NUMBER" optional="true">
                 <doc>
                     The frequency of the sine modulation that is used to modulate the signal in lock-in.
                     link to the target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/lockin_amplifier/modulation_frequency
+                    /ENTRY[*]/INSTRUMENT[*]/lockin_amplifier/modulation_frequency
+                    
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
                 </doc>
             </field>
         </group>
