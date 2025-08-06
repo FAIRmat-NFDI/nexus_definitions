@@ -348,7 +348,7 @@ NXspm(NXsensor_scan):
         nameType: any
         exists: optional
         doc: |
-          A group handling the temperature such as cryo, shield and tip. For different
+          A group handling the temperature sensors such as cryo, shield and tip temperature. For different
           type of temperature sensors repeat this group.
         temperature(NX_NUMBER):
           exists: optional
@@ -375,7 +375,7 @@ NXspm(NXsensor_scan):
             Data (e.g, record from SPM head temperature) from temperature sensor.
       bias_spectroscopy_environment(NXenvironment):
         doc: |
-          To explain bias and current relationship (sweep measurement) due to voltage
+          To explain bias and current behavior (sweep measurement) due to voltage
           applied to the sample.
         (NXspm_bias_spectroscopy):
           doc: |
@@ -499,14 +499,38 @@ NXspm(NXsensor_scan):
       doc: |
         The group of indicators (links to the existing fields in different groups) that measure
         the reproducibility of the experiment.
+      LINK_TO_GROUP(NXcollection):
+        nameType: any
+        exists: optional
+        doc: |
+          A place holder to create link to any group relevant considered as
+          reproducibility indicators (defined by laboratory).
+      LINK_TO_FIELD(NX_CHAR):
+        nameType: any
+        exists: optional
+        doc: |
+          A place holder to create link to any field relevant considered as
+          reproducibility indicators (defined by laboratory).
     resolution_indicators(NXcollection):
       exists: optional
       doc: |
         The group of indicators (links to the existing fields in different groups) that
         are used to measure the resolution of the experiment results.
+      LINK_TO_GROUP(NXcollection):
+        nameType: any
+        exists: optional
+        doc: |
+          A place holder to create link to any group relevant considered as
+          reproducibility indicators (defined by laboratory).
+      LINK_TO_FIELD(NX_CHAR):
+        nameType: any
+        exists: optional
+        doc: |
+          A place holder to create link to any field relevant considered as
+          reproducibility indicators (defined by laboratory).
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 58febe1de2459397a167dbc50b8d1176ec9b1b83e5df7390dc261cd878315340
+# 6f9ef105856899e52963007d6e6528a80e10ecf46e45bc4f73d2377b10c4168c
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -962,7 +986,7 @@ NXspm(NXsensor_scan):
 #             </group>
 #             <group name="TEMPERATURE" type="NXsensor" nameType="any" optional="true">
 #                 <doc>
-#                     A group handling the temperature such as cryo, shield and tip. For different
+#                     A group handling the temperature sensors such as cryo, shield and tip temperature. For different
 #                     type of temperature sensors repeat this group.
 #                 </doc>
 #                 <field name="temperature" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
@@ -993,7 +1017,7 @@ NXspm(NXsensor_scan):
 #             </group>
 #             <group name="bias_spectroscopy_environment" type="NXenvironment">
 #                 <doc>
-#                     To explain bias and current relationship (sweep measurement) due to voltage
+#                     To explain bias and current behavior (sweep measurement) due to voltage
 #                     applied to the sample.
 #                 </doc>
 #                 <group type="NXspm_bias_spectroscopy">
@@ -1149,12 +1173,36 @@ NXspm(NXsensor_scan):
 #                 The group of indicators (links to the existing fields in different groups) that measure
 #                 the reproducibility of the experiment.
 #             </doc>
+#             <group name="LINK_TO_GROUP" type="NXcollection" nameType="any" optional="true">
+#                 <doc>
+#                     A place holder to create link to any group relevant considered as
+#                     reproducibility indicators (defined by laboratory).
+#                 </doc>
+#             </group>
+#             <field name="LINK_TO_FIELD" type="NX_CHAR" nameType="any" optional="true">
+#                 <doc>
+#                     A place holder to create link to any field relevant considered as
+#                     reproducibility indicators (defined by laboratory).
+#                 </doc>
+#             </field>
 #         </group>
 #         <group name="resolution_indicators" type="NXcollection" optional="true">
 #             <doc>
 #                 The group of indicators (links to the existing fields in different groups) that
 #                 are used to measure the resolution of the experiment results.
 #             </doc>
+#             <group name="LINK_TO_GROUP" type="NXcollection" nameType="any" optional="true">
+#                 <doc>
+#                     A place holder to create link to any group relevant considered as
+#                     reproducibility indicators (defined by laboratory).
+#                 </doc>
+#             </group>
+#             <field name="LINK_TO_FIELD" type="NX_CHAR" nameType="any" optional="true">
+#                 <doc>
+#                     A place holder to create link to any field relevant considered as
+#                     reproducibility indicators (defined by laboratory).
+#                 </doc>
+#             </field>
 #         </group>
 #     </group>
 # </definition>
