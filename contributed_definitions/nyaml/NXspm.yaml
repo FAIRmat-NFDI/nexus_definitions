@@ -4,7 +4,8 @@ doc: |
   sample and image it at the atomic level.
   
   The application class NXspm is designed as a skeleton and contains common technical concepts
-  for specific SPM sub-techniques such as STM, STS, AFM etc.
+  for specific SPM sub-techniques such as STM, STS, AFM etc. In addition, it can be utilized to
+  describe the SPM experiments without further specialization for each sub-technique.
 type: group
 NXspm(NXsensor_scan):
   (NXentry):
@@ -22,14 +23,16 @@ NXspm(NXsensor_scan):
         The mode of the scan. The possible options depend on the type of experiment.
         For example, in STM, the scan mode could be constant height or constant current,
         in AFM, the scan mode could be contact mode, tapping mode or non-contact mode.
+        
+        For general purpose usage, all scan modes from its sub-techniques are listed.
       enumeration:
         open_enum: true
         items: [constant height, constant current, contact mode, tapping mode, non-contact mode, Kelvin probe, electric force, lateral force mode]
     scan_type:
-      exists: optional
+      exists: recommended
       doc: |
         The type of the scan. It mainly describes how scan probe moves in the scan region, e.g.
-        forward, backward, or both (if scan is repeated).
+        forward, backward, or both (if scan is repeated). Any lab defined scan type
     identifier_experiment:
       exists: optional
       doc: |
@@ -44,12 +47,12 @@ NXspm(NXsensor_scan):
         The instrument information.
       hardware(NXfabrication):
         doc: |
-          The hardware description of the core instrument setup of the experiment.
+          The hardware description of core instrument setup of experiment.
           Usually, the entire instrument is supplied by a single manufacturer.
           To describe the hardware from any sub-components, use the hardware group of that
           sub-component (child group of the NXinstrument group) group.
         name:
-          exists: optional
+          exists: recommended
           doc: |
             Name of the hardware.
         vendor:
@@ -65,7 +68,7 @@ NXspm(NXsensor_scan):
               specific enough to resolve the version.
       software(NXfabrication):
         doc: |
-          The software description of the core instrument setup of the experiment.
+          The software description of core instrument setup of experiment.
           Usually, the entire instrument is supplied by a single name/manufacturer/model/etc.
           To describe the software from any sub-components, use the software group of that component.
         name:
@@ -96,24 +99,32 @@ NXspm(NXsensor_scan):
         exists: optional
         doc: |
           The lock-in amplifier information.
+        lockin_current_flip_sign(NX_NUMBER):
+          exists: optional
+          doc: |
+            The sign (1 or -1) that defines the sign of the lock-in current.
+            The calibration procedure with retracted tip is normally performed to compensate for the signal phase delay
+            in SPM. The procedure yields two possible solutions, this number should be equal
+            to 1 or -1 depending on which solution is chosen (this concept mainly used in STS experiments,
+            e.g. in Nanonis machine).
       scan_environment(NXenvironment):
         doc: |
           Information of the scan environment holding concpet for
           temperature, setpoint (current or height), scan area and scan data.
         tip_temp(NX_NUMBER):
-          exists: optional
+          exists: recommended
           unit: NX_TEMPERATURE
           doc: |
             Temperature of STM head. Note: At least one field from tip_temp,
             cryo_bottom_temp and cryo_shield_temp must be provided.
         cryo_bottom_temp(NX_NUMBER):
-          exists: optional
+          exists: recommended
           unit: NX_TEMPERATURE
           doc: |
             Temperature of the cold tail of the cryostat. Note: At least one field from
             tip_temp, cryo_bottom_temp and cryo_shield_temp must be provided.
         cryo_shield_temp(NX_NUMBER):
-          exists: optional
+          exists: recommended
           unit: NX_TEMPERATURE
           doc: |
             Temperature of liquid nitrogen shield. Note: At
@@ -127,30 +138,33 @@ NXspm(NXsensor_scan):
           exists: optional
           doc: |
             This should be a link to the current_sensor under the instrument group:
-            ENTRY[entry]/INSTRUMENT[instrument]/current_sensor.
+            ENTRY[*]/INSTRUMENT[*]/current_sensor.
             
-            Note: group name (e.g. entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
-        voltage_SENSOR(NXsensor):
+            Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+            square bracket would be the `exact` name of the NXentry group.
+        voltage_sensorTAG(NXsensor):
           exists: optional
           doc: |
-            This should be a link to the voltage_SENSOR under the instrument group:
-            ENTRY[entry]/INSTRUMENT[instrument]/voltage_SENSOR[*].
+            This should be a link to the voltage_sensorTAG under the instrument group:
+            ENTRY[*]/INSTRUMENT[*]/voltage_sensorTAG[voltage_sensor*].
             
-            Note: group name (e.g. entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
+            Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+            square bracket would be the `exact` name of the NXentry group.
         piezo_sensor(NXsensor):
           exists: optional
           doc: |
             This should be a link to the piezo_sensor under the instrument group:
-            ENTRY[entry]/INSTRUMENT[instrument]/piezo_sensor.
+            ENTRY[*]/INSTRUMENT[*]/piezo_sensor.
             
-            Note: group name (e.g. entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
+            Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+            square bracket would be the `exact` name of the NXentry group.
         (NXspm_scan_control):
           doc: |
             The scan control information like scan region or phase space, type of scan (e.g.
-            mesh, spiral, etc.), and scan speed, etc. This group mainly stores the raw scan
+            mesh, spiral, etc.), and scan speed, etc. This group mainly stores the scan settings
             data. For processed data or final experimental data would go to NXdata group.
           scan_name:
-            exists: optional
+            exists: recommended
             doc: |
               The name of the scan, mainly lab defined, that helps to differentiate among different
               scans performed in lab. This field is intended for several types of scan control
@@ -361,17 +375,18 @@ NXspm(NXsensor_scan):
             Data (e.g, record from SPM head temperature) from temperature sensor.
       bias_spectroscopy_environment(NXenvironment):
         doc: |
-          To explain bias (sweep measurement) voltage applied to the sample.
+          To explain bias and current relationship (sweep measurement) due to voltage
+          applied to the sample.
         (NXspm_bias_spectroscopy):
           doc: |
-            Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
+            Setup and scan data for continuous measurement of bias voltage on the subject of experiment
             vs tunneling current from probe.
           (NXspm_positioner):
             exists: optional
             doc: |
               The positioner information like the position of the tip, PID loop feedback etc.
             z_controller(NXpid_controller):
-              exists: optional
+              exists: recommended
               doc: |
                 The PID controller information for the z-axis.
               z_average_time(NX_NUMBER):
@@ -383,7 +398,7 @@ NXspm(NXsensor_scan):
                 exists: optional
                 unit: NX_TIME
                 doc: |
-                  The time taken by the z-controller to measure physical properties.
+                  The time taken by the z-controller to measure output.
               z_controller_hold(NX_BOOLEAN):
                 exists: optional
                 doc: |
@@ -396,7 +411,7 @@ NXspm(NXsensor_scan):
           bias_sweep(NXspm_scan_control):
             doc: |
               The bias voltage sweep is a common technique used on the substance or sample or environment
-              to study the change in the behavior of the sample or substance or environment due to change
+              to study the change in the behavior of the sample or substance or environment (in this case current) due to change
               in applied  bias voltage.
             scan_region(NXspm_scan_region):
               doc: |
@@ -435,7 +450,7 @@ NXspm(NXsensor_scan):
         exists: optional
         doc: |
           The DC bias voltage that is applied to the sample (for example in constant-
-          current mode).
+          current mode in STM).
         bias_voltage(NX_NUMBER):
           unit: NX_VOLTAGE
           doc: |
@@ -467,9 +482,9 @@ NXspm(NXsensor_scan):
           Information of environment around the sample.
         sample_bias_voltage(NXsensor):
           doc: |
-            This should be a linkto the ENTRY[entry]/INSTRUMENT[instrument]/sample_bias_voltage sensor under the instrument.
+            This should be a linkto the ENTRY[*]/INSTRUMENT[*]/sample_bias_voltage sensor under the instrument.
             
-            Note: group name (e.g. entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
+            Note: group name (could be any meaningful and relevant name e.g., entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
     (NXdata):
       doc: |
         The data group.
@@ -491,7 +506,7 @@ NXspm(NXsensor_scan):
         are used to measure the resolution of the experiment results.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# d6f12b26c2321581b866d75caaebf029cbc2815e2b07a085b8e053a5e9d8ec24
+# 58febe1de2459397a167dbc50b8d1176ec9b1b83e5df7390dc261cd878315340
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -521,7 +536,8 @@ NXspm(NXsensor_scan):
 #         sample and image it at the atomic level.
 #         
 #         The application class NXspm is designed as a skeleton and contains common technical concepts
-#         for specific SPM sub-techniques such as STM, STS, AFM etc.
+#         for specific SPM sub-techniques such as STM, STS, AFM etc. In addition, it can be utilized to
+#         describe the SPM experiments without further specialization for each sub-technique.
 #     </doc>
 #     <group type="NXentry">
 #         <field name="definition">
@@ -547,6 +563,8 @@ NXspm(NXsensor_scan):
 #                 The mode of the scan. The possible options depend on the type of experiment.
 #                 For example, in STM, the scan mode could be constant height or constant current,
 #                 in AFM, the scan mode could be contact mode, tapping mode or non-contact mode.
+#                 
+#                 For general purpose usage, all scan modes from its sub-techniques are listed.
 #             </doc>
 #             <enumeration open="true">
 #                 <item value="constant height"/>
@@ -559,10 +577,10 @@ NXspm(NXsensor_scan):
 #                 <item value="lateral force mode"/>
 #             </enumeration>
 #         </field>
-#         <field name="scan_type" optional="true">
+#         <field name="scan_type" recommended="true">
 #             <doc>
 #                 The type of the scan. It mainly describes how scan probe moves in the scan region, e.g.
-#                 forward, backward, or both (if scan is repeated).
+#                 forward, backward, or both (if scan is repeated). Any lab defined scan type
 #             </doc>
 #         </field>
 #         <field name="identifier_experiment" optional="true">
@@ -582,12 +600,12 @@ NXspm(NXsensor_scan):
 #             </doc>
 #             <group name="hardware" type="NXfabrication">
 #                 <doc>
-#                     The hardware description of the core instrument setup of the experiment.
+#                     The hardware description of core instrument setup of experiment.
 #                     Usually, the entire instrument is supplied by a single manufacturer.
 #                     To describe the hardware from any sub-components, use the hardware group of that
 #                     sub-component (child group of the NXinstrument group) group.
 #                 </doc>
-#                 <field name="name" optional="true">
+#                 <field name="name" recommended="true">
 #                     <doc>
 #                         Name of the hardware.
 #                     </doc>
@@ -611,7 +629,7 @@ NXspm(NXsensor_scan):
 #             </group>
 #             <group name="software" type="NXfabrication">
 #                 <doc>
-#                     The software description of the core instrument setup of the experiment.
+#                     The software description of core instrument setup of experiment.
 #                     Usually, the entire instrument is supplied by a single name/manufacturer/model/etc.
 #                     To describe the software from any sub-components, use the software group of that component.
 #                 </doc>
@@ -652,25 +670,34 @@ NXspm(NXsensor_scan):
 #                 <doc>
 #                     The lock-in amplifier information.
 #                 </doc>
+#                 <field name="lockin_current_flip_sign" type="NX_NUMBER" optional="true">
+#                     <doc>
+#                         The sign (1 or -1) that defines the sign of the lock-in current.
+#                         The calibration procedure with retracted tip is normally performed to compensate for the signal phase delay
+#                         in SPM. The procedure yields two possible solutions, this number should be equal
+#                         to 1 or -1 depending on which solution is chosen (this concept mainly used in STS experiments,
+#                         e.g. in Nanonis machine).
+#                     </doc>
+#                 </field>
 #             </group>
 #             <group name="scan_environment" type="NXenvironment">
 #                 <doc>
 #                     Information of the scan environment holding concpet for
 #                     temperature, setpoint (current or height), scan area and scan data.
 #                 </doc>
-#                 <field name="tip_temp" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
+#                 <field name="tip_temp" type="NX_NUMBER" recommended="true" units="NX_TEMPERATURE">
 #                     <doc>
 #                         Temperature of STM head. Note: At least one field from tip_temp,
 #                         cryo_bottom_temp and cryo_shield_temp must be provided.
 #                     </doc>
 #                 </field>
-#                 <field name="cryo_bottom_temp" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
+#                 <field name="cryo_bottom_temp" type="NX_NUMBER" recommended="true" units="NX_TEMPERATURE">
 #                     <doc>
 #                         Temperature of the cold tail of the cryostat. Note: At least one field from
 #                         tip_temp, cryo_bottom_temp and cryo_shield_temp must be provided.
 #                     </doc>
 #                 </field>
-#                 <field name="cryo_shield_temp" type="NX_NUMBER" optional="true" units="NX_TEMPERATURE">
+#                 <field name="cryo_shield_temp" type="NX_NUMBER" recommended="true" units="NX_TEMPERATURE">
 #                     <doc>
 #                         Temperature of liquid nitrogen shield. Note: At
 #                         least one field from tip_temp, cryo_bottom_temp and cryo_shield_temp.
@@ -685,34 +712,37 @@ NXspm(NXsensor_scan):
 #                 <group name="current_sensor" type="NXsensor" optional="true">
 #                     <doc>
 #                         This should be a link to the current_sensor under the instrument group:
-#                         ENTRY[entry]/INSTRUMENT[instrument]/current_sensor.
+#                         ENTRY[*]/INSTRUMENT[*]/current_sensor.
 #                         
-#                         Note: group name (e.g. entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
+#                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+#                         square bracket would be the `exact` name of the NXentry group.
 #                     </doc>
 #                 </group>
-#                 <group name="voltage_SENSOR" type="NXsensor" optional="true">
+#                 <group name="voltage_sensorTAG" type="NXsensor" optional="true">
 #                     <doc>
-#                         This should be a link to the voltage_SENSOR under the instrument group:
-#                         ENTRY[entry]/INSTRUMENT[instrument]/voltage_SENSOR[*].
+#                         This should be a link to the voltage_sensorTAG under the instrument group:
+#                         ENTRY[*]/INSTRUMENT[*]/voltage_sensorTAG[voltage_sensor*].
 #                         
-#                         Note: group name (e.g. entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
+#                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+#                         square bracket would be the `exact` name of the NXentry group.
 #                     </doc>
 #                 </group>
 #                 <group name="piezo_sensor" type="NXsensor" optional="true">
 #                     <doc>
 #                         This should be a link to the piezo_sensor under the instrument group:
-#                         ENTRY[entry]/INSTRUMENT[instrument]/piezo_sensor.
+#                         ENTRY[*]/INSTRUMENT[*]/piezo_sensor.
 #                         
-#                         Note: group name (e.g. entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
+#                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+#                         square bracket would be the `exact` name of the NXentry group.
 #                     </doc>
 #                 </group>
 #                 <group type="NXspm_scan_control">
 #                     <doc>
 #                         The scan control information like scan region or phase space, type of scan (e.g.
-#                         mesh, spiral, etc.), and scan speed, etc. This group mainly stores the raw scan
+#                         mesh, spiral, etc.), and scan speed, etc. This group mainly stores the scan settings
 #                         data. For processed data or final experimental data would go to NXdata group.
 #                     </doc>
-#                     <field name="scan_name" optional="true">
+#                     <field name="scan_name" recommended="true">
 #                         <doc>
 #                             The name of the scan, mainly lab defined, that helps to differentiate among different
 #                             scans performed in lab. This field is intended for several types of scan control
@@ -841,8 +871,8 @@ NXspm(NXsensor_scan):
 #             <group name="voltage_sensorTAG" type="NXsensor" nameType="partial" optional="true">
 #                 <doc>
 #                     The sensor information for the voltage device. Any voltage sensor involved in the
-#                     experiment or in any special measurement or in any specialized experiment component 
-#                     can be registered under this group. 
+#                     experiment or in any special measurement or in any specialized experiment component
+#                     can be registered under this group.
 #                     
 #                     For this purpose, replace the TAG with the specific name or ID of the voltage sensor.
 #                     
@@ -963,18 +993,19 @@ NXspm(NXsensor_scan):
 #             </group>
 #             <group name="bias_spectroscopy_environment" type="NXenvironment">
 #                 <doc>
-#                     To explain bias (sweep measurement) voltage applied to the sample.
+#                     To explain bias and current relationship (sweep measurement) due to voltage
+#                     applied to the sample.
 #                 </doc>
 #                 <group type="NXspm_bias_spectroscopy">
 #                     <doc>
-#                         Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
+#                         Setup and scan data for continuous measurement of bias voltage on the subject of experiment
 #                         vs tunneling current from probe.
 #                     </doc>
 #                     <group type="NXspm_positioner" optional="true">
 #                         <doc>
 #                             The positioner information like the position of the tip, PID loop feedback etc.
 #                         </doc>
-#                         <group name="z_controller" type="NXpid_controller" optional="true">
+#                         <group name="z_controller" type="NXpid_controller" recommended="true">
 #                             <doc>
 #                                 The PID controller information for the z-axis.
 #                             </doc>
@@ -985,7 +1016,7 @@ NXspm(NXsensor_scan):
 #                             </field>
 #                             <field name="z_controller_time" type="NX_NUMBER" optional="true" units="NX_TIME">
 #                                 <doc>
-#                                     The time taken by the z-controller to measure physical properties.
+#                                     The time taken by the z-controller to measure output.
 #                                 </doc>
 #                             </field>
 #                             <field name="z_controller_hold" type="NX_BOOLEAN" optional="true">
@@ -1004,7 +1035,7 @@ NXspm(NXsensor_scan):
 #                     <group name="bias_sweep" type="NXspm_scan_control">
 #                         <doc>
 #                             The bias voltage sweep is a common technique used on the substance or sample or environment
-#                             to study the change in the behavior of the sample or substance or environment due to change
+#                             to study the change in the behavior of the sample or substance or environment (in this case current) due to change
 #                             in applied  bias voltage.
 #                         </doc>
 #                         <group name="scan_region" type="NXspm_scan_region">
@@ -1056,7 +1087,7 @@ NXspm(NXsensor_scan):
 #             <group name="sample_bias_voltage" type="NXsensor" optional="true">
 #                 <doc>
 #                     The DC bias voltage that is applied to the sample (for example in constant-
-#                     current mode).
+#                     current mode in STM).
 #                 </doc>
 #                 <field name="bias_voltage" type="NX_NUMBER" units="NX_VOLTAGE">
 #                     <doc>
@@ -1095,9 +1126,9 @@ NXspm(NXsensor_scan):
 #                 </doc>
 #                 <group name="sample_bias_voltage" type="NXsensor">
 #                     <doc>
-#                         This should be a linkto the ENTRY[entry]/INSTRUMENT[instrument]/sample_bias_voltage sensor under the instrument.
+#                         This should be a linkto the ENTRY[*]/INSTRUMENT[*]/sample_bias_voltage sensor under the instrument.
 #                         
-#                         Note: group name (e.g. entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
+#                         Note: group name (could be any meaningful and relevant name e.g., entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
 #                     </doc>
 #                 </group>
 #             </group>
