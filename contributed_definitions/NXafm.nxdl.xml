@@ -42,11 +42,11 @@
                 contact mode: Cantilever moves on the sample surface in very close contact with the sample.
                 non-contact mode: Cantilever oscillates above the sample surface without touching it. Cantilever stays in the
                           interaction (atomic force) zone therefore cantilever oscillator amplitude and frequency are deformed.
-                tapping mode: Resembles to the non-contact mode, but at every point of scan the cantilever tip comes very close 
+                tapping mode: Resembles to the non-contact mode, but at every point of scan the cantilever tip comes very close
                           to the sample surface and taps it.
                 peak force tapping mode: Like the tapping mode, but at each point of the scan force-distance curve is recorded.
                           The maximum force is used to control the cantilever position using a PID feedback loop.
-                Kelvin probe: A variant of the non-contact mode, where the electrostatic force between the conductive tip and 
+                Kelvin probe: A variant of the non-contact mode, where the electrostatic force between the conductive tip and
                           sample is measured. The difference of the work function leads electric current between the tip and sample.
             </doc>
             <enumeration open="true">
@@ -91,24 +91,7 @@
                         or resonance frequency are very sensitive to changes in the interaction potential field, giving rise of
                         various measurement modes, such as non-contact or intermittent-contact (tapping) modes.
                     </doc>
-                    <field name="amplitude_excitation" type="NX_NUMBER" recommended="true" units="NX_ANY">
-                        <doc>
-                            The reference amplitude (also called driver amplitude) of the cantilever.
-                            Here, the amplitude excitation voltage may be the same as the oscillator
-                            excitation voltage.
-                        </doc>
-                    </field>
-                    <field name="frequency_excitation" type="NX_NUMBER" recommended="true" units="NX_FREQUENCY">
-                        <doc>
-                            The reference frequency of the cantilever.
-                        </doc>
-                    </field>
                 </group>
-                <field name="cantilever_phase" type="NX_NUMBER" optional="true" units="NX_ANGLE">
-                    <doc>
-                        The phase of the cantilever oscillation.
-                    </doc>
-                </field>
                 <group name="cantilever_phase_positioner" type="NXpositioner" optional="true">
                     <doc>
                         The phase positioner of the cantilever.
@@ -125,7 +108,7 @@
                     </doc>
                 </group>
             </group>
-            <group name="phase_lock_loop" type="NXspm_lockin" recommended="true">
+            <group name="phase_lock_loop" type="NXspm_lockin">
                 <doc>
                     Phase locked loop for cantilever lock-in device.
                 </doc>
@@ -134,28 +117,31 @@
                 <doc>
                     The environment information.
                 </doc>
-                <group name="height_piezo_sensor" type="NXsensor">
+                <group name="height_piezo_sensor" type="NXsensor" optional="true">
                     <doc>
                         Link to the group
-                        ENTRY[entry]/experiment_instrument/height_piezo_sensor.
+                        ENTRY[*]/experiment_instrument/height_piezo_sensor.
                         
-                        Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                        Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                        square bracket would be the `exact` name of the NXentry group.
                     </doc>
                 </group>
-                <group name="XY_piezo_sensor" type="NXsensor" nameType="specified">
+                <group name="XY_piezo_sensor" type="NXsensor" nameType="specified" optional="true">
                     <doc>
                         Link to the group
-                        ENTRY[entry]/experiment_instrument/XY_piezo_sensor.
+                        ENTRY[*]/experiment_instrument/XY_piezo_sensor.
                         
-                        Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                        Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                        square bracket would be the `exact` name of the NXentry group.
                     </doc>
                 </group>
-                <group name="tip_temp_sensor" type="NXsensor">
+                <group name="tip_temp_sensor" type="NXsensor" optional="true">
                     <doc>
                         Link to the group
-                        ENTRY[entry]/experiment_instrument/tip_temp_sensor.
+                        ENTRY[*]/experiment_instrument/tip_temp_sensor.
                         
-                        Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                        Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                        square bracket would be the `exact` name of the NXentry group.
                     </doc>
                 </group>
             </group>
@@ -163,18 +149,13 @@
                 <doc>
                     The sensor information for the height piezo device.
                 </doc>
-                <group name="piezo_configuration" type="NXspm_piezo_config">
+                <group name="piezo_configuration" type="NXspm_piezo_config" recommended="true">
                     <doc>
                         The piezo configuration information like piezoelectric calibration and material
                         properties.
                     </doc>
-                    <group name="piezo_material" type="NXspm_piezoelectric_material" optional="true">
-                        <doc>
-                            The material description and properties of the piezoelectric scanner materials.
-                        </doc>
-                    </group>
                 </group>
-                <group type="NXspm_positioner">
+                <group type="NXspm_positioner" recommended="true">
                     <doc>
                         The positioner information like the position of the tip, the position of the
                         sample, PID loop feedback etc.
@@ -190,11 +171,6 @@
                         The piezo configuration information like piezoelectric calibration and material
                         properties.
                     </doc>
-                    <group name="piezo_material" type="NXspm_piezoelectric_material" optional="true">
-                        <doc>
-                            The material description and properties of the piezoelectric scanner materials.
-                        </doc>
-                    </group>
                 </group>
                 <group type="NXspm_positioner">
                     <doc>
@@ -217,33 +193,37 @@
             <field name="cantilever_tip_temp" type="NX_NUMBER" optional="true">
                 <doc>
                     Link to target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/tip_temp
+                    /ENTRY[*]/INSTRUMENT[*]/scan_environment/tip_temp
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
             <field name="cryo_bottom_temp" type="NX_NUMBER" optional="true">
                 <doc>
                     Link to target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_bottom_temp
+                    /ENTRY[*]/INSTRUMENT[*]/scan_environment/cryo_bottom_temp
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
             <field name="cryo_shield_temp" type="NX_NUMBER" optional="true">
                 <doc>
                     Link to target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_shield_temp
+                    /ENTRY[*]/INSTRUMENT[*]/scan_environment/cryo_shield_temp
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
             <group name="cantilever_oscillator" type="NXcomponent" optional="true">
                 <doc>
                     Link to target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/cantilever_spm/cantilever_oscillator
+                    /ENTRY[*]/INSTRUMENT[*]/cantilever_spm/cantilever_oscillator
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </group>
         </group>
@@ -254,41 +234,46 @@
             <field name="cantilever_tip_temp" type="NX_NUMBER" optional="true">
                 <doc>
                     Link to target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/tip_temp
+                    /ENTRY[*]/INSTRUMENT[*]/scan_environment/tip_temp
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
             <field name="cryo_bottom_temp" type="NX_NUMBER" optional="true">
                 <doc>
                     Link to target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_bottom_temp
+                    /ENTRY[*]/INSTRUMENT[*]/scan_environment/cryo_bottom_temp
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
             <field name="cryo_shield_temp" type="NX_NUMBER" optional="true">
                 <doc>
                     Link to target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/scan_environment/cryo_shield_temp
+                    /ENTRY[*]/INSTRUMENT[*]/scan_environment/cryo_shield_temp
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
-            <field name="oscillator_excitation" type="NX_NUMBER" optional="true">
+            <field name="cantilever_config" type="NX_NUMBER" optional="true">
                 <doc>
                     Link to target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/cantilever_spm/cantilever_oscillator/oscillator_excitation
+                    /ENTRY[*]/INSTRUMENT[*]/cantilever_spm/cantilever_config
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
             <field name="amplitude_excitation" type="NX_NUMBER" optional="true">
                 <doc>
                     Link to target:
-                    /ENTRY[entry]/INSTRUMENT[instrument]/cantilever_spm/cantilever_oscillator/phase_lock_loop/amplitude_excitation
+                    /ENTRY[*]/INSTRUMENT[*]/phase_lock_loop/amplitude_excitation
                     
-                    Note: The group name written inside the square brackets (e.g. entry in ENTRY[entry]) would be the exact instance name of the base class (e.g. NXentry) in the nexus file.
+                    Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
+                    square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
         </group>

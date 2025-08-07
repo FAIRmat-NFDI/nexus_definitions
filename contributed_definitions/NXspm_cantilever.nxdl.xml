@@ -28,20 +28,24 @@
     </doc>
     <group name="cantilever_oscillator" type="NXcomponent">
         <doc>
-            Generally speaking, the cantilever resembles a simple harmonic oscillator, thus it has resonance 
+            Generally speaking, the cantilever resembles a simple harmonic oscillator, thus it has resonance
             frequency and amplitude.
             
-            When the cantilever tip is close to the surface of the sample, an attractive or repulsive 
+            When the cantilever tip is close to the surface of the sample, an attractive or repulsive
             force appears between the cantilever and the sample, deforming the cantilever's resonance
-            frequency and amplitude. The detector (typically a photodiode) measures this deformation 
+            frequency and amplitude. The detector (typically a photodiode) measures this deformation
             from a laser light deflection and, therefore, the force acting on the cantilever.
-            In a typical AFM scan cantilever moves toward the surface of the sample until a user-defined value of force 
+            In a typical AFM scan cantilever moves toward the surface of the sample until a user-defined value of force
             acting on the cantilever is reached. The measured force is used as an input of a PID feedback loop, and the
             output of this loop controls the vertical position of the cantilever.
+            
+            Note: If any field data in this group comes in an array as input or output in the scan process they will
+            be stored in NXdata in scan_control group.
         </doc>
-        <field name="reference_amplitude" type="NX_NUMBER" units="NX_ANY">
+        <field name="reference_amplitude" type="NX_NUMBER" units="NX_LENGTH">
             <doc>
                 The reference amplitude (also called drive amplitude) of the cantilever.
+                This is the amplitude of the cantilever oscillation when no external forces are acting on it.
             </doc>
         </field>
         <field name="reference_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
@@ -56,26 +60,6 @@
                 the cantilever.
             </doc>
         </field>
-        <group name="phase_lock_loop" type="NXspm_lockin">
-            <doc>
-                Phase locked loop for cantilever lock-in device.
-            </doc>
-            <group name="cantilever_amplitude_positioner" type="NXpositioner">
-                <doc>
-                    Describes the cantilever frequency positioner, if it exists.
-                </doc>
-            </group>
-            <group name="cantilever_phase_positioner" type="NXpositioner">
-                <doc>
-                    Describes the cantilever phase positioner, if it exists.
-                </doc>
-            </group>
-            <group name="cantilever_frequency_positioner" type="NXpositioner">
-                <doc>
-                    Describes the cantilever frequency positioner, if it exists.
-                </doc>
-            </group>
-        </group>
         <field name="phase_shift" type="NX_NUMBER" units="NX_ANGLE">
             <doc>
                 The phase difference between the reference signal of cantilever and response
@@ -97,9 +81,16 @@
                 The bandwidth of the resonance frequency.
             </doc>
         </field>
-        <field name="target_amplitude" type="NX_NUMBER" units="NX_ANY">
+        <field name="target_amplitude" type="NX_NUMBER" units="NX_LENGTH">
             <doc>
-                The target amplitude of the cantilever to start the AFM/SPM experiment.
+                The target amplitude of the cantilever to scan on each scan point.
+                This field is same as the reference amplitude in the non-contact mode.
+            </doc>
+        </field>
+        <field name="target_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
+            <doc>
+                The target frequency of the cantilever to scan on each scan point.
+                This field is same as the reference frequency in the non-contact mode
             </doc>
         </field>
         <field name="active_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
@@ -112,63 +103,5 @@
                 The reference phase of the cantilever oscillator.
             </doc>
         </field>
-    </group>
-    <group name="cantilever_config" type="NXobject">
-        <doc>
-            The configuration information of the cantilever such as calibration information,
-            material properties, size, resonance, etc.
-        </doc>
-        <field name="cantilever_coating">
-            <doc>
-                The coating material of the cantilever.
-            </doc>
-        </field>
-        <field name="curvature_radiusN" type="NX_NUMBER" nameType="partial" units="NX_ANY">
-            <doc>
-                The radius of curvature of the cantilever tip. The (substring) N denotes X or Y.
-            </doc>
-        </field>
-        <field name="cantilever_type">
-            <doc>
-                The shape of the cantilever as a general text, such as A-shape, beam, or arrow.
-            </doc>
-        </field>
-        <field name="cantilever_length" type="NX_NUMBER" units="NX_LENGTH">
-            <doc>
-                Nominal length between base and end of the cantilever in micrometers.
-            </doc>
-        </field>
-        <field name="cantilever_width" type="NX_NUMBER" units="NX_LENGTH">
-            <doc>
-                Nominal width of the cantilever in microns.
-            </doc>
-        </field>
-        <field name="cantilever_thickness" type="NX_NUMBER" units="NX_LENGTH">
-            <doc>
-                Nominal thickness of the cantilever in microns.
-            </doc>
-        </field>
-        <field name="cantilever_resonance_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
-            <doc>
-                Nominal free resonance frequency of the cantilever in air, in kHz.
-            </doc>
-        </field>
-        <group type="NXcalibration">
-            <doc>
-                The calibration information of the cantilever.
-            </doc>
-            <field name="sensitivity" type="NX_NUMBER" units="NX_ANY">
-                <doc>
-                    A force applied to the cantilever tip will cause a change in
-                    cantilever's oscillation amplitude (in dynamic mode) or deflection of the cantilever.
-                    The sensitivity of the cantilever is calculated as the ratio of this change to the force causing it.
-                </doc>
-            </field>
-            <field name="spring_constant" type="NX_NUMBER" units="NX_ANY">
-                <doc>
-                    The spring constant coefficient of the cantilever.
-                </doc>
-            </field>
-        </group>
     </group>
 </definition>
