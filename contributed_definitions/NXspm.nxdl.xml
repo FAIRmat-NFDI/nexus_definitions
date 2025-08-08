@@ -225,9 +225,9 @@
                         square bracket would be the `exact` name of the NXentry group.
                     </doc>
                 </group>
-                <group name="piezo_sensor" type="NXsensor" optional="true">
+                <group name="piezo_sensor" type="NXspm_piezo_sensor" optional="true">
                     <doc>
-                        This should be a link to the piezo_sensor under the instrument group:
+                        This should be a link to the piezo_sensor associated with Z-axis:
                         ENTRY[*]/INSTRUMENT[*]/piezo_sensor.
                         
                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
@@ -333,8 +333,8 @@
             </group>
             <group name="current_sensorTAG" type="NXsensor" optional="true">
                 <doc>
-                    Information for current sensor. Any current sensor involved in the experiment or 
-                    in any special measurement or in any specialized experiment component can be 
+                    Information for current sensor. Any current sensor involved in the experiment or
+                    in any special measurement or in any specialized experiment component can be
                     registered under this group.
                 </doc>
                 <field name="current" type="NX_NUMBER" units="NX_CURRENT">
@@ -415,54 +415,30 @@
                     </field>
                 </group>
             </group>
-            <group name="piezo_sensor" type="NXsensor">
+            <group name="piezo_sensor" type="NXspm_piezo_sensor" nameType="specified">
                 <doc>
-                    This piezo sensor group refers to the height (or Z) piezo sensor.
+                    This piezo sensor group refers to the XYZ piezo sensor.
                 </doc>
-                <field name="x" type="NX_NUMBER" units="NX_LENGTH" optional="true">
+                <field name="x" type="NX_NUMBER" units="NX_LENGTH" recommended="true">
                     <doc>
-                        The x position of the piezo. In STS experiment, the piezo stays fixed at
-                        x,y and z and the the tunneling current is measured with respect to the
-                        bias voltage (sweep voltage).
+                        The x position of the piezo.
                     </doc>
                 </field>
-                <field name="y" type="NX_NUMBER" units="NX_LENGTH" optional="true">
+                <field name="y" type="NX_NUMBER" units="NX_LENGTH" recommended="true">
                     <doc>
                         The y position of the piezo.
                     </doc>
                 </field>
-                <field name="z" type="NX_NUMBER" units="NX_LENGTH">
+                <field name="z" type="NX_NUMBER" units="NX_LENGTH" recommended="true">
                     <doc>
                         The z position of the piezo.
                     </doc>
                 </field>
-                <group name="piezo_configuration" type="NXspm_piezo_config" optional="true">
-                    <doc>
-                        The piezo configuration information like piezoelectric calibration and material
-                        properties.
-                    </doc>
-                    <group name="calibration" type="NXcalibration" optional="true">
-                        <doc>
-                            Calibration of the piezo device.
-                        </doc>
-                    </group>
-                </group>
-                <group type="NXspm_positioner">
-                    <doc>
-                        The positioner information like the position of the tip, the position of the
-                        sample, PID loop feedback etc.
-                    </doc>
-                </group>
-                <group name="piezo_material" type="NXspm_piezoelectric_material" optional="true">
-                    <doc>
-                        The material description and properties of the piezoelectric scanner materials.
-                    </doc>
-                </group>
             </group>
-            <group type="NXspm_temperature_sensor" nameType="any" optional="true">
+            <group name="XYZpiezo_sensor" type="NXspm_piezo_sensor" nameType="partial">
                 <doc>
-                    A group handling the temperature sensors. For different
-                    type of temperature sensors repeat this group.
+                    This separate piezo sensor along X-, Y-, and Z-axis register this group, e.g., x_piezo_sensor
+                    or height_piezo_sensor.
                 </doc>
             </group>
             <group name="tip_temp_sensor" type="NXspm_temperature_sensor" recommended="true">

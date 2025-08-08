@@ -46,17 +46,12 @@
                           to the sample surface and taps it.
                 peak force tapping mode: Like the tapping mode, but at each point of the scan force-distance curve is recorded.
                           The maximum force is used to control the cantilever position using a PID feedback loop.
-                Kelvin probe: A variant of the non-contact mode, where the electrostatic force between the conductive tip and
-                          sample is measured. The difference of the work function leads electric current between the tip and sample.
             </doc>
             <enumeration open="true">
                 <item value="contact mode"/>
                 <item value="tapping mode"/>
                 <item value="non-contact mode"/>
                 <item value="peak force tapping mode"/>
-                <item value="Kelvin probe"/>
-                <item value="electric force"/>
-                <item value="lateral force mode"/>
             </enumeration>
         </field>
         <group type="NXinstrument">
@@ -98,11 +93,6 @@
                         The amplitude positioner of the cantilever.
                     </doc>
                 </group>
-                <group name="cantilever_frequency_positioner" type="NXpositioner" optional="true">
-                    <doc>
-                        The frequency positioner of the cantilever.
-                    </doc>
-                </group>
             </group>
             <group name="phase_lock_loop" type="NXspm_lockin">
                 <doc>
@@ -113,7 +103,7 @@
                 <doc>
                     The environment information.
                 </doc>
-                <group name="height_piezo_sensor" type="NXsensor" optional="true">
+                <group name="height_piezo_sensor" type="NXspm_piezo_sensor" optional="true">
                     <doc>
                         Link to the group
                         ENTRY[*]/experiment_instrument/height_piezo_sensor.
@@ -122,7 +112,7 @@
                         square bracket would be the `exact` name of the NXentry group.
                     </doc>
                 </group>
-                <group name="XY_piezo_sensor" type="NXsensor" nameType="specified" optional="true">
+                <group name="XYpiezo_sensor" type="NXspm_piezo_sensor" nameType="partial" optional="true">
                     <doc>
                         Link to the group
                         ENTRY[*]/experiment_instrument/XY_piezo_sensor.
@@ -141,39 +131,15 @@
                     </doc>
                 </group>
             </group>
-            <group name="height_piezo_sensor" type="NXsensor" optional="true">
+            <group name="height_piezo_sensor" type="NXspm_piezo_sensor" nameType="specified" optional="true">
                 <doc>
-                    The sensor information for the height piezo device.
+                    The sensor information for the height (Z-axis) piezo device.
                 </doc>
-                <group name="piezo_configuration" type="NXspm_piezo_config" recommended="true">
-                    <doc>
-                        The piezo configuration information like piezoelectric calibration and material
-                        properties.
-                    </doc>
-                </group>
-                <group type="NXspm_positioner" recommended="true">
-                    <doc>
-                        The positioner information like the position of the tip, the position of the
-                        sample, PID loop feedback etc.
-                    </doc>
-                </group>
             </group>
-            <group name="XY_piezo_sensor" type="NXsensor" nameType="specified" optional="true">
+            <group name="XYpiezo_sensor" type="NXspm_piezo_sensor" nameType="partial" optional="true">
                 <doc>
                     The sensor information for the xy piezo device.
                 </doc>
-                <group name="piezo_configuration" type="NXspm_piezo_config">
-                    <doc>
-                        The piezo configuration information like piezoelectric calibration and material
-                        properties.
-                    </doc>
-                </group>
-                <group type="NXspm_positioner">
-                    <doc>
-                        The positioner information like the position of the end of the cantilever, the position of the
-                        sample, PID loop feedback etc.
-                    </doc>
-                </group>
             </group>
             <group name="tip_temp_sensor" type="NXsensor" optional="true">
                 <doc>
