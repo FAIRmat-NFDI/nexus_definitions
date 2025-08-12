@@ -1,7 +1,6 @@
 category: application
 doc: |
-  An application definition to describe atomic force microscopy (AFM) scanning
-  technique.
+  An application definition to describe atomic force microscopy (AFM).
 type: group
 NXafm(NXspm):
   (NXentry):
@@ -9,6 +8,10 @@ NXafm(NXspm):
       doc: |
         Name of the definition that is used for the application.
       enumeration: [NXafm]
+    experiment_technique:
+      doc: |
+        The AFM technique.
+      enumeration: [AFM]
     scan_mode:
       doc: |
         The mode of the scan.
@@ -36,11 +39,11 @@ NXafm(NXspm):
           doc: |
             The sensor information for the photodiode.
       (NXspm_cantilever):
-        exists: optional
+        exists: recommended
         doc: |
           The cantilever information.
-        cantilever_oscillator(NXcomponent):
-          exists: optional
+        cantilever_oscillator(NXspm_cantilever_oscillator):
+          exists: recommended
           doc: |
             When a cantilever is oscillated close to its resonance, this describes the oscillator properties.
             
@@ -48,12 +51,35 @@ NXafm(NXspm):
             resonance frequency. Changes in the oscillation amplitude, phase (between oscillated tail and moving tip)
             or resonance frequency are very sensitive to changes in the interaction potential field, giving rise of
             various measurement modes, such as non-contact or intermittent-contact (tapping) modes.
+          reference_amplitude:
+            unit: NX_LENGTH
+            exists: recommended
+            doc: |
+              The reference amplitude (also called drive amplitude) of the cantilever.
+              This is the amplitude of the cantilever oscillation when no external forces are acting on it.
+              
+              Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
+          reference_frequency:
+            unit: NX_FREQUENCY
+            exists: recommended
+            doc: |
+              The reference frequency (also called drive frequency or resonance frequency) of
+              the cantilever.
+              
+              Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
+          reference_phase:
+            unit: NX_ANGLE
+            exists: recommended
+            doc: |
+              The reference phase of the cantilever.
+              
+              Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
         cantilever_phase_positioner(NXpositioner):
-          exists: optional
+          exists: recommended
           doc: |
             The phase positioner of the cantilever.
         cantilever_amplitude_positioner(NXpositioner):
-          exists: optional
+          exists: recommended
           doc: |
             The amplitude positioner of the cantilever.
       phase_lock_loop(NXspm_lockin):
@@ -65,8 +91,8 @@ NXafm(NXspm):
         height_piezo_sensor(NXspm_piezo_sensor):
           exists: optional
           doc: |
-            Link to the group
-            ENTRY[*]/experiment_instrument/height_piezo_sensor.
+            This should be a link to the concept
+            ENTRY[*]/INSTRUMENT[*]/height_piezo_sensor.
             
             Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
             square bracket would be the `exact` name of the NXentry group.
@@ -74,16 +100,16 @@ NXafm(NXspm):
           nameType: partial
           exists: optional
           doc: |
-            Link to the group
-            ENTRY[*]/experiment_instrument/XY_piezo_sensor.
+            This should be a link to the concept
+            ENTRY[*]/INSTRUMENT[*]/XY_piezo_sensor.
             
             Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
             square bracket would be the `exact` name of the NXentry group.
         tip_temp_sensor(NXsensor):
           exists: optional
           doc: |
-            Link to the group
-            ENTRY[*]/experiment_instrument/tip_temp_sensor.
+            This should be a link to the concept
+            ENTRY[*]/INSTRUMENT[*]/tip_temp_sensor.
             
             Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
             square bracket would be the `exact` name of the NXentry group.
@@ -130,7 +156,7 @@ NXafm(NXspm):
           
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
-      cantilever_oscillator(NXcomponent):
+      cantilever_oscillator(NXspm_cantilever_oscillator):
         exists: optional
         doc: |
           Link to target:
@@ -184,8 +210,8 @@ NXafm(NXspm):
           square bracket would be the `exact` name of the NXentry group.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# d1176628d31b41fbd6b17f50858439d483686c70bff62f095d8ee8d9cbd83996
-# <?xml version="1.0" encoding="UTF-8"?>
+# 0b6472b6ba0d095b84d34df7782417ed2a684657e04ddb9e40f83ae1f6d9d8db
+# <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
 # # NeXus - Neutron and X-ray Common Data Format
@@ -210,8 +236,7 @@ NXafm(NXspm):
 # -->
 # <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXafm" extends="NXspm" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <doc>
-#         An application definition to describe atomic force microscopy (AFM) scanning
-#         technique.
+#         An application definition to describe atomic force microscopy (AFM).
 #     </doc>
 #     <group type="NXentry">
 #         <field name="definition">
@@ -220,6 +245,14 @@ NXafm(NXspm):
 #             </doc>
 #             <enumeration>
 #                 <item value="NXafm"/>
+#             </enumeration>
+#         </field>
+#         <field name="experiment_technique">
+#             <doc>
+#                 The AFM technique.
+#             </doc>
+#             <enumeration>
+#                 <item value="AFM"/>
 #             </enumeration>
 #         </field>
 #         <field name="scan_mode">
@@ -256,11 +289,11 @@ NXafm(NXspm):
 #                     </doc>
 #                 </group>
 #             </group>
-#             <group type="NXspm_cantilever" optional="true">
+#             <group type="NXspm_cantilever" recommended="true">
 #                 <doc>
 #                     The cantilever information.
 #                 </doc>
-#                 <group name="cantilever_oscillator" type="NXcomponent" optional="true">
+#                 <group name="cantilever_oscillator" type="NXspm_cantilever_oscillator" recommended="true">
 #                     <doc>
 #                         When a cantilever is oscillated close to its resonance, this describes the oscillator properties.
 #                         
@@ -269,13 +302,36 @@ NXafm(NXspm):
 #                         or resonance frequency are very sensitive to changes in the interaction potential field, giving rise of
 #                         various measurement modes, such as non-contact or intermittent-contact (tapping) modes.
 #                     </doc>
+#                     <field name="reference_amplitude" units="NX_LENGTH" recommended="true">
+#                         <doc>
+#                             The reference amplitude (also called drive amplitude) of the cantilever.
+#                             This is the amplitude of the cantilever oscillation when no external forces are acting on it.
+#                             
+#                             Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
+#                         </doc>
+#                     </field>
+#                     <field name="reference_frequency" units="NX_FREQUENCY" recommended="true">
+#                         <doc>
+#                             The reference frequency (also called drive frequency or resonance frequency) of
+#                             the cantilever.
+#                             
+#                             Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
+#                         </doc>
+#                     </field>
+#                     <field name="reference_phase" units="NX_ANGLE" recommended="true">
+#                         <doc>
+#                             The reference phase of the cantilever.
+#                             
+#                             Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
+#                         </doc>
+#                     </field>
 #                 </group>
-#                 <group name="cantilever_phase_positioner" type="NXpositioner" optional="true">
+#                 <group name="cantilever_phase_positioner" type="NXpositioner" recommended="true">
 #                     <doc>
 #                         The phase positioner of the cantilever.
 #                     </doc>
 #                 </group>
-#                 <group name="cantilever_amplitude_positioner" type="NXpositioner" optional="true">
+#                 <group name="cantilever_amplitude_positioner" type="NXpositioner" recommended="true">
 #                     <doc>
 #                         The amplitude positioner of the cantilever.
 #                     </doc>
@@ -292,8 +348,8 @@ NXafm(NXspm):
 #                 </doc>
 #                 <group name="height_piezo_sensor" type="NXspm_piezo_sensor" optional="true">
 #                     <doc>
-#                         Link to the group
-#                         ENTRY[*]/experiment_instrument/height_piezo_sensor.
+#                         This should be a link to the concept
+#                         ENTRY[*]/INSTRUMENT[*]/height_piezo_sensor.
 #                         
 #                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
 #                         square bracket would be the `exact` name of the NXentry group.
@@ -301,8 +357,8 @@ NXafm(NXspm):
 #                 </group>
 #                 <group name="XYpiezo_sensor" type="NXspm_piezo_sensor" nameType="partial" optional="true">
 #                     <doc>
-#                         Link to the group
-#                         ENTRY[*]/experiment_instrument/XY_piezo_sensor.
+#                         This should be a link to the concept
+#                         ENTRY[*]/INSTRUMENT[*]/XY_piezo_sensor.
 #                         
 #                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
 #                         square bracket would be the `exact` name of the NXentry group.
@@ -310,8 +366,8 @@ NXafm(NXspm):
 #                 </group>
 #                 <group name="tip_temp_sensor" type="NXsensor" optional="true">
 #                     <doc>
-#                         Link to the group
-#                         ENTRY[*]/experiment_instrument/tip_temp_sensor.
+#                         This should be a link to the concept
+#                         ENTRY[*]/INSTRUMENT[*]/tip_temp_sensor.
 #                         
 #                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
 #                         square bracket would be the `exact` name of the NXentry group.
@@ -366,7 +422,7 @@ NXafm(NXspm):
 #                     square bracket would be the `exact` name of the NXentry group.
 #                 </doc>
 #             </field>
-#             <group name="cantilever_oscillator" type="NXcomponent" optional="true">
+#             <group name="cantilever_oscillator" type="NXspm_cantilever_oscillator" optional="true">
 #                 <doc>
 #                     Link to target:
 #                     /ENTRY[*]/INSTRUMENT[*]/cantilever_spm/cantilever_oscillator

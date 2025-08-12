@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 <!--
 # NeXus - Neutron and X-ray Common Data Format
@@ -24,20 +24,17 @@
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXspm_bias_spectroscopy" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <doc>
         A base class for bias spectroscopy to describe the change in the physical properties
-        of the sample with respect to the sweep voltage applied on a sample of STM/AFM/... experiment.
+        of the sample with respect to the sweep voltage applied on a sample of STM/AFM/... experiments.
         
         In these experiments an electric potential is applied between the (conductive) sample and the probe
-        (tip), and the physical properties (e.g. tunnelling current) is measured as the function of this
+        (tip), and the physical properties (e.g. tunnelling current) are measured as the function of this
         potential. The potential is varied in so-called voltage sweeps and the corresponding properties are
         recorded accordingly.
     </doc>
     <field name="measurement_type">
         <doc>
-            The measurement of the I(V) curve can come in two ways:
-            1. Constant spacing: The bias voltage is swept from the start to the end with a constant
-            spacing between the tip and surface.
-            2. Variable spacing: The bias voltage is swept from the start to the end in a discretized
-            spacing between the tip and surface. (Either an array of voltages, or the steps are defined).
+            The measurement type defines how current is measured under the different input variables like
+            bias voltage (constant_spacing) or height (variadic_spacing) is applied during the measurement.
         </doc>
         <enumeration>
             <item value="constant_spacing"/>
@@ -59,28 +56,22 @@
             </doc>
         </field>
     </group>
-    <group type="NXcircuit" optional="true">
-        <field name="acquisition_time" type="NX_NUMBER" optional="true" units="NX_TIME">
+    <group type="NXcircuit">
+        <field name="acquisition_time" type="NX_NUMBER" units="NX_TIME">
             <doc>
                 The time or period is taken by a bias sweep to acquire the data for
                 a single bias sweep point (when the given point or whole sweep is started.).
             </doc>
         </field>
-        <field name="animation_time" type="NX_NUMBER" optional="true" units="NX_TIME">
+        <field name="animation_time" type="NX_NUMBER" units="NX_TIME">
             <doc>
                 The time or period is taken by a bias sweep to be displayed.
             </doc>
         </field>
-        <field name="measurement_time" type="NX_NUMBER" optional="true" units="NX_TIME">
+        <field name="measurement_time" type="NX_NUMBER" units="NX_TIME">
             <doc>
                 The time or period is taken by the circuit to measure a full bias sweep voltage or
-                bias current. (duration of the measurement)
-            </doc>
-        </field>
-        <field name="indicators_period" type="NX_NUMBER" optional="true" units="NX_TIME">
-            <doc>
-                The time or period is taken by the circuit to indicate the bias sweep voltage
-                after measuring the voltage.
+                bias current. (duration of the measurement).
             </doc>
         </field>
     </group>
@@ -106,7 +97,7 @@ each other (e.g. spiral)-->
                 <item value="linear"/>
             </enumeration>
         </field>
-        <field name="sweep_number" type="NX_NUMBER">
+        <field name="number_of_sweeps" type="NX_NUMBER">
             <doc>
                 The number of sweeps (a full scan from starting bias to end bias)
                 taken during the bias spectroscopy.
@@ -114,20 +105,19 @@ each other (e.g. spiral)-->
         </field>
         <field name="first_settling_time" type="NX_NUMBER" optional="true" units="NX_TIME">
             <doc>
-                The initial time is taken to settle the bias voltage at the desired value.
+                The initial time taken to settle the bias voltage at the desired value.
                 On each sweep usually, the system takes time to settle to the bias voltage
                 at the next value.
             </doc>
         </field>
         <field name="end_settling_time" type="NX_NUMBER" optional="true" units="NX_TIME">
             <doc>
-                The time is taken to settle the bias voltage at the desired value.
                 The time (at the last sweep) to settle for the last value of the sweep.
             </doc>
         </field>
         <field name="settling_time" type="NX_NUMBER" units="NX_TIME">
             <doc>
-                The time is taken to settle the bias voltage at the desired value. On each sweep usually, the system
+                The time taken to settle the bias voltage at the desired value. On each sweep usually, the system
                 takes time to settle the bias voltage at the next value.
             </doc>
         </field>
@@ -217,10 +207,11 @@ each other (e.g. spiral)-->
                 </doc>
                 <field name="DATA" nameType="any" units="NX_ANY">
                     <doc>
-                        The plottable data collected during the scan.
+                        The plottable data collected during the scan. Data to be plotted against
+                        the axis defined in AXISNAME field. Use this data as signal attributes.
                     </doc>
                 </field>
-                <field name="AXISNAME" nameType="any" units="NX_VOLTAGE">
+                <field name="AXISNAME" nameType="any">
                     <doc>
                         The voltage axis name of the data collected during the scan.
                     </doc>

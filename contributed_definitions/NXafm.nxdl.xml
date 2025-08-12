@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 <!--
 # NeXus - Neutron and X-ray Common Data Format
@@ -23,8 +23,7 @@
 -->
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXafm" extends="NXspm" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <doc>
-        An application definition to describe atomic force microscopy (AFM) scanning
-        technique.
+        An application definition to describe atomic force microscopy (AFM).
     </doc>
     <group type="NXentry">
         <field name="definition">
@@ -33,6 +32,14 @@
             </doc>
             <enumeration>
                 <item value="NXafm"/>
+            </enumeration>
+        </field>
+        <field name="experiment_technique">
+            <doc>
+                The AFM technique.
+            </doc>
+            <enumeration>
+                <item value="AFM"/>
             </enumeration>
         </field>
         <field name="scan_mode">
@@ -69,11 +76,11 @@
                     </doc>
                 </group>
             </group>
-            <group type="NXspm_cantilever" optional="true">
+            <group type="NXspm_cantilever" recommended="true">
                 <doc>
                     The cantilever information.
                 </doc>
-                <group name="cantilever_oscillator" type="NXcomponent" optional="true">
+                <group name="cantilever_oscillator" type="NXspm_cantilever_oscillator" recommended="true">
                     <doc>
                         When a cantilever is oscillated close to its resonance, this describes the oscillator properties.
                         
@@ -82,13 +89,36 @@
                         or resonance frequency are very sensitive to changes in the interaction potential field, giving rise of
                         various measurement modes, such as non-contact or intermittent-contact (tapping) modes.
                     </doc>
+                    <field name="reference_amplitude" units="NX_LENGTH" recommended="true">
+                        <doc>
+                            The reference amplitude (also called drive amplitude) of the cantilever.
+                            This is the amplitude of the cantilever oscillation when no external forces are acting on it.
+                            
+                            Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
+                        </doc>
+                    </field>
+                    <field name="reference_frequency" units="NX_FREQUENCY" recommended="true">
+                        <doc>
+                            The reference frequency (also called drive frequency or resonance frequency) of
+                            the cantilever.
+                            
+                            Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
+                        </doc>
+                    </field>
+                    <field name="reference_phase" units="NX_ANGLE" recommended="true">
+                        <doc>
+                            The reference phase of the cantilever.
+                            
+                            Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
+                        </doc>
+                    </field>
                 </group>
-                <group name="cantilever_phase_positioner" type="NXpositioner" optional="true">
+                <group name="cantilever_phase_positioner" type="NXpositioner" recommended="true">
                     <doc>
                         The phase positioner of the cantilever.
                     </doc>
                 </group>
-                <group name="cantilever_amplitude_positioner" type="NXpositioner" optional="true">
+                <group name="cantilever_amplitude_positioner" type="NXpositioner" recommended="true">
                     <doc>
                         The amplitude positioner of the cantilever.
                     </doc>
@@ -105,8 +135,8 @@
                 </doc>
                 <group name="height_piezo_sensor" type="NXspm_piezo_sensor" optional="true">
                     <doc>
-                        Link to the group
-                        ENTRY[*]/experiment_instrument/height_piezo_sensor.
+                        This should be a link to the concept
+                        ENTRY[*]/INSTRUMENT[*]/height_piezo_sensor.
                         
                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
                         square bracket would be the `exact` name of the NXentry group.
@@ -114,8 +144,8 @@
                 </group>
                 <group name="XYpiezo_sensor" type="NXspm_piezo_sensor" nameType="partial" optional="true">
                     <doc>
-                        Link to the group
-                        ENTRY[*]/experiment_instrument/XY_piezo_sensor.
+                        This should be a link to the concept
+                        ENTRY[*]/INSTRUMENT[*]/XY_piezo_sensor.
                         
                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
                         square bracket would be the `exact` name of the NXentry group.
@@ -123,8 +153,8 @@
                 </group>
                 <group name="tip_temp_sensor" type="NXsensor" optional="true">
                     <doc>
-                        Link to the group
-                        ENTRY[*]/experiment_instrument/tip_temp_sensor.
+                        This should be a link to the concept
+                        ENTRY[*]/INSTRUMENT[*]/tip_temp_sensor.
                         
                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
                         square bracket would be the `exact` name of the NXentry group.
@@ -179,7 +209,7 @@
                     square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
-            <group name="cantilever_oscillator" type="NXcomponent" optional="true">
+            <group name="cantilever_oscillator" type="NXspm_cantilever_oscillator" optional="true">
                 <doc>
                     Link to target:
                     /ENTRY[*]/INSTRUMENT[*]/cantilever_spm/cantilever_oscillator
