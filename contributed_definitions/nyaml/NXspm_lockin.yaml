@@ -21,14 +21,15 @@ NXspm_lockin(NXamplifier):
       Hardware manufacturers and type (product number) of lock-in amplifier.
   bias_divider:
     doc: |
-      Bias divider for lock-in channel if it has.
-      Bias divider = V(ref)/[V(ref)+V(input)]
+      Bias divider for lock-in channel.
+      math: `Bias divider $= \frac{V_{\mathrm{ref}}}{V_{\mathrm{ref}} + V_{\mathrm{input}}}$`
   modulation_status(NX_BOOLEAN):
     doc: |
       Switch the lock-in modulation on or off.
   modulation_signal(NX_CHAR):
     doc: |
       Type of the modulation or reference signal, voltage | current.
+    enumeration: [voltage, current]
   reference_amplitude(NX_NUMBER):
     unit: NX_ANY
     doc: |
@@ -80,38 +81,38 @@ NXspm_lockin(NXamplifier):
       The phase of the demodulated signal.
   demodulator_channels(NX_CHAR):
     doc: |
-      List of the demodulator channels.
-  low_pass_N(NX_NUMBER):
+      Comma separated list of the demodulator channels.
+  low_passN(NX_NUMBER):
     nameType: partial
     unit: NX_FREQUENCY
     doc: |
-      Frequency of the low-pass filter or cut-off frequency. Only signals belower
-      then this frequency are passed through filter (for each Channels e.g., Demodulator channel).
-  hi_pass_N(NX_NUMBER):
+      Frequency of the low-pass filter or cut-off frequency. Only signals below
+      this frequency are passed through the filter (for each Channels e.g., Demodulator channel).
+  high_passN(NX_NUMBER):
     nameType: partial
     unit: NX_FREQUENCY
     doc: |
       Frequency of the high-pass filter or cut-off frequency. Only signals above
       this frequency are passed through the filter (for each Channels e.g., Demodulator channel).
-  lp_filter_order_N(NX_NUMBER):
+  lp_filter_orderN(NX_NUMBER):
     nameType: partial
     doc: |
       Order of the low-pass filter applied on the input or demodulated signals (X, Y).
       Reducing the bandwidth or increasing the order reduces noise on the demodulated signals,
       but increases settling and measurement times.
-  hp_filter_order_N(NX_NUMBER):
+  hp_filter_orderN(NX_NUMBER):
     nameType: partial
     doc: |
       Order of the high-pass filter applied on the input or demodulated
       signal. This is used mainly to suppress a DC component of the input
       signal noise.
-  ref_phase_N(NX_NUMBER):
+  ref_phaseN(NX_NUMBER):
     nameType: partial
     unit: NX_ANGLE
     doc: |
       An extra reference phase offset of reference signal with respect to the demodulated signal
       (for each Channels).
-  harmonic_order_N(NX_NUMBER):
+  harmonic_orderN(NX_NUMBER):
     nameType: partial
     doc: |
       The reference signal can be a higher harmonic of the modulation signal.
@@ -121,8 +122,8 @@ NXspm_lockin(NXamplifier):
       Ratio of output signal amplitude to input signal amplitude (V/V).
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# a8e6d86fd3a9c8c7d5c2390d5af7968ffff4fcc39baca249fcda5c6126fe27c7
-# <?xml version="1.0" encoding="UTF-8"?>
+# fcfa8eb8d46c703d2d247394006e2c449d6d7f25cb612f9ae5099a5911549d0f
+# <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
 # # NeXus - Neutron and X-ray Common Data Format
@@ -169,8 +170,8 @@ NXspm_lockin(NXamplifier):
 #     </group>
 #     <field name="bias_divider">
 #         <doc>
-#             Bias divider for lock-in channel if it has.
-#             Bias divider = V(ref)/[V(ref)+V(input)]
+#             Bias divider for lock-in channel.
+#             math: `Bias divider $= \frac{V_{\mathrm{ref}}}{V_{\mathrm{ref}} + V_{\mathrm{input}}}$`
 #         </doc>
 #     </field>
 #     <field name="modulation_status" type="NX_BOOLEAN">
@@ -182,6 +183,10 @@ NXspm_lockin(NXamplifier):
 #         <doc>
 #             Type of the modulation or reference signal, voltage | current.
 #         </doc>
+#         <enumeration>
+#             <item value="voltage"/>
+#             <item value="current"/>
+#         </enumeration>
 #     </field>
 #     <field name="reference_amplitude" type="NX_NUMBER" units="NX_ANY">
 #         <doc>
@@ -245,42 +250,42 @@ NXspm_lockin(NXamplifier):
 #     </field>
 #     <field name="demodulator_channels" type="NX_CHAR">
 #         <doc>
-#             List of the demodulator channels.
+#             Comma separated list of the demodulator channels.
 #         </doc>
 #     </field>
-#     <field name="low_pass_N" type="NX_NUMBER" nameType="partial" units="NX_FREQUENCY">
+#     <field name="low_passN" type="NX_NUMBER" nameType="partial" units="NX_FREQUENCY">
 #         <doc>
-#             Frequency of the low-pass filter or cut-off frequency. Only signals belower
-#             then this frequency are passed through filter (for each Channels e.g., Demodulator channel).
+#             Frequency of the low-pass filter or cut-off frequency. Only signals below
+#             this frequency are passed through the filter (for each Channels e.g., Demodulator channel).
 #         </doc>
 #     </field>
-#     <field name="hi_pass_N" type="NX_NUMBER" nameType="partial" units="NX_FREQUENCY">
+#     <field name="high_passN" type="NX_NUMBER" nameType="partial" units="NX_FREQUENCY">
 #         <doc>
 #             Frequency of the high-pass filter or cut-off frequency. Only signals above
 #             this frequency are passed through the filter (for each Channels e.g., Demodulator channel).
 #         </doc>
 #     </field>
-#     <field name="lp_filter_order_N" type="NX_NUMBER" nameType="partial">
+#     <field name="lp_filter_orderN" type="NX_NUMBER" nameType="partial">
 #         <doc>
 #             Order of the low-pass filter applied on the input or demodulated signals (X, Y).
 #             Reducing the bandwidth or increasing the order reduces noise on the demodulated signals,
 #             but increases settling and measurement times.
 #         </doc>
 #     </field>
-#     <field name="hp_filter_order_N" type="NX_NUMBER" nameType="partial">
+#     <field name="hp_filter_orderN" type="NX_NUMBER" nameType="partial">
 #         <doc>
 #             Order of the high-pass filter applied on the input or demodulated
 #             signal. This is used mainly to suppress a DC component of the input
 #             signal noise.
 #         </doc>
 #     </field>
-#     <field name="ref_phase_N" type="NX_NUMBER" nameType="partial" units="NX_ANGLE">
+#     <field name="ref_phaseN" type="NX_NUMBER" nameType="partial" units="NX_ANGLE">
 #         <doc>
 #             An extra reference phase offset of reference signal with respect to the demodulated signal
 #             (for each Channels).
 #         </doc>
 #     </field>
-#     <field name="harmonic_order_N" type="NX_NUMBER" nameType="partial">
+#     <field name="harmonic_orderN" type="NX_NUMBER" nameType="partial">
 #         <doc>
 #             The reference signal can be a higher harmonic of the modulation signal.
 #             Here the order of the harmonic is stored.

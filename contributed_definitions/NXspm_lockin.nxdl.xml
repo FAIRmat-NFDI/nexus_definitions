@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 <!--
 # NeXus - Neutron and X-ray Common Data Format
@@ -45,8 +45,8 @@
     </group>
     <field name="bias_divider">
         <doc>
-            Bias divider for lock-in channel if it has.
-            Bias divider = V(ref)/[V(ref)+V(input)]
+            Bias divider for lock-in channel.
+            math: `Bias divider $= \frac{V_{\mathrm{ref}}}{V_{\mathrm{ref}} + V_{\mathrm{input}}}$`
         </doc>
     </field>
     <field name="modulation_status" type="NX_BOOLEAN">
@@ -58,6 +58,10 @@
         <doc>
             Type of the modulation or reference signal, voltage | current.
         </doc>
+        <enumeration>
+            <item value="voltage"/>
+            <item value="current"/>
+        </enumeration>
     </field>
     <field name="reference_amplitude" type="NX_NUMBER" units="NX_ANY">
         <doc>
@@ -121,42 +125,42 @@
     </field>
     <field name="demodulator_channels" type="NX_CHAR">
         <doc>
-            List of the demodulator channels.
+            Comma separated list of the demodulator channels.
         </doc>
     </field>
-    <field name="low_pass_N" type="NX_NUMBER" nameType="partial" units="NX_FREQUENCY">
+    <field name="low_passN" type="NX_NUMBER" nameType="partial" units="NX_FREQUENCY">
         <doc>
-            Frequency of the low-pass filter or cut-off frequency. Only signals belower
-            then this frequency are passed through filter (for each Channels e.g., Demodulator channel).
+            Frequency of the low-pass filter or cut-off frequency. Only signals below
+            this frequency are passed through the filter (for each Channels e.g., Demodulator channel).
         </doc>
     </field>
-    <field name="hi_pass_N" type="NX_NUMBER" nameType="partial" units="NX_FREQUENCY">
+    <field name="high_passN" type="NX_NUMBER" nameType="partial" units="NX_FREQUENCY">
         <doc>
             Frequency of the high-pass filter or cut-off frequency. Only signals above
             this frequency are passed through the filter (for each Channels e.g., Demodulator channel).
         </doc>
     </field>
-    <field name="lp_filter_order_N" type="NX_NUMBER" nameType="partial">
+    <field name="lp_filter_orderN" type="NX_NUMBER" nameType="partial">
         <doc>
             Order of the low-pass filter applied on the input or demodulated signals (X, Y).
             Reducing the bandwidth or increasing the order reduces noise on the demodulated signals,
             but increases settling and measurement times.
         </doc>
     </field>
-    <field name="hp_filter_order_N" type="NX_NUMBER" nameType="partial">
+    <field name="hp_filter_orderN" type="NX_NUMBER" nameType="partial">
         <doc>
             Order of the high-pass filter applied on the input or demodulated
             signal. This is used mainly to suppress a DC component of the input
             signal noise.
         </doc>
     </field>
-    <field name="ref_phase_N" type="NX_NUMBER" nameType="partial" units="NX_ANGLE">
+    <field name="ref_phaseN" type="NX_NUMBER" nameType="partial" units="NX_ANGLE">
         <doc>
             An extra reference phase offset of reference signal with respect to the demodulated signal
             (for each Channels).
         </doc>
     </field>
-    <field name="harmonic_order_N" type="NX_NUMBER" nameType="partial">
+    <field name="harmonic_orderN" type="NX_NUMBER" nameType="partial">
         <doc>
             The reference signal can be a higher harmonic of the modulation signal.
             Here the order of the harmonic is stored.
