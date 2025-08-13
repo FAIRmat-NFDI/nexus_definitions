@@ -5,12 +5,7 @@ doc: |
   attached at the head of the tip or cantilever. The material deforms when the external electric field
   (e.g., electric force) is applied.
 type: group
-NXspm_piezoelectric_material(NXsample):
-  
-  # Online links:
-  # 1. https://www.ulprospector.com/knowledge/2689/pe-piezoelectric-materials/#:~:text=piezoelectric ceramics, such as lithium,as polyvinylidene fluoride (PVDF).
-  # 2. https://info.piezo.com/hubfs/Data-Sheets/piezo-material-properties-data-sheet-20201112.pdf
-  # 3. https://application.wiley-vch.de/books/sample/3527345124_c01.pdf
+NXspm_piezoelectric_material(NXcrystal):
   name(NX_CHAR):
     doc: |
       The name of the material of the piezo scanner such as Lead Zirconate Titanates
@@ -19,14 +14,10 @@ NXspm_piezoelectric_material(NXsample):
     doc: |
       The identifier of the piezo material.
   chemical_formula:
-    doc: |
-      The chemical formula of the material of the piezo scanner such as Pb(Zr,Ti)O3.
   type(NX_CHAR):
     doc: |
       The type of the material of the piezo scanner (e.g. piezoelectric ceramics,
       polymer-film piezoelectrics).
-  
-  # Properties of the piezo material
   density(NX_NUMBER):
     unit: NX_ANY
     doc: |
@@ -75,7 +66,8 @@ NXspm_piezoelectric_material(NXsample):
   temperature_range(NX_NUMBER):
     unit: NX_TEMPERATURE
     doc: |
-      The temperature range of the piezo material.
+      The temperature range of the piezo material. This field is expecting a range
+      of temperatures in an array [min temperature, max temperature].
   glass_transition_temperature(NX_NUMBER):
     unit: NX_TEMPERATURE
     doc: |
@@ -83,8 +75,8 @@ NXspm_piezoelectric_material(NXsample):
       viscous state.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 7a8970675110f7de354517ecc1dc06b4942f67f0b3719901938f0b7049cbec16
-# <?xml version="1.0" encoding="UTF-8"?>
+# e386aafe51fffeb6c926fa3c5aabd248372f732b4fd4bfb0f2a8fc3fd1ee156a
+# <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
 # # NeXus - Neutron and X-ray Common Data Format
@@ -107,17 +99,13 @@ NXspm_piezoelectric_material(NXsample):
 # #
 # # For further information, see http://www.nexusformat.org
 # -->
-# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXspm_piezoelectric_material" extends="NXsample" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXspm_piezoelectric_material" extends="NXcrystal" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <doc>
 #         Description and properties of the piezoelectric actuator materials.
 #         The piezoelectric actuator is usually composed of polycrystalline solids and
 #         attached at the head of the tip or cantilever. The material deforms when the external electric field
 #         (e.g., electric force) is applied.
 #     </doc>
-#     <!--Online links:
-# 1. https://www.ulprospector.com/knowledge/2689/pe-piezoelectric-materials/#:~:text=piezoelectric ceramics, such as lithium,as polyvinylidene fluoride (PVDF).
-# 2. https://info.piezo.com/hubfs/Data-Sheets/piezo-material-properties-data-sheet-20201112.pdf
-# 3. https://application.wiley-vch.de/books/sample/3527345124_c01.pdf-->
 #     <field name="name" type="NX_CHAR">
 #         <doc>
 #             The name of the material of the piezo scanner such as Lead Zirconate Titanates
@@ -129,18 +117,13 @@ NXspm_piezoelectric_material(NXsample):
 #             The identifier of the piezo material.
 #         </doc>
 #     </field>
-#     <field name="chemical_formula">
-#         <doc>
-#             The chemical formula of the material of the piezo scanner such as Pb(Zr,Ti)O3.
-#         </doc>
-#     </field>
+#     <field name="chemical_formula"/>
 #     <field name="type" type="NX_CHAR">
 #         <doc>
 #             The type of the material of the piezo scanner (e.g. piezoelectric ceramics,
 #             polymer-film piezoelectrics).
 #         </doc>
 #     </field>
-#     <!--Properties of the piezo material-->
 #     <field name="density" type="NX_NUMBER" units="NX_ANY">
 #         <doc>
 #             The density of the piezo material.
@@ -193,7 +176,8 @@ NXspm_piezoelectric_material(NXsample):
 #     </field>
 #     <field name="temperature_range" type="NX_NUMBER" units="NX_TEMPERATURE">
 #         <doc>
-#             The temperature range of the piezo material.
+#             The temperature range of the piezo material. This field is expecting a range
+#             of temperatures in an array [min temperature, max temperature].
 #         </doc>
 #     </field>
 #     <field name="glass_transition_temperature" type="NX_NUMBER" units="NX_TEMPERATURE">
