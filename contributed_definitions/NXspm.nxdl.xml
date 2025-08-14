@@ -41,7 +41,7 @@
         </field>
         <field name="experiment_technique">
             <doc>
-                The technique of the experiment like STM, STS, AFM, etc.
+                The technique of the experiment like STM, STS, AFM.
             </doc>
             <enumeration>
                 <item value="STM"/>
@@ -75,26 +75,23 @@
                 forward, backward, or both (if scan is repeated). Any lab defined scan type
             </doc>
         </field>
-        <field name="identifier_experiment" optional="true">
+        <field name="identifier_experiment" recommended="true">
             <doc>
-                The identifiers for the experiment which should be unique at least in lab.
+                The identifier for the experiment which should be unique at least in lab.
             </doc>
         </field>
-        <group type="NXprocess" recommended="true">
+        <group type="NXprocess" optional="true">
             <doc>
                 Define data processing (e.g., data analysis, image processing) program and
                 associated workflow, software and store results.
             </doc>
         </group>
         <group type="NXinstrument">
-            <doc>
-                The instrument information.
-            </doc>
             <group name="hardware" type="NXfabrication">
                 <doc>
                     The hardware description of core instrument setup of experiment.
                     Usually, the entire instrument is supplied by a single manufacturer.
-                    To describe the hardware from any sub-components, use the hardware group of that
+                    To describe the hardware from any sub-components, use the ``hardware`` group of that
                     sub-component (child group of the NXinstrument group) group.
                 </doc>
                 <field name="name" recommended="true">
@@ -111,19 +108,13 @@
                     <doc>
                         Version or model of the hardware setup provided by the manufacturer.
                     </doc>
-                    <attribute name="version" optional="true">
-                        <doc>
-                            If different versions are possible, the value in this field should be made
-                            specific enough to resolve the version.
-                        </doc>
-                    </attribute>
                 </field>
             </group>
-            <group name="software" type="NXfabrication">
+            <group name="software" type="NXprogram">
                 <doc>
                     The software description of core instrument setup of experiment.
                     Usually, the entire instrument is supplied by a single name/manufacturer/model/etc.
-                    To describe the software from any sub-components, use the software group of that component.
+                    To describe the software from any sub-components, use the ``software`` group of that component.
                 </doc>
                 <field name="name" optional="true">
                     <doc>
@@ -139,12 +130,6 @@
                     <doc>
                         Version or model of the component named by the manufacturer.
                     </doc>
-                    <attribute name="version" optional="true">
-                        <doc>
-                            If different versions are possible, the value in this field should be made
-                            specific enough to resolve the version.
-                        </doc>
-                    </attribute>
                 </field>
             </group>
             <group name="real_time_controller" type="NXrcs" optional="true">
@@ -182,23 +167,23 @@
                         Temperature (stabilized or targeted single value) of STM head. For array data of head_temperature, use
                         head_temperature_sensor group.
                         
-                        Note: At least one field from head_temperature, cryo_bottom_temp and cryo_shield_temp must be provided.
+                        Note: At least one field from head_temperature, cryo_bottom_temperature and cryo_shield_temperature must be provided.
                     </doc>
                 </field>
-                <field name="cryo_bottom_temp" type="NX_NUMBER" recommended="true" units="NX_TEMPERATURE">
+                <field name="cryo_bottom_temperature" type="NX_NUMBER" recommended="true" units="NX_TEMPERATURE">
                     <doc>
                         Temperature (stabilized or targeted single value) of the cold tail of the cryostat. For array data of
-                        cryo_bottom_temp, use cryo_bottom_temp_sensor group.
+                        cryo_bottom_temperature, use cryo_bottom_temperature_sensor group.
                         
-                        Note: At least one field from head_temperature, cryo_bottom_temp and cryo_shield_temp must be provided.
+                        Note: At least one field from head_temperature, cryo_bottom_temperature and cryo_shield_temperature must be provided.
                     </doc>
                 </field>
-                <field name="cryo_shield_temp" type="NX_NUMBER" recommended="true" units="NX_TEMPERATURE">
+                <field name="cryo_shield_temperature" type="NX_NUMBER" recommended="true" units="NX_TEMPERATURE">
                     <doc>
                         Temperature (stabilized or targeted single value) of liquid nitrogen shield.
-                        For array data of cryo_shield_temp, use cryo_shield_temp_sensor group.
+                        For array data of cryo_shield_temperature, use cryo_shield_temperature_sensor group.
                         
-                        Note: At least one field from head_temperature, cryo_bottom_temp and cryo_shield_temp must be provided.
+                        Note: At least one field from head_temperature, cryo_bottom_temperature and cryo_shield_temperature must be provided.
                     </doc>
                 </field>
                 <field name="scan_name" optional="true">
@@ -240,11 +225,10 @@
                         mesh, spiral, etc.), and scan speed, etc. This group mainly stores the scan settings
                         data. For processed data or final experimental data would go to NXdata group.
                     </doc>
-                    <field name="scan_name" recommended="true">
+                    <field name="scanTAG" optional="true">
                         <doc>
-                            The name of the scan, mainly lab defined, that helps to differentiate among different
-                            scans performed in lab. This field is intended for several types of scan control
-                            run under the same environment.
+                            If there are multiple scans performed under the same environment, use this field
+                            to differentiate among them.
                         </doc>
                     </field>
                     <group name="scan_region" type="NXspm_scan_region">
@@ -252,12 +236,12 @@
                             The scan region (phase space or sub-phase space) is the region where the scan is
                             performed.
                         </doc>
-                        <field name="scan_range_x" type="NX_NUMBER" units="NX_LENGTH">
+                        <field name="scan_range_x" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
                             <doc>
                                 The range of the scan in x direction.
                             </doc>
                         </field>
-                        <field name="scan_range_y" type="NX_NUMBER" units="NX_LENGTH">
+                        <field name="scan_range_y" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
                             <doc>
                                 The range of the scan in y direction.
                             </doc>
@@ -347,13 +331,13 @@
                         The offset in the tunneling current between tip and sample.
                     </doc>
                 </field>
-                <group name="current_calibration" type="NXcalibration" optional="true">
+                <group name="calibration" type="NXcalibration" optional="true">
                     <doc>
                         Calibration data of the current sensor.
                     </doc>
-                    <field name="coefficients" type="NX_NUMBER" optional="true" units="NX_ANY">
+                    <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
                         <doc>
-                            The coefficients of the calibration.
+                            The coefficient of the calibration.
                         </doc>
                     </field>
                 </group>
@@ -376,16 +360,17 @@
                     
                     For this purpose, replace the TAG with the specific name or ID of the voltage sensor.
                     
-                    Do not register this group for sample bias voltage (DC), for that we have sample_bias_voltage group.
+                    Do not register this group for sample bias voltage (DC), for that we have sample_bias_voltage group
+                    /ENTRY[*]/INSTRUMENT[*]/sample_bias_voltage.
                 </doc>
-                <field name="NAME_voltage" type="NX_CHAR" optional="true" nameType="partial">
+                <field name="NAMEvoltage" type="NX_CHAR" optional="true" nameType="partial">
                     <doc>
                         The name of the voltage sensor used for specific measurement or in component.
                     </doc>
                 </field>
                 <field name="voltage" type="NX_NUMBER" units="NX_VOLTAGE" optional="true">
                     <doc>
-                        Voltage value the voltage sensor measures.
+                        Voltage measured by sensor.
                     </doc>
                 </field>
                 <field name="voltage_offset_value" type="NX_NUMBER" optional="true" units="NX_VOLTAGE">
@@ -394,13 +379,13 @@
                         voltage.
                     </doc>
                 </field>
-                <group name="voltage_calibration" type="NXcalibration" optional="true">
+                <group name="calibration" type="NXcalibration" optional="true">
                     <doc>
                         Calibration data of the voltage sensor.
                     </doc>
-                    <field name="coefficients" type="NX_NUMBER" optional="true" units="NX_ANY">
+                    <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
                         <doc>
-                            The coefficients of the calibration.
+                            The coefficient of the calibration.
                         </doc>
                     </field>
                 </group>
@@ -447,13 +432,13 @@
                     an array data (e.g., time series).
                 </doc>
             </group>
-            <group name="cryo_bottom_temp_sensor" type="NXspm_temperature_sensor" optional="true">
+            <group name="cryo_bottom_temperature_sensor" type="NXspm_temperature_sensor" optional="true">
                 <doc>
                     The temperature of the cold tail of the cryostat. This group is intended to be
                     used for an array data (e.g., time series).
                 </doc>
             </group>
-            <group name="cryo_shield_temp_sensor" type="NXspm_temperature_sensor" optional="true">
+            <group name="cryo_shield_temperature_sensor" type="NXspm_temperature_sensor" optional="true">
                 <doc>
                     The temperature of the liquid nitrogen shield. This group is intended to be used
                     for an array data (e.g., time series).
@@ -471,66 +456,32 @@
                     </doc>
                     <group type="NXspm_positioner" optional="true">
                         <doc>
-                            The positioner information like the position of the tip, PID loop feedback etc.
+                            The positioner information like the position of the tip, PID controller etc.
                         </doc>
                         <group name="z_controller" type="NXpid_controller" recommended="true">
                             <doc>
                                 The PID controller information for the z-axis.
                             </doc>
-                            <field name="z_average_time" type="NX_NUMBER" optional="true" units="NX_TIME">
-                                <doc>
-                                    The average time taken by the z-controller to stabilize the tip.
-                                </doc>
-                            </field>
-                            <field name="z_controller_time" type="NX_NUMBER" optional="true" units="NX_TIME">
-                                <doc>
-                                    The time taken by the z-controller to measure output.
-                                </doc>
-                            </field>
-                            <field name="z_controller_hold" type="NX_BOOLEAN" optional="true">
-                                <doc>
-                                    The status of the controller to be held on the previous position, before going to the
-                                    next scan point or line to measure the physical properties.
-                                </doc>
-                            </field>
-                            <field name="record_final_z" type="NX_BOOLEAN" optional="true">
-                                <doc>
-                                    The status of the controller to record the final z position after the scan.
-                                </doc>
-                            </field>
                         </group>
                     </group>
                     <group name="bias_sweep" type="NXspm_scan_control">
                         <doc>
-                            The bias voltage sweep is a common technique used on the substance or sample or environment
-                            to study the change in the behavior of the sample or substance or environment (in this case current) due to change
-                            in applied  bias voltage.
+                            The bias voltage sweep is a common technique used to study properties (in this case current) in 
+                            the sample or environment due to change in applied bias voltage.
                         </doc>
                         <group name="scan_region" type="NXspm_scan_region">
                             <doc>
                                 The scan region (phase space or sub-phase space) is the region where the scan is
                                 performed.
                             </doc>
-                            <field name="scan_start_bias" type="NX_NUMBER" units="NX_VOLTAGE">
-                                <doc>
-                                    The start of the bias scan voltage.
-                                </doc>
-                            </field>
-                            <field name="scan_end_bias" type="NX_NUMBER" units="NX_VOLTAGE">
-                                <doc>
-                                    The end of the bias scan voltage.
-                                </doc>
-                            </field>
+                            <field name="scan_start_bias" type="NX_NUMBER" units="NX_VOLTAGE"/>
+                            <field name="scan_end_bias" type="NX_NUMBER" units="NX_VOLTAGE"/>
                             <field name="scan_offset_bias" type="NX_NUMBER" units="NX_VOLTAGE">
                                 <doc>
                                     The offset of the bias scan voltage.
                                 </doc>
                             </field>
-                            <field name="scan_range_bias" type="NX_NUMBER" units="NX_VOLTAGE">
-                                <doc>
-                                    The range of the bias scan voltage.
-                                </doc>
-                            </field>
+                            <field name="scan_range_bias" type="NX_NUMBER" recommended="true" units="NX_VOLTAGE"/>
                         </group>
                         <group name="linear_sweep" type="NXspm_scan_pattern">
                             <doc>
@@ -583,7 +534,7 @@
             <doc>
                 The sample information.
             </doc>
-            <group name="history" type="NXhistory">
+            <group name="history" type="NXhistory" recommended="true">
                 <doc>
                     A set of physical processes that occurred to the sample prior/during experiment.
                 </doc>
@@ -594,7 +545,7 @@
                 </doc>
                 <group name="sample_bias_voltage" type="NXsensor">
                     <doc>
-                        This should be a link to 
+                        This should be a link to
                         
                         ENTRY[*]/INSTRUMENT[*]/sample_bias_voltage sensor under the instrument.
                         
@@ -609,8 +560,8 @@
             </doc>
             <field name="DATA" type="NX_NUMBER" nameType="any" units="NX_ANY">
                 <doc>
-                    The plot able data (e.g. current, voltage, temperature) field in against of the
-                    axis.
+                    The data (e.g. current, voltage, temperature) field that can be plotted against
+                    the axes.
                 </doc>
             </field>
         </group>
