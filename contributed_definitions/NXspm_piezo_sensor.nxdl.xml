@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+<!--
+# NeXus - Neutron and X-ray Common Data Format
+#
+# Copyright (C) 2025-2025 NeXus International Advisory Committee (NIAC)
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For further information, see http://www.nexusformat.org
+-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXpiezo_sensor" extends="NXsensor" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+    <doc>
+        This file defines the NXspm_piezo_sensor base class, which contains information about
+        the piezo sensor used in scanning probe microscopy (SPM) experiments.
+        In STS experiment, the piezo stays fixed at x,y and z and the the tunneling current is 
+        measured with respect to the bias voltage applied on sample. Some other cases,
+        only x, y or z values are fixed and the other two are varied and vice versa.
+    </doc>
+    <doc>
+        This piezo sensor group refers to the height (or Z) piezo sensor.
+    </doc>
+    <field name="x" type="NX_NUMBER" units="NX_LENGTH">
+        <doc>
+            The x position of the piezo.
+        </doc>
+    </field>
+    <field name="y" type="NX_NUMBER" units="NX_LENGTH">
+        <doc>
+            The y position of the piezo.
+        </doc>
+    </field>
+    <field name="z" type="NX_NUMBER" units="NX_LENGTH">
+        <doc>
+            The z position of the piezo.
+        </doc>
+    </field>
+    <group name="piezo_configuration" type="NXspm_piezo_config">
+        <doc>
+            The piezo configuration information like piezoelectric calibration and material
+            properties.
+        </doc>
+        <group name="calibration" type="NXcalibration">
+            <doc>
+                Calibration of the piezo device.
+            </doc>
+        </group>
+    </group>
+    <group type="NXspm_positioner">
+        <doc>
+            The positioner information like the position of the tip, the position of the
+            sample, PID loop feedback etc.
+        </doc>
+    </group>
+    <group name="piezo_material" type="NXspm_piezoelectric_material">
+        <doc>
+            The material description and properties of the piezoelectric scanner materials.
+        </doc>
+    </group>
+</definition>
