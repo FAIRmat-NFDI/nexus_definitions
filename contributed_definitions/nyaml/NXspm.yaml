@@ -87,16 +87,14 @@ NXspm(NXsensor_scan):
         exists: optional
         doc: |
           The lock-in amplifier information.
-        lockin_current_flip_sign(NX_NUMBER):
+        flip_sign(NX_NUMBER):
           exists: optional
           doc: |
-            The sign (1 or -1) that defines the sign of the lock-in current.
+            The sign (1 or -1) that renders the values of the lock-in current positive.
             The calibration procedure with retracted tip is normally performed to compensate for the signal phase delay
-            in SPM. The procedure yields two possible solutions, this number should be equal
-            to 1 or -1 depending on which solution is chosen (this concept mainly used in STS experiments
-            e.g., in processing file from Nanonis machine).
+            in SPM. The procedure yields two possible solutions corresponding to the chosen phase, this number should be equal
+            to 1 or -1 depending on which solution is chosen (this concept mainly used in STS experiments).
       SCAN_ENVIRONMENT(NXenvironment):
-        nameType: any
         doc: |
           Information of the scan environment holding concpet for
           temperature, setpoint (current or height), scan area and scan data.
@@ -106,7 +104,7 @@ NXspm(NXsensor_scan):
           exists: recommended
           unit: NX_TEMPERATURE
           doc: |
-            Temperature (stabilized or targeted single value) of STM head. For array data of head_temperature, use
+            Temperature (stabilized or target value) of STM head. For array data of head_temperature, use
             head_temperature_sensor group.
         cryo_bottom_temperature(NX_NUMBER):
           exists: recommended
@@ -225,7 +223,7 @@ NXspm(NXsensor_scan):
       current_sensorTAG(NXsensor):
         exists: optional
         doc: |
-          Information for current sensor. Any current sensor involved in the experiment or
+          Information for current sensor. Any current sensor such as a current-voltage transimpedance involved in the experiment or
           in any special measurement or in any specialized experiment component can be
           registered under this group.
         NAMEcurrent(NX_CHAR):
@@ -333,7 +331,7 @@ NXspm(NXsensor_scan):
       head_temperature_sensor(NXspm_temperature_sensor):
         exists: recommended
         doc: |
-          The temperature of the tip one of the tip. This group is intended to be used for
+          The temperature of the SPM measured near the sample or tip. This group is intended to be used for
           an array data (e.g., time series).
       cryo_bottom_temperature_sensor(NXspm_temperature_sensor):
         exists: optional
@@ -356,7 +354,7 @@ NXspm(NXsensor_scan):
           (NXspm_positioner):
             exists: optional
             doc: |
-              The positioner information like the position of the tip, PID controller etc.
+              The positioner information like PID loop parameters, controller or feedback on/off, etc.
             z_controller(NXpid_controller):
               exists: recommended
               doc: |
