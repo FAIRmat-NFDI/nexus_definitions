@@ -21,6 +21,24 @@ NXspm_bias_spectroscopy(NXobject):
       
       These components position the probe relative to the sample, thus help obtaining maps of the data
       across the sample surface.
+    z_controller(NXpid_controller):
+      doc: |
+        The PID controller information for the z-axis.
+      z_average_time(NX_NUMBER):
+        unit: NX_TIME
+        doc: |
+          The average time taken by the z-controller to stabilize the tip.
+      z_controller_time(NX_NUMBER):
+        unit: NX_TIME
+        doc: |
+          The time taken by the z-controller to measure output.
+      z_controller_hold(NX_BOOLEAN):
+        doc: |
+          The status of the controller to be held on the previous position, before going to the
+          next scan point or line to measure the physical properties.
+      record_final_z(NX_BOOLEAN):
+        doc: |
+          The status of the controller to record the final z position after the scan.
     z_offset_value(NX_NUMBER):
       unit: NX_LENGTH
       doc: |
@@ -160,7 +178,7 @@ NXspm_bias_spectroscopy(NXobject):
             The voltage axis name of the data collected during the scan.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 66284288149113dc73adbdf74be10d4afca5ddd42d351224a939f0c0f9fafa33
+# 4f740f3aa7a403ad1faf2e2fd8f938bfdfd46fe143f3be1d12d5c7ccb73c1029
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -212,6 +230,32 @@ NXspm_bias_spectroscopy(NXobject):
 #             These components position the probe relative to the sample, thus help obtaining maps of the data
 #             across the sample surface.
 #         </doc>
+#         <group name="z_controller" type="NXpid_controller">
+#             <doc>
+#                 The PID controller information for the z-axis.
+#             </doc>
+#             <field name="z_average_time" type="NX_NUMBER" units="NX_TIME">
+#                 <doc>
+#                     The average time taken by the z-controller to stabilize the tip.
+#                 </doc>
+#             </field>
+#             <field name="z_controller_time" type="NX_NUMBER" units="NX_TIME">
+#                 <doc>
+#                     The time taken by the z-controller to measure output.
+#                 </doc>
+#             </field>
+#             <field name="z_controller_hold" type="NX_BOOLEAN">
+#                 <doc>
+#                     The status of the controller to be held on the previous position, before going to the
+#                     next scan point or line to measure the physical properties.
+#                 </doc>
+#             </field>
+#             <field name="record_final_z" type="NX_BOOLEAN">
+#                 <doc>
+#                     The status of the controller to record the final z position after the scan.
+#                 </doc>
+#             </field>
+#         </group>
 #         <field name="z_offset_value" type="NX_NUMBER" units="NX_LENGTH">
 #             <doc>
 #                 The z-offset is a starting tip position before the sweep starts (typically the position of a
