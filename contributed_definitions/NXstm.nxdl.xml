@@ -53,10 +53,6 @@
             </enumeration>
         </field>
         <group type="NXinstrument">
-            <doc>
-                The group explains the instrumentation of the STM experiment such
-                as current sensor, lock-in amplifier etc.
-            </doc>
             <group name="lockin_amplifier" type="NXspm_lockin">
                 <doc>
                     The lock-in amplifier information. The device is being used to extract
@@ -74,9 +70,11 @@
                     </doc>
                 </field>
             </group>
-            <group name="scan_environment" type="NXenvironment">
+            <group name="SCAN_ENVIRONMENT" type="NXenvironment">
                 <doc>
                     The environment information for stm or sts experiment.
+                    
+                    Note: At least one field from head_temperature, cryo_bottom_temperature and cryo_shield_temperature must be provided.
                 </doc>
                 <group type="NXspm_scan_control">
                     <doc>
@@ -88,27 +86,18 @@
                     <doc>
                         This should be a link to
                         /ENTRY[*]/INSTRUMENT[*]/head_temperature_sensor
-                        
-                        Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
-                        square bracket would be the `exact` name of the NXentry group.
                     </doc>
                 </group>
                 <group name="cryo_bottom_temperature_sensor" type="NXsensor" optional="true">
                     <doc>
                         This should be a link to
                         /ENTRY[*]/INSTRUMENT[*]/cryo_bottom_temperature_sensor
-                        
-                        Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
-                        square bracket would be the `exact` name of the NXentry group.
                     </doc>
                 </group>
                 <group name="cryo_shield_temperature_sensor" type="NXsensor" optional="true">
                     <doc>
                         This should be a link to
                         /ENTRY[*]/INSTRUMENT[*]/cryo_shield_temperature_sensor
-                        
-                        Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
-                        square bracket would be the `exact` name of the NXentry group.
                     </doc>
                 </group>
             </group>
@@ -128,7 +117,7 @@
                 <doc>
                     The tunneling current between tip and sample after application of bias voltage.
                     This should be a link to
-                    /ENTRY[*]/INSTRUMENT[*]/current_sensor/current
+                    /ENTRY[*]/INSTRUMENT[*]/current_sensorTAG[current_sensor*]/current
                     
                     Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
                     square bracket would be the `exact` name of the NXentry group.
@@ -138,7 +127,7 @@
                 <doc>
                     The offset in tunneling current between tip and sample after application of bias voltage.
                     This should be a link to
-                    /ENTRY[*]/INSTRUMENT[*]/current_sensor/current_offset
+                    /ENTRY[*]/INSTRUMENT[*]/current_sensorTAG[current_sensor*]/current_offset
                     
                     Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
                     square bracket would be the `exact` name of the NXentry group.
