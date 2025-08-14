@@ -18,9 +18,6 @@ NXstm(NXspm):
         The specific to STM experiment.
       enumeration: [STM]
     (NXinstrument):
-      doc: |
-        The group explains the instrumentation of the STM experiment such
-        as current sensor, lock-in amplifier etc.
       lockin_amplifier(NXspm_lockin):
         doc: |
           The lock-in amplifier information. The device is being used to extract
@@ -36,9 +33,11 @@ NXstm(NXspm):
           doc: |
             The frequency of the sine modulation that is used to modulate the signal in
             lock-in.
-      scan_environment(NXenvironment):
+      SCAN_ENVIRONMENT(NXenvironment):
         doc: |
           The environment information for stm or sts experiment.
+          
+          Note: At least one field from head_temperature, cryo_bottom_temperature and cryo_shield_temperature must be provided.
         (NXspm_scan_control):
           doc: |
             The scan control information like scan region or phase space, e.g. pattern of scan
@@ -48,25 +47,16 @@ NXstm(NXspm):
           doc: |
             This should be a link to
             /ENTRY[*]/INSTRUMENT[*]/head_temperature_sensor
-            
-            Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
-            square bracket would be the `exact` name of the NXentry group.
         cryo_bottom_temperature_sensor(NXsensor):
           exists: optional
           doc: |
             This should be a link to
             /ENTRY[*]/INSTRUMENT[*]/cryo_bottom_temperature_sensor
-            
-            Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
-            square bracket would be the `exact` name of the NXentry group.
         cryo_shield_temperature_sensor(NXsensor):
           exists: optional
           doc: |
             This should be a link to
             /ENTRY[*]/INSTRUMENT[*]/cryo_shield_temperature_sensor
-            
-            Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
-            square bracket would be the `exact` name of the NXentry group.
       bias_spectroscopy_environment(NXenvironment):
         exists: optional
         doc: |
@@ -82,7 +72,7 @@ NXstm(NXspm):
         doc: |
           The tunneling current between tip and sample after application of bias voltage.
           This should be a link to
-          /ENTRY[*]/INSTRUMENT[*]/current_sensor/current
+          /ENTRY[*]/INSTRUMENT[*]/current_sensorTAG[current_sensor*]/current
           
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
@@ -91,7 +81,7 @@ NXstm(NXspm):
         doc: |
           The offset in tunneling current between tip and sample after application of bias voltage.
           This should be a link to
-          /ENTRY[*]/INSTRUMENT[*]/current_sensor/current_offset
+          /ENTRY[*]/INSTRUMENT[*]/current_sensorTAG[current_sensor*]/current_offset
           
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
@@ -177,7 +167,7 @@ NXstm(NXspm):
           square bracket would be the `exact` name of the NXentry group.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# a0e54e8edbd32d3725571abc070ca2963e174e7625e41206993edbe38310a607
+# 4f1c13b2a04740f972287c32ea05ef139bed9832e312d9bf9954bad7ccfd7d4c
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -233,10 +223,6 @@ NXstm(NXspm):
 #             </enumeration>
 #         </field>
 #         <group type="NXinstrument">
-#             <doc>
-#                 The group explains the instrumentation of the STM experiment such
-#                 as current sensor, lock-in amplifier etc.
-#             </doc>
 #             <group name="lockin_amplifier" type="NXspm_lockin">
 #                 <doc>
 #                     The lock-in amplifier information. The device is being used to extract
@@ -254,9 +240,11 @@ NXstm(NXspm):
 #                     </doc>
 #                 </field>
 #             </group>
-#             <group name="scan_environment" type="NXenvironment">
+#             <group name="SCAN_ENVIRONMENT" type="NXenvironment">
 #                 <doc>
 #                     The environment information for stm or sts experiment.
+#                     
+#                     Note: At least one field from head_temperature, cryo_bottom_temperature and cryo_shield_temperature must be provided.
 #                 </doc>
 #                 <group type="NXspm_scan_control">
 #                     <doc>
@@ -268,27 +256,18 @@ NXstm(NXspm):
 #                     <doc>
 #                         This should be a link to
 #                         /ENTRY[*]/INSTRUMENT[*]/head_temperature_sensor
-#                         
-#                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
-#                         square bracket would be the `exact` name of the NXentry group.
 #                     </doc>
 #                 </group>
 #                 <group name="cryo_bottom_temperature_sensor" type="NXsensor" optional="true">
 #                     <doc>
 #                         This should be a link to
 #                         /ENTRY[*]/INSTRUMENT[*]/cryo_bottom_temperature_sensor
-#                         
-#                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
-#                         square bracket would be the `exact` name of the NXentry group.
 #                     </doc>
 #                 </group>
 #                 <group name="cryo_shield_temperature_sensor" type="NXsensor" optional="true">
 #                     <doc>
 #                         This should be a link to
 #                         /ENTRY[*]/INSTRUMENT[*]/cryo_shield_temperature_sensor
-#                         
-#                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
-#                         square bracket would be the `exact` name of the NXentry group.
 #                     </doc>
 #                 </group>
 #             </group>
@@ -308,7 +287,7 @@ NXstm(NXspm):
 #                 <doc>
 #                     The tunneling current between tip and sample after application of bias voltage.
 #                     This should be a link to
-#                     /ENTRY[*]/INSTRUMENT[*]/current_sensor/current
+#                     /ENTRY[*]/INSTRUMENT[*]/current_sensorTAG[current_sensor*]/current
 #                     
 #                     Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
 #                     square bracket would be the `exact` name of the NXentry group.
@@ -318,7 +297,7 @@ NXstm(NXspm):
 #                 <doc>
 #                     The offset in tunneling current between tip and sample after application of bias voltage.
 #                     This should be a link to
-#                     /ENTRY[*]/INSTRUMENT[*]/current_sensor/current_offset
+#                     /ENTRY[*]/INSTRUMENT[*]/current_sensorTAG[current_sensor*]/current_offset
 #                     
 #                     Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
 #                     square bracket would be the `exact` name of the NXentry group.

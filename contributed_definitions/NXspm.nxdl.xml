@@ -157,45 +157,35 @@
                     </doc>
                 </field>
             </group>
-            <group name="scan_environment" type="NXenvironment">
+            <group name="SCAN_ENVIRONMENT" type="NXenvironment" nameType="any">
                 <doc>
                     Information of the scan environment holding concpet for
                     temperature, setpoint (current or height), scan area and scan data.
+                    
+                    Note: At least one field from head_temperature, cryo_bottom_temperature and cryo_shield_temperature must be provided.
                 </doc>
                 <field name="head_temperature" type="NX_NUMBER" recommended="true" units="NX_TEMPERATURE">
                     <doc>
                         Temperature (stabilized or targeted single value) of STM head. For array data of head_temperature, use
                         head_temperature_sensor group.
-                        
-                        Note: At least one field from head_temperature, cryo_bottom_temperature and cryo_shield_temperature must be provided.
                     </doc>
                 </field>
                 <field name="cryo_bottom_temperature" type="NX_NUMBER" recommended="true" units="NX_TEMPERATURE">
                     <doc>
                         Temperature (stabilized or targeted single value) of the cold tail of the cryostat. For array data of
                         cryo_bottom_temperature, use cryo_bottom_temperature_sensor group.
-                        
-                        Note: At least one field from head_temperature, cryo_bottom_temperature and cryo_shield_temperature must be provided.
                     </doc>
                 </field>
                 <field name="cryo_shield_temperature" type="NX_NUMBER" recommended="true" units="NX_TEMPERATURE">
                     <doc>
                         Temperature (stabilized or targeted single value) of liquid nitrogen shield.
                         For array data of cryo_shield_temperature, use cryo_shield_temperature_sensor group.
-                        
-                        Note: At least one field from head_temperature, cryo_bottom_temperature and cryo_shield_temperature must be provided.
-                    </doc>
-                </field>
-                <field name="scan_name" optional="true">
-                    <doc>
-                        The name of the scan, mainly lab defined, that helps to differentiate among different
-                        scans performed in the lab.
                     </doc>
                 </field>
                 <group name="current_sensorTAG" type="NXsensor" optional="true">
                     <doc>
                         This should be a link to
-                        ENTRY[*]/INSTRUMENT[*]/current_sensor.
+                        ENTRY[*]/INSTRUMENT[*]/current_sensorTAG[current_sensor*].
                         
                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
                         square bracket would be the `exact` name of the NXentry group.
@@ -225,7 +215,7 @@
                         mesh, spiral, etc.), and scan speed, etc. This group mainly stores the scan settings
                         data. For processed data or final experimental data would go to NXdata group.
                     </doc>
-                    <field name="scanTAG" optional="true">
+                    <field name="scanTAG" nameType="any" optional="true">
                         <doc>
                             If there are multiple scans performed under the same environment, use this field
                             to differentiate among them.
@@ -256,12 +246,12 @@
                                 The offset of the scan in y direction.
                             </doc>
                         </field>
-                        <field name="scan_angle_x" type="NX_NUMBER" units="NX_ANGLE">
+                        <field name="scan_angle_x" type="NX_NUMBER" recommended="true" units="NX_ANGLE">
                             <doc>
                                 The angle of the scan region in x direction.
                             </doc>
                         </field>
-                        <field name="scan_angle_y" type="NX_NUMBER" units="NX_ANGLE">
+                        <field name="scan_angle_y" type="NX_NUMBER" recommended="true" units="NX_ANGLE">
                             <doc>
                                 The angle of the scan region in y direction.
                             </doc>
@@ -321,6 +311,11 @@
                     in any special measurement or in any specialized experiment component can be
                     registered under this group.
                 </doc>
+                <field name="NAMEcurrent" type="NX_CHAR" optional="true" nameType="partial">
+                    <doc>
+                        The name of the current sensor used for specific measurement or in component.
+                    </doc>
+                </field>
                 <field name="current" type="NX_NUMBER" units="NX_CURRENT">
                     <doc>
                         A constant DC current between tip and sample, so-called current setpoint.
@@ -466,7 +461,7 @@
                     </group>
                     <group name="bias_sweep" type="NXspm_scan_control">
                         <doc>
-                            The bias voltage sweep is a common technique used to study properties (in this case current) in 
+                            The bias voltage sweep is a common technique used to study properties (in this case current) in
                             the sample or environment due to change in applied bias voltage.
                         </doc>
                         <group name="scan_region" type="NXspm_scan_region">
@@ -518,11 +513,11 @@
                         Offset value of the bias voltage.
                     </doc>
                 </field>
-                <group name="bias_calibration" type="NXcalibration" optional="true">
+                <group name="calibration" type="NXcalibration" optional="true">
                     <doc>
                         Calibration of the bias voltage measurement (V/V).
                     </doc>
-                    <field name="coefficients" type="NX_NUMBER" optional="true" units="NX_ANY">
+                    <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
                         <doc>
                             The coefficients of the calibration.
                         </doc>
