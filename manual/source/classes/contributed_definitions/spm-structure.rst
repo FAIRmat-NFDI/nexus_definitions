@@ -53,11 +53,8 @@ Base Classes
    :ref:`NXspm_piezo_sensor`:
     A base class to describe piezo sensor in SPM experiments.
 
-    :ref:`NXpiezo_config_spm`:
+    :ref:`NXspm_piezo_config`:
     A base class to describe piezo configuration in SPM experiments.
-
-    :ref:`NXspm_piezo_sensor`:
-    A base class to describe piezo sensor in SPM experiments.
 
     :ref:`NXspm_piezoelectric_material`:
     A base class to draw piezoelectric material properties used in cantilever tip.
@@ -66,13 +63,13 @@ Base Classes
     A base class to describe PID positioner in SPM experiments.
 
     :ref:`NXspm_scan_control`:
-   A base class to characterize the movement of scan probe in a multi-dimensional phase space. 
+    A base class to characterize the movement of scan probe in a multi-dimensional phase space. 
 
     :ref:`NXspm_scan_pattern`:
-   A base class to define the pattern of a scan in a given scan region.
+    A base class to define the pattern of a scan in a given scan region.
 
     :ref:`NXspm_scan_region`:
-   A base class to define the phase space or sub-phase space for scan in SPM experiments.
+    A base class to define the phase space or sub-phase space for scan in SPM experiments.
 
     :ref:`NXspm_temperature_sensor`:
-   A base class to describe temperature sensor in SPM experiments.
+    A base class to describe temperature sensor in SPM experiments.
