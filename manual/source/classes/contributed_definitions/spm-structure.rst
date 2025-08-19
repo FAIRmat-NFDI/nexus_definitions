@@ -35,20 +35,44 @@ Base Classes
     :ref:`NXlockin`:
     A base class to describe lock-in amplifier instrument.
 
-    :ref:`NXbias_spectroscopy`:
+    :ref:`NXspm_bias_spectroscopy`:
     A base class to describe bias spectroscopy measurement to measure I/V curve in STS expriment.
 
-    :ref:`NXcantilever_spm`:
+    :ref:`NXspm_cantilever`:
     A base class to characterize cantilever used in AFM experiments.
+    
+    :ref:`NXspm_cantilever_config`:
+    A base class to describe cantilever configuration in AFM experiments.
+
+    :ref:`NXspm_cantilever_oscillator`:
+    A base class to describe cantilever oscillator in AFM experiments.
+
+    :ref:`NXphase_lock_loop`:
+    A base class to describe phase lock loop in AFM experiments.
+
+   :ref:`NXspm_piezo_sensor`:
+    A base class to describe piezo sensor in SPM experiments.
 
     :ref:`NXpiezo_config_spm`:
     A base class to describe piezo configuration in SPM experiments.
 
-    :ref:`NXpiezoelectric_material`:
+    :ref:`NXspm_piezo_sensor`:
+    A base class to describe piezo sensor in SPM experiments.
+
+    :ref:`NXspm_piezoelectric_material`:
     A base class to draw piezoelectric material properties used in cantilever tip.
 
-    :ref:`NXpositioner_spm`:
+    :ref:`NXspm_positioner`:
     A base class to describe PID positioner in SPM experiments.
 
-    :ref:`NXscan_control`:
-    A base class to characterize the movement of scan probe in a multi-dimensional phase space. 
+    :ref:`NXspm_scan_control`:
+   A base class to characterize the movement of scan probe in a multi-dimensional phase space. 
+
+    :ref:`NXspm_scan_pattern`:
+   A base class to define the pattern of a scan in a given scan region.
+
+    :ref:`NXspm_scan_region`:
+   A base class to define the phase space or sub-phase space for scan in SPM experiments.
+
+    :ref:`NXspm_temperature_sensor`:
+   A base class to describe temperature sensor in SPM experiments.
