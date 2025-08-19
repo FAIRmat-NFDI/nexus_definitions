@@ -437,7 +437,9 @@ NXspm(NXsensor_scan):
           exists: recommended
           unit: NX_TEMPERATURE
           doc: |
-            The single temperature of the sample environment.
+            The single-valued temperature of the sample, also referred to as the tip temperature
+            (not head temperature), since the tip and sample are in contact or in close proximity.
+            For array like temperature data use sample_temperature_sensor group.
         sample_bias_voltage(NXsensor):
           exists: optional
           doc: |
@@ -446,6 +448,12 @@ NXspm(NXsensor_scan):
             ENTRY[*]/INSTRUMENT[*]/sample_bias_voltage sensor under the instrument.
             
             Note: group name (could be any meaningful and relevant name e.g., entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
+        sample_temperature_sensor(NXspm_temperature_sensor):
+          exists: optional
+          doc: |
+            This should be a link to
+            
+            ENTRY[*]/INSTRUMENT[*]/sample_temperature_sensor under the instrument.
     (NXdata):
       doc: |
         The data group.
@@ -491,7 +499,7 @@ NXspm(NXsensor_scan):
           reproducibility indicators (defined by laboratory).
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 8f6dc072d79b54f0a21dc90f39e227ae5268be2083d05d9fcff9af9b9fae5e55
+# 7bdd6125235622474d71309837cbbd07fdaada66d802c8527456146ca7a3aab7
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -1040,7 +1048,9 @@ NXspm(NXsensor_scan):
 #                 </doc>
 #                 <field name="temperature" type="NX_NUMBER" recommended="true" units="NX_TEMPERATURE">
 #                     <doc>
-#                         The single temperature of the sample environment.
+#                         The single-valued temperature of the sample, also referred to as the tip temperature
+#                         (not head temperature), since the tip and sample are in contact or in close proximity.
+#                         For array like temperature data use sample_temperature_sensor group.
 #                     </doc>
 #                 </field>
 #                 <group name="sample_bias_voltage" type="NXsensor" optional="true">
@@ -1050,6 +1060,13 @@ NXspm(NXsensor_scan):
 #                         ENTRY[*]/INSTRUMENT[*]/sample_bias_voltage sensor under the instrument.
 #                         
 #                         Note: group name (could be any meaningful and relevant name e.g., entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
+#                     </doc>
+#                 </group>
+#                 <group name="sample_temperature_sensor" type="NXspm_temperature_sensor" optional="true">
+#                     <doc>
+#                         This should be a link to
+#                         
+#                         ENTRY[*]/INSTRUMENT[*]/sample_temperature_sensor under the instrument.
 #                     </doc>
 #                 </group>
 #             </group>
