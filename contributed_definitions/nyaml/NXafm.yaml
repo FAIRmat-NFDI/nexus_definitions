@@ -2,7 +2,7 @@ category: application
 doc: |
   An application definition to describe atomic force microscopy (AFM).
 type: group
-NXafm(NXspm): #test
+NXafm(NXspm):
   (NXentry):
     definition:
       doc: |
@@ -24,7 +24,7 @@ NXafm(NXspm): #test
         tapping mode: Resembles to the non-contact mode, but at every point of scan the cantilever tip comes closer
          to the sample surface ("taps it").
          The cantilever oscillation amplitude is usually employed to control the cantilever position using a PID feedback loop.
-        peak force tapping mode: Like the tapping mode, but at each point of the scan force-distance curve is recorded. 
+        peak force tapping mode: Like the tapping mode, but at each point of the scan force-distance curve is recorded.
          The maximum force is usually employed to control the cantilever position using a PID feedback loop.
       enumeration:
         open_enum: true
@@ -33,11 +33,11 @@ NXafm(NXspm): #test
       photo_detector(NXdetector):
         exists: optional
         doc: |
-          Information about the quadrant photodiode deflection detector or interferometer. 
+          Information about the quadrant photodiode deflection detector or interferometer.
         (NXsensor):
           exists: optional
           doc: |
-            The sensor information for the photodiode or interferometer. 
+            The sensor information for the photodiode or interferometer.
       (NXspm_cantilever):
         exists: recommended
         doc: |
@@ -55,7 +55,7 @@ NXafm(NXspm): #test
             unit: NX_LENGTH
             exists: recommended
             doc: |
-              The reference amplitude (also called drive amplitude) of the cantilever.
+              The reference amplitude (also called driver amplitude) of the cantilever.
               This is the amplitude of the cantilever oscillation when no external forces are acting on it.
               
               Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
@@ -63,9 +63,8 @@ NXafm(NXspm): #test
             unit: NX_FREQUENCY
             exists: recommended
             doc: |
-              The reference frequency (also called drive frequency or resonance frequency) of
+              The reference frequency (also called driver frequency) of
               the cantilever.
-  ## It would be beneficial to define two frequencies: Cantilever frequency and drive frequency. They need not be the same. I for example only drive with second harmonic frequency. So NX_FREQUENCY and NX_DRIVE_FREQUENCY? 
               
               Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
           reference_phase:
@@ -211,7 +210,7 @@ NXafm(NXspm): #test
           square bracket would be the `exact` name of the NXentry group.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 7451062c09d73ac5b7b08d260a5367cd560b36d03a7bcc1bc16055c95e1787fe
+# b2dbde7e1d44e3f6f57c3b71eb477f8119ae2287e63ee7898ebec68dba66da82
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -260,13 +259,16 @@ NXafm(NXspm): #test
 #             <doc>
 #                 The mode of the scan.
 #                 
-#                 contact mode: Cantilever moves on the sample surface in very close contact with the sample.
-#                 non-contact mode: Cantilever oscillates above the sample surface without touching it. Cantilever stays in the
-#                           interaction (atomic force) zone therefore cantilever oscillator amplitude and frequency are deformed.
-#                 tapping mode: Resembles to the non-contact mode, but at every point of scan the cantilever tip comes very close
-#                           to the sample surface and taps it.
-#                 peak force tapping mode: Like the tapping mode, but at each point of the scan force-distance curve is recorded.
-#                           The maximum force is used to control the cantilever position using a PID feedback loop.
+#                 contact mode: Cantilever attempts to move on the sample surface in very close contact with the sample.
+#                  The cantilever deflection is usually emplloyed to control the cantilever position using a PID feedback loop.
+#                 non-contact mode: Cantilever attempts to oscillate above the sample surface. Cantilever attempts to stay in the
+#                  interaction (atomic force) zone therefore cantilever oscillator amplitude and frequency are deformed.
+#                  The cantilever frequecy or oscillation amplitude is usually employed to control the cantilever position using a PID feedback loop.
+#                 tapping mode: Resembles to the non-contact mode, but at every point of scan the cantilever tip comes closer
+#                  to the sample surface ("taps it").
+#                  The cantilever oscillation amplitude is usually employed to control the cantilever position using a PID feedback loop.
+#                 peak force tapping mode: Like the tapping mode, but at each point of the scan force-distance curve is recorded. 
+#                  The maximum force is usually employed to control the cantilever position using a PID feedback loop.
 #             </doc>
 #             <enumeration open="true">
 #                 <item value="contact mode"/>
@@ -278,11 +280,11 @@ NXafm(NXspm): #test
 #         <group type="NXinstrument">
 #             <group name="photo_detector" type="NXdetector" optional="true">
 #                 <doc>
-#                     Information about the quadrant photodiode deflection detector.
+#                     Information about the quadrant photodiode deflection detector or interferometer.
 #                 </doc>
 #                 <group type="NXsensor" optional="true">
 #                     <doc>
-#                         The sensor information for the photodiode.
+#                         The sensor information for the photodiode or interferometer.
 #                     </doc>
 #                 </group>
 #             </group>
@@ -301,7 +303,7 @@ NXafm(NXspm): #test
 #                     </doc>
 #                     <field name="reference_amplitude" units="NX_LENGTH" recommended="true">
 #                         <doc>
-#                             The reference amplitude (also called drive amplitude) of the cantilever.
+#                             The reference amplitude (also called driver amplitude) of the cantilever.
 #                             This is the amplitude of the cantilever oscillation when no external forces are acting on it.
 #                             
 #                             Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
@@ -309,7 +311,7 @@ NXafm(NXspm): #test
 #                     </field>
 #                     <field name="reference_frequency" units="NX_FREQUENCY" recommended="true">
 #                         <doc>
-#                             The reference frequency (also called drive frequency or resonance frequency) of
+#                             The reference frequency (also called driver frequency) of
 #                             the cantilever.
 #                             
 #                             Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
