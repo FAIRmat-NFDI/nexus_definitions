@@ -119,36 +119,29 @@ NXspm(NXsensor_scan):
             Temperature (stabilized or targeted single value) of liquid nitrogen shield.
             For array data of cryo_shield_temperature, use cryo_shield_temperature_sensor group.
         current_sensorTAG(NXsensor):
+          nameType: partial
           exists: optional
           doc: |
             This should be a link to
-            ENTRY[*]/INSTRUMENT[*]/current_sensorTAG[current_sensor*].
-            
-            Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
-            square bracket would be the `exact` name of the NXentry group.
+            /entry/instrument/current_sensor
         voltage_sensorTAG(NXsensor):
+          nameType: partial
           exists: optional
           doc: |
             This should be a link to
-            ENTRY[*]/INSTRUMENT[*]/voltage_sensorTAG[voltage_sensor*].
-            
-            Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
-            square bracket would be the `exact` name of the NXentry group.
+            /entry/instrument/voltage_sensor
         piezo_sensor(NXspm_piezo_sensor):
           exists: optional
           doc: |
             This should be a link to
-            ENTRY[*]/INSTRUMENT[*]/piezo_sensor.
-            
-            Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
-            square bracket would be the `exact` name of the NXentry group.
+            /entry/instrument/piezo_sensor.
         (NXspm_scan_control):
           doc: |
             The scan control information like scan region or phase space, type of scan (e.g.
             mesh, spiral, etc.), and scan speed, etc. This group mainly stores the scan settings
             data. For processed data or final experimental data would go to NXdata group.
           scanTAG:
-            nameType: any
+            nameType: partial
             exists: optional
             doc: |
               If there are multiple scans performed under the same environment, use this field
@@ -221,6 +214,7 @@ NXspm(NXsensor_scan):
               doc: |
                 The step size in y direction.
       current_sensorTAG(NXsensor):
+        nameType: partial
         exists: optional
         doc: |
           Information for current sensor. Any current sensor such as a current-voltage transimpedance amplifier involved in the experiment or
@@ -269,7 +263,7 @@ NXspm(NXsensor_scan):
           For this purpose, replace the TAG with the specific name or ID of the voltage sensor.
           
           Do not register this group for sample bias voltage (DC), for that we have sample_bias_voltage group
-          /ENTRY[*]/INSTRUMENT[*]/sample_bias_voltage.
+          /entry/instrument/sample_bias_voltage
         NAMEvoltage(NX_CHAR):
           exists: optional
           nameType: partial
@@ -444,15 +438,13 @@ NXspm(NXsensor_scan):
           doc: |
             This should be a link to
             
-            ENTRY[*]/INSTRUMENT[*]/sample_bias_voltage sensor under the instrument.
-            
-            Note: group name (could be any meaningful and relevant name e.g., entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
+            /entry/instrument/sample_bias_voltage sensor under the instrument.
         sample_temperature_sensor(NXspm_temperature_sensor):
           exists: optional
           doc: |
             This should be a link to
             
-            ENTRY[*]/INSTRUMENT[*]/sample_temperature_sensor under the instrument.
+            /entry/instrument/sample_temperature_sensor under the instrument.
     (NXdata):
       doc: |
         The data group.
@@ -498,7 +490,7 @@ NXspm(NXsensor_scan):
           reproducibility indicators (defined by laboratory).
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 7f66aa9848f69a054df5a03345128b53f635181d05d1bc6cf0435aa313e8ef15
+# a3b6f04b276cd5ab1a5f0e99b9686c74ae4b3cf73b9d2d1c011ce55369e3d686
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -682,31 +674,22 @@ NXspm(NXsensor_scan):
 #                         For array data of cryo_shield_temperature, use cryo_shield_temperature_sensor group.
 #                     </doc>
 #                 </field>
-#                 <group name="current_sensorTAG" type="NXsensor" optional="true">
+#                 <group name="current_sensorTAG" type="NXsensor" nameType="partial" optional="true">
 #                     <doc>
 #                         This should be a link to
-#                         ENTRY[*]/INSTRUMENT[*]/current_sensorTAG[current_sensor*].
-#                         
-#                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
-#                         square bracket would be the `exact` name of the NXentry group.
+#                         /entry/instrument/current_sensor/current
 #                     </doc>
 #                 </group>
-#                 <group name="voltage_sensorTAG" type="NXsensor" optional="true">
+#                 <group name="voltage_sensorTAG" type="NXsensor" nameType="partial" optional="true">
 #                     <doc>
 #                         This should be a link to
-#                         ENTRY[*]/INSTRUMENT[*]/voltage_sensorTAG[voltage_sensor*].
-#                         
-#                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
-#                         square bracket would be the `exact` name of the NXentry group.
+#                         /entry/instrument/voltage_sensor/current
 #                     </doc>
 #                 </group>
 #                 <group name="piezo_sensor" type="NXspm_piezo_sensor" optional="true">
 #                     <doc>
 #                         This should be a link to
-#                         ENTRY[*]/INSTRUMENT[*]/piezo_sensor.
-#                         
-#                         Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
-#                         square bracket would be the `exact` name of the NXentry group.
+#                         /entry/instrument/piezo_sensor.
 #                     </doc>
 #                 </group>
 #                 <group type="NXspm_scan_control">
@@ -715,7 +698,7 @@ NXspm(NXsensor_scan):
 #                         mesh, spiral, etc.), and scan speed, etc. This group mainly stores the scan settings
 #                         data. For processed data or final experimental data would go to NXdata group.
 #                     </doc>
-#                     <field name="scanTAG" nameType="any" optional="true">
+#                     <field name="scanTAG" nameType="partial" optional="true">
 #                         <doc>
 #                             If there are multiple scans performed under the same environment, use this field
 #                             to differentiate among them.
@@ -805,7 +788,7 @@ NXspm(NXsensor_scan):
 #                     </group>
 #                 </group>
 #             </group>
-#             <group name="current_sensorTAG" type="NXsensor" optional="true">
+#             <group name="current_sensorTAG" type="NXsensor" nameType="partial" optional="true">
 #                 <doc>
 #                     Information for current sensor. Any current sensor such as a current-voltage transimpedance amplifier involved in the experiment or
 #                     in any special measurement or in any specialized experiment component can be
@@ -856,7 +839,7 @@ NXspm(NXsensor_scan):
 #                     For this purpose, replace the TAG with the specific name or ID of the voltage sensor.
 #                     
 #                     Do not register this group for sample bias voltage (DC), for that we have sample_bias_voltage group
-#                     /ENTRY[*]/INSTRUMENT[*]/sample_bias_voltage.
+#                     /entry/instrument/sample_bias_voltage
 #                 </doc>
 #                 <field name="NAMEvoltage" type="NX_CHAR" optional="true" nameType="partial">
 #                     <doc>
@@ -1056,16 +1039,14 @@ NXspm(NXsensor_scan):
 #                     <doc>
 #                         This should be a link to
 #                         
-#                         ENTRY[*]/INSTRUMENT[*]/sample_bias_voltage sensor under the instrument.
-#                         
-#                         Note: group name (could be any meaningful and relevant name e.g., entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
+#                         /entry/instrument/sample_bias_voltage sensor under the instrument.
 #                     </doc>
 #                 </group>
 #                 <group name="sample_temperature_sensor" type="NXspm_temperature_sensor" optional="true">
 #                     <doc>
 #                         This should be a link to
 #                         
-#                         ENTRY[*]/INSTRUMENT[*]/sample_temperature_sensor under the instrument.
+#                         /entry/instrument/sample_temperature_sensor under the instrument.
 #                     </doc>
 #                 </group>
 #             </group>
