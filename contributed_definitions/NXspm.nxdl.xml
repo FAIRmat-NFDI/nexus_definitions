@@ -143,30 +143,29 @@
                     </doc>
                 </field>
             </group>
-            <group name="lockin_amplifier" type="NXspm_lockin" optional="true">
+            <group name="lockin_amplifier" type="NXlockin" optional="true">
                 <doc>
                     The lock-in amplifier information.
                 </doc>
-                <field name="lockin_current_flip_sign" type="NX_NUMBER" optional="true">
+                <field name="flip_sign" type="NX_NUMBER" optional="true">
                     <doc>
-                        The sign (1 or -1) that defines the sign of the lock-in current.
+                        The sign (1 or -1) that renders the values of the lock-in current positive.
                         The calibration procedure with retracted tip is normally performed to compensate for the signal phase delay
-                        in SPM. The procedure yields two possible solutions, this number should be equal
-                        to 1 or -1 depending on which solution is chosen (this concept mainly used in STS experiments
-                        e.g., in processing file from Nanonis machine).
+                        in SPM. The procedure yields two possible solutions corresponding to the chosen phase, this number should be equal
+                        to 1 or -1 depending on which solution is chosen (this concept mainly used in STS experiments).
                     </doc>
                 </field>
             </group>
-            <group name="SCAN_ENVIRONMENT" type="NXenvironment" nameType="any">
+            <group name="SCAN_ENVIRONMENT" type="NXenvironment">
                 <doc>
-                    Information of the scan environment holding concpet for
+                    Information of the scan environment holding concept for
                     temperature, setpoint (current or height), scan area and scan data.
                     
                     Note: At least one field from head_temperature, cryo_bottom_temperature and cryo_shield_temperature must be provided.
                 </doc>
                 <field name="head_temperature" type="NX_NUMBER" recommended="true" units="NX_TEMPERATURE">
                     <doc>
-                        Temperature (stabilized or targeted single value) of STM head. For array data of head_temperature, use
+                        Temperature (stabilized or target value) of STM head. For array data of head_temperature, use
                         head_temperature_sensor group.
                     </doc>
                 </field>
@@ -307,7 +306,7 @@
             </group>
             <group name="current_sensorTAG" type="NXsensor" optional="true">
                 <doc>
-                    Information for current sensor. Any current sensor involved in the experiment or
+                    Information for current sensor. Any current sensor such as a current-voltage transimpedance amplifier involved in the experiment or
                     in any special measurement or in any specialized experiment component can be
                     registered under this group.
                 </doc>
@@ -423,7 +422,7 @@
             </group>
             <group name="head_temperature_sensor" type="NXspm_temperature_sensor" recommended="true">
                 <doc>
-                    The temperature of the tip one of the tip. This group is intended to be used for
+                    The temperature of the SPM measured near the sample or tip. This group is intended to be used for
                     an array data (e.g., time series).
                 </doc>
             </group>
@@ -439,6 +438,12 @@
                     for an array data (e.g., time series).
                 </doc>
             </group>
+            <group name="sample_temperature_sensor" type="NXspm_temperature_sensor" optional="true">
+                <doc>
+                    The temperature of the sample. This group is intended to be used for
+                    an array data (e.g., time series).
+                </doc>
+            </group>
             <group name="bias_spectroscopy_environment" type="NXenvironment">
                 <doc>
                     To explain bias and current behavior (sweep measurement) due to voltage
@@ -451,7 +456,8 @@
                     </doc>
                     <group type="NXspm_positioner" optional="true">
                         <doc>
-                            The positioner information like the position of the tip, PID controller etc.
+                            The positioner information like PID loop parameters, controller or feedback
+                            on/off, etc.
                         </doc>
                         <group name="z_controller" type="NXpid_controller" recommended="true">
                             <doc>
@@ -538,13 +544,27 @@
                 <doc>
                     Information of environment around the sample.
                 </doc>
-                <group name="sample_bias_voltage" type="NXsensor">
+                <field name="temperature" type="NX_NUMBER" recommended="true" units="NX_TEMPERATURE">
+                    <doc>
+                        The single-valued temperature of the sample, also referred to as the tip temperature
+                        (not head temperature), since the tip and sample are in contact or in close proximity.
+                        For array like temperature data use sample_temperature_sensor group.
+                    </doc>
+                </field>
+                <group name="sample_bias_voltage" type="NXsensor" optional="true">
                     <doc>
                         This should be a link to
                         
                         ENTRY[*]/INSTRUMENT[*]/sample_bias_voltage sensor under the instrument.
                         
                         Note: group name (could be any meaningful and relevant name e.g., entry in ENTRY[entry]) inside the square bracket would be the `exact` name of the NXentry group.
+                    </doc>
+                </group>
+                <group name="sample_temperature_sensor" type="NXspm_temperature_sensor" optional="true">
+                    <doc>
+                        This should be a link to
+                        
+                        ENTRY[*]/INSTRUMENT[*]/sample_temperature_sensor under the instrument.
                     </doc>
                 </group>
             </group>

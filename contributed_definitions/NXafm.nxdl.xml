@@ -46,13 +46,16 @@
             <doc>
                 The mode of the scan.
                 
-                contact mode: Cantilever moves on the sample surface in very close contact with the sample.
-                non-contact mode: Cantilever oscillates above the sample surface without touching it. Cantilever stays in the
-                          interaction (atomic force) zone therefore cantilever oscillator amplitude and frequency are deformed.
-                tapping mode: Resembles to the non-contact mode, but at every point of scan the cantilever tip comes very close
-                          to the sample surface and taps it.
+                contact mode: Cantilever attempts to move on the sample surface in very close contact with the sample.
+                 The cantilever deflection is usually employed to control the cantilever position using a PID feedback loop.
+                non-contact mode: Cantilever attempts to oscillate above the sample surface. Cantilever attempts to stay in the
+                 interaction (atomic force) zone therefore cantilever oscillator amplitude and frequency are deformed.
+                 The cantilever frequency or oscillation amplitude is usually employed to control the cantilever position using a PID feedback loop.
+                tapping mode: Resembles to the non-contact mode, but at every point of scan the cantilever tip comes closer
+                 to the sample surface ("taps it").
+                 The cantilever oscillation amplitude is usually employed to control the cantilever position using a PID feedback loop.
                 peak force tapping mode: Like the tapping mode, but at each point of the scan force-distance curve is recorded.
-                          The maximum force is used to control the cantilever position using a PID feedback loop.
+                 The maximum force is usually employed to control the cantilever position using a PID feedback loop.
             </doc>
             <enumeration open="true">
                 <item value="contact mode"/>
@@ -64,11 +67,11 @@
         <group type="NXinstrument">
             <group name="photo_detector" type="NXdetector" optional="true">
                 <doc>
-                    Information about the quadrant photodiode deflection detector.
+                    Information about the quadrant photodiode deflection detector or interferometer.
                 </doc>
                 <group type="NXsensor" optional="true">
                     <doc>
-                        The sensor information for the photodiode.
+                        The sensor information for the photodiode or interferometer.
                     </doc>
                 </group>
             </group>
@@ -87,7 +90,7 @@
                     </doc>
                     <field name="reference_amplitude" units="NX_LENGTH" recommended="true">
                         <doc>
-                            The reference amplitude (also called drive amplitude) of the cantilever.
+                            The reference amplitude (also called driver amplitude) of the cantilever.
                             This is the amplitude of the cantilever oscillation when no external forces are acting on it.
                             
                             Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
@@ -95,7 +98,7 @@
                     </field>
                     <field name="reference_frequency" units="NX_FREQUENCY" recommended="true">
                         <doc>
-                            The reference frequency (also called drive frequency or resonance frequency) of
+                            The reference frequency (also called driver frequency) of
                             the cantilever.
                             
                             Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
@@ -120,7 +123,7 @@
                     </doc>
                 </group>
             </group>
-            <group name="phase_lock_loop" type="NXspm_lockin">
+            <group name="phase_lock_loop" type="NXlockin">
                 <doc>
                     Phase locked loop for cantilever lock-in device.
                 </doc>
