@@ -49,12 +49,14 @@ NXspm_piezo_config(NXobject):
       doc: |
         The N (substring) denotes X or Y or Z, e.g., range_x. There are 3 parameters in X, Y and Z directions. The range
         is the maximum distance the piezo can move.
-    calibration_coefficientN(NX_NUMBER):
-      nameType: partial
-      unit: NX_ANY
-      doc: |
-        The calibration coefficient is the ratio of the actual distance moved by the piezo due to
-        the voltage or external force applied to the piezo. It is also called first-order correction.
+    calibration_parameters(NXparameter):
+      exists: optional
+      calibration_coefficientN(NX_NUMBER):
+        nameType: partial
+        unit: NX_ANY
+        doc: |
+          The calibration coefficient is the ratio of the actual distance moved by the piezo due to
+          the voltage or external force applied to the piezo. It is also called first-order correction.
     tiltN(NX_NUMBER):
       nameType: partial
       unit: NX_ANGLE
@@ -84,7 +86,7 @@ NXspm_piezo_config(NXobject):
         move at that speed.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# b1e0977774a21d14fe510510eb51748024ebb65178c3c46ad31371c98c28e3a4
+# 520b320f05c91f19296749a441d23d577ec9bfc65b413ecac395c1bf7bc40345
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -171,12 +173,14 @@ NXspm_piezo_config(NXobject):
 #                 is the maximum distance the piezo can move.
 #             </doc>
 #         </field>
-#         <field name="calibration_coefficientN" type="NX_NUMBER" nameType="partial" units="NX_ANY">
-#             <doc>
-#                 The calibration coefficient is the ratio of the actual distance moved by the piezo due to
-#                 the voltage or external force applied to the piezo. It is also called first-order correction.
-#             </doc>
-#         </field>
+#         <group name="calibration_parameters" type="NXparameter" optional="true">
+#             <field name="calibration_coefficientN" type="NX_NUMBER" nameType="partial" units="NX_ANY">
+#                 <doc>
+#                     The calibration coefficient is the ratio of the actual distance moved by the piezo due to
+#                     the voltage or external force applied to the piezo. It is also called first-order correction.
+#                 </doc>
+#             </field>
+#         </group>
 #         <field name="tiltN" type="NX_NUMBER" nameType="partial" units="NX_ANGLE">
 #             <doc>
 #                 The N (substring) denotes X and Y directions (e.g., tilt_x), and for both directions tilt needs to be adjusted according

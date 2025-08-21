@@ -57,6 +57,7 @@ NXspm(NXsensor_scan):
           doc: |
             Company name of the manufacturer.
         model:
+          exists: recommended
           doc: |
             Version or model of the hardware setup provided by the manufacturer.
       software(NXprogram):
@@ -72,6 +73,7 @@ NXspm(NXsensor_scan):
           doc: |
             Company name of the manufacturer.
         model:
+          exists: recommended
           doc: |
             Version or model of the component named by the manufacturer.
       real_time_controller(NXrcs):
@@ -248,11 +250,13 @@ NXspm(NXsensor_scan):
           exists: optional
           doc: |
             Calibration data of the current sensor.
-          coefficient(NX_NUMBER):
+          calibration_parameters(NXparameter):
             exists: optional
-            unit: NX_ANY
-            doc: |
-              The coefficient of the calibration.
+            coefficient(NX_NUMBER):
+              exists: optional
+              unit: NX_ANY
+              doc: |
+                The coefficient of the calibration.
         (NXamplifier):
           exists: optional
           doc: |
@@ -294,11 +298,13 @@ NXspm(NXsensor_scan):
           exists: optional
           doc: |
             Calibration data of the voltage sensor.
-          coefficient(NX_NUMBER):
+          calibration_parameters(NXparameter):
             exists: optional
-            unit: NX_ANY
-            doc: |
-              The coefficient of the calibration.
+            coefficient(NX_NUMBER):
+              exists: optional
+              unit: NX_ANY
+              doc: |
+                The coefficient of the calibration.
         (NXamplifier):
           exists: optional
           doc: |
@@ -421,11 +427,13 @@ NXspm(NXsensor_scan):
           exists: optional
           doc: |
             Calibration of the bias voltage measurement (V/V).
-          coefficient(NX_NUMBER):
+          calibration_parameters(NXparameter):
             exists: optional
-            unit: NX_ANY
-            doc: |
-              The coefficients of the calibration.
+            coefficient(NX_NUMBER):
+              exists: optional
+              unit: NX_ANY
+              doc: |
+                The coefficients of the calibration.
     (NXsample):
       exists: optional
       doc: |
@@ -502,7 +510,7 @@ NXspm(NXsensor_scan):
           reproducibility indicators (defined by laboratory).
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 946741344994509bb8a4036934ec3e544d4b0c5b16e9afce0969c9dee5345082
+# bce9ad2ccc2b95b347a6c9d459a1e7f22b05a4f4d32c09b169591a0155da4eff
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -609,7 +617,7 @@ NXspm(NXsensor_scan):
 #                         Company name of the manufacturer.
 #                     </doc>
 #                 </field>
-#                 <field name="model">
+#                 <field name="model" recommended="true">
 #                     <doc>
 #                         Version or model of the hardware setup provided by the manufacturer.
 #                     </doc>
@@ -631,7 +639,7 @@ NXspm(NXsensor_scan):
 #                         Company name of the manufacturer.
 #                     </doc>
 #                 </field>
-#                 <field name="model">
+#                 <field name="model" recommended="true">
 #                     <doc>
 #                         Version or model of the component named by the manufacturer.
 #                     </doc>
@@ -831,11 +839,13 @@ NXspm(NXsensor_scan):
 #                     <doc>
 #                         Calibration data of the current sensor.
 #                     </doc>
-#                     <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
-#                         <doc>
-#                             The coefficient of the calibration.
-#                         </doc>
-#                     </field>
+#                     <group name="calibration_parameters" type="NXparameter" optional="true">
+#                         <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
+#                             <doc>
+#                                 The coefficient of the calibration.
+#                             </doc>
+#                         </field>
+#                     </group>
 #                 </group>
 #                 <group type="NXamplifier" optional="true">
 #                     <doc>
@@ -879,11 +889,13 @@ NXspm(NXsensor_scan):
 #                     <doc>
 #                         Calibration data of the voltage sensor.
 #                     </doc>
-#                     <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
-#                         <doc>
-#                             The coefficient of the calibration.
-#                         </doc>
-#                     </field>
+#                     <group name="calibration_parameters" type="NXparameter" optional="true">
+#                         <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
+#                             <doc>
+#                                 The coefficient of the calibration.
+#                             </doc>
+#                         </field>
+#                     </group>
 #                 </group>
 #                 <group type="NXamplifier" optional="true">
 #                     <doc>
@@ -1025,11 +1037,13 @@ NXspm(NXsensor_scan):
 #                     <doc>
 #                         Calibration of the bias voltage measurement (V/V).
 #                     </doc>
-#                     <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
-#                         <doc>
-#                             The coefficients of the calibration.
-#                         </doc>
-#                     </field>
+#                     <group name="calibration_parameters" type="NXparameter" optional="true">
+#                         <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
+#                             <doc>
+#                                 The coefficients of the calibration.
+#                             </doc>
+#                         </field>
+#                     </group>
 #                 </group>
 #             </group>
 #         </group>

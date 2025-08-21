@@ -19,10 +19,13 @@ NXspm_piezo_sensor(NXsensor):
     doc: |
       The piezo configuration information like piezoelectric calibration and material
       properties.
-    calibration(NXcalibration):
-      doc: |
-        Calibration of the piezo device.
+    calibration_parameters(NXparameter):
+      exists: optional
+      calibration(NXcalibration):
+        doc: |
+          Calibration of the piezo device.
   (NXspm_positioner):
+    nameType: any
     doc: |
       The positioner information like the position of the tip, the position of the
       sample, PID controller etc.
@@ -31,7 +34,7 @@ NXspm_piezo_sensor(NXsensor):
       The material description and properties of the piezoelectric scanner materials.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# d2f0d5c8abea46716f2fb1c246c52692bbba3c746989d66cbd06205e377b8f47
+# facf35d8f4b1ceb50b284bdfe491baa6f41b788bcd75145e91ddd72d1b2c5924
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -79,13 +82,15 @@ NXspm_piezo_sensor(NXsensor):
 #             The piezo configuration information like piezoelectric calibration and material
 #             properties.
 #         </doc>
-#         <group name="calibration" type="NXcalibration">
-#             <doc>
-#                 Calibration of the piezo device.
-#             </doc>
+#         <group name="calibration_parameters" type="NXparameter" optional="true">
+#             <group name="calibration" type="NXcalibration">
+#                 <doc>
+#                     Calibration of the piezo device.
+#                 </doc>
+#             </group>
 #         </group>
 #     </group>
-#     <group type="NXspm_positioner">
+#     <group type="NXspm_positioner" nameType="any">
 #         <doc>
 #             The positioner information like the position of the tip, the position of the
 #             sample, PID controller etc.

@@ -26,10 +26,12 @@ NXspm_temperature_sensor(NXsensor):
   calibration(NXcalibration):
     doc: |
       Calibration of the temperature measurement.
-    coefficient(NX_NUMBER):
-      unit: NX_ANY
-      doc: |
-        The coefficient of the calibration.
+    calibration_parameters(NXparameter):
+      exists: optional
+      coefficient(NX_NUMBER):
+        unit: NX_ANY
+        doc: |
+          The coefficient of the calibration.
   (NXdata):
     nameType: any
     exists: optional
@@ -38,7 +40,7 @@ NXspm_temperature_sensor(NXsensor):
       or voltage-temperature data.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 32b92f6af24acbe2a067fac8d767ad323bff6a7fc5dc649ae6a8b75a9e87e40a
+# 003fe0e5d1e547189fef7a23b92b4ed77b268146b25c59b531e3807aba2dc932
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -94,11 +96,13 @@ NXspm_temperature_sensor(NXsensor):
 #         <doc>
 #             Calibration of the temperature measurement.
 #         </doc>
-#         <field name="coefficient" type="NX_NUMBER" units="NX_ANY">
-#             <doc>
-#                 The coefficient of the calibration.
-#             </doc>
-#         </field>
+#         <group name="calibration_parameters" type="NXparameter" optional="true">
+#             <field name="coefficient" type="NX_NUMBER" units="NX_ANY">
+#                 <doc>
+#                     The coefficient of the calibration.
+#                 </doc>
+#             </field>
+#         </group>
 #     </group>
 #     <group type="NXdata" nameType="any" optional="true">
 #         <doc>
