@@ -250,7 +250,7 @@ NXspm(NXsensor_scan):
           exists: optional
           doc: |
             Calibration data of the current sensor.
-          calibration_parameters(NXparameter):
+          calibration_parameters(NXparameters):
             exists: optional
             coefficient(NX_NUMBER):
               exists: optional
@@ -276,13 +276,15 @@ NXspm(NXsensor_scan):
           
           For this purpose, replace the TAG with the specific name or ID of the voltage sensor.
           
-          Do not register this group for sample bias voltage (DC), for that we have sample_bias_voltage group
-          /entry/instrument/sample_bias_voltage
+          Do not register this group for sample bias voltage (DC), for that we have :ref:`sample_bias_voltage </NXspm/entry/instrument/sample_bias_voltage-group>` group.
         NAMEvoltage(NX_CHAR):
           exists: optional
           nameType: partial
           doc: |
-            The name of the voltage sensor used for specific measurement or in component.
+            The name of the voltage according to the purpose of the measurement.
+            E.g., the field can be named as x_source_drain_bias_voltage defining
+            the applied bias along the x-axis as source-drain channel, while current
+            (tip current) will be measured along the z-axis.
         voltage(NX_NUMBER):
           unit: NX_VOLTAGE
           exists: optional
@@ -298,7 +300,7 @@ NXspm(NXsensor_scan):
           exists: optional
           doc: |
             Calibration data of the voltage sensor.
-          calibration_parameters(NXparameter):
+          calibration_parameters(NXparameters):
             exists: optional
             coefficient(NX_NUMBER):
               exists: optional
@@ -362,8 +364,8 @@ NXspm(NXsensor_scan):
           an array data (e.g., time series).
       bias_spectroscopy_environment(NXenvironment):
         doc: |
-          To explain bias and current behavior (sweep measurement) due to voltage
-          applied to the sample.
+          To explain bias and current behavior (sweep measurement especially in STS experiment)
+          due to voltage applied to the sample.
         (NXspm_bias_spectroscopy):
           doc: |
             Setup and scan data for continuous measurement of bias voltage on the subject of experiment
@@ -371,13 +373,11 @@ NXspm(NXsensor_scan):
           (NXspm_positioner):
             exists: optional
             doc: |
-              The positioner information like PID loop parameters, controller or feedback
-              on/off, etc.
+              Information about positioner used in STS scan settings, like PID controller and
+              offset.
             z_controller(NXpid_controller):
               exists: recommended
-              doc: |
-                The PID controller information for the z-axis.
-          bias_sweep(NXspm_scan_control):
+          BIAS_SWEEP(NXspm_scan_control):
             doc: |
               The bias voltage sweep is a common technique used to study properties (in this case current) in
               the sample or environment due to change in applied bias voltage.
@@ -427,7 +427,7 @@ NXspm(NXsensor_scan):
           exists: optional
           doc: |
             Calibration of the bias voltage measurement (V/V).
-          calibration_parameters(NXparameter):
+          calibration_parameters(NXparameters):
             exists: optional
             coefficient(NX_NUMBER):
               exists: optional
@@ -510,7 +510,7 @@ NXspm(NXsensor_scan):
           reproducibility indicators (defined by laboratory).
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# bce9ad2ccc2b95b347a6c9d459a1e7f22b05a4f4d32c09b169591a0155da4eff
+# 4546190e3d633f69f1d036cb81bc1e13d421929c99e72d76b21ee3b7c886d665
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -839,7 +839,7 @@ NXspm(NXsensor_scan):
 #                     <doc>
 #                         Calibration data of the current sensor.
 #                     </doc>
-#                     <group name="calibration_parameters" type="NXparameter" optional="true">
+#                     <group name="calibration_parameters" type="NXparameters" optional="true">
 #                         <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
 #                             <doc>
 #                                 The coefficient of the calibration.
@@ -866,12 +866,14 @@ NXspm(NXsensor_scan):
 #                     
 #                     For this purpose, replace the TAG with the specific name or ID of the voltage sensor.
 #                     
-#                     Do not register this group for sample bias voltage (DC), for that we have sample_bias_voltage group
-#                     /entry/instrument/sample_bias_voltage
+#                     Do not register this group for sample bias voltage (DC), for that we have :ref:`sample_bias_voltage &lt;/NXspm/entry/instrument/sample_bias_voltage-group&gt;` group.
 #                 </doc>
 #                 <field name="NAMEvoltage" type="NX_CHAR" optional="true" nameType="partial">
 #                     <doc>
-#                         The name of the voltage sensor used for specific measurement or in component.
+#                         The name of the voltage according to the purpose of the measurement.
+#                         E.g., the field can be named as x_source_drain_bias_voltage defining 
+#                         the applied bias along the x-axis as source-drain channel, while current
+#                         (tip current) will be measured along the z-axis.
 #                     </doc>
 #                 </field>
 #                 <field name="voltage" type="NX_NUMBER" units="NX_VOLTAGE" optional="true">
@@ -889,7 +891,7 @@ NXspm(NXsensor_scan):
 #                     <doc>
 #                         Calibration data of the voltage sensor.
 #                     </doc>
-#                     <group name="calibration_parameters" type="NXparameter" optional="true">
+#                     <group name="calibration_parameters" type="NXparameters" optional="true">
 #                         <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
 #                             <doc>
 #                                 The coefficient of the calibration.
@@ -960,8 +962,8 @@ NXspm(NXsensor_scan):
 #             </group>
 #             <group name="bias_spectroscopy_environment" type="NXenvironment">
 #                 <doc>
-#                     To explain bias and current behavior (sweep measurement) due to voltage
-#                     applied to the sample.
+#                     To explain bias and current behavior (sweep measurement especially in STS experiment) 
+#                     due to voltage applied to the sample.
 #                 </doc>
 #                 <group type="NXspm_bias_spectroscopy">
 #                     <doc>
@@ -970,16 +972,12 @@ NXspm(NXsensor_scan):
 #                     </doc>
 #                     <group type="NXspm_positioner" optional="true">
 #                         <doc>
-#                             The positioner information like PID loop parameters, controller or feedback
-#                             on/off, etc.
+#                             Information about positioner used in STS scan settings, like PID controller and
+#                             offset.
 #                         </doc>
-#                         <group name="z_controller" type="NXpid_controller" recommended="true">
-#                             <doc>
-#                                 The PID controller information for the z-axis.
-#                             </doc>
-#                         </group>
+#                         <group name="z_controller" type="NXpid_controller" recommended="true"/>
 #                     </group>
-#                     <group name="bias_sweep" type="NXspm_scan_control">
+#                     <group name="BIAS_SWEEP" type="NXspm_scan_control">
 #                         <doc>
 #                             The bias voltage sweep is a common technique used to study properties (in this case current) in
 #                             the sample or environment due to change in applied bias voltage.
@@ -1037,7 +1035,7 @@ NXspm(NXsensor_scan):
 #                     <doc>
 #                         Calibration of the bias voltage measurement (V/V).
 #                     </doc>
-#                     <group name="calibration_parameters" type="NXparameter" optional="true">
+#                     <group name="calibration_parameters" type="NXparameters" optional="true">
 #                         <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
 #                             <doc>
 #                                 The coefficients of the calibration.

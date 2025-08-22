@@ -68,11 +68,6 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                     Information for current sensor.
                 </doc>
             </group>
-            <group name="piezo_sensor" type="NXspm_piezo_sensor">
-                <doc>
-                    This piezo sensor group refers to the XYZ piezo sensor.
-                </doc>
-            </group>
             <group name="bias_spectroscopy_environment" type="NXenvironment">
                 <doc>
                     To explain bias (sweep measurement) voltage applied to the sample.
@@ -82,9 +77,11 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                         Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
                         vs tunneling current from probe.
                     </doc>
-                    <group type="NXspm_positioner">
+                    <group type="NXspm_positioner" recommended="true">
                         <doc>
-                            The positioner information PID controller.
+                            Information about positioner used in STS scan settings, like PID controller and offset.
+                            
+                            Reuse, if needed, this group for positioners for multiple scans at different points on sample.
                         </doc>
                         <group name="z_controller" type="NXpid_controller" recommended="true">
                             <doc>
@@ -131,7 +128,7 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                     square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
-            <group name="bias_sweep" type="NXspm_scan_control" optional="true">
+            <group name="BIAS_SWEEP" type="NXspm_scan_control" optional="true">
                 <doc>
                     Bias sweep measurement in bias spectroscopy.
                     This should be a link to
@@ -194,7 +191,7 @@ TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and
                     square bracket would be the `exact` name of the NXentry group.
                 </doc>
             </field>
-            <group name="bias_sweep" type="NXspm_scan_control" optional="true">
+            <group name="BIAS_SWEEP" type="NXspm_scan_control" optional="true">
                 <doc>
                     This should be a link to
                     /ENTRY[*]/INSTRUMENT[*]/bias_spectroscopy_environment/SPM_BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep

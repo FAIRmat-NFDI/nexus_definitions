@@ -16,14 +16,12 @@ NXspm_bias_spectroscopy(NXobject):
     enumeration: [constant_spacing, variadic_spacing]
   (NXspm_positioner):
     doc: |
-      The PID (proportional, integral, differential feedback system) positioner information while running
-      bias voltage-tunneling current measurement.
+      Information about the positioner PID (proportional, integral, differential feedback system),
+      offset values, setpoint values and so on, while running bias voltage-tunneling current measurement.
       
       These components position the probe relative to the sample, thus help obtaining maps of the data
       across the sample surface.
     z_controller(NXpid_controller):
-      doc: |
-        The PID controller information for the z-axis.
       z_average_time(NX_NUMBER):
         unit: NX_TIME
         doc: |
@@ -59,19 +57,19 @@ NXspm_bias_spectroscopy(NXobject):
       doc: |
         The time or period is taken by the circuit to measure a full bias sweep voltage or
         bias current. (duration of the measurement).
-  bias_sweep(NXspm_scan_control):
+  BIAS_SWEEP(NXspm_scan_control):
     doc: |
       The bias sweep scan which is is performed in the scanning probe microscopy
       experiments.
+    spatial_location(NXcoordinate_system):
+      x(NX_NUMBER):
+        unit: NX_LENGTH
+      y(NX_NUMBER):
+        unit: NX_LENGTH
+      z(NX_NUMBER):
+        unit: NX_LENGTH
     scan_type:
-      
-      # I modify this text, by I may be wrong T.
-      # key is: I can change X,Y location at constant voltage or do a sweep
-      # at every X,Y coordinate, and I can define patterns how X,Y values follow
-      # each other (e.g. spiral)
       doc: |
-        The type of scan like mesh, spiral, etc.
-        
         This combines not only how the voltages are changed, but how the voltage values are
         correlated to a position across the sample surface, measuring sweeps are each spatial
         coordinate or mapping the response at constant voltage, etc.
@@ -82,14 +80,12 @@ NXspm_bias_spectroscopy(NXobject):
         The number of sweeps (a full scan from starting bias to end bias)
         taken during the bias spectroscopy.
     first_settling_time(NX_NUMBER):
-      exists: optional
       unit: NX_TIME
       doc: |
         The initial time taken to settle the bias voltage at the desired value.
         On each sweep usually, the system takes time to settle to the bias voltage
         at the next value.
     end_settling_time(NX_NUMBER):
-      exists: optional
       unit: NX_TIME
       doc: |
         The time (at the last sweep) to settle for the last value of the sweep.
@@ -99,18 +95,16 @@ NXspm_bias_spectroscopy(NXobject):
         The time taken to settle the bias voltage at the desired value. On each sweep usually, the system
         takes time to settle the bias voltage at the next value.
     max_slew_rate(NX_NUMBER):
-      exists: optional
       unit: NX_ANY
       doc: |
         The rate at which the amplifier responds to the voltage change
         (to reach at the desired value). It defines if the tip movement and
         voltage sweep are synchronized.
     final_z(NX_NUMBER):
-      exists: recommended
+      unit: NX_LENGTH
       doc: |
         The z position after the sweeps are done.
     total_spectroscopy_time(NX_NUMBER):
-      exists: recommended
       unit: NX_TIME
       doc: |
         The total time needed for the entire voltage sweep.
@@ -166,19 +160,20 @@ NXspm_bias_spectroscopy(NXobject):
           The scan data is the data collected during the scan.
           If the scan has several channels or derivatives from the channel data,
           please duplicate this NXdata group for each.
-        DATA:
+        current:
           nameType: any
-          unit: NX_ANY
+          unit: NX_CURRENT
           doc: |
-            The plottable data collected during the scan. Data to be plotted against
-            the axis defined in AXISNAME field. Use this data as signal attributes.
-        AXISNAME:
+            The tip current collected during the scan. Data to be plotted against
+            the axis defined in voltage field. Use this data as signal attributes.
+        voltage:
           nameType: any
+          unit: NX_VOLTAGE
           doc: |
-            The voltage axis name of the data collected during the scan.
+            Applied voltage during the scan.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 4f740f3aa7a403ad1faf2e2fd8f938bfdfd46fe143f3be1d12d5c7ccb73c1029
+# 987b23d7e18fe04e922c3261770021ce58e58e601a155ff1a73fc76598dbf760
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -224,16 +219,13 @@ NXspm_bias_spectroscopy(NXobject):
 #     </field>
 #     <group type="NXspm_positioner">
 #         <doc>
-#             The PID (proportional, integral, differential feedback system) positioner information while running
-#             bias voltage-tunneling current measurement.
+#             Information about the positioner PID (proportional, integral, differential feedback system), 
+#             offset values, setpoint values and so on, while running bias voltage-tunneling current measurement.
 #             
 #             These components position the probe relative to the sample, thus help obtaining maps of the data
 #             across the sample surface.
 #         </doc>
 #         <group name="z_controller" type="NXpid_controller">
-#             <doc>
-#                 The PID controller information for the z-axis.
-#             </doc>
 #             <field name="z_average_time" type="NX_NUMBER" units="NX_TIME">
 #                 <doc>
 #                     The average time taken by the z-controller to stabilize the tip.
@@ -282,19 +274,18 @@ NXspm_bias_spectroscopy(NXobject):
 #             </doc>
 #         </field>
 #     </group>
-#     <group name="bias_sweep" type="NXspm_scan_control">
+#     <group name="BIAS_SWEEP" type="NXspm_scan_control">
 #         <doc>
 #             The bias sweep scan which is is performed in the scanning probe microscopy
 #             experiments.
 #         </doc>
+#         <group name="spatial_location" type="NXcoordinate_system">
+#             <field name="x" type="NX_NUMBER" units="NX_LENGTH"/>
+#             <field name="y" type="NX_NUMBER" units="NX_LENGTH"/>
+#             <field name="z" type="NX_NUMBER" units="NX_LENGTH"/>
+#         </group>
 #         <field name="scan_type">
-#             <!--I modify this text, by I may be wrong T.
-# key is: I can change X,Y location at constant voltage or do a sweep
-# at every X,Y coordinate, and I can define patterns how X,Y values follow
-# each other (e.g. spiral)-->
 #             <doc>
-#                 The type of scan like mesh, spiral, etc.
-#                 
 #                 This combines not only how the voltages are changed, but how the voltage values are
 #                 correlated to a position across the sample surface, measuring sweeps are each spatial
 #                 coordinate or mapping the response at constant voltage, etc.
@@ -310,14 +301,14 @@ NXspm_bias_spectroscopy(NXobject):
 #                 taken during the bias spectroscopy.
 #             </doc>
 #         </field>
-#         <field name="first_settling_time" type="NX_NUMBER" optional="true" units="NX_TIME">
+#         <field name="first_settling_time" type="NX_NUMBER" units="NX_TIME">
 #             <doc>
 #                 The initial time taken to settle the bias voltage at the desired value.
 #                 On each sweep usually, the system takes time to settle to the bias voltage
 #                 at the next value.
 #             </doc>
 #         </field>
-#         <field name="end_settling_time" type="NX_NUMBER" optional="true" units="NX_TIME">
+#         <field name="end_settling_time" type="NX_NUMBER" units="NX_TIME">
 #             <doc>
 #                 The time (at the last sweep) to settle for the last value of the sweep.
 #             </doc>
@@ -328,19 +319,19 @@ NXspm_bias_spectroscopy(NXobject):
 #                 takes time to settle the bias voltage at the next value.
 #             </doc>
 #         </field>
-#         <field name="max_slew_rate" type="NX_NUMBER" optional="true" units="NX_ANY">
+#         <field name="max_slew_rate" type="NX_NUMBER" units="NX_ANY">
 #             <doc>
 #                 The rate at which the amplifier responds to the voltage change
 #                 (to reach at the desired value). It defines if the tip movement and
 #                 voltage sweep are synchronized.
 #             </doc>
 #         </field>
-#         <field name="final_z" type="NX_NUMBER" recommended="true">
+#         <field name="final_z" type="NX_NUMBER" units="NX_LENGTH">
 #             <doc>
 #                 The z position after the sweeps are done.
 #             </doc>
 #         </field>
-#         <field name="total_spectroscopy_time" type="NX_NUMBER" recommended="true" units="NX_TIME">
+#         <field name="total_spectroscopy_time" type="NX_NUMBER" units="NX_TIME">
 #             <doc>
 #                 The total time needed for the entire voltage sweep.
 #             </doc>
@@ -412,15 +403,15 @@ NXspm_bias_spectroscopy(NXobject):
 #                     If the scan has several channels or derivatives from the channel data,
 #                     please duplicate this NXdata group for each.
 #                 </doc>
-#                 <field name="DATA" nameType="any" units="NX_ANY">
+#                 <field name="current" nameType="any" units="NX_CURRENT">
 #                     <doc>
-#                         The plottable data collected during the scan. Data to be plotted against
-#                         the axis defined in AXISNAME field. Use this data as signal attributes.
+#                         The tip current collected during the scan. Data to be plotted against
+#                         the axis defined in voltage field. Use this data as signal attributes.
 #                     </doc>
 #                 </field>
-#                 <field name="AXISNAME" nameType="any">
+#                 <field name="voltage" nameType="any" units="NX_VOLTAGE">
 #                     <doc>
-#                         The voltage axis name of the data collected during the scan.
+#                         Applied voltage during the scan.
 #                     </doc>
 #                 </field>
 #             </group>

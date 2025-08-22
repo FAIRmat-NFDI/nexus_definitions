@@ -6,15 +6,20 @@ type: group
 NXspm_positioner(NXpositioner):
   z_controller(NXpid_controller):
     doc: |
-      This controller's task is to continuously adjust the Z position of tip (e.g., in STM/STS experiment)
-      in order to keep the selected control signal as close as possible to the Set Point. Different control
-      signals lead to different controller's behavior.
+      This controller's task is to continuously adjust the Z position of tip (e.g., in topography scan in
+      STM/STS experiment) in order to keep the selected control signal as close as possible to the Set
+      Point. Different control signals lead to different controller's behavior.
       
       The second PID feedback loop intends to position the tip in the Z direction.
       
       p_gain (proportional gain) from z_controller refers to K_p value from PID controller.
       i_gain (integral gain) from z_controller refers to K_i value from PID controller.
       setpoint from z_controller refers to setpoint from PID controller.
+      
+      Usually, the same controller, (z_controller) will be used for positioning the tip in three dimensional
+      space. In this case, the controller coefficients (proportional, integral, differential) and other characteristic
+      constants will be the same. Otherwise, for separate controllers positioning the tip in 3D space use the
+      :ref:`feedback </NXspm_positioner/actuator/feedback>` controller in actuator.
     D_t(NX_NUMBER):
       nameType: specified
       unit: NX_TIME
@@ -49,6 +54,8 @@ NXspm_positioner(NXpositioner):
       unit: NX_TIME
       doc: |
         The switch-off delay of the controller from its stable point.
+    actuator(NXactuator):
+      feedback(NXpid_controller):
   z_offset_value(NX_NUMBER):
     unit: NX_LENGTH
     doc: |
@@ -60,7 +67,7 @@ NXspm_positioner(NXpositioner):
       select a
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 3c89ea782d9d0566bddcc3e7bb7515bd9da9cfa1ab9fa80a6bb63b11443a53a2
+# a9593b0d9ce6aeb943c41ebc80a66bf061ceb92aadd60f406773efe8831afc10
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -91,15 +98,20 @@ NXspm_positioner(NXpositioner):
 #     </doc>
 #     <group name="z_controller" type="NXpid_controller">
 #         <doc>
-#             This controller's task is to continuously adjust the Z position of tip (e.g., in STM/STS experiment)
-#             in order to keep the selected control signal as close as possible to the Set Point. Different control
-#             signals lead to different controller's behavior.
+#             This controller's task is to continuously adjust the Z position of tip (e.g., in topography scan in 
+#             STM/STS experiment) in order to keep the selected control signal as close as possible to the Set 
+#             Point. Different control signals lead to different controller's behavior.
 #             
 #             The second PID feedback loop intends to position the tip in the Z direction.
 #             
 #             p_gain (proportional gain) from z_controller refers to K_p value from PID controller.
 #             i_gain (integral gain) from z_controller refers to K_i value from PID controller.
 #             setpoint from z_controller refers to setpoint from PID controller.
+#             
+#             Usually, the same controller, (z_controller) will be used for positioning the tip in three dimensional
+#             space. In this case, the controller coefficients (proportional, integral, differential) and other characteristic
+#             constants will be the same. Otherwise, for separate controllers positioning the tip in 3D space use the
+#             :ref:`feedback &lt;/NXspm_positioner/actuator/feedback&gt;` controller in actuator.
 #         </doc>
 #         <field name="D_t" type="NX_NUMBER" nameType="specified" units="NX_TIME">
 #             <doc>
@@ -140,6 +152,9 @@ NXspm_positioner(NXpositioner):
 #                 The switch-off delay of the controller from its stable point.
 #             </doc>
 #         </field>
+#         <group name="actuator" type="NXactuator">
+#             <group name="feedback" type="NXpid_controller"/>
+#         </group>
 #     </group>
 #     <field name="z_offset_value" type="NX_NUMBER" units="NX_LENGTH">
 #         <doc>

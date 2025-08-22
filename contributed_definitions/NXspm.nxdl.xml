@@ -326,7 +326,7 @@
                     <doc>
                         Calibration data of the current sensor.
                     </doc>
-                    <group name="calibration_parameters" type="NXparameter" optional="true">
+                    <group name="calibration_parameters" type="NXparameters" optional="true">
                         <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
                             <doc>
                                 The coefficient of the calibration.
@@ -353,12 +353,14 @@
                     
                     For this purpose, replace the TAG with the specific name or ID of the voltage sensor.
                     
-                    Do not register this group for sample bias voltage (DC), for that we have sample_bias_voltage group
-                    /entry/instrument/sample_bias_voltage
+                    Do not register this group for sample bias voltage (DC), for that we have :ref:`sample_bias_voltage &lt;/NXspm/entry/instrument/sample_bias_voltage-group&gt;` group.
                 </doc>
                 <field name="NAMEvoltage" type="NX_CHAR" optional="true" nameType="partial">
                     <doc>
-                        The name of the voltage sensor used for specific measurement or in component.
+                        The name of the voltage according to the purpose of the measurement.
+                        E.g., the field can be named as x_source_drain_bias_voltage defining 
+                        the applied bias along the x-axis as source-drain channel, while current
+                        (tip current) will be measured along the z-axis.
                     </doc>
                 </field>
                 <field name="voltage" type="NX_NUMBER" units="NX_VOLTAGE" optional="true">
@@ -376,7 +378,7 @@
                     <doc>
                         Calibration data of the voltage sensor.
                     </doc>
-                    <group name="calibration_parameters" type="NXparameter" optional="true">
+                    <group name="calibration_parameters" type="NXparameters" optional="true">
                         <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
                             <doc>
                                 The coefficient of the calibration.
@@ -447,8 +449,8 @@
             </group>
             <group name="bias_spectroscopy_environment" type="NXenvironment">
                 <doc>
-                    To explain bias and current behavior (sweep measurement) due to voltage
-                    applied to the sample.
+                    To explain bias and current behavior (sweep measurement especially in STS experiment) 
+                    due to voltage applied to the sample.
                 </doc>
                 <group type="NXspm_bias_spectroscopy">
                     <doc>
@@ -457,16 +459,12 @@
                     </doc>
                     <group type="NXspm_positioner" optional="true">
                         <doc>
-                            The positioner information like PID loop parameters, controller or feedback
-                            on/off, etc.
+                            Information about positioner used in STS scan settings, like PID controller and
+                            offset.
                         </doc>
-                        <group name="z_controller" type="NXpid_controller" recommended="true">
-                            <doc>
-                                The PID controller information for the z-axis.
-                            </doc>
-                        </group>
+                        <group name="z_controller" type="NXpid_controller" recommended="true"/>
                     </group>
-                    <group name="bias_sweep" type="NXspm_scan_control">
+                    <group name="BIAS_SWEEP" type="NXspm_scan_control">
                         <doc>
                             The bias voltage sweep is a common technique used to study properties (in this case current) in
                             the sample or environment due to change in applied bias voltage.
@@ -524,7 +522,7 @@
                     <doc>
                         Calibration of the bias voltage measurement (V/V).
                     </doc>
-                    <group name="calibration_parameters" type="NXparameter" optional="true">
+                    <group name="calibration_parameters" type="NXparameters" optional="true">
                         <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
                             <doc>
                                 The coefficients of the calibration.

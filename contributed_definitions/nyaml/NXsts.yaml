@@ -33,9 +33,6 @@ NXsts(NXspm):
         nameType: partial
         doc: |
           Information for current sensor.
-      piezo_sensor(NXspm_piezo_sensor):
-        doc: |
-          This piezo sensor group refers to the XYZ piezo sensor.
       bias_spectroscopy_environment(NXenvironment):
         doc: |
           To explain bias (sweep measurement) voltage applied to the sample.
@@ -44,8 +41,11 @@ NXsts(NXspm):
             Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
             vs tunneling current from probe.
           (NXspm_positioner):
+            exists: recommended
             doc: |
-              The positioner information PID controller.
+              Information about positioner used in STS scan settings, like PID controller and offset.
+              
+              Reuse, if needed, this group for positioners for multiple scans at different points on sample.
             z_controller(NXpid_controller):
               exists: recommended
               doc: |
@@ -83,7 +83,7 @@ NXsts(NXspm):
           
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
-      bias_sweep(NXspm_scan_control):
+      BIAS_SWEEP(NXspm_scan_control):
         exists: optional
         doc: |
           Bias sweep measurement in bias spectroscopy.
@@ -139,7 +139,7 @@ NXsts(NXspm):
           
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
-      bias_sweep(NXspm_scan_control):
+      BIAS_SWEEP(NXspm_scan_control):
         exists: optional
         doc: |
           This should be a link to
@@ -166,7 +166,7 @@ NXsts(NXspm):
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# dde830b3beeea286cace1fbf4051118a0fece202471a05e7d7f9d61c7f06ea2d
+# c16e348914627a9d7a05f7380bcc86b1084cef1e58a961b1f2387dd71b5d9788
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -237,11 +237,6 @@ NXsts(NXspm):
 #                     Information for current sensor.
 #                 </doc>
 #             </group>
-#             <group name="piezo_sensor" type="NXspm_piezo_sensor">
-#                 <doc>
-#                     This piezo sensor group refers to the XYZ piezo sensor.
-#                 </doc>
-#             </group>
 #             <group name="bias_spectroscopy_environment" type="NXenvironment">
 #                 <doc>
 #                     To explain bias (sweep measurement) voltage applied to the sample.
@@ -251,9 +246,11 @@ NXsts(NXspm):
 #                         Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
 #                         vs tunneling current from probe.
 #                     </doc>
-#                     <group type="NXspm_positioner">
+#                     <group type="NXspm_positioner" recommended="true">
 #                         <doc>
-#                             The positioner information PID controller.
+#                             Information about positioner used in STS scan settings, like PID controller and offset.
+#                             
+#                             Reuse, if needed, this group for positioners for multiple scans at different points on sample.
 #                         </doc>
 #                         <group name="z_controller" type="NXpid_controller" recommended="true">
 #                             <doc>
@@ -300,7 +297,7 @@ NXsts(NXspm):
 #                     square bracket would be the `exact` name of the NXentry group.
 #                 </doc>
 #             </field>
-#             <group name="bias_sweep" type="NXspm_scan_control" optional="true">
+#             <group name="BIAS_SWEEP" type="NXspm_scan_control" optional="true">
 #                 <doc>
 #                     Bias sweep measurement in bias spectroscopy.
 #                     This should be a link to
@@ -363,7 +360,7 @@ NXsts(NXspm):
 #                     square bracket would be the `exact` name of the NXentry group.
 #                 </doc>
 #             </field>
-#             <group name="bias_sweep" type="NXspm_scan_control" optional="true">
+#             <group name="BIAS_SWEEP" type="NXspm_scan_control" optional="true">
 #                 <doc>
 #                     This should be a link to
 #                     /ENTRY[*]/INSTRUMENT[*]/bias_spectroscopy_environment/SPM_BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep

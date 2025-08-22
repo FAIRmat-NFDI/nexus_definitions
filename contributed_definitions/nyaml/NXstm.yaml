@@ -38,6 +38,11 @@ NXstm(NXspm):
           doc: |
             The scan control information like scan region or phase space, e.g. pattern of scan
             (e.g. mesh), scanner speed, etc.
+        lockin_status(NX_BOOLEAN):
+          exists: recommended
+          doc: |
+            The status of the lock-in amplifier. It is well stabilished convention that for topographic measurements
+            lockin amplifier is turned off state while current scan lockin amplifier is turned on.
         head_temperature_sensor(NXsensor):
           exists: optional
           doc: |
@@ -75,7 +80,7 @@ NXstm(NXspm):
           The offset in tunneling current between tip and sample after application of bias voltage.
           This should be a link to
           /entry/instrument/current_sensor/current_offset
-      bias_sweep(NXspm_scan_control):
+      BIAS_SWEEP(NXspm_scan_control):
         exists: optional
         doc: |
           Bias sweep measurement in bias spectroscopy.
@@ -114,7 +119,7 @@ NXstm(NXspm):
         doc: |
           This should be a link to
           /entry/instrument/scan_environment/cryo_shield_temperature
-      bias_sweep(NXspm_scan_control):
+      BIAS_SWEEP(NXspm_scan_control):
         exists: optional
         doc: |
           This should be a link to
@@ -133,7 +138,7 @@ NXstm(NXspm):
           /entry/instrument/lockin_amplifier/reference_frequency
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# a9ecd4de4929aedba7f3fa8db318e6f7241d337f4d9845c9547e072b0a2d5946
+# 8d5c308e2603ebbf59dc4b2eeda6342f51947545f257889e4cb4760969a8cc4d
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -212,6 +217,12 @@ NXstm(NXspm):
 #                         (e.g. mesh), scanner speed, etc.
 #                     </doc>
 #                 </group>
+#                 <field name="lockin_status" type="NX_BOOLEAN" recommended="true">
+#                     <doc>
+#                         The status of the lock-in amplifier. It is well stabilished convention that for topographic measurements
+#                         lockin amplifier is turned off state while current scan lockin amplifier is turned on.
+#                     </doc>
+#                 </field>
 #                 <group name="head_temperature_sensor" type="NXsensor" optional="true">
 #                     <doc>
 #                         This should be a link to
@@ -257,7 +268,7 @@ NXstm(NXspm):
 #                     /entry/instrument/current_sensor/current_offset
 #                 </doc>
 #             </field>
-#             <group name="bias_sweep" type="NXspm_scan_control" optional="true">
+#             <group name="BIAS_SWEEP" type="NXspm_scan_control" optional="true">
 #                 <doc>
 #                     Bias sweep measurement in bias spectroscopy.
 #                     This should be a link to
@@ -303,7 +314,7 @@ NXstm(NXspm):
 #                     /entry/instrument/scan_environment/cryo_shield_temperature
 #                 </doc>
 #             </field>
-#             <group name="bias_sweep" type="NXspm_scan_control" optional="true">
+#             <group name="BIAS_SWEEP" type="NXspm_scan_control" optional="true">
 #                 <doc>
 #                     This should be a link to
 #                     /entry/instrument/bias_spectroscopy_environment/bias_spectroscopy/bias_sweep
