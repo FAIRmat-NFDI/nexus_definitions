@@ -104,7 +104,7 @@
                         Company name of the manufacturer.
                     </doc>
                 </field>
-                <field name="model">
+                <field name="model" recommended="true">
                     <doc>
                         Version or model of the hardware setup provided by the manufacturer.
                     </doc>
@@ -126,7 +126,7 @@
                         Company name of the manufacturer.
                     </doc>
                 </field>
-                <field name="model">
+                <field name="model" recommended="true">
                     <doc>
                         Version or model of the component named by the manufacturer.
                     </doc>
@@ -155,8 +155,14 @@
                         to 1 or -1 depending on which solution is chosen (this concept mainly used in STS experiments).
                     </doc>
                 </field>
+                <field name="active_channel" recommended="true">
+                    <doc>
+                        The name of the active channel of the lock-in amplifier which is used for the
+                        measurement.
+                    </doc>
+                </field>
             </group>
-            <group name="SCAN_ENVIRONMENT" type="NXenvironment">
+            <group name="SCAN_ENVIRONMENT" type="NXenvironment" nameType="any">
                 <doc>
                     Information of the scan environment holding concept for
                     temperature, setpoint (current or height), scan area and scan data.
@@ -184,13 +190,13 @@
                 <group name="current_sensorTAG" type="NXsensor" nameType="partial" optional="true">
                     <doc>
                         This should be a link to
-                        /entry/instrument/current_sensor/current
+                        /entry/instrument/current_sensorTAG
                     </doc>
                 </group>
                 <group name="voltage_sensorTAG" type="NXsensor" nameType="partial" optional="true">
                     <doc>
                         This should be a link to
-                        /entry/instrument/voltage_sensor/current
+                        /entry/instrument/voltage_sensorTAG
                     </doc>
                 </group>
                 <group name="piezo_sensor" type="NXspm_piezo_sensor" optional="true">
@@ -199,13 +205,25 @@
                         /entry/instrument/piezo_sensor.
                     </doc>
                 </group>
+                <group name="XYZpiezo_sensor" type="NXspm_piezo_sensor" nameType="partial" optional="true">
+                    <doc>
+                        This should be a link to
+                        /entry/instrument/XYZpiezo_sensor.
+                    </doc>
+                </group>
+                <group name="height_piezo_sensor" type="NXspm_piezo_sensor" optional="true">
+                    <doc>
+                        This should be a link to the concept
+                        entry/instrument/height_piezo_sensor.
+                    </doc>
+                </group>
                 <group type="NXspm_scan_control">
                     <doc>
                         The scan control information like scan region or phase space, type of scan (e.g.
                         mesh, spiral, etc.), and scan speed, etc. This group mainly stores the scan settings
                         data. For processed data or final experimental data would go to NXdata group.
                     </doc>
-                    <field name="scanTAG" nameType="partial" optional="true">
+                    <field name="scanTAG" nameType="partial" recommended="true">
                         <doc>
                             If there are multiple scans performed under the same environment, use this field
                             to differentiate among them.
@@ -226,12 +244,12 @@
                                 The range of the scan in y direction.
                             </doc>
                         </field>
-                        <field name="scan_offset_x" type="NX_NUMBER" units="NX_LENGTH">
+                        <field name="scan_offset_value_x" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
                             <doc>
                                 The offset of the scan in x direction.
                             </doc>
                         </field>
-                        <field name="scan_offset_y" type="NX_NUMBER" units="NX_LENGTH">
+                        <field name="scan_offset_value_y" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
                             <doc>
                                 The offset of the scan in y direction.
                             </doc>
@@ -282,12 +300,12 @@
                                 The number of points scanned in y direction.
                             </doc>
                         </field>
-                        <field name="step_size_x" type="NX_NUMBER" units="NX_LENGTH">
+                        <field name="step_size_x" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
                             <doc>
                                 The step size in x direction.
                             </doc>
                         </field>
-                        <field name="step_size_y" type="NX_NUMBER" units="NX_LENGTH">
+                        <field name="step_size_y" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
                             <doc>
                                 The step size in y direction.
                             </doc>
@@ -308,7 +326,8 @@
                 </field>
                 <field name="current" type="NX_NUMBER" units="NX_CURRENT">
                     <doc>
-                        A constant DC current between tip and sample, so-called current setpoint.
+                        Name of the current according to the purpose of the measurement.
+                        E.g., the field can be named as tip_current defining the current measured at the tip.
                     </doc>
                 </field>
                 <field name="current_offset_value" type="NX_NUMBER" optional="true" units="NX_CURRENT">
@@ -320,11 +339,13 @@
                     <doc>
                         Calibration data of the current sensor.
                     </doc>
-                    <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
-                        <doc>
-                            The coefficient of the calibration.
-                        </doc>
-                    </field>
+                    <group name="calibration_parameters" type="NXparameters" optional="true">
+                        <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
+                            <doc>
+                                The coefficient of the calibration.
+                            </doc>
+                        </field>
+                    </group>
                 </group>
                 <group type="NXamplifier" optional="true">
                     <doc>
@@ -345,12 +366,14 @@
                     
                     For this purpose, replace the TAG with the specific name or ID of the voltage sensor.
                     
-                    Do not register this group for sample bias voltage (DC), for that we have sample_bias_voltage group
-                    /entry/instrument/sample_bias_voltage
+                    Do not register this group for sample bias voltage (DC), for that we have :ref:`sample_bias_voltage &lt;/NXspm/entry/instrument/sample_bias_voltage-group&gt;` group.
                 </doc>
                 <field name="NAMEvoltage" type="NX_CHAR" optional="true" nameType="partial">
                     <doc>
-                        The name of the voltage sensor used for specific measurement or in component.
+                        The name of the voltage according to the purpose of the measurement.
+                        E.g., the field can be named as x_source_drain_bias_voltage defining
+                        the applied bias along the x-axis as source-drain channel, while current
+                        (tip current) will be measured along the z-axis.
                     </doc>
                 </field>
                 <field name="voltage" type="NX_NUMBER" units="NX_VOLTAGE" optional="true">
@@ -368,11 +391,13 @@
                     <doc>
                         Calibration data of the voltage sensor.
                     </doc>
-                    <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
-                        <doc>
-                            The coefficient of the calibration.
-                        </doc>
-                    </field>
+                    <group name="calibration_parameters" type="NXparameters" optional="true">
+                        <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
+                            <doc>
+                                The coefficient of the calibration.
+                            </doc>
+                        </field>
+                    </group>
                 </group>
                 <group type="NXamplifier" optional="true">
                     <doc>
@@ -385,9 +410,9 @@
                     </field>
                 </group>
             </group>
-            <group name="piezo_sensor" type="NXspm_piezo_sensor" nameType="specified">
+            <group name="piezo_sensor" type="NXspm_piezo_sensor" recommended="true" nameType="specified">
                 <doc>
-                    This piezo sensor group refers to the XYZ piezo sensor.
+                    This piezo sensor group refers to the XYZ (in all directions) piezo sensor.
                 </doc>
                 <field name="x" type="NX_NUMBER" units="NX_LENGTH" recommended="true">
                     <doc>
@@ -405,9 +430,14 @@
                     </doc>
                 </field>
             </group>
-            <group name="XYZpiezo_sensor" type="NXspm_piezo_sensor" nameType="partial">
+            <group name="height_piezo_sensor" type="NXspm_piezo_sensor" nameType="specified" optional="true">
                 <doc>
-                    For piezo sensor along X-, Y-, and Z-axis register this group, e.g., x_piezo_sensor
+                    The sensor information for the height (Z-axis) piezo device.
+                </doc>
+            </group>
+            <group name="XYZpiezo_sensor" type="NXspm_piezo_sensor" nameType="partial" recommended="true">
+                <doc>
+                    For separate piezo sensors along X-, Y-, and Z-axis register this group, e.g., x_piezo_sensor
                     or height_piezo_sensor.
                 </doc>
             </group>
@@ -437,8 +467,8 @@
             </group>
             <group name="bias_spectroscopy_environment" type="NXenvironment">
                 <doc>
-                    To explain bias and current behavior (sweep measurement) due to voltage
-                    applied to the sample.
+                    To explain bias and current behavior (sweep measurement especially in STS experiment)
+                    due to voltage applied to the sample.
                 </doc>
                 <group type="NXspm_bias_spectroscopy">
                     <doc>
@@ -447,16 +477,12 @@
                     </doc>
                     <group type="NXspm_positioner" optional="true">
                         <doc>
-                            The positioner information like PID loop parameters, controller or feedback
-                            on/off, etc.
+                            Information about positioner used in STS scan settings, like PID controller and
+                            offset.
                         </doc>
-                        <group name="z_controller" type="NXpid_controller" recommended="true">
-                            <doc>
-                                The PID controller information for the z-axis.
-                            </doc>
-                        </group>
+                        <group name="z_controller" type="NXpid_controller" recommended="true"/>
                     </group>
-                    <group name="bias_sweep" type="NXspm_scan_control">
+                    <group name="BIAS_SWEEP" type="NXspm_scan_control">
                         <doc>
                             The bias voltage sweep is a common technique used to study properties (in this case current) in
                             the sample or environment due to change in applied bias voltage.
@@ -514,11 +540,13 @@
                     <doc>
                         Calibration of the bias voltage measurement (V/V).
                     </doc>
-                    <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
-                        <doc>
-                            The coefficients of the calibration.
-                        </doc>
-                    </field>
+                    <group name="calibration_parameters" type="NXparameters" optional="true">
+                        <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
+                            <doc>
+                                The coefficients of the calibration.
+                            </doc>
+                        </field>
+                    </group>
                 </group>
             </group>
         </group>
@@ -546,14 +574,14 @@
                     <doc>
                         This should be a link to
                         
-                        /entry/instrument/sample_bias_voltage sensor under the instrument.
+                        /entry/instrument/sample_bias_voltage sensor under instrument.
                     </doc>
                 </group>
                 <group name="sample_temperature_sensor" type="NXspm_temperature_sensor" optional="true">
                     <doc>
                         This should be a link to
                         
-                        /entry/instrument/sample_temperature_sensor under the instrument.
+                        /entry/instrument/sample_temperature_sensor under instrument.
                     </doc>
                 </group>
             </group>

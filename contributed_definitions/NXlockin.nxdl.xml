@@ -63,6 +63,12 @@
             <item value="current"/>
         </enumeration>
     </field>
+    <field name="modulation_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
+        <doc>
+            The frequency of the sine modulation that is used to modulate the signal in
+            lock-in.
+        </doc>
+    </field>
     <field name="reference_amplitude" type="NX_NUMBER" units="NX_ANY">
         <doc>
             Amplitude of the reference signal for the lock-in amplifier.
@@ -90,6 +96,10 @@
         <doc>
             Type of the demodulated signal,  current | voltage.
         </doc>
+        <enumeration>
+            <item value="current"/>
+            <item value="voltage"/>
+        </enumeration>
     </field>
     <field name="demodulated_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
         <doc>
@@ -131,13 +141,15 @@
     <field name="low_passN" type="NX_NUMBER" nameType="partial" units="NX_FREQUENCY">
         <doc>
             Frequency of the low-pass filter or cut-off frequency. Only signals below
-            this frequency are passed through the filter (for each Channels e.g., Demodulator channel).
+            this frequency are passed through the filter.
+            N is envisined to represent the channel number e.g., low_pass1.
         </doc>
     </field>
     <field name="high_passN" type="NX_NUMBER" nameType="partial" units="NX_FREQUENCY">
         <doc>
             Frequency of the high-pass filter or cut-off frequency. Only signals above
-            this frequency are passed through the filter (for each Channels e.g., Demodulator channel).
+            this frequency are passed through the filter.
+            N is envisined to represent the channel number e.g., high_pass1.
         </doc>
     </field>
     <field name="lp_filter_orderN" type="NX_NUMBER" nameType="partial">
@@ -145,6 +157,7 @@
             Order of the low-pass filter applied on the input or demodulated signals (X, Y).
             Reducing the bandwidth or increasing the order reduces noise on the demodulated signals,
             but increases settling and measurement times.
+            N is envisined to represent the channel number e.g., lp_filter_order1.
         </doc>
     </field>
     <field name="hp_filter_orderN" type="NX_NUMBER" nameType="partial">
@@ -152,23 +165,34 @@
             Order of the high-pass filter applied on the input or demodulated
             signal. This is used mainly to suppress a DC component of the input
             signal noise.
+            N is envisined to represent the channel number e.g., hp_filter_order1.
         </doc>
     </field>
-    <field name="ref_phaseN" type="NX_NUMBER" nameType="partial" units="NX_ANGLE">
+    <field name="ref_offset_phaseN" type="NX_NUMBER" nameType="partial" units="NX_ANGLE">
         <doc>
-            An extra reference phase offset of reference signal with respect to the demodulated signal
-            (for each Channels like channel1, channel2, ...).
+            An extra phase offset added to the reference signal in modulation step.
+            N is envisined to represent the channel number e.g., hp_filter_order1.
         </doc>
     </field>
     <field name="harmonic_orderN" type="NX_NUMBER" nameType="partial">
         <doc>
             The reference signal can be a higher harmonic of the modulation signal.
             Here the order of the harmonic is stored.
+            N is envisined to represent the channel number e.g., harmonic_order1.
         </doc>
     </field>
-    <field name="sensitivity_factor" type="NX_NUMBER">
+    <field name="sensitivity_factor" type="NX_NUMBER" units="NX_UNITLESS">
         <doc>
             Ratio of output signal amplitude to input signal amplitude (V/V).
+        </doc>
+    </field>
+    <field name="dc_offset_valueN" type="NX_NUMBER" nameType="partial" units="NX_ANY">
+        <doc>
+            The DC offset of the demodulated signal.
+            This is used to remove the DC component from the demodulated signal.
+            
+            The same DC offset might be applied to the input signal in the modulation process.
+            N is envisined to represent the channel number e.g., dc_offset_value1.
         </doc>
     </field>
 </definition>
