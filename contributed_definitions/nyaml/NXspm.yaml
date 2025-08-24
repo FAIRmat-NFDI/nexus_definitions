@@ -60,7 +60,7 @@ NXspm(NXsensor_scan):
           exists: recommended
           doc: |
             Version or model of the hardware setup provided by the manufacturer.
-      software(NXprogram):
+      software(NXfabrication):
         doc: |
           The software description of core instrument setup of experiment.
           Usually, the entire instrument is supplied by a single name/manufacturer/model/etc.
@@ -388,10 +388,11 @@ NXspm(NXsensor_scan):
             Setup and scan data for continuous measurement of bias voltage on the subject of experiment
             vs tunneling current from probe.
           (NXspm_positioner):
-            exists: optional
+            exists: recommended
             doc: |
-              Information about positioner used in STS scan settings, like PID controller and
-              offset.
+              Information about positioner used in STS scan settings, like PID controller and offset.
+              
+              Reuse, if needed, this group for positioners for multiple scans at different points on sample.
             z_controller(NXpid_controller):
               exists: recommended
           BIAS_SWEEP(NXspm_scan_control):
@@ -527,7 +528,7 @@ NXspm(NXsensor_scan):
           reproducibility indicators (defined by laboratory).
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 3b1f1169b48f3de60b1815cec2953ac926a042316105d14ec90f8734bdfa3f75
+# 4103db43cc374a0339cc2e23ace32db56cb866b7e3fe63906a5b100632e176bb
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -640,7 +641,7 @@ NXspm(NXsensor_scan):
 #                     </doc>
 #                 </field>
 #             </group>
-#             <group name="software" type="NXprogram">
+#             <group name="software" type="NXfabrication">
 #                 <doc>
 #                     The software description of core instrument setup of experiment.
 #                     Usually, the entire instrument is supplied by a single name/manufacturer/model/etc.
@@ -1005,10 +1006,11 @@ NXspm(NXsensor_scan):
 #                         Setup and scan data for continuous measurement of bias voltage on the subject of experiment
 #                         vs tunneling current from probe.
 #                     </doc>
-#                     <group type="NXspm_positioner" optional="true">
+#                     <group type="NXspm_positioner" recommended="true">
 #                         <doc>
-#                             Information about positioner used in STS scan settings, like PID controller and
-#                             offset.
+#                             Information about positioner used in STS scan settings, like PID controller and offset.
+#                             
+#                             Reuse, if needed, this group for positioners for multiple scans at different points on sample.
 #                         </doc>
 #                         <group name="z_controller" type="NXpid_controller" recommended="true"/>
 #                     </group>
