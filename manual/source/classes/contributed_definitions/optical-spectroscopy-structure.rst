@@ -1,85 +1,52 @@
-.. _Optical-Spectroscopy-Structure:
+.. _Contributed-Opt-Spec-Structure:
 
-====================
+========================
 Optical Spectroscopy
-====================
+========================
 
 .. index::
-   Ellipsometry
-   Raman
-   DispersiveMaterial
+   Contributed-Opt-Spec-Introduction
+   Contributed-Opt-Spec-Definitions
+   Contributed-Opt-Spec-DispersiveMaterial
 
 
-.. _Ellipsometry:
+.. _Contributed-Opt-Spec-Introduction:
 
-Ellipsometry
-############
+Introduction
+##############
 
-Ellipsometry is an optical characterization method to describe optical properties of interfaces and thickness of films.
-The measurements are based on determining how the polarization state of light changes upon transmission and reflection.
-Interpretation is based on Fresnel equations and numerical models of the optical properties of the materials.
+:ref:`Application definitions <appdef-opt-spec-definitions>` and :ref:`base classes <bc-opt-spec-classes>`
+to describe optical spectroscopy experiments are already part of the NeXus standard. In addition, there are several 
+contributed definitions that are currently under discussion.
 
-In the application definition we provide a minimum set of description elements allowing for a reproducible recording of ellipsometry measurements. 
-
-.. _Raman:
-
-Raman
-############
-
-Raman spectroscopy is a characterization method to analyze vibrational properties for liquids, gases or solids. 
-The measurements is based on the inelastic light scattering due to the materials vibrations.
-Interpretation can be done based on peaks, which represent the phonon properties (intensity, center, width).
-
-The application provides a minimum set of description elements, which are necessary to understand for Raman spectroscopy measurements.
-
-
+.. _Contributed-Opt-Spec-Definitions:
 
 Application Definitions
 -----------------------
 
-    :ref:`NXoptical_spectroscopy`:
-       A generic application definition for optial spectorscopy measurements. This including specifically ellipsometry and Raman spectroscopy measurements, but as well other techniques such as photoluminescence, transmission, reflection measurements. The requirements are: (i) an incident photon beam, (ii) a detector to measure scattered/emitted photons and (iii) a sample.
-
-    :ref:`NXellipsometry`:
-       An application definition for ellipsometry measurements, including complex systems up to variable angle spectroscopic ellipsometry.
-
-    :ref:`NXraman`:
-       An application definition for Raman spectroscopy measurements.
+    :ref:`NXtransmission`:
+      Application definition for transmission experiments
 
 
 Base Classes
 ------------
 
-This is the set of base classes for describing an optical experiment.
-
-    :ref:`NXbeam`
-      Beam properties such as intensity, polarization, wavelength or direction.
-
-    :ref:`NXdetector`
-      A detector for signal detection.
-
-    :ref:`NXsource`
-      A light source such as laser, lamp or LED.
-
-    :ref:`NXmonochromator`
-      A monochromator is often used to energetically disperse the scattered or emitted light.
-
-    :ref:`NXoptical_lens`
-      Description of an optical lens.
-
-    :ref:`NXoptical_window`
-      Description of an optical window.
+These are new base classes to describe additional, yet to be standardized components of optical spectroscopy experiments.
+            
+    :ref:`NXbeam_splitter`
+       A beam splitter, i.e. a device splitting the light into two or more beams.
        
-    :ref:`NXwaveplate`
-      A waveplate or retarder.
+       Use two or more NXbeam_paths to describe the beam paths after the beam
+       splitter. In the dependency chain of the new beam paths, the first elements
+       each point to this beam splitter, as this is the previous element.
 
-    :ref:`NXsensor`
-      Specify external parameters that have influenced the sample such as
-      varied parameters e.g. temperature, pressure, pH value, beam intensity, etc.
+    :ref:`NXfiber`
+       An optical fiber, e.g. glass fiber.
+       
+    :ref:`NXpolarizer_opt`
+       An optical polarizer.
 
-
-
-.. _DispersiveMaterial:
+.. _Contributed-Opt-Spec-DispersiveMaterial:
 
 Dispersive Material
 ###################
@@ -95,7 +62,6 @@ Application Definition
        An application definition to describe the dispersive properties of a material.
        The material may be isotropic, uniaxial or biaxial. Hence, it may contain up
        to three dispersive functions or tables.
-
 
 
 Base Classes
