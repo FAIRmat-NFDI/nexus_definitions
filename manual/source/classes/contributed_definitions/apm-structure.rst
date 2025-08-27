@@ -100,7 +100,7 @@ What has been achieved so far?
 ##############################
 
 This proposal summarizes work of members of the FAIRmat project, which is part of the `German
-National Research Data Infrastructure <https://www.nfdi.de/?lang=en>`_. The here detailed
+National Research Data Infrastructure <https://www.nfdi.de/?lang=en>`_. The here detailed 
 proposal documents how all tools of the paraprobe-toolbox were modified to generate
 only well-defined configuration files as accepted input and yield specifically formatted output
 files according to the following NeXus application definitions.
