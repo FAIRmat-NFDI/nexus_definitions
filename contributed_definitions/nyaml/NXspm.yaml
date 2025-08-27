@@ -27,7 +27,7 @@ NXspm(NXsensor_scan):
         For general purpose usage, all scan modes from its sub-techniques are listed.
       enumeration:
         open_enum: true
-        items: [constant height, constant current, contact mode, tapping mode, peak force tapping mode, non-contact mode, Kelvin probe, electric force, lateral force mode]
+        items: [constant height, constant current, contact mode, tapping mode, peak force tapping mode, non-contact mode]
     scan_type:
       exists: recommended
       doc: |
@@ -77,14 +77,7 @@ NXspm(NXsensor_scan):
           doc: |
             Version or model of the component named by the manufacturer.
       real_time_controller(NXrcs):
-        exists: optional
-        doc: |
-          The real-time controller information.
-        rcs_frequency(NX_NUMBER):
-          exists: optional
-          doc: |
-            The frequency of the real-time controller system which indicated the number of close-loop process
-            (gathering data, process data and update system) control cycles per unit time.
+        exists: recommended
       lockin_amplifier(NXlockin):
         exists: optional
         doc: |
@@ -114,6 +107,13 @@ NXspm(NXsensor_scan):
           doc: |
             Temperature (stabilized or target value) of STM head. For array data of head_temperature, use
             head_temperature_sensor group.
+        environment_identifier:
+          exists: recommended
+          doc: |
+            Unique identifier for the scan environment defined by the user or lab. When multiple scans are performed
+            in a single environment conditions or settings, the entire scan environment can be differentiated
+            by this identifier. For example, scan on a sample of TiSe2 with layered of evaporated pyrene and
+            annealed at 300K temperature for 5 min process.
         cryo_bottom_temperature(NX_NUMBER):
           exists: recommended
           unit: NX_TEMPERATURE
@@ -253,7 +253,7 @@ NXspm(NXsensor_scan):
           doc: |
             Name of the current according to the purpose of the measurement.
             E.g., the field can be named as tip_current defining the current measured at the tip.
-        current_offset_value(NX_NUMBER):
+        offset_value(NX_NUMBER):
           exists: optional
           unit: NX_CURRENT
           doc: |
@@ -302,7 +302,7 @@ NXspm(NXsensor_scan):
           exists: optional
           doc: |
             Voltage measured by sensor.
-        voltage_offset_value(NX_NUMBER):
+        offset_value(NX_NUMBER):
           exists: optional
           unit: NX_VOLTAGE
           doc: |
@@ -329,7 +329,7 @@ NXspm(NXsensor_scan):
             doc: |
               The gain of the voltage sensor.
       piezo_sensor(NXspm_piezo_sensor):
-        exists: recommended
+        exists: optional
         nameType: specified
         doc: |
           This piezo sensor group refers to the XYZ (in all directions) piezo sensor.
@@ -350,12 +350,12 @@ NXspm(NXsensor_scan):
             The z position of the piezo.
       height_piezo_sensor(NXspm_piezo_sensor):
         nameType: specified
-        exists: optional
+        exists: recommended
         doc: |
           The sensor information for the height (Z-axis) piezo device.
       XYZpiezo_sensor(NXspm_piezo_sensor):
         nameType: partial
-        exists: recommended
+        exists: optional
         doc: |
           For separate piezo sensors along X-, Y-, and Z-axis register this group, e.g., x_piezo_sensor
           or height_piezo_sensor.
@@ -451,7 +451,7 @@ NXspm(NXsensor_scan):
               exists: optional
               unit: NX_ANY
               doc: |
-                The coefficients of the calibration.
+                The coefficient of the calibration.
     (NXsample):
       exists: optional
       doc: |
@@ -528,7 +528,7 @@ NXspm(NXsensor_scan):
           reproducibility indicators (defined by laboratory).
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 4103db43cc374a0339cc2e23ace32db56cb866b7e3fe63906a5b100632e176bb
+# e8a45f43cc57b4093c645a7a4539e8832c192b7eff2d062ca3c85e1e1f422265
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -595,9 +595,6 @@ NXspm(NXsensor_scan):
 #                 <item value="tapping mode"/>
 #                 <item value="peak force tapping mode"/>
 #                 <item value="non-contact mode"/>
-#                 <item value="Kelvin probe"/>
-#                 <item value="electric force"/>
-#                 <item value="lateral force mode"/>
 #             </enumeration>
 #         </field>
 #         <field name="scan_type" recommended="true">
@@ -663,17 +660,7 @@ NXspm(NXsensor_scan):
 #                     </doc>
 #                 </field>
 #             </group>
-#             <group name="real_time_controller" type="NXrcs" optional="true">
-#                 <doc>
-#                     The real-time controller information.
-#                 </doc>
-#                 <field name="rcs_frequency" type="NX_NUMBER" optional="true">
-#                     <doc>
-#                         The frequency of the real-time controller system which indicated the number of close-loop process
-#                         (gathering data, process data and update system) control cycles per unit time.
-#                     </doc>
-#                 </field>
-#             </group>
+#             <group name="real_time_controller" type="NXrcs" recommended="true"/>
 #             <group name="lockin_amplifier" type="NXlockin" optional="true">
 #                 <doc>
 #                     The lock-in amplifier information.
@@ -704,6 +691,14 @@ NXspm(NXsensor_scan):
 #                     <doc>
 #                         Temperature (stabilized or target value) of STM head. For array data of head_temperature, use
 #                         head_temperature_sensor group.
+#                     </doc>
+#                 </field>
+#                 <field name="environment_identifier" recommended="true">
+#                     <doc>
+#                         Unique identifier for the scan environment defined by the user or lab. When multiple scans are performed
+#                         in a single environment conditions or settings, the entire scan environment can be differentiated
+#                         by this identifier. For example, scan on a sample of TiSe2 with layered of evaporated pyrene and
+#                         annealed at 300K temperature for 5 min process.
 #                     </doc>
 #                 </field>
 #                 <field name="cryo_bottom_temperature" type="NX_NUMBER" recommended="true" units="NX_TEMPERATURE">
@@ -861,7 +856,7 @@ NXspm(NXsensor_scan):
 #                         E.g., the field can be named as tip_current defining the current measured at the tip.
 #                     </doc>
 #                 </field>
-#                 <field name="current_offset_value" type="NX_NUMBER" optional="true" units="NX_CURRENT">
+#                 <field name="offset_value" type="NX_NUMBER" optional="true" units="NX_CURRENT">
 #                     <doc>
 #                         The offset in the tunneling current between tip and sample.
 #                     </doc>
@@ -912,7 +907,7 @@ NXspm(NXsensor_scan):
 #                         Voltage measured by sensor.
 #                     </doc>
 #                 </field>
-#                 <field name="voltage_offset_value" type="NX_NUMBER" optional="true" units="NX_VOLTAGE">
+#                 <field name="offset_value" type="NX_NUMBER" optional="true" units="NX_VOLTAGE">
 #                     <doc>
 #                         The offset voltage. The real voltage is the sum of the voltage and the offset
 #                         voltage.
@@ -941,7 +936,7 @@ NXspm(NXsensor_scan):
 #                     </field>
 #                 </group>
 #             </group>
-#             <group name="piezo_sensor" type="NXspm_piezo_sensor" recommended="true" nameType="specified">
+#             <group name="piezo_sensor" type="NXspm_piezo_sensor" optional="true" nameType="specified">
 #                 <doc>
 #                     This piezo sensor group refers to the XYZ (in all directions) piezo sensor.
 #                 </doc>
@@ -961,12 +956,12 @@ NXspm(NXsensor_scan):
 #                     </doc>
 #                 </field>
 #             </group>
-#             <group name="height_piezo_sensor" type="NXspm_piezo_sensor" nameType="specified" optional="true">
+#             <group name="height_piezo_sensor" type="NXspm_piezo_sensor" nameType="specified" recommended="true">
 #                 <doc>
 #                     The sensor information for the height (Z-axis) piezo device.
 #                 </doc>
 #             </group>
-#             <group name="XYZpiezo_sensor" type="NXspm_piezo_sensor" nameType="partial" recommended="true">
+#             <group name="XYZpiezo_sensor" type="NXspm_piezo_sensor" nameType="partial" optional="true">
 #                 <doc>
 #                     For separate piezo sensors along X-, Y-, and Z-axis register this group, e.g., x_piezo_sensor
 #                     or height_piezo_sensor.
@@ -1075,7 +1070,7 @@ NXspm(NXsensor_scan):
 #                     <group name="calibration_parameters" type="NXparameters" optional="true">
 #                         <field name="coefficient" type="NX_NUMBER" optional="true" units="NX_ANY">
 #                             <doc>
-#                                 The coefficients of the calibration.
+#                                 The coefficient of the calibration.
 #                             </doc>
 #                         </field>
 #                     </group>

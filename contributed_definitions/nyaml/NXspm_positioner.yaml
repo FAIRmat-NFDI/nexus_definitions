@@ -28,13 +28,13 @@ NXspm_positioner(NXpositioner):
       unit: NX_TIME
       doc: |
         The derivative time constant of the derivative part of the PID controller. Proportional Derivative constant
-        K_d can be expressed as K_d = gain / D_t.
+        K_d can be expressed as :math:`K_d = K_p D_t`.
     I_t(NX_NUMBER):
       nameType: specified
       unit: NX_TIME
       doc: |
         The integral time constant of the integral part of the PID controller. Proportional Integral constant
-        K_i can be expressed as K_i = gain / I_t.
+        K_i can be expressed as :math:`K_i = \frac{K_p}{I_t}`.
     z(NX_NUMBER):
       unit: NX_LENGTH
       doc: |
@@ -57,20 +57,20 @@ NXspm_positioner(NXpositioner):
       unit: NX_TIME
       doc: |
         The switch-off delay of the controller from its stable point.
-    actuator(NXactuator):
-      feedback(NXpid_controller):
-  z_offset_value(NX_NUMBER):
-    unit: NX_LENGTH
-    doc: |
-      Offset added to the initial averaged position tip on Z-axis before starting to
-      scan.
-  controller_label(NX_CHAR):
-    doc: |
-      Controller label. This label which will be displayed at places where you can
-      select a
+    z_offset_value(NX_NUMBER):
+      unit: NX_LENGTH
+      doc: |
+        Offset added to the initial averaged tip position on Z-axis before starting
+        scan.
+    controller_label(NX_CHAR):
+      doc: |
+        Controller label. This label which will be displayed at places where you can
+        select a channel or controller.
+  actuator(NXactuator):
+    feedback(NXpid_controller):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 8437e98fd75bb9c54dea3680b47a9e0a6d4a640fd02fe33f4b5e834b3bbe237b
+# e7bef049cde524915dc0fe308732154411d648bf42d98004077871591818a068
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -122,13 +122,13 @@ NXspm_positioner(NXpositioner):
 #         <field name="D_t" type="NX_NUMBER" nameType="specified" units="NX_TIME">
 #             <doc>
 #                 The derivative time constant of the derivative part of the PID controller. Proportional Derivative constant
-#                 K_d can be expressed as K_d = gain / D_t.
+#                 K_d can be expressed as :math:`K_d = K_p D_t`.
 #             </doc>
 #         </field>
 #         <field name="I_t" type="NX_NUMBER" nameType="specified" units="NX_TIME">
 #             <doc>
 #                 The integral time constant of the integral part of the PID controller. Proportional Integral constant
-#                 K_i can be expressed as K_i = gain / I_t.
+#                 K_i can be expressed as :math:`K_i = \frac{K_p}{I_t}`.
 #             </doc>
 #         </field>
 #         <field name="z" type="NX_NUMBER" units="NX_LENGTH">
@@ -158,20 +158,20 @@ NXspm_positioner(NXpositioner):
 #                 The switch-off delay of the controller from its stable point.
 #             </doc>
 #         </field>
-#         <group name="actuator" type="NXactuator">
-#             <group name="feedback" type="NXpid_controller"/>
-#         </group>
+#         <field name="z_offset_value" type="NX_NUMBER" units="NX_LENGTH">
+#             <doc>
+#                 Offset added to the initial averaged tip position on Z-axis before starting
+#                 scan.
+#             </doc>
+#         </field>
+#         <field name="controller_label" type="NX_CHAR">
+#             <doc>
+#                 Controller label. This label which will be displayed at places where you can
+#                 select a channel or controller.
+#             </doc>
+#         </field>
 #     </group>
-#     <field name="z_offset_value" type="NX_NUMBER" units="NX_LENGTH">
-#         <doc>
-#             Offset added to the initial averaged position tip on Z-axis before starting to
-#             scan.
-#         </doc>
-#     </field>
-#     <field name="controller_label" type="NX_CHAR">
-#         <doc>
-#             Controller label. This label which will be displayed at places where you can
-#             select a
-#         </doc>
-#     </field>
+#     <group name="actuator" type="NXactuator">
+#         <group name="feedback" type="NXpid_controller"/>
+#     </group>
 # </definition>
