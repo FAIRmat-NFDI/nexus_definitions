@@ -46,7 +46,7 @@ Base Classes
     :ref:`NXcircuit`:
        Base class to describe electronic circuits.
 
-    :ref:`NXinstrument_apm`:
+    :ref:`NXapm_instrument`:
         A base class which defines all modular parts that make up an instrument (real or simulated) for studying
         ion extraction as performed in atom probe and related field-ion microscopy. This base class is used in NXapm in two places:
         One that is placed inside an ENTRY.measurement.instrument
@@ -54,7 +54,7 @@ Base Classes
         hardware components or version of control software. Another one that is placed inside an ENTRY.measurements.eventID group.
         This group holds all those (meta)data data change when collecting data during a session.
 
-    :ref:`NXevent_data_apm`:
+    :ref:`NXapm_event_data`:
         A base class representing a container to hold time-stamped and instrument-specific-state-
         annotated data during a session at an electron microscope.
 

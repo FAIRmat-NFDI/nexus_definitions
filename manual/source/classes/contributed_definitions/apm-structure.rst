@@ -109,7 +109,7 @@ Data and metadata between the tools are exchanged with NeXus/HDF5 files. This me
 inside HDF5 binary containers are named, formatted, and hierarchically structured according
 to application definitions.
 
-For example the application definition :ref:`NXapm_paraprobe_config_surfacer`: specifies
+For example the application definition :ref:`NXapm_paraprobe_surfacer_config`: specifies
 how a configuration file for the paraprobe-surfacer tool should be formatted
 and which parameters it contains including optionality and cardinality constraints.
 
@@ -148,47 +148,47 @@ NXapm_paraprobe application definitions are in fact pairs of application definit
 One for the configuration (input) side and one for the results (output) side. For each
 tool one such pair is proposed:
 
-    :ref:`NXapm_paraprobe_config_transcoder`, :ref:`NXapm_paraprobe_results_transcoder`:
+    :ref:`NXapm_paraprobe_transcoder_config`, :ref:`NXapm_paraprobe_transcoder_results`:
         Configuration and the results respectively of the paraprobe-transcoder tool.
         Load POS, ePOS, APSuite APT, RRNG, RNG, and NeXus NXapm files.
         Store reconstructed positions, ions, and charge states.
 
-    :ref:`NXapm_paraprobe_config_ranger`, :ref:`NXapm_paraprobe_results_ranger`:
+    :ref:`NXapm_paraprobe_ranger_config`, :ref:`NXapm_paraprobe_ranger_results`:
         Configuration and results respectively of the paraprobe-ranger tool.
         Apply ranging definitions and explore possible molecular ions.
         Store applied ranging definitions and combinatorial analyses of possible iontypes.
 
-    :ref:`NXapm_paraprobe_config_selector`, :ref:`NXapm_paraprobe_results_selector`:
+    :ref:`NXapm_paraprobe_selector_config`, :ref:`NXapm_paraprobe_selector_results`:
         Configuration and results respectively of the paraprobe-selector tool.
         Defining complex spatial regions-of-interest to filter reconstructed datasets.
         Store which points are inside or on the boundary of complex spatial regions-of-interest.
 
-    :ref:`NXapm_paraprobe_config_surfacer`, :ref:`NXapm_paraprobe_results_surfacer`:
+    :ref:`NXapm_paraprobe_surfacer_config`, :ref:`NXapm_paraprobe_surfacer_results`:
         Configuration and results respectively of the paraprobe-surfacer tool.
         Create a model for the edge of a point cloud via convex hulls, alpha shapes, or alpha-wrappings.
         Store triangulated surface meshes of models for the edge of a dataset.
 
-    :ref:`NXapm_paraprobe_config_distancer`, :ref:`NXapm_paraprobe_results_distancer`:
+    :ref:`NXapm_paraprobe_distancer_config`, :ref:`NXapm_paraprobe_distancer_results`:
         Configuration and results respectively of the paraprobe-distancer tool.
         Compute and store analytical distances between ions to a set of triangles.
 
-    :ref:`NXapm_paraprobe_config_tessellator`, :ref:`NXapm_paraprobe_results_tessellator`:
+    :ref:`NXapm_paraprobe_tessellator_config`, :ref:`NXapm_paraprobe_tessellator_results`:
         Configuration and results respectively of the paraprobe-tessellator tool.
         Compute and store Voronoi cells and properties of these for all ions in a dataset.
 
-    :ref:`NXapm_paraprobe_config_spatstat`, :ref:`NXapm_paraprobe_results_spatstat`:
+    :ref:`NXapm_paraprobe_spatstat_config`, :ref:`NXapm_paraprobe_spatstat_results`:
         Configuration and results respectively of the paraprobe-spatstat tool.
         Compute spatial statistics on the entire or selected regions of the reconstructed dataset.
 
-    :ref:`NXapm_paraprobe_config_clusterer`, :ref:`NXapm_paraprobe_results_clusterer`:
+    :ref:`NXapm_paraprobe_clusterer_config`, :ref:`NXapm_paraprobe_clusterer_results`:
         Configuration and results resepctively of the paraprobe-clusterer tool.
         Compute cluster analyses with established machine learning algorithms using CPU or GPUs.
 
-    :ref:`NXapm_paraprobe_config_nanochem`, :ref:`NXapm_paraprobe_results_nanochem`:
+    :ref:`NXapm_paraprobe_nanochem_config`, :ref:`NXapm_paraprobe_nanochem_results`:
         Configuration and results resepctively of the paraprobe-nanochem tool.
         Compute delocalization, iso-surfaces, analyze 3D objects, composition profiles, and mesh interfaces.
 
-    :ref:`NXapm_paraprobe_config_intersector`, :ref:`NXapm_paraprobe_results_intersector`:
+    :ref:`NXapm_paraprobe_intersector_config`, :ref:`NXapm_paraprobe_intersector_results`:
         Configuration and results resepctively of the paraprobe-intersector tool.
         Analyze volumetric intersections and proximity of 3D objects discretized as triangulated surface meshes
         in continuum space to study the effect the parameterization of surface extraction algorithms on the resulting shape,

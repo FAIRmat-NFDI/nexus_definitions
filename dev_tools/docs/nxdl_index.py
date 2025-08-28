@@ -80,6 +80,7 @@ def nxdl_indices() -> Dict[str, dict]:
         if file.endswith("contributed_definitions/index.rst"):
             rst_lines.append(f"{indentation}apm-structure\n")
             rst_lines.append(f"{indentation}optical-spectroscopy-structure\n")
+            rst_lines.append(f"{indentation}spm-structure\n")
             rst_lines.append(f"{indentation}transport-structure\n")
         for cname in sorted(classes):
             rst_lines.append(f"{indentation}{cname}\n")
