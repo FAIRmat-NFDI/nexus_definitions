@@ -22,26 +22,6 @@ NXspm_bias_spectroscopy(NXobject):
       These components position the probe relative to the sample, thus help obtaining maps of the data
       across the sample surface.
     z_controller(NXpid_controller):
-      z_average_time(NX_NUMBER):
-        unit: NX_TIME
-        doc: |
-          The average time taken by the z-controller to stabilize the tip.
-      z_controller_time(NX_NUMBER):
-        unit: NX_TIME
-        doc: |
-          The time taken by the z-controller to measure output.
-      z_controller_hold(NX_BOOLEAN):
-        doc: |
-          The status of the controller to be held on the previous position, before going to the
-          next scan point or line to measure the physical properties.
-      record_final_z(NX_BOOLEAN):
-        doc: |
-          The status of the controller to record the final z position after the scan.
-    z_offset_value(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
-        The z-offset is a starting tip position before the sweep starts (typically the position of a
-        piezo element).
   (NXcircuit):
     acquisition_time(NX_NUMBER):
       unit: NX_TIME
@@ -57,10 +37,15 @@ NXspm_bias_spectroscopy(NXobject):
         The time or period taken by the circuit to measure a full bias sweep
         (duration of the voltage-current measurement measurement).
   BIAS_SWEEP(NXspm_scan_control):
+    nameType: any
     doc: |
       The bias sweep scan which is is performed in the scanning probe microscopy
       experiments.
     spatial_location(NXcoordinate_system):
+      doc: |
+        The spatial location of the scan points.
+        This would be recommended to use if there are multiple bias sweep scans
+        at different locations.
       x(NX_NUMBER):
         unit: NX_LENGTH
       y(NX_NUMBER):
@@ -170,7 +155,7 @@ NXspm_bias_spectroscopy(NXobject):
             Applied voltage on sample during the scan.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# bbe268b3666013bd3ab624cf067952fcd343afffb281a2e448e7f0513f6c75c8
+# ed6a2a78944b6d68429cf095efc1a7831e5bb39c8b9f6772dd075cdbb17ce49a
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -222,35 +207,7 @@ NXspm_bias_spectroscopy(NXobject):
 #             These components position the probe relative to the sample, thus help obtaining maps of the data
 #             across the sample surface.
 #         </doc>
-#         <group name="z_controller" type="NXpid_controller">
-#             <field name="z_average_time" type="NX_NUMBER" units="NX_TIME">
-#                 <doc>
-#                     The average time taken by the z-controller to stabilize the tip.
-#                 </doc>
-#             </field>
-#             <field name="z_controller_time" type="NX_NUMBER" units="NX_TIME">
-#                 <doc>
-#                     The time taken by the z-controller to measure output.
-#                 </doc>
-#             </field>
-#             <field name="z_controller_hold" type="NX_BOOLEAN">
-#                 <doc>
-#                     The status of the controller to be held on the previous position, before going to the
-#                     next scan point or line to measure the physical properties.
-#                 </doc>
-#             </field>
-#             <field name="record_final_z" type="NX_BOOLEAN">
-#                 <doc>
-#                     The status of the controller to record the final z position after the scan.
-#                 </doc>
-#             </field>
-#         </group>
-#         <field name="z_offset_value" type="NX_NUMBER" units="NX_LENGTH">
-#             <doc>
-#                 The z-offset is a starting tip position before the sweep starts (typically the position of a
-#                 piezo element).
-#             </doc>
-#         </field>
+#         <group name="z_controller" type="NXpid_controller"/>
 #     </group>
 #     <group type="NXcircuit">
 #         <field name="acquisition_time" type="NX_NUMBER" units="NX_TIME">
@@ -270,12 +227,17 @@ NXspm_bias_spectroscopy(NXobject):
 #             </doc>
 #         </field>
 #     </group>
-#     <group name="BIAS_SWEEP" type="NXspm_scan_control">
+#     <group name="BIAS_SWEEP" type="NXspm_scan_control" nameType="any">
 #         <doc>
 #             The bias sweep scan which is is performed in the scanning probe microscopy
 #             experiments.
 #         </doc>
 #         <group name="spatial_location" type="NXcoordinate_system">
+#             <doc>
+#                 The spatial location of the scan points.
+#                 This would be recommended to use if there are multiple bias sweep scans
+#                 at different locations.
+#             </doc>
 #             <field name="x" type="NX_NUMBER" units="NX_LENGTH"/>
 #             <field name="y" type="NX_NUMBER" units="NX_LENGTH"/>
 #             <field name="z" type="NX_NUMBER" units="NX_LENGTH"/>

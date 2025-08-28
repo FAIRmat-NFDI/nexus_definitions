@@ -44,7 +44,7 @@
             Usually, the same controller, (z_controller) will be used for positioning the tip in three dimensional
             space. In this case, the controller coefficients (proportional, integral, differential) and other characteristic
             constants will be the same. Otherwise, for separate controllers positioning the tip in 3D space use the
-            :ref:`feedback &lt;/NXspm_positioner/actuator/feedback&gt;` controller in actuator.
+            :ref:`feedback &lt;/NXspm_positioner/actuator/feedback-group&gt;` controller in actuator.
         </doc>
         <field name="D_t" type="NX_NUMBER" nameType="specified" units="NX_TIME">
             <doc>
@@ -89,6 +89,33 @@
             <doc>
                 Offset added to the initial averaged tip position on Z-axis before starting
                 scan.
+            </doc>
+        </field>
+        <field name="z_average_time" type="NX_NUMBER" units="NX_TIME">
+            <doc>
+                The averaging time for stabilizing the Z position.
+                Usually, the signal for z-position contains noise, to reduce the noise
+                impacts, z-position is being averaged over this time window.
+            </doc>
+        </field>
+        <field name="z_controller_time" type="NX_NUMBER" units="NX_TIME">
+            <doc>
+                Time taken by the Z controller to switch mode e.g., feedback off from on and vice versa.
+                In this time window, controller fixed its position if feedback changed to off mode.
+            </doc>
+        </field>
+        <field name="z_controller_hold" type="NX_BOOLEAN">
+            <doc>
+                Controller feedback system status: OFF / ON.
+                The :ref:`z_controller_hold` is True, refers feedback system off
+                (mostly case in STS bias spectra) and False refers feedback system on
+                (mostly case in STM constant current spectra).
+            </doc>
+        </field>
+        <field name="final_z" type="NX_NUMBER" units="NX_LENGTH">
+            <doc>
+                The final Z position of the tip after the scan.
+                This parameter is used to indicate any unexpected displacement of the tip.
             </doc>
         </field>
         <field name="controller_label" type="NX_CHAR">
