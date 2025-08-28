@@ -162,26 +162,10 @@ of material (area or volume) which can be useful not only for stencil-based meth
     :ref:`NXsimilarity_grouping`:
         An alternative for NXclustering.
 
-    :ref:`NXclustering`:
-        A description for clustering of objects (such as atoms or features).
-
-    :ref:`NXorientation_set`:
-        A set of parameters to describe the relative orientation of members of a set of features/objects.
-
-    :ref:`NXslip_system_set`:
-        Metadata for a set of slip systems in a given crystal structure.
-
-    :ref:`NXms_feature_set`:
-        Generic base class to describe any nested set of features
+    :ref:`NXmicrostructure_feature`:
+        Generic base class to describe any nested features
         of a microstructure at the continuum-, micron-, nano-scale, or
         to represent a topology of molecules and atoms.
-
-    :ref:`NXms_snapshot`:
-        A container to describe the state of microstructural features
-        at a given point in time.
-
-    :ref:`NXms_snapshot_set`:
-        The corresponding class to hold a set of :ref:`NXms_snapshot` objects.
 
     :ref:`NXchemical_composition`:
         (Chemical) composition of a sample or a set of things.
@@ -205,21 +189,6 @@ parameters and to summarize its performance statistics:
     :ref:`NXcs_computer`:
         Metadata of a computer.
 
-    :ref:`NXcs_cpu`:
-        Metadata of a central processing unit.
-
-    :ref:`NXcs_gpu`:
-        Metadata of a graphical processing unit / accelerator.
-
-    :ref:`NXcs_mm_sys`:
-        Metadata of the (main) memory (sub-)system.
-
-    :ref:`NXcs_io_sys`:
-        Metadata of the input/output system.
-
-    :ref:`NXcs_io_obj`:
-        Metadata of a component storing data of an :ref:`NXcs_io_sys` instance.
-
     :ref:`NXprogram`:
         A named and version of a program of library/component.
 
@@ -241,18 +210,18 @@ The following application definitions are proposed to support discussion on
 how materials engineering-specific data models connect to or can be mapped on
 concepts which are equally modellable with NeXus:
 
-    :ref:`NXms`:
+    :ref:`NXmicrostructure`:
         An application definition for arbitrary spatiotemporally resolved simulations.
 
-    :ref:`NXms_feature_set`:
+    :ref:`NXmicrostructure_feature`:
         Set of topological/spatial features in materials build from other features.       
 
-    :ref:`NXms_score_config`:
-        A specific example of how :ref:`NXapm_paraprobe_config_ranger` can be
+    :ref:`NXmicrostructure_score_config`:
+        A specific example of how :ref:`NXapm_paraprobe_ranger_config` can be
         specialized for documenting the configuration of a computer simulation
         with the static recrystallization cellular automata model SCORE.
 
-    :ref:`NXms_score_results`:
-        A specific example of how :ref:`NXms` can be specialized for documenting
+    :ref:`NXmicrostructure_score_results`:
+        A specific example of how :ref:`NXmicrostructure` can be specialized for documenting
         results of computer simulations with the static recrystallization
         cellular automata model SCORE.
