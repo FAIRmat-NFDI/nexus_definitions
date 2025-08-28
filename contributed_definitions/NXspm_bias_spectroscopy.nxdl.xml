@@ -49,35 +49,7 @@
             These components position the probe relative to the sample, thus help obtaining maps of the data
             across the sample surface.
         </doc>
-        <group name="z_controller" type="NXpid_controller">
-            <field name="z_average_time" type="NX_NUMBER" units="NX_TIME">
-                <doc>
-                    The average time taken by the z-controller to stabilize the tip.
-                </doc>
-            </field>
-            <field name="z_controller_time" type="NX_NUMBER" units="NX_TIME">
-                <doc>
-                    The time taken by the z-controller to measure output.
-                </doc>
-            </field>
-            <field name="z_controller_hold" type="NX_BOOLEAN">
-                <doc>
-                    The status of the controller to be held on the previous position, before going to the
-                    next scan point or line to measure the physical properties.
-                </doc>
-            </field>
-            <field name="record_final_z" type="NX_BOOLEAN">
-                <doc>
-                    The status of the controller to record the final z position after the scan.
-                </doc>
-            </field>
-        </group>
-        <field name="z_offset_value" type="NX_NUMBER" units="NX_LENGTH">
-            <doc>
-                The z-offset is a starting tip position before the sweep starts (typically the position of a
-                piezo element).
-            </doc>
-        </field>
+        <group name="z_controller" type="NXpid_controller"/>
     </group>
     <group type="NXcircuit">
         <field name="acquisition_time" type="NX_NUMBER" units="NX_TIME">
@@ -97,12 +69,17 @@
             </doc>
         </field>
     </group>
-    <group name="BIAS_SWEEP" type="NXspm_scan_control">
+    <group name="BIAS_SWEEP" type="NXspm_scan_control" nameType="any">
         <doc>
             The bias sweep scan which is is performed in the scanning probe microscopy
             experiments.
         </doc>
         <group name="spatial_location" type="NXcoordinate_system">
+            <doc>
+                The spatial location of the scan points.
+                This would be recommended to use if there are multiple bias sweep scans
+                at different locations.
+            </doc>
             <field name="x" type="NX_NUMBER" units="NX_LENGTH"/>
             <field name="y" type="NX_NUMBER" units="NX_LENGTH"/>
             <field name="z" type="NX_NUMBER" units="NX_LENGTH"/>

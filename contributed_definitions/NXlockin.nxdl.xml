@@ -60,11 +60,14 @@
     </field>
     <field name="modulation_signal" type="NX_CHAR">
         <doc>
-            Type of the modulation or reference signal, voltage | current.
+            Type of the modulation or reference signal, voltage | current | bias.
+            The name of the current or voltage signal can be also specified
+            according to their purpose (e.g., `bias` voltage).
         </doc>
-        <enumeration>
+        <enumeration open="true">
             <item value="voltage"/>
             <item value="current"/>
+            <item value="bias"/>
         </enumeration>
     </field>
     <field name="modulation_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
@@ -98,11 +101,14 @@
     </field>
     <field name="demodulated_signal" type="NX_CHAR">
         <doc>
-            Type of the demodulated signal,  current | voltage.
+            Type of the demodulated signal,  current | voltage | bias.
+            The name of the current or voltage signal can be also specified
+            according to their purpose (e.g., `bias` voltage).
         </doc>
-        <enumeration>
+        <enumeration open="true">
             <item value="current"/>
             <item value="voltage"/>
+            <item value="bias"/>
         </enumeration>
     </field>
     <field name="demodulated_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
@@ -125,7 +131,6 @@
             The bandwidth of the modulating signal over which modulated signal spreads.
         </doc>
     </field>
-    <!--unit could be NX_VOLTAGE or NX_CURRENT-->
     <field name="demodulated_amplitude" type="NX_NUMBER" units="NX_ANY">
         <doc>
             The amplitude of the demodulated signal.
@@ -185,7 +190,7 @@
             N is envisined to represent the channel number e.g., harmonic_order1.
         </doc>
     </field>
-    <field name="sensitivity_factor" type="NX_NUMBER" units="NX_UNITLESS">
+    <field name="sensitivity_factor" type="NX_NUMBER" units="NX_DIMENSIONLESS">
         <doc>
             Ratio of output signal amplitude to input signal amplitude (V/V).
         </doc>
