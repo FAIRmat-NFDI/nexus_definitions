@@ -1,0 +1,1076 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.205. NXsts &#8212; NeXus-FAIRmat v2022.07 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=329478a8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.206. NXsubsampling_filter" href="NXsubsampling_filter.html" />
+    <link rel="prev" title="2.3.3.3.204. NXstage_lab" href="NXstage_lab.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nxsts">
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.205. </span>NXsts<a class="headerlink" href="#nxsts" title="Link to this heading">¶</a></h1>
+<p><strong>Status</strong>:</p>
+<blockquote>
+<div><p>application definition, extends <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan"><span class="std std-ref">NXsensor_scan</span></a></p>
+</div></blockquote>
+<p><strong>Description</strong>:</p>
+<blockquote>
+<div><details class="summary-application-definition-for-temperature-dependent-iv-curve-measurements">
+<summary>Application definition for temperature-dependent IV curve measurements ...</summary><p>Application definition for temperature-dependent IV curve measurements
+#2023.19.7 This Nexus file is currently only for STS data, it will be updated to handle the
+STM image mode in the future with a focus on bias spectroscopy in Scanning Tunneling Microscopy.</p>
+<p>In this application definition, times should be specified always together with a UTC offset.</p>
+<p>This is the application definition describing temperature (T) dependent current voltage (IV) curve
+measurements. For this, a temperature is set. After reaching the temperature, a voltage sweep
+is performed. For each voltage, a current is measured.
+Then, the next desired temperature is set and an IV measurement is performed.
+The data can be visualized in a tensor with:
+I (NXsensor_C, NXsoftware_Read_offset, NXcircuit)
+parameters:
+V has (NXsource+offset, NXsoftware_Scan_offset, NXsensor_V, NXcircuit)
+T has (NXsource, NXsoftware_Scan_offset, NXsensor_T)
+x has (NXsoftware_Scan_offset)
+y has (NXsoftware_Scan_offset)
+z has (NXsoftware_Scan_offset)</p>
+</details></div></blockquote>
+<p><strong>Symbols</strong>:</p>
+<blockquote>
+<div><p>No symbol table</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="NXamplifier.html#nxamplifier"><span class="std std-ref">NXamplifier</span></a>, <a class="reference internal" href="NXbias_spectroscopy.html#nxbias-spectroscopy"><span class="std std-ref">NXbias_spectroscopy</span></a>, <a class="reference internal" href="NXcircuit.html#nxcircuit"><span class="std std-ref">NXcircuit</span></a>, <a class="reference internal" href="../base_classes/NXcollection.html#nxcollection"><span class="std std-ref">NXcollection</span></a>, <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a>, <a class="reference internal" href="../base_classes/NXentry.html#nxentry"><span class="std std-ref">NXentry</span></a>, <a class="reference internal" href="../base_classes/NXenvironment.html#nxenvironment"><span class="std std-ref">NXenvironment</span></a>, <a class="reference internal" href="NXfabrication.html#nxfabrication"><span class="std std-ref">NXfabrication</span></a>, <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument"><span class="std std-ref">NXinstrument</span></a>, <a class="reference internal" href="NXiv_bias.html#nxiv-bias"><span class="std std-ref">NXiv_bias</span></a>, <a class="reference internal" href="NXlockin.html#nxlockin"><span class="std std-ref">NXlockin</span></a>, <a class="reference internal" href="NXpositioner_sts.html#nxpositioner-sts"><span class="std std-ref">NXpositioner_sts</span></a>, <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a>, <a class="reference internal" href="../base_classes/NXsample.html#nxsample"><span class="std std-ref">NXsample</span></a>, <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor"><span class="std std-ref">NXsensor</span></a>, <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations"><span class="std std-ref">NXtransformations</span></a></p>
+</dd>
+</dl>
+<p id="index-1"><strong>Structure</strong>:</p>
+<blockquote>
+<div><p id="nxsts-entry-group"><strong>ENTRY</strong>: (required) <a class="reference internal" href="../base_classes/NXentry.html#nxentry"><span class="std std-ref">NXentry</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-2"><span id="nxsts-entry-definition-field"></span><strong>definition</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-definition-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">NXsts</span></code></p>
+</div></blockquote>
+<p id="index-3"><span id="nxsts-entry-experiment-type-field"></span><strong>experiment_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-name-of-the-experiment-where-the-application-is-applicable">
+<summary>Name of the experiment where the application is applicable. ...</summary><p>Name of the experiment where the application is applicable.</p>
+<p>Any of these values: <code class="docutils literal notranslate"><span class="pre">sts</span></code> | <code class="docutils literal notranslate"><span class="pre">stm</span></code></p>
+</details></div></blockquote>
+<p id="index-4"><span id="nxsts-entry-type-field"></span><strong>type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-the-equipments-and-techniques-as-well-as-the-parameter-settings-and-referenc">
+<summary>The equipments and techniques as well as the parameter settings and referenc ...</summary><p>The equipments and techniques as well as the parameter settings and reference signals
+are used during the experiments used in Scanning Tunneling Microscopy (STM).</p>
+<p>Any of these values: <code class="docutils literal notranslate"><span class="pre">background</span></code> | <code class="docutils literal notranslate"><span class="pre">reference</span></code> | <code class="docutils literal notranslate"><span class="pre">sample</span></code></p>
+</details></div></blockquote>
+<p id="index-5"><span id="nxsts-entry-entry-identifier-field"></span><strong>entry_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXentry.html#nxentry-entry-identifier-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-name-of-the-output-file-with-the-number-of-scans-at-the-end-e-g">
+<summary>The name of the output file, with the number of scans at the end. (e.g. ...</summary><p>The name of the output file, with the number of scans at the end. (e.g.
+221122_Au_5K00014)</p>
+</details></div></blockquote>
+<p id="index-6"><span id="nxsts-entry-collection-identifier-field"></span><strong>collection_identifier</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXentry.html#nxentry-collection-identifier-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-name-of-the-series-output-file-which-represents-only-the-public-part-of">
+<summary>The name of the series output file, which represents only the public part of ...</summary><p>The name of the series output file, which represents only the public part of the
+output file. (e.g. 221122_Au_5K)</p>
+</details></div></blockquote>
+<p id="index-7"><span id="nxsts-entry-experiment-identifier-field"></span><strong>experiment_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-experiment-identifier-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-path-to-storage-of-output-files">
+<summary>Path to storage of output files. ...</summary><p>Path to storage of output files.
+(e.g. Path C:UsersSPM-PEEMDesktopDATA_Nanonis20220711_CreaTec_Service_Benchmarks_LHeNanonis-Session-PMD100-HVHU_CreaTec_Service_PalmaLabBerlin220711)</p>
+</details></div></blockquote>
+<p id="index-8"><span id="nxsts-entry-experiment-description-field"></span><strong>experiment_description</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-experiment-description-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-descriptive-comments-for-this-experiment-added-by-the-experimenter-coming">
+<summary>Descriptive comments for this experiment, added by the experimenter, coming  ...</summary><p>Descriptive comments for this experiment, added by the experimenter, coming from the
+output file. (e.g. Comment01 SYNC &amp; Filter LP 8order WITHDRAW 600 steps, locked Au(111),
+50pA, 100 mV set point, 1mV DCA, 973Hz,138 1st H, -84 2nd H)</p>
+</details></div></blockquote>
+<p id="nxsts-entry-instrument-group"><strong>INSTRUMENT</strong>: (required) <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument"><span class="std std-ref">NXinstrument</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-instrument-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-9"><span id="nxsts-entry-instrument-stm-head-temp-field"></span><strong>stm_head_temp</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-temperature"><span class="std std-ref">NX_TEMPERATURE</span></a>}</p>
+<blockquote>
+<div><details class="summary-temperature-of-stm-head-note-at-least-one-field-from-stm-head-temperatur">
+<summary>Temperature of STM head. Note: At least one field from stm_head_temperatur ...</summary><p>Temperature of STM head. Note: At least one field from stm_head_temperature,
+cryo_bottom_temp and cryo_sheild_temp must be provided.</p>
+</details></div></blockquote>
+<p id="index-10"><span id="nxsts-entry-instrument-cryo-bottom-temp-field"></span><strong>cryo_bottom_temp</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-temperature"><span class="std std-ref">NX_TEMPERATURE</span></a>}</p>
+<blockquote>
+<div><details class="summary-temperature-of-liquid-helium-cryostat-note-at-least-one-field-from">
+<summary>Temperature of liquid helium cryostat. Note: At least one field from ...</summary><p>Temperature of liquid helium cryostat. Note: At least one field from
+stm_head_temperature, cryo_bottom_temp and cryo_sheild_temp must be provided.</p>
+</details></div></blockquote>
+<p id="index-11"><span id="nxsts-entry-instrument-cryo-shield-temp-field"></span><strong>cryo_shield_temp</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-temperature"><span class="std std-ref">NX_TEMPERATURE</span></a>}</p>
+<blockquote>
+<div><details class="summary-temperature-of-liquid-nitrogen-shield-temperature-3-k-e-g-78-00000e-0">
+<summary>Temperature of liquid nitrogen shield. Temperature 3 (K) (e.g 78.00000E+0) ...</summary><p>Temperature of liquid nitrogen shield. Temperature 3 (K) (e.g 78.00000E+0). Note: At
+least one field from stm_head_temperature, cryo_bottom_temp and cryo_sheild_temp
+must be provided.</p>
+</details></div></blockquote>
+<p id="nxsts-entry-instrument-hardware-group"><strong>hardware</strong>: (optional) <a class="reference internal" href="NXfabrication.html#nxfabrication"><span class="std std-ref">NXfabrication</span></a> <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument-fabrication-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-hardware-type-used-in-spm-experiment-includes-hardware-manufacturers-and">
+<summary>Hardware type used in SPM experiment, includes hardware manufacturers and  ...</summary><p>Hardware type used in SPM experiment, includes hardware manufacturers and type.
+(e.g. Nanonis BP5e)</p>
+</details></div></blockquote>
+<p id="nxsts-entry-instrument-software-group"><strong>software</strong>: (optional) <a class="reference internal" href="NXfabrication.html#nxfabrication"><span class="std std-ref">NXfabrication</span></a> <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument-fabrication-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-type-of-software-used-in-spm-experiments-such-as-software-version-serial">
+<summary>Type of software used in SPM experiments, such as software version serial  ...</summary><p>Type of software used in SPM experiments, such as software version serial number, UI and
+RT probe release method. (e.g. SW Version Generic 5e – RT Release 10771)</p>
+</details></div></blockquote>
+<p id="nxsts-entry-instrument-current-amplifier-group"><strong>current_amplifier</strong>: (optional) <a class="reference internal" href="NXamplifier.html#nxamplifier"><span class="std std-ref">NXamplifier</span></a></p>
+<blockquote>
+<div><details class="summary-the-amplifier-description-that-improves-or-helps-to-determine-tunnel-curre">
+<summary>The Amplifier description that improves or helps to determine tunnel curre ...</summary><p>The Amplifier description that improves or helps to determine tunnel current (current
+between tip and bias).</p>
+</details></div></blockquote>
+<p id="nxsts-entry-instrument-lock-in-group"><strong>lock_in</strong>: (optional) <a class="reference internal" href="NXlockin.html#nxlockin"><span class="std std-ref">NXlockin</span></a></p>
+<blockquote>
+<div><p id="index-12"><span id="nxsts-entry-instrument-lock-in-status-field"></span><strong>status</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Status of Lock-in device whether while performing the experiment</p>
+</div></blockquote>
+<p id="index-13"><span id="nxsts-entry-instrument-lock-in-modulation-signal-field"></span><strong>modulation_signal</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-voltage"><span class="std std-ref">NX_VOLTAGE</span></a>} <a class="reference internal" href="NXlockin.html#nxlockin-modulation-signal-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>This is the signal on which the modulation (sine) will be added.</p>
+</div></blockquote>
+<p id="index-14"><span id="nxsts-entry-instrument-lock-in-modulation-frequency-field"></span><strong>modulation_frequency</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-frequency"><span class="std std-ref">NX_FREQUENCY</span></a>} <a class="reference internal" href="NXlockin.html#nxlockin-modulation-frequency-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-signal-is-modulated-by-adding-the-frequency-of-the-sine-modulation">
+<summary>The signal is modulated by adding the frequency of the sine modulation.  ...</summary><p>The signal is modulated by adding the frequency of the sine modulation. The
+modulation frequency spans can be from 10 mHz to 40 kHz, corresponding to the output filter
+cut-off range. When dealing with harmonics, it’s essential to ensure that the
+harmonic frequencies remain below ~100 kHz, which aligns with the input filter cut-off.
+Be mindful that hardware filters might impact the amplitude as the signal approaches
+their cut-off frequencies.” (e.g. 973E+0)</p>
+</details></div></blockquote>
+<p id="index-15"><span id="nxsts-entry-instrument-lock-in-modulation-amplitude-field"></span><strong>modulation_amplitude</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="NXlockin.html#nxlockin-modulation-amplitude-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>The amplitude (in physical units of modulated signal) of the sine modulation.</p>
+</div></blockquote>
+<p id="index-16"><span id="nxsts-entry-instrument-lock-in-demodulated-signal-field"></span><strong>demodulated_signal</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXlockin.html#nxlockin-demodulated-signal-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-input-signal-sts-signal-will-be-demodulated-in-order-to-determine">
+<summary>The input signal (STS signal) will be demodulated, in order to determine ...</summary><p>The input signal (STS signal) will be demodulated, in order to determine the amplitude
+and phase at the frequency set in the Frequency field or harmonics, such as current,
+bias, et.al.</p>
+</details></div></blockquote>
+<p id="index-17"><span id="nxsts-entry-instrument-lock-in-harmonic-order-n-field"></span><strong>harmonic_order_N</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="NXlockin.html#nxlockin-harmonic-order-n-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-n-denotes-1-or-2-the-order-of-the-harmonic-oscillation-to-be-detected-i">
+<summary>N denotes 1 or 2. The order of the harmonic oscillation to be detected i ...</summary><p>N denotes 1 or 2. The order of the harmonic oscillation to be detected in the demodulated
+signal should be considered relative to the modulation frequency. When dealing with
+higher harmonics, it’s essential to ensure that their frequencies do not surpass
+the analogue signal bandwidth (e.g. harmonic_order_1).</p>
+</details></div></blockquote>
+<p id="index-18"><span id="nxsts-entry-instrument-lock-in-ref-phase-n-field"></span><strong>ref_phase_N</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="NXlockin.html#nxlockin-ref-phase-n-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-reference-phase-for-the-sine-on-the-demodulated-signal-with-respect-to-t">
+<summary>Reference phase for the sine on the demodulated signal with respect to t ...</summary><p>Reference phase for the sine on the demodulated signal with respect to the
+modulation signal. The determined phase is displayed with respect to the
+reference phase.</p>
+</details></div></blockquote>
+<p id="index-19"><span id="nxsts-entry-instrument-lock-in-lock-in-data-flip-number-field"></span><strong>lock_in_data_flip_number</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+</div></blockquote>
+<p id="nxsts-entry-instrument-sample-bias-group"><strong>sample_bias</strong>: (required) <a class="reference internal" href="NXiv_bias.html#nxiv-bias"><span class="std std-ref">NXiv_bias</span></a></p>
+<blockquote>
+<div><p>Bias voltage applied to the sample.</p>
+<p id="index-20"><span id="nxsts-entry-instrument-sample-bias-bias-field"></span><strong>bias</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-voltage"><span class="std std-ref">NX_VOLTAGE</span></a>} <a class="reference internal" href="NXiv_bias.html#nxiv-bias-bias-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Applied a voltage between tip and sample.</p>
+</div></blockquote>
+<p id="index-21"><span id="nxsts-entry-instrument-sample-bias-bias-calibration-field"></span><strong>bias_calibration</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<p id="index-22"><span id="nxsts-entry-instrument-sample-bias-bias-offset-field"></span><strong>bias_offset</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-voltage"><span class="std std-ref">NX_VOLTAGE</span></a>}</p>
+</div></blockquote>
+<p id="nxsts-entry-instrument-output-cabling-group"><strong>output_cabling</strong>: (optional) <a class="reference internal" href="NXcircuit.html#nxcircuit"><span class="std std-ref">NXcircuit</span></a></p>
+<p id="nxsts-entry-instrument-piezo-config-group"><strong>piezo_config</strong>: (optional) <a class="reference internal" href="../base_classes/NXcollection.html#nxcollection"><span class="std std-ref">NXcollection</span></a> <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument-collection-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-configuration-for-piezoelectric-scanner-used-to-move-tip-along-x-and-y-dir">
+<summary>Configuration for piezoelectric scanner used to move tip along X and Y dir ...</summary><p>Configuration for piezoelectric scanner used to move tip along X and Y direction. The
+material of the Piezoelectric scanner composed of polycrystalline solids and sensitive to
+applied voltage.</p>
+</details><p id="index-23"><span id="nxsts-entry-instrument-piezo-config-active-calib-field"></span><strong>active_calib</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>The name of calibration type. (e.g. LHe)</p>
+</div></blockquote>
+<p id="index-24"><span id="nxsts-entry-instrument-piezo-config-calib-n-field"></span><strong>calib_N</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-n-denotes-x-or-y-or-z-there-are-three-parameters-in-the-x-y-and-z-dir">
+<summary>N denotes X or Y or Z. There are three parameters in the X, Y, and Z dir ...</summary><p>N denotes X or Y or Z. There are three parameters in the X, Y, and Z directions,
+along with three available controls: Calibration (m/V), Range (m), and HV gain. Only
+two of these parameters are required to define the calibration. Consequently, when any
+value is changed, one of the other values will be automatically updated. (e.g. calib_X = 3.8E-9)</p>
+</details></div></blockquote>
+<p id="index-25"><span id="nxsts-entry-instrument-piezo-config-hv-gain-n-field"></span><strong>hv_gain_N</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-n-denotes-x-or-y-or-z-in-some-systems-there-is-an-hv-gain-readout-feat">
+<summary>N denotes X or Y or Z. In some systems, there is an HV gain readout feat ...</summary><p>N denotes X or Y or Z. In some systems, there is an HV gain readout feature. For
+these systems, the HV gain should be automatically adjusted whenever the gain is
+changed at the high voltage amplifier. (e.g. 14.5)</p>
+</details></div></blockquote>
+<p id="index-26"><span id="nxsts-entry-instrument-piezo-config-tilt-n-field"></span><strong>tilt_N</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>}</p>
+<blockquote>
+<div><details class="summary-n-denotes-x-or-y-there-are-2-parameters-in-x-and-y-directions-and-tilt">
+<summary>N denotes X or Y. There are 2 parameters in X and Y directions, and tilt ...</summary><p>N denotes X or Y. There are 2 parameters in X and Y directions, and tilt needs to be
+adjusted according to the actual surface. (in degrees, first order correction).</p>
+</details></div></blockquote>
+<p id="index-27"><span id="nxsts-entry-instrument-piezo-config-curvature-radius-n-field"></span><strong>curvature_radius_N</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><details class="summary-n-denotes-x-or-y-there-are-2-parameters-in-x-and-y-directions-can-be">
+<summary>N denotes X or Y. There are 2 parameters in X and Y directions. (can be  ...</summary><p>N denotes X or Y. There are 2 parameters in X and Y directions. (can be set
+approximately to the length of the piezotube).</p>
+</details></div></blockquote>
+<p id="index-28"><span id="nxsts-entry-instrument-piezo-config-2nd-order-corr-n-field"></span><strong>2nd_order_corr_N</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-n-denotes-x-or-y-there-are-2-parameters-in-x-and-y-directions-if-you-k">
+<summary>N denotes X or Y. There are 2 parameters in X and Y directions. If you k ...</summary><p>N denotes X or Y. There are 2 parameters in X and Y directions. If you know them,
+you can enter the 2nd order piezo characteristics to compensate for it. The
+following equation shows the interpretation of the 2nd order correction parameter:
+For the X-piezo: “Ux = 1/cx · X + cxx · X2” with units:
+[V] = [V/m] · [m] + [V/m2] · [m2] where cx is the calibration of the piezo X and cxx
+is the 2nd order correction. (V/m^2). (e.g. 0E+0)</p>
+</details></div></blockquote>
+<p id="index-29"><span id="nxsts-entry-instrument-piezo-config-drift-n-field"></span><strong>drift_N</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-n-denotes-x-y-or-z-there-are-3-parameters-in-x-y-and-z-directions-de">
+<summary>N denotes X, Y or Z. There are 3 parameters in X, Y and Z directions. De ...</summary><p>N denotes X, Y or Z. There are 3 parameters in X, Y and Z directions. Define the
+drift speed for all three axes. When the compensation is on, the piezos will start to
+move at that speed. (e.g. 0E+0)</p>
+</details></div></blockquote>
+<p id="index-30"><span id="nxsts-entry-instrument-piezo-config-drift-correction-status-field"></span><strong>drift_correction_status</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><p>Use the button to enable or disable the drift compensation. (e.g. FALSE)</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxsts-entry-instrument-environment-group"><strong>ENVIRONMENT</strong>: (required) <a class="reference internal" href="../base_classes/NXenvironment.html#nxenvironment"><span class="std std-ref">NXenvironment</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-instrument-environment-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-an-environmental-setup-to-measure-the-tunneling-current-due-to-different-t">
+<summary>An environmental setup to measure the tunneling current due to different t ...</summary><p>An environmental setup to measure the tunneling current due to different tip-
+sample biases.</p>
+</details><p id="nxsts-entry-instrument-environment-current-sensor-group"><strong>current_sensor</strong>: (optional) <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor"><span class="std std-ref">NXsensor</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-instrument-environment-sensor-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-31"><span id="nxsts-entry-instrument-environment-current-sensor-current-field"></span><strong>current</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-current"><span class="std std-ref">NX_CURRENT</span></a>}</p>
+<blockquote>
+<div><details class="summary-this-is-set-point-of-tip-current-in-the-constant-current-mode-should">
+<summary>This is set-point of tip current (in the constant current mode should  ...</summary><p>This is set-point of tip current (in the constant current mode should be equal to set-point,
+in the constant height mode means the real tunnelling current between tip and sample).</p>
+</details></div></blockquote>
+<p id="index-32"><span id="nxsts-entry-instrument-environment-current-sensor-current-calibration-field"></span><strong>current_calibration</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-current"><span class="std std-ref">NX_CURRENT</span></a>}</p>
+<blockquote>
+<div><details class="summary-value-of-calibration-that-comes-as-a-v-the-value-for-this-concept-can">
+<summary>Value of calibration that comes as A/V. The value for this concept can ...</summary><p>Value of calibration that comes as A/V. The value for this concept can be read
+as current per unit voltage.</p>
+</details></div></blockquote>
+<p id="index-33"><span id="nxsts-entry-instrument-environment-current-sensor-current-offset-field"></span><strong>current_offset</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-current"><span class="std std-ref">NX_CURRENT</span></a>}</p>
+<p id="index-34"><span id="nxsts-entry-instrument-environment-current-sensor-current-gain-field"></span><strong>current_gain</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<p id="index-35"><span id="nxsts-entry-instrument-environment-current-sensor-calibration-time-field"></span><strong>calibration_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-instrument-environment-sensor-calibration-time-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-36"><span id="nxsts-entry-instrument-environment-current-sensor-value-field"></span><strong>value</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+</div></blockquote>
+<p id="nxsts-entry-instrument-environment-position-group"><strong>position</strong>: (required) <a class="reference internal" href="NXpositioner_sts.html#nxpositioner-sts"><span class="std std-ref">NXpositioner_sts</span></a></p>
+<blockquote>
+<div><p>Clarify the frame laboratory frame.</p>
+<p id="index-37"><span id="nxsts-entry-instrument-environment-position-x-field"></span><strong>x</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><p>The scanning area in x position in the frame. (e.g. -890.53E-12)</p>
+</div></blockquote>
+<p id="index-38"><span id="nxsts-entry-instrument-environment-position-y-field"></span><strong>y</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><p>The scanning area in y position in the frame. (e.g. 29.6968E-9)</p>
+</div></blockquote>
+<p id="index-39"><span id="nxsts-entry-instrument-environment-position-z-field"></span><strong>z</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><p>The scanning area in z position in the frame. (e.g. 130.5E-9)</p>
+</div></blockquote>
+<p id="nxsts-entry-instrument-environment-position-z-controller-group"><strong>z_controller</strong>: (required) <a class="reference internal" href="../base_classes/NXcollection.html#nxcollection"><span class="std std-ref">NXcollection</span></a></p>
+<blockquote>
+<div><p id="index-40"><span id="nxsts-entry-instrument-environment-position-z-controller-z-field"></span><strong>z</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><details class="summary-indicate-the-relative-tip-position-z-between-tip-and-sample-the-tip">
+<summary>Indicate the relative tip position z between tip and sample. The tip ...</summary><p>Indicate the relative tip position z between tip and sample. The tip position can also
+be varied when the z_controller is not running. (e.g. 130.5E-9)</p>
+</details></div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxsts-entry-instrument-environment-sweep-control-group"><strong>sweep_control</strong>: (required) <a class="reference internal" href="../base_classes/NXcollection.html#nxcollection"><span class="std std-ref">NXcollection</span></a></p>
+<blockquote>
+<div><p id="nxsts-entry-instrument-environment-sweep-control-bias-spectroscopy-group"><strong>bias_spectroscopy</strong>: (optional) <a class="reference internal" href="NXbias_spectroscopy.html#nxbias-spectroscopy"><span class="std std-ref">NXbias_spectroscopy</span></a></p>
+<blockquote>
+<div><p id="index-41"><span id="nxsts-entry-instrument-environment-sweep-control-bias-spectroscopy-integration-time-field"></span><strong>integration_time</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>} <a class="reference internal" href="NXbias_spectroscopy.html#nxbias-spectroscopy-integration-time-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Time during which the spectroscopy data are acquired and averaged. (e.g. 150E-6)</p>
+</div></blockquote>
+<p id="index-42"><span id="nxsts-entry-instrument-environment-sweep-control-bias-spectroscopy-number-of-sweeps-field"></span><strong>number_of_sweeps</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="NXbias_spectroscopy.html#nxbias-spectroscopy-number-of-sweeps-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Number of sweeps to measure and average. (e.g. 100)</p>
+</div></blockquote>
+<p id="index-43"><span id="nxsts-entry-instrument-environment-sweep-control-bias-spectroscopy-sweep-start-field"></span><strong>sweep_start</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-voltage"><span class="std std-ref">NX_VOLTAGE</span></a>} <a class="reference internal" href="NXbias_spectroscopy.html#nxbias-spectroscopy-sweep-start-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>The start bias values of the sweep. (e.g. -300E-3)</p>
+</div></blockquote>
+<p id="index-44"><span id="nxsts-entry-instrument-environment-sweep-control-bias-spectroscopy-sweep-end-field"></span><strong>sweep_end</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-voltage"><span class="std std-ref">NX_VOLTAGE</span></a>} <a class="reference internal" href="NXbias_spectroscopy.html#nxbias-spectroscopy-sweep-end-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>The end bias values of the sweep. (e.g. 300E-3)</p>
+</div></blockquote>
+<p id="index-45"><span id="nxsts-entry-instrument-environment-sweep-control-bias-spectroscopy-num-pixel-field"></span><strong>num_pixel</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="NXbias_spectroscopy.html#nxbias-spectroscopy-num-pixel-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-sweep-number-of-points-is-defined-as-the-maximum-spectrum-resolu">
+<summary>The sweep number of points is defined as the maximum spectrum resolu ...</summary><p>The sweep number of points is defined as the maximum spectrum resolution, which
+is equal to the bias sweep window divided by the number of pixels. (e.g. 4096)</p>
+</details></div></blockquote>
+<p id="index-46"><span id="nxsts-entry-instrument-environment-sweep-control-bias-spectroscopy-z-avg-time-field"></span><strong>z_avg_time</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>} <a class="reference internal" href="NXbias_spectroscopy.html#nxbias-spectroscopy-z-avg-time-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-z-position-is-recorded-and-averaged-for-a-certain-duration-both">
+<summary>The Z position is recorded and averaged for a certain duration both  ...</summary><p>The Z position is recorded and averaged for a certain duration both before and
+after the sweep. After the initial Z averaging time, if “Z-Controller to Hold”
+is selected, the Z-Controller is set to hold mode, and the tip is positioned at
+the previously averaged Z position (adjusted by the Z offset). (e.g. 100E-3)</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="nxsts-entry-instrument-environment-sweep-control-circuit-group"><strong>circuit</strong>: (optional) <a class="reference internal" href="../base_classes/NXcollection.html#nxcollection"><span class="std std-ref">NXcollection</span></a></p>
+<blockquote>
+<div><p id="index-47"><span id="nxsts-entry-instrument-environment-sweep-control-circuit-rt-frequency-field"></span><strong>rt_frequency</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-frequency"><span class="std std-ref">NX_FREQUENCY</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-bandwidth-of-the-hardware-and-or-software-is-instrument-specific">
+<summary>The bandwidth of the Hardware and/or Software is instrument specific ...</summary><p>The bandwidth of the Hardware and/or Software is instrument specific.
+For example, Nanonis Generic 5 has ‘RT Frequency’ (e.g. 20E+3).</p>
+</details></div></blockquote>
+<p id="index-48"><span id="nxsts-entry-instrument-environment-sweep-control-circuit-signals-oversampling-field"></span><strong>signals_oversampling</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-the-signals-period-represents-the-rate-at-which-signals-are-transfer">
+<summary>The Signals Period represents the rate at which signals are transfer ...</summary><p>The Signals Period represents the rate at which signals are transferred to
+the host computer, which operates the control software. This rate may
+be 10 times lower than the sampling rate, as the real-time engine internally
+oversamples the signal. If desired, you may have the option to reduce the oversampling
+to 1, enabling higher frequency resolution in the Spectrum Analyzer. (e.g. 10)</p>
+</details></div></blockquote>
+<p id="index-49"><span id="nxsts-entry-instrument-environment-sweep-control-circuit-acquisition-period-field"></span><strong>acquisition_period</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-update-rate-is-utilized-in-various-processes-including-the-hist">
+<summary>The update rate is utilized in various processes, including the Hist ...</summary><p>The update rate is utilized in various processes, including the History Graph,
+Auto-Approach, and multiple Programming Interface functions. It may be
+configured to a 20 ms interval. Any additional timings must strictly be integer
+multiples of this base value. While it is possible to set these additional
+timings to different values, the actual timing value will automatically be
+adjusted to become a multiple of the Acquisition Period. (e.g. 20E-3)</p>
+</details></div></blockquote>
+<p id="index-50"><span id="nxsts-entry-instrument-environment-sweep-control-circuit-animations-period-field"></span><strong>animations_period</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-update-rate-of-animated-graphical-indicators-such-as-graphs-and">
+<summary>The update rate of animated graphical indicators, such as graphs and ...</summary><p>The update rate of animated graphical indicators, such as graphs and sliders,
+can be adjusted. A normal value may be 40 ms, which corresponds to 25 updates
+per second. Increasing this period can help reduce the processor load on the
+graphical user interface, particularly on slower computers. It is important to
+note that this update rate solely impacts the user interface and does not affect
+measurements in any manner. (e.g. 20E-3)</p>
+</details></div></blockquote>
+<p id="index-51"><span id="nxsts-entry-instrument-environment-sweep-control-circuit-indicators-period-field"></span><strong>indicators_period</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-update-rate-of-digital-indicators-such-as-the-numbers-displayed">
+<summary>The update rate of digital indicators, such as the numbers displayed ...</summary><p>The update rate of digital indicators, such as the numbers displayed, can be set
+to 3 updates per second, equivalent to 300 ms. This interval is sufficient for
+the user interface and does not impact measurements in any manner. (e.g. 300E-3)</p>
+</details></div></blockquote>
+<p id="index-52"><span id="nxsts-entry-instrument-environment-sweep-control-circuit-measurements-period-field"></span><strong>measurements_period</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-measurements-period-determines-the-integration-time-required-for">
+<summary>The Measurements period determines the integration time required for ...</summary><p>The Measurements period determines the integration time required for precise
+measurements, primarily utilized in sweep modules. It is particularly useful for
+tasks such as recording force-distance curves or cantilever resonances. For
+swift measurements with small steps, a value of 40 ms is often adequate. For
+regular use, a range of 300-500 ms may be recommended, but when capturing the
+resonance of a high-Q cantilever, longer values in the range of several seconds
+might be necessary. Usually, this parameter does not require manual adjustment
+within this module, as the sweep modules automatically set this value according
+to the sweep timings. (e.g. 500E-3)</p>
+</details></div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxsts-entry-instrument-environment-scan-control-group"><strong>scan_control</strong>: (optional) <a class="reference internal" href="../base_classes/NXcollection.html#nxcollection"><span class="std std-ref">NXcollection</span></a></p>
+<blockquote>
+<div><p id="index-53"><span id="nxsts-entry-instrument-environment-scan-control-scan-range-field"></span><strong>scan_range</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><details class="summary-in-stm-experiment-the-scan-range-is-the-coordinate-x-y-along-the-x">
+<summary>In STM experiment, the scan range is the coordinate (x,y) along the X  ...</summary><p>In STM experiment, the scan range is the coordinate (x,y) along the X and Y axis from the origin (scan_offset) of
+the scan area (e.g. 5.000000E-9 5.000000E-9).</p>
+</details></div></blockquote>
+<p id="index-54"><span id="nxsts-entry-instrument-environment-scan-control-scan-offset-field"></span><strong>scan_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><details class="summary-in-stm-experiment-the-scan-offset-is-the-position-of-the-tip-at-the-s">
+<summary>In STM experiment, the scan offset is the position of the tip at the s ...</summary><p>In STM experiment, the scan offset is the position of the tip at the starting point of scan area.
+(e.g. -2.354637E-7 1.267476E-)</p>
+</details></div></blockquote>
+<p id="index-55"><span id="nxsts-entry-instrument-environment-scan-control-scan-direction-field"></span><strong>scan_direction</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-in-stm-experiment-the-scan-direction-is-the-direction-from-which-side">
+<summary>In STM experiment, the scan direction is the direction from which side ...</summary><p>In STM experiment, the scan direction is the direction from which side of the
+sample the tip starts scanning.</p>
+<p>Any of these values: <code class="docutils literal notranslate"><span class="pre">down</span></code> | <code class="docutils literal notranslate"><span class="pre">up</span></code> | <code class="docutils literal notranslate"><span class="pre">top</span></code> | <code class="docutils literal notranslate"><span class="pre">bottom</span></code></p>
+</details></div></blockquote>
+<p id="index-56"><span id="nxsts-entry-instrument-environment-scan-control-scan-angle-field"></span><strong>scan_angle</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-angle-of-scan-with-the-bottom-or-top-side-depends-on-the-scan-dir">
+<summary>The angle of scan with the bottom or top side (depends on the scan_dir ...</summary><p>The angle of scan with the bottom or top side (depends on the scan_direction
+field) of the sample. (e.g. 0.000E+0).</p>
+</details></div></blockquote>
+<p id="nxsts-entry-instrument-environment-scan-control-roi-group"><strong>roi</strong>: (required) <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations"><span class="std std-ref">NXtransformations</span></a></p>
+<blockquote>
+<div><p id="index-57"><span id="nxsts-entry-instrument-environment-scan-control-roi-frame-field"></span><strong>frame</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-also-clarify-the-frame-for-the-roi-of-the-scan-in-lab-frame-the-mid">
+<summary>Also clarify the frame for the ROI of the scan in lab frame, the mid ...</summary><p>Also clarify the frame for the ROI of the scan in lab frame, the middle of the lab
+frame is (0, 0), and positive in x means right and in y means up.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="nxsts-entry-instrument-environment-scan-control-circuit-group"><strong>circuit</strong>: (required) <a class="reference internal" href="../base_classes/NXcollection.html#nxcollection"><span class="std std-ref">NXcollection</span></a></p>
+<blockquote>
+<div><p id="index-58"><span id="nxsts-entry-instrument-environment-scan-control-circuit-channels-current-field"></span><strong>channels_current</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-the-scan-channels-are-selected-by-users-e-g-a-bias-v-z-m-li">
+<summary>The scan channels are selected by users. (e.g. (A);Bias (V);Z (m);LI ...</summary><p>The scan channels are selected by users. (e.g. (A);Bias (V);Z (m);LI Demod 2 X
+(A);LI Demod 2 Y (A);LI Demod 1 X (A);LI Demod 1 Y (A))</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="nxsts-entry-instrument-environment-scan-control-positioner-group"><strong>positioner</strong>: (required) <a class="reference internal" href="../base_classes/NXcollection.html#nxcollection"><span class="std std-ref">NXcollection</span></a></p>
+<blockquote>
+<div><p id="index-59"><span id="nxsts-entry-instrument-environment-scan-control-positioner-scanfield-field"></span><strong>scanfield</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-configure-the-scan-frame-like-x-position-y-position-width-height">
+<summary>Configure the scan frame like x position; y position; width; height. ...</summary><p>Configure the scan frame like x position; y position; width; height. (e.g.
+3.11737E-9;29.1583E-9;15E-9;15E-9;0E+0). If the ‘scanfield’ is not considered, use
+the ‘scan_range’ and ‘scan_offset’ from ‘scan_control’ group</p>
+</details></div></blockquote>
+<p id="index-60"><span id="nxsts-entry-instrument-environment-scan-control-positioner-pixels-line-field"></span><strong>pixels_line</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>Scan resolution by setting the Lines equal to Pixels.  (e.g. 512)</p>
+</div></blockquote>
+<p id="index-61"><span id="nxsts-entry-instrument-environment-scan-control-positioner-lines-field"></span><strong>lines</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>Define the image resolution. (e.g. 512)</p>
+</div></blockquote>
+<p id="index-62"><span id="nxsts-entry-instrument-environment-scan-control-positioner-speed-forw-field"></span><strong>speed_forw</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>Define the scan forward speed in the forward direction. (m/s) (e.g. 11.7187E-9)</p>
+</div></blockquote>
+<p id="index-63"><span id="nxsts-entry-instrument-environment-scan-control-positioner-speed-backw-field"></span><strong>speed_backw</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>Define the scan backward speed in the forward direction. (m/s) (e.g. 11.7187E-9)</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxsts-entry-resolution-indicators-group"><strong>resolution_indicators</strong>: (optional) <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-process-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-64"><span id="nxsts-entry-resolution-indicators-stm-head-temp-field"></span><strong>stm_head_temp</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-temperature"><span class="std std-ref">NX_TEMPERATURE</span></a>}</p>
+<blockquote>
+<div><p>Link to target: /NXentry/NXinstrument/stm_head_temp</p>
+</div></blockquote>
+<p id="index-65"><span id="nxsts-entry-resolution-indicators-cryo-bottom-temp-field"></span><strong>cryo_bottom_temp</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-temperature"><span class="std std-ref">NX_TEMPERATURE</span></a>}</p>
+<blockquote>
+<div><p>Link to target: /NXentry/NXinstrument/cryo_bottom_temp</p>
+</div></blockquote>
+<p id="index-66"><span id="nxsts-entry-resolution-indicators-cryo-shield-temp-field"></span><strong>cryo_shield_temp</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-temperature"><span class="std std-ref">NX_TEMPERATURE</span></a>}</p>
+<blockquote>
+<div><p>Link to target: /NXentry/NXinstrument/temp_cryo_shield</p>
+</div></blockquote>
+<p id="index-67"><span id="nxsts-entry-resolution-indicators-modulation-signal-field"></span><strong>modulation_signal</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-voltage"><span class="std std-ref">NX_VOLTAGE</span></a>}</p>
+<blockquote>
+<div><p>Link to target: /NXentry/NXinstrument/NXlock_in/modulation_signal</p>
+</div></blockquote>
+<p id="index-68"><span id="nxsts-entry-resolution-indicators-integration-time-field"></span><strong>integration_time</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/NXintegration_time</p>
+</details></div></blockquote>
+<p id="index-69"><span id="nxsts-entry-resolution-indicators-number-of-sweeps-field"></span><strong>number_of_sweeps</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/number_of_sweeps</p>
+</details></div></blockquote>
+<p id="index-70"><span id="nxsts-entry-resolution-indicators-sweep-start-field"></span><strong>sweep_start</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-voltage"><span class="std std-ref">NX_VOLTAGE</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/sweep_start</p>
+</details></div></blockquote>
+<p id="index-71"><span id="nxsts-entry-resolution-indicators-sweep-end-field"></span><strong>sweep_end</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-voltage"><span class="std std-ref">NX_VOLTAGE</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/sweep_end</p>
+</details></div></blockquote>
+<p id="index-72"><span id="nxsts-entry-resolution-indicators-num-pixel-field"></span><strong>num_pixel</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/num_pixel</p>
+</details></div></blockquote>
+<p id="index-73"><span id="nxsts-entry-resolution-indicators-z-avg-time-field"></span><strong>z_avg_time</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_avg_time</p>
+</details></div></blockquote>
+<p id="index-74"><span id="nxsts-entry-resolution-indicators-rt-frequency-field"></span><strong>rt_frequency</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-frequency"><span class="std std-ref">NX_FREQUENCY</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/rt_frequency</p>
+</details></div></blockquote>
+<p id="index-75"><span id="nxsts-entry-resolution-indicators-signals-oversampling-field"></span><strong>signals_oversampling</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/signals_oversampling</p>
+</details></div></blockquote>
+<p id="index-76"><span id="nxsts-entry-resolution-indicators-acquisition-period-field"></span><strong>acquisition_period</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/acquisition_period</p>
+</details></div></blockquote>
+<p id="index-77"><span id="nxsts-entry-resolution-indicators-animations-period-field"></span><strong>animations_period</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/animations_period</p>
+</details></div></blockquote>
+<p id="index-78"><span id="nxsts-entry-resolution-indicators-indicators-period-field"></span><strong>indicators_period</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/indicators_period</p>
+</details></div></blockquote>
+<p id="index-79"><span id="nxsts-entry-resolution-indicators-measurements-period-field"></span><strong>measurements_period</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXcircuit/measurements_period</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="nxsts-entry-reproducibility-indicators-group"><strong>reproducibility_indicators</strong>: (optional) <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-process-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-80"><span id="nxsts-entry-reproducibility-indicators-bias-field"></span><strong>bias</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-voltage"><span class="std std-ref">NX_VOLTAGE</span></a>}</p>
+<blockquote>
+<div><p>Link to target: /NXentry/NXinstrument/NXsample_bias/bias</p>
+</div></blockquote>
+<p id="index-81"><span id="nxsts-entry-reproducibility-indicators-current-field"></span><strong>current</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-current"><span class="std std-ref">NX_CURRENT</span></a>}</p>
+<blockquote>
+<div><p>Link to target: /NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current</p>
+</div></blockquote>
+<p id="index-82"><span id="nxsts-entry-reproducibility-indicators-bias-calibration-field"></span><strong>bias_calibration</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Link to target: /NXentry/NXnstrument/NXsample_bias/bias_calibration</p>
+</div></blockquote>
+<p id="index-83"><span id="nxsts-entry-reproducibility-indicators-bias-offset-field"></span><strong>bias_offset</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-voltage"><span class="std std-ref">NX_VOLTAGE</span></a>}</p>
+<blockquote>
+<div><p>Link to target: /NXentry/NXinstrument/NXsample_bias/bias_offset</p>
+</div></blockquote>
+<p id="index-84"><span id="nxsts-entry-reproducibility-indicators-current-calibration-field"></span><strong>current_calibration</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-current"><span class="std std-ref">NX_CURRENT</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current_calibration</p>
+</details></div></blockquote>
+<p id="index-85"><span id="nxsts-entry-reproducibility-indicators-current-offset-field"></span><strong>current_offset</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-current"><span class="std std-ref">NX_CURRENT</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current_offset</p>
+</details></div></blockquote>
+<p id="index-86"><span id="nxsts-entry-reproducibility-indicators-current-gain-field"></span><strong>current_gain</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXcurrent_sensor/current_gain</p>
+</details></div></blockquote>
+<p id="index-87"><span id="nxsts-entry-reproducibility-indicators-z-offset-field"></span><strong>z_offset</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_offset</p>
+</details></div></blockquote>
+<p id="index-88"><span id="nxsts-entry-reproducibility-indicators-settling-time-field"></span><strong>settling_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/settling_time</p>
+</details></div></blockquote>
+<p id="index-89"><span id="nxsts-entry-reproducibility-indicators-z-control-hold-field"></span><strong>z_control_hold</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_ccontroller_hold</p>
+</details></div></blockquote>
+<p id="index-90"><span id="nxsts-entry-reproducibility-indicators-final-z-field"></span><strong>final_z</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/record_final_z</p>
+</details></div></blockquote>
+<p id="index-91"><span id="nxsts-entry-reproducibility-indicators-first-settling-time-field"></span><strong>first_settling_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/first_settling_time</p>
+</details></div></blockquote>
+<p id="index-92"><span id="nxsts-entry-reproducibility-indicators-end-settling-time-field"></span><strong>end_settling_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/end_settling_time</p>
+</details></div></blockquote>
+<p id="index-93"><span id="nxsts-entry-reproducibility-indicators-z-control-time-field"></span><strong>z_control_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/z_control_time</p>
+</details></div></blockquote>
+<p id="index-94"><span id="nxsts-entry-reproducibility-indicators-max-slew-rate-field"></span><strong>max_slew_rate</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/max_slew_rate</p>
+</details></div></blockquote>
+<p id="index-95"><span id="nxsts-entry-reproducibility-indicators-backward-sweep-field"></span><strong>backward_sweep</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXsweep_control/NXbias_spectroscopy/backward_sweep</p>
+</details></div></blockquote>
+<p id="index-96"><span id="nxsts-entry-reproducibility-indicators-z-controller-name-field"></span><strong>z_controller_name</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/controller_name</p>
+</details></div></blockquote>
+<p id="index-97"><span id="nxsts-entry-reproducibility-indicators-z-controller-status-field"></span><strong>z_controller_status</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/controller_status</p>
+</details></div></blockquote>
+<p id="index-98"><span id="nxsts-entry-reproducibility-indicators-z-controller-setpoint-field"></span><strong>z_controller_setpoint</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-current"><span class="std std-ref">NX_CURRENT</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/set_point</p>
+</details></div></blockquote>
+<p id="index-99"><span id="nxsts-entry-reproducibility-indicators-y-control-p-gain-field"></span><strong>y_control_p_gain</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/p_gain</p>
+</details></div></blockquote>
+<p id="index-100"><span id="nxsts-entry-reproducibility-indicators-z-control-i-gain-field"></span><strong>z_control_i_gain</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/i_gain</p>
+</details></div></blockquote>
+<p id="index-101"><span id="nxsts-entry-reproducibility-indicators-z-control-time-const-field"></span><strong>z_control_time_const</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/time_const</p>
+</details></div></blockquote>
+<p id="index-102"><span id="nxsts-entry-reproducibility-indicators-z-control-tip-lift-field"></span><strong>z_control_tip_lift</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/tip_lift</p>
+</details></div></blockquote>
+<p id="index-103"><span id="nxsts-entry-reproducibility-indicators-z-control-switchoff-delay-field"></span><strong>z_control_switchoff_delay</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-link-to-target">
+<summary>Link to target: ...</summary><p>Link to target:
+/NXentry/NXinstrument/NXenvironment/NXposition/NXz_controller/switchoff_delay</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="nxsts-entry-sample-group"><strong>sample</strong>: (optional) <a class="reference internal" href="../base_classes/NXsample.html#nxsample"><span class="std std-ref">NXsample</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-sample-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-this-describes-the-sample-and-its-properties-as-well-as-constraints-that-ar">
+<summary>This describes the sample and its properties, as well as constraints that ar ...</summary><p>This describes the sample and its properties, as well as constraints that are
+applied to the sample before scanning.</p>
+</details><p id="index-104"><span id="nxsts-entry-sample-sample-prep-descripton-field"></span><strong>sample_prep_descripton</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>At this moment no base class available that can track entire sample preparation.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxsts-entry-data-group"><strong>DATA</strong>: (required) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-data-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-this-nxdata-should-contain-separate-fields-for-the-current-values-at-differe">
+<summary>This NXdata should contain separate fields for the current values at differe ...</summary><p>This NXdata should contain separate fields for the current values at different temperature setpoints, for example current_at_100C.
+There should also be two more fields called temperature and voltage containing the setpoint values.
+There should also be a field with an array of rank equal to the number of different temperature setpoints and each child’s dimension
+equal to the number of voltage setpoints.
+axes: bias_calc
+signals:
+li_demod_[1;2]_[X/Y]_[-;bwd;filt;bwd_filt]
+current_[-;bwd;filt;bwd_filt]
+temperature</p>
+</details></div></blockquote>
+<p id="nxsts-entry-single-point-group"><strong>single_point</strong>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-data-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Plot for a single point (x,y) with I vs. V curve.</p>
+</div></blockquote>
+<p id="nxsts-entry-line-scan-group"><strong>line_scan</strong>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-data-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Line scan with multiple I vs. V curves for different single (x,y) co-ordinates.</p>
+</div></blockquote>
+<p id="nxsts-entry-alternative-plot-group"><strong>alternative_plot</strong>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-data-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-plot-for-current-i-curve-in-the-2d-space-of-position-x-bias-v-which-ca">
+<summary>Plot for current(I) curve in the 2D space of (position(x), bias(V)) which ca ...</summary><p>Plot for current(I) curve in the 2D space of (position(x), bias(V)) which can be
+derived from the <cite>line_scan</cite> plot.</p>
+</details></div></blockquote>
+<p id="nxsts-entry-mesh-scan-group"><strong>mesh_scan</strong>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="NXsensor_scan.html#nxsensor-scan-entry-data-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Mesh scan with 2D slices of the above alternative plot for other y co-ordinates.</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<section id="hypertext-anchors">
+<h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
+<p>List of hypertext anchors for all groups, fields,
+attributes, and links defined in this class.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nxsts-entry-group"><span class="std std-ref">/NXsts/ENTRY-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-alternative-plot-group"><span class="std std-ref">/NXsts/ENTRY/alternative_plot-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-collection-identifier-field"><span class="std std-ref">/NXsts/ENTRY/collection_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-data-group"><span class="std std-ref">/NXsts/ENTRY/DATA-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-definition-field"><span class="std std-ref">/NXsts/ENTRY/definition-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-entry-identifier-field"><span class="std std-ref">/NXsts/ENTRY/entry_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-experiment-description-field"><span class="std std-ref">/NXsts/ENTRY/experiment_description-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-experiment-identifier-field"><span class="std std-ref">/NXsts/ENTRY/experiment_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-experiment-type-field"><span class="std std-ref">/NXsts/ENTRY/experiment_type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-cryo-bottom-temp-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/cryo_bottom_temp-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-cryo-shield-temp-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/cryo_shield_temp-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-current-amplifier-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/current_amplifier-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-current-sensor-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/current_sensor-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-current-sensor-calibration-time-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/current_sensor/calibration_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-current-sensor-current-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/current_sensor/current-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-current-sensor-current-calibration-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/current_sensor/current_calibration-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-current-sensor-current-gain-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/current_sensor/current_gain-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-current-sensor-current-offset-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/current_sensor/current_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-current-sensor-value-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/current_sensor/value-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-position-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/position-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-position-x-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/position/x-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-position-y-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/position/y-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-position-z-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/position/z-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-position-z-controller-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/position/z_controller-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-position-z-controller-z-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/position/z_controller/z-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-scan-control-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-scan-control-circuit-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/circuit-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-scan-control-circuit-channels-current-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/circuit/channels_current-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-scan-control-positioner-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/positioner-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-scan-control-positioner-lines-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/positioner/lines-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-scan-control-positioner-pixels-line-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/positioner/pixels_line-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-scan-control-positioner-scanfield-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/positioner/scanfield-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-scan-control-positioner-speed-backw-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/positioner/speed_backw-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-scan-control-positioner-speed-forw-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/positioner/speed_forw-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-scan-control-roi-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/roi-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-scan-control-roi-frame-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/roi/frame-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-scan-control-scan-angle-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_angle-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-scan-control-scan-direction-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_direction-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-scan-control-scan-offset-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-scan-control-scan-range-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/scan_control/scan_range-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-sweep-control-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-sweep-control-bias-spectroscopy-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/bias_spectroscopy-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-sweep-control-bias-spectroscopy-integration-time-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/bias_spectroscopy/integration_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-sweep-control-bias-spectroscopy-num-pixel-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/bias_spectroscopy/num_pixel-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-sweep-control-bias-spectroscopy-number-of-sweeps-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/bias_spectroscopy/number_of_sweeps-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-sweep-control-bias-spectroscopy-sweep-end-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/bias_spectroscopy/sweep_end-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-sweep-control-bias-spectroscopy-sweep-start-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/bias_spectroscopy/sweep_start-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-sweep-control-bias-spectroscopy-z-avg-time-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/bias_spectroscopy/z_avg_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-sweep-control-circuit-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/circuit-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-sweep-control-circuit-acquisition-period-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/circuit/acquisition_period-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-sweep-control-circuit-animations-period-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/circuit/animations_period-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-sweep-control-circuit-indicators-period-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/circuit/indicators_period-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-sweep-control-circuit-measurements-period-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/circuit/measurements_period-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-sweep-control-circuit-rt-frequency-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/circuit/rt_frequency-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-environment-sweep-control-circuit-signals-oversampling-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/ENVIRONMENT/sweep_control/circuit/signals_oversampling-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-hardware-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/hardware-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-lock-in-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/lock_in-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-lock-in-demodulated-signal-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/lock_in/demodulated_signal-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-lock-in-harmonic-order-n-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/lock_in/harmonic_order_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-lock-in-lock-in-data-flip-number-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/lock_in/lock_in_data_flip_number-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-lock-in-modulation-amplitude-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/lock_in/modulation_amplitude-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-lock-in-modulation-frequency-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/lock_in/modulation_frequency-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-lock-in-modulation-signal-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/lock_in/modulation_signal-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-lock-in-ref-phase-n-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/lock_in/ref_phase_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-lock-in-status-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/lock_in/status-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-output-cabling-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/output_cabling-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-piezo-config-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/piezo_config-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-piezo-config-2nd-order-corr-n-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/piezo_config/2nd_order_corr_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-piezo-config-active-calib-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/piezo_config/active_calib-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-piezo-config-calib-n-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/piezo_config/calib_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-piezo-config-curvature-radius-n-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/piezo_config/curvature_radius_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-piezo-config-drift-correction-status-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/piezo_config/drift_correction_status-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-piezo-config-drift-n-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/piezo_config/drift_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-piezo-config-hv-gain-n-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/piezo_config/hv_gain_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-piezo-config-tilt-n-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/piezo_config/tilt_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-sample-bias-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/sample_bias-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-sample-bias-bias-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/sample_bias/bias-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-sample-bias-bias-calibration-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/sample_bias/bias_calibration-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-sample-bias-bias-offset-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/sample_bias/bias_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-software-group"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/software-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-instrument-stm-head-temp-field"><span class="std std-ref">/NXsts/ENTRY/INSTRUMENT/stm_head_temp-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-line-scan-group"><span class="std std-ref">/NXsts/ENTRY/line_scan-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-mesh-scan-group"><span class="std std-ref">/NXsts/ENTRY/mesh_scan-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-group"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-backward-sweep-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/backward_sweep-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-bias-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/bias-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-bias-calibration-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/bias_calibration-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-bias-offset-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/bias_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-current-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/current-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-current-calibration-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/current_calibration-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-current-gain-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/current_gain-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-current-offset-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/current_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-end-settling-time-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/end_settling_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-final-z-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/final_z-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-first-settling-time-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/first_settling_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-max-slew-rate-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/max_slew_rate-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-settling-time-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/settling_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-y-control-p-gain-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/y_control_p_gain-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-z-control-hold-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/z_control_hold-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-z-control-i-gain-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/z_control_i_gain-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-z-control-switchoff-delay-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/z_control_switchoff_delay-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-z-control-time-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/z_control_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-z-control-time-const-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/z_control_time_const-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-z-control-tip-lift-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/z_control_tip_lift-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-z-controller-name-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/z_controller_name-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-z-controller-setpoint-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/z_controller_setpoint-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-z-controller-status-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/z_controller_status-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-reproducibility-indicators-z-offset-field"><span class="std std-ref">/NXsts/ENTRY/reproducibility_indicators/z_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-group"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-acquisition-period-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/acquisition_period-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-animations-period-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/animations_period-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-cryo-bottom-temp-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/cryo_bottom_temp-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-cryo-shield-temp-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/cryo_shield_temp-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-indicators-period-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/indicators_period-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-integration-time-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/integration_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-measurements-period-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/measurements_period-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-modulation-signal-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/modulation_signal-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-num-pixel-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/num_pixel-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-number-of-sweeps-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/number_of_sweeps-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-rt-frequency-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/rt_frequency-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-signals-oversampling-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/signals_oversampling-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-stm-head-temp-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/stm_head_temp-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-sweep-end-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/sweep_end-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-sweep-start-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/sweep_start-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-resolution-indicators-z-avg-time-field"><span class="std std-ref">/NXsts/ENTRY/resolution_indicators/z_avg_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-sample-group"><span class="std std-ref">/NXsts/ENTRY/sample-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-sample-sample-prep-descripton-field"><span class="std std-ref">/NXsts/ENTRY/sample/sample_prep_descripton-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-single-point-group"><span class="std std-ref">/NXsts/ENTRY/single_point-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxsts-entry-type-field"><span class="std std-ref">/NXsts/ENTRY/type-field</span></a></p></li>
+</ul>
+<dl class="simple">
+<dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXsts.nxdl.xml">https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXsts.nxdl.xml</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Examples data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ellipsometry-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sts-structure.html">8. Scanning Tunneling Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../laboratory-structure.html">11. Sample preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">13. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">14. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.205. NXsts</a><ul>
+<li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="NXstage_lab.html" title="previous chapter"><span class="section-number">2.3.3.3.204. </span>NXstage_lab</a></li>
+      <li>Next: <a href="NXsubsampling_filter.html" title="next chapter"><span class="section-number">2.3.3.3.206. </span>NXsubsampling_filter</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2024, The FAIRmat collaboration.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/NXsts.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
