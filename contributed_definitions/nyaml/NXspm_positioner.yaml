@@ -45,10 +45,11 @@ NXspm_positioner(NXpositioner):
       doc: |
         The set point for the z-controller to be fixed and the target value could be
         height or current.
-    controller_status(NX_BOOLEAN):
+    feedback_on(NX_BOOLEAN):
       exists: recommended
       doc: |
-        The status of the controller to say was PID has been used or not.
+        The status of the controller PID feedback system in z-axis is ON / OFF.
+        E.g., for constant height mode, the z-controller feedback system is off.
     tip_lift(NX_NUMBER):
       unit: NX_LENGTH
       doc: |
@@ -76,7 +77,7 @@ NXspm_positioner(NXpositioner):
     z_controller_hold(NX_BOOLEAN):
       doc: |
         Controller feedback system status: OFF / ON.
-        The :ref:`z_controller_hold` is True, refers feedback system off
+        The `z_controller_hold-field` is True, refers feedback system off
         (mostly case in STS bias spectra) and False refers feedback system on
         (mostly case in STM constant current spectra).
     final_z(NX_NUMBER):
@@ -92,7 +93,7 @@ NXspm_positioner(NXpositioner):
     feedback(NXpid_controller):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# fdaa72c9b9919d804ad5a4775fc9ca9b6a3753840da558bb1ba1c58c7c37786d
+# 0e95874426bf8ed5770043e963a4a77a06e41173a3dcaca063041f496a49c492
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -165,9 +166,10 @@ NXspm_positioner(NXpositioner):
 #                 height or current.
 #             </doc>
 #         </field>
-#         <field name="controller_status" type="NX_BOOLEAN" recommended="true">
+#         <field name="feedback_on" type="NX_BOOLEAN" recommended="true">
 #             <doc>
-#                 The status of the controller to say was PID has been used or not.
+#                 The status of the controller PID feedback system in z-axis is ON / OFF.
+#                 E.g., for constant height mode, the z-controller feedback system is off.
 #             </doc>
 #         </field>
 #         <field name="tip_lift" type="NX_NUMBER" units="NX_LENGTH">
@@ -202,7 +204,7 @@ NXspm_positioner(NXpositioner):
 #         <field name="z_controller_hold" type="NX_BOOLEAN">
 #             <doc>
 #                 Controller feedback system status: OFF / ON.
-#                 The :ref:`z_controller_hold` is True, refers feedback system off
+#                 The `z_controller_hold-field` is True, refers feedback system off
 #                 (mostly case in STS bias spectra) and False refers feedback system on
 #                 (mostly case in STM constant current spectra).
 #             </doc>

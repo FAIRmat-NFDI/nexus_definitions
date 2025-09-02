@@ -16,13 +16,13 @@ NXsts(NXspm):
     experiment_technique:
       doc: |
         The specific to STM experiment.
-      enumeration: [STM]
+      enumeration: [STS]
     scan_mode:
       doc: |
         The mode between the tip and sample of the tunneling spectroscopy experiment.
       enumeration:
         open_enum: true
-        items: [constant_height, constant_current, constant_spacing]
+        items: [constant height, constant current, constant spacing]
     (NXinstrument):
       lockin_amplifier(NXlockin):
         exists: recommended
@@ -33,6 +33,11 @@ NXsts(NXspm):
         nameType: partial
         doc: |
           Information for current sensor.
+      SCAN_ENVIRONMENT(NXenvironment):
+        nameType: any
+        exists: optional
+        (NXspm_scan_control):
+          exists: recommended
       bias_spectroscopy_environment(NXenvironment):
         doc: |
           To explain bias (sweep measurement) voltage applied to the sample.
@@ -160,7 +165,7 @@ NXsts(NXspm):
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 67abcf040144e7834d6d0930feabb4bc377654b501dba6dc61679a4a5a818e96
+# bc944d2510edb2facc2972e1dbe15282f1cbbc02fdf6b00a5167f08683ab97a7
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -207,7 +212,7 @@ NXsts(NXspm):
 #                 The specific to STM experiment.
 #             </doc>
 #             <enumeration>
-#                 <item value="STM"/>
+#                 <item value="STS"/>
 #             </enumeration>
 #         </field>
 #         <field name="scan_mode">
@@ -215,9 +220,9 @@ NXsts(NXspm):
 #                 The mode between the tip and sample of the tunneling spectroscopy experiment.
 #             </doc>
 #             <enumeration open="true">
-#                 <item value="constant_height"/>
-#                 <item value="constant_current"/>
-#                 <item value="constant_spacing"/>
+#                 <item value="constant height"/>
+#                 <item value="constant current"/>
+#                 <item value="constant spacing"/>
 #             </enumeration>
 #         </field>
 #         <group type="NXinstrument">
@@ -230,6 +235,9 @@ NXsts(NXspm):
 #                 <doc>
 #                     Information for current sensor.
 #                 </doc>
+#             </group>
+#             <group name="SCAN_ENVIRONMENT" type="NXenvironment" nameType="any" optional="true">
+#                 <group type="NXspm_scan_control" recommended="true"/>
 #             </group>
 #             <group name="bias_spectroscopy_environment" type="NXenvironment">
 #                 <doc>

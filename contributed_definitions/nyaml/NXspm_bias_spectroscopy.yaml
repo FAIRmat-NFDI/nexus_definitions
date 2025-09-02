@@ -14,6 +14,13 @@ NXspm_bias_spectroscopy(NXobject):
       The measurement type defines how current is measured under the different input variables like
       bias voltage (constant_spacing) or height (variadic_spacing) is applied during the measurement.
     enumeration: [constant_spacing, variadic_spacing]
+  identifier_environment:
+    exists: recommended
+    doc: |
+      Unique identifier for the environment defined by the user or lab. When multiple scans are performed
+      in a single environment conditions or settings, the entire scan environment can be differentiated
+      by this identifier. For example, scan on a sample of TiSe2 with layered of evaporated pyrene and
+      annealed at 300K temperature for 5 min process.
   (NXspm_positioner):
     doc: |
       Information about the positioner PID (proportional, integral, differential feedback system),
@@ -138,24 +145,28 @@ NXspm_bias_spectroscopy(NXobject):
         doc: |
           The reset_bias defines whether the bias voltage should be reset to the starting
           value after the sweep is completed.
-      SCAN_DATA(NXdata):
+      (NXdata):
         nameType: any
         doc: |
           The scan data is the data collected during the scan.
           If the scan has several channels or derivatives from the channel data,
           please duplicate this NXdata group for each.
-        current:
-          unit: NX_CURRENT
-          doc: |
-            The tip current collected during the scan. Data to be plotted against
-            the axis defined in voltage field. Use this data as signal attributes.
-        voltage:
-          unit: NX_VOLTAGE
-          doc: |
-            Applied voltage on sample during the scan.
+          
+          To define specific current or voltage use :ref:`DATA <NXdata/DATA-field>`
+          and :ref:`AXISNAME <NXdata/AXISNAME-field>`.
+  
+  # current:
+  # unit: NX_CURRENT
+  # doc: |
+  # The tip current collected during the scan. Data to be plotted against
+  # the axis defined in voltage field. Use this data as signal attributes.
+  # voltage:
+  # unit: NX_VOLTAGE
+  # doc: |
+  # Applied voltage on sample during the scan.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# ed6a2a78944b6d68429cf095efc1a7831e5bb39c8b9f6772dd075cdbb17ce49a
+# 3b33fd33088f4fc73f503a457d351e4a74d55bc6e7861c9cab25cf13b48798e9
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -198,6 +209,14 @@ NXspm_bias_spectroscopy(NXobject):
 #             <item value="constant_spacing"/>
 #             <item value="variadic_spacing"/>
 #         </enumeration>
+#     </field>
+#     <field name="identifier_environment" recommended="true">
+#         <doc>
+#             Unique identifier for the environment defined by the user or lab. When multiple scans are performed
+#             in a single environment conditions or settings, the entire scan environment can be differentiated
+#             by this identifier. For example, scan on a sample of TiSe2 with layered of evaporated pyrene and
+#             annealed at 300K temperature for 5 min process.
+#         </doc>
 #     </field>
 #     <group type="NXspm_positioner">
 #         <doc>
@@ -355,24 +374,25 @@ NXspm_bias_spectroscopy(NXobject):
 #                     value after the sweep is completed.
 #                 </doc>
 #             </field>
-#             <group name="SCAN_DATA" type="NXdata" nameType="any">
+#             <group type="NXdata" nameType="any">
 #                 <doc>
 #                     The scan data is the data collected during the scan.
 #                     If the scan has several channels or derivatives from the channel data,
 #                     please duplicate this NXdata group for each.
+#                     
+#                     To define specific current or voltage use :ref:`DATA &lt;NXdata/DATA-field&gt;`
+#                     and :ref:`AXISNAME &lt;NXdata/AXISNAME-field&gt;`.
 #                 </doc>
-#                 <field name="current" units="NX_CURRENT">
-#                     <doc>
-#                         The tip current collected during the scan. Data to be plotted against
-#                         the axis defined in voltage field. Use this data as signal attributes.
-#                     </doc>
-#                 </field>
-#                 <field name="voltage" units="NX_VOLTAGE">
-#                     <doc>
-#                         Applied voltage on sample during the scan.
-#                     </doc>
-#                 </field>
 #             </group>
 #         </group>
 #     </group>
+#     <!--current:
+#   unit: NX_CURRENT
+#   doc: |
+#     The tip current collected during the scan. Data to be plotted against
+#     the axis defined in voltage field. Use this data as signal attributes.
+# voltage:
+#   unit: NX_VOLTAGE
+#   doc: |
+#     Applied voltage on sample during the scan.-->
 # </definition>
