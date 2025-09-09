@@ -3,7 +3,7 @@
 <!--
 # NeXus - Neutron and X-ray Common Data Format
 #
-# Copyright (C) 2025-2025 NeXus International Advisory Committee (NIAC)
+# Copyright (C) 2014-2025 NeXus International Advisory Committee (NIAC)
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -33,15 +33,26 @@
         <doc>
             The reference amplitude (also called drive amplitude) of the cantilever.
             This is the amplitude of the cantilever oscillation when no external forces are acting on it.
+            
+            Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
         </doc>
     </field>
     <field name="reference_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
         <doc>
             The reference frequency (also called drive frequency or resonance frequency) of
             the cantilever.
+            
+            Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
         </doc>
     </field>
-    <field name="frequency_harmonic" type="NX_NUMBER" units="NX_FREQUENCY">
+    <field name="reference_phase" type="NX_NUMBER" units="NX_ANGLE">
+        <doc>
+            The reference phase of the cantilever oscillator.
+                
+            Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
+        </doc>
+    </field>
+    <field name="frequency_harmonic" type="NX_NUMBER" units="NX_DIMENSIONLESS">
         <doc>
             The harmonic (e.g., second harmonic of the fundamental frequency) frequency of
             the cantilever.
@@ -83,11 +94,6 @@
     <field name="active_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
         <doc>
             The active frequency of the cantilever to start the experiment.
-        </doc>
-    </field>
-    <field name="reference_phase" type="NX_NUMBER" units="NX_ANGLE">
-        <doc>
-            The reference phase of the cantilever oscillator.
         </doc>
     </field>
 </definition>

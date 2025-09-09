@@ -12,13 +12,23 @@ NXspm_cantilever_oscillator(NXobject):
     doc: |
       The reference amplitude (also called drive amplitude) of the cantilever.
       This is the amplitude of the cantilever oscillation when no external forces are acting on it.
+      
+      Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
   reference_frequency(NX_NUMBER):
     unit: NX_FREQUENCY
     doc: |
       The reference frequency (also called drive frequency or resonance frequency) of
       the cantilever.
+      
+      Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
+  reference_phase(NX_NUMBER):
+    unit: NX_ANGLE
+    doc: |
+      The reference phase of the cantilever oscillator.
+          
+      Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
   frequency_harmonic(NX_NUMBER):
-    unit: NX_FREQUENCY
+    unit: NX_DIMENSIONLESS
     doc: |
       The harmonic (e.g., second harmonic of the fundamental frequency) frequency of
       the cantilever.
@@ -53,19 +63,15 @@ NXspm_cantilever_oscillator(NXobject):
     unit: NX_FREQUENCY
     doc: |
       The active frequency of the cantilever to start the experiment.
-  reference_phase(NX_NUMBER):
-    unit: NX_ANGLE
-    doc: |
-      The reference phase of the cantilever oscillator.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# fbdb2b18c743dfa319efcb0a9242da90113d4b226c0f7811ee08103fd8fd5082
+# 601d0cb9864edcc83b70f48fbe8668ad2e21f39883ba0800b9e2aa1ca149963b
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
 # # NeXus - Neutron and X-ray Common Data Format
 # #
-# # Copyright (C) 2025-2025 NeXus International Advisory Committee (NIAC)
+# # Copyright (C) 2014-2025 NeXus International Advisory Committee (NIAC)
 # #
 # # This library is free software; you can redistribute it and/or
 # # modify it under the terms of the GNU Lesser General Public
@@ -95,15 +101,26 @@ NXspm_cantilever_oscillator(NXobject):
 #         <doc>
 #             The reference amplitude (also called drive amplitude) of the cantilever.
 #             This is the amplitude of the cantilever oscillation when no external forces are acting on it.
+#             
+#             Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
 #         </doc>
 #     </field>
 #     <field name="reference_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
 #         <doc>
 #             The reference frequency (also called drive frequency or resonance frequency) of
 #             the cantilever.
+#             
+#             Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
 #         </doc>
 #     </field>
-#     <field name="frequency_harmonic" type="NX_NUMBER" units="NX_FREQUENCY">
+#     <field name="reference_phase" type="NX_NUMBER" units="NX_ANGLE">
+#         <doc>
+#             The reference phase of the cantilever oscillator.
+#                 
+#             Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
+#         </doc>
+#     </field>
+#     <field name="frequency_harmonic" type="NX_NUMBER" units="NX_DIMENSIONLESS">
 #         <doc>
 #             The harmonic (e.g., second harmonic of the fundamental frequency) frequency of
 #             the cantilever.
@@ -145,11 +162,6 @@ NXspm_cantilever_oscillator(NXobject):
 #     <field name="active_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
 #         <doc>
 #             The active frequency of the cantilever to start the experiment.
-#         </doc>
-#     </field>
-#     <field name="reference_phase" type="NX_NUMBER" units="NX_ANGLE">
-#         <doc>
-#             The reference phase of the cantilever oscillator.
 #         </doc>
 #     </field>
 # </definition>
