@@ -37,14 +37,16 @@ The application definition contains a minimum of descriptive elements required t
 Application Definitions
 -----------------------
 
-    :ref:`NXoptical_spectroscopy`:
-       A generic application definition for spectroscopy measurements. This includes in particular ellipsometry and Raman spectroscopy measurements, but also other techniques such as photoluminescence, transmission, and reflection measurements. The requirements are: (i) an incident photon beam, (ii) a detector to measure scattered/emitted photons, and (iii) a sample.
+:ref:`NXoptical_spectroscopy`
+    A generic application definition for spectroscopy measurements. This includes in particular ellipsometry and Raman spectroscopy measurements,
+    but also other techniques such as photoluminescence, transmission, and reflection measurements. The requirements are:
+    (i) an incident photon beam, (ii) a detector to measure scattered/emitted photons, and (iii) a sample.
 
-    :ref:`NXellipsometry`:
-       An application definition for ellipsometry measurements, including complex systems up to variable angle spectroscopic ellipsometry.
+:ref:`NXellipsometry`
+    An application definition for ellipsometry measurements, including complex systems up to variable angle spectroscopic ellipsometry.
 
-    :ref:`NXraman`:
-       An application definition for Raman spectroscopy measurements.
+:ref:`NXraman`
+    An application definition for Raman spectroscopy measurements.
 
 Base classes
 #######################

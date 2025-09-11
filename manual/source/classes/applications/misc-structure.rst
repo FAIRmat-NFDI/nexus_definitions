@@ -20,32 +20,32 @@ Set of miscellaneous classical NeXus application definitions.
 Application Definitions
 #######################
 
-:ref:`NXarchive`:
+:ref:`NXarchive`
 
-:ref:`NXfluo`:
+:ref:`NXfluo`
 
-:ref:`NXmx`:
+:ref:`NXmx`
 
-:ref:`NXrefscan`:
+:ref:`NXrefscan`
 
-:ref:`NXscan`:
+:ref:`NXscan`
 
-:ref:`NXspe`:
+:ref:`NXspe`
 
-:ref:`NXsqom`:
+:ref:`NXsqom`
 
-:ref:`NXstxm`:
+:ref:`NXstxm`
 
-:ref:`NXtas`:
+:ref:`NXtas`
 
-:ref:`NXtomo`:
+:ref:`NXtomo`
 
-:ref:`NXtomophase`:
+:ref:`NXtomophase`
 
-:ref:`NXtomoproc`:
+:ref:`NXtomoproc`
 
-:ref:`NXxas`:
+:ref:`NXxas`
 
-:ref:`NXxasproc`:
+:ref:`NXxasproc`
     
     

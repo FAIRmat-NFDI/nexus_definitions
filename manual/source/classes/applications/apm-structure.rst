@@ -25,11 +25,11 @@ Application Definition
 There exists a single application definition to serve atom probe tomography
 and field-ion microscopy measurements, i.e. the data collection with the instrument:
 
-:ref:`NXapm`:
-A general application definition with many detailed places for leaving metadata
-and computational steps described which are commonly used when reporting the
-measurement of atom probe data including also detector hit data, as well as how
-to proceed with reconstructing atom positions from these data, and how to store
-details about definitions made, which describe how mass-to-charge-state ratio
-values are mapped to iontypes in a process called ranging.
+:ref:`NXapm`
+    A general application definition with many detailed places for leaving metadata
+    and computational steps described which are commonly used when reporting the
+    measurement of atom probe data including also detector hit data, as well as how
+    to proceed with reconstructing atom positions from these data, and how to store
+    details about definitions made, which describe how mass-to-charge-state ratio
+    values are mapped to iontypes in a process called ranging.
 

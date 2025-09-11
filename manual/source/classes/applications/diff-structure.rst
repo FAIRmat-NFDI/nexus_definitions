@@ -20,31 +20,31 @@ Set of classical NeXus application definitions for diffraction.
 Application Definitions
 #######################
 
-:ref:`NXiqproc`:
+:ref:`NXiqproc`
 
-:ref:`NXlauetof`:
+:ref:`NXlauetof`
 
-:ref:`NXmonopd`:
+:ref:`NXmonopd`
 
-:ref:`NXtomo`:
+:ref:`NXtomo`
 
-:ref:`NXtomophase`:
+:ref:`NXtomophase`
 
-:ref:`NXtomoproc`:
+:ref:`NXtomoproc`
 
-:ref:`NXxbase`:
+:ref:`NXxbase`
 
-:ref:`NXxeuler`:
+:ref:`NXxeuler`
 
-:ref:`NXxkappa`:
+:ref:`NXxkappa`
 
-:ref:`NXxlaue`:
+:ref:`NXxlaue`
 
-:ref:`NXxlaueplate`:
+:ref:`NXxlaueplate`
 
-:ref:`NXxnb`:
+:ref:`NXxnb`
 
-:ref:`NXxrot`:
+:ref:`NXxrot`
     
 
     

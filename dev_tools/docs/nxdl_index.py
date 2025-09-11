@@ -42,13 +42,10 @@ def nxdl_indices() -> Dict[str, dict]:
             classes = sections[source]["classes"]
             rst_lines = sections[source]["rst_lines"]
 
-        print(f"{nxdl_file} >>>>>> {source}")
         nxclass_name = nxdl_file.with_suffix("").stem
         classes.append(nxclass_name)
         summary = get_nxclass_description(nxdl_file, namespaces)
-        # if "NXcg" in nxclass_name or "NXapm" in nxclass_name or "NXms" in nxclass_name:
-        #     continue
-        if source == "applications":
+        if source in ["applications", "contributed_definitions"]:
             continue
         rst_lines.append("\n")
         rst_lines.append(f":ref:`{nxclass_name}`\n")
@@ -70,7 +67,16 @@ def nxdl_indices() -> Dict[str, dict]:
             file = ""
             print("---------++++++++-", section)
         if file.endswith("applications/index.rst"):
-            for domain in ["apm", "diff", "em", "misc", "mpes", "optical-spectroscopy", "sas", "tof"]:
+            for domain in [
+                "apm",
+                "diff",
+                "em",
+                "misc",
+                "mpes",
+                "optical-spectroscopy",
+                "sas",
+                "tof",
+            ]:
                 rst_lines.append(f"{indentation}{domain}-structure\n")
         if file.endswith("base_classes/index.rst"):
             rst_lines.append(f"{indentation}apm-structure\n")
@@ -79,9 +85,19 @@ def nxdl_indices() -> Dict[str, dict]:
             rst_lines.append(f"{indentation}mpes-structure\n")
             rst_lines.append(f"{indentation}optical-spectroscopy-structure\n")
         if file.endswith("contributed_definitions/index.rst"):
-            rst_lines.append(f"{indentation}apm-structure\n")
-            rst_lines.append(f"{indentation}optical-spectroscopy-structure\n")
-            rst_lines.append(f"{indentation}transport-structure\n")
+            for domain in [
+                "misc",
+                "beam",
+                "sample",
+                "computer",
+                "danalysis",
+                "cg",
+                "apm",
+                "optical-spectroscopy",
+                "transport",
+                "micro",
+            ]:
+                rst_lines.append(f"{indentation}{domain}-structure\n")
         for cname in sorted(classes):
             rst_lines.append(f"{indentation}{cname}\n")
 
@@ -181,10 +197,9 @@ are listed in each category in this tag-based approach:
 
   :ref:`Time-of-flight methods <AppDef-Tof-Structure>`
      """,
-
-# and others are simply listed here:
-# 
-#    """,
+    # and others are simply listed here:
+    #
+    #    """,
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     "contributed_definitions": """
 .. index::
@@ -199,18 +214,35 @@ Contributed Definitions
 A description of each NeXus contributed definition is given.
 NXDL files in the NeXus contributed definitions include propositions from
 the community for NeXus base classes or application definitions, as well
-as other NXDL files for long-term archival by NeXus.  Consider the contributed
+as other NXDL files for long-term archival by NeXus. Consider the contributed
 definitions as either in *incubation* or a special
 case not for general use.  The :ref:`NIAC` is charged to review any new contributed
 definitions and provide feedback to the authors before ratification
 and acceptance as either a base class or application definition.
 
-Some contributions are grouped together:
-  :ref:`Optical Spectroscopy <Contributed-Opt-Spec-Structure>`
+These contributions are grouped together based on topics and research fields
+for their typical usage. Definitions that touch multiple research fields or
+topics are listed in each category in this tag-based approach:
 
-  :ref:`Transport Measurements <Contributed-Transport-Structure>`
+  :ref:`Miscellaneous <CC-Miscellaneous-Structure>`
+ 
+  :ref:`Working with beams <CC-Beam-Structure>`
 
-and others are simply listed here:
+  :ref:`Working with samples <CC-Sample-Structure>`
+
+  :ref:`Working with computers <CC-Computer-Structure>`
+
+  :ref:`Conventions and data analysis <CC-Danalysis-Structure>`
+    
+  :ref:`Computational and constructive solid geometry <CC-Cgeometry-Structure>`
+
+  :ref:`Atom Probe Microscopy <CC-Apm-Structure>`
+  
+  :ref:`Optical Spectroscopy <CC-Opt-Spec-Structure>`
+
+  :ref:`Transport Measurements <CC-Transport-Structure>`
+
+  :ref:`Microstructure <CC-Micro-Structure>`
 
     """,
 }

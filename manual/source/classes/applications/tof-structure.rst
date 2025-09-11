@@ -20,20 +20,20 @@ Set of classical NeXus application definitions for time-of-flight (spectroscopy)
 Application Definitions
 #######################
 
-:ref:`NXdirecttof`:
+:ref:`NXdirecttof`
 
-:ref:`NXindirecttof`:
+:ref:`NXindirecttof`
 
-:ref:`NXlauetof`:
+:ref:`NXlauetof`
 
-:ref:`NXreftof`:
+:ref:`NXreftof`
 
-:ref:`NXsastof`:
+:ref:`NXsastof`
 
-:ref:`NXtofnpd`:
+:ref:`NXtofnpd`
 
-:ref:`NXtofraw`:
+:ref:`NXtofraw`
 
-:ref:`NXtofsingle`:
+:ref:`NXtofsingle`
     
     
