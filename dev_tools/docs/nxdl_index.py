@@ -45,8 +45,12 @@ def nxdl_indices() -> Dict[str, dict]:
         nxclass_name = nxdl_file.with_suffix("").stem
         classes.append(nxclass_name)
         summary = get_nxclass_description(nxdl_file, namespaces)
-        if source in ["applications", "contributed_definitions"]:
-            continue
+        # if source in ["applications",
+        #               # "base_classes",
+        #               "contributed_definitions"]:
+        #     continue
+        # for falling back to classical list of all classes per source/domain
+        # deactivate the if statement
         rst_lines.append("\n")
         rst_lines.append(f":ref:`{nxclass_name}`\n")
         rst_lines.append(f"{indentation}{summary}\n")
@@ -79,11 +83,20 @@ def nxdl_indices() -> Dict[str, dict]:
             ]:
                 rst_lines.append(f"{indentation}{domain}-structure\n")
         if file.endswith("base_classes/index.rst"):
-            rst_lines.append(f"{indentation}apm-structure\n")
-            rst_lines.append(f"{indentation}cgms-structure\n")
-            rst_lines.append(f"{indentation}em-structure\n")
-            rst_lines.append(f"{indentation}mpes-structure\n")
-            rst_lines.append(f"{indentation}optical-spectroscopy-structure\n")
+            for domain in [
+                "core",
+                "tech"
+                # "beam",
+                "sample",
+                "computer",
+                "danalysis",
+                "cg",
+                "apm",
+                "em",
+                "mpes",
+                "optical-spectroscopy"
+            ]:
+                rst_lines.append(f"{indentation}{domain}-structure\n")
         if file.endswith("contributed_definitions/index.rst"):
             for domain in [
                 "misc",
@@ -135,10 +148,21 @@ NeXus base class definitions define the set of terms that
 Consider the base classes as a set of *components*
 that are used to construct a data file.
 
-Some base classes are grouped together:
-  :ref:`Atom Probe Microscopy <BC-Apm-Structure>`
+Base classes are grouped together ADDADDADDADDADD
 
-  :ref:`Computational Geometry and Microstructures <BC-Cgms-Structure>`
+  :ref:`Core Classes <BC-Core-Structure>`
+
+  :ref:`Instrument Components <BC-Tech-Structure>`
+
+  :ref:`Working with Samples <BC-Sample-Structure>`
+
+  :ref:`Working with Computers <BC-Computer-Structure>`
+
+  :ref:`Conventions, Reference Frames, and Data Analysis <BC-Danalysis-Structure>`
+
+  :ref:`Computational and Constructive Solid Geometry <BC-Cgeometry-Structure>`
+
+  :ref:`Atom Probe Microscopy <BC-Apm-Structure>`
 
   :ref:`Electron Microscopy <BC-Em-Structure>`
 
@@ -146,8 +170,7 @@ Some base classes are grouped together:
 
   :ref:`Optical Spectroscopy <BC-Opt-Spec-Structure>`
 
-and others are simply listed here:
-
+A full list of base classes is available here:
     """,
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     "applications": """
@@ -196,7 +219,9 @@ are listed in each category in this tag-based approach:
   :ref:`Small-angle scattering <AppDef-Sas-Structure>`
 
   :ref:`Time-of-flight methods <AppDef-Tof-Structure>`
-     """,
+
+A full list of application definitions is available here:
+    """,
     # and others are simply listed here:
     #
     #    """,
@@ -244,5 +269,6 @@ topics are listed in each category in this tag-based approach:
 
   :ref:`Microstructure <CC-Micro-Structure>`
 
+A full list of contributed_definitions is available here:
     """,
 }
