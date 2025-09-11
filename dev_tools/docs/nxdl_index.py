@@ -42,10 +42,13 @@ def nxdl_indices() -> Dict[str, dict]:
             classes = sections[source]["classes"]
             rst_lines = sections[source]["rst_lines"]
 
+        print(f"{nxdl_file} >>>>>> {source}")
         nxclass_name = nxdl_file.with_suffix("").stem
         classes.append(nxclass_name)
         summary = get_nxclass_description(nxdl_file, namespaces)
-        if "NXcg" in nxclass_name or "NXapm" in nxclass_name or "NXms" in nxclass_name:
+        # if "NXcg" in nxclass_name or "NXapm" in nxclass_name or "NXms" in nxclass_name:
+        #     continue
+        if source == "applications":
             continue
         rst_lines.append("\n")
         rst_lines.append(f":ref:`{nxclass_name}`\n")
@@ -67,10 +70,8 @@ def nxdl_indices() -> Dict[str, dict]:
             file = ""
             print("---------++++++++-", section)
         if file.endswith("applications/index.rst"):
-            rst_lines.append(f"{indentation}apm-structure\n")
-            rst_lines.append(f"{indentation}em-structure\n")
-            rst_lines.append(f"{indentation}mpes-structure\n")
-            rst_lines.append(f"{indentation}optical-spectroscopy-structure\n")
+            for domain in ["apm", "diff", "em", "misc", "mpes", "optical-spectroscopy", "sas", "tof"]:
+                rst_lines.append(f"{indentation}{domain}-structure\n")
         if file.endswith("base_classes/index.rst"):
             rst_lines.append(f"{indentation}apm-structure\n")
             rst_lines.append(f"{indentation}cgms-structure\n")
@@ -160,18 +161,30 @@ In application definitions involving raw data,
 write the raw data in the :ref:`NXinstrument` tree and then link to it
 from the location(s) defined in the relevant application definition.
 
-Some application definitions are grouped together:
+Application definitions are grouped together based on the research fields
+for their typical usage. Definitions that touch multiple research fields
+are listed in each category in this tag-based approach:
+
   :ref:`Atom Probe Microscopy <AppDef-Apm-Structure>`
 
+  :ref:`Diffraction <AppDef-Diff-Structure>`
+
   :ref:`Electron Microscopy <AppDef-Em-Structure>`
+
+  :ref:`Miscellaneous <AppDef-Misc-Structure>`
 
   :ref:`Multi-dimensional Photoemission Spectroscopy <AppDef-Mpes-Structure>`
 
   :ref:`Optical Spectroscopy <AppDef-Opt-Spec-Structure>`
 
-and others are simply listed here:
+  :ref:`Small-angle scattering <AppDef-Sas-Structure>`
 
-    """,
+  :ref:`Time-of-flight methods <AppDef-Tof-Structure>`
+     """,
+
+# and others are simply listed here:
+# 
+#    """,
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     "contributed_definitions": """
 .. index::
