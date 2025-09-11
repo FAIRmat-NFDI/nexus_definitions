@@ -34,7 +34,7 @@ Base classes
 ############
 
 :ref:`NXelectrostatic_kicker`
-    definition for a electrostatic kicker.
+    Definition for an electrostatic kicker.
 
 :ref:`NXfiber`
     An optical fiber, e.g. glass fiber.

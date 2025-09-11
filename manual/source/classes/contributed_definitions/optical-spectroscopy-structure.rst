@@ -71,9 +71,9 @@ There is a set of base classes for describing a dispersion.
 
 :ref:`NXdispersion`
     This is an umbrella base class for a group of dispersion functions to describe the material.
-    For a simple dispersion it may contain only on NXdispersion_function or NXdispersion_table entry.
+    For a simple dispersion it may contain only one NXdispersion_function or NXdispersion_table entry.
     If it contains multiple entries the actual dispersion is the sum of all dispersion functions and tables.
-    This allows for, e.g. splitting real and imaginary parts and describing them seperately or
+    This allows for, e.g. splitting real and imaginary parts and describing them separately or
     adding a dielectric background (e.g. Sellmeier model) to an oscillator model (e.g. Lorentz).
       
 :ref:`NXdispersion_function`

@@ -119,6 +119,6 @@ beam electromagnetic field.
 There currently exists a single application definition for describing EM experiments:
 
 :ref:`NXem`
-    A general application definition which explores the possibilities of electron microscopes for characterizing 
-    electron- and ion-beam matter interactions.
+    A general application definition which explores the possibilities of electron microscopes
+    for characterizing electron- and ion-beam matter interactions.
 

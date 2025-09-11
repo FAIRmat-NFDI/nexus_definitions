@@ -20,11 +20,14 @@ Set of classical NeXus application definitions for small angle scattering.
 Application Definitions
 #######################
 
-:ref:`NXcanSAS`:
+:ref:`NXcanSAS`
+    Implementation of the canSAS standard to store reduced small-angle scattering data of any dimension.
 
-:ref:`NXsas`:
+:ref:`NXsas`
+    Raw, monochromatic 2-D SAS data with an area detector.
 
-:ref:`NXsastof`:
+:ref:`NXsastof`
+    Raw 2-D SAS data with an area detector with a time-of-flight source.
     
     
     

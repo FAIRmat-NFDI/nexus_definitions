@@ -28,14 +28,14 @@ Application Definitions
    A simple legacy application definition for angular resolved photo emission spectroscopy.
 
 :ref:`NXmpes`
-   A general application definition with minimalistic metadata requirements, apt to describe all photoemission experiments.
+   A general application definition with minimalistic metadata requirements,
+   apt to describe all photoemission experiments.
 
 :ref:`NXmpes_arpes`
    An application definition for angle-resolved photoemission spectroscopy (ARPES) experiments.
 
 :ref:`NXxps`
    An application definition for X-ray/UV photoelectron spectroscopy (XPS/UPS) experiments.
-
 
 Base classes
 #######################
