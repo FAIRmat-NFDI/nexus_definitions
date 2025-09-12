@@ -248,7 +248,7 @@ where these are typically used. Definitions that address multiple
 research fields are listed in each category:
 
   :ref:`Miscellaneous Definitions <CC-Miscellaneous-Structure>`
- 
+
   :ref:`Working with Beams <CC-Beam-Structure>`
 
   :ref:`Working with Samples <CC-Sample-Structure>`
@@ -256,11 +256,11 @@ research fields are listed in each category:
   :ref:`Working with Computers <CC-Computer-Structure>`
 
   :ref:`Conventions and Data Analysis <CC-Danalysis-Structure>`
-    
+
   :ref:`Computational and Constructive Solid Geometry <CC-Cgeometry-Structure>`
 
   :ref:`Atom Probe Microscopy <CC-Apm-Structure>`
-  
+
   :ref:`Optical Spectroscopy <CC-Opt-Spec-Structure>`
 
   :ref:`Transport Measurements <CC-Transport-Structure>`
