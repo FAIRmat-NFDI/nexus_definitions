@@ -1,7 +1,7 @@
 .. _AppDef-Tof-Structure:
 
 ==================================
-Time-of-flight (TOF) techniques
+Time-of-Flight (TOF) Techniques
 ==================================
 
 .. index::
@@ -13,7 +13,7 @@ Time-of-flight (TOF) techniques
 Introduction
 ############
 
-Set of classical NeXus application definitions for time-of-flight (spectroscopy).
+Classical application definitions for time-of-flight (spectroscopy) techniques.
 
 .. _AppDef-Tof-Definitions:
 

@@ -27,7 +27,7 @@ Raman spectroscopy
 ##################
 
 Raman spectroscopy is a characterization method to analyze vibrational properties for liquids, gases, or solids. 
-The measurements is based on the inelastic light scattering due to the material's vibrations.
+The measurements are based on the inelastic light scattering due to the material's vibrations.
 Interpretation can be done based on peaks, which represent the phonon properties (intensity, center, width).
 
 The application definition contains a minimum of descriptive elements required to understand Raman spectroscopy measurements.

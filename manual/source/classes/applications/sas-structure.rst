@@ -1,7 +1,7 @@
 .. _AppDef-Sas-Structure:
 
 ==================================
-Small angle scattering techniques
+Small-Angle Scattering Techniques
 ==================================
 
 .. index::
@@ -13,7 +13,7 @@ Small angle scattering techniques
 Introduction
 ############
 
-Set of classical NeXus application definitions for small angle scattering.
+Classical application definitions for small angle scattering.
 
 .. _AppDef-Sas-Definitions:
 

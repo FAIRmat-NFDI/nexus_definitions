@@ -1,7 +1,7 @@
 .. _AppDef-Diff-Structure:
 
 ==================================
-Diffraction techniques
+Diffraction Techniques
 ==================================
 
 .. index::
@@ -13,7 +13,7 @@ Diffraction techniques
 Introduction
 ############
 
-Set of classical NeXus application definitions for diffraction.
+Classical application definitions for different diffraction techniques
 
 .. _AppDef-Diff-Definitions:
 

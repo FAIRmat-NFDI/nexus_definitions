@@ -85,7 +85,7 @@ def nxdl_indices() -> Dict[str, dict]:
         if file.endswith("base_classes/index.rst"):
             for domain in [
                 "core",
-                "tech"
+                "tech",
                 # "beam",
                 "sample",
                 "computer",
@@ -201,26 +201,26 @@ write the raw data in the :ref:`NXinstrument` tree and then link to it
 from the location(s) defined in the relevant application definition.
 
 Application definitions are grouped together based on the research fields
-for their typical usage. Definitions that touch multiple research fields
-are listed in each category in this tag-based approach:
+where these are typically used. Definitions that address multiple
+research fields are listed in each category:
 
   :ref:`Atom Probe Microscopy <AppDef-Apm-Structure>`
 
-  :ref:`Diffraction <AppDef-Diff-Structure>`
+  :ref:`Diffraction Techniques <AppDef-Diff-Structure>`
 
   :ref:`Electron Microscopy <AppDef-Em-Structure>`
 
-  :ref:`Miscellaneous <AppDef-Misc-Structure>`
+  :ref:`Miscellaneous Techniques <AppDef-Misc-Structure>`
 
-  :ref:`Multi-dimensional Photoemission Spectroscopy <AppDef-Mpes-Structure>`
+  :ref:`Multi-Dimensional Photoemission Spectroscopy <AppDef-Mpes-Structure>`
 
   :ref:`Optical Spectroscopy <AppDef-Opt-Spec-Structure>`
 
-  :ref:`Small-angle scattering <AppDef-Sas-Structure>`
+  :ref:`Small-Angle Scattering Techniques <AppDef-Sas-Structure>`
 
-  :ref:`Time-of-flight methods <AppDef-Tof-Structure>`
+  :ref:`Time-of-Flight Techniques <AppDef-Tof-Structure>`
 
-A full list of application definitions is available here:
+This is the complete list of application definitions:
     """,
     # and others are simply listed here:
     #

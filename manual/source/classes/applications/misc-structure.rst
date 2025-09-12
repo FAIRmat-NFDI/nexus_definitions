@@ -1,7 +1,7 @@
 .. _AppDef-Misc-Structure:
 
 ==================================
-Miscellaneous techniques
+Miscellaneous Techniques
 ==================================
 
 .. index::
@@ -13,7 +13,7 @@ Miscellaneous techniques
 Introduction
 ############
 
-Set of miscellaneous classical NeXus application definitions.
+Classical application definitions for miscellaneous techniques
 
 .. _AppDef-Misc-Definitions:
 
