@@ -148,7 +148,8 @@ NeXus base class definitions define the set of terms that
 Consider the base classes as a set of *components*
 that are used to construct a data file.
 
-Base classes are grouped together ADDADDADDADDADD
+A grouping of base classes is offered to assist users with
+navigating the full list of base classes along the following topics:
 
   :ref:`Core Classes <BC-Core-Structure>`
 
@@ -166,11 +167,11 @@ Base classes are grouped together ADDADDADDADDADD
 
   :ref:`Electron Microscopy <BC-Em-Structure>`
 
-  :ref:`Multi-dimensional Photoemission Spectroscopy <BC-Mpes-Structure>`
+  :ref:`Multi-Dimensional Photoemission Spectroscopy <BC-Mpes-Structure>`
 
   :ref:`Optical Spectroscopy <BC-Opt-Spec-Structure>`
 
-A full list of base classes is available here:
+This is the complete list of base classes:
     """,
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     "applications": """

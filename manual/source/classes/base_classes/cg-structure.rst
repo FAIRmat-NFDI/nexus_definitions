@@ -7,13 +7,7 @@ Computational and Constructive Solid Geometry
 .. index::
    BC-Cgeometry-Introduction
    BC-Cgeometry-Base-Classes
-   BC-Cgeometry-Introduction-IcmeMsModels
-   
-.. literalinclude:: cube_example.txt
-    :tab-width: 4
-    :linenos:
-    :language: text
-   
+    
 .. _BC-Cgeometry-Introduction:
 
 Introduction
@@ -78,6 +72,13 @@ for frequently used shapes and geometric primitives are proposed:
     :ref:`NXcg_hexahedron`:
         A collection of hexahedra with capabilities to represent
         also simpler (bounding) boxes for e.g. binary trees.
+
+An example how to use these classes follows:
+
+.. literalinclude:: cube_example.txt
+    :tab-width: 4
+    :linenos:
+    :language: text
 
 These base classes describe data structures used for more complex geometries:
 
