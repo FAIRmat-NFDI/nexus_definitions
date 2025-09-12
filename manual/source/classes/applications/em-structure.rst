@@ -28,7 +28,7 @@ materials-science-branch of electron microscopy. Therefore, the focus is on the 
 chemical physics of solids, and materials engineering applications.
 
 The biology-/bio-materials-/omics-/life-science-community of the electron microscopy community can also take advantage of the definitions
-and classes. We acknowledge that the Open Microscopy Environment (https://www.openmicroscopy.org/omero/OMERO) offers a data model and
+and classes. We acknowledge that the Open Microscopy Environment (https://www.openmicroscopy.org) offers a data model and
 schema set for the life science. Conceptual and semantic overlap between concepts of these two data models exist but should be explored
 further in the future to improve on the interoperability of data exchange between the materials-science and life science communities.
 

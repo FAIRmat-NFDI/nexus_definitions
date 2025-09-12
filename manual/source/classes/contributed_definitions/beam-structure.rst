@@ -17,7 +17,7 @@ Base classes
 ############
 
 :ref:`NXbeam_splitter`
-    A beam splitter, i.e. a device splitting the light into two or more beams.
+    A beam splitter, i.e., a device splitting the light into two or more beams.
 
 
 

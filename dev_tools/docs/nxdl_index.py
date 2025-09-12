@@ -222,9 +222,6 @@ research fields are listed in each category:
 
 This is the complete list of application definitions:
     """,
-    # and others are simply listed here:
-    #
-    #    """,
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     "contributed_definitions": """
 .. index::
@@ -245,21 +242,21 @@ case not for general use.  The :ref:`NIAC` is charged to review any new contribu
 definitions and provide feedback to the authors before ratification
 and acceptance as either a base class or application definition.
 
-These contributions are grouped together based on topics and research fields
-for their typical usage. Definitions that touch multiple research fields or
-topics are listed in each category in this tag-based approach:
+These contributions are grouped together based on the research fields
+where these are typically used. Definitions that address multiple
+research fields are listed in each category:
 
-  :ref:`Miscellaneous <CC-Miscellaneous-Structure>`
+  :ref:`Miscellaneous Definitions <CC-Miscellaneous-Structure>`
  
-  :ref:`Working with beams <CC-Beam-Structure>`
+  :ref:`Working with Beams <CC-Beam-Structure>`
 
-  :ref:`Working with samples <CC-Sample-Structure>`
+  :ref:`Working with Samples <CC-Sample-Structure>`
 
-  :ref:`Working with computers <CC-Computer-Structure>`
+  :ref:`Working with Computers <CC-Computer-Structure>`
 
-  :ref:`Conventions and data analysis <CC-Danalysis-Structure>`
+  :ref:`Conventions and Data Analysis <CC-Danalysis-Structure>`
     
-  :ref:`Computational and constructive solid geometry <CC-Cgeometry-Structure>`
+  :ref:`Computational and Constructive Solid Geometry <CC-Cgeometry-Structure>`
 
   :ref:`Atom Probe Microscopy <CC-Apm-Structure>`
   
@@ -267,8 +264,8 @@ topics are listed in each category in this tag-based approach:
 
   :ref:`Transport Measurements <CC-Transport-Structure>`
 
-  :ref:`Microstructure <CC-Micro-Structure>`
+  :ref:`Microstructures Characterization and Representation <CC-Micro-Structure>`
 
-A full list of contributed_definitions is available here:
+This is the complete list of contributed definitions:
     """,
 }

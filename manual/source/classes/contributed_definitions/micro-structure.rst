@@ -1,13 +1,19 @@
 .. _CC-Micro-Structure:
 
-==============
-Microstructure
-==============
-
-The internal structure of a material modeled as crystals and the defect network that connect these.
+===================================================
+Microstructure Characterization and Representation
+===================================================
 
 .. index::
+   CC-Micro-Introduction
    CC-Micro-Definitions
+
+.. _CC-Micro-Introduction:
+
+Introduction
+##############
+
+The internal structure of a material modeled as crystals and the defect network that connect these.
 
 .. _CC-Micro-Definitions:
 

@@ -17,12 +17,20 @@ Atom Probe Microscopy
 Introduction
 ##############
 
+For the use case atom probe tomography the community contributed not only the :ref:`NXapm` application definition.
+It was also explored how using several instances of :ref:`NXprocess` is useful for documenting the many data
+processing steps that are typical in atom probe research to investigate structural features of the material
+demanding reconstructions, i.e., models of the crystal and defect network by analyzing the collective position
+data of atoms. The following definitions are a summary of the status quo how NeXus can be used for documenting
+these processing steps to improve numerical reproducibility and assist researchers with documenting procedural
+aspects of their data analysis workflows.
+
 .. _CC-Apm-Definitions:
 
 Base Classes
 ############
 
-Atom probe specific base classes:
+The processing steps of ranging and reconstructing are documented as two specializations of :ref:`NXprocess`:
 
 :ref:`NXapm_input_ranging`
     Metadata to ranging definitions made for a dataset in atom probe microscopy.
@@ -30,16 +38,9 @@ Atom probe specific base classes:
 :ref:`NXapm_input_reconstruction`
     Metadata of a dataset (tomographic reconstruction) in atom probe microscopy.
 
-Several instances of :ref:`NXprocess` were defined in :ref:`NXapm` to document processing of atom probe data
-including hit finding, voltage-and-bowl correction, combinatorial recovery of charge states, reconstruction,
-and ranging definitions. These base classes are examples that substantiate that data processing steps are
-essential when transforming atom probe measurements or simulations into knowledge. Consequently, these
-steps should be documented to enable reproducible research, if possible even numerical reproducibility
-of the results,  and to learn better the workflow. In what follows, an example is presented how an
-open-source community software can be modified to use descriptions of these computational steps.
-
-A detailed inspection of spatial and other type of filters frequently used in analysis of atom probe
-data revealed that it is better to define atom-probe-agnostic reusable concepts for filters:
+Spatial or other type of filters which are frequently used for atom probe to select specific atom positions
+or portions of the data based on isotopic identity are modeled as base classes for filters, which are
+defined atom-probe-agnostic empower reuse:
 
 :ref:`NXdelocalization`
     Base class to describe the delocalization of point-like objects on a grid.
@@ -48,17 +49,16 @@ data revealed that it is better to define atom-probe-agnostic reusable concepts 
     Computational geometry description of isocontouring/phase-fields in Euclidean space.
     
 :ref:`NXmatch_filter`
-    A base class for a filter that can also be used for specifying how entries
-    like ions can be filtered based on their type or other descriptors like hit multiplicity.
+    Base class to filter ions based on their type or other descriptors like hit multiplicity.
 
 :ref:`NXspatial_filter`
-    A base class proposing how a point cloud can be spatially filtered in a specific yet general manner.
-    This base class takes advantage of :ref:`NXcg_ellipsoid`, :ref:`NXcg_cylinder`, and :ref:`NXcg_hexahedron`
-    to cater for commonly used geometric primitives in atom probe.
-    The primitives are used for defining the shape and extent of a region of interest (ROI).
+    Base class to filter based on position. This base class takes advantage of :ref:`NXcg_ellipsoid`,
+    :ref:`NXcg_cylinder`, and :ref:`NXcg_hexahedron` to cater for commonly used geometric primitives
+    in atom probe. The primitives are used for defining the shape and extent of a
+    region of interest (ROI) :ref:`NXroi_process`.
 
 :ref:`NXsubsampling_filter`
-    A base class for a filter that can also be used for specifying how entries
+    Base class for a filter that can also be used for specifying how entries
     like ions can be filtered via sub-sampling.
 
 .. _CC-Apm-Paraprobe-Introduction:
@@ -78,8 +78,8 @@ within materials when characterized and studied with atom probe.
 
 There is a set of contributed application definitions describing each computational step in the 
 paraprobe-toolbox. These were added to describe the whole workflow in this particular software,
-but also can act as a blueprint for how computational steps of other software tool (including commercial 
-ones) could be developed further to benefit from NeXus.
+but can also act as a blueprint for how computational steps of other software tools
+(including commercial ones) could be developed further to benefit from NeXus.
 
 The need for a thorough documentation of the tools was motivated by several needs:
 
@@ -95,36 +95,29 @@ provenance and workflow should be documented.
 
 Individual tools of paraprobe-toolbox are developed in C/C++ and/or Python.
 Provenance tracking is useful as it is one component and requirement for making
-workflows exactly numerically reproducible and thus to enable reproducibility (the "R"
-of the FAIR principles of data stewardship).
+workflows exactly numerically reproducible and thus to enable reproducibility
+(the "R" of the FAIR principles of data stewardship).
 
 For tools of the paraprobe-toolbox each workflow step is a pair or triple of sub-steps:
 1. The creation of a configuration file. 
-2. The actual analysis using the Python/or C/C++ tools. 
+2. The actual analysis using a given Python/or C/C++ tool from the toolbox. 
 3. The optional analyses/visualization of the results based on data in NeXus/HDF5 files generated by each tool. 
-
-.. _CC-Apm-Paraprobe-Status-Quo:
-
-What has been achieved so far?
-##############################
-
-This proposal summarizes work of members of the FAIRmat project, which is part of the `German
-National Research Data Infrastructure <https://www.nfdi.de/?lang=en>`_. The here detailed
-proposal documents how all tools of the paraprobe-toolbox were modified to generate
-only well-defined configuration files as accepted input and yield specifically formatted output
-files according to the following NeXus application definitions.
 
 Data and metadata between the tools are exchanged with NeXus/HDF5 files. This means that data
 inside HDF5 binary containers are named, formatted, and hierarchically structured according
-to application definitions.
+to NeXus application definitions.
+
+In a refactoring project, within the FAIRmat project, which is part of the `German
+National Research Data Infrastructure <https://www.nfdi.de/?lang=en>`_, the tools of the
+paraprobe-toolbox were modified to read from and write data using NeXus application definitions.
 
 For example the application definition :ref:`NXapm_paraprobe_config_surfacer`: specifies
-how a configuration file for the paraprobe-surfacer tool should be formatted
+the expectation how a configuration file for the paraprobe-surfacer tool is formatted
 and which parameters it contains including optionality and cardinality constraints.
 
-Thereby, each config file uses a controlled vocabulary of terms. Furthermore,
-the config files store a SHA256 checksum for each input file. This implements a full
-provenance tracking on the input files along the workflow.
+Thereby, each config file uses a controlled vocabulary of terms. The config files store
+SHA256 checksum for each input file, thereby implementing an uninterrupted
+provenance tracking chain documenting the computational workflow.
 
 As an example, a user may first range their reconstruction and then compute spatial
 correlation functions. The config file for the ranging tool stores the files
@@ -136,29 +129,25 @@ imported by the spatial statistics tool which again keeps track of all files
 and reports its results in a spatial statistics tool results file.
 
 This design makes it possible to rigorously trace which numerical results were achieved
-with specific inputs and settings using specifically-versioned tools. Noteworthy
+with specific inputs and settings using specifically-versioned tools. Noteworthy,
 this includes Y-junction on a graph which is where multiple input sources are
 combined to generate new results.
 
 Defining, documenting, using, and sharing application definitions is a useful and future-proof 
 strategy for software development and data analyses as it enables automated provenance
-tracking which happens silently in the background.
+tracking working silently in the background.
 
-Base classes have been defined to group common pieces of information for each tool of the
-toolbox. For each tool we define a pair of base classes. One for the configuration (input) side
-and one for the results (output) side.
+In summary, the following application definitions were defined for the paraprobe-toolbox.
+These are always pairs of application definitions --- one for the configuration (input) side
+and one for the results (output) side. For each tool one such pair is proposed:
 
 .. _CC-Apm-Paraprobe-Application-Definitions:
 
 Application Definitions
 #######################
 
-NXapm_paraprobe application definitions are in fact pairs of application definitions.
-One for the configuration (input) side and one for the results (output) side. For each
-tool one such pair is proposed:
-
 :ref:`NXapm_paraprobe_config_clusterer`, :ref:`NXapm_paraprobe_results_clusterer`
-    Configuration and results resepctively of the paraprobe-clusterer tool.
+    Configuration and results respectively of the paraprobe-clusterer tool.
     Compute cluster analyses with established machine learning algorithms using CPU or GPUs.
 
 :ref:`NXapm_paraprobe_config_distancer`, :ref:`NXapm_paraprobe_results_distancer`
@@ -168,8 +157,8 @@ tool one such pair is proposed:
 :ref:`NXapm_paraprobe_config_intersector`, :ref:`NXapm_paraprobe_results_intersector`
     Configuration and results resepctively of the paraprobe-intersector tool.
     Analyze volumetric intersections and proximity of 3D objects discretized as triangulated surface meshes
-    in continuum space to study the effect the parameterization of surface extraction algorithms on the resulting shape,
-    spatial arrangement, and colocation of 3D objects via graph-based techniques.
+    in continuum space to study the effect the parameterization of surface extraction algorithms on the
+    resulting shape, spatial arrangement, and colocation of 3D objects via graph-based techniques.
 
 :ref:`NXapm_paraprobe_config_nanochem`, :ref:`NXapm_paraprobe_results_nanochem`
     Configuration and results resepctively of the paraprobe-nanochem tool.
@@ -200,7 +189,8 @@ tool one such pair is proposed:
 
 :ref:`NXapm_paraprobe_config_transcoder`, :ref:`NXapm_paraprobe_results_transcoder`
     Configuration and the results respectively of the paraprobe-transcoder tool.
-    Load POS, ePOS, APSuite APT, RRNG, RNG, and NeXus NXapm files.
+    Load common file formats of the atom probe community POS, ePOS, APSuite APT, RRNG, RNG,
+    and generate NeXus/HDF5 files that comply with the :ref:`NXapm` application definition.
     Store reconstructed positions, ions, and charge states.
 
 .. _CC-Apm-Paraprobe-German-NFDI:
@@ -211,8 +201,10 @@ Joint work German NFDI consortia NFDI-MatWerk and FAIRmat
 Members of the NFDI-MatWerk and the FAIRmat consortium of the German National Research Data Infrastructure
 are working together within the Infrastructure Use Case IUC09 of the NFDI-MatWerk project to work on examples
 how software tools in both consortia become better documented and interoperable to use. Within this project,
-we have also added the `CompositionSpace tool that has been developed at the Max Planck Institute for Sustainable Materials in Düsseldorf <https://github.com/eisenforschung/CompositionSpace>`_ by A. Saxena et al.
+we have also added the `CompositionSpace` tool that has been developed at the
+Max Planck Institute for Sustainable Materials in Düsseldorf <https://github.com/eisenforschung/CompositionSpace>`_ by A. Saxena et al.
 
 :ref:`NXapm_composition_space_results`
     Results of a run with Alaukik Saxena's composition space tool.
+
 

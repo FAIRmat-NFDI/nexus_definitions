@@ -16,25 +16,25 @@ Introduction
 ##############
 
 :ref:`Application definitions <appdef-opt-spec-definitions>` and :ref:`base classes <bc-opt-spec-classes>`
-to describe optical spectroscopy experiments are already part of the NeXus standard. In addition, there are several 
-contributed definitions that are currently under discussion.
+to describe optical spectroscopy experiments are already part of the NeXus standard.
+In addition, there are several contributed definitions that are currently under discussion.
 
 .. _CC-Opt-Spec-Definitions:
 
 Application Definitions
------------------------
+#######################
 
 :ref:`NXtransmission`
     Application definition for transmission experiments
 
 
 Base Classes
-------------
+############
 
 These are new base classes to describe additional, yet to be standardized components of optical spectroscopy experiments.
             
 :ref:`NXbeam_splitter`
-    A beam splitter, i.e. a device splitting the light into two or more beams.
+    A beam splitter, i.e., a device splitting the light into two or more beams.
 
 Use two or more NXbeam_paths to describe the beam paths after the beam
 splitter. In the dependency chain of the new beam paths, the first elements
@@ -60,7 +60,7 @@ Application Definition
 
 :ref:`NXdispersive_material`
     An application definition to describe the dispersive properties of a material.
-    The material may be isotropic, uniaxial or biaxial. Hence, it may contain up
+    The material may be isotropic, uniaxial, or biaxial. Hence, it may contain up
     to three dispersive functions or tables.
 
 
