@@ -94,7 +94,7 @@ def nxdl_indices() -> Dict[str, dict]:
                 "apm",
                 "em",
                 "mpes",
-                "optical-spectroscopy"
+                "optical-spectroscopy",
             ]:
                 rst_lines.append(f"{indentation}{domain}-structure\n")
         if file.endswith("contributed_definitions/index.rst"):
