@@ -45,8 +45,12 @@ def nxdl_indices() -> Dict[str, dict]:
         nxclass_name = nxdl_file.with_suffix("").stem
         classes.append(nxclass_name)
         summary = get_nxclass_description(nxdl_file, namespaces)
-        if "NXcg" in nxclass_name or "NXapm" in nxclass_name or "NXms" in nxclass_name:
-            continue
+        # if source in ["applications",
+        #               # "base_classes",
+        #               "contributed_definitions"]:
+        #     continue
+        # for falling back to classical list of all classes per source/domain
+        # deactivate the if statement
         rst_lines.append("\n")
         rst_lines.append(f":ref:`{nxclass_name}`\n")
         rst_lines.append(f"{indentation}{summary}\n")
@@ -67,20 +71,46 @@ def nxdl_indices() -> Dict[str, dict]:
             file = ""
             print("---------++++++++-", section)
         if file.endswith("applications/index.rst"):
-            rst_lines.append(f"{indentation}apm-structure\n")
-            rst_lines.append(f"{indentation}em-structure\n")
-            rst_lines.append(f"{indentation}mpes-structure\n")
-            rst_lines.append(f"{indentation}optical-spectroscopy-structure\n")
+            for domain in [
+                "apm",
+                "diff",
+                "em",
+                "misc",
+                "mpes",
+                "optical-spectroscopy",
+                "sas",
+                "tof",
+            ]:
+                rst_lines.append(f"{indentation}{domain}-structure\n")
         if file.endswith("base_classes/index.rst"):
-            rst_lines.append(f"{indentation}apm-structure\n")
-            rst_lines.append(f"{indentation}cgms-structure\n")
-            rst_lines.append(f"{indentation}em-structure\n")
-            rst_lines.append(f"{indentation}mpes-structure\n")
-            rst_lines.append(f"{indentation}optical-spectroscopy-structure\n")
+            for domain in [
+                "core",
+                "tech",
+                # "beam",
+                "sample",
+                "computer",
+                "danalysis",
+                "cg",
+                "apm",
+                "em",
+                "mpes",
+                "optical-spectroscopy",
+            ]:
+                rst_lines.append(f"{indentation}{domain}-structure\n")
         if file.endswith("contributed_definitions/index.rst"):
-            rst_lines.append(f"{indentation}apm-structure\n")
-            rst_lines.append(f"{indentation}optical-spectroscopy-structure\n")
-            rst_lines.append(f"{indentation}transport-structure\n")
+            for domain in [
+                "misc",
+                "beam",
+                "sample",
+                "computer",
+                "danalysis",
+                "cg",
+                "apm",
+                "optical-spectroscopy",
+                "transport",
+                "micro",
+            ]:
+                rst_lines.append(f"{indentation}{domain}-structure\n")
         for cname in sorted(classes):
             rst_lines.append(f"{indentation}{cname}\n")
 
@@ -118,19 +148,30 @@ NeXus base class definitions define the set of terms that
 Consider the base classes as a set of *components*
 that are used to construct a data file.
 
-Some base classes are grouped together:
-  :ref:`Atom Probe Microscopy <BC-Apm-Structure>`
+A grouping of base classes is offered to assist users with
+navigating the full list of base classes along the following topics:
 
-  :ref:`Computational Geometry and Microstructures <BC-Cgms-Structure>`
+  :ref:`Core Classes <BC-Core-Structure>`
+
+  :ref:`Instrument Components <BC-Tech-Structure>`
+
+  :ref:`Working with Samples <BC-Sample-Structure>`
+
+  :ref:`Working with Computers <BC-Computer-Structure>`
+
+  :ref:`Conventions, Reference Frames, and Data Analysis <BC-Danalysis-Structure>`
+
+  :ref:`Computational and Constructive Solid Geometry <BC-Cgeometry-Structure>`
+
+  :ref:`Atom Probe Microscopy <BC-Apm-Structure>`
 
   :ref:`Electron Microscopy <BC-Em-Structure>`
 
-  :ref:`Multi-dimensional Photoemission Spectroscopy <BC-Mpes-Structure>`
+  :ref:`Multi-Dimensional Photoemission Spectroscopy <BC-Mpes-Structure>`
 
   :ref:`Optical Spectroscopy <BC-Opt-Spec-Structure>`
 
-and others are simply listed here:
-
+This is the complete list of base classes:
     """,
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     "applications": """
@@ -160,17 +201,27 @@ In application definitions involving raw data,
 write the raw data in the :ref:`NXinstrument` tree and then link to it
 from the location(s) defined in the relevant application definition.
 
-Some application definitions are grouped together:
+Application definitions are grouped together based on the research fields
+where these are typically used. Definitions that address multiple
+research fields are listed in each category:
+
   :ref:`Atom Probe Microscopy <AppDef-Apm-Structure>`
+
+  :ref:`Diffraction Techniques <AppDef-Diff-Structure>`
 
   :ref:`Electron Microscopy <AppDef-Em-Structure>`
 
-  :ref:`Multi-dimensional Photoemission Spectroscopy <AppDef-Mpes-Structure>`
+  :ref:`Miscellaneous Techniques <AppDef-Misc-Structure>`
+
+  :ref:`Multi-Dimensional Photoemission Spectroscopy <AppDef-Mpes-Structure>`
 
   :ref:`Optical Spectroscopy <AppDef-Opt-Spec-Structure>`
 
-and others are simply listed here:
+  :ref:`Small-Angle Scattering Techniques <AppDef-Sas-Structure>`
 
+  :ref:`Time-of-Flight Techniques <AppDef-Tof-Structure>`
+
+This is the complete list of application definitions:
     """,
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     "contributed_definitions": """
@@ -186,18 +237,36 @@ Contributed Definitions
 A description of each NeXus contributed definition is given.
 NXDL files in the NeXus contributed definitions include propositions from
 the community for NeXus base classes or application definitions, as well
-as other NXDL files for long-term archival by NeXus.  Consider the contributed
+as other NXDL files for long-term archival by NeXus. Consider the contributed
 definitions as either in *incubation* or a special
 case not for general use.  The :ref:`NIAC` is charged to review any new contributed
 definitions and provide feedback to the authors before ratification
 and acceptance as either a base class or application definition.
 
-Some contributions are grouped together:
-  :ref:`Optical Spectroscopy <Contributed-Opt-Spec-Structure>`
+These contributions are grouped together based on the research fields
+where these are typically used. Definitions that address multiple
+research fields are listed in each category:
 
-  :ref:`Transport Measurements <Contributed-Transport-Structure>`
+  :ref:`Miscellaneous Definitions <CC-Miscellaneous-Structure>`
 
-and others are simply listed here:
+  :ref:`Working with Beams <CC-Beam-Structure>`
 
+  :ref:`Working with Samples <CC-Sample-Structure>`
+
+  :ref:`Working with Computers <CC-Computer-Structure>`
+
+  :ref:`Conventions and Data Analysis <CC-Danalysis-Structure>`
+
+  :ref:`Computational and Constructive Solid Geometry <CC-Cgeometry-Structure>`
+
+  :ref:`Atom Probe Microscopy <CC-Apm-Structure>`
+
+  :ref:`Optical Spectroscopy <CC-Opt-Spec-Structure>`
+
+  :ref:`Transport Measurements <CC-Transport-Structure>`
+
+  :ref:`Microstructures Characterization and Representation <CC-Micro-Structure>`
+
+This is the complete list of contributed definitions:
     """,
 }
