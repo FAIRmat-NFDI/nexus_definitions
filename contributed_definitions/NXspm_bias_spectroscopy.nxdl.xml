@@ -41,6 +41,14 @@
             <item value="variadic_spacing"/>
         </enumeration>
     </field>
+    <field name="identifier_environment" recommended="true">
+        <doc>
+            Unique identifier for the environment defined by the user or lab. When multiple scans are performed
+            in a single environment conditions or settings, the entire scan environment can be differentiated
+            by this identifier. For example, scan on a sample of TiSe2 with layered of evaporated pyrene and
+            annealed at 300K temperature for 5 min process.
+        </doc>
+    </field>
     <group type="NXspm_positioner">
         <doc>
             Information about the positioner PID (proportional, integral, differential feedback system),
@@ -197,24 +205,25 @@
                     value after the sweep is completed.
                 </doc>
             </field>
-            <group name="SCAN_DATA" type="NXdata" nameType="any">
+            <group type="NXdata" nameType="any">
                 <doc>
                     The scan data is the data collected during the scan.
                     If the scan has several channels or derivatives from the channel data,
                     please duplicate this NXdata group for each.
+                    
+                    To define specific current or voltage use :ref:`DATA &lt;NXdata/DATA-field&gt;`
+                    and :ref:`AXISNAME &lt;NXdata/AXISNAME-field&gt;`.
                 </doc>
-                <field name="current" units="NX_CURRENT">
-                    <doc>
-                        The tip current collected during the scan. Data to be plotted against
-                        the axis defined in voltage field. Use this data as signal attributes.
-                    </doc>
-                </field>
-                <field name="voltage" units="NX_VOLTAGE">
-                    <doc>
-                        Applied voltage on sample during the scan.
-                    </doc>
-                </field>
             </group>
         </group>
     </group>
+    <!--current:
+  unit: NX_CURRENT
+  doc: |
+    The tip current collected during the scan. Data to be plotted against
+    the axis defined in voltage field. Use this data as signal attributes.
+voltage:
+  unit: NX_VOLTAGE
+  doc: |
+    Applied voltage on sample during the scan.-->
 </definition>

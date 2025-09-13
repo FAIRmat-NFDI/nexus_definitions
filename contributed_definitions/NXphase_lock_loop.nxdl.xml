@@ -3,7 +3,7 @@
 <!--
 # NeXus - Neutron and X-ray Common Data Format
 #
-# Copyright (C) 2025-2025 NeXus International Advisory Committee (NIAC)
+# Copyright (C) 2014-2025 NeXus International Advisory Committee (NIAC)
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -37,12 +37,31 @@
           - Zero phase error: The output signal is in coherence with the reference signal (lock condition).
           - Constant phase error: The output signal has a constant phase difference from the reference signal, and therefore,
                   both reference signals have the same frequency (lock condition).
-          - Continuous increasing phase error: The output signal's phase continuously changes, indicating the PLL is in an unlock condition.
+          - Continuous increasing phase error: The output signal's phase continuously changes therefore they have different frequencies, 
+                  indicating the PLL is in an unlock condition.
     </doc>
     <group name="hardware" type="NXfabrication">
         <doc>
             Manufacturer and model of the PLL hardware or controller.
         </doc>
+        <field name="type" type="NX_CHAR">
+            <doc>
+                Types (design parameter for circuit) of the PLL from type-1, type-2, and type-3 
+                available in device specifications (for mathmatical details: https://www.nxp.com/docs/en/application-note/AN535.pdf).
+                Type is defined by the number of poles that exist in the transfer function of the PLL.
+            </doc>
+            <enumeration>
+                <item value="type-1"/>
+                <item value="type-2"/>
+                <item value="type-3"/>
+            </enumeration>
+        </field>
+        <field name="order" type="NX_NUMBER" units="NX_UNITLESS">
+            <doc>
+                Order of the PLL. This is characteristic of circuit design and is defined as the number of roots of
+                characteristics polynomial of the PLL circuit.
+            </doc>
+        </field>
     </group>
     <group name="calibration" type="NXcalibration">
         <doc>
@@ -50,26 +69,24 @@
             or procedures.
         </doc>
     </group>
-    <field name="type" type="NX_CHAR">
+    <field name="center_frequency" type="NX_NUMBER" units="NX_FREQUENCY">
         <doc>
-            Types of the PLL from type-1, type-2, and type-3 available in device specifications.
-            Type is defined by the number of poles that exist in the transfer function of the PLL.
-        </doc>
-        <enumeration>
-            <item value="type-1"/>
-            <item value="type-2"/>
-            <item value="type-3"/>
-        </enumeration>
-    </field>
-    <field name="order" type="NX_NUMBER" units="NX_UNITLESS">
-        <doc>
-            Order of the PLL. This is characteristic of circuit design and is defined as the number of roots of
-            characteristics polynomial of the PLL circuit.
+            The center frequency of the PLL is the middle frequency of the PLL's operating
+            range.
         </doc>
     </field>
     <field name="frequency_bandwidth" type="NX_NUMBER" units="NX_FREQUENCY">
         <doc>
             The frequency bandwidth of the PLL is where it responds or is stable.
+            If phase difference (also called phase error) is calculated from the input and output signal
+            frequencies.
+        </doc>
+    </field>
+    <field name="phase_bandwidth" type="NX_NUMBER" units="NX_FREQUENCY">
+        <doc>
+            The phase bandwidth of the PLL is where it responds or is stable.
+            If phase difference (also called phase error) is calculated from the input and output signal
+            phases.
         </doc>
     </field>
     <field name="frequency_step" type="NX_NUMBER" units="NX_FREQUENCY">
