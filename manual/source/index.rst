@@ -36,6 +36,8 @@ https://www.nexusformat.org/
 | This commit identifier |commit_hash|.
 | This manual built |today|.
 
+Noteworthy, NeXus-FAIRmat works with a fork of the official NeXus definitions. Therefore, expect that individual definitions may show differences between specific versions of the official NeXus definitions and those maintained by FAIRmat. FAIRmat and NeXus exchange frequently to sync up of the FAIRmat fork to build always on top of the latest official NeXus release.
+
 .. rubric:: Acknowledgements
 
 | The FAIRmat project is funded by the Deutsche Forschungsgemeinschaft
@@ -45,7 +47,7 @@ https://www.nexusformat.org/
 
 .. seealso:: 
 
-   The extended NeXus documentation:
+   The extended NeXus documentation of the latest official NeXus release:
    
    :HTML:
    	https://manual.nexusformat.org/
