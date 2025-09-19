@@ -36,7 +36,11 @@ https://www.nexusformat.org/
 | This commit identifier |commit_hash|.
 | This manual built |today|.
 
-Noteworthy, NeXus-FAIRmat works with a fork of the official NeXus definitions. Therefore, expect that individual definitions may show differences between specific versions of the official NeXus definitions and those maintained by FAIRmat. FAIRmat and NeXus exchange frequently to sync up of the FAIRmat fork to build always on top of the latest official NeXus release.
+Noteworthy, NeXus-FAIRmat works with a fork of the official NeXus definitions.
+Therefore, expect individual definitions may differ between versions when
+comparing the official NeXus repository and the fork maintained by FAIRmat.
+FAIRmat and NeXus exchange frequently to sync up such that the FAIRmat fork
+builds always on top of the latest official NeXus release.
 
 .. rubric:: Acknowledgements
 
