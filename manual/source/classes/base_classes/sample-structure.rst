@@ -28,9 +28,6 @@ Base Classes
 :ref:`NXhistory`
     A set of activities that occurred to a physical entity prior/during experiment.
 
-:ref:`NXinsertion_device`
-    An insertion device, as used in a synchrotron light source.
-
 :ref:`NXmanipulator`
     Base class to describe the use of manipulators and sample stages.
 
@@ -54,7 +51,4 @@ Base Classes
 
 :ref:`NXunit_cell`
     Base class to describe structural aspects of an arrangement of atoms.
-
-:ref:`NXuser`
-    Contact information for a user.
 
