@@ -12,6 +12,9 @@ Base Classes
 
 :ref:`NXcite`
     A literature reference
+    
+:ref:`NXcollection`
+    An unvalidated set of terms, such as the description of a beam line.
 
 :ref:`NXdata`
     The :ref:`NXdata` class is designed to encapsulate all the information required for a set of data to be plotted.

@@ -24,9 +24,6 @@ near-ambient pressure conditions, dichroism etc.
 Application Definitions
 #######################
 
-:ref:`NXarpes`
-   A simple legacy application definition for angular resolved photo emission spectroscopy.
-
 :ref:`NXmpes`
    A general application definition with minimalistic metadata requirements,
    apt to describe all photoemission experiments.
@@ -36,6 +33,12 @@ Application Definitions
 
 :ref:`NXxps`
    An application definition for X-ray/UV photoelectron spectroscopy (XPS/UPS) experiments.
+
+
+:ref:`NXarpes`
+   An application definition for angular resolved photo emission spectroscopy.
+   Note that this application definition is only kept for legacy reasons and
+   new NeXus ARPES files should use :ref:`NXmpes_arpes`.
 
 Base classes
 #######################

@@ -13,7 +13,7 @@ Diffraction Techniques
 Introduction
 ############
 
-Classical application definitions for different diffraction techniques
+Application definitions for different diffraction techniques
 
 .. _AppDef-Diff-Definitions:
 

@@ -16,9 +16,6 @@ Base Classes
 :ref:`NXactivity`
     A planned or unplanned action that has a temporal extension and for some time depends on some entity.
 
-:ref:`NXatom`
-    Base class for documenting a set of atoms.
-
 :ref:`NXcoordinate_system`
     Base class to detail a coordinate system (CS).
 

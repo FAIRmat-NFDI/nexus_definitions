@@ -6,6 +6,8 @@ Working with Computers
 
 .. index::
    BC-Computer-Base-Classes
+   
+Set of data schemas to describe a computer that was used for example collecting or processing data.
 
 Base Classes
 ############
@@ -13,11 +15,8 @@ Base Classes
 :ref:`NXcircuit`
     Base class for documenting circuit devices.
 
-:ref:`NXcollection`
-    An unvalidated set of terms, such as the description of a beam line.
-
 :ref:`NXcs_computer`
-    Base class for reporting the description of a computer
+    Base class for reporting the description of a computer.
 
 :ref:`NXcs_filter_boolean_mask`
     Base class for packing and unpacking booleans.
@@ -39,9 +38,6 @@ Base Classes
 
 :ref:`NXcs_storage`
     Base class for reporting the description of the I/O of a computer.
-
-:ref:`NXlog`
-    Information recorded as a function of time.
 
 :ref:`NXnote`
     Any additional freeform information not covered by the other base classes.
