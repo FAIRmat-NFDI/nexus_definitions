@@ -9,13 +9,49 @@ Scanning Probe Microscopy
 
 .. _SpmAppDef:
 
+Scanning probe microscopy (SPM) is a branch of microscopes that forms images of surfaces using a physical probe that scans the specimen.
+Using proper instrument setup, SPM can be used to measure various properties of the material surface, such as its topography, magnetic and 
+electric properties, and chemical composition.
+
+
+.. compound::
+
+    .. _STS_STM_instrument_settings:
+
+    .. figure:: ../../img/STS_STM_instrument_settings.png
+        :alt: STS_STM_instrument_settings
+	   :width: 50%
+	   :align: center
+
+        A schematic diagram of Scanning Tunneling Microscopy (STM) and Spectroscopy (STS) setup generate topography image and I/V curve.
+
+NXspm provides a shared structural framework for capturing essential components such as the instrument configuration, experimental, and 
+sample environments, scan data acquired during measurements, and other relevant metadata. The current version aims to ensure that 
+fundamental technical elements are inherited consistently across specific experiment types like STM, STS, and AFM.
+sample environments, scan data acquired during measurements, and other relevant metadata. The current version aims to ensure that 
+fundamental technical elements are inherited consistently across specific experiment types like STM, STS, and AFM. 
+
+
+.. compound::
+
+    .. _SPM-inheritance:
+
+    .. figure:: ../../img/SPM-inheritance.png
+        :alt: SPM-inheritance
+	   :width: 50%
+	   :align: center
+
+        Inheritance relationship among SPM application definitions.
+
 Application Definition
 ######################
 
     :ref:`NXspm`:
        An application definition for scanning Probe Microscopy domain experiments. 
        The :ref:`NXspm` in herited from the :ref:`NXsensor_scan` is considered as
-       a as general structure for all SPM experiments.
+       a generic structure for all SPM experiments. The App. Def. :ref:`NXsts` is also capable 
+       to handle :ref:`NXsts` application definition considering STS as a fundamental
+       experiment of SPM family. 
     :ref:`NXsts`:
          The application definition NXsts for Scanning Tunneling Spectroscopy is 
          proxy to be used for STS experiments and it is inherited from the :ref:`NXspm`.
@@ -50,7 +86,7 @@ Base Classes
     :ref:`NXphase_lock_loop`:
     A base class to describe phase lock loop in AFM experiments.
 
-   :ref:`NXspm_piezo_sensor`:
+    :ref:`NXspm_piezo_sensor`:
     A base class to describe piezo sensor in SPM experiments.
 
     :ref:`NXspm_piezo_config`:
