@@ -1,8 +1,8 @@
 .. _AppDef-Sas-Structure:
 
-==================================
-Small-Angle Scattering Techniques
-==================================
+===================================
+(Small-Angle) Scattering Techniques
+===================================
 
 .. index::
    AppDef-Sas-Introduction
@@ -13,7 +13,7 @@ Small-Angle Scattering Techniques
 Introduction
 ############
 
-Classical application definitions for small angle scattering.
+Application definitions for (small-angle) scattering
 
 .. _AppDef-Sas-Definitions:
 

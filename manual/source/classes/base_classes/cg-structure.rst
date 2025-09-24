@@ -13,19 +13,9 @@ Computational and Constructive Solid Geometry
 Introduction
 ############
 
-The computational-geometry/microstructure-modeling-based part of the proposal
-has the following aims:
-
-To contribute to efforts on standardizing a controlled
-vocabulary, definitions for these terms, and relations between the terms, for
-computational-geometry-based descriptions of the structure of materials and
-atomic configurations used when characterizing materials in experiments
-and computer simulations.
-
-As far as NeXus is concerned, this proposed set of simple geometric primitives
-and shapes offer a complementary alternative to the current set of base classes in
-NeXus for constructive solid geometry such as :ref:`NXcsg`, :ref:`NXoff_geometry`, 
-or :ref:`NXquadric` to name but a few.
+A set of base classes to describe the location and shape of objects using
+concepts from the fields of computer graphics, computational geometry,
+and constructive solid geometry (CSG).
 
 .. _BC-Cg-Introduction-Base-Classes:
 
@@ -122,4 +112,3 @@ of material (area or volume) which can be useful not only for stencil-based meth
 
     :ref:`NXorientation_set`:
         A set of parameters to describe the relative orientation of members of a set of features/objects.
-

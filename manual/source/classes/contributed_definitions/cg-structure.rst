@@ -12,7 +12,7 @@ Computational and Constructive Solid Geometry
 Application Definitions
 #######################
 
-      
+
 Base classes
 ############
 
@@ -20,10 +20,10 @@ Base classes
     Constructive Solid Geometry base class, using :ref:`NXquadric` and :ref:`NXoff_geometry`
 
 :ref:`NXquadric`
-    definition of a quadric surface.
+    Definition of a quadric surface
 
 :ref:`NXsolid_geometry`
-    the head node for constructively defined geometry
+    The head node for constructively defined geometry
 
 
 

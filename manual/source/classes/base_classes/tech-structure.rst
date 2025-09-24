@@ -7,6 +7,8 @@ Parts of instruments
 .. index::
    BC-Tech-Base-Classes
 
+Data schemas to describe parts, components, or sets of components for building an instrument.
+
 Base Classes
 ############
 

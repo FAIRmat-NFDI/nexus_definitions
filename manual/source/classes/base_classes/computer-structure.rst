@@ -7,7 +7,7 @@ Working with Computers
 .. index::
    BC-Computer-Base-Classes
    
-Set of data schemas to describe a computer that was used for example collecting or processing data.
+Data schemas to describe a computer that was used for collecting or processing data.
 
 Base Classes
 ############
