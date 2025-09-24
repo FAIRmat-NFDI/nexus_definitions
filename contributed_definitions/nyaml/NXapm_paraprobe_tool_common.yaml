@@ -1,6 +1,6 @@
 category: base
 doc: |
-  Base class documenting the information common to tools of the paraprobe-toolbox.
+  Base class documenting metadata that is common to tools of the paraprobe-toolbox.
   
   The paraprobe-toolbox is a collection of open-source tools for performing
   efficient analyses of point cloud data where each point can represent atoms or
@@ -32,21 +32,17 @@ NXapm_paraprobe_tool_common(NXobject):
       one should consider the results of the tool. In all other cases it might
       be that the tool has terminated prematurely or another error occurred.
     enumeration: [success, failure]
-  (NXprogram):
+  programID(NXprogram):
+    nameType: partial
   identifier_analysis(NX_UINT):
     doc: |
-      Internal identifier used by the tool to refer to an analysis (aka simulation
-      id).
+      Internal identifier used by the tool to refer to an analysis.
+      Simulation ID is an alias.
   config(NXnote):
     doc: |
       The configuration file that was used to parameterize
       the algorithms that this tool has executed.
   profiling(NXcs_profiling):
-    
-    # results_path(NX_CHAR):
-    # doc: |
-    # Path where the tool stores tool-specific results. If not specified,
-    # results will be stored in the current working directory.
     start_time(NX_DATE_TIME):
       doc: |
         ISO 8601 formatted time code with local time zone offset to UTC
@@ -61,7 +57,8 @@ NXapm_paraprobe_tool_common(NXobject):
       unit: NX_TIME
       doc: |
         Wall-clock time.
-  (NXuser):
+  userID(NXuser):
+    nameType: partial
   (NXcoordinate_system):
     doc: |
       Details about coordinate systems (reference frames) used. In atom probe several coordinate
@@ -84,7 +81,7 @@ NXapm_paraprobe_tool_common(NXobject):
       Inspect :ref:`NXtransformations` for further details.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# cf880b6707e5f0efa5ec615125437ad700c0b729b4877e4a230c395e2422d0df
+# 11ef7ea405b427357dc4915a632871a3240ee2428af9d6cd0d52c16fc773b206
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -110,7 +107,7 @@ NXapm_paraprobe_tool_common(NXobject):
 # -->
 # <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXapm_paraprobe_tool_common" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <doc>
-#         Base class documenting the information common to tools of the paraprobe-toolbox.
+#         Base class documenting metadata that is common to tools of the paraprobe-toolbox.
 #         
 #         The paraprobe-toolbox is a collection of open-source tools for performing
 #         efficient analyses of point cloud data where each point can represent atoms or
@@ -146,11 +143,11 @@ NXapm_paraprobe_tool_common(NXobject):
 #             <item value="failure"/>
 #         </enumeration>
 #     </field>
-#     <group type="NXprogram"/>
+#     <group name="programID" type="NXprogram" nameType="partial"/>
 #     <field name="identifier_analysis" type="NX_UINT">
 #         <doc>
-#             Internal identifier used by the tool to refer to an analysis (aka simulation
-#             id).
+#             Internal identifier used by the tool to refer to an analysis.
+#             Simulation ID is an alias.
 #         </doc>
 #     </field>
 #     <group name="config" type="NXnote">
@@ -160,10 +157,6 @@ NXapm_paraprobe_tool_common(NXobject):
 #         </doc>
 #     </group>
 #     <group name="profiling" type="NXcs_profiling">
-#         <!--results_path(NX_CHAR):
-# doc: |
-# Path where the tool stores tool-specific results. If not specified,
-# results will be stored in the current working directory.-->
 #         <field name="start_time" type="NX_DATE_TIME">
 #             <doc>
 #                 ISO 8601 formatted time code with local time zone offset to UTC
@@ -184,7 +177,7 @@ NXapm_paraprobe_tool_common(NXobject):
 #             </doc>
 #         </field>
 #     </group>
-#     <group type="NXuser"/>
+#     <group name="userID" type="NXuser" nameType="partial"/>
 #     <group type="NXcoordinate_system">
 #         <doc>
 #             Details about coordinate systems (reference frames) used. In atom probe several coordinate

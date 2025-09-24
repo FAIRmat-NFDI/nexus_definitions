@@ -21,11 +21,7 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
-<!--
-symbols:
-doc: |
-The symbols used in the schema to specify e.g. dimensions of arrays.-->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_transcoder_config" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_transcoder_config" extends="NXapm_paraprobe_tool" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <doc>
         Application definition for a configuration file of the paraprobe-transcoder tool.
         
@@ -34,7 +30,6 @@ The symbols used in the schema to specify e.g. dimensions of arrays.-->
     <group type="NXentry" minOccurs="1" maxOccurs="1">
         <!--by default for application definitions the value of the exists keyword is required unless it is explicitly specified differently-->
         <field name="definition" type="NX_CHAR">
-            <attribute name="version" type="NX_CHAR"/>
             <enumeration>
                 <item value="NXapm_paraprobe_transcoder_config"/>
             </enumeration>
@@ -43,7 +38,6 @@ The symbols used in the schema to specify e.g. dimensions of arrays.-->
         <group name="transcode" type="NXapm_paraprobe_tool_config" minOccurs="1" maxOccurs="1">
             <field name="identifier_analysis" type="NX_UINT" recommended="true"/>
             <group name="reconstruction" type="NXnote">
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -54,27 +48,12 @@ The symbols used in the schema to specify e.g. dimensions of arrays.-->
                 <doc>
                     Specification of the ranging definition file to use for this analysis.
                 </doc>
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
             </group>
         </group>
-        <!--tool-specific parameter
-filter-->
-        <group name="common" type="NXapm_paraprobe_tool_common">
-            <field name="status" type="NX_CHAR"/>
-            <group type="NXprogram" minOccurs="1" maxOccurs="unbounded">
-                <field name="program" type="NX_CHAR">
-                    <attribute name="version" type="NX_CHAR"/>
-                </field>
-            </group>
-            <group name="profiling" type="NXcs_profiling" recommended="true">
-                <field name="start_time" type="NX_DATE_TIME"/>
-                <field name="end_time" type="NX_DATE_TIME"/>
-                <field name="total_elapsed_time" type="NX_FLOAT"/>
-                <field name="current_working_directory" type="NX_CHAR"/>
-            </group>
-        </group>
     </group>
+    <!--tool-specific parameter
+filter-->
 </definition>

@@ -21,7 +21,7 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_intersector_config" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_intersector_config" extends="NXapm_paraprobe_tool" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <symbols>
         <doc>
             The symbols used in the schema to specify e.g. dimensions of arrays.
@@ -39,7 +39,6 @@
     </doc>
     <group type="NXentry" minOccurs="1" maxOccurs="1">
         <field name="definition" type="NX_CHAR">
-            <attribute name="version" type="NX_CHAR"/>
             <enumeration>
                 <item value="NXapm_paraprobe_intersector_config"/>
             </enumeration>
@@ -121,7 +120,7 @@
                     next_set to nodes representing members of the current_set.
                 </doc>
             </field>
-            <group name="current_set" type="NXparameters">
+            <group name="current" type="NXparameters">
                 <doc>
                     Current set stores a set of members, meshes of volumetric features,
                     which will be checked for proximity and/or volumetric intersection,
@@ -152,7 +151,7 @@
                         current_set.
                     </doc>
                 </field>
-                <group name="objectID" type="NXparameters" nameType="partial" minOccurs="1" maxOccurs="4">
+                <group name="objectID" type="NXnote" nameType="partial" minOccurs="1" maxOccurs="4">
                     <doc>
                         Name of the (NeXus)/HDF5 file which contains triangulated surface meshes of the
                         members of the set as instances of NXcg_polyhedron.
@@ -169,7 +168,6 @@
                             <item value="other"/>
                         </enumeration>
                     </field>
-                    <field name="type" type="NX_CHAR"/>
                     <field name="file_name" type="NX_CHAR"/>
                     <field name="checksum" type="NX_CHAR"/>
                     <field name="algorithm" type="NX_CHAR"/>
@@ -191,7 +189,7 @@
                     </field>
                 </group>
             </group>
-            <group name="next_set" type="NXparameters">
+            <group name="next" type="NXparameters">
                 <doc>
                     Next set stores a set of members, meshes of volumetric features,
                     which will be checked for proximity and/or volumetric intersection,
@@ -222,7 +220,7 @@
                         next_set.
                     </doc>
                 </field>
-                <group name="objectID" type="NXparameters" nameType="partial" minOccurs="1" maxOccurs="4">
+                <group name="objectID" type="NXnote" nameType="partial" minOccurs="1" maxOccurs="4">
                     <field name="feature_type" type="NX_CHAR">
                         <doc>
                             Descriptive category explaining what these features are.
@@ -234,7 +232,6 @@
                             <item value="proxies_close_to_edge"/>
                         </enumeration>
                     </field>
-                    <field name="type" type="NX_CHAR"/>
                     <field name="file_name" type="NX_CHAR"/>
                     <field name="checksum" type="NX_CHAR"/>
                     <field name="algorithm" type="NX_CHAR"/>
@@ -257,21 +254,7 @@
                 </group>
             </group>
         </group>
-        <!--MK::tetrahedra volume intersection and tessellation and Nef polyhedra intersection are considered guru features
-what one is doing here before using these functionalities-->
-        <group name="common" type="NXapm_paraprobe_tool_common">
-            <field name="status" type="NX_CHAR"/>
-            <group type="NXprogram" minOccurs="1" maxOccurs="unbounded">
-                <field name="program" type="NX_CHAR">
-                    <attribute name="version" type="NX_CHAR"/>
-                </field>
-            </group>
-            <group name="profiling" type="NXcs_profiling" recommended="true">
-                <field name="start_time" type="NX_DATE_TIME"/>
-                <field name="end_time" type="NX_DATE_TIME"/>
-                <field name="total_elapsed_time" type="NX_FLOAT"/>
-                <field name="current_working_directory" type="NX_CHAR"/>
-            </group>
-        </group>
     </group>
+    <!--MK::tetrahedra volume intersection and tessellation and Nef polyhedra intersection are considered guru features
+what one is doing here before using these functionalities-->
 </definition>

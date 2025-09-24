@@ -20,14 +20,12 @@ doc: |
   using binary container formats. Currently, paraprobe-toolbox uses the
   Hierarchical Data Format 5 (HDF5).
 type: group
-NXapm_paraprobe_tool_config(NXobject):
-  
-  # sequence_id is inherited from NXprocess
+NXapm_paraprobe_tool_config(NXparameters):
   identifier_analysis(NX_UINT):
     unit: NX_UNITLESS
     doc: |
-      Internal identifier used by the tool to refer to an analysis (aka simulation
-      id).
+      Internal identifier used by the tool to refer to an analysis.
+      Simulation ID an alias.
   description(NX_CHAR):
     doc: |
       Possibility for leaving a free-text description about this analysis.
@@ -64,8 +62,8 @@ NXapm_paraprobe_tool_config(NXobject):
       that is assumed to have been evaporated given that its mass-to-charge-state ratio
       lies within the specific mass-to-charge-state-ratio value interval of the iontype.
       
-      The so-called UNKNOWNTYPE iontype represents the null model of an ion
-      that has not been ranged (for whatever reasons).
+      The so-called unknown_type iontype represents the null model of an ion
+      that has not been ranged (for whatever reasons) or is not rangeable.
       The identifier of this special iontype is always the reserved value 0.
     ranging_definitions(NX_CHAR):
       doc: |
@@ -93,12 +91,13 @@ NXapm_paraprobe_tool_config(NXobject):
         points (ions).
   
   # filters
-  (NXspatial_filter):
-  (NXsubsampling_filter):
-  (NXmatch_filter):
+  spatial_filter(NXspatial_filter):
+  evaporation_id_filter(NXsubsampling_filter):
+  iontype_filter(NXmatch_filter):
+  hit_multiplicity_filter(NXmatch_filter):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 5b1e870ad6840ca73ed2b481cad11f2db20697da8de53c9e68785f4e7ec21a9e
+# a31ed788181de8848c9768c30493e94e971a5fc6ec8e380285bf8051c1c99c72
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -122,7 +121,7 @@ NXapm_paraprobe_tool_config(NXobject):
 # #
 # # For further information, see http://www.nexusformat.org
 # -->
-# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXapm_paraprobe_tool_config" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXapm_paraprobe_tool_config" extends="NXparameters" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <doc>
 #         Base class documenting the configuration used for a tool of the paraprobe-toolbox.
 #         
@@ -144,11 +143,10 @@ NXapm_paraprobe_tool_config(NXobject):
 #         using binary container formats. Currently, paraprobe-toolbox uses the
 #         Hierarchical Data Format 5 (HDF5).
 #     </doc>
-#     <!--sequence_id is inherited from NXprocess-->
 #     <field name="identifier_analysis" type="NX_UINT" units="NX_UNITLESS">
 #         <doc>
-#             Internal identifier used by the tool to refer to an analysis (aka simulation
-#             id).
+#             Internal identifier used by the tool to refer to an analysis.
+#             Simulation ID an alias.
 #         </doc>
 #     </field>
 #     <field name="description" type="NX_CHAR">
@@ -194,8 +192,8 @@ NXapm_paraprobe_tool_config(NXobject):
 #             that is assumed to have been evaporated given that its mass-to-charge-state ratio
 #             lies within the specific mass-to-charge-state-ratio value interval of the iontype.
 #             
-#             The so-called UNKNOWNTYPE iontype represents the null model of an ion
-#             that has not been ranged (for whatever reasons).
+#             The so-called unknown_type iontype represents the null model of an ion
+#             that has not been ranged (for whatever reasons) or is not rangeable.
 #             The identifier of this special iontype is always the reserved value 0.
 #         </doc>
 #         <field name="ranging_definitions" type="NX_CHAR">
@@ -231,7 +229,8 @@ NXapm_paraprobe_tool_config(NXobject):
 #         </field>
 #     </group>
 #     <!--filters-->
-#     <group type="NXspatial_filter"/>
-#     <group type="NXsubsampling_filter"/>
-#     <group type="NXmatch_filter"/>
+#     <group name="spatial_filter" type="NXspatial_filter"/>
+#     <group name="evaporation_id_filter" type="NXsubsampling_filter"/>
+#     <group name="iontype_filter" type="NXmatch_filter"/>
+#     <group name="hit_multiplicity_filter" type="NXmatch_filter"/>
 # </definition>

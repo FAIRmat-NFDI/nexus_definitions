@@ -7,25 +7,22 @@ symbols:
   doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
 type: group
-NXapm_paraprobe_distancer_config(NXobject):
+NXapm_paraprobe_distancer_config(NXapm_paraprobe_tool):
   (NXentry):
     exists: ['min', '1', 'max', '1']
     definition(NX_CHAR):
-      \@version(NX_CHAR):
       enumeration: [NXapm_paraprobe_distancer_config]
     point_to_triangle(NXapm_paraprobe_tool_config):
       exists: ['min', '1', 'max', '1']
       identifier_analysis(NX_UINT):
         exists: recommended
       reconstruction(NXnote):
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         position(NX_CHAR):
         mass_to_charge(NX_CHAR):
       ranging(NXnote):
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -66,8 +63,6 @@ NXapm_paraprobe_distancer_config(NXobject):
           number_of_objects(NX_UINT):
           bitdepth(NX_UINT):
           mask(NX_UINT):
-      
-      # <field name="identifier" type="NX_UINT"/>
       evaporation_id_filter(NXsubsampling_filter):
         exists: optional
         min_incr_max(NX_INT):
@@ -113,7 +108,6 @@ NXapm_paraprobe_distancer_config(NXobject):
           array of NX_UINT incident vertices of each facet. Vertex indices are assumed to
           start at zero and must not exceed n_vertices - 1, i.e. the index_offset is 0.
           Facet normal have to be provided as an array of (n_facets, 3) of NX_FLOAT.
-        type(NX_CHAR):
         algorithm(NX_CHAR):
         checksum(NX_CHAR):
         file_name(NX_CHAR):
@@ -144,23 +138,11 @@ NXapm_paraprobe_distancer_config(NXobject):
           exists: optional
           method(NX_CHAR):
           match(NX_NUMBER):
-    
-    # point_set_to_polyline_set(NXapm_paraprobe_tool_config):
-    common(NXapm_paraprobe_tool_common):
-      status(NX_CHAR):
-      (NXprogram):
-        exists: ['min', '1', 'max', 'unbounded']
-        program(NX_CHAR):
-          \@version(NX_CHAR):
-      profiling(NXcs_profiling):
-        exists: recommended
-        start_time(NX_DATE_TIME):
-        end_time(NX_DATE_TIME):
-        total_elapsed_time(NX_FLOAT):
-        current_working_directory(NX_CHAR):
+  
+  # point_set_to_polyline_set(NXapm_paraprobe_tool_config):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 75d8113fdf1f793aa6755135eb9817d5625b71bd094724914fdc685e36ec2d99
+# ea866ef28dbbc757f87e60d84e2de89c6de2328174fa6fb673290a014471787d
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -184,7 +166,7 @@ NXapm_paraprobe_distancer_config(NXobject):
 # #
 # # For further information, see http://www.nexusformat.org
 # -->
-# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_distancer_config" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_distancer_config" extends="NXapm_paraprobe_tool" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <symbols>
 #         <doc>
 #             The symbols used in the schema to specify e.g. dimensions of arrays.
@@ -197,7 +179,6 @@ NXapm_paraprobe_distancer_config(NXobject):
 #     </doc>
 #     <group type="NXentry" minOccurs="1" maxOccurs="1">
 #         <field name="definition" type="NX_CHAR">
-#             <attribute name="version" type="NX_CHAR"/>
 #             <enumeration>
 #                 <item value="NXapm_paraprobe_distancer_config"/>
 #             </enumeration>
@@ -205,7 +186,6 @@ NXapm_paraprobe_distancer_config(NXobject):
 #         <group name="point_to_triangle" type="NXapm_paraprobe_tool_config" minOccurs="1" maxOccurs="1">
 #             <field name="identifier_analysis" type="NX_UINT" recommended="true"/>
 #             <group name="reconstruction" type="NXnote">
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -213,7 +193,6 @@ NXapm_paraprobe_distancer_config(NXobject):
 #                 <field name="mass_to_charge" type="NX_CHAR"/>
 #             </group>
 #             <group name="ranging" type="NXnote">
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -254,7 +233,6 @@ NXapm_paraprobe_distancer_config(NXobject):
 #                     <field name="mask" type="NX_UINT"/>
 #                 </group>
 #             </group>
-#             <!--<field name="identifier" type="NX_UINT"/>-->
 #             <group name="evaporation_id_filter" type="NXsubsampling_filter" optional="true">
 #                 <field name="min_incr_max" type="NX_INT"/>
 #             </group>
@@ -303,7 +281,6 @@ NXapm_paraprobe_distancer_config(NXobject):
 #                     start at zero and must not exceed n_vertices - 1, i.e. the index_offset is 0.
 #                     Facet normal have to be provided as an array of (n_facets, 3) of NX_FLOAT.
 #                 </doc>
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
@@ -343,20 +320,6 @@ NXapm_paraprobe_distancer_config(NXobject):
 #                 </group>
 #             </group>
 #         </group>
-#         <!--point_set_to_polyline_set(NXapm_paraprobe_tool_config):-->
-#         <group name="common" type="NXapm_paraprobe_tool_common">
-#             <field name="status" type="NX_CHAR"/>
-#             <group type="NXprogram" minOccurs="1" maxOccurs="unbounded">
-#                 <field name="program" type="NX_CHAR">
-#                     <attribute name="version" type="NX_CHAR"/>
-#                 </field>
-#             </group>
-#             <group name="profiling" type="NXcs_profiling" recommended="true">
-#                 <field name="start_time" type="NX_DATE_TIME"/>
-#                 <field name="end_time" type="NX_DATE_TIME"/>
-#                 <field name="total_elapsed_time" type="NX_FLOAT"/>
-#                 <field name="current_working_directory" type="NX_CHAR"/>
-#             </group>
-#         </group>
 #     </group>
+#     <!--point_set_to_polyline_set(NXapm_paraprobe_tool_config):-->
 # </definition>

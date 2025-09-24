@@ -3,18 +3,13 @@ doc: |
   Application definition for a configuration file of the paraprobe-transcoder tool.
   
   This tool is part of the paraprobe-toolbox. Inspect :ref:`NXapm_paraprobe_tool_config` for details.
-
-# symbols:
-# doc: |
-# The symbols used in the schema to specify e.g. dimensions of arrays.
 type: group
-NXapm_paraprobe_transcoder_config(NXobject):
+NXapm_paraprobe_transcoder_config(NXapm_paraprobe_tool):
   (NXentry):
     exists: ['min', '1', 'max', '1']
     
     # by default for application definitions the value of the exists keyword is required unless it is explicitly specified differently
     definition(NX_CHAR):
-      \@version(NX_CHAR):
       enumeration: [NXapm_paraprobe_transcoder_config]
     
     # tool-specific
@@ -23,7 +18,6 @@ NXapm_paraprobe_transcoder_config(NXobject):
       identifier_analysis(NX_UINT):
         exists: recommended
       reconstruction(NXnote):
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -32,28 +26,15 @@ NXapm_paraprobe_transcoder_config(NXobject):
       ranging(NXnote):
         doc: |
           Specification of the ranging definition file to use for this analysis.
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
-    
-    # tool-specific parameter
-    # filter
-    common(NXapm_paraprobe_tool_common):
-      status(NX_CHAR):
-      (NXprogram):
-        exists: ['min', '1', 'max', 'unbounded']
-        program(NX_CHAR):
-          \@version(NX_CHAR):
-      profiling(NXcs_profiling):
-        exists: recommended
-        start_time(NX_DATE_TIME):
-        end_time(NX_DATE_TIME):
-        total_elapsed_time(NX_FLOAT):
-        current_working_directory(NX_CHAR):
+  
+  # tool-specific parameter
+  # filter
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# efe2f4f94318235979207916615347bd6f666273f047adf88a4200b225b6ef7f
+# 8d4deaff2c5f766a7c900d9b2050068c44e29f5da2f126f07a09032153905736
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -77,11 +58,7 @@ NXapm_paraprobe_transcoder_config(NXobject):
 # #
 # # For further information, see http://www.nexusformat.org
 # -->
-# <!--
-# symbols:
-# doc: |
-# The symbols used in the schema to specify e.g. dimensions of arrays.-->
-# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_transcoder_config" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_transcoder_config" extends="NXapm_paraprobe_tool" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <doc>
 #         Application definition for a configuration file of the paraprobe-transcoder tool.
 #         
@@ -90,7 +67,6 @@ NXapm_paraprobe_transcoder_config(NXobject):
 #     <group type="NXentry" minOccurs="1" maxOccurs="1">
 #         <!--by default for application definitions the value of the exists keyword is required unless it is explicitly specified differently-->
 #         <field name="definition" type="NX_CHAR">
-#             <attribute name="version" type="NX_CHAR"/>
 #             <enumeration>
 #                 <item value="NXapm_paraprobe_transcoder_config"/>
 #             </enumeration>
@@ -99,7 +75,6 @@ NXapm_paraprobe_transcoder_config(NXobject):
 #         <group name="transcode" type="NXapm_paraprobe_tool_config" minOccurs="1" maxOccurs="1">
 #             <field name="identifier_analysis" type="NX_UINT" recommended="true"/>
 #             <group name="reconstruction" type="NXnote">
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -110,27 +85,12 @@ NXapm_paraprobe_transcoder_config(NXobject):
 #                 <doc>
 #                     Specification of the ranging definition file to use for this analysis.
 #                 </doc>
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
 #             </group>
 #         </group>
-#         <!--tool-specific parameter
-# filter-->
-#         <group name="common" type="NXapm_paraprobe_tool_common">
-#             <field name="status" type="NX_CHAR"/>
-#             <group type="NXprogram" minOccurs="1" maxOccurs="unbounded">
-#                 <field name="program" type="NX_CHAR">
-#                     <attribute name="version" type="NX_CHAR"/>
-#                 </field>
-#             </group>
-#             <group name="profiling" type="NXcs_profiling" recommended="true">
-#                 <field name="start_time" type="NX_DATE_TIME"/>
-#                 <field name="end_time" type="NX_DATE_TIME"/>
-#                 <field name="total_elapsed_time" type="NX_FLOAT"/>
-#                 <field name="current_working_directory" type="NX_CHAR"/>
-#             </group>
-#         </group>
 #     </group>
+#     <!--tool-specific parameter
+# filter-->
 # </definition>

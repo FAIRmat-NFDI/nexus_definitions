@@ -12,27 +12,25 @@ symbols:
   n_composition: |
     The number of compositions to consider for molecular ion search tasks.
 type: group
-NXapm_paraprobe_ranger_config(NXobject):
+NXapm_paraprobe_ranger_config(NXapm_paraprobe_tool):
   (NXentry):
     exists: ['min', '1', 'max', '1']
     definition(NX_CHAR):
-      \@version(NX_CHAR):
       enumeration: [NXapm_paraprobe_ranger_config]
     
     # tool-specific
-    range(NXapm_paraprobe_tool_config):
-      exists: ['min', '1', 'max', '1']
+    rangeID(NXapm_paraprobe_tool_config):
+      nameType: partial
+      exists: ['min', '1', 'max', 'unbounded']
       identifier_analysis(NX_UINT):
         exists: recommended
       reconstruction(NXnote):
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         position(NX_CHAR):
         mass_to_charge(NX_CHAR):
       ranging(NXnote):
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -73,13 +71,15 @@ NXapm_paraprobe_ranger_config(NXobject):
           number_of_objects(NX_UINT):
           bitdepth(NX_UINT):
           mask(NX_UINT):
-          
-          # leave open if scalar or matrix
-          # dim: (i,)
-          identifier(NX_UINT):
+      
+      # leave open if scalar or matrix
+      # dim: (i,)
+      # identifier(NX_UINT):
       evaporation_id_filter(NXsubsampling_filter):
         exists: optional
-        min_incr_max(NX_INT):
+        min(NX_INT):
+        increment(NX_INT):
+        max(NX_INT):
       iontype_filter(NXmatch_filter):
         exists: optional
         method(NX_CHAR):
@@ -88,27 +88,15 @@ NXapm_paraprobe_ranger_config(NXobject):
         exists: optional
         method(NX_CHAR):
         match(NX_NUMBER):
-    common(NXapm_paraprobe_tool_common):
-      status(NX_CHAR):
-      (NXprogram):
-        exists: ['min', '1', 'max', 'unbounded']
-        program(NX_CHAR):
-          \@version(NX_CHAR):
-      profiling(NXcs_profiling):
-        exists: recommended
-        start_time(NX_DATE_TIME):
-        end_time(NX_DATE_TIME):
-        total_elapsed_time(NX_FLOAT):
-        current_working_directory(NX_CHAR):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# d6bd7ff3c66c1daf0e13df6fa1ad7a2edecf9560c6755c02105c25ea1a718706
+# 2cc87d8e32cd42e7514c4e3d21fa8ed168bee84a6dc756d8e90c927a8008d3f0
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
 # # NeXus - Neutron and X-ray Common Data Format
 # #
-# # Copyright (C) 2024-2025 NeXus International Advisory Committee (NIAC)
+# # Copyright (C) 2025-2025 NeXus International Advisory Committee (NIAC)
 # #
 # # This library is free software; you can redistribute it and/or
 # # modify it under the terms of the GNU Lesser General Public
@@ -126,7 +114,7 @@ NXapm_paraprobe_ranger_config(NXobject):
 # #
 # # For further information, see http://www.nexusformat.org
 # -->
-# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_ranger_config" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_ranger_config" extends="NXapm_paraprobe_tool" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <symbols>
 #         <doc>
 #             The symbols used in the schema to specify e.g. dimensions of arrays.
@@ -150,16 +138,14 @@ NXapm_paraprobe_ranger_config(NXobject):
 #     </doc>
 #     <group type="NXentry" minOccurs="1" maxOccurs="1">
 #         <field name="definition" type="NX_CHAR">
-#             <attribute name="version" type="NX_CHAR"/>
 #             <enumeration>
 #                 <item value="NXapm_paraprobe_ranger_config"/>
 #             </enumeration>
 #         </field>
 #         <!--tool-specific-->
-#         <group name="range" type="NXapm_paraprobe_tool_config" minOccurs="1" maxOccurs="1">
+#         <group name="rangeID" type="NXapm_paraprobe_tool_config" nameType="partial" minOccurs="1" maxOccurs="unbounded">
 #             <field name="identifier_analysis" type="NX_UINT" recommended="true"/>
 #             <group name="reconstruction" type="NXnote">
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -167,7 +153,6 @@ NXapm_paraprobe_ranger_config(NXobject):
 #                 <field name="mass_to_charge" type="NX_CHAR"/>
 #             </group>
 #             <group name="ranging" type="NXnote">
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -206,13 +191,15 @@ NXapm_paraprobe_ranger_config(NXobject):
 #                     <field name="number_of_objects" type="NX_UINT"/>
 #                     <field name="bitdepth" type="NX_UINT"/>
 #                     <field name="mask" type="NX_UINT"/>
-#                     <!--leave open if scalar or matrix
-# dim: (i,)-->
-#                     <field name="identifier" type="NX_UINT"/>
 #                 </group>
 #             </group>
+#             <!--leave open if scalar or matrix
+# dim: (i,)
+# identifier(NX_UINT):-->
 #             <group name="evaporation_id_filter" type="NXsubsampling_filter" optional="true">
-#                 <field name="min_incr_max" type="NX_INT"/>
+#                 <field name="min" type="NX_INT"/>
+#                 <field name="increment" type="NX_INT"/>
+#                 <field name="max" type="NX_INT"/>
 #             </group>
 #             <group name="iontype_filter" type="NXmatch_filter" optional="true">
 #                 <field name="method" type="NX_CHAR"/>
@@ -221,20 +208,6 @@ NXapm_paraprobe_ranger_config(NXobject):
 #             <group name="hit_multiplicity_filter" type="NXmatch_filter" optional="true">
 #                 <field name="method" type="NX_CHAR"/>
 #                 <field name="match" type="NX_NUMBER"/>
-#             </group>
-#         </group>
-#         <group name="common" type="NXapm_paraprobe_tool_common">
-#             <field name="status" type="NX_CHAR"/>
-#             <group type="NXprogram" minOccurs="1" maxOccurs="unbounded">
-#                 <field name="program" type="NX_CHAR">
-#                     <attribute name="version" type="NX_CHAR"/>
-#                 </field>
-#             </group>
-#             <group name="profiling" type="NXcs_profiling" recommended="true">
-#                 <field name="start_time" type="NX_DATE_TIME"/>
-#                 <field name="end_time" type="NX_DATE_TIME"/>
-#                 <field name="total_elapsed_time" type="NX_FLOAT"/>
-#                 <field name="current_working_directory" type="NX_CHAR"/>
 #             </group>
 #         </group>
 #     </group>

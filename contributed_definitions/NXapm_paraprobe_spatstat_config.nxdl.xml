@@ -21,7 +21,7 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_spatstat_config" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_spatstat_config" extends="NXapm_paraprobe_tool" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <symbols>
         <doc>
             The symbols used in the schema to specify e.g. dimensions of arrays.
@@ -62,7 +62,6 @@
         <group name="spatial_statisticsID" type="NXapm_paraprobe_tool_config" nameType="partial" minOccurs="1" maxOccurs="unbounded">
             <field name="identifier_analysis" type="NX_UINT" recommended="true"/>
             <group name="reconstruction" type="NXnote">
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -70,7 +69,6 @@
                 <field name="mass_to_charge" type="NX_CHAR"/>
             </group>
             <group name="ranging" type="NXnote">
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -80,7 +78,6 @@
                 <doc>
                     Distance between each ion and triangulated surface mesh.
                 </doc>
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -108,7 +105,6 @@
                     ions within a distance not farther away to a feature than the feature_distance
                     threshold value.
                 </doc>
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -168,7 +164,9 @@
 dim: (i,)
 identifier(NX_UINT):-->
             <group name="evaporation_id_filter" type="NXsubsampling_filter" optional="true">
-                <field name="min_incr_max" type="NX_INT"/>
+                <field name="min" type="NX_INT"/>
+                <field name="increment" type="NX_INT"/>
+                <field name="max" type="NX_INT"/>
             </group>
             <group name="iontype_filter" type="NXmatch_filter" optional="true">
                 <field name="method" type="NX_CHAR"/>
@@ -293,13 +291,20 @@ identifier(NX_UINT):-->
                             Order k.
                         </doc>
                     </field>
-                    <field name="min_incr_max" type="NX_FLOAT" units="NX_LENGTH">
+                    <field name="min" type="NX_FLOAT" units="NX_LENGTH">
                         <doc>
-                            Minimum value, increment, and maximum value of the histogram binning.
+                            Minimum value of the histogram binning.
                         </doc>
-                        <dimensions rank="1">
-                            <dim index="1" value="3"/>
-                        </dimensions>
+                    </field>
+                    <field name="increment" type="NX_FLOAT" units="NX_LENGTH">
+                        <doc>
+                            Increment of the histogram binning.
+                        </doc>
+                    </field>
+                    <field name="max" type="NX_FLOAT" units="NX_LENGTH">
+                        <doc>
+                            Maximum value of the histogram binning.
+                        </doc>
                     </field>
                 </group>
                 <group name="rdf" type="NXprocess" minOccurs="0" maxOccurs="1">
@@ -308,30 +313,23 @@ identifier(NX_UINT):-->
                     </doc>
                     <field name="min_incr_max" type="NX_FLOAT" units="NX_LENGTH">
                         <doc>
-                            Minimum value, increment, and maximum value of the histogram binning.
+                            Minimum value of the histogram binning.
                         </doc>
-                        <dimensions rank="1">
-                            <dim index="1" value="3"/>
-                        </dimensions>
+                    </field>
+                    <field name="increment" type="NX_FLOAT" units="NX_LENGTH">
+                        <doc>
+                            Increment value of the histogram binning.
+                        </doc>
+                    </field>
+                    <field name="max" type="NX_FLOAT" units="NX_LENGTH">
+                        <doc>
+                            Maximum value of the histogram binning.
+                        </doc>
                     </field>
                 </group>
             </group>
         </group>
-        <!--NEW ISSUE: ripleyk(NXcollection):
-NEW ISSUE: two_point(NXcollection):-->
-        <group name="common" type="NXapm_paraprobe_tool_common">
-            <field name="status" type="NX_CHAR"/>
-            <group type="NXprogram" minOccurs="1" maxOccurs="unbounded">
-                <field name="program" type="NX_CHAR">
-                    <attribute name="version" type="NX_CHAR"/>
-                </field>
-            </group>
-            <group name="profiling" type="NXcs_profiling" recommended="true">
-                <field name="start_time" type="NX_DATE_TIME"/>
-                <field name="end_time" type="NX_DATE_TIME"/>
-                <field name="total_elapsed_time" type="NX_FLOAT"/>
-                <field name="current_working_directory" type="NX_CHAR"/>
-            </group>
-        </group>
     </group>
+    <!--NEW ISSUE: ripleyk(NXcollection):
+NEW ISSUE: two_point(NXcollection):-->
 </definition>

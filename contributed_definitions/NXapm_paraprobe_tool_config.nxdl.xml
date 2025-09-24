@@ -21,7 +21,7 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXapm_paraprobe_tool_config" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXapm_paraprobe_tool_config" extends="NXparameters" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <doc>
         Base class documenting the configuration used for a tool of the paraprobe-toolbox.
         
@@ -43,11 +43,10 @@
         using binary container formats. Currently, paraprobe-toolbox uses the
         Hierarchical Data Format 5 (HDF5).
     </doc>
-    <!--sequence_id is inherited from NXprocess-->
     <field name="identifier_analysis" type="NX_UINT" units="NX_UNITLESS">
         <doc>
-            Internal identifier used by the tool to refer to an analysis (aka simulation
-            id).
+            Internal identifier used by the tool to refer to an analysis.
+            Simulation ID an alias.
         </doc>
     </field>
     <field name="description" type="NX_CHAR">
@@ -93,8 +92,8 @@ base class from which tool-specific application definitions inherit-->
             that is assumed to have been evaporated given that its mass-to-charge-state ratio
             lies within the specific mass-to-charge-state-ratio value interval of the iontype.
             
-            The so-called UNKNOWNTYPE iontype represents the null model of an ion
-            that has not been ranged (for whatever reasons).
+            The so-called unknown_type iontype represents the null model of an ion
+            that has not been ranged (for whatever reasons) or is not rangeable.
             The identifier of this special iontype is always the reserved value 0.
         </doc>
         <field name="ranging_definitions" type="NX_CHAR">
@@ -130,7 +129,8 @@ an instance of :ref:`NXcg_triangle_set` is stored.-->
         </field>
     </group>
     <!--filters-->
-    <group type="NXspatial_filter"/>
-    <group type="NXsubsampling_filter"/>
-    <group type="NXmatch_filter"/>
+    <group name="spatial_filter" type="NXspatial_filter"/>
+    <group name="evaporation_id_filter" type="NXsubsampling_filter"/>
+    <group name="iontype_filter" type="NXmatch_filter"/>
+    <group name="hit_multiplicity_filter" type="NXmatch_filter"/>
 </definition>

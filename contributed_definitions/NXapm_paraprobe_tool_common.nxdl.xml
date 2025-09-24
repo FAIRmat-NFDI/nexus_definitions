@@ -23,7 +23,7 @@
 -->
 <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="base" type="group" name="NXapm_paraprobe_tool_common" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <doc>
-        Base class documenting the information common to tools of the paraprobe-toolbox.
+        Base class documenting metadata that is common to tools of the paraprobe-toolbox.
         
         The paraprobe-toolbox is a collection of open-source tools for performing
         efficient analyses of point cloud data where each point can represent atoms or
@@ -59,11 +59,11 @@
             <item value="failure"/>
         </enumeration>
     </field>
-    <group type="NXprogram"/>
+    <group name="programID" type="NXprogram" nameType="partial"/>
     <field name="identifier_analysis" type="NX_UINT">
         <doc>
-            Internal identifier used by the tool to refer to an analysis (aka simulation
-            id).
+            Internal identifier used by the tool to refer to an analysis.
+            Simulation ID is an alias.
         </doc>
     </field>
     <group name="config" type="NXnote">
@@ -73,10 +73,6 @@
         </doc>
     </group>
     <group name="profiling" type="NXcs_profiling">
-        <!--results_path(NX_CHAR):
-doc: |
-Path where the tool stores tool-specific results. If not specified,
-results will be stored in the current working directory.-->
         <field name="start_time" type="NX_DATE_TIME">
             <doc>
                 ISO 8601 formatted time code with local time zone offset to UTC
@@ -97,7 +93,7 @@ results will be stored in the current working directory.-->
             </doc>
         </field>
     </group>
-    <group type="NXuser"/>
+    <group name="userID" type="NXuser" nameType="partial"/>
     <group type="NXcoordinate_system">
         <doc>
             Details about coordinate systems (reference frames) used. In atom probe several coordinate

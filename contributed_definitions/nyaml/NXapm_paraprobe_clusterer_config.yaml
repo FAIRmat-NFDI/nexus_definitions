@@ -15,11 +15,10 @@ symbols:
   n_ions: |
     Number of different iontypes to distinguish during clustering.
 type: group
-NXapm_paraprobe_clusterer_config(NXobject):
+NXapm_paraprobe_clusterer_config(NXapm_paraprobe_tool):
   (NXentry):
     exists: ['min', '1', 'max', '1']
     definition(NX_CHAR):
-      \@version(NX_CHAR):
       enumeration: [NXapm_paraprobe_clusterer_config]
     number_of_tasks(NX_UINT):
       unit: NX_UNITLESS
@@ -35,7 +34,6 @@ NXapm_paraprobe_clusterer_config(NXobject):
         a binary file that is formatted like a POS file but cluster labels written out using floating
         point numbers.
       reconstruction(NXnote):
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -49,7 +47,6 @@ NXapm_paraprobe_clusterer_config(NXobject):
           point quadruplets, one quadruplet for each ion. The first three values of each
           quadruplet encode the position of the ion. The fourth value is the integer identifier
           of the cluster encoded as a floating point number.
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -75,14 +72,12 @@ NXapm_paraprobe_clusterer_config(NXobject):
         This process performs a cluster analysis on a
         reconstructed dataset or a ROI within it.
       reconstruction(NXnote):
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         position(NX_CHAR):
         mass_to_charge(NX_CHAR):
       ranging(NXnote):
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -91,7 +86,6 @@ NXapm_paraprobe_clusterer_config(NXobject):
         exists: optional
         doc: |
           Distance between each ion and triangulated surface mesh.
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -132,7 +126,9 @@ NXapm_paraprobe_clusterer_config(NXobject):
           mask(NX_UINT):
       evaporation_id_filter(NXsubsampling_filter):
         exists: optional
-        min_incr_max(NX_INT):
+        min(NX_INT):
+        increment(NX_INT):
+        max(NX_INT):
       iontype_filter(NXmatch_filter):
         exists: optional
         method(NX_CHAR):
@@ -294,24 +290,12 @@ NXapm_paraprobe_clusterer_config(NXobject):
           dimensions:
             rank: 1
             dim: (m,)
-    
-    # ADD FURTHER ALGORITHMS, see L. Stephenson for further details
-    # e.g. https://doi.org/10.1017/S1431927607070900
-    common(NXapm_paraprobe_tool_common):
-      status(NX_CHAR):
-      (NXprogram):
-        exists: ['min', '1', 'max', 'unbounded']
-        program(NX_CHAR):
-          \@version(NX_CHAR):
-      profiling(NXcs_profiling):
-        exists: recommended
-        start_time(NX_DATE_TIME):
-        end_time(NX_DATE_TIME):
-        total_elapsed_time(NX_FLOAT):
-        current_working_directory(NX_CHAR):
+  
+  # ADD FURTHER ALGORITHMS, see L. Stephenson for further details
+  # e.g. https://doi.org/10.1017/S1431927607070900
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# a2cf168bee2387ccb8f0c8cd2ba8610829d582cd9429a5ee6797c0e1eedb1022
+# 3d13909e703a6a25bfb895779ed129d0e73bc0be0c04d4dfed2ad5405474ef5c
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -335,7 +319,7 @@ NXapm_paraprobe_clusterer_config(NXobject):
 # #
 # # For further information, see http://www.nexusformat.org
 # -->
-# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_clusterer_config" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_clusterer_config" extends="NXapm_paraprobe_tool" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <symbols>
 #         <doc>
 #             The symbols used in the schema to specify e.g. dimensions of arrays.
@@ -364,7 +348,6 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #     </doc>
 #     <group type="NXentry" minOccurs="1" maxOccurs="1">
 #         <field name="definition" type="NX_CHAR">
-#             <attribute name="version" type="NX_CHAR"/>
 #             <enumeration>
 #                 <item value="NXapm_paraprobe_clusterer_config"/>
 #             </enumeration>
@@ -384,7 +367,6 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #                 point numbers.
 #             </doc>
 #             <group name="reconstruction" type="NXnote">
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -400,7 +382,6 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #                     quadruplet encode the position of the ion. The fourth value is the integer identifier
 #                     of the cluster encoded as a floating point number.
 #                 </doc>
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -428,7 +409,6 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #                 reconstructed dataset or a ROI within it.
 #             </doc>
 #             <group name="reconstruction" type="NXnote">
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -436,7 +416,6 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #                 <field name="mass_to_charge" type="NX_CHAR"/>
 #             </group>
 #             <group name="ranging" type="NXnote">
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -446,7 +425,6 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #                 <doc>
 #                     Distance between each ion and triangulated surface mesh.
 #                 </doc>
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -487,7 +465,9 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #                 </group>
 #             </group>
 #             <group name="evaporation_id_filter" type="NXsubsampling_filter" optional="true">
-#                 <field name="min_incr_max" type="NX_INT"/>
+#                 <field name="min" type="NX_INT"/>
+#                 <field name="increment" type="NX_INT"/>
+#                 <field name="max" type="NX_INT"/>
 #             </group>
 #             <group name="iontype_filter" type="NXmatch_filter" optional="true">
 #                 <field name="method" type="NX_CHAR"/>
@@ -673,21 +653,7 @@ NXapm_paraprobe_clusterer_config(NXobject):
 #                 </field>
 #             </group>
 #         </group>
-#         <!--ADD FURTHER ALGORITHMS, see L. Stephenson for further details
-# e.g. https://doi.org/10.1017/S1431927607070900-->
-#         <group name="common" type="NXapm_paraprobe_tool_common">
-#             <field name="status" type="NX_CHAR"/>
-#             <group type="NXprogram" minOccurs="1" maxOccurs="unbounded">
-#                 <field name="program" type="NX_CHAR">
-#                     <attribute name="version" type="NX_CHAR"/>
-#                 </field>
-#             </group>
-#             <group name="profiling" type="NXcs_profiling" recommended="true">
-#                 <field name="start_time" type="NX_DATE_TIME"/>
-#                 <field name="end_time" type="NX_DATE_TIME"/>
-#                 <field name="total_elapsed_time" type="NX_FLOAT"/>
-#                 <field name="current_working_directory" type="NX_CHAR"/>
-#             </group>
-#         </group>
 #     </group>
+#     <!--ADD FURTHER ALGORITHMS, see L. Stephenson for further details
+# e.g. https://doi.org/10.1017/S1431927607070900-->
 # </definition>

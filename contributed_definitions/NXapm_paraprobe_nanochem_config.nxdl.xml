@@ -21,7 +21,7 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_nanochem_config" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_nanochem_config" extends="NXapm_paraprobe_tool" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <symbols>
         <doc>
             The symbols used in the schema to specify e.g. dimensions of arrays.
@@ -74,7 +74,6 @@
     </doc>
     <group type="NXentry" minOccurs="1" maxOccurs="1">
         <field name="definition" type="NX_CHAR">
-            <attribute name="version" type="NX_CHAR"/>
             <enumeration>
                 <item value="NXapm_paraprobe_nanochem_config"/>
             </enumeration>
@@ -98,7 +97,6 @@ Therefore, it can be advantageous for users to load an already computed delocali
 This can be achieved with the load_existent option.-->
             <field name="identifier_analysis" type="NX_UINT" recommended="true"/>
             <group name="reconstruction" type="NXnote">
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -106,7 +104,6 @@ This can be achieved with the load_existent option.-->
                 <field name="mass_to_charge" type="NX_CHAR"/>
             </group>
             <group name="ranging" type="NXnote">
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -118,7 +115,6 @@ This can be achieved with the load_existent option.-->
                     of the edge of the dataset. This model can be used to detect and control
                     various sources of bias in the analyses.
                 </doc>
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -139,7 +135,6 @@ This can be achieved with the load_existent option.-->
                 <doc>
                     Distance between each ion and triangulated surface mesh.
                 </doc>
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -183,7 +178,9 @@ This can be achieved with the load_existent option.-->
 dim: (i,)
 identifier(NX_UINT):-->
             <group name="evaporation_id_filter" type="NXsubsampling_filter" optional="true">
-                <field name="min_incr_max" type="NX_INT"/>
+                <field name="min" type="NX_INT"/>
+                <field name="increment" type="NX_INT"/>
+                <field name="max" type="NX_INT"/>
             </group>
             <group name="decomposition" type="NXmatch_filter">
                 <doc>
@@ -240,7 +237,6 @@ identifier(NX_UINT):-->
                     Serialized result of an already computed delocalization which is for performance
                     reasons here just loaded and not computed again.
                 </doc>
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -417,7 +413,6 @@ identifier(NX_UINT):-->
                         * candidates, total number of ions with type in the isotope_whitelist.
                         * composition, candidates but normalized by composition, i.e. at.-%
                         * concentration, candidates but normalized by voxel volume, i.e. ions/nm^3
-                        
                     </doc>
                 </field>
                 <field name="has_triangle_soup" type="NX_BOOLEAN">
@@ -594,7 +589,6 @@ NEW ISSUE: here we need to specify how the meshes were smoothened-->
             </doc>
             <field name="identifier_analysis" type="NX_UINT" recommended="true"/>
             <group name="reconstruction" type="NXnote">
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -602,7 +596,6 @@ NEW ISSUE: here we need to specify how the meshes were smoothened-->
                 <field name="mass_to_charge" type="NX_CHAR"/>
             </group>
             <group name="ranging" type="NXnote">
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -614,7 +607,6 @@ NEW ISSUE: here we need to specify how the meshes were smoothened-->
                     of the edge of the dataset. This model can be used to detect and control
                     various sources of bias in the analyses.
                 </doc>
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -669,7 +661,9 @@ NEW ISSUE: here we need to specify how the meshes were smoothened-->
 dim: (i,)
 identifier(NX_UINT):-->
             <group name="evaporation_id_filter" type="NXsubsampling_filter" optional="true">
-                <field name="min_incr_max" type="NX_INT"/>
+                <field name="min" type="NX_INT"/>
+                <field name="increment" type="NX_INT"/>
+                <field name="max" type="NX_INT"/>
             </group>
             <group name="iontype_filter" type="NXmatch_filter" optional="true">
                 <field name="method" type="NX_CHAR"/>
@@ -702,7 +696,6 @@ identifier(NX_UINT):-->
                 <doc>
                     Details about the control point file used.
                 </doc>
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -822,7 +815,6 @@ identifier(NX_UINT):-->
             </doc>
             <field name="identifier_analysis" type="NX_UINT" recommended="true"/>
             <group name="reconstruction" type="NXnote">
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -830,7 +822,6 @@ identifier(NX_UINT):-->
                 <field name="mass_to_charge" type="NX_CHAR"/>
             </group>
             <group name="ranging" type="NXnote">
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -842,7 +833,6 @@ identifier(NX_UINT):-->
                     of the edge of the dataset. This model can be used to detect and control
                     various sources of bias in the analyses.
                 </doc>
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -863,7 +853,6 @@ identifier(NX_UINT):-->
                 <doc>
                     Distance between each ion and triangulated surface mesh.
                 </doc>
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -882,7 +871,6 @@ identifier(NX_UINT):-->
                     interface as returned e.g. by a previous interface_meshing task or the
                     mesh of an iso-surface from a previous delocalization task.
                 </doc>
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -927,7 +915,6 @@ from normals of neighboring facets, type of weighting schemes can affect results
                     mesh it is recommended to feed precomputed distances of each ion to
                     the triangles of the feature mesh.
                 </doc>
-                <field name="type" type="NX_CHAR"/>
                 <field name="file_name" type="NX_CHAR"/>
                 <field name="checksum" type="NX_CHAR"/>
                 <field name="algorithm" type="NX_CHAR"/>
@@ -977,7 +964,9 @@ from normals of neighboring facets, type of weighting schemes can affect results
 dim: (i,)
 identifier(NX_UINT):-->
             <group name="evaporation_id_filter" type="NXsubsampling_filter" optional="true">
-                <field name="min_incr_max" type="NX_INT"/>
+                <field name="min" type="NX_INT"/>
+                <field name="increment" type="NX_INT"/>
+                <field name="max" type="NX_INT"/>
             </group>
             <group name="iontype_filter" type="NXmatch_filter" optional="true">
                 <field name="method" type="NX_CHAR"/>
@@ -988,7 +977,7 @@ identifier(NX_UINT):-->
                 <field name="match" type="NX_NUMBER"/>
             </group>
             <!--config-->
-            <group name="user_defined_roi" type="NXobject" optional="true">
+            <group name="user_defined_roi" type="NXroi_process" optional="true">
                 <doc>
                     As an alternative mode the tool can be instructed to place ROIs
                     at specific locations into the dataset. This is the programmatic
@@ -1051,20 +1040,6 @@ but cylinders are most frequently used-->
                     be if ROIs are placed at triangles of the feature mesh.
                 </doc>
             </field>
-        </group>
-        <group name="common" type="NXapm_paraprobe_tool_common">
-            <field name="status" type="NX_CHAR"/>
-            <group type="NXprogram" minOccurs="1" maxOccurs="unbounded">
-                <field name="program" type="NX_CHAR">
-                    <attribute name="version" type="NX_CHAR"/>
-                </field>
-            </group>
-            <group name="profiling" type="NXcs_profiling" recommended="true">
-                <field name="start_time" type="NX_DATE_TIME"/>
-                <field name="end_time" type="NX_DATE_TIME"/>
-                <field name="total_elapsed_time" type="NX_FLOAT"/>
-                <field name="current_working_directory" type="NX_CHAR"/>
-            </group>
         </group>
     </group>
 </definition>

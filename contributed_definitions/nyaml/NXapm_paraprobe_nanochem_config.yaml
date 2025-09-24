@@ -23,11 +23,10 @@ symbols:
   n_rois: |
     Number of cylinder ROIs to place for oned_profile if no feature mesh is used.
 type: group
-NXapm_paraprobe_nanochem_config(NXobject):
+NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool):
   (NXentry):
     exists: ['min', '1', 'max', '1']
     definition(NX_CHAR):
-      \@version(NX_CHAR):
       enumeration: [NXapm_paraprobe_nanochem_config]
     delocalization(NXapm_paraprobe_tool_config):
       exists: ['min', '0', 'max', '1']
@@ -50,14 +49,12 @@ NXapm_paraprobe_nanochem_config(NXobject):
       identifier_analysis(NX_UINT):
         exists: recommended
       reconstruction(NXnote):
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         position(NX_CHAR):
         mass_to_charge(NX_CHAR):
       ranging(NXnote):
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -67,7 +64,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
           A precomputed triangulated surface mesh representing a model (of the surface)
           of the edge of the dataset. This model can be used to detect and control
           various sources of bias in the analyses.
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -83,7 +79,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
         exists: recommended
         doc: |
           Distance between each ion and triangulated surface mesh.
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -128,7 +123,9 @@ NXapm_paraprobe_nanochem_config(NXobject):
       # identifier(NX_UINT):
       evaporation_id_filter(NXsubsampling_filter):
         exists: optional
-        min_incr_max(NX_INT):
+        min(NX_INT):
+        increment(NX_INT):
+        max(NX_INT):
       decomposition(NXmatch_filter):
         doc: |
           Configuration for the algorithm that defines how the multiplicity of all
@@ -167,7 +164,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
         doc: |
           Serialized result of an already computed delocalization which is for performance
           reasons here just loaded and not computed again.
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -465,14 +461,12 @@ NXapm_paraprobe_nanochem_config(NXobject):
       identifier_analysis(NX_UINT):
         exists: recommended
       reconstruction(NXnote):
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         position(NX_CHAR):
         mass_to_charge(NX_CHAR):
       ranging(NXnote):
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -483,7 +477,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
           A precomputed triangulated surface mesh representing a model (of the surface)
           of the edge of the dataset. This model can be used to detect and control
           various sources of bias in the analyses.
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -535,7 +528,9 @@ NXapm_paraprobe_nanochem_config(NXobject):
       # identifier(NX_UINT):
       evaporation_id_filter(NXsubsampling_filter):
         exists: optional
-        min_incr_max(NX_INT):
+        min(NX_INT):
+        increment(NX_INT):
+        max(NX_INT):
       iontype_filter(NXmatch_filter):
         exists: optional
         method(NX_CHAR):
@@ -562,7 +557,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
       control_point(NXnote):
         doc: |
           Details about the control point file used.
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -660,14 +654,12 @@ NXapm_paraprobe_nanochem_config(NXobject):
       identifier_analysis(NX_UINT):
         exists: recommended
       reconstruction(NXnote):
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         position(NX_CHAR):
         mass_to_charge(NX_CHAR):
       ranging(NXnote):
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -678,7 +670,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
           A precomputed triangulated surface mesh representing a model (of the surface)
           of the edge of the dataset. This model can be used to detect and control
           various sources of bias in the analyses.
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -694,7 +685,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
         exists: recommended
         doc: |
           Distance between each ion and triangulated surface mesh.
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -710,7 +700,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
           interface at which to place ROIs to profile. This can be the mesh of an
           interface as returned e.g. by a previous interface_meshing task or the
           mesh of an iso-surface from a previous delocalization task.
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -746,7 +735,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
           To enable an additional filtration of specific parts of the feature
           mesh it is recommended to feed precomputed distances of each ion to
           the triangles of the feature mesh.
-        type(NX_CHAR):
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
@@ -795,7 +783,9 @@ NXapm_paraprobe_nanochem_config(NXobject):
       # identifier(NX_UINT):
       evaporation_id_filter(NXsubsampling_filter):
         exists: optional
-        min_incr_max(NX_INT):
+        min(NX_INT):
+        increment(NX_INT):
+        max(NX_INT):
       iontype_filter(NXmatch_filter):
         exists: optional
         method(NX_CHAR):
@@ -806,7 +796,7 @@ NXapm_paraprobe_nanochem_config(NXobject):
         match(NX_NUMBER):
       
       # config
-      user_defined_roi(NXobject):
+      user_defined_roi(NXroi_process):
         exists: optional
         doc: |
           As an alternative mode the tool can be instructed to place ROIs
@@ -851,21 +841,9 @@ NXapm_paraprobe_nanochem_config(NXobject):
         doc: |
           For each ROI, how wide (in radius) should the cylindrical ROI
           be if ROIs are placed at triangles of the feature mesh.
-    common(NXapm_paraprobe_tool_common):
-      status(NX_CHAR):
-      (NXprogram):
-        exists: ['min', '1', 'max', 'unbounded']
-        program(NX_CHAR):
-          \@version(NX_CHAR):
-      profiling(NXcs_profiling):
-        exists: recommended
-        start_time(NX_DATE_TIME):
-        end_time(NX_DATE_TIME):
-        total_elapsed_time(NX_FLOAT):
-        current_working_directory(NX_CHAR):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 0eadf37c02da9fc5aaff69a50b81be1b98894002216c103a2c3d89ab270fb2ee
+# fdd2d7ee79d3c07e4862230d0b2a48940c842c9320a6d9dd79fc9aed116702f4
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -889,7 +867,7 @@ NXapm_paraprobe_nanochem_config(NXobject):
 # #
 # # For further information, see http://www.nexusformat.org
 # -->
-# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_nanochem_config" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_nanochem_config" extends="NXapm_paraprobe_tool" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <symbols>
 #         <doc>
 #             The symbols used in the schema to specify e.g. dimensions of arrays.
@@ -942,7 +920,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #     </doc>
 #     <group type="NXentry" minOccurs="1" maxOccurs="1">
 #         <field name="definition" type="NX_CHAR">
-#             <attribute name="version" type="NX_CHAR"/>
 #             <enumeration>
 #                 <item value="NXapm_paraprobe_nanochem_config"/>
 #             </enumeration>
@@ -966,7 +943,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 # This can be achieved with the load_existent option.-->
 #             <field name="identifier_analysis" type="NX_UINT" recommended="true"/>
 #             <group name="reconstruction" type="NXnote">
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -974,7 +950,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #                 <field name="mass_to_charge" type="NX_CHAR"/>
 #             </group>
 #             <group name="ranging" type="NXnote">
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -986,7 +961,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #                     of the edge of the dataset. This model can be used to detect and control
 #                     various sources of bias in the analyses.
 #                 </doc>
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -1007,7 +981,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #                 <doc>
 #                     Distance between each ion and triangulated surface mesh.
 #                 </doc>
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -1051,7 +1024,9 @@ NXapm_paraprobe_nanochem_config(NXobject):
 # dim: (i,)
 # identifier(NX_UINT):-->
 #             <group name="evaporation_id_filter" type="NXsubsampling_filter" optional="true">
-#                 <field name="min_incr_max" type="NX_INT"/>
+#                 <field name="min" type="NX_INT"/>
+#                 <field name="increment" type="NX_INT"/>
+#                 <field name="max" type="NX_INT"/>
 #             </group>
 #             <group name="decomposition" type="NXmatch_filter">
 #                 <doc>
@@ -1108,7 +1083,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #                     Serialized result of an already computed delocalization which is for performance
 #                     reasons here just loaded and not computed again.
 #                 </doc>
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -1285,7 +1259,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #                         * candidates, total number of ions with type in the isotope_whitelist.
 #                         * composition, candidates but normalized by composition, i.e. at.-%
 #                         * concentration, candidates but normalized by voxel volume, i.e. ions/nm^3
-#                         
 #                     </doc>
 #                 </field>
 #                 <field name="has_triangle_soup" type="NX_BOOLEAN">
@@ -1462,7 +1435,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #             </doc>
 #             <field name="identifier_analysis" type="NX_UINT" recommended="true"/>
 #             <group name="reconstruction" type="NXnote">
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -1470,7 +1442,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #                 <field name="mass_to_charge" type="NX_CHAR"/>
 #             </group>
 #             <group name="ranging" type="NXnote">
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -1482,7 +1453,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #                     of the edge of the dataset. This model can be used to detect and control
 #                     various sources of bias in the analyses.
 #                 </doc>
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -1537,7 +1507,9 @@ NXapm_paraprobe_nanochem_config(NXobject):
 # dim: (i,)
 # identifier(NX_UINT):-->
 #             <group name="evaporation_id_filter" type="NXsubsampling_filter" optional="true">
-#                 <field name="min_incr_max" type="NX_INT"/>
+#                 <field name="min" type="NX_INT"/>
+#                 <field name="increment" type="NX_INT"/>
+#                 <field name="max" type="NX_INT"/>
 #             </group>
 #             <group name="iontype_filter" type="NXmatch_filter" optional="true">
 #                 <field name="method" type="NX_CHAR"/>
@@ -1570,7 +1542,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #                 <doc>
 #                     Details about the control point file used.
 #                 </doc>
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -1690,7 +1661,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #             </doc>
 #             <field name="identifier_analysis" type="NX_UINT" recommended="true"/>
 #             <group name="reconstruction" type="NXnote">
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -1698,7 +1668,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #                 <field name="mass_to_charge" type="NX_CHAR"/>
 #             </group>
 #             <group name="ranging" type="NXnote">
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -1710,7 +1679,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #                     of the edge of the dataset. This model can be used to detect and control
 #                     various sources of bias in the analyses.
 #                 </doc>
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -1731,7 +1699,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #                 <doc>
 #                     Distance between each ion and triangulated surface mesh.
 #                 </doc>
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -1750,7 +1717,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #                     interface as returned e.g. by a previous interface_meshing task or the
 #                     mesh of an iso-surface from a previous delocalization task.
 #                 </doc>
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -1795,7 +1761,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #                     mesh it is recommended to feed precomputed distances of each ion to
 #                     the triangles of the feature mesh.
 #                 </doc>
-#                 <field name="type" type="NX_CHAR"/>
 #                 <field name="file_name" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="algorithm" type="NX_CHAR"/>
@@ -1845,7 +1810,9 @@ NXapm_paraprobe_nanochem_config(NXobject):
 # dim: (i,)
 # identifier(NX_UINT):-->
 #             <group name="evaporation_id_filter" type="NXsubsampling_filter" optional="true">
-#                 <field name="min_incr_max" type="NX_INT"/>
+#                 <field name="min" type="NX_INT"/>
+#                 <field name="increment" type="NX_INT"/>
+#                 <field name="max" type="NX_INT"/>
 #             </group>
 #             <group name="iontype_filter" type="NXmatch_filter" optional="true">
 #                 <field name="method" type="NX_CHAR"/>
@@ -1856,7 +1823,7 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #                 <field name="match" type="NX_NUMBER"/>
 #             </group>
 #             <!--config-->
-#             <group name="user_defined_roi" type="NXobject" optional="true">
+#             <group name="user_defined_roi" type="NXroi_process" optional="true">
 #                 <doc>
 #                     As an alternative mode the tool can be instructed to place ROIs
 #                     at specific locations into the dataset. This is the programmatic
@@ -1919,20 +1886,6 @@ NXapm_paraprobe_nanochem_config(NXobject):
 #                     be if ROIs are placed at triangles of the feature mesh.
 #                 </doc>
 #             </field>
-#         </group>
-#         <group name="common" type="NXapm_paraprobe_tool_common">
-#             <field name="status" type="NX_CHAR"/>
-#             <group type="NXprogram" minOccurs="1" maxOccurs="unbounded">
-#                 <field name="program" type="NX_CHAR">
-#                     <attribute name="version" type="NX_CHAR"/>
-#                 </field>
-#             </group>
-#             <group name="profiling" type="NXcs_profiling" recommended="true">
-#                 <field name="start_time" type="NX_DATE_TIME"/>
-#                 <field name="end_time" type="NX_DATE_TIME"/>
-#                 <field name="total_elapsed_time" type="NX_FLOAT"/>
-#                 <field name="current_working_directory" type="NX_CHAR"/>
-#             </group>
 #         </group>
 #     </group>
 # </definition>
