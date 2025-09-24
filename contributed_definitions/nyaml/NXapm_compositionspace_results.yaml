@@ -52,8 +52,6 @@ NXapm_compositionspace_results(NXobject):
     config(NXnote):
       doc: |
         Configuration file that was used in this analysis.
-      type(NX_CHAR):
-        exists: optional
       file_name(NX_CHAR):
       algorithm(NX_CHAR):
         exists: recommended
@@ -105,7 +103,7 @@ NXapm_compositionspace_results(NXobject):
         origin(NX_NUMBER):
           dimensions:
             dim: (grid_dim,)
-        symmetry:
+        symmetry(NX_CHAR):
           enumeration: [cubic]
         cell_dimensions(NX_NUMBER):
           dimensions:
@@ -142,7 +140,8 @@ NXapm_compositionspace_results(NXobject):
           for the occupancy of each voxel with atoms.
         dimensions:
           dim: (n_voxels,)
-      (NXatom):
+      ionID(NXatom):
+        nameType: partial
         exists: ['min', '1', 'max', 'unbounded']
         name(NX_CHAR):
           doc: |
@@ -214,8 +213,8 @@ NXapm_compositionspace_results(NXobject):
           axis_pca_dimension(NX_UINT):
             unit: NX_UNITLESS
             doc: |
-              Elements identifier matching those from ENTRY/voxelization/ION
-              as the principal component analysis.
+              Elements identifier matching those from ENTRY/voxelization/ionID
+              used during the principal component analysis.
             dimensions:
               dim: (i,)
       ic_opt(NXprocess):
@@ -269,8 +268,9 @@ NXapm_compositionspace_results(NXobject):
       exists: ['min', '0', 'max', '1']
       doc: |
         Step during which the chemically segmented voxel sets are analyzed for their spatial organization
-        into different spatial clusters of voxels in the same chemical set but representing individual object
-        not-necessarily watertight or topologically closed objects built from individual voxels.
+        into different spatial clusters of voxels in the same chemical set but representing individual objects.
+        The objects are constructed from blobs of neighboring voxels.
+        The objects are not necessarily watertight or topologically closed.
       sequence_index(NX_POSINT):
         enumeration: [4, 5]
       ic_opt(NXprocess):
