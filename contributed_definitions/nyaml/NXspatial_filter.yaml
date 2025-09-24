@@ -2,7 +2,8 @@ category: base
 doc: |
   Base class for a spatial filter for objects within a region-of-interest (ROI).
   
-  Objects can be points or objects composed from other geometric primitives.
+  Objects can be points, objects composed from other geometric primitives,
+  or objects.
 symbols:
   doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
@@ -18,7 +19,7 @@ symbols:
 # n_vertices: Number of vertices for polyhedra.
 # n_facets: Number of facets for polyhedra.
 type: group
-NXspatial_filter(NXobject):
+NXspatial_filter(NXparameters):
   windowing_method(NX_CHAR):
     doc: |
       Qualitative statement which describes the logical operations
@@ -30,15 +31,9 @@ NXspatial_filter(NXobject):
         All other objects are excluded.
       * bitmask, a boolean array whose bits encode with 1 which objects
         are included. Bits set to zero encode which objects are excluded.
-        Users of python can use the bitfield operations
-        of the numpy package to work with bitfields.
-    
-    # In the case that windowing_method is union_of_primitives,
-    # it is possible to specify none or all types of primitives
-    # (ellipsoids, cylinder, hexahedra). If no primitives are specified
-    # the filter falls back to entire_dataset.
-    # In the case that windowing_method is bitmask, the bitmask has to be defined;
-    # otherwise the filter falls back to entire dataset.
+        
+      Users of python can use the bitfield operations of the numpy package to work with bitfields.
+      Multiple instances of NXcg base classes are used to compose a union_of_primitives.
     enumeration: [entire_dataset, union_of_primitives, bitmask]
   (NXcg_hexahedron):
   (NXcg_cylinder):
