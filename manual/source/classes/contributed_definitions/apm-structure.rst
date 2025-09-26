@@ -178,8 +178,8 @@ Base classes have been defined to group common pieces of information for each to
 toolbox. For each tool we define a pair of base classes. One for the configuration (input) side
 and one for the results (output) side:
 
-    :ref:`NXapm_paraprobe_tool_config`, :ref:`NXapm_paraprobe_tool_results`, :ref:`NXapm_paraprobe_tool_common`:
-     Configuration, results, and common parts respectively useful for the application definitions for tools of the paraprobe-toolbox.
+    :ref:`NXapm_paraprobe_tool_parameters`, :ref:`NXapm_paraprobe_tool_process`, :ref:`NXapm_paraprobe_tool_common`:
+     Parameters, processing specific data, and common parts respectively useful for the application definitions of the tools of the paraprobe-toolbox.
 
 .. _ApmParaprobeAppDef:
 
@@ -188,12 +188,13 @@ Application Definitions
 
 NXapm_paraprobe application definitions are in fact pairs of application definitions.
 One for the configuration (input) side and one for the results (output) side. For each
-tool one such pair is proposed:
+tool one such pair is proposed. The tool-specific application definition inherit
+common parameter and settings from the following tool agnostic application definitions:
 
-    :ref:`NXapm_paraprobe_transcoder_config`, :ref:`NXapm_paraprobe_transcoder_results`:
-        Configuration and the results respectively of the paraprobe-transcoder tool.
-        Load POS, ePOS, APSuite APT, RRNG, RNG, and NeXus NXapm files.
-        Store reconstructed positions, ions, and charge states.
+    :ref:`NXapm_paraprobe_tool_config`, :ref:`NXapm_paraprobe_tool_results`:
+       Configuration and results respectively.      
+
+These are the proposed pairs for all tools in the toolbox:
 
     :ref:`NXapm_paraprobe_ranger_config`, :ref:`NXapm_paraprobe_ranger_results`:
         Configuration and results respectively of the paraprobe-ranger tool.

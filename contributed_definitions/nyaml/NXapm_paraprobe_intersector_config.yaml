@@ -1,24 +1,19 @@
 category: application
 doc: |
-  Application definition for a configuration file of the paraprobe-intersector tool.
-  
-  This tool is part of the paraprobe-toolbox. Inspect :ref:`NXapm_paraprobe_tool_config` for details.
+  Application definition for a configuration file of the paraprobe-intersector
+  tool.
 symbols:
   doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   n_variable: |
     Number of entries
 type: group
-NXapm_paraprobe_intersector_config(NXapm_paraprobe_tool):
+NXapm_paraprobe_intersector_config(NXapm_paraprobe_tool_config):
   (NXentry):
     exists: ['min', '1', 'max', '1']
     definition(NX_CHAR):
       enumeration: [NXapm_paraprobe_intersector_config]
-    number_of_tasks(NX_UINT):
-      unit: NX_UNITLESS
-      doc: |
-        How many v_v_spatial_correlation tasks should the tool execute.
-    v_v_spatial_correlationID(NXapm_paraprobe_tool_config):
+    v_v_spatial_correlationID(NXapm_paraprobe_tool_parameters):
       nameType: partial
       exists: ['min', '1', 'max', 'unbounded']
       doc: |
@@ -31,8 +26,6 @@ NXapm_paraprobe_intersector_config(NXapm_paraprobe_tool):
         step :math:`k` pairs of sets are compared:
         Members of a so-called current_set to members of a so-called next_set.
         Members can be different types of volumetric features.
-      
-      # config
       intersection_detection_method(NX_CHAR):
         doc: |
           Specifies the method whereby to decide if two objects intersect volumetrically.
@@ -192,13 +185,13 @@ NXapm_paraprobe_intersector_config(NXapm_paraprobe_tool):
   # what one is doing here before using these functionalities
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# c9ce4e2192cbb35580927b17c8c1d6335bbccb9a05f735cd9d97f0e04af2d50f
+# 49c597d5e65162455582dcf896963ebfa1c3e2271f5a444ecaa0f243e34b4702
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
 # # NeXus - Neutron and X-ray Common Data Format
 # #
-# # Copyright (C) 2024-2025 NeXus International Advisory Committee (NIAC)
+# # Copyright (C) 2025-2025 NeXus International Advisory Committee (NIAC)
 # #
 # # This library is free software; you can redistribute it and/or
 # # modify it under the terms of the GNU Lesser General Public
@@ -216,7 +209,7 @@ NXapm_paraprobe_intersector_config(NXapm_paraprobe_tool):
 # #
 # # For further information, see http://www.nexusformat.org
 # -->
-# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_intersector_config" extends="NXapm_paraprobe_tool" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+# <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXapm_paraprobe_intersector_config" extends="NXapm_paraprobe_tool_config" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <symbols>
 #         <doc>
 #             The symbols used in the schema to specify e.g. dimensions of arrays.
@@ -228,9 +221,8 @@ NXapm_paraprobe_intersector_config(NXapm_paraprobe_tool):
 #         </symbol>
 #     </symbols>
 #     <doc>
-#         Application definition for a configuration file of the paraprobe-intersector tool.
-#         
-#         This tool is part of the paraprobe-toolbox. Inspect :ref:`NXapm_paraprobe_tool_config` for details.
+#         Application definition for a configuration file of the paraprobe-intersector
+#         tool.
 #     </doc>
 #     <group type="NXentry" minOccurs="1" maxOccurs="1">
 #         <field name="definition" type="NX_CHAR">
@@ -238,12 +230,7 @@ NXapm_paraprobe_intersector_config(NXapm_paraprobe_tool):
 #                 <item value="NXapm_paraprobe_intersector_config"/>
 #             </enumeration>
 #         </field>
-#         <field name="number_of_tasks" type="NX_UINT" units="NX_UNITLESS">
-#             <doc>
-#                 How many v_v_spatial_correlation tasks should the tool execute.
-#             </doc>
-#         </field>
-#         <group name="v_v_spatial_correlationID" type="NXapm_paraprobe_tool_config" nameType="partial" minOccurs="1" maxOccurs="unbounded">
+#         <group name="v_v_spatial_correlationID" type="NXapm_paraprobe_tool_parameters" nameType="partial" minOccurs="1" maxOccurs="unbounded">
 #             <doc>
 #                 Tracking volume_volume_spatial_correlations (v_v) is the process of building logical
 #                 relations between objects, their proximity and eventual volumetric intersections.
@@ -255,7 +242,6 @@ NXapm_paraprobe_intersector_config(NXapm_paraprobe_tool):
 #                 Members of a so-called current_set to members of a so-called next_set.
 #                 Members can be different types of volumetric features.
 #             </doc>
-#             <!--config-->
 #             <field name="intersection_detection_method" type="NX_CHAR">
 #                 <doc>
 #                     Specifies the method whereby to decide if two objects intersect volumetrically.
