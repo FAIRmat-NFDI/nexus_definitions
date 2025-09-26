@@ -45,7 +45,8 @@ NXmicrostructure_score_config(NXobject):
     # exists: optional
     profiling(NXcs_profiling):
       exists: optional
-    (NXuser):
+    userID(NXuser):
+      nameType: partial
       exists: ['min', '0', 'max', 'unbounded']
     sample(NXsample):
       exists: recommended
@@ -53,8 +54,8 @@ NXmicrostructure_score_config(NXobject):
         unit: NX_UNITLESS
         doc: |
           Dimensionality of the simulation.
-        enumeration: [3]
-      type(NX_CHAR):
+        enumeration: [1, 2, 3]
+      is_simulation(NX_CHAR):
         doc: |
           A qualifier whether the sample is a real one or a virtual one.
         enumeration: [experiment, simulation]
@@ -78,7 +79,8 @@ NXmicrostructure_score_config(NXobject):
       exists: recommended
       doc: |
         Programs and libraries representing the computational environment
-      (NXprogram):
+      programID(NXprogram):
+        nameType: partial
         exists: ['min', '1', 'max', 'unbounded']
         program(NX_CHAR):
           \@version(NX_CHAR):
@@ -112,9 +114,9 @@ NXmicrostructure_score_config(NXobject):
         doc: |
           Which model should be used to generate a starting microstructure.
           
-          * cuboidal, a regular array of equally shaped cuboidal grains
-          * poisson_voronoi, a discretized poisson voronoi
-          * ebsd, a microstructure synthesized based on a simulated or measured EBSD orientation map
+          * cuboidal, a regular array of equally-shaped cuboidal grains
+          * poisson_voronoi, a discretized Poisson Voronoi tessellation
+          * ebsd, a microstructure synthesized based on a simulated or a measured EBSD orientation map
           * damask, the result of a simulation from `DAMASK <https://damask-multiphysics.org>`_.
         enumeration: [cuboidal, poisson_voronoi, ebsd, damask]
       extent(NX_FLOAT):
@@ -160,7 +162,6 @@ NXmicrostructure_score_config(NXobject):
           EBSD orientation map when model is cuboidal or poisson.
         file_name(NX_CHAR):
         algorithm(NX_CHAR):
-          enumeration: [sha256]
         checksum(NX_CHAR):
         stepsize(NX_FLOAT):
           unit: NX_LENGTH
@@ -180,12 +181,12 @@ NXmicrostructure_score_config(NXobject):
             Name of the DREAM.3D HDF5 file that was instantiated from the
             a previously performed DAMASK simulation.
         algorithm(NX_CHAR):
-          enumeration: [sha256]
         checksum(NX_CHAR):
     nucleation(NXparameters):
       doc: |
         Phenomenological model according to which recrystallization nuclei
-        are placed into the domain whose growth is studied with the simulation.
+        are placed into the domain. Studying the growth of these nuclei
+        is the main purpose of a SCORE simulation.
       spatial_distribution(NX_CHAR):
         doc: |
           According to which model will the nuclei become distributed spatially:
@@ -196,7 +197,9 @@ NXmicrostructure_score_config(NXobject):
         enumeration: [csr, damask]
       incubation_time(NX_CHAR):
         doc: |
-          According to which model will the nuclei start to grow.
+          According to which model will the nuclei start to grow:
+          
+          * site_saturation, instantaneously
         enumeration: [site_saturation]
       orientation(NX_CHAR):
         doc: |
@@ -230,7 +233,7 @@ NXmicrostructure_score_config(NXobject):
     grain_boundary_mobility(NXparameters):
       doc: |
         Model for the assumed mobility of grain boundaries with different disorientation
-        implemented as parameterized Turnbull's model for thermally-activated
+        implemented as a parameterized Turnbull's model for thermally-activated
         grain boundary migration.
       model(NX_CHAR):
         doc: |
@@ -448,10 +451,9 @@ NXmicrostructure_score_config(NXobject):
     # dim: (d,)
     numerics(NXparameters):
       doc: |
-        Criteria which enable to stop the simulation in a controlled manner.
+        Criteria which enable to stop the simulation in a controlled manner
+        and assure a stable numerical integration.
         Whichever criterion is fulfilled first stops the simulation.
-        Furthermore, numerical configuration required to achieve
-        a stable numerical integration.
       max_x(NX_FLOAT):
         unit: NX_DIMENSIONLESS
         doc: |
@@ -482,9 +484,10 @@ NXmicrostructure_score_config(NXobject):
           including the assignment of grains and cells surplus the state of the
           recrystallization front.
           
-          Despite these front data make up for approximately one order of magnitude
-          less cells than represented in the domain, more numerical data have to be
-          collected for each cell in the front than just a grain identifier.
+          Despite these, data about the cells that define the recrystallization front make up
+          for approximately one order of magnitude less cells than present in the domain.
+          For the cells in this front, though, more data have to be collected
+          than just a grain identifier.
         dimensions:
           rank: 1
           dim: (n_snapshot,)
@@ -536,7 +539,7 @@ NXmicrostructure_score_config(NXobject):
           during post-processing the results with the solitary unit modeling approach.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 68eef00573d978ee8505c363acca7f7c1ec47ce1c5c7fc2022fe7b87ae50ddb3
+# 57aacf695328ad15a9dce6dd93e560ccf34f9e3e809361d8443caf04d0b66b34
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -640,17 +643,19 @@ NXmicrostructure_score_config(NXobject):
 #         <!--end_time(NX_DATE_TIME):
 # exists: optional-->
 #         <group name="profiling" type="NXcs_profiling" optional="true"/>
-#         <group type="NXuser" minOccurs="0" maxOccurs="unbounded"/>
+#         <group name="userID" type="NXuser" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
 #         <group name="sample" type="NXsample" recommended="true">
 #             <field name="dimensionality" type="NX_POSINT" units="NX_UNITLESS">
 #                 <doc>
 #                     Dimensionality of the simulation.
 #                 </doc>
 #                 <enumeration>
+#                     <item value="1"/>
+#                     <item value="2"/>
 #                     <item value="3"/>
 #                 </enumeration>
 #             </field>
-#             <field name="type" type="NX_CHAR">
+#             <field name="is_simulation" type="NX_CHAR">
 #                 <doc>
 #                     A qualifier whether the sample is a real one or a virtual one.
 #                 </doc>
@@ -684,7 +689,7 @@ NXmicrostructure_score_config(NXobject):
 #             <doc>
 #                 Programs and libraries representing the computational environment
 #             </doc>
-#             <group type="NXprogram" minOccurs="1" maxOccurs="unbounded">
+#             <group name="programID" type="NXprogram" nameType="partial" minOccurs="1" maxOccurs="unbounded">
 #                 <field name="program" type="NX_CHAR">
 #                     <attribute name="version" type="NX_CHAR"/>
 #                 </field>
@@ -725,9 +730,9 @@ NXmicrostructure_score_config(NXobject):
 #                 <doc>
 #                     Which model should be used to generate a starting microstructure.
 #                     
-#                     * cuboidal, a regular array of equally shaped cuboidal grains
-#                     * poisson_voronoi, a discretized poisson voronoi
-#                     * ebsd, a microstructure synthesized based on a simulated or measured EBSD orientation map
+#                     * cuboidal, a regular array of equally-shaped cuboidal grains
+#                     * poisson_voronoi, a discretized Poisson Voronoi tessellation
+#                     * ebsd, a microstructure synthesized based on a simulated or a measured EBSD orientation map
 #                     * damask, the result of a simulation from `DAMASK &lt;https://damask-multiphysics.org&gt;`_.
 #                 </doc>
 #                 <enumeration>
@@ -784,11 +789,7 @@ NXmicrostructure_score_config(NXobject):
 #                     EBSD orientation map when model is cuboidal or poisson.
 #                 </doc>
 #                 <field name="file_name" type="NX_CHAR"/>
-#                 <field name="algorithm" type="NX_CHAR">
-#                     <enumeration>
-#                         <item value="sha256"/>
-#                     </enumeration>
-#                 </field>
+#                 <field name="algorithm" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #                 <field name="stepsize" type="NX_FLOAT" units="NX_LENGTH">
 #                     <doc>
@@ -811,18 +812,15 @@ NXmicrostructure_score_config(NXobject):
 #                         a previously performed DAMASK simulation.
 #                     </doc>
 #                 </field>
-#                 <field name="algorithm" type="NX_CHAR">
-#                     <enumeration>
-#                         <item value="sha256"/>
-#                     </enumeration>
-#                 </field>
+#                 <field name="algorithm" type="NX_CHAR"/>
 #                 <field name="checksum" type="NX_CHAR"/>
 #             </group>
 #         </group>
 #         <group name="nucleation" type="NXparameters">
 #             <doc>
 #                 Phenomenological model according to which recrystallization nuclei
-#                 are placed into the domain whose growth is studied with the simulation.
+#                 are placed into the domain. Studying the growth of these nuclei
+#                 is the main purpose of a SCORE simulation.
 #             </doc>
 #             <field name="spatial_distribution" type="NX_CHAR">
 #                 <doc>
@@ -839,7 +837,9 @@ NXmicrostructure_score_config(NXobject):
 #             </field>
 #             <field name="incubation_time" type="NX_CHAR">
 #                 <doc>
-#                     According to which model will the nuclei start to grow.
+#                     According to which model will the nuclei start to grow:
+#                     
+#                     * site_saturation, instantaneously
 #                 </doc>
 #                 <enumeration>
 #                     <item value="site_saturation"/>
@@ -888,7 +888,7 @@ NXmicrostructure_score_config(NXobject):
 #         <group name="grain_boundary_mobility" type="NXparameters">
 #             <doc>
 #                 Model for the assumed mobility of grain boundaries with different disorientation
-#                 implemented as parameterized Turnbull's model for thermally-activated
+#                 implemented as a parameterized Turnbull's model for thermally-activated
 #                 grain boundary migration.
 #             </doc>
 #             <field name="model" type="NX_CHAR">
@@ -1157,10 +1157,9 @@ NXmicrostructure_score_config(NXobject):
 #         <!--dim: (d,)-->
 #         <group name="numerics" type="NXparameters">
 #             <doc>
-#                 Criteria which enable to stop the simulation in a controlled manner.
+#                 Criteria which enable to stop the simulation in a controlled manner
+#                 and assure a stable numerical integration.
 #                 Whichever criterion is fulfilled first stops the simulation.
-#                 Furthermore, numerical configuration required to achieve
-#                 a stable numerical integration.
 #             </doc>
 #             <field name="max_x" type="NX_FLOAT" units="NX_DIMENSIONLESS">
 #                 <doc>
@@ -1195,9 +1194,10 @@ NXmicrostructure_score_config(NXobject):
 #                     including the assignment of grains and cells surplus the state of the
 #                     recrystallization front.
 #                     
-#                     Despite these front data make up for approximately one order of magnitude
-#                     less cells than represented in the domain, more numerical data have to be
-#                     collected for each cell in the front than just a grain identifier.
+#                     Despite these, data about the cells that define the recrystallization front make up
+#                     for approximately one order of magnitude less cells than present in the domain.
+#                     For the cells in this front, though, more data have to be collected
+#                     than just a grain identifier.
 #                 </doc>
 #                 <dimensions rank="1">
 #                     <dim index="1" value="n_snapshot"/>
