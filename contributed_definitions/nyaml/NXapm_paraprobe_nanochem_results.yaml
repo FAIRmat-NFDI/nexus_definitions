@@ -241,48 +241,50 @@ NXapm_paraprobe_nanochem_results(NXapm_paraprobe_tool_results):
             The result of the delocalization :math:`\Phi = f(x, y, z)` based on which subsequent iso-surfaces
             will be computed. In commercial software so far there is no possibility to export this information.
             
-            If the intensity for all matches of the weighting_model are summarized name this NXdata instance
+            If the intensity for all matches of the weighting_model are summarized, name this NXdata instance
             scalar_field_magn_total.
             
-            If the intensity is reported for each iontype one can avoid many subsequent
+            If the intensity is reported for each iontype, one can avoid many subsequent
             computations as individual intensities can be reinterpreted using a different weighting_model in
             down-stream usage of the here reported values (e.g. with Python scripting).
             In this case name the individual NXdata instances scalar_field_magn_ionID using the ID of the ion as
             per the configuration of the ranging definitions used.
-          \@signal(NX_CHAR):
-          \@axes(NX_CHAR):
-          \@xpos_indices(NX_UINT):
-          \@ypos_indices(NX_UINT):
-          \@zpos_indices(NX_UINT):
-          title(NX_CHAR):
-          intensity(NX_FLOAT):
-            unit: NX_ANY
-            doc: |
-              The actual delocalized intensity values.
-            dimensions:
-              rank: 3
-              dim: (n_z, n_y, n_x)
-          xpos(NX_FLOAT):
-            unit: NX_LENGTH
-            doc: |
-              Cell center of mass positions along x.
-            dimensions:
-              rank: 1
-              dim: (n_x,)
-          ypos(NX_FLOAT):
-            unit: NX_LENGTH
-            doc: |
-              Cell center of mass positions along y.
-            dimensions:
-              rank: 1
-              dim: (n_y,)
-          zpos(NX_FLOAT):
-            unit: NX_LENGTH
-            doc: |
-              Cell center of mass positions along z.
-            dimensions:
-              rank: 1
-              dim: (n_z,)
+          
+          # MK:currently switched off as the displaying is of secondary relevance in RDM, assuming visualization with paraview/xdmf
+          # \@signal(NX_CHAR):
+          # \@axes(NX_CHAR):
+          # \@xpos_indices(NX_UINT):
+          # \@ypos_indices(NX_UINT):
+          # \@zpos_indices(NX_UINT):
+          # title(NX_CHAR):
+          # intensity(NX_FLOAT):
+          # unit: NX_ANY
+          # doc: |
+          # The actual delocalized intensity values.
+          # dimensions:
+          # rank: 3
+          # dim: (n_z, n_y, n_x)
+          # xpos(NX_FLOAT):
+          # unit: NX_LENGTH
+          # doc: |
+          # Cell center of mass positions along x.
+          # dimensions:
+          # rank: 1
+          # dim: (n_x,)
+          # ypos(NX_FLOAT):
+          # unit: NX_LENGTH
+          # doc: |
+          # Cell center of mass positions along y.
+          # dimensions:
+          # rank: 1
+          # dim: (n_y,)
+          # zpos(NX_FLOAT):
+          # unit: NX_LENGTH
+          # doc: |
+          # Cell center of mass positions along z.
+          # dimensions:
+          # rank: 1
+          # dim: (n_z,)
           xdmf_intensity(NX_FLOAT):
             exists: optional
             unit: NX_ANY
@@ -293,7 +295,7 @@ NXapm_paraprobe_nanochem_results(NXapm_paraprobe_tool_results):
               dim: (n_xyz,)
           xdmf_xyz(NX_FLOAT):
             exists: optional
-            unit: NX_UNITLESS
+            unit: NX_LENGTH
             doc: |
               Center of mass positions of each voxel for rendering the scalar field
               via XDMF in e.g. Paraview.
@@ -315,40 +317,42 @@ NXapm_paraprobe_nanochem_results(NXapm_paraprobe_tool_results):
           doc: |
             The three-dimensional gradient :math:`\nabla \Phi`.
             Follow the naming convention of scalar_field_magn_SUFFIX to report parallel structures.
-          \@signal(NX_CHAR):
-          \@axes(NX_CHAR):
-          \@xpos_indices(NX_CHAR):
-          \@ypos_indices(NX_CHAR):
-          \@zpos_indices(NX_CHAR):
-          title(NX_CHAR):
-          intensity(NX_FLOAT):
-            unit: NX_ANY
-            doc: |
-              The actual point-wise component values.
-            dimensions:
-              rank: 4
-              dim: (n_z, n_y, n_x, 3)
-          xpos(NX_FLOAT):
-            unit: NX_LENGTH
-            doc: |
-              Cell center of mass positions along x.
-            dimensions:
-              rank: 1
-              dim: (n_x,)
-          ypos(NX_FLOAT):
-            unit: NX_LENGTH
-            doc: |
-              Cell center of mass positions along y.
-            dimensions:
-              rank: 1
-              dim: (n_y,)
-          zpos(NX_FLOAT):
-            unit: NX_LENGTH
-            doc: |
-              Cell center of mass positions along z.
-            dimensions:
-              rank: 1
-              dim: (n_z,)
+          
+          # MK:currently switched off as the displaying is of secondary relevance in RDM, assuming visualization with paraview/xdmf
+          # \@signal(NX_CHAR):
+          # \@axes(NX_CHAR):
+          # \@xpos_indices(NX_CHAR):
+          # \@ypos_indices(NX_CHAR):
+          # \@zpos_indices(NX_CHAR):
+          # title(NX_CHAR):
+          # intensity(NX_FLOAT):
+          # unit: NX_ANY
+          # doc: |
+          # The actual point-wise component values.
+          # dimensions:
+          # rank: 4
+          # dim: (n_z, n_y, n_x, 3)
+          # xpos(NX_FLOAT):
+          # unit: NX_LENGTH
+          # doc: |
+          # Cell center of mass positions along x.
+          # dimensions:
+          # rank: 1
+          # dim: (n_x,)
+          # ypos(NX_FLOAT):
+          # unit: NX_LENGTH
+          # doc: |
+          # Cell center of mass positions along y.
+          # dimensions:
+          # rank: 1
+          # dim: (n_y,)
+          # zpos(NX_FLOAT):
+          # unit: NX_LENGTH
+          # doc: |
+          # Cell center of mass positions along z.
+          # dimensions:
+          # rank: 1
+          # dim: (n_z,)
           xdmf_gradient(NX_FLOAT):
             exists: optional
             unit: NX_ANY
@@ -396,6 +400,7 @@ NXapm_paraprobe_nanochem_results(NXapm_paraprobe_tool_results):
             doc: |
               The threshold or iso-contour value :math:`\varphi`.
           marching_cubes(NX_CHAR):
+            exists: optional
             doc: |
               Reference to the specific implementation of marching cubes used.
               The value placed here should be a DOI. If there are no specific
@@ -1017,7 +1022,7 @@ NXapm_paraprobe_nanochem_results(NXapm_paraprobe_tool_results):
                 dim: (k,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# f63e448e3391b9b59d62f7cb4a1aabeee56a04a68f7c56a0f58b802022d9a775
+# 861703c6ca7cc72cde64874b74b0966dbd8b6e8a69f193f5a80076e78c9676e0
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -1358,55 +1363,50 @@ NXapm_paraprobe_nanochem_results(NXapm_paraprobe_tool_results):
 #                         The result of the delocalization :math:`\Phi = f(x, y, z)` based on which subsequent iso-surfaces
 #                         will be computed. In commercial software so far there is no possibility to export this information.
 #                         
-#                         If the intensity for all matches of the weighting_model are summarized name this NXdata instance
+#                         If the intensity for all matches of the weighting_model are summarized, name this NXdata instance
 #                         scalar_field_magn_total.
 #                         
-#                         If the intensity is reported for each iontype one can avoid many subsequent
+#                         If the intensity is reported for each iontype, one can avoid many subsequent
 #                         computations as individual intensities can be reinterpreted using a different weighting_model in
 #                         down-stream usage of the here reported values (e.g. with Python scripting).
 #                         In this case name the individual NXdata instances scalar_field_magn_ionID using the ID of the ion as
 #                         per the configuration of the ranging definitions used.
 #                     </doc>
-#                     <attribute name="signal" type="NX_CHAR"/>
-#                     <attribute name="axes" type="NX_CHAR"/>
-#                     <attribute name="xpos_indices" type="NX_UINT"/>
-#                     <attribute name="ypos_indices" type="NX_UINT"/>
-#                     <attribute name="zpos_indices" type="NX_UINT"/>
-#                     <field name="title" type="NX_CHAR"/>
-#                     <field name="intensity" type="NX_FLOAT" units="NX_ANY">
-#                         <doc>
-#                             The actual delocalized intensity values.
-#                         </doc>
-#                         <dimensions rank="3">
-#                             <dim index="1" value="n_z"/>
-#                             <dim index="2" value="n_y"/>
-#                             <dim index="3" value="n_x"/>
-#                         </dimensions>
-#                     </field>
-#                     <field name="xpos" type="NX_FLOAT" units="NX_LENGTH">
-#                         <doc>
-#                             Cell center of mass positions along x.
-#                         </doc>
-#                         <dimensions rank="1">
-#                             <dim index="1" value="n_x"/>
-#                         </dimensions>
-#                     </field>
-#                     <field name="ypos" type="NX_FLOAT" units="NX_LENGTH">
-#                         <doc>
-#                             Cell center of mass positions along y.
-#                         </doc>
-#                         <dimensions rank="1">
-#                             <dim index="1" value="n_y"/>
-#                         </dimensions>
-#                     </field>
-#                     <field name="zpos" type="NX_FLOAT" units="NX_LENGTH">
-#                         <doc>
-#                             Cell center of mass positions along z.
-#                         </doc>
-#                         <dimensions rank="1">
-#                             <dim index="1" value="n_z"/>
-#                         </dimensions>
-#                     </field>
+#                     <!--MK:currently switched off as the displaying is of secondary relevance in RDM, assuming visualization with paraview/xdmf
+# \@signal(NX_CHAR):
+# \@axes(NX_CHAR):
+# \@xpos_indices(NX_UINT):
+# \@ypos_indices(NX_UINT):
+# \@zpos_indices(NX_UINT):
+# title(NX_CHAR):
+# intensity(NX_FLOAT):
+#   unit: NX_ANY
+#   doc: |
+#     The actual delocalized intensity values.
+#   dimensions:
+#     rank: 3
+#     dim: (n_z, n_y, n_x)
+# xpos(NX_FLOAT):
+#   unit: NX_LENGTH
+#   doc: |
+#     Cell center of mass positions along x.
+#   dimensions:
+#     rank: 1
+#     dim: (n_x,)
+# ypos(NX_FLOAT):
+#   unit: NX_LENGTH
+#   doc: |
+#     Cell center of mass positions along y.
+#   dimensions:
+#     rank: 1
+#     dim: (n_y,)
+# zpos(NX_FLOAT):
+#   unit: NX_LENGTH
+#   doc: |
+#     Cell center of mass positions along z.
+#   dimensions:
+#     rank: 1
+#     dim: (n_z,)-->
 #                     <field name="xdmf_intensity" type="NX_FLOAT" optional="true" units="NX_ANY">
 #                         <doc>
 #                             Intensity of the field at given point
@@ -1415,7 +1415,7 @@ NXapm_paraprobe_nanochem_results(NXapm_paraprobe_tool_results):
 #                             <dim index="1" value="n_xyz"/>
 #                         </dimensions>
 #                     </field>
-#                     <field name="xdmf_xyz" type="NX_FLOAT" optional="true" units="NX_UNITLESS">
+#                     <field name="xdmf_xyz" type="NX_FLOAT" optional="true" units="NX_LENGTH">
 #                         <doc>
 #                             Center of mass positions of each voxel for rendering the scalar field
 #                             via XDMF in e.g. Paraview.
@@ -1440,47 +1440,41 @@ NXapm_paraprobe_nanochem_results(NXapm_paraprobe_tool_results):
 #                         The three-dimensional gradient :math:`\nabla \Phi`.
 #                         Follow the naming convention of scalar_field_magn_SUFFIX to report parallel structures.
 #                     </doc>
-#                     <attribute name="signal" type="NX_CHAR"/>
-#                     <attribute name="axes" type="NX_CHAR"/>
-#                     <attribute name="xpos_indices" type="NX_CHAR"/>
-#                     <attribute name="ypos_indices" type="NX_CHAR"/>
-#                     <attribute name="zpos_indices" type="NX_CHAR"/>
-#                     <field name="title" type="NX_CHAR"/>
-#                     <field name="intensity" type="NX_FLOAT" units="NX_ANY">
-#                         <doc>
-#                             The actual point-wise component values.
-#                         </doc>
-#                         <dimensions rank="4">
-#                             <dim index="1" value="n_z"/>
-#                             <dim index="2" value="n_y"/>
-#                             <dim index="3" value="n_x"/>
-#                             <dim index="4" value="3"/>
-#                         </dimensions>
-#                     </field>
-#                     <field name="xpos" type="NX_FLOAT" units="NX_LENGTH">
-#                         <doc>
-#                             Cell center of mass positions along x.
-#                         </doc>
-#                         <dimensions rank="1">
-#                             <dim index="1" value="n_x"/>
-#                         </dimensions>
-#                     </field>
-#                     <field name="ypos" type="NX_FLOAT" units="NX_LENGTH">
-#                         <doc>
-#                             Cell center of mass positions along y.
-#                         </doc>
-#                         <dimensions rank="1">
-#                             <dim index="1" value="n_y"/>
-#                         </dimensions>
-#                     </field>
-#                     <field name="zpos" type="NX_FLOAT" units="NX_LENGTH">
-#                         <doc>
-#                             Cell center of mass positions along z.
-#                         </doc>
-#                         <dimensions rank="1">
-#                             <dim index="1" value="n_z"/>
-#                         </dimensions>
-#                     </field>
+#                     <!--MK:currently switched off as the displaying is of secondary relevance in RDM, assuming visualization with paraview/xdmf
+# \@signal(NX_CHAR):
+# \@axes(NX_CHAR):
+# \@xpos_indices(NX_CHAR):
+# \@ypos_indices(NX_CHAR):
+# \@zpos_indices(NX_CHAR):
+# title(NX_CHAR):
+# intensity(NX_FLOAT):
+#   unit: NX_ANY
+#   doc: |
+#     The actual point-wise component values.
+#   dimensions:
+#     rank: 4
+#     dim: (n_z, n_y, n_x, 3)
+# xpos(NX_FLOAT):
+#   unit: NX_LENGTH
+#   doc: |
+#     Cell center of mass positions along x.
+#   dimensions:
+#     rank: 1
+#     dim: (n_x,)
+# ypos(NX_FLOAT):
+#   unit: NX_LENGTH
+#   doc: |
+#     Cell center of mass positions along y.
+#   dimensions:
+#     rank: 1
+#     dim: (n_y,)
+# zpos(NX_FLOAT):
+#   unit: NX_LENGTH
+#   doc: |
+#     Cell center of mass positions along z.
+#   dimensions:
+#     rank: 1
+#     dim: (n_z,)-->
 #                     <field name="xdmf_gradient" type="NX_FLOAT" optional="true" units="NX_ANY">
 #                         <doc>
 #                             The gradient vector formatted for direct visualization via XDMF in e.g.
@@ -1529,7 +1523,7 @@ NXapm_paraprobe_nanochem_results(NXapm_paraprobe_tool_results):
 #                             The threshold or iso-contour value :math:`\varphi`.
 #                         </doc>
 #                     </field>
-#                     <field name="marching_cubes" type="NX_CHAR">
+#                     <field name="marching_cubes" type="NX_CHAR" optional="true">
 #                         <doc>
 #                             Reference to the specific implementation of marching cubes used.
 #                             The value placed here should be a DOI. If there are no specific
