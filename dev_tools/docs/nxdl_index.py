@@ -36,6 +36,7 @@ SOURCE_TO_GROUPING = {
         "optical-spectroscopy",
         "transport",
         "micro",
+        "spm"
     ],
 }
 
@@ -307,6 +308,8 @@ research fields are listed in each category:
   :ref:`Atom Probe Microscopy <CC-Apm-Structure>`
 
   :ref:`Optical Spectroscopy <CC-Opt-Spec-Structure>`
+
+  :ref:`Scanning Probe Microscopy <CC-Spm-Structure>`
 
   :ref:`Transport Measurements <CC-Transport-Structure>`
 
