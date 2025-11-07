@@ -82,7 +82,7 @@
                 <item value="NXmicrostructure_score_config"/>
             </enumeration>
         </field>
-        <field name="identifier_simulation" type="NX_UINT">
+        <field name="identifier_simulation" type="NX_UINT" recommended="true">
             <doc>
                 An alias to refer to this simulation.
             </doc>
@@ -200,8 +200,10 @@ SecondOrderThermalExpCoeff-->
                     <item value="damask"/>
                 </enumeration>
             </field>
-            <field name="extent" type="NX_FLOAT" units="NX_LENGTH">
-                <!--an example why a conditional exists statement is necessary to add in NeXus-->
+            <!--extent and diameter are required when model is poisson_voronoi and ebsd
+but such conditional requirements can currently not be expressed in NeXus
+one would need to make one group per model!-->
+            <field name="extent" type="NX_FLOAT" recommended="true" units="NX_LENGTH">
                 <doc>
                     Extent of each deformed grain in voxel along the
                     x, y, and z direction when model is cuboidal.
@@ -210,7 +212,7 @@ SecondOrderThermalExpCoeff-->
                     <dim index="1" value="3"/>
                 </dimensions>
             </field>
-            <field name="diameter" type="NX_FLOAT" units="NX_LENGTH">
+            <field name="diameter" type="NX_FLOAT" recommended="true" units="NX_LENGTH">
                 <doc>
                     Average spherical diameter when model is poisson_voronoi.
                 </doc>
@@ -415,7 +417,7 @@ unit: NX_ANGLE-->
                     Parameter of the Rollett-Holm migration model.
                 </doc>
                 <!--For rollett_holm :math:`m(\Theta) = m_0 \cdot (1 - c_1 * exp(-c_2 \cdot \frac{\Theta}{15}^{c_3}))`.-->
-                <field name="pre_factor" type="NX_FLOAT" units="NX_ANY">
+                <field name="m_null" type="NX_FLOAT" units="NX_ANY">
                     <doc>
                         Pre-exponential factor for the fastest grain boundary in the system.
                     </doc>
@@ -470,8 +472,8 @@ unit: NX_ANGLE-->
                     <item value="zener_smith"/>
                 </enumeration>
             </field>
-            <group name="zener_smith" type="NXparameters">
-                <!--required when model is zener_smith-->
+            <!--required when model is zener_smith-->
+            <group name="zener_smith" type="NXparameters" optional="true">
                 <doc>
                     Parameter of the Zener-Smith drag model when model is zener_smith.
                 </doc>

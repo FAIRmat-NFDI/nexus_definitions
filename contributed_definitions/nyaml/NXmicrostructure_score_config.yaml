@@ -30,6 +30,7 @@ NXmicrostructure_score_config(NXobject):
     definition(NX_CHAR):
       enumeration: [NXmicrostructure_score_config]
     identifier_simulation(NX_UINT):
+      exists: recommended
       doc: |
         An alias to refer to this simulation.
     description(NX_CHAR):
@@ -119,10 +120,13 @@ NXmicrostructure_score_config(NXobject):
           * ebsd, a microstructure synthesized based on a simulated or a measured EBSD orientation map
           * damask, the result of a simulation from `DAMASK <https://damask-multiphysics.org>`_.
         enumeration: [cuboidal, poisson_voronoi, ebsd, damask]
+      
+      # extent and diameter are required when model is poisson_voronoi and ebsd
+      # but such conditional requirements can currently not be expressed in NeXus
+      # one would need to make one group per model!
       extent(NX_FLOAT):
+        exists: recommended
         unit: NX_LENGTH
-        
-        # an example why a conditional exists statement is necessary to add in NeXus
         doc: |
           Extent of each deformed grain in voxel along the
           x, y, and z direction when model is cuboidal.
@@ -130,6 +134,7 @@ NXmicrostructure_score_config(NXobject):
           rank: 1
           dim: (3,)
       diameter(NX_FLOAT):
+        exists: recommended
         unit: NX_LENGTH
         doc: |
           Average spherical diameter when model is poisson_voronoi.
@@ -291,7 +296,7 @@ NXmicrostructure_score_config(NXobject):
           Parameter of the Rollett-Holm migration model.
         
         # For rollett_holm :math:`m(\Theta) = m_0 \cdot (1 - c_1 * exp(-c_2 \cdot \frac{\Theta}{15}^{c_3}))`.
-        pre_factor(NX_FLOAT):
+        m_null(NX_FLOAT):
           unit: NX_ANY
           doc: |
             Pre-exponential factor for the fastest grain boundary in the system.
@@ -327,9 +332,10 @@ NXmicrostructure_score_config(NXobject):
         doc: |
           Which type of drag model.
         enumeration: [none, zener_smith]
+      
+      # required when model is zener_smith
       zener_smith(NXparameters):
-        
-        # required when model is zener_smith
+        exists: optional
         doc: |
           Parameter of the Zener-Smith drag model when model is zener_smith.
         pre_factor(NX_FLOAT):
@@ -539,7 +545,7 @@ NXmicrostructure_score_config(NXobject):
           during post-processing the results with the solitary unit modeling approach.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 57aacf695328ad15a9dce6dd93e560ccf34f9e3e809361d8443caf04d0b66b34
+# 234bce2a534e65d47c0a80959387906a179faf8324188eca2713f5db542d1926
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -624,7 +630,7 @@ NXmicrostructure_score_config(NXobject):
 #                 <item value="NXmicrostructure_score_config"/>
 #             </enumeration>
 #         </field>
-#         <field name="identifier_simulation" type="NX_UINT">
+#         <field name="identifier_simulation" type="NX_UINT" recommended="true">
 #             <doc>
 #                 An alias to refer to this simulation.
 #             </doc>
@@ -742,8 +748,10 @@ NXmicrostructure_score_config(NXobject):
 #                     <item value="damask"/>
 #                 </enumeration>
 #             </field>
-#             <field name="extent" type="NX_FLOAT" units="NX_LENGTH">
-#                 <!--an example why a conditional exists statement is necessary to add in NeXus-->
+#             <!--extent and diameter are required when model is poisson_voronoi and ebsd
+# but such conditional requirements can currently not be expressed in NeXus
+# one would need to make one group per model!-->
+#             <field name="extent" type="NX_FLOAT" recommended="true" units="NX_LENGTH">
 #                 <doc>
 #                     Extent of each deformed grain in voxel along the
 #                     x, y, and z direction when model is cuboidal.
@@ -752,7 +760,7 @@ NXmicrostructure_score_config(NXobject):
 #                     <dim index="1" value="3"/>
 #                 </dimensions>
 #             </field>
-#             <field name="diameter" type="NX_FLOAT" units="NX_LENGTH">
+#             <field name="diameter" type="NX_FLOAT" recommended="true" units="NX_LENGTH">
 #                 <doc>
 #                     Average spherical diameter when model is poisson_voronoi.
 #                 </doc>
@@ -957,7 +965,7 @@ NXmicrostructure_score_config(NXobject):
 #                     Parameter of the Rollett-Holm migration model.
 #                 </doc>
 #                 <!--For rollett_holm :math:`m(\Theta) = m_0 \cdot (1 - c_1 * exp(-c_2 \cdot \frac{\Theta}{15}^{c_3}))`.-->
-#                 <field name="pre_factor" type="NX_FLOAT" units="NX_ANY">
+#                 <field name="m_null" type="NX_FLOAT" units="NX_ANY">
 #                     <doc>
 #                         Pre-exponential factor for the fastest grain boundary in the system.
 #                     </doc>
@@ -1012,8 +1020,8 @@ NXmicrostructure_score_config(NXobject):
 #                     <item value="zener_smith"/>
 #                 </enumeration>
 #             </field>
-#             <group name="zener_smith" type="NXparameters">
-#                 <!--required when model is zener_smith-->
+#             <!--required when model is zener_smith-->
+#             <group name="zener_smith" type="NXparameters" optional="true">
 #                 <doc>
 #                     Parameter of the Zener-Smith drag model when model is zener_smith.
 #                 </doc>
