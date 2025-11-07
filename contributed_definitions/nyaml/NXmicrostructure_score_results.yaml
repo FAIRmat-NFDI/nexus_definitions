@@ -144,6 +144,7 @@ NXmicrostructure_score_results(NXobject):
             rank: 1
             dim: (6,)
         boundaries:
+          exists: optional
           doc: |
             Name of the boundaries. Left, right, front, back, bottom, top,
             The field must have as many entries as there are number_of_boundaries.
@@ -331,9 +332,12 @@ NXmicrostructure_score_results(NXobject):
               rank: 1
               dim: (n_grains,)
           volume(NX_FLOAT):
-            unit: NX_VOLUME
+            unit: NX_UNITLESS
             doc: |
               Volume of each grain (partially transformed cells are accounted for).
+              
+              Values are reported in multiples of cells, needs multiplication with
+              cell volume!
             dimensions:
               rank: 1
               dim: (n_grains,)
@@ -439,9 +443,16 @@ NXmicrostructure_score_results(NXobject):
             dimensions:
               rank: 1
               dim: (n_front,)
+          recrystallized_fraction(NX_FLOAT):
+            exists: optional
+            unit: NX_DIMENSIONLESS
+            doc: |
+              The fraction to which the cell is assumed transformed.
+            dimensions:
+              rank: 1
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 89aaa6fe89e36b8ee670588d01185cbf26043f1975cb44415bc5da566ec3b593
+# 2ca93fa62100e188ba3c37f8abed4d66fa3177c6916d01f670aba93c65219582
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -677,7 +688,7 @@ NXmicrostructure_score_results(NXobject):
 #                         <dim index="1" value="6"/>
 #                     </dimensions>
 #                 </field>
-#                 <field name="boundaries">
+#                 <field name="boundaries" optional="true">
 #                     <doc>
 #                         Name of the boundaries. Left, right, front, back, bottom, top,
 #                         The field must have as many entries as there are number_of_boundaries.
@@ -889,9 +900,12 @@ NXmicrostructure_score_results(NXobject):
 #                             <dim index="1" value="n_grains"/>
 #                         </dimensions>
 #                     </field>
-#                     <field name="volume" type="NX_FLOAT" units="NX_VOLUME">
+#                     <field name="volume" type="NX_FLOAT" units="NX_UNITLESS">
 #                         <doc>
 #                             Volume of each grain (partially transformed cells are accounted for).
+#                             
+#                             Values are reported in multiples of cells, needs multiplication with
+#                             cell volume!
 #                         </doc>
 #                         <dimensions rank="1">
 #                             <dim index="1" value="n_grains"/>
@@ -1003,6 +1017,12 @@ NXmicrostructure_score_results(NXobject):
 #                         <dimensions rank="1">
 #                             <dim index="1" value="n_front"/>
 #                         </dimensions>
+#                     </field>
+#                     <field name="recrystallized_fraction" type="NX_FLOAT" optional="true" units="NX_DIMENSIONLESS">
+#                         <doc>
+#                             The fraction to which the cell is assumed transformed.
+#                         </doc>
+#                         <dimensions rank="1"/>
 #                     </field>
 #                 </group>
 #             </group>

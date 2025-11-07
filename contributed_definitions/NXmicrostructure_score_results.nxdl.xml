@@ -233,7 +233,7 @@ https://docs.lammps.org/Howto_triclinic.html NXcg_polyhedron because a parallele
                         <dim index="1" value="6"/>
                     </dimensions>
                 </field>
-                <field name="boundaries">
+                <field name="boundaries" optional="true">
                     <doc>
                         Name of the boundaries. Left, right, front, back, bottom, top,
                         The field must have as many entries as there are number_of_boundaries.
@@ -445,9 +445,12 @@ the typically storage-costlier snapshot data-->
                             <dim index="1" value="n_grains"/>
                         </dimensions>
                     </field>
-                    <field name="volume" type="NX_FLOAT" units="NX_VOLUME">
+                    <field name="volume" type="NX_FLOAT" units="NX_UNITLESS">
                         <doc>
                             Volume of each grain (partially transformed cells are accounted for).
+                            
+                            Values are reported in multiples of cells, needs multiplication with
+                            cell volume!
                         </doc>
                         <dimensions rank="1">
                             <dim index="1" value="n_grains"/>
@@ -559,6 +562,12 @@ the typically storage-costlier snapshot data-->
                         <dimensions rank="1">
                             <dim index="1" value="n_front"/>
                         </dimensions>
+                    </field>
+                    <field name="recrystallized_fraction" type="NX_FLOAT" optional="true" units="NX_DIMENSIONLESS">
+                        <doc>
+                            The fraction to which the cell is assumed transformed.
+                        </doc>
+                        <dimensions rank="1"/>
                     </field>
                 </group>
             </group>
