@@ -89,20 +89,54 @@ NXmicrostructure_score_config(NXobject):
         (Mechanical) properties of the material which scale the
         amount of stored (elastic) energy in the system and
         thus mainly affect recrystallization kinetics.
-      shear_modulus(NX_FLOAT):
+        
+        Temperature-dependent lattice softening of the shear modulus
+        :math:`G(T)` is modeled according to `Nadal and Le Poac <https://dx.doi.org/10.1063/1.1539913>`_
+        i.e., :math:`G(T) = \frac{1}{\mathfrak{J}(\frac{T}{T_m})} G_0 (1 - a \frac{T}{T_m})`
+        with :math:`G_0` shear_modulus_zero, :math:`a` nadal_lepoac_a, :math:`\zeta` nadal_lepoac_zeta,
+        and :math:`\mathfrak{J}(\frac{T}{T_m}) = 1 + exp(\frac{\frac{T}{T_m} - 1}{\zeta(1 - \frac{T}{T_m(1+\zeta)})})`.
+        
+        The temperature-dependent Burgers vector :math:`b(T)` is
+        modeled with a second order approximation :math:`b(T) = b_0 (1 + (a_2 T^2 + a_1 T + a_0))`
+        with :math:`a_2` lattice_expansion_second, :math:`a_1` lattice_expansion_first,
+        and :math:`a_0` lattice_expansion_null.
+      melting_temperature(NX_FLOAT):
+        unit: NX_TEMPERATURE
+        doc: |
+          Empirical melting temperature measured at standard conditions.
+      shear_modulus_zero(NX_FLOAT):
         unit: NX_PRESSURE
         doc: |
-          Reference shear modulus at zero Kelvin.
-      burgers_vector(NX_FLOAT):
+          Shear modulus at zero Kelvin.
+      nadal_lepoac_a(NX_FLOAT):
+        unit: NX_UNITLESS
+        doc: |
+          Constant :math:`a` in the Nadal-Le Poac-based model of the temperature-dependent
+          shear modulus.
+      nadal_lepoac_zeta(NX_FLOAT):
+        unit: NX_UNITLESS
+        doc: |
+          Constant :math:`\zeta` in the Nadal-Le Poac-based model of the temperature-
+          dependent shear modulus.
+      burgers_vector_zero(NX_FLOAT):
         unit: NX_LENGTH
         doc: |
           Magnitude of the Burgers vector at zero Kelvin.
-    
-    # firstOrderedG0dT
-    # alloyConstantThermalExpCoeff
-    # FirstOrderThermalExpCoeff
-    # SecondOrderThermalExpCoeff
-    # melting_temperature(NX_FLOAT):
+      lattice_expansion_second(NX_FLOAT):
+        unit: NX_ANY
+        doc: |
+          Constant :math:`a_2` in the second-order model that is used
+          for quantifying the temperature-dependent Burgers vector.
+      lattice_expansion_first(NX_FLOAT):
+        unit: NX_ANY
+        doc: |
+          Constant :math:`a_1` in the second-order model that is used
+          for quantifying the temperature-dependent Burgers vector.
+      lattice_expansion_null(NX_FLOAT):
+        unit: NX_LENGTH
+        doc: |
+          Constant :math:`a_0` in the second-order model that is used
+          for quantifying the temperature-dependent Burgers vector.
     deformation(NXparameters):
       doc: |
         Details about the geometry and properties of the polycrystal that represents the
@@ -541,7 +575,7 @@ NXmicrostructure_score_config(NXobject):
           during post-processing the results with the solitary unit modeling approach.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 2dbb3e82d6536c45ed97fb3e8f35c1f680d1da4b8c58369c09b85959fdb0fabe
+# f2395e1f8b2a98c71102f1332cb6e122b2a04e378ad1e80944d1294628acedc9
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -702,23 +736,64 @@ NXmicrostructure_score_config(NXobject):
 #                 (Mechanical) properties of the material which scale the
 #                 amount of stored (elastic) energy in the system and
 #                 thus mainly affect recrystallization kinetics.
+#                 
+#                 Temperature-dependent lattice softening of the shear modulus
+#                 :math:`G(T)` is modeled according to `Nadal and Le Poac &lt;https://dx.doi.org/10.1063/1.1539913&gt;`_
+#                 i.e., :math:`G(T) = \frac{1}{\mathfrak{J}(\frac{T}{T_m})} G_0 (1 - a \frac{T}{T_m})`
+#                 with :math:`G_0` shear_modulus_zero, :math:`a` nadal_lepoac_a, :math:`\zeta` nadal_lepoac_zeta,
+#                 and :math:`\mathfrak{J}(\frac{T}{T_m}) = 1 + exp(\frac{\frac{T}{T_m} - 1}{\zeta(1 - \frac{T}{T_m(1+\zeta)})})`.
+#                 
+#                 The temperature-dependent Burgers vector :math:`b(T)` is
+#                 modeled with a second order approximation :math:`b(T) = b_0 (1 + (a_2 T^2 + a_1 T + a_0))`
+#                 with :math:`a_2` lattice_expansion_second, :math:`a_1` lattice_expansion_first, 
+#                 and :math:`a_0` lattice_expansion_null.
 #             </doc>
-#             <field name="shear_modulus" type="NX_FLOAT" units="NX_PRESSURE">
+#             <field name="melting_temperature" type="NX_FLOAT" units="NX_TEMPERATURE">
 #                 <doc>
-#                     Reference shear modulus at zero Kelvin.
+#                     Empirical melting temperature measured at standard conditions.
 #                 </doc>
 #             </field>
-#             <field name="burgers_vector" type="NX_FLOAT" units="NX_LENGTH">
+#             <field name="shear_modulus_zero" type="NX_FLOAT" units="NX_PRESSURE">
+#                 <doc>
+#                     Shear modulus at zero Kelvin.
+#                 </doc>
+#             </field>
+#             <field name="nadal_lepoac_a" type="NX_FLOAT" units="NX_UNITLESS">
+#                 <doc>
+#                     Constant :math:`a` in the Nadal-Le Poac-based model of the temperature-dependent
+#                     shear modulus.
+#                 </doc>
+#             </field>
+#             <field name="nadal_lepoac_zeta" type="NX_FLOAT" units="NX_UNITLESS">
+#                 <doc>
+#                     Constant :math:`\zeta` in the Nadal-Le Poac-based model of the temperature-
+#                     dependent shear modulus.
+#                 </doc>
+#             </field>
+#             <field name="burgers_vector_zero" type="NX_FLOAT" units="NX_LENGTH">
 #                 <doc>
 #                     Magnitude of the Burgers vector at zero Kelvin.
 #                 </doc>
 #             </field>
+#             <field name="lattice_expansion_second" type="NX_FLOAT" units="NX_ANY">
+#                 <doc>
+#                     Constant :math:`a_2` in the second-order model that is used
+#                     for quantifying the temperature-dependent Burgers vector.
+#                 </doc>
+#             </field>
+#             <field name="lattice_expansion_first" type="NX_FLOAT" units="NX_ANY">
+#                 <doc>
+#                     Constant :math:`a_1` in the second-order model that is used
+#                     for quantifying the temperature-dependent Burgers vector.
+#                 </doc>
+#             </field>
+#             <field name="lattice_expansion_null" type="NX_FLOAT" units="NX_LENGTH">
+#                 <doc>
+#                     Constant :math:`a_0` in the second-order model that is used
+#                     for quantifying the temperature-dependent Burgers vector.
+#                 </doc>
+#             </field>
 #         </group>
-#         <!--firstOrderedG0dT
-# alloyConstantThermalExpCoeff
-# FirstOrderThermalExpCoeff
-# SecondOrderThermalExpCoeff
-# melting_temperature(NX_FLOAT):-->
 #         <group name="deformation" type="NXparameters">
 #             <doc>
 #                 Details about the geometry and properties of the polycrystal that represents the
