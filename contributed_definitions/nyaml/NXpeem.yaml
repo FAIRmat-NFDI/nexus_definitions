@@ -1,6 +1,8 @@
-doc: |
-  This is a general application definition for a photo-electron emission or low energy electron microscopy/diffraction experiment.
 category: application
+doc: |
+  This is a general application definition for a photo-electron emission or low
+  energy electron microscopy/diffraction experiment.
+type: group
 NXpeem(NXmpes):
   (NXentry):
     definition:
@@ -8,109 +10,118 @@ NXpeem(NXmpes):
       enumeration: [NXpeem]
     (NXmonitor):
       exists: recommended
-      doc: contains field named in the :ref:```flux`` attribute of ``NXbeam`` &lt;/NXpeem/ENTRY/INSTRUMENT/beam_probe/\@flux&gt;`
+      doc: |
+        contains field named in the :ref:```flux`` attribute of ``NXbeam``
+        &lt;/NXpeem/ENTRY/INSTRUMENT/beam_probe/\@flux&gt;`
     (NXinstrument):
-      monochromator_probe(NXmonochromator): # incoming_beam_monochromator
+      monochromator_probe(NXmonochromator):
         exists: recommended
       source_probe(NXsource):
-        exists: optional # only when PEEM uses synchrotron light
+        exists: optional
         associated_beam:
-          exists: optional # only when PEEM uses synchrotron light
+          exists: optional
           enumeration: [beam_probe]
       beam_probe(NXbeam):
-        exists: optional # as we record it in NXsample
-        \@flux: # that will point to the NXmonitor data field
+        exists: optional
+        \@flux:
         incident_energy(NX_FLOAT):
           unit: NX_ENERGY
-          doc: this should be a link to :ref:`monochromator energy &lt;/NXpeem/ENTRY/INSTRUMENT/monochromator_probe/energy&gt;`
+          doc: |
+            this should be a link to :ref:`monochromator energy
+            &lt;/NXpeem/ENTRY/INSTRUMENT/monochromator_probe/energy&gt;`
         incident_polarization_stokes(NX_NUMBER):
           exists: recommended
-          doc: use this or **incident_polarization**
+          doc: |
+            use this or **incident_polarization**
         depends_on:
         (NXtransformations):
           direction(NX_number):
             exists: recommended
-            doc:
+            doc: |
               default is [0,0,1]
-          reference_plane(NX_NUMBER): #how is that for our AC-PEEM?
+          reference_plane(NX_NUMBER):
             exists: recommended
-            doc:
-              defined as normal to the plane used to measure azimuth. Default is [0,1,0] through the origin
-      (NXem_optical_system): 
+            doc: |
+              defined as normal to the plane used to measure azimuth. Default is [0,1,0]
+              through the origin
+      (NXem_optical_system):
         field_of_view(NX_FLOAT):
           unit: NX_LENGTH
-          doc:
-            One or two values for size of image on sample or in another space along slow and fast pixel dimensions.
+          doc: |
+            One or two values for size of image on sample or in another space along slow and
+            fast pixel dimensions.
         working_distance(NX_FLOAT):
           unit: NX_LENGTH
         magnification(NX_FLOAT):
       (NXelectronanalyzer):
-        (NXcollectioncolumn): # supplement base application definition
+        (NXcollectioncolumn):
           scheme:
             doc: |
               Scheme of the electron collection column.
             enumeration: [standard, angular dispersive, selective area, deflector, PEEM, PEEM dark-field, LEEM, LEEM dark-field, LEED, dispersive plane, momentum microscope]
           projection:
-            doc:
+            doc: |
               The space projected in the angularly dispersive direction
             enumeration: [real, reciprocal, energy]
           extractor_voltage(NX_FLOAT):
             unit: NX_VOLTAGE
           objective_lens(NXelectromagnetic_lens):
-            doc:
+            doc: |
               list of electromagnetic lenses of the microscope column.
-          # other EM lenses in column
+        
+        # other EM lenses in column
         electron_gun(NXebeam_column):
-          exists: optional # when doing LEEM/LEED
-          field_aperture(NXaperture_em):
+          exists: optional
+          field_aperture(NXaperture):
           beam(NXbeam):
         (NXenergydispersion):
           exists: optional
           energy_interval(NX_FLOAT):
             exists: optional
             unit: NX_ENERGY
-            doc:
+            doc: |
               only in dispersive mode
           center_energy(NX_FLOAT):
             exists: optional
             unit: NX_ENERGY
-            doc:
+            doc: |
               Center of the energy window (only in dispersive mode)
         (NXelectron_detector):
           depends_on:
           transformations(NXtransformations):
-            doc:
+            doc: |
               Virtual transformations to sample that map the pixels onto sample coordinates.
           (NXdetector_module):
-            doc:
+            doc: |
               For detectors with irregular pixel sizes or composed by modules tiled together.
           dark_image(NX_NUMBER):
-            doc:
+            doc: |
               external link to a dark image.
           flatfield_image(NX_NUMBER):
-            doc:
+            doc: |
               external link to a flat field image.
           data(NX_NUMBER):
         (NXmanipulator):
-          doc:
+          doc: |
             Manipulator for positioning and rotating of the sample.
           (NXpositioner):
-            doc:
+            doc: |
               One of a group of sample positioners
+          
           # other NXpositioners
           sample_bias(NX_FLOAT):
             unit: NX_VOLTAGE
-            doc:
+            doc: |
               Start voltage (sample retarding potential).
-    geometries(NXcoordinate_system_set):
-      doc:
-        Collection of useful coordinate system. The common reference system should 
-        be the sample with all the positioner set to zero. Define at least the beam
-        reference at sample position and the gravity direction. 
-        Add the crystal cell orientation if necessary.
+    geometries(NXcoordinate_system):
+      doc: |
+        Collection of useful coordinate system. The common reference system should be
+        the sample with all the positioner set to zero. Define at least the beam
+        reference at sample position and the gravity direction. Add the crystal cell
+        orientation if necessary.
     (NXsample):
       depends_on:
-      (NXtransformations): # links to fields in NXmanipulator
-        doc:
-          The origin is at the sample position in the center of the detector field of view,
-          with all the manipulator positioners set to zero.
+      (NXtransformations):
+        doc: |
+          The origin is at the sample position in the center of the detector field of
+          view, with all the manipulator positioners set to zero.
