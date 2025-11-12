@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 <!--
 # NeXus - Neutron and X-ray Common Data Format
@@ -21,7 +21,7 @@
 #
 # For further information, see http://www.nexusformat.org
 -->
-<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" name="NXpeem" extends="NXmpes" type="group" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXpeem" extends="NXmpes" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
     <doc>
         This is a general application definition for a photo-electron emission or low
         energy electron microscopy/diffraction experiment.
@@ -34,10 +34,7 @@
             </enumeration>
         </field>
         <group type="NXmonitor" recommended="true">
-            <doc>
-                contains field named in the :ref:```flux`` attribute of ``NXbeam``
-                &amp;lt;/NXpeem/ENTRY/INSTRUMENT/beam_probe/\@flux&amp;gt;`
-            </doc>
+            <field name="data"/>
         </group>
         <group type="NXinstrument">
             <group name="monochromator_probe" type="NXmonochromator" recommended="true"/>
@@ -49,7 +46,12 @@
                 </field>
             </group>
             <group name="beam_probe" type="NXbeam" optional="true">
-                <attribute name="flux"/>
+                <field name="flux">
+                    <doc>
+                        this should be a link to :ref:`monitor data
+                        &amp;lt;/NXpeem/ENTRY/INSTRUMENT/MONITOR/data&amp;gt;`
+                    </doc>
+                </field>
                 <field name="incident_energy" type="NX_FLOAT" units="NX_ENERGY">
                     <doc>
                         this should be a link to :ref:`monochromator energy
@@ -119,7 +121,7 @@
                     <field name="extractor_voltage" type="NX_FLOAT" units="NX_VOLTAGE"/>
                     <group name="objective_lens" type="NXelectromagnetic_lens">
                         <doc>
-                            list of electromagnetic lenses of the microscope column.
+                            electromagnetic lens of the microscope column.
                         </doc>
                     </group>
                 </group>
@@ -131,7 +133,7 @@
                 <group type="NXenergydispersion" optional="true">
                     <field name="energy_interval" type="NX_FLOAT" optional="true" units="NX_ENERGY">
                         <doc>
-                            only in dispersive mode
+                            Width of energy window (only in dispersive mode)
                         </doc>
                     </field>
                     <field name="center_energy" type="NX_FLOAT" optional="true" units="NX_ENERGY">
@@ -154,15 +156,15 @@
                     </group>
                     <field name="dark_image" type="NX_NUMBER">
                         <doc>
-                            external link to a dark image.
+                            external link to a dark image field in another file.
                         </doc>
                     </field>
                     <field name="flatfield_image" type="NX_NUMBER">
                         <doc>
-                            external link to a flat field image.
+                            external link to a flat field image field in another file.
                         </doc>
                     </field>
-                    <field name="data" type="NX_NUMBER"/>
+                    <field name="raw_data" type="NX_NUMBER"/>
                 </group>
                 <group type="NXmanipulator">
                     <doc>
@@ -174,7 +176,7 @@
                         </doc>
                     </group>
                     <!--other NXpositioners-->
-                    <field name="sample_bias" type="NX_FLOAT" units="NX_VOLTAGE">
+                    <field name="sample_bias_potentiostat" type="NX_FLOAT" units="NX_VOLTAGE">
                         <doc>
                             Start voltage (sample retarding potential).
                         </doc>

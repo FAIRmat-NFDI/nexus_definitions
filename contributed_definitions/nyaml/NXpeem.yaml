@@ -10,9 +10,7 @@ NXpeem(NXmpes):
       enumeration: [NXpeem]
     (NXmonitor):
       exists: recommended
-      doc: |
-        contains field named in the :ref:```flux`` attribute of ``NXbeam``
-        &lt;/NXpeem/ENTRY/INSTRUMENT/beam_probe/\@flux&gt;`
+      data:
     (NXinstrument):
       monochromator_probe(NXmonochromator):
         exists: recommended
@@ -24,6 +22,9 @@ NXpeem(NXmpes):
       beam_probe(NXbeam):
         exists: optional
         flux:
+          doc: |
+              this should be a link to :ref:`monitor data
+              &lt;/NXpeem/ENTRY/INSTRUMENT/MONITOR/data&gt;`
         incident_energy(NX_FLOAT):
           unit: NX_ENERGY
           doc: |
@@ -67,7 +68,7 @@ NXpeem(NXmpes):
             unit: NX_VOLTAGE
           objective_lens(NXelectromagnetic_lens):
             doc: |
-              list of electromagnetic lenses of the microscope column.
+              electromagnetic lens of the microscope column.
         
         # other EM lenses in column
         electron_gun(NXebeam_column):
@@ -80,7 +81,7 @@ NXpeem(NXmpes):
             exists: optional
             unit: NX_ENERGY
             doc: |
-              only in dispersive mode
+              Width of energy window (only in dispersive mode)
           center_energy(NX_FLOAT):
             exists: optional
             unit: NX_ENERGY
