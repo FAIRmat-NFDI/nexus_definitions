@@ -1350,8 +1350,8 @@ NXmpes(NXobject):
           /entry/sample/temperature_env/temperature_sensor/value.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# df60ccb4b82aad42929a2c9830baf2d461084e88ed10d9d3abe4147b53d1f6f2
-# <?xml version='1.0' encoding='UTF-8'?>
+# 891bb4093add8d0e728e1cf57aadbd3dceec3c376e0b360f28c77a659c5ceda8
+# <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
 # # NeXus - Neutron and X-ray Common Data Format
@@ -1777,6 +1777,8 @@ NXmpes(NXobject):
 #                         Should be named with the same suffix, e.g.,
 #                         for ``beam_laser`` it should refer to ``source_laser``.
 #                         This should be specified if an associated source exists.
+#                         This could be the name of a NXbeam group in the enclosing instrument group
+#                         or an absolute path.
 #                         
 #                         Example:
 #                           * /entry/instrument/beam_laser/associated_source = /entry/instrument/source_laser
@@ -1864,6 +1866,13 @@ NXmpes(NXobject):
 #                         <field name="model" recommended="true"/>
 #                         <field name="identifier" recommended="true"/>
 #                     </group>
+#                 </group>
+#                 <group name="electron_gun" type="NXebeam_column" optional="true">
+#                     <doc>
+#                         Properties of an electron gun used to provide a source of electron beam
+#                     </doc>
+#                     <group name="field_aperture" type="NXaperture"/>
+#                     <group name="beam" type="NXbeam"/>
 #                 </group>
 #                 <group type="NXenergydispersion">
 #                     <field name="scheme">
