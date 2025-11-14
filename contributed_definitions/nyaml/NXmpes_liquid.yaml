@@ -9,31 +9,37 @@ NXmpes_liquid(NXmpes):
     definition:
       \@version:
       enumeration: [NXmpes_liquid]
-    (NXinstrument):
-      instrument_orientation(NXtransformations):
+    jet_coordinate_system(NXcoordinate_system):
+      exists: recommended
+      doc: |
+        Orientation of the liquid jet with respect to the beam. The major flow direction of the jet is defined as
+        pointing in the -y direction. In case of flatjets this is the propagation direction of the jet after the
+        leafs are merged completely. The surface normal is defined as pointing in the +z direction. For flat jets,
+        normal vector of the first leaf in the half-plane oriented towards the electron detector. A 180 degree
+        rotation around the y axis exposes the back surface of the first leaf. The z axis should be pre-rotated to
+        coincide with the z-direction of analyzer coordinate system. For cylindrical jets the surface normal is
+        defined to always align with the analyzer coordinate system independent of any applied rotations.
+      origin:
+        enumeration: [center of interaction]
+      y_direction:
+        enumeration: [major propagation direction of the liquid jet]
+      z_direction:
+        enumeration: [liquid surface normal (of first leaf for flatjets)]
+      x(NX_NUMBER):
+        enumeration: [[-1, 0, 0]]
+      y(NX_NUMBER):
+        enumeration: [[0, 1, 0]]
+      z(NX_NUMBER):
+        enumeration: [[0, 0, 1]]
+      depends_on(NX_CHAR):
+        doc: |
+          Link to transformations defining the base jet coordinate system, which is defined such that the positive
+          z-axis points along the liquid surface normal, and the y-axis points along the major jet propagation direction.
+      (NXtransformations):
         exists: optional
         doc: |
-          Transformations describing base geometry in the experiment.
-          Usually defaults to the beam in z direction and gravity in -y direction.
-        analyzer_optical_axis(NX_NUMBER):
-          exists: recommended
-          doc: |
-            The coordinate system frame of the analyzer.
-            If no direction attribute is specified,
-            the optical axis of the analyzer follows the positive z-direction.
-          \@gravity:
-            doc: |
-              Direction of gravity in the analyzer coordinate system.
-          \@beam_direction:
-            doc: |
-              Direction of the photon beam in the analyzer coordinate system.
-          \@direction:
-            doc: |
-              The direction of the analyzer optical axis.
-              If this is not specified the optical axis points
-              in the positive jet direction.
-              It is recommended to always specify the axis
-              direction explicitly (even for the default case).
+          Set of transformations, describing the orientation of the jet coordinate system
+          with respect to the beam coordinate system (.).
     (NXsample):
       thickness(NX_FLOAT):
         exists: recommended
@@ -71,66 +77,33 @@ NXmpes_liquid(NXmpes):
       depends_on:
         exists: recommended
         doc: |
-          Connects this liquidjet to its transformation chain.
-      liquidjet_orientation(NXtransformations):
-        doc: |
-          Transformations describing the transformation chain of the liquid jet flow direction
-          and optionally the flat jet normal. The vector of the major flow direction of the
-          liquid jet from the point of injection into the chamber.
-          Along the cylinder axis for single, cylindrical jets, and parallel to the leaf plane for flatjets.
-        jet_direction(NX_NUMBER):
+          Reference to the transformation describing the orientation of the jet
+          relative to a defined coordinate system.
+      transformations(NXtransformations):
+        exists: recommended
+        jet_surface_rotation(NX_NUMBER):
           unit: NX_ANGLE
           doc: |
-            The coordinate system frame of the liquid jet direction.
-            If no direction attribute is specified,
-            the jet points in the positive z-direction.
-          \@gravity(NX_NUMBER):
-            exists: recommended
-            doc: |
-              The direction of gravity in the coordinate system
-              of `jet_direction`.
-            dimensions:
-              rank: 1
-              dim: (3,)
-          \@transformation_type(NX_CHAR):
-            enumeration: [rotation]
-          \@direction(NX_NUMBER):
-            exists: recommended
-            doc: |
-              The direction of the liquid jet.
-              If this is not specified the jet points
-              in the positive jet direction.
-              It is recommended to always specify the jet
-              direction explicitly (even for the default case).
-            dimensions:
-              rank: 1
-              dim: (3,)
-        leaf_normal(NX_NUMBER):
-          unit: NX_ANGLE
-          doc: |
-            Coordinate frame for the surface normal of the first leaf on the side of solvent #1.
-            If no direction is specified,
-            the surface leaf normal vector points in the positive z-direction.
-            The value of this field is the angle between the
-            analyzer optical axis and the leaf normal.
-            If you only want to collect the angle between the leaf normal
-            and the analyzer optical axis the `depends_on` attribute may be omitted.
-            If a transformation chain is provided (with the `depends_on` attribute)
-            it should depend on the analyzer optical axis or the jet direction depending
-            on the use case.
+            Rotation of the liquid surface normal around the major propagation direction.
           \@transformation_type:
             enumeration: [rotation]
-          \@direction(NX_NUMBER):
-            exists: recommended
+          \@vector(NX_NUMBER):
+            enumeration: [[0, 1, 0]]
+          \@depends_on:
+            enumeration: [jet_surface_tilt]
+        jet_surface_tilt(NX_NUMBER):
+          unit: NX_ANGLE
+          doc: |
+            Tilt of the liquid surface normal around the axis perpendicular to the major
+            propagation direction.
+          \@transformation_type:
+            enumeration: [rotation]
+          \@vector(NX_NUMBER):
+            enumeration: [[1, 0, 0]]
+          \@depends_on:
             doc: |
-              Direction of surface normal vector of the first leaf on the side of solvent #1.
-              If this is not specified it defaults to the positive z-direction which should
-              be parallel to the detection direction.
-              It is recommended to always specify the leaf normal direction
-              explicitly (even for the default case).
-            dimensions:
-              rank: 1
-              dim: (3,)
+              This should point to the coordinate system defined in
+              /entry/jet_coordinate_system.
       solventSOLVENT(NXsample_component):
         nameType: partial
         doc: |
@@ -188,13 +161,13 @@ NXmpes_liquid(NXmpes):
             Specifies the parent solvent entry of the solution.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# bcd6c8a591ae9be49e97a163dabd6447280c28c0aeb8227d4f8034978c1f3e31
-# <?xml version='1.0' encoding='UTF-8'?>
+# d3fc7a2493c71183ae93ccd5dc6dcacaddb12820816b800bbfcd127bbfea90c9
+# <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
 # # NeXus - Neutron and X-ray Common Data Format
 # #
-# # Copyright (C) 2014-2024 NeXus International Advisory Committee (NIAC)
+# # Copyright (C) 2023-2025 NeXus International Advisory Committee (NIAC)
 # #
 # # This library is free software; you can redistribute it and/or
 # # modify it under the terms of the GNU Lesser General Public
@@ -225,38 +198,57 @@ NXmpes_liquid(NXmpes):
 #                 <item value="NXmpes_liquid"/>
 #             </enumeration>
 #         </field>
-#         <group type="NXinstrument">
-#             <group name="instrument_orientation" type="NXtransformations" optional="true">
+#         <group name="jet_coordinate_system" type="NXcoordinate_system" recommended="true">
+#             <doc>
+#                 Orientation of the liquid jet with respect to the beam. The major flow direction of the jet is defined as
+#                 pointing in the -y direction. In case of flatjets this is the propagation direction of the jet after the
+#                 leafs are merged completely. The surface normal is defined as pointing in the +z direction. For flat jets,
+#                 normal vector of the first leaf in the half-plane oriented towards the electron detector. A 180 degree
+#                 rotation around the y axis exposes the back surface of the first leaf. The z axis should be pre-rotated to
+#                 coincide with the z-direction of analyzer coordinate system. For cylindrical jets the surface normal is
+#                 defined to always align with the analyzer coordinate system independent of any applied rotations.
+#             </doc>
+#             <field name="origin">
+#                 <enumeration>
+#                     <item value="center of interaction"/>
+#                 </enumeration>
+#             </field>
+#             <field name="y_direction">
+#                 <enumeration>
+#                     <item value="major propagation direction of the liquid jet"/>
+#                 </enumeration>
+#             </field>
+#             <field name="z_direction">
+#                 <enumeration>
+#                     <item value="liquid surface normal (of first leaf for flatjets)"/>
+#                 </enumeration>
+#             </field>
+#             <field name="x" type="NX_NUMBER">
+#                 <enumeration>
+#                     <item value="[-1, 0, 0]"/>
+#                 </enumeration>
+#             </field>
+#             <field name="y" type="NX_NUMBER">
+#                 <enumeration>
+#                     <item value="[0, 1, 0]"/>
+#                 </enumeration>
+#             </field>
+#             <field name="z" type="NX_NUMBER">
+#                 <enumeration>
+#                     <item value="[0, 0, 1]"/>
+#                 </enumeration>
+#             </field>
+#             <field name="depends_on" type="NX_CHAR">
 #                 <doc>
-#                     Transformations describing base geometry in the experiment.
-#                     Usually defaults to the beam in z direction and gravity in -y direction.
+#                     Link to transformations defining the base jet coordinate system, which is defined such that the positive
+#                     z-axis points along the liquid surface normal, and the y-axis points along the major jet propagation direction.
 #                 </doc>
-#                 <field name="analyzer_optical_axis" type="NX_NUMBER" recommended="true">
-#                     <doc>
-#                         The coordinate system frame of the analyzer.
-#                         If no direction attribute is specified,
-#                         the optical axis of the analyzer follows the positive z-direction.
-#                     </doc>
-#                     <attribute name="gravity">
-#                         <doc>
-#                             Direction of gravity in the analyzer coordinate system.
-#                         </doc>
-#                     </attribute>
-#                     <attribute name="beam_direction">
-#                         <doc>
-#                             Direction of the photon beam in the analyzer coordinate system.
-#                         </doc>
-#                     </attribute>
-#                     <attribute name="direction">
-#                         <doc>
-#                             The direction of the analyzer optical axis.
-#                             If this is not specified the optical axis points
-#                             in the positive jet direction.
-#                             It is recommended to always specify the axis
-#                             direction explicitly (even for the default case).
-#                         </doc>
-#                     </attribute>
-#                 </field>
+#             </field>
+#             <group type="NXtransformations" optional="true">
+#                 <doc>
+#                     Set of transformations, describing the orientation of the jet coordinate system
+#                     with respect to the beam coordinate system (.).
+#                 </doc>
 #             </group>
 #         </group>
 #         <group type="NXsample">
@@ -302,78 +294,51 @@ NXmpes_liquid(NXmpes):
 #             </group>
 #             <field name="depends_on" recommended="true">
 #                 <doc>
-#                     Connects this liquidjet to its transformation chain.
+#                     Reference to the transformation describing the orientation of the jet
+#                     relative to a defined coordinate system.
 #                 </doc>
 #             </field>
-#             <group name="liquidjet_orientation" type="NXtransformations">
-#                 <doc>
-#                     Transformations describing the transformation chain of the liquid jet flow direction
-#                     and optionally the flat jet normal. The vector of the major flow direction of the
-#                     liquid jet from the point of injection into the chamber.
-#                     Along the cylinder axis for single, cylindrical jets, and parallel to the leaf plane for flatjets.
-#                 </doc>
-#                 <field name="jet_direction" type="NX_NUMBER" units="NX_ANGLE">
+#             <group name="transformations" type="NXtransformations" recommended="true">
+#                 <field name="jet_surface_rotation" type="NX_NUMBER" units="NX_ANGLE">
 #                     <doc>
-#                         The coordinate system frame of the liquid jet direction.
-#                         If no direction attribute is specified,
-#                         the jet points in the positive z-direction.
-#                     </doc>
-#                     <attribute name="gravity" type="NX_NUMBER" recommended="true">
-#                         <doc>
-#                             The direction of gravity in the coordinate system
-#                             of `jet_direction`.
-#                         </doc>
-#                         <dimensions rank="1">
-#                             <dim index="1" value="3"/>
-#                         </dimensions>
-#                     </attribute>
-#                     <attribute name="transformation_type" type="NX_CHAR">
-#                         <enumeration>
-#                             <item value="rotation"/>
-#                         </enumeration>
-#                     </attribute>
-#                     <attribute name="direction" type="NX_NUMBER" recommended="true">
-#                         <doc>
-#                             The direction of the liquid jet.
-#                             If this is not specified the jet points
-#                             in the positive jet direction.
-#                             It is recommended to always specify the jet
-#                             direction explicitly (even for the default case).
-#                         </doc>
-#                         <dimensions rank="1">
-#                             <dim index="1" value="3"/>
-#                         </dimensions>
-#                     </attribute>
-#                 </field>
-#                 <field name="leaf_normal" type="NX_NUMBER" units="NX_ANGLE">
-#                     <doc>
-#                         Coordinate frame for the surface normal of the first leaf on the side of solvent #1.
-#                         If no direction is specified,
-#                         the surface leaf normal vector points in the positive z-direction.
-#                         The value of this field is the angle between the
-#                         analyzer optical axis and the leaf normal.
-#                         If you only want to collect the angle between the leaf normal
-#                         and the analyzer optical axis the `depends_on` attribute may be omitted.
-#                         If a transformation chain is provided (with the `depends_on` attribute)
-#                         it should depend on the analyzer optical axis or the jet direction depending
-#                         on the use case.
+#                         Rotation of the liquid surface normal around the major propagation direction.
 #                     </doc>
 #                     <attribute name="transformation_type">
 #                         <enumeration>
 #                             <item value="rotation"/>
 #                         </enumeration>
 #                     </attribute>
-#                     <attribute name="direction" type="NX_NUMBER" recommended="true">
+#                     <attribute name="vector" type="NX_NUMBER">
+#                         <enumeration>
+#                             <item value="[0, 1, 0]"/>
+#                         </enumeration>
+#                     </attribute>
+#                     <attribute name="depends_on">
+#                         <enumeration>
+#                             <item value="jet_surface_tilt"/>
+#                         </enumeration>
+#                     </attribute>
+#                 </field>
+#                 <field name="jet_surface_tilt" type="NX_NUMBER" units="NX_ANGLE">
+#                     <doc>
+#                         Tilt of the liquid surface normal around the axis perpendicular to the major
+#                         propagation direction.
+#                     </doc>
+#                     <attribute name="transformation_type">
+#                         <enumeration>
+#                             <item value="rotation"/>
+#                         </enumeration>
+#                     </attribute>
+#                     <attribute name="vector" type="NX_NUMBER">
+#                         <enumeration>
+#                             <item value="[1, 0, 0]"/>
+#                         </enumeration>
+#                     </attribute>
+#                     <attribute name="depends_on">
 #                         <doc>
-#                             Direction of surface normal vector of the first leaf on the side of solvent #1.
-#                             If this is not specified it defaults to the positive z-direction which should
-#                             be parallel to the detection direction.
-#                             It is recommended to always specify the leaf normal direction
-#                             explicitly (even for the default case).
+#                             This should point to the coordinate system defined in
+#                             /entry/jet_coordinate_system.
 #                         </doc>
-#                         <dimensions rank="1">
-#                             <dim index="1" value="3"/>
-#                         </dimensions>
 #                     </attribute>
 #                 </field>
 #             </group>
