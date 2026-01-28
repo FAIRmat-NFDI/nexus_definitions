@@ -20,7 +20,6 @@ import github
 import logging
 import os
 
-
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("create_release_notes")
 
@@ -28,12 +27,12 @@ logger = logging.getLogger("create_release_notes")
 def findGitConfigFile():
     """
     return full path to .git/config file
-    
+
     must be in current working directory or some parent directory
-    
-    This is a simplistic search that could be improved by using 
+
+    This is a simplistic search that could be improved by using
     an open source package.
-    
+
     Needs testing for when things are wrong.
     """
     path = os.getcwd()
@@ -63,10 +62,10 @@ def parse_git_url(url):
 def getRepositoryInfo():
     """
     return (organization, repository) tuple from .git/config file
-    
-    This is a simplistic search that could be improved by using 
+
+    This is a simplistic search that could be improved by using
     an open source package.
-    
+
     Needs testing for when things are wrong.
     """
     config_file = findGitConfigFile()
@@ -269,7 +268,9 @@ def report(title, repo, milestone, tags, pulls, issues, commits):
         for k, commit in commits.items():
             message = commit.commit.message.splitlines()
             when = commit.raw_data["commit"]["committer"]["date"].split("T")[0]
-            print(f"[{k[:7]}]({commit.html_url}) | {when} | {message[0] if message else ""}")
+            print(
+                f"[{k[:7]}]({commit.html_url}) | {when} | {message[0] if message else ""}"
+            )
 
 
 def main(base=None, head=None, milestone=None, token=None, debug=False):

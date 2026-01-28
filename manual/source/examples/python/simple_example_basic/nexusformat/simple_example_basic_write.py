@@ -25,8 +25,7 @@ with nxopen(fileName, "w") as f:
 
     # create the NXdata group
     x = NXfield(mr_arr, name="mr", units="degrees", long_name="USAXS mr (degrees)")
-    y = NXfield(i00_arr, name="I00", units="counts",
-                long_name="USAXS I00 (counts)")
+    y = NXfield(i00_arr, name="I00", units="counts", long_name="USAXS I00 (counts)")
     f["entry/mr_scan"] = NXdata(y, x)
 
 print("wrote file:", fileName)

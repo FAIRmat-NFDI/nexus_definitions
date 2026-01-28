@@ -149,7 +149,7 @@ def command_args():
 def main():
     """
     standard command-line processing
-    
+
     source directory (NeXus definitions dir) named as command line argument
     target directory is specified (or defaults to present working directory)
     """
