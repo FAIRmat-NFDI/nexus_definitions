@@ -222,6 +222,9 @@ NXem(NXobject):
         exists: recommended
       algorithm(NX_CHAR):
         exists: recommended
+    project(NXproject):
+      exists: optional
+      name(NX_CHAR):
     userID(NXuser):
       exists: ['min', '0', 'max', 'unbounded']
       nameType: partial
@@ -1527,6 +1530,11 @@ NXem(NXobject):
           actuatorID(NXactuator):
             nameType: partial
             exists: ['min', '0', 'max', 'unbounded']
+        (NXcollection):
+          exists: optional
+          doc: |
+            Group with content not meant for validation to store e.g.,
+            metadata that are currently not standardized with NeXus.
     simulation(NXem_simulation):
       exists: optional
       doc: |
@@ -1844,12 +1852,61 @@ NXem(NXobject):
                 \@long_name(NX_CHAR):
       eels(NXem_eels):
         exists: optional
+      tomo(NXprocess):
+        exists: optional
+        doc: |
+          Electron tomography
+        reconstructionID(NXprocess):
+          nameType: partial
+          exists: ['min', '0', 'max', 'unbounded']
+          doc: |
+            Processing a single tilt series into an electron tomogram
+          configuration(NXparameters):
+            exists: recommended
+            doc: |
+              Parameters used for computing the tomogram.
+          programID(NXprogram):
+            nameType: partial
+            exists: recommended
+            doc: |
+              The program with which the reconstruction was performed.
+            program(NX_CHAR):
+              \@version(NX_CHAR):
+                exists: recommended
+          tomogram(NXdata):
+            doc: |
+              The resulting tomogram
+            \@signal(NX_CHAR):
+            \@axes(NX_CHAR):
+            \@AXISNAME_indices(NX_UINT):
+              nameType: partial
+            title(NX_CHAR):
+              exists: recommended
+            intensity(NX_NUMBER):
+              dimensions:
+                rank: 3
+                dim: (n_k, n_j, n_i)
+            axis_k(NX_FLOAT):
+              dimensions:
+                rank: 1
+                dim: (n_k,)
+              \@long_name(NX_CHAR):
+            axis_j(NX_FLOAT):
+              dimensions:
+                rank: 1
+                dim: (n_j,)
+              \@long_name(NX_CHAR):
+            axis_i(NX_FLOAT):
+              dimensions:
+                rank: 1
+                dim: (n_i,)
+              \@long_name(NX_CHAR):
   
   # see an example how to map e.g. the following flat schema https://www.zenodo.org/record/6513745 to NXem
   # in https://github.com/FAIRmat-NFDI/nexus_definitions/commit/0b928c4352bc5636f673b5fb25ce990f1af8a099
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# e3e6bcaa161a279725e7f49a6fb894a742bb8ccb458099b296e0fb3dc7a8d685
+# 81a1686cd17dbf3e8d156396988d66fa675b32a6dbaad3f394afee3df7e72a1e
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -2102,6 +2159,9 @@ NXem(NXobject):
 #             <field name="file_name" type="NX_CHAR"/>
 #             <field name="checksum" type="NX_CHAR" recommended="true"/>
 #             <field name="algorithm" type="NX_CHAR" recommended="true"/>
+#         </group>
+#         <group name="project" type="NXproject" optional="true">
+#             <field name="name" type="NX_CHAR"/>
 #         </group>
 #         <group name="userID" type="NXuser" minOccurs="0" maxOccurs="unbounded" nameType="partial">
 #             <doc>
@@ -3439,6 +3499,12 @@ NXem(NXobject):
 #                     <group name="sensorID" type="NXsensor" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
 #                     <group name="actuatorID" type="NXactuator" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
 #                 </group>
+#                 <group type="NXcollection" optional="true">
+#                     <doc>
+#                         Group with content not meant for validation to store e.g.,
+#                         metadata that are currently not standardized with NeXus.
+#                     </doc>
+#                 </group>
 #             </group>
 #         </group>
 #         <group name="simulation" type="NXem_simulation" optional="true">
@@ -3724,6 +3790,63 @@ NXem(NXobject):
 #                 </group>
 #             </group>
 #             <group name="eels" type="NXem_eels" optional="true"/>
+#             <group name="tomo" type="NXprocess" optional="true">
+#                 <doc>
+#                     Electron tomography
+#                 </doc>
+#                 <group name="reconstructionID" type="NXprocess" nameType="partial" minOccurs="0" maxOccurs="unbounded">
+#                     <doc>
+#                         Processing a single tilt series into an electron tomogram
+#                     </doc>
+#                     <group name="configuration" type="NXparameters" recommended="true">
+#                         <doc>
+#                             Parameters used for computing the tomogram.
+#                         </doc>
+#                     </group>
+#                     <group name="programID" type="NXprogram" nameType="partial" recommended="true">
+#                         <doc>
+#                             The program with which the reconstruction was performed.
+#                         </doc>
+#                         <field name="program" type="NX_CHAR">
+#                             <attribute name="version" type="NX_CHAR" recommended="true"/>
+#                         </field>
+#                     </group>
+#                     <group name="tomogram" type="NXdata">
+#                         <doc>
+#                             The resulting tomogram
+#                         </doc>
+#                         <attribute name="signal" type="NX_CHAR"/>
+#                         <attribute name="axes" type="NX_CHAR"/>
+#                         <attribute name="AXISNAME_indices" type="NX_UINT" nameType="partial"/>
+#                         <field name="title" type="NX_CHAR" recommended="true"/>
+#                         <field name="intensity" type="NX_NUMBER">
+#                             <dimensions rank="3">
+#                                 <dim index="1" value="n_k"/>
+#                                 <dim index="2" value="n_j"/>
+#                                 <dim index="3" value="n_i"/>
+#                             </dimensions>
+#                         </field>
+#                         <field name="axis_k" type="NX_FLOAT">
+#                             <dimensions rank="1">
+#                                 <dim index="1" value="n_k"/>
+#                             </dimensions>
+#                             <attribute name="long_name" type="NX_CHAR"/>
+#                         </field>
+#                         <field name="axis_j" type="NX_FLOAT">
+#                             <dimensions rank="1">
+#                                 <dim index="1" value="n_j"/>
+#                             </dimensions>
+#                             <attribute name="long_name" type="NX_CHAR"/>
+#                         </field>
+#                         <field name="axis_i" type="NX_FLOAT">
+#                             <dimensions rank="1">
+#                                 <dim index="1" value="n_i"/>
+#                             </dimensions>
+#                             <attribute name="long_name" type="NX_CHAR"/>
+#                         </field>
+#                     </group>
+#                 </group>
+#             </group>
 #         </group>
 #     </group>
 #     <!--see an example how to map e.g. the following flat schema https://www.zenodo.org/record/6513745 to NXem

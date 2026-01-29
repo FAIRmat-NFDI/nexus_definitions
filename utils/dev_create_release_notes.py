@@ -3,9 +3,14 @@
 """
 Developers: use this code to develop and test create_release_notes.py
 """
+
 import os
 
-CREDS_FILE = os.path.join(os.environ["HOME"], ".config", "github_token",)
+CREDS_FILE = os.path.join(
+    os.environ["HOME"],
+    ".config",
+    "github_token",
+)
 
 with open(CREDS_FILE, "r") as cf:
     token = cf.read().strip()
