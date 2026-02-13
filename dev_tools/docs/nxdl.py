@@ -587,7 +587,7 @@ class NXClassDocGenerator:
     def _print_doc_enum(self, indent, ns, node, required=False):
         collapse_indent = indent
         node_list = node.xpath("nx:enumeration", namespaces=ns)
-        (doclen, line, blocks) = self.long_doc(ns, node, len(indent))
+        doclen, line, blocks = self.long_doc(ns, node, len(indent))
         if len(node_list) + doclen > 1:
             collapse_indent = f"{indent}    "
             self._print(f"{indent}{self._INDENTATION_UNIT}.. collapse:: {line} ...\n")
@@ -610,6 +610,7 @@ class NXClassDocGenerator:
         self._print(
             f"{indent}{formatted_name}: {optional}{self._format_type(node)}{self._format_units(node)} {self.get_first_parent_ref(f'{parent_path}/{name}', 'attribute')}\n"
         )
+        self._print_if_deprecated(ns, node, indent + self._INDENTATION_UNIT)
         self._print_doc_enum(indent, ns, node)
 
     def _print_if_deprecated(self, ns, node, indent):
@@ -727,6 +728,16 @@ class NXClassDocGenerator:
         except FileNotFoundError:
             return ""
         if len(parents) > 1:
+            for parent in parents:
+                # iterate back and check tag matches
+                if not parent.tag.endswith(tag) and not parent.tag.endswith(
+                    "definition"
+                ):
+                    print(
+                        f"Warning: {path} has a mismatching inherited node - {parent.tag} cf {tag}"
+                    )
+                    return ""
+
             parent = parents[1]
             parent_path = parent_display_name = parent.attrib["nxdlpath"]
             parent_path_segments = parent_path[1:].split("/")
