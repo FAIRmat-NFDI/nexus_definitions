@@ -1,0 +1,416 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.106. NXem_correlation &#8212; NeXus-FAIRmat v2024.02 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/details_summary_hide.css?v=30df4bca" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bolditalic.css?v=504f8cd9" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=04096e4a"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.107. NXem_ebsd" href="NXem_ebsd.html" />
+    <link rel="prev" title="2.3.3.3.105. NXem_calorimetry" href="NXem_calorimetry.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nxem-correlation">
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.106. </span>NXem_correlation<a class="headerlink" href="#nxem-correlation" title="Link to this heading">¶</a></h1>
+<p><strong>Status</strong>:</p>
+<blockquote>
+<div><p><em>base class</em> (contribution), extends <a class="reference internal" href="NXem_method.html#nxem-method"><span class="std std-ref">NXem_method</span></a></p>
+</div></blockquote>
+<p><strong>Description</strong>:</p>
+<blockquote>
+<div><details class="summary-base-class-to-combine-different-method-specific-data-in-electron-microscopy">
+<summary>Base class to combine different method-specific data in electron microscopy. ...</summary><p>Base class to combine different method-specific data in electron microscopy.</p>
+<p>This base class represent a template for documenting correlations
+(spatial, temporal) between different method-specific results.</p>
+</details></div></blockquote>
+<p><strong>Symbols</strong>:</p>
+<blockquote>
+<div><p>No symbol table</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="NXcrystal_structure.html#nxcrystal-structure"><span class="std std-ref">NXcrystal_structure</span></a>, <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a>, <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a></p>
+</dd>
+</dl>
+<p id="index-1"><strong>Structure</strong>:</p>
+<blockquote>
+<div><p id="nxem-correlation-process-group"><span class="bolditalic">PROCESS</span>: (optional) <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a> <a class="reference internal" href="NXem_method.html#nxem-method-process-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Details about processing steps.</p>
+<p id="index-2"><span id="nxem-correlation-process-sequence-index-field"></span><strong>sequence_index</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> <a class="reference internal" href="NXem_method.html#nxem-method-process-sequence-index-field"><span class="std std-ref">⤆</span></a></p>
+</div></blockquote>
+<p id="nxem-correlation-indexing-group"><strong>indexing</strong>: (optional) <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a> <a class="reference internal" href="NXem_method.html#nxem-method-process-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-details-about-correlated-or-logically-connected-ebsd-datasets">
+<summary>Details about correlated or logically connected EBSD datasets. ...</summary><p>Details about correlated or logically connected EBSD datasets.</p>
+<p>One important class of such correlated experiments are the so-called
+(quasi) in-situ experiments. In this case the same or nearly the same ROI
+gets analyzed via a repetitive sequence of thermomechanical treatment,
+sample preparation, measurement, on-the-fly-indexing. Phenomena
+investigated are recrystallization, strain accumulation, material damage.
+Post-processing is required to correlate and reidentify eventual
+microstructural features or local ROIs across several orientation maps.</p>
+<p>Another important class of correlated experiments are the so-called
+serial-sectioning experiments. Here the same sample is measured
+repetitively after polishing each time, to create a stack of
+orientation data which can be reconstructed to a
+three-dimensional volume ROI.</p>
+<p>Data can be correlated in time, position (spatial), or both (spatiotemporal).</p>
+<p>Spatial correlations between repetitively characterized regions-of-interests
+are typically correlated using image registration and alignment algorithms.
+For this typically so-called landmarks are used. These can be grains with
+a very large size or specific shape, i.e. grains which are qualitatively
+different enough to be used as a guide how images are shifted relative to
+one another. Other commonly used landmarks are fiducial marks which are
+milled into the specimen surface using focus-ion beam milling and/or various
+types of indentation methods.</p>
+<p>As far as the same physical region-of-interest is just measured several times,
+the additional issue of the depth increment is not a concern. However, correct
+assumptions for the depth increment, amount of material removed along the milling
+direction is relevant for accurate and precise three-dimensional (serial-sectioning)
+correlations. For these studies it can be tricky though to assume or estimate
+useful depth increments. Different strategies have been proposed like
+calibrations, wedged-shaped landmarks and computer simulation assisted
+assumption making.</p>
+<p>Despite the use of landmarks, there are many practical issues which make the
+processing of correlations imprecise and inaccurate. Among these are drift
+and shift of the specimen, instabilities of the holder, the beam, irrespective
+of the source of the drift, charging effects, here specifically causing local
+image distortions and rotations which may require special processing algorithms
+to reduce such imprecisions.</p>
+<p>Time correlations face all of the above-mentioned issues surplus the challenge
+that specific experimental protocols have to be used to ensure the material state
+is observed at specific physical time. The example of quasi in-situ characterization
+of crystal growth phenomena, a common topic in engineering or modern catalysis research
+makes it necessary to consider that e.g. the target value for the desired annealing
+temperature is not just gauged based on macroscopic arguments but considers
+that transient effects take place. Heating or quenching a sample might thus might
+not have been executed under conditions in the interaction volume as they are
+documented and/or assumed.</p>
+<p>These issue cause that correlations have an error margin as to how accurately
+respective datasets were not only just synced based on the geometry of the
+region-of-interests and the time markers but also to asssure which physical
+conditions the specimen experienced over the course of the measurements.</p>
+<p>The fourth example of the em_om reference implementation explores the use of the
+correlation group with a serial-sectioning datasets that was collected by the
+classical Inconel 100 dataset collected by M. D. Uchic and colleagues
+(M. Groeber M, Haley BK, Uchic MD, Dimiduk DM, Ghosh S 3d reconstruction and
+characterization of polycrystalline microstructures using a fib-sem system data set.
+Mater Charac 2006, 57 259–273. 10.1016/j.matchar.2006.01.019M).</p>
+<p>This dataset was specifically relevant in driving forward the implementation
+of the DREAM.3D software. DREAM.3D is an open-source software project for
+post-processing and reconstructing, i.e. correlating sets of orientation
+microscopy data foremost spatially. One focus of the software is the
+(post-)processing of EBSD datasets. Another cutting edge tool with similar
+scope but a commercial solution by Bruker is QUBE which was developed by
+P. Konijnenberg and coworkers.</p>
+<p>Conceptually, software like DREAM.3D supports users with creating linear
+workflows of post-processing tasks. Workflows can be instructed via the
+graphical user interface or via so-called pipeline processing via command line
+calls. DREAM.3D is especially useful because its internal system documents all
+input, output, and parameter of the processing steps. This makes DREAM.3D a
+good candidate to interface with tools like em_om parser. Specifically, DREAM.3D
+documents numerical results via a customized HDF5 file format called DREAM3D.
+Workflow steps and settings are stored as nested dictionaries in JSON syntax
+inside a supplementary JSON file or alongside the data in the DREAM3D file.
+DREAM.3D has a few hundred algorithms implemented. These are called filters
+in DREAM.3D terminology.</p>
+<p>Users configure a workflow which instructs DREAM.3D to send the data through
+a chain of predefined and configured filters. Given that for each analysis
+the filter is documented via its version tags surplus its parameter and setting
+via a controlled vocabulary, interpreting the content of a DREAM3D HDF5 file
+is possible in an automated manner using a parser. This makes DREAM.3D analyses
+repeatable and self-descriptive. A key limitation though is that most frequently
+the initial set of input data come from commercial files like ANG.
+This missing link between the provenance of these input files, their associated
+creation as electron microscope session, is also what NXem_ebsd solves.</p>
+<p>Nevertheless, as this can be solved with e.g. NXem_ebsd we are convinced that
+the DREAM.3D and the em_om parser can work productively together to realize
+RDMS-agnostic parsing of serial-section analyses.</p>
+<p>The internal documentation of the DREAM.3D workflow also simplifies the
+provenance tracking represented by an instance of NXem_ebsd as not every
+intermediate results has to be stored. Therefore, the fourth example
+focuses on the key result obtained from DREAM.3D - the reconstructed
+and aligned three-dimensional orientation map.</p>
+<p>Usually, this result is the starting point for further post-processing
+and characterization of structural features. As here orientation microscopy
+is insofar scale invariant using DREAM.3D, NXem_ebsd, and em_om should
+be useful for different characterization methods, such as EBSD, Transmission
+Kikuchi Diffraction (TKD), Automated Crystal Orientation Mapping (ACOM),
+Nanobeam Electron Diffraction (using commercial systems like NanoMegas ASTAR)
+or open-source implementations of these techniques (such as via pyxem/orix).</p>
+<p>The result of orientation microscopy methods are maps of local orientation
+and thermodynamic phase (crystal structure) pieces of information. Virtually
+all post-processing of such results for structural features includes again
+a workflow of steps which are covered though by the NXmicrostructure partner application
+definition. The respective source of the data in an instance of NXmicrostructure can
+again be a link or reference to an instance of NXem_ebsd to complete the
+chain of provenance.</p>
+</details><p id="nxem-correlation-indexing-crystal-structure-group"><span class="bolditalic">CRYSTAL_STRUCTURE</span>: (optional) <a class="reference internal" href="NXcrystal_structure.html#nxcrystal-structure"><span class="std std-ref">NXcrystal_structure</span></a></p>
+<p id="nxem-correlation-indexing-roi-group"><strong>roi</strong>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="../base_classes/NXobject.html#nxobject-data-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-3"><span id="nxem-correlation-indexing-roi-descriptor-field"></span><strong>descriptor</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Descriptor representing the image contrast.</p>
+</div></blockquote>
+<p id="index-4"><span id="nxem-correlation-indexing-roi-title-field"></span><strong>title</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-title-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Title of the default plot.</p>
+</div></blockquote>
+<p id="index-5"><span id="nxem-correlation-indexing-roi-data-field"></span><strong>data</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 3, Dimensions: [n_z, n_y, n_x]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-data-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Descriptor values displaying the ROI.</p>
+<p id="index-6"><span id="nxem-correlation-indexing-roi-data-long-name-attribute"></span><strong>&#64;long_name</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdata.html#nxdata-data-long-name-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Descriptor values.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-7"><span id="nxem-correlation-indexing-roi-axis-z-field"></span><strong>axis_z</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n_z]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><p>Calibrated coordinate along the z-axis.</p>
+<p id="index-8"><span id="nxem-correlation-indexing-roi-axis-z-long-name-attribute"></span><strong>&#64;long_name</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Label for the z axis</p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-9"><span id="nxem-correlation-indexing-roi-axis-y-field"></span><strong>axis_y</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n_y]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><p>Calibrated coordinate along the y-axis.</p>
+<p id="index-10"><span id="nxem-correlation-indexing-roi-axis-y-long-name-attribute"></span><strong>&#64;long_name</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Label for the y axis</p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-11"><span id="nxem-correlation-indexing-roi-axis-x-field"></span><strong>axis_x</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n_x]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><p>Calibrated coordinate along the x-axis.</p>
+<p id="index-12"><span id="nxem-correlation-indexing-roi-axis-x-long-name-attribute"></span><strong>&#64;long_name</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Label for the x axis</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<section id="hypertext-anchors">
+<h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
+<p>List of hypertext anchors for all groups, fields,
+attributes, and links defined in this class.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nxem-correlation-indexing-group"><span class="std std-ref">/NXem_correlation/indexing-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-correlation-indexing-crystal-structure-group"><span class="std std-ref">/NXem_correlation/indexing/CRYSTAL_STRUCTURE-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-correlation-indexing-roi-group"><span class="std std-ref">/NXem_correlation/indexing/roi-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-correlation-indexing-roi-axis-x-field"><span class="std std-ref">/NXem_correlation/indexing/roi/axis_x-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-correlation-indexing-roi-axis-x-long-name-attribute"><span class="std std-ref">/NXem_correlation/indexing/roi/axis_x&#64;long_name-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-correlation-indexing-roi-axis-y-field"><span class="std std-ref">/NXem_correlation/indexing/roi/axis_y-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-correlation-indexing-roi-axis-y-long-name-attribute"><span class="std std-ref">/NXem_correlation/indexing/roi/axis_y&#64;long_name-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-correlation-indexing-roi-axis-z-field"><span class="std std-ref">/NXem_correlation/indexing/roi/axis_z-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-correlation-indexing-roi-axis-z-long-name-attribute"><span class="std std-ref">/NXem_correlation/indexing/roi/axis_z&#64;long_name-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-correlation-indexing-roi-data-field"><span class="std std-ref">/NXem_correlation/indexing/roi/data-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-correlation-indexing-roi-data-long-name-attribute"><span class="std std-ref">/NXem_correlation/indexing/roi/data&#64;long_name-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-correlation-indexing-roi-descriptor-field"><span class="std std-ref">/NXem_correlation/indexing/roi/descriptor-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-correlation-indexing-roi-title-field"><span class="std std-ref">/NXem_correlation/indexing/roi/title-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-correlation-process-group"><span class="std std-ref">/NXem_correlation/PROCESS-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxem-correlation-process-sequence-index-field"><span class="std std-ref">/NXem_correlation/PROCESS/sequence_index-field</span></a></p></li>
+</ul>
+<dl class="simple">
+<dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXem_correlation.nxdl.xml">https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXem_correlation.nxdl.xml</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Examples data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optical-spectroscopy-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spm-structure.html">8. Scanning Probe Microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../laboratory-structure.html">11. Sample preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">13. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">14. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.106. NXem_correlation</a><ul>
+<li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="NXem_calorimetry.html" title="previous chapter"><span class="section-number">2.3.3.3.105. </span>NXem_calorimetry</a></li>
+      <li>Next: <a href="NXem_ebsd.html" title="next chapter"><span class="section-number">2.3.3.3.107. </span>NXem_ebsd</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2025, The FAIRmat collaboration.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/NXem_correlation.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

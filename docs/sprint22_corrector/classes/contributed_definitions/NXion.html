@@ -1,0 +1,342 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.136. NXion &#8212; NeXus-FAIRmat v2022.07 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=329478a8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.137. NXisocontour" href="NXisocontour.html" />
+    <link rel="prev" title="2.3.3.3.135. NXinteraction_vol_em" href="NXinteraction_vol_em.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nxion">
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.136. </span>NXion<a class="headerlink" href="#nxion" title="Link to this heading">¶</a></h1>
+<p><strong>Status</strong>:</p>
+<blockquote>
+<div><p>base class, extends <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+</div></blockquote>
+<p><strong>Description</strong>:</p>
+<blockquote>
+<div><p>Base class for documenting the set of atoms of a (molecular) ion.</p>
+</div></blockquote>
+<p><strong>Symbols</strong>:</p>
+<blockquote>
+<div><p>The symbols used in the schema to specify e.g. dimensions of arrays.</p>
+<p><strong>n_ivec_max</strong>: Maximum number of atoms/isotopes allowed per (molecular) ion (fragment).</p>
+<p><strong>n_ranges</strong>: Number of mass-to-charge-state-ratio range intervals for ion type.</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>Groups cited</strong>:</dt><dd><p>none</p>
+</dd>
+</dl>
+<p><strong>Structure</strong>:</p>
+<blockquote>
+<div><p id="index-1"><span id="nxion-identifier-field"></span><strong>identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-a-unique-identifier-whereby-such-an-ion-can-be-referred-to">
+<summary>A unique identifier whereby such an ion can be referred to ...</summary><p>A unique identifier whereby such an ion can be referred to
+via the service offered as described in identifier_type.</p>
+</details></div></blockquote>
+<p id="index-2"><span id="nxion-identifier-type-field"></span><strong>identifier_type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-how-can-the-identifier-be-resolved">
+<summary>How can the identifier be resolved? ...</summary><p>How can the identifier be resolved?</p>
+<p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">inchi</span></code></p>
+</details></div></blockquote>
+<p id="index-3"><span id="nxion-ion-type-field"></span><strong>ion_type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-ion-type-ion-species-identifier">
+<summary>Ion type (ion species) identifier. ...</summary><p>Ion type (ion species) identifier.</p>
+<p>The identifier zero is reserved for the special unknown ion type.</p>
+</details></div></blockquote>
+<p id="index-4"><span id="nxion-nuclide-hash-field"></span><strong>nuclide_hash</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 1, Dimensions: [n_ivec_max]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-vector-of-nuclide-hash-values">
+<summary>Vector of nuclide hash values. ...</summary><p>Vector of nuclide hash values.</p>
+<p>Individual hash values <span class="math notranslate nohighlight">\(H\)</span> is <span class="math notranslate nohighlight">\(H = Z + N \cdot 256\)</span> with <span class="math notranslate nohighlight">\(Z\)</span>
+encode the number of protons <span class="math notranslate nohighlight">\(Z\)</span> and the number of neutrons <span class="math notranslate nohighlight">\(N\)</span>
+of each nuclide respectively. <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(N\)</span> have to be 8-bit unsigned integers.</p>
+<p>The array is sorted in decreasing order. For the rationale behind this see <a class="reference external" href="https://doi.org/10.1017/S1431927621012241">M. Kühbach et al. (2021)</a></p>
+</details></div></blockquote>
+<p id="index-5"><span id="nxion-nuclide-list-field"></span><strong>nuclide_list</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 2, Dimensions: [n_ivecmax, 2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-table-which-decodes-the-entries-in-nuclide-hash-into-a-human-readable-matrix-o">
+<summary>Table which decodes the entries in nuclide_hash into a human-readable matrix o ...</summary><p>Table which decodes the entries in nuclide_hash into a human-readable matrix of instances.
+The first column specifies the nuclide mass number, i.e. using the hashvalues
+from the isotope_vector this is <span class="math notranslate nohighlight">\(Z + N\)</span> or 0. The value 0 documents that no
+isotope-specific information about the element encoded is relevant.
+The second row specifies the number of protons <span class="math notranslate nohighlight">\(Z\)</span> or 0.
+The value 0 in this case documents a placeholder or that no element-specific
+information is relevant.
+Taking a carbon-14 nuclide as an example the mass number is 14.
+That is encoded as a value pair (14, 6) as one row of the table.</p>
+<p>Therefore, this notation is the typical superscribed nuclide mass number
+and subscripted number of protons element notation e.g. <span class="math notranslate nohighlight">\(^{14}C\)</span>.
+The array is stored matching the order of nuclide_hash.</p>
+</details></div></blockquote>
+<p id="index-6"><span id="nxion-volume-field"></span><strong>volume</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-volume"><span class="std std-ref">NX_VOLUME</span></a>}</p>
+<blockquote>
+<div><details class="summary-assumed-volume-of-the-ion">
+<summary>Assumed volume of the ion. ...</summary><p>Assumed volume of the ion.</p>
+<p>In atom probe microscopy this field can be used to store the reconstructed
+volume per ion (average) which is typically stored alongside ranging
+definitions.</p>
+</details></div></blockquote>
+<p id="index-7"><span id="nxion-charge-field"></span><strong>charge</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-charge"><span class="std std-ref">NX_CHARGE</span></a>}</p>
+<blockquote>
+<div><p>Charge of the ion.</p>
+</div></blockquote>
+<p id="index-8"><span id="nxion-charge-state-field"></span><strong>charge_state</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-signed-charge-state-of-the-ion-in-multiples-of-electron-charge">
+<summary>Signed charge state of the ion in multiples of electron charge. ...</summary><p>Signed charge state of the ion in multiples of electron charge.</p>
+<p>In the example of atom probe microscopy, only positive values will be measured
+as the ions are accelerated by a negatively signed bias electric field.
+In the case that the charge state is not explicitly recoverable, the value should
+be set to zero.</p>
+<p>In atom probe microscopy this is for example the case when using
+classical ranging definition files in formats like RNG, RRNG.
+These file formats do not document the charge state explicitly
+but the number of atoms of each element per molecular ion
+surplus the mass-to-charge-state-ratio interval.
+Details on ranging definition files can be found in the literature:
+<a class="reference external" href="https://doi.org/10.1002/sia.1719">M. K. Miller</a></p>
+</details></div></blockquote>
+<p id="index-9"><span id="nxion-name-field"></span><strong>name</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-human-readable-ion-type-name-e-g-al">
+<summary>Human-readable ion type name (e.g. Al +++) ...</summary><p>Human-readable ion type name (e.g. Al +++)
+The string should consists of UTF-8 characters, ideally using LaTeX
+notation to specify the isotopes, ions, and charge state.
+Examples are 12C + or Al +++.</p>
+<p>To ease automated parsing, isotope_vector should be the
+preferred machine-readable information used.</p>
+</details></div></blockquote>
+<p id="index-10"><span id="nxion-mass-to-charge-range-field"></span><strong>mass_to_charge_range</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [n_ranges, 2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-associated-lower-mqmin-and-upper-mqmax-bounds-of-the">
+<summary>Associated lower (mqmin) and upper (mqmax) bounds of the ...</summary><p>Associated lower (mqmin) and upper (mqmax) bounds of the
+mass-to-charge-state ratio interval(s) [mqmin, mqmax]
+(boundaries inclusive). This field is primarily of interest
+for documenting <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a> steps of indexing a
+ToF/mass-to-charge state histogram.</p>
+</details></div></blockquote>
+</div></blockquote>
+<section id="hypertext-anchors">
+<h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
+<p>List of hypertext anchors for all groups, fields,
+attributes, and links defined in this class.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nxion-charge-field"><span class="std std-ref">/NXion/charge-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxion-charge-state-field"><span class="std std-ref">/NXion/charge_state-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxion-identifier-field"><span class="std std-ref">/NXion/identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxion-identifier-type-field"><span class="std std-ref">/NXion/identifier_type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxion-ion-type-field"><span class="std std-ref">/NXion/ion_type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxion-mass-to-charge-range-field"><span class="std std-ref">/NXion/mass_to_charge_range-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxion-name-field"><span class="std std-ref">/NXion/name-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxion-nuclide-hash-field"><span class="std std-ref">/NXion/nuclide_hash-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxion-nuclide-list-field"><span class="std std-ref">/NXion/nuclide_list-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxion-volume-field"><span class="std std-ref">/NXion/volume-field</span></a></p></li>
+</ul>
+<dl class="simple">
+<dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXion.nxdl.xml">https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXion.nxdl.xml</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Examples data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ellipsometry-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sts-structure.html">8. Scanning Tunneling Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../laboratory-structure.html">11. Sample preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">13. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">14. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.136. NXion</a><ul>
+<li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="NXinteraction_vol_em.html" title="previous chapter"><span class="section-number">2.3.3.3.135. </span>NXinteraction_vol_em</a></li>
+      <li>Next: <a href="NXisocontour.html" title="next chapter"><span class="section-number">2.3.3.3.137. </span>NXisocontour</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2024, The FAIRmat collaboration.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/NXion.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

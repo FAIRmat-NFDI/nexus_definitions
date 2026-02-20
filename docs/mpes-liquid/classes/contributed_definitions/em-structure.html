@@ -1,0 +1,342 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.1. Electron microscopy &#8212; NeXus-FAIRmat v2024.02 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/details_summary_hide.css?v=30df4bca" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bolditalic.css?v=504f8cd9" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=04096e4a"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.2. Optical Spectroscopy" href="optical-spectroscopy-structure.html" />
+    <link rel="prev" title="2.3.3.3. Contributed Definitions" href="index.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="electron-microscopy">
+<span id="em-structure"></span><h1><span class="section-number">2.3.3.3.1. </span>Electron microscopy<a class="headerlink" href="#electron-microscopy" title="Link to this heading">¶</a></h1>
+<section id="introduction">
+<span id="introductionem"></span><span id="index-0"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>A set of data schemas is proposed to describe components of an electron microscope and its eventually available focused-ion beam functionalities.
+The data schemas were designed from the perspective of how electron microscopes are used by colleagues in the materials-science-branch of electron microscopy.
+We realize that the biology-/bio-materials/omics-branch of electron microscopy is eventually in an already more mature state of discussion with respect
+to data management practices. In what follows, the focus is on the usage of electron microscopy in condensed-matter physics, chemical physics of solids,
+and materials engineering applications. As many of the components of electron microscopes used in the bio-materials communities are the same or at least many
+components are very similar, it is likely that the here presented schema definitions can also inspire discussion and exchange with the bio-materials community.
+Partner consortia in the German National Research Data Infrastructure are here e.g. NFDI-BioImage, NFDI-Microbiota, NFDI4Health, and e.g. NFDI-Neuro.</p>
+<p>Electron microscopes are functionally very customizable tools: Examples include multi-signal/-modal analyses which are frequently realized as on-the-fly computational analyses, regularly switching between GUI-based instrument control, computational steps, and more and more using high-throughput stream-based processing. Also artificial intelligence methods are increasingly used and are becoming more closely interconnected with classical modes of controlling the instrument and perform data processing. A challenge in electron microscopy is that these steps are often executed within commercial integrated control and analysis software. This makes it difficult to keep track of workflows in a technology-partner-agnostic, i.e. interdisciplinary manner.</p>
+</section>
+<section id="application-definition-nxem">
+<span id="emappdef"></span><h2>Application Definition NXem<a class="headerlink" href="#application-definition-nxem" title="Link to this heading">¶</a></h2>
+<p>We acknowledge that it can be difficult to agree on a single application definition which is generally enough applicable yet not unnecessarily complex and useful for applications across a variety of instruments, technology partners, and instrument use cases. In what follows, the proposal conceptualizes first the basic components of an electron microscope and the usual workflow of how an electron microscope is used for collecting data with detectors via probing radiation-specimen-matter interaction mechanisms.</p>
+<p>In summary, scientists place a specimen/sample into the microscope, calibrate the instrument, take measurements, and may perform experiments, prepare their specimens with a focused ion beam, calibrate again, and take other measurements, before their session on the instrument ends. In between virtually all of these steps data are collected and stream in from different detectors probing different physical mechanisms of the interaction between electrons or other types of radiation with the specimen.</p>
+<p>A microscope session ends with the scientist removing the specimen from the instrument or parking it so that the next user can start a session. Occasionally, service technicians perform calibrations and maintenance which also can be described as a session on the microscope. We have provided base classes to describe these steps and events and an application definition for electron microscopy:</p>
+<blockquote>
+<div><dl class="simple">
+<dt><a class="reference internal" href="NXem.html#nxem"><span class="std std-ref">NXem</span></a>:</dt><dd><p>An application definition which explores the possibilities of research on electron-beam matter interaction with (real or simulated) electron microscopes.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="base-classes">
+<span id="embc"></span><h2>Base Classes<a class="headerlink" href="#base-classes" title="Link to this heading">¶</a></h2>
+<p>The following base classes are proposed to support modularizing the storage of pieces of information related to electron microscopy research:</p>
+<blockquote>
+<div><dl class="simple">
+<dt><a class="reference internal" href="../base_classes/NXcomponent.html#nxcomponent"><span class="std std-ref">NXcomponent</span></a>:</dt><dd><p>A base class to describe components aka devices to building an instrument like a microscope irrespective whether that is a real one or a simulated one.</p>
+</dd>
+<dt><a class="reference internal" href="../base_classes/NXfabrication.html#nxfabrication"><span class="std std-ref">NXfabrication</span></a>:</dt><dd><p>A base class to bundle manufacturer/technology-partner-specific details about a component or device of an instrument.</p>
+</dd>
+<dt><a class="reference internal" href="NXcircuit.html#nxcircuit"><span class="std std-ref">NXcircuit</span></a>:</dt><dd><p>A base class to describe a logical unit of at least one integrated circuit.</p>
+</dd>
+<dt><a class="reference internal" href="NXebeam_column.html#nxebeam-column"><span class="std std-ref">NXebeam_column</span></a>:</dt><dd><p>A base class serving the possibility to group the components relevant for generating
+and shaping the electron beam.</p>
+</dd>
+<dt><a class="reference internal" href="NXibeam_column.html#nxibeam-column"><span class="std std-ref">NXibeam_column</span></a>:</dt><dd><p>A base class serving the possibility to group the components relevant for generating
+and shaping an ion beam of an instrument to offer focused-ion beam (milling) capabilities.</p>
+</dd>
+<dt><a class="reference internal" href="../base_classes/NXlens_em.html#nxlens-em"><span class="std std-ref">NXlens_em</span></a>:</dt><dd><p>A base class to detail an electro-magnetic lens. In practice, an electron microscope has many such lenses. It is possible to specify as many lenses as necessary to represent eventually each single lens of the microscope and thus describe how the lenses are affecting the electron beam. This can offer opportunities for developers of software tools which strive to model the instrument e.g. to create digital twins of the instrument. We understand there is still a way to go with this to arrive there though. Consequently, we suggest to focus first on which details should be collected for a lens as a component so that developers of application definitions can take immediate advantage of this work.</p>
+</dd>
+<dt><a class="reference internal" href="NXdeflector.html#nxdeflector"><span class="std std-ref">NXdeflector</span></a>:</dt><dd><p>A base class to describe a component to deflect a beam of charged particles.</p>
+</dd>
+<dt><a class="reference internal" href="NXpump.html#nxpump"><span class="std std-ref">NXpump</span></a>:</dt><dd><p>A base class to describe details about pump(s) as components of an electron microscope.</p>
+</dd>
+<dt><a class="reference internal" href="NXcorrector_cs.html#nxcorrector-cs"><span class="std std-ref">NXcorrector_cs</span></a>, <a class="reference internal" href="NXaberration.html#nxaberration"><span class="std std-ref">NXaberration</span></a>:</dt><dd><p>Base classes to describe procedures and values for the calibration of aberrations based on
+conventions of different companies active in the field of aberration correction including a base class
+to describe details about corrective lens or compound lens devices which reduce
+(spherical) aberrations of an electron beam.</p>
+</dd>
+<dt><a class="reference internal" href="NXscanbox_em.html#nxscanbox-em"><span class="std std-ref">NXscanbox_em</span></a>:</dt><dd><p>A base class to represent the component of an electron microscope which realizes a controlled deflection
+(and eventually shift, blanking, and/or descanning) of the electron beam to illuminate the specimen in a controlled manner
+This base class can be used to document the scan pattern. The base class focuses mostly on the concept idea that there
+is a component in a microscope which controls eventually multiple other components such as beam deflectors to achieve deflection
+and thus a controlled scanning of the beam over the sample/specimen surface.</p>
+</dd>
+<dt><a class="reference internal" href="NXmanipulator.html#nxmanipulator"><span class="std std-ref">NXmanipulator</span></a>:</dt><dd><p>A base class to describe the stage/specimen holder which offers place for the documentation of the small-scale laboratory functionalities
+which modern stages of electron microscopes typically offer.</p>
+</dd>
+<dt><a class="reference internal" href="NXinstrument_em.html#nxinstrument-em"><span class="std std-ref">NXinstrument_em</span></a>:</dt><dd><p>A base class to group the components that make up an electron microscope.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Contextualizing and defining definitions of reference frames and transformations of these and rotations and orientations defined within such reference frames:</p>
+<blockquote>
+<div><dl class="simple">
+<dt><a class="reference internal" href="NXcoordinate_system_set.html#nxcoordinate-system-set"><span class="std std-ref">NXcoordinate_system_set</span></a>, <a class="reference internal" href="NXcoordinate_system.html#nxcoordinate-system"><span class="std std-ref">NXcoordinate_system</span></a>, <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations"><span class="std std-ref">NXtransformations</span></a>:</dt><dd><p>Base classes to describe different coordinate systems used and/or to be harmonized
+or transformed into one another and respective transformations.</p>
+</dd>
+<dt><a class="reference internal" href="NXevent_data_em.html#nxevent-data-em"><span class="std std-ref">NXevent_data_em</span></a>:</dt><dd><p>A base class representing a container to hold time-stamped and microscope-state-annotated
+data during a session at an electron microscope.</p>
+</dd>
+<dt><a class="reference internal" href="NXimage.html#nximage"><span class="std std-ref">NXimage</span></a>:</dt><dd><p>Base classes for storing acquisition details for individual images or stacks of images.</p>
+</dd>
+<dt><a class="reference internal" href="NXspectrum.html#nxspectrum"><span class="std std-ref">NXspectrum</span></a>:</dt><dd><p>A base class and specializations comparable to <a class="reference internal" href="NXimage.html#nximage"><span class="std std-ref">NXimage</span></a> but for storing spectra.</p>
+</dd>
+<dt><a class="reference internal" href="NXion.html#nxion"><span class="std std-ref">NXion</span></a> (about to become replaced by <a class="reference internal" href="NXatom.html#nxatom"><span class="std std-ref">NXatom</span></a>):</dt><dd><p>A base class to describe molecular ions with an adjustable number of atoms/isotopes building each ion. Right now the maximum number of atoms supported building a molecular ion is 32. Suggestions made in reference <a class="reference external" href="https://doi.org/10.1017/S1431927621012241">DOI: 10.1017/S1431927621012241</a> are used to map isotope to hash values with which all possible isotopes can be described.</p>
+</dd>
+<dt><a class="reference internal" href="NXoptical_system_em.html#nxoptical-system-em"><span class="std std-ref">NXoptical_system_em</span></a>:</dt><dd><p>A base class to store for now qualitative and quantitative values of frequent interest
+which are affected by the interplay of the components and state of an electron microscope.
+Examples are the semiconvergence angle or the depth of field and depth of focus, the magnification, or the camera length.</p>
+</dd>
+<dt><a class="reference internal" href="NXpeak.html#nxpeak"><span class="std std-ref">NXpeak</span></a>:</dt><dd><p>A base class to describe peaks mathematically.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="storage-of-event-base-data-and-results-of-post-processing">
+<span id="emanalysisclasses"></span><h2>Storage of event-base data and results of post-processing<a class="headerlink" href="#storage-of-event-base-data-and-results-of-post-processing" title="Link to this heading">¶</a></h2>
+<p>We provide specific base classes which granularize frequently collected or analyzed quantities in specific application fields of electron microscopy to deal
+with the situation that there are cases were logical connections between generated data artifacts mainly exist for the fact that the data artifacts were
+collected during a workflow of electron microscopy research (e.g. taking measurements and then performing method-specific analyses generating new data and conclusions).
+We see a value in granularizing out these pieces of information into own classes. In fact, one limitation of application definitions in NeXus, exactly as it applies for serialization
+of information also more generally, is currently that they define a set of constraints on their graph of controlled concepts and terms.</p>
+<p>If we take for example diffraction experiments performed with an electron microscope, it is usually the case that (diffraction) patterns are collected in the session at the microscope.
+However, all scientifically relevant conclusions are typically drawn later, i.e. through post-processing the collected diffraction (raw) data. These numerical and algorithmic steps
+define computational workflows were data from an instance of an application definition such as NXem are used as input but many additional concepts, constraints, and assumptions
+are applied without that these demand necessarily changes in the constraints on fields or groups of NXem. If we were to modify NXem for these cases,
+NXem would combinatorially diverge as every different combination of required constraints demands having an own but almost similar application definition.
+For this reason, method-specific base classes are used which granularize out how specific pieces of information are processed further to eventually enable their
+storage (i.e. serialization) using NeXus.</p>
+<p>More consolidation through the use of NXsubentry classes should be considered in the future. For now we use an approach whereby base classes are combined to reuse vocabulary and a hierarchical organization of pieces of information with specific constraints which are relevant only for specific usage of such data by specific tools used by an eventually smaller circle of users.</p>
+<blockquote>
+<div><dl class="simple">
+<dt><a class="reference internal" href="NXem_ebsd.html#nxem-ebsd"><span class="std std-ref">NXem_ebsd</span></a>, <a class="reference internal" href="NXem_eds.html#nxem-eds"><span class="std std-ref">NXem_eds</span></a>, <a class="reference internal" href="NXem_eels.html#nxem-eels"><span class="std std-ref">NXem_eels</span></a>, <a class="reference internal" href="NXem_img.html#nxem-img"><span class="std std-ref">NXem_img</span></a>:</dt><dd><p>Base classes with method-specific details especially when it comes to reporting post-processed data within electron microscopy.</p>
+</dd>
+<dt><a class="reference internal" href="NXphase.html#nxphase"><span class="std std-ref">NXphase</span></a>, <a class="reference internal" href="NXunit_cell.html#nxunit-cell"><span class="std std-ref">NXunit_cell</span></a>, <a class="reference internal" href="NXatom.html#nxatom"><span class="std std-ref">NXatom</span></a>:</dt><dd><p>Base classes to store crystal structure specific details e.g. to support simulation of and post-processing of diffraction patterns.</p>
+</dd>
+<dt><a class="reference internal" href="NXcg_roi.html#nxcg-roi"><span class="std std-ref">NXcg_roi</span></a>:</dt><dd><p>A base class to granularize information collected and relevant for the characterization of a region-of-interest.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="domain-specific-data-analysis">
+<span id="emexamples"></span><h2>Domain-specific data analysis<a class="headerlink" href="#domain-specific-data-analysis" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt><a class="reference internal" href="NXem_calorimetry.html#nxem-calorimetry"><span class="std std-ref">NXem_calorimetry</span></a>:</dt><dd><p>Example together with the IKZ in Berlin and FAIRmat, in-situ (transmission) electron microscopy with a heating stage.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Example data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optical-spectroscopy-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spm-structure.html">8. Scanning Probe Microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../laboratory-structure.html">11. Sample preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">13. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">14. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.1. Electron microscopy</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#application-definition-nxem">Application Definition NXem</a></li>
+<li><a class="reference internal" href="#base-classes">Base Classes</a></li>
+<li><a class="reference internal" href="#storage-of-event-base-data-and-results-of-post-processing">Storage of event-base data and results of post-processing</a></li>
+<li><a class="reference internal" href="#domain-specific-data-analysis">Domain-specific data analysis</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a></li>
+      <li>Next: <a href="optical-spectroscopy-structure.html" title="next chapter"><span class="section-number">2.3.3.3.2. </span>Optical Spectroscopy</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2025, The FAIRmat collaboration.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/em-structure.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

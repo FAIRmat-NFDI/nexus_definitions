@@ -1,0 +1,371 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.4. Atom Probe Microscopy &#8212; NeXus-FAIRmat v2024.02 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/details_summary_hide.css?v=30df4bca" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bolditalic.css?v=504f8cd9" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=04096e4a"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.5. Optical Spectroscopy" href="optical-spectroscopy-structure.html" />
+    <link rel="prev" title="2.3.3.3.3. Computational and Constructive Solid Geometry" href="cg-structure.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="atom-probe-microscopy">
+<span id="cc-apm-structure"></span><h1><span class="section-number">2.3.3.3.4. </span>Atom Probe Microscopy<a class="headerlink" href="#atom-probe-microscopy" title="Link to this heading">¶</a></h1>
+<section id="introduction">
+<span id="cc-apm-introduction"></span><span id="index-0"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>For the use case atom probe tomography the community contributed not only the <a class="reference internal" href="../applications/NXapm.html#nxapm"><span class="std std-ref">NXapm</span></a> application definition.
+It was also explored how using several instances of <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a> is useful for documenting the many data
+processing steps that are typical in atom probe research to investigate structural features of the material
+demanding reconstructions, i.e., models of the crystal and defect network by analyzing the collective position
+data of atoms. The following definitions are a summary of the status quo how NeXus can be used for documenting
+these processing steps to improve numerical reproducibility and assist researchers with documenting procedural
+aspects of their data analysis workflows.</p>
+</section>
+<section id="base-classes">
+<span id="cc-apm-definitions"></span><h2>Base Classes<a class="headerlink" href="#base-classes" title="Link to this heading">¶</a></h2>
+<p>The processing steps of ranging and reconstructing are documented as two specializations of <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a>:</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../base_classes/NXapm_ranging.html#nxapm-ranging"><span class="std std-ref">NXapm_ranging</span></a></dt><dd><p>Metadata to ranging definitions made for a dataset in atom probe microscopy.</p>
+</dd>
+<dt><a class="reference internal" href="../base_classes/NXapm_reconstruction.html#nxapm-reconstruction"><span class="std std-ref">NXapm_reconstruction</span></a></dt><dd><p>Metadata of a dataset (tomographic reconstruction) in atom probe microscopy.</p>
+</dd>
+</dl>
+<p>Spatial or other type of filters which are frequently used for atom probe to select specific atom positions
+or portions of the data based on isotopic identity are modeled as base classes for filters, which are
+defined atom-probe-agnostic empowering reuse:</p>
+<dl class="simple">
+<dt><a class="reference internal" href="NXdelocalization.html#nxdelocalization"><span class="std std-ref">NXdelocalization</span></a></dt><dd><p>Base class to describe the delocalization of point-like objects on a grid.</p>
+</dd>
+<dt><a class="reference internal" href="NXisocontour.html#nxisocontour"><span class="std std-ref">NXisocontour</span></a></dt><dd><p>Computational geometry description of isocontouring/phase-fields in Euclidean space.</p>
+</dd>
+<dt><a class="reference internal" href="NXmatch_filter.html#nxmatch-filter"><span class="std std-ref">NXmatch_filter</span></a></dt><dd><p>Base class to filter ions based on their type or on other properties like hit multiplicity.</p>
+</dd>
+<dt><a class="reference internal" href="NXspatial_filter.html#nxspatial-filter"><span class="std std-ref">NXspatial_filter</span></a></dt><dd><p>Base class to filter based on position. This base class takes advantage of <a class="reference internal" href="../base_classes/NXcg_ellipsoid.html#nxcg-ellipsoid"><span class="std std-ref">NXcg_ellipsoid</span></a>,</p>
+</dd>
+<dt><a class="reference internal" href="../base_classes/NXcg_cylinder.html#nxcg-cylinder"><span class="std std-ref">NXcg_cylinder</span></a>, <a class="reference internal" href="../base_classes/NXcg_hexahedron.html#nxcg-hexahedron"><span class="std std-ref">NXcg_hexahedron</span></a></dt><dd><p>Base classes to describe commonly used geometric primitives (not only) in atom probe.
+The primitives are used for defining the shape and extent of a region of interest
+(ROI) <a class="reference internal" href="../base_classes/NXroi_process.html#nxroi-process"><span class="std std-ref">NXroi_process</span></a> of material.</p>
+</dd>
+<dt><a class="reference internal" href="NXsubsampling_filter.html#nxsubsampling-filter"><span class="std std-ref">NXsubsampling_filter</span></a></dt><dd><p>Base class for a filter that can also be used for specifying how entries
+like ions can be filtered via sub-sampling.</p>
+</dd>
+</dl>
+</section>
+<section id="tools-and-applications-in-apm">
+<span id="cc-apm-paraprobe-introduction"></span><h2>Tools and applications in APM<a class="headerlink" href="#tools-and-applications-in-apm" title="Link to this heading">¶</a></h2>
+<p>Several research software tools exist in the APM community to analyze APM data.
+One of these is the <a class="reference external" href="https://paraprobe-toolbox.readthedocs.io/">paraprobe-toolbox</a>
+The software is developed by <a class="reference external" href="https://arxiv.org/abs/2205.13510">M. Kühbach et al.</a>.</p>
+<p>The paraprobe-toolbox is an example of an open-source parallelized software for analyzing
+point cloud data, for assessing meshes in 3D continuum space, and for studying the effects of
+parameterization on descriptors of micro- and nanoscale structural features (crystal defects).</p>
+<p>There is a set of contributed application definitions which describe each computational step
+performed by tools of the paraprobe-toolbox. This is a blueprint of how NeXus can be used
+for documentation also computational steps of other software tools (including commercial ones).</p>
+<p>The need for a thorough documentation of the tools was motivated by several needs:</p>
+<p>First, users of software would like to better understand and also be able to study for themselves
+which individual parameters and settings for each tool exist and how configuring these
+affect analyses quantitatively. This stresses the aspect how to improve documentation.</p>
+<p>Second, scientific software like paraprobe-toolbox implements workflows with numerics
+and algorithms that process data from multiple input sources (like previous analysis results),
+and carry these data through multiple steps inside the tool. The tool then creates output as files.
+This provenance and workflow should be documented for reproducibility (the “R” of the FAIR principles
+of data stewardship).</p>
+<p>Individual tools of the paraprobe-toolbox are developed in C/C++ or Python. Each of these tools
+instructs a workflow that takes three steps each:
+1. The creation of a configuration file.
+2. The actual analysis using a given Python/or C/C++ tool from the toolbox with results summarized in a results file.
+3. The optional analyses/visualization of the results based on data in NeXus/HDF5 files generated by each tool.</p>
+<p>Data and metadata between the tools are exchanged via NeXus/HDF5 files. This means that data
+inside HDF5 binary containers are named, formatted, and hierarchically structured according
+to NeXus application definitions. These definitions are specific for each tool:</p>
+<p>For example the application definition <a class="reference internal" href="NXapm_paraprobe_surfacer_config.html#nxapm-paraprobe-surfacer-config"><span class="std std-ref">NXapm_paraprobe_surfacer_config</span></a>: specifies
+the expected data formatting of a configuration file for the paraprobe-surfacer tool.
+The application definition defines which parameters are expected, which of these
+are optional, and if specific cardinality constraints exist. Each config file defines
+a controlled vocabulary of terms. The config files store SHA256 checksum for each input file,
+thereby implementing an uninterrupted provenance tracking chain that encodes
+the computational workflow.</p>
+<p>As an example, a user may first range their reconstruction and then compute spatial
+correlation functions. The config file for the ranging tool stores the files
+which hold the reconstructed ion position and ranging definitions.
+The ranging tool generates a results file with the labels of each molecular ion.
+This results file is formatted according to the tool-specific <cite>results</cite>
+application definition. The generated results file and the reconstruction is
+imported by the spatial statistics tool which again keeps track of all files
+and reports its results in a spatial statistics tool results file.</p>
+<p>This design makes it possible to rigorously trace which numerical results were achieved
+with specific inputs and settings using specifically-versioned tools including
+Y-junction on the workflow graph where multiple input sources are combined.</p>
+<p>Concepts that are used in multiple tools are inherited from the following
+tool-agnostic application definitions:</p>
+<dl class="simple">
+<dt><a class="reference internal" href="NXapm_paraprobe_tool_config.html#nxapm-paraprobe-tool-config"><span class="std std-ref">NXapm_paraprobe_tool_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_tool_results.html#nxapm-paraprobe-tool-results"><span class="std std-ref">NXapm_paraprobe_tool_results</span></a>:</dt><dd><p>Configuration and results respectively.</p>
+</dd>
+</dl>
+<p>Internally, these inherit from several other tool-agnostic base classes
+adding atom-probe-research-specific concepts:</p>
+<blockquote>
+<div><dl class="simple">
+<dt><a class="reference internal" href="NXapm_paraprobe_tool_parameters.html#nxapm-paraprobe-tool-parameters"><span class="std std-ref">NXapm_paraprobe_tool_parameters</span></a>, <a class="reference internal" href="NXapm_paraprobe_tool_process.html#nxapm-paraprobe-tool-process"><span class="std std-ref">NXapm_paraprobe_tool_process</span></a>, <a class="reference internal" href="NXapm_paraprobe_tool_common.html#nxapm-paraprobe-tool-common"><span class="std std-ref">NXapm_paraprobe_tool_common</span></a>:</dt><dd><p>Parameters, processing specific data, and common parts respectively useful for the application definitions of the tools of the paraprobe-toolbox.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="application-definitions">
+<span id="cc-apm-paraprobe-application-definitions"></span><h2>Application Definitions<a class="headerlink" href="#application-definitions" title="Link to this heading">¶</a></h2>
+<p>In summary, these are the proposed pairs for all tools in the paraprobe-toolbox:</p>
+<dl class="simple">
+<dt><a class="reference internal" href="NXapm_paraprobe_ranger_config.html#nxapm-paraprobe-ranger-config"><span class="std std-ref">NXapm_paraprobe_ranger_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_ranger_results.html#nxapm-paraprobe-ranger-results"><span class="std std-ref">NXapm_paraprobe_ranger_results</span></a></dt><dd><p>Configuration and results respectively of the paraprobe-ranger tool.
+Apply ranging definitions and explore possible molecular ions.
+Store applied ranging definitions and combinatorial analyses of possible iontypes.</p>
+</dd>
+<dt><a class="reference internal" href="NXapm_paraprobe_surfacer_config.html#nxapm-paraprobe-surfacer-config"><span class="std std-ref">NXapm_paraprobe_surfacer_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_surfacer_results.html#nxapm-paraprobe-surfacer-results"><span class="std std-ref">NXapm_paraprobe_surfacer_results</span></a></dt><dd><p>Configuration and results respectively of the paraprobe-surfacer tool.
+Create a model for the edge of a point cloud via convex hulls, alpha shapes,
+or alpha-wrappings. Store triangulated surface meshes of models
+for the edge of a dataset.</p>
+</dd>
+<dt><a class="reference internal" href="NXapm_paraprobe_distancer_config.html#nxapm-paraprobe-distancer-config"><span class="std std-ref">NXapm_paraprobe_distancer_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_distancer_results.html#nxapm-paraprobe-distancer-results"><span class="std std-ref">NXapm_paraprobe_distancer_results</span></a></dt><dd><p>Configuration and results respectively of the paraprobe-distancer tool.
+Compute and store analytical distances between ions to a set of triangles.</p>
+</dd>
+<dt><a class="reference internal" href="NXapm_paraprobe_tessellator_config.html#nxapm-paraprobe-tessellator-config"><span class="std std-ref">NXapm_paraprobe_tessellator_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_tessellator_results.html#nxapm-paraprobe-tessellator-results"><span class="std std-ref">NXapm_paraprobe_tessellator_results</span></a></dt><dd><p>Configuration and results respectively of the paraprobe-tessellator tool.
+Compute and store Voronoi cells and properties of these for all ions in a dataset.</p>
+</dd>
+<dt><a class="reference internal" href="NXapm_paraprobe_selector_config.html#nxapm-paraprobe-selector-config"><span class="std std-ref">NXapm_paraprobe_selector_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_selector_results.html#nxapm-paraprobe-selector-results"><span class="std std-ref">NXapm_paraprobe_selector_results</span></a></dt><dd><p>Configuration and results respectively of the paraprobe-selector tool.
+Defining complex spatial regions-of-interest to filter reconstructed datasets.
+Store which points are inside or on the boundary of complex spatial regions-of-interest.</p>
+</dd>
+<dt><a class="reference internal" href="NXapm_paraprobe_spatstat_config.html#nxapm-paraprobe-spatstat-config"><span class="std std-ref">NXapm_paraprobe_spatstat_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_spatstat_results.html#nxapm-paraprobe-spatstat-results"><span class="std std-ref">NXapm_paraprobe_spatstat_results</span></a></dt><dd><p>Configuration and results respectively of the paraprobe-spatstat tool.
+Compute spatial statistics on the entire or selected regions of the reconstructed dataset.</p>
+</dd>
+<dt><a class="reference internal" href="NXapm_paraprobe_nanochem_config.html#nxapm-paraprobe-nanochem-config"><span class="std std-ref">NXapm_paraprobe_nanochem_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_nanochem_results.html#nxapm-paraprobe-nanochem-results"><span class="std std-ref">NXapm_paraprobe_nanochem_results</span></a></dt><dd><p>Configuration and results respectively of the paraprobe-nanochem tool.
+Compute delocalization, iso-surfaces, analyze 3D objects, composition profiles,
+and mesh interfaces.</p>
+</dd>
+<dt><a class="reference internal" href="NXapm_paraprobe_clusterer_config.html#nxapm-paraprobe-clusterer-config"><span class="std std-ref">NXapm_paraprobe_clusterer_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_clusterer_results.html#nxapm-paraprobe-clusterer-results"><span class="std std-ref">NXapm_paraprobe_clusterer_results</span></a></dt><dd><p>Configuration and results respectively of the paraprobe-clusterer tool.
+Compute cluster analyses with established machine learning algorithms using CPU or GPUs.</p>
+</dd>
+<dt><a class="reference internal" href="NXapm_paraprobe_intersector_config.html#nxapm-paraprobe-intersector-config"><span class="std std-ref">NXapm_paraprobe_intersector_config</span></a>, <a class="reference internal" href="NXapm_paraprobe_intersector_results.html#nxapm-paraprobe-intersector-results"><span class="std std-ref">NXapm_paraprobe_intersector_results</span></a></dt><dd><p>Configuration and results resepctively of the paraprobe-intersector tool.
+Analyze volumetric intersections and proximity of 3D objects discretized as
+triangulated surface meshes in continuum space to study the effect the
+parameterization of surface extraction algorithms on the resulting shape,
+spatial arrangement, and colocation of 3D objects via graph-based techniques.</p>
+</dd>
+</dl>
+</section>
+<section id="joint-work-german-nfdi-consortia-nfdi-matwerk-and-fairmat">
+<span id="cc-apm-paraprobe-german-nfdi"></span><h2>Joint work German NFDI consortia NFDI-MatWerk and FAIRmat<a class="headerlink" href="#joint-work-german-nfdi-consortia-nfdi-matwerk-and-fairmat" title="Link to this heading">¶</a></h2>
+<p>Members of the FAIRmat and the NFDI-MatWerk consortia of the German National Research Data Infrastructure
+are working together within the Infrastructure Use Case IUC09 of the NFDI-MatWerk project to work on examples
+how software tools in both consortia become better documented and interoperable to use. Within this project,
+we added the <a class="reference external" href="https://github.com/eisenforschung/CompositionSpace">CompositionSpace tool</a> by A. Saxena et al. that has been developed at the
+Max Planck Institute for Sustainable Materials in Düsseldorf using the above-mentioned approach of pairs of application definitions:</p>
+<dl class="simple">
+<dt><a class="reference internal" href="NXapm_compositionspace_config.html#nxapm-compositionspace-config"><span class="std std-ref">NXapm_compositionspace_config</span></a>, <a class="reference internal" href="NXapm_compositionspace_results.html#nxapm-compositionspace-results"><span class="std std-ref">NXapm_compositionspace_results</span></a></dt><dd><p>Results of a run with Alaukik Saxena’s composition space tool.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Example data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optical-spectroscopy-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spm-structure.html">8. Scanning Probe Microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">11. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">12. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.4. Atom Probe Microscopy</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#base-classes">Base Classes</a></li>
+<li><a class="reference internal" href="#tools-and-applications-in-apm">Tools and applications in APM</a></li>
+<li><a class="reference internal" href="#application-definitions">Application Definitions</a></li>
+<li><a class="reference internal" href="#joint-work-german-nfdi-consortia-nfdi-matwerk-and-fairmat">Joint work German NFDI consortia NFDI-MatWerk and FAIRmat</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="cg-structure.html" title="previous chapter"><span class="section-number">2.3.3.3.3. </span>Computational and Constructive Solid Geometry</a></li>
+      <li>Next: <a href="optical-spectroscopy-structure.html" title="next chapter"><span class="section-number">2.3.3.3.5. </span>Optical Spectroscopy</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2025, The FAIRmat consortium, a member of the German National Research Data Infrastructure (NFDI).
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/apm-structure.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,282 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.7. Geometry &amp; Microstructure &#8212; NeXus-FAIRmat v2024.02 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/details_summary_hide.css?v=30df4bca" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bolditalic.css?v=504f8cd9" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=04096e4a"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.8. Integrated Computational Materials Engineering" href="icme-structure.html" />
+    <link rel="prev" title="2.3.3.3.6. Scanning Probe Microscopy" href="spm-structure.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="geometry-microstructure">
+<span id="cgmsfeatures-structure"></span><h1><span class="section-number">2.3.3.3.7. </span>Geometry &amp; Microstructure<a class="headerlink" href="#geometry-microstructure" title="Link to this heading">¶</a></h1>
+<section id="base-classes">
+<span id="cgmsbc"></span><span id="index-0"></span><h2>Base Classes<a class="headerlink" href="#base-classes" title="Link to this heading">¶</a></h2>
+<p>The following base classes are defined to incentivize the use of NeXus for
+using computational-geometry-based descriptions. In what follows, base classes
+for frequently used shapes and geometric primitives are proposed:</p>
+<blockquote>
+<div><dl class="simple">
+<dt><a class="reference internal" href="NXcg_primitive.html#nxcg-primitive"><span class="std std-ref">NXcg_primitive</span></a>:</dt><dd><p>Base class from which most other NXcg classes that define specific primitives inherit.</p>
+</dd>
+<dt><a class="reference internal" href="NXcg_ellipsoid.html#nxcg-ellipsoid"><span class="std std-ref">NXcg_ellipsoid</span></a>:</dt><dd><p>A description for a set of possibly dissimilar oriented ellipsoids.</p>
+</dd>
+<dt><a class="reference internal" href="NXcg_cylinder.html#nxcg-cylinder"><span class="std std-ref">NXcg_cylinder</span></a>:</dt><dd><p>A description for a set of possibly dissimilar oriented cylinders.</p>
+</dd>
+<dt><a class="reference internal" href="NXcg_point.html#nxcg-point"><span class="std std-ref">NXcg_point</span></a>:</dt><dd><p>A collection of points with labels.</p>
+</dd>
+<dt><a class="reference internal" href="NXcg_polyline.html#nxcg-polyline"><span class="std std-ref">NXcg_polyline</span></a>:</dt><dd><p>A collection of lines and linear segments.</p>
+</dd>
+<dt><a class="reference internal" href="NXcg_triangle.html#nxcg-triangle"><span class="std std-ref">NXcg_triangle</span></a>:</dt><dd><p>A collection of triangles.</p>
+</dd>
+<dt><a class="reference internal" href="NXcg_parallelogram.html#nxcg-parallelogram"><span class="std std-ref">NXcg_parallelogram</span></a>:</dt><dd><p>A collection of possibly dissimilar parallelograms.</p>
+</dd>
+<dt><a class="reference internal" href="NXcg_polygon.html#nxcg-polygon"><span class="std std-ref">NXcg_polygon</span></a>:</dt><dd><p>A collection of polygons.</p>
+</dd>
+<dt><a class="reference internal" href="NXcg_tetrahedron.html#nxcg-tetrahedron"><span class="std std-ref">NXcg_tetrahedron</span></a>:</dt><dd><p>A collection of tetrahedra.</p>
+</dd>
+<dt><a class="reference internal" href="NXcg_hexahedron.html#nxcg-hexahedron"><span class="std std-ref">NXcg_hexahedron</span></a>:</dt><dd><p>A collection of hexahedra with capabilities to represent
+also simpler (bounding) boxes for e.g. binary trees.</p>
+</dd>
+<dt><a class="reference internal" href="NXcg_polyhedron.html#nxcg-polyhedron"><span class="std std-ref">NXcg_polyhedron</span></a>:</dt><dd><p>A collection of polyhedra.</p>
+</dd>
+<dt><a class="reference internal" href="NXcg_roi.html#nxcg-roi"><span class="std std-ref">NXcg_roi</span></a>:</dt><dd><p>A container to host a number of different types of primitives.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>These base classes describe data structures used for more complex geometries:</p>
+<blockquote>
+<div><dl class="simple">
+<dt><a class="reference internal" href="NXcg_face_list_data_structure.html#nxcg-face-list-data-structure"><span class="std std-ref">NXcg_face_list_data_structure</span></a>:</dt><dd><p>In essence, the usual way how polygon/polyhedra data are reported:
+A list of vertices and faces with identifier and properties.</p>
+</dd>
+<dt><a class="reference internal" href="NXcg_half_edge_data_structure.html#nxcg-half-edge-data-structure"><span class="std std-ref">NXcg_half_edge_data_structure</span></a>:</dt><dd><p>A half-edge data structure (also known as a doubly connected edge list)
+is a useful complementary descriptor for polygon/polyhedra which enables
+topological analyses and traversal of the graph of how polygons and
+polyhedra are connected.</p>
+</dd>
+<dt><a class="reference internal" href="NXcg_unit_normal.html#nxcg-unit-normal"><span class="std std-ref">NXcg_unit_normal</span></a>:</dt><dd><p>As an additional structuring element especially for meshes, well-documented
+normal information is crucial for distance computations.</p>
+</dd>
+<dt><a class="reference internal" href="NXcg_alpha_complex.html#nxcg-alpha-complex"><span class="std std-ref">NXcg_alpha_complex</span></a>:</dt><dd><p>Alpha shapes and alpha wrappings, specifically the special case of the
+convex hull, are frequently used geometrical models for describing
+a boundary or edge to a set of geometric primitives.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Next, a few base classes are defined for documenting discretized representations
+of material (area or volume) which can be useful not only for stencil-based methods:</p>
+<blockquote>
+<div><dl class="simple">
+<dt><a class="reference internal" href="NXcg_grid.html#nxcg-grid"><span class="std std-ref">NXcg_grid</span></a>:</dt><dd><p>A grid of cells.</p>
+</dd>
+<dt><a class="reference internal" href="NXisocontour.html#nxisocontour"><span class="std std-ref">NXisocontour</span></a>:</dt><dd><p>A description for isocontour descriptions.</p>
+</dd>
+<dt><a class="reference internal" href="NXdelocalization.html#nxdelocalization"><span class="std std-ref">NXdelocalization</span></a>:</dt><dd><p>An approach to document procedures whereby a scalar field
+is smoothed in a controlled manner.</p>
+</dd>
+<dt><a class="reference internal" href="NXsimilarity_grouping.html#nxsimilarity-grouping"><span class="std std-ref">NXsimilarity_grouping</span></a>:</dt><dd><p>A description for clustering of objects (such as atoms or features).</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>TODO CHECK THAT MICROSTRUCTURE PART IS COVERED IN ICME WHEN MICROSTRUCTURE PROPOSAL SYNCED UP</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Example data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optical-spectroscopy-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spm-structure.html">8. Scanning Probe Microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../laboratory-structure.html">11. Sample preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">13. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">14. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.7. Geometry &amp; Microstructure</a><ul>
+<li><a class="reference internal" href="#base-classes">Base Classes</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="spm-structure.html" title="previous chapter"><span class="section-number">2.3.3.3.6. </span>Scanning Probe Microscopy</a></li>
+      <li>Next: <a href="icme-structure.html" title="next chapter"><span class="section-number">2.3.3.3.8. </span>Integrated Computational Materials Engineering</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2025, The FAIRmat collaboration.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/cgms-structure.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
