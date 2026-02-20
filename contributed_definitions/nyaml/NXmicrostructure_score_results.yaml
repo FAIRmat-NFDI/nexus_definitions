@@ -41,7 +41,6 @@ NXmicrostructure_score_results(NXobject):
     definition(NX_CHAR):
       enumeration: [NXmicrostructure_score_results]
     identifier_simulation(NX_UINT):
-      exists: recommended
       doc: |
         Simulation ID as an alias to refer to this simulation.
     config(NXnote):
@@ -51,8 +50,6 @@ NXmicrostructure_score_results(NXobject):
       file_name(NX_CHAR):
       algorithm(NX_CHAR):
       checksum(NX_CHAR):
-    
-    # numerics(NXparameters):
     description(NX_CHAR):
       exists: optional
       doc: |
@@ -107,7 +104,7 @@ NXmicrostructure_score_results(NXobject):
       y_direction:
         enumeration: [in]
       z_alias:
-        enumeration: [normal_direction]
+        enumeration: [normal direction]
       z_direction:
         enumeration: [north]
     discretization(NXmicrostructure):
@@ -119,7 +116,7 @@ NXmicrostructure_score_results(NXobject):
         symmetry(NX_CHAR):
         cell_dimensions(NX_NUMBER):
         extent(NX_UINT):
-        index_offset_cell(NX_INT):
+        index_offset(NX_INT):
       boundary(NXcg_hexahedron):
         doc: |
           A tight bounding box or sphere or bounding primitive about the grid.
@@ -147,7 +144,6 @@ NXmicrostructure_score_results(NXobject):
             rank: 1
             dim: (6,)
         boundaries:
-          exists: optional
           doc: |
             Name of the boundaries. Left, right, front, back, bottom, top,
             The field must have as many entries as there are number_of_boundaries.
@@ -338,9 +334,6 @@ NXmicrostructure_score_results(NXobject):
             unit: NX_VOLUME
             doc: |
               Volume of each grain (partially transformed cells are accounted for).
-              
-              Values are reported in multiples of cells, needs multiplication with
-              cell volume!
             dimensions:
               rank: 1
               dim: (n_grains,)
@@ -446,22 +439,15 @@ NXmicrostructure_score_results(NXobject):
             dimensions:
               rank: 1
               dim: (n_front,)
-          recrystallized_fraction(NX_FLOAT):
-            exists: recommended
-            unit: NX_DIMENSIONLESS
-            doc: |
-              The fraction to which the cell is assumed transformed.
-            dimensions:
-              rank: 1
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 3c5dbf746e80543c1b3d28330df4717e72745f61610e8be581a9e54d24b84370
+# 89aaa6fe89e36b8ee670588d01185cbf26043f1975cb44415bc5da566ec3b593
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
 # # NeXus - Neutron and X-ray Common Data Format
 # #
-# # Copyright (C) 2023-2025 NeXus International Advisory Committee (NIAC)
+# # Copyright (C) 2023-2026 NeXus International Advisory Committee (NIAC)
 # #
 # # This library is free software; you can redistribute it and/or
 # # modify it under the terms of the GNU Lesser General Public
@@ -549,7 +535,7 @@ NXmicrostructure_score_results(NXobject):
 #                 <item value="NXmicrostructure_score_results"/>
 #             </enumeration>
 #         </field>
-#         <field name="identifier_simulation" type="NX_UINT" recommended="true">
+#         <field name="identifier_simulation" type="NX_UINT">
 #             <doc>
 #                 Simulation ID as an alias to refer to this simulation.
 #             </doc>
@@ -563,7 +549,6 @@ NXmicrostructure_score_results(NXobject):
 #             <field name="algorithm" type="NX_CHAR"/>
 #             <field name="checksum" type="NX_CHAR"/>
 #         </group>
-#         <!--numerics(NXparameters):-->
 #         <field name="description" type="NX_CHAR" optional="true">
 #             <doc>
 #                 Discouraged free-text field to add further details to the computation.
@@ -645,7 +630,7 @@ NXmicrostructure_score_results(NXobject):
 #             </field>
 #             <field name="z_alias">
 #                 <enumeration>
-#                     <item value="normal_direction"/>
+#                     <item value="normal direction"/>
 #                 </enumeration>
 #             </field>
 #             <field name="z_direction">
@@ -662,7 +647,7 @@ NXmicrostructure_score_results(NXobject):
 #                 <field name="symmetry" type="NX_CHAR"/>
 #                 <field name="cell_dimensions" type="NX_NUMBER"/>
 #                 <field name="extent" type="NX_UINT"/>
-#                 <field name="index_offset_cell" type="NX_INT"/>
+#                 <field name="index_offset" type="NX_INT"/>
 #             </group>
 #             <group name="boundary" type="NXcg_hexahedron">
 #                 <doc>
@@ -692,7 +677,7 @@ NXmicrostructure_score_results(NXobject):
 #                         <dim index="1" value="6"/>
 #                     </dimensions>
 #                 </field>
-#                 <field name="boundaries" optional="true">
+#                 <field name="boundaries">
 #                     <doc>
 #                         Name of the boundaries. Left, right, front, back, bottom, top,
 #                         The field must have as many entries as there are number_of_boundaries.
@@ -907,9 +892,6 @@ NXmicrostructure_score_results(NXobject):
 #                     <field name="volume" type="NX_FLOAT" units="NX_VOLUME">
 #                         <doc>
 #                             Volume of each grain (partially transformed cells are accounted for).
-#                             
-#                             Values are reported in multiples of cells, needs multiplication with
-#                             cell volume!
 #                         </doc>
 #                         <dimensions rank="1">
 #                             <dim index="1" value="n_grains"/>
@@ -1021,12 +1003,6 @@ NXmicrostructure_score_results(NXobject):
 #                         <dimensions rank="1">
 #                             <dim index="1" value="n_front"/>
 #                         </dimensions>
-#                     </field>
-#                     <field name="recrystallized_fraction" type="NX_FLOAT" recommended="true" units="NX_DIMENSIONLESS">
-#                         <doc>
-#                             The fraction to which the cell is assumed transformed.
-#                         </doc>
-#                         <dimensions rank="1"/>
 #                     </field>
 #                 </group>
 #             </group>
