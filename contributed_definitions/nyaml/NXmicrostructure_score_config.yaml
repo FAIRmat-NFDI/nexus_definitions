@@ -30,6 +30,7 @@ NXmicrostructure_score_config(NXobject):
     definition(NX_CHAR):
       enumeration: [NXmicrostructure_score_config]
     identifier_simulation(NX_UINT):
+      exists: recommended
       doc: |
         An alias to refer to this simulation.
     description(NX_CHAR):
@@ -50,8 +51,7 @@ NXmicrostructure_score_config(NXobject):
       exists: ['min', '0', 'max', 'unbounded']
     sample(NXsample):
       exists: recommended
-      dimensionality(NX_POSINT):
-        unit: NX_UNITLESS
+      dimensionality(NX_CHAR):
         doc: |
           Dimensionality of the simulation.
         enumeration: [1, 2, 3]
@@ -89,23 +89,54 @@ NXmicrostructure_score_config(NXobject):
         (Mechanical) properties of the material which scale the
         amount of stored (elastic) energy in the system and
         thus mainly affect recrystallization kinetics.
-      shear_modulus(NX_FLOAT):
-        unit: NX_PRESSURE
-        doc: |
-          Reference shear modulus at zero Kelvin.
-      burgers_vector(NX_FLOAT):
-        unit: NX_LENGTH
-        doc: |
-          Magnitude of the Burgers vector at zero Kelvin.
-      
-      # firstOrderedG0dT
-      # alloyConstantThermalExpCoeff
-      # FirstOrderThermalExpCoeff
-      # SecondOrderThermalExpCoeff
+        
+        Temperature-dependent lattice softening of the shear modulus
+        :math:`G(T)` is modeled according to `Nadal and Le Poac <https://dx.doi.org/10.1063/1.1539913>`_
+        i.e., :math:`G(T) = \frac{1}{\mathfrak{J}(\frac{T}{T_m})} G_0 (1 - a \frac{T}{T_m})`
+        with :math:`G_0` shear_modulus_zero, :math:`a` nadal_lepoac_a, :math:`\zeta` nadal_lepoac_zeta,
+        and :math:`\mathfrak{J}(\frac{T}{T_m}) = 1 + exp(\frac{\frac{T}{T_m} - 1}{\zeta(1 - \frac{T}{T_m(1+\zeta)})})`.
+        
+        The temperature-dependent Burgers vector :math:`b(T)` is
+        modeled with a second order approximation :math:`b(T) = b_0 (1 + (a_2 T^2 + a_1 T + a_0))`
+        with :math:`a_2` lattice_expansion_second, :math:`a_1` lattice_expansion_first,
+        and :math:`a_0` lattice_expansion_null.
       melting_temperature(NX_FLOAT):
         unit: NX_TEMPERATURE
         doc: |
-          Melting temperature
+          Empirical melting temperature measured at standard conditions.
+      shear_modulus_zero(NX_FLOAT):
+        unit: NX_PRESSURE
+        doc: |
+          Shear modulus at zero Kelvin.
+      nadal_lepoac_a(NX_FLOAT):
+        unit: NX_UNITLESS
+        doc: |
+          Constant :math:`a` in the Nadal-Le Poac-based model of the temperature-dependent
+          shear modulus.
+      nadal_lepoac_zeta(NX_FLOAT):
+        unit: NX_UNITLESS
+        doc: |
+          Constant :math:`\zeta` in the Nadal-Le Poac-based model of the temperature-
+          dependent shear modulus.
+      burgers_vector_zero(NX_FLOAT):
+        unit: NX_LENGTH
+        doc: |
+          Magnitude of the Burgers vector at zero Kelvin.
+      lattice_expansion_second(NX_FLOAT):
+        unit: NX_ANY
+        doc: |
+          Constant :math:`a_2` in the second-order model that is used
+          for quantifying the temperature-dependent Burgers vector.
+      lattice_expansion_first(NX_FLOAT):
+        unit: NX_ANY
+        doc: |
+          Constant :math:`a_1` in the second-order model that is used
+          for quantifying the temperature-dependent Burgers vector.
+      lattice_expansion_null(NX_FLOAT):
+        unit: NX_LENGTH
+        doc: |
+          Constant :math:`a_0` in the second-order model that is used
+          for quantifying the temperature-dependent Burgers vector.
     deformation(NXparameters):
       doc: |
         Details about the geometry and properties of the polycrystal that represents the
@@ -119,10 +150,13 @@ NXmicrostructure_score_config(NXobject):
           * ebsd, a microstructure synthesized based on a simulated or a measured EBSD orientation map
           * damask, the result of a simulation from `DAMASK <https://damask-multiphysics.org>`_.
         enumeration: [cuboidal, poisson_voronoi, ebsd, damask]
+      
+      # extent and diameter are required when model is poisson_voronoi and ebsd
+      # but such conditional requirements can currently not be expressed in NeXus
+      # one would need to make one group per model!
       extent(NX_FLOAT):
+        exists: recommended
         unit: NX_LENGTH
-        
-        # an example why a conditional exists statement is necessary to add in NeXus
         doc: |
           Extent of each deformed grain in voxel along the
           x, y, and z direction when model is cuboidal.
@@ -130,6 +164,7 @@ NXmicrostructure_score_config(NXobject):
           rank: 1
           dim: (3,)
       diameter(NX_FLOAT):
+        exists: recommended
         unit: NX_LENGTH
         doc: |
           Average spherical diameter when model is poisson_voronoi.
@@ -291,7 +326,7 @@ NXmicrostructure_score_config(NXobject):
           Parameter of the Rollett-Holm migration model.
         
         # For rollett_holm :math:`m(\Theta) = m_0 \cdot (1 - c_1 * exp(-c_2 \cdot \frac{\Theta}{15}^{c_3}))`.
-        pre_factor(NX_FLOAT):
+        m_null(NX_FLOAT):
           unit: NX_ANY
           doc: |
             Pre-exponential factor for the fastest grain boundary in the system.
@@ -327,9 +362,10 @@ NXmicrostructure_score_config(NXobject):
         doc: |
           Which type of drag model.
         enumeration: [none, zener_smith]
+      
+      # required when model is zener_smith
       zener_smith(NXparameters):
-        
-        # required when model is zener_smith
+        exists: optional
         doc: |
           Parameter of the Zener-Smith drag model when model is zener_smith.
         pre_factor(NX_FLOAT):
@@ -539,7 +575,7 @@ NXmicrostructure_score_config(NXobject):
           during post-processing the results with the solitary unit modeling approach.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 57aacf695328ad15a9dce6dd93e560ccf34f9e3e809361d8443caf04d0b66b34
+# f2395e1f8b2a98c71102f1332cb6e122b2a04e378ad1e80944d1294628acedc9
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -624,7 +660,7 @@ NXmicrostructure_score_config(NXobject):
 #                 <item value="NXmicrostructure_score_config"/>
 #             </enumeration>
 #         </field>
-#         <field name="identifier_simulation" type="NX_UINT">
+#         <field name="identifier_simulation" type="NX_UINT" recommended="true">
 #             <doc>
 #                 An alias to refer to this simulation.
 #             </doc>
@@ -645,7 +681,7 @@ NXmicrostructure_score_config(NXobject):
 #         <group name="profiling" type="NXcs_profiling" optional="true"/>
 #         <group name="userID" type="NXuser" nameType="partial" minOccurs="0" maxOccurs="unbounded"/>
 #         <group name="sample" type="NXsample" recommended="true">
-#             <field name="dimensionality" type="NX_POSINT" units="NX_UNITLESS">
+#             <field name="dimensionality" type="NX_CHAR">
 #                 <doc>
 #                     Dimensionality of the simulation.
 #                 </doc>
@@ -700,24 +736,61 @@ NXmicrostructure_score_config(NXobject):
 #                 (Mechanical) properties of the material which scale the
 #                 amount of stored (elastic) energy in the system and
 #                 thus mainly affect recrystallization kinetics.
+#                 
+#                 Temperature-dependent lattice softening of the shear modulus
+#                 :math:`G(T)` is modeled according to `Nadal and Le Poac &lt;https://dx.doi.org/10.1063/1.1539913&gt;`_
+#                 i.e., :math:`G(T) = \frac{1}{\mathfrak{J}(\frac{T}{T_m})} G_0 (1 - a \frac{T}{T_m})`
+#                 with :math:`G_0` shear_modulus_zero, :math:`a` nadal_lepoac_a, :math:`\zeta` nadal_lepoac_zeta,
+#                 and :math:`\mathfrak{J}(\frac{T}{T_m}) = 1 + exp(\frac{\frac{T}{T_m} - 1}{\zeta(1 - \frac{T}{T_m(1+\zeta)})})`.
+#                 
+#                 The temperature-dependent Burgers vector :math:`b(T)` is
+#                 modeled with a second order approximation :math:`b(T) = b_0 (1 + (a_2 T^2 + a_1 T + a_0))`
+#                 with :math:`a_2` lattice_expansion_second, :math:`a_1` lattice_expansion_first, 
+#                 and :math:`a_0` lattice_expansion_null.
 #             </doc>
-#             <field name="shear_modulus" type="NX_FLOAT" units="NX_PRESSURE">
+#             <field name="melting_temperature" type="NX_FLOAT" units="NX_TEMPERATURE">
 #                 <doc>
-#                     Reference shear modulus at zero Kelvin.
+#                     Empirical melting temperature measured at standard conditions.
 #                 </doc>
 #             </field>
-#             <field name="burgers_vector" type="NX_FLOAT" units="NX_LENGTH">
+#             <field name="shear_modulus_zero" type="NX_FLOAT" units="NX_PRESSURE">
+#                 <doc>
+#                     Shear modulus at zero Kelvin.
+#                 </doc>
+#             </field>
+#             <field name="nadal_lepoac_a" type="NX_FLOAT" units="NX_UNITLESS">
+#                 <doc>
+#                     Constant :math:`a` in the Nadal-Le Poac-based model of the temperature-dependent
+#                     shear modulus.
+#                 </doc>
+#             </field>
+#             <field name="nadal_lepoac_zeta" type="NX_FLOAT" units="NX_UNITLESS">
+#                 <doc>
+#                     Constant :math:`\zeta` in the Nadal-Le Poac-based model of the temperature-
+#                     dependent shear modulus.
+#                 </doc>
+#             </field>
+#             <field name="burgers_vector_zero" type="NX_FLOAT" units="NX_LENGTH">
 #                 <doc>
 #                     Magnitude of the Burgers vector at zero Kelvin.
 #                 </doc>
 #             </field>
-#             <!--firstOrderedG0dT
-# alloyConstantThermalExpCoeff
-# FirstOrderThermalExpCoeff
-# SecondOrderThermalExpCoeff-->
-#             <field name="melting_temperature" type="NX_FLOAT" units="NX_TEMPERATURE">
+#             <field name="lattice_expansion_second" type="NX_FLOAT" units="NX_ANY">
 #                 <doc>
-#                     Melting temperature
+#                     Constant :math:`a_2` in the second-order model that is used
+#                     for quantifying the temperature-dependent Burgers vector.
+#                 </doc>
+#             </field>
+#             <field name="lattice_expansion_first" type="NX_FLOAT" units="NX_ANY">
+#                 <doc>
+#                     Constant :math:`a_1` in the second-order model that is used
+#                     for quantifying the temperature-dependent Burgers vector.
+#                 </doc>
+#             </field>
+#             <field name="lattice_expansion_null" type="NX_FLOAT" units="NX_LENGTH">
+#                 <doc>
+#                     Constant :math:`a_0` in the second-order model that is used
+#                     for quantifying the temperature-dependent Burgers vector.
 #                 </doc>
 #             </field>
 #         </group>
@@ -742,8 +815,10 @@ NXmicrostructure_score_config(NXobject):
 #                     <item value="damask"/>
 #                 </enumeration>
 #             </field>
-#             <field name="extent" type="NX_FLOAT" units="NX_LENGTH">
-#                 <!--an example why a conditional exists statement is necessary to add in NeXus-->
+#             <!--extent and diameter are required when model is poisson_voronoi and ebsd
+# but such conditional requirements can currently not be expressed in NeXus
+# one would need to make one group per model!-->
+#             <field name="extent" type="NX_FLOAT" recommended="true" units="NX_LENGTH">
 #                 <doc>
 #                     Extent of each deformed grain in voxel along the
 #                     x, y, and z direction when model is cuboidal.
@@ -752,7 +827,7 @@ NXmicrostructure_score_config(NXobject):
 #                     <dim index="1" value="3"/>
 #                 </dimensions>
 #             </field>
-#             <field name="diameter" type="NX_FLOAT" units="NX_LENGTH">
+#             <field name="diameter" type="NX_FLOAT" recommended="true" units="NX_LENGTH">
 #                 <doc>
 #                     Average spherical diameter when model is poisson_voronoi.
 #                 </doc>
@@ -957,7 +1032,7 @@ NXmicrostructure_score_config(NXobject):
 #                     Parameter of the Rollett-Holm migration model.
 #                 </doc>
 #                 <!--For rollett_holm :math:`m(\Theta) = m_0 \cdot (1 - c_1 * exp(-c_2 \cdot \frac{\Theta}{15}^{c_3}))`.-->
-#                 <field name="pre_factor" type="NX_FLOAT" units="NX_ANY">
+#                 <field name="m_null" type="NX_FLOAT" units="NX_ANY">
 #                     <doc>
 #                         Pre-exponential factor for the fastest grain boundary in the system.
 #                     </doc>
@@ -1012,8 +1087,8 @@ NXmicrostructure_score_config(NXobject):
 #                     <item value="zener_smith"/>
 #                 </enumeration>
 #             </field>
-#             <group name="zener_smith" type="NXparameters">
-#                 <!--required when model is zener_smith-->
+#             <!--required when model is zener_smith-->
+#             <group name="zener_smith" type="NXparameters" optional="true">
 #                 <doc>
 #                     Parameter of the Zener-Smith drag model when model is zener_smith.
 #                 </doc>
