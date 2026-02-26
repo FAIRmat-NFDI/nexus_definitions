@@ -44,10 +44,10 @@ defined atom-probe-agnostic empower reuse:
 
 :ref:`NXdelocalization`
     Base class to describe the delocalization of point-like objects on a grid.
-    
+
 :ref:`NXisocontour`
     Computational geometry description of isocontouring/phase-fields in Euclidean space.
-    
+
 :ref:`NXmatch_filter`
     Base class to filter ions based on their type or other descriptors like hit multiplicity.
 
