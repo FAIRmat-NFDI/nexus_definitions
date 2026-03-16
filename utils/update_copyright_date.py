@@ -79,10 +79,7 @@ def update(filename):
         fp.writelines(buf)
         fp.close()
 
-
 NOT_ALLOWED = ("/.git", "/kits", "cache")
-
-
 def find_source_files(path):
     """walk the source_path directories accumulating files to be checked"""
     file_list = []
