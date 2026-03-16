@@ -100,7 +100,6 @@ def test_get_inherited_nodes():
 
     elem = ET.parse(nxdl_file_path).getroot()
     _, _, elist = nexus.get_inherited_nodes(nxdl_path="/ENTRY/NXODD_name", elem=elem)
-    print(elist)
     assert len(elist) == 5
 
     nxdl_file_path = (

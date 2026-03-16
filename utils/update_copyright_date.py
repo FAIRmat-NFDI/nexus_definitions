@@ -10,7 +10,8 @@ This is the bash command to find all matching lines::
 See copyright text at bottom of this file for example.
 """
 
-import os, sys
+import os
+import sys
 import mimetypes
 import datetime
 
@@ -22,7 +23,7 @@ ROOT_DIR_EXPECTED_RESOURCES = {
                 nxdl.xsd nxdlTypes.xsd README.md
              """.split(),
     "subdirs": """applications base_classes contributed_definitions manual
-                 package utils www impatient-guide
+                 dev_tools galleries utils impatient-guide
                """.split(),
 }
 
@@ -40,7 +41,13 @@ def update(filename):
     if not os.path.exists(filename):
         return
     changes = []
-    buf = open(filename).readlines()
+    with open(filename) as f:
+        try:
+            buf = f.readlines()
+        except Exception as e:
+            print(f"{filename} could not be read: {e}")
+            raise e
+
     for number, line in enumerate(buf):
         pos = position(line, LEFT_SIDE_TEXT_MATCH)
         if pos is None:
@@ -73,11 +80,14 @@ def update(filename):
         fp.close()
 
 
+NOT_ALLOWED = ("/.git", "/kits", "cache")
+
+
 def find_source_files(path):
     """walk the source_path directories accumulating files to be checked"""
     file_list = []
     for root, dirs, files in os.walk(path):
-        if root.find("/.git") < 0 or root.find("/kits") < 0:
+        if not any(n in root for n in NOT_ALLOWED):
             file_list = file_list + [os.path.join(root, _) for _ in files]
     return file_list
 
@@ -94,7 +104,6 @@ def sift_file_list(file_list):
     .dia .vsdx .h5 .nx .hdf5 .hdf .nx5 .pyc
     """.strip().split()
     for fn in file_list:
-        _fn = os.path.split(fn)[-1]
         mime = mimetypes.guess_type(fn)[0]
         if fn.find("/.git") >= 0:
             continue
@@ -164,8 +173,6 @@ def main():
 
 def __developer_build_setup__():
     """for use with source-code debugger ONLY"""
-    import shutil
-
     # sys.argv.append('-h')
     sys.argv.append("..")
 
@@ -177,7 +184,7 @@ if __name__ == "__main__":
 
 # NeXus - Neutron and X-ray Common Data Format
 #
-# Copyright (C) 2008-2024 NeXus International Advisory Committee (NIAC)
+# Copyright (C) 2016-2026 NeXus International Advisory Committee (NIAC)
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
