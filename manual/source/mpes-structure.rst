@@ -34,3 +34,6 @@ Here's a list of application definitions related to photoemission spectroscopy:
 
     :ref:`NXxps`:
        An application definition for XPS/UPS measurements.
+
+    :ref:`NXmpes_liquid`:
+       An application definition for MPES measurements with liquids (jets)
