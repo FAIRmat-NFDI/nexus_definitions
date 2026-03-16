@@ -9,7 +9,7 @@ FAIRmat-NeXus Proposal
    OurScope
    Outreach
    WhichData
-   WhatIsNew
+   VersionAlignment
 
 Aim
 #########################
@@ -140,7 +140,11 @@ it guarantees full control on the data until publication. We are confident that 
 and you will be naturally inclined to gradually integrate FAIRmat structures and tools further in your workflow. 
 
 
-.. _WhatIsNew:
+.. _VersionAlignment:
 
-.. What is New?
-.. ##############
+Alignment of the definitions on the official NIAC repository and its NeXus-FAIRmat fork
+#######################################################################################
+
+TODO
+
+
