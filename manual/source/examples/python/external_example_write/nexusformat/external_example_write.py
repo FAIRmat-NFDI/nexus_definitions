@@ -9,16 +9,13 @@ from pathlib import Path
 
 import h5py
 import numpy
-
-from nexusformat.nexus import (
-    NXdata,
-    NXdetector,
-    NXentry,
-    NXfield,
-    NXinstrument,
-    NXlink,
-    nxopen,
-)
+from nexusformat.nexus import NXdata
+from nexusformat.nexus import NXdetector
+from nexusformat.nexus import NXentry
+from nexusformat.nexus import NXfield
+from nexusformat.nexus import NXinstrument
+from nexusformat.nexus import NXlink
+from nexusformat.nexus import nxopen
 
 FILE_HDF5_MASTER = "external_master.hdf5"
 FILE_HDF5_ANGLES = "external_angles.hdf5"

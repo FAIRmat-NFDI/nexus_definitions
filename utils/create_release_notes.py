@@ -16,9 +16,10 @@ Create release notes for a new release of this GitHub repository.
 
 import argparse
 import datetime
-import github
 import logging
 import os
+
+import github
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("create_release_notes")

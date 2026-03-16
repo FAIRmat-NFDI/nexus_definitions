@@ -2,10 +2,12 @@
 """Writes a NeXus HDF5 file using h5py and numpy"""
 
 from pathlib import Path
-from re import X
-import numpy
 
-from nexusformat.nexus import NXdata, NXentry, NXfield, nxopen
+import numpy
+from nexusformat.nexus import NXdata
+from nexusformat.nexus import NXentry
+from nexusformat.nexus import NXfield
+from nexusformat.nexus import nxopen
 
 print("Write a NeXus HDF5 file")
 fileName = "simple_example_basic.nexus.hdf5"

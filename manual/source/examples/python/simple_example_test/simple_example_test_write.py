@@ -1,6 +1,7 @@
 """Writes a NeXus HDF5 file using h5py"""
 
 import datetime
+
 import h5py  # HDF5 support
 
 RAW_MR_SCAN = """

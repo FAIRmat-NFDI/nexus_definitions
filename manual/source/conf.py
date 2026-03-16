@@ -8,6 +8,7 @@
 
 import datetime
 import os
+import subprocess
 import sys
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -202,8 +203,6 @@ sphinx_gallery_conf = {
 }
 
 # -- Inject Git commit information for substitution --------------------------
-
-import subprocess
 
 
 def run_git_cmd(*args):

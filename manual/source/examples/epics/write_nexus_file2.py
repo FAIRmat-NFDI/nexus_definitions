@@ -1,5 +1,10 @@
-import numpy as np
-from nexusformat.nexus import *
+from nexusformat.nexus import NXcollection
+from nexusformat.nexus import NXdata
+from nexusformat.nexus import NXdetector
+from nexusformat.nexus import NXentry
+from nexusformat.nexus import NXfield
+from nexusformat.nexus import NXinstrument
+from nexusformat.nexus import NXroot
 
 
 def write_nexus_file(fname, image, md={}):

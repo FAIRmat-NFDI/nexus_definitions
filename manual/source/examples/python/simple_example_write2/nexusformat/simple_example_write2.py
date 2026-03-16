@@ -7,16 +7,13 @@ according to the example from Figure 2.1 in the Design chapter
 from pathlib import Path
 
 import numpy
-
-from nexusformat.nexus import (
-    NXdata,
-    NXdetector,
-    NXentry,
-    NXfield,
-    NXinstrument,
-    NXlink,
-    nxopen,
-)
+from nexusformat.nexus import NXdata
+from nexusformat.nexus import NXdetector
+from nexusformat.nexus import NXentry
+from nexusformat.nexus import NXfield
+from nexusformat.nexus import NXinstrument
+from nexusformat.nexus import NXlink
+from nexusformat.nexus import nxopen
 
 filename = str(Path(__file__).absolute().parent.parent / "simple_example.dat")
 buffer = numpy.loadtxt(filename).T

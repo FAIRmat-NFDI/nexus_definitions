@@ -1,8 +1,7 @@
 #!/usr/bin/python
 
-import sys
-import nxs
 import numpy
+import nxs
 
 a = numpy.zeros((2, 3, 4), dtype=numpy.int)
 val = 0

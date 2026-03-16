@@ -10,10 +10,10 @@ This is the bash command to find all matching lines::
 See copyright text at bottom of this file for example.
 """
 
+import datetime
+import mimetypes
 import os
 import sys
-import mimetypes
-import datetime
 
 YEAR = datetime.datetime.now().year
 LEFT_SIDE_TEXT_MATCH = "Copyright (C) "
@@ -79,7 +79,10 @@ def update(filename):
         fp.writelines(buf)
         fp.close()
 
+
 NOT_ALLOWED = ("/.git", "/kits", "cache")
+
+
 def find_source_files(path):
     """walk the source_path directories accumulating files to be checked"""
     file_list = []

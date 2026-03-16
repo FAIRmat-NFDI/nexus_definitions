@@ -11,8 +11,8 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys, os
-
+# import os
+# import sys
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -175,12 +175,12 @@ latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     "papersize": "letterpaper",
     # The font size ('10pt', '11pt' or '12pt').
-    #'pointsize': '10pt',
+    # 'pointsize': '10pt',
     # Additional stuff for the LaTeX preamble.
     # FIXME: roman page numbers in TOC, and no page numbers later
     #  http://osdir.com/ml/sphinx-dev/2011-03/msg00036.html
     #  BUT, latex does not recognize these two lines when in the preamble
-    "preamble": """%
+    "preamble": r"""%
  \pagestyle{plain}
  \pagenumbering{arabic}
 """,
