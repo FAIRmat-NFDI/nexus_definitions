@@ -10,7 +10,8 @@ This is the bash command to find all matching lines::
 See copyright text at bottom of this file for example.
 """
 
-import os, sys
+import os
+import sys
 import mimetypes
 import datetime
 
@@ -100,7 +101,6 @@ def sift_file_list(file_list):
     .dia .vsdx .h5 .nx .hdf5 .hdf .nx5 .pyc
     """.strip().split()
     for fn in file_list:
-        _fn = os.path.split(fn)[-1]
         mime = mimetypes.guess_type(fn)[0]
         if fn.find("/.git") >= 0:
             continue
@@ -170,8 +170,6 @@ def main():
 
 def __developer_build_setup__():
     """for use with source-code debugger ONLY"""
-    import shutil
-
     # sys.argv.append('-h')
     sys.argv.append("..")
 

@@ -148,8 +148,7 @@ def get_release_info(token, base_tag_name, head_branch_name, milestone_name):
         for i in repo.get_issues(milestone=milestone, state="closed")
         if (
             (milestone is not None or i.closed_at > earliest)
-            and
-            i.number not in pulls
+            and i.number not in pulls
         )
     }
     # fmt: on
@@ -184,12 +183,12 @@ def parse_command_line():
     help_text += ' (default="main")'
     # fmt: off
     parser.add_argument(
-        "--head", 
-        action='store', 
+        "--head",
+        action='store',
         dest='head',
-        nargs='?', 
-        help = help_text, 
-        default="main"
+        nargs='?',
+        help=help_text,
+        default="main",
     )
     # fmt: on
 
