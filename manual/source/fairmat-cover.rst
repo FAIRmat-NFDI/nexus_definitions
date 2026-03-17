@@ -5,8 +5,7 @@ FAIRmat-NeXus Proposal
 =======================
 
 .. index::
-   IntroductionCover
-   OurScope
+   Achievements
    Outreach
    WhichData
    VersionAlignment
@@ -14,114 +13,35 @@ FAIRmat-NeXus Proposal
 Aim
 #########################
 
-Experiments nowadays create a set of very often voluminous and diverse numerical data and metadata.
-These pieces of information represent entities of what is effectively a graph of materials data.
-This graph can have a very large number of nodes and edges representing the large variety of
-relations which scientists ideally want to identify and master
-when transforming experimental research into knowledge.
+Organizing (meta)data for materials characterization calls for a mastering of formatting varieties and data volume handling while assuring semantic interpretability, validity, and keeping inaccuracies documented and controlled. Data schemas and file formats are the tools that enable a structured and semantically annotated storage and processing of research data. Frequently, these tools organize entities effectively as graph of materials data. Experimentalists face the challenge that these schemas and graph-based representations often use different levels of (meta)data and information granularity, different formatting, and different semantic concepts. This causes limited interoperability.
 
-Experimentalists face the challenge that these pieces of information come at different levels
-of granularity and format, of which many need to be better documented. You have very likely experienced
-yourself how file and data formats are routinely encountered tasks to master in your daily
-research practice and you might have questioned how these formats are currently handled
-when you want to produce FAIR research data and publications.
+`NeXus <https://www.nexusformat.org/>`_ is a (meta)data schema and formatting standardization that is rooted in the condensed matter physics. The development of NeXus is coordinated by the NeXus International Advisory Committee (NIAC).
 
-The NeXus-FAIRmat proposal is an interdisciplinary data science activity initiated by scientists of the
-condensed-matter physics community which strives to develop community-maintained open file and data formats
-for describing specific experimental techniques, their numerical data and metadata,
-and strategies how to exchange these pieces of information.
+The NeXus-FAIRmat proposal is an interdisciplinary data-science- and semantic-technology-driven standardization project that extends NeXus beyond its original scope (neutron, x-ray, and muon experiments). These extensions cover the materials-science-branch of electron microscopy (EM), photo-emission spectroscopy (PES), optical spectroscopy, and standards for the field of atom probe tomography and related field-ion microscopy (atom probe microscopy). The FAIRmat proposal to NeXus is an effort by the community of scientists of the `FAIRmat consortium <https://www.fairmat-nfdi.eu/fairmat/about-fairmat/consortium-fairmat>`_. As a project which aims at creating an infrastructure for experimental data to be findable, accessible, interoperable, and reusable (FAIR) in the fields of condensed-matter physics and the chemical physics of solids, FAIRmat has adopted NeXus as the common format.
 
-.. _IntroductionCover:
+NeXus defines a set of data schemas. These define terms (concepts) with a controlled vocabulary and defined relations between the concepts including definitions for specifying details how (meta)data instances should be recorded for file based storage. NeXus definitions are version-controlled. Software tools are provided by members of the NIAC and FAIRmat for checking and verifying if specific instances of NeXus files comply with the intended
+schema definitions. The file format most commonly used with NeXus is the Hierarchical Data Format (`HDF5 <https://www.hdfgroup.org/solutions/hdf5/>`_) but using other file formats is also possible.
 
-The FAIRmat proposal to NeXus is an effort by the community of scientists of the `FAIRmat consortium <https://www.fairmat-nfdi.eu/fairmat/about-fairmat/consortium-fairmat>`_
-to refine and expand the structure of NeXus. As a project which aims at creating an infrastructure
-for experimental data to be findable, accessible, interoperable, and reusable (FAIR) in the fields of
-condensed-matter physics and the chemical physics of solids, FAIRmat has adopted NeXus as the common format.
+Base classes (:ref:`base.class.definitions`) and application definitions (:ref:`application.definitions`) are the two key components of the NeXus data model. A base class represents a set of concepts, (meta)data (categorical or numerical)which specify details about e.g., scientists, projects, instruments, and other physical devices. NeXus includes also base classes with concepts to document (meta)data of associated computational analyses and data processing steps. Application definitions are constructed from combining such experiment- and research-question-specifically customized base classes. In effect, an application definition is a data contract between a producer and a consumer of (meta)data. Humans or software are the contractual partners. This design has sufficient flexibility to cover any experimental technique and instrumentation, while ensuring rigorous, application-specific structures that can be processed in an automated manner. Representing a panel of scientists with cross-disciplinary expertise, the role of the NIAC ranges from offering support with community consensus building and technical reviewing.
 
-`NeXus <https://www.nexusformat.org/>`_ is a common data exchange format which has its origin in the community of
-scientists performing neutron, x-ray, and muon experiments. The development of NeXus is coordinated by the 
-NeXus International Advisory Committee (NIAC).
-NeXus defines a schema of data entries with a controlled vocabulary and defined relations between the entries.
-NeXus offers not only tools to document these schema definitions in a version-controlled manner but
-also tools to check and verify how and if specific instances of NeXus schemata comply with the intended
-schema definition when the data are written to files. Although, the Hierarchical Data Format (HDF5) is the
-most commonly used file format to write NeXus file to, NeXus can also be used with other file formats.
+.. _Achievements:
 
-NeXus defines domain-specific rules for organizing data in e.g. HDF5 files (:ref:`application.definitions`)
-and defines a dictionary of well-defined domain-specific (a vocabulary) of terms (:ref:`base.class.definitions`).
-The meta- and numerical data in a NeXus file represent a hierarchical graph which encodes a specifically
-granularized representation of relevant pieces of information and results that should be stored with
-an experiment.
+Achievements
+############
 
-Base classes and application definitions are two key components of the NeXus data model.
-A base class represents a set of numerical data and metadata which specify details about
-scientists, projects, instruments, and other physical devices, including the numerical data
-and metadata which are deemed relevant for their description and the associated
-computational analyses. Application definitions are constructed from combining such experiment-
-and research-question-specifically customized base classes. 
+Within the five years funding of the FAIRmat project, we have achieved a substantiated broadening of the experimental techniques that NeXus covers. This manual details these achievements for each technique and connects to the contents of the official NeXus User Manual (also available `here <https://manual.nexusformat.org/user_manual.html>`_) that has been here compiled into one documentation for making the exploring of NeXus more convenient for users. The contents of the NeXus-FAIRmat proposal have successfully been accepted as a standard after community discussions with the NIAC. Decisions were made public via the `v2025.11 <https://github.com/nexusformat/definitions/releases/tag/v2025.11>`_ and the `v2026.01 <https://github.com/nexusformat/definitions/releases/tag/v2026.01>`_ releases.
 
-In this combination, an application definition is a data contract between 
-a producer and a consumer of these scientific data.
+For making effective research data management a reality though developing data schemas alone is insufficient. One also needs to prove that these schemas are useful in practice. Therefore, perhaps the greatest resource, of the coordinated
+work between the NeXus community and FAIRmat has been the inclusion of experimental datasets in the `NOMAD Laboratory <https://nomad-lab.eu>`_ while assuring these to store along the definitions of the NeXus-FAIRmat proposal.
 
-This design has sufficient flexibility to cover any experimental technique and instrumentation, while
-ensuring rigorous, application-specific structures that can be processed in an automated manner.
-
-In cases where base classes or application definitions have not yet been proposed advantage of NeXus can be taken
-if the respective scientific community explicitly designs, implements, uses, and continuously evolves
-these classes and definitions. Here the role of the NIAC is to support the community with
-data modeling and data science technical expertise, thus taking an important role of
-cross-disciplinary review.
-
-The NeXus-FAIRmat proposal represents the results of this development for experiments and use cases which have not yet used NeXus.
-Specifically, the proposal includes cases in the materials-science-branch of electron microscopy (EM), photo-emission spectroscopy, 
-ellipsometry, and the field of atom probe tomography and related field-ion microscopy, here jointly referred to as atom probe microscopy.
-
-
-The documentation available here includes parts of the contents of the NeXus User Manual (also available `here <https://manual.nexusformat.org/user_manual.html>`_),
-reported here for the convenience of the user, but is restricted to the parts most pertinent to the our proposal.
-
-For more extensive information, please visit the original manual.
-
-.. _OurScope:
-
-Our scope and perspective
-#########################
-
-Thanks to a cooperative approach across a wide variety of experimental techniques,
-the NeXus-FAIRmat proposal of the FAIRmat project has an opportunity
-to expand the set of data/metadata accurately described via NeXus.
-
-With a closely-connected team of domain experts, we will develop such expansion while at the same time maintaining
-a consistent structure across different techniques and methods, striving for the maximum simplicity of use.
-
-Achieving a standardized and FAIR data structure has a wide spectrum of advantages, ranging from radical
-progress in scientific transparency to the development of new, far-reaching tools that can be shared across
-the whole scientific community. The convenience of such tools can range from guaranteeing data reusability within 
-a single lab, to enabling open-source availability of ready-to-use advanced analysis software.
-
-Perhaps the greatest resource, however, is the inclusion of experimental datasets in the `NOMAD Laboratory <https://nomad-lab.eu/about/scope>`_:
-a data infrastructure that already hosts the largest computational material science repository in the world, representing a
-homogeneous and machine-readable archive, a human-accessible encyclopedia of materials data
-with tools for automated artificial intelligence analyses and data access.
 
 .. _Outreach:
 
 Outreach to the community
-##########################
+#########################
 
-A data infrastructure is not effective if it does not integrate seamlessly in the day-to-day workflow of a laboratory.
-For this reason, we approach our newly developed NeXus proposal as a community-driven development.
-We have drafted an accurate and consistent expansion of NeXus capabilities for a number of lab-based techniques,
-but need extensive testing and tweaking of its characteristics by the community.
+If you are applying any of the here detailed characterization methods and you are interested in producing FAIR data and accessing the FAIRmat tools, we invite you to try out our proposed structure. If you find any conflicts or inconsistencies, please raise them to us using the comment section (implemented with `Hypothesis <https://web.hypothes.is/>`_) or reporting an issue on the `GitHub repository of the project <https://github.com/FAIRmat-NFDI/nexus_definitions/issues>`_. Feel also very much invited to contact us directly at the `FAIRmat-Team <https://www.fair-di.eu/fairmat/about-fairmat/team-fairmat>`_.
 
-If your data is generated with these techniques and you are interested in producing FAIR data and accessing the FAIRmat tools, we
-invite you to try out our proposed structure. If you find any conflicts or inconsistencies, please raise them to us using the
-comment section. These comments are implemented with `Hypothesis <https://web.hypothes.is/>`_, a modern web annotation
-tool from the journalism community. The commenting function for each page of the proposal enable you to contribute to the
-creation of a more consistent and practical NeXus structure which, in our firm belief, can serve your community and beyond.
-
-If you do not find your specific experimental technique but would be interested in participating in the development
-of a standard using NeXus, feel also very much invited to contact us directly at the `FAIRmat-Team <https://www.fair-di.eu/fairmat/about-fairmat/team-fairmat>`_.
 
 .. _WhichData:
 
