@@ -89,8 +89,11 @@
                         Center-to-center distance between the two slits.
                     </doc>
                 </field>
-                <field name="height" type="NX_FLOAT" units="NX_LENGTH" optional="true"/>
-                <field name="material" type="NX_CHAR" optional="true"/>
+                <field name="height" type="NX_FLOAT" optional="true" units="NX_LENGTH">
+                    <doc>
+                        Height of the two slit.
+                    </doc>
+                </field>
             </group>
             <group name="detector" type="NXdetector">
                 <field name="distance" type="NX_FLOAT" units="NX_LENGTH">
@@ -98,48 +101,6 @@
                         Distance from the slit plane to the detector surface.
                     </doc>
                 </field>
-                <group name="data" type="NXdata">
-                    <doc>
-                        Raw 2D pixel data collected by the detector with no calibration
-                        applied. This group stores data at the lowest level of processing
-                        possible, indexed by integer pixel coordinates.
-                    </doc>
-                    <attribute name="signal">
-                        <enumeration>
-                            <item value="data"/>
-                        </enumeration>
-                    </attribute>
-                    <attribute name="axes">
-                        <enumeration>
-                            <item value="['x', 'y']"/>
-                        </enumeration>
-                    </attribute>
-                    <field name="data" type="NX_NUMBER" recommended="true" units="NX_ANY">
-                        <doc>
-                            Raw 2D intensity array indexed by pixel position.
-                        </doc>
-                        <dimensions rank="2">
-                            <dim index="1" value="n_x"/>
-                            <dim index="2" value="n_y"/>
-                        </dimensions>
-                    </field>
-                    <field name="x" type="NX_INT">
-                        <doc>
-                            Pixel indices along the horizontal detector axis (0-based).
-                        </doc>
-                        <dimensions rank="1">
-                            <dim index="1" value="n_x"/>
-                        </dimensions>
-                    </field>
-                    <field name="y" type="NX_INT">
-                        <doc>
-                            Pixel indices along the vertical detector axis (0-based).
-                        </doc>
-                        <dimensions rank="1">
-                            <dim index="1" value="n_y"/>
-                        </dimensions>
-                    </field>
-                </group>
             </group>
         </group>
         <group name="processID" type="NXprocess" nameType="partial" optional="true">
@@ -183,7 +144,7 @@
             </attribute>
             <attribute name="axes">
                 <enumeration>
-                    <item value="['x_offset', 'y_offset']"/>
+                    <item value="['x', 'y']"/>
                 </enumeration>
             </attribute>
             <field name="data" type="NX_NUMBER" units="NX_ANY">
@@ -195,7 +156,7 @@
                     <dim index="2" value="n_y"/>
                 </dimensions>
             </field>
-            <field name="x_offset" type="NX_FLOAT" units="NX_LENGTH">
+            <field name="x" type="NX_FLOAT" units="NX_LENGTH">
                 <doc>
                     Horizontal spatial offset from the detector centre, derived from
                     pixel index and pixel pitch.
@@ -204,7 +165,7 @@
                     <dim index="1" value="n_x"/>
                 </dimensions>
             </field>
-            <field name="y_offset" type="NX_FLOAT" units="NX_LENGTH">
+            <field name="y" type="NX_FLOAT" units="NX_LENGTH">
                 <doc>
                     Vertical spatial offset from the detector centre, derived from
                     pixel index and pixel pitch.

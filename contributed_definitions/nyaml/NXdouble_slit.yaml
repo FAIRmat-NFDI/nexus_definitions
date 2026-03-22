@@ -48,44 +48,15 @@ NXdouble_slit(NXobject):
           doc: |
             Center-to-center distance between the two slits.
         height(NX_FLOAT):
+          exists: optional
           unit: NX_LENGTH
-          exists: optional
-        material(NX_CHAR):
-          exists: optional
+          doc: |
+            Height of the two slit.
       detector(NXdetector):
         distance(NX_FLOAT):
           unit: NX_LENGTH
           doc: |
             Distance from the slit plane to the detector surface.
-        data(NXdata):
-          doc: |
-            Raw 2D pixel data collected by the detector with no calibration
-            applied. This group stores data at the lowest level of processing
-            possible, indexed by integer pixel coordinates.
-          \@signal:
-            enumeration: [data]
-          \@axes:
-            enumeration: [['x', 'y']]
-          data(NX_NUMBER):
-            exists: recommended
-            unit: NX_ANY
-            doc: |
-              Raw 2D intensity array indexed by pixel position.
-            dimensions:
-              rank: 2
-              dim: (n_x, n_y)
-          x(NX_INT):
-            doc: |
-              Pixel indices along the horizontal detector axis (0-based).
-            dimensions:
-              rank: 1
-              dim: (n_x,)
-          y(NX_INT):
-            doc: |
-              Pixel indices along the vertical detector axis (0-based).
-            dimensions:
-              rank: 1
-              dim: (n_y,)
     processID(NXprocess):
       nameType: partial
       exists: optional
@@ -119,7 +90,7 @@ NXdouble_slit(NXobject):
       \@signal:
         enumeration: [data]
       \@axes:
-        enumeration: [['x_offset', 'y_offset']]
+        enumeration: [['x', 'y']]
       data(NX_NUMBER):
         unit: NX_ANY
         doc: |
@@ -127,7 +98,7 @@ NXdouble_slit(NXobject):
         dimensions:
           rank: 2
           dim: (n_x, n_y)
-      x_offset(NX_FLOAT):
+      x(NX_FLOAT):
         unit: NX_LENGTH
         doc: |
           Horizontal spatial offset from the detector centre, derived from
@@ -135,7 +106,7 @@ NXdouble_slit(NXobject):
         dimensions:
           rank: 1
           dim: (n_x,)
-      y_offset(NX_FLOAT):
+      y(NX_FLOAT):
         unit: NX_LENGTH
         doc: |
           Vertical spatial offset from the detector centre, derived from
@@ -145,7 +116,7 @@ NXdouble_slit(NXobject):
           dim: (n_y,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# fefb9ed4bd02113660009f22d93b29fda5cd1d056c54945831cd27bd6021cba9
+# 62b164a394e41dc4542d2e5f8fa3ac814ad7e602b4fd570b3c4768126eaf9f61
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -237,8 +208,11 @@ NXdouble_slit(NXobject):
 #                         Center-to-center distance between the two slits.
 #                     </doc>
 #                 </field>
-#                 <field name="height" type="NX_FLOAT" units="NX_LENGTH" optional="true"/>
-#                 <field name="material" type="NX_CHAR" optional="true"/>
+#                 <field name="height" type="NX_FLOAT" optional="true" units="NX_LENGTH">
+#                     <doc>
+#                         Height of the two slit.
+#                     </doc>
+#                 </field>
 #             </group>
 #             <group name="detector" type="NXdetector">
 #                 <field name="distance" type="NX_FLOAT" units="NX_LENGTH">
@@ -246,48 +220,6 @@ NXdouble_slit(NXobject):
 #                         Distance from the slit plane to the detector surface.
 #                     </doc>
 #                 </field>
-#                 <group name="data" type="NXdata">
-#                     <doc>
-#                         Raw 2D pixel data collected by the detector with no calibration
-#                         applied. This group stores data at the lowest level of processing
-#                         possible, indexed by integer pixel coordinates.
-#                     </doc>
-#                     <attribute name="signal">
-#                         <enumeration>
-#                             <item value="data"/>
-#                         </enumeration>
-#                     </attribute>
-#                     <attribute name="axes">
-#                         <enumeration>
-#                             <item value="['x', 'y']"/>
-#                         </enumeration>
-#                     </attribute>
-#                     <field name="data" type="NX_NUMBER" recommended="true" units="NX_ANY">
-#                         <doc>
-#                             Raw 2D intensity array indexed by pixel position.
-#                         </doc>
-#                         <dimensions rank="2">
-#                             <dim index="1" value="n_x"/>
-#                             <dim index="2" value="n_y"/>
-#                         </dimensions>
-#                     </field>
-#                     <field name="x" type="NX_INT">
-#                         <doc>
-#                             Pixel indices along the horizontal detector axis (0-based).
-#                         </doc>
-#                         <dimensions rank="1">
-#                             <dim index="1" value="n_x"/>
-#                         </dimensions>
-#                     </field>
-#                     <field name="y" type="NX_INT">
-#                         <doc>
-#                             Pixel indices along the vertical detector axis (0-based).
-#                         </doc>
-#                         <dimensions rank="1">
-#                             <dim index="1" value="n_y"/>
-#                         </dimensions>
-#                     </field>
-#                 </group>
 #             </group>
 #         </group>
 #         <group name="processID" type="NXprocess" nameType="partial" optional="true">
@@ -331,7 +263,7 @@ NXdouble_slit(NXobject):
 #             </attribute>
 #             <attribute name="axes">
 #                 <enumeration>
-#                     <item value="['x_offset', 'y_offset']"/>
+#                     <item value="['x', 'y']"/>
 #                 </enumeration>
 #             </attribute>
 #             <field name="data" type="NX_NUMBER" units="NX_ANY">
@@ -343,7 +275,7 @@ NXdouble_slit(NXobject):
 #                     <dim index="2" value="n_y"/>
 #                 </dimensions>
 #             </field>
-#             <field name="x_offset" type="NX_FLOAT" units="NX_LENGTH">
+#             <field name="x" type="NX_FLOAT" units="NX_LENGTH">
 #                 <doc>
 #                     Horizontal spatial offset from the detector centre, derived from
 #                     pixel index and pixel pitch.
@@ -352,7 +284,7 @@ NXdouble_slit(NXobject):
 #                     <dim index="1" value="n_x"/>
 #                 </dimensions>
 #             </field>
-#             <field name="y_offset" type="NX_FLOAT" units="NX_LENGTH">
+#             <field name="y" type="NX_FLOAT" units="NX_LENGTH">
 #                 <doc>
 #                     Vertical spatial offset from the detector centre, derived from
 #                     pixel index and pixel pitch.
