@@ -33,8 +33,7 @@
         </symbol>
     </symbols>
     <doc>
-        This is the most general application definition for
-        photoemission experiments.
+        This is the most general application definition for photoemission experiments.
         
         Groups and fields are named according to the
         `ISO 18115-1:2023`_ specification as well as the `IUPAC Recommendations 2020`_.
@@ -424,6 +423,8 @@
                         Should be named with the same suffix, e.g.,
                         for ``beam_laser`` it should refer to ``source_laser``.
                         This should be specified if an associated source exists.
+                        This could be the name of a NXbeam group in the enclosing instrument group
+                        or an absolute path.
                         
                         Example:
                           * /entry/instrument/beam_laser/associated_source = /entry/instrument/source_laser
@@ -460,10 +461,28 @@
                             <item value="spatial dispersive"/>
                             <item value="momentum dispersive"/>
                             <item value="non-dispersive"/>
+                            <item value="selective area"/>
+                            <item value="deflector"/>
+                            <item value="PEEM"/>
+                            <item value="PEEM dark-field"/>
+                            <item value="LEEM"/>
+                            <item value="LEEM dark-field"/>
+                            <item value="LEED"/>
+                            <item value="dispersive plane"/>
+                            <item value="momentum microscope"/>
                         </enumeration>
                     </field>
                     <field name="lens_mode" recommended="true"/>
-                    <field name="projection" recommended="true"/>
+                    <field name="projection" recommended="true">
+                        <doc>
+                            The space projected in the angularly dispersive direction
+                        </doc>
+                        <enumeration>
+                            <item value="real"/>
+                            <item value="reciprocal"/>
+                            <item value="energy"/>
+                        </enumeration>
+                    </field>
                     <field name="angular_acceptance" type="NX_FLOAT" optional="true"/>
                     <field name="spatial_acceptance" type="NX_FLOAT" optional="true"/>
                     <group name="field_aperture" type="NXaperture" optional="true">
@@ -493,6 +512,13 @@
                         <field name="model" recommended="true"/>
                         <field name="identifier" recommended="true"/>
                     </group>
+                </group>
+                <group name="electron_gun" type="NXebeam_column" optional="true">
+                    <doc>
+                        Properties of an electron gun used to provide a source of electron beam
+                    </doc>
+                    <group name="field_aperture" type="NXaperture"/>
+                    <group name="beam" type="NXbeam"/>
                 </group>
                 <group type="NXenergydispersion">
                     <field name="scheme">
@@ -1265,13 +1291,13 @@
         <group type="NXdata">
             <doc>
                 The NXdata group containing a view on the measured data.
-
+                
                 This NXdata group contains a collection of the main relevant fields (axes).
                 Axes should be named according to the conventions defined below. Note that this
                 list is a glossary with explicitly named axis names, which is only intended to cover
                 the most common measurement axes and is therefore not complete. It is possible to add
                 axes with other names at any time.
-
+                
                 In NXmpes, it is recommended to provide an energy axis.
             </doc>
             <attribute name="signal">
