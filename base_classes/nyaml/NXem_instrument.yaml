@@ -42,13 +42,14 @@ NXem_instrument(NXinstrument):
       (which would indicate type is fib) or if certain lens configurations or instrument models are used
       which suggests the microscope is a scanning (sem) or transmission electron microscope (tem):
     enumeration: [sem, fib, tem]
-  (NXfabrication):
-  (NXebeam_column):
-  (NXibeam_column):
+  fabrication(NXfabrication):
+  ebeam_column(NXebeam_column):
+  ibeam_column(NXibeam_column):
   
   # (NXpbeam_column) for adding laser pulsing capabilities (NXsource + x)
-  (NXem_optical_system):
-  (NXdetector):
+  optics(NXem_optical_system):
+  detectorID(NXdetector):
+    nameType: partial
     doc: |
       Description of the type of the detector.
       
@@ -178,12 +179,15 @@ NXem_instrument(NXinstrument):
       Gas injection systems (GIS) are components of microscopes that are equipped with focused-ion beam
       capabilities. The component is used to introduce reactive neutral gases to the sample surface for
       enhanced etching, preferential etching, or material deposition.
-  (NXpump):
-  (NXsensor):
-  (NXactuator):
+  pumpID(NXpump):
+    nameType: partial
+  sensorID(NXsensor):
+    nameType: partial
+  actuatorID(NXactuator):
+    nameType: partial
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# bced4402af1c0aad3f118b57c4d13a130318c151c544ba05b896f47b6081b924
+# ffe4c7bac02b38fc6ff58574d5c5fdfc5edec414c68f64a549387ad2b0b0eb67
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -259,12 +263,12 @@ NXem_instrument(NXinstrument):
 #             <item value="tem"/>
 #         </enumeration>
 #     </field>
-#     <group type="NXfabrication"/>
-#     <group type="NXebeam_column"/>
-#     <group type="NXibeam_column"/>
+#     <group name="fabrication" type="NXfabrication"/>
+#     <group name="ebeam_column" type="NXebeam_column"/>
+#     <group name="ibeam_column" type="NXibeam_column"/>
 #     <!--(NXpbeam_column) for adding laser pulsing capabilities (NXsource + x)-->
-#     <group type="NXem_optical_system"/>
-#     <group type="NXdetector">
+#     <group name="optics" type="NXem_optical_system"/>
+#     <group name="detectorID" type="NXdetector" nameType="partial">
 #         <doc>
 #             Description of the type of the detector.
 #             
@@ -412,7 +416,7 @@ NXem_instrument(NXinstrument):
 #             enhanced etching, preferential etching, or material deposition.
 #         </doc>
 #     </group>
-#     <group type="NXpump"/>
-#     <group type="NXsensor"/>
-#     <group type="NXactuator"/>
+#     <group name="pumpID" type="NXpump" nameType="partial"/>
+#     <group name="sensorID" type="NXsensor" nameType="partial"/>
+#     <group name="actuatorID" type="NXactuator" nameType="partial"/>
 # </definition>
