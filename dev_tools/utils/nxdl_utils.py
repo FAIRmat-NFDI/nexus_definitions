@@ -987,8 +987,8 @@ def get_rst_formatted_name(node):
     fixstop = "**"
 
     # Characters that are substitutable
-    varstart = ":bolditalic:`"
-    varstop = "`"
+    varstart = "***`"
+    varstop = "`***"
 
     if nameType == "any":
         # Formatting: bold and italicized
