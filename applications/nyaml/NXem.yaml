@@ -928,6 +928,10 @@ NXem(NXobject):
             title(NX_CHAR):
               exists: recommended
             real(NX_NUMBER):
+              
+              # the existence conflict is here real is required so intensity cannot be used unless also real is instantiated
+              # complex on can also not be used alone without a copy of real and thus inconsistently no required copy of imag
+              # making any of required though would make nonsense data without signal valid by the standard
               \@long_name(NX_CHAR):
             imag(NX_NUMBER):
               exists: optional
@@ -1906,7 +1910,7 @@ NXem(NXobject):
   # in https://github.com/FAIRmat-NFDI/nexus_definitions/commit/0b928c4352bc5636f673b5fb25ce990f1af8a099
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 81a1686cd17dbf3e8d156396988d66fa675b32a6dbaad3f394afee3df7e72a1e
+# edafd92241f6412039a1628052cdeb617c79b458245e65128a19ad0449cac591
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -2917,6 +2921,9 @@ NXem(NXobject):
 #                         <attribute name="AXISNAME_indices" type="NX_UINT" nameType="partial"/>
 #                         <field name="title" type="NX_CHAR" recommended="true"/>
 #                         <field name="real" type="NX_NUMBER">
+#                             <!--the existence conflict is here real is required so intensity cannot be used unless also real is instantiated
+# complex on can also not be used alone without a copy of real and thus inconsistently no required copy of imag
+# making any of required though would make nonsense data without signal valid by the standard-->
 #                             <attribute name="long_name" type="NX_CHAR"/>
 #                         </field>
 #                         <field name="imag" type="NX_NUMBER" optional="true">

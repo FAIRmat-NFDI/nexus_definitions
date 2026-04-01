@@ -52,9 +52,9 @@ extensions = [
     "sphinx.ext.imgconverter",
     "sphinx_tabs.tabs",
     "contrib_ext",
-    "chios.bolditalic",
+    # "chios.bolditalic",
     "sphinx_gallery.gen_gallery",
-    "sphinx_comments",
+    # "sphinx_comments",
 ]
 
 
