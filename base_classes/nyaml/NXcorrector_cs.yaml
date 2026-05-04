@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Base class for a corrector reducing (spherical) aberrations of an electron optical setup.
   
   Different technology partners use different conventions and
@@ -25,69 +25,69 @@ doc: |
   In optics, though, the difference is that the design of the :ref:`NXoptical_lens`
   itself (e.g., using aspheric lenses or combinations of lenses) enables to
   reduce spherical aberrations.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   n_img: |
     Number of images taken, at least one.
-type: group
+\type: group
 NXcorrector_cs(NXcomponent):
   
   # user perspective
   applied(NX_BOOLEAN):
-    doc: |
+    \doc: |
       Was the corrector used?
   tableauID(NXprocess):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       Specific information about the alignment procedure. This is a process during which
       the corrector is configured to enable calibrated usage of the instrument.
       
       This :ref:`NXprocess` group should also be used when one describes in a computer
       simulation the specific details about the modeled or assumed aberrations.
     description(NX_CHAR):
-      doc: |
+      \doc: |
         Discouraged free-text field to add further details about the alignment
         procedure.
     tilt_angle(NX_NUMBER):
-      unit: NX_ANGLE
-      doc: |
+      \unit: NX_ANGLE
+      \doc: |
         The outer tilt angle of the beam in tableau acquisition.
         
         TODO: The relevant axes which span the tilt_angle need a
         cleaner description. Suggestions from the community are
         welcome here for guiding an improvement of this base class.
-      dimensions:
-        rank: 1
-        dim: (n_img,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_img,)
     exposure_time(NX_NUMBER):
-      unit: NX_TIME
-      doc: |
+      \unit: NX_TIME
+      \doc: |
         The exposure time of single tilt images.
-      dimensions:
-        rank: 1
-        dim: (n_img,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_img,)
     magnification(NX_NUMBER):
-      unit: NX_DIMENSIONLESS
-      doc: |
+      \unit: NX_DIMENSIONLESS
+      \doc: |
         The factor of enlargement of the apparent size,
         not the physical size, of an object.
-      dimensions:
-        rank: 1
-        dim: (n_img,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_img,)
     imageID(NXimage):
-      nameType: partial
-      doc: |
+      \nameType: partial
+      \doc: |
         Image(s) taken during the alignment procedure
     model(NX_CHAR):
-      doc: |
+      \doc: |
         Convention used for storing measured or estimated aberrations (for each or the final image)
         via fields c_1, a_1, c_1_0, c_1_2_a, and so on and so forth.
         
         See `S. J. Pennycock and P. D. Nellist <https://doi.org/10.1007/978-1-4419-7200-2>`_ (page 44ff, and page 118ff)
         for different definitions available and further details. Table 7-2 of Ibid. publication (page 305ff) documents how
         to convert from the Nion to the CEOS definitions. Conversion tables are also summarized by `Y. Liao <https://www.globalsino.com/EM/page3740.html>`_.
-      enumeration: [ceos, nion]
+      \enumeration: [ceos, nion]
     
     # specifically-named aberrations following the CEOS / Typke and Dierksen convention
     c_1(NXaberration):
@@ -140,7 +140,7 @@ NXcorrector_cs(NXcomponent):
   (NXdeflector):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 4e4769a43560f95bc8ded22b59ad15dbdada36d08d9f533ca0edbc3f3ba57da5
+# 1c0b47b016adb05b8805dfb84b40ed6645131f3a4a21f0bc616c043e83953309
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Collection of axis-based translations and rotations to describe a geometry.
   May also contain axes that do not move and therefore do not have a transformation
   type specified, but are useful in understanding coordinate frames within which
@@ -82,16 +82,16 @@ doc: |
   actively changes the position or orientation of the object itself. This is in contrast to a **passive** transformation,
   which changes the frame of reference or coordinate system, while the object remains fixed. In case it is needed
   to describe multiple coordinate systems, it is strongly suggested to use the :ref:`NXcoordinate_system` base class.
-type: group
-ignoreExtraGroups: true
-ignoreExtraFields: true
-ignoreExtraAttributes: true
+\type: group
+\ignoreExtraGroups: true
+\ignoreExtraFields: true
+\ignoreExtraAttributes: true
 NXtransformations(NXobject):
   AXISNAME(NX_NUMBER):
-    nameType: any
-    unit: NX_TRANSFORMATION
-    exists: ['max', 'unbounded']
-    doc: |
+    \nameType: any
+    \unit: NX_TRANSFORMATION
+    \exists: ['max', 'unbounded']
+    \doc: |
       Units need to be appropriate for translation or rotation
       
       The name of this field is not forced.  The user is free to use any name
@@ -102,8 +102,8 @@ NXtransformations(NXobject):
       The values given should be the start points of exposures for the corresponding
       frames. The end points should be given in ``AXISNAME_end``.
     \@transformation_type:
-      exists: optional
-      doc: |
+      \exists: optional
+      \doc: |
         The transformation_type may be ``translation``, in which case the
         values are linear displacements along the axis, ``rotation``,
         in which case the values are angular rotations around the axis.
@@ -113,13 +113,14 @@ NXtransformations(NXobject):
         or the direction to the source, or a basis vector of a
         coordinate frame. In this case the value of the ``AXISNAME`` field
         is not used and can be set to the number ``NaN``.
-      enumeration:
+      \enumeration:
         
         # <item value="general" />
         items: [translation, rotation]
-    \@vector(NX_NUMBER):
-      exists: optional
-      doc: |
+    \@vector:
+      \exists: optional
+      \type: NX_NUMBER
+      \doc: |
         Three values that define the axis for this transformation.
         The axis should be normalized to unit length, making it
         dimensionless.
@@ -148,50 +149,54 @@ NXtransformations(NXobject):
         
         Note that by using this convention, the transformation matrices in both left- and
         right-handed coordinate systems are the same.
-      dimensions:
-        rank: 1
-        dim: (3,)
-    \@offset(NX_NUMBER):
-      doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (3,)
+    \@offset:
+      \type: NX_NUMBER
+      \doc: |
         A fixed offset applied before the transformation (three vector components).
         This is not intended to be a substitute for a fixed ``translation`` axis but, for example,
         as the mechanical offset from mounting the axis to its dependency.
-      dimensions:
-        rank: 1
-        dim: (3,)
-    \@offset_units(NX_CHAR):
-      doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (3,)
+    \@offset_units:
+      \type: NX_CHAR
+      \doc: |
         Units of the offset.  Values should be consistent with NX_LENGTH.
-    \@depends_on(NX_CHAR):
-      doc: |
+    \@depends_on:
+      \type: NX_CHAR
+      \doc: |
         Points to the path of a field defining the axis on which this instance of
         NXtransformations depends or the string ".". It can also point to an instance of
         ``NX_coordinate_system`` if this transformation depends on it.
         
         If it is the string ".", it is explicitly pointing towards the default
         `NeXus coordinate system <https://manual.nexusformat.org/design.html#the-nexus-coordinate-system>`_.
-    \@equipment_component(NX_CHAR):
-      doc: |
+    \@equipment_component:
+      \type: NX_CHAR
+      \doc: |
         An arbitrary identifier of a component of the equipment to which
         the transformation belongs, such as 'detector_arm' or 'detector_module'.
         NXtransformations with the same equipment_component label form a logical
         grouping which can be combined together into a single change-of-basis
         operation.
   AXISNAME_end(NX_NUMBER):
-    unit: NX_TRANSFORMATION
-    nameType: partial
-    exists: ['min', '0', 'max', 'unbounded']
-    doc: |
+    \unit: NX_TRANSFORMATION
+    \nameType: partial
+    \exists: ['min', '0', 'max', 'unbounded']
+    \doc: |
       ``AXISNAME_end`` is a placeholder for a name constructed from the actual
       name of an axis to which ``_end`` has been appended.
       
       The values in this field are the end points of the motions that start
       at the corresponding positions given in the ``AXISNAME`` field.
   AXISNAME_increment_set(NX_NUMBER):
-    unit: NX_TRANSFORMATION
-    nameType: partial
-    exists: ['min', '0']
-    doc: |
+    \unit: NX_TRANSFORMATION
+    \nameType: partial
+    \exists: ['min', '0']
+    \doc: |
       ``AXISNAME_increment_set`` is a placeholder for a name constructed from the actual
       name of an axis to which ``_increment_set`` has been appended.
       
@@ -202,7 +207,7 @@ NXtransformations(NXobject):
       differences. Use of ``AXISNAME_end`` is recommended.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# de5414fb45dd99479f23cd4ee5c397f5c4d07c4d82bada3cb8bdcce144f33837
+# 00f771c69ba9f3203cd0db27b0486674f00d4d53435300675b67ad0b8596c7bf
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

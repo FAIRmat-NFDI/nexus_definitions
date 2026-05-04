@@ -1,10 +1,10 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for a configuration file of the paraprobe-spatstat tool.
   
   The tool paraprobe-spatstat evaluates spatial distribution functions.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   n_ivec_max: |
     Maximum number of atoms per molecular ion. Should be 32 for paraprobe.
@@ -12,24 +12,24 @@ symbols:
     Number of different source iontypes to distinguish.
   n_ion_target: |
     Number of different target iontypes to distinguish.
-type: group
+\type: group
 NXapm_paraprobe_spatstat_config(NXapm_paraprobe_tool_config):
   (NXentry):
-    exists: ['min', '1', 'max', '1']
+    \exists: ['min', '1', 'max', '1']
     definition(NX_CHAR):
-      enumeration: [NXapm_paraprobe_spatstat_config]
+      \enumeration: [NXapm_paraprobe_spatstat_config]
     spatial_statisticsID(NXapm_paraprobe_tool_parameters):
-      nameType: partial
-      exists: ['min', '1', 'max', 'unbounded']
+      \nameType: partial
+      \exists: ['min', '1', 'max', 'unbounded']
       surface_distance(NXnote):
-        exists: optional
+        \exists: optional
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         distance(NX_CHAR):
         edge_distance(NX_FLOAT):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             Threshold to define how far an ion has to lay at least from the edge
             of the dataset so that the ion can act as a source. This means that
             an ROI is placed at the location of the ion and its neighbors are
@@ -41,8 +41,8 @@ NXapm_paraprobe_spatstat_config(NXapm_paraprobe_tool_config):
             The threshold is useful to process the dataset such that ROIs do
             not protrude out of the dataset as this would add bias.
       feature_distance(NXnote):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           Distance between each ion and triangulated mesh of microstructural features.
           In addition to spatial filtering and considering how far ions lie to the
           edge of the dataset, it is possible to restrict the analyses to a sub-set of
@@ -52,12 +52,12 @@ NXapm_paraprobe_spatstat_config(NXapm_paraprobe_tool_config):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         distance(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute path in the (HDF5) file which points to the distance of each
             ion to the closest feature.
         feature_distance(NX_FLOAT):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             Threshold to define how close an ion has to lay to a feature so that
             the ion can at all qualify as a source, i.e. that an ROI is placed
             at the location of the ion and its neighbors are then analyzed
@@ -66,7 +66,7 @@ NXapm_paraprobe_spatstat_config(NXapm_paraprobe_tool_config):
             Recall that this feature_distance threshold is used in combination
             with the edge_distance threshold when placing ROI about source ions.
       randomize_iontypes(NX_BOOLEAN):
-        doc: |
+        \doc: |
           Specifies, if the iontypes are randomized for the point cloud or not.
           Internally, paraprobe uses a sequentially executed deterministic MT19987
           (MersenneTwister) pseudo-random number generator to shuffle the
@@ -74,12 +74,12 @@ NXapm_paraprobe_spatstat_config(NXapm_paraprobe_tool_config):
           number of ions of either type remain the same but the information about
           their location is randomized.
       random_number_generator(NXcs_prng):
-        exists: recommended
+        \exists: recommended
         type(NX_CHAR):
         seed(NX_NUMBER):
         warmup(NX_NUMBER):
       ion_query_type_source(NX_CHAR):
-        doc: |
+        \doc: |
           How should the iontype be interpreted on the source-side, i.e.
           all these ion positions where a regions-of-interest (ROI) around
           so-called source ions will be placed. Different options exist
@@ -109,10 +109,10 @@ NXapm_paraprobe_spatstat_config(NXapm_paraprobe_tool_config):
           which ions are considered as source ions of the correlation statistics
           and how the multiplicity of each ion will be factorized, i.e. how
           often it is accounted for.
-        enumeration: [resolve_all, resolve_unknown, resolve_ion, resolve_element, resolve_isotope]
+        \enumeration: [resolve_all, resolve_unknown, resolve_ion, resolve_element, resolve_isotope]
       ion_query_nuclide_source(NX_UINT):
-        unit: NX_UNITLESS
-        doc: |
+        \unit: NX_UNITLESS
+        \doc: |
           Matrix of isotope vectors, as many as rows as different candidates
           for iontypes should be distinguished as possible source iontypes.
           In the simplest case, the matrix contains only the proton number
@@ -120,11 +120,11 @@ NXapm_paraprobe_spatstat_config(NXapm_paraprobe_tool_config):
           Combined with ion_query_type_source set to resolve_element this will
           recover usual spatial correlation statistics like the 1NN C-C
           spatial statistics.
-        dimensions:
-          rank: 2
-          dim: (n_ion_source, n_ivec_max)
+        \dimensions:
+          \rank: 2
+          \dim: (n_ion_source, n_ivec_max)
       ion_query_type_target(NX_CHAR):
-        doc: |
+        \doc: |
           Similarly as ion_query_type_source how should iontypes be interpreted
           on the target-side, i.e. how many counts will be bookkept for ions
           which are neighbors of source ions within or on the surface of each
@@ -133,60 +133,60 @@ NXapm_paraprobe_spatstat_config(NXapm_paraprobe_tool_config):
           counting the summary statistics.
           For details about the resolve values consider the explanations in
           ion_query_type_source. These account for ion_query_type_target as well.
-        enumeration: [resolve_all, resolve_unknown, resolve_ion, resolve_element, resolve_isotope]
+        \enumeration: [resolve_all, resolve_unknown, resolve_ion, resolve_element, resolve_isotope]
       
       # NEW ISSUE: conditionally required only when resolve_isotope
       ion_query_nuclide_target(NX_UINT):
-        unit: NX_UNITLESS
-        doc: |
+        \unit: NX_UNITLESS
+        \doc: |
           Matrix of isotope vectors, as many as rows as different candidates for
           iontypes to distinguish as possible targets. See additional comments
           under ion_query_isotope_vector_source.
-        dimensions:
-          rank: 2
-          dim: (n_ion_target, n_ivec_max)
+        \dimensions:
+          \rank: 2
+          \dim: (n_ion_target, n_ivec_max)
       statistics(NXprocess):
-        doc: |
+        \doc: |
           Specifies which spatial statistics to compute.
         knn(NXprocess):
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Compute k-th nearest neighbour statistics.
           kth(NX_UINT):
-            unit: NX_UNITLESS
-            doc: |
+            \unit: NX_UNITLESS
+            \doc: |
               Order k.
           min(NX_FLOAT):
-            unit: NX_LENGTH
-            doc: |
+            \unit: NX_LENGTH
+            \doc: |
               Minimum value of the histogram binning.
           increment(NX_FLOAT):
-            unit: NX_LENGTH
-            doc: |
+            \unit: NX_LENGTH
+            \doc: |
               Increment of the histogram binning.
           max(NX_FLOAT):
-            unit: NX_LENGTH
-            doc: |
+            \unit: NX_LENGTH
+            \doc: |
               Maximum value of the histogram binning.
         rdf(NXprocess):
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Compute radial distribution function.
           min(NX_FLOAT):
-            unit: NX_LENGTH
-            doc: |
+            \unit: NX_LENGTH
+            \doc: |
               Minimum value of the histogram binning.
           increment(NX_FLOAT):
-            unit: NX_LENGTH
-            doc: |
+            \unit: NX_LENGTH
+            \doc: |
               Increment value of the histogram binning.
           max(NX_FLOAT):
-            unit: NX_LENGTH
-            doc: |
+            \unit: NX_LENGTH
+            \doc: |
               Maximum value of the histogram binning.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 2432a1f22af046732049b220f7ae3b0a6dc49d288d494282ba3adbe895ece038
+# c5dfb65ab45ec464784d2fa21486ce1c5a618e8fb4d7835e890d6fac72c151a8
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

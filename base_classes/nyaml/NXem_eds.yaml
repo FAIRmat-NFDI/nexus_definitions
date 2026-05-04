@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Base class method-specific for energy-dispersive X-ray spectroscopy (EDS/EDXS).
   
   `IUPAC instead of Siegbahn notation <https://doi.org/10.1002/xrs.1300200308>`_ should be used.
@@ -10,7 +10,7 @@ doc: |
   In effect, the resulting three-dimensional elemental information mappings are truly the
   result of a correlation and post-processing of several measurements which is the field
   of correlative tomographic usage of electron microscopy.
-symbols:
+\symbols:
   n_photon_energy: |
     Number of X-ray photon energy (bins)
   n_elements: |
@@ -19,39 +19,41 @@ symbols:
     Number of peaks detected
   n_iupac_line_names: |
     Number of IUPAC line names
-type: group
+\type: group
 NXem_eds(NXprocess):
   indexing(NXprocess):
-    doc: |
+    \doc: |
       Details about computational steps how peaks were indexed as elements.
     (NXprogram):
-      doc: |
+      \doc: |
         The program with which the indexing was performed.
     summary(NXdata):
-      doc: |
+      \doc: |
         Accumulated intensity over all pixels of the region-of-interest.
       intensity(NX_NUMBER):
-        unit: NX_UNITLESS
-        doc: |
+        \unit: NX_UNITLESS
+        \doc: |
           Accumulated counts
-        dimensions:
-          rank: 1
-          dim: (n_photon_energy,)
-        \@long_name(NX_CHAR):
-          doc: |
+        \dimensions:
+          \rank: 1
+          \dim: (n_photon_energy,)
+        \@long_name:
+          \type: NX_CHAR
+          \doc: |
             Counts
       axis_energy(NX_NUMBER):
-        unit: NX_ENERGY
-        doc: |
+        \unit: NX_ENERGY
+        \doc: |
           Energy axis
-        dimensions:
-          rank: 1
-          dim: (n_photon_energy,)
-        \@long_name(NX_CHAR):
-          doc: |
+        \dimensions:
+          \rank: 1
+          \dim: (n_photon_energy,)
+        \@long_name:
+          \type: NX_CHAR
+          \doc: |
             Energy
     atom_types(NX_CHAR):
-      doc: |
+      \doc: |
         Comma-separated list of symbols for elements from the periodic table that have
         been confirmed present by the here reported EDS analysis.
         
@@ -59,33 +61,33 @@ NXem_eds(NXprocess):
         However, a collection of instances of NXpeak with individual NXatom
         can be used to add isotopic information and other relevant context.
     (NXpeak):
-      doc: |
+      \doc: |
         Details about individual indexed peaks.
       (NXatom):
         energy_range(NX_NUMBER):
-          unit: NX_ENERGY
-          doc: |
+          \unit: NX_ENERGY
+          \doc: |
             Associated lower :math:`[e_{min}, e_{max}]` bounds of the
             energy which is assumed associated with this peak.
-          dimensions:
-            rank: 1
-            dim: (2,)
+          \dimensions:
+            \rank: 1
+            \dim: (2,)
         energy(NX_NUMBER):
-          unit: NX_ENERGY
-          doc: |
+          \unit: NX_ENERGY
+          \doc: |
             Theoretical energy of the line according to IUPAC.
         iupac_line_name(NX_CHAR):
-          doc: |
+          \doc: |
             IUPAC notation identifier of the line which the peak represents.
             
             This can be a list of IUPAC notations for (the seldom) case that
             multiple lines are grouped with the same peak.
-          dimensions:
-            rank: 1
-            dim: (n_iupac_line_names,)
+          \dimensions:
+            \rank: 1
+            \dim: (n_iupac_line_names,)
     ELEMENT_SPECIFIC_MAP(NXimage):
-      nameType: any
-      doc: |
+      \nameType: any
+      \doc: |
         Individual element-specific EDS/EDX/EDXS/SXES mapping
         
         A composition map is an image whose intensities for each pixel are the
@@ -102,38 +104,38 @@ NXem_eds(NXprocess):
         
         In this case specify the processing details use peak and weight.
       description(NX_CHAR):
-        doc: |
+        \doc: |
           Discouraged free-text field to add additional information.
       iupac_line_candidates(NX_CHAR):
-        doc: |
+        \doc: |
           Comma-separated list of chemical_symbol-IUPAC X-ray (emission) line name that
           documents which elements and their specific lines are theoretically located within
           the energy_range of the spectrum from which the EDS (element) map was computed.
       energy_range(NX_NUMBER):
-        unit: NX_ENERGY
-        doc: |
+        \unit: NX_ENERGY
+        \doc: |
           Associated :math:`[e_{min}, e_{max}]` bounds of the energy
           range for which spectrum counts were accumulated.
-        dimensions:
-          rank: 1
-          dim: (2,)
+        \dimensions:
+          \rank: 1
+          \dim: (2,)
       (NXprocess):
         peak(NX_CHAR):
-          doc: |
+          \doc: |
             A list of :ref:`NXpeak` instance names whose X-ray quanta were
             accumulated for each pixel to obtain an element-specific
             EDS map.
-          dimensions:
-            rank: 1
-            dim: (n_peaks,)
+          \dimensions:
+            \rank: 1
+            \dim: (n_peaks,)
         weight(NX_NUMBER):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             A list of weights by how much the intensity of each peak
             contributes to the intensity of the EDS map.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 3903897979b6ea01fe3d2ffbcfc0642fe9593e9419111b1d5de3f419609f3505
+# ae4fa56aa3d4b6dce7ab75ccced2b44c49d81f5330a47d398c015b0c2eced9c4
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

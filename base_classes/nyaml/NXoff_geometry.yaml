@@ -1,13 +1,13 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Geometry (shape) description.
   The format closely matches the Object File Format (OFF) which can be output
   by most CAD software.
   It can be used to describe the shape of any component, including detectors.
   In the case of detectors it can be used to define the shape of a single pixel, or,
   if the pixel shapes are non-uniform, to describe the shape of the whole detector.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     These symbols will be used below.
   i: |
     number of vertices in the shape
@@ -16,35 +16,35 @@ symbols:
   l: |
     number faces which are detecting surfaces or form the boundary of
     detecting volumes
-type: group
+\type: group
 NXoff_geometry(NXobject):
   vertices(NX_NUMBER):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       List of x,y,z coordinates for vertices.
       The origin of the coordinates is the position of the parent component, for
       example the NXdetector which the geometry describes.
       If the shape describes a single pixel for a detector with uniform pixel
       shape then the origin is the position of each pixel as described by the
       ``x/y/z_pixel_offset`` datasets in ``NXdetector``.
-    dimensions:
-      rank: 2
-      dim: (i, 3)
+    \dimensions:
+      \rank: 2
+      \dim: (i, 3)
   winding_order(NX_INT):
-    doc: |
+    \doc: |
       List of indices of vertices in the ``vertices`` dataset to form each face,
       right-hand rule for face normal.
-    dimensions:
-      rank: 1
-      dim: (j,)
+    \dimensions:
+      \rank: 1
+      \dim: (j,)
   faces(NX_INT):
-    doc: |
+    \doc: |
       The start index in ``winding_order`` for each face.
-    dimensions:
-      rank: 1
-      dim: (k,)
+    \dimensions:
+      \rank: 1
+      \dim: (k,)
   detector_faces(NX_INT):
-    doc: |
+    \doc: |
       List of pairs of index in the "faces" dataset and detector id. Face IDs in
       the first column, and corresponding detector IDs in the second column.
       This dataset should only be used only if the ``NXoff_geometry`` group is
@@ -53,12 +53,12 @@ NXoff_geometry(NXobject):
       consecutive as not every face in faces need be a detecting surface or
       boundary of detecting volume.
       Can use multiple entries with the same detector id to define detector volumes.
-    dimensions:
-      rank: 2
-      dim: (l, 2)
+    \dimensions:
+      \rank: 2
+      \dim: (l, 2)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 81632fdb953035a7b1b1d221e316fa0d84b979a62debbb4bac0e1bedfa6210db
+# 3660bedbe9ca3907055e888e382f22a7ec76443edd3d374fb41691e99852caf1
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

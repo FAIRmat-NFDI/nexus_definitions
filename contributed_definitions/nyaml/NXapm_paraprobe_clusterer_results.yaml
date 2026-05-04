@@ -1,49 +1,49 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for a results file of the paraprobe-clusterer tool.
   
   The tool paraprobe-clusterer evaluates how points cluster in space.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   n_ions: |
     The total number of ions in the reconstruction.
   n_feat: |
     Number of clusters found.
-type: group
+\type: group
 NXapm_paraprobe_clusterer_results(NXapm_paraprobe_tool_results):
   (NXentry):
-    exists: ['min', '1', 'max', '1']
+    \exists: ['min', '1', 'max', '1']
     definition(NX_CHAR):
-      enumeration: [NXapm_paraprobe_clusterer_results]
+      \enumeration: [NXapm_paraprobe_clusterer_results]
     cameca_to_nexus(NXapm_paraprobe_tool_process):
-      exists: optional
+      \exists: optional
     cluster_analysisID(NXapm_paraprobe_tool_process):
-      nameType: partial
-      exists: ['min', '0', 'max', 'unbounded']
+      \nameType: partial
+      \exists: ['min', '0', 'max', 'unbounded']
       dbscanID(NXsimilarity_grouping):
-        nameType: partial
-        exists: ['min', '0', 'max', 'unbounded']
-        doc: |
+        \nameType: partial
+        \exists: ['min', '0', 'max', 'unbounded']
+        \doc: |
           Results of a DBScan clustering analysis.
         eps(NX_FLOAT):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             The epsilon (eps) parameter used.
         min_pts(NX_UINT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             The minimum points (min_pts) parameter used.
         cardinality(NX_POSINT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             Number of members in the set which is partitioned into features.
             Specifically, this is the total number of targets filtered from the
             dataset, i.e. typically the number of clusters which is usually not and
             for sure not necessarily the total number of ions in the dataset.
         index_offset(NX_INT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             Which identifier is the first to be used to label a cluster.
             
             The value should be chosen in such a way that special values can be resolved:
@@ -54,69 +54,69 @@ NXapm_paraprobe_clusterer_results(NXapm_paraprobe_tool_results):
             case that objects of the noise category get the value of -1 and points of the
             unassigned category get the value 0.
         targets(NX_UINT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             The evaporation (sequence) id (aka evaporation_id) to figure out
             which ions from the reconstruction were considered targets. The length
             of this array is not necessarily n_ions.
             Instead, it is the value of cardinality.
-          dimensions:
-            rank: 1
-            dim: (i,)
+          \dimensions:
+            \rank: 1
+            \dim: (i,)
         
         # quantities for debugging purposes
         number_of_solutions(NX_UINT):
-          exists: optional
-          unit: NX_UNITLESS
-          doc: |
+          \exists: optional
+          \unit: NX_UNITLESS
+          \doc: |
             The number of solutions found for each target. Typically,
             this value is 1 in which case the field can be omitted.
             Otherwise, this array is the concatenated set of values of solution
             tuples for each target that can be used to decode model_labels,
             core_sample_indices, and weight.
-          dimensions:
-            rank: 1
-            dim: (i,)
+          \dimensions:
+            \rank: 1
+            \dim: (i,)
         model_label(NX_INT):
-          exists: optional
-          unit: NX_UNITLESS
-          doc: |
+          \exists: optional
+          \unit: NX_UNITLESS
+          \doc: |
             The raw labels from the DBScan clustering backend process.
             The length of this array is not necessarily n_ions.
             Instead, it is typically the value of cardinality provided that each
             target has only one associated cluster. If targets are assigned to
             multiple cluster this array is as long as the total number of solutions
             found and
-          dimensions:
-            rank: 1
-            dim: (k,)
+          \dimensions:
+            \rank: 1
+            \dim: (k,)
         core_sample_indices(NX_INT):
-          exists: optional
-          unit: NX_UNITLESS
-          doc: |
+          \exists: optional
+          \unit: NX_UNITLESS
+          \doc: |
             The raw array of core sample indices which specify which of the
             targets are core points.
-          dimensions:
-            rank: 1
-            dim: (k,)
+          \dimensions:
+            \rank: 1
+            \dim: (k,)
         numerical_label(NX_UINT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             Numerical label for each target (member in the set) aka cluster identifier.
-          dimensions:
-            rank: 1
-            dim: (k,)
+          \dimensions:
+            \rank: 1
+            \dim: (k,)
         categorical_label(NX_CHAR):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Categorical label(s) for each target (member in the set) aka cluster name(s).
-          dimensions:
-            rank: 1
-            dim: (k,)
+          \dimensions:
+            \rank: 1
+            \dim: (k,)
         weight(NX_NUMBER):
-          exists: optional
-          unit: NX_UNITLESS
-          doc: |
+          \exists: optional
+          \unit: NX_UNITLESS
+          \doc: |
             Weights for each target that specifies how probable the target is assigned to
             a specific cluster.
             
@@ -124,67 +124,67 @@ NXapm_paraprobe_clusterer_results(NXapm_paraprobe_tool_results):
             multiplicity of each ion with respect to the cluster. That is how many times
             should the position of the ion be accounted for because the ion is e.g. a
             molecular ion with several elements or nuclides of requested type.
-          dimensions:
-            rank: 1
-            dim: (k,)
+          \dimensions:
+            \rank: 1
+            \dim: (k,)
         is_noise(NX_BOOLEAN):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Are targets assigned to the noise category or not.
-          dimensions:
-            rank: 1
-            dim: (k,)
+          \dimensions:
+            \rank: 1
+            \dim: (k,)
         is_core(NX_BOOLEAN):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Are targets assumed a core point.
-          dimensions:
-            rank: 1
-            dim: (k,)
+          \dimensions:
+            \rank: 1
+            \dim: (k,)
         statistics(NXprocess):
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             In addition to the detailed storage which members were grouped to which
             feature here summary statistics are stored that communicate e.g. how many
             cluster were found.
           
           # at the level of the set of targets
           number_of_targets(NX_UINT):
-            unit: NX_UNITLESS
-            doc: |
+            \unit: NX_UNITLESS
+            \doc: |
               Total number of targets in the set, i.e. ions that were filtered
               and considered in this cluster analysis.
           number_of_noise_members(NX_UINT):
-            unit: NX_UNITLESS
-            doc: |
+            \unit: NX_UNITLESS
+            \doc: |
               Total number of members in the set which are categorized as noise.
           number_of_core_members(NX_UINT):
-            unit: NX_UNITLESS
-            doc: |
+            \unit: NX_UNITLESS
+            \doc: |
               Total number of members in the set which are categorized as a core point.
           number_of_features(NX_UINT):
-            unit: NX_UNITLESS
-            doc: |
+            \unit: NX_UNITLESS
+            \doc: |
               Total number of clusters (excluding noise and unassigned).
           
           # at the level of the feature set
           indices_feature(NX_INT):
-            unit: NX_UNITLESS
-            doc: |
+            \unit: NX_UNITLESS
+            \doc: |
               Numerical identifier of each feature aka cluster_id.
-            dimensions:
-              rank: 1
-              dim: (n_feat,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_feat,)
           number_of_members(NX_UINT):
-            unit: NX_UNITLESS
-            doc: |
+            \unit: NX_UNITLESS
+            \doc: |
               Number of members for each feature.
-            dimensions:
-              rank: 1
-              dim: (n_feat,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_feat,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 25f8c88ec94a13db350194f15d7b44958d7e5b7eb540f79936527379b6b9b4b7
+# 46b24c481e4624e1722b6a6ed460654e170d0250210b23f6e954fb8e6d3196d1
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

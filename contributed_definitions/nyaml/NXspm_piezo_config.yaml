@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   A base class describing piezo actuator settings for scanning probe microscopy.
   
   Piezoelectric actuators work utilizing the inverse-piezoelectric effect, when a voltage
@@ -8,61 +8,61 @@ doc: |
   open loop piezo actuators (that is actuators without capacitive sensor feedback systems).
 
 # Discussion: No need to create this base class rather we can define in spm application definition.
-type: group
+\type: group
 NXspm_piezo_config(NXobject):
   piezo_material(NXspm_piezoelectric_material):
-    doc: |
+    \doc: |
       The material description and properties of the piezoelectric scanner materials.
     curvature_radiusN(NX_NUMBER):
-      nameType: partial
-      unit: NX_LENGTH
-      doc: |
+      \nameType: partial
+      \unit: NX_LENGTH
+      \doc: |
         The N (substring) denotes X or Y. There are 2 parameters in X and Y directions. It can be set
         approximately to the length of the piezo tube along X and Y axis.
   calibration(NXcalibration):
     calibration_type(NX_CHAR):
-      doc: |
+      \doc: |
         The name of the calibration type, sometimes it is called
         `active calibration`.
-      enumeration: [active, passive]
+      \enumeration: [active, passive]
     calibration_name:
-      doc: |
+      \doc: |
         A specific name of the calibration (e.g. active type with name 'LHe').
     calibration_date(NX_DATE_TIME):
-      doc: |
+      \doc: |
         The date of the calibration.
     calibratedAXIS(NX_NUMBER):
-      nameType: partial
-      doc: |
+      \nameType: partial
+      \doc: |
         The AXIS (substring) denotes X, Y or Z, e.g., calibrated_x. There are three directions X, Y, and Z for calibration,
         along with three available parameters each: Calibration (m/V), Range (m), and HV gain. Only
         two of these parameters are required to define the calibration. Consequently, when any
         value is changed, one of the other values will be automatically updated.
     hv_gainN(NX_NUMBER):
-      nameType: partial
-      doc: |
+      \nameType: partial
+      \doc: |
         The N (substring) denotes X or Y or Z, e.g., hv_gain_x. In some systems, there is an HV gain readout feature. For
         these systems, the HV gain should be automatically adjusted whenever the gain is
         changed at the high voltage amplifier.
     rangeN(NX_NUMBER):
-      nameType: partial
-      unit: NX_LENGTH
-      doc: |
+      \nameType: partial
+      \unit: NX_LENGTH
+      \doc: |
         The N (substring) denotes X or Y or Z, e.g., range_x. There are 3 parameters in X, Y and Z directions. The range
         is the maximum distance the piezo can move.
     calibration_parameters(NXparameters):
-      exists: optional
+      \exists: optional
       coefficientN(NX_NUMBER):
-        nameType: partial
-        unit: NX_ANY
-        doc: |
+        \nameType: partial
+        \unit: NX_ANY
+        \doc: |
           The calibration coefficient is the ratio of the actual distance moved by the piezo due to
           the voltage or external force applied to the piezo. It is also called first-order correction.
           The N (substring) denotes X and Y directions (e.g., coefficient_x).
       second_order_correctionN(NX_NUMBER):
-        nameType: partial
-        unit: NX_ANY
-        doc: |
+        \nameType: partial
+        \unit: NX_ANY
+        \doc: |
           The N (substring) denotes X and Y directions (e.g., second_order_correction_x). If you know them, you can enter the 2nd order piezo
           characteristics to compensate the error for that axis.
           The following equation shows the
@@ -71,24 +71,24 @@ NXspm_piezo_config(NXobject):
           where cx is the calibration of the piezo X and cxx is the 2nd order correction. The unit for
           the second-order correction is (:math:`\frac{V}{m^2}`).
     tiltN(NX_NUMBER):
-      nameType: partial
-      unit: NX_ANGLE
-      doc: |
+      \nameType: partial
+      \unit: NX_ANGLE
+      \doc: |
         The N (substring) denotes X and Y directions (e.g., tilt_x), and for both directions tilt needs to be adjusted according
         to the actual surface.
     drift_correction_status(NX_BOOLEAN):
-      doc: |
+      \doc: |
         The drift correction status (true / false) in calibration step of piezo.
     driftN(NX_NUMBER):
-      nameType: partial
-      unit: NX_ANY
-      doc: |
+      \nameType: partial
+      \unit: NX_ANY
+      \doc: |
         The N (substring) denotes X, Y and Z directions (e.g., drift_x). Define the
         drift speed [m/s] for all three axes. When the compensation is on, the piezo will start to
         move at that speed.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# e0b55417f513cd13242230ae3a361a6ba0e94a7c58e09680356e71b028173981
+# f7bdc55be0e0fdec5ab5e863635cb39e1d5298a1e9e7d813f4bf5ae4499e76ac
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

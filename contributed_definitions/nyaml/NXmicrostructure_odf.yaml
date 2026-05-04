@@ -1,11 +1,11 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Base class to store an orientation distribution function (ODF).
   
   An orientation distribution function is a probability distribution that details how
   much volume of material has a specific orientation. An ODF is computed from
   pole figure data in a computational process called `pole figure inversion <https://doi.org/10.1107/S0021889808030112>`_.
-symbols:
+\symbols:
   n_varphi_two: |
     Number of pixel per varphi section plot along the :math:`\varphi_2` slow
     direction.
@@ -18,37 +18,37 @@ symbols:
     Number of local maxima evaluated in the component analysis.
   n_pos: |
     Number of sampled positions in orientation space.
-type: group
+\type: group
 NXmicrostructure_odf(NXprocess):
   configuration(NXparameters):
-    doc: |
+    \doc: |
       Details about the algorithm used for computing the ODF.
     crystal_symmetry_point_group(NX_CHAR):
-      doc: |
+      \doc: |
         Point group of the crystal structure of the phase for which the here documented
         phase-dependent ODF was computed following the notation of the
         International Table of Crystallography.
     specimen_symmetry_point_group(NX_CHAR):
-      doc: |
+      \doc: |
         Point group assumed for additionally considered sample symmetries
         following the notation of the International Table of Crystallography.
     kernel_halfwidth(NX_NUMBER):
-      unit: NX_ANGLE
-      doc: |
+      \unit: NX_ANGLE
+      \doc: |
         Halfwidth of the kernel.
     kernel_name(NX_CHAR):
-      doc: |
+      \doc: |
         Name of the kernel.
     resolution(NX_NUMBER):
-      unit: NX_ANGLE
-      doc: |
+      \unit: NX_ANGLE
+      \doc: |
         Resolution of the kernel.
   characteristics(NXprocess):
-    doc: |
+    \doc: |
       Group to store descriptors for a rough classification of an ODF.
     texture_index(NX_FLOAT):
-      unit: NX_DIMENSIONLESS
-      doc: |
+      \unit: NX_DIMENSIONLESS
+      \doc: |
         The texture index :math:`t = \int_{\mathcal{SO(3)}} f(R)^{2}dR` with :math:`f(R)`, denoting the ODF
         is evaluated in orientation space :math:`\mathcal{SO(3)}`.
         
@@ -56,66 +56,66 @@ NXmicrostructure_odf(NXprocess):
   
   # specific values and typical results
   kth_extrema(NXprocess):
-    doc: |
+    \doc: |
       Group to store descriptors and summary statistics for extrema of the ODF.
     extrema(NX_CHAR):
-      doc: |
+      \doc: |
         Minima or maxima, if extrema is set to minima values for location and volume_fraction
         are sorted in increasing order. If extrema is set to maxima values for location and
         volume_fraction are sorted in decreasing order. Therefore, the global extremum is
         always the first entry in location and volume_fraction.
-      enumeration: [minima, maxima]
+      \enumeration: [minima, maxima]
     kth(NX_UINT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Number of local extrema evaluated
     
     # value of kth should be k
     theta(NX_NUMBER):
-      unit: NX_ANGLE
-      doc: |
+      \unit: NX_ANGLE
+      \doc: |
         Disorientation threshold within which intensity of the ODF
         is integrated for the component analysis.
     location(NX_NUMBER):
-      unit: NX_ANGLE
-      doc: |
+      \unit: NX_ANGLE
+      \doc: |
         Euler angle representation :math:`\varphi_1`, :math:`\Phi`, :math:`\varphi_2` of the
         kth-most maxima in decreasing order of the intensity maximum.
-      dimensions:
-        rank: 2
-        dim: (k, 3)
+      \dimensions:
+        \rank: 2
+        \dim: (k, 3)
     volume_fraction(NX_NUMBER):
-      unit: NX_ANY
-      doc: |
+      \unit: NX_ANY
+      \doc: |
         Integrated ODF intensity within a theta angular region of the orientation space :math:`SO3`
         about each location (obeying symmetries) as specified for each location.
-      dimensions:
-        rank: 1
-        dim: (k,)
+      \dimensions:
+        \rank: 1
+        \dim: (k,)
   sampling(NXprocess):
-    doc: |
+    \doc: |
       The ODF intensity values (weights) as sampled with a software.
     resolution(NX_NUMBER):
-      unit: NX_ANGLE
-      doc: |
+      \unit: NX_ANGLE
+      \doc: |
         Sampling resolution
     euler(NX_NUMBER):
-      unit: NX_ANGLE
-      doc: |
+      \unit: NX_ANGLE
+      \doc: |
         Bunge-Euler (i.e. ZXZ convention) locations of each position
         in orientation space for which a weight was sampled.
-      dimensions:
-        rank: 2
-        dim: (n_pos, 3)
+      \dimensions:
+        \rank: 2
+        \dim: (n_pos, 3)
     weight(NX_NUMBER):
-      unit: NX_DIMENSIONLESS
-      doc: |
+      \unit: NX_DIMENSIONLESS
+      \doc: |
         Weight at each sampled position following the order in euler.
-      dimensions:
-        rank: 1
-        dim: (n_pos,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_pos,)
   phi_two_plot(NXdata):
-    doc: |
+    \doc: |
       Visualization of the ODF intensity as discretized orthogonal sections through
       orientation space parameterized using Bunge-Euler angles.
       
@@ -124,37 +124,37 @@ NXmicrostructure_odf(NXprocess):
       Mind that the orientation space is a distorted space when it using an Euler angle parameterization.
       Therefore, equivalent orientations show intensity contributions in eventually multiple locations.
     intensity(NX_NUMBER):
-      unit: NX_DIMENSIONLESS
-      doc: |
+      \unit: NX_DIMENSIONLESS
+      \doc: |
         ODF intensity at probed locations relative to the intensity of the null model of
         a random texture.
-      dimensions:
-        rank: 3
-        dim: (n_varphi_two, n_capital_phi, n_varphi_one)
+      \dimensions:
+        \rank: 3
+        \dim: (n_varphi_two, n_capital_phi, n_varphi_one)
     varphi_one(NX_NUMBER):
-      unit: NX_ANGLE
-      doc: |
+      \unit: NX_ANGLE
+      \doc: |
         Pixel center angular position along the :math:`\varphi_1` direction.
-      dimensions:
-        rank: 1
-        dim: (n_varphi_one,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_varphi_one,)
     capital_phi(NX_NUMBER):
-      unit: NX_ANGLE
-      doc: |
+      \unit: NX_ANGLE
+      \doc: |
         Pixel center angular position along the :math:`\Phi` direction.
-      dimensions:
-        rank: 1
-        dim: (n_capital_phi,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_capital_phi,)
     varphi_two(NX_NUMBER):
-      unit: NX_ANGLE
-      doc: |
+      \unit: NX_ANGLE
+      \doc: |
         Pixel center angular position along the :math:`\varphi_2` direction.
-      dimensions:
-        rank: 1
-        dim: (n_varphi_two,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_varphi_two,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 6114794aa8ae148316c93ba3a4ce3c0e831110d194f032dcf2cc947b2bd4d9d4
+# 51f3536b8721134d548d19fcdda3af8cc0749043e986d918d3d49a26407c6255
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Computational geometry description of a grid of Wigner-Seitz cells in Euclidean space.
   
   Three-dimensional grids with cubic cells are if not the most frequently used
@@ -7,8 +7,8 @@ doc: |
   in many cases in the natural sciences and engineering disciplines. Examples are
   discretizations in space and time used for phase-field, cellular automata, or Monte Carlo
   modeling.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   d: |
     The dimensionality of the grid.
@@ -16,32 +16,32 @@ symbols:
     The cardinality or total number of cells aka grid points.
   n_b: |
     Number of boundaries of the bounding box or primitive housing the grid.
-type: group
+\type: group
 NXcg_grid(NXcg_primitive):
   origin(NX_NUMBER):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       Location of the origin of the grid.
       
       Use the depends_on field that is inherited from the :ref:`NXcg_primitive`
       class to specify the coordinate system in which the origin location is defined.
-    dimensions:
-      rank: 1
-      dim: (d,)
+    \dimensions:
+      \rank: 1
+      \dim: (d,)
   symmetry(NX_CHAR):
-    doc: |
+    \doc: |
       The symmetry of the lattice defining the shape of the unit cell.
-    enumeration: [cubic]
+    \enumeration: [cubic]
   cell_dimensions(NX_NUMBER):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       The unit cell dimensions using crystallographic notation.
-    dimensions:
-      rank: 1
-      dim: (d,)
+    \dimensions:
+      \rank: 1
+      \dim: (d,)
   extent(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Number of unit cells along each of the d unit vectors.
       
       The total number of cells or grid points has to be the cardinality.
@@ -49,52 +49,52 @@ NXcg_grid(NXcg_primitive):
       as it could be for instance the case of a grid where all grid points
       outside some masking primitive are removed, this extent field should
       not be used. Instead, use the coordinate field.
-    dimensions:
-      rank: 1
-      dim: (d,)
+    \dimensions:
+      \rank: 1
+      \dim: (d,)
   
   # number_of_cells(NX_UINT): maybe already too trivial quantities
   # should constraints on the grid be place here or not
   position(NX_NUMBER):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       Position of each cell in Euclidean space.
-    dimensions:
-      rank: 2
-      dim: (c, d)
+    \dimensions:
+      \rank: 2
+      \dim: (c, d)
   coordinate(NX_INT):
-    unit: NX_DIMENSIONLESS
-    doc: |
+    \unit: NX_DIMENSIONLESS
+    \doc: |
       Coordinate of each cell with respect to the discrete grid.
-    dimensions:
-      rank: 2
-      dim: (c, d)
+    \dimensions:
+      \rank: 2
+      \dim: (c, d)
   
   # this should be a ROI
   bounding_box(NXcg_polyhedron):
-    doc: |
+    \doc: |
       A tight bounding box about the grid.
   
   # does it have to be a tight bounding box?
   # a good example for a general bounding box description for such a grids of triclinic cells
   # https://docs.lammps.org/Howto_triclinic.html NXcg_polyhedron because a parallelepiped
   number_of_boundaries(NX_UINT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Number of boundaries distinguished
       
       Most grids discretize a cubic or cuboidal region. In this case
       six sides can be distinguished, each making an own boundary.
   boundaries(NX_CHAR):
-    doc: |
+    \doc: |
       Name of domain boundaries of the simulation box/ROI
       e.g. left, right, front, back, bottom, top.
-    dimensions:
-      rank: 1
-      dim: (n_b,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_b,)
   boundary_conditions(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       The boundary conditions for each boundary:
       
       0 - undefined
@@ -103,11 +103,11 @@ NXcg_grid(NXcg_primitive):
       3 - mirror
       4 - von Neumann
       5 - Dirichlet
-    dimensions:
-      rank: 1
-      dim: (n_b,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_b,)
   surface_reconstruction(NX_CHAR):
-    doc: |
+    \doc: |
       Details about the computational geometry method and implementation
       used for discretizing internal surfaces as e.g. obtained with marching methods,
       like marching squares or marching cubes.
@@ -127,7 +127,7 @@ NXcg_grid(NXcg_primitive):
       description can be used instead.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# c5bee596e67c2209b40728d8aef705108736ff7e8edce3781bd661d458bfbe13
+# 9b248f766b4ebf3b307f46ce8640794513f1482999a3339b1bfeea43b968077c
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

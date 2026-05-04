@@ -1,30 +1,30 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Parameters for controlling external conditions
-type: group
+\type: group
 NXenvironment(NXobject):
   name:
-    doc: |
+    \doc: |
       Apparatus identification code/model number; e.g. OC100 011
   short_name:
-    doc: |
+    \doc: |
       Alternative short name, perhaps for dashboard display like a present Seblock name
   type:
-    doc: |
+    \doc: |
       Type of apparatus. This could be the SE codes in scheduling database; e.g. OC/100
   description:
-    doc: |
+    \doc: |
       Description of the apparatus; e.g. 100mm bore orange cryostat with Roots pump
   program:
-    doc: |
+    \doc: |
       Program controlling the apparatus; e.g. LabView VI name
   position(NXgeometry):
-    doc: |
+    \doc: |
       The position and orientation of the apparatus.
       Note, it is recommended to use NXtransformations instead.
   value(NX_FLOAT):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       This is to be used if there is no actuator/sensor that controls/measures
       the environment parameters, but the user would still like to give a value for
       it. An example would be a room temperature experiment where the temperature is
@@ -33,7 +33,7 @@ NXenvironment(NXobject):
       Note that this method for recording the environment parameters is not advised,
       but using NXsensor and NXactuator is strongly recommended instead.
   depends_on(NX_CHAR):
-    doc: |
+    \doc: |
       NeXus positions components by applying a set of translations and rotations
       to apply to the component starting from 0, 0, 0. The order of these operations
       is critical and forms what NeXus calls a dependency chain. The depends_on
@@ -41,26 +41,26 @@ NXenvironment(NXobject):
       string "." if located in the origin. Usually these operations are stored in a
       NXtransformations group. But NeXus allows them to be stored anywhere.
   (NXtransformations):
-    exists: ['min', '0']
-    doc: |
+    \exists: ['min', '0']
+    \doc: |
       This is the group recommended for holding the chain of translation
       and rotation operations necessary to position the component within
       the instrument. The dependency chain may however traverse similar groups in
       other component groups.
   (NXnote):
-    doc: |
+    \doc: |
       Additional information, LabView logs, digital photographs, etc
   (NXactuator):
-    doc: |
+    \doc: |
       Any actuator used to control the environment. This can be linked to an actuator
       defined in an NXinstrument instance.
   (NXsensor):
-    doc: |
+    \doc: |
       Any sensor used to monitor the environment. This can be linked to a sensor
       defined in an NXinstrument instance.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 42ff61c479ba3c4466f8ad723cb3f07af542a72fc8dc15cf2519c8aeb221feff
+# f340ad4a0789247039c4ad4a8478bcd507d40090d521dc9aa0d2f8ee47810d16
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

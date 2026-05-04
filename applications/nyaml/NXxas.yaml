@@ -1,78 +1,78 @@
-category: application
-doc: |
+\category: application
+\doc: |
   This is an application definition for raw data from an X-ray absorption spectroscopy experiment.
   
   This is essentially a scan on energy versus incoming/
   absorbed beam.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbol(s) listed here will be used below to coordinate datasets with the same shape.
   nP: |
     Number of points
-type: group
+\type: group
 NXxas(NXobject):
   (NXentry):
     title:
     start_time(NX_DATE_TIME):
     definition:
-      doc: |
+      \doc: |
         Official NeXus NXDL schema to which this file conforms
-      enumeration: [NXxas]
+      \enumeration: [NXxas]
     (NXinstrument):
       (NXsource):
         type:
         name:
         probe:
-          enumeration: [x-ray]
+          \enumeration: [x-ray]
       monochromator(NXmonochromator):
         energy(NX_FLOAT):
           axis: 1
-          dimensions:
-            rank: 1
-            dim: (nP,)
+          \dimensions:
+            \rank: 1
+            \dim: (nP,)
       incoming_beam(NXdetector):
         data(NX_NUMBER):
-          dimensions:
-            rank: 1
-            dim: (nP,)
+          \dimensions:
+            \rank: 1
+            \dim: (nP,)
       absorbed_beam(NXdetector):
         data(NX_NUMBER):
-          doc: |
+          \doc: |
             This data corresponds to the sample signal.
-          dimensions:
-            rank: 1
-            dim: (nP,)
+          \dimensions:
+            \rank: 1
+            \dim: (nP,)
     (NXsample):
       name:
-        doc: |
+        \doc: |
           Descriptive name of sample
     (NXmonitor):
       mode:
-        doc: |
+        \doc: |
           Count to a preset value based on either clock time (timer)
           or received monitor counts (monitor).
-        enumeration: [monitor, timer]
+        \enumeration: [monitor, timer]
       preset(NX_FLOAT):
-        doc: |
+        \doc: |
           preset value for time or monitor
       data(NX_NUMBER):
-        doc: |
+        \doc: |
           This field could be a link to ``/NXentry/NXinstrument/incoming_beam:NXdetector/data``
-        dimensions:
-          rank: 1
-          dim: (nP,)
+        \dimensions:
+          \rank: 1
+          \dim: (nP,)
     (NXdata):
       energy(link):
-        target: /NXentry/NXinstrument/monochromator:NXmonochromator/energy
+        \target: /NXentry/NXinstrument/monochromator:NXmonochromator/energy
       absorbed_beam(link):
-        target: /NXentry/NXinstrument/absorbed_beam:NXdetector/data
+        \target: /NXentry/NXinstrument/absorbed_beam:NXdetector/data
       mode:
-        doc: |
+        \doc: |
           Detection method used for observing the sample absorption (pick one from the enumerated list and spell exactly)
-        enumeration: [Total Electron Yield, Partial Electron Yield, Auger Electron Yield, Fluorescence Yield, Transmission]
+        \enumeration: [Total Electron Yield, Partial Electron Yield, Auger Electron Yield, Fluorescence Yield, Transmission]
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 00a6bb194c3f08b31060f1cc7e9cc56f38da639ef14c06e681ed85f56b2a443c
+# 07eac04e5d4f0fa1e57f080d1821d28369b121a6784030dfcf2fd6fd743dc83b
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

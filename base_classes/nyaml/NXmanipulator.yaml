@@ -1,141 +1,141 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Base class to describe the use of manipulators and sample stages.
-type: group
+\type: group
 NXmanipulator(NXcomponent):
   name(NX_CHAR):
-    doc: |
+    \doc: |
       Name of the manipulator.
   description(NX_CHAR):
-    doc: |
+    \doc: |
       A description of the manipulator.
   type(NX_CHAR):
-    doc: |
+    \doc: |
       Type of manipulator, Hexapod, Rod, etc.
   cryostat(NXactuator):
-    doc: |
+    \doc: |
       Cryostat for cooling the sample (and, potentially, the whole manipulator).
     actuation_target:
-      enumeration: [temperature]
+      \enumeration: [temperature]
     (NXpid_controller):
       setpoint(NX_FLOAT):
-        unit: NX_TEMPERATURE
-        doc: |
+        \unit: NX_TEMPERATURE
+        \doc: |
           In case of a fixed or averaged cooling temperature, this is the scalar temperature setpoint.
           It can also be a 1D array of temperature setpoints (without time stamps).
       setpoint_log(NXlog):
         value(NX_FLOAT):
-          unit: NX_TEMPERATURE
-          doc: |
+          \unit: NX_TEMPERATURE
+          \doc: |
             In the case of an experiment in which the temperature is changed and the setpoints are
             recorded with time stamps, this is an array of temperature setpoints.
   temperature_sensor(NXsensor):
-    doc: |
+    \doc: |
       Temperature sensor measuring the sample temperature.
     measurement:
-      enumeration: [temperature]
+      \enumeration: [temperature]
     value(NX_FLOAT):
-      unit: NX_TEMPERATURE
-      doc: |
+      \unit: NX_TEMPERATURE
+      \doc: |
         In case of a single or averaged temperature measurement, this is the scalar temperature measured
         by the sample temperature sensor. It can also be a 1D array of measured temperatures
         (without time stamps).
     value_log(NXlog):
       value(NX_FLOAT):
-        unit: NX_TEMPERATURE
-        doc: |
+        \unit: NX_TEMPERATURE
+        \doc: |
           In the case of an experiment in which the temperature changes and is recorded with time stamps,
           this is an array of length m of temperatures.
   sample_heater(NXactuator):
-    doc: |
+    \doc: |
       Device to heat the sample.
     actuation_target:
-      enumeration: [temperature]
+      \enumeration: [temperature]
     output_heater_power(NX_FLOAT):
-      unit: NX_POWER
-      doc: |
+      \unit: NX_POWER
+      \doc: |
         In case of a fixed or averaged heating power, this is the scalar heater power.
         It can also be a 1D array of heater powers (without time stamps).
     output_heater_power_log(NXlog):
       value(NX_FLOAT):
-        unit: NX_POWER
-        doc: |
+        \unit: NX_POWER
+        \doc: |
           In the case of an experiment in which the heater power is changed and recorded with time stamps,
           this is an array of length m of temperature setpoints.
     (NXpid_controller):
       setpoint(NX_FLOAT):
-        unit: NX_TEMPERATURE
-        doc: |
+        \unit: NX_TEMPERATURE
+        \doc: |
           In case of a fixed or averaged temperature, this is the scalar temperature setpoint.
           It can also be a 1D array of temperature setpoints (without time stamps).
       setpoint_log(NXlog):
         value(NX_FLOAT):
-          unit: NX_TEMPERATURE
-          doc: |
+          \unit: NX_TEMPERATURE
+          \doc: |
             In the case of an experiment in which the temperature is changed and the setpoints are
             recorded with time stamps, this is an array of length m of temperature setpoints.
   drain_current_ammeter(NXsensor):
-    doc: |
+    \doc: |
       Ammeter measuring the drain current of the sample and sample holder.
     measurement:
-      enumeration: [current]
+      \enumeration: [current]
     value(NX_FLOAT):
-      unit: NX_CURRENT
-      doc: |
+      \unit: NX_CURRENT
+      \doc: |
         In case of a single or averaged drain current measurement, this is the scalar drain current measured between
         the sample and sample holder. It can also be an 1D array of measured currents (without time stamps).
     value_log(NXlog):
       value(NX_FLOAT):
-        unit: NX_CURRENT
-        doc: |
+        \unit: NX_CURRENT
+        \doc: |
           In the case of an experiment in which the current changes and is recorded with
           time stamps, this is an array of length m of currents.
   sample_bias_potentiostat(NXactuator):
-    doc: |
+    \doc: |
       Actuator applying a voltage between sample holder and sample.
     actuation_target:
-      enumeration: [voltage]
+      \enumeration: [voltage]
     (NXpid_controller):
       setpoint(NX_FLOAT):
-        unit: NX_VOLTAGE
-        doc: |
+        \unit: NX_VOLTAGE
+        \doc: |
           In case of a fixed or averaged applied bias, this is the scalar voltage applied between
           sample and sample holder. It can also be an 1D array of voltage setpoints (without time stamps).
       setpoint_log(NXlog):
         value(NX_FLOAT):
-          unit: NX_VOLTAGE
-          doc: |
+          \unit: NX_VOLTAGE
+          \doc: |
             In the case of an experiment in which the bias is changed and the setpoints are
             recorded with time stamps, this is an array of length m of voltage setpoints.
   sample_bias_voltmeter(NXsensor):
-    doc: |
+    \doc: |
       Sensor measuring the voltage applied to sample and sample holder.
     measurement:
-      enumeration: [voltage]
+      \enumeration: [voltage]
     value(NX_FLOAT):
-      unit: NX_VOLTAGE
-      doc: |
+      \unit: NX_VOLTAGE
+      \doc: |
         In case of a single or averaged bias measurement, this is the scalar voltage measured between
         sample and sample holder. It can also be an 1D array of measured voltages (without time stamps).
     value_log(NXlog):
       value(NX_FLOAT):
-        unit: NX_VOLTAGE
-        doc: |
+        \unit: NX_VOLTAGE
+        \doc: |
           In the case of an experiment in which the bias changes and is recorded with
           time stamps, this is an array of length m of voltages.
   (NXactuator):
-    doc: |
+    \doc: |
       Any additional actuator on the manipulator used to control an external
       condition.
   (NXsensor):
-    doc: |
+    \doc: |
       Any additional sensors on the manipulator used to monitor an external condition.
   (NXpositioner):
-    doc: |
+    \doc: |
       Class to describe the motors that are used in the manipulator.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 06b12ac7ff5bcc6059958b43ef5ab82cbf43b99d04d3f742a7db0b62fa928f1b
+# e8f61515808300e42f26aac9ac6ee00c4778840f5aa55f7aa4ce8f9d6e0efe9b
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

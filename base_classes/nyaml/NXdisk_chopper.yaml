@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   A device blocking the beam in a temporal periodic pattern.
   
   A disk which blocks the beam but has one or more slits to periodically
@@ -13,97 +13,98 @@ doc: |
   
   Angles and positive rotation speeds are measured in an anticlockwise
   direction when facing away from the source.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     This symbol will be used below to coordinate datasets with the same shape.
   n: |
     Number of slits in the disk
-type: group
+\type: group
 NXdisk_chopper(NXcomponent):
   type:
-    doc: |
+    \doc: |
       Type of the disk-chopper: only one from the enumerated list (match text exactly)
-    enumeration: [Chopper type single, contra_rotating_pair, synchro_pair]
+    \enumeration: [Chopper type single, contra_rotating_pair, synchro_pair]
   rotation_speed(NX_FLOAT):
-    unit: NX_FREQUENCY
-    doc: |
+    \unit: NX_FREQUENCY
+    \doc: |
       Chopper rotation speed. Positive for anticlockwise rotation when
       facing away from the source, negative otherwise.
   slits(NX_INT):
-    doc: |
+    \doc: |
       Number of slits
   slit_angle(NX_FLOAT):
-    unit: NX_ANGLE
-    doc: |
+    \unit: NX_ANGLE
+    \doc: |
       Angular opening
   pair_separation(NX_FLOAT):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       Disk spacing in direction of beam
   slit_edges(NX_FLOAT):
-    unit: NX_ANGLE
-    doc: |
+    \unit: NX_ANGLE
+    \doc: |
       Angle of each edge of every slit from the position of the
       top-dead-center timestamp sensor, anticlockwise when facing
       away from the source.
       The first edge must be the opening edge of a slit, thus the last edge
       may have an angle greater than 360 degrees.
-    dimensions:
-      dim: (2n,)
+    \dimensions:
+      \dim: (2n,)
   top_dead_center(NX_NUMBER):
-    unit: NX_TIME
-    doc: |
+    \unit: NX_TIME
+    \doc: |
       Timestamps of the top-dead-center signal. The times are relative
       to the "start" attribute and in the units specified in the "units"
       attribute. Please note that absolute
       timestamps under unix are relative to ``1970-01-01T00:00:00.0Z``.
-    \@start(NX_DATE_TIME):
+    \@start:
+      \type: NX_DATE_TIME
   beam_position(NX_FLOAT):
-    unit: NX_ANGLE
-    doc: |
+    \unit: NX_ANGLE
+    \doc: |
       Angular separation of the center of the beam and the
       top-dead-center timestamp sensor, anticlockwise when facing
       away from the source.
   radius(NX_FLOAT):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       Radius of the disk
   slit_height(NX_FLOAT):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       Total slit height
   phase(NX_FLOAT):
-    unit: NX_ANGLE
-    doc: |
+    \unit: NX_ANGLE
+    \doc: |
       Chopper phase angle
   delay(NX_NUMBER):
-    unit: NX_TIME
-    doc: |
+    \unit: NX_TIME
+    \doc: |
       Time difference between timing system t0 and chopper driving clock signal
   ratio(NX_INT):
-    doc: |
+    \doc: |
       Pulse reduction factor of this chopper in relation to other
       choppers/fastest pulse in the instrument
   distance(NX_FLOAT):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       Effective distance to the origin.
       Note, it is recommended to use NXtransformations instead.
   wavelength_range(NX_FLOAT):
-    unit: NX_WAVELENGTH
-    doc: |
+    \unit: NX_WAVELENGTH
+    \doc: |
       Low and high values of wavelength range transmitted
-    dimensions:
-      dim: (2,)
+    \dimensions:
+      \dim: (2,)
   (NXgeometry):
     deprecated: |
       Use the field `depends_on` and :ref:`NXtransformations` to position the chopper and NXoff_geometry to describe its shape instead
   (NXoff_geometry):
-    exists: ['min', '0']
-    doc: |
+    \exists: ['min', '0']
+    \doc: |
       This group describes the shape of the beam line component
   depends_on(NX_CHAR):
-    doc: |
+    \doc: |
       The reference plane of the disk chopper includes the surface of the spinning disk which faces
       the source. The reference point in the x and y axis is the point on this surface which is the
       centre of the axle which the disk is spinning around. The reference plane is orthogonal to
@@ -115,7 +116,7 @@ NXdisk_chopper(NXcomponent):
           :width: 40%
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 3eb27dc6891ad6872249aafcd96d1cfd0082e4b49d559ad25c905570b45abba2
+# b9c1f203c0d2ab7c2de099a069085aafeed2d8938387214b7c1a3340511024a4
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

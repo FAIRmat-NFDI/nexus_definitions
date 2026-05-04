@@ -1,14 +1,14 @@
-category: base
-doc: |
+\category: base
+\doc: |
   An extension of positioner, used to maintain a measurement signal through
   a feedback loop, specialized for scanning probe microscopy applications.
   
   The component positions the spm head or cantilever tip on the surface of the sample
   thus maps 2D scan of the sample.
-type: group
+\type: group
 NXspm_positioner(NXpositioner):
   z_controller(NXpid_controller):
-    doc: |
+    \doc: |
       This controller's task is to continuously adjust the Z position of tip (e.g., in topography scan in
       STM/STS experiment) in order to keep the selected control signal as close as possible to the Set
       Point. Different control signals lead to different controller's behavior.
@@ -24,76 +24,76 @@ NXspm_positioner(NXpositioner):
       constants will be the same. Otherwise, for separate controllers positioning the tip in 3D space use the
       :ref:`feedback </NXspm_positioner/actuator/feedback-group>` controller in actuator.
     D_t(NX_NUMBER):
-      nameType: specified
-      unit: NX_TIME
-      doc: |
+      \nameType: specified
+      \unit: NX_TIME
+      \doc: |
         The derivative time constant of the derivative part of the PID controller. Proportional Derivative constant
         K_d can be expressed as :math:`K_d = K_p D_t`.
     I_t(NX_NUMBER):
-      nameType: specified
-      unit: NX_TIME
-      doc: |
+      \nameType: specified
+      \unit: NX_TIME
+      \doc: |
         The integral time constant of the integral part of the PID controller. Proportional Integral constant
         K_i can be expressed as :math:`K_i = \frac{K_p}{I_t}`.
     z(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         To indicate the relative tip position z between tip and sample. The tip position
         can also be varied when the z_controller is not running.
     set_point(NX_NUMBER):
-      unit: NX_ANY
-      doc: |
+      \unit: NX_ANY
+      \doc: |
         The set point for the z-controller to be fixed and the target value could be
         height or current.
     feedback_on(NX_BOOLEAN):
-      exists: recommended
-      doc: |
+      \exists: recommended
+      \doc: |
         The status of the controller PID feedback system in z-axis is ON / OFF.
         E.g., for constant height mode, the z-controller feedback system is off.
     tip_lift(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         If the tip is lifted from the stable point.
     switch_off_delay(NX_CHAR_OR_NUMBER):
-      unit: NX_TIME
-      doc: |
+      \unit: NX_TIME
+      \doc: |
         The switch-off delay of the controller from its stable point.
     z_offset_value(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Offset added to the initial averaged tip position on Z-axis before starting
         scan.
     z_average_time(NX_NUMBER):
-      unit: NX_TIME
-      doc: |
+      \unit: NX_TIME
+      \doc: |
         The averaging time for stabilizing the Z position.
         Usually, the signal for z-position contains noise, to reduce the noise
         impacts, z-position is being averaged over this time window.
     z_controller_time(NX_NUMBER):
-      unit: NX_TIME
-      doc: |
+      \unit: NX_TIME
+      \doc: |
         Time taken by the Z controller to switch mode e.g., feedback off from on and vice versa.
         In this time window, controller fixed its position if feedback changed to off mode.
     z_controller_hold(NX_BOOLEAN):
-      doc: |
+      \doc: |
         Controller feedback system status: OFF / ON.
         The `z_controller_hold-field` is True, refers feedback system off
         (mostly case in STS bias spectra) and False refers feedback system on
         (mostly case in STM constant current spectra).
     final_z(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         The final Z position of the tip after the scan.
         This parameter is used to indicate any unexpected displacement of the tip.
     controller_label(NX_CHAR):
-      doc: |
+      \doc: |
         Controller label. This label which will be displayed at places where you can
         select a channel or controller.
   actuator(NXactuator):
     feedback(NXpid_controller):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 0e95874426bf8ed5770043e963a4a77a06e41173a3dcaca063041f496a49c492
+# e216663214049550c32e44dee0689882094d378f8c7eac505c9b26977f804816
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

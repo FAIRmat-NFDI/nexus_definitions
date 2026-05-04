@@ -1,5 +1,5 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for temperature-dependent IV curve measurements.
   
   In this application definition, times should be specified always together
@@ -9,23 +9,23 @@ doc: |
   measurements. For this a temperature is set. After reaching the temperature,
   a voltage sweep is performed. For each voltage a current is measured.
   Then, the next desired temperature is set and an IV measurement is performed.
-symbols:
+\symbols:
   n_different_temperatures: |
     Number of different temperature setpoints used in the experiment.
   n_different_voltages: |
     Number of different voltage setpoints used in the experiment.
-type: group
+\type: group
 NXiv_temp(NXsensor_scan):
   (NXentry):
     definition:
-      enumeration: [NXiv_temp]
+      \enumeration: [NXiv_temp]
     (NXsample):
-      exists: recommended
+      \exists: recommended
       name:
-        doc: |
+        \doc: |
           Descriptive name or ideally (globally) unique persistent identifier.
       atom_types:
-        doc: |
+        \doc: |
           List of comma-separated elements from the periodic table
           that are contained in the sample.
           If the sample substance has multiple components, all
@@ -36,7 +36,7 @@ NXiv_temp(NXsensor_scan):
           these from the sample history or from other data sources.
     (NXinstrument):
       (NXenvironment):
-        doc: |
+        \doc: |
           Describes an environment setup for a temperature-dependent IV measurement experiment.
           
           The temperature and voltage must be present as independently scanned controllers and
@@ -45,7 +45,7 @@ NXiv_temp(NXsensor_scan):
         temperature_controller(NXsensor):
         current_sensor(NXsensor):
     (NXdata):
-      doc: |
+      \doc: |
         This NXdata should contain separate fields for the current values at different temperature setpoints, for example current_at_100C.
         There should also be two more fields called temperature and voltage containing the setpoint values.
         There should also be a field with an array of rank equal to the number of different temperature setpoints and each child's dimension
@@ -53,12 +53,12 @@ NXiv_temp(NXsensor_scan):
       temperature(NX_NUMBER):
       voltage(NX_NUMBER):
       current(NX_NUMBER):
-        dimensions:
-          rank: 2
-          dim: (n_different_temperatures, n_different_voltages)
+        \dimensions:
+          \rank: 2
+          \dim: (n_different_temperatures, n_different_voltages)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# b25a05aebdcb297af920d2594d70bc648d79e6c88369664a13155ab665c66e0c
+# f81bd22ef32fa6232eebf940fc26a95571d693995af26660f46ef80258cedb19
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

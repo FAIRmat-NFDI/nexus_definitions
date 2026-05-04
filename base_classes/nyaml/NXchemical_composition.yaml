@@ -1,15 +1,15 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Chemical composition of a sample or a set of things.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   n: |
     The number of samples or things.
-type: group
+\type: group
 NXchemical_composition(NXobject):
   normalization(NX_CHAR):
-    doc: |
+    \doc: |
       Reporting compositions as atom and weight percent yields both
       dimensionless quantities but their conceptual interpretation differs.
       A normalization based on atom_percent counts relative to the
@@ -18,46 +18,46 @@ NXchemical_composition(NXobject):
       respective mass of the elements. Software libraries that work with
       units, like pint in Python, are challenged by these differences as
       at.-% and wt.-% are both fractional quantities.
-    enumeration: [atom_percent, weight_percent]
+    \enumeration: [atom_percent, weight_percent]
   total(NX_NUMBER):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Total formula mass or number of atoms, depending on the
       normalization stated in the normalization field.
-    dimensions:
-      rank: 1
-      dim: (n,)
+    \dimensions:
+      \rank: 1
+      \dim: (n,)
   ELEMENT(NXatom):
-    exists: ['min', '1', 'max', 'unbounded']
-    nameType: any
-    doc: |
+    \exists: ['min', '1', 'max', 'unbounded']
+    \nameType: any
+    \doc: |
       If this group is used to report the composition of elements from the periodic table,
       the group should use the chemical symbol of that element. For other case the
       group name is unconstrained.
     amount(NX_NUMBER):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Count or weight which, when divided by total yields the composition
         of this element, isotope, molecule, or ion.
-      dimensions:
-        rank: 1
-        dim: (n,)
+      \dimensions:
+        \rank: 1
+        \dim: (n,)
     composition(NX_FLOAT):
-      unit: NX_DIMENSIONLESS
-      doc: |
+      \unit: NX_DIMENSIONLESS
+      \doc: |
         Composition value for the element/ion referred to under name.
         Composition is reported either normalized for atomic or weight
         percent. The field normalization should be used to communicate
         this explicitly. Composition should be reported consistently
         for all instances ELEMENT.
     composition_errors(NX_FLOAT):
-      exists: recommended
-      unit: NX_DIMENSIONLESS
-      doc: |
+      \exists: recommended
+      \unit: NX_DIMENSIONLESS
+      \doc: |
         Magnitude of the standard deviation of the composition.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 1f60c794061e1a994a90b38b39d3f531a5888cca51f6fc7b7b1ee240e25fc307
+# 66cc52b3f0e51411b5c25cfd41cb0d9e11853649deb552a7e2741f5d390d8a75
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

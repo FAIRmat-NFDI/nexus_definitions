@@ -1,10 +1,10 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for a results file of the paraprobe-spatstat tool.
   
   The tool paraprobe-spatstat evaluates spatial distribution functions.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   n_ions: |
     The total number of ions in the reconstruction.
@@ -12,18 +12,18 @@ symbols:
     The total number of bins in the histogram for the k-th nearest neighbor.
   n_rdf: |
     The total number of bins in the histogram for the radial distribution function.
-type: group
+\type: group
 NXapm_paraprobe_spatstat_results(NXapm_paraprobe_tool_results):
   (NXentry):
-    exists: ['min', '1', 'max', '1']
+    \exists: ['min', '1', 'max', '1']
     definition(NX_CHAR):
-      enumeration: [NXapm_paraprobe_spatstat_results]
+      \enumeration: [NXapm_paraprobe_spatstat_results]
     spatial_statisticsID(NXapm_paraprobe_tool_process):
-      nameType: partial
-      exists: ['min', '1', 'max', 'unbounded']
+      \nameType: partial
+      \exists: ['min', '1', 'max', 'unbounded']
       iontypes_randomized(NX_UINT):
-        unit: NX_UNITLESS
-        doc: |
+        \unit: NX_UNITLESS
+        \doc: |
           The iontype ID for each ion that was assigned to each ion during
           the randomization of the ionlabels. Iontype labels are just permuted
           but the total number of values for each iontype remain the same.
@@ -31,72 +31,72 @@ NXapm_paraprobe_spatstat_results(NXapm_paraprobe_tool_results):
           The order matches the iontypes array from a given ranging results
           as it is specified in the configuration settings inside the specific
           config_filename that was used for this paraprobe-spatstat analysis.
-        dimensions:
-          rank: 1
-          dim: (n_ions,)
+        \dimensions:
+          \rank: 1
+          \dim: (n_ions,)
       knn(NXprocess):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           K-nearest neighbor statistics.
         distance(NX_FLOAT):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             Right boundary of the binning.
-          dimensions:
-            rank: 1
-            dim: (n_knn,)
+          \dimensions:
+            \rank: 1
+            \dim: (n_knn,)
         probability_mass(NX_FLOAT):
-          unit: NX_DIMENSIONLESS
-          dimensions:
-            rank: 1
-            dim: (n_knn,)
+          \unit: NX_DIMENSIONLESS
+          \dimensions:
+            \rank: 1
+            \dim: (n_knn,)
         cumulated(NX_FLOAT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             Cumulated not normalized by total counts.
-          dimensions:
-            rank: 1
-            dim: (n_knn,)
+          \dimensions:
+            \rank: 1
+            \dim: (n_knn,)
         cumulated_normalized(NX_FLOAT):
-          unit: NX_DIMENSIONLESS
-          doc: |
+          \unit: NX_DIMENSIONLESS
+          \doc: |
             Cumulated and normalized by total counts.
-          dimensions:
-            rank: 1
-            dim: (n_knn,)
+          \dimensions:
+            \rank: 1
+            \dim: (n_knn,)
       rdf(NXprocess):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           Radial distribution statistics.
         distance(NX_FLOAT):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             Right boundary of the binning.
-          dimensions:
-            rank: 1
-            dim: (n_rdf,)
+          \dimensions:
+            \rank: 1
+            \dim: (n_rdf,)
         probability_mass(NX_FLOAT):
-          unit: NX_DIMENSIONLESS
-          dimensions:
-            rank: 1
-            dim: (n_rdf,)
+          \unit: NX_DIMENSIONLESS
+          \dimensions:
+            \rank: 1
+            \dim: (n_rdf,)
         cumulated(NX_FLOAT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             Cumulated not normalized by total counts.
-          dimensions:
-            rank: 1
-            dim: (n_rdf,)
+          \dimensions:
+            \rank: 1
+            \dim: (n_rdf,)
         cumulated_normalized(NX_FLOAT):
-          unit: NX_DIMENSIONLESS
-          doc: |
+          \unit: NX_DIMENSIONLESS
+          \doc: |
             Cumulated and normalized by total counts.
-          dimensions:
-            rank: 1
-            dim: (n_rdf,)
+          \dimensions:
+            \rank: 1
+            \dim: (n_rdf,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 2a4f9ed52cd06674f3b3785ccb3f0b1fbe93fd9083a0fceb1b7506cc21a71d48
+# 733a8c9b92d137b0d4267724a6fb74507200c19b8a910bc5df8d8e0c54f2abc3
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

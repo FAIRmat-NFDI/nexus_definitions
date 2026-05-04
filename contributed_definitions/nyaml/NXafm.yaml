@@ -1,19 +1,19 @@
-category: application
-doc: |
+\category: application
+\doc: |
   An application definition to describe atomic force microscopy (AFM).
-type: group
+\type: group
 NXafm(NXspm):
   (NXentry):
     definition:
-      doc: |
+      \doc: |
         Name of the definition that is used for the application.
-      enumeration: [NXafm]
+      \enumeration: [NXafm]
     experiment_technique:
-      doc: |
+      \doc: |
         The AFM technique.
-      enumeration: [AFM]
+      \enumeration: [AFM]
     scan_mode:
-      doc: |
+      \doc: |
         The mode of the scan.
         
         contact mode: Cantilever attempts to move on the sample surface in very close contact with the sample.
@@ -26,25 +26,25 @@ NXafm(NXspm):
          The cantilever oscillation amplitude is usually employed to control the cantilever position using a PID feedback loop.
         peak force tapping mode: Like the tapping mode, but at each point of the scan force-distance curve is recorded.
          The maximum force is usually employed to control the cantilever position using a PID feedback loop.
-      enumeration:
-        open_enum: true
+      \enumeration:
+        \open: true
         items: [contact mode, tapping mode, non-contact mode, peak force tapping mode]
     (NXinstrument):
       photo_detector(NXdetector):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           Information about the quadrant photodiode deflection detector or interferometer.
         (NXsensor):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             The sensor information for the photodiode or interferometer.
       (NXspm_cantilever):
-        exists: recommended
-        doc: |
+        \exists: recommended
+        \doc: |
           The cantilever information.
         cantilever_oscillator(NXspm_cantilever_oscillator):
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             When a cantilever is oscillated close to its resonance, this describes the oscillator properties.
             
             A cantilever can be used in direct contact mode to detect interaction forces or oscillated close to its
@@ -52,102 +52,102 @@ NXafm(NXspm):
             or resonance frequency are very sensitive to changes in the interaction potential field, giving rise of
             various measurement modes, such as non-contact or intermittent-contact (tapping) modes.
           reference_amplitude(NX_NUMBER):
-            unit: NX_LENGTH
-            exists: recommended
+            \unit: NX_LENGTH
+            \exists: recommended
           reference_frequency(NX_NUMBER):
-            unit: NX_FREQUENCY
-            exists: recommended
+            \unit: NX_FREQUENCY
+            \exists: recommended
           reference_phase(NX_NUMBER):
-            unit: NX_ANGLE
-            exists: recommended
+            \unit: NX_ANGLE
+            \exists: recommended
         phase_positioner(NXpositioner):
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             The phase positioner of the cantilever.
         amplitude_positioner(NXpositioner):
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             The amplitude positioner of the cantilever.
       phase_lock_loop(NXphase_lock_loop):
-        exists: recommended
-        doc: |
+        \exists: recommended
+        \doc: |
           Phase locked loop for cantilever lock-in device.
       SCAN_ENVIRONMENT(NXenvironment):
-        nameType: any
-        doc: |
+        \nameType: any
+        \doc: |
           The environment information.
         XYpiezo_sensor(NXspm_piezo_sensor):
-          nameType: partial
-          exists: optional
-          doc: |
+          \nameType: partial
+          \exists: optional
+          \doc: |
             This should be a link to the concept
             entry/instrument/xy_piezo_sensor.
         head_temperature_sensor(NXsensor):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             This should be a link to the concept
             entry/instrument/head_temperature_sensor.
       head_temperature_sensor(NXsensor):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           The temperature of the scan environment or head of the cantilever.
     reproducibility_indicators(NXcollection):
-      exists: optional
-      doc: |
+      \exists: optional
+      \doc: |
         The group of indicators (links to the existing fields in different groups) that measure
         the reproducibility of the experiment.
       head_temperature(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           This should be a link to
           /entry/instrument/scan_environment/head_temperature
       cryo_bottom_temperature(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           This should be a link to
           /entry/instrument/scan_environment/cryo_bottom_temperature
       cryo_shield_temperature(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           This should be a link to
           /entry/instrument/scan_environment/cryo_shield_temperature
       cantilever_oscillator(NXspm_cantilever_oscillator):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           This should be a link to
           /entry/instrument/cantilever_spm/cantilever_oscillator
     resolution_indicators(NXcollection):
-      exists: optional
-      doc: |
+      \exists: optional
+      \doc: |
         The group of indicators (links to the existing fields in different groups) that
       head_temperature(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           This should be a link to
           /entry/instrument/scan_environment/head_temperature
       cryo_bottom_temperature(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           This should be a link to
           /entry/instrument/scan_environment/cryo_bottom_temperature
       cryo_shield_temperature(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           This should be a link to
           /entry/instrument/scan_environment/cryo_shield_temperature
       cantilever_config(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           This should be a link to
           /entry/instrument/cantilever_spm/cantilever_config
       amplitude_excitation(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           This should be a link to
           /entry/instrument/phase_lock_loop/amplitude_excitation
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# c7100d86a01768274dd726f1616d403ebe187e514c5290101d9f1bf4caeb0ae0
+# f5cf2b414d8533026719137a503e6f528012c98c25ce3e55f6865574274b2877
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

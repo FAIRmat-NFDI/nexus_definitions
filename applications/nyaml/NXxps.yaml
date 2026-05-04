@@ -1,13 +1,13 @@
-category: application
-doc: |
+\category: application
+\doc: |
   This is the application definition for X-ray photoelectron spectroscopy.
-type: group
+\type: group
 NXxps(NXmpes):
   (NXentry):
     definition(NX_CHAR):
-      enumeration: [NXxps]
+      \enumeration: [NXxps]
     method:
-      doc: |
+      \doc: |
         A name of the experimental method according to `Clause 11`_ of
         the `ISO 18115-1:2023`_ specification.
         
@@ -22,10 +22,10 @@ NXxps(NXmpes):
         .. _ISO 18115-1:2023: https://www.iso.org/standard/74811.html
         .. _Clause 11: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:sec:11
     transitions:
-      exists: recommended
+      \exists: recommended
     xps_coordinate_system(NXcoordinate_system):
-      exists: recommended
-      doc: |
+      \exists: recommended
+      \doc: |
         In traditional surface science, a left-handed coordinate system is used such that the positive z-axis
         points along the normal of the sample stage, and the x- and y-axes lie in the plane of the sample stage.
         However, in NeXus, a coordinate system that is the same as `McStas`_  is used. `xps_coordinate_system`
@@ -36,23 +36,23 @@ NXxps(NXmpes):
         .. image:: xps/xps_cs.png
             :width: 40%
       origin:
-        enumeration: [sample stage]
+        \enumeration: [sample stage]
       z_direction:
-        enumeration: [sample stage normal]
+        \enumeration: [sample stage normal]
       x(NX_NUMBER):
-        enumeration: [[-1, 0, 0]]
+        \enumeration: [[-1, 0, 0]]
       y(NX_NUMBER):
-        enumeration: [[0, 1, 0]]
+        \enumeration: [[0, 1, 0]]
       z(NX_NUMBER):
-        enumeration: [[0, 0, 1]]
+        \enumeration: [[0, 0, 1]]
       depends_on(NX_CHAR):
-        doc: |
+        \doc: |
           Link to transformations defining the XPS base coordinate system,
           which is defined such that the positive z-axis points along the sample stage normal, and the
           x- and y-axes lie in the plane of the sample stage.
       (NXtransformations):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           Set of transformations, describing the orientation of the XPS coordinate system
           with respect to the beam coordinate system (.) or another coordinate system.
           The transformations in the ``NXtransformations`` group depend on the actual instrument
@@ -82,83 +82,86 @@ NXxps(NXmpes):
           are used. In this case, this group shall not be written here to avoid circular references in the
           transformations chain.
     (NXinstrument):
-      doc:
+      \doc:
       - |
         Description of the XPS spectrometer and its individual parts.
       - |
-        xref:
-          spec: ISO 18115-1:2023
-          term: 12.58
-          url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.58
+        \xref:
+          \spec: ISO 18115-1:2023
+          \term: 12.58
+          \url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.58
       source_probe(NXsource):
-        exists: recommended
+        \exists: recommended
         power(NX_FLOAT):
-          unit: NX_POWER
-          exists: recommended
+          \unit: NX_POWER
+          \exists: recommended
       beam_probe(NXbeam):
         depends_on:
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             Reference to the transformation describing the direction of the beam
             relative to a defined coordinate system.
             
             Should point to /entry/instrument/beam_probe/transformations/beam_direction.
         transformations(NXtransformations):
-          exists: recommended
+          \exists: recommended
           beam_direction(NX_NUMBER):
-            unit: NX_UNITLESS
-            doc: |
+            \unit: NX_UNITLESS
+            \doc: |
               Beam direction in the XPS coordinate system after rotation.
-            \@vector(NX_NUMBER):
-              enumeration: [[0, 0, -1]]
+            \@vector:
+              \type: NX_NUMBER
+              \enumeration: [[0, 0, -1]]
             \@depends_on:
-              enumeration: [beam_polar_angle_of_incidence]
+              \enumeration: [beam_polar_angle_of_incidence]
           beam_polar_angle_of_incidence(NX_NUMBER):
-            unit: NX_ANGLE
-            doc: |
+            \unit: NX_ANGLE
+            \doc: |
               Incidence angle of the beam with respect to the upward z-direction, defined by
               the sample stage.
             \@transformation_type:
-              enumeration: [rotation]
-            \@vector(NX_NUMBER):
-              enumeration: [[-1, 0, 0]]
+              \enumeration: [rotation]
+            \@vector:
+              \type: NX_NUMBER
+              \enumeration: [[-1, 0, 0]]
             \@depends_on:
-              enumeration: [beam_azimuth_angle]
+              \enumeration: [beam_azimuth_angle]
           beam_azimuth_angle(NX_NUMBER):
-            unit: NX_ANGLE
-            doc: |
+            \unit: NX_ANGLE
+            \doc: |
               Azimuthal rotation of the beam from the y-direction defined by the sample stage.
             \@transformation_type:
-              enumeration: [rotation]
-            \@vector(NX_NUMBER):
-              enumeration: [[0, 0, 1]]
+              \enumeration: [rotation]
+            \@vector:
+              \type: NX_NUMBER
+              \enumeration: [[0, 0, 1]]
             \@depends_on:
-              doc: |
+              \doc: |
                 This should point to the coordinate system defined in
                 /entry/xps_coordinate_system.
       (NXelectronanalyzer):
         work_function(NX_FLOAT):
         transmission_function(NXdata):
-          exists: recommended
+          \exists: recommended
         (NXcollectioncolumn):
           magnification(NX_FLOAT):
-            exists: recommended
-            unit: NX_DIMENSIONLESS
+            \exists: recommended
+            \unit: NX_DIMENSIONLESS
         (NXenergydispersion):
           radius(NX_NUMBER):
-            exists: recommended
-            unit: NX_LENGTH
+            \exists: recommended
+            \unit: NX_LENGTH
           energy_scan_mode:
         depends_on:
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             Reference to the transformation describing the orientation of the analyzer
             relative to a defined coordinate system.
         transformations(NXtransformations):
-          exists: recommended
+          \exists: recommended
           analyzer_take_off_polar_angle(NX_NUMBER):
-            unit: NX_ANGLE
-            doc: |
+            \unit: NX_ANGLE
+            \doc: |
               Polar tilt of the analyzer with respect to the upward z-direction, defined by
               the sample stage.
               
@@ -168,82 +171,84 @@ NXxps(NXmpes):
               so that beam_analyzer_angle = beam_polar_angle_of_incidence. For magic angle configurations,
               this angle is 54.5°.
             \@transformation_type:
-              enumeration: [rotation]
-            \@vector(NX_NUMBER):
-              enumeration: [[-1, 0, 0]]
+              \enumeration: [rotation]
+            \@vector:
+              \type: NX_NUMBER
+              \enumeration: [[-1, 0, 0]]
             \@depends_on:
-              enumeration: [analyzer_take_off_azimuth_angle]
+              \enumeration: [analyzer_take_off_azimuth_angle]
           analyzer_take_off_azimuth_angle(NX_NUMBER):
-            unit: NX_ANGLE
-            doc: |
+            \unit: NX_ANGLE
+            \doc: |
               Azimuthal rotation of the analyzer from the y-direction defined by the sample
               stage.
             \@transformation_type:
-              enumeration: [rotation]
-            \@vector(NX_NUMBER):
-              enumeration: [[0, 0, 1]]
+              \enumeration: [rotation]
+            \@vector:
+              \type: NX_NUMBER
+              \enumeration: [[0, 0, 1]]
             \@depends_on:
-              doc: |
+              \doc: |
                 This should point to the coordinate system defined in
                 /entry/xps_coordinate_system.
     energy_referencing(NXcalibration):
-      exists: recommended
+      \exists: recommended
     transmission_correction(NXcalibration):
-      exists: recommended
+      \exists: recommended
     (NXfit):
-      exists: recommended
-      doc:
+      \exists: recommended
+      \doc:
       - |
         Peak model for XPS fitting. Each `NXfit` instance shall be used for the description of
         _one_ peak fit in _one_ XPS region. As an example, this could be used to describe the
         fitting of one measured C 1s spectrum.
       - |
-        xref:
-          spec: ISO 18115-1:2023
-          term: 3.29
-          url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.29
+        \xref:
+          \spec: ISO 18115-1:2023
+          \term: 3.29
+          \url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.29
       label:
       data(NXdata):
-        doc: |
+        \doc: |
           Input data and results of the fit.
         input_dependent(NX_NUMBER):
-          unit: NX_ANY
-          doc: |
+          \unit: NX_ANY
+          \doc: |
             Dependent variable for this fit procedure.
             
             This could be a link to entry/data/data.
         input_independent(NX_NUMBER):
-          unit: NX_ENERGY
-          doc: |
+          \unit: NX_ENERGY
+          \doc: |
             Independent variable for this fit procedure.
             
             This could be a link to entry/data/energy.
         fit_sum(NX_NUMBER):
-          unit: NX_ANY
+          \unit: NX_ANY
         residual(NX_NUMBER):
-          exists: recommended
-          unit: NX_ANY
+          \exists: recommended
+          \unit: NX_ANY
       peakPEAK(NXpeak):
-        nameType: partial
+        \nameType: partial
         label:
         data(NXdata):
           position(NX_NUMBER):
-            unit: NX_ENERGY
-            doc: |
+            \unit: NX_ENERGY
+            \doc: |
               This could be a link to entry/data/energy.
           intensity(NX_NUMBER):
-            doc:
+            \doc:
             - |
               Intensity values of the fitted function at each energy in the position field.
             - |
-              xref:
-                spec: ISO 18115-1:2023
-                term: 3.15
-                url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.15
+              \xref:
+                \spec: ISO 18115-1:2023
+                \term: 3.15
+                \url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.15
         function(NXfit_function):
-          exists: recommended
+          \exists: recommended
           function_type:
-            doc: |
+            \doc: |
               Type of fit function used.
                 
               The user is encouraged to use one of the options defined in the enumeration, but in case none of these fit
@@ -251,10 +256,10 @@ NXxps(NXmpes):
               can be used. In that case in particular, but also if one of the suggested values is used, the functional
               form of the peak should be given by the ``formula_description`` field. The user is also encouraged to use the
               ``description`` field for describing the fit function in a human-readable way.
-            enumeration:
-              open_enum: true
+            \enumeration:
+              \open: true
               Gaussian:
-                doc: |
+                \doc: |
                   The Gaussian function models peaks with a symmetric shape, commonly arising from instrumental broadening
                   and thermal motion in XPS. It is defined as
                   
@@ -266,7 +271,7 @@ NXxps(NXmpes):
                   
                   The full width at half maximum (FWHM) is given by: :math:`\text{FWHM} = 2\sqrt{2\ln(2)} \sigma`.
               Lorentzian:
-                doc: |
+                \doc: |
                   The Lorentzian function describes peaks that originate from lifetime broadening due to the finite lifetime
                   of excited states. It has more pronounced tails compared to the Gaussian function. The Lorentzian function
                   is defined as
@@ -279,7 +284,7 @@ NXxps(NXmpes):
                   
                   The full width at half maximum (FWHM) is given by: :math:`\text{FWHM} = 2\gamma`.
               Voigt:
-                doc: |
+                \doc: |
                   The Voigt function is a convolution of a Gaussian and a Lorentzian function. It provides a more accurate
                   representation of XPS peaks by incorporating both instrumental broadening (Gaussian) and intrinsic lifetime
                    broadening (Lorentzian). It is defined as
@@ -298,7 +303,7 @@ NXxps(NXmpes):
                   - :math:`\text{FWHM}_L = 2\gamma` (Lorentzian FWHM) and
                   - :math:`\text{FWHM}_G = 2\sqrt{2\ln(2)} \sigma` (Gaussian FWHM).
               Gaussian-Lorentzian Sum:
-                doc: |
+                \doc: |
                   The Gaussian-Lorentzian Sum is an approximation to the Voigt function where the line shape is simply the sum of
                   a Gaussian and a Lorentzian function
                   
@@ -306,7 +311,7 @@ NXxps(NXmpes):
                   
                   where :math:`\eta` (ranging from 0 to 1) controls the relative contribution of the Lorentzian component.
               Gaussian-Lorentzian Product:
-                doc: |
+                \doc: |
                   The **Gaussian-Lorentzian Product** function provides an approximation to the true Voigt function by multiplying
                   a Gaussian and a Lorentzian line shape. This model is often used to describe peak broadening due to both
                   instrumental resolution (Gaussian component) and intrinsic lifetime effects (Lorentzian component).
@@ -320,7 +325,7 @@ NXxps(NXmpes):
                   This method ensures that the resulting peak retains characteristics of both functions while avoiding excessive
                   weight in either the Gaussian or Lorentzian component.
               Asymmetric Lorentzian:
-                doc: |
+                \doc: |
                   The Asymmetric Lorentzian function modifies the standard Lorentzian shape to asymmetry on either side of the
                   peak. Oftentimes, the the asymmetric modification is achieved by introducing asymmetric broadening through
                   power-law scaling on either side of the peak. The **asymmetric modification** is introduced using exponents
@@ -343,7 +348,7 @@ NXxps(NXmpes):
                   Note that this is not the only possibility to introduce asymmetry. The exact functional form
                   should be given by the ``formula_description`` field.
               Doniach-Sunjic:
-                doc: |
+                \doc: |
                   The Doniach-Sunjic function models asymmetric peaks arising from many-body interactions in XPS, particularly
                   for core-level spectra influenced by conduction electrons. It is given by
                   
@@ -353,7 +358,7 @@ NXxps(NXmpes):
                   
                   When :math:`\alpha = 0`, the function reduces to a symmetric Lorentzian.
               Asymmetric Finite:
-                doc: |
+                \doc: |
                   One major challenge in using asymmetric peaks is ensuring that the fitted line shape correctly models the peak
                   intensity while being confined to physically meaningful integration limits. Standard asymmetric peaks, like the
                   ``Lorentzian Asymmetric`` function, may extend indefinitely, making it difficult to compare intensities when peak
@@ -369,22 +374,22 @@ NXxps(NXmpes):
                   
                   The functional form depends on the implementation and should be given by the ``formula_description`` field, if possible.
           description:
-            exists: recommended
-            doc: |
+            \exists: recommended
+            \doc: |
               Human-readable description of the peak fit function.
           formula_description:
-            exists: recommended
+            \exists: recommended
           fit_parameters(NXparameters):
-            exists: recommended
+            \exists: recommended
             area(NX_NUMBER):
-              unit: NX_ANY
-              exists: optional
-              doc: |
+              \unit: NX_ANY
+              \exists: optional
+              \doc: |
                 Area of the peak.
             width(NX_NUMBER):
-              unit: NX_ENERGY
-              exists: optional
-              doc:
+              \unit: NX_ENERGY
+              \exists: optional
+              \doc:
               - |
                 Width of a peak at a defined fraction of the peak height.
               - |
@@ -392,52 +397,52 @@ NXxps(NXmpes):
                 For asymmetric peaks, convenient measures of peak width are the half-widths of
                 each side of the peak at half maximum intensity.
               - |
-                xref:
-                  spec: ISO 18115-1:2023
-                  term: 3.28
-                  url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.28
+                \xref:
+                  \spec: ISO 18115-1:2023
+                  \term: 3.28
+                  \url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.28
             position(NX_NUMBER):
-              unit: NX_ENERGY
-              exists: optional
-              doc: |
+              \unit: NX_ENERGY
+              \exists: optional
+              \doc: |
                 Position of the peak on the energy axis.
         total_area(NX_NUMBER):
-          exists: recommended
-          unit: NX_ANY
-          doc:
+          \exists: recommended
+          \unit: NX_ANY
+          \doc:
           - |
             Total area under the peak after background removal.
           - |
-            xref:
-              spec: ISO 18115-1:2023
-              term: 3.16
-              url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.16
+            \xref:
+              \spec: ISO 18115-1:2023
+              \term: 3.16
+              \url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.16
         relative_atomic_concentration(NX_FLOAT):
-          exists: optional
-          unit: NX_ANY
-          doc: |
+          \exists: optional
+          \unit: NX_ANY
+          \doc: |
             Atomic concentration of the species defined by this peak. This should be a value
             between 0 and 1.
       backgroundBACKGROUND(NXpeak):
-        nameType: partial
-        doc:
+        \nameType: partial
+        \doc:
         - |
           Functional form of one of the fitted XPS backgrounds.
         - |
-          xref:
-            spec: ISO 18115-1:2023
-            term: 3.21
-            url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.21
+          \xref:
+            \spec: ISO 18115-1:2023
+            \term: 3.21
+            \url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:3.21
         label:
-          exists: recommended
+          \exists: recommended
         data(NXdata):
           position(NX_NUMBER):
-            unit: NX_ENERGY
+            \unit: NX_ENERGY
           intensity(NX_NUMBER):
         function(NXfit_function):
-          exists: recommended
+          \exists: recommended
           function_type:
-            doc: |
+            \doc: |
               Type of fit function used.
                 
               The user is encouraged to use one of the options defined in the enumeration, but in case none of these fit
@@ -445,10 +450,10 @@ NXxps(NXmpes):
               can be used. In that case in particular, but also if one of the suggested values is used, the functional
               form of the background should be given by the ``formula_description`` field. The user is also encouraged to use the
               ``description`` field for describing the fit function in a human-readable way.
-            enumeration:
-              open_enum: true
+            \enumeration:
+              \open: true
               Linear:
-                doc: |
+                \doc: |
                   Linear background, i.e., a simple straight line from the minimal to the maximal
                   abscissa value.
                   
@@ -456,7 +461,7 @@ NXxps(NXmpes):
                   between the minimum and maximum binding energy values. This model is used when there is
                   a gradual, uniform increase or decrease in the background across the spectrum.
               Shirley:
-                doc: |
+                \doc: |
                   The Shirley background is based on the idea that the background intensity at any given
                   binding energy is  proportional to the total intensity of the peaks above that background
                   in the lower binding energy range. Essentially, the Shirley background estimates the contribution
@@ -474,7 +479,7 @@ NXxps(NXmpes):
                   - :math:`I(\mu)` is the intensity of the peaks at binding energy :math:`\mu`,
                   - :math:`x` is the binding energy at the current point.
               Tougaard:
-                doc: |
+                \doc: |
                   The Tougaard background is based on the concept of universal cross-sections and is used for
                   modeling the XPS background in situations where the background is integrated from the peak
                   intensities at each binding energy to higher kinetic energies. It is useful when fitting the
@@ -494,7 +499,7 @@ NXxps(NXmpes):
                   - :math:`I(E)` is the intensity at energy :math:`E`,
                   - :math:`x_0` is the threshold energy for the background.
               Step Down:
-                doc: |
+                \doc: |
                   The Step Down background is commonly used to fit data when a sharp decrease in the signal
                   occurs at a certain binding energy, such as in the case of an abrupt edge or a "step-down"
                   feature in the spectrum. It is modeled using a complementary error function (erf), which
@@ -513,7 +518,7 @@ NXxps(NXmpes):
                   - :math:`\sigma` is the width of the transition region,
                   - :math:`\text{erfc}(x)` is the complementary error function.
               Step Up:
-                doc: |
+                \doc: |
                   The Step Up background is similar to the Step Down background but is used to model a sharp
                   increase in intensity, such as when a peak or feature rises suddenly above the baseline.
                   This background is also modeled using the complementary error function, providing a smooth
@@ -529,79 +534,83 @@ NXxps(NXmpes):
                   - :math:`\sigma` is the width of the transition,
                   - :math:`\text{erf}(x)` is the error function.
           description:
-            exists: recommended
-            doc: |
+            \exists: recommended
+            \doc: |
               Human-readable description of the background fit function.
           formula_description:
-            exists: recommended
+            \exists: recommended
       global_fit_function(NXfit_function):
-        exists: recommended
+        \exists: recommended
         function_type:
-          exists: recommended
+          \exists: recommended
         description:
-          exists: recommended
+          \exists: recommended
         formula_description:
-          exists: recommended
+          \exists: recommended
       error_function(NXfit_function):
-        exists: recommended
+        \exists: recommended
         function_type:
-          exists: recommended
+          \exists: recommended
         description:
-          exists: recommended
+          \exists: recommended
         formula_description:
-          exists: recommended
+          \exists: recommended
       figure_of_meritMETRIC(NX_NUMBER):
-        nameType: partial
-        exists: recommended
+        \nameType: partial
+        \exists: recommended
         \@metric:
     (NXsample):
       depends_on:
-        exists: recommended
-        doc: |
+        \exists: recommended
+        \doc: |
           Reference to the transformation describing the orientation of the sample
           relative to a defined coordinate system.
       transformations(NXtransformations):
-        exists: recommended
+        \exists: recommended
         sample_rotation_angle(NX_NUMBER):
-          unit: NX_ANGLE
-          doc: |
+          \unit: NX_ANGLE
+          \doc: |
             Rotation about the sample normal.
           \@transformation_type:
-            enumeration: [rotation]
-          \@vector(NX_NUMBER):
-            enumeration: [[0, 0, 1]]
+            \enumeration: [rotation]
+          \@vector:
+            \type: NX_NUMBER
+            \enumeration: [[0, 0, 1]]
           \@depends_on:
-            enumeration: [sample_normal_polar_angle_of_tilt]
+            \enumeration: [sample_normal_polar_angle_of_tilt]
         sample_normal_polar_angle_of_tilt(NX_NUMBER):
-          unit: NX_ANGLE
-          doc: |
+          \unit: NX_ANGLE
+          \doc: |
             Polar tilt of the sample with respect to the upward z-direction, defined by
             the sample stage.
           \@transformation_type:
-            enumeration: [rotation]
-          \@vector(NX_NUMBER):
-            enumeration: [[-1, 0, 0]]
+            \enumeration: [rotation]
+          \@vector:
+            \type: NX_NUMBER
+            \enumeration: [[-1, 0, 0]]
           \@depends_on:
-            enumeration: [sample_normal_tilt_azimuth_angle]
+            \enumeration: [sample_normal_tilt_azimuth_angle]
         sample_normal_tilt_azimuth_angle(NX_NUMBER):
-          unit: NX_ANGLE
-          doc: |
+          \unit: NX_ANGLE
+          \doc: |
             Azimuthal rotation of the sample from the y-direction defined by the sample
             stage.
           \@transformation_type:
-            enumeration: [rotation]
-          \@vector(NX_NUMBER):
-            enumeration: [[0, 0, 1]]
+            \enumeration: [rotation]
+          \@vector:
+            \type: NX_NUMBER
+            \enumeration: [[0, 0, 1]]
           \@depends_on:
-            doc: |
+            \doc: |
               This should point to the coordinate system defined in
               /entry/xps_coordinate_system.
     (NXdata):
       energy(NX_NUMBER):
-      \@energy_indices(NX_INT):
+      \@energy_indices:
+        \type: NX_INT
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 0b7643b18c80a3534edecd75ca769ee11acefc0ca706bf20d04dd63d10be4c75
+# 2529739dcca996511c564f7643fa044d206e7bbbdc3c7fa5537748e209819500
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

@@ -1,5 +1,5 @@
-category: application
-doc: |
+\category: application
+\doc: |
   An application definition for Raman spectroscopy experiments.
   
   This application definition supports a wide range of Raman spectroscopy experiments.
@@ -62,49 +62,49 @@ doc: |
   Stimulated Raman scattering, Coherent anti-Stokes Raman scattering,
   Surface-enhanced Raman scattering, Tip-enhanced Raman scattering
   * https://doi.org/10.1186/s11671-019-3039-2
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     Variables used throughout the document, e.g. dimensions or parameters.
   N_scattering_configurations: |
     Number of scattering configurations used in the measurement.
     It is 1 for only parallel polarization measurement, 2 for parallel and cross
     polarization measurement or larger, if i.e. the incident and scattered photon
     direction is varied.
-type: group
+\type: group
 NXraman(NXoptical_spectroscopy):
   (NXentry):
     definition:
-      doc: |
+      \doc: |
         An application definition for Raman spectroscopy.
       \@version:
-        doc: |
+        \doc: |
           Version number to identify which definition of this application
           definition was used for this entry/data.
       \@URL:
-        doc: |
+        \doc: |
           URL where to find further material (documentation, examples) relevant
           to the application definition.
-      enumeration: [NXraman]
+      \enumeration: [NXraman]
     title:
-      exists: recommended
+      \exists: recommended
     experiment_type:
-      doc: |
+      \doc: |
         Specify the type of the optical experiment.
         
         You may specify fundamental characteristics or properties in the experimental sub-type.
-      enumeration: [Raman spectroscopy]
+      \enumeration: [Raman spectroscopy]
     raman_experiment_type:
-      doc: |
+      \doc: |
         Specify the type of Raman experiment.
-      enumeration:
-        open_enum: true
+      \enumeration:
+        \open: true
         items: [in situ Raman spectroscopy, resonant Raman spectroscopy, non-resonant Raman spectroscopy, Raman imaging, tip-enhanced Raman spectroscopy (TERS), surface-enhanced Raman spectroscopy (SERS), surface plasmon polariton enhanced Raman scattering (SPPERS), hyper Raman spectroscopy (HRS), stimulated Raman spectroscopy (SRS), inverse Raman spectroscopy (IRS), coherent anti-Stokes Raman spectroscopy (CARS)]
     (NXinstrument):
-      doc: |
+      \doc: |
         Metadata of the setup, its optical elements and physical properties which
         defines the Raman measurement.
       scattering_configuration(NX_CHAR):
-        doc: |
+        \doc: |
           Scattering configuration as defined by the porto notation by three
           states, which are orthogonal to each other. Example: z(xx)z for
           parallel polarized backscattering configuration.
@@ -123,27 +123,28 @@ NXraman(NXoptical_spectroscopy):
           Linear polarized light is displayed by e.g. "x","y" or "z"
           Unpolarized light is displayed by "."
           For non-orthogonal vectors, use the attribute porto_notation_vectors.
-        \@porto_notation_vectors(NX_NUMBER):
-          exists: recommended
-          doc: |
+        \@porto_notation_vectors:
+          \type: NX_NUMBER
+          \exists: recommended
+          \doc: |
             Scattering configuration as defined by the porto notation given by
             respective vectors.
             
             Vectors in the porto notation are defined as for A, B, C, D above.
             Linear light polarization is assumed.
-          dimensions:
-            rank: 3
-            doc: |
+          \dimensions:
+            \rank: 3
+            \doc: |
               3 x 4 Matrix, which lists the porto notation vectors A, B, C, D.
               A has to be perpendicular to B and C perpendicular to D.
-            dim: (4, 3, N_scattering_configurations)
+            \dim: (4, 3, N_scattering_configurations)
       beam_incident(NXbeam):
-        doc: |
+        \doc: |
           Beam which is incident to the sample.
         wavelength(NX_NUMBER):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# c5d06c501a185d18e65f69e222da31d55588a20c9ebf765f9059307068212045
+# 5067ec2fcab6c96f96716992bafb44b342c8e4f2fe6939a0aa336712ef0836f2
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

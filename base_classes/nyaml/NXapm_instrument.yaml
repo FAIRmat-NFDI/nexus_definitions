@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Base class for instrument-related details of a real or simulated
   atom probe tomograph or field-ion microscope.
   
@@ -11,8 +11,8 @@ doc: |
   whether these typically change during a session, so-called dynamic, or not, so-called static metadata.
   This design allows to store e.g. hardware related concepts only once instead of demanding
   that each image or spectrum from the session needs to be stored also with the static metadata.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   p: |
     Number of pulses collected in between start_time and end_time
@@ -22,30 +22,30 @@ symbols:
 # are stored but then referencing this in an application definition would demand to make such
 # file required, while NXapm_instrument can be used directly for the static and the dynamic
 # or volatile (meta)data.
-type: group
+\type: group
 NXapm_instrument(NXinstrument):
   type(NX_CHAR):
-    doc: |
+    \doc: |
       Which type of instrument.
-    enumeration:
-      open_enum: true
+    \enumeration:
+      \open: true
       items: [Inspico, 3DAP, LAWATAP, LEAP 3000 Si, LEAP 3000X Si, LEAP 3000 HR, LEAP 3000X HR, LEAP 4000 Si, LEAP 4000X Si, LEAP 4000 HR, LEAP 4000X HR, LEAP 5000 XS, LEAP 5000 XR, LEAP 5000 R, EIKOS, EIKOS-UV, LEAP 6000 XR, LEAP INVIZO, Photonic AP, TeraSAT, TAPHR, Modular AP, Titanium APT, Extreme UV APT]
   fabrication(NXfabrication):
   
   # (NXcsg):
   location(NX_CHAR):
-    doc: |
+    \doc: |
       Location of the lab or place where the instrument is installed. Using GEOREF is
       preferred.
   flight_path(NX_FLOAT):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       Nominal flight path
       
       The value can be extracted from the CAnalysis.CSpatial.fFlightPath
       field of a CamecaRoot ROOT file.
   reflectron(NXcomponent):
-    doc: |
+    \doc: |
       Device which reduces ToF differences of ions in ToF experiments.
       
       For atom probe the reflectron can be considered an energy compensation device.
@@ -56,27 +56,27 @@ NXapm_instrument(NXinstrument):
       * 3863068 and 6740872 for the reflectron
       * 8134119 for the curved reflectron
     applied(NX_BOOLEAN):
-      doc: |
+      \doc: |
         Was the reflectron used?
     voltage(NX_FLOAT):
-      unit: NX_VOLTAGE
-      doc: |
+      \unit: NX_VOLTAGE
+      \doc: |
         The maximum voltage applied to the reflectron, relative to system ground.
   decelerate_electrode(NXcomponent):
-    doc: |
+    \doc: |
       A counter electrode of the LEAP 6000 series atom probes.
   
   # counter_electrodes being optional WO2016171675A1 or Einzel lens
   local_electrode(NXcomponent):
-    doc: |
+    \doc: |
       A local electrode guiding the ion flight path.
       Also called counter or extraction electrode.
     voltage(NX_FLOAT):
-      unit: NX_VOLTAGE
-      doc: |
+      \unit: NX_VOLTAGE
+      \doc: |
         Acceleration voltage
     aperture_type(NX_CHAR):
-      doc: |
+      \doc: |
         The type of aperture used when the local_electrode has an aperture or acts as an aperture
         in addition to acting as an extraction electrode.
         
@@ -87,13 +87,13 @@ NXapm_instrument(NXinstrument):
         * "conical", conical aperture with a circular hole
         * "feedthrough", an aperture where the specimen protrudes through a circular hole
         * "custom", a user modified aperture, which is otherwise non-standard
-      enumeration: [n/a, conical, feedthrough, custom]
+      \enumeration: [n/a, conical, feedthrough, custom]
   ion_detector(NXdetector):
-    doc: |
+    \doc: |
       Detector for taking raw time-of-flight and ion/hit impact positions data.
     signal_amplitude(NX_FLOAT):
-      unit: NX_CURRENT
-      doc: |
+      \unit: NX_CURRENT
+      \doc: |
         Amplitude of the signal detected on the multi-channel plate (MCP).
         
         This field should be used for storing the signal amplitude quantity
@@ -101,23 +101,23 @@ NXapm_instrument(NXinstrument):
         
         The ATO file format is used primarily by the atom probe group of the
         GPM in Rouen, France.
-      dimensions:
-        rank: 1
-        dim: (p,)
+      \dimensions:
+        \rank: 1
+        \dim: (p,)
     mcp_efficiency(NX_FLOAT):
-      unit: NX_DIMENSIONLESS
-      doc: |
+      \unit: NX_DIMENSIONLESS
+      \doc: |
         The value can be extracted from the CRunHeader.fMcpEfficiency
         field of a CamecaRoot RHIT file.
     mesh_efficiency(NX_FLOAT):
-      unit: NX_DIMENSIONLESS
-      doc: |
+      \unit: NX_DIMENSIONLESS
+      \doc: |
         The value can be extracted from the CRunHeader.fMeshEfficiency
         field of a CamecaRoot RHIT file.
   
   # model, serial_number, manufacturer_name all inherited from NXdetector base class
   pulser(NXcomponent):
-    doc: |
+    \doc: |
       Laser- and/or voltage-pulsing device to trigger ion removal.
       
       When the base class NXapm_instrument is used in the NXapm
@@ -139,18 +139,18 @@ NXapm_instrument(NXinstrument):
     # technical design
     fabrication(NXfabrication):
     pulse_mode(NX_CHAR):
-      doc: |
+      \doc: |
         Detail whereby ion extraction is triggered methodologically.
-      enumeration:
-        open_enum: true
+      \enumeration:
+        \open: true
         items: [laser, voltage, laser_and_voltage]
     pulse_frequency(NX_FLOAT):
-      unit: NX_FREQUENCY
-      doc: |
+      \unit: NX_FREQUENCY
+      \doc: |
         Frequency with which the pulser fire(s).
     pulse_fraction(NX_FLOAT):
-      unit: NX_DIMENSIONLESS
-      doc: |
+      \unit: NX_DIMENSIONLESS
+      \doc: |
         Fraction of the pulse_voltage that is applied in addition
         to the standing_voltage at peak voltage of a pulse.
         
@@ -162,22 +162,22 @@ NXapm_instrument(NXinstrument):
     # as either pulse_voltage is required in an application definition but then that
     # existence constraint is independent of other values.
     pulse_voltage(NX_FLOAT):
-      unit: NX_VOLTAGE
-      doc: |
+      \unit: NX_VOLTAGE
+      \doc: |
         Pulsed voltage, in laser pulsing mode this field can be omitted.
     pulse_number(NX_UINT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Absolute number of pulses starting from the beginning of the experiment.
     standing_voltage(NX_FLOAT):
-      unit: NX_VOLTAGE
-      doc: |
+      \unit: NX_VOLTAGE
+      \doc: |
         Direct current voltage between the specimen and the (local electrode) in
         the case of local electrode atom probe (LEAP) instrument. Otherwise, the
         standing voltage applied to the sample, relative to system ground.
     sourceID(NXsource):
-      nameType: partial
-      doc: |
+      \nameType: partial
+      \doc: |
         Group to store details about components that enable laser pulsing strategies.
         
         When multiple sources are available, these should be named source1, source2;
@@ -189,43 +189,44 @@ NXapm_instrument(NXinstrument):
         strategies to trigger ion extraction via exciting and eventual field evaporation
         field emission of ion at the specimen surface.
       wavelength(NX_FLOAT):
-        unit: NX_WAVELENGTH
-        doc: |
+        \unit: NX_WAVELENGTH
+        \doc: |
           The wavelength of the radiation emitted by the source.
       power(NX_FLOAT):
-        unit: NX_POWER
-        doc: |
+        \unit: NX_POWER
+        \doc: |
           Nominal power of the laser source while illuminating the specimen.
       pulse_energy(NX_FLOAT):
-        unit: NX_ENERGY
-        doc: |
+        \unit: NX_ENERGY
+        \doc: |
           Average energy of the laser at peak of each pulse.
-        \@logged_against(NX_CHAR):
-          doc: |
+        \@logged_against:
+          \type: NX_CHAR
+          \doc: |
             Path to pulse_id
       beamID(NXbeam):
-        nameType: partial
-        doc: |
+        \nameType: partial
+        \doc: |
           Details about specific positions along the laser beam
           which illuminates the (atom probe) specimen.
         incidence_vector(NX_NUMBER):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             Track time-dependent settings over the course of the measurement
             how the laser beam shines on the specimen, i.e. the mean vector
             is parallel to the laser propagation direction.
         pinhole_position(NX_NUMBER):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             Track time-dependent settings over the course of the measurement
             where the laser beam exits the focusing optics.
         spot_position(NX_NUMBER):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             Track time-dependent settings over the course of the
             measurement where the laser hits the specimen.
       (NXtransformations):
-        doc: |
+        \doc: |
           Affine transformations which describe the geometry how the
           laser focusing optics/pinhole-attached coordinate system is
           defined, how it has to be transformed so that it aligns with
@@ -233,23 +234,23 @@ NXapm_instrument(NXinstrument):
   stage(NXmanipulator):
     temperature_sensor(NXsensor):
       value(NX_FLOAT):
-        doc: |
+        \doc: |
           The value can be extracted from the CRunHeader.CAnalysis.fSpecimenTemperature
           field of a CamecaRoot RHIT file.
   
   # NEW ISSUE: add NXapm_energy_analyzer, a voltage grid like done in Rouen/GPM
   analysis_chamber(NXcomponent):
     flight_path(NX_FLOAT):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         The space inside the atom probe along which ions pass nominally
         when they leave the specimen and travel to the detector.
     pressure_sensor(NXsensor):
       measurement(NX_CHAR):
-        enumeration: [pressure]
+        \enumeration: [pressure]
       value(NX_FLOAT):
-        unit: NX_PRESSURE
-        doc: |
+        \unit: NX_PRESSURE
+        \doc: |
           The value can be extracted from the CRunHeader.CLasHeader.fAnalysisPressure
           field of a CamecaRoot RHIT file.
   buffer_chamber(NXcomponent):
@@ -258,24 +259,24 @@ NXapm_instrument(NXinstrument):
   roughening_pump(NXpump):
   turbomolecular_pump(NXpump):
   comment(NX_CHAR):
-    doc: |
+    \doc: |
       Free-text field for additional comments.
   control(NXparameters):
-    doc: |
+    \doc: |
       Relevant quantities during a measurement with a LEAP system as were
       suggested by `T. Blum et al. <https://doi.org/10.1002/9781119227250.ch18>`_.
     evaporation_control(NX_CHAR):
-      doc: |
+      \doc: |
         Parameter that defines the rules and control loops whereby the pulser and
         other components of the instrument are controlled during evaporation.
     target_detection_rate(NX_NUMBER):
-      unit: NX_ANY
-      doc: |
+      \unit: NX_ANY
+      \doc: |
         Parameter that assure maintenance of a significant yet not too high
         ion influx on the detector to avoid detection losses.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 00518a52b2aa711a0d4118d218d66634f3679c4ee944463680e8c22db1f7f81e
+# 2f2c8b863258ac4ae0f0b099a62c4712c8807ea6200383486534db294487496b
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

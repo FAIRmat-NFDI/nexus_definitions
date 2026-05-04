@@ -1,5 +1,5 @@
-category: application
-doc: |
+\category: application
+\doc: |
   This is the application definition describing ellipsometry experiments.
   
   Such experiments may be as simple as identifying how a reflected
@@ -41,8 +41,8 @@ doc: |
   * S. Zollner et al., "Spectroscopic ellipsometry from 10 to 700 K",
     Adv. Opt. Techn., (2022),
     https://doi.org/10.1515/aot-2022-0016
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     Variables used throughout the document, e.g. dimensions or parameters.
   N_spectrum: |
     Length of the spectrum array (e.g. wavelength or energy) of the measured
@@ -57,102 +57,102 @@ symbols:
     sample.
   N_incident_angles: |
     Number of angles of incidence of the incident beam.
-type: group
+\type: group
 NXellipsometry(NXoptical_spectroscopy):
   (NXentry):
     definition:
-      doc: |
+      \doc: |
         An application definition for ellipsometry.
       \@version:
-        doc: |
+        \doc: |
           Version number to identify which definition of this application
           definition was used for this entry/data.
       \@URL:
-        doc: |
+        \doc: |
           URL where to find further material (documentation, examples) relevant
           to the application definition.
-      enumeration: [NXellipsometry]
+      \enumeration: [NXellipsometry]
     title:
-      exists: recommended
+      \exists: recommended
     experiment_type:
-      doc: |
+      \doc: |
         Specify the type of the optical experiment.
         
         You may specify fundamental characteristics or properties in the experimental sub-type.
-      enumeration: [ellipsometry]
+      \enumeration: [ellipsometry]
     ellipsometry_experiment_type:
-      doc: |
+      \doc: |
         Specify the type of ellipsometry.
-      enumeration:
-        open_enum: true
+      \enumeration:
+        \open: true
         items: [in situ spectroscopic ellipsometry, THz spectroscopic ellipsometry, infrared spectroscopic ellipsometry, ultraviolet spectroscopic ellipsometry, uv-vis spectroscopic ellipsometry, NIR-Vis-UV spectroscopic ellipsometry]
     (NXinstrument):
-      doc: |
+      \doc: |
         Properties of the ellipsometry equipment.
       ellipsometer_type:
-        doc: |
+        \doc: |
           What type of ellipsometry was used? See Fujiwara Table 4.2.
-        enumeration:
-          open_enum: true
+        \enumeration:
+          \open: true
           items: [rotating analyzer, rotating analyzer with analyzer compensator, rotating analyzer with polarizer compensator, rotating polarizer, rotating compensator on polarizer side, rotating compensator on analyzer side, modulator on polarizer side, modulator on analyzer side, dual compensator, phase modulation, imaging ellipsometry, null ellipsometry]
       focusing_probes(NXoptical_lens):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           If focusing probes (lenses) were used, please state if the data
           were corrected for the window effects.
         type:
-          enumeration:
-            open_enum: true
+          \enumeration:
+            \open: true
             items: [objective, lens, glass fiber, none]
         device_information(NXfabrication):
-          exists: optional
+          \exists: optional
         data_correction(NX_BOOLEAN):
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             Were the recorded data corrected by the window effects of the
             focusing probes (lenses)?
         angular_spread(NX_NUMBER):
-          exists: recommended
-          unit: NX_ANGLE
-          doc: |
+          \exists: recommended
+          \unit: NX_ANGLE
+          \doc: |
             Specify the angular spread caused by the focusing probes.
       rotating_element(NXwaveplate):
-        doc: |
+        \doc: |
           Properties of the rotating element defined in
           'instrument/rotating_element_type'.
         rotating_element_type:
-          doc: |
+          \doc: |
             Define which element rotates, e.g. polarizer or analyzer.
-          enumeration: [polarizer (source side), analyzer (detector side), compensator (source side), compensator (detector side)]
+          \enumeration: [polarizer (source side), analyzer (detector side), compensator (source side), compensator (detector side)]
         revolutions(NX_NUMBER):
-          exists: optional
-          unit: NX_COUNT
-          doc: |
+          \exists: optional
+          \unit: NX_COUNT
+          \doc: |
             Define how many revolutions of the rotating element were averaged
             for each measurement. If the number of revolutions was fixed to a
             certain value use the field 'fixed_revolutions' instead.
         fixed_revolutions(NX_NUMBER):
-          exists: optional
-          unit: NX_COUNT
-          doc: |
+          \exists: optional
+          \unit: NX_COUNT
+          \doc: |
             Define how many revolutions of the rotating element were taken
             into account for each measurement (if number of revolutions was
             fixed to a certain value, i.e. not averaged).
         max_revolutions(NX_NUMBER):
-          exists: optional
-          unit: NX_COUNT
-          doc: |
+          \exists: optional
+          \unit: NX_COUNT
+          \doc: |
             Specify the maximum value of revolutions of the rotating element
             for each measurement.
     (NXsample):
       backside_roughness(NX_BOOLEAN):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           Was the backside of the sample roughened? Relevant for infrared
           ellipsometry.
     data_collection(NXdata):
-      exists: optional
-      doc: |
+      \exists: optional
+      \doc: |
         Measured data, data errors, and varied parameters. This may be used to describe
         indirectly derived data or data transformed between different descriptions,
         such as:
@@ -166,39 +166,39 @@ NXellipsometry(NXoptical_spectroscopy):
         in a generic (NXdata) concept from :ref:`NXoptical_spectroscopy`, or better
         directly in the location of the sample positioner or temperature sensor.
       data_identifier(NX_NUMBER):
-        exists: recommended
-        doc: |
+        \exists: recommended
+        \doc: |
           An identifier to correlate data to the experimental conditions,
           if several were used in this measurement; typically an index of 0-N.
       data_type:
-        exists: recommended
-        doc: |
+        \exists: recommended
+        \doc: |
           Select which type of data was recorded, for example intensity,
           reflectivity, transmittance, Psi and Delta etc.
           It is possible to have multiple selections. The enumeration list
           depends on the type of experiment and may differ for different
           application definitions.
-        enumeration: [intensity, reflectivity, transmittance, Psi/Delta, tan(Psi)/cos(Delta), Mueller matrix, Jones matrix, N/C/S, raw data]
+        \enumeration: [intensity, reflectivity, transmittance, Psi/Delta, tan(Psi)/cos(Delta), Mueller matrix, Jones matrix, N/C/S, raw data]
       NAME_spectrum(NX_FLOAT):
-        nameType: partial
-        exists: optional
-        unit: NX_ANY
-        doc: |
+        \nameType: partial
+        \exists: optional
+        \unit: NX_ANY
+        \doc: |
           Spectral values (e.g. wavelength or energy) used for the measurement.
           An array of 1 or more elements. Length defines N_spectrum. Replace
           'NAME' by the physical quantity that is used, e.g. wavelength.
-        dimensions:
-          rank: 1
-          dim: (N_spectrum,)
+        \dimensions:
+          \rank: 1
+          \dim: (N_spectrum,)
         \@units:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             If applicable, change 'unit: NX_ANY' to the appropriate NXDL unit.
             If the unit of the measured data is not covered by NXDL units state
             here which unit was used.
       measured_data(NX_FLOAT):
-        unit: NX_ANY
-        doc: |
+        \unit: NX_ANY
+        \doc: |
           Resulting data from the measurement, described by 'data_type'.
           
           The first dimension is defined by the number of measurements taken,
@@ -210,41 +210,41 @@ NXellipsometry(NXoptical_spectroscopy):
           (T1, T2, T3), two different pressures (p1, p2) and two different
           angles of incidence (a1, a2), the first measurement was taken at the
           parameters {a1,p1,T1}, the second measurement at {a1,p1,T2} etc.
-        dimensions:
-          rank: 3
-          dim: (N_measurements, N_observables, N_spectrum)
+        \dimensions:
+          \rank: 3
+          \dim: (N_measurements, N_observables, N_spectrum)
         \@units:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             If applicable, change 'unit: NX_ANY' to the appropriate NXDL unit.
             If the unit of the measured data is not covered by NXDL units state
             here which unit was used.
       measured_data_errors(NX_FLOAT):
-        exists: optional
-        unit: NX_ANY
-        doc: |
+        \exists: optional
+        \unit: NX_ANY
+        \doc: |
           Specified uncertainties (errors) of the data described by 'data_type'
           and provided in 'measured_data'.
-        dimensions:
-          rank: 3
-          dim: (N_measurements, N_observables, N_spectrum)
+        \dimensions:
+          \rank: 3
+          \dim: (N_measurements, N_observables, N_spectrum)
         \@units:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             If applicable, change 'unit: NX_ANY' to the appropriate NXDL unit.
             If the unit of the measured data is not covered by NXDL units state
             here which unit was used.
       varied_parameter_link:
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           List of links to the values of the sensors. Add a link for each
           varied parameter (i.e. for each sensor).
-        dimensions:
-          rank: 1
-          dim: (N_sensors,)
+        \dimensions:
+          \rank: 1
+          \dim: (N_sensors,)
       reference_data_link:
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           :ref:`External link <Design-Links>` to the data field in the NeXus
           file which describes the reference data if a reference measurement was performed.
           Ideally, the reference measurement was performed using the same conditions as
@@ -254,30 +254,30 @@ NXellipsometry(NXoptical_spectroscopy):
           Ideally, the link uses the relative path with respect to the actual
           NeXus file.
       data_software(NXprogram):
-        exists: optional
+        \exists: optional
         program:
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             Commercial or otherwise defined given name of the program that was
             used to generate the result file(s) with measured data and/or
             metadata (in most cases, this is the same as INSTRUMENT/software).
             If home written, one can provide the actual steps in the NOTE
             subfield here.
         version:
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             Either version with build number, commit hash, or description of a
             (online) repository where the source code of the program and build
             instructions can be found so that the program can be configured in
             such a way that result files can be created ideally in a
             deterministic manner.
         \@URL:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Website of the software.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# ea602603f563e57028e83433775dc7fdad06b11c751d8b2bac2b782310fbfe70
+# 12e68cb043776bea8706860ff0a495a69c36b50de3fd60b4e9b3c4716a6ea02a
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

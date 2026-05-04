@@ -1,8 +1,8 @@
-category: application
-doc: |
+\category: application
+\doc: |
   This is an application definition for raw data from a TOF reflectometer.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbol(s) listed here will be used below to coordinate datasets with the same shape.
   xSize: |
     xSize description
@@ -10,82 +10,82 @@ symbols:
     ySize description
   nTOF: |
     nTOF description
-type: group
+\type: group
 NXreftof(NXobject):
   (NXentry):
     title:
     start_time(NX_DATE_TIME):
     end_time(NX_DATE_TIME):
     definition:
-      doc: |
+      \doc: |
         Official NeXus NXDL schema to which this file conforms
-      enumeration: [NXreftof]
+      \enumeration: [NXreftof]
     instrument(NXinstrument):
       name(NX_CHAR):
       chopper(NXdisk_chopper):
         distance(NX_FLOAT):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             Distance between chopper and sample
       detector(NXdetector):
         data(NX_INT):
           signal: 1
-          dimensions:
-            rank: 3
-            dim: (xSize, ySize, nTOF)
+          \dimensions:
+            \rank: 3
+            \dim: (xSize, ySize, nTOF)
         time_of_flight(NX_FLOAT):
-          unit: NX_TIME_OF_FLIGHT
+          \unit: NX_TIME_OF_FLIGHT
           axis: 3
-          doc: |
+          \doc: |
             Array of time values for each bin in a time-of-flight
             measurement
-          dimensions:
-            rank: 1
-            dim: (nTOF,)
+          \dimensions:
+            \rank: 1
+            \dim: (nTOF,)
         distance(NX_FLOAT):
-          unit: NX_LENGTH
+          \unit: NX_LENGTH
         polar_angle(NX_FLOAT):
-          unit: NX_ANGLE
+          \unit: NX_ANGLE
         x_pixel_size(NX_FLOAT):
-          unit: NX_LENGTH
+          \unit: NX_LENGTH
         y_pixel_size(NX_FLOAT):
-          unit: NX_LENGTH
+          \unit: NX_LENGTH
     sample(NXsample):
       name:
-        doc: |
+        \doc: |
           Descriptive name of sample
       rotation_angle(NX_FLOAT):
-        unit: NX_ANGLE
+        \unit: NX_ANGLE
     control(NXmonitor):
       mode:
-        doc: |
+        \doc: |
           Count to a preset value based on either clock time (timer)
           or received monitor counts (monitor).
-        enumeration: [monitor, timer]
+        \enumeration: [monitor, timer]
       preset(NX_FLOAT):
-        unit: NX_ANY
-        doc: |
+        \unit: NX_ANY
+        \doc: |
           preset value for time or monitor
       integral(NX_INT):
-        doc: |
+        \doc: |
           Total integral monitor counts
       time_of_flight(NX_FLOAT):
-        unit: NX_TIME_OF_FLIGHT
+        \unit: NX_TIME_OF_FLIGHT
         axis: 1
-        doc: |
+        \doc: |
           Time channels
       data(NX_INT):
         signal: 1
-        doc: |
+        \doc: |
           Monitor counts in each time channel
     data(NXdata):
       data(link):
-        target: /NXentry/NXinstrument/NXdetector/data
+        \target: /NXentry/NXinstrument/NXdetector/data
       time_of_flight(link):
-        target: /NXentry/NXinstrument/NXdetector/time_of_flight
+        \target: /NXentry/NXinstrument/NXdetector/time_of_flight
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 9970c7a3ef2f2ecd1f4a53450c40662ddfcfba7c9b2d014e61f0f000283599d4
+# 2d94c09dd46e8b93a9303d36a6362f35c2077ed33dec9a1d160a5b01152d155a
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

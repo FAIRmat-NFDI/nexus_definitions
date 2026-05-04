@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Base class container for reporting a set of spectra.
   
   The mostly commonly used scanning methods are supported. That is one-,
@@ -8,7 +8,7 @@ doc: |
   Use stack for all other tilings.
 
 # set of frequently made specializations of NXdata instances for spectra
-symbols:
+\symbols:
   n_spc: |
     Number of spectra in the stack, for stacks the slowest dimension.
   n_k: |
@@ -19,13 +19,13 @@ symbols:
     Number of image points along the fast dimension (i equivalent to x).
   n_energy: |
     Number of energy bins (always the fastest dimension).
-type: group
+\type: group
 NXspectrum(NXobject):
   (NXprocess):
-    doc: |
+    \doc: |
       Details how spectra were processed from the detector readings.
     input(NXnote):
-      doc: |
+      \doc: |
         Resolvable data artifact (e.g. filename) from which all values in the :ref:`NXdata`
         instances in this :ref:`NXspectrum` were loaded during parsing.
         
@@ -35,353 +35,384 @@ NXspectrum(NXobject):
         
         The group in combination with an added field *context* therein adds context.
       context(NX_CHAR):
-        doc: |
+        \doc: |
           Reference to a location inside the artifact that points to the specific group of values
           that were processed if the artifacts contains several groups of values and thus
           further resolving of ambiguities is required.
     mode(NX_CHAR):
-      doc: |
+      \doc: |
         Imaging (data collection) mode of the instrument during acquisition
         of the data in this :ref:`NXspectrum` instance.
     detector_identifier(NX_CHAR):
-      doc: |
+      \doc: |
         Link or name of an :ref:`NXdetector` instance with which the data were
         collected.
     (NXprogram):
   spectrum_0d(NXdata):
-    doc: |
+    \doc: |
       One spectrum for a point of a 0d ROI. Also known as spot measurement.
     intensity(NX_NUMBER):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Counts
-      dimensions:
-        rank: 1
-        dim: (n_energy,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_energy,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Counts
     axis_energy(NX_NUMBER):
-      unit: NX_ENERGY
-      doc: |
+      \unit: NX_ENERGY
+      \doc: |
         Energy axis
-      dimensions:
-        rank: 1
-        dim: (n_energy,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_energy,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Energy
   spectrum_1d(NXdata):
-    doc: |
+    \doc: |
       One spectrum for each point of a 1d ROI.
     intensity(NX_NUMBER):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Counts
-      dimensions:
-        rank: 2
-        dim: (n_i, n_energy)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 2
+        \dim: (n_i, n_energy)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Counts
     axis_i(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Point coordinate along the fast dimension
-      dimensions:
-        rank: 1
-        dim: (n_i,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_i,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Point coordinate along the fast dimension
     axis_energy(NX_NUMBER):
-      unit: NX_ENERGY
-      doc: |
+      \unit: NX_ENERGY
+      \doc: |
         Energy axis
-      dimensions:
-        rank: 1
-        dim: (n_energy,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_energy,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Energy
   spectrum_2d(NXdata):
-    doc: |
+    \doc: |
       One spectrum for each scan point of 2d ROI.
     intensity(NX_NUMBER):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Counts
-      dimensions:
-        rank: 3
-        dim: (n_j, n_i, n_energy)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 3
+        \dim: (n_j, n_i, n_energy)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Counts
     axis_j(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Point coordinate along the slow dimension
-      dimensions:
-        rank: 1
-        dim: (n_j,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_j,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Point coordinate along the slow dimension
     axis_i(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Point coordinate along the fast dimension
-      dimensions:
-        rank: 1
-        dim: (n_i,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_i,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Point coordinate along the fast dimension
     axis_energy(NX_NUMBER):
-      unit: NX_ENERGY
-      doc: |
+      \unit: NX_ENERGY
+      \doc: |
         Energy axis
-      dimensions:
-        rank: 1
-        dim: (n_energy,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_energy,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Energy
   spectrum_3d(NXdata):
-    doc: |
+    \doc: |
       One spectrum for point of a 3d ROI.
     intensity(NX_NUMBER):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Counts
-      dimensions:
-        rank: 4
-        dim: (n_k, n_j, n_i, n_energy)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 4
+        \dim: (n_k, n_j, n_i, n_energy)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Counts
     axis_k(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Point coordinate along the slower dimension
-      dimensions:
-        rank: 1
-        dim: (n_k,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_k,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Point coordinate along the slower dimension
     axis_j(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Point coordinate along the slow dimension
-      dimensions:
-        rank: 1
-        dim: (n_j,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_j,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Point coordinate along the slow dimension
     axis_i(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Point coordinate along the fast dimension
-      dimensions:
-        rank: 1
-        dim: (n_i,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_i,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Point coordinate along the fast dimension
     axis_energy(NX_NUMBER):
-      unit: NX_ENERGY
-      doc: |
+      \unit: NX_ENERGY
+      \doc: |
         Energy axis
-      dimensions:
-        rank: 1
-        dim: (n_energy,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_energy,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Energy
   stack_0d(NXdata):
-    doc: |
+    \doc: |
       Multiple instances of spectrum_0d.
     intensity(NX_NUMBER):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Counts
-      dimensions:
-        rank: 2
-        dim: (n_spc, n_energy)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 2
+        \dim: (n_spc, n_energy)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Counts
     indices_group(NX_INT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Group identifier
-      dimensions:
-        rank: 1
-        dim: (n_spc,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_spc,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Group identifier
     indices_spectrum(NX_INT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Spectrum identifier
-      dimensions:
-        rank: 1
-        dim: (n_spc,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_spc,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Spectrum identifier
     axis_energy(NX_NUMBER):
-      unit: NX_ENERGY
-      doc: |
+      \unit: NX_ENERGY
+      \doc: |
         Energy axis
-      dimensions:
-        rank: 1
-        dim: (n_energy,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_energy,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Energy
   stack_2d(NXdata):
-    doc: |
+    \doc: |
       Multiple instances of spectrum_2d.
     intensity(NX_NUMBER):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Counts
-      dimensions:
-        rank: 4
-        dim: (n_spc, n_j, n_i, n_energy)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 4
+        \dim: (n_spc, n_j, n_i, n_energy)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Counts
     indices_group(NX_INT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Group identifier
-      dimensions:
-        rank: 1
-        dim: (n_spc,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_spc,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Group identifier
     indices_spectrum(NX_INT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Spectrum identifier
-      dimensions:
-        rank: 1
-        dim: (n_spc,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_spc,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Spectrum identifier
     axis_j(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Point coordinate along the slow dimension
-      dimensions:
-        rank: 1
-        dim: (n_j,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_j,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Point coordinate along the slow dimension
     axis_i(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Point coordinate along the fast dimension
-      dimensions:
-        rank: 1
-        dim: (n_i,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_i,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Point coordinate along the fast dimension
     axis_energy(NX_NUMBER):
-      unit: NX_ENERGY
-      doc: |
+      \unit: NX_ENERGY
+      \doc: |
         Energy axis
-      dimensions:
-        rank: 1
-        dim: (n_energy,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_energy,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Energy
   stack_3d(NXdata):
-    doc: |
+    \doc: |
       Multiple instances of spectrum_3d.
     intensity(NX_NUMBER):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Counts
-      dimensions:
-        rank: 5
-        dim: (n_spc, n_k, n_j, n_i, n_energy)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 5
+        \dim: (n_spc, n_k, n_j, n_i, n_energy)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Counts
     indices_group(NX_INT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Group identifier
-      dimensions:
-        rank: 1
-        dim: (n_spc,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_spc,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Group identifier
     indices_spectrum(NX_INT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Spectrum identifier
-      dimensions:
-        rank: 1
-        dim: (n_spc,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_spc,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Spectrum identifier
     axis_k(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Point coordinate along the slower dimension
-      dimensions:
-        rank: 1
-        dim: (n_k,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_k,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Point coordinate along the slower dimension
     axis_j(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Point coordinate along the slow dimension
-      dimensions:
-        rank: 1
-        dim: (n_j,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_j,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Point coordinate along the slow dimension
     axis_i(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Point coordinate along the fast dimension
-      dimensions:
-        rank: 1
-        dim: (n_i,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_i,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Point coordinate along the fast dimension
     axis_energy(NX_NUMBER):
-      unit: NX_ENERGY
-      doc: |
+      \unit: NX_ENERGY
+      \doc: |
         Energy axis
-      dimensions:
-        rank: 1
-        dim: (n_energy,)
-      \@long_name(NX_CHAR):
-        doc: |
+      \dimensions:
+        \rank: 1
+        \dim: (n_energy,)
+      \@long_name:
+        \type: NX_CHAR
+        \doc: |
           Energy
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 68227c894efa4e970e8826facd84d2676cd89a1a8de369b7af5df2856417c3e6
+# 36b14c7a667a4d26d3cc4e53ee505a97627f68716cbf97c139f8cd02443c49d2
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

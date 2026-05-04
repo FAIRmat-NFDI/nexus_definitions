@@ -1,8 +1,8 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for any :math:`I(Q)` data.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbol(s) listed here will be used below to coordinate datasets with the same shape.
   nVars: |
     The number of values taken by the varied variable
@@ -10,76 +10,76 @@ symbols:
     Number of values for the first dimension of Q
   nQY: |
     Number of values for the second dimension of Q
-type: group
+\type: group
 NXiqproc(NXobject):
   (NXentry):
     title:
     definition:
-      doc: |
+      \doc: |
         Official NeXus NXDL schema to which this file conforms
-      enumeration: [NXiqproc]
+      \enumeration: [NXiqproc]
     instrument(NXinstrument):
       (NXsource):
         type:
         name:
         probe:
-          enumeration: [neutron, x-ray, electron]
+          \enumeration: [neutron, x-ray, electron]
       name(NX_CHAR):
-        doc: |
+        \doc: |
           Name of the instrument from which this data was reduced.
     (NXsample):
       name:
-        doc: |
+        \doc: |
           Descriptive name of sample
     reduction(NXprocess):
       program(NX_CHAR):
       version(NX_CHAR):
       input(NXparameters):
         filenames(NX_CHAR):
-          doc: |
+          \doc: |
             Raw data files used to generate this I(Q)
-        doc: |
+        \doc: |
           Input parameters for the reduction program used
       output(NXparameters):
-        doc: |
+        \doc: |
           Eventual output parameters from the data reduction program used
     (NXdata):
       data(NX_INT):
         signal: 1
-        doc: |
+        \doc: |
           This is I(Q). The client has to analyse the dimensions
           of I(Q). Often, multiple I(Q) for various environment
           conditions are measured; that would be the first
           dimension. Q can be multidimensional, this accounts for
           the further dimensions in the data
-        dimensions:
-          rank: 3
-          dim: (nVars, nQX, nQY)
+        \dimensions:
+          \rank: 3
+          \dim: (nVars, nQX, nQY)
       variable(NX_NUMBER):
         axis: 1
-        dimensions:
-          rank: 1
-          dim: (nVars,)
+        \dimensions:
+          \rank: 1
+          \dim: (nVars,)
         \@varied_variable:
-          doc: |
+          \doc: |
             The real name of the varied variable in the first dim of data, temperature, P, MF etc...
       qx(NX_NUMBER):
         axis: 2
-        doc: |
+        \doc: |
           Values for the first dimension of Q
-        dimensions:
-          rank: 1
-          dim: (nQX,)
+        \dimensions:
+          \rank: 1
+          \dim: (nQX,)
       qy(NX_NUMBER):
         axis: 3
-        doc: |
+        \doc: |
           Values for the second dimension of Q
-        dimensions:
-          rank: 1
-          dim: (nQY,)
+        \dimensions:
+          \rank: 1
+          \dim: (nQY,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 89cc32ace3ddc934bec9d1baaa1c87d8dfd85954c74a35453c5c84f5048f3d9a
+# eedf50d8098cdf56f767cab929efbae6ebeffaad1c6b78821f8dd0665c665ccb
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

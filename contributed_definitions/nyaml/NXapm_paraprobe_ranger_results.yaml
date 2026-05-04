@@ -1,40 +1,40 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for results files of the paraprobe-ranger tool.
   
   The tool paraprobe-ranger evaluates how mass-to-charge-state-ratio
   values map on (molecular) ion types.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   n_ions: |
     The total number of ions in the reconstructed volume.
-type: group
+\type: group
 NXapm_paraprobe_ranger_results(NXapm_paraprobe_tool_results):
   (NXentry):
-    exists: ['min', '1', 'max', '1']
+    \exists: ['min', '1', 'max', '1']
     definition(NX_CHAR):
-      enumeration: [NXapm_paraprobe_ranger_results]
+      \enumeration: [NXapm_paraprobe_ranger_results]
     iontypesID(NXapm_paraprobe_tool_process):
-      nameType: partial
-      exists: ['min', '1', 'max', 'unbounded']
-      doc: |
+      \nameType: partial
+      \exists: ['min', '1', 'max', 'unbounded']
+      \doc: |
         The tool loads ranging definitions from the configuration file and
         evaluates for each ion to which iontype it matches.
         If an ion matches on no type, the ion is assume of the default
         *unknown_type*. In this case, the value *iontypes* is 0.
         In other cases the value is larger than 0.
       iontypes(NX_UINT):
-        unit: NX_UNITLESS
-        doc: |
+        \unit: NX_UNITLESS
+        \doc: |
           The iontype (identifier) for each ion that was best matching,
           stored in the order of the evaporation sequence ID.
-        dimensions:
-          rank: 1
-          dim: (n_ions,)
+        \dimensions:
+          \rank: 1
+          \dim: (n_ions,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 25950a4f242125ae0de8d54529a51c27b94f1ce5846ae351ab1b9989be7445b8
+# bcd3adb5af1a57c4d159becd68e26edfe12cda6a2607159315f4cce6c47b1c65
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

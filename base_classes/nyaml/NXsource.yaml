@@ -1,167 +1,168 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Radiation source emitting a beam.
   
   Examples include particle sources (electrons, neutrons, protons) or sources for electromagnetic radiation (photons).
   This base class can also be used to describe neutron or x-ray storage ring/facilities.
-type: group
+\type: group
 NXsource(NXcomponent):
   distance(NX_FLOAT):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       Effective distance from sample
       Distance as seen by radiation from sample. This number should be negative
       to signify that it is upstream of the sample.
   name:
-    doc: |
+    \doc: |
       Name of source
     \@short_name:
-      doc: |
+      \doc: |
         short name for source, perhaps the acronym
   type:
-    doc: |
+    \doc: |
       type of radiation source (pick one from the enumerated list and spell exactly)
-    enumeration:
-      open_enum: true
+    \enumeration:
+      \open: true
       items: [Spallation Neutron Source, Pulsed Reactor Neutron Source, Reactor Neutron Source, Synchrotron X-ray Source, Pulsed Muon Source, Rotating Anode X-ray, Fixed Tube X-ray, UV Laser, Free-Electron Laser, Optical Laser, Ion Source, UV Plasma Source, Metal Jet X-ray, Laser, Dye Laser, Broadband Tunable Light Source, Halogen Lamp, LED, Mercury Cadmium Telluride Lamp, Deuterium Lamp, Xenon Lamp, Globar]
   probe:
-    doc: |
+    \doc: |
       type of radiation probe (pick one from the enumerated list and spell exactly)
-    enumeration: [neutron, photon, x-ray, muon, electron, ultraviolet, visible light, positron, proton]
+    \enumeration: [neutron, photon, x-ray, muon, electron, ultraviolet, visible light, positron, proton]
   power(NX_FLOAT):
-    unit: NX_POWER
-    doc: |
+    \unit: NX_POWER
+    \doc: |
       Source power
   emittance_x(NX_FLOAT):
-    unit: NX_EMITTANCE
-    doc: |
+    \unit: NX_EMITTANCE
+    \doc: |
       Source emittance (nm-rad) in X (horizontal) direction.
   emittance_y(NX_FLOAT):
-    unit: NX_EMITTANCE
-    doc: |
+    \unit: NX_EMITTANCE
+    \doc: |
       Source emittance (nm-rad) in Y (horizontal) direction.
   sigma_x(NX_FLOAT):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       particle beam size in x
   sigma_y(NX_FLOAT):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       particle beam size in y
   flux(NX_FLOAT):
-    unit: NX_FLUX
-    doc: |
+    \unit: NX_FLUX
+    \doc: |
       Source intensity/area (example: s-1 cm-2)
   energy(NX_FLOAT):
-    unit: NX_ENERGY
-    doc: |
+    \unit: NX_ENERGY
+    \doc: |
       Source energy. Typically, this would be the energy of
       the emitted beam. For storage rings, this would be
       the particle beam energy.
   current(NX_FLOAT):
-    unit: NX_CURRENT
-    doc: |
+    \unit: NX_CURRENT
+    \doc: |
       Accelerator, X-ray tube, or storage ring current
   voltage(NX_FLOAT):
-    unit: NX_VOLTAGE
-    doc: |
+    \unit: NX_VOLTAGE
+    \doc: |
       Accelerator voltage
   frequency(NX_FLOAT):
-    unit: NX_FREQUENCY
-    doc: |
+    \unit: NX_FREQUENCY
+    \doc: |
       Frequency of pulsed source
   period(NX_FLOAT):
-    unit: NX_PERIOD
-    doc: |
+    \unit: NX_PERIOD
+    \doc: |
       Period of pulsed source
   target_material:
-    doc: |
+    \doc: |
       Pulsed source target material
-    enumeration: [Ta, W, depleted_U, enriched_U, Hg, Pb, C]
+    \enumeration: [Ta, W, depleted_U, enriched_U, Hg, Pb, C]
   notes(NXnote):
-    doc: |
+    \doc: |
       any source/facility related messages/events that
       occurred during the experiment
   bunch_pattern(NXdata):
-    doc: |
+    \doc: |
       For storage rings, description of the bunch pattern.
       This is useful to describe irregular bunch patterns.
     title:
-      doc: |
+      \doc: |
         name of the bunch pattern
   number_of_bunches(NX_INT):
-    doc: |
+    \doc: |
       For storage rings, the number of bunches in use.
   bunch_length(NX_FLOAT):
-    unit: NX_TIME
-    doc: |
+    \unit: NX_TIME
+    \doc: |
       For storage rings, temporal length of the bunch
   bunch_distance(NX_FLOAT):
-    unit: NX_TIME
-    doc: |
+    \unit: NX_TIME
+    \doc: |
       For storage rings, time between bunches
   pulse_width(NX_FLOAT):
-    unit: NX_TIME
-    doc: |
+    \unit: NX_TIME
+    \doc: |
       temporal width of source pulse
     
     # pulsed sources or storage rings could use this
   pulse_shape(NXdata):
-    doc: |
+    \doc: |
       source pulse shape
     
     # pulsed sources or storage rings could use this
   mode:
-    doc: |
+    \doc: |
       source operating mode
-    enumeration:
-      open_enum: true
+    \enumeration:
+      \open: true
       Single Bunch:
-        doc: |
+        \doc: |
           for storage rings
       Multi Bunch:
-        doc: |
+        \doc: |
           for storage rings
   top_up(NX_BOOLEAN):
-    doc: |
+    \doc: |
       Is the synchrotron operating in top_up mode?
   last_fill(NX_NUMBER):
-    unit: NX_CURRENT
-    doc: |
+    \unit: NX_CURRENT
+    \doc: |
       For storage rings, the current at the end of the most recent injection.
-    \@time(NX_DATE_TIME):
-      doc: |
+    \@time:
+      \type: NX_DATE_TIME
+      \doc: |
         date and time of the most recent injection.
   wavelength(NX_FLOAT):
-    unit: NX_WAVELENGTH
-    doc: |
+    \unit: NX_WAVELENGTH
+    \doc: |
       The wavelength of the radiation emitted by the source.
   pulse_energy(NX_FLOAT):
-    unit: NX_ENERGY
-    doc: |
+    \unit: NX_ENERGY
+    \doc: |
       For pulsed sources, the energy of a single pulse.
   peak_power(NX_FLOAT):
-    unit: NX_POWER
-    doc: |
+    \unit: NX_POWER
+    \doc: |
       For pulsed sources, the pulse energy divided
       by the pulse duration
   anode_material:
-    doc: |
+    \doc: |
       Material of the anode (for X-ray tubes).
   filament_current(NX_FLOAT):
-    unit: NX_CURRENT
-    doc: |
+    \unit: NX_CURRENT
+    \doc: |
       Filament current (for X-ray tubes).
   emission_current(NX_FLOAT):
-    unit: NX_CURRENT
-    doc: |
+    \unit: NX_CURRENT
+    \doc: |
       Emission current of the generated beam.
   gas_pressure(NX_FLOAT):
-    unit: NX_PRESSURE
-    doc: |
+    \unit: NX_PRESSURE
+    \doc: |
       Gas pressure inside ionization source.
   previous_source(NX_CHAR):
-    doc: |
+    \doc: |
       Single instance or list of instances of NXsource pointing to the sources from which a beam originated to reach this source.
       This can be used, for example, for secondary sources to describe which other source(s) they are derived from.
       
@@ -172,27 +173,27 @@ NXsource(NXcomponent):
   geometry(NXgeometry):
     deprecated: |
       Use the field `depends_on` and :ref:`NXtransformations` to position the source and NXoff_geometry to describe its shape instead
-    doc: |
+    \doc: |
       "Engineering" location of source.
   (NXaperture):
-    doc: |
+    \doc: |
       The size and position of an aperture inside the source.
   (NXelectromagnetic_lens):
-    doc: |
+    \doc: |
       Individual electromagnetic lenses inside the source.
   (NXdeflector):
-    doc: |
+    \doc: |
       Deflectors inside the source.
   (NXfabrication):
   (NXoff_geometry):
-    exists: ['min', '0']
-    doc: |
+    \exists: ['min', '0']
+    \doc: |
       This group describes the shape of the beam line component
   distribution(NXdata):
-    doc: |
+    \doc: |
       The wavelength or energy distribution of the source
   depends_on(NX_CHAR):
-    doc: |
+    \doc: |
       The reference point of the source plane is its center in the x and y axis. The source is considered infinitely thin in the
       z axis.
       
@@ -200,7 +201,7 @@ NXsource(NXcomponent):
         :width: 40%
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# a85fe87f55e843178bfcbad58a624e22d12f62d8e164a496d68e129e7b5e7d0c
+# 3babd57a1962e0704a25327bf8ac7478fc157872bc860ecfebdbf78a90e7b733
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

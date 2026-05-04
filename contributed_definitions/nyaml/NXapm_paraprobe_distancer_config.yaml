@@ -1,5 +1,5 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for a configuration file of the paraprobe-distancer tool.
   
   The tool paraprobe-distancer tool evaluates exactly the shortest Euclidean distance for each
@@ -10,40 +10,40 @@ doc: |
   
   Currently, paraprobe-distancer does not check if the respectively specified triangle sets are consistent,
   what their topology is, or whether or not these triangles are consistently oriented.
-type: group
+\type: group
 NXapm_paraprobe_distancer_config(NXapm_paraprobe_tool_config):
   (NXentry):
-    exists: ['min', '1', 'max', '1']
+    \exists: ['min', '1', 'max', '1']
     definition(NX_CHAR):
-      enumeration: [NXapm_paraprobe_distancer_config]
+      \enumeration: [NXapm_paraprobe_distancer_config]
     point_to_triangleID(NXapm_paraprobe_tool_parameters):
-      nameType: partial
-      exists: ['min', '1', 'max', '1']
+      \nameType: partial
+      \exists: ['min', '1', 'max', '1']
       method(NX_CHAR):
-        doc: |
+        \doc: |
           Specifies for which point the tool will compute distances.
           
           The value *default* configures that distances are computed for all points.
           The value *skin* configures that distances are computed only for those
           points which are not farther away located to a triangle than
           threshold_distance.
-        enumeration: [default, skin]
+        \enumeration: [default, skin]
       threshold_distance(NX_FLOAT):
-        exists: optional
-        unit: NX_LENGTH
-        doc: |
+        \exists: optional
+        \unit: NX_LENGTH
+        \doc: |
           Maximum distance for which distances are
           computed when *method* is *skin*.
       number_of_triangle_sets(NX_UINT):
-        unit: NX_UNITLESS
-        doc: |
+        \unit: NX_UNITLESS
+        \doc: |
           How many triangle sets to consider.
           Multiple triangle sets can be defined which are
           composed into one joint triangle set for the analysis.
       triangle_setID(NXnote):
-        nameType: partial
-        exists: ['min', '1', 'max', 'unbounded']
-        doc: |
+        \nameType: partial
+        \exists: ['min', '1', 'max', 'unbounded']
+        \doc: |
           Each triangle_set that is referred to here should be a face_list_data_structure,
           i.e. an array of (n_vertices, 3) of NX_FLOAT for vertex coordinates, an (n_facets, 3)
           array of NX_UINT incident vertices of each facet. Vertex indices are assumed to
@@ -53,35 +53,35 @@ NXapm_paraprobe_distancer_config(NXapm_paraprobe_tool_config):
         checksum(NX_CHAR):
         file_name(NX_CHAR):
         vertices(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute path in the (HDF5) file that points to the array
             of vertex positions for the triangles in that triangle_set.
         indices(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute path in the (HDF5) file that points to the array
             of vertex indices for the triangles in that triangle_set.
         vertex_normals(NX_CHAR):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Absolute path in the (HDF5) file that points to the array
             of vertex normal vectors for the triangles in that triangle_set.
         face_normals(NX_CHAR):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Absolute path in the (HDF5) file that points to the array
             of facet normal vectors for the triangles in that triangle_set.
         indices_patch(NX_CHAR):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Absolute path in the (HDF5) file that points to the array
             of identifier for the triangles in that triangle_set.
         patch_filter(NXmatch_filter):
-          exists: optional
+          \exists: optional
           method(NX_CHAR):
           match(NX_NUMBER):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# b8a6883c05768739a9daf402e5189a23389ca27d9425ba499c036b58304c94b0
+# 566e380d5dc0139a3cc7a52ae08e8c9e410ce46aa9cee133861c32607eaffd51
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

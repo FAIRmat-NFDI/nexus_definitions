@@ -1,11 +1,11 @@
-category: base
-doc: |
+\category: base
+\doc: |
   An optical fiber, e.g. glass fiber.
   
   Specify the quantities that define the fiber. Fiber optics are described in
   detail [here](https://www.photonics.com/Article.aspx?AID=25151&PID=4), for
   example.
-symbols:
+\symbols:
   N_spectrum_core: |
     Length of the spectrum vector (e.g. wavelength or energy) for which the
     refractive index of the core material is given.
@@ -17,127 +17,127 @@ symbols:
     attenuation curve is given.
 
 # A draft of a new base class to describe an optical fiber (e.g. glass fiber)
-type: group
+\type: group
 NXoptical_fiber(NXcomponent):
   description:
-    exists: recommended
-    doc: |
+    \exists: recommended
+    \doc: |
       Descriptive name or brief description of the fiber, e.g. by stating its
       dimension. The dimension of a fiber can be given as 60/100/200 which
       refers to a core diameter of 60 micron, a clad diameter of 100 micron,
       and a coating diameter of 200 micron.
   type:
-    doc: |
+    \doc: |
       Type/mode of the fiber. Modes of fiber transmission are shown in
       Fig. 5 [here](https://www.photonics.com/Article.aspx?AID=25151&PID=4).
-    enumeration: [single mode, multimode graded index, multimode step index]
+    \enumeration: [single mode, multimode graded index, multimode step index]
   dispersion_type:
-    doc: |
+    \doc: |
       Type of dispersion.
-    enumeration:
-      open_enum: true
+    \enumeration:
+      \open: true
       items: [modal, material, chromatic]
   dispersion(NX_FLOAT):
-    unit: NX_TIME
-    doc: |
+    \unit: NX_TIME
+    \doc: |
       Spectrum-dependent (or refractive index-dependent) dispersion of the
       fiber. Specify in ps/nm*km.
-    dimensions:
-      rank: 1
-      dim: (N_spectrum_core,)
+    \dimensions:
+      \rank: 1
+      \dim: (N_spectrum_core,)
   core(NXsample):
-    doc: |
+    \doc: |
       Core of the fiber, i.e. the part of the fiber which transmits the light.
     material:
-      doc: |
+      \doc: |
         Specify the material of the core of the fiber.
     diameter(NX_FLOAT):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Core diameter of the fiber (e.g. given in micrometer).
     index_of_refraction(NX_FLOAT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Complex index of refraction of the fiber. Specify at given wavelength
         (or energy, wavenumber etc.) values.
-      dimensions:
-        rank: 2
-        dim: (2, N_spectrum_core)
+      \dimensions:
+        \rank: 2
+        \dim: (2, N_spectrum_core)
   cladding(NXsample):
-    doc: |
+    \doc: |
       Core of the fiber, i.e. the part of the fiber which transmits the light.
     material:
-      doc: |
+      \doc: |
         Specify the material of the core of the fiber.
     diameter(NX_FLOAT):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Clad diameter of the fiber (e.g. given in micrometer).
     index_of_refraction(NX_FLOAT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Complex index of refraction of the fiber. Specify at given wavelength
         (or energy, wavenumber etc.) values.
-      dimensions:
-        rank: 2
-        dim: (2, N_spectrum_clad)
+      \dimensions:
+        \rank: 2
+        \dim: (2, N_spectrum_clad)
   coating(NXsample):
-    doc: |
+    \doc: |
       Coating of the fiber.
     material:
-      doc: |
+      \doc: |
         Specify the material of the coating of the fiber.
     diameter(NX_FLOAT):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Outer diameter of the fiber (e.g. given in micrometer).
   length(NX_FLOAT):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       Length of the fiber.
   spectral_range(NX_FLOAT):
-    exists: recommended
-    unit: NX_ANY
-    doc: |
+    \exists: recommended
+    \unit: NX_ANY
+    \doc: |
       Spectral range for which the fiber is designed. Enter the minimum and
       maximum values (lower and upper limit) of the wavelength range.
-    dimensions:
-      rank: 1
-      dim: (2,)
+    \dimensions:
+      \rank: 1
+      \dim: (2,)
     \@units:
-      doc: |
+      \doc: |
         Unit of spectral array (e.g. nanometer or angstrom for wavelength, or
         electronvolt for energy etc.).
   transfer_rate(NX_FLOAT):
-    unit: GB/s
-    doc: |
+    \unit: GB/s
+    \doc: |
       Transfer rate of the fiber (in GB per second).
   numerical_aperture(NX_FLOAT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Numerical aperture (NA) of the fiber.
   attenuation(NX_FLOAT):
-    unit: dB/km
-    doc: |
+    \unit: dB/km
+    \doc: |
       Wavelength-dependent attenuation of the fiber (specify in dB/km).
-    dimensions:
-      rank: 1
-      dim: (N_spectrum_attenuation,)
+    \dimensions:
+      \rank: 1
+      \dim: (N_spectrum_attenuation,)
     \@units:
-      doc: |
+      \doc: |
         Use dB/km.
-      enumeration: [dB/km]
+      \enumeration: [dB/km]
   power_loss(NX_FLOAT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Power loss of the fiber in percentage.
   acceptance_angle(NX_FLOAT):
-    unit: NX_ANGLE
-    doc: |
+    \unit: NX_ANGLE
+    \doc: |
       Acceptance angle of the fiber.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 64295c420620e79bb6b8d6f500d3a5c51d6df9dfe0084a658dd68000994bb8e0
+# c6290bb1a4263bcbcf1bcaf3229bcb804b30d166df91d0dcfd362bce889c09ec
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

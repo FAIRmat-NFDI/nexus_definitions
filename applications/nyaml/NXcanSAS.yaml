@@ -1,5 +1,5 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Implementation of the canSAS standard to store reduced small-angle scattering data of any dimension.
   
   .. index:: canSAS
@@ -80,12 +80,12 @@ doc: |
 # All such related resources are stored in the related subdirectory: ./canSAS/
 # In general, for an NXDL file:  NXsomenxdl.nxdl.xml
 # all related resources should be stored in subdirectory:  ./somenxdl/
-type: group
+\type: group
 NXcanSAS(NXobject):
   (NXentry):
     \@default:
-      exists: optional
-      doc: |
+      \exists: optional
+      \doc: |
         .. index:: plotting
         
         Declares which :ref:`NXdata` group
@@ -93,7 +93,7 @@ NXcanSAS(NXobject):
         It is needed to resolve ambiguity when more than one :ref:`NXdata` group exists.
         The value is the name of the default :ref:`NXdata` group.
         Usually, this will be the name of the first *SASdata* group.
-    doc: |
+    \doc: |
       .. index:: NXcanSAS (applications); SASentry
       
       Place the canSAS ``SASentry`` group as a child of a NeXus ``NXentry`` group
@@ -107,26 +107,26 @@ NXcanSAS(NXobject):
       
       .. [#] The UDunits specification also includes instructions for derived units.
     \@canSAS_class:
-      doc: |
+      \doc: |
         Official canSAS group: **SASentry**
-      enumeration: [SASentry]
+      \enumeration: [SASentry]
     \@version:
-      doc: |
+      \doc: |
         Describes the version of the canSAS standard used to write this data.
         This must be a text (not numerical) representation. Such as::
         
           @version="1.1"
-      enumeration: [1.1]
+      \enumeration: [1.1]
     definition:
-      doc: |
+      \doc: |
         Official NeXus NXDL schema to which this subentry conforms.
-      enumeration: [NXcanSAS]
+      \enumeration: [NXcanSAS]
     
     # ============================
     # SASdata
     # ============================
     (NXdata):
-      doc: |
+      \doc: |
         A *SASData* group contains a single reduced small-angle scattering data set
         that can be represented as :math:`I(\vec{Q})` or :math:`I(|\vec{Q}|)`.
         
@@ -150,20 +150,21 @@ NXcanSAS(NXobject):
         use attributes similar to ``@Mask_indices`` (such as ``@Temperature_indices``
         or ``@Pressure_indices``).
       \@canSAS_class:
-        doc: |
+        \doc: |
           Official canSAS group: :index:`NXcanSAS (applications); SASdata`
-        enumeration: [SASdata]
+        \enumeration: [SASdata]
       
       # attributes, see: http://www.cansas.org/formats/canSAS2012/1.0/doc/framework.html#terms
-      \@signal(NX_CHAR):
-        doc: |
+      \@signal:
+        \type: NX_CHAR
+        \doc: |
           Name of the default data field.
-        enumeration:
+        \enumeration:
           I:
-            doc: |
+            \doc: |
               For canSAS **SASdata**, this is always "I".
       \@I_axes:
-        doc: |
+        \doc: |
           String array that defines the independent data fields used in
           the default plot for all of the dimensions of the *signal* field
           (the *signal* field is the field in this group that is named by
@@ -175,8 +176,9 @@ NXcanSAS(NXobject):
           
           Since there are five items in the list, the intensity field of this example
           ``I`` must be a five-dimensional array (rank=5).
-      \@Q_indices(NX_INT):
-        doc: |
+      \@Q_indices:
+        \type: NX_INT
+        \doc: |
           Integer or integer array that describes which indices
           (of the :math:`I` data object) are used to
           reference the ``Q`` data object. The items in this array
@@ -188,8 +190,9 @@ NXcanSAS(NXobject):
           from the :math:`I` data object: one for time and
           two for Q position.   Thus, in this example, the
           ``Q`` data is time-dependent: :math:`\vec{Q}(t)`.
-      \@mask(NX_CHAR):
-        doc: |
+      \@mask:
+        \type: NX_CHAR
+        \doc: |
           Name of the data mask field.
           
           .. see: https://github.com/nexusformat/definitions/issues/533
@@ -200,8 +203,8 @@ NXcanSAS(NXobject):
           where ``false`` means *no mask* and ``true`` means *mask*
           or a more descriptive array as as defined in :ref:`NXdetector`.
       \@Mask_indices:
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           Integer or integer array that describes which indices
           (of the :math:`I` data object) are used to
           reference the ``Mask`` data object.  The items in this
@@ -211,16 +214,17 @@ NXcanSAS(NXobject):
           
           which indicates that Q requires two indices
           from the :math:`I` data object for Q position.
-      \@timestamp(NX_DATE_TIME):
-        exists: optional
-        doc: |
+      \@timestamp:
+        \type: NX_DATE_TIME
+        \exists: optional
+        \doc: |
           ISO-8601 time [#iso8601]_
       Q(NX_NUMBER):
-        unit: NX_PER_LENGTH
-        nameType: specified
+        \unit: NX_PER_LENGTH
+        \nameType: specified
         
         # http://www.cansas.org/formats/canSAS2012/1.0/doc/basics.html#definition-of
-        doc: |
+        \doc: |
           .. index:: NXcanSAS (applications); Q
                       
           Array of :math:`Q` data to accompany :math:`I`.
@@ -241,23 +245,23 @@ NXcanSAS(NXobject):
           :math:`|\vec{Q}|`
           or :math:`\vec{Q}`,  depending on the context.
         \@units:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Engineering units to use when expressing
             :math:`Q` and related terms.
             
             Data expressed in other units will generate
             a warning from validation software and may not
             be processed by some analysis software packages.
-          enumeration:
+          \enumeration:
             1/m:
             1/nm:
-              doc: |
+              \doc: |
                 preferred
             1/angstrom:
         \@uncertainties:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             (optional: for numerical arrays)
             
             Names the dataset (in this SASdata group) that provides the
@@ -286,9 +290,10 @@ NXcanSAS(NXobject):
             .. note:: To report distribution in reported :math:`Q` values,
                use the ``@resolutions`` attribute.  It is possible for both
                ``@resolutions`` and ``uncertainties`` to be reported.
-        \@resolutions(NX_CHAR):
-          exists: optional
-          doc: |
+        \@resolutions:
+          \type: NX_CHAR
+          \exists: optional
+          \doc: |
             .. index:: NXcanSAS (applications); resolutions
             
             (optional: for numerical arrays)
@@ -332,9 +337,10 @@ NXcanSAS(NXobject):
             .. note:: To report uncertainty in reported :math:`Q` values,
                use the ``@uncertainties`` attribute.  It is possible for both
                ``@resolutions`` and ``uncertainties`` to be reported.
-        \@resolutions_description(NX_CHAR):
-          exists: optional
-          doc: |
+        \@resolutions_description:
+          \type: NX_CHAR
+          \exists: optional
+          \doc: |
             (optional)
             Generally, this describes the :math:`Q` ``@resolutions`` data object.
             By default, the value is assumed to be "Gaussian".  These are
@@ -357,10 +363,10 @@ NXcanSAS(NXobject):
             In such cases, use additional datasets or a :ref:`NXnote` subgroup
             to include that detail.
       I(NX_NUMBER):
-        nameType: specified
+        \nameType: specified
         
         # http://www.cansas.org/formats/canSAS2012/1.0/doc/basics.html#definition-of-intensity
-        doc: |
+        \doc: |
           .. index:: NXcanSAS (applications); I
                       
           Array of intensity (:math:`I`) data.
@@ -401,8 +407,8 @@ NXcanSAS(NXobject):
           data may be presented in other units and still be consistent with NeXus.
           See the :ref:`design-units` section.
         \@units:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Engineering units to use when expressing
             :math:`I` and intensity-related terms.
             
@@ -411,19 +417,19 @@ NXcanSAS(NXobject):
             
             For software using the UDUNITS-2 library, ``arbitrary`` will be
             changed to ``unknown`` for handling with that library.
-          enumeration:
+          \enumeration:
             1/m:
-              doc: |
+              \doc: |
                 includes m2/m3 and 1/m/sr
             1/cm:
-              doc: |
+              \doc: |
                 includes cm2/cm3 and 1/cm/sr
             m2/g:
             cm2/g:
             arbitrary:
         \@uncertainties:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             (optional: for numerical arrays)
             
             Names the dataset (in this SASdata group) that provides the
@@ -443,8 +449,8 @@ NXcanSAS(NXobject):
             
                 @uncertainties="Idev"
         \@scaling_factor:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             (optional)
             Names the field (a.k.a. dataset) that contains a factor
             to multiply ``I``.  By default, this value is unity.
@@ -465,8 +471,8 @@ NXcanSAS(NXobject):
             defined by NXcanSAS.  The user has the flexibility to use names
             different than those shown in this example.
       Idev(NX_NUMBER):
-        exists: ['min', '0']
-        doc: |
+        \exists: ['min', '0']
+        \doc: |
           .. index:: NXcanSAS (applications); Idev
           
           Estimated **uncertainty** (usually standard deviation)
@@ -477,8 +483,8 @@ NXcanSAS(NXobject):
           
               I/@uncertainties="Idev"
         \@units:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Engineering units to use when expressing
             :math:`I` and intensity-related terms.
             
@@ -488,20 +494,20 @@ NXcanSAS(NXobject):
             
             For software using the UDUNITS-2 library, ``arbitrary`` will be
             changed to ``unknown`` for handling with that library.
-          enumeration:
+          \enumeration:
             1/m:
-              doc: |
+              \doc: |
                 includes m2/m3 and 1/m/sr
             1/cm:
-              doc: |
+              \doc: |
                 includes cm2/cm3 and 1/cm/sr
             m2/g:
             cm2/g:
             arbitrary:
       Qdev(NX_NUMBER):
-        unit: NX_PER_LENGTH
-        exists: ['min', '0']
-        doc: |
+        \unit: NX_PER_LENGTH
+        \exists: ['min', '0']
+        \doc: |
           .. index:: NXcanSAS (applications); Qdev
           
           Estimated :math:`Q` **resolution** (usually standard deviation).
@@ -517,23 +523,23 @@ NXcanSAS(NXobject):
           
               Q/@resolutions="dQw", "dQl"
         \@units:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Engineering units to use when expressing
             :math:`Q` and related terms.
             
             Data expressed in other units may not be processed by some
             software packages.
-          enumeration:
+          \enumeration:
             1/m:
             1/nm:
-              doc: |
+              \doc: |
                 preferred
             1/angstrom:
       dQw(NX_NUMBER):
-        unit: NX_PER_LENGTH
-        exists: ['min', '0']
-        doc: |
+        \unit: NX_PER_LENGTH
+        \exists: ['min', '0']
+        \doc: |
           .. index:: NXcanSAS (applications); dQw
           
           :math:`Q` **resolution** along the axis of scanning
@@ -548,23 +554,23 @@ NXcanSAS(NXobject):
           
               Q/@resolutions="dQw", "dQl"
         \@units:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Engineering units to use when expressing
             :math:`Q` and related terms.
             
             Data expressed in other units may not be processed by some
             software packages.
-          enumeration:
+          \enumeration:
             1/m:
             1/nm:
-              doc: |
+              \doc: |
                 preferred
             1/angstrom:
       dQl(NX_NUMBER):
-        unit: NX_PER_LENGTH
-        exists: ['min', '0']
-        doc: |
+        \unit: NX_PER_LENGTH
+        \exists: ['min', '0']
+        \doc: |
           .. index:: NXcanSAS (applications); dQl
           
           :math:`Q` **resolution** perpendicular to the axis of scanning
@@ -579,23 +585,23 @@ NXcanSAS(NXobject):
           
               Q/@resolutions="dQw", "dQl"
         \@units:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Engineering units to use when expressing
             :math:`Q` and related terms.
             
             Data expressed in other units may not be processed by some
             software packages.
-          enumeration:
+          \enumeration:
             1/m:
             1/nm:
-              doc: |
+              \doc: |
                 preferred
             1/angstrom:
       Qmean(NX_NUMBER):
-        exists: ['min', '0']
-        unit: NX_PER_LENGTH
-        doc: |
+        \exists: ['min', '0']
+        \unit: NX_PER_LENGTH
+        \doc: |
           Mean value of :math:`Q` for this data point.
           Useful when describing data that has been
           binned from higher-resolution data.
@@ -603,23 +609,23 @@ NXcanSAS(NXobject):
           It is expected that ``Q`` is provided
           and that both ``Q`` and ``Qmean`` will have the same units.
         \@units:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Engineering units to use when expressing
             :math:`Q` and related terms.
             
             Data expressed in other units may not be processed by some
             software packages.
-          enumeration:
+          \enumeration:
             1/m:
             1/nm:
-              doc: |
+              \doc: |
                 preferred
             1/angstrom:
       ShadowFactor:
-        exists: ['min', '0']
-        unit: NX_DIMENSIONLESS
-        doc: |
+        \exists: ['min', '0']
+        \unit: NX_DIMENSIONLESS
+        \doc: |
           A numerical factor applied to pixels affected by the beam stop penumbra.
           Used in data files from NIST/NCNR instruments.
           
@@ -627,33 +633,33 @@ NXcanSAS(NXobject):
     
     # optional items
     title:
-      exists: ['min', '1', 'max', '1']
-      doc: |
+      \exists: ['min', '1', 'max', '1']
+      \doc: |
         Title of this *SASentry*.
         Make it so that you can recognize the data by its title.
         Could be the name of the sample,
         the name for the measured data, or something else representative.
     run:
-      exists: ['min', '1', 'max', 'unbounded']
-      nameType: any
-      doc: |
+      \exists: ['min', '1', 'max', 'unbounded']
+      \nameType: any
+      \doc: |
         Run identification for this *SASentry*.
         For many facilities, this is an integer, such as en experiment number.
         Use multiple instances of ``run`` as needed, keeping
         in mind that HDF5 requires unique names for all entities
         in a group.
       \@name:
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           Optional string attribute to identify this particular *run*.
           Could use this to associate (correlate) multiple *SASdata* elements with *run* elements.
     (NXinstrument):
-      exists: ['min', '0']
+      \exists: ['min', '0']
       \@canSAS_class:
-        doc: |
+        \doc: |
           Official canSAS group: :index:`NXcanSAS (applications); SASinstrument`
-        enumeration: [SASinstrument]
-      doc: |
+        \enumeration: [SASinstrument]
+      \doc: |
         Description of the small-angle scattering instrument.
         
         Consider, carefully, the relevance to the SAS data analysis process
@@ -668,52 +674,52 @@ NXcanSAS(NXobject):
       # SASaperture
       # ===========
       (NXaperture):
-        exists: ['min', '0']
-        doc: |
+        \exists: ['min', '0']
+        \doc: |
           :ref:`NXaperture` is generic and limits the variation in data files.
           
           Possible NeXus base class alternatives are: :ref:`NXpinhole` or :ref:`NXslit`.
         \@canSAS_class:
-          doc: |
+          \doc: |
             Official canSAS group: :index:`NXcanSAS (applications); SASaperture`
-          enumeration: [SASaperture]
+          \enumeration: [SASaperture]
         shape:
-          doc: |
+          \doc: |
             describe the type of aperture (pinhole, 4-blade slit, Soller slit, ...)
         x_gap(NX_NUMBER):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             opening along the :math:`x` axis
         y_gap(NX_NUMBER):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             opening along the :math:`y` axis
       
       # ==============
       # SAScollimation
       # ==============
       (NXcollimator):
-        exists: ['min', '0']
+        \exists: ['min', '0']
         \@canSAS_class:
-          doc: |
+          \doc: |
             Official canSAS group: :index:`NXcanSAS (applications); SAScollimation`
-          enumeration: [SAScollimation]
-        doc: |
+          \enumeration: [SAScollimation]
+        \doc: |
           Description of a collimating element (defines the divergence of the beam) in the instrument.
           
           To document a slit, pinhole, or the beam, refer to the
           documentation of the ``NXinstrument`` group above.
         length(NX_NUMBER):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Amount/length of collimation inserted (as on a SANS instrument)
         distance(NX_NUMBER):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Distance from this collimation element to the sample
         
         # SAScollimation
@@ -722,21 +728,21 @@ NXcanSAS(NXobject):
       # SASdetector
       # ============================
       (NXdetector):
-        exists: ['min', '0']
+        \exists: ['min', '0']
         \@canSAS_class:
-          doc: |
+          \doc: |
             Official canSAS group: :index:`NXcanSAS (applications); SASdetector`
-          enumeration: [SASdetector]
-        doc: |
+          \enumeration: [SASdetector]
+        \doc: |
           Description of a detector in the instrument.
         name:
-          exists: ['max', '1']
-          doc: |
+          \exists: ['max', '1']
+          \doc: |
             Identifies the name of this detector
         SDD(NX_NUMBER):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Distance between sample and detector.
             
             Note: In NXdetector, the ``distance`` field records the
@@ -748,40 +754,40 @@ NXcanSAS(NXobject):
             We define here the field ``SDD`` to document without
             ambiguity the distance between sample and detector.
         slit_length(NX_NUMBER):
-          unit: NX_PER_LENGTH
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_PER_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Slit length of the instrument for this detector,
             expressed in the same units as :math:`Q`.
         x_position(NX_NUMBER):
-          exists: ['min', '0', 'max', '1']
-          unit: NX_LENGTH
-          doc: |
+          \exists: ['min', '0', 'max', '1']
+          \unit: NX_LENGTH
+          \doc: |
             Location of the detector in :math:`x`
         y_position(NX_NUMBER):
-          exists: ['min', '0', 'max', '1']
-          unit: NX_LENGTH
-          doc: |
+          \exists: ['min', '0', 'max', '1']
+          \unit: NX_LENGTH
+          \doc: |
             Location of the detector in :math:`y`
         roll(NX_NUMBER):
-          exists: ['min', '0', 'max', '1']
-          unit: NX_ANGLE
-          doc: |
+          \exists: ['min', '0', 'max', '1']
+          \unit: NX_ANGLE
+          \doc: |
             Rotation of the detector about the :math:`z` axis (roll)
         pitch(NX_NUMBER):
-          exists: ['min', '0', 'max', '1']
-          unit: NX_ANGLE
-          doc: |
+          \exists: ['min', '0', 'max', '1']
+          \unit: NX_ANGLE
+          \doc: |
             Rotation of the detector about the :math:`x` axis (roll)
         yaw(NX_NUMBER):
-          exists: ['min', '0', 'max', '1']
-          unit: NX_ANGLE
-          doc: |
+          \exists: ['min', '0', 'max', '1']
+          \unit: NX_ANGLE
+          \doc: |
             Rotation of the detector about the :math:`y` axis (yaw)
         beam_center_x(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Position of the beam center on the detector.
             
             This is the x position where the direct beam would hit the detector plane.
@@ -790,9 +796,9 @@ NXcanSAS(NXobject):
             as documented by the units attribute. The value can be any
             real number (positive, zero, or negative).
         beam_center_y(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Position of the beam center on the detector.
             
             This is the y position where the direct beam would hit the detector plane.
@@ -801,14 +807,14 @@ NXcanSAS(NXobject):
             as documented by the units attribute. The value can be any
             real number (positive, zero, or negative).
         x_pixel_size(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Size of each detector pixel. If it is scalar all pixels are the same size
         y_pixel_size(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Size of each detector pixel. If it is scalar all pixels are the same size
         
         # SASdetector
@@ -817,63 +823,63 @@ NXcanSAS(NXobject):
       # SASsource
       # ============================
       (NXsource):
-        exists: ['min', '0']
+        \exists: ['min', '0']
         \@canSAS_class:
-          doc: |
+          \doc: |
             Official canSAS group: :index:`NXcanSAS (applications); SASsource`
-          enumeration: [SASsource]
-        doc: |
+          \enumeration: [SASsource]
+        \doc: |
           Description of the radiation source.
         radiation:
-          exists: optional
+          \exists: optional
           deprecated: Use either (or both) ``probe`` or ``type`` fields from ``NXsource`` (issue #765)
-          doc: |
+          \doc: |
             Name of the radiation used.
             Note that this is **not** the name of the facility!
             
             This field contains a value from either the
             ``probe`` or ``type`` fields in :ref:`NXsource`. Thus,
             it is redundant with existing NeXus structure.
-          enumeration:
+          \enumeration:
             
             # enumeration values from NXsource/type and NXsource/probe
             items: [Spallation Neutron Source, Pulsed Reactor Neutron Source, Reactor Neutron Source, Synchrotron X-ray Source, Pulsed Muon Source, Rotating Anode X-ray, Fixed Tube X-ray, UV Laser, Free-Electron Laser, Optical Laser, Ion Source, UV Plasma Source, neutron, x-ray, muon, electron, ultraviolet, visible light, positron, proton]
         beam_shape:
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Text description of the shape of the beam (incident on the sample).
         incident_wavelength(NX_NUMBER):
-          exists: ['min', '0', 'max', '1']
-          unit: NX_WAVELENGTH
-          doc: |
+          \exists: ['min', '0', 'max', '1']
+          \unit: NX_WAVELENGTH
+          \doc: |
             wavelength (:math:`\lambda`) of radiation incident on the sample
         wavelength_min(NX_NUMBER):
-          exists: ['min', '0', 'max', '1']
-          unit: NX_WAVELENGTH
-          doc: |
+          \exists: ['min', '0', 'max', '1']
+          \unit: NX_WAVELENGTH
+          \doc: |
             Some facilities specify wavelength using a range.
             This is the lowest wavelength in such a range.
         wavelength_max(NX_NUMBER):
-          exists: ['min', '0', 'max', '1']
-          unit: NX_WAVELENGTH
-          doc: |
+          \exists: ['min', '0', 'max', '1']
+          \unit: NX_WAVELENGTH
+          \doc: |
             Some facilities specify wavelength using a range.
             This is the highest wavelength in such a range.
         incident_wavelength_spread(NX_NUMBER):
-          exists: ['min', '0', 'max', '1']
-          unit: NX_WAVELENGTH
-          doc: |
+          \exists: ['min', '0', 'max', '1']
+          \unit: NX_WAVELENGTH
+          \doc: |
             Some facilities specify wavelength using a range.
             This is the width (FWHM) of such a range.
         beam_size_x(NX_NUMBER):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Size of the incident beam along the x axis.
         beam_size_y(NX_NUMBER):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Size of the incident beam along the y axis.
         
         # SASsource
@@ -884,26 +890,26 @@ NXcanSAS(NXobject):
     # SASsample
     # ==============
     (NXsample):
-      exists: ['min', '0']
+      \exists: ['min', '0']
       \@canSAS_class:
-        doc: |
+        \doc: |
           Official canSAS group: :index:`NXcanSAS (applications); SASsample`
-        enumeration: [SASsample]
-      doc: |
+        \enumeration: [SASsample]
+      \doc: |
         Description of the sample.
       name:
-        exists: ['max', '1']
-        doc: |
+        \exists: ['max', '1']
+        \doc: |
           **ID**: Text string that identifies this sample.
       thickness(NX_FLOAT):
-        exists: ['min', '0', 'max', '1']
-        unit: NX_LENGTH
-        doc: |
+        \exists: ['min', '0', 'max', '1']
+        \unit: NX_LENGTH
+        \doc: |
           Thickness of this sample
       transmission(NX_NUMBER):
-        exists: ['min', '0', 'max', '1']
-        unit: NX_DIMENSIONLESS
-        doc: |
+        \exists: ['min', '0', 'max', '1']
+        \unit: NX_DIMENSIONLESS
+        \doc: |
           Transmission (:math:`I/I_0`) of this sample.
           There is no *units* attribute as this number is dimensionless.
           
@@ -911,39 +917,39 @@ NXcanSAS(NXobject):
           instead of a single value, is provided elsewhere in the structure,
           in the *SAStransmission_spectrum* element.
       temperature(NX_NUMBER):
-        exists: ['min', '0', 'max', '1']
-        unit: NX_TEMPERATURE
-        doc: |
+        \exists: ['min', '0', 'max', '1']
+        \unit: NX_TEMPERATURE
+        \doc: |
           Temperature of this sample.
       details:
-        exists: ['min', '0', 'max', 'unbounded']
-        nameType: any
-        doc: |
+        \exists: ['min', '0', 'max', 'unbounded']
+        \nameType: any
+        \doc: |
           Any additional sample details.
       x_position(NX_NUMBER):
-        exists: ['min', '0', 'max', '1']
-        unit: NX_LENGTH
-        doc: |
+        \exists: ['min', '0', 'max', '1']
+        \unit: NX_LENGTH
+        \doc: |
           Location of the sample in :math:`x`
       y_position(NX_NUMBER):
-        exists: ['min', '0', 'max', '1']
-        unit: NX_LENGTH
-        doc: |
+        \exists: ['min', '0', 'max', '1']
+        \unit: NX_LENGTH
+        \doc: |
           Location of the sample in :math:`y`
       roll(NX_NUMBER):
-        exists: ['min', '0', 'max', '1']
-        unit: NX_ANGLE
-        doc: |
+        \exists: ['min', '0', 'max', '1']
+        \unit: NX_ANGLE
+        \doc: |
           Rotation of the sample about the :math:`z` axis (roll)
       pitch(NX_NUMBER):
-        exists: ['min', '0', 'max', '1']
-        unit: NX_ANGLE
-        doc: |
+        \exists: ['min', '0', 'max', '1']
+        \unit: NX_ANGLE
+        \doc: |
           Rotation of the sample about the :math:`x` axis (roll)
       yaw(NX_NUMBER):
-        exists: ['min', '0', 'max', '1']
-        unit: NX_ANGLE
-        doc: |
+        \exists: ['min', '0', 'max', '1']
+        \unit: NX_ANGLE
+        \doc: |
           Rotation of the sample about the :math:`y` axis (yaw)
       
       # NXsample
@@ -952,24 +958,24 @@ NXcanSAS(NXobject):
     # SASprocess
     # ==============
     (NXprocess):
-      exists: ['min', '0', 'max', 'unbounded']
+      \exists: ['min', '0', 'max', 'unbounded']
       \@canSAS_class:
-        doc: |
+        \doc: |
           Official canSAS group: :index:`NXcanSAS (applications); SASprocess`
-        enumeration: [SASprocess]
-      doc: |
+        \enumeration: [SASprocess]
+      \doc: |
         Description of a processing or analysis step.
         
         Add additional fields as needed to describe value(s) of any
         variable, parameter, or term related to the *SASprocess* step.
         Be sure to include *units* attributes for all numerical fields.
       name:
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           Optional name for this data processing or analysis step
       date(NX_DATE_TIME):
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           Optional date for this data processing or analysis step. [#iso8601]_
           
           
@@ -982,13 +988,13 @@ NXcanSAS(NXobject):
               See: http://www.w3.org/TR/NOTE-datetime
               or http://en.wikipedia.org/wiki/ISO_8601 for more details.
       description:
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           Optional description for this data processing or analysis step
       term:
-        exists: ['min', '0', 'max', 'unbounded']
-        nameType: any
-        doc: |
+        \exists: ['min', '0', 'max', 'unbounded']
+        \nameType: any
+        \doc: |
           Specifies the value of a single variable, parameter,
           or term (while defined here as a string, it could be a number)
           related to the *SASprocess* step.
@@ -1001,16 +1007,16 @@ NXcanSAS(NXobject):
       # Isn't this ALWAYS a possibility in any NeXus base class?
       # Not needed to define this but it is a good suggestion for usage.
       (NXnote):
-        exists: ['min', '0', 'max', 'unbounded']
-        doc: |
+        \exists: ['min', '0', 'max', 'unbounded']
+        \doc: |
           Any additional notes or subprocessing steps will be documented here.
           
           An **NXnote** group can be added to any NeXus group at or below the
           **NXentry** group.  It is shown here as a suggestion of a good place
           to *consider* its use.
       (NXcollection):
-        exists: ['min', '0', 'max', 'unbounded']
-        doc: |
+        \exists: ['min', '0', 'max', 'unbounded']
+        \doc: |
           Describes anything about *SASprocess* that is not already described.
           
           Any content not defined in the canSAS standard can be placed at this point.
@@ -1019,9 +1025,9 @@ NXcanSAS(NXobject):
           The name of this group is flexible, it could take any name,
           as long as it is unique within the **NXprocess** group.
         \@canSAS_class:
-          doc: |
+          \doc: |
             Official canSAS group: :index:`NXcanSAS (applications); SASprocessnote`
-          enumeration: [SASprocessnote]
+          \enumeration: [SASprocessnote]
         
         # SASprocessnote
       
@@ -1031,21 +1037,21 @@ NXcanSAS(NXobject):
     # SASnote
     # ==============
     (NXcollection):
-      exists: ['min', '0', 'max', 'unbounded']
+      \exists: ['min', '0', 'max', 'unbounded']
       \@canSAS_class:
-        doc: |
+        \doc: |
           Official canSAS group: :index:`NXcanSAS (applications); SASnote`
-        enumeration: [SASnote]
-      doc: |
+        \enumeration: [SASnote]
+      \doc: |
         Free form description of anything not covered by other elements.
     
     # ============================
     # SAStransmission_spectrum
     # ============================
     TRANSMISSION_SPECTRUM(NXdata):
-      exists: ['min', '0']
-      nameType: any
-      doc: |
+      \exists: ['min', '0']
+      \nameType: any
+      \doc: |
         The *SAStransmission_spectrum* element
         
         This describes certain data obtained from a variable-wavelength source
@@ -1053,23 +1059,24 @@ NXcanSAS(NXobject):
         
         # requested to be in the 1D format by ISIS
       \@canSAS_class:
-        doc: |
+        \doc: |
           Official canSAS group: :index:`NXcanSAS (applications); SAStransmission_spectrum`
-        enumeration: [SAStransmission_spectrum]
-      \@signal(NX_CHAR):
-        doc: |
+        \enumeration: [SAStransmission_spectrum]
+      \@signal:
+        \type: NX_CHAR
+        \doc: |
           Name of the default data field.
-        enumeration:
+        \enumeration:
           T:
-            doc: |
+            \doc: |
               For **SAStransmission_spectrum**, this is always "T".
       \@T_axes:
-        enumeration:
+        \enumeration:
           T:
-            doc: |
+            \doc: |
               the wavelengths field (as axis coordinates) corresponding to this transmission
       \@name:
-        doc: |
+        \doc: |
           Identify what type of spectrum is being described.
           It is expected that this value will take either of these two values:
           
@@ -1079,25 +1086,26 @@ NXcanSAS(NXobject):
           sample  measurement with the sample and container
           can     measurement with just the container
           ======  ==============================================
-      \@timestamp(NX_DATE_TIME):
-        exists: optional
-        doc: |
+      \@timestamp:
+        \type: NX_DATE_TIME
+        \exists: optional
+        \doc: |
           ISO-8601 time [#iso8601]_
       lambda(NX_NUMBER):
-        unit: NX_WAVELENGTH
-        doc: |
+        \unit: NX_WAVELENGTH
+        \doc: |
           Wavelength of the radiation.
           
           This array is of the same shape as ``T`` and ``Tdev``.
       T(NX_NUMBER):
-        unit: NX_DIMENSIONLESS
-        doc: |
+        \unit: NX_DIMENSIONLESS
+        \doc: |
           Transmission values (:math:`I/I_0`)
           as a function of wavelength.
           
           This array is of the same shape as ``lambda`` and ``Tdev``.
         \@uncertainties:
-          doc: |
+          \doc: |
             Names the dataset (in this SASdata group) that provides the
             uncertainty of each transmission :math:`T` to be used for data analysis.
             The name of the dataset containing the :math:`T` uncertainty
@@ -1110,8 +1118,8 @@ NXcanSAS(NXobject):
             
                 @uncertainties="Tdev"
       Tdev(NX_NUMBER):
-        unit: NX_DIMENSIONLESS
-        doc: |
+        \unit: NX_DIMENSIONLESS
+        \doc: |
           .. index:: NXcanSAS (applications); Tdev
           
           Estimated uncertainty (usually standard deviation)
@@ -1124,7 +1132,7 @@ NXcanSAS(NXobject):
           This array is of the same shape as ``lambda`` and ``T``.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# bfb52df7e3b0da5a8d9236cfefd53d6098426f6d482a8602c448cceddc1dc486
+# f2575f6de1ad87a3fb68220344a768f02b6941c54b113c3c8244158281e0cbc1
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

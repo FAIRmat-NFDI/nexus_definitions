@@ -1,5 +1,5 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for storing results of the SCORE cellular automata model.
   
   The SCORE cellular automata model for primary recrystallization is an example
@@ -13,8 +13,8 @@ doc: |
   * `M. Kühbach et al. <https://doi.org/10.1016/j.actamat.2016.01.068>`_
   * `C. Haase et al. <https://doi.org/10.1016/j.actamat.2015.08.057>`_
   * `M. Diehl et al. <https://doi.org/10.1088/1361-651X/ab51bd>`_
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays
   n_summary_stats: |
     The total number of summary statistic log entries
@@ -35,17 +35,17 @@ symbols:
     Number of grains in the computer simulation
 
 # inspect comments behind NXmicrostructure
-type: group
+\type: group
 NXmicrostructure_score_results(NXobject):
   (NXentry):
     definition(NX_CHAR):
-      enumeration: [NXmicrostructure_score_results]
+      \enumeration: [NXmicrostructure_score_results]
     identifier_simulation(NX_UINT):
-      exists: recommended
-      doc: |
+      \exists: recommended
+      \doc: |
         Simulation ID as an alias to refer to this simulation.
     config(NXnote):
-      doc: |
+      \doc: |
         Configuration file with the parameterization of the
         SCORE model that was used for this simulation.
       file_name(NX_CHAR):
@@ -54,36 +54,37 @@ NXmicrostructure_score_results(NXobject):
     
     # numerics(NXparameters):
     description(NX_CHAR):
-      exists: optional
-      doc: |
+      \exists: optional
+      \doc: |
         Discouraged free-text field to add further details to the computation.
     start_time(NX_DATE_TIME):
-      doc: |
+      \doc: |
         ISO 8601 time code with local time zone offset to UTC information
         included when the simulation was started.
     end_time(NX_DATE_TIME):
-      exists: recommended
-      doc: |
+      \exists: recommended
+      \doc: |
         ISO 8601 time code with local time zone offset to UTC information
         included when the simulation ended.
     profiling(NXcs_profiling):
-      exists: optional
+      \exists: optional
     
     # consider integrating content that is currently stored in ThreadProfiling.csv
     program1(NXprogram):
-      doc: |
+      \doc: |
         Name of the program with which the simulation was performed.
       program(NX_CHAR):
         \@version:
     environment(NXcollection):
-      exists: optional
-      doc: |
+      \exists: optional
+      \doc: |
         Programs and libraries representing the computational environment
       programID(NXprogram):
-        nameType: partial
-        exists: ['min', '1', 'max', 'unbounded']
+        \nameType: partial
+        \exists: ['min', '1', 'max', 'unbounded']
         program(NX_CHAR):
-          \@version(NX_CHAR):
+          \@version:
+            \type: NX_CHAR
     
     # rotation_conventions(NXrotation_conventions):
     # rotation_handedness(NX_CHAR):
@@ -93,25 +94,25 @@ NXmicrostructure_score_results(NXobject):
     # sign_convention(NX_CHAR):
     sample_reference_frame(NXcoordinate_system):
       type:
-        enumeration: [cartesian]
+        \enumeration: [cartesian]
       handedness:
-        enumeration: [right_handed]
+        \enumeration: [right_handed]
       origin:
-        enumeration: [front_bottom_left]
+        \enumeration: [front_bottom_left]
       x_alias:
-        enumeration: [rolling_direction]
+        \enumeration: [rolling_direction]
       x_direction:
-        enumeration: [east]
+        \enumeration: [east]
       y_alias:
-        enumeration: [transverse_direction]
+        \enumeration: [transverse_direction]
       y_direction:
-        enumeration: [in]
+        \enumeration: [in]
       z_alias:
-        enumeration: [normal_direction]
+        \enumeration: [normal_direction]
       z_direction:
-        enumeration: [north]
+        \enumeration: [north]
     discretization(NXmicrostructure):
-      exists: ['min', '1', 'max', '1']
+      \exists: ['min', '1', 'max', '1']
       grid(NXcg_grid):
         dimensionality(NX_POSINT):
         cardinality(NX_POSINT):
@@ -121,20 +122,20 @@ NXmicrostructure_score_results(NXobject):
         extent(NX_UINT):
         index_offset_cell(NX_INT):
       boundary(NXcg_hexahedron):
-        doc: |
+        \doc: |
           A tight bounding box or sphere or bounding primitive about the grid.
         
         # a good example for a general bounding box description for such a grids of triclinic cells
         # https://docs.lammps.org/Howto_triclinic.html NXcg_polyhedron because a parallelepiped
         number_of_boundaries(NX_UINT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             How many distinct boundaries are distinguished?
             Most grids discretize a cubic or cuboidal region. In this case
             six sides can be distinguished, each making an own boundary.
         boundary_conditions(NX_INT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             The boundary conditions for each boundary:
             
             * 0 - undefined
@@ -143,21 +144,21 @@ NXmicrostructure_score_results(NXobject):
             * 3 - mirror
             * 4 - von Neumann
             * 5 - Dirichlet
-          dimensions:
-            rank: 1
-            dim: (6,)
+          \dimensions:
+            \rank: 1
+            \dim: (6,)
         boundaries:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Name of the boundaries. Left, right, front, back, bottom, top,
             The field must have as many entries as there are number_of_boundaries.
-          dimensions:
-            rank: 1
-            dim: (6,)
+          \dimensions:
+            \rank: 1
+            \dim: (6,)
     spatiotemporalID(NXprocess):
-      nameType: partial
-      exists: ['min', '1', 'max', 'unbounded']
-      doc: |
+      \nameType: partial
+      \exists: ['min', '1', 'max', 'unbounded']
+      \doc: |
         Documentation of the spatiotemporal evolution for each CA domain.
         
         SCORE is a hybrid parallelized code that can evolve multiple replicas
@@ -166,92 +167,98 @@ NXmicrostructure_score_results(NXobject):
       
       # the typical lean summary statistics flattened
       summary_statistics(NXprocess):
-        doc: |
+        \doc: |
           Summary quantities which are the result of some post-processing of the snapshot data
           (averaging, integrating, interpolating) happening for practical and performance reasons
           during the simulation. Place used for storing descriptors from continuum mechanics
           and thermodynamics at the scale of the entire ROI.
         kinetics(NXdata):
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             Evolution of the recrystallized volume fraction over time.
-          \@signal(NX_CHAR):
-          \@axes(NX_CHAR):
-          \@time_indices(NX_UINT):
-          \@iteration_indices(NX_UINT):
-            exists: optional
-          \@temperature_indices(NX_UINT):
-            exists: optional
-          \@x_indices(NX_UINT):
+          \@signal:
+            \type: NX_CHAR
+          \@axes:
+            \type: NX_CHAR
+          \@time_indices:
+            \type: NX_UINT
+          \@iteration_indices:
+            \type: NX_UINT
+            \exists: optional
+          \@temperature_indices:
+            \type: NX_UINT
+            \exists: optional
+          \@x_indices:
+            \type: NX_UINT
           title(NX_CHAR):
-            exists: recommended
+            \exists: recommended
           time(NX_FLOAT):
-            unit: NX_TIME
-            doc: |
+            \unit: NX_TIME
+            \doc: |
               Evolution of the physical time not to be confused with wall-clock time or
               profiling data.
-            dimensions:
-              rank: 1
-              dim: (n_summary_stats,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_summary_stats,)
           iteration(NX_INT):
-            unit: NX_UNITLESS
-            doc: |
+            \unit: NX_UNITLESS
+            \doc: |
               Iteration or increment counter.
-            dimensions:
-              rank: 1
-              dim: (n_summary_stats,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_summary_stats,)
           temperature(NX_FLOAT):
-            unit: NX_TEMPERATURE
-            doc: |
+            \unit: NX_TEMPERATURE
+            \doc: |
               Evolution of the simulated temperature over time.
-            dimensions:
-              rank: 1
-              dim: (n_summary_stats,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_summary_stats,)
           x(NX_FLOAT):
-            unit: NX_DIMENSIONLESS
-            doc: |
+            \unit: NX_DIMENSIONLESS
+            \doc: |
               Recrystallized volume fraction.
-            dimensions:
-              rank: 1
-              dim: (n_summary_stats,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_summary_stats,)
         stress(NXdata):
-          exists: optional
+          \exists: optional
           type(NX_CHAR):
-            doc: |
+            \doc: |
               Which type of stress.
-            enumeration: [cauchy]
+            \enumeration: [cauchy]
           tensor(NX_FLOAT):
-            unit: NX_ANY
-            doc: |
+            \unit: NX_ANY
+            \doc: |
               Applied external stress tensor on the ROI.
-            dimensions:
-              rank: 3
-              dim: (n_summary_stats, 3, 3)
+            \dimensions:
+              \rank: 3
+              \dim: (n_summary_stats, 3, 3)
         strain(NXdata):
-          exists: optional
+          \exists: optional
           type(NX_CHAR):
-            doc: |
+            \doc: |
               Which type of strain.
           tensor(NX_FLOAT):
-            unit: NX_ANY
-            doc: |
+            \unit: NX_ANY
+            \doc: |
               Applied external strain tensor on the ROI.
-            dimensions:
-              rank: 3
-              dim: (n_summary_stats, 3, 3)
+            \dimensions:
+              \rank: 3
+              \dim: (n_summary_stats, 3, 3)
         deformation_gradient(NXprocess):
-          exists: optional
+          \exists: optional
           type:
-            doc: |
+            \doc: |
               Which type of deformation gradient.
-            enumeration: [piola]
+            \enumeration: [piola]
           tensor(NX_FLOAT):
-            unit: NX_ANY
-            doc: |
+            \unit: NX_ANY
+            \doc: |
               Applied deformation gradient tensor on the ROI.
-            dimensions:
-              rank: 3
-              dim: (n_summary_stats, 3, 3)
+            \dimensions:
+              \rank: 3
+              \dim: (n_summary_stats, 3, 3)
       
       # magnetic_field(NXprocess):
       # exists: optional
@@ -269,193 +276,193 @@ NXmicrostructure_score_results(NXobject):
       # dim: (n_summary_stats, 3, 3)
       # the typically storage-costlier snapshot data
       microstructureID(NXmicrostructure):
-        exists: ['min', '1', 'max', 'unbounded']
-        nameType: partial
+        \exists: ['min', '1', 'max', 'unbounded']
+        \nameType: partial
         time(NX_FLOAT):
-          unit: NX_TIME
-          doc: |
+          \unit: NX_TIME
+          \doc: |
             Simulated physical time for this snapshot.
         iteration(NX_UINT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             Iteration or increment counter of this snapshot.
         temperature(NX_FLOAT):
-          unit: NX_TEMPERATURE
-          doc: |
+          \unit: NX_TEMPERATURE
+          \doc: |
             Simulated temperature for this snapshot.
         x(NX_FLOAT):
-          unit: NX_DIMENSIONLESS
-          doc: |
+          \unit: NX_DIMENSIONLESS
+          \doc: |
             Current recrystallized volume fraction (taking fractional infections into
             account).
         x_set(NX_FLOAT):
-          unit: NX_DIMENSIONLESS
-          doc: |
+          \unit: NX_DIMENSIONLESS
+          \doc: |
             Target value for which a snapshot was requested for the recrystallized volume
             fraction.
         
         # optional places to store the grid for instance if it changes
         grid(NXcg_grid):
-          exists: recommended
+          \exists: recommended
           indices_crystal(NX_INT):
-            exists: recommended
-            unit: NX_UNITLESS
-            doc: |
+            \exists: recommended
+            \unit: NX_UNITLESS
+            \doc: |
               Index for each crystal whereby its metadata can be retrieved.
-            dimensions:
-              rank: 3
-              dim: (n_x, n_y, n_z)
+            \dimensions:
+              \rank: 3
+              \dim: (n_x, n_y, n_z)
           thread_id(NX_UINT):
-            exists: optional
-            unit: NX_UNITLESS
-            doc: |
+            \exists: optional
+            \unit: NX_UNITLESS
+            \doc: |
               Identifier of the OpenMP thread that processed this part of the grid.
-            dimensions:
-              rank: 3
-              dim: (n_x, n_y, n_z)
+            \dimensions:
+              \rank: 3
+              \dim: (n_x, n_y, n_z)
         crystals(NXmicrostructure_feature):
           representation(NX_CHAR):
-            exists: recommended
+            \exists: recommended
           number_of_crystals(NX_UINT):
-            exists: recommended
+            \exists: recommended
           number_of_phases(NX_UINT):
-            exists: recommended
+            \exists: recommended
           index_offset_crystal(NX_INT):
-            exists: recommended
+            \exists: recommended
           indices_crystal(NX_INT):
-            exists: recommended
-            dimensions:
-              rank: 1
-              dim: (n_grains,)
+            \exists: recommended
+            \dimensions:
+              \rank: 1
+              \dim: (n_grains,)
           index_offset_phase(NX_INT):
-            exists: recommended
+            \exists: recommended
           indices_phase(NX_INT):
-            exists: recommended
-            dimensions:
-              rank: 1
-              dim: (n_grains,)
+            \exists: recommended
+            \dimensions:
+              \rank: 1
+              \dim: (n_grains,)
           volume(NX_FLOAT):
-            unit: NX_VOLUME
-            doc: |
+            \unit: NX_VOLUME
+            \doc: |
               Volume of each grain (partially transformed cells are accounted for).
               
               Values are reported in multiples of cells, needs multiplication with
               cell volume!
-            dimensions:
-              rank: 1
-              dim: (n_grains,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_grains,)
           
           # SCORE specific
           bunge_euler(NX_FLOAT):
-            unit: NX_ANGLE
-            doc: |
+            \unit: NX_ANGLE
+            \doc: |
               Bunge-Euler angle triplets for each grain.
-            dimensions:
-              rank: 2
-              dim: (n_grains, 3)
+            \dimensions:
+              \rank: 2
+              \dim: (n_grains, 3)
           dislocation_density(NX_FLOAT):
-            exists: recommended
-            unit: NX_ANY
-            doc: |
+            \exists: recommended
+            \unit: NX_ANY
+            \doc: |
               Current value for the dislocation density as a measure of the remaining
               stored energy in assumed crystal defects inside each grain.
-            dimensions:
-              rank: 1
-              dim: (n_grains,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_grains,)
           is_deformed(NX_BOOLEAN):
-            exists: recommended
-            doc: |
+            \exists: recommended
+            \doc: |
               Is the grain deformed.
-            dimensions:
-              rank: 1
-              dim: (n_grains,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_grains,)
           is_recrystallized(NX_BOOLEAN):
-            exists: recommended
-            doc: |
+            \exists: recommended
+            \doc: |
               Is the grain recrystallized.
-            dimensions:
-              rank: 1
-              dim: (n_grains,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_grains,)
         recrystallization_front(NXmicrostructure_feature):
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             Details about those cells which in this time step
             represent the discrete recrystallization front.
             
             Each CA is processed by a team of OpenMP threads.
           halo_region(NX_UINT):
-            exists: optional
-            unit: NX_UNITLESS
-            doc: |
+            \exists: optional
+            \unit: NX_UNITLESS
+            \doc: |
               Which cells are currently in a halo region of threads.
               
               The halo region is a layer of cells about the sub-domain
               of the simulation grid evolved by a thread.
-            dimensions:
-              rank: 1
-              dim: (n_front,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_front,)
           mobility_weight(NX_FLOAT):
-            exists: recommended
-            unit: NX_UNITLESS
-            doc: |
+            \exists: recommended
+            \unit: NX_UNITLESS
+            \doc: |
               So-called mobility weight which is a scaling factor to control the
               mobility of the grain boundary that is modelled sweeping cells that
               make the discrete recrystallization front.
-            dimensions:
-              rank: 1
-              dim: (n_front,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_front,)
           coordinate(NX_NUMBER):
-            exists: recommended
-            unit: NX_UNITLESS
-            doc: |
+            \exists: recommended
+            \unit: NX_UNITLESS
+            \doc: |
               The x, y, z grid coordinates of each cell in the recrystallization front.
-            dimensions:
-              rank: 2
-              dim: (n_front, 3)
+            \dimensions:
+              \rank: 2
+              \dim: (n_front, 3)
           deformed_grain_id(NX_UINT):
-            exists: recommended
-            unit: NX_UNITLESS
-            doc: |
+            \exists: recommended
+            \unit: NX_UNITLESS
+            \doc: |
               Grain identifier assigned to each cell in the recrystallization front.
-            dimensions:
-              rank: 1
-              dim: (n_front,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_front,)
           recrystallized_grain_id(NX_UINT):
-            exists: recommended
-            unit: NX_UNITLESS
-            doc: |
+            \exists: recommended
+            \unit: NX_UNITLESS
+            \doc: |
               Grain identifier assigned to each nucleus which affected that cell in the
               recrystallization front.
-            dimensions:
-              rank: 1
-              dim: (n_front,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_front,)
           thread_id(NX_UINT):
-            exists: optional
-            unit: NX_UNITLESS
-            doc: |
+            \exists: optional
+            \unit: NX_UNITLESS
+            \doc: |
               Identifier of the OpenMP thread processing each cell in the recrystallization
               front.
-            dimensions:
-              rank: 1
-              dim: (n_front,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_front,)
           infection_direction(NX_UINT):
-            exists: optional
-            unit: NX_UNITLESS
-            doc: |
+            \exists: optional
+            \unit: NX_UNITLESS
+            \doc: |
               Hint about the direction from which the cell was infected.
-            dimensions:
-              rank: 1
-              dim: (n_front,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_front,)
           recrystallized_fraction(NX_FLOAT):
-            exists: recommended
-            unit: NX_DIMENSIONLESS
-            doc: |
+            \exists: recommended
+            \unit: NX_DIMENSIONLESS
+            \doc: |
               The fraction to which the cell is assumed transformed.
-            dimensions:
-              rank: 1
+            \dimensions:
+              \rank: 1
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 3c5dbf746e80543c1b3d28330df4717e72745f61610e8be581a9e54d24b84370
+# 40982491823d652ecd88ab53c816a67f49acc500ea67a88c983387c19484d21e
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

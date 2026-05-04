@@ -1,22 +1,22 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for a configuration file of the paraprobe-intersector
   tool.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   n_variable: |
     Number of entries
-type: group
+\type: group
 NXapm_paraprobe_intersector_config(NXapm_paraprobe_tool_config):
   (NXentry):
-    exists: ['min', '1', 'max', '1']
+    \exists: ['min', '1', 'max', '1']
     definition(NX_CHAR):
-      enumeration: [NXapm_paraprobe_intersector_config]
+      \enumeration: [NXapm_paraprobe_intersector_config]
     v_v_spatial_correlationID(NXapm_paraprobe_tool_parameters):
-      nameType: partial
-      exists: ['min', '1', 'max', 'unbounded']
-      doc: |
+      \nameType: partial
+      \exists: ['min', '1', 'max', 'unbounded']
+      \doc: |
         Tracking volume_volume_spatial_correlations (v_v) is the process of building logical
         relations between objects, their proximity and eventual volumetric intersections.
         Here, objects are assumed to be represented as a set of triangulated surface meshes.
@@ -27,7 +27,7 @@ NXapm_paraprobe_intersector_config(NXapm_paraprobe_tool_config):
         Members of a so-called current_set to members of a so-called next_set.
         Members can be different types of volumetric features.
       intersection_detection_method(NX_CHAR):
-        doc: |
+        \doc: |
           Specifies the method whereby to decide if two objects intersect volumetrically.
           For reasons which are detailed in the supplementary material of `M. Kühbach et al. <https://arxiv.org/abs/2205.13510>`_,
           it is assumed by default that two objects intersect if they share at least one ion with the same evaporation ID (shared_ion).
@@ -42,16 +42,16 @@ NXapm_paraprobe_intersector_config(NXapm_paraprobe_tool_config):
           Finding more robust methods for computing intersections between not necessarily convex polyhedra might improve
           the situation in the future. For practical reasons we have thus deactivated the functionality of tetrahedra-tetrahedron
           intersections in paraprobe-intersector.
-        enumeration: [shared_ion]
+        \enumeration: [shared_ion]
       analyze_intersection(NX_BOOLEAN):
-        doc: |
+        \doc: |
           Specifies if the tool evaluates if objects intersect volumetrically.
       analyze_proximity(NX_BOOLEAN):
-        doc: |
+        \doc: |
           Specifies if the tool evaluates if objects lay closer to one another than
           threshold_proximity.
       analyze_coprecipitation(NX_BOOLEAN):
-        doc: |
+        \doc: |
           Specifies if the tool evaluates, provided that all (preprocessing tasks were successful), how intersecting
           or proximity related objects build sub-graphs. This is the feature that was used in `M. Kühbach et al. <https://arxiv.org/abs/2205.13510>`_
           for the high-throughput analyses of how many objects are coprecipitates in the sense that they are single,
@@ -59,34 +59,34 @@ NXapm_paraprobe_intersector_config(NXapm_paraprobe_tool_config):
       
       # For these analyses to work has_object_volume needs to be true.
       threshold_proximity(NX_FLOAT):
-        unit: NX_LENGTH
-        doc: |
+        \unit: NX_LENGTH
+        \doc: |
           The maximum Euclidean distance between two objects below which they are
           considered within proximity.
       has_current_to_next_links(NX_BOOLEAN):
-        doc: |
+        \doc: |
           Specifies if the tool stores the so-called forward relations between nodes representing members of the
           current_set to nodes representing members of the next_set.
       has_next_to_current_links(NX_BOOLEAN):
-        doc: |
+        \doc: |
           Specifies if the tool stores the so-called backward relations between nodes representing members of the
           next_set to nodes representing members of the current_set.
       current_set(NXparameters):
-        doc: |
+        \doc: |
           Current set stores a set of members, meshes of volumetric features,
           which will be checked for proximity and/or volumetric intersection,
           to members of the current_set.
           The meshes were generated as a result of some other meshing process.
         set_identifier(NX_UINT):
-          unit: NX_ANY
-          doc: |
+          \unit: NX_ANY
+          \doc: |
             This identifier can be used to label the current set. The label effectively can be interpreted as the time/iteration (i.e. :math:`k`)
             step when the current set was taken (see `M. Kühbach et al. 2022 <https://arxiv.org/abs/2205.13510>`_).
         
         # number_of_objects(NX_UINT) for now a support field to tell the tool how many objects to load.
         number_of_feature_types(NX_UINT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             The total number of distinguished feature sets featureID.
             It is assumed that the members within all these featureID sets
             are representing a set together. As an example this set might represent
@@ -101,48 +101,48 @@ NXapm_paraprobe_intersector_config(NXapm_paraprobe_tool_config):
             features, key is that they were all generated for one set, here the
             current_set.
         objectID(NXnote):
-          nameType: partial
-          exists: ['min', '1', 'max', '4']
-          doc: |
+          \nameType: partial
+          \exists: ['min', '1', 'max', '4']
+          \doc: |
             Name of the (NeXus)/HDF5 file which contains triangulated surface meshes of the
             members of the set as instances of NXcg_polyhedron.
           feature_type(NX_CHAR):
-            doc: |
+            \doc: |
               Descriptive category explaining what these features are.
-            enumeration: [objects_far_from_edge, objects_close_to_edge, proxies_far_from_edge, proxies_close_to_edge, other]
+            \enumeration: [objects_far_from_edge, objects_close_to_edge, proxies_far_from_edge, proxies_close_to_edge, other]
           file_name(NX_CHAR):
           checksum(NX_CHAR):
           algorithm(NX_CHAR):
           geometry(NX_CHAR):
-            doc: |
+            \doc: |
               Absolute path to the group with geometry data in the HDF5 file referred to by
               path.
           
           # currently groupname_geometry_prefix/object<ID>/polyhedron.
           indices_feature(NX_INT):
-            unit: NX_UNITLESS
-            doc: |
+            \unit: NX_UNITLESS
+            \doc: |
               Array of identifier whereby the path to the geometry data can be inferred
               automatically.
-            dimensions:
-              rank: 1
-              dim: (n_variable,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_variable,)
       next_set(NXparameters):
-        doc: |
+        \doc: |
           Next set stores a set of members, meshes of volumetric features,
           which will be checked for proximity and/or volumetric intersection,
           to members of the next_set.
           The meshes were generated as a result of some other meshing process.
         set_identifier(NX_UINT):
-          unit: NX_ANY
-          doc: |
+          \unit: NX_ANY
+          \doc: |
             This identifier can be used to label the current set. The label effectively can be interpreted as the time/iteration (i.e. :math:`k + 1`)
             step when the current set was taken (see `M. Kühbach et al. 2022 <https://arxiv.org/abs/2205.13510>`_).
         
         # number_of_objects(NX_UINT) for now a support field to tell the tool how many objects to load.
         number_of_feature_types(NX_UINT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             The total number of distinguished feature sets featureID.
             It is assumed that the members within all these featureID sets
             are representing a set together. As an example this set might represent
@@ -157,35 +157,35 @@ NXapm_paraprobe_intersector_config(NXapm_paraprobe_tool_config):
             features key is that they were all generated for one set, here the
             next_set.
         objectID(NXnote):
-          nameType: partial
-          exists: ['min', '1', 'max', '4']
+          \nameType: partial
+          \exists: ['min', '1', 'max', '4']
           feature_type(NX_CHAR):
-            doc: |
+            \doc: |
               Descriptive category explaining what these features are.
-            enumeration: [objects_far_from_edge, objects_close_to_edge, proxies_far_from_edge, proxies_close_to_edge]
+            \enumeration: [objects_far_from_edge, objects_close_to_edge, proxies_far_from_edge, proxies_close_to_edge]
           file_name(NX_CHAR):
           checksum(NX_CHAR):
           algorithm(NX_CHAR):
           geometry(NX_CHAR):
-            doc: |
+            \doc: |
               Absolute path to the group with geometry data in the HDF5 file referred to by
               path.
           
           # currently groupname_geometry_prefix/object<ID>/polyhedron.
           indices_feature(NX_INT):
-            unit: NX_UNITLESS
-            doc: |
+            \unit: NX_UNITLESS
+            \doc: |
               Array of identifier whereby the path to the geometry data can be inferred
               automatically.
-            dimensions:
-              rank: 1
-              dim: (n_variable,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_variable,)
   
   # MK::tetrahedra volume intersection and tessellation and Nef polyhedra intersection are considered guru features
   # what one is doing here before using these functionalities
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 49c597d5e65162455582dcf896963ebfa1c3e2271f5a444ecaa0f243e34b4702
+# b391fd94b781bf115dbdc48a4d8144eecd20a5e57cfbf1181e998d057e07a9b7
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
