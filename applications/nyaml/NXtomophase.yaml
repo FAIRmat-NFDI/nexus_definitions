@@ -1,12 +1,12 @@
-category: application
-doc: |
+\category: application
+\doc: |
   This is the application definition for x-ray or neutron tomography raw data with phase contrast variation at each point.
   
   In tomography first
   some dark field images are measured, some bright field images and, of course the sample. In order
   to properly sort the order of the images taken, a sequence number is stored with each image.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     These symbols will be used below to coordinate datasets with the same shape.
   nBrightFrames: |
     Number of bright frames
@@ -20,102 +20,102 @@ symbols:
     Number of pixels in X direction
   ySize: |
     Number of pixels in Y direction
-type: group
+\type: group
 NXtomophase(NXobject):
   (NXentry):
     title:
     start_time(NX_DATE_TIME):
     end_time(NX_DATE_TIME):
     definition:
-      doc: |
+      \doc: |
         Official NeXus NXDL schema to which this file conforms
-      enumeration: [NXtomophase]
+      \enumeration: [NXtomophase]
     instrument(NXinstrument):
       (NXsource):
         type:
         name:
         probe:
-          enumeration: [neutron, x-ray, electron]
+          \enumeration: [neutron, x-ray, electron]
       bright_field(NXdetector):
         data(NX_INT):
           signal: 1
-          dimensions:
-            rank: 3
-            dim: (nBrightFrames, xSize, ySize)
+          \dimensions:
+            \rank: 3
+            \dim: (nBrightFrames, xSize, ySize)
         sequence_number(NX_INT):
-          dimensions:
-            rank: 1
-            dim: (nBrightFrames,)
+          \dimensions:
+            \rank: 1
+            \dim: (nBrightFrames,)
       dark_field(NXdetector):
         data(NX_INT):
           signal: 1
-          dimensions:
-            rank: 3
-            dim: (nDarkFrames, xSize, ySize)
+          \dimensions:
+            \rank: 3
+            \dim: (nDarkFrames, xSize, ySize)
         sequence_number(NX_INT):
-          dimensions:
-            rank: 1
-            dim: (nDarkFrames,)
+          \dimensions:
+            \rank: 1
+            \dim: (nDarkFrames,)
       sample(NXdetector):
         data(NX_INT):
           signal: 1
-          dimensions:
-            rank: 4
-            dim: (nSampleFrames, nPhase, xSize, ySize)
+          \dimensions:
+            \rank: 4
+            \dim: (nSampleFrames, nPhase, xSize, ySize)
         sequence_number(NX_INT):
-          dimensions:
-            rank: 2
-            dim: (nSampleFrames, nPhase)
+          \dimensions:
+            \rank: 2
+            \dim: (nSampleFrames, nPhase)
         x_pixel_size(NX_FLOAT):
-          unit: NX_LENGTH
+          \unit: NX_LENGTH
         y_pixel_size(NX_FLOAT):
-          unit: NX_LENGTH
+          \unit: NX_LENGTH
         distance(NX_FLOAT):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             Distance between detector and sample
     sample(NXsample):
       name:
-        doc: |
+        \doc: |
           Descriptive name of sample
       rotation_angle(NX_FLOAT):
-        unit: NX_ANGLE
+        \unit: NX_ANGLE
         axis: 1
-        dimensions:
-          rank: 1
-          dim: (nSampleFrames,)
+        \dimensions:
+          \rank: 1
+          \dim: (nSampleFrames,)
       x_translation(NX_FLOAT):
-        unit: NX_LENGTH
-        dimensions:
-          rank: 1
-          dim: (nSampleFrames,)
+        \unit: NX_LENGTH
+        \dimensions:
+          \rank: 1
+          \dim: (nSampleFrames,)
       y_translation(NX_FLOAT):
-        unit: NX_LENGTH
-        dimensions:
-          rank: 1
-          dim: (nSampleFrames,)
+        \unit: NX_LENGTH
+        \dimensions:
+          \rank: 1
+          \dim: (nSampleFrames,)
       z_translation(NX_FLOAT):
-        unit: NX_LENGTH
-        dimensions:
-          rank: 1
-          dim: (nSampleFrames,)
+        \unit: NX_LENGTH
+        \dimensions:
+          \rank: 1
+          \dim: (nSampleFrames,)
     control(NXmonitor):
       integral(NX_FLOAT):
-        unit: NX_ANY
-        doc: |
+        \unit: NX_ANY
+        \doc: |
           Total integral monitor counts for each measured frame. Allows a correction for
           fluctuations in the beam between frames.
-        dimensions:
-          rank: 1
-          dim: (nDarkFrames + nBrightFrames + nSampleFrame,)
+        \dimensions:
+          \rank: 1
+          \dim: (nDarkFrames + nBrightFrames + nSampleFrame,)
     data(NXdata):
       data(link):
-        target: /NXentry/NXinstrument/sample:NXdetector/data
+        \target: /NXentry/NXinstrument/sample:NXdetector/data
       rotation_angle(link):
-        target: /NXentry/NXsample/rotation_angle
+        \target: /NXentry/NXsample/rotation_angle
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 0e2a72a9423ed54787376c07dea31578cb4bbc5dd488fbbe55e7ea17ae42ef52
+# 54cd8877630c2d51e2c470ec6d5d1679ca47e41143ded7e1411962a1b40ecd86
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

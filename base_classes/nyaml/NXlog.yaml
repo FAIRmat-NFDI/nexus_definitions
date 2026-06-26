@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Information recorded as a function of time.
   
   Description of information that is recorded against
@@ -29,11 +29,11 @@ doc: |
   every five minutes. The ``cue_index`` will then contain the
   index into the time,value pair of arrays for that
   coarser ``cue_timestamp_zero``.
-type: group
+\type: group
 NXlog(NXobject):
   time(NX_NUMBER):
-    unit: NX_TIME
-    doc: |
+    \unit: NX_TIME
+    \doc: |
       Time of logged entry. The times are relative to the "start" attribute
       and in the units specified in the "units"
       attribute. Please note that absolute
@@ -42,61 +42,65 @@ NXlog(NXobject):
       The scaling_factor, when present, has to be applied to the time values in order
       to arrive at the units specified in the units attribute. The scaling_factor allows
       for arbitrary time units such as ticks of some hardware clock.
-    \@start(NX_DATE_TIME):
-    \@scaling_factor(NX_NUMBER):
+    \@start:
+      \type: NX_DATE_TIME
+    \@scaling_factor:
+      \type: NX_NUMBER
   value(NX_NUMBER):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       Array of logged value, such as temperature. If this is
       a single value the dimensionality is
       nEntries. However, NXlog can also be used to store
       multi dimensional time stamped data such as images. In
       this example the dimensionality of values would be value[nEntries,xdim,ydim].
   raw_value(NX_NUMBER):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       Array of raw information, such as thermocouple voltage
   description:
-    doc: |
+    \doc: |
       Description of logged value
   average_value(NX_FLOAT):
-    unit: NX_ANY
+    \unit: NX_ANY
   average_value_error(NX_FLOAT):
-    unit: NX_ANY
-    deprecated: |
+    \unit: NX_ANY
+    \deprecated: |
       see: https://github.com/nexusformat/definitions/issues/639
-    doc: |
+    \doc: |
       estimated uncertainty (often used: standard deviation) of average_value
   average_value_errors(NX_FLOAT):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       estimated uncertainty (often used: standard deviation) of average_value
   minimum_value(NX_FLOAT):
-    unit: NX_ANY
+    \unit: NX_ANY
   maximum_value(NX_FLOAT):
-    unit: NX_ANY
+    \unit: NX_ANY
   duration(NX_FLOAT):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       Total time log was taken
   cue_timestamp_zero(NX_NUMBER):
-    unit: NX_TIME
-    doc: |
+    \unit: NX_TIME
+    \doc: |
       Timestamps matching the corresponding cue_index into the
       time, value pair.
-    \@start(NX_DATE_TIME):
-      doc: |
+    \@start:
+      \type: NX_DATE_TIME
+      \doc: |
         If missing start is assumed to be the same as for "time".
-    \@scaling_factor(NX_NUMBER):
-      doc: |
+    \@scaling_factor:
+      \type: NX_NUMBER
+      \doc: |
         If missing start is assumed to be the same as for "time".
   cue_index(NX_INT):
-    doc: |
+    \doc: |
       Index into the time, value pair matching the corresponding
       cue_timestamp_zero.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# e6e8946dcddf323ff59ca04ef816d07bd75697022030ef75d1314041d47b6e87
+# 1c6aa7041aa0e66ec61e7d7890ca02f6e7c1e691c1166dc5b4e7cf89b2c06024
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

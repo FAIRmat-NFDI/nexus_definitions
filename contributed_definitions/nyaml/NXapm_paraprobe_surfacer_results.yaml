@@ -1,8 +1,8 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for a results file of the paraprobe-surfacer tool.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   n_ions: |
     The total number of ions in the reconstruction.
@@ -14,16 +14,16 @@ symbols:
     The total number of XDMF values to represent all faces of triangles via XDMF.
   n_f_tet_xdmf: |
     The total number of XDMF values to represent all faces of tetrahedra via XDMF.
-type: group
+\type: group
 NXapm_paraprobe_surfacer_results(NXapm_paraprobe_tool_results):
   (NXentry):
-    exists: ['min', '1', 'max', '1']
+    \exists: ['min', '1', 'max', '1']
     definition(NX_CHAR):
-      enumeration: [NXapm_paraprobe_surfacer_results]
+      \enumeration: [NXapm_paraprobe_surfacer_results]
     point_set_wrappingID(NXapm_paraprobe_tool_process):
-      nameType: partial
-      exists: ['min', '1', 'max', 'unbounded']
-      doc: |
+      \nameType: partial
+      \exists: ['min', '1', 'max', 'unbounded']
+      \doc: |
         Paraprobe-surfacer can be used to load a ROI that is the entire or a
         sub-set of the ion point cloud. In the point_cloud_wrapping process
         the tool computes a triangulated surface mesh which encloses the
@@ -38,13 +38,13 @@ NXapm_paraprobe_surfacer_results(NXapm_paraprobe_tool_results):
         This polyhedron is not necessarily convex. For some algorithms there
         is no guarantee that the resulting mesh yields a watertight mesh.
       alpha_complexID(NXcg_alpha_complex):
-        nameType: partial
-        exists: ['min', '0', 'max', 'unbounded']
+        \nameType: partial
+        \exists: ['min', '0', 'max', 'unbounded']
         
         # (NXcg_grid): currently we do not store the underlying grid
         # for eventually performed preprocessing
         window(NXcs_filter_boolean_mask):
-          doc: |
+          \doc: |
             A bitmask which identifies exactly all those ions whose positions
             were considered when defining the filtered point set from which
             that alpha_complex instance was computed.
@@ -56,35 +56,35 @@ NXapm_paraprobe_surfacer_results(NXapm_paraprobe_tool_results):
           
           # filtered in addition to the ROI or again the entire dataset
           number_of_ions(NX_UINT):
-            unit: NX_UNITLESS
-            doc: |
+            \unit: NX_UNITLESS
+            \doc: |
               Number of ions covered by the mask.
           bitdepth(NX_UINT):
-            unit: NX_UNITLESS
-            doc: |
+            \unit: NX_UNITLESS
+            \doc: |
               Number of bits assumed matching on a default datatype.
           mask(NX_UINT):
-            unit: NX_UNITLESS
-            doc: |
+            \unit: NX_UNITLESS
+            \doc: |
               The bitfield of the mask. See :ref:`NXcs_filter_boolean_mask` for
               how this bitfield is to be interpreted.
-            dimensions:
-              rank: 1
-              dim: (n_ions,)
+            \dimensions:
+              \rank: 1
+              \dim: (n_ions,)
         dimensionality(NX_POSINT):
-          enumeration: [2, 3]
+          \enumeration: [2, 3]
         type(NX_CHAR):
-          enumeration: [convex_hull, alpha_shape, alpha_wrapping, other, undefined]
+          \enumeration: [convex_hull, alpha_shape, alpha_wrapping, other, undefined]
         mode(NX_CHAR):
-          enumeration: [general, regularized]
+          \enumeration: [general, regularized]
         alpha(NX_NUMBER):
-          unit: NX_ANY
+          \unit: NX_ANY
         offset(NX_NUMBER):
-          exists: optional
-          unit: NX_LENGTH
+          \exists: optional
+          \unit: NX_LENGTH
         triangle_set(NXcg_triangle):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             The set of triangles in the coordinate system paraprobe
             which discretizes the exterior surface of the alpha complex.
           index_offset(NX_INT):
@@ -95,67 +95,67 @@ NXapm_paraprobe_surfacer_results(NXapm_paraprobe_tool_results):
             indices_offset_vertex(NX_INT):
             indices_offset_face(NX_INT):
             vertices(NX_FLOAT):
-              unit: NX_LENGTH
-              dimensions:
-                rank: 2
-                dim: (n_v_tri, 3)
+              \unit: NX_LENGTH
+              \dimensions:
+                \rank: 2
+                \dim: (n_v_tri, 3)
             faces(NX_UINT):
-              dimensions:
-                rank: 2
-                dim: (n_f_tri, 3)
+              \dimensions:
+                \rank: 2
+                \dim: (n_f_tri, 3)
             xdmf_topology(NX_UINT):
-              unit: NX_UNITLESS
-              doc: |
+              \unit: NX_UNITLESS
+              \doc: |
                 A list of as many tuples of XDMF topology key, XDMF number
                 of vertices and a triple of vertex indices specifying each
                 triangle. The total number of entries is n_f_tri * (1+1+3).
-              dimensions:
-                rank: 1
-                dim: (n_f_tri_xdmf,)
+              \dimensions:
+                \rank: 1
+                \dim: (n_f_tri_xdmf,)
             is_watertight(NX_BOOLEAN):
-              exists: optional
-              doc: |
+              \exists: optional
+              \doc: |
                 Do the triangles define a triangulated surface mesh that is watertight?
             volume(NX_FLOAT):
-              exists: optional
-              unit: NX_VOLUME
-              doc: |
+              \exists: optional
+              \unit: NX_VOLUME
+              \doc: |
                 The volume which the triangulated surface mesh
                 encloses if that mesh is watertight.
         interior_tetrahedra(NXcg_tetrahedron):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             The set of tetrahedra which represent the interior volume
             of the complex if that is a closed two-manifold.
           index_offset(NX_INT):
           volume(NX_FLOAT):
-            exists: optional
-            unit: NX_VOLUME
-            doc: |
+            \exists: optional
+            \unit: NX_VOLUME
+            \doc: |
               The accumulated volume of all interior tetrahedra.
           tetrahedra(NXcg_face_list_data_structure):
-            exists: optional
+            \exists: optional
             number_of_vertices(NX_UINT):
             number_of_faces(NX_UINT):
             indices_offset_vertex(NX_INT):
             indices_offset_face(NX_INT):
             vertices(NX_FLOAT):
-              unit: NX_LENGTH
-              dimensions:
-                rank: 2
-                dim: (n_v_tet, 3)
+              \unit: NX_LENGTH
+              \dimensions:
+                \rank: 2
+                \dim: (n_v_tet, 3)
             xdmf_topology(NX_UINT):
-              unit: NX_UNITLESS
-              doc: |
+              \unit: NX_UNITLESS
+              \doc: |
                 A list of as many tuples of XDMF topology key, XDMF number
                 of vertices and a triple of vertex indices specifying each
                 triangle. The total number of entries is n_f_tet * (1+1+4).
-              dimensions:
-                rank: 1
-                dim: (n_f_tet_xdmf,)
+              \dimensions:
+                \rank: 1
+                \dim: (n_f_tet_xdmf,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# d884a1068ec9ef0347cf2d9f28a5e3b2aaa5074abe445c814a93b577f76d8b87
+# b5c0fc279507f4d2dda550116abe1420a54c737d938103a3780327b45d65fed4
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

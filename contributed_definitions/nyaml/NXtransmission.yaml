@@ -1,8 +1,8 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for transmission experiments
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     Variables used throughout the experiment
   N_wavelengths: |
     Number of wavelength points
@@ -11,25 +11,25 @@ symbols:
 
 # FAIRmat consortium 21.07.2022
 # Draft NeXus application definition for transmission experiments
-type: group
+\type: group
 NXtransmission(NXobject):
   (NXentry):
     definition:
       \@version:
-        doc: |
+        \doc: |
           Version number to identify which definition of this application definition was
           used for this entry/data.
       \@URL:
-        nameType: specified
-        doc: |
+        \nameType: specified
+        \doc: |
           URL where to find further material (documentation, examples) relevant to the
           application definition.
-      enumeration: [NXtransmission]
+      \enumeration: [NXtransmission]
     start_time(NX_DATE_TIME):
-      doc: |
+      \doc: |
         Start time of the experiment.
     experiment_identifier:
-      doc: |
+      \doc: |
         Unique identifier of the experiment, such as a (globally persistent)
         unique identifier.
         
@@ -37,85 +37,86 @@ NXtransmission(NXobject):
           investigator.
         * The identifier enables to link experiments to e.g. proposals.
     experiment_description(NX_CHAR):
-      exists: optional
-      doc: |
+      \exists: optional
+      \doc: |
         An optional free-text description of the experiment. However, details of the
         experiment should be defined in the specific fields of this application
         definition rather than in this experiment description.
     acquisition_program(NXfabrication):
-      exists: optional
+      \exists: optional
       model(NX_CHAR):
-        doc: |
+        \doc: |
           Commercial or otherwise defined given name to the program that was
           used to generate the result file(s) with measured data and metadata.
       identifier:
-        doc: |
+        \doc: |
           Version number of the program that was used to generate the result
           file(s) with measured data and metadata.
-      \@url(NX_CHAR):
-        exists: recommended
-        doc: |
+      \@url:
+        \type: NX_CHAR
+        \exists: recommended
+        \doc: |
           Website of the software
     (NXuser):
-      doc: |
+      \doc: |
         Contact information of at least the user of the instrument or the investigator
         who performed this experiment. Adding multiple users if relevant is recommended.
       name:
-        doc: |
+        \doc: |
           Name of the user.
       affiliation:
-        exists: recommended
-        doc: |
+        \exists: recommended
+        \doc: |
           Name of the affiliation of the user at the point in time when the experiment was
           performed.
     instrument(NXinstrument):
       manufacturer(NXfabrication):
-        exists: recommended
-        doc: |
+        \exists: recommended
+        \doc: |
           Manufacturer of the instrument.
       common_beam_mask(NXslit):
-        doc: |
+        \doc: |
           Common beam mask to shape the incident beam
         y_gap(NX_NUMBER):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             The height of the common beam in percentage of the beam
       common_beam_depolarizer(NX_BOOLEAN):
-        doc: |
+        \doc: |
           If true, the incident beam is depolarized.
       polarizer(NX_NUMBER):
-        unit: NX_ANGLE
-        doc: |
+        \unit: NX_ANGLE
+        \doc: |
           Polarizer value inside the beam path
       ref_attenuator(NXattenuator):
-        doc: |
+        \doc: |
           Attenuator in the reference beam
         attenuator_transmission(NX_FLOAT):
       sample_attenuator(NXattenuator):
-        doc: |
+        \doc: |
           Attenuator in the sample beam
         attenuator_transmission(NX_FLOAT):
       spectrometer(NXmonochromator):
         wavelength(NX_NUMBER):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             Wavelength value(s) used for the measurement.
             An array of 1 or more elements. Length defines N_wavelenghts
-          dimensions:
-            rank: 1
-            dim: (N_wavelengths,)
+          \dimensions:
+            \rank: 1
+            \dim: (N_wavelengths,)
         spectral_resolution(NXresolution):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Overall spectral resolution of this spectrometer.
             If several gratings are employed the spectral resolution
             should rather be specified for each grating inside the
             NXgrating group of this spectrometer.
           resolution(NX_NUMBER):
-            unit: NX_WAVENUMBER
+            \unit: NX_WAVENUMBER
         (NXgrating):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Diffraction grating, as could be used in a monochromator.
             If two or more gratings were used, define the angular
             dispersion and the wavelength range (min/max wavelength)
@@ -123,111 +124,111 @@ NXtransmission(NXobject):
             do not overlap. The dispersion should be defined for the
             entire wavelength range of the experiment.
           angular_dispersion(NX_NUMBER):
-            exists: optional
-            unit: NX_DIMENSIONLESS
-            doc: |
+            \exists: optional
+            \unit: NX_DIMENSIONLESS
+            \doc: |
               Dispersion of the grating in nm/mm used.
           blaze_wavelength(NX_NUMBER):
-            exists: optional
-            unit: NX_LENGTH
-            doc: |
+            \exists: optional
+            \unit: NX_LENGTH
+            \doc: |
               The blaze wavelength of the grating used.
           spectral_resolution(NXresolution):
-            exists: optional
-            doc: |
+            \exists: optional
+            \doc: |
               Overall spectral resolution of the instrument
               when this grating is used.
             resolution(NX_NUMBER):
-              unit: NX_WAVENUMBER
+              \unit: NX_WAVENUMBER
           wavelength_range(NX_NUMBER):
-            unit: NX_LENGTH
-            doc: |
+            \unit: NX_LENGTH
+            \doc: |
               Wavelength range in which this grating was used
-            dimensions:
-              rank: 1
-              dim: (2,)
+            \dimensions:
+              \rank: 1
+              \dim: (2,)
       (NXdetector):
         wavelength_range(NX_NUMBER):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             Wavelength range in which this detector was used
-          dimensions:
-            rank: 1
-            dim: (2,)
+          \dimensions:
+            \rank: 1
+            \dim: (2,)
         type(NX_CHAR):
-          doc: |
+          \doc: |
             Detector type
-          enumeration: [PMT, PbS, InGaAs]
+          \enumeration: [PMT, PbS, InGaAs]
         response_time(NX_NUMBER):
-          exists: optional
-          unit: NX_TIME
-          doc: |
+          \exists: optional
+          \unit: NX_TIME
+          \doc: |
             Response time of the detector
         gain(NX_NUMBER):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Detector gain
         slit(NXslit):
-          doc: |
+          \doc: |
             Slit setting used for measurement with this detector
           type(NX_CHAR):
-            enumeration: [fixed, servo]
+            \enumeration: [fixed, servo]
       time_points(NX_NUMBER):
-        exists: optional
-        unit: NX_TIME
-        doc: |
+        \exists: optional
+        \unit: NX_TIME
+        \doc: |
           An array of relative scan start time points.
-        dimensions:
-          rank: 1
-          dim: (N_scans,)
+        \dimensions:
+          \rank: 1
+          \dim: (N_scans,)
       measured_data(NX_NUMBER):
-        doc: |
+        \doc: |
           Resulting data from the measurement.
           The length of the 2nd dimension is
           the number of time points.
           If it has length one the time_points
           may be empty.
-        dimensions:
-          rank: 2
-          dim: (N_scans, N_wavelengths)
+        \dimensions:
+          \rank: 2
+          \dim: (N_scans, N_wavelengths)
       (NXsource):
-        doc: |
+        \doc: |
           The lamp used for illumination
         type(NX_CHAR):
-          doc: |
+          \doc: |
             The type of lamp, e.g. halogen, D2 etc.
-          enumeration:
-            open_enum: true
-            items: [halogen, D2]
+          \enumeration:
+            \open: true
+            \items: [halogen, D2]
         spectrum(NX_NUMBER):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             The spectrum of the lamp used
-          dimensions:
-            rank: 1
-            dim: (N_wavelengths,)
+          \dimensions:
+            \rank: 1
+            \dim: (N_wavelengths,)
         wavelength_range(NX_NUMBER):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             Wavelength range in which the lamp was used
-          dimensions:
-            rank: 1
-            dim: (2,)
+          \dimensions:
+            \rank: 1
+            \dim: (2,)
     (NXsample):
-      doc: |
+      \doc: |
         Properties of the sample measured
       name(NX_CHAR):
     data(NXdata):
-      doc: |
+      \doc: |
         A default view of the data emitted intensity vs. wavelength.
         From measured_data plot intensity and wavelength.
       \@axes:
-        doc: |
+        \doc: |
           We recommend to use wavelength as a default attribute, but it can be
           replaced by any suitable parameter along the X-axis.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 6a05b364c23b9cc2d8e352061b1288bafba56bb4358270f1b8a20f16c46dcdba
+# 4eee8dc779dc5c9f03d644a8d2c9db27716b98b2f6f585e41e1664ddda355ad9
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

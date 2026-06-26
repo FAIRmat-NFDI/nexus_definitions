@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   A scan is performed inside an N-dimensional phase space, where each dimension can correspond not only to real space coordinates (x,y) but also to any other parameter. This class contains detailed information about controlling the scan in such a phase space (or its subspace).
   
   scan_types:
@@ -14,86 +14,86 @@ doc: |
   Stepping: At each step, a movement to the next point is performed; correction (for example backlash) or active regulation (feedback loop) may or may not be applied. After the movement is done, the measurement is performed without the movement.
   Continuous: The scanning of each line in an N-dimensional phase space is done without stopping; measurements are done simultaneously with the movement.
   Oscillating: Scanning over a scan point continuously and then moving to start scanning at the next position.
-type: group
+\type: group
 NXspm_scan_control(NXobject):
   scan_time_start(NX_DATE_TIME):
-    unit: NX_TIME
-    doc: |
+    \unit: NX_TIME
+    \doc: |
       The start time of the scan.
   scan_time_end(NX_DATE_TIME):
-    unit: NX_TIME
-    doc: |
+    \unit: NX_TIME
+    \doc: |
       The end time of the scan.
   independent_scan_axes:
-    doc: |
+    \doc: |
       An array of scan axes which are controlled independently of each other.
       (e.g. X, Y, Z, or other physical dimensions)
       
       The array elements are in the order of axes of the scan from the fastest to the slowest.
   scan_resolutionN(NX_NUMBER):
-    nameType: partial
-    unit: NX_ANY
-    doc: |
+    \nameType: partial
+    \unit: NX_ANY
+    \doc: |
       Define the scan resolution along each dimension as the number of steps per unit of the dimension parameters.
       
       Rename the field according to the name of the independent dimension (e.g. scan_resolution_x, scan_resolution_voltage).
   accuracyN(NX_NUMBER):
-    nameType: partial
-    unit: NX_LENGTH
-    doc: |
+    \nameType: partial
+    \unit: NX_LENGTH
+    \doc: |
       Define the accuracy of the scan probe.
   scan_type:
-    doc: |
+    \doc: |
       This group specifies how the trajectory of the scan is defined.
-    enumeration: [trajectory, mesh, snake, spiral, linear, tilt]
+    \enumeration: [trajectory, mesh, snake, spiral, linear, tilt]
   scan_control_type:
-    doc: |
+    \doc: |
       This string describes how the scan was performed.
-    enumeration: [stepping, continuous, oscillating]
+    \enumeration: [stepping, continuous, oscillating]
   scan_region(NXspm_scan_region):
-    doc: |
+    \doc: |
       The scan region is the area of phase space or sub-phase space where the scan is
       performed. The region could be N-dimensional and is defined by the minimum and
       maximum values of the scan axes.
   meshSCAN(NXspm_scan_pattern):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       For each dimension a range and a direction are chosen. When a scan along a dimension is done,
       a single step in the next dimension is taken, and then the scan in the previous dimension is
       repeated. As such we can speak about the fastest and the slowest scan axes.
   spiralSCAN(NXspm_scan_pattern):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       To define the spiral or circular scan, use this group.
     spiral_radiusN(NX_NUMBER):
-      nameType: partial
-      unit: NX_ANY
-      doc: |
+      \nameType: partial
+      \unit: NX_ANY
+      \doc: |
         Define the radius of the spiral circle of scanning.
         
         Rename the field, according to the circle order, the nearest circle to the center is 0.
     scan_pointsN(NX_NUMBER):
-      nameType: partial
-      doc: |
+      \nameType: partial
+      \doc: |
         Define the total number of points in a given circle scan to be performed.
         
         Rename the field, according to the circle order, the nearest circle to the center
         is 0 (e.g. scan_points_2).
   snakeSCAN(NXspm_scan_pattern):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       To define the snake scan, use this group.
   trajSCAN(NXspm_scan_pattern):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       To define the trajectory scan, use this group.
   linearSCAN(NXspm_scan_pattern):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       To define the linear scan, use this group.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# f7b9cf9c38c68d2dfc857c8b32e3edd855b2f5c694dbf57da75e9b84cbc5c942
+# 9766511e9f99c9ddfd73ae34c2c412fb6ac1ef93a5d05d5bda6ed4d50e533a8b
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

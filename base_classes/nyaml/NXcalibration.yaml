@@ -1,31 +1,31 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Subclass of NXprocess to describe post-processing calibrations.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays
   ncal: |
     Number of points of the calibrated and uncalibrated axes
-type: group
+\type: group
 NXcalibration(NXprocess):
   description(NX_CHAR):
-    doc: |
+    \doc: |
       A description of the procedures employed.
   physical_quantity:
-    doc: |
+    \doc: |
       The physical quantity of the calibration, e.g.,
       energy, momentum, time, etc.
   identifier_calibration_method(NX_CHAR):
-    doc: |
+    \doc: |
       A digital persistent identifier (e.g., DOI, ISO standard) referring to a detailed description of a
       calibration method but no actual calibration data.
   identifier_calibration_reference(NX_CHAR):
-    doc: |
+    \doc: |
       A digital persistent identifier (e.g., a DOI) referring to a publicly available calibration measurement
       used for this instrument, e.g., a measurement of a known standard containing calibration information.
       The axis values may be copied or linked in the appropriate NXcalibration fields for reference.
   calibration_object(NXnote):
-    doc: |
+    \doc: |
       A file serialization of a calibration which may not be publicly available (externally from the NeXus file).
       
       This metadata can be a documentation of the source (file) or database (entry) from which pieces
@@ -34,20 +34,20 @@ NXcalibration(NXprocess):
       
       The axis values may be copied or linked in the appropriate NXcalibration fields for reference.
   last_process(NX_CHAR):
-    doc: |
+    \doc: |
       Indicates the name of the last operation applied in the NXprocess sequence.
   applied(NX_BOOLEAN):
-    doc: |
+    \doc: |
       Has the calibration been applied?
   original_axis(NX_FLOAT):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       Array containing the data coordinates in the original uncalibrated axis
-    dimensions:
-      rank: 1
-      dim: (ncal,)
+    \dimensions:
+      \rank: 1
+      \dim: (ncal,)
     \@symbol:
-      doc: |
+      \doc: |
         The symbol of the axis to be used in the fit_function, e.g., `energy`, `E`.
         This should comply to the following naming rules (similar to python's naming rules):
         
@@ -56,51 +56,51 @@ NXcalibration(NXprocess):
         * A variable name can only contain alpha-numeric characters and underscores (A-z, 0-9, and _ )
         * Variable names are case-sensitive (age, Age and AGE are three different variables)
     \@input_path:
-      doc: |
+      \doc: |
         The path from which this data is derived, e.g., raw detector axis.
         Should be a valid NeXus path name, e.g., /entry/instrument/detector/raw.
   fit_formula_inputs(NXparameters):
-    doc: |
+    \doc: |
       Additional input axis to be used in the formula.
     PARAMETER:
-      nameType: any
-      doc: |
+      \nameType: any
+      \doc: |
         The name of each ``PARAMETER`` is used as the symbol to be used in the ``fit_formula_description``, i.e.,
         if the field name is `my_field` you should refer to this axis by `my_field` in the ``fit_formula_description``.
       \@input_path:
-        doc: |
+        \doc: |
           The path from which this data is derived, e.g., raw detector axis.
           Should be a valid NeXus path name, e.g., /entry/instrument/detector/raw.
   calibration_parameters(NXparameters):
-    doc: |
+    \doc: |
       Fit coefficients to be used in ``fit_formula_description``.
       
       As an example, for nonlinear energy calibrations, e.g. in a time-of-flight (TOF) detector, a polynomial
       function is fitted to a set of features (peaks) at well defined energy positions to determine
       E(TOF). Here we can store the fit coefficients for that procedure.
     aN(NX_NUMBER):
-      nameType: partial
-      doc: |
+      \nameType: partial
+      \doc: |
         Use a0, a1, ..., an for the coefficients of a polynomial fit, corresponding to the values in the
         ``fit_formula_description``.
     scaling_factor(NX_FLOAT):
-      unit: NX_ANY
-      doc: |
+      \unit: NX_ANY
+      \doc: |
         For linear calibration. Scaling parameter.
         This should yield the relation `calibrated_axis` = (`original_axis` + `offset`) * `scaling_factor`.
         
         For a more detailed description of scaling factors, see
         :ref:`/NXdata/FIELDNAME_scaling_factor </NXdata/FIELDNAME_scaling_factor-field>`.
     offset(NX_FLOAT):
-      unit: NX_ANY
-      doc: |
+      \unit: NX_ANY
+      \doc: |
         For linear calibration. Offset parameter.
         This should yield the relation `calibrated_axis` = (`original_axis` + `offset`) * `scaling_factor`.
         
         For a more detailed description of offset, see
         :ref:`/NXdata/FIELDNAME_offset </NXdata/FIELDNAME_offset-field>`.
   fit_formula_description(NX_CHAR):
-    doc: |
+    \doc: |
       Here we can store a description of the formula used for the fit function.
       
       For polynomial fits, use a0, a1, ..., an for the coefficients, corresponding to the values in the
@@ -114,25 +114,25 @@ NXcalibration(NXprocess):
       name ``my_field`` in ``fit_formula_inputs``, it should be referred here by ``my_field`` or ``my_field0``
       if you want to read the zeroth element of the array.
   mapping_MAPPING(NX_FLOAT):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       Mapping data for calibration.
       
       This can be used to map data points from uncalibrated to calibrated values,
       i.e., by multiplying each point in the input axis by the corresponding point in the mapping data.
   calibrated_axis(NX_FLOAT):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       An array representing the axis after calibration, matching the data length
-    dimensions:
-      rank: 1
-      dim: (ncal,)
+    \dimensions:
+      \rank: 1
+      \dim: (ncal,)
   (NXdata):
-    doc: |
+    \doc: |
       Any data acquired/used during the calibration that does not fit the `NX_FLOAT` fields above.
       NXdata groups can be used for multidimensional data which are relevant to the calibration
   \@default:
-    doc: |
+    \doc: |
       .. index:: plotting
       
       Declares which child group contains a path leading
@@ -144,7 +144,7 @@ NXcalibration(NXprocess):
       for a summary of the discussion.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 308e8d48f9942443825c6123ea94e68d07950bb1c1132fc3e2aa7898f626a125
+# a865f9b433a3f89bf15e9476298c74244a9f26be69be0ac77729e8e09ffcc9ae
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

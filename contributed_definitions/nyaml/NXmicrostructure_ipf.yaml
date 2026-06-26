@@ -1,7 +1,7 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Base class to store an inverse pole figure (IPF) mapping (IPF map).
-symbols:
+\symbols:
   v: |
     Number of pixel along the slow direction used for the IPF color key.
   u: |
@@ -14,25 +14,26 @@ symbols:
     Number of pixel along the fast direction, typically labeled x or i.
   n_rgb: |
     Number of RGB values along the fastest direction, always three.
-type: group
+\type: group
 NXmicrostructure_ipf(NXprocess):
   depends_on(NX_CHAR):
-    doc: |
+    \doc: |
       Reference to an instance of :ref:`NXcoordinate_system` in which the axes axis_z,
       axis_y, and axis_x are defined.
   color_model(NX_CHAR):
-    doc: |
+    \doc: |
       The algorithm whereby orientations are colored.
-    enumeration: [tsl, mtex]
+    \enumeration: [tsl, mtex]
   projection_direction(NX_NUMBER):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       The direction normal vector along which orientations are projected.
-    dimensions:
-      rank: 1
-      dim: (3,)
-    \@depends_on(NX_CHAR):
-      doc: |
+    \dimensions:
+      \rank: 1
+      \dim: (3,)
+    \@depends_on:
+      \type: NX_CHAR
+      \doc: |
         Reference to an instance of :ref:`NXcoordinate_system` in which the projection_direction is defined.
         
         If the field depends_on is not provided but parents of the instance of this base class or its
@@ -41,23 +42,23 @@ NXmicrostructure_ipf(NXprocess):
         
         If nothing is provided, it is assumed that projection_direction is defined in the McStas coordinate system.
   input_grid(NXcg_grid):
-    doc: |
+    \doc: |
       Details about the original grid, i.e. the grid for which the IPF map was computed
       when that IPF map was exported from the tech partner's file format representation.
   output_grid(NXcg_grid):
-    doc: |
+    \doc: |
       Details about the grid onto which the IPF is recomputed.
       
       Rescaling the visualization of the IPF map may be needed to enable
       visualization in specific software tools like H5Web.
   interpolation(NX_CHAR):
-    doc: |
+    \doc: |
       How where orientation values at positions of input_grid computed to values on output_grid.
       
       Nearest neighbour means the orientation of the closed (Euclidean distance) grid point of the input_grid was taken.
-    enumeration: [nearest_neighbour]
+    \enumeration: [nearest_neighbour]
   map(NXdata):
-    doc: |
+    \doc: |
       Inverse pole figure mapping.
       
       Instances named phase0 should by definition refer to the null phase notIndexed.
@@ -71,8 +72,8 @@ NXmicrostructure_ipf(NXprocess):
       The main purpose of this map is to offer a normalized default representation
       of the IPF map for consumption by a research data management system (RDMS).
     data(NX_NUMBER):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Inverse pole figure color code for each map coordinate.
         
         Different types of AXISNAME dimensional scale axes are found in practice. A few examples:
@@ -102,28 +103,28 @@ NXmicrostructure_ipf(NXprocess):
     
     # strictly speaking unit must not be constraint for AXISNAME no scaling
     axis_z(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Pixel center coordinate calibrated for step size along the z axis of the map.
-      dimensions:
-        rank: 1
-        dim: (n_z,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_z,)
     axis_y(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Pixel center coordinate calibrated for step size along the y axis of the map.
-      dimensions:
-        rank: 1
-        dim: (n_y,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_y,)
     axis_x(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Pixel center coordinate calibrated for step size along the x axis of the map.
-      dimensions:
-        rank: 1
-        dim: (n_x,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_x,)
   legend(NXdata):
-    doc: |
+    \doc: |
       The color code which maps color to orientation in the fundamental zone.
       
       For each stereographic standard triangle (SST), i.e. a rendering of the
@@ -149,34 +150,34 @@ NXmicrostructure_ipf(NXprocess):
     # of a rasterized image which is rendered by the backend tool gets
     # copied into an RGB matrix to offer a default plot.
     data(NX_NUMBER):
-      unit: NX_ANY
+      \unit: NX_ANY
       
       # NX_UNITLESS or NX_DIMENSIONLESS
-      doc: |
+      \doc: |
         Inverse pole figure color code for each map coordinate.
-      dimensions:
-        rank: 3
-        dim: (v, u, 3)
+      \dimensions:
+        \rank: 3
+        \dim: (v, u, 3)
     axis_y(NX_NUMBER):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Pixel along the y-axis.
-      dimensions:
-        rank: 1
-        dim: (v,)
+      \dimensions:
+        \rank: 1
+        \dim: (v,)
     axis_x(NX_NUMBER):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Pixel along the x-axis.
-      dimensions:
-        rank: 1
-        dim: (u,)
+      \dimensions:
+        \rank: 1
+        \dim: (u,)
   
   # for further contextualization see comments in NXms_ipf.yaml
   # https://github.com/FAIRmat-NFDI/nexus_definitions/commit/26d4faa5c6950161e48f0672f3fdfd8c9bc907e2
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 083fd06414e83ed2371c49391079cac1644057c0cf3cf9c30d17b43ad1db2668
+# f301ccc2b1cd6e282682d94083d49a726dbfc425d33c4a93188c50cb87653268
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

@@ -1,11 +1,11 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for data from two-dimensional area detectors that has been integrated azimuthally,
   with a certain radial binning in units of q or 2theta and with a binning around the azimuthal angle eta.
   
   An example application that creates these files is documented here: https://maxiv-science.github.io/azint_writer/
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbol(s) listed here will be used below to coordinate datasets with the same shape.
   nImg: |
     Number of integrated images
@@ -17,19 +17,19 @@ symbols:
     Number of azimuthal bins
   nEtaEdge: |
     Number of azimuthal bin edges (nEta+1)
-type: group
+\type: group
 NXazint2d(NXobject):
   (NXentry):
     \@default:
-      exists: optional
-      doc: |
+      \exists: optional
+      \doc: |
         .. index:: plotting
         
         Declares which :ref:`NXdata` group
         contains the data to be shown by default.
         It is needed to resolve ambiguity when more than one :ref:`NXdata` group exists.
         The value is the name of the default :ref:`NXdata` group.
-    doc: |
+    \doc: |
       .. index:: NXazint2d (applications)
       
       The ``NXsubentry`` or Multi-Method Data convention described here:
@@ -41,130 +41,141 @@ NXazint2d(NXobject):
       In case of a single ``NXazint2d`` data processing the standard convention with
       the application definition directly under ``NXentry`` should be used.
     definition:
-      doc: |
+      \doc: |
         Official NeXus NXDL schema to which this file conforms.
-      enumeration: [NXazint2d]
+      \enumeration: [NXazint2d]
     solid_angle_applied(NX_BOOLEAN):
-      doc: |
+      \doc: |
         is solid angle correction applied or not.
     polarization_applied(NX_BOOLEAN):
-      doc: |
+      \doc: |
         is polarization correction applied or not.
     normalization_applied(NX_BOOLEAN):
-      doc: |
+      \doc: |
         is a normalization correction applied or not.
         
         It indicates that integrated intensities and their errors were already divided by the appropriate normalization factors accounting
         for the effective number or weighted contribution of detector pixels to each integration bin.
     monitor_applied(NX_BOOLEAN):
-      exists: optional
-      doc: |
+      \exists: optional
+      \doc: |
         is a monitor correction applied or not.
         
         The monitor correction accounts for external factors that are independent of the azimuthal integration process.
         Most commonly, this involves normalizing for fluctuations in the incident beam intensity or, where applicable, variations in exposure time.
     (NXinstrument):
       name(NX_CHAR):
-        doc: |
+        \doc: |
           Name of instrument (beamline) where data was collected.
       (NXmonochromator):
         wavelength(NX_FLOAT):
-          unit: angstrom
-          doc: |
+          \unit: angstrom
+          \doc: |
             Wavelength in angstrom.
         energy(NX_FLOAT):
-          unit: keV
-          doc: |
+          \unit: keV
+          \doc: |
             Energy in keV.
       (NXsource):
         name(NX_CHAR):
-          doc: |
+          \doc: |
             Name of laboratory where data was collected.
         type(NX_CHAR):
-          doc: |
+          \doc: |
             Type of laboratory where data was collected.
         probe(NX_CHAR):
-          doc: |
+          \doc: |
             Type of probe.
     reduction(NXprocess):
       program(NX_CHAR):
-        doc: |
+        \doc: |
           Name of the program that made this file.
       version(NX_CHAR):
-        doc: |
+        \doc: |
           Version of the program that made this file.
       date(NX_DATE_TIME):
-        doc: |
+        \doc: |
           Date the file was created.
       reference(NX_CHAR):
-        doc: |
+        \doc: |
           Citation or other references for the algorithm used in the processing.
       note(NX_CHAR):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           Notes required to help interpret the data, e.g. on coordinate systems.
       input(NXparameters):
-        doc: |
+        \doc: |
           Parameters should exactly match those required by the algorithm used in the processing.
           For example, `azint` requires `error_model`, `mask`, `n_splitting`, `poni`, etc.
     (NXmonitor):
-      exists: optional
-      doc: |
+      \exists: optional
+      \doc: |
         Monitor data for example `I_zero`.
       data(NX_NUMBER):
-        dimensions:
-          rank: 1
-          dim: (nImg,)
+        \dimensions:
+          \rank: 1
+          \dim: (nImg,)
     (NXdata):
-      doc: |
+      \doc: |
         Azimuthally integrated data with radial binning in q or 2theta and with azimuthal binning.
-      \@axes(NX_CHAR):
-        enumeration: [['.', 'azimuthal_axis', 'radial_axis']]
-        dimensions:
-          rank: 1
-      \@interpretation(NX_CHAR):
-        enumeration: [image]
-      \@signal(NX_CHAR):
-        enumeration: [I]
+      \@axes:
+        \type: NX_CHAR
+        \enumeration: [['.', 'azimuthal_axis', 'radial_axis']]
+        \dimensions:
+          \rank: 1
+      \@interpretation:
+        \type: NX_CHAR
+        \enumeration: [image]
+      \@signal:
+        \type: NX_CHAR
+        \enumeration: [I]
       I(NX_NUMBER):
-        dimensions:
-          rank: 3
-          dim: (nImg, nEta, nRad)
-        \@long_name(NX_CHAR):
-          enumeration: [intensity]
-        \@units(NX_CHAR):
-          enumeration: [arbitrary units]
+        \dimensions:
+          \rank: 3
+          \dim: (nImg, nEta, nRad)
+        \@long_name:
+          \type: NX_CHAR
+          \enumeration: [intensity]
+        \@units:
+          \type: NX_CHAR
+          \enumeration: [arbitrary units]
       I_errors(NX_NUMBER):
-        exists: optional
-        dimensions:
-          rank: 3
-          dim: (nImg, nEta, nRad)
-        \@long_name(NX_CHAR):
-          exists: optional
-          enumeration: [estimated intensity error]
-        \@units(NX_CHAR):
-          exists: optional
-          enumeration: [arbitrary units]
+        \exists: optional
+        \dimensions:
+          \rank: 3
+          \dim: (nImg, nEta, nRad)
+        \@long_name:
+          \type: NX_CHAR
+          \exists: optional
+          \enumeration: [estimated intensity error]
+        \@units:
+          \type: NX_CHAR
+          \exists: optional
+          \enumeration: [arbitrary units]
       radial_axis(NX_NUMBER):
-        dimensions:
-          rank: 1
-          dim: (nRad,)
-        \@long_name(NX_CHAR):
-          enumeration: [q, 2theta]
-        \@units(NX_CHAR):
-          enumeration: [NX_PER_LENGHT, NX_WAVENUMBER, NX_ANGLE]
+        \dimensions:
+          \rank: 1
+          \dim: (nRad,)
+        \@long_name:
+          \type: NX_CHAR
+          \enumeration: [q, 2theta]
+        \@units:
+          \type: NX_CHAR
+          \enumeration: [NX_PER_LENGHT, NX_WAVENUMBER, NX_ANGLE]
       radial_axis_edges(NX_NUMBER):
-        exists: optional
-        dimensions:
-          rank: 1
-          dim: (nRadEdge,)
-        \@long_name(NX_CHAR):
-          enumeration: [q bin edges, 2theta bin edges]
-        \@units(NX_CHAR):
-          enumeration: [NX_PER_LENGTH, NX_WAVENUMBER, NX_ANGLE]
+        \exists: optional
+        \dimensions:
+          \rank: 1
+          \dim: (nRadEdge,)
+        \@long_name:
+          \type: NX_CHAR
+          \enumeration: [q bin edges, 2theta bin edges]
+        \@units:
+          \type: NX_CHAR
+          \enumeration: [NX_PER_LENGTH, NX_WAVENUMBER, NX_ANGLE]
       norm(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           Values of the normalization correction.
           
           The normalization correction accounts for the effective number or weighted contribution of detector pixels to each integration bin.
@@ -177,34 +188,40 @@ NXazint2d(NXobject):
           It must be concluded from the software used or its parameters.
           
           The monitor correction is not included in the normalization correction and it is specified separately.
-        dimensions:
-          rank: 2
-          dim: (nEta, nRad)
-        \@long_name(NX_CHAR):
-          enumeration: [effective number of pixels contributing to the corresponding bin]
-        \@units(NX_CHAR):
-          enumeration: [arbitrary units]
+        \dimensions:
+          \rank: 2
+          \dim: (nEta, nRad)
+        \@long_name:
+          \type: NX_CHAR
+          \enumeration: [effective number of pixels contributing to the corresponding bin]
+        \@units:
+          \type: NX_CHAR
+          \enumeration: [arbitrary units]
       azimuthal_axis(NX_NUMBER):
-        exists: optional
-        dimensions:
-          rank: 1
-          dim: (nEta,)
-        \@long_name(NX_CHAR):
-          enumeration: [azimuthal bin center]
-        \@units(NX_CHAR):
-          enumeration: [NX_ANGLE]
+        \exists: optional
+        \dimensions:
+          \rank: 1
+          \dim: (nEta,)
+        \@long_name:
+          \type: NX_CHAR
+          \enumeration: [azimuthal bin center]
+        \@units:
+          \type: NX_CHAR
+          \enumeration: [NX_ANGLE]
       azimuthal_axis_edges(NX_NUMBER):
-        exists: optional
-        dimensions:
-          rank: 1
-          dim: (nEtaEdge,)
-        \@long_name(NX_CHAR):
-          enumeration: [azimuthal bin edges]
-        \@units(NX_CHAR):
-          enumeration: [NX_ANGLE]
+        \exists: optional
+        \dimensions:
+          \rank: 1
+          \dim: (nEtaEdge,)
+        \@long_name:
+          \type: NX_CHAR
+          \enumeration: [azimuthal bin edges]
+        \@units:
+          \type: NX_CHAR
+          \enumeration: [NX_ANGLE]
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 7b2514a943653ff05a1451a64f6853f96c9fd96d7521cbfb755481aa762e7d6d
+# 6139551787d20f0ddbfaef4e5f722c8c786eb2269347ecb4fe772a8f55f33912
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

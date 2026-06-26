@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Basic base class to define the pattern of a scan in a given scan region.
   
   The base class is intended to handle the following scan types or patterns:
@@ -14,12 +14,12 @@ doc: |
   Spiral: A scan taken along a spiral trajectory.
   Tilt: At each step, a proportional movement is done in all dimensions (an special case of Trajectory scan).
   Linear: A scan where the scanning will be performed along a single independent axis.
-type: group
+\type: group
 NXspm_scan_pattern(NXobject):
   scan_speedN(NX_NUMBER):
-    nameType: partial
-    unit: NX_ANY
-    doc: |
+    \nameType: partial
+    \unit: NX_ANY
+    \doc: |
       Define the scan speed in the forward direction along the axis (except the spiral and trajectory scans),
       if forward and backward speeds below are not specified.
       
@@ -30,40 +30,40 @@ NXspm_scan_pattern(NXobject):
       Trajectory scan: N refers to the nth trajectory line (line between two trajectory points).
       Spiral scan: N refers to the nth circle from center.
   forward_speedN(NX_NUMBER):
-    nameType: partial
-    unit: NX_ANY
-    doc: |
+    \nameType: partial
+    \unit: NX_ANY
+    \doc: |
       Define the scan speed in the forward directions (except the spiral and trajectory scans).
       Rename the field, according to the name of the dimension.
       
       Trajectory scan: N refers to the nth trajectory line (line between two trajectory points).
       Spiral scan: N refers to the nth circle from center.
   backward_speedN(NX_NUMBER):
-    nameType: partial
-    unit: NX_ANY
-    doc: |
+    \nameType: partial
+    \unit: NX_ANY
+    \doc: |
       Define the scan speed in the backward directions (except the spiral and trajectory scans).
       Rename the field, according to the name of the dimension.
       
       Trajectory scan: N refers to the nth trajectory line (line between two trajectory points).
       Spiral scan: N refers to the nth circle from center.
   channelNAME:
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       Name of the channel that leads the scan data. The ending annotation 'NAME' is to represent the name of the channel and/or dimension.
       
       Rename the field, according to the name of the channel and dimension (e.g. channel_piezo_scanner_x).
   scan_pointsN(NX_NUMBER):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       Define the total number of points in the given axis the scan to be performed (except the spiral and trajectory scans).
       Rename the field, according to the name of the dimension (e.g. scan_points_x, scan_points_voltage).
       
       Trajectory scan: N refers to the nth trajectory line (line between two trajectory points).
       Spiral scan: N refers to the nth circle from center.
   steppingN(NX_NUMBER):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       The number of steps the probe jumps over the scan steps or points in the scanning process. This comes into picture, when not
       every point from the scan_points is scanned along an axis (except the spiral and trajectory scans).
       
@@ -72,9 +72,9 @@ NXspm_scan_pattern(NXobject):
       Trajectory scan:  N refers to the nth trajectory line (line between two trajectory points).
       Spiral scan: N refers to the nth circle from center.
   step_sizeN(NX_NUMBER):
-    nameType: partial
-    unit: NX_ANY
-    doc: |
+    \nameType: partial
+    \unit: NX_ANY
+    \doc: |
       The size of each step in the scan on each dimension (except the spiral and trajectory scans).
       
       Rename the field, according to the name of the dimension (e.g. step_size_x, step_size_voltage).
@@ -82,8 +82,8 @@ NXspm_scan_pattern(NXobject):
       Trajectory scan:  N refers to the nth trajectory line (line between two trajectory points).
       Spiral scan: N refers to the nth circle from center.
   continuousN(NX_BOOLEAN):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       If the scan probe moves continuously over the scan points or steps, use True. The default value is True.
       Usually, continuous scanning is possible in one dimension. On other dimensions, the scan probe moves
       in steps.
@@ -93,50 +93,50 @@ NXspm_scan_pattern(NXobject):
       Trajectory scan: N refers to the nth trajectory line (line between two trajectory points).
       Spiral scan: N refers to the nth circle from center.
   oscillating(NX_BOOLEAN):
-    doc: |
+    \doc: |
       If the scan probe oscillates over the scan point, use True.
       The default value is False.
   oscillation_frequency(NX_NUMBER):
-    doc: |
+    \doc: |
       The number of oscillations on each scanning point per second.
   number_of_trajectory_points(NX_NUMBER):
-    doc: |
+    \doc: |
       The number of trajectory points in the entire scan that defines the path or lines of the trajectory.
       Each trajectory line is defined by two subsequent trajectory points.
   trajectory_points(NX_NUMBER):
-    doc: |
+    \doc: |
       The trajectory points (nTraj) are the N-dimensional vectors (nD), each vector refers to a point in
       N-dimensional phase space.
-    dimensions:
-      rank: 2
-      dim: (nTraj, nD)
+    \dimensions:
+      \rank: 2
+      \dim: (nTraj, nD)
   spiral_radiusN(NX_NUMBER):
-    nameType: partial
-    unit: NX_ANY
-    doc: |
+    \nameType: partial
+    \unit: NX_ANY
+    \doc: |
       Define the radius of the spiral circle of scanning.
       
       Rename the field, according to the circle order, the nearest circle to the center is 0.
   (NXdata):
-    nameType: any
-    doc: |
+    \nameType: any
+    \doc: |
       The scan data is the data collected during the scan.
       If the scan has several channels or derivatives from the channel data, please
       duplicate this NXdata group for each.
     DATA(NX_NUMBER):
-      nameType: any
-      unit: NX_ANY
-      doc: |
+      \nameType: any
+      \unit: NX_ANY
+      \doc: |
         The data (e.g. current, voltage, temperature) field that can be plotted against
         the axes.
     AXISNAME(NX_CHAR_OR_NUMBER):
-      unit: NX_ANY
-      nameType: any
-      doc: |
+      \unit: NX_ANY
+      \nameType: any
+      \doc: |
         The name of the axis that corresponds to the data field.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 19296dac2f85e2ac549d2471bbe57cbd7b30f71809861e436ec9f28312525c46
+# 31176f3c241b867c505d0035e398ace969f9425ec239386e2c66806e8cbb9445
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

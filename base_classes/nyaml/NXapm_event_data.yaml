@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Base class to store state and (meta)data of events over the course of an atom probe experiment.
   
   Having at least one instance for an instance of NXapm is recommended.
@@ -16,15 +16,15 @@ doc: |
   both atom probe experiments or simulation. To monitor the course of an ion extraction experiment
   (or simulation) it makes sense to track time explicitly via time stamps or implicitly
   via e.g. a clock inside the instrument, such as the clock of the pulser and respective pulse_id.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   p: |
     Number of pulses collected in between start_time and end_time.
-type: group
+\type: group
 NXapm_event_data(NXobject):
   start_time(NX_DATE_TIME):
-    doc: |
+    \doc: |
       ISO 8601 time code with local time zone offset to UTC information included
       when the snapshot time interval started.
       
@@ -33,12 +33,12 @@ NXapm_event_data(NXobject):
       calibrations, the start_time is the start, the left bound of the time interval, while
       the end_time specifies the end, the right bound of the time interval.
   end_time(NX_DATE_TIME):
-    doc: |
+    \doc: |
       ISO 8601 time code with local time zone offset to UTC information included
       when the snapshot time interval ended.
   delta_time(NX_NUMBER):
-    unit: NX_TIME
-    doc: |
+    \unit: NX_TIME
+    \doc: |
       Delta time array which resolves for each pulse_id the time difference
       between when that pulse was fired and start_time.
       
@@ -51,17 +51,17 @@ NXapm_event_data(NXobject):
       is required to assure that the entries in delta_time are always taken at
       at points in time that, relative to the triggering of the pulse, represent an
       as close as possible state of the pulse.
-    dimensions:
-      rank: 1
-      dim: (p,)
+    \dimensions:
+      \rank: 1
+      \dim: (p,)
   pulse_id_offset(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Integer which defines the first pulse_id.
       Typically, this is either zero or one.
   pulse_id(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       An integer to identify a specific pulse in a sequence.
       
       There are two possibilities to report pulse_id values:
@@ -73,16 +73,16 @@ NXapm_event_data(NXobject):
       Alternatively, pulse_id_offset is not provided but instead
       a sequence of :math:`p` values is defined.
       These integer values do not need to be sorted.
-    dimensions:
-      rank: 1
-      dim: (p,)
+    \dimensions:
+      \rank: 1
+      \dim: (p,)
   instrument(NXapm_instrument):
-    doc: |
+    \doc: |
       Place to store dynamic metadata of the instrument to document as close as possible
       the state of the instrument during the event, i.e. in between start_time and end_time.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# a2c570fe12d9e117e25a95d1da664ea9268dc77d2111d0de735e1f107462b580
+# b20f2a9eb27929ee65d9076346fb1ab686d18521334220c0004f4216efb6dfd2
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

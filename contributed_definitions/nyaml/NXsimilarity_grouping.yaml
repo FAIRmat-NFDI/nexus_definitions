@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Base class to store results obtained from applying a similarity grouping (clustering) algorithm.
   
   Similarity grouping algorithms are segmentation or machine learning algorithms for
@@ -11,8 +11,8 @@ doc: |
   or belonging to a cluster, i.e. members of a cluster.
   The algorithm assigns each similarity group (feature/cluster) at least one
   identifier (numerical or categorical labels) to distinguish different cluster.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   c: |
     Cardinality of the set.
@@ -22,19 +22,19 @@ symbols:
     Number of categorical labels per object.
   n_features: |
     Total number of similarity groups aka features/clusters.
-type: group
+\type: group
 NXsimilarity_grouping(NXobject):
   cardinality(NX_POSINT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Number of members in the set which gets partitioned into features.
   number_of_numeric_labels(NX_UINT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       How many numerical labels does each feature have.
   number_of_categorical_labels(NX_UINT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       How many categorical labels does each feature have.
   
   # config/input
@@ -44,8 +44,8 @@ NXsimilarity_grouping(NXobject):
   # Features need to have disjoint numeric identifier.
   # results for the object set
   index_offset(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Which numerical index is the first to be used to label a feature.
       
       The value should be chosen in such a way that special values can be resolved:
@@ -55,59 +55,59 @@ NXsimilarity_grouping(NXobject):
       case that objects of the noise category get values to -1 and unassigned
       points to 0. Numerical identifier have to be strictly increasing.
   numerical_label(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Matrix of numerical label for each member in the set.
       For classical clustering algorithms this can for instance
       encode the indices_cluster.
-    dimensions:
-      rank: 2
-      dim: (c, n_lbl_num)
+    \dimensions:
+      \rank: 2
+      \dim: (c, n_lbl_num)
   categorical_label(NX_CHAR):
-    doc: |
+    \doc: |
       Matrix of categorical attribute data for each member in the set.
-    dimensions:
-      rank: 2
-      dim: (c, n_lbl_cat)
+    \dimensions:
+      \rank: 2
+      \dim: (c, n_lbl_cat)
   statistics(NXprocess):
-    doc: |
+    \doc: |
       In addition to the detailed storage which objects were grouped to which
       feature/group summary statistics are stored under this group.
     
     # at the level of the object set
     # at the level of the feature set
     unassigned(NX_UINT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Total number of features categorized as unassigned.
     noise(NX_UINT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Total number of features categorized as noise.
     total(NX_UINT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Total number of features.
     
     # Total number of features (excluding noise and unassigned) can be trivially computed
     # when knowing total, noise, and unassigned.
     indices_cluster(NX_INT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Array of numerical identifier of each feature.
-      dimensions:
-        rank: 1
-        dim: (n_features,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_features,)
     member_count(NX_UINT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Array of number of objects for each feature.
-      dimensions:
-        rank: 2
-        dim: (n_features, n_lbl_num)
+      \dimensions:
+        \rank: 2
+        \dim: (n_features, n_lbl_num)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 6dc338706ba4daa59db1cea7a343ebac413fe635c17f5869f9781bf3db2746c1
+# 24d5c35c50fd6ce9a399a0dd1664cc0e0dfb07f904e77db34cfeccff292921e0
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

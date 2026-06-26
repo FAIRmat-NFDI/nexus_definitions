@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Computational geometry description of a half-edge data structure.
   
   Such a data structure can be used to efficiently circulate around faces
@@ -9,8 +9,8 @@ doc: |
   Indices can be used as identifier and thus names for individual instances.
 
 # holes in the polygon mesh can be handled
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   d: |
     The dimensionality, which has to be at least 2.
@@ -20,52 +20,52 @@ symbols:
     The number of faces.
   n_he: |
     The number of half-edges.
-type: group
+\type: group
 NXcg_half_edge_data_structure(NXcg_primitive):
   dimensionality(NX_POSINT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Dimensionality of the primitives described.
   
   # resulting in a design similar to that of NXoff_geometry and the XDMF mixed primitive topology
   number_of_vertices(NX_UINT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Number of vertices for each face.
       
       Each entry represents the total number of vertices for that face,
       irrespectively whether vertices are shared among faces or not.
-    dimensions:
-      rank: 1
-      dim: (n_f,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_f,)
   number_of_edges(NX_UINT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Number of edges for each face.
       
       Each entry represents the total number of edges for that face,
       irrespectively whether edges are shared across faces or not.
-    dimensions:
-      rank: 1
-      dim: (n_he,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_he,)
   index_offset_vertex(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Integer offset whereby the identifier of the first member
       of the vertices differs from zero.
       
       Identifier can be defined explicitly or implicitly.
       Inspect the definition of :ref:`NXcg_primitive` for further details.
   index_offset_edge(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Integer offset whereby the identifier of the first member
       of the edges differs from zero.
       
       Identifier can be defined explicitly or implicitly.
       Inspect the definition of :ref:`NXcg_primitive` for further details.
   index_offset_face(NX_INT):
-    doc: |
+    \doc: |
       Integer offset whereby the identifier of the first member
       of the faces differs from zero.
       
@@ -74,64 +74,64 @@ NXcg_half_edge_data_structure(NXcg_primitive):
   
   # therefore, indices_ -vertex, -face, -half_edge are implicit
   position(NX_NUMBER):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       The position of the vertices.
-    dimensions:
-      rank: 2
-      dim: (n_v, d)
+    \dimensions:
+      \rank: 2
+      \dim: (n_v, d)
   vertex_incident_half_edge(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Identifier of the incident half-edge.
-    dimensions:
-      rank: 1
-      dim: (n_v,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_v,)
   face_half_edge(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Identifier of the (starting)/associated half-edge of the face.
-    dimensions:
-      rank: 1
-      dim: (n_f,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_f,)
   half_edge_vertex_origin(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       The identifier of the vertex from which this half-edge is outwards pointing.
-    dimensions:
-      rank: 1
-      dim: (n_he,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_he,)
   half_edge_twin(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Identifier of the associated oppositely pointing half-edge.
-    dimensions:
-      rank: 1
-      dim: (n_he,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_he,)
   half_edge_incident_face(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       If the half-edge is a boundary half-edge the
       incident face identifier is NULL, i.e. 0.
-    dimensions:
-      rank: 1
-      dim: (n_he,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_he,)
   half_edge_next(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Identifier of the next half-edge.
-    dimensions:
-      rank: 1
-      dim: (n_he,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_he,)
   half_edge_prev(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Identifier of the previous half-edge.
-    dimensions:
-      rank: 1
-      dim: (n_he,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_he,)
   weinberg_vector:
-    doc: |
+    \doc: |
       Users are referred to the literature for the background of L. Weinberg's
       work about topological characterization of planar graphs:
       
@@ -143,7 +143,7 @@ NXcg_half_edge_data_structure(NXcg_primitive):
       of microstructural objects like crystals/grains.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# b10ac48eea45ef41a87c498cb5948f0214ae0b644dac489dba9373b8f3afcff6
+# e63f384d7b44d47bcac5ff4d2bf3f81aaa147873af8ba4442948e593d812d52a
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

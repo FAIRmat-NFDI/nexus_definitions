@@ -1,8 +1,8 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for a configuration file of the paraprobe-nanochem tool.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   n_ityp_deloc_cand: |
     How many iontypes does the delocalization filter specify.
@@ -20,16 +20,16 @@ symbols:
     Maximum number of atoms per molecular ion.
   n_rois: |
     Number of cylinder ROIs to place for oned_profile if no feature mesh is used.
-type: group
+\type: group
 NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
   (NXentry):
-    exists: ['min', '1', 'max', '1']
+    \exists: ['min', '1', 'max', '1']
     definition(NX_CHAR):
-      enumeration: [NXapm_paraprobe_nanochem_config]
+      \enumeration: [NXapm_paraprobe_nanochem_config]
     delocalizationID(NXapm_paraprobe_tool_parameters):
-      nameType: partial
-      exists: ['min', '0', 'max', '1']
-      doc: |
+      \nameType: partial
+      \exists: ['min', '0', 'max', '1']
+      \doc: |
         Discretization and distributing of the ion point cloud on a 3D grid
         to enable analyses at the continuum scale.
         
@@ -46,7 +46,7 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
       # Therefore, it can be advantageous for users to load an already computed delocalization.
       # This can be achieved with the load_existent option.
       surface(NXnote):
-        doc: |
+        \doc: |
           A precomputed triangulated surface mesh representing a model (of the surface)
           of the edge of the dataset. This model can be used to detect and control
           various sources of bias in the analyses.
@@ -54,27 +54,27 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         vertices(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute path in the (HDF5) file that points to the array
             of vertex positions for the triangles in that triangle_set.
         indices(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute path in the (HDF5) file that points to the array
             of vertex indices for the triangles in that triangle_set.
       surface_distance(NXnote):
-        exists: recommended
-        doc: |
+        \exists: recommended
+        \doc: |
           Distance between each ion and triangulated surface mesh.
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         distance(NX_CHAR):
       decomposition(NXmatch_filter):
-        doc: |
+        \doc: |
           Configuration for the algorithm that defines the multiplicity of
           each reconstructed position during the delocalization.
         method(NX_CHAR):
-          doc: |
+          \doc: |
             The multiplicity of an ion at a reconstructed position is defined as follows:
             
             * resolve_unknown, multiplicity equals 1 for all ions of the unknown_type
@@ -91,37 +91,37 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
             * resolve_isotope_charge, ???
             
             Other multiplicities are 0.
-          enumeration: [resolve_unknown, resolve_point, resolve_atom, resolve_element, resolve_element_charge, resolve_isotope, resolve_isotope_charge]
+          \enumeration: [resolve_unknown, resolve_point, resolve_atom, resolve_element, resolve_element_charge, resolve_isotope, resolve_isotope_charge]
         nuclide_whitelist(NX_UINT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             TODO
         charge_state_whitelist(NX_INT):
-          unit: NX_DIMENSIONLESS
-          doc: |
+          \unit: NX_DIMENSIONLESS
+          \doc: |
             TODO
       
       # config
       method(NX_CHAR):
-        doc: |
+        \doc: |
           Compute delocalization or load an existent one from input.
-        enumeration: [compute, load_existent]
+        \enumeration: [compute, load_existent]
       input(NXnote):
-        doc: |
+        \doc: |
           Serialized result of an already computed delocalization which is for performance
           reasons here just loaded and not computed again.
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         results(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute path in the (HDF5) file that points to the group within which
             individual delocalization results are stored.
       
       # TODO: add more descriptions
       nuclide_whitelist(NX_UINT):
-        unit: NX_UNITLESS
-        doc: |
+        \unit: NX_UNITLESS
+        \doc: |
           Matrix of nuclides representing how iontypes should be accounted for during
           the delocalization. This is the most general approach to define if and how many
           times an ion is to be counted. The tool performs a so-called atomic decomposition
@@ -148,44 +148,44 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
           
           Unused values in each row of the matrix are nullified.
           Nuclides are identified as hashed nuclide (see :ref:`NXatom`) for further details.
-        dimensions:
-          dim: (n_ityp_deloc_cand, n_ivec_max)
+        \dimensions:
+          \dim: (n_ityp_deloc_cand, n_ivec_max)
       grid_resolution(NX_FLOAT):
-        unit: NX_LENGTH
-        doc: |
+        \unit: NX_LENGTH
+        \doc: |
           Array of edge lengths of the cubic cells used for discretizing the reconstructed dataset
           on a cuboidal 3D grid (:ref:`NXcg_grid`). The tool performs as many delocalization
           computations as values are specified in grid_resolution.
-        dimensions:
-          dim: (n_grid,)
+        \dimensions:
+          \dim: (n_grid,)
       kernel_size(NX_UINT):
-        unit: NX_UNITLESS
-        doc: |
+        \unit: NX_UNITLESS
+        \doc: |
           Half the width of a :math:`{(2 \cdot n + 1)}^3` cubic kernel of cubic voxel
           beyond which the Gaussian Ansatz function will be truncated. Intensity outside
           the kernel is factorized into the kernel via a normalization procedure.
       kernel_variance(NX_FLOAT):
-        unit: NX_LENGTH
-        doc: |
+        \unit: NX_LENGTH
+        \doc: |
           Array of variance values :math:`\sigma` of the Gaussian Ansatz kernel
           (:math:`\sigma_x := \sigma`, :math:`\sigma_x = \sigma_y = 2 \cdot \sigma_z`).
           The tool performs as many delocalization computations as values are specified
           in kernel_variance.
-        dimensions:
-          dim: (n_var,)
+        \dimensions:
+          \dim: (n_var,)
       normalization(NX_CHAR):
-        doc: |
+        \doc: |
           How should the results of the kernel-density estimation be normalized into quantities.
           By default, the tool computes the total number (intensity) of ions or elements.
           Alternatively, the tool can compute the total intensity, the composition,
           or the concentration of the ions/elements specified by the nuclide_whitelist.
-        enumeration: [none, composition, concentration]
+        \enumeration: [none, composition, concentration]
       has_scalar_fields(NX_BOOLEAN):
-        doc: |
+        \doc: |
           Specifies if the tool should report the delocalization 3D field values.
       isosurfacing(NXprocess):
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           Configuration of the set of iso-surfaces to compute using that delocalization.
           Such iso-surfaces are the starting point for a reconstruction of so-called objects or
           (microstructural) features. Examples of scientific relevant are (line features e.g. dislocations
@@ -194,7 +194,7 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
           Users should be aware that reconstructed datasets in atom probe are a model and may face
           inaccuracies and artifacts that can be mistaken incorrectly as microstructural features.
         edge_method(NX_CHAR):
-          doc: |
+          \doc: |
             As it is detailed in `M. Kühbach et al. <https://arxiv.org/abs/2205.13510>`_, the handling of
             triangles at the surface (edge) of the dataset requires special attention especially for
             composition-normalized delocalization. Here, it is possible that the composition
@@ -233,10 +233,10 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
             
             Being able to quantify these effects and making atom probers aware of these subtleties
             was one of the main reasons why the paraprobe-nanochem tool was implemented.
-          enumeration: [default, keep_edge_triangles]
+          \enumeration: [default, keep_edge_triangles]
         edge_threshold(NX_FLOAT):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             The ion-to-surface distance that is used in the analyses of features to identify whether
             these are laying inside the dataset or close to the surface (edge) of the dataset.
             
@@ -253,8 +253,8 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
             edge of the dataset; however mathematically the object is indeed completely inside.
             In short, a distance-based approach is rigorous and flexible.
         phi(NX_FLOAT):
-          unit: NX_ANY
-          doc: |
+          \unit: NX_ANY
+          \doc: |
             Iso-contour values. For each value, the tool computes an iso-surface and performs
             subsequent analyses for each iso-surface. The unit depends on the choice for the
             normalization of the accumulated ion intensity values per voxel:
@@ -264,7 +264,7 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
             * composition, candidates but normalized by composition, i.e. at.-%
             * concentration, candidates but normalized by voxel volume, i.e. ions/nm^3
         has_triangle_soup(NX_BOOLEAN):
-          doc: |
+          \doc: |
             Specifies if the tool should report the triangle soup which represents each triangle of the
             iso-surface complex. The resulting set of triangles is colloquially referred to as a soup
             because different sub-set may not be connected.
@@ -273,7 +273,7 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
             the triangle belongs. The clustering of triangles within the soup is performed with a
             modified DBScan algorithm.
         has_object(NX_BOOLEAN):
-          doc: |
+          \doc: |
             Specifies if the tool should analyze for each cluster of triangles how they can be combinatorially
             processed to describe a closed polyhedron. Such a closed polyhedron (not-necessarily convex!)
             can be used to describe objects with relevance in the microstructure.
@@ -288,7 +288,7 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
             which in reconstructions may appear as ellipsoids although they should be indeed almost spherical
             provided their size is larger than the atomic length scale.
         has_object_geometry(NX_BOOLEAN):
-          doc: |
+          \doc: |
             Specifies if the tool should report a triangulated surface mesh for each identified closed polyhedron.
             It is common that a marching cubes algorithm creates iso-surfaces with a fraction of tiny sub-complexes
             (e.g. small isolated tetrahedra).
@@ -301,11 +301,11 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
             Therefore, paraprobe-nanochem by default does not report closed objects which bound a volume
             that contains no ion.
         has_object_properties(NX_BOOLEAN):
-          doc: |
+          \doc: |
             Specifies if the tool should report properties of each closed polyhedron, such
             as volume and other details.
         has_object_obb(NX_BOOLEAN):
-          doc: |
+          \doc: |
             Specifies if the tool should report for each closed polyhedron an approximately optimal bounding box
             fitted to all triangles of the surface mesh of the object and ion positions inside or on the surface of the mesh.
             This bounding box informs about the closed object's shape (aspect ratios).
@@ -315,7 +315,7 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
             is an :math:`\mathcal{O}^3`-time-complex task. The tool uses well-established approximate algorithms
             of the Computational Geometry Algorithms Library (CGAL).
         has_object_ions(NX_BOOLEAN):
-          doc: |
+          \doc: |
             Specifies if the tool should report for each closed polyhedron all evaporation IDs of those ions which
             lay inside or on the boundary of the polyhedron. This information is used by the paraprobe-intersector
             tool to infer if two objects share common ions, which is then understood as that the two objects intersect.
@@ -333,14 +333,14 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
             tetrahedralization libraries have challenges dealing with. In this case, checking intersections
             via shared_ions is a more practical alternative.
         has_object_edge_contact(NX_BOOLEAN):
-          doc: |
+          \doc: |
             Specifies if the tool should report if a (closed) object has contact with the surface aka edge of the dataset.
             For this the tool currently inspects if the shortest distance between the set of triangles of the triangulated
             surface mesh and the triangles of the edge model is larger than edge_threshold.
             If this is the case, the object is assumed to be deeply embedded in the interior of the dataset.
             Otherwise, the object is considered to have an edge contact, i.e. it shape is likely affected by the edge.
         has_proxy(NX_BOOLEAN):
-          doc: |
+          \doc: |
             Specifies if the tool should analyze a closed polyhedron (aka proxy) for each cluster of triangles whose
             combinatorial analysis according to has_object returned that the object is not a closed polyhedron.
             Such proxies are closed via iterative hole-filling, mesh refinement, and fairing operations.
@@ -351,26 +351,26 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
             for these objects. However, users should make themselves familiar with the consequences and
             potential bias which this can introduce into the analysis.
         has_proxy_geometry(NX_BOOLEAN):
-          doc: |
+          \doc: |
             Like has_object_geometry but for the proxies.
         has_proxy_properties(NX_BOOLEAN):
-          doc: |
+          \doc: |
             Like has_object_properties but for the proxies.
         has_proxy_obb(NX_BOOLEAN):
-          doc: |
+          \doc: |
             Like has_object_obb but for the proxies.
         has_proxy_ions(NX_BOOLEAN):
-          doc: |
+          \doc: |
             Like has_object_ions but for the proxies.
         has_proxy_edge_contact(NX_BOOLEAN):
-          doc: |
+          \doc: |
             Like has_object_edge_contact but for the proxies.
         has_object_proxigram(NX_BOOLEAN):
-          doc: |
+          \doc: |
             Specifies if the tool should report for each closed object a (cylindrical) region-of-interest (ROI) that gets
             placed, centered, and aligned with the local normal for each triangle of the object.
         has_object_proxigram_edge_contact(NX_BOOLEAN):
-          doc: |
+          \doc: |
             Specifies if the tool should report for each ROI that was placed at a triangle of each object if this ROI intersects
             with the edge the dataset. Currently, the tool supports cylindrical ROIs. A computational geometry test is
             performed to check for a possible intersection of each ROI with the triangulated surface mesh that is defined
@@ -388,9 +388,9 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
     # mesh_smoothing(NXprocess):
     # NEW ISSUE: here we need to specify how the meshes were smoothened
     interface_meshingID(NXapm_paraprobe_tool_parameters):
-      nameType: partial
-      exists: ['min', '0', 'max', '1']
-      doc: |
+      \nameType: partial
+      \exists: ['min', '0', 'max', '1']
+      \doc: |
         Use a principle component analysis (PCA) to mesh a single free-standing interface patch within
         the reconstructed volume that is decorated by ions of specific iontypes (e.g. solute atoms).
         
@@ -406,8 +406,8 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
         paraprobe-nanochem uses inspection functionalities which detect potential geometric
         inconsistencies or self-interactions of the evolved DCOM mesh.
       surface(NXnote):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           A precomputed triangulated surface mesh representing a model (of the surface)
           of the edge of the dataset. This model can be used to detect and control
           various sources of bias in the analyses.
@@ -415,17 +415,17 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         vertices(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute path in the (HDF5) file that points to the array
             of vertex positions for the triangles in that triangle_set.
         indices(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute path in the (HDF5) file that points to the array
             of vertex indices for the triangles in that triangle_set.
       
       # config
       initialization(NX_CHAR):
-        doc: |
+        \doc: |
           How is the PCA initialized:
           
           * default, means based on segregated solutes in the ROI
@@ -436,51 +436,51 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
           The Leoben group lead by L. Romaner has developed a GUI tool `A. Reichmann et al. <https://github.com/areichm/APT_analyzer>`_ creates a control_point_file that
           can be parsed by paraprobe-parmsetup-nanochem to match the here required
           formatting in control_points.
-        enumeration: [default, control_point_file]
+        \enumeration: [default, control_point_file]
       control_point(NXnote):
-        doc: |
+        \doc: |
           Details about the control point file used.
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         control_points(NX_CHAR):
-          doc: |
+          \doc: |
             X, Y, Z position matrix of disjoint control points.
       method(NX_CHAR):
-        doc: |
+        \doc: |
           Method used for identifying and refining the location of the interface. Currently,
           paraprobe-nanochem implements a PCA followed by an iterative loop of isotropic
           mesh refinement and DCOM step(s), paired with self-intersection detection.
-        enumeration: [pca_plus_dcom]
+        \enumeration: [pca_plus_dcom]
       decoration_filter(NXmatch_filter):
-        doc: |
+        \doc: |
           Specify those nuclides which the tool should inspect iontypes for if they contain such nuclides.
           If this is the case ions of such type are taken with the number of nuclides of this multiplicity found.
           The atoms of these ions are assumed to serve as useful markers for locating the interface and
           refining the interface mesh.
         method(NX_CHAR):
-          enumeration: [whitelist]
+          \enumeration: [whitelist]
         match(NX_UINT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             Array of nuclide iontypes to filter.
-          dimensions:
-            dim: (n_fct_filter_cand, n_ivec_max)
+          \dimensions:
+            \dim: (n_fct_filter_cand, n_ivec_max)
       number_of_iterations(NX_UINT):
-        unit: NX_UNITLESS
-        doc: |
+        \unit: NX_UNITLESS
+        \doc: |
           How many times should the DCOM and mesh refinement be applied?
       target_edge_length(NX_FLOAT):
-        unit: NX_LENGTH
-        doc: |
+        \unit: NX_LENGTH
+        \doc: |
           Array of decreasing positive not smaller than one nanometer real values
           which specify how the initial triangles of the mesh should be iteratively
           refined by edge splitting and related mesh refinement operations.
-        dimensions:
-          dim: (n_fct_iterations,)
+        \dimensions:
+          \dim: (n_fct_iterations,)
       target_dcom_radius(NX_FLOAT):
-        unit: NX_LENGTH
-        doc: |
+        \unit: NX_LENGTH
+        \doc: |
           Array of decreasing positive not smaller than one nanometer real values
           which specify the radius of the spherical region of interest within which the
           DCOM algorithm decides for each vertex how the vertex might be relocated.
@@ -489,23 +489,23 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
           likely it becomes that vertices will be relocated so substantially that triangle
           self-intersections may occur. The tool detects these and stops in a controlled
           manner so that the user can repeat the analyses with using a different parameterization.
-        dimensions:
-          dim: (n_fct_iterations,)
+        \dimensions:
+          \dim: (n_fct_iterations,)
       target_smoothing_step(NX_UINT):
-        unit: NX_UNITLESS
-        doc: |
+        \unit: NX_UNITLESS
+        \doc: |
           Array of integers which specify for each DCOM step how many times the mesh
           should be iteratively smoothened. Users should be aware that all three arrays
           target_edge_length, target_dcom_radius, and target_smoothing_step are interpreted
           in the same sequence, i.e. the zeroth entry of each array specifies the respective
           parameter values to be used in the first DCOM iteration. The first entry of each array
           those for the second DCOM iteration and so on and so forth.
-        dimensions:
-          dim: (n_fct_iterations,)
+        \dimensions:
+          \dim: (n_fct_iterations,)
     oned_profileID(NXapm_paraprobe_tool_parameters):
-      nameType: partial
-      exists: ['min', '0', 'max', '1']
-      doc: |
+      \nameType: partial
+      \exists: ['min', '0', 'max', '1']
+      \doc: |
         Analysis of one-dimensional profiles in ROIs placed in the dataset.
         Such analyses are useful for quantifying interfacial excess or for
         performing classical composition analyses.
@@ -536,8 +536,8 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
         intersection of triangles and convex polyhedra is a robust but currently
         not implemented method to quantify intersections.
       surface(NXnote):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           A precomputed triangulated surface mesh representing a model (of the surface)
           of the edge of the dataset. This model can be used to detect and control
           various sources of bias in the analyses.
@@ -545,28 +545,28 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         vertices(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute path in the (HDF5) file that points to the array
             of vertex positions for the triangles in that triangle_set.
         indices(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute path in the (HDF5) file that points to the array
             of vertex indices for the triangles in that triangle_set.
       surface_distance(NXnote):
-        exists: recommended
-        doc: |
+        \exists: recommended
+        \doc: |
           Distance between each ion and triangulated surface mesh.
         file_name(NX_CHAR):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         distance(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute path in the (HDF5) file that points to the distance values.
             The tool assumes that the values are stored in the same order as
             points (ions).
       feature(NXnote):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           A precomputed triangulated mesh of the feature representing a model of the
           interface at which to place ROIs to profile. This can be the mesh of an
           interface as returned e.g. by a previous interface_meshing task or the
@@ -575,18 +575,18 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         vertices(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute HDF5 path to the dataset that specifies the array of vertex positions.
         indices(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute HDF5 path to the dataset that specifies the array of facet indices
             which refer to vertices.
         facet_normals(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute HDF5 path to the dataset that  specifies the array of facet signed unit
             normals.
         vertex_normals(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute HDF5 path to the dataset that specifies the array of vertex signed unit
             normals.
         
@@ -594,15 +594,15 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
         # consequently, vertex and facet normals typically differ, the former are typically interpolated
         # from normals of neighboring facets, type of weighting schemes can affect results quantitatively
         patch_filter(NXmatch_filter):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             If interface_model is isosurface this filter can be used to restrict the analysis to specific
             patches of an iso-surface.
           method(NX_CHAR):
           match(NX_NUMBER):
       feature_distance(NXnote):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           To enable an additional filtration of specific parts of the feature
           mesh it is recommended to feed precomputed distances of each ion to
           the triangles of the feature mesh.
@@ -610,15 +610,15 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
         checksum(NX_CHAR):
         algorithm(NX_CHAR):
         distance(NX_CHAR):
-          doc: |
+          \doc: |
             Absolute path in the (HDF5) file that points to the distance values.
             The tool assumes that the values are stored in the same order as
             points (ions).
       
       # config
       user_defined_roi(NXroi_process):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           As an alternative mode the tool can be instructed to place ROIs
           at specific locations into the dataset. This is the programmatic
           equivalent to the classical approach in atom probe to place ROIs
@@ -630,40 +630,40 @@ NXapm_paraprobe_nanochem_config(NXapm_paraprobe_tool_config):
           # cardinality(NX_POSINT):
           index_offset(NX_INT):
           center(NX_NUMBER):
-            dimensions:
-              dim: (n_rois, 3)
+            \dimensions:
+              \dim: (n_rois, 3)
           height(NX_NUMBER):
-            dimensions:
-              dim: (n_rois, 3)
+            \dimensions:
+              \dim: (n_rois, 3)
           radii(NX_NUMBER):
-            dimensions:
-              dim: (n_rois,)
+            \dimensions:
+              \dim: (n_rois,)
       
       # could add other shapes in the future if necessary
       # but cylinders are most frequently used
       distancing_model(NX_CHAR):
-        doc: |
+        \doc: |
           Which type of distance should be reported for the profile.
-        enumeration: [project_to_triangle_plane]
+        \enumeration: [project_to_triangle_plane]
       roi_orientation(NX_CHAR):
-        doc: |
+        \doc: |
           For each ROI, along which direction should the cylindrical ROI
           be oriented if ROIs are placed at triangles of the feature mesh.
-        enumeration: [triangle_outer_unit_normal]
+        \enumeration: [triangle_outer_unit_normal]
       roi_cylinder_height(NX_FLOAT):
-        unit: NX_LENGTH
-        doc: |
+        \unit: NX_LENGTH
+        \doc: |
           For each ROI, how high (projected onto the cylinder axis) should
           the cylindrical ROI be if ROIs are placed at triangles
           of the feature mesh.
       roi_cylinder_radius(NX_FLOAT):
-        unit: NX_LENGTH
-        doc: |
+        \unit: NX_LENGTH
+        \doc: |
           For each ROI, how wide (in radius) should the cylindrical ROI
           be if ROIs are placed at triangles of the feature mesh.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 684ad213e29fb8d5fa795ea94090879c3c39430eded2dd47108ec9b4a8c344d9
+# 13fe020ec6bf6c26420a2592673e3b8f74e8203ea7b9f60d75ad92781e5c5852
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

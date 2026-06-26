@@ -1,5 +1,5 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for the microstructure generator kanapy from ICAMS Bochum.
   
   * `A. Hartmeier et al. <https://joss.theoj.org/papers/10.21105/joss.01732>`_
@@ -7,7 +7,7 @@ doc: |
   A draft application definition to support discussion within the infrastructure use case IUC07 of the
   NFDI-MatWerk consortium of the German NFDI working on a data model for documenting simulations
   of spatiotemporal microstructure evolution with scientific software from this community.
-symbols:
+\symbols:
   n_z: |
     Number of material points along the z axis of the domain.
   n_y: |
@@ -16,95 +16,106 @@ symbols:
     Number of material points along the x axis of the domain.
   c: |
     Number of crystals.
-type: group
+\type: group
 NXmicrostructure_kanapy_results(NXobject):
   (NXentry):
     definition(NX_CHAR):
-      enumeration: [NXmicrostructure_kanapy_results]
+      \enumeration: [NXmicrostructure_kanapy_results]
     description(NX_CHAR):
-      doc: |
+      \doc: |
         Discouraged free-text field to add further details to the computation.
     start_time(NX_DATE_TIME):
     end_time(NX_DATE_TIME):
-      exists: recommended
+      \exists: recommended
     profiling(NXcs_profiling):
-      exists: optional
+      \exists: optional
     (NXuser):
-      exists: ['min', '0', 'max', 'unbounded']
+      \exists: ['min', '0', 'max', 'unbounded']
     
     # kanapy,  the script because this is also a program /Users/alexander/Codes/kanapy/examples/RVE_generation/create_rve.py
     program1(NXprogram):
       program(NX_CHAR):
-        \@version(NX_CHAR):
-        \@url(NX_CHAR):
-          exists: recommended
+        \@version:
+          \type: NX_CHAR
+        \@url:
+          \type: NX_CHAR
+          \exists: recommended
     program2(NXprogram):
       program(NX_CHAR):
-        \@version(NX_CHAR):
-        \@url(NX_CHAR):
-          exists: recommended
+        \@version:
+          \type: NX_CHAR
+        \@url:
+          \type: NX_CHAR
+          \exists: recommended
     environment(NXcollection):
-      exists: optional
-      doc: |
+      \exists: optional
+      \doc: |
         Programs and libraries representing the computational environment
       (NXprogram):
-        exists: ['min', '1', 'max', 'unbounded']
+        \exists: ['min', '1', 'max', 'unbounded']
         program(NX_CHAR):
-          \@version(NX_CHAR):
+          \@version:
+            \type: NX_CHAR
     
     # no units instead labelled-property graph concepts with units
     microstructureID(NXmicrostructure):
-      exists: ['min', '1', 'max', 'unbounded']
-      nameType: partial
+      \exists: ['min', '1', 'max', 'unbounded']
+      \nameType: partial
       grid(NXcg_grid):
         extent(NX_UINT):
         cell_dimensions(NX_NUMBER):
         origin(NX_NUMBER):
         symmetry(NX_CHAR):
         structure(NXdata):
-          doc: |
+          \doc: |
             Default plot showing the grid.
-          \@signal(NX_CHAR):
-          \@axes(NX_CHAR):
-          \@AXISNAME_indices(NX_UINT):
-            nameType: partial
+          \@signal:
+            \type: NX_CHAR
+          \@axes:
+            \type: NX_CHAR
+          \@AXISNAME_indices:
+            \type: NX_UINT
+            \nameType: partial
           title(NX_CHAR):
           indices_crystal(NX_INT):
-            unit: NX_UNITLESS
-            doc: |
+            \unit: NX_UNITLESS
+            \doc: |
               Crystal identifier that was assigned to each material point.
           
           # either (n_y, n_x) or (n_z, n_y, n_x)
           z(NX_NUMBER):
-            exists: optional
-            unit: NX_LENGTH
-            doc: |
+            \exists: optional
+            \unit: NX_LENGTH
+            \doc: |
               Material point barycenter coordinate along z direction.
-            dimensions:
-              rank: 1
-              dim: (n_y,)
-            \@long_name(NX_CHAR):
-              doc: |
+            \dimensions:
+              \rank: 1
+              \dim: (n_y,)
+            \@long_name:
+              \type: NX_CHAR
+              \doc: |
                 Coordinate along z direction.
           y(NX_NUMBER):
-            unit: NX_LENGTH
-            doc: |
+            \unit: NX_LENGTH
+            \doc: |
               Material point barycenter coordinate along y direction.
-            dimensions:
-              rank: 1
-              dim: (n_y,)
-            \@long_name(NX_CHAR):
-              doc: |
+            \dimensions:
+              \rank: 1
+              \dim: (n_y,)
+            \@long_name:
+              \type: NX_CHAR
+              \doc: |
                 Coordinate along y direction.
           x(NX_NUMBER):
-            unit: NX_LENGTH
-            doc: |
+            \unit: NX_LENGTH
+            \doc: |
               Material point barycenter coordinate along x direction.
-            dimensions:
-              rank: 1
-              dim: (n_x,)
-            \@long_name(NX_CHAR):
-              doc: |
+            \dimensions:
+              \rank: 1
+              \dim: (n_x,)
+            \@long_name:
+              \type: NX_CHAR
+              \doc: |
                 Coordinate along x direction.
       
       # add nodal positions as suggested in NXmicrostructure
@@ -113,33 +124,33 @@ NXmicrostructure_kanapy_results(NXobject):
         number_of_crystals(NX_UINT):
         number_of_phases(NX_UINT):
         indices_crystal(NX_INT):
-          dimensions:
-            rank: 1
-            dim: (c,)
+          \dimensions:
+            \rank: 1
+            \dim: (c,)
         indices_phase(NX_INT):
-          dimensions:
-            rank: 1
-            dim: (c,)
+          \dimensions:
+            \rank: 1
+            \dim: (c,)
         area(NX_NUMBER):
-          exists: recommended
-          dimensions:
-            rank: 1
-            dim: (c,)
+          \exists: recommended
+          \dimensions:
+            \rank: 1
+            \dim: (c,)
         volume(NX_NUMBER):
-          exists: recommended
-          dimensions:
-            rank: 1
-            dim: (c,)
+          \exists: recommended
+          \dimensions:
+            \rank: 1
+            \dim: (c,)
         bunge_euler(NX_FLOAT):
-          unit: NX_ANGLE
-          doc: |
+          \unit: NX_ANGLE
+          \doc: |
             Bunge-Euler angle orientation of each crystal.
-          dimensions:
-            rank: 2
-            dim: (c, 3)
+          \dimensions:
+            \rank: 2
+            \dim: (c, 3)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 5ae64c7665dc9fef2170ef9bc002aa61b056d3737550c7df60465e2b82812e90
+# 07ecaca8e6399ded0a8dce123ea972ff30aa9e95594eecbdf2cb50eb21fc3a1c
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

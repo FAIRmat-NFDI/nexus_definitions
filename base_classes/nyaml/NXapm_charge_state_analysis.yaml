@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Base class to document the parameters, configuration, and results of a processing for recovering
   the charge state and nuclide composition of an ion from ranging definitions as used in the research
   field of atom probe microscopy.
@@ -12,8 +12,8 @@ doc: |
   are indistinguishable and thus multiple ions in eventually even different charge states can be valid
   labels for a given mass-to-charge-state-ratio peak. Enumerating the possible combinations
   is a programmatic approach that can help with peak identification.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   n_cand: |
     The number of ion candidates.
@@ -21,93 +21,93 @@ symbols:
     Maximum number of allowed atoms per ion.
   n_variable: |
     Number of entries
-type: group
+\type: group
 NXapm_charge_state_analysis(NXprocess):
   config(NXparameters):
-    doc: |
+    \doc: |
       Parameters for the algorithm used to recover which combinations of nuclides
       have a mass and charge that matches a set of constraints.
       
       Each parameter in this group is defines one constraint.
     nuclides(NX_UINT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Parameter that defines the elements considered in the combinatorial search.
         The array contains nuclides as many times as their multiplicity and must not be empty.
         Nuclides are encoded using the hashing rule that is defined in by nuclide_hash of :ref:`NXatom`.
         
         Constraining the elements or nuclides instead of providing all nuclides
         reduces the time to perform an exhaustive combinatorial search.
-      dimensions:
-        rank: 1
-        dim: (n_variable,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_variable,)
     mass_to_charge_range(NX_FLOAT):
-      unit: NX_ANY
-      doc: |
+      \unit: NX_ANY
+      \doc: |
         Parameter that defines the interval :math:`[{\frac{m}{q}}_{min}, {\frac{m}{q}}_{max}]` within which
         ions with given mass-to-charge-state-ratio qualify as candidates.
-      dimensions:
-        rank: 1
-        dim: (2,)
+      \dimensions:
+        \rank: 1
+        \dim: (2,)
     min_half_life(NX_FLOAT):
-      unit: NX_TIME
-      doc: |
+      \unit: NX_TIME
+      \doc: |
         Parameter that defines the minimum half life for how long each nuclide of each
         ion needs to be stable such that the ion qualifies as a candidate.
     min_abundance(NX_FLOAT):
-      unit: NX_DIMENSIONLESS
-      doc: |
+      \unit: NX_DIMENSIONLESS
+      \doc: |
         Parameter that defines the minimum natural abundance of each nuclide of each
         ion such that the ion qualifies as a candidate.
     sacrifice_isotopic_uniqueness(NX_BOOLEAN):
-      doc: |
+      \doc: |
         If the value is false, it means that non-unique solutions are accepted.
         These are solutions where multiple candidates have been built from
         different nuclide instances but the charge_state of all the ions is the same.
   charge_state(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Signed charge, i.e. integer multiple of the elementary
       charge of each candidate.
-    dimensions:
-      rank: 1
-      dim: (n_cand,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_cand,)
   nuclide_hash(NX_UINT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Table of nuclide instances of which each candidate is composed.
       Each row vector is sorted in descending order.
       Unused entries in the matrix should be set to 0.
       Use the hashing rule that is defined in nuclide_hash of :ref:`NXatom`.
-    dimensions:
-      rank: 2
-      dim: (n_cand, n_ivec_max)
+    \dimensions:
+      \rank: 2
+      \dim: (n_cand, n_ivec_max)
   mass(NX_FLOAT):
-    unit: NX_MASS
-    doc: |
+    \unit: NX_MASS
+    \doc: |
       Accumulated mass of the nuclides in each candidate.
       Not corrected for quantum effects.
-    dimensions:
-      rank: 1
-      dim: (n_cand,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_cand,)
   natural_abundance_product(NX_FLOAT):
-    unit: NX_DIMENSIONLESS
-    doc: |
+    \unit: NX_DIMENSIONLESS
+    \doc: |
       The product of the natural abundances of the nuclides for each candidate.
-    dimensions:
-      rank: 1
-      dim: (n_cand,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_cand,)
   shortest_half_life(NX_FLOAT):
-    unit: NX_TIME
-    doc: |
+    \unit: NX_TIME
+    \doc: |
       For each candidate the half life of the nuclide that has the
       shortest half life.
-    dimensions:
-      rank: 1
-      dim: (n_cand,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_cand,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# e861940019a069945faa83956caca45ad5dd2120d4531cfeee6f5727fe1a3554
+# da3deb4ec05cd2f66f5dc86f2fc97972c9e2243e2aaa91c51e6a51689a53f81e
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

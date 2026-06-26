@@ -1,5 +1,5 @@
-category: base
-doc:
+\category: base
+\doc:
 - |
   Base class method-specific for Electron Backscatter Diffraction (EBSD).
 - |
@@ -80,11 +80,11 @@ doc:
   a 3D orientation mapping. Therefore, the here proposed base class can be a blueprint
   also for future classes to embrace our colleagues from X-ray-based techniques be it 3DXRD or HEDM.
 - |
-  xref:
-    spec: EMglossary
-    term: Electron Backscatter Diffraction
-    url: https://purls.helmholtz-metadaten.de/emg/EMG_00000019
-symbols:
+  \xref:
+    \spec: EMglossary
+    \term: Electron Backscatter Diffraction
+    \url: https://purls.helmholtz-metadaten.de/emg/EMG_00000019
+\symbols:
   n_op: |
     Number of arguments per orientation for given parameterization.
   n_sc: |
@@ -102,10 +102,10 @@ symbols:
     Number of phase solutions
   n_hkl: |
     Number of reflectors (Miller crystallographic plane triplets).
-type: group
+\type: group
 NXem_ebsd(NXprocess):
   gnomonic_reference_frame(NXcoordinate_system):
-    doc: |
+    \doc: |
       Details about the gnomonic (projection) reference frame.
       
       It is assumed that the configuration is inspected by looking towards the sample surface.
@@ -117,29 +117,29 @@ NXem_ebsd(NXprocess):
       Reference `<https://doi.org/10.1016/j.matchar.2016.04.008>`_ suggests to label the
       base vectors of this coordinate system as :math:`X_g, Y_g, Z_g`.
     origin(NX_CHAR):
-      doc: |
+      \doc: |
         Origin of the gnomonic_reference_frame.
         
         Reference `<https://doi.org/10.1016/j.matchar.2016.04.008>`_ suggests to
         assume that this is coordinate :math:`Xg = 0, Yg = 0, Zg = 0`.
-      enumeration: [in_the_pattern_center]
+      \enumeration: [in_the_pattern_center]
     x_direction(NX_CHAR):
-      doc: |
+      \doc: |
         Direction of the positively pointing x-axis base vector of the
         gnomonic_reference_frame.
-      enumeration: [north, east, south, west, in, out]
+      \enumeration: [north, east, south, west, in, out]
     y_direction(NX_CHAR):
-      doc: |
+      \doc: |
         Direction of the positively pointing y-axis base vector of the
         gnomonic_reference_frame.
-      enumeration: [north, east, south, west, in, out]
+      \enumeration: [north, east, south, west, in, out]
     z_direction(NX_CHAR):
-      doc: |
+      \doc: |
         Direction of the positively pointing z-axis base vector of the
         gnomonic_reference_frame.
-      enumeration: [north, east, south, west, in, out]
+      \enumeration: [north, east, south, west, in, out]
   pattern_center(NXprocess):
-    doc: |
+    \doc: |
       Details about the definition of the pattern center as a special point in the
       gnomonic_reference_frame.
       
@@ -159,35 +159,35 @@ NXem_ebsd(NXprocess):
       region-of-interest is defined by a rectangle, referring to the direction of outer-unit
       normals to the respective edges of this rectangle.
     x_boundary_convention(NX_CHAR):
-      doc: |
+      \doc: |
         From which border of the EBSP (in the detector reference frame) is the pattern
         center's x-position (PCx) measured.
-      enumeration: [top, right, bottom, left]
+      \enumeration: [top, right, bottom, left]
     x_normalization_direction(NX_CHAR):
-      doc: |
+      \doc: |
         In which direction are positive values for the x-axis coordinate value measured
         from the specified boundary.
-      enumeration: [north, east, south, west]
+      \enumeration: [north, east, south, west]
     y_boundary_convention(NX_CHAR):
-      doc: |
+      \doc: |
         From which border of the EBSP (in the detector reference frame) is the pattern
         center's y-position (PCy) measured.
-      enumeration: [top, right, bottom, left]
+      \enumeration: [top, right, bottom, left]
     y_normalization_direction(NX_CHAR):
-      doc: |
+      \doc: |
         In which direction are positive values for the y-axis coordinate value measured
         from the specified boundary.
-      enumeration: [north, east, south, west]
+      \enumeration: [north, east, south, west]
   measurement(NXprocess):
-    doc: |
+    \doc: |
       This group documents relevant details about the conditions and the
       tools for measuring diffraction patterns with an electron microscope.
       
       The most frequently collected EBSD data are captured for rectangular
       regions-of-interest using a discretization into square or hexagon tiles.
     time(NX_NUMBER):
-      unit: NX_TIME
-      doc: |
+      \unit: NX_TIME
+      \doc: |
         Physical time since the beginning of a timestamp that is required to be
         the same for all experiments in the set. The purpose of this marker is
         to identify how all experiments in the set need to be arranged
@@ -195,19 +195,20 @@ NXem_ebsd(NXprocess):
         The time is relevant to sort e.g. experiments of consecutive quasi
         in-situ experiments where a measurement was e.g. taken after 0 minutes,
         30 minutes, 6 hours, or 24 hours of annealing.
-      \@epoch_start(NX_CHAR):
-        doc: |
+      \@epoch_start:
+        \type: NX_CHAR
+        \doc: |
           Timestamp relative to which time was counted to aid
           converting between time and timestamp.
     depends_on(NX_CHAR):
-      doc: |
+      \doc: |
         Path to an instance of :ref:`NXdata` where the measured patterns are stored.
     source(NXnote):
-      doc: |
+      \doc: |
         Reference (e.g. path and filename) to an existent data artifact which
         stores either the measured patterns or input (already processed EBSD data).
   simulation(NXprocess):
-    doc: |
+    \doc: |
       This group documents relevant details about the conditions and the tools
       used for simulating diffraction patterns with some physical model.
       
@@ -218,15 +219,15 @@ NXem_ebsd(NXprocess):
       indexing strategies used, so-called master pattern(s) are used to compare
       measured or simulated patterns with the master patterns.
     depends_on(NX_CHAR):
-      doc: |
+      \doc: |
         Path to an instance of :ref:`NXimage` where the simulated patterns are stored.
     source(NXnote):
-      doc: |
+      \doc: |
         Reference (e.g. path and filename) to an existent digital resource which
         stores either the patterns or input (already processed EBSD data) that are
         about to become processed further as described by this NXem_ebsd instance.
   calibration(NXprocess):
-    doc: |
+    \doc: |
       The EBSD system, including components like the electron gun, pole-piece,
       stage tilt, EBSD detector, and the gnomonic projection have to be
       calibrated to achieve reliable, precise, and accurate scientific results.
@@ -263,13 +264,13 @@ NXem_ebsd(NXprocess):
       get lost. All these issues are a motivation and problem which :ref:`NXem_ebsd`
       solves in that all conventions can be specified explicitly.
     depends_on(NX_CHAR):
-      doc: |
+      \doc: |
         Path to an instance of :ref:`NXem` where calibration data are stored.
     source(NXnote):
-      doc: |
+      \doc: |
         Reference to a digital resource where the calibration is stored.
   indexing(NXprocess):
-    doc: |
+    \doc: |
       Indexing is a data processing step performed either after or while (aka on-the-fly)
       the beam scans the specimen. The resulting method is also
       known as orientation imaging microscopy (OIM).
@@ -290,7 +291,7 @@ NXem_ebsd(NXprocess):
       EBSP is essentially a discretized Radon transform (for details see `M. van Ginkel et al. <https://www.semanticscholar.org/paper/A-short-introduction-to-the-Radon-and-Hough-and-how-Ginkel/fb6226f606cad489a15e38ed961c419037ccc858>`_). Recently, dictionary-based and artificial intelligence-based methods
       find more widespread usage for indexing.
     source(NXnote):
-      doc: |
+      \doc: |
         This group enables to establish a logical connection between previous
         processing steps or on-the-fly-performed indexing of the EBSD map.
         Typically these processing steps are performed with commercial software.
@@ -300,23 +301,23 @@ NXem_ebsd(NXprocess):
         
         Typical file formats are CPR/CRC, ANG, OSC, HDF5, H5EBSD, EDAXH5.
     method(NX_CHAR):
-      doc: |
+      \doc: |
         Principal algorithm used for indexing.
-      enumeration:
-        open_enum: true
-        items: [hough_transform, dictionary, radon_transform]
+      \enumeration:
+        \open: true
+        \items: [hough_transform, dictionary, radon_transform]
     background_correction(NXprocess):
-      doc: |
+      \doc: |
         Details about the background correction applied to each Kikuchi pattern.
     binning(NXprocess):
-      doc: |
+      \doc: |
         Binning i.e. downsampling to each pattern.
     parameter(NXcollection):
-      doc: |
+      \doc: |
         Specific parameter relevant only for certain algorithms used.
     phaseID(NXphase):
-      nameType: partial
-      doc: |
+      \nameType: partial
+      \doc: |
         Details for each phase used as a model with which the patterns were
         indexed. Instances of :ref:`NXunit_cell` in this group must
         have the group name prefixed with phase. The identifier in the name is an
@@ -324,43 +325,43 @@ NXem_ebsd(NXprocess):
         the special phase that is the null-model, the null phase also known
         as notIndexed.
       dspacing(NX_NUMBER):
-        unit: NX_LENGTH
-        doc: |
+        \unit: NX_LENGTH
+        \doc: |
           Spacing between the crystallographic planes that are defined via ``miller``.
-        dimensions:
-          rank: 1
-          dim: (n_hkl,)
+        \dimensions:
+          \rank: 1
+          \dim: (n_hkl,)
       relative_intensity(NX_NUMBER):
-        unit: NX_DIMENSIONLESS
-        doc: |
+        \unit: NX_DIMENSIONLESS
+        \doc: |
           Relative intensity for the computed diffraction intensity (signal) for the
           plane.
-        dimensions:
-          rank: 1
-          dim: (n_hkl,)
+        \dimensions:
+          \rank: 1
+          \dim: (n_hkl,)
       number_of_scan_points(NX_UINT):
-        unit: NX_UNITLESS
-        doc: |
+        \unit: NX_UNITLESS
+        \doc: |
           In case the :ref:`NXunit_cell` base class is used with analyzed orientation maps
           this field stores how many scan points of the map were identified as matching best
           with this phase.
       number_of_planes(NX_UINT):
-        unit: NX_UNITLESS
-        doc: |
+        \unit: NX_UNITLESS
+        \doc: |
           How many reflectors for crystallographic planes are distinguished.
       miller(NX_NUMBER):
-        unit: NX_UNITLESS
-        doc: |
+        \unit: NX_UNITLESS
+        \doc: |
           Miller indices :math:`(hkl)[uvw]` of the planes.
           
           The first triplet specifies :math:`(hkl)`. The second triplet specifies :math:`[uvw]`.
           Miller indices refer to the Cartesian right-handed coordinate system of the unit cell.
-        dimensions:
-          rank: 2
-          dim: (n_hkl, 6)
+        \dimensions:
+          \rank: 2
+          \dim: (n_hkl, 6)
     status(NX_UINT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Which return value did the indexing algorithm yield for each scan point.
         
         * 0 - Not analyzed
@@ -368,12 +369,12 @@ NXem_ebsd(NXprocess):
         * 2 - No solution
         * 100 - Success
         * 255 - Unexpected errors
-      dimensions:
-        rank: 1
-        dim: (n_sc,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_sc,)
     phases_per_scan_point(NX_INT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         How many phases i.e. crystal structure models were used to index each
         scan point if any? Let's assume an example to explain how this field
         should be used: In the simplest case users collected one pattern for
@@ -388,12 +389,12 @@ NXem_ebsd(NXprocess):
         point, and all scan points indexed using that same single phase model),
         phase_id has as many entries as scan points
         and matching_phase has also as many entries as scan points.
-      dimensions:
-        rank: 1
-        dim: (n_sc,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_sc,)
     phase_id(NX_INT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         The array phases_per_scan_point details how the phase_id
         and the matching_phase arrays have to be interpreted.
         
@@ -413,93 +414,96 @@ NXem_ebsd(NXprocess):
         These are organized in sequence: The solutions for the 0-th scan point,
         the 1-th scan point, the n_sc - 1 th scan point and omitting tuples
         for those scan points with no phases according to phases_per_scan_point.
-      dimensions:
-        rank: 1
-        dim: (n_solutions,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_solutions,)
     matching_phase(NX_INT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         One-dimensional array, pattern-by-pattern labelling the solutions found.
         The array phases_per_scan_point has to be specified because it details
         how the phase_id and the matching_phase arrays are interpreted.
         See documentation of phase_id for further details.
-      dimensions:
-        rank: 1
-        dim: (n_solutions,)
+      \dimensions:
+        \rank: 1
+        \dim: (n_solutions,)
     matching_phase_descriptor(NX_CHAR):
-      doc: |
+      \doc: |
         Phase_matching is a descriptor for how well the solution matches or not.
         Examples can be confidence_index, mean_angular_deviation, or other.
-      enumeration: [confidence_index, mean_angular_deviation, other]
+      \enumeration: [confidence_index, mean_angular_deviation, other]
     rotation(NXrotations):
     scan_point_positions(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Calibrated center positions of each scan point
         in the sample surface reference system.
-      dimensions:
-        rank: 2
-        dim: (n_sc, 2)
+      \dimensions:
+        \rank: 2
+        \dim: (n_sc, 2)
     indexing_rate(NX_NUMBER):
-      unit: NX_DIMENSIONLESS
-      doc: |
+      \unit: NX_DIMENSIONLESS
+      \doc: |
         Fraction of successfully indexed patterns with a phase
         not the null-phase vs the number_of_scan_points.
     number_of_scan_points(NX_UINT):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Number of scan points in the original mapping.
     pixel_shape(NX_CHAR):
-      doc: |
+      \doc: |
         The shape of the polygon or polyhedron that was used for the tiling
         respectively tessellation of the region-of-interest into scan points.
-      enumeration: [square, hexagon, cube, other]
+      \enumeration: [square, hexagon, cube, other]
     
     # use NXcg_grid in the future
     (NXmicrostructure):
     roi(NXdata):
-      doc: |
+      \doc: |
         An overview of the entire ROI.
       descriptor(NX_CHAR):
-        doc: |
+        \doc: |
           Descriptor representing the image contrast.
-        enumeration: [band_contrast, confidence_index, mean_angular_deviation]
+        \enumeration: [band_contrast, confidence_index, mean_angular_deviation]
       title(NX_CHAR):
-        doc: |
+        \doc: |
           Title of the default plot.
       data(NX_NUMBER):
-        unit: NX_UNITLESS
-        doc: |
+        \unit: NX_UNITLESS
+        \doc: |
           Descriptor values displaying the ROI.
-        dimensions:
-          rank: 2
-          dim: (n_y, n_x)
-        \@long_name(NX_CHAR):
-          doc: |
+        \dimensions:
+          \rank: 2
+          \dim: (n_y, n_x)
+        \@long_name:
+          \type: NX_CHAR
+          \doc: |
             Descriptor values
       axis_y(NX_NUMBER):
-        unit: NX_LENGTH
-        doc: |
+        \unit: NX_LENGTH
+        \doc: |
           Calibrated coordinate along the y-axis.
-        dimensions:
-          rank: 1
-          dim: (n_y,)
-        \@long_name(NX_CHAR):
-          doc: |
+        \dimensions:
+          \rank: 1
+          \dim: (n_y,)
+        \@long_name:
+          \type: NX_CHAR
+          \doc: |
             Label for the y axis
       axis_x(NX_NUMBER):
-        unit: NX_LENGTH
-        doc: |
+        \unit: NX_LENGTH
+        \doc: |
           Calibrated coordinate along the x-axis.
-        dimensions:
-          rank: 1
-          dim: (n_x,)
-        \@long_name(NX_CHAR):
-          doc: |
+        \dimensions:
+          \rank: 1
+          \dim: (n_x,)
+        \@long_name:
+          \type: NX_CHAR
+          \doc: |
             Label for the x axis
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# fb2acdd06c99e91867b64a02069da30beeb27a0d7c5f5503b747068505289db1
+# 0d09f5d227ae498036995dea18f31e6e2886cc856796f1604b75081394b83631
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

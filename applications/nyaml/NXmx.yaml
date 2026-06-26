@@ -1,8 +1,8 @@
-category: application
-doc: |
+\category: application
+\doc: |
   functional application definition for macromolecular crystallography
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     These symbols will be used below to coordinate datasets
     with the same shape.  Most MX x-ray detectors will produce
     two-dimensional images.  Some will produce three-dimensional
@@ -23,32 +23,32 @@ symbols:
     An array of the hierarchical levels of the parents of detector
     elements or groupings of detector elements.
     A top-level element or grouping has parent level -1.
-type: group
+\type: group
 NXmx(NXobject):
   (NXentry):
-    doc: |
+    \doc: |
       Note, it is recommended that ``file_name`` and ``file_time`` are included
       as attributes at the root of a file that includes  :ref:`NXmx`. See
       :ref:`NXroot`.
     \@version:
-      exists: optional
-      doc: |
+      \exists: optional
+      \doc: |
         Describes the version of the NXmx definition used to write this data.
         This must be a text (not numerical) representation. Such as::
         
         @version="1.0"
-      enumeration: [1.0]
+      \enumeration: [1.0]
     title(NX_CHAR):
-      exists: ['min', '0']
+      \exists: ['min', '0']
     start_time(NX_DATE_TIME):
-      doc: |
+      \doc: |
         ISO 8601 time/date of the first data point collected in UTC,
         using the Z suffix to avoid confusion with local time.
         Note that the time zone of the beamline should be provided in
         NXentry/NXinstrument/time_zone.
     end_time(NX_DATE_TIME):
-      exists: ['min', '0']
-      doc: |
+      \exists: ['min', '0']
+      \doc: |
         ISO 8601 time/date of the last data point collected in UTC,
         using the Z suffix to avoid confusion with local time.
         Note that the time zone of the beamline should be provided in
@@ -57,26 +57,26 @@ NXmx(NXobject):
         collection aborts or otherwise prevents accurate recording of
         the end_time, this field should be omitted.
     end_time_estimated(NX_DATE_TIME):
-      doc: |
+      \doc: |
         ISO 8601 time/date of the last data point collected in UTC,
         using the Z suffix to avoid confusion with local time.
         Note that the time zone of the beamline should be provided in
         NXentry/NXinstrument/time_zone.  This field may be filled
         with a value estimated before an observed value is available.
     definition:
-      doc: |
+      \doc: |
         NeXus NXDL schema to which this file conforms
-      enumeration: [NXmx]
+      \enumeration: [NXmx]
     (NXdata):
       data(NX_NUMBER):
-        exists: recommended
-        doc: |
+        \exists: recommended
+        \doc: |
           For a dimension-2 detector, the rank of the data array will be 3.
           For a dimension-3 detector, the rank of the data array will be 4.
           This allows for the introduction of the frame number as the
           first index.
-        dimensions:
-          rank: dataRank
+        \dimensions:
+          \rank: dataRank
           1:
             value: nP
           2:
@@ -87,8 +87,8 @@ NXmx(NXobject):
             value: k
             required: false
       data_scaling_factor(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           An optional scaling factor to apply to the values in ``data``.
           
           The elements in ``data`` are often stored as integers for efficiency reasons and need
@@ -118,8 +118,8 @@ NXmx(NXobject):
           
           When omitted, the scaling factor is assumed to be 1.
       data_offset(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           An optional offset to apply to the values in data.
           
           When omitted, the offset is assumed to be 0.
@@ -127,12 +127,12 @@ NXmx(NXobject):
           See :ref:`data_scaling_factor </NXmx/ENTRY/DATA/data_scaling_factor-field>` for more information.
     (NXsample):
       name(NX_CHAR):
-        doc: |
+        \doc: |
           Descriptive name of sample
       depends_on(NX_CHAR):
         
         # better type for paths the need to resolve
-        doc: |
+        \doc: |
           This is a requirement to describe for any scan experiment.
           
           The axis on which the sample position depends may be stored
@@ -142,8 +142,8 @@ NXmx(NXobject):
           If there is no goniometer, e.g. with a jet, depends_on
           should be set to "."
       (NXtransformations):
-        exists: ['min', '0']
-        doc: |
+        \exists: ['min', '0']
+        \doc: |
           This is the recommended location for sample goniometer
           and other related axes.
           
@@ -158,14 +158,14 @@ NXmx(NXobject):
           The reason it is optional is mainly to accommodate XFEL
           single shot exposures.
       temperature(NX_NUMBER):
-        unit: NX_TEMPERATURE
-        exists: ['min', '0']
+        \unit: NX_TEMPERATURE
+        \exists: ['min', '0']
     (NXinstrument):
       name(NX_CHAR):
-        exists: ['min', '1']
+        \exists: ['min', '1']
         
         # CAUTION: keep URLs all on one line
-        doc: |
+        \doc: |
           Name of instrument.  Consistency with the controlled
           vocabulary beamline naming in
           https://mmcif.wwpdb.org/dictionaries/mmcif_pdbx_v50.dic/Items/_diffrn_source.pdbx_synchrotron_beamline.html
@@ -173,21 +173,21 @@ NXmx(NXobject):
           https://mmcif.wwpdb.org/dictionaries/mmcif_pdbx_v50.dic/Items/_diffrn_source.type.html
           is highly recommended.
         \@short_name:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Short name for instrument, perhaps the acronym.
       time_zone(NX_DATE_TIME):
-        exists: recommended
-        doc: |
+        \exists: recommended
+        \doc: |
           ISO 8601 time_zone offset from UTC.
       (NXattenuator):
-        exists: ['min', '0']
+        \exists: ['min', '0']
         attenuator_transmission(NX_NUMBER):
-          unit: NX_UNITLESS
-          exists: ['min', '0']
+          \unit: NX_UNITLESS
+          \exists: ['min', '0']
       (NXdetector_group):
-        exists: recommended
-        doc: |
+        \exists: recommended
+        \doc: |
           Optional logical grouping of detectors.
           
           Each detector is represented as an NXdetector
@@ -216,61 +216,61 @@ NXmx(NXobject):
                group_index: [1, 2, 3, 4, 5]
                group_parent:  [-1, 1, 1, 1, 1]
         group_names(NX_CHAR):
-          doc: |
+          \doc: |
             An array of the names of the detectors or the names of
             hierarchical groupings of detectors.
         group_index(NX_INT):
-          doc: |
+          \doc: |
             An array of unique identifiers for detectors or groupings
             of detectors.
             
             Each ID is a unique ID for the corresponding detector or group
             named in the field group_names.  The IDs are positive integers
             starting with 1.
-          dimensions:
-            rank: 1
-            dim: (i,)
+          \dimensions:
+            \rank: 1
+            \dim: (i,)
         group_parent(NX_INT):
-          doc: |
+          \doc: |
             An array of the hierarchical levels of the parents of detectors
             or groupings of detectors.
             
             A top-level grouping has parent level -1.
-          dimensions:
-            rank: 1
-            dim: (groupIndex,)
+          \dimensions:
+            \rank: 1
+            \dim: (groupIndex,)
       (NXdetector):
-        doc: |
+        \doc: |
           Normally the detector group will have the name ``detector``.
           However, in the case of multiple detectors, each detector
           needs a uniquely named NXdetector.
         depends_on(NX_CHAR):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             NeXus path to the detector positioner axis that most directly
             supports the detector.  In the case of a single-module
             detector, the detector axis chain may start here.
         (NXtransformations):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             Location for axes (transformations) to do with the
             detector.  In the case of a single-module detector, the
             axes of the detector axis chain may be stored here.
         (NXcollection):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             Suggested container for detailed non-standard detector
             information like corrections applied automatically or
             performance settings.
         data(NX_NUMBER):
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             For a dimension-2 detector, the rank of the data array will be 3.
             For a dimension-3 detector, the rank of the data array will be 4.
             This allows for the introduction of the frame number as the
             first index.
-          dimensions:
-            rank: dataRank
+          \dimensions:
+            \rank: dataRank
             1:
               value: nP
             2:
@@ -281,19 +281,19 @@ NXmx(NXobject):
               value: k
               required: false
         description:
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             name/manufacturer/model/etc. information.
         time_per_channel:
-          unit: NX_TIME
-          exists: ['min', '0']
-          doc: |
+          \unit: NX_TIME
+          \exists: ['min', '0']
+          \doc: |
             For a time-of-flight detector this is the scaling
             factor to convert from the numeric value reported to
             the flight time for a given measurement.
         (NXdetector_module):
-          exists: ['min', '1', 'max', 'unbounded']
-          doc: |
+          \exists: ['min', '1', 'max', 'unbounded']
+          \doc: |
             Many detectors consist of multiple smaller modules that are
             operated in sync and store their data in a common dataset.
             To allow consistent parsing of the experimental geometry,
@@ -310,7 +310,7 @@ NXmx(NXobject):
             Note, the pixel size is given as values in the array
             fast_pixel_direction and slow_pixel_direction.
           data_origin(NX_INT):
-            doc: |
+            \doc: |
               A dimension-2 or dimension-3 field which gives the indices
               of the origin of the hyperslab of data for this module in the
               main area detector image in the parent NXdetector module.
@@ -326,54 +326,60 @@ NXmx(NXobject):
               The :ref:`order <Design-ArrayStorageOrder>` of indices (i, j
               or i, j, k) is slow to fast.
           data_size(NX_INT):
-            doc: |
+            \doc: |
               Two or three values for the size of the module in pixels in
               each direction. Dimensionality and order of indices is the
               same as for data_origin.
           data_stride(NX_INT):
-            exists: ['min', '0']
-            doc: |
+            \exists: ['min', '0']
+            \doc: |
               Two or three values for the stride of the module in pixels in
               each direction.  By default the stride is [1,1] or [1,1,1],
               and this is the most likely case.  This optional field is
               included for completeness.
           module_offset(NX_NUMBER):
-            unit: NX_LENGTH
-            exists: ['min', '0']
-            doc: |
+            \unit: NX_LENGTH
+            \exists: ['min', '0']
+            \doc: |
               Offset of the module in regards to the origin of the detector in an
               arbitrary direction.
             \@transformation_type:
-              enumeration: [translation]
-            \@vector(NX_NUMBER):
-            \@offset(NX_NUMBER):
+              \enumeration: [translation]
+            \@vector:
+              \type: NX_NUMBER
+            \@offset:
+              \type: NX_NUMBER
             \@depends_on:
           fast_pixel_direction(NX_NUMBER):
-            unit: NX_LENGTH
-            doc: |
+            \unit: NX_LENGTH
+            \doc: |
               Values along the direction of :ref:`fastest varying <Design-ArrayStorageOrder>`
               pixel direction.  The direction itself is given through the vector
               attribute.
             \@transformation_type:
-              enumeration: [translation]
-            \@vector(NX_NUMBER):
-            \@offset(NX_NUMBER):
+              \enumeration: [translation]
+            \@vector:
+              \type: NX_NUMBER
+            \@offset:
+              \type: NX_NUMBER
             \@depends_on:
           slow_pixel_direction(NX_NUMBER):
-            unit: NX_LENGTH
-            doc: |
+            \unit: NX_LENGTH
+            \doc: |
               Values along the direction of :ref:`slowest varying <Design-ArrayStorageOrder>`
               pixel direction. The direction itself is given through the vector
               attribute.
             \@transformation_type:
-              enumeration: [translation]
-            \@vector(NX_NUMBER):
-            \@offset(NX_NUMBER):
+              \enumeration: [translation]
+            \@vector:
+              \type: NX_NUMBER
+            \@offset:
+              \type: NX_NUMBER
             \@depends_on:
         distance(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: recommended
-          doc: |
+          \unit: NX_LENGTH
+          \exists: recommended
+          \doc: |
             Distance from the sample to the beam center.
             Normally this value is for guidance only, the proper
             geometry can be found following the depends_on axis chain,
@@ -382,32 +388,32 @@ NXmx(NXobject):
             chain, that may take precedence over the axis chain
             calculation.
         distance_derived(NX_BOOLEAN):
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             Boolean to indicate if the distance is a derived, rather than
             a primary observation.  If distance_derived true or is not specified,
             the distance is assumed to be derived from detector axis
             specifications.
         dead_time(NX_FLOAT):
-          unit: NX_TIME
-          exists: ['min', '0']
-          doc: |
+          \unit: NX_TIME
+          \exists: ['min', '0']
+          \doc: |
             Detector dead time.
         count_time(NX_NUMBER):
-          unit: NX_TIME
-          exists: recommended
-          doc: |
+          \unit: NX_TIME
+          \exists: recommended
+          \doc: |
             Elapsed actual counting time.
         beam_center_derived(NX_BOOLEAN):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Boolean to indicate if the distance is a derived, rather than
             a primary observation.  If true or not provided, that value of
             beam_center_derived is assumed to be true.
         beam_center_x(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: recommended
-          doc: |
+          \unit: NX_LENGTH
+          \exists: recommended
+          \doc: |
             This is the x position where the direct beam would hit the
             detector. This is a length and can be outside of the actual
             detector. The length can be in physical units or pixels as
@@ -415,9 +421,9 @@ NXmx(NXobject):
             be derived from the axis chain, but the direct specification
             may take precedence if it is not a derived quantity.
         beam_center_y(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: recommended
-          doc: |
+          \unit: NX_LENGTH
+          \exists: recommended
+          \doc: |
             This is the y position where the direct beam would hit the
             detector. This is a length and can be outside of the actual
             detector. The length can be in physical units or pixels as
@@ -425,16 +431,16 @@ NXmx(NXobject):
             be derived from the axis chain, but the direct specification
             may take precedence if it is not a derived quantity.
         angular_calibration_applied(NX_BOOLEAN):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             True when the angular calibration has been applied in the
             electronics, false otherwise.
         angular_calibration(NX_FLOAT):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             Angular calibration data.
-          dimensions:
-            rank: dataRank
+          \dimensions:
+            \rank: dataRank
             1:
               value: i
             2:
@@ -443,17 +449,17 @@ NXmx(NXobject):
               value: k
               required: false
         flatfield_applied(NX_BOOLEAN):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             True when the flat field correction has been applied in the
             electronics, false otherwise.
         flatfield(NX_NUMBER):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             Flat field correction data.  If provided, it is recommended
             that it be compressed.
-          dimensions:
-            rank: dataRank
+          \dimensions:
+            \rank: dataRank
             1:
               value: i
             2:
@@ -462,13 +468,13 @@ NXmx(NXobject):
               value: k
               required: false
         flatfield_error(NX_NUMBER):
-          exists: ['min', '0', 'max', '0']
-          doc: |
+          \exists: ['min', '0', 'max', '0']
+          \doc: |
             *** Deprecated form.  Use plural form ***
             Errors of the flat field correction data.  If provided, it is recommended
             that it be compressed.
-          dimensions:
-            rank: dataRank
+          \dimensions:
+            \rank: dataRank
             1:
               value: i
             2:
@@ -477,12 +483,12 @@ NXmx(NXobject):
               value: k
               required: false
         flatfield_errors(NX_NUMBER):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             Errors of the flat field correction data.  If provided, it is recommended
             that it be compressed.
-          dimensions:
-            rank: dataRank
+          \dimensions:
+            \rank: dataRank
             1:
               value: i
             2:
@@ -491,13 +497,13 @@ NXmx(NXobject):
               value: k
               required: false
         pixel_mask_applied(NX_BOOLEAN):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             True when the pixel mask correction has been applied in the
             electronics, false otherwise.
         pixel_mask(NX_INT):
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             The 32-bit pixel mask for the detector. Can be either one mask
             for the whole dataset (i.e. an array with indices i, j) or
             each frame can have its own mask (in which case it would be
@@ -538,31 +544,31 @@ NXmx(NXobject):
             of pixel_mask and any pixel_mask_N entries.
             
             If provided, it is recommended that it be compressed.
-          dimensions:
-            rank: 2
-            dim: (i, j)
+          \dimensions:
+            \rank: 2
+            \dim: (i, j)
         countrate_correction_applied(NX_BOOLEAN):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             Counting detectors usually are not able to measure all incoming particles,
             especially at higher count-rates. Count-rate correction is applied to
             account for these errors.
             
             True when count-rate correction has been applied, false otherwise.
         countrate_correction_lookup_table(NX_NUMBER):
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             The countrate_correction_lookup_table defines the LUT used for count-rate
             correction. It maps a measured count :math:`c` to its corrected value
             :math:`countrate\_correction\_lookup\_table[c]`.
             
             :math:`m` denotes the length of the table.
-          dimensions:
-            rank: 1
-            dim: (m,)
+          \dimensions:
+            \rank: 1
+            \dim: (m,)
         virtual_pixel_interpolation_applied(NX_BOOLEAN):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             True when virtual pixel interpolation has been applied, false otherwise.
             
             When virtual pixel interpolation is applied, values of some pixels may
@@ -571,24 +577,24 @@ NXmx(NXobject):
             chips may have larger sensor areas and counts may be distributed between
             their logical pixels.
         bit_depth_readout(NX_INT):
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             How many bits the electronics record per pixel.
         detector_readout_time(NX_FLOAT):
-          unit: NX_TIME
-          exists: ['min', '0']
-          doc: |
+          \unit: NX_TIME
+          \exists: ['min', '0']
+          \doc: |
             Time it takes to read the detector (typically milliseconds).
             This is important to know for time resolved experiments.
         frame_time(NX_FLOAT):
-          unit: NX_TIME
-          exists: ['min', '0']
-          doc: |
+          \unit: NX_TIME
+          \exists: ['min', '0']
+          \doc: |
             This is time for each frame. This is exposure_time + readout
             time.
         gain_setting(NX_CHAR):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             The gain setting of the detector. This influences
             background. This is a detector-specific value meant
             to document the gain setting of the detector during
@@ -609,8 +615,8 @@ NXmx(NXobject):
             Developers are encouraged to use one of these terms, or to submit
             additional terms to add to the list.
         saturation_value(NX_NUMBER):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             The value at which the detector goes into saturation.
             Data above this value is known to be invalid.
             
@@ -618,8 +624,8 @@ NXmx(NXobject):
             the valid pixels are those less than or equal to the
             saturation_value and greater than or equal to the underload_value.
         underload_value(NX_NUMBER):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             The lowest value at which pixels for this detector
             would be reasonably be measured.
             
@@ -627,38 +633,38 @@ NXmx(NXobject):
             the valid pixels are those less than or equal to the
             saturation_value and greater than or equal to the underload_value.
         sensor_material(NX_CHAR):
-          exists: ['min', '1']
-          doc: |
+          \exists: ['min', '1']
+          \doc: |
             At times, radiation is not directly sensed by the detector.
             Rather, the detector might sense the output from some
             converter like a scintillator.
             This is the name of this converter material.
         sensor_thickness(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: ['min', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '1']
+          \doc: |
             At times, radiation is not directly sensed by the detector.
             Rather, the detector might sense the output from some
             converter like a scintillator. This is the thickness of this
             converter material.
         threshold_energy(NX_FLOAT):
-          unit: NX_ENERGY
-          exists: ['min', '0']
-          doc: |
+          \unit: NX_ENERGY
+          \exists: ['min', '0']
+          \doc: |
             Single photon counter detectors can be adjusted for a certain
             energy range in which they work optimally. This is the energy
             setting for this.  If the detector supports multiple thresholds,
             this is an array.
         type:
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             Description of type such as scintillator,
             ccd, pixel, image
             plate, CMOS, ...
         CHANNELNAME_channel(NXdetector_channel):
-          exists: optional
-          nameType: partial
-          doc: |
+          \exists: optional
+          \nameType: partial
+          \doc: |
             Group containing the description and metadata for a single channel from a multi-channel
             detector.
             
@@ -667,19 +673,19 @@ NXmx(NXobject):
             the NXdetector will have a series of NXdetector_channel groups, one for each channel,
             named CHANNELNAME_channel.
       (NXbeam):
-        exists: ['min', '1']
+        \exists: ['min', '1']
         \@flux:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             Which field contains the measured flux. One of ``flux``,
             ``total_flux``, ``flux_integrated``, or ``total_flux_integrated``.
             
             Alternatively, the name being indicated could be a link
             to a dataset in an NXmonitor group that records per shot beam data.
         incident_wavelength(NX_FLOAT):
-          unit: NX_WAVELENGTH
-          exists: ['min', '1']
-          doc: |
+          \unit: NX_WAVELENGTH
+          \exists: ['min', '1']
+          \doc: |
             In the case of a monochromatic beam this is the scalar
             wavelength.
             
@@ -712,10 +718,10 @@ NXmx(NXobject):
             available along with the original spectrum from which it
             was calibrated.
         incident_wavelength_weight(NX_FLOAT):
-          exists: ['min', '0']
-          deprecated: |
+          \exists: ['min', '0']
+          \deprecated: |
             use incident_wavelength_weights, see https://github.com/nexusformat/definitions/issues/837
-          doc: |
+          \doc: |
             In the case of a polychromatic beam this is an array of
             length **m** of the relative weights of the corresponding
             wavelengths in incident_wavelength.
@@ -725,8 +731,8 @@ NXmx(NXobject):
             (slow to fast) of the relative weights of the
             corresponding wavelengths in incident_wavelength.
         incident_wavelength_weights(NX_FLOAT):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             In the case of a polychromatic beam this is an array of
             length **m** of the relative weights of the corresponding
             wavelengths in ``incident_wavelength``.
@@ -736,9 +742,9 @@ NXmx(NXobject):
             (slow to fast) of the relative weights of the
             corresponding wavelengths in ``incident_wavelength``.
         incident_wavelength_spread(NX_FLOAT):
-          unit: NX_WAVELENGTH
-          exists: ['min', '0']
-          doc: |
+          \unit: NX_WAVELENGTH
+          \exists: ['min', '0']
+          \doc: |
             The wavelength spread FWHM for the corresponding
             wavelength(s) in incident_wavelength.
             
@@ -747,26 +753,26 @@ NXmx(NXobject):
             **m** (slow to fast) of the spreads of the
             corresponding wavelengths in incident_wavelength.
         incident_wavelength_spectrum(NXdata):
-          exists: ['min', '0']
-          doc: |
+          \exists: ['min', '0']
+          \doc: |
             This group is intended for use cases that do not fit the
             :ref:`incident_wavelength </NXmx/ENTRY/INSTRUMENT/BEAM/incident_wavelength-field>`
             and
             :ref:`incident_wavelength_weights </NXmx/ENTRY/INSTRUMENT/BEAM/incident_wavelength_weights-field>`
             fields above, perhaps for example a 2D spectrometer.
         flux(NX_FLOAT):
-          unit: NX_FLUX
-          exists: ['min', '0']
-          doc: |
+          \unit: NX_FLUX
+          \exists: ['min', '0']
+          \doc: |
             Flux density incident on beam plane area in photons
             per second per unit area.
             
             In the case of a beam that varies in flux shot-to-shot,
             this is an array of values, one for each recorded shot.
         total_flux(NX_FLOAT):
-          unit: NX_FREQUENCY
-          exists: ['min', '0']
-          doc: |
+          \unit: NX_FREQUENCY
+          \exists: ['min', '0']
+          \doc: |
             Flux incident on beam plane in photons per second. In other words
             this is the :ref:`flux </NXmx/ENTRY/INSTRUMENT/BEAM/flux-field>` integrated
             over area.
@@ -776,9 +782,9 @@ NXmx(NXobject):
             In the case of a beam that varies in total flux shot-to-shot,
             this is an array of values, one for each recorded shot.
         flux_integrated(NX_FLOAT):
-          unit: NX_PER_AREA
-          exists: ['min', '0']
-          doc: |
+          \unit: NX_PER_AREA
+          \exists: ['min', '0']
+          \doc: |
             Flux density incident on beam plane area in photons
             per unit area. In other words this is the :ref:`flux </NXmx/ENTRY/INSTRUMENT/BEAM/flux-field>`
             integrated over time.
@@ -788,9 +794,9 @@ NXmx(NXobject):
             In the case of a beam that varies in flux shot-to-shot,
             this is an array of values, one for each recorded shot.
         total_flux_integrated(NX_FLOAT):
-          unit: NX_DIMENSIONLESS
-          exists: ['min', '0']
-          doc: |
+          \unit: NX_DIMENSIONLESS
+          \exists: ['min', '0']
+          \doc: |
             Flux incident on beam plane in photons. In other words this is the :ref:`flux </NXmx/ENTRY/INSTRUMENT/BEAM/flux-field>`
             integrated over time and area.
             
@@ -799,58 +805,58 @@ NXmx(NXobject):
             In the case of a beam that varies in total flux shot-to-shot,
             this is an array of values, one for each recorded shot.
         incident_beam_size(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: recommended
-          doc: |
+          \unit: NX_LENGTH
+          \exists: recommended
+          \doc: |
             Two-element array of FWHM (if Gaussian or Airy function) or
             diameters (if top hat) or widths (if rectangular) of the beam
             in the order x, y
-          dimensions:
-            rank: 1
-            dim: (2,)
+          \dimensions:
+            \rank: 1
+            \dim: (2,)
         profile(NX_CHAR):
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             The beam profile, Gaussian, Airy function, top-hat or
             rectangular.  The profile is given in the plane of
             incidence of the beam on the sample.
-          enumeration: [Gaussian, Airy, top-hat, rectangular]
+          \enumeration: [Gaussian, Airy, top-hat, rectangular]
         incident_polarisation_stokes(NX_NUMBER):
-          exists: optional
-          deprecated: |
+          \exists: optional
+          \deprecated: |
             use incident_polarization_stokes, see https://github.com/nexusformat/definitions/issues/708
-          doc: |
+          \doc: |
             Polarization vector on entering beamline
             component using Stokes notation
-          dimensions:
-            rank: 2
-            dim: (nP, 4)
+          \dimensions:
+            \rank: 2
+            \dim: (nP, 4)
         incident_polarization_stokes(NX_NUMBER):
-          exists: recommended
-          doc: |
+          \exists: recommended
+          \doc: |
             Polarization vector on entering beamline
             component using Stokes notation. See
             incident_polarization_stokes in :ref:`NXbeam`
-          dimensions:
-            rank: 2
-            dim: (nP, 4)
+          \dimensions:
+            \rank: 2
+            \dim: (nP, 4)
     (NXsource):
-      doc: |
+      \doc: |
         The neutron or x-ray storage ring/facility. Note, the NXsource base class
         has many more fields available, but at present we only require the name.
       name:
-        exists: ['min', '1']
-        doc: |
+        \exists: ['min', '1']
+        \doc: |
           Name of source.  Consistency with the naming in
           https://mmcif.wwpdb.org/dictionaries/mmcif_pdbx_v50.dic/Items/_diffrn_source.pdbx_synchrotron_site.html
           controlled vocabulary is highly recommended.
         \@short_name:
-          exists: optional
-          doc: |
+          \exists: optional
+          \doc: |
             short name for source, perhaps the acronym
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# c3c9cf5c6635cfbfdd1c24053b530f73467c66d3a5ebb3fe918240779f789545
+# d3f1aeed3541c351294c0aa142f1e76290df8e712419092e5f6ca76084e92dbe
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

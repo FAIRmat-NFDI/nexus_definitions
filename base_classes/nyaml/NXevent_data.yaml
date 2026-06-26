@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   NXevent_data is a special group for storing data from neutron
   detectors in event mode.  In this mode, the detector electronics
   emits a stream of detectorID, timestamp pairs. With detectorID
@@ -23,64 +23,66 @@ doc: |
   every five minutes. The cue_index will then contain the
   index into the event_id,event_time_offset pair of arrays for that
   courser cue_timestamp_zero.
-type: group
+\type: group
 NXevent_data(NXobject):
   event_time_offset(NX_NUMBER):
-    unit: NX_TIME_OF_FLIGHT
-    doc: |
+    \unit: NX_TIME_OF_FLIGHT
+    \doc: |
       A list of timestamps for each event as it comes in.
-    dimensions:
-      rank: 1
-      dim: (i,)
+    \dimensions:
+      \rank: 1
+      \dim: (i,)
   event_id(NX_INT):
-    unit: NX_DIMENSIONLESS
-    doc: |
+    \unit: NX_DIMENSIONLESS
+    \doc: |
       There will be extra information in the NXdetector to convert
       event_id to detector_number.
-    dimensions:
-      rank: 1
-      dim: (i,)
+    \dimensions:
+      \rank: 1
+      \dim: (i,)
   event_time_zero(NX_NUMBER):
-    unit: NX_TIME
-    doc: |
+    \unit: NX_TIME
+    \doc: |
       The time that each pulse started with respect to the offset
-    dimensions:
-      rank: 1
-      dim: (j,)
-    \@offset(NX_DATE_TIME):
-      doc: |
+    \dimensions:
+      \rank: 1
+      \dim: (j,)
+    \@offset:
+      \type: NX_DATE_TIME
+      \doc: |
         ISO8601
   event_index(NX_INT):
-    unit: NX_DIMENSIONLESS
-    doc: |
+    \unit: NX_DIMENSIONLESS
+    \doc: |
       The index into the event_time_offset, event_id pair for
       the pulse occurring at the matching entry in event_time_zero.
-    dimensions:
-      rank: 1
-      dim: (j,)
+    \dimensions:
+      \rank: 1
+      \dim: (j,)
   pulse_height(NX_FLOAT):
-    unit: NX_DIMENSIONLESS
-    doc: |
+    \unit: NX_DIMENSIONLESS
+    \doc: |
       If voltages from the ends of the detector are read out this
       is where they go. This list is for all events with information
       to attach to a particular pulse height. The information to
       attach to a particular pulse is located in events_per_pulse.
-    dimensions:
-      rank: 2
-      dim: (i, k)
+    \dimensions:
+      \rank: 2
+      \dim: (i, k)
   cue_timestamp_zero(NX_DATE_TIME):
-    unit: NX_TIME
-    doc: |
+    \unit: NX_TIME
+    \doc: |
       Timestamps matching the corresponding cue_index into the
       event_id, event_time_offset pair.
-    \@start(NX_DATE_TIME):
+    \@start:
+      \type: NX_DATE_TIME
   cue_index(NX_INT):
-    doc: |
+    \doc: |
       Index into the event_id, event_time_offset pair matching the corresponding
       cue_timestamp.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# f6906010c7c8919a81a00373200d1f8b536ba22ba717cf4788b1faee834ec30b
+# 280a3fe5c00d9eac2694c22f40bac337b8b0c1afb9d374037e8f0f4c07a6aec3
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

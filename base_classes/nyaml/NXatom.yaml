@@ -1,12 +1,12 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Base class for documenting a set of atoms.
   
   Atoms in the set may be bonded. The set may have
   a net charge to represent an ion.
   An ion can be a molecular ion.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   n_pos: |
     Number of atom positions.
@@ -16,36 +16,36 @@ symbols:
     Maximum number of atoms/isotopes allowed per ion.
   n_ranges: |
     Number of mass-to-charge-state-ratio range intervals for ion type.
-type: group
+\type: group
 NXatom(NXobject):
   name(NX_CHAR):
-    doc: |
+    \doc: |
       Given name for the set.
       
       This field could for example be used in the research field
       of atom probe tomography to store a standardized human-readable
       name of the element or ion like such as Al +++ or 12C +.
   id(NX_UINT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Given numerical identifier for  the set.
       
       The identifier zero is reserved for the special unknown ion type.
   identifier_chemical(NX_CHAR):
-    doc: |
+    \doc: |
       Identifier used to refer to if the set of atoms represents a substance.
-    enumeration: [inchi]
+    \enumeration: [inchi]
   charge(NX_NUMBER):
-    unit: NX_CHARGE
-    doc: |
+    \unit: NX_CHARGE
+    \doc: |
       Signed net (partial) charge of the (molecular) ion.
       
       Different methods for computing charge are in use.
       Care needs to be exercised with respect to the integration.
       `T. A. Manz <10.1039/c6ra04656h>`_ and `N. G. Limas <10.1039/C6RA05507A>`_ discuss computational details.
   charge_state(NX_NUMBER):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Charge reported in multiples of the charge of an electron.
       
       For research using atom probe tomography the value should be set to
@@ -57,57 +57,58 @@ NXatom(NXobject):
       
       Details on ranging definition files in the literature are `M. K. Miller <https://doi.org/10.1002/sia.1719>`_.
   volume(NX_NUMBER):
-    unit: NX_VOLUME
-    doc: |
+    \unit: NX_VOLUME
+    \doc: |
       Assumed volume affected by the set of atoms.
       
       Neither individual atoms nor a set of cluster of these have a volume
       that is unique as a some cut-off criterion is required.
   indices(NX_CHAR):
-    doc: |
+    \doc: |
       Index for each atom at locations as detailed by position.
       Indices can be used as identifier and thus names for individual atoms.
-    dimensions:
-      rank: 1
-      dim: (n_pos,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_pos,)
   type(NX_UINT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Nuclide information for each atom at locations as detailed by position.
       
       One `approach <https://doi.org/10.1017/S1431927621012241>`_ for storing nuclide information
       efficiently is via individual hash values.
       Consult the docstring of ``nuclide_hash`` for further details.
-    dimensions:
-      rank: 1
-      dim: (n_pos,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_pos,)
   position(NX_NUMBER):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       Position of each atom.
-    dimensions:
-      rank: 2
-      dim: (n_pos, d)
-    \@depends_on(NX_CHAR):
-      doc: |
+    \dimensions:
+      \rank: 2
+      \dim: (n_pos, d)
+    \@depends_on:
+      \type: NX_CHAR
+      \doc: |
         Path to an instance of :ref:`NXcoordinate_system` to document
         the reference frame in which the positions are defined.
         
         This resolves ambiguity when the reference frame is different
         to the NeXus default reference frame (McStas).
   occupancy(NX_NUMBER):
-    unit: NX_DIMENSIONLESS
-    doc: |
+    \unit: NX_DIMENSIONLESS
+    \doc: |
       Relative occupancy of the atom position.
       
       This field is useful for specifying the atomic motif in
       instances of :ref:`NXunit_cell`.
-    dimensions:
-      rank: 1
-      dim: (n_pos,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_pos,)
   nuclide_hash(NX_UINT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Vector of nuclide hash values. The vector is sorted in decreasing order.
       
       Individual hash values :math:`H` `encode <https://doi.org/10.1017/S1431927621012241>`_
@@ -130,12 +131,12 @@ NXatom(NXobject):
       This hashing rule implements a bitshift operation. The benefit is that this enables encoding of all
       currently known nuclides and elements efficiently into an 16-bit unsigned integer. Sufficient
       unused indices remain to case situations when new elements will be discovered.
-    dimensions:
-      rank: 1
-      dim: (n_ivec_max,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_ivec_max,)
   nuclide_list(NX_UINT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Table which decodes the entries in nuclide_hash into a human-readable matrix
       instances for either nuclides or elements. Specifically, the first row specifies the
       nuclide mass number. When the nuclide_hash values are used this means
@@ -148,22 +149,22 @@ NXatom(NXobject):
       Taking a carbon-14 nuclide as an example the mass number is 14.
       That is encoded as a column vector (14, 6).
       The array is stored matching the order of nuclide_hash.
-    dimensions:
-      rank: 2
-      dim: (n_ivec_max, 2)
+    \dimensions:
+      \rank: 2
+      \dim: (n_ivec_max, 2)
   mass_to_charge_range(NX_NUMBER):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       Associated lower :math:`{\frac{m}{q}}_{min}` and upper :math:`{\frac{m}{q}}_{max}` bounds of the
       mass-to-charge-state ratio interval(s) :math:`[{\frac{m}{q}}_{min}, {\frac{m}{q}}_{max}]`.
       (boundaries inclusive). This field is primarily of interest for documenting :ref:`NXprocess`
       steps of indexing a ToF/mass-to-charge-state ratio histogram.
-    dimensions:
-      rank: 2
-      dim: (n_ranges, 2)
+    \dimensions:
+      \rank: 2
+      \dim: (n_ranges, 2)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 3e34106345f5362bb2054e1922a28101a0e963d2e2a1de6d03fa8905403dc0e6
+# 51abe8008ddc328045b0b33c19ad71f912802d04dae923c908344fc3048d6890
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

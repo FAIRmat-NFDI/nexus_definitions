@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   The root of a NeXus file.
   
   In the NeXus standard, only NXentry groups are allowed at the
@@ -12,32 +12,34 @@ doc: |
   Note that NXroot is the only base class that does not inherit
   from the NXobject class, since the latter permits the inclusion
   of NeXus objects that are not allowed at the root level.
-type: group
+\type: group
 NXroot:
-  \@file_time(NX_DATE_TIME):
-    doc: |
+  \@file_time:
+    \type: NX_DATE_TIME
+    \doc: |
       Date and time file was originally created
   \@file_name:
-    doc: |
+    \doc: |
       File name of original NeXus file
-  \@file_update_time(NX_DATE_TIME):
-    doc: |
+  \@file_update_time:
+    \type: NX_DATE_TIME
+    \doc: |
       Date and time of last file change at close
   \@NeXus_version:
-    deprecated: NAPI is frozen.
-    doc: |
+    \deprecated: NAPI is frozen.
+    \doc: |
       Version of NeXus API used in writing the file.
       
       Note that this is different from the version of the
       base class or application definition version number.
   \@NeXus_repository:
-    doc: |
+    \doc: |
       A repository containing the application definitions
       used for creating this file.
       If the ``NeXus_release`` attribute contains a commit distance and hash,
       this should refer to this repository.
   \@NeXus_release:
-    doc: |
+    \doc: |
       The version of NeXus definitions used in writing the file. This can either be a date-based
       NeXus release (e.g., YYYY.MM), see https://github.com/nexusformat/definitions/releases or
       a version tag that includes additional development information, such as a commit distance and
@@ -50,38 +52,38 @@ NXroot:
       If the version includes both a commit distance and a Git hash, the ``NeXus_repository``
       attribute must be included, specifying the URL of the repository containing that version.
   \@HDF_version:
-    doc: |
+    \doc: |
       Version of HDF (version 4) library used in writing the file
   \@HDF5_Version:
-    doc: |
+    \doc: |
       Version of HDF5 library used in writing the file.
       
       Note this attribute is spelled with uppercase "V",
       different than other version attributes.
   \@XML_version:
-    doc: |
+    \doc: |
       Version of XML support library used in writing the XML file
   \@h5py_version:
-    doc: |
+    \doc: |
       Version of h5py Python package used in writing the file
   \@partial:
-    doc: |
+    \doc: |
       A list of concepts in an application definition this file describes.
       This is for partially filling an application definition.
       If this attribute is not present the application definition is assumed
       to be valid, if not only the specified concepts/paths are assumed to be valid.
   \@creator:
-    doc: |
+    \doc: |
       facility or program where file originated
   \@creator_version:
-    doc: |
+    \doc: |
       Version of facility or program used in writing the file
   (NXentry):
-    exists: ['min', '1']
-    doc: |
+    \exists: ['min', '1']
+    \doc: |
       entries
   \@default:
-    doc: |
+    \doc: |
       .. index:: find the default plottable data
       .. index:: plotting
       .. index:: default attribute value
@@ -100,7 +102,7 @@ NXroot:
       for a summary of the discussion.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# b0ee2480b531acdab4a998169a3684811ba188fa0efd95529da4727dd7cc802d
+# 34b4268d45fb060d001781b3bf1fc9405ead58842c4f1340d6a3ebfc4739cafb
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

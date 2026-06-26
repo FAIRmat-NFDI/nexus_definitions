@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   A base class definition for a lock-in amplifier.
   
   The lock-in amplifier information: the device is being used to extract a (potentially)
@@ -18,134 +18,134 @@ doc: |
   Fields with partial names like low_passN, high_passN, etc., can be repeated for each channel
   of the lockin amplifier. It is envisioned that these fields are named low_pass_0, low_pass_1,
   and so on.
-type: group
+\type: group
 NXlockin(NXobject):
   hardware(NXfabrication):
-    doc: |
+    \doc: |
       Hardware manufacturers and type (product number) of lock-in amplifier.
   bias_divider:
-    doc: |
+    \doc: |
       Bias divider for lock-in channel.
       math: `Bias divider $= \frac{V_{\mathrm{ref}}}{V_{\mathrm{ref}} + V_{\mathrm{input}}}$`
   modulation_status(NX_BOOLEAN):
-    doc: |
+    \doc: |
       Switch the lock-in modulation on or off.
   modulation_signal(NX_CHAR):
-    doc: |
+    \doc: |
       Type of the modulation or reference signal, voltage | current | bias.
       The name of the current or voltage signal can be also specified
       according to their purpose (e.g., `bias` voltage).
-    enumeration:
-      open_enum: true
-      items: [voltage, current, bias]
+    \enumeration:
+      \open: true
+      \items: [voltage, current, bias]
   modulation_frequency(NX_NUMBER):
-    unit: NX_FREQUENCY
-    doc: |
+    \unit: NX_FREQUENCY
+    \doc: |
       The frequency of the sine modulation that is used to modulate the signal in
       lock-in.
   reference_amplitude(NX_NUMBER):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       Amplitude of the reference signal for the lock-in amplifier.
       Unit could be NX_VOLTAGE or NX_CURRENT depending on the type of the reference signal.
   reference_frequency(NX_NUMBER):
-    unit: NX_FREQUENCY
-    doc: |
+    \unit: NX_FREQUENCY
+    \doc: |
       Frequency of the reference signal for the lock-in amplifier.
   reference_phase(NX_NUMBER):
-    unit: NX_ANGLE
-    doc: |
+    \unit: NX_ANGLE
+    \doc: |
       Phase of the reference signal set in the lock-in amplifier.
   phase_difference(NX_NUMBER):
-    unit: NX_ANGLE
-    doc: |
+    \unit: NX_ANGLE
+    \doc: |
       Phase difference between the input signal and the reference signal.
       This is used in two phase lock-in amplifiers.
       In single phase lock-in amplifiers, this value is set to zero.
   demodulated_signal(NX_CHAR):
-    doc: |
+    \doc: |
       Type of the demodulated signal,  current | voltage | bias.
       The name of the current or voltage signal can be also specified
       according to their purpose (e.g., `bias` voltage).
-    enumeration:
-      open_enum: true
-      items: [current, voltage, bias]
+    \enumeration:
+      \open: true
+      \items: [current, voltage, bias]
   demodulated_frequency(NX_NUMBER):
-    unit: NX_FREQUENCY
-    doc: |
+    \unit: NX_FREQUENCY
+    \doc: |
       The frequency of the demodulated signal.
   frequency_modulation_bandwidth(NX_NUMBER):
-    unit: NX_FREQUENCY
-    doc: |
+    \unit: NX_FREQUENCY
+    \doc: |
       The bandwidth of the modulating signal.
   phase_modulation_bandwidth(NX_NUMBER):
-    unit: NX_FREQUENCY
-    doc: |
+    \unit: NX_FREQUENCY
+    \doc: |
       The bandwidth of the modulating signal over which modulated signal spreads.
   amplitude_modulation_bandwidth(NX_NUMBER):
-    unit: NX_FREQUENCY
-    doc: |
+    \unit: NX_FREQUENCY
+    \doc: |
       The bandwidth of the modulating signal over which modulated signal spreads.
   demodulated_amplitude(NX_NUMBER):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       The amplitude of the demodulated signal.
       Unit could be NX_VOLTAGE or NX_CURRENT depending on the type of the demodulated signal.
   demodulated_phase(NX_NUMBER):
-    unit: NX_ANGLE
-    doc: |
+    \unit: NX_ANGLE
+    \doc: |
       The phase of the demodulated signal.
   demodulator_channels(NX_CHAR):
-    doc: |
+    \doc: |
       Comma separated list of the demodulator channels.
   low_passN(NX_NUMBER):
-    nameType: partial
-    unit: NX_FREQUENCY
-    doc: |
+    \nameType: partial
+    \unit: NX_FREQUENCY
+    \doc: |
       Frequency of the low-pass filter or cut-off frequency. Only signals below
       this frequency are passed through the filter.
       N is envisioned to represent the channel number e.g., low_pass1.
   high_passN(NX_NUMBER):
-    nameType: partial
-    unit: NX_FREQUENCY
-    doc: |
+    \nameType: partial
+    \unit: NX_FREQUENCY
+    \doc: |
       Frequency of the high-pass filter or cut-off frequency. Only signals above
       this frequency are passed through the filter.
       N is envisioned to represent the channel number e.g., high_pass1.
   lp_filter_orderN(NX_NUMBER):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       Order of the low-pass filter applied on the input or demodulated signals (X, Y).
       Reducing the bandwidth or increasing the order reduces noise on the demodulated signals,
       but increases settling and measurement times.
       N is envisioned to represent the channel number e.g., lp_filter_order1.
   hp_filter_orderN(NX_NUMBER):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       Order of the high-pass filter applied on the input or demodulated
       signal. This is used mainly to suppress a DC component of the input
       signal noise.
       N is envisioned to represent the channel number e.g., hp_filter_order1.
   ref_offset_phaseN(NX_NUMBER):
-    nameType: partial
-    unit: NX_ANGLE
-    doc: |
+    \nameType: partial
+    \unit: NX_ANGLE
+    \doc: |
       An extra phase offset added to the reference signal in modulation step.
       N is envisioned to represent the channel number e.g., hp_filter_order1.
   harmonic_orderN(NX_NUMBER):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       The reference signal can be a higher harmonic of the modulation signal.
       Here the order of the harmonic is stored.
       N is envisioned to represent the channel number e.g., harmonic_order1.
   sensitivity_factor(NX_NUMBER):
-    unit: NX_DIMENSIONLESS
-    doc: |
+    \unit: NX_DIMENSIONLESS
+    \doc: |
       Ratio of output signal amplitude to input signal amplitude (V/V).
   dc_offset_valueN(NX_NUMBER):
-    nameType: partial
-    unit: NX_ANY
-    doc: |
+    \nameType: partial
+    \unit: NX_ANY
+    \doc: |
       The DC offset of the demodulated signal.
       This is used to remove the DC component from the demodulated signal.
       
@@ -153,7 +153,7 @@ NXlockin(NXobject):
       N is envisioned to represent the channel number e.g., dc_offset_value1.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 49e66b4e9cfda6e43ad426bd3d635d11f78638773b0817085d7a0d9c14fc31b7
+# c990a1ba6c9cd5def31651ecefa33362ce66f245380c885c69d1faab07f19d9c
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

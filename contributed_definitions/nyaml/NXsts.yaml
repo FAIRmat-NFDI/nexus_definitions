@@ -1,62 +1,62 @@
-category: application
-doc: |
+\category: application
+\doc: |
   An application definition to describe Scanning Tunneling Spectroscopy (STS).
   
   NXsts is an extension of NXspm.
 
 # https://thesis.library.caltech.edu/1943/4/03chapter3.pdf
 # TODO: Replace rename NXenvironment to experiment_environment in NXstm, NXspm and NXafm
-type: group
+\type: group
 NXsts(NXspm):
   (NXentry):
     definition:
-      doc: |
+      \doc: |
         Name of the definition that is used for the application.
-      enumeration: [NXsts]
+      \enumeration: [NXsts]
     experiment_technique:
-      doc: |
+      \doc: |
         The specific to STM experiment.
-      enumeration: [STS]
+      \enumeration: [STS]
     scan_mode:
-      doc: |
+      \doc: |
         The mode between the tip and sample of the tunneling spectroscopy experiment.
-      enumeration:
-        open_enum: true
-        items: [constant height, constant current, constant spacing]
+      \enumeration:
+        \open: true
+        \items: [constant height, constant current, constant spacing]
     (NXinstrument):
       lockin_amplifier(NXlockin):
-        exists: recommended
-        doc: |
+        \exists: recommended
+        \doc: |
           The lock-in amplifier information.
       current_sensorTAG(NXsensor):
-        exists: recommended
-        nameType: partial
-        doc: |
+        \exists: recommended
+        \nameType: partial
+        \doc: |
           Information for current sensor.
       SCAN_ENVIRONMENT(NXenvironment):
-        nameType: any
-        exists: optional
+        \nameType: any
+        \exists: optional
         (NXspm_scan_control):
-          exists: recommended
+          \exists: recommended
       bias_spectroscopy_environment(NXenvironment):
-        doc: |
+        \doc: |
           To explain bias (sweep measurement) voltage applied to the sample.
         (NXspm_bias_spectroscopy):
-          doc: |
+          \doc: |
             Setup and scan data for continuous measurement of bias-voltage on the subject of experiment
             vs tunneling current from probe.
           (NXspm_positioner):
-            exists: recommended
+            \exists: recommended
             z_controller(NXpid_controller):
-              exists: recommended
+              \exists: recommended
     reproducibility_indicators(NXcollection):
-      exists: optional
-      doc: |
+      \exists: optional
+      \doc: |
         The group's concepts hold the link to the related concepts that define the
         reproducibility of the STM experiment.
       current(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           The tunneling current between tip and sample after application of bias voltage.
           This should be a link to
           /ENTRY[*]/INSTRUMENT[*]/current_sensorTAG/current
@@ -64,8 +64,8 @@ NXsts(NXspm):
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
       current_offset(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           The offset in tunneling current between tip and sample after application of bias voltage.
           This should be a link to
           /ENTRY[*]/INSTRUMENT[*]/current_sensorTAG[current_sensor*]/current_offset
@@ -73,8 +73,8 @@ NXsts(NXspm):
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
       current_gain(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           Proportional relationship between the probe output voltage and the actual
           tunneling current when measuring the tunneling current.
           This should be a link to
@@ -83,9 +83,9 @@ NXsts(NXspm):
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
       BIAS_SWEEP(NXspm_scan_control):
-        nameType: any
-        exists: optional
-        doc: |
+        \nameType: any
+        \exists: optional
+        \doc: |
           Bias sweep measurement in bias spectroscopy.
           This should be a link to
           /ENTRY[*]/INSTRUMENT[*]/bias_spectroscopy_environment/BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep
@@ -93,8 +93,8 @@ NXsts(NXspm):
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
       modulation_signal_type:
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           This is the signal on which the modulation voltage or current will be added.
           This should be a link to
           /ENTRY[*]/INSTRUMENT[*]/lockin_amplifier/modulation_signal_type
@@ -102,8 +102,8 @@ NXsts(NXspm):
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
       reference_frequency(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           The frequency of the sine modulation that is used as carrier signal of input signal in lock-in.
           This should be a link to
           /ENTRY[*]/INSTRUMENT[*]/lockin_amplifier/reference_frequency
@@ -111,46 +111,46 @@ NXsts(NXspm):
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
     resolution_indicators(NXcollection):
-      exists: optional
-      doc: |
+      \exists: optional
+      \doc: |
         The group's concepts hold the link to the related concepts that define the
         resolution of the STM experiment.
       head_temperature(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           This should be a link to
           /entry/instrument/scan_environment/head_temperature
           
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
       cryo_bottom_temperature(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           This should be a link to
           /entry/instrument/scan_environment/cryo_bottom_temperature
           
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
       cryo_shield_temperature(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           This should be a link to
           /entry/instrument/scan_environment/cryo_shield_temperature
           
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
       BIAS_SWEEP(NXspm_scan_control):
-        nameType: any
-        exists: optional
-        doc: |
+        \nameType: any
+        \exists: optional
+        \doc: |
           This should be a link to
           /ENTRY[*]/INSTRUMENT[*]/bias_spectroscopy_environment/SPM_BIAS_SPECTROSCOPY[bias_spectroscopy]/bias_sweep
           
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
       modulation_signal_type:
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           This is the signal on which the modulation voltage or current will be added.
           This should be a link to
           /ENTRY[*]/INSTRUMENT[*]/lockin_amplifier/modulation_signal_type
@@ -158,8 +158,8 @@ NXsts(NXspm):
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
           square bracket would be the `exact` name of the NXentry group.
       modulation_frequency(NX_NUMBER):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           The frequency of the sine modulation that is used to modulate the signal in lock-in.
           This should be a link to
           /ENTRY[*]/INSTRUMENT[*]/lockin_amplifier/modulation_frequency
@@ -167,7 +167,7 @@ NXsts(NXspm):
           Note: group name (could be any meaningful and relevant name e.g. entry in ENTRY[entry]) inside the
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 28b4a6b3df3f87243cc75018e8571765093757ca9cd8ff2cfcb9c036ff2d85b5
+# 16a2d55deee4b181e2e581d38be32f9861721ad8a2573832935d12669b138193
 # <?xml version='1.0' encoding='UTF-8'?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

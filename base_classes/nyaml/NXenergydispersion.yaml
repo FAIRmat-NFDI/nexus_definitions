@@ -1,59 +1,59 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Energy dispersion section of an electron analyzer.
-type: group
+\type: group
 NXenergydispersion(NXcomponent):
   scheme(NX_CHAR):
-    doc: |
+    \doc: |
       Energy dispersion scheme employed, for example: tof, hemispherical, cylindrical,
       mirror, retarding grid, etc.
   pass_energy(NX_FLOAT):
-    unit: NX_ENERGY
-    doc:
+    \unit: NX_ENERGY
+    \doc:
     - |
       Mean kinetic energy of the electrons in this energy-dispersive section of the analyzer.
       This term should be used for hemispherical analyzers.
     - |
-      xref:
-        spec: ISO 18115-1:2023
-        term: 12.63
-        url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.63
+      \xref:
+        \spec: ISO 18115-1:2023
+        \term: 12.63
+        \url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.63
   kinetic_energy(NX_FLOAT):
-    unit: NX_ENERGY
-    doc: |
+    \unit: NX_ENERGY
+    \doc: |
       Kinetic energy set for this dispersive section. Can be either the set kinetic energy,
       or the whole calibrated energy axis of a scan.
   drift_energy(NX_FLOAT):
-    unit: NX_ENERGY
-    doc: |
+    \unit: NX_ENERGY
+    \doc: |
       Drift energy for time-of-flight energy dispersive elements.
   center_energy(NX_FLOAT):
-    unit: NX_ENERGY
-    doc: |
+    \unit: NX_ENERGY
+    \doc: |
       Center of the energy window
   energy_interval(NX_FLOAT):
-    unit: NX_ENERGY
-    doc: |
+    \unit: NX_ENERGY
+    \doc: |
       The interval of transmitted energies. It can be two different things depending
       on whether the scan is fixed or swept. With a fixed scan it is a 2 vector
       containing the extrema of the transmitted energy window (smaller number first).
       With a swept scan of m steps it is a 2xm array of windows, one for each
       measurement point.
   diameter(NX_FLOAT):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       Diameter of the dispersive orbit
   radius(NX_FLOAT):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       Radius of the dispersive orbit
   energy_scan_mode(NX_CHAR):
-    doc: |
+    \doc: |
       Way of scanning the energy axis
-    enumeration:
-      open_enum: true
+    \enumeration:
+      \open: true
       fixed_analyzer_transmission:
-        doc:
+        \doc:
         - |
           constant :math:`\Delta E` mode, where the electron retardation (i.e., the fraction of pass energy to
           kinetic energy, :math:`R = (E_K - W)/E_p`, is scanned, but the pass energy :math:`E_p` is kept constant.
@@ -67,12 +67,12 @@ NXenergydispersion(NXcomponent):
           Synonyms: constant :math:`\Delta E` mode, constant analyzer energy mode, CAE
           mode, FAT mode
         - |
-          xref:
-            spec: ISO 18115-1:2023
-            term: 12.64
-            url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.64
+          \xref:
+            \spec: ISO 18115-1:2023
+            \term: 12.64
+            \url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.64
       fixed_retardation_ratio:
-        doc:
+        \doc:
         - |
           constant :math:`\Delta E/E` mode, where the pass energy is scanned such that the electron retardation
           ratio is constant. In this mode, electrons of all energies are decelerated with this same
@@ -84,12 +84,12 @@ NXenergydispersion(NXcomponent):
           Synonyms: constant :math:`\Delta E/E` mode, constant retardation ratio mode, CRR
           mode, FRR mode
         - |
-          xref:
-            spec: ISO 18115-1:2023
-            term: 12.66
-            url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.66
+          \xref:
+            \spec: ISO 18115-1:2023
+            \term: 12.66
+            \url: https://www.iso.org/obp/ui/en/#iso:std:iso:18115:-1:ed-3:v1:en:term:12.66
       fixed_energy:
-        doc: |
+        \doc: |
           In the fixed energy (FE) mode, the intensity for one single kinetic energy is measured for a
           specified time. This mode is particularly useful during setup or alignment of the
           electron analyzer, for analysis of stability of the excitation source or for sample
@@ -100,7 +100,7 @@ NXenergydispersion(NXcomponent):
           
           Synonym: FE mode
       snapshot:
-        doc: |
+        \doc: |
           Snapshot mode does not involve an energy scan and instead collects data from all channels of
           the detector without averaging. The resulting spectrum reflects the energy distribution of
           particles passing through the analyzer using the current settings. This mode is commonly used
@@ -110,29 +110,29 @@ NXenergydispersion(NXcomponent):
           display the peak shape. While five or nine-channel detectors can also be used for snapshot
           measurements, their energy resolution is relatively lower.
       dither:
-        doc: |
+        \doc: |
           In dither acquisition mode, the kinetic energy of the analyzer is randomly varied by a small value
           around a central value and at fixed pass energy. This reduces or removes inhomogeneities
           of the detector efficiency, such as e.g. imposed by a mesh in front of the detector.
           Mostly relevant for CCD/DLD type of detectors.
   tof_distance(NX_FLOAT):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       Length of the time-of-flight drift electrode
   (NXaperture):
-    doc: |
+    \doc: |
       Size, position and shape of a slit in dispersive analyzer, e.g. entrance and
       exit slits.
   (NXdeflector):
-    doc: |
+    \doc: |
       Deflectors in the energy dispersive section
   (NXelectromagnetic_lens):
-    doc: |
+    \doc: |
       Individual lenses in the energy dispersive section
   (NXfabrication):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 0217b29a2b3843f36c81b4410357b0a531b5f5bdb14fe7e625dacdd00818c381
+# 0199908e96626260a254128f33b78f9cfde83e35be48f7ac6a06989ca05e1cc7
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

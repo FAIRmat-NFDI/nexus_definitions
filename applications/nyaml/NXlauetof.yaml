@@ -1,8 +1,8 @@
-category: application
-doc: |
+\category: application
+\doc: |
   This is the application definition for a TOF laue diffractometer
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbol(s) listed here will be used below to coordinate datasets with the same shape.
   nXPixels: |
     Number of X pixels
@@ -10,93 +10,94 @@ symbols:
     Number of Y pixels
   nTOF: |
     Time of flight
-type: group
+\type: group
 NXlauetof(NXobject):
   (NXentry):
     definition:
-      doc: |
+      \doc: |
         Official NeXus NXDL schema to which this file conforms
-      enumeration: [NXlauetof]
+      \enumeration: [NXlauetof]
     instrument(NXinstrument):
       detector(NXdetector):
-        doc: |
+        \doc: |
           This assumes a planar 2D detector. All angles and distances refer to the center of the
           detector.
         polar_angle(NX_FLOAT):
-          unit: NX_ANGLE
-          doc: |
+          \unit: NX_ANGLE
+          \doc: |
             The polar_angle (two theta) where the detector is placed.
         azimuthal_angle(NX_FLOAT):
-          unit: NX_ANGLE
-          doc: |
+          \unit: NX_ANGLE
+          \doc: |
             The azimuthal angle where the detector is placed.
         data(NX_INT):
           signal: 1
-          dimensions:
-            rank: 3
-            dim: (nXPixels, nYPixels, nTOF)
-          \@signal(NX_POSINT):
-            enumeration: [1]
+          \dimensions:
+            \rank: 3
+            \dim: (nXPixels, nYPixels, nTOF)
+          \@signal:
+            \type: NX_POSINT
+            \enumeration: [1]
         x_pixel_size(NX_FLOAT):
-          unit: NX_LENGTH
+          \unit: NX_LENGTH
         y_pixel_size(NX_FLOAT):
-          unit: NX_LENGTH
+          \unit: NX_LENGTH
         distance(NX_FLOAT):
-          unit: NX_LENGTH
+          \unit: NX_LENGTH
         time_of_flight(NX_FLOAT):
-          unit: NX_TIME_OF_FLIGHT
-          dimensions:
-            rank: 1
-            dim: (nTOF,)
+          \unit: NX_TIME_OF_FLIGHT
+          \dimensions:
+            \rank: 1
+            \dim: (nTOF,)
     sample(NXsample):
       name:
-        doc: |
+        \doc: |
           Descriptive name of sample
       orientation_matrix(NX_FLOAT):
-        doc: |
+        \doc: |
           The orientation matrix according to Busing and
           Levy conventions. This is not strictly necessary as
           the UB can always be derived from the data.  But
           let us bow to common usage which includes the
           UB nearly always.
-        dimensions:
-          rank: 2
-          dim: (3, 3)
+        \dimensions:
+          \rank: 2
+          \dim: (3, 3)
       unit_cell(NX_FLOAT):
-        doc: |
+        \doc: |
           The unit cell, a, b, c, alpha, beta, gamma.
           Again, not strictly necessary, but normally written.
-        dimensions:
-          rank: 1
-          dim: (6,)
+        \dimensions:
+          \rank: 1
+          \dim: (6,)
     control(NXmonitor):
       mode:
-        doc: |
+        \doc: |
           Count to a preset value based on either clock time (timer) or received monitor counts
                    (monitor).
-        enumeration: [monitor, timer]
+        \enumeration: [monitor, timer]
       preset(NX_FLOAT):
-        doc: |
+        \doc: |
           preset value for time or monitor
       data(NX_INT):
-        doc: |
+        \doc: |
           use these attributes  ``primary=1 signal=1``
-        dimensions:
-          rank: 1
-          dim: (nTOF,)
+        \dimensions:
+          \rank: 1
+          \dim: (nTOF,)
       time_of_flight(NX_FLOAT):
-        unit: NX_TIME_OF_FLIGHT
-        dimensions:
-          rank: 1
-          dim: (nTOF,)
+        \unit: NX_TIME_OF_FLIGHT
+        \dimensions:
+          \rank: 1
+          \dim: (nTOF,)
     name(NXdata):
       data(link):
-        target: /NXentry/NXinstrument/NXdetector/data
+        \target: /NXentry/NXinstrument/NXdetector/data
       time_of_flight(link):
-        target: /NXentry/NXinstrument/NXdetector/time_of_flight
+        \target: /NXentry/NXinstrument/NXdetector/time_of_flight
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# d9707b353c447925f317d928c8d505b17182f80f86fe0b048d399960bddea4b2
+# d57fe0846daf1bca71342c5cd94c9b1262fef63e4613037a37c8bcb61b0b739f
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

@@ -1,5 +1,5 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for a ptychography experiment, compatible with CXI from version 1.6.
   
   This is compatible with CXI from version 1.6 if this application definition
@@ -9,8 +9,8 @@ doc: |
   
   An example here is that CXI expects the data to always to have shape (npts_x*npts_y, frame_size_x, frame_size_y). For nexus this is only true for arbitrary scan paths
   with raster format scans taking shape (npts_x, npts_y, frame_size_x, frame_size_y).
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     These symbols will be used below to coordinate the shapes of the datasets.
   npts_x: |
     The number of points in the x direction
@@ -20,174 +20,192 @@ symbols:
     Number of detector pixels in x
   frame_size_y: |
     Number of detector pixels in y
-type: group
+\type: group
 NXcxi_ptycho(NXobject):
   entry_1(NXentry):
     title:
-      exists: ['min', '0', 'max', '1']
+      \exists: ['min', '0', 'max', '1']
     start_time(NX_DATE_TIME):
-      exists: ['min', '0', 'max', '1']
+      \exists: ['min', '0', 'max', '1']
     end_time(NX_DATE_TIME):
-      exists: ['min', '0', 'max', '1']
+      \exists: ['min', '0', 'max', '1']
     definition(NX_CHAR):
-      exists: ['min', '1', 'max', '1']
-      doc: |
+      \exists: ['min', '1', 'max', '1']
+      \doc: |
         Official NeXus NXDL schema to which this file conforms
-      enumeration: [NXcxi_ptycho]
+      \enumeration: [NXcxi_ptycho]
     instrument_1(NXinstrument):
-      exists: ['min', '1', 'max', '1']
+      \exists: ['min', '1', 'max', '1']
       source_1(NXsource):
-        exists: ['min', '1', 'max', '1']
+        \exists: ['min', '1', 'max', '1']
         name(NX_CHAR):
-          exists: ['min', '1', 'max', '1']
+          \exists: ['min', '1', 'max', '1']
         energy(NX_FLOAT):
-          exists: ['min', '1', 'max', '1']
-          doc: |
+          \exists: ['min', '1', 'max', '1']
+          \doc: |
             This is the energy of the machine, not the beamline.
         probe(NX_FLOAT):
-          exists: ['min', '1', 'max', '1']
+          \exists: ['min', '1', 'max', '1']
         type(NX_FLOAT):
-          exists: ['min', '1', 'max', '1']
+          \exists: ['min', '1', 'max', '1']
       beam_1(NXbeam):
-        exists: ['min', '1', 'max', '1']
+        \exists: ['min', '1', 'max', '1']
         energy(NX_FLOAT):
-          exists: ['min', '1', 'max', '1']
-          \@units(NX_CHAR):
-            exists: optional
+          \exists: ['min', '1', 'max', '1']
+          \@units:
+            \type: NX_CHAR
+            \exists: optional
         extent(NX_FLOAT):
-          exists: ['min', '0', 'max', '1']
-          \@units(NX_CHAR):
-            exists: optional
+          \exists: ['min', '0', 'max', '1']
+          \@units:
+            \type: NX_CHAR
+            \exists: optional
         incident_beam_divergence(NX_FLOAT):
-          exists: ['min', '0', 'max', '1']
-          \@units(NX_CHAR):
-            exists: optional
+          \exists: ['min', '0', 'max', '1']
+          \@units:
+            \type: NX_CHAR
+            \exists: optional
         incident_beam_energy(NX_FLOAT):
-          exists: ['min', '1', 'max', '1']
-          \@units(NX_CHAR):
-            exists: optional
+          \exists: ['min', '1', 'max', '1']
+          \@units:
+            \type: NX_CHAR
+            \exists: optional
         incident_energy_spread(NX_FLOAT):
-          exists: ['min', '1', 'max', '1']
-          \@units(NX_CHAR):
-            exists: optional
+          \exists: ['min', '1', 'max', '1']
+          \@units:
+            \type: NX_CHAR
+            \exists: optional
       detector_1(NXdetector):
-        exists: ['min', '1', 'max', '1']
-        \@axes(NX_CHAR):
-          doc: |
+        \exists: ['min', '1', 'max', '1']
+        \@axes:
+          \type: NX_CHAR
+          \doc: |
             should have value "[, data]"
-        \@signal(NX_CHAR):
-          doc: |
+        \@signal:
+          \type: NX_CHAR
+          \doc: |
             should have value "data"
         transformations(NXtransformations):
           vector(NX_NUMBER):
-            exists: ['min', '1', 'max', '1']
+            \exists: ['min', '1', 'max', '1']
         translation(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: ['min', '1', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '1', 'max', '1']
+          \doc: |
             This is an array of shape (npts_x*npts_y, 3) and can be a Virtual Dataset of x and y
-          \@units(NX_CHAR):
-            exists: optional
-          \@axes(NX_CHAR):
-            exists: optional
-            doc: |
+          \@units:
+            \type: NX_CHAR
+            \exists: optional
+          \@axes:
+            \exists: optional
+            \type: NX_CHAR
+            \doc: |
               this should take the value "translation:$slowaxisname:$fastaxisname"
-          \@interpretation(NX_CHAR):
-            exists: optional
-            doc: |
+          \@interpretation:
+            \exists: optional
+            \type: NX_CHAR
+            \doc: |
               This should be "image"
         data(NX_INT):
           signal: 1
-          exists: ['min', '1', 'max', '1']
-          dimensions:
-            rank: 3 for arbitrary scan, 4 for raster
-            dim: (npts_x, npts_y, frame_size_x, frame_size_y)
+          \exists: ['min', '1', 'max', '1']
+          \dimensions:
+            \rank: 3 for arbitrary scan, 4 for raster
+            \dim: (npts_x, npts_y, frame_size_x, frame_size_y)
         data_1(link):
-          target: /NXentry/NXinstrument/NXdetector/data
-          doc: |
+          \target: /NXentry/NXinstrument/NXdetector/data
+          \doc: |
             This data must always have shape (npts_x*npts_y, frame_size_x, frame_size_y) regardless
             of the scan pattern. Use hdf5 virtual dataset to achieve this.
         x_pixel_size(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: ['min', '1', 'max', '1']
-          \@units(NX_CHAR):
-            exists: optional
+          \unit: NX_LENGTH
+          \exists: ['min', '1', 'max', '1']
+          \@units:
+            \type: NX_CHAR
+            \exists: optional
         y_pixel_size(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: ['min', '1', 'max', '1']
-          \@units(NX_CHAR):
-            exists: optional
+          \unit: NX_LENGTH
+          \exists: ['min', '1', 'max', '1']
+          \@units:
+            \type: NX_CHAR
+            \exists: optional
         distance(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: ['min', '1', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '1', 'max', '1']
+          \doc: |
             The distance between the detector and the sample
-          \@units(NX_CHAR):
-            exists: optional
+          \@units:
+            \type: NX_CHAR
+            \exists: optional
         beam_center_x(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          \@units(NX_CHAR):
-            exists: optional
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \@units:
+            \type: NX_CHAR
+            \exists: optional
         beam_center_y(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          \@units(NX_CHAR):
-            exists: optional
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \@units:
+            \type: NX_CHAR
+            \exists: optional
       (NXmonitor):
-        exists: ['min', '0', 'max', '1']
+        \exists: ['min', '0', 'max', '1']
         data(NX_FLOAT):
-          dimensions:
-            rank: 1 for arbitrary scan, 2 for raster
-            dim: (npts_x, npts_y)
+          \dimensions:
+            \rank: 1 for arbitrary scan, 2 for raster
+            \dim: (npts_x, npts_y)
   (NXdata):
-    exists: ['min', '1', 'max', '1']
-    \@axes(NX_CHAR):
-      exists: optional
-      doc: |
+    \exists: ['min', '1', 'max', '1']
+    \@axes:
+      \type: NX_CHAR
+      \exists: optional
+      \doc: |
         This should be "[x,.]" for arbitrary scanning patterns, and "[x,.,.]" for raster
-    \@signal(NX_CHAR):
-      exists: optional
-      doc: |
+    \@signal:
+      \type: NX_CHAR
+      \exists: optional
+      \doc: |
         This should be "data"
     data(link):
-      target: /NXentry/NXinstrument/NXdetector/data
+      \target: /NXentry/NXinstrument/NXdetector/data
     x(link):
-      target: /NXentry/NXsample/NXtransformations/x
+      \target: /NXentry/NXsample/NXtransformations/x
     y(link):
-      target: /NXentry/NXsample/NXtransformations/y
+      \target: /NXentry/NXsample/NXtransformations/y
     x_indices(NX_CHAR):
     y_indices(NX_CHAR):
   data_1(NXcollection):
-    exists: ['min', '1', 'max', '1']
-    doc: |
+    \exists: ['min', '1', 'max', '1']
+    \doc: |
       To ensure CXI compatibility the data in this group must always have shape that is
       (npts_x*npts_y, frame_size_x, frame_size_y). For nexus-style raster scans it is proposed that
       hdf5 virtual dataset is used.
     data(link):
-      target: /NXentry/NXinstrument/NXdetector/data
+      \target: /NXentry/NXinstrument/NXdetector/data
     translation(link):
-      target: /NXentry/NXinstrument/NXdetector/translation
+      \target: /NXentry/NXinstrument/NXdetector/translation
   sample_1(NXsample):
-    exists: ['min', '1', 'max', '1']
+    \exists: ['min', '1', 'max', '1']
     name(NX_CHAR):
-      exists: ['min', '0', 'max', '1']
+      \exists: ['min', '0', 'max', '1']
     transformations(NXtransformations):
-      doc: |
+      \doc: |
         This must contain two fields with the x and y motors that are linked via the
         dependency tree according to the real-life motor layout dependency.
         For raster scans x and y will have shape (npts_x, npts_y)
         For arbitrary scans x and y will be (npts_x*npts_y,)
         An attribute with the units for each motor is required.
-      \@vector(NX_NUMBER):
-        exists: optional
+      \@vector:
+        \exists: optional
+        \type: NX_NUMBER
     geometry_1(NXcollection):
-      exists: ['min', '1', 'max', '1']
+      \exists: ['min', '1', 'max', '1']
       translation(link):
-        target: /NXentry/NXinstrument/NXdetector/translation
+        \target: /NXentry/NXinstrument/NXdetector/translation
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# d8e1fa079cf95d336dc8e07b879839626d6c4d972043dbe28a6f117d55745a11
+# 8644cbe4fba94a4818cdc47ae901fc8d3e369b6e85b1f53707fc55534a11771d
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!-- 

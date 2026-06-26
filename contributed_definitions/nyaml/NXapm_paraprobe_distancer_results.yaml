@@ -1,5 +1,5 @@
-category: application
-doc: |
+\category: application
+\doc: |
   Application definition for a results file of the paraprobe-distancer tool.
   
   The tool paraprobe-distancer tool evaluates exactly the shortest Euclidean distance for each
@@ -10,53 +10,53 @@ doc: |
   
   Currently, paraprobe-distancer does not check if the respectively specified triangle sets are consistent,
   what their topology is, or whether or not these triangles are consistently oriented.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   n_ions: |
     The total number of points, i.e. ions in the reconstruction.
   n_tri: |
     The total number of triangles in the set.
-type: group
+\type: group
 NXapm_paraprobe_distancer_results(NXapm_paraprobe_tool_results):
   (NXentry):
-    exists: ['min', '1', 'max', '1']
+    \exists: ['min', '1', 'max', '1']
     definition(NX_CHAR):
-      enumeration: [NXapm_paraprobe_distancer_results]
+      \enumeration: [NXapm_paraprobe_distancer_results]
     point_to_triangleID(NXapm_paraprobe_tool_process):
-      nameType: partial
-      exists: ['min', '1', 'max', '1']
+      \nameType: partial
+      \exists: ['min', '1', 'max', '1']
       distance(NX_FLOAT):
-        unit: NX_LENGTH
-        doc: |
+        \unit: NX_LENGTH
+        \doc: |
           The shortest analytical distance of each point to their
           respectively closest triangle from the joint triangle set.
-        dimensions:
-          rank: 1
-          dim: (n_ions,)
+        \dimensions:
+          \rank: 1
+          \dim: (n_ions,)
       indices_triangle(NX_INT):
-        exists: optional
-        unit: NX_UNITLESS
-        doc: |
+        \exists: optional
+        \unit: NX_UNITLESS
+        \doc: |
           For each point the identifier of the triangle for which the
           shortest distance was found.
-        dimensions:
-          rank: 1
-          dim: (n_ions,)
+        \dimensions:
+          \rank: 1
+          \dim: (n_ions,)
       indices_point(NX_INT):
-        exists: optional
-        unit: NX_UNITLESS
-        doc: |
+        \exists: optional
+        \unit: NX_UNITLESS
+        \doc: |
           A support field to enable the visualization of each point
           by an explicit identifier on the interval [0, n_ions - 1].
           The field can be used to visualize the points as a function
           of their distance to the triangle set (e.g. via XDMF/Paraview).
-        dimensions:
-          rank: 1
-          dim: (n_ions,)
+        \dimensions:
+          \rank: 1
+          \dim: (n_ions,)
       sign_valid(NXcs_filter_boolean_mask):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           A bitmask that identifies which of the distance values is
           assumed to have a consistent sign because the closest
           triangle had a consistent outer unit normal defined.
@@ -64,27 +64,27 @@ NXapm_paraprobe_distancer_results(NXapm_paraprobe_tool_results):
           For points whose bit is set to 0 the distance is correct
           but the sign is not reliable.
         number_of_triangles(NX_UINT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             Number of triangles covered by the mask.
         bitdepth(NX_UINT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             Bitdepth of the elementary datatype that is used to store
             the information content of the mask (typically 8 bit, uint8).
         mask(NX_UINT):
-          unit: NX_UNITLESS
-          doc: |
+          \unit: NX_UNITLESS
+          \doc: |
             The content of the mask. Like for all masks used in the tools
             of the paraprobe-toolbox, padding is used when number_of_objects
             is not an integer multiple of bitdepth. If padding is used,
             padded bits are set to 0.
-          dimensions:
-            rank: 1
-            dim: (n_ions,)
+          \dimensions:
+            \rank: 1
+            \dim: (n_ions,)
       window_triangles(NXcs_filter_boolean_mask):
-        exists: optional
-        doc: |
+        \exists: optional
+        \doc: |
           A bitmask that identifies which of the triangles in the set were
           considered when certain triangles have been filtered out.
         number_of_objects(NX_UINT):
@@ -95,12 +95,12 @@ NXapm_paraprobe_distancer_results(NXapm_paraprobe_tool_results):
         # its unit category only the dimensions are constrained strong to match the number of objects
         # triangles in this case
         mask(NX_UINT):
-          dimensions:
-            rank: 1
-            dim: (n_tri,)
+          \dimensions:
+            \rank: 1
+            \dim: (n_tri,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 1f9fe08978f0c108dd3ff7d4456e90efcada088106992caeaef424c3fd86cbcf
+# 1ee3379b25caaf8a09b5d6445dc92bc04d658fdc92837efe71f7bdb0cc92ca65
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

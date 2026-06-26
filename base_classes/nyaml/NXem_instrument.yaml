@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Base class for instrument-related details of a real or simulated electron microscope.
   
   For collecting data and experiments which are simulations of an electron
@@ -10,20 +10,20 @@ doc: |
   whether these typically change during a session (dynamic) or not (static metadata).
   This design allows to store e.g. hardware related concepts only once instead of demanding
   that each image or spectrum from the session needs to be stored also with the static metadata.
-type: group
+\type: group
 NXem_instrument(NXinstrument):
   name(NX_CHAR):
-    doc: |
+    \doc: |
       Given name of the microscope at the hosting institution.
       This is an alias. Examples could be NionHermes, Titan, JEOL,
       Gemini, etc.
   location(NX_CHAR):
-    doc: |
+    \doc: |
       Location of the lab or place where the instrument is installed.
       Using GEOREF is preferred.
   type(NX_CHAR):
-    exists: recommended
-    doc: |
+    \exists: recommended
+    \doc: |
       Different types of electron microscopes exist:
       
       * sem, a scanning electron microscope without focused-ion beam capabilities
@@ -41,7 +41,7 @@ NXem_instrument(NXinstrument):
       or tagging of experiments without having to analyze if groups like NXibeam_column are present
       (which would indicate type is fib) or if certain lens configurations or instrument models are used
       which suggests the microscope is a scanning (sem) or transmission electron microscope (tem):
-    enumeration: [sem, fib, tem]
+    \enumeration: [sem, fib, tem]
   (NXfabrication):
   (NXebeam_column):
   (NXibeam_column):
@@ -49,15 +49,15 @@ NXem_instrument(NXinstrument):
   # (NXpbeam_column) for adding laser pulsing capabilities (NXsource + x)
   (NXem_optical_system):
   (NXdetector):
-    doc: |
+    \doc: |
       Description of the type of the detector.
       
       Electron microscopes have typically multiple detectors.
       Different technologies are in use like CCD, scintillator,
       direct electron, CMOS, or image plate to name but a few.
   stageID(NXmanipulator):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       Stages in an electron microscope are multi-functional devices.
       
       Stages enable experimentalists the application of controlled external stimuli
@@ -103,7 +103,7 @@ NXem_instrument(NXinstrument):
     # see for complicated positioning tools like an eucentric five-axis table stage in an SEM
     # https://www.nanotechnik.com/e5as.html
     design(NX_CHAR):
-      doc: |
+      \doc: |
         Principal design of the stage.
         
         Exemplar terms could be side_entry, top_entry,
@@ -112,7 +112,7 @@ NXem_instrument(NXinstrument):
         heating_chip, atmosphere_chip,
         electrical_biasing_chip, liquid_cell_chip
     alias(NX_CHAR):
-      doc: |
+      \doc: |
         Free-text field to give a term how that a stage_lab at this level of the
         stage_lab hierarchy is commonly referred to. Examples could be stub,
         puck, carousel, microtip, clip, holder, etc.
@@ -123,58 +123,61 @@ NXem_instrument(NXinstrument):
     # this can be interpreted as that position values and tilts are only meaningful for those users
     # in a particular narrow community which work with that particular microscope
     tilt1(NX_NUMBER):
-      unit: NX_ANGLE
-      doc: |
+      \unit: NX_ANGLE
+      \doc: |
         The interpretation of this tilt1 value can be contextualized via the comment
         attribute. However, it is better to describe the reference frame in which the
         tilt is defined explicitly using instances of :ref:`NXtransformations` and
         respective instances of :ref:`NXcoordinate_system`. Especially when this
         NXem_instrument base class is used in an application definition like NXem.
-      \@comment(NX_CHAR):
-        doc: |
+      \@comment:
+        \type: NX_CHAR
+        \doc: |
           Discouraged free-text field to provide details about how to interpret tilt1.
     tilt2(NX_NUMBER):
-      unit: NX_ANGLE
-      doc: |
+      \unit: NX_ANGLE
+      \doc: |
         The interpretation of this tilt2 value can be contextualized via the comment
         attribute. However, it is better to describe the reference frame in which the
         tilt is defined explicitly using instances of :ref:`NXtransformations` and
         respective instances of :ref:`NXcoordinate_system`. Especially when this
         NXem_instrument base class is used in an application definition like NXem.
-      \@comment(NX_CHAR):
-        doc: |
+      \@comment:
+        \type: NX_CHAR
+        \doc: |
           Discouraged free-text field to provide details about how to interpret tilt2.
     rotation(NX_NUMBER):
-      unit: NX_ANGLE
-      doc: |
+      \unit: NX_ANGLE
+      \doc: |
         The interpretation of this rotation value can be contextualized via the comment
         attribute. However, it is better to describe the reference frame in which the
         rotation is defined explicitly using instances of :ref:`NXtransformations` and
         respective instances of :ref:`NXcoordinate_system`. Especially when this
         NXem_instrument base class is used in an application definition like NXem.
-      \@comment(NX_CHAR):
-        doc: |
+      \@comment:
+        \type: NX_CHAR
+        \doc: |
           Discouraged free-text field to provide details about how to interpret rotation.
     position(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         The interpretation of these position values can be contextualized via the comment
         attribute. However, it is better to describe the reference frame in which the
         position values are defined explicitly using instances of :ref:`NXtransformations`
         and respective instances of :ref:`NXcoordinate_system`. Especially when this
         NXem_instrument base class is used in an application definition like NXem.
-      dimensions:
-        rank: 1
-        dim: (3,)
+      \dimensions:
+        \rank: 1
+        \dim: (3,)
   nanoprobeID(NXmanipulator):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       In contrast to the stage, the nanoprobe is an additional manipulator that is a specifically
       frequently found component of FIB/SEM instruments. A nanoprobe is used to pick up and
       relocated portions of the specimen that have been cut off during site-specific lift-outs
       and specimen preparation.
   gas_injector(NXcomponent):
-    doc: |
+    \doc: |
       Gas injection systems (GIS) are components of microscopes that are equipped with focused-ion beam
       capabilities. The component is used to introduce reactive neutral gases to the sample surface for
       enhanced etching, preferential etching, or material deposition.
@@ -183,7 +186,7 @@ NXem_instrument(NXinstrument):
   (NXactuator):
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# bced4402af1c0aad3f118b57c4d13a130318c151c544ba05b896f47b6081b924
+# e7e8bca88d2a21c8a7755d1e5bd877a2b02c27fcbf9730c5f2bd675da44ff889
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

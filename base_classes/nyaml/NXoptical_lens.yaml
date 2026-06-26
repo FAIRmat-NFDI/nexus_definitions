@@ -1,7 +1,7 @@
-category: base
-doc: |
+\category: base
+\doc: |
   Description of an optical lens.
-symbols:
+\symbols:
   N_spectrum: |
     Size of the wavelength array for which the refractive index of the material
     is given.
@@ -11,43 +11,43 @@ symbols:
   N_spectrum_RT: |
     Size of the wavelength array for which the reflectance or transmission of
     the lens is given.
-type: group
+\type: group
 NXoptical_lens(NXcomponent):
   type:
-    doc: |
+    \doc: |
       Type of the lens (e.g. concave, convex etc.).
-    enumeration:
-      open_enum: true
-      items: [biconcave, plano-concave, convexo-concave, biconvex, plano-convex, concavo-convex, Fresnel lens]
+    \enumeration:
+      \open: true
+      \items: [biconcave, plano-concave, convexo-concave, biconvex, plano-convex, concavo-convex, Fresnel lens]
   chromatic(NX_BOOLEAN):
-    doc: |
+    \doc: |
       Is it a chromatic lens?
   lens_diameter(NX_NUMBER):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       Diameter of the lens.
   substrate(NXsample):
-    doc: |
+    \doc: |
       Properties of the substrate material of the lens. If the lens has a
       coating specify the coating material and its properties in 'coating'.
     substrate_material:
-      doc: |
+      \doc: |
         Specify the substrate material of the lens.
     substrate_thickness(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Thickness of the lens substrate at the optical axis.
     index_of_refraction(NX_NUMBER):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Complex index of refraction of the lens material. Specify at given
         wavelength (or energy, wavenumber etc.) values.
-      dimensions:
-        rank: 2
-        dim: (2, N_spectrum)
+      \dimensions:
+        \rank: 2
+        \dim: (2, N_spectrum)
   COATING(NXsample):
-    nameType: any
-    doc: |
+    \nameType: any
+    \doc: |
       If the lens has a coating describe the material and its properties.
       Some basic information can be found e.g. [here]
       (https://www.opto-e.com/basics/reflection-transmission-and-coatings).
@@ -56,52 +56,52 @@ NXoptical_lens(NXcomponent):
       on the front and back side, respectively. For example:
       coating_front(NXsample) and coating_back(NXsample).
     coating_type:
-      doc: |
+      \doc: |
         Specify the coating type (e.g. dielectric, anti-reflection (AR),
         multilayer coating etc.).
     coating_material:
-      doc: |
+      \doc: |
         Describe the coating material (e.g. MgF2).
     coating_thickness(NX_NUMBER):
-      unit: NX_LENGTH
-      doc: |
+      \unit: NX_LENGTH
+      \doc: |
         Thickness of the coating.
     index_of_refraction_coating(NX_NUMBER):
-      unit: NX_UNITLESS
-      doc: |
+      \unit: NX_UNITLESS
+      \doc: |
         Complex index of refraction of the coating. Specify at given spectral
         values (wavelength, energy, wavenumber etc.).
-      dimensions:
-        rank: 2
-        dim: (2, N_spectrum_coating)
+      \dimensions:
+        \rank: 2
+        \dim: (2, N_spectrum_coating)
   reflectance:
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Reflectance of the lens at given spectral values.
-    dimensions:
-      rank: 1
-      dim: (N_spectrum_RT,)
+    \dimensions:
+      \rank: 1
+      \dim: (N_spectrum_RT,)
   transmission:
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Transmission of the lens at given spectral values.
-    dimensions:
-      rank: 1
-      dim: (N_spectrum_RT,)
+    \dimensions:
+      \rank: 1
+      \dim: (N_spectrum_RT,)
   focal_length(NX_NUMBER):
-    exists: recommended
-    unit: NX_LENGTH
-    doc: |
+    \exists: recommended
+    \unit: NX_LENGTH
+    \doc: |
       Focal length of the lens on the front side (first value), i.e. where the
       beam is incident, and on the back side (second value).
-    dimensions:
-      rank: 1
-      dim: (2,)
+    \dimensions:
+      \rank: 1
+      \dim: (2,)
   curvature_radius_FACE(NX_NUMBER):
-    nameType: partial
-    exists: recommended
-    unit: NX_LENGTH
-    doc: |
+    \nameType: partial
+    \exists: recommended
+    \unit: NX_LENGTH
+    \doc: |
       Curvature radius of the lens.
       Instead of 'FACE' in the name of this field, the user is advised to
       specify for which surface (e.g. front or back) the curvature is provided:
@@ -109,19 +109,19 @@ NXoptical_lens(NXcomponent):
       which the light beam is incident, while the back face is the one from
       which the light beam exits the lens.
   Abbe_number(NX_NUMBER):
-    nameType: specified
-    unit: NX_UNITLESS
-    doc: |
+    \nameType: specified
+    \unit: NX_UNITLESS
+    \doc: |
       Abbe number (or V-number) of the lens.
   numerical_aperture(NX_NUMBER):
-    doc: |
+    \doc: |
       The numerical aperture of the lens.
   magnification(NX_FLOAT):
-    doc: |
+    \doc: |
       Magnification of the lens
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# ff3aacdecbd2c9293ac333fafe4799f9a696484027f8b97362b534b39fcea2de
+# efa20354d8328959c65a5c66b6a1c828f3afe451feb21caee7adcac1cde24b98
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

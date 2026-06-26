@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   A description of a feedback system in terms of the settings of a proportional-integral-derivative (PID) controller.
    
   Automated control of a physical quantity is often achieved by connecting the output of a sensor to an actuator
@@ -27,58 +27,58 @@ doc: |
   Note that the ``NXpid_controller`` is designed to be a child object of the actuator that its output is connected to. The parent object
   representing the actuator is likely to be represented by an ``NXactuator`` or ``NXpositioner`` base class, but there is a wide variety
   of possible applications for PID controllers.
-type: group
+\type: group
 NXpid_controller(NXcomponent):
   description:
-    doc: |
+    \doc: |
       Description of how the Process Value for the PID controller is produced by sensor(s) in the setup.
        
       For example, a set of sensors could be averaged over before feeding it back into the loop.
   pv_sensor(NXsensor):
-    doc: |
+    \doc: |
       The sensor representing the Process Value used in the feedback loop for the PID.
        
       In case multiple sensors were used, this NXsensor should contain the proper calculated/aggregated value.
     value_log(NXlog):
       value(NX_NUMBER):
-        doc: |
+        \doc: |
           The actual timeseries data fed back into the PID controller.
   setpoint(NX_FLOAT):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       The Setpoint(s) used as an input for the PID controller.
        
       It can also be a link to an ``NXsensor.value`` field.
   K_p(NX_NUMBER):
-    nameType: specified
-    doc: |
+    \nameType: specified
+    \doc: |
       Proportional gain constant. This constant determines how strongly the output value
       directly follows the current Error Value. When this constant dominates, the output
       value is linearly proportional to the Error Value.
   K_i(NX_NUMBER):
-    nameType: specified
-    doc: |
+    \nameType: specified
+    \doc: |
       Integral gain constant. This constant determines how strongly the output value
       should react to an accumulated offset in the Error Value that should have
       been corrected previously. since the integral term is proportional to both
       the magnitude and persistence of the Error Value over time.
   K_d(NX_NUMBER):
-    nameType: specified
-    doc: |
+    \nameType: specified
+    \doc: |
       Derivative gain constant. This constant determines how much the feedback system
       should anticipate the future value of the Error Value function through adjustment of the
       output value that is proportional to the rate of change (i.e. derivative) of the Error Value.
       This term is important for damping oscillations in the feedback system.
   K_ff(NX_NUMBER):
-    nameType: specified
-    doc: |
+    \nameType: specified
+    \doc: |
       Feed Forward gain constant. This constant determines how much the feedback system
       should rely on a calculated output value to achieve the desired Process Variable value.
       A Feed Forward system uses a model of the physical system to calculate an appropriate
       output value to achieve a desired Setpoint value. A description of this model should be provided
       in the ``feed_forward_model`` field.
   feed_forward_model(NX_CHAR):
-    doc: |
+    \doc: |
       A description of the model used for the Feed Forward part of the feedback system. Note that such models typically
       involve the Setpoint value, but not the Error Value. The simplest model is simply proportional to the Setpoint value.
       For example, the position (Process Variable) of a sample is measured by a a linear optical encoder (sensor) and
@@ -88,7 +88,7 @@ NXpid_controller(NXcomponent):
       A complex model could involve any number of input variables, mathematical functions, and coefficients in order to
       describe the physical system relevant to the PID controller.
   control_action:
-    doc: |
+    \doc: |
       The Error Value of PID feedback system is normally constructed in terms of the correction needed to bring
       the Process Variable towards a match with the Setpoint. This "direct" control action means that a measurement of
       the Process Variable that is lower than the Setpoint results in a positive Error Value and a generally positive
@@ -97,10 +97,10 @@ NXpid_controller(NXcomponent):
       a Peltier cooler) and so the output of the feedback system must be reversed to match the behavior of the physical system.
       A feedback system may also be implemented with reverse action in order to ensure that failures (e.g. disconnected sensor
       output or actuator input) result in a safe state (e.g. a valve should be left open to release pressure).
-    enumeration: [direct, reverse]
+    \enumeration: [direct, reverse]
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 2080f16935e3ade9f25000293c358a121db023f3cadc19543e9e9ce0e45295a7
+# fd345248be0071a79750ec89fd3961e847ccfd1076579e062834fb24e59f75d6
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

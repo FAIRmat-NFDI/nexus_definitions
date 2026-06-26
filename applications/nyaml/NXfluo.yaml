@@ -1,61 +1,61 @@
-category: application
-doc: |
+\category: application
+\doc: |
   This is an application definition for raw data from an X-ray fluorescence experiment
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbol(s) listed here will be used below to coordinate datasets with the same shape.
   nE: |
     Number of energies
-type: group
+\type: group
 NXfluo(NXobject):
   (NXentry):
     title:
     start_time(NX_DATE_TIME):
     definition:
-      doc: |
+      \doc: |
         Official NeXus NXDL schema to which this file conforms.
-      enumeration: [NXfluo]
+      \enumeration: [NXfluo]
     (NXinstrument):
       (NXsource):
         type:
         name:
         probe:
-          enumeration: [x-ray]
+          \enumeration: [x-ray]
       monochromator(NXmonochromator):
         wavelength(NX_FLOAT):
       fluorescence(NXdetector):
         data(NX_INT):
           axes: energy
           signal: 1
-          dimensions:
-            rank: 1
-            dim: (nE,)
+          \dimensions:
+            \rank: 1
+            \dim: (nE,)
         energy(NX_FLOAT):
-          dimensions:
-            rank: 1
-            dim: (nE,)
+          \dimensions:
+            \rank: 1
+            \dim: (nE,)
     (NXsample):
       name:
-        doc: |
+        \doc: |
           Descriptive name of sample
     (NXmonitor):
       mode:
-        doc: |
+        \doc: |
           Count to a preset value based on either clock time (timer)
           or received monitor counts (monitor).
-        enumeration: [monitor, timer]
+        \enumeration: [monitor, timer]
       preset(NX_FLOAT):
-        doc: |
+        \doc: |
           preset value for time or monitor
       data(NX_INT):
     data(NXdata):
       energy(link):
-        target: /entry/instrument/fluorescence/energy
+        \target: /entry/instrument/fluorescence/energy
       data(link):
-        target: /entry/instrument/fluorescence/data
+        \target: /entry/instrument/fluorescence/data
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# de5b10d67be5bc7507c745d9f21625ec355847731ac05644ccd466a59718c605
+# 3b6f6807bb308f835abf6e5a9cad17a4984fc872d8d0c5d6a2394d97463d8b5f
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--

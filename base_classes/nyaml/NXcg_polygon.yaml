@@ -1,7 +1,7 @@
-category: base
+\category: base
 
 # similar design like NXoff_geometry but easier to understand
-doc: |
+\doc: |
   Computational geometry description of a set of polygons in Euclidean space.
   
   Polygons are specialized polylines:
@@ -25,8 +25,8 @@ doc: |
   subclass of such complexes, users should rather design their own base class
   e.g. NXcg_polytope to describe such even more complex primitives instead
   of abusing this base class for such purposes.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbols used in the schema to specify e.g. dimensions of arrays.
   d: |
     The dimensionality, which has to be either 2 or 3.
@@ -36,59 +36,59 @@ symbols:
   # n_unique: Number of unique points supporting the polygons.
   n_total: |
     The total number of vertices when visiting every polygon.
-type: group
+\type: group
 NXcg_polygon(NXcg_primitive):
   number_of_total_vertices(NX_UINT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       The total number of vertices in the set.
   
   # detailed mesh-based representation
   polygons(NXcg_face_list_data_structure):
-    doc: |
+    \doc: |
       Combined storage of all primitives of all polygons.
   polygonID(NXcg_face_list_data_structure):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       Individual storage of the mesh of each polygon.
   polygon_half_edgeID(NXcg_half_edge_data_structure):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       Individual storage of each polygon as a graph.
   
   # properties of the polygon primitives
   edge_length(NX_NUMBER):
-    unit: NX_LENGTH
-    doc: |
+    \unit: NX_LENGTH
+    \doc: |
       For each polygon its accumulated length along its edges.
-    dimensions:
-      rank: 1
-      dim: (c,)
+    \dimensions:
+      \rank: 1
+      \dim: (c,)
   interior_angle(NX_NUMBER):
-    unit: NX_ANGLE
-    doc: |
+    \unit: NX_ANGLE
+    \doc: |
       Interior angles for each polygon. There are as many values per polygon
       as there are number_of_vertices.
       The angle is the angle at the specific vertex, i.e. between the adjoining
       edges of the vertex according to the sequence in the polygons array.
       Usually, the winding_order field is required to interpret the value.
-    dimensions:
-      rank: 1
-      dim: (n_total,)
+    \dimensions:
+      \rank: 1
+      \dim: (n_total,)
   shape(NX_INT):
-    unit: NX_UNITLESS
-    doc: |
+    \unit: NX_UNITLESS
+    \doc: |
       Curvature type:
       
       * 0 - unspecified,
       * 1 - convex,
       * 2 - concave
-    dimensions:
-      rank: 1
-      dim: (c,)
+    \dimensions:
+      \rank: 1
+      \dim: (c,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# f2c9dd98d7dba9d3f888b529c0af25ebea924039fc745bdeb51cc97b9443fa5b
+# 050fcdefd672c89179fa44da056389e8da0699ab38e48592997acac133cd3b4f
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

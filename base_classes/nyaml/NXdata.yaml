@@ -1,5 +1,5 @@
-category: base
-doc: |
+\category: base
+\doc: |
   The :ref:`NXdata` class is designed to encapsulate all the information required for a set of data to be plotted.
   NXdata groups contain plottable data (also referred to as *signals* or *dependent variables*) and their
   associated axis coordinates (also referred to as *axes* or *independent variables*).
@@ -165,8 +165,8 @@ doc: |
 # Since common use of NXdata indicates field names of any value, _many_
 # instances of this class would generate a warning message during validation
 # without this attribute being set to "true".
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     These symbols will be used below to coordinate fields with the same shape.
   dataRank: |
     rank of the ``DATA`` field(s)
@@ -176,14 +176,14 @@ symbols:
     length of the ``y`` field
   nz: |
     length of the ``z`` field
-type: group
-ignoreExtraFields: true
-ignoreExtraAttributes: true
+\type: group
+\ignoreExtraFields: true
+\ignoreExtraAttributes: true
 NXdata(NXobject):
   
   # Attributes for data and coordinate field detection
   \@signal:
-    doc: |
+    \doc: |
       .. index:: find the default plottable data
       .. index:: plotting
       .. index:: signal attribute value
@@ -197,7 +197,7 @@ NXdata(NXobject):
       See https://www.nexusformat.org/2014_How_to_find_default_data.html
       for a summary of the discussion.
   \@auxiliary_signals:
-    doc: |
+    \doc: |
       .. index:: plotting
       
       Array of strings holding the :ref:`names <validItemName>` of additional
@@ -208,8 +208,9 @@ NXdata(NXobject):
       
       ..  NIAC2018:
           https://www.nexusformat.org/NIAC2018Minutes.html
-  \@default_slice(NX_CHAR_OR_NUMBER):
-    doc: |
+  \@default_slice:
+    \type: NX_CHAR_OR_NUMBER
+    \doc: |
       Which slice of data to show in a plot by default. This is useful especially for
       datasets with more than 2 dimensions.
       
@@ -251,7 +252,7 @@ NXdata(NXobject):
           channel = ["threshold_1", "threshold_2", "difference"]
           data = uint[nP, nC, i, j]
   \@reference:
-    doc: |
+    \doc: |
       Points to the path of a field defining the data to which the `DATA` group refers.
       
       This concept allows to link the data to a respective field in the NeXus hierarchy, thereby
@@ -262,9 +263,10 @@ NXdata(NXobject):
           to that detectors data:
       
           @reference: '/entry/instrument/detector/data' for a 2D detector
-  \@AXISNAME_indices(NX_INT):
-    nameType: partial
-    doc: |
+  \@AXISNAME_indices:
+    \type: NX_INT
+    \nameType: partial
+    \doc: |
       The ``AXISNAME_indices`` attribute is a single integer or an array of integers that defines which :ref:`DATA </NXdata/DATA-field>`
       dimensions are spanned by the corresponding axis. The first dimension index is ``0`` (zero).
       
@@ -276,7 +278,7 @@ NXdata(NXobject):
       .. note::  When ``AXISNAME_indices`` contains multiple integers, it must be saved as an actual array
           of integers and not a comma separated string.
   \@axes:
-    doc: |
+    \doc: |
       .. index:: plotting
       
       The ``axes`` attribute is a list of strings which are the names of the :ref:`AXISNAME </NXdata/AXISNAME-field>` fields
@@ -286,14 +288,14 @@ NXdata(NXobject):
       
       .. note::  When ``axes`` contains multiple strings, it must be saved as an actual array
           of strings and not a single comma separated string.
-    dimensions:
-      rank: 1
-      dim: (dataRank,)
+    \dimensions:
+      \rank: 1
+      \dim: (dataRank,)
   
   # Data and coordinate fields
   AXISNAME(NX_CHAR_OR_NUMBER):
-    nameType: any
-    doc: |
+    \nameType: any
+    \doc: |
       Coordinate values along one or more :ref:`DATA </NXdata/DATA-field>` dimensions.
       
       The shape of an ``AXISNAME`` field must correspond to the shape of the :ref:`DATA </NXdata/DATA-field>`
@@ -306,32 +308,36 @@ NXdata(NXobject):
       Most ``AXISNAME`` fields will be sequences of numbers but if an axis is better represented using names, such as channel names,
       an array of NX_CHAR can be provided.
     \@long_name:
-      doc: |
+      \doc: |
         Axis label
     \@units:
-      doc: |
+      \doc: |
         Unit in which the coordinate values are expressed.
         See the section :ref:`Design-Units` for more information.
-    \@distribution(NX_BOOLEAN):
-      doc: |
+    \@distribution:
+      \type: NX_BOOLEAN
+      \doc: |
         ``0|false``: single value,
         ``1|true``: multiple values
-    \@first_good(NX_INT):
-      doc: |
+    \@first_good:
+      \type: NX_INT
+      \doc: |
         Index of first good value
-    \@last_good(NX_INT):
-      doc: |
+    \@last_good:
+      \type: NX_INT
+      \doc: |
         Index of last good value
-    \@axis(NX_POSINT):
-      deprecated: Use the group ``axes`` attribute   (NIAC2014)
-      doc: |
+    \@axis:
+      \type: NX_POSINT
+      \deprecated: Use the group ``axes`` attribute   (NIAC2014)
+      \doc: |
         Index (positive integer) identifying this specific set of numbers.
         
         N.B. The ``axis`` attribute is the old way of designating a link.
         Do not use the :ref:`axes </NXdata@axes-attribute>` attribute with the ``axis`` attribute.
         The :ref:`axes </NXdata@axes-attribute>` attribute is now preferred.
     \@reference:
-      doc: |
+      \doc: |
         Points to the path of a field defining the axis to which the ``AXISNAME`` axis refers.
         
         This concept allows to link an axis to a respective field in the NeXus hierarchy, thereby
@@ -353,8 +359,8 @@ NXdata(NXobject):
         
                 @reference: '/entry/instrument/detector/transformations/some_transformation' for a motion of the detector
   DATA(NX_NUMBER):
-    nameType: any
-    doc: |
+    \nameType: any
+    \doc: |
       .. index:: plotting
       
       Data values to be used as the NeXus *plottable data*. As the upper case ``DATA``
@@ -363,14 +369,15 @@ NXdata(NXobject):
       that contain data values.
       
       The maximum rank is ``32`` for compatibility with backend file formats.
-    dimensions:
-      rank: dataRank
-      doc: |
+    \dimensions:
+      \rank: dataRank
+      \doc: |
         The rank (``dataRank``) of the ``data`` must satisfy
         ``1 <= dataRank <= NX_MAXRANK=32``.
-    \@signal(NX_POSINT):
-      deprecated: Use the group ``signal`` attribute   (NIAC2014)
-      doc: |
+    \@signal:
+      \type: NX_POSINT
+      \deprecated: Use the group ``signal`` attribute   (NIAC2014)
+      \doc: |
         .. index:: plotting
         
         Plottable (independent) axis, indicate index number.
@@ -378,8 +385,8 @@ NXdata(NXobject):
         ``signal=1`` attribute.
         Do not use the ``signal`` attribute with the ``axis`` attribute.
     \@axes:
-      deprecated: Use the group ``axes`` attribute   (NIAC2014)
-      doc: |
+      \deprecated: Use the group ``axes`` attribute   (NIAC2014)
+      \doc: |
         Defines the names of the coordinates
         (independent axes) for this data set
         as a colon-delimited array.
@@ -387,10 +394,10 @@ NXdata(NXobject):
         method of designating a link.
         Do not use the :ref:`axes </NXdata@axes-attribute>` attribute with the ``axis`` attribute.
     \@long_name:
-      doc: |
+      \doc: |
         data label
     \@reference:
-      doc: |
+      \doc: |
         Points to the path of a field defining the data to which the `DATA` field refers.
         
         This concept allows to link the data to a respective field in the NeXus hierarchy, thereby
@@ -405,8 +412,8 @@ NXdata(NXobject):
         
                 @reference: '/entry/instrument/detector/data' for a 2D detector
   FIELDNAME_errors(NX_NUMBER):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       "Errors" (meaning *uncertainties* or *standard deviations*)
       associated with any field named ``FIELDNAME`` in this ``NXdata``
       group. This can be a :ref:`DATA </NXdata/DATA-field>` field
@@ -416,22 +423,22 @@ NXdata(NXobject):
       The dimensions of the ``FIELDNAME_errors`` field must match
       the dimensions of the corresponding ``FIELDNAME`` field.
   errors(NX_NUMBER):
-    deprecated: Use ``DATA_errors`` instead (NIAC2018)
-    doc: |
+    \deprecated: Use ``DATA_errors`` instead (NIAC2018)
+    \doc: |
       Standard deviations of data values -
       the data array is identified by the group attribute ``signal``.
       The ``errors`` array must have the same dimensions as ``DATA``.
       Client is responsible for defining the dimensions of the data.
-    dimensions:
-      rank: dataRank
-      doc: |
+    \dimensions:
+      \rank: dataRank
+      \doc: |
         The ``errors`` must have the same rank (``dataRank``)
         as the ``data``.
   
   # Data vs. plot coordinates
   FIELDNAME_scaling_factor(NX_NUMBER):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       An optional scaling factor to apply to the values in any field named ``FIELDNAME``
       in this ``NXdata`` group. This can be a :ref:`DATA </NXdata/DATA-field>` field
       (signal or auxiliary signal) or a :ref:`AXISNAME </NXdata/AXISNAME-field>`
@@ -451,23 +458,23 @@ NXdata(NXobject):
       
       When omitted, the scaling factor is assumed to be 1.
   FIELDNAME_offset(NX_NUMBER):
-    nameType: partial
-    doc: |
+    \nameType: partial
+    \doc: |
       An optional offset to apply to the values in FIELDNAME (usually the signal).
       
       When omitted, the offset is assumed to be 0.
       
       See :ref:`FIELDNAME_scaling_factor </NXdata/FIELDNAME_scaling_factor-field>` for more information.
   scaling_factor(NX_FLOAT):
-    deprecated: Use FIELDNAME_scaling_factor instead
-    doc: |
+    \deprecated: Use FIELDNAME_scaling_factor instead
+    \doc: |
       The scaling_factor and FIELDNAME_scaling_factor fields have similar semantics.
       However, scaling_factor is ambiguous in the case of multiple signals.  Therefore
       scaling_factor is deprecated.  Use FIELDNAME_scaling_factor instead, even when
       only a single signal is present.
   offset(NX_FLOAT):
-    deprecated: Use FIELDNAME_offset instead
-    doc: |
+    \deprecated: Use FIELDNAME_offset instead
+    \doc: |
       The offset and FIELDNAME_offset fields have similar semantics.
       However, offset is ambiguous in the case of multiple signals.  Therefore
       offset is deprecated.  Use FIELDNAME_offset instead, even when
@@ -475,46 +482,46 @@ NXdata(NXobject):
   
   # Other fields
   title:
-    doc: |
+    \doc: |
       Title for the plot.
   
   # Deprecated fields
   x(NX_FLOAT):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       This is an array holding the values to use for the x-axis of
       data. The units must be appropriate for the measurement.
       
       This is a special case of a :ref:`AXISNAME field </NXdata/AXISNAME-field>`
       kept for backward compatibility.
-    dimensions:
-      rank: 1
-      dim: (nx,)
+    \dimensions:
+      \rank: 1
+      \dim: (nx,)
   y(NX_FLOAT):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       This is an array holding the values to use for the y-axis of
       data. The units must be appropriate for the measurement.
       
       This is a special case of a :ref:`AXISNAME field </NXdata/AXISNAME-field>`
       kept for backward compatibility.
-    dimensions:
-      rank: 1
-      dim: (ny,)
+    \dimensions:
+      \rank: 1
+      \dim: (ny,)
   z(NX_FLOAT):
-    unit: NX_ANY
-    doc: |
+    \unit: NX_ANY
+    \doc: |
       This is an array holding the values to use for the z-axis of
       data. The units must be appropriate for the measurement.
       
       This is a special case of a :ref:`AXISNAME field </NXdata/AXISNAME-field>`
       kept for backward compatibility.
-    dimensions:
-      rank: 1
-      dim: (nz,)
+    \dimensions:
+      \rank: 1
+      \dim: (nz,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 83e3a1de8b920bbcea6b85620f008c75239dcaed928a3f3bae994e448052f36d
+# 84305e7c562bb8c192962058dad2b8e2bda060b5b8c5165c56974a7c90d2ddb2
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--

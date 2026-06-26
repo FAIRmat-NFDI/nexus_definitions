@@ -1,5 +1,5 @@
-category: application
-doc: |
+\category: application
+\doc: |
   X-ray Photon Correlation Spectroscopy (XPCS) data (results).
   
   The purpose of ``NXxpcs`` is to document and communicate an accepted vernacular for various XPCS results data
@@ -10,27 +10,27 @@ doc: |
   Additional fields may be added to XPCS results file (either formally or informally).  It is expected
   that this XPCS data will be part of multi-modal data set that could involve e.g., :ref:`NXcanSAS` or
   1D and/or 2D data.
-symbols:
-  doc: |
+\symbols:
+  \doc: |
     The symbol(s) listed here will be used below to coordinate datasets with the same shape.
   nP: |
     Number of points
-type: group
+\type: group
 NXxpcs(NXobject):
   (NXentry):
     definition:
-      doc: |
+      \doc: |
         Official NeXus NXDL schema to which this file conforms
-      enumeration: [NXxpcs]
+      \enumeration: [NXxpcs]
     entry_identifier:
-      doc: |
+      \doc: |
         **Locally** unique identifier for the experiment (a.k.a. run or scan).
         
         * For bluesky users, this is the run's `"scan_id"`.
         * For SPEC users, this is the scan number (``SCAN_N``).
     entry_identifier_uuid:
-      exists: ['min', '0', 'max', '1']
-      doc: |
+      \exists: ['min', '0', 'max', '1']
+      \doc: |
         (optional) UUID identifier for this entry.
         
         See the `UUID standard <https://www.rfc-editor.org/rfc/rfc4122.html>`__ (or
@@ -42,43 +42,43 @@ NXxpcs(NXobject):
         * Typically, `SPEC <https://certif.com/content/spec/>`__ users will
           not use this field without further engineering.
     scan_number(NX_INT):
-      deprecated: Use the ``entry_identifier`` field.
+      \deprecated: Use the ``entry_identifier`` field.
       
       # Use of "deprecated" is to advise the XPCS authors of this change.
       # The `scan_number` field will be removed by 2022-12-31.
-      doc: |
+      \doc: |
         Scan number (must be an integer).
         
         NOTE: Link to collection_identifier.
     start_time(NX_DATE_TIME):
-      doc: |
+      \doc: |
         Starting time of experiment, such as "2021-02-11 11:22:33.445566Z".
     end_time(NX_DATE_TIME):
-      exists: ['min', '0', 'max', '1']
-      doc: |
+      \exists: ['min', '0', 'max', '1']
+      \doc: |
         Ending time of experiment, such as "2021-02-11 11:23:45Z".
     data(NXdata):
-      doc: |
+      \doc: |
         The results data captured here are most commonly required for high throughput, equilibrium dynamics experiments. Data (results)
         describing on-equilibrium dynamics consume more memory resources so these data are separated.
       frame_sum(NX_NUMBER):
-        unit: NX_COUNT
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \unit: NX_COUNT
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           Two-dimensional summation along the frames stack.
           
           sum of intensity v. time (in the units of "frames")
       frame_average(NX_NUMBER):
-        unit: NX_COUNT
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \unit: NX_COUNT
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           Two-dimensional average along the frames stack.
           
           average intensity v. time (in the units of "frames")
       g2(NX_NUMBER):
-        unit: NX_DIMENSIONLESS
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \unit: NX_DIMENSIONLESS
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           normalized intensity auto-correlation function, see Lumma, Rev. Sci. Instr. (2000), Eq 1
           
           ..  math:: g_2(\boldsymbol Q,t) = \frac{ \langle I(\boldsymbol Q,t\prime) I(\boldsymbol Q,t\prime + t) \rangle }{ \langle I(\boldsymbol Q,t\prime)\rangle^2 }; t > 0
@@ -103,38 +103,41 @@ NXxpcs(NXobject):
           
           .. [#] mask: ``NXxpcs:/entry/instrument/masks-group``
           .. [#] NeXus 2-D data and axes: https://manual.nexusformat.org/classes/base_classes/NXdata.html#nxdata
-        \@storage_mode(NX_CHAR):
-          doc: |
+        \@storage_mode:
+          \type: NX_CHAR
+          \doc: |
             storage_mode describes the format of the data to be loaded
             
             We encourage the documentation of other formats not represented here.
             
             * one array representing entire data set ("one_array")
             * data exchange format with each key representing one ``q`` by its corresponding roi_map value ("data_exchange_keys")
-          enumeration: [one_array, data_exchange_keys, other]
+          \enumeration: [one_array, data_exchange_keys, other]
       g2_derr(NX_NUMBER):
-        unit: NX_DIMENSIONLESS
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \unit: NX_DIMENSIONLESS
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           error values for the :math:`g_2` values.
           
           The derivation of the error is left up to the implemented code. Symmetric error will be
           expected (:math:`\pm` error).  The data should be in the same format as ``g2``.
-        \@storage_mode(NX_CHAR):
-          enumeration: [one_array, data_exchange_keys, other]
+        \@storage_mode:
+          \type: NX_CHAR
+          \enumeration: [one_array, data_exchange_keys, other]
       G2_unnormalized(NX_NUMBER):
-        unit: NX_ANY
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \unit: NX_ANY
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           unnormalized intensity auto-correlation function.
           
           Specifically, ``g2`` without the denominator.  The data should be in the same format as ``g2``.
-        \@storage_mode(NX_CHAR):
-          enumeration: [one_array, data_exchange_keys, other]
+        \@storage_mode:
+          \type: NX_CHAR
+          \enumeration: [one_array, data_exchange_keys, other]
       delay_difference(NX_INT):
-        unit: NX_COUNT
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \unit: NX_COUNT
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           delay_difference (also known as delay or lag step)
           
           This is quantized difference so that the "step" between two consecutive
@@ -144,16 +147,17 @@ NXxpcs(NXobject):
           
           The unit of delay_differences is ``NX_INT`` for units of frames (i.e., integers) preferred,
           refer to :ref:`NXdetector` for conversion to time units.
-        \@storage_mode(NX_CHAR):
-          enumeration: [one_array, data_exchange_keys, other]
+        \@storage_mode:
+          \type: NX_CHAR
+          \enumeration: [one_array, data_exchange_keys, other]
     twotime(NXdata):
-      exists: ['min', '0']
-      doc: |
+      \exists: ['min', '0']
+      \doc: |
         The data (results) in this section are based on the two-time intensity correlation function derived from a time series of scattering images.
       two_time_corr_func(NX_NUMBER):
-        unit: NX_ANY
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \unit: NX_ANY
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           two-time correlation of speckle intensity for a given q-bin or roi (represented by the nth roi_map value)
           
           See Fluerasu, Phys Rev E (2007), Eq 1 and Sutton, Optics Express (2003) for an early
@@ -180,31 +184,35 @@ NXxpcs(NXobject):
           
           * A method to reduce data storage needs is to only record half of the 2D array by populating
             array elements above or below the array diagonal.
-        \@storage_mode(NX_CHAR):
-          doc: |
+        \@storage_mode:
+          \type: NX_CHAR
+          \doc: |
             storage_mode describes the format of the data to be loaded
             
             We encourage the documentation of other formats represented here.
-          enumeration: [one_array_q_first, one_array_q_last, data_exchange_keys, other]
-        \@baseline_reference(NX_INT):
-          doc: |
+          \enumeration: [one_array_q_first, one_array_q_last, data_exchange_keys, other]
+        \@baseline_reference:
+          \type: NX_INT
+          \doc: |
             baseline is the expected value of a full decorrelation
             
             The baseline is a constant value added to the functional form of the auto-correlation
             function. This value is required.
-          enumeration: [0, 1]
-        \@time_origin_location(NX_CHAR):
-          doc: |
+          \enumeration: [0, 1]
+        \@time_origin_location:
+          \type: NX_CHAR
+          \doc: |
             time_origin_location is the location of the origin
-          enumeration: [upper_left, lower_left]
-        \@populated_elements(NX_CHAR):
-          doc: |
+          \enumeration: [upper_left, lower_left]
+        \@populated_elements:
+          \type: NX_CHAR
+          \doc: |
             populated_elements describe the elements of the 2D array that are populated with data
-          enumeration: [all, upper_half, lower_half]
+          \enumeration: [all, upper_half, lower_half]
       g2_from_two_time_corr_func(NX_NUMBER):
-        unit: NX_DIMENSIONLESS
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \unit: NX_DIMENSIONLESS
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           frame weighted average along the diagonal direction in ``two_time_corr_func``
           
           The data format and description should be consistent with that found in "/NXxpcs/entry/data/g2"
@@ -217,30 +225,34 @@ NXxpcs(NXobject):
           
           The computation of this result can be customized.  The customization can affect the fitting required to extract quantitative results.  The
           following attributes will be used to manage the customization.
-        \@storage_mode(NX_CHAR):
-          enumeration: [one_array_q_first, one_array_q_last, data_exchange_keys, other]
-        \@baseline_reference(NX_INT):
-          enumeration: [0, 1]
-        \@first_point_for_fit(NX_INT):
-          doc: |
+        \@storage_mode:
+          \type: NX_CHAR
+          \enumeration: [one_array_q_first, one_array_q_last, data_exchange_keys, other]
+        \@baseline_reference:
+          \type: NX_INT
+          \enumeration: [0, 1]
+        \@first_point_for_fit:
+          \type: NX_INT
+          \doc: |
             first_point_for_fit describes if the first point should or should not be used in fitting the functional form of the dynamics to extract quantitative time-scale information.
             
             The first_point_for_fit is True ("1") or False ("0"). This value is required.
-          enumeration: [0, 1]
+          \enumeration: [0, 1]
       g2_err_from_two_time_corr_func(NX_NUMBER):
-        unit: NX_DIMENSIONLESS
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \unit: NX_DIMENSIONLESS
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           error values for the :math:`g_2` values.
           
           The derivation of the error is left up to the implemented code. Symmetric error will be
           expected (:math:`\pm` error).
-        \@storage_mode(NX_CHAR):
-          enumeration: [one_array_q_first, one_array_q_last, data_exchange_keys, other]
+        \@storage_mode:
+          \type: NX_CHAR
+          \enumeration: [one_array_q_first, one_array_q_last, data_exchange_keys, other]
       g2_from_two_time_corr_func_partials(NX_NUMBER):
-        unit: NX_DIMENSIONLESS
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \unit: NX_DIMENSIONLESS
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           subset of frame weighted average along the diagonal direction in ``two_time_corr_func``
           
           Time slicing along the diagonal can be very sophisticated.  This entry currently assumes
@@ -253,53 +265,55 @@ NXxpcs(NXobject):
           
           Note that delay_difference is not included here because it is derived from the shape of
           extracted :math:`g_2`.
-        \@storage_mode(NX_CHAR):
-          enumeration: [one_array, data_exchange_keys, other]
-        \@baseline_reference(NX_INT):
-          enumeration: [0, 1]
+        \@storage_mode:
+          \type: NX_CHAR
+          \enumeration: [one_array, data_exchange_keys, other]
+        \@baseline_reference:
+          \type: NX_INT
+          \enumeration: [0, 1]
       g2_err_from_two_time_corr_func_partials(NX_NUMBER):
-        unit: NX_DIMENSIONLESS
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \unit: NX_DIMENSIONLESS
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           error values for the :math:`g_2` values.
           
           The derivation of the error is left up to the implemented code. Symmetric error will be
           expected (:math:`\pm` error).
     instrument(NXinstrument):
-      doc: |
+      \doc: |
         XPCS instrument Metadata.
         
         Objects can be entered here directly or linked from other
         objects in the NeXus file (such as within ``/entry/instrument``).
       incident_beam(NXbeam):
         incident_energy(NX_FLOAT):
-          unit: NX_ENERGY
-          doc: |
+          \unit: NX_ENERGY
+          \doc: |
             Incident beam line energy (either keV or eV).
         incident_energy_spread(NX_FLOAT):
-          unit: NX_ENERGY
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_ENERGY
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Spread of incident beam line energy (either keV or eV). This quantity is otherwise known
             as the energy resolution, which is related to the longitudinal coherence length.
         incident_polarization_type:
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Terse description of the incident beam polarization.
             
             The value can be plain text, such as ``vertical``, ``C+``,
             ``circular left``.
         extent(NX_FLOAT):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Size (2-D) of the beam at this position.
           
           # FIXME: (h, v) or (v, h)?  State this in the docs FOR EPICS AD, likely v, h.  But seems CSX is (h,v) if looking
           # from the source's perspective at the face of the detector - see fig 11 and fig 12 of cxidb documentation.  this
           # is also relevant for the next section, which is just describing the 2D array V, H  is python/bluesky
       (NXdetector):
-        doc: |
+        \doc: |
           XPCS data is typically produced by area detector (likely EPICS AreaDetector) as a stack of 2D images. Sometimes
           this data is represented in different ways (sparse arrays or photon event list), but this detail
           is left to the analysis software.  Therefore, we only include requirements based on full array data.
@@ -316,45 +330,45 @@ NXxpcs(NXobject):
           
           .. [#] Coherent X-ray Imaging Data Bank: https://cxidb.org/cxi.html
         description:
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Detector name.
         distance(NX_NUMBER):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Distance between sample and detector.
         count_time(NX_NUMBER):
-          unit: NX_TIME
-          doc: |
+          \unit: NX_TIME
+          \doc: |
             Exposure time of frames, s.
         frame_time(NX_NUMBER):
-          unit: NX_TIME
-          doc: |
+          \unit: NX_TIME
+          \doc: |
             Exposure period (time between frame starts) of frames, s
         beam_center_x(NX_NUMBER):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             Position of beam center, x axis, in detector's coordinates.
         beam_center_y(NX_NUMBER):
-          unit: NX_LENGTH
-          doc: |
+          \unit: NX_LENGTH
+          \doc: |
             Position of beam center, y axis, in detector's coordinates.
         x_pixel_size(NX_NUMBER):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
           
           # made this optional in case of single photon xy-time lists
-          doc: |
+          \doc: |
             Length of pixel in x direction.
         y_pixel_size(NX_NUMBER):
-          unit: NX_LENGTH
-          exists: ['min', '0', 'max', '1']
-          doc: |
+          \unit: NX_LENGTH
+          \exists: ['min', '0', 'max', '1']
+          \doc: |
             Length of pixel in y direction.
       masks(NXnote):
-        exists: ['min', '0', 'max', '1']
-        doc: |
+        \exists: ['min', '0', 'max', '1']
+        \doc: |
           Data masks or mappings to regions of interest (roi) for specific :math:`Q` values
           
           Fields in this ``masks`` group describe regions of interest
@@ -373,8 +387,8 @@ NXxpcs(NXobject):
           development of new NeXus definitions for GI-SAXS or other reciprocal space
           intensity mapping.
         dynamic_roi_map(NX_NUMBER):
-          unit: NX_DIMENSIONLESS
-          doc: |
+          \unit: NX_DIMENSIONLESS
+          \doc: |
             roi index array or labeled array
             
             The values of this mask index (or map to) the :math:`Q` value from the
@@ -384,9 +398,9 @@ NXxpcs(NXobject):
             The ``units`` attribute should be set to ``"au"``
             indicating arbitrary units.
         dynamic_q_list(NX_NUMBER):
-          unit: NX_PER_LENGTH
-          exists: ['min', '0']
-          doc: |
+          \unit: NX_PER_LENGTH
+          \exists: ['min', '0']
+          \doc: |
             1-D list of :math:`Q` values, one for each roi index value.
             
             List order is determined by the index value of the associated roi map starting at ``1``.
@@ -401,16 +415,16 @@ NXxpcs(NXobject):
             This format is chosen because results plotting packages are not common and simple I/O is required by end user.
             The lists can be accessed as lists, arrays or via keys
         dynamic_phi_list(NX_NUMBER):
-          unit: NX_PER_LENGTH
-          exists: ['min', '0']
-          doc: |
+          \unit: NX_PER_LENGTH
+          \exists: ['min', '0']
+          \doc: |
             Array of :math:`\varphi` value for each pixel.
             
             List order is determined by the index value of the associated roi map starting at ``1``.
         static_roi_map(NX_NUMBER):
-          unit: NX_DIMENSIONLESS
-          exists: ['min', '0']
-          doc: |
+          \unit: NX_DIMENSIONLESS
+          \exists: ['min', '0']
+          \doc: |
             roi index array.
             
             The values of this mask index the :math:`|Q|` value from the
@@ -419,12 +433,12 @@ NXxpcs(NXobject):
             The ``units`` attribute should be set to ``"au"``
             indicating arbitrary units.
         static_q_list(NX_NUMBER):
-          unit: NX_PER_LENGTH
-          exists: ['min', '0']
-          doc: |
+          \unit: NX_PER_LENGTH
+          \exists: ['min', '0']
+          \doc: |
             1-D list of :math:`|Q|` values, 1 for each roi.
     sample(NXsample):
-      exists: ['min', '0']
+      \exists: ['min', '0']
       
       # Describes the minimum requirements regarding equilibrium sample conditions. NXsample
       # permits other quantities (e.g., applied fields, crystallographic information, name, etc) that
@@ -433,24 +447,24 @@ NXxpcs(NXobject):
       # For non-equilibrium sample conditions (i.e., changing sample or process conditions
       # during the XPCS measurement) will require either a new entry or an additional attribute.
       temperature_set(NX_NUMBER):
-        unit: NX_TEMPERATURE
-        exists: ['min', '0']
-        doc: |
+        \unit: NX_TEMPERATURE
+        \exists: ['min', '0']
+        \doc: |
           Sample temperature setpoint, (C or K).
       temperature(NX_NUMBER):
-        unit: NX_TEMPERATURE
-        exists: ['min', '0']
-        doc: |
+        \unit: NX_TEMPERATURE
+        \exists: ['min', '0']
+        \doc: |
           Sample temperature actual, (C or K).
       position_x(NXpositioner):
-        exists: ['min', '0']
+        \exists: ['min', '0']
       position_y(NXpositioner):
-        exists: ['min', '0']
+        \exists: ['min', '0']
       position_z(NXpositioner):
-        exists: ['min', '0']
+        \exists: ['min', '0']
     NOTE(NXnote):
-      exists: ['min', '0', 'max', 'unbounded']
-      doc: |
+      \exists: ['min', '0', 'max', 'unbounded']
+      \doc: |
         Any other notes.
         
         NAME: The NeXus convention, to use all upper case
@@ -460,11 +474,11 @@ NXxpcs(NXobject):
         Start with ``note_1`` if the first one, otherwise
         pick the next number in this sequence.
   (NXprocess):
-    doc: |
+    \doc: |
       Describe the computation process that produced these results.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 0f570fc6c43e31a4636e04b52da142f22b3e75487197aef72a970fb296ba1ae9
+# bae46162431a6ddd8613af2f90c8c78177c38fc634f8e14800bbf7efdd207ce0
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--
