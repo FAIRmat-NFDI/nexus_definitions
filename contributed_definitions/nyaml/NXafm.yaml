@@ -48,9 +48,10 @@ NXafm(NXspm):
             When a cantilever is oscillated close to its resonance, this describes the oscillator properties.
             
             A cantilever can be used in direct contact mode to detect interaction forces or oscillated close to its
-            resonance frequency. Changes in the oscillation amplitude, phase (between oscillated tail and moving tip)
-            or resonance frequency are very sensitive to changes in the interaction potential field, giving rise of
-            various measurement modes, such as non-contact or intermittent-contact (tapping) modes.
+            resonance frequency near to surface in non-contact mode or in tapping mode. Changes in the oscillation 
+            amplitude, phase (between oscillated tail and moving tip) or resonance frequency are very sensitive to 
+            changes in the interaction potential field, giving rise of various measurement modes, such as non-contact
+            or intermittent-contact (tapping) modes.
           reference_amplitude(NX_NUMBER):
             \unit: NX_LENGTH
             \exists: recommended
@@ -76,6 +77,31 @@ NXafm(NXspm):
         \nameType: any
         \doc: |
           The environment information.
+        (NXspm_scan_control):
+          \doc: |
+            The scan control information related to the scan pattern and scan area.
+          meshSCAN(NXspm_scan_pattern):
+            \nameType: partial
+            \exists: optional
+            \doc: |
+              The mesh scan is a common technique used in AFM for imaging of the surface of given sample
+              in a grid pattern.
+              
+              This group is rquired to be present if the AFM experiment associated with ruster scan that 
+              includes contract mode, non-contact mode, tapping mode and peak force tapping mode.
+          point_forceSCAN(NXspm_scan_pattern):
+            \nameType: partial
+            \exists: optional
+            \doc: |
+              The scan data from point force spectroscopy, force between the tip and the sample at a specific point:
+                1. approach
+                2. retract.
+                
+              This group is rquired to be present if the AFM experiment associated with point force spectroscopy.
+            scan_points_z(NX_NUMBER):
+              \doc: |
+                The number of points scanned in z direction.
+            scan_points_y(NX_NUMBER):
         XYpiezo_sensor(NXspm_piezo_sensor):
           \nameType: partial
           \exists: optional

@@ -8,10 +8,12 @@
 \type: group
 NXspm_cantilever_oscillator(NXobject):
   reference_amplitude(NX_NUMBER):
-    \unit: NX_LENGTH
+    \unit: NX_VOLTAGE
     \doc: |
       The reference amplitude (also called drive amplitude) of the cantilever.
       This is the amplitude of the cantilever oscillation when no external forces are acting on it.
+      
+      It is the voltage applied to the piezoe system to drive the cantilever at its resonance frequency.
       
       Note: At least one from reference_amplitude, reference_frequency, or reference_phase is expected.
   reference_frequency(NX_NUMBER):
@@ -49,15 +51,18 @@ NXspm_cantilever_oscillator(NXobject):
     \unit: NX_FREQUENCY
     \doc: |
       The bandwidth of the resonance frequency.
-  target_amplitude(NX_NUMBER):
-    \unit: NX_LENGTH
+  amplitude_setpoint(NX_NUMBER):
+    \unit: NX_VOLTAGE
     \doc: |
-      The target amplitude of the cantilever to scan on each scan point.
+      The amplitude setpoint is a target or desire voltage obtained in the feedback loop of the cantilever's
+      piezo system. It is constantly compared to the RMS amplitude of the cantilever's oscillation to adjust 
+      the drive voltage and maintain a stable oscillation amplitude. 
+      
       This field is same as the reference amplitude in the non-contact mode.
-  target_frequency(NX_NUMBER):
+  frequency_setpoint(NX_NUMBER):
     \unit: NX_FREQUENCY
     \doc: |
-      The target frequency of the cantilever to scan on each scan point.
+      The frequency setpoint is the target or desired frequency of the cantilever.
       This field is same as the reference frequency in the non-contact mode
   active_frequency(NX_NUMBER):
     \unit: NX_FREQUENCY
