@@ -105,7 +105,7 @@ NXafm(NXspm):
               \doc: |
                 The start of the scan in y direction (for raster scan).
             scan_start_z(NX_NUMBER):
-              \exists: optional
+              \exists: recommended
               \unit: NX_LENGTH
               \doc: |
                 The start of the scan in z direction (for point force spectroscopy).
@@ -139,13 +139,20 @@ NXafm(NXspm):
             \doc: |
               The scan data from point force spectroscopy, force between the tip and the sample at a specific point:
                 1. approach
-                2. retract.
+                2. retrace.
                 
               This group is rquired to be present if the AFM experiment associated with point force spectroscopy.
             scan_points_z(NX_NUMBER):
               \doc: |
                 The number of points scanned in z direction.
-            scan_points_y(NX_NUMBER):
+            forward_speed_approach(NX_NUMBER):
+              \unit: NX_VELOCITY
+              \doc: |
+                The speed of the cantilever tip during approach in point force spectroscopy.
+            backward_speed_retrace(NX_NUMBER):
+              \unit: NX_VELOCITY
+              \doc: |
+                The speed of the cantilever tip during retract in point force spectroscopy.
         XYpiezo_sensor(NXspm_piezo_sensor):
           \nameType: partial
           \exists: optional
