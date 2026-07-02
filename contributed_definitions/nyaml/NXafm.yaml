@@ -15,7 +15,7 @@ NXafm(NXspm):
     scan_mode:
       \doc: |
         The mode of the scan.
-        
+
         contact mode: Cantilever attempts to move on the sample surface in very close contact with the sample.
          The cantilever deflection is usually employed to control the cantilever position using a PID feedback loop.
         non-contact mode: Cantilever attempts to oscillate above the sample surface. Cantilever attempts to stay in the
@@ -28,7 +28,13 @@ NXafm(NXspm):
          The maximum force is usually employed to control the cantilever position using a PID feedback loop.
       \enumeration:
         \open: true
-        \items: [contact mode, tapping mode, non-contact mode, peak force tapping mode]
+        \items:
+          [
+            contact mode,
+            tapping mode,
+            non-contact mode,
+            peak force tapping mode,
+          ]
     (NXinstrument):
       photo_detector(NXdetector):
         \exists: optional
@@ -46,14 +52,14 @@ NXafm(NXspm):
           \exists: recommended
           \doc: |
             When a cantilever is oscillated close to its resonance, this describes the oscillator properties.
-            
+
             A cantilever can be used in direct contact mode to detect interaction forces or oscillated close to its
             resonance frequency near to surface in non-contact mode or in tapping mode. Changes in the oscillation 
             amplitude, phase (between oscillated tail and moving tip) or resonance frequency are very sensitive to 
             changes in the interaction potential field, giving rise of various measurement modes, such as non-contact
             or intermittent-contact (tapping) modes.
           reference_amplitude(NX_NUMBER):
-            \unit: NX_LENGTH
+            \unit: NX_VOLTAGE
             \exists: recommended
           reference_frequency(NX_NUMBER):
             \unit: NX_FREQUENCY
@@ -130,7 +136,7 @@ NXafm(NXspm):
             \doc: |
               The mesh scan is a common technique used in AFM for imaging of the surface of given sample
               in a grid pattern.
-              
+
               This group is rquired to be present if the AFM experiment associated with ruster scan that 
               includes contract mode, non-contact mode, tapping mode and peak force tapping mode.
           point_forceSCAN(NXspm_scan_pattern):
@@ -143,13 +149,24 @@ NXafm(NXspm):
                 
               This group is rquired to be present if the AFM experiment associated with point force spectroscopy.
             scan_points_z(NX_NUMBER):
+              \exists: recommended
               \doc: |
-                The number of points scanned in z direction.
+                The number of points scanned in z direction, approach and retrace are same.
+            scan_points_approach(NX_NUMBER):
+              \exists: recommended
+              \doc: |
+                The number of points scanned in approach.
+            scan_points_retrace(NX_NUMBER):
+              \exists: recommended
+              \doc: |
+                The number of points scanned in retrace.
             forward_speed_approach(NX_NUMBER):
+              \exists: recommended
               \unit: NX_VELOCITY
               \doc: |
                 The speed of the cantilever tip during approach in point force spectroscopy.
             backward_speed_retrace(NX_NUMBER):
+              \exists: recommended
               \unit: NX_VELOCITY
               \doc: |
                 The speed of the cantilever tip during retract in point force spectroscopy.
@@ -272,7 +289,7 @@ NXafm(NXspm):
 #         <field name="scan_mode">
 #             <doc>
 #                 The mode of the scan.
-#                 
+#
 #                 contact mode: Cantilever attempts to move on the sample surface in very close contact with the sample.
 #                  The cantilever deflection is usually employed to control the cantilever position using a PID feedback loop.
 #                 non-contact mode: Cantilever attempts to oscillate above the sample surface. Cantilever attempts to stay in the
@@ -309,7 +326,7 @@ NXafm(NXspm):
 #                 <group name="cantilever_oscillator" type="NXspm_cantilever_oscillator" recommended="true">
 #                     <doc>
 #                         When a cantilever is oscillated close to its resonance, this describes the oscillator properties.
-#                         
+#
 #                         A cantilever can be used in direct contact mode to detect interaction forces or oscillated close to its
 #                         resonance frequency. Changes in the oscillation amplitude, phase (between oscillated tail and moving tip)
 #                         or resonance frequency are very sensitive to changes in the interaction potential field, giving rise of
