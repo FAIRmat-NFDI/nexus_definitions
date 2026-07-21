@@ -36,7 +36,9 @@ NXevent_data(NXobject):
     \unit: NX_DIMENSIONLESS
     \doc: |
       There will be extra information in the NXdetector to convert
-      event_id to detector_number.
+      event_id to detector_number. But in short,
+      event_id contains information about detector_id which is
+      related to the specific pixels on the detector bank.
     \dimensions:
       \rank: 1
       \dim: (i,)
@@ -56,6 +58,10 @@ NXevent_data(NXobject):
     \doc: |
       The index into the event_time_offset, event_id pair for
       the pulse occurring at the matching entry in event_time_zero.
+      Each pulse creates an entry in the event_index,
+      the value of event_index points to the latest index of the event in event_id.
+      Sometimes, two adjcent event_index[i] and event_index[i+1] will have the same value,
+      this means there is no additonal neutron hit the detector bank in (i+1)th pulse.
     \dimensions:
       \rank: 1
       \dim: (j,)
@@ -82,7 +88,7 @@ NXevent_data(NXobject):
       cue_timestamp.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 280a3fe5c00d9eac2694c22f40bac337b8b0c1afb9d374037e8f0f4c07a6aec3
+# a9b781e9bf705a669e3c5556676bc5836b93854c41168f53938d6bdf9f3d6466
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
 # <!--
@@ -145,7 +151,9 @@ NXevent_data(NXobject):
 # 	<field name="event_id" type="NX_INT" units="NX_DIMENSIONLESS">
 # 		<doc>
 # 			There will be extra information in the NXdetector to convert 
-# 			event_id to detector_number.
+# 			event_id to detector_number. But in short, 
+# 			event_id contains information about detector_id which is 
+# 			related to the specific pixels on the detector bank.
 # 		</doc>
 # 		<dimensions rank="1"><dim index="1" value="i"/></dimensions>
 # 	</field>
@@ -162,6 +170,10 @@ NXevent_data(NXobject):
 # 	  <doc>
 # 	    The index into the event_time_offset, event_id pair for
 # 	    the pulse occurring at the matching entry in event_time_zero.
+# 	    Each pulse creates an entry in the event_index, 
+# 	    the value of event_index points to the latest index of the event in event_id. 
+# 	    Sometimes, two adjcent event_index[i] and event_index[i+1] will have the same value, 
+# 	    this means there is no additonal neutron hit the detector bank in (i+1)th pulse.
 # 	  </doc>
 # 		<dimensions rank="1"><dim index="1" value="j"/></dimensions>
 # 	</field>
