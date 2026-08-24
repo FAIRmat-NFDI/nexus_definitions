@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 <!--
 # NeXus - Neutron and X-ray Common Data Format
@@ -25,6 +25,7 @@
     <doc>
         Scanning Probe Microscopy (SPM) is a branch of microscopy that utilizes a physical probe to scan the surface of
         sample and image it at the atomic level.
+        
         The application class NXspm is designed as a skeleton and contains common technical concepts
         for specific SPM sub-techniques such as STM, STS, AFM etc. In addition, it can be utilized to
         describe the SPM experiments without further specialization for each sub-technique.
@@ -53,6 +54,7 @@
                 The mode of the scan. The possible options depend on the type of experiment.
                 For example, in STM, the scan mode could be constant height or constant current,
                 in AFM, the scan mode could be contact mode, tapping mode or non-contact mode.
+                
                 For general purpose usage, all scan modes from its sub-techniques are listed.
             </doc>
             <enumeration open="true">
@@ -151,6 +153,7 @@
                 <doc>
                     Information of the scan environment holding concept for
                     temperature, setpoint (current or height), scan area and scan data.
+                    
                     Note: At least one field from head_temperature, cryo_bottom_temperature and cryo_shield_temperature must be provided.
                 </doc>
                 <field name="head_temperature" type="NX_NUMBER" recommended="true" units="NX_TEMPERATURE">
@@ -256,22 +259,22 @@
                                 The angle of the scan region in y direction.
                             </doc>
                         </field>
-                        <field name="scan_start_x" type="NX_NUMBER" units="NX_LENGTH">
+                        <field name="scan_start_x" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
                             <doc>
                                 The start of the scan in x direction.
                             </doc>
                         </field>
-                        <field name="scan_start_y" type="NX_NUMBER" units="NX_LENGTH">
+                        <field name="scan_start_y" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
                             <doc>
                                 The start of the scan in y direction.
                             </doc>
                         </field>
-                        <field name="scan_end_x" type="NX_NUMBER" units="NX_LENGTH">
+                        <field name="scan_end_x" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
                             <doc>
                                 The end of the scan in x direction.
                             </doc>
                         </field>
-                        <field name="scan_end_y" type="NX_NUMBER" units="NX_LENGTH">
+                        <field name="scan_end_y" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
                             <doc>
                                 The end of the scan in y direction.
                             </doc>
@@ -355,7 +358,9 @@
                     The sensor information for the voltage device. Any voltage sensor involved in the
                     experiment or in any special measurement or in any specialized experiment component
                     can be registered under this group.
+                    
                     For this purpose, replace the TAG with the specific name or ID of the voltage sensor.
+                    
                     Do not register this group for sample bias voltage (DC), for that we have :ref:`sample_bias_voltage &lt;/NXspm/entry/instrument/sample_bias_voltage-group&gt;` group.
                 </doc>
                 <field name="NAMEvoltage" type="NX_CHAR" optional="true" nameType="partial">
@@ -459,6 +464,7 @@
                 <doc>
                     To explain bias and current behavior (sweep measurement especially in STS experiment)
                     due to voltage applied to the sample.
+                    
                     In some experiments, e.g., STM, bias spectroscopy could also be part of the measurement setup.
                 </doc>
                 <group type="NXspm_bias_spectroscopy">
@@ -469,6 +475,7 @@
                     <group type="NXspm_positioner" recommended="true">
                         <doc>
                             Information about positioner used in STS scan settings, like PID controller and offset.
+                            
                             Reuse, if needed, this group for positioners for multiple scans at different points on sample.
                         </doc>
                         <group name="z_controller" type="NXpid_controller" recommended="true"/>
@@ -556,12 +563,14 @@
                 <group name="sample_bias_voltage" type="NXsensor" optional="true">
                     <doc>
                         This should be a link to
+                        
                         /entry/instrument/sample_bias_voltage sensor under instrument.
                     </doc>
                 </group>
                 <group name="sample_temperature_sensor" type="NXspm_temperature_sensor" optional="true">
                     <doc>
                         This should be a link to
+                        
                         /entry/instrument/sample_temperature_sensor under instrument.
                     </doc>
                 </group>
@@ -580,6 +589,13 @@
             <field name="AXISNAME" type="NX_CHAR_OR_NUMBER" units="NX_ANY" nameType="any">
                 <doc>
                     The name of the axis that corresponds to the data field.
+                </doc>
+            </field>
+        </group>
+        <group name="citeID" type="NXcite" minOccurs="0" maxOccurs="unbounded" nameType="partial">
+            <field name="author" type="NX_CHAR" optional="true">
+                <doc>
+                    The author(s) of that reference.
                 </doc>
             </field>
         </group>

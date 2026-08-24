@@ -1,6 +1,22 @@
 \category: application
 \doc: |
   An application definition to describe atomic force microscopy (AFM).
+  
+  In AFM a sharp tip mounted on a flexible cantilever senses the tip-sample interaction force.
+  This application definition covers the two complementary classes of AFM experiment:
+  
+  1. Imaging (raster scan): the tip is scanned over the sample surface in a raster (mesh) pattern
+     while a feedback loop keeps a chosen set point constant. This yields maps of the surface topography
+     together with the accompanying channels such as amplitude, phase, frequency shift or deflection error.
+     Such experiments are described by the ``meshSCAN`` scan pattern group.
+  
+  2. Force spectroscopy (single point): the lateral position of the tip is kept fixed and the
+     tip-sample distance is ramped along z while the cantilever deflection is recorded, giving a
+     force-distance (force-versus-z) curve for the approach and the retract (retrace) segment.
+     Such experiments are described by the ``point_forceSCAN`` scan pattern group.
+  
+  Both classes can be combined within a single experiment, as in force-volume mapping or peak
+  force tapping, where a force-distance curve is recorded at every point of a raster grid.
 \type: group
 NXafm(NXspm):
   (NXentry):
@@ -15,7 +31,7 @@ NXafm(NXspm):
     scan_mode:
       \doc: |
         The mode of the scan.
-
+        
         contact mode: Cantilever attempts to move on the sample surface in very close contact with the sample.
          The cantilever deflection is usually employed to control the cantilever position using a PID feedback loop.
         non-contact mode: Cantilever attempts to oscillate above the sample surface. Cantilever attempts to stay in the
@@ -28,13 +44,7 @@ NXafm(NXspm):
          The maximum force is usually employed to control the cantilever position using a PID feedback loop.
       \enumeration:
         \open: true
-        \items:
-          [
-            contact mode,
-            tapping mode,
-            non-contact mode,
-            peak force tapping mode,
-          ]
+        \items: [contact mode, tapping mode, non-contact mode, peak force tapping mode]
     (NXinstrument):
       photo_detector(NXdetector):
         \exists: optional
@@ -52,10 +62,10 @@ NXafm(NXspm):
           \exists: recommended
           \doc: |
             When a cantilever is oscillated close to its resonance, this describes the oscillator properties.
-
+            
             A cantilever can be used in direct contact mode to detect interaction forces or oscillated close to its
-            resonance frequency near to surface in non-contact mode or in tapping mode. Changes in the oscillation 
-            amplitude, phase (between oscillated tail and moving tip) or resonance frequency are very sensitive to 
+            resonance frequency near to surface in non-contact mode or in tapping mode. Changes in the oscillation
+            amplitude, phase (between oscillated tail and moving tip) or resonance frequency are very sensitive to
             changes in the interaction potential field, giving rise of various measurement modes, such as non-contact
             or intermittent-contact (tapping) modes.
           reference_amplitude(NX_NUMBER):
@@ -90,26 +100,16 @@ NXafm(NXspm):
             \doc: |
               The scan region (phase space or sub-phase space) is the region where the scan is
               performed.
-            scan_range_z(NX_NUMBER):
-              \exists: optional
-              \unit: NX_LENGTH
-              \doc: |
-                The range of the scan in z direction (for point force spectroscopy).
-            scan_offset_value_z(NX_NUMBER):
-              \exists: optional
-              \unit: NX_LENGTH
-              \doc: |
-                The offset of the scan in z direction (for point force spectroscopy).
             scan_start_x(NX_NUMBER):
               \exists: recommended
               \unit: NX_LENGTH
               \doc: |
-                The start of the scan in x direction (for raster scan)
+                The start of the scan in x direction (for afm raster scan)
             scan_start_y(NX_NUMBER):
               \exists: recommended
               \unit: NX_LENGTH
               \doc: |
-                The start of the scan in y direction (for raster scan).
+                The start of the scan in y direction (for afm raster scan).
             scan_start_z(NX_NUMBER):
               \exists: recommended
               \unit: NX_LENGTH
@@ -119,12 +119,12 @@ NXafm(NXspm):
               \exists: recommended
               \unit: NX_LENGTH
               \doc: |
-                The end of the scan in x direction (for raster scan).
+                The end of the scan in x direction (for afm raster scan).
             scan_end_y(NX_NUMBER):
               \exists: recommended
               \unit: NX_LENGTH
               \doc: |
-                The end of the scan in y direction (for raster scan).
+                The end of the scan in y direction (for afm raster scan).
             scan_end_z(NX_NUMBER):
               \exists: recommended
               \unit: NX_LENGTH
@@ -136,9 +136,9 @@ NXafm(NXspm):
             \doc: |
               The mesh scan is a common technique used in AFM for imaging of the surface of given sample
               in a grid pattern.
-
-              This group is rquired to be present if the AFM experiment associated with ruster scan that 
-              includes contract mode, non-contact mode, tapping mode and peak force tapping mode.
+              
+              This group is required to be present if the AFM experiment is associated with a raster scan,
+              which includes contact mode, non-contact mode, tapping mode and peak force tapping mode.
           point_forceSCAN(NXspm_scan_pattern):
             \nameType: partial
             \exists: optional
@@ -147,7 +147,8 @@ NXafm(NXspm):
                 1. approach
                 2. retrace.
                 
-              This group is rquired to be present if the AFM experiment associated with point force spectroscopy.
+              This group is required to be present if the AFM experiment is associated with point force
+              spectroscopy.
             scan_points_z(NX_NUMBER):
               \exists: recommended
               \doc: |
@@ -241,8 +242,8 @@ NXafm(NXspm):
           /entry/instrument/phase_lock_loop/amplitude_excitation
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# 453b9b4041b86ce76ff72f9ebd20a4711d1ba263afeb5c0476e617649d961d9a
-# <?xml version='1.0' encoding='UTF-8'?>
+# 8e4a84beb1b796748f977dd6bbfe51383b96347e9446f603db90a49f30fc3eb7
+# <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
 # # NeXus - Neutron and X-ray Common Data Format
@@ -268,6 +269,22 @@ NXafm(NXspm):
 # <definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXafm" extends="NXspm" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
 #     <doc>
 #         An application definition to describe atomic force microscopy (AFM).
+#         
+#         In AFM a sharp tip mounted on a flexible cantilever senses the tip-sample interaction force.
+#         This application definition covers the two complementary classes of AFM experiment:
+#         
+#         1. Imaging (raster scan): the tip is scanned over the sample surface in a raster (mesh) pattern
+#            while a feedback loop keeps a chosen set point constant. This yields maps of the surface topography
+#            together with the accompanying channels such as amplitude, phase, frequency shift or deflection error.
+#            Such experiments are described by the ``meshSCAN`` scan pattern group.
+#         
+#         2. Force spectroscopy (single point): the lateral position of the tip is kept fixed and the
+#            tip-sample distance is ramped along z while the cantilever deflection is recorded, giving a
+#            force-distance (force-versus-z) curve for the approach and the retract (retrace) segment.
+#            Such experiments are described by the ``point_forceSCAN`` scan pattern group.
+#         
+#         Both classes can be combined within a single experiment, as in force-volume mapping or peak
+#         force tapping, where a force-distance curve is recorded at every point of a raster grid.
 #     </doc>
 #     <group type="NXentry">
 #         <field name="definition">
@@ -289,7 +306,7 @@ NXafm(NXspm):
 #         <field name="scan_mode">
 #             <doc>
 #                 The mode of the scan.
-#
+#                 
 #                 contact mode: Cantilever attempts to move on the sample surface in very close contact with the sample.
 #                  The cantilever deflection is usually employed to control the cantilever position using a PID feedback loop.
 #                 non-contact mode: Cantilever attempts to oscillate above the sample surface. Cantilever attempts to stay in the
@@ -326,13 +343,14 @@ NXafm(NXspm):
 #                 <group name="cantilever_oscillator" type="NXspm_cantilever_oscillator" recommended="true">
 #                     <doc>
 #                         When a cantilever is oscillated close to its resonance, this describes the oscillator properties.
-#
+#                         
 #                         A cantilever can be used in direct contact mode to detect interaction forces or oscillated close to its
-#                         resonance frequency. Changes in the oscillation amplitude, phase (between oscillated tail and moving tip)
-#                         or resonance frequency are very sensitive to changes in the interaction potential field, giving rise of
-#                         various measurement modes, such as non-contact or intermittent-contact (tapping) modes.
+#                         resonance frequency near to surface in non-contact mode or in tapping mode. Changes in the oscillation
+#                         amplitude, phase (between oscillated tail and moving tip) or resonance frequency are very sensitive to
+#                         changes in the interaction potential field, giving rise of various measurement modes, such as non-contact
+#                         or intermittent-contact (tapping) modes.
 #                     </doc>
-#                     <field name="reference_amplitude" type="NX_NUMBER" units="NX_LENGTH" recommended="true"/>
+#                     <field name="reference_amplitude" type="NX_NUMBER" units="NX_VOLTAGE" recommended="true"/>
 #                     <field name="reference_frequency" type="NX_NUMBER" units="NX_FREQUENCY" recommended="true"/>
 #                     <field name="reference_phase" type="NX_NUMBER" units="NX_ANGLE" recommended="true"/>
 #                 </group>
@@ -356,6 +374,91 @@ NXafm(NXspm):
 #                 <doc>
 #                     The environment information.
 #                 </doc>
+#                 <group type="NXspm_scan_control">
+#                     <doc>
+#                         The scan control information related to the scan pattern and scan area.
+#                     </doc>
+#                     <group name="scan_region" type="NXspm_scan_region">
+#                         <doc>
+#                             The scan region (phase space or sub-phase space) is the region where the scan is
+#                             performed.
+#                         </doc>
+#                         <field name="scan_start_x" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
+#                             <doc>
+#                                 The start of the scan in x direction (for afm raster scan)
+#                             </doc>
+#                         </field>
+#                         <field name="scan_start_y" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
+#                             <doc>
+#                                 The start of the scan in y direction (for afm raster scan).
+#                             </doc>
+#                         </field>
+#                         <field name="scan_start_z" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
+#                             <doc>
+#                                 The start of the scan in z direction (for point force spectroscopy).
+#                             </doc>
+#                         </field>
+#                         <field name="scan_end_x" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
+#                             <doc>
+#                                 The end of the scan in x direction (for afm raster scan).
+#                             </doc>
+#                         </field>
+#                         <field name="scan_end_y" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
+#                             <doc>
+#                                 The end of the scan in y direction (for afm raster scan).
+#                             </doc>
+#                         </field>
+#                         <field name="scan_end_z" type="NX_NUMBER" recommended="true" units="NX_LENGTH">
+#                             <doc>
+#                                 The end of the scan in z direction (for point force spectroscopy).
+#                             </doc>
+#                         </field>
+#                     </group>
+#                     <group name="meshSCAN" type="NXspm_scan_pattern" nameType="partial" optional="true">
+#                         <doc>
+#                             The mesh scan is a common technique used in AFM for imaging of the surface of given sample
+#                             in a grid pattern.
+#                             
+#                             This group is required to be present if the AFM experiment is associated with a raster scan,
+#                             which includes contact mode, non-contact mode, tapping mode and peak force tapping mode.
+#                         </doc>
+#                     </group>
+#                     <group name="point_forceSCAN" type="NXspm_scan_pattern" nameType="partial" optional="true">
+#                         <doc>
+#                             The scan data from point force spectroscopy, force between the tip and the sample at a specific point:
+#                               1. approach
+#                               2. retrace.
+#                               
+#                             This group is required to be present if the AFM experiment is associated with point force
+#                             spectroscopy.
+#                         </doc>
+#                         <field name="scan_points_z" type="NX_NUMBER" recommended="true">
+#                             <doc>
+#                                 The number of points scanned in z direction, approach and retrace are same.
+#                             </doc>
+#                         </field>
+#                         <field name="scan_points_approach" type="NX_NUMBER" recommended="true">
+#                             <doc>
+#                                 The number of points scanned in approach.
+#                             </doc>
+#                         </field>
+#                         <field name="scan_points_retrace" type="NX_NUMBER" recommended="true">
+#                             <doc>
+#                                 The number of points scanned in retrace.
+#                             </doc>
+#                         </field>
+#                         <field name="forward_speed_approach" type="NX_NUMBER" recommended="true" units="NX_ANY">
+#                             <doc>
+#                                 The speed of the cantilever tip during approach in point force spectroscopy.
+#                             </doc>
+#                         </field>
+#                         <field name="backward_speed_retrace" type="NX_NUMBER" recommended="true" units="NX_ANY">
+#                             <doc>
+#                                 The speed of the cantilever tip during retract in point force spectroscopy.
+#                             </doc>
+#                         </field>
+#                     </group>
+#                 </group>
 #                 <group name="XYpiezo_sensor" type="NXspm_piezo_sensor" nameType="partial" optional="true">
 #                     <doc>
 #                         This should be a link to the concept
