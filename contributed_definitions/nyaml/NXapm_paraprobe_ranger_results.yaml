@@ -24,6 +24,18 @@ NXapm_paraprobe_ranger_results(NXapm_paraprobe_tool_results):
         If an ion matches on no type, the ion is assume of the default
         *unknown_type*. In this case, the value *iontypes* is 0.
         In other cases the value is larger than 0.
+      ionID(NXatom):
+        \nameType: partial
+        \exists: ['min', '1', 'max', '256']
+        \doc: |
+          An ion ranged; the instance name ``ion0`` is reserved for
+          documenting ``unknown_type`` (positions of atoms not ranged).
+        nuclide_hash(NX_UINT):
+        charge_state(NX_INT):
+        nuclide_list(NX_UINT):
+          \exists: recommended
+        name(NX_CHAR):
+          \exists: recommended
       iontypes(NX_UINT):
         \unit: NX_UNITLESS
         \doc: |
@@ -34,7 +46,7 @@ NXapm_paraprobe_ranger_results(NXapm_paraprobe_tool_results):
           \dim: (n_ions,)
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# bcd3adb5af1a57c4d159becd68e26edfe12cda6a2607159315f4cce6c47b1c65
+# 86222ab74f0b5e5822fa67acd0163bf837792922d285eed3233fe31c3e9b2de3
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -89,6 +101,16 @@ NXapm_paraprobe_ranger_results(NXapm_paraprobe_tool_results):
 #                 *unknown_type*. In this case, the value *iontypes* is 0.
 #                 In other cases the value is larger than 0.
 #             </doc>
+#             <group name="ionID" type="NXatom" nameType="partial" minOccurs="1" maxOccurs="256">
+#                 <doc>
+#                     An ion ranged; the instance name ``ion0`` is reserved for
+#                     documenting ``unknown_type`` (positions of atoms not ranged).
+#                 </doc>
+#                 <field name="nuclide_hash" type="NX_UINT"/>
+#                 <field name="charge_state" type="NX_INT"/>
+#                 <field name="nuclide_list" type="NX_UINT" recommended="true"/>
+#                 <field name="name" type="NX_CHAR" recommended="true"/>
+#             </group>
 #             <field name="iontypes" type="NX_UINT" units="NX_UNITLESS">
 #                 <doc>
 #                     The iontype (identifier) for each ion that was best matching,
