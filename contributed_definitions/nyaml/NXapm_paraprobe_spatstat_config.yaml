@@ -99,16 +99,19 @@ NXapm_paraprobe_spatstat_config(NXapm_paraprobe_tool_config):
           
           The value resolve_element will set an ion active, and most importantly,
           account for each as many times as the (molecular) ion contains
-          atoms of elements in the whitelist ion_query_isotope_vector.
+          atoms of elements in the whitelist ion_query_nuclide_source.
           
           The value resolve_isotope will set an ion active, and most importantly,
           account for each as many times as the (molecular) ion contains
-          isotopes in the whitelist ion_query_isotope_vector.
+          isotopes in the whitelist ion_query_nuclide_source.
           
-          In effect, ion_query_isotope_vector acts as a whitelist to filter
+          In effect, ion_query_nuclide_source acts as a whitelist to filter
           which ions are considered as source ions of the correlation statistics
           and how the multiplicity of each ion will be factorized, i.e. how
           often it is accounted for.
+          
+          The sibling concepts ion_query_nuclide_target and ion_query_type_target
+          configure respectively but for the atoms that are considered targets.
         \enumeration: [resolve_all, resolve_unknown, resolve_ion, resolve_element, resolve_isotope]
       ion_query_nuclide_source(NX_UINT):
         \unit: NX_UNITLESS
@@ -117,9 +120,9 @@ NXapm_paraprobe_spatstat_config(NXapm_paraprobe_tool_config):
           for iontypes should be distinguished as possible source iontypes.
           In the simplest case, the matrix contains only the proton number
           of the element in the row, all other values set to zero.
-          Combined with ion_query_type_source set to resolve_element this will
-          recover usual spatial correlation statistics like the 1NN C-C
-          spatial statistics.
+          Combined with ion_query_type_source set to resolve_element, this
+          configures the recovery of usual spatial correlation statistics
+          like the 1NN C-C spatial statistics, i.e. k-th nearest neighbor.
         \dimensions:
           \rank: 2
           \dim: (n_ion_source, n_ivec_max)
@@ -186,7 +189,7 @@ NXapm_paraprobe_spatstat_config(NXapm_paraprobe_tool_config):
               Maximum value of the histogram binning.
 
 # ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
-# c5dfb65ab45ec464784d2fa21486ce1c5a618e8fb4d7835e890d6fac72c151a8
+# d1f547df9f7fa6ada71c8c0f2405ae6a84aeef6a7abf6cb8ca799470e57b02fe
 # <?xml version="1.0" encoding="UTF-8"?>
 # <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
 # <!--
@@ -328,16 +331,19 @@ NXapm_paraprobe_spatstat_config(NXapm_paraprobe_tool_config):
 #                     
 #                     The value resolve_element will set an ion active, and most importantly,
 #                     account for each as many times as the (molecular) ion contains
-#                     atoms of elements in the whitelist ion_query_isotope_vector.
+#                     atoms of elements in the whitelist ion_query_nuclide_source.
 #                     
 #                     The value resolve_isotope will set an ion active, and most importantly,
 #                     account for each as many times as the (molecular) ion contains
-#                     isotopes in the whitelist ion_query_isotope_vector.
+#                     isotopes in the whitelist ion_query_nuclide_source.
 #                     
-#                     In effect, ion_query_isotope_vector acts as a whitelist to filter
+#                     In effect, ion_query_nuclide_source acts as a whitelist to filter
 #                     which ions are considered as source ions of the correlation statistics
 #                     and how the multiplicity of each ion will be factorized, i.e. how
 #                     often it is accounted for.
+#                     
+#                     The sibling concepts ion_query_nuclide_target and ion_query_type_target
+#                     configure respectively but for the atoms that are considered targets.
 #                 </doc>
 #                 <enumeration>
 #                     <item value="resolve_all"/>
@@ -353,9 +359,9 @@ NXapm_paraprobe_spatstat_config(NXapm_paraprobe_tool_config):
 #                     for iontypes should be distinguished as possible source iontypes.
 #                     In the simplest case, the matrix contains only the proton number
 #                     of the element in the row, all other values set to zero.
-#                     Combined with ion_query_type_source set to resolve_element this will
-#                     recover usual spatial correlation statistics like the 1NN C-C
-#                     spatial statistics.
+#                     Combined with ion_query_type_source set to resolve_element, this
+#                     configures the recovery of usual spatial correlation statistics
+#                     like the 1NN C-C spatial statistics, i.e. k-th nearest neighbor.
 #                 </doc>
 #                 <dimensions rank="2">
 #                     <dim index="1" value="n_ion_source"/>
