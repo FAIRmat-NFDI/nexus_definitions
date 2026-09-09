@@ -12,9 +12,9 @@ from ..globals.directories import get_nxdl_root
 from ..globals.errors import NXDLParseError
 from ..globals.nxdl import NXDL_NAMESPACE
 from ..globals.urls import REPO_URL
+from ..utils import nxdl_utils
+from ..utils import xml_utils
 from ..utils.github import get_file_contributors_via_api
-from ..utils.nxdl_utils import get_inherited_nodes
-from ..utils.nxdl_utils import get_rst_formatted_name
 from ..utils.types import PathLike
 from .anchor_list import AnchorRegistry
 
@@ -368,8 +368,8 @@ class NXClassDocGenerator:
         :param obj node: instance of lxml.etree._Element
         :returns: formatted text
         """
-        tag = node.tag.split("}")[-1]
-        if tag in ("field", "group"):
+        nxdl_element_type = nxdl_utils.get_nxdl_element_type(node)
+        if nxdl_element_type in ("field", "group", "choice"):
             optional_default = not self._use_application_defaults
             optional = node.get("optional", optional_default) in (True, "true", "1", 1)
             recommended = node.get("recommended", None) in (True, "true", "1", 1)
@@ -384,7 +384,7 @@ class NXClassDocGenerator:
                 # this is unexpected and remarkable
                 # TODO: add a remark to the log
                 optional_text = f"(``minOccurs={str(minOccurs)}``) "
-        elif tag in ("attribute",):
+        elif nxdl_element_type in ("attribute",):
             optional_default = not self._use_application_defaults
             optional = node.get("optional", optional_default) in (True, "true", "1", 1)
             recommended = node.get("recommended", None) in (True, "true", "1", 1)
@@ -392,7 +392,7 @@ class NXClassDocGenerator:
             if recommended:
                 optional_text = "(recommended) "
         else:
-            optional_text = "(unknown tag: " + str(tag) + ") "
+            optional_text = "(unknown tag: " + str(nxdl_element_type) + ") "
         return optional_text
 
     def _analyze_dimensions(self, ns, parent) -> str:
@@ -601,7 +601,7 @@ class NXClassDocGenerator:
 
     def _print_attribute(self, ns, kind, node, optional, indent, parent_path):
         name = node.get("name")
-        formatted_name = get_rst_formatted_name(node)
+        formatted_name = nxdl_utils.get_rst_formatted_name(node)
         index_name = name
         self._print(
             f"{indent}" f"{self._hyperlink_target(parent_path, name, 'attribute')}"
@@ -629,91 +629,144 @@ class NXClassDocGenerator:
         :param indent: to keep track of indentation level
         :param parent_path: NX class path of parent nodes
         """
-        for node in parent.xpath("nx:field", namespaces=ns):
-            name = node.get("name")
-            formatted_name = get_rst_formatted_name(node)
-            index_name = name
-            dims = self._analyze_dimensions(ns, node)
+        # Process children in document order to preserve XML ordering.
+        for node in parent.xpath("nx:field|nx:group|nx:choice|nx:link", namespaces=ns):
+            nxdl_element_type = nxdl_utils.get_nxdl_element_type(node)
 
-            optional_text = self._get_required_or_optional_text(node)
-            self._print(f"{indent}{self._hyperlink_target(parent_path, name, 'field')}")
-            self._print(f"{indent}.. index:: {index_name} (field)\n")
-            self._print(
-                f"{indent}{formatted_name}: "
-                f"{optional_text}"
-                f"{self._format_type(node)}"
-                f"{dims}"
-                f"{self._format_units(node)}"
-                f" {self.get_first_parent_ref(f'{parent_path}/{name}', 'field')}"
-                "\n"
-            )
+            if nxdl_element_type == "field":
+                name = node.get("name")
+                formatted_name = nxdl_utils.get_rst_formatted_name(node)
+                index_name = name
+                dims = self._analyze_dimensions(ns, node)
 
-            self._print_if_deprecated(ns, node, indent + self._INDENTATION_UNIT)
-            self._print_doc_enum(indent, ns, node)
+                optional_text = self._get_required_or_optional_text(node)
+                self._print(
+                    f"{indent}{self._hyperlink_target(parent_path, name, 'field')}"
+                )
+                self._print(f"{indent}.. index:: {index_name} (field)\n")
+                self._print(
+                    f"{indent}{formatted_name}: "
+                    f"{optional_text}"
+                    f"{self._format_type(node)}"
+                    f"{dims}"
+                    f"{self._format_units(node)}"
+                    f" {self.get_first_parent_ref(f'{parent_path}/{name}', 'field')}"
+                    "\n"
+                )
 
-            for subnode in node.xpath("nx:attribute", namespaces=ns):
-                optional = self._get_required_or_optional_text(subnode)
-                self._print_attribute(
+                self._print_if_deprecated(ns, node, indent + self._INDENTATION_UNIT)
+                self._print_doc_enum(indent, ns, node)
+
+                for subnode in node.xpath("nx:attribute", namespaces=ns):
+                    optional = self._get_required_or_optional_text(subnode)
+                    self._print_attribute(
+                        ns,
+                        "field",
+                        subnode,
+                        optional,
+                        indent + self._INDENTATION_UNIT,
+                        parent_path + "/" + name,
+                    )
+
+            elif nxdl_element_type == "group":
+                name = node.get("name", "")
+                formatted_name = nxdl_utils.get_rst_formatted_name(node)
+                typ = node.get("type", "untyped (this is an error; please report)")
+
+                optional_text = self._get_required_or_optional_text(node)
+                if typ.startswith("NX"):
+                    if name == "":
+                        name = typ.lstrip("NX").upper()
+                    typ = f":ref:`{typ}`"
+                hTarget = self._hyperlink_target(parent_path, name, "group")
+                # target = hTarget.replace(".. _", "").replace(":\n", "")
+                # TODO: https://github.com/nexusformat/definitions/issues/1057
+                self._print(f"{indent}{hTarget}")
+                self._print(
+                    f"{indent}{formatted_name}: {optional_text}{typ} "
+                    f"{self.get_first_parent_ref(f'{parent_path}/{name}', 'group')}\n"
+                )
+
+                self._print_if_deprecated(ns, node, indent + self._INDENTATION_UNIT)
+                self._print_doc_enum(indent, ns, node)
+
+                for subnode in node.xpath("nx:attribute", namespaces=ns):
+                    optional = self._get_required_or_optional_text(subnode)
+                    self._print_attribute(
+                        ns,
+                        "group",
+                        subnode,
+                        optional,
+                        indent + self._INDENTATION_UNIT,
+                        parent_path + "/" + name,
+                    )
+
+                nodename = "%s/%s" % (name, node.get("type"))
+                self._print_full_tree(
                     ns,
-                    "field",
-                    subnode,
-                    optional,
+                    node,
+                    nodename,
                     indent + self._INDENTATION_UNIT,
                     parent_path + "/" + name,
                 )
 
-        for node in parent.xpath("nx:group", namespaces=ns):
-            name = node.get("name", "")
-            formatted_name = get_rst_formatted_name(node)
-            typ = node.get("type", "untyped (this is an error; please report)")
-
-            optional_text = self._get_required_or_optional_text(node)
-            if typ.startswith("NX"):
-                if name == "":
-                    name = typ.lstrip("NX").upper()
-                typ = f":ref:`{typ}`"
-            hTarget = self._hyperlink_target(parent_path, name, "group")
-            # target = hTarget.replace(".. _", "").replace(":\n", "")
-            # TODO: https://github.com/nexusformat/definitions/issues/1057
-            self._print(f"{indent}{hTarget}")
-            self._print(
-                f"{indent}{formatted_name}: {optional_text}{typ} {self.get_first_parent_ref(f'{parent_path}/{name}', 'group')}\n"
-            )
-
-            self._print_if_deprecated(ns, node, indent + self._INDENTATION_UNIT)
-            self._print_doc_enum(indent, ns, node)
-
-            for subnode in node.xpath("nx:attribute", namespaces=ns):
-                optional = self._get_required_or_optional_text(subnode)
-                self._print_attribute(
-                    ns,
-                    "group",
-                    subnode,
-                    optional,
-                    indent + self._INDENTATION_UNIT,
-                    parent_path + "/" + name,
+            elif nxdl_element_type == "choice":
+                name = node.get("name", "")
+                hTarget = self._hyperlink_target(parent_path, name, "choice")
+                self._print(f"{indent}{hTarget}")
+                optional_text = self._get_required_or_optional_text(node).strip("() ")
+                self._print(
+                    f"{indent}**{name}**: ({optional_text}) "
+                    "Only one of the following groups may be present:\n"
                 )
+                self._print_doc_enum(indent, ns, node)
 
-            nodename = "%s/%s" % (name, node.get("type"))
-            self._print_full_tree(
-                ns,
-                node,
-                nodename,
-                indent + self._INDENTATION_UNIT,
-                parent_path + "/" + name,
-            )
+                # Print each group option within the choice.
+                for subnode in node.xpath("nx:group", namespaces=ns):
+                    subname = subnode.get("name", "")
+                    typ = subnode.get(
+                        "type", "untyped (this is an error; please report)"
+                    )
+                    if typ.startswith("NX"):
+                        if subname == "":
+                            subname = typ.lstrip("NX").upper()
+                        typ_ref = f":ref:`{typ}`"
+                    else:
+                        typ_ref = typ
+                    sub_indent = indent + self._INDENTATION_UNIT
+                    subTarget = self._hyperlink_target(
+                        parent_path + "/" + name, subname, "group"
+                    )
+                    self._print(f"{sub_indent}{subTarget}")
+                    self._print(f"{sub_indent}**{subname}**: {typ_ref}\n")
+                    self._print_doc_enum(sub_indent, ns, subnode)
 
-        for node in parent.xpath("nx:link", namespaces=ns):
-            name = node.get("name")
-            formatted_name = get_rst_formatted_name(node)
-            self._print(f"{indent}{self._hyperlink_target(parent_path, name, 'link')}")
-            self._print(
-                f"{indent}{formatted_name}: "
-                ":ref:`link<Design-Links>` "
-                f"(suggested target: ``{node.get('target')}``)"
-                "\n"
-            )
-            self._print_doc_enum(indent, ns, node)
+                    # Recursively print any content within this group option.
+                    nodename = "%s/%s" % (subname, subnode.get("type"))
+                    self._print_full_tree(
+                        ns,
+                        subnode,
+                        nodename,
+                        sub_indent + self._INDENTATION_UNIT,
+                        parent_path + "/" + name + "/" + subname,
+                    )
+
+            elif nxdl_element_type == "link":
+                name = node.get("name")
+                formatted_name = nxdl_utils.get_rst_formatted_name(node)
+                self._print(
+                    f"{indent}{self._hyperlink_target(parent_path, name, 'link')}"
+                )
+                self._print(
+                    f"{indent}{formatted_name}: "
+                    ":ref:`link<Design-Links>` "
+                    f"(suggested target: ``{node.get('target')}``)"
+                    "\n"
+                )
+                self._print_doc_enum(indent, ns, node)
+
+            else:
+                raise ValueError(f"Unknown node type: {nxdl_element_type}")
 
     def _print(self, *args, end="\n"):
         # TODO: change instances of \t to proper indentation
@@ -724,15 +777,13 @@ class NXClassDocGenerator:
         path = path[path.find("/", 1) :]
 
         try:
-            parents = get_inherited_nodes(path, nx_name)[2]
+            parents = nxdl_utils.get_inherited_nodes(path, nx_name)[2]
         except FileNotFoundError:
             return ""
         if len(parents) > 1:
             for parent in parents:
                 # iterate back and check tag matches
-                if not parent.tag.endswith(tag) and not parent.tag.endswith(
-                    "definition"
-                ):
+                if xml_utils.get_local_name(parent) not in (tag, "definition"):
                     print(
                         f"Warning: {path} has a mismatching inherited node - {parent.tag} cf {tag}"
                     )
