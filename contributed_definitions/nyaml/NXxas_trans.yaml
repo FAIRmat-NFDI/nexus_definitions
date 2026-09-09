@@ -1,0 +1,389 @@
+\category: application
+\doc: |
+  In transmission, the linear attenuation coefficient or absorption
+  coefficient :math:`\mu(E)` is given by the Beer-Lambert law:
+  
+  .. math:: \mu(E)t = -\ln(I/I_0)
+  
+  where :math:`I` is the intensity of the transmitted beam, :math:`I_0` is
+  the intensity of the incident beam, and :math:`t` is the thickness of the
+  sample.
+  
+  The top-level :ref:`intensity </NXxas/ENTRY/intensity-field>`
+  field contains the processed absorption coefficient. When the raw
+  detector data and processing steps are available, they can be stored
+  in the optional ``NXinstrument``, ``NXcollection``, and ``NXprocess``
+  groups, enabling full reproducibility of the data reduction.
+\type: group
+NXxas_trans(NXxas):
+  (NXentry):
+    definition:
+      \doc: |
+        Official NeXus NXDL schema to which this file conforms.
+      \enumeration: [NXxas_trans]
+    intensity(NX_FLOAT):
+      \unit: NX_ANY
+      \doc: |
+        The absorption coefficient :math:`\mu(E)t = -\ln(I/I_0)`.
+      \dimensions:
+        \rank: dataRank
+        \dim: (nP, nEnergy)
+    (NXinstrument):
+      \exists: recommended
+      \doc: |
+        The ``data`` field of each detector below holds the intensity
+        used to compute the absorption coefficient and may already
+        include corrections. If the uncorrected values are kept, they
+        are archived in the ``NXcollection`` group and the corrections
+        are described in ``NXprocess``.
+      (NXsource):
+        \exists: recommended
+        type:
+        name:
+        probe:
+          \enumeration: [x-ray]
+      monochromator(NXmonochromator):
+        \exists: recommended
+        energy(NX_FLOAT):
+          \unit: NX_ENERGY
+          \exists: recommended
+          \dimensions:
+            \rank: 1
+            \dim: (nEnergy,)
+        crystal(NXcrystal):
+          \exists: recommended
+          d_spacing(NX_FLOAT):
+            \unit: NX_LENGTH
+            \doc: |
+              The spacing between crystal planes of the reflection
+          type:
+            \doc: |
+              Type or material of monochromating substance
+              (Si, Ge, Multilayer).
+          reflection(NX_INT):
+            \unit: NX_UNITLESS
+            \doc: |
+              Miller indices (hkl) values of nominal reflection
+            \dimensions:
+              \dim: (3,)
+      i0(NXdetector):
+        \doc: |
+          Detector measuring the incident beam intensity
+          :math:`I_0`.
+        data(NX_NUMBER):
+          \dimensions:
+            \rank: dataRank
+            \dim: (nP, nEnergy)
+      itrans(NXdetector):
+        \doc: |
+          Detector measuring the transmitted beam intensity
+          :math:`I`.
+        data(NX_NUMBER):
+          \dimensions:
+            \rank: dataRank
+            \dim: (nP, nEnergy)
+      iref(NXdetector):
+        \exists: recommended
+        \doc: |
+          Detector measuring the reference intensity
+          :math:`I_{ref}`, placed after a reference sample
+          (typically a metal foil). For a reference that is an
+          independent spectrum probing a different absorbing
+          element or absorption edge, use the ``reference``
+          subentry instead.
+        data(NX_NUMBER):
+          \dimensions:
+            \rank: dataRank
+            \dim: (nP, nEnergy)
+    reference(NXsubentry):
+      \exists: optional
+      \doc: |
+        An independent reference spectrum, for example a metal-foil
+        standard used for energy calibration. Use this group instead
+        of the ``iref`` detector when the reference is a complete
+        spectrum in its own right, in particular when it probes a
+        different absorbing element or absorption edge, so that the
+        element, edge, energy axis, and intensity of the reference
+        can be described in full.
+        
+        Provide the ``iref`` detector when the reference is a
+        simultaneous transmission channel that shares the main energy
+        axis. Provide this ``reference`` subentry when the reference
+        is an independent measurement. Do not provide both for the
+        same reference.
+      definition:
+        \doc: |
+          Official NeXus NXDL schema to which this subentry conforms.
+          Should be an ``NXxas``-family definition (for example
+          ``NXxas`` or ``NXxas_trans``).
+    (NXcollection):
+      \exists: optional
+      \doc: |
+        Raw data as written by the acquisition software,
+        preserved without modification to allow independent
+        reprocessing.
+    (NXprocess):
+      \exists: optional
+      \doc: |
+        Description of how :ref:`intensity
+        </NXxas/ENTRY/intensity-field>` was obtained from the raw
+        detector data (i0, itrans, and iref). When present, it allows a
+        third party to fully reproduce the data reduction.
+      program(NX_CHAR):
+        \exists: optional
+        \doc: |
+          Name of the program used for processing.
+      version(NX_CHAR):
+        \exists: optional
+        \doc: |
+          Version of the program used for processing.
+      date(NX_DATE_TIME):
+        \exists: optional
+        \doc: |
+          Date and time of processing.
+      sequence_index(NX_POSINT):
+        \exists: optional
+        \doc: |
+          Order of this step when several NXprocess groups
+          describe a sequence of corrections.
+      parameters(NXparameters):
+        \exists: optional
+        \doc: |
+          Validated parameters of the corrections applied, for
+          example energy calibration, deglitching, incident-beam
+          normalization, or scan merging. Each parameter should
+          carry a units attribute where applicable.
+      note(NXnote):
+        \exists: optional
+        \doc: |
+          Code or notes reproducing the top-level :ref:`intensity
+          </NXxas/ENTRY/intensity-field>` from the raw data.
+        type:
+          \doc: |
+            Mime content type of the note data field.
+          \enumeration: [text/x-python]
+        data(NX_CHAR):
+          \doc: |
+            The reproduction code or notes.
+
+# ++++++++++++++++++++++++++++++++++ SHA HASH ++++++++++++++++++++++++++++++++++
+# bfe3e945af05172d0fbd9aacc38c647529ebd3433c279830319110cf56331760
+# <?xml version="1.0" encoding="UTF-8"?>
+# <?xml-stylesheet type="text/xsl" href="nxdlformat.xsl" ?>
+# <!--
+# # NeXus - Neutron and X-ray Common Data Format
+# #
+# # Copyright (C) 2026 NeXus International Advisory Committee (NIAC)
+# #
+# # This library is free software; you can redistribute it and/or
+# # modify it under the terms of the GNU Lesser General Public
+# # License as published by the Free Software Foundation; either
+# # version 3 of the License, or (at your option) any later version.
+# #
+# # This library is distributed in the hope that it will be useful,
+# # but WITHOUT ANY WARRANTY; without even the implied warranty of
+# # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# # Lesser General Public License for more details.
+# #
+# # You should have received a copy of the GNU Lesser General Public
+# # License along with this library; if not, write to the Free Software
+# # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# #
+# # For further information, see http://www.nexusformat.org
+# -->
+# <definition name="NXxas_trans" extends="NXxas" type="group" category="application"
+#     xmlns="http://definition.nexusformat.org/nxdl/3.1"
+#     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd ">
+#     <doc>
+#       In transmission, the linear attenuation coefficient or absorption
+#       coefficient :math:`\mu(E)` is given by the Beer-Lambert law:
+# 
+#       .. math:: \mu(E)t = -\ln(I/I_0)
+# 
+#       where :math:`I` is the intensity of the transmitted beam, :math:`I_0` is
+#       the intensity of the incident beam, and :math:`t` is the thickness of the
+#       sample.
+# 
+#       The top-level :ref:`intensity &lt;/NXxas/ENTRY/intensity-field&gt;`
+#       field contains the processed absorption coefficient. When the raw
+#       detector data and processing steps are available, they can be stored
+#       in the optional ``NXinstrument``, ``NXcollection``, and ``NXprocess``
+#       groups, enabling full reproducibility of the data reduction.
+#     </doc>
+#     <group type="NXentry">
+#         <field name="definition">
+#             <doc> Official NeXus NXDL schema to which this file conforms. </doc>
+#             <enumeration>
+#                 <item value="NXxas_trans"/>
+#             </enumeration>
+#         </field>
+#         <field name="intensity" type="NX_FLOAT" units="NX_ANY">
+#             <doc>
+#                 The absorption coefficient :math:`\mu(E)t = -\ln(I/I_0)`.
+#             </doc>
+#             <dimensions rank="dataRank">
+#                 <dim index="1" value="nP" />
+#                 <dim index="2" value="nEnergy" />
+#             </dimensions>
+#         </field>
+#         <group type="NXinstrument" recommended="true">
+#             <doc>
+#                 The ``data`` field of each detector below holds the intensity
+#                 used to compute the absorption coefficient and may already
+#                 include corrections. If the uncorrected values are kept, they
+#                 are archived in the ``NXcollection`` group and the corrections
+#                 are described in ``NXprocess``.
+#             </doc>
+#             <group type="NXsource" recommended="true">
+#                 <field name="type"/>
+#                 <field name="name"/>
+#                 <field name="probe">
+#                     <enumeration>
+#                         <item value="x-ray"/>
+#                     </enumeration>
+#                 </field>
+#             </group>
+#             <group type="NXmonochromator" name="monochromator" recommended="true">
+#                 <field name="energy" type="NX_FLOAT" units="NX_ENERGY" recommended="true">
+#                     <dimensions rank="1">
+#                         <dim index="1" value="nEnergy" />
+#                     </dimensions>
+#                 </field>
+#                 <group type="NXcrystal" name="crystal" recommended="true">
+#                     <field name="d_spacing" type="NX_FLOAT" units="NX_LENGTH">
+#                         <doc>The spacing between crystal planes of the reflection</doc>
+#                     </field>
+#                     <field name="type">
+#                         <doc>
+#                             Type or material of monochromating substance
+#                             (Si, Ge, Multilayer).
+#                         </doc>
+#                     </field>
+#                     <field name="reflection" type="NX_INT" units="NX_UNITLESS">
+#                         <doc>Miller indices (hkl) values of nominal reflection</doc>
+#                         <dimensions>
+#                             <dim index="1" value="3"/>
+#                         </dimensions>
+#                     </field>
+#                 </group>
+#             </group>
+#             <group type="NXdetector" name="i0">
+#                 <doc>
+#                     Detector measuring the incident beam intensity
+#                     :math:`I_0`.
+#                 </doc>
+#                 <field name="data" type="NX_NUMBER">
+#                     <dimensions rank="dataRank">
+#                         <dim index="1" value="nP" />
+#                         <dim index="2" value="nEnergy" />
+#                     </dimensions>
+#                 </field>
+#             </group>
+#             <group type="NXdetector" name="itrans">
+#                 <doc>
+#                     Detector measuring the transmitted beam intensity
+#                     :math:`I`.
+#                 </doc>
+#                 <field name="data" type="NX_NUMBER">
+#                     <dimensions rank="dataRank">
+#                         <dim index="1" value="nP" />
+#                         <dim index="2" value="nEnergy" />
+#                     </dimensions>
+#                 </field>
+#             </group>
+#             <group type="NXdetector" name="iref" recommended="true">
+#                 <doc>
+#                     Detector measuring the reference intensity
+#                     :math:`I_{ref}`, placed after a reference sample
+#                     (typically a metal foil). For a reference that is an
+#                     independent spectrum probing a different absorbing
+#                     element or absorption edge, use the ``reference``
+#                     subentry instead.
+#                 </doc>
+#                 <field name="data" type="NX_NUMBER">
+#                     <dimensions rank="dataRank">
+#                         <dim index="1" value="nP" />
+#                         <dim index="2" value="nEnergy" />
+#                     </dimensions>
+#                 </field>
+#             </group>
+#         </group>
+#         <group type="NXsubentry" name="reference" optional="true">
+#             <doc>
+#                 An independent reference spectrum, for example a metal-foil
+#                 standard used for energy calibration. Use this group instead
+#                 of the ``iref`` detector when the reference is a complete
+#                 spectrum in its own right, in particular when it probes a
+#                 different absorbing element or absorption edge, so that the
+#                 element, edge, energy axis, and intensity of the reference
+#                 can be described in full.
+# 
+#                 Provide the ``iref`` detector when the reference is a
+#                 simultaneous transmission channel that shares the main energy
+#                 axis. Provide this ``reference`` subentry when the reference
+#                 is an independent measurement. Do not provide both for the
+#                 same reference.
+#             </doc>
+#             <field name="definition">
+#                 <doc>
+#                     Official NeXus NXDL schema to which this subentry conforms.
+#                     Should be an ``NXxas``-family definition (for example
+#                     ``NXxas`` or ``NXxas_trans``).
+#                 </doc>
+#             </field>
+#         </group>
+#         <group type="NXcollection" optional="true">
+#             <doc>
+#                 Raw data as written by the acquisition software,
+#                 preserved without modification to allow independent
+#                 reprocessing.
+#             </doc>
+#         </group>
+#         <group type="NXprocess" optional="true">
+#             <doc>
+#                 Description of how :ref:`intensity
+#                 &lt;/NXxas/ENTRY/intensity-field&gt;` was obtained from the raw
+#                 detector data (i0, itrans, and iref). When present, it allows a
+#                 third party to fully reproduce the data reduction.
+#             </doc>
+#             <field name="program" type="NX_CHAR" optional="true">
+#                 <doc>Name of the program used for processing.</doc>
+#             </field>
+#             <field name="version" type="NX_CHAR" optional="true">
+#                 <doc>Version of the program used for processing.</doc>
+#             </field>
+#             <field name="date" type="NX_DATE_TIME" optional="true">
+#                 <doc>Date and time of processing.</doc>
+#             </field>
+#             <field name="sequence_index" type="NX_POSINT" optional="true">
+#                 <doc>
+#                     Order of this step when several NXprocess groups
+#                     describe a sequence of corrections.
+#                 </doc>
+#             </field>
+#             <group type="NXparameters" name="parameters" optional="true">
+#                 <doc>
+#                     Validated parameters of the corrections applied, for
+#                     example energy calibration, deglitching, incident-beam
+#                     normalization, or scan merging. Each parameter should
+#                     carry a units attribute where applicable.
+#                 </doc>
+#             </group>
+#             <group name="note" type="NXnote" optional="true">
+#                 <doc>
+#                     Code or notes reproducing the top-level :ref:`intensity
+#                     &lt;/NXxas/ENTRY/intensity-field&gt;` from the raw data.
+#                 </doc>
+#                 <field name="type">
+#                     <doc>Mime content type of the note data field.</doc>
+#                     <enumeration>
+#                         <item value="text/x-python"/>
+#                     </enumeration>
+#                 </field>
+#                 <field name="data" type="NX_CHAR">
+#                     <doc>The reproduction code or notes.</doc>
+#                 </field>
+#             </group>
+#         </group>
+#     </group>
+# </definition>
