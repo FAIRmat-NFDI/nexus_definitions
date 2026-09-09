@@ -719,14 +719,17 @@ NXem(NXobject):
               model(NX_CHAR):
               serial_number(NX_CHAR):
                 \exists: recommended
-          corrector_ax(NXcomponent):
-            \exists: ['min', '0', 'max', '1']
+          corrector_axID(NXelectromagnetic_lens):
+            \nameType: partial
+            \exists: ['min', '0', 'max', 'unbounded']
             fabrication(NXfabrication):
               \exists: optional
               vendor(NX_CHAR):
               model(NX_CHAR):
               serial_number(NX_CHAR):
                 \exists: recommended
+            # collection(NXcollection):
+            #   \exists: optional
           biprismID(NXcomponent):
             \nameType: partial
             \exists: ['min', '0', 'max', 'unbounded']
@@ -1548,8 +1551,9 @@ NXem(NXobject):
             
             # we could write down how to store the aberrations but we should not force to add aberrations
             # basically optional use of NXaberration therein at least some value required
-            corrector_ax(NXcomponent):
-              \exists: optional
+            corrector_axID(NXelectromagnetic_lens):
+              \nameType: partial
+              \exists: ['min', 0, 'max', 'unbounded']
               applied(NX_BOOLEAN):
               value_x(NX_NUMBER):
               value_y(NX_NUMBER):

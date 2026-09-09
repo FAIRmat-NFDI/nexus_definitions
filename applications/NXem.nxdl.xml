@@ -848,13 +848,15 @@
                             <field name="serial_number" type="NX_CHAR" recommended="true"/>
                         </group>
                     </group>
-                    <group name="corrector_ax" type="NXcomponent" minOccurs="0" maxOccurs="1">
+                    <group name="corrector_axID" type="NXelectromagnetic_lens" nameType="partial" minOccurs="0" maxOccurs="unbounded">
                         <group name="fabrication" type="NXfabrication" optional="true">
                             <field name="vendor" type="NX_CHAR"/>
                             <field name="model" type="NX_CHAR"/>
                             <field name="serial_number" type="NX_CHAR" recommended="true"/>
                         </group>
                     </group>
+                    <!--collection(NXcollection):
+  \exists: optional-->
                     <group name="biprismID" type="NXcomponent" nameType="partial" minOccurs="0" maxOccurs="unbounded">
                         <group name="fabrication" type="NXfabrication" recommended="true">
                             <field name="vendor" type="NX_CHAR"/>
@@ -1507,7 +1509,7 @@
                         </group>
                         <!--we could write down how to store the aberrations but we should not force to add aberrations
 basically optional use of NXaberration therein at least some value required-->
-                        <group name="corrector_ax" type="NXcomponent" optional="true">
+                        <group name="corrector_axID" type="NXelectromagnetic_lens" nameType="partial" minOccurs="0" maxOccurs="unbounded">
                             <field name="applied" type="NX_BOOLEAN"/>
                             <field name="value_x" type="NX_NUMBER"/>
                             <field name="value_y" type="NX_NUMBER"/>

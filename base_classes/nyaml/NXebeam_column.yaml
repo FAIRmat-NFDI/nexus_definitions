@@ -132,7 +132,7 @@ NXebeam_column(NXcomponent):
       \doc: |
         Corresponding voltage for that energy dispersion.
   (NXcorrector_cs):
-  corrector_ax(NXcomponent):
+  corrector_axID(NXcomponent):
     \doc: |
       Component that reshapes an ellipse-shaped electron beam into a circular one.
       
@@ -140,6 +140,14 @@ NXebeam_column(NXcomponent):
       * `M. Tanaka et al., Electron Microscopy Glossary, 2024 <https://www.jeol.com/words/semterms/20201020.111014.php#gsc.tab=0>`_
       
       Stigmator is an exact synonym.
+      
+      If the microscope has only one, its name should be `corrector_ax`.
+      If the microscope has multiple such components, start counting from 1,
+      when naming the instances.
+      
+      Distinguish the components that correct different types of aberrations
+      by combining the use of `corrector_csID` and `corrector_axID` instances
+      especially for transmission electron microscopes.
     value_x(NX_NUMBER):
       \unit: NX_ANY
       \doc: |
