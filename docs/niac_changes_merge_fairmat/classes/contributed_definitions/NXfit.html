@@ -1,0 +1,380 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.103. NXfit &#8212; NeXus-FAIRmat v2024.02 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/details_summary_hide.css?v=30df4bca" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bolditalic.css?v=504f8cd9" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=04096e4a"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.104. NXfit_background" href="NXfit_background.html" />
+    <link rel="prev" title="2.3.3.3.102. NXfiber" href="NXfiber.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nxfit">
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.103. </span>NXfit<a class="headerlink" href="#nxfit" title="Link to this heading">¶</a></h1>
+<p><strong>Status</strong>:</p>
+<blockquote>
+<div><p><em>base class</em> (contribution), extends <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a></p>
+</div></blockquote>
+<p><strong>Description</strong>:</p>
+<blockquote>
+<div><p>Description of a fit procedure.</p>
+</div></blockquote>
+<p><strong>Symbols</strong>:</p>
+<blockquote>
+<div><p>The symbols used in the schema to specify e.g. dimensions of arrays.</p>
+<p><strong>dimRank</strong>: Rank of the dependent and independent data arrays (for multidimensional/multivariate fit.)</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a>, <a class="reference internal" href="NXfit_background.html#nxfit-background"><span class="std std-ref">NXfit_background</span></a>, <a class="reference internal" href="NXfit_function.html#nxfit-function"><span class="std std-ref">NXfit_function</span></a>, <a class="reference internal" href="NXpeak.html#nxpeak"><span class="std std-ref">NXpeak</span></a></p>
+</dd>
+</dl>
+<p id="index-1"><strong>Structure</strong>:</p>
+<blockquote>
+<div><p id="index-2"><span id="nxfit-label-field"></span><strong>label</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Human-readable label for this fit procedure.</p>
+</div></blockquote>
+<p id="index-3"><span id="nxfit-figure-of-meritmetric-field"></span><strong>figure_of_merit</strong><span class="bolditalic">METRIC</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-figure-of-merit-to-determine-the-goodness-of-fit-i-e-how-well-the-peak-mode">
+<summary>Figure-of-merit to determine the goodness of fit, i.e., how well the peak mode ...</summary><p>Figure-of-merit to determine the goodness of fit, i.e., how well the peak model
+fits the measured observations.</p>
+<p>This value (which is a single number) is often used to guide adjustments to the
+fitting parameters in the peak fitting process.</p>
+</details><p id="index-4"><span id="nxfit-figure-of-meritmetric-metric-attribute"></span><strong>&#64;metric</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-metric-used-to-determine-the-goodness-of-fit-examples-include">
+<summary>Metric used to determine the goodness of fit. Examples include: ...</summary><p>Metric used to determine the goodness of fit. Examples include:
+- <span class="math notranslate nohighlight">\(\chi^2\)</span>, the squared sum of the sigma-weighted residuals
+- reduced <span class="math notranslate nohighlight">\(\chi^2\)</span>:, <span class="math notranslate nohighlight">\(\chi^2\)</span>: per degree of freedom
+- <span class="math notranslate nohighlight">\(R^2\)</span>, the coefficient of determination</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="nxfit-data-group"><strong>data</strong>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="../base_classes/NXobject.html#nxobject-data-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Input data and results of the fit.</p>
+<p id="index-5"><span id="nxfit-data-input-dependent-field"></span><strong>input_dependent</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: dimRank) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-position-values-along-one-or-more-data-dimensions-to-hold-the">
+<summary>Position values along one or more data dimensions (to hold the ...</summary><p>Position values along one or more data dimensions (to hold the
+values for the independent variable for this fit procedure).</p>
+</details></div></blockquote>
+<p id="index-6"><span id="nxfit-data-input-independent-field"></span><strong>input_independent</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: dimRank) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>Independent input axis for this fit procedure.</p>
+</div></blockquote>
+<p id="index-7"><span id="nxfit-data-envelope-field"></span><strong>envelope</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: dimRank) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-resulting-envelope-of-applying-the-global-fit-function-with-its-parameter">
+<summary>Resulting envelope of applying the `global_fit_function` with its parameter  ...</summary><p>Resulting envelope of applying the <cite>global_fit_function</cite> with its parameter to the data stored
+in <cite>input_independent</cite>.</p>
+</details></div></blockquote>
+<p id="index-8"><span id="nxfit-data-residual-field"></span><strong>residual</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: dimRank) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>Difference between the envelope and the <cite>input_independent</cite> data to be fitted.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxfit-peakpeak-group"><strong>peak</strong><span class="bolditalic">PEAK</span>: (optional) <a class="reference internal" href="NXpeak.html#nxpeak"><span class="std std-ref">NXpeak</span></a></p>
+<blockquote>
+<div><details class="summary-one-peak-of-the-peak-model">
+<summary>One peak of the peak model. ...</summary><p>One peak of the peak model.
+If there is no characteristic name for each peak component, is envisioned that peaks
+are labeled as peak_0, peak_1, and so on.</p>
+</details><p id="index-9"><span id="nxfit-peakpeak-total-area-field"></span><strong>total_area</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="NXpeak.html#nxpeak-total-area-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-total-area-under-the-curve-can-also-be-used-for-the-total-area-minus-any">
+<summary>Total area under the curve (can also be used for the total area minus any ...</summary><p>Total area under the curve (can also be used for the total area minus any
+background values).</p>
+</details></div></blockquote>
+<p id="index-10"><span id="nxfit-peakpeak-relative-sensitivity-factor-field"></span><strong>relative_sensitivity_factor</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-relative-sensitivity-for-this-peak-to-be-used-for-quantification-in">
+<summary>Relative sensitivity for this peak, to be used for quantification in ...</summary><p>Relative sensitivity for this peak, to be used for quantification in
+an NXprocess.</p>
+<p>As an example, in X-ray spectroscopy could depend on the energy scale
+(see position), the ionization cross section, and the element probed.</p>
+</details></div></blockquote>
+<p id="index-11"><span id="nxfit-peakpeak-relative-area-field"></span><strong>relative_area</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-relative-area-of-this-peak-compared-to-other-peaks">
+<summary>Relative area of this peak compared to other peaks. ...</summary><p>Relative area of this peak compared to other peaks.</p>
+<p>The relative area can simply be derived by dividing the total_area by the
+total area of all peaks or by a more complicated method (e.g., by
+additionally dividing by the relative sensitivity factors). Details shall
+be given in <cite>global_fit_function</cite>.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="nxfit-backgroundbackground-group"><strong>background</strong><span class="bolditalic">BACKGROUND</span>: (optional) <a class="reference internal" href="NXfit_background.html#nxfit-background"><span class="std std-ref">NXfit_background</span></a></p>
+<blockquote>
+<div><details class="summary-one-fitted-background-functional-form-position-and-intensities-of-the-peak">
+<summary>One fitted background (functional form, position, and intensities) of the peak ...</summary><p>One fitted background (functional form, position, and intensities) of the peak fit.
+If there is no characteristic name for each peak component, it is envisioned that backgrounds are labeled
+as background_0, background_1, and so on.</p>
+</details></div></blockquote>
+<p id="nxfit-global-fit-function-group"><strong>global_fit_function</strong>: (optional) <a class="reference internal" href="NXfit_function.html#nxfit-function"><span class="std std-ref">NXfit_function</span></a></p>
+<blockquote>
+<div><details class="summary-function-used-to-describe-the-overall-fit-to-the-data-taking-into-account-the">
+<summary>Function used to describe the overall fit to the data, taking into account the ...</summary><p>Function used to describe the overall fit to the data, taking into account the parameters of the
+individual <cite>NXpeak</cite> and <cite>NXfit_background</cite> components.</p>
+</details><p id="index-12"><span id="nxfit-global-fit-function-formula-field"></span><strong>formula</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-oftentimes-if-the-peaks-and-fit-backgrounds-are-defined-independently-i-e">
+<summary>Oftentimes, if the peaks and fit backgrounds are defined independently (i.e, ...</summary><p>Oftentimes, if the peaks and fit backgrounds are defined independently (i.e, with their own
+parameter sets), the resulting global fit is a function of the form
+<span class="math notranslate nohighlight">\(model = peak_1(p_1) + peak2(p_2) + backgr(p_3).\)</span>, where each <span class="math notranslate nohighlight">\(p_x\)</span> describes the
+set of parameters for one peak/background.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="nxfit-error-function-group"><strong>error_function</strong>: (optional) <a class="reference internal" href="NXfit_function.html#nxfit-function"><span class="std std-ref">NXfit_function</span></a></p>
+<blockquote>
+<div><p>Function used to optimize the parameters during peak fitting.</p>
+<p id="index-13"><span id="nxfit-error-function-description-field"></span><strong>description</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXfit_function.html#nxfit-function-description-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-description-of-the-method-used-to-optimize-the-parameters-during-peak-fittin">
+<summary>Description of the method used to optimize the parameters during peak fittin ...</summary><p>Description of the method used to optimize the parameters during peak fitting.
+Examples:
+- least squares
+- non-linear least squares
+- Levenberg-Marquardt algorithm (damped least-squares)
+- linear regression
+- Bayesian linear regression</p>
+</details></div></blockquote>
+<p id="index-14"><span id="nxfit-error-function-formula-field"></span><strong>formula</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-for-the-optimization-the-formula-is-any-optimization-process-on-the-global">
+<summary>For the optimization, the formula is any optimization process on the `global ...</summary><p>For the optimization, the formula is any optimization process on the <cite>global_fit_function</cite> given above.
+As an example, for a linear least squared algorithm on independent components, the formula of the error_function
+would be <span class="math notranslate nohighlight">\(LLS(peak_1(p_1) + peak2(p_2) + backgr(p_3))\)</span>, where each <span class="math notranslate nohighlight">\(p_x\)</span> describes the set
+of parameters for one peak/background.</p>
+<p>It is however also possible to supply more involved formulas (e.g., in the case of constrained fits).</p>
+</details></div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<section id="hypertext-anchors">
+<h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
+<p>List of hypertext anchors for all groups, fields,
+attributes, and links defined in this class.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nxfit-backgroundbackground-group"><span class="std std-ref">/NXfit/backgroundBACKGROUND-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-data-group"><span class="std std-ref">/NXfit/data-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-data-envelope-field"><span class="std std-ref">/NXfit/data/envelope-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-data-input-dependent-field"><span class="std std-ref">/NXfit/data/input_dependent-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-data-input-independent-field"><span class="std std-ref">/NXfit/data/input_independent-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-data-residual-field"><span class="std std-ref">/NXfit/data/residual-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-error-function-group"><span class="std std-ref">/NXfit/error_function-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-error-function-description-field"><span class="std std-ref">/NXfit/error_function/description-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-error-function-formula-field"><span class="std std-ref">/NXfit/error_function/formula-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-figure-of-meritmetric-field"><span class="std std-ref">/NXfit/figure_of_meritMETRIC-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-figure-of-meritmetric-metric-attribute"><span class="std std-ref">/NXfit/figure_of_meritMETRIC&#64;metric-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-global-fit-function-group"><span class="std std-ref">/NXfit/global_fit_function-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-global-fit-function-formula-field"><span class="std std-ref">/NXfit/global_fit_function/formula-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-label-field"><span class="std std-ref">/NXfit/label-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-peakpeak-group"><span class="std std-ref">/NXfit/peakPEAK-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-peakpeak-relative-area-field"><span class="std std-ref">/NXfit/peakPEAK/relative_area-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-peakpeak-relative-sensitivity-factor-field"><span class="std std-ref">/NXfit/peakPEAK/relative_sensitivity_factor-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxfit-peakpeak-total-area-field"><span class="std std-ref">/NXfit/peakPEAK/total_area-field</span></a></p></li>
+</ul>
+<dl class="simple">
+<dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXfit.nxdl.xml">https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXfit.nxdl.xml</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Example data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optical-spectroscopy-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spm-structure.html">8. Scanning Probe Microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../laboratory-structure.html">11. Sample preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">13. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">14. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.103. NXfit</a><ul>
+<li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="NXfiber.html" title="previous chapter"><span class="section-number">2.3.3.3.102. </span>NXfiber</a></li>
+      <li>Next: <a href="NXfit_background.html" title="next chapter"><span class="section-number">2.3.3.3.104. </span>NXfit_background</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2025, The FAIRmat collaboration.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/NXfit.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

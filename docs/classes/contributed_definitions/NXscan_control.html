@@ -1,0 +1,853 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.75. NXscan_control &#8212; NeXus-FAIRmat v2024.02 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/details_summary_hide.css?v=30df4bca" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bolditalic.css?v=504f8cd9" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=04096e4a"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.76. NXsensor_scan" href="NXsensor_scan.html" />
+    <link rel="prev" title="2.3.3.3.74. NXregion" href="NXregion.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nxscan-control">
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.75. </span>NXscan_control<a class="headerlink" href="#nxscan-control" title="Link to this heading">¶</a></h1>
+<p><strong>Status</strong>:</p>
+<blockquote>
+<div><p><em>base class</em> (contribution), extends <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+</div></blockquote>
+<p><strong>Description</strong>:</p>
+<blockquote>
+<div><details class="summary-a-scan-is-performed-inside-an-n-dimensional-phase-space-where-each-dimension-ca">
+<summary>A scan is performed inside an N-dimensional phase space, where each dimension ca ...</summary><p>A scan is performed inside an N-dimensional phase space, where each dimension can correspond not only to real space coordinates (x,y) but also to any other parameter. This class contains detailed information about controlling the scan in such a phase space (or its subspace).</p>
+<p>scan_types:
+Trajectory: A list of N-dimensional sequential vectors describes the trajectory line for a full scan.
+Mesh: For each dimension a range and a direction are chosen. When a scan along a dimension is done, a single step in the next dimension is taken, and then the scan in the previous dimension is repeated. As such we can speak about the fastest and the slowest scan axes.
+Snake: Similar to a mesh scan but with the scanning direction reversed after each line.
+Spiral: A scan taken along a spiral trajectory.
+Tilt: At each step, a proportional movement is done in all dimensions.
+Linear: A scan where the scanning will be performed along a single independent axis.</p>
+<p>Scan_control_types:
+Stepping: At each step, a movement to the next point is performed; correction (for example backlash) or active regulation (feedback loop) may or may not be applied. After the movement is done, the measurement is performed without the movement.
+Continuous: The scanning of each line in an N-dimensional phase space is done without stopping; measurements are done simultaneously with the movement.
+Oscillating: Scanning over a scan point continuously and then moving to start scanning at the next position.</p>
+</details></div></blockquote>
+<p><strong>Symbols</strong>:</p>
+<blockquote>
+<div><p>No symbol table</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a>, <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+</dd>
+</dl>
+<p id="index-1"><strong>Structure</strong>:</p>
+<blockquote>
+<div><p id="index-2"><span id="nxscan-control-scan-time-start-field"></span><strong>scan_time_start</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><p>The start time of the scan.</p>
+</div></blockquote>
+<p id="index-3"><span id="nxscan-control-scan-time-end-field"></span><strong>scan_time_end</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><p>The end time of the scan.</p>
+</div></blockquote>
+<p id="index-4"><span id="nxscan-control-independent-scan-axes-field"></span><strong>independent_scan_axes</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-a-list-of-scan-axes-which-are-controlled-independently-of-each-other">
+<summary>A list of scan axes which are controlled independently of each other. ...</summary><p>A list of scan axes which are controlled independently of each other.
+(e.g. X, Y, Z, or other physical dimensions)</p>
+<p>The list is in the order of axes of the scan from the fastest to the slowest.</p>
+</details></div></blockquote>
+<p id="index-5"><span id="nxscan-control-scan-resolution-n-field"></span><strong>scan_resolution_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-define-the-scan-resolution-along-each-dimension-as-the-number-of-steps-per-uni">
+<summary>Define the scan resolution along each dimension as the number of steps per uni ...</summary><p>Define the scan resolution along each dimension as the number of steps per unit of the dimension parameters.</p>
+<p>Rename the field according to the name of the independent dimension (e.g. scan_resolution_x, scan_resolution_voltage).</p>
+</details></div></blockquote>
+<p id="index-6"><span id="nxscan-control-accuracy-n-field"></span><strong>accuracy_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><p>Define the accuracy of the scan probe.</p>
+</div></blockquote>
+<p id="index-7"><span id="nxscan-control-scan-type-field"></span><strong>scan_type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-this-group-specifies-how-the-trajectory-of-the-scan-is-defined">
+<summary>This group specifies how the trajectory of the scan is defined. ...</summary><p>This group specifies how the trajectory of the scan is defined.</p>
+<p>Any of these values: <code class="docutils literal notranslate"><span class="pre">trajectory</span></code> | <code class="docutils literal notranslate"><span class="pre">mesh</span></code> | <code class="docutils literal notranslate"><span class="pre">snake</span></code> | <code class="docutils literal notranslate"><span class="pre">spiral</span></code></p>
+</details></div></blockquote>
+<p id="index-8"><span id="nxscan-control-scan-control-type-field"></span><strong>scan_control_type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-this-string-describes-how-the-scan-was-performed">
+<summary>This string describes how the scan was performed. ...</summary><p>This string describes how the scan was performed.</p>
+<p>Any of these values: <code class="docutils literal notranslate"><span class="pre">stepping</span></code> | <code class="docutils literal notranslate"><span class="pre">continuous</span></code> | <code class="docutils literal notranslate"><span class="pre">oscillating</span></code></p>
+</details></div></blockquote>
+<p id="nxscan-control-scan-region-group"><strong>scan_region</strong>: (optional) <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+<blockquote>
+<div><details class="summary-the-scan-region-is-the-area-of-phase-space-or-sub-phase-space-where-the-scan-i">
+<summary>The scan region is the area of phase space or sub-phase space where the scan i ...</summary><p>The scan region is the area of phase space or sub-phase space where the scan is
+performed. The region could be N-dimensional and is defined by the minimum and
+maximum values of the scan axes.</p>
+</details><p id="index-9"><span id="nxscan-control-scan-region-scan-offset-n-field"></span><strong>scan_offset_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-offset-of-center-of-the-scan-region-from-the-origin-along-the-specific-s">
+<summary>The offset of center of the scan region from the origin along the specific s ...</summary><p>The offset of center of the scan region from the origin along the specific scan axis.</p>
+<p>‘N’ denotes the name of the specific scan axis. (Offset, start and end positions are related)</p>
+</details></div></blockquote>
+<p id="index-10"><span id="nxscan-control-scan-region-scan-range-n-field"></span><strong>scan_range_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-range-of-the-scan-is-the-difference-start-and-end-values-of-the-scan-reg">
+<summary>The range of the scan is the difference start and end values of the scan reg ...</summary><p>The range of the scan is the difference start and end values of the scan region
+along the dimension ‘N’.</p>
+</details></div></blockquote>
+<p id="index-11"><span id="nxscan-control-scan-region-scan-angle-n-field"></span><strong>scan_angle_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-orientation-of-the-scan-region-or-subspace-usually-the-scan-offset-and">
+<summary>The orientation of the scan region or subspace. Usually, the scan_offset and ...</summary><p>The orientation of the scan region or subspace. Usually, the scan_offset and scan_range are enough
+to define the scan region. This field defines how the spatial space is oriented with respect to
+the frame of reference.</p>
+<p>Rename the field describing the angle with an axis of the spatial space (e.g. scan_angle_x).</p>
+</details></div></blockquote>
+<p id="index-12"><span id="nxscan-control-scan-region-scan-start-n-field"></span><strong>scan_start_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-start-of-the-scan-is-the-starting-point-of-the-scan-region-phase-space">
+<summary>The start of the scan is the starting point of the scan region (phase space  ...</summary><p>The start of the scan is the starting point of the scan region (phase space or sub-phase space)
+for each independent scan axis.</p>
+<p>For N-dimensional, it is a list of N numbers.</p>
+</details></div></blockquote>
+<p id="index-13"><span id="nxscan-control-scan-region-scan-end-n-field"></span><strong>scan_end_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-end-of-the-scan-is-the-ending-point-of-the-scan-region-phase-space-or-s">
+<summary>The end of the scan is the ending point of the scan region (phase space or s ...</summary><p>The end of the scan is the ending point of the scan region (phase space or sub-phase space)
+for each independent scan axis.</p>
+<p>Note: The scan_offset and scan_range are equivalent to the scan_start and scan_end.</p>
+<p>For N-dimensional, it is a list of N numbers.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="nxscan-control-mesh-scan-group"><strong>mesh_</strong><span class="bolditalic">SCAN</span>: (optional) <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+<blockquote>
+<div><details class="summary-for-each-dimension-a-range-and-a-direction-are-chosen-when-a-scan-along-a-dim">
+<summary>For each dimension a range and a direction are chosen. When a scan along a dim ...</summary><p>For each dimension a range and a direction are chosen. When a scan along a dimension is done,
+a single step in the next dimension is taken, and then the scan in the previous dimension is
+repeated. As such we can speak about the fastest and the slowest scan axes.</p>
+</details><p id="index-14"><span id="nxscan-control-mesh-scan-scan-speed-n-field"></span><strong>scan_speed_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-define-the-scan-speed-in-the-forward-direction-along-the-axis-if-forward-and">
+<summary>Define the scan speed in the forward direction along the axis if forward and ...</summary><p>Define the scan speed in the forward direction along the axis if forward and backward
+speeds below are not specified.</p>
+<p>If the scan goes in the negative direction, the speed should be negative.</p>
+<p>Rename the field, according to the name of the dimension (e.g. scan_speed_x, scan_speed_voltage).</p>
+</details></div></blockquote>
+<p id="index-15"><span id="nxscan-control-mesh-scan-forward-speed-n-field"></span><strong>forward_speed_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-define-the-scan-speed-in-the-forward-directions">
+<summary>Define the scan speed in the forward directions. ...</summary><p>Define the scan speed in the forward directions.
+Rename the field, according to the name of the dimension.</p>
+</details></div></blockquote>
+<p id="index-16"><span id="nxscan-control-mesh-scan-backward-speed-n-field"></span><strong>backward_speed_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-define-the-scan-speed-in-the-backward-directions">
+<summary>Define the scan speed in the backward directions. ...</summary><p>Define the scan speed in the backward directions.
+Rename the field, according to the name of the dimension.</p>
+</details></div></blockquote>
+<p id="index-17"><span id="nxscan-control-mesh-scan-channel-name-field"></span><strong>channel_</strong><span class="bolditalic">NAME</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-name-of-the-channel-that-records-the-scan-data-for-the-given-dimension-the">
+<summary>Name of the channel that records the scan data for the given dimension. The  ...</summary><p>Name of the channel that records the scan data for the given dimension. The ending annotation ‘N’ is
+to represent the name of the dimensions.</p>
+<p>Rename the field, according to the name of the channel and dimension (e.g. piezo_scanner_x).</p>
+</details></div></blockquote>
+<p id="index-18"><span id="nxscan-control-mesh-scan-scan-points-n-field"></span><strong>scan_points_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-define-the-total-number-of-points-in-the-given-axis-scan-to-be-performed">
+<summary>Define the total number of points in the given axis scan to be performed. ...</summary><p>Define the total number of points in the given axis scan to be performed.</p>
+<p>Rename the field, according to the name of the dimension (e.g. scan_points_x, scan_points_voltage).</p>
+</details></div></blockquote>
+<p id="index-19"><span id="nxscan-control-mesh-scan-stepping-n-field"></span><strong>stepping_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-the-number-of-steps-the-probe-jumps-over-the-scan-steps-or-points-this-desc">
+<summary>The number of steps the probe jumps over the scan steps or points. This desc ...</summary><p>The number of steps the probe jumps over the scan steps or points. This describes when not
+every point from the scan_points is measured along an axis.</p>
+<p>Rename the field, according to the name of the dimension (e.g. stepping_x, stepping_voltage).</p>
+</details><p id="index-20"><span id="nxscan-control-mesh-scan-stepping-n-frog-leap-scan-attribute"></span><strong>&#64;frog_leap_scan</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-jumps-over-a-number-of-scan-steps-or-points-more-than-o">
+<summary>If the scan probe jumps over a number of scan steps or points (more than o ...</summary><p>If the scan probe jumps over a number of scan steps or points (more than one)
+to perform each scan. By default, it is False.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="index-21"><span id="nxscan-control-mesh-scan-step-size-n-field"></span><strong>step_size_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-length-of-each-step-in-the-scan-on-each-dimension">
+<summary>The length of each step in the scan on each dimension. ...</summary><p>The length of each step in the scan on each dimension.</p>
+<p>Rename the field, according to the name of the dimension (e.g. step_size_x, step_size_voltage).</p>
+</details></div></blockquote>
+<p id="index-22"><span id="nxscan-control-mesh-scan-continuous-n-field"></span><strong>continuous_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-moves-continuously-over-the-scan-points-or-steps-use-true">
+<summary>If the scan probe moves continuously over the scan points or steps, use True ...</summary><p>If the scan probe moves continuously over the scan points or steps, use True. The default value is True.
+Usually, continuous scanning is possible in one dimension. On other dimensions, the scan probe moves
+in steps.</p>
+<p>Rename the field, according to the name of the dimension (e.g. continuous_voltage).</p>
+</details></div></blockquote>
+<p id="index-23"><span id="nxscan-control-mesh-scan-oscillating-n-field"></span><strong>oscillating_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-oscillates-over-the-scan-point-use-true">
+<summary>If the scan probe oscillates over the scan point, use True. ...</summary><p>If the scan probe oscillates over the scan point, use True.
+The default value is False.</p>
+</details></div></blockquote>
+<p id="index-24"><span id="nxscan-control-mesh-scan-oscillation-frequency-field"></span><strong>oscillation_frequency</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>The number of oscillations on each scanning point per second.</p>
+</div></blockquote>
+<p id="nxscan-control-mesh-scan-scan-data-group"><span class="bolditalic">SCAN_DATA</span>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="../base_classes/NXobject.html#nxobject-data-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-25"><span id="nxscan-control-mesh-scan-scan-data-data-field"></span><span class="bolditalic">DATA</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-data-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-scan-data-is-the-data-collected-during-the-scan">
+<summary>The scan data is the data collected during the scan. ...</summary><p>The scan data is the data collected during the scan.
+If the scan has several channels or derivatives from the channel data, please
+duplicate this NXdata group for each.</p>
+</details></div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxscan-control-spiral-scan-group"><strong>spiral_</strong><span class="bolditalic">SCAN</span>: (optional) <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+<blockquote>
+<div><p>To define the spiral or circular scan, use this group.</p>
+<p id="index-26"><span id="nxscan-control-spiral-scan-scan-speed-n-field"></span><strong>scan_speed_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-define-the-scan-speed-in-forward-clockwise-directions">
+<summary>Define the scan speed in forward (clockwise) directions. ...</summary><p>Define the scan speed in forward (clockwise) directions.</p>
+<p>If the scan goes in the negative (anti-clockwise) direction, the speed should be negative.</p>
+<p>Rename the field, according to the circle index. The circle near the center starts with 0.
+In case, the speed is the same for all the circles, replace ‘N’ by ‘all’.</p>
+</details><p id="index-27"><span id="nxscan-control-spiral-scan-scan-speed-n-spiral-direction-attribute"></span><strong>&#64;spiral_direction</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-define-the-direction-of-the-spiral-scan-e-g-clockwise-anticlockwise-fr">
+<summary>Define the direction of the spiral scan. (e.g. clockwise, anticlockwise fr ...</summary><p>Define the direction of the spiral scan. (e.g. clockwise, anticlockwise from looking back
+along the surface normal)</p>
+<p>Any of these values: <code class="docutils literal notranslate"><span class="pre">clockwise</span></code> | <code class="docutils literal notranslate"><span class="pre">anticlockwise</span></code></p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="index-28"><span id="nxscan-control-spiral-scan-forward-speed-n-field"></span><strong>forward_speed_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-define-the-scan-speed-in-the-forward-clockwise-directions">
+<summary>Define the scan speed in the forward (clockwise) directions. ...</summary><p>Define the scan speed in the forward (clockwise) directions.
+Rename the field, according to the circle index. The circle near the center starts with 0.</p>
+<p>In case, the speed is the same for all the circles, replace ‘N’ by ‘all’.</p>
+</details></div></blockquote>
+<p id="index-29"><span id="nxscan-control-spiral-scan-backward-speed-n-field"></span><strong>backward_speed_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-define-the-scan-speed-in-the-backward-anti-clockwise-directions">
+<summary>Define the scan speed in the backward (anti-clockwise) directions. ...</summary><p>Define the scan speed in the backward (anti-clockwise) directions.
+Rename the field, according to the circle index. The circle near the center starts with 0.</p>
+<p>In case, the speed is the same for all the circles, replace ‘N’ by ‘all’.</p>
+</details></div></blockquote>
+<p id="index-30"><span id="nxscan-control-spiral-scan-spiral-radius-n-field"></span><strong>spiral_radius_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-define-the-radius-of-the-spiral-circle-of-scanning">
+<summary>Define the radius of the spiral circle of scanning. ...</summary><p>Define the radius of the spiral circle of scanning.</p>
+<p>Rename the field, according to the circle order, the nearest circle to the center is 0.</p>
+</details></div></blockquote>
+<p id="index-31"><span id="nxscan-control-spiral-scan-scan-points-n-field"></span><strong>scan_points_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-define-the-total-number-of-points-in-a-given-circle-scan-to-be-performed">
+<summary>Define the total number of points in a given circle scan to be performed. ...</summary><p>Define the total number of points in a given circle scan to be performed.</p>
+<p>Rename the field, according to the circle order, the nearest circle to the center
+is 0 (e.g. scan_points_2).</p>
+</details></div></blockquote>
+<p id="index-32"><span id="nxscan-control-spiral-scan-stepping-n-field"></span><strong>stepping_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-steps-over-a-number-of-scan-points">
+<summary>If the scan probe steps over a number of scan points. ...</summary><p>If the scan probe steps over a number of scan points.</p>
+<p>Rename the field, according to the circle index. The circle near the center starts with 0.
+In case, the stepping is the same for all the circles, replace ‘N’ by ‘all’.</p>
+</details><p id="index-33"><span id="nxscan-control-spiral-scan-stepping-n-frog-leap-scan-attribute"></span><strong>&#64;frog_leap_scan</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-jumps-over-a-number-of-scan-steps-or-points-more-than-o">
+<summary>If the scan probe jumps over a number of scan steps or points (more than o ...</summary><p>If the scan probe jumps over a number of scan steps or points (more than one), use True.
+The default value is False.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="index-34"><span id="nxscan-control-spiral-scan-step-size-n-field"></span><strong>step_size_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-define-the-number-of-points-that-the-scan-probe-steps-over">
+<summary>Define the number of points that the scan probe steps over. ...</summary><p>Define the number of points that the scan probe steps over.</p>
+<p>Rename the field, according to the circle index. The circle near the center or lowest value of a
+parameter starts with 0.
+In case, the step size is the same for all the circles, replace ‘N’ by ‘all’.</p>
+</details></div></blockquote>
+<p id="index-35"><span id="nxscan-control-spiral-scan-continuous-n-field"></span><strong>continuous_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-moves-continuously-over-the-scan-points-use-true-the-def">
+<summary>If the scan probe moves continuously over the scan points, use True. The def ...</summary><p>If the scan probe moves continuously over the scan points, use True. The default value is True.
+A scan process can run continuously in the spatial dimension but can be discretized in time or
+other physical dimensions (e.g. voltage).</p>
+<p>Rename this field according to the dimensions, considering continuous scan in a two-dimensional space
+rename the field as continuous_x_y.</p>
+</details></div></blockquote>
+<p id="index-36"><span id="nxscan-control-spiral-scan-oscillating-n-field"></span><strong>oscillating_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-oscillates-over-the-scan-point-use-true-the-default-valu">
+<summary>If the scan probe oscillates over the scan point, use True. The default valu ...</summary><p>If the scan probe oscillates over the scan point, use True. The default value is
+False.</p>
+</details></div></blockquote>
+<p id="index-37"><span id="nxscan-control-spiral-scan-oscillation-frequency-field"></span><strong>oscillation_frequency</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-frequency"><span class="std std-ref">NX_FREQUENCY</span></a>}</p>
+<blockquote>
+<div><p>Number of oscillation on each scanning point per second.</p>
+</div></blockquote>
+<p id="nxscan-control-spiral-scan-scan-data-group"><span class="bolditalic">SCAN_DATA</span>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="../base_classes/NXobject.html#nxobject-data-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-scan-data-is-the-data-collected-during-the-scan">
+<summary>The scan data is the data collected during the scan. ...</summary><p>The scan data is the data collected during the scan.
+If the scan has several channels or derivatives from the channel data, please
+duplicate this NXdata group for each.</p>
+</details><p id="index-38"><span id="nxscan-control-spiral-scan-scan-data-data-field"></span><span class="bolditalic">DATA</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-data-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>The scan data is the data collected during the scan.</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxscan-control-snake-scan-group"><strong>snake_</strong><span class="bolditalic">SCAN</span>: (optional) <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+<blockquote>
+<div><p>To define the snake scan, use this group.</p>
+<p id="index-39"><span id="nxscan-control-snake-scan-scan-speed-n-field"></span><strong>scan_speed_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-define-the-scan-speed-for-the-type-of-snake-scan-for-the-same-speed-along-t">
+<summary>Define the scan speed for the type of snake scan. For the same speed along t ...</summary><p>Define the scan speed for the type of snake scan. For the same speed along the
+positive and negative directions, use a single number</p>
+<p>Rename the field, according to the name of the fast and slow axis e.g. scan_speed_x.</p>
+</details></div></blockquote>
+<p id="index-40"><span id="nxscan-control-snake-scan-forward-speed-field"></span><strong>forward_speed</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-field-defines-the-scan-speed-in-the-positive-direction-on-the-fast-axis">
+<summary>The field defines the scan speed in the positive direction on the fast axis. ...</summary><p>The field defines the scan speed in the positive direction on the fast axis.</p>
+<p>Rename the field, according to the name of the fast axis.</p>
+</details></div></blockquote>
+<p id="index-41"><span id="nxscan-control-snake-scan-backward-speed-field"></span><strong>backward_speed</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-field-defines-the-scan-speed-in-the-negative-direction-on-the-fast-axis">
+<summary>The field defines the scan speed in the negative direction on the fast axis. ...</summary><p>The field defines the scan speed in the negative direction on the fast axis.</p>
+<p>Rename the field, according to the name of the fast axis.</p>
+</details></div></blockquote>
+<p id="index-42"><span id="nxscan-control-snake-scan-scan-points-n-field"></span><strong>scan_points_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-define-the-total-number-of-points-in-the-given-axis-scan-to-be-performed">
+<summary>Define the total number of points in the given axis scan to be performed. ...</summary><p>Define the total number of points in the given axis scan to be performed.</p>
+<p>Rename the field, according to the name of the dimension (e.g. scan_points_x, scan_points_voltage).</p>
+</details></div></blockquote>
+<p id="index-43"><span id="nxscan-control-snake-scan-stepping-n-field"></span><strong>stepping_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-the-number-of-steps-the-probe-jumps-over-the-scan-steps-or-points">
+<summary>The number of steps the probe jumps over the scan steps or points. ...</summary><p>The number of steps the probe jumps over the scan steps or points.</p>
+<p>Rename the field, according to the name of the dimension (e.g. stepping_x, stepping_voltage).</p>
+</details><p id="index-44"><span id="nxscan-control-snake-scan-stepping-n-frog-leap-scan-attribute"></span><strong>&#64;frog_leap_scan</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-jumps-over-a-number-of-scan-steps-or-points-more-than-o">
+<summary>If the scan probe jumps over a number of scan steps or points (more than o ...</summary><p>If the scan probe jumps over a number of scan steps or points (more than one)
+to perform each scan. By default, it is False.</p>
+<p>Rename the field, according to the name of the dimension.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="index-45"><span id="nxscan-control-snake-scan-step-size-n-field"></span><strong>step_size_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-length-of-each-step-in-the-scan-on-each-dimension">
+<summary>The length of each step in the scan on each dimension. ...</summary><p>The length of each step in the scan on each dimension.</p>
+<p>Rename the field, according to the name of the dimension (e.g. step_size_x, step_size_voltage).</p>
+</details></div></blockquote>
+<p id="index-46"><span id="nxscan-control-snake-scan-channel-name-field"></span><strong>channel_</strong><span class="bolditalic">NAME</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-name-of-the-channel-that-records-the-scan-data-for-the-given-dimension-the">
+<summary>Name of the channel that records the scan data for the given dimension. The  ...</summary><p>Name of the channel that records the scan data for the given dimension. The ending annotation ‘N’ is
+to represent the name of the dimensions.</p>
+<p>Rename the field, according to the name of the channel and dimension (e.g. piezo_scanner_x).</p>
+</details></div></blockquote>
+<p id="index-47"><span id="nxscan-control-snake-scan-continuous-n-field"></span><strong>continuous_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-moves-continuously-over-the-scan-points-or-steps-use-true">
+<summary>If the scan probe moves continuously over the scan points or steps, use True ...</summary><p>If the scan probe moves continuously over the scan points or steps, use True. The default value is True.
+Usually, continuous scanning is possible in one dimension. On other dimensions, the scan probe moves
+in a stepping manner.</p>
+<p>Rename the field, according to the name of the dimension (e.g. continuous_voltage).</p>
+</details></div></blockquote>
+<p id="index-48"><span id="nxscan-control-snake-scan-oscillating-n-field"></span><strong>oscillating_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-oscillates-over-the-scan-point-use-true">
+<summary>If the scan probe oscillates over the scan point, use True. ...</summary><p>If the scan probe oscillates over the scan point, use True.
+The default value is False.</p>
+</details></div></blockquote>
+<p id="index-49"><span id="nxscan-control-snake-scan-oscillation-frequency-field"></span><strong>oscillation_frequency</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-frequency"><span class="std std-ref">NX_FREQUENCY</span></a>}</p>
+<blockquote>
+<div><p>The number of oscillations on each scanning point per second.</p>
+</div></blockquote>
+<p id="nxscan-control-snake-scan-scan-data-group"><span class="bolditalic">SCAN_DATA</span>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="../base_classes/NXobject.html#nxobject-data-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-scan-data-is-the-data-collected-during-the-scan">
+<summary>The scan data is the data collected during the scan. ...</summary><p>The scan data is the data collected during the scan.
+If the scan has several channels or derivatives from the channel data, please
+duplicate this NXdata group for each.</p>
+</details><p id="index-50"><span id="nxscan-control-snake-scan-scan-data-data-field"></span><span class="bolditalic">DATA</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-data-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>The scan data is the data collected during the scan.</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxscan-control-traj-scan-group"><strong>traj_</strong><span class="bolditalic">SCAN</span>: (optional) <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+<blockquote>
+<div><p>To define the trajectory scan, use this group.</p>
+<p id="index-51"><span id="nxscan-control-traj-scan-scan-speed-field"></span><strong>scan_speed</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>Define the scan speed through the trajectory points.</p>
+</div></blockquote>
+<p id="index-52"><span id="nxscan-control-traj-scan-forward-speed-field"></span><strong>forward_speed</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-field-defines-the-scan-speed-in-the-forward-directions-through-the">
+<summary>The field defines the scan speed in the forward directions through the ...</summary><p>The field defines the scan speed in the forward directions through the
+trajectory points.</p>
+</details></div></blockquote>
+<p id="index-53"><span id="nxscan-control-traj-scan-backward-speed-field"></span><strong>backward_speed</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-field-defines-the-scan-speed-in-the-backward-directions-backtracking">
+<summary>The field defines the scan speed in the backward directions (backtracking) ...</summary><p>The field defines the scan speed in the backward directions (backtracking)
+through the trajectory points.</p>
+</details></div></blockquote>
+<p id="index-54"><span id="nxscan-control-traj-scan-channel-name-field"></span><strong>channel_</strong><span class="bolditalic">NAME</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-name-of-the-channel-that-records-the-scan-data-for-the-given-dimension-the">
+<summary>Name of the channel that records the scan data for the given dimension. The  ...</summary><p>Name of the channel that records the scan data for the given dimension. The ending annotation ‘N’ is
+to represent the name of the dimensions.</p>
+<p>Rename the field, according to the name of the channel and dimension (e.g. piezo_scanner_x).</p>
+</details></div></blockquote>
+<p id="index-55"><span id="nxscan-control-traj-scan-number-of-trajectory-points-field"></span><strong>number_of_trajectory_points</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>The number of trajectory points in the entire scan.</p>
+</div></blockquote>
+<p id="index-56"><span id="nxscan-control-traj-scan-trajectory-points-field"></span><strong>trajectory_points</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [nTraj, nD])</p>
+<blockquote>
+<div><details class="summary-the-trajectory-points-are-the-n-dimensional-vectors-describing-all-the-scan">
+<summary>The trajectory points are the N-dimensional vectors describing all the scan  ...</summary><p>The trajectory points are the N-dimensional vectors describing all the scan points sequentially.</p>
+<p>The second rank dataset should contain total number of trajectory points (nTraj) and
+a full coordinate (nD) of each trajectory point.</p>
+</details></div></blockquote>
+<p id="index-57"><span id="nxscan-control-traj-scan-scan-points-n-field"></span><strong>scan_points_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-define-the-total-number-of-scan-points-between-two-trajectory-points">
+<summary>Define the total number of scan points between two trajectory points. ...</summary><p>Define the total number of scan points between two trajectory points.</p>
+<p>Rename the field, according to the index of the second trajectory points.
+For example, scan_points_1 is the number of points between the starting(zero) and first trajectory points.</p>
+</details></div></blockquote>
+<p id="index-58"><span id="nxscan-control-traj-scan-stepping-n-field"></span><strong>stepping_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-the-number-of-steps-the-probe-jumps-over-the-scan-steps-or-points-along-the">
+<summary>The number of steps the probe jumps over the scan steps or points along the  ...</summary><p>The number of steps the probe jumps over the scan steps or points along the trajectory line from between two trajectory points.</p>
+<p>Rename the field, according to the index of the second trajectory points.
+For example, scan_points_1 is the number of points between the starting(zero) and first trajectory points.</p>
+</details><p id="index-59"><span id="nxscan-control-traj-scan-stepping-n-frog-leap-scan-attribute"></span><strong>&#64;frog_leap_scan</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-jumps-over-a-number-of-scan-steps-or-points-more-than-o">
+<summary>If the scan probe jumps over a number of scan steps or points (more than o ...</summary><p>If the scan probe jumps over a number of scan steps or points (more than one)
+to perform each scan. By default, it is False.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="index-60"><span id="nxscan-control-traj-scan-step-size-field"></span><strong>step_size</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>The length of each step along the entire trajectory line.</p>
+</div></blockquote>
+<p id="index-61"><span id="nxscan-control-traj-scan-continuous-field"></span><strong>continuous</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-moves-continuously-over-the-scan-points-or-steps-between-t">
+<summary>If the scan probe moves continuously over the scan points or steps between t ...</summary><p>If the scan probe moves continuously over the scan points or steps between two
+trajectory points, use True. The default value is True.</p>
+</details></div></blockquote>
+<p id="index-62"><span id="nxscan-control-traj-scan-oscillating-n-field"></span><strong>oscillating_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-oscillates-over-the-scan-point-use-true">
+<summary>If the scan probe oscillates over the scan point, use True. ...</summary><p>If the scan probe oscillates over the scan point, use True.
+The default value is False.</p>
+</details></div></blockquote>
+<p id="index-63"><span id="nxscan-control-traj-scan-oscillation-frequency-field"></span><strong>oscillation_frequency</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-frequency"><span class="std std-ref">NX_FREQUENCY</span></a>}</p>
+<blockquote>
+<div><p>The number of oscillations on each scanning point per second.</p>
+</div></blockquote>
+<p id="nxscan-control-traj-scan-scan-data-group"><span class="bolditalic">SCAN_DATA</span>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="../base_classes/NXobject.html#nxobject-data-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-scan-data-is-the-data-collected-during-the-scan">
+<summary>The scan data is the data collected during the scan. ...</summary><p>The scan data is the data collected during the scan.
+If the scan has several channels or derivatives from the channel data, please
+duplicate this NXdata group for each.</p>
+</details><p id="index-64"><span id="nxscan-control-traj-scan-scan-data-data-field"></span><span class="bolditalic">DATA</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-data-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>The scan data is the data collected during the scan.</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxscan-control-linear-scan-group"><strong>linear_</strong><span class="bolditalic">SCAN</span>: (optional) <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+<blockquote>
+<div><p>Define the scan mode that is performed for a single independent data axis.</p>
+<p id="index-65"><span id="nxscan-control-linear-scan-scan-speed-field"></span><strong>scan_speed</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-define-the-scan-speed-of-the-scan-disregarding-the-forward-or-backward">
+<summary>Define the scan speed of the scan disregarding the forward or backward ...</summary><p>Define the scan speed of the scan disregarding the forward or backward
+direction.</p>
+</details></div></blockquote>
+<p id="index-66"><span id="nxscan-control-linear-scan-forward-speed-field"></span><strong>forward_speed</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>Define the scan speed in the forward directions.</p>
+</div></blockquote>
+<p id="index-67"><span id="nxscan-control-linear-scan-backward-speed-field"></span><strong>backward_speed</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>Define the scan speed in the backward directions.</p>
+</div></blockquote>
+<p id="index-68"><span id="nxscan-control-linear-scan-channel-name-field"></span><strong>channel_</strong><span class="bolditalic">NAME</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Name of the channel that records the scan data for the given dimension.</p>
+</div></blockquote>
+<p id="index-69"><span id="nxscan-control-linear-scan-scan-points-n-field"></span><strong>scan_points_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-define-the-total-number-of-points-in-the-given-axis-scan-to-be-performed">
+<summary>Define the total number of points in the given axis scan to be performed. ...</summary><p>Define the total number of points in the given axis scan to be performed.</p>
+<p>Rename the field, according to the name of the dimension (e.g. scan_points_x, scan_points_voltage).</p>
+</details></div></blockquote>
+<p id="index-70"><span id="nxscan-control-linear-scan-stepping-n-field"></span><strong>stepping_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><details class="summary-the-number-of-steps-the-probe-jumps-over-the-scan-steps-or-points">
+<summary>The number of steps the probe jumps over the scan steps or points. ...</summary><p>The number of steps the probe jumps over the scan steps or points.</p>
+<p>Rename the field, according to the name of the dimension (e.g. stepping_x, stepping_voltage).</p>
+</details><p id="index-71"><span id="nxscan-control-linear-scan-stepping-n-frog-leap-scan-attribute"></span><strong>&#64;frog_leap_scan</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-jumps-over-a-number-of-scan-steps-or-points-more-than-o">
+<summary>If the scan probe jumps over a number of scan steps or points (more than o ...</summary><p>If the scan probe jumps over a number of scan steps or points (more than one)
+to perform each scan. By default, it is False.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="index-72"><span id="nxscan-control-linear-scan-step-size-n-field"></span><strong>step_size_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-length-of-each-step-in-the-scan-on-each-dimension">
+<summary>The length of each step in the scan on each dimension. ...</summary><p>The length of each step in the scan on each dimension.</p>
+<p>Rename the field, according to the name of the dimension (e.g. step_size_x, step_size_voltage).</p>
+</details></div></blockquote>
+<p id="index-73"><span id="nxscan-control-linear-scan-continuous-n-field"></span><strong>continuous_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-moves-continuously-over-the-scan-points-or-steps-use-true">
+<summary>If the scan probe moves continuously over the scan points or steps, use True ...</summary><p>If the scan probe moves continuously over the scan points or steps, use True. The default value is True.
+Usually, continuous scanning is possible in one dimension. On other dimensions, the scan probe moves
+in a stepping manner.</p>
+<p>Rename the field, according to the name of the dimension (e.g. continuous_voltage).</p>
+</details></div></blockquote>
+<p id="index-74"><span id="nxscan-control-linear-scan-oscillating-n-field"></span><strong>oscillating_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a></p>
+<blockquote>
+<div><details class="summary-if-the-scan-probe-oscillates-over-the-scan-point-use-true">
+<summary>If the scan probe oscillates over the scan point, use True. ...</summary><p>If the scan probe oscillates over the scan point, use True.
+The default value is False.</p>
+</details></div></blockquote>
+<p id="index-75"><span id="nxscan-control-linear-scan-oscillation-frequency-field"></span><strong>oscillation_frequency</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-frequency"><span class="std std-ref">NX_FREQUENCY</span></a>}</p>
+<blockquote>
+<div><p>The number of oscillations on each scanning point per second.</p>
+</div></blockquote>
+<p id="nxscan-control-linear-scan-scan-data-group"><span class="bolditalic">SCAN_DATA</span>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="../base_classes/NXobject.html#nxobject-data-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-scan-data-is-the-data-collected-during-the-scan">
+<summary>The scan data is the data collected during the scan. ...</summary><p>The scan data is the data collected during the scan.
+If the scan has several channels or derivatives from the channel data, please
+duplicate this NXdata group for each.</p>
+</details><p id="index-76"><span id="nxscan-control-linear-scan-scan-data-data-field"></span><span class="bolditalic">DATA</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-data-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>The scan data is the data collected during the scan.</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<section id="hypertext-anchors">
+<h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
+<p>List of hypertext anchors for all groups, fields,
+attributes, and links defined in this class.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nxscan-control-accuracy-n-field"><span class="std std-ref">/NXscan_control/accuracy_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-independent-scan-axes-field"><span class="std std-ref">/NXscan_control/independent_scan_axes-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-linear-scan-group"><span class="std std-ref">/NXscan_control/linear_SCAN-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-linear-scan-backward-speed-field"><span class="std std-ref">/NXscan_control/linear_SCAN/backward_speed-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-linear-scan-channel-name-field"><span class="std std-ref">/NXscan_control/linear_SCAN/channel_NAME-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-linear-scan-continuous-n-field"><span class="std std-ref">/NXscan_control/linear_SCAN/continuous_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-linear-scan-forward-speed-field"><span class="std std-ref">/NXscan_control/linear_SCAN/forward_speed-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-linear-scan-oscillating-n-field"><span class="std std-ref">/NXscan_control/linear_SCAN/oscillating_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-linear-scan-oscillation-frequency-field"><span class="std std-ref">/NXscan_control/linear_SCAN/oscillation_frequency-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-linear-scan-scan-data-group"><span class="std std-ref">/NXscan_control/linear_SCAN/SCAN_DATA-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-linear-scan-scan-data-data-field"><span class="std std-ref">/NXscan_control/linear_SCAN/SCAN_DATA/DATA-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-linear-scan-scan-points-n-field"><span class="std std-ref">/NXscan_control/linear_SCAN/scan_points_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-linear-scan-scan-speed-field"><span class="std std-ref">/NXscan_control/linear_SCAN/scan_speed-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-linear-scan-step-size-n-field"><span class="std std-ref">/NXscan_control/linear_SCAN/step_size_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-linear-scan-stepping-n-field"><span class="std std-ref">/NXscan_control/linear_SCAN/stepping_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-linear-scan-stepping-n-frog-leap-scan-attribute"><span class="std std-ref">/NXscan_control/linear_SCAN/stepping_N&#64;frog_leap_scan-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-mesh-scan-group"><span class="std std-ref">/NXscan_control/mesh_SCAN-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-mesh-scan-backward-speed-n-field"><span class="std std-ref">/NXscan_control/mesh_SCAN/backward_speed_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-mesh-scan-channel-name-field"><span class="std std-ref">/NXscan_control/mesh_SCAN/channel_NAME-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-mesh-scan-continuous-n-field"><span class="std std-ref">/NXscan_control/mesh_SCAN/continuous_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-mesh-scan-forward-speed-n-field"><span class="std std-ref">/NXscan_control/mesh_SCAN/forward_speed_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-mesh-scan-oscillating-n-field"><span class="std std-ref">/NXscan_control/mesh_SCAN/oscillating_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-mesh-scan-oscillation-frequency-field"><span class="std std-ref">/NXscan_control/mesh_SCAN/oscillation_frequency-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-mesh-scan-scan-data-group"><span class="std std-ref">/NXscan_control/mesh_SCAN/SCAN_DATA-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-mesh-scan-scan-data-data-field"><span class="std std-ref">/NXscan_control/mesh_SCAN/SCAN_DATA/DATA-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-mesh-scan-scan-points-n-field"><span class="std std-ref">/NXscan_control/mesh_SCAN/scan_points_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-mesh-scan-scan-speed-n-field"><span class="std std-ref">/NXscan_control/mesh_SCAN/scan_speed_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-mesh-scan-step-size-n-field"><span class="std std-ref">/NXscan_control/mesh_SCAN/step_size_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-mesh-scan-stepping-n-field"><span class="std std-ref">/NXscan_control/mesh_SCAN/stepping_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-mesh-scan-stepping-n-frog-leap-scan-attribute"><span class="std std-ref">/NXscan_control/mesh_SCAN/stepping_N&#64;frog_leap_scan-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-scan-control-type-field"><span class="std std-ref">/NXscan_control/scan_control_type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-scan-region-group"><span class="std std-ref">/NXscan_control/scan_region-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-scan-region-scan-angle-n-field"><span class="std std-ref">/NXscan_control/scan_region/scan_angle_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-scan-region-scan-end-n-field"><span class="std std-ref">/NXscan_control/scan_region/scan_end_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-scan-region-scan-offset-n-field"><span class="std std-ref">/NXscan_control/scan_region/scan_offset_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-scan-region-scan-range-n-field"><span class="std std-ref">/NXscan_control/scan_region/scan_range_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-scan-region-scan-start-n-field"><span class="std std-ref">/NXscan_control/scan_region/scan_start_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-scan-resolution-n-field"><span class="std std-ref">/NXscan_control/scan_resolution_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-scan-time-end-field"><span class="std std-ref">/NXscan_control/scan_time_end-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-scan-time-start-field"><span class="std std-ref">/NXscan_control/scan_time_start-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-scan-type-field"><span class="std std-ref">/NXscan_control/scan_type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-snake-scan-group"><span class="std std-ref">/NXscan_control/snake_SCAN-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-snake-scan-backward-speed-field"><span class="std std-ref">/NXscan_control/snake_SCAN/backward_speed-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-snake-scan-channel-name-field"><span class="std std-ref">/NXscan_control/snake_SCAN/channel_NAME-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-snake-scan-continuous-n-field"><span class="std std-ref">/NXscan_control/snake_SCAN/continuous_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-snake-scan-forward-speed-field"><span class="std std-ref">/NXscan_control/snake_SCAN/forward_speed-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-snake-scan-oscillating-n-field"><span class="std std-ref">/NXscan_control/snake_SCAN/oscillating_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-snake-scan-oscillation-frequency-field"><span class="std std-ref">/NXscan_control/snake_SCAN/oscillation_frequency-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-snake-scan-scan-data-group"><span class="std std-ref">/NXscan_control/snake_SCAN/SCAN_DATA-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-snake-scan-scan-data-data-field"><span class="std std-ref">/NXscan_control/snake_SCAN/SCAN_DATA/DATA-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-snake-scan-scan-points-n-field"><span class="std std-ref">/NXscan_control/snake_SCAN/scan_points_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-snake-scan-scan-speed-n-field"><span class="std std-ref">/NXscan_control/snake_SCAN/scan_speed_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-snake-scan-step-size-n-field"><span class="std std-ref">/NXscan_control/snake_SCAN/step_size_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-snake-scan-stepping-n-field"><span class="std std-ref">/NXscan_control/snake_SCAN/stepping_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-snake-scan-stepping-n-frog-leap-scan-attribute"><span class="std std-ref">/NXscan_control/snake_SCAN/stepping_N&#64;frog_leap_scan-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-spiral-scan-group"><span class="std std-ref">/NXscan_control/spiral_SCAN-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-spiral-scan-backward-speed-n-field"><span class="std std-ref">/NXscan_control/spiral_SCAN/backward_speed_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-spiral-scan-continuous-n-field"><span class="std std-ref">/NXscan_control/spiral_SCAN/continuous_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-spiral-scan-forward-speed-n-field"><span class="std std-ref">/NXscan_control/spiral_SCAN/forward_speed_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-spiral-scan-oscillating-n-field"><span class="std std-ref">/NXscan_control/spiral_SCAN/oscillating_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-spiral-scan-oscillation-frequency-field"><span class="std std-ref">/NXscan_control/spiral_SCAN/oscillation_frequency-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-spiral-scan-scan-data-group"><span class="std std-ref">/NXscan_control/spiral_SCAN/SCAN_DATA-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-spiral-scan-scan-data-data-field"><span class="std std-ref">/NXscan_control/spiral_SCAN/SCAN_DATA/DATA-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-spiral-scan-scan-points-n-field"><span class="std std-ref">/NXscan_control/spiral_SCAN/scan_points_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-spiral-scan-scan-speed-n-field"><span class="std std-ref">/NXscan_control/spiral_SCAN/scan_speed_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-spiral-scan-scan-speed-n-spiral-direction-attribute"><span class="std std-ref">/NXscan_control/spiral_SCAN/scan_speed_N&#64;spiral_direction-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-spiral-scan-spiral-radius-n-field"><span class="std std-ref">/NXscan_control/spiral_SCAN/spiral_radius_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-spiral-scan-step-size-n-field"><span class="std std-ref">/NXscan_control/spiral_SCAN/step_size_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-spiral-scan-stepping-n-field"><span class="std std-ref">/NXscan_control/spiral_SCAN/stepping_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-spiral-scan-stepping-n-frog-leap-scan-attribute"><span class="std std-ref">/NXscan_control/spiral_SCAN/stepping_N&#64;frog_leap_scan-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-group"><span class="std std-ref">/NXscan_control/traj_SCAN-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-backward-speed-field"><span class="std std-ref">/NXscan_control/traj_SCAN/backward_speed-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-channel-name-field"><span class="std std-ref">/NXscan_control/traj_SCAN/channel_NAME-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-continuous-field"><span class="std std-ref">/NXscan_control/traj_SCAN/continuous-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-forward-speed-field"><span class="std std-ref">/NXscan_control/traj_SCAN/forward_speed-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-number-of-trajectory-points-field"><span class="std std-ref">/NXscan_control/traj_SCAN/number_of_trajectory_points-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-oscillating-n-field"><span class="std std-ref">/NXscan_control/traj_SCAN/oscillating_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-oscillation-frequency-field"><span class="std std-ref">/NXscan_control/traj_SCAN/oscillation_frequency-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-scan-data-group"><span class="std std-ref">/NXscan_control/traj_SCAN/SCAN_DATA-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-scan-data-data-field"><span class="std std-ref">/NXscan_control/traj_SCAN/SCAN_DATA/DATA-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-scan-points-n-field"><span class="std std-ref">/NXscan_control/traj_SCAN/scan_points_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-scan-speed-field"><span class="std std-ref">/NXscan_control/traj_SCAN/scan_speed-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-step-size-field"><span class="std std-ref">/NXscan_control/traj_SCAN/step_size-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-stepping-n-field"><span class="std std-ref">/NXscan_control/traj_SCAN/stepping_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-stepping-n-frog-leap-scan-attribute"><span class="std std-ref">/NXscan_control/traj_SCAN/stepping_N&#64;frog_leap_scan-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxscan-control-traj-scan-trajectory-points-field"><span class="std std-ref">/NXscan_control/traj_SCAN/trajectory_points-field</span></a></p></li>
+</ul>
+<dl class="simple">
+<dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXscan_control.nxdl.xml">https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXscan_control.nxdl.xml</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Example data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optical-spectroscopy-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spm-structure.html">8. Scanning Probe Microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">11. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">12. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">13. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.75. NXscan_control</a><ul>
+<li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="NXregion.html" title="previous chapter"><span class="section-number">2.3.3.3.74. </span>NXregion</a></li>
+      <li>Next: <a href="NXsensor_scan.html" title="next chapter"><span class="section-number">2.3.3.3.76. </span>NXsensor_scan</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2025, The FAIRmat consortium, a member of the German National Research Data Infrastructure (NFDI).
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/NXscan_control.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

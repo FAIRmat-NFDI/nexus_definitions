@@ -1,0 +1,420 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.47. NXbias_spectroscopy &#8212; NeXus-FAIRmat v2024.02 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/details_summary_hide.css?v=30df4bca" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bolditalic.css?v=504f8cd9" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=04096e4a"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.48. NXbias_sweep" href="NXbias_sweep.html" />
+    <link rel="prev" title="2.3.3.3.46. NXbeam_transfer_matrix_table" href="NXbeam_transfer_matrix_table.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nxbias-spectroscopy">
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.47. </span>NXbias_spectroscopy<a class="headerlink" href="#nxbias-spectroscopy" title="Link to this heading">¶</a></h1>
+<p><strong>Status</strong>:</p>
+<blockquote>
+<div><p><em>base class</em> (contribution), extends <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+</div></blockquote>
+<p><strong>Description</strong>:</p>
+<blockquote>
+<div><details class="summary-a-base-class-for-bias-spectroscopy-to-describe-the-change-in-the-physical-proper">
+<summary>A base class for bias spectroscopy to describe the change in the physical proper ...</summary><p>A base class for bias spectroscopy to describe the change in the physical properties
+of the sample with respect to the sweep voltage applied on a sample of STM/AFM/… experiment.</p>
+<p>In these experiments an electric potential is applied between the (conductive) sample and the probe
+(tip), and the physical properties (e.g. tunnelling current) is measured as the function of this
+potential. The potential is varied in so-called voltage sweeps and the corresponding properties are
+recorded accordingly.</p>
+</details></div></blockquote>
+<p><strong>Symbols</strong>:</p>
+<blockquote>
+<div><p>No symbol table</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="NXbias_sweep.html#nxbias-sweep"><span class="std std-ref">NXbias_sweep</span></a>, <a class="reference internal" href="NXcircuit.html#nxcircuit"><span class="std std-ref">NXcircuit</span></a>, <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a>, <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a>, <a class="reference internal" href="NXpositioner_spm.html#nxpositioner-spm"><span class="std std-ref">NXpositioner_spm</span></a></p>
+</dd>
+</dl>
+<p id="index-1"><strong>Structure</strong>:</p>
+<blockquote>
+<div><p id="index-2"><span id="nxbias-spectroscopy-measurement-type-field"></span><strong>measurement_type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-the-measurement-of-the-i-v-curve-can-come-in-two-ways">
+<summary>The measurement of the I(V) curve can come in two ways: ...</summary><p>The measurement of the I(V) curve can come in two ways:
+1. Constant spacing: The bias voltage is swept from the start to the end with a constant
+spacing between the tip and surface.
+2. Variable spacing: The bias voltage is swept from the start to the end in a discretized
+spacing between the tip and surface. (Either an array of voltages, or the steps are defined).</p>
+<p>Any of these values: <code class="docutils literal notranslate"><span class="pre">constant_spacing</span></code> | <code class="docutils literal notranslate"><span class="pre">variadic_spacing</span></code></p>
+</details></div></blockquote>
+<p id="nxbias-spectroscopy-positioner-spm-group"><span class="bolditalic">POSITIONER_SPM</span>: (optional) <a class="reference internal" href="NXpositioner_spm.html#nxpositioner-spm"><span class="std std-ref">NXpositioner_spm</span></a></p>
+<blockquote>
+<div><details class="summary-the-pid-proportional-integral-differential-feedback-system-positioner-info">
+<summary>The PID (proportional, integral, differential feedback system) positioner info ...</summary><p>The PID (proportional, integral, differential feedback system) positioner information while running
+bias voltage-tunneling current measurement.</p>
+<p>These components position the probe relative to the sample, thus help obtaining maps of the data
+across the sample surface.</p>
+</details><p id="index-3"><span id="nxbias-spectroscopy-positioner-spm-z-offset-field"></span><strong>z_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="NXpositioner_spm.html#nxpositioner-spm-z-offset-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-z-offset-is-a-starting-tip-position-before-the-sweep-starts-typically-t">
+<summary>The z-offset is a starting tip position before the sweep starts (typically t ...</summary><p>The z-offset is a starting tip position before the sweep starts (typically the position of a
+piezo element).</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="nxbias-spectroscopy-circuit-group"><span class="bolditalic">CIRCUIT</span>: (optional) <a class="reference internal" href="NXcircuit.html#nxcircuit"><span class="std std-ref">NXcircuit</span></a></p>
+<blockquote>
+<div><p id="index-4"><span id="nxbias-spectroscopy-circuit-acquisition-time-field"></span><strong>acquisition_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>} <a class="reference internal" href="NXcircuit.html#nxcircuit-acquisition-time-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-time-or-period-is-taken-by-a-bias-sweep-to-acquire-the-data-for">
+<summary>The time or period is taken by a bias sweep to acquire the data for ...</summary><p>The time or period is taken by a bias sweep to acquire the data for
+a single bias sweep point (when the given point or whole sweep is started.).</p>
+</details></div></blockquote>
+<p id="index-5"><span id="nxbias-spectroscopy-circuit-animation-time-field"></span><strong>animation_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><p>The time or period is taken by a bias sweep to be displayed.</p>
+</div></blockquote>
+<p id="index-6"><span id="nxbias-spectroscopy-circuit-measurement-time-field"></span><strong>measurement_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-time-or-period-is-taken-by-the-circuit-to-measure-a-full-bias-sweep-volt">
+<summary>The time or period is taken by the circuit to measure a full bias sweep volt ...</summary><p>The time or period is taken by the circuit to measure a full bias sweep voltage or
+bias current. (duration of the measurement)</p>
+</details></div></blockquote>
+<p id="index-7"><span id="nxbias-spectroscopy-circuit-indicators-period-field"></span><strong>indicators_period</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-time-or-period-is-taken-by-the-circuit-to-indicate-the-bias-sweep-voltag">
+<summary>The time or period is taken by the circuit to indicate the bias sweep voltag ...</summary><p>The time or period is taken by the circuit to indicate the bias sweep voltage
+after measuring the voltage.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="nxbias-spectroscopy-bias-sweep-group"><span class="bolditalic">BIAS_SWEEP</span>: (optional) <a class="reference internal" href="NXbias_sweep.html#nxbias-sweep"><span class="std std-ref">NXbias_sweep</span></a></p>
+<blockquote>
+<div><p>The bias sweep information.</p>
+<p id="index-8"><span id="nxbias-spectroscopy-bias-sweep-scan-type-field"></span><strong>scan_type</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXscan_control.html#nxscan-control-scan-type-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-type-of-scan-like-mesh-spiral-etc">
+<summary>The type of scan like mesh, spiral, etc. ...</summary><p>The type of scan like mesh, spiral, etc.</p>
+<p>This combines not only how the voltages are changed, but how the voltage values are
+correlated to a position across the sample surface, measuring sweeps are each spatial
+coordinate or mapping the response at constant voltage, etc.
+For STS experiment, the scan type is usually a single-point scan (trajectory scan).</p>
+<p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">linear</span></code></p>
+</details></div></blockquote>
+<p id="index-9"><span id="nxbias-spectroscopy-bias-sweep-sweep-number-field"></span><strong>sweep_number</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>The number of sweeps taken during the bias spectroscopy.</p>
+</div></blockquote>
+<p id="index-10"><span id="nxbias-spectroscopy-bias-sweep-first-settling-time-field"></span><strong>first_settling_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-initial-time-is-taken-to-settle-the-bias-voltage-at-the-desired-value">
+<summary>The initial time is taken to settle the bias voltage at the desired value. ...</summary><p>The initial time is taken to settle the bias voltage at the desired value.
+On each sweep usually, the system takes time to settle to the bias voltage
+at the next value.</p>
+</details></div></blockquote>
+<p id="index-11"><span id="nxbias-spectroscopy-bias-sweep-end-settling-time-field"></span><strong>end_settling_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-time-is-taken-to-settle-the-bias-voltage-at-the-desired-value">
+<summary>The time is taken to settle the bias voltage at the desired value. ...</summary><p>The time is taken to settle the bias voltage at the desired value.
+The time (at the last sweep) to settle for the last value of the sweep.</p>
+</details></div></blockquote>
+<p id="index-12"><span id="nxbias-spectroscopy-bias-sweep-settling-time-field"></span><strong>settling_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-time-is-taken-to-settle-the-bias-voltage-at-the-desired-value-on-each-s">
+<summary>The time is taken to settle the bias voltage at the desired value. On each s ...</summary><p>The time is taken to settle the bias voltage at the desired value. On each sweep usually, the system
+takes time to settle the bias voltage at the next value.</p>
+</details></div></blockquote>
+<p id="index-13"><span id="nxbias-spectroscopy-bias-sweep-max-slew-rate-field"></span><strong>max_slew_rate</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-rate-at-which-the-amplifier-responds-to-the-voltage-change">
+<summary>The rate at which the amplifier responds to the voltage change ...</summary><p>The rate at which the amplifier responds to the voltage change
+(to reach at the desired value). It defines if the tip movement and
+voltage sweep are synchronized.</p>
+</details></div></blockquote>
+<p id="index-14"><span id="nxbias-spectroscopy-bias-sweep-final-z-field"></span><strong>final_z</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a></p>
+<blockquote>
+<div><p>The z position after the sweeps are done.</p>
+</div></blockquote>
+<p id="index-15"><span id="nxbias-spectroscopy-bias-sweep-total-spectroscopy-time-field"></span><strong>total_spectroscopy_time</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><p>The total time needed for the entire voltage sweep.</p>
+</div></blockquote>
+<p id="nxbias-spectroscopy-bias-sweep-scan-region-group"><strong>scan_region</strong>: (optional) <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a> <a class="reference internal" href="NXbias_sweep.html#nxbias-sweep-scan-region-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>The region of the scan area.</p>
+<p id="index-16"><span id="nxbias-spectroscopy-bias-sweep-scan-region-scan-range-field"></span><strong>scan_range</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>The range of the scan area.</p>
+</div></blockquote>
+<p id="index-17"><span id="nxbias-spectroscopy-bias-sweep-scan-region-scan-offset-field"></span><strong>scan_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>The offset of the scan area in 2D (X and Y) space.</p>
+</div></blockquote>
+<p id="index-18"><span id="nxbias-spectroscopy-bias-sweep-scan-region-scan-angle-n-field"></span><strong>scan_angle_</strong><span class="bolditalic">N</span>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>} <a class="reference internal" href="NXscan_control.html#nxscan-control-scan-region-scan-angle-n-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-n-substring-denotes-the-angle-of-the-scan-area-with-different-physic">
+<summary>The N (substring) denotes the angle of the scan area with different physic ...</summary><p>The N (substring) denotes the angle of the scan area with different physical
+axes.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="nxbias-spectroscopy-bias-sweep-linear-sweep-group"><strong>linear_sweep</strong>: (optional) <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a> <a class="reference internal" href="NXbias_sweep.html#nxbias-sweep-linear-sweep-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-linear-scan-information-for-scanning-of-a-smaple">
+<summary>The linear scan information for scanning of a smaple. ...</summary><p>The linear scan information for scanning of a smaple.</p>
+<p>In this scan type the probe is scanned with a constant velocity across the surface,
+and parameters are measured along the line.</p>
+</details><p id="index-19"><span id="nxbias-spectroscopy-bias-sweep-linear-sweep-scan-speed-field"></span><strong>scan_speed</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="NXscan_control.html#nxscan-control-linear-scan-scan-speed-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>The speed of the scanner or the probe during the scan.</p>
+</div></blockquote>
+<p id="index-20"><span id="nxbias-spectroscopy-bias-sweep-linear-sweep-scan-time-field"></span><strong>scan_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><p>The time taken by the scanner to scan the entire area.</p>
+</div></blockquote>
+<p id="index-21"><span id="nxbias-spectroscopy-bias-sweep-linear-sweep-forward-speed-bias-field"></span><strong>forward_speed_bias</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>Speed of the scanner or the probe moves forward direction.</p>
+</div></blockquote>
+<p id="index-22"><span id="nxbias-spectroscopy-bias-sweep-linear-sweep-backward-speed-bias-field"></span><strong>backward_speed_bias</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>Speed of the scanner or the probe that moves backward direction.</p>
+</div></blockquote>
+<p id="nxbias-spectroscopy-bias-sweep-linear-sweep-scan-data-group"><span class="bolditalic">SCAN</span><strong>_data</strong>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a> <a class="reference internal" href="NXbias_sweep.html#nxbias-sweep-linear-sweep-scan-data-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>The data that comes from scanning the area.</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<section id="hypertext-anchors">
+<h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
+<p>List of hypertext anchors for all groups, fields,
+attributes, and links defined in this class.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-group"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-end-settling-time-field"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/end_settling_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-final-z-field"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/final_z-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-first-settling-time-field"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/first_settling_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-linear-sweep-group"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/linear_sweep-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-linear-sweep-backward-speed-bias-field"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/linear_sweep/backward_speed_bias-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-linear-sweep-forward-speed-bias-field"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/linear_sweep/forward_speed_bias-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-linear-sweep-scan-data-group"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/linear_sweep/SCAN_data-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-linear-sweep-scan-speed-field"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/linear_sweep/scan_speed-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-linear-sweep-scan-time-field"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/linear_sweep/scan_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-max-slew-rate-field"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/max_slew_rate-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-scan-region-group"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/scan_region-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-scan-region-scan-angle-n-field"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/scan_region/scan_angle_N-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-scan-region-scan-offset-field"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/scan_region/scan_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-scan-region-scan-range-field"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/scan_region/scan_range-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-scan-type-field"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/scan_type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-settling-time-field"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/settling_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-sweep-number-field"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/sweep_number-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-bias-sweep-total-spectroscopy-time-field"><span class="std std-ref">/NXbias_spectroscopy/BIAS_SWEEP/total_spectroscopy_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-circuit-group"><span class="std std-ref">/NXbias_spectroscopy/CIRCUIT-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-circuit-acquisition-time-field"><span class="std std-ref">/NXbias_spectroscopy/CIRCUIT/acquisition_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-circuit-animation-time-field"><span class="std std-ref">/NXbias_spectroscopy/CIRCUIT/animation_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-circuit-indicators-period-field"><span class="std std-ref">/NXbias_spectroscopy/CIRCUIT/indicators_period-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-circuit-measurement-time-field"><span class="std std-ref">/NXbias_spectroscopy/CIRCUIT/measurement_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-measurement-type-field"><span class="std std-ref">/NXbias_spectroscopy/measurement_type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-positioner-spm-group"><span class="std std-ref">/NXbias_spectroscopy/POSITIONER_SPM-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxbias-spectroscopy-positioner-spm-z-offset-field"><span class="std std-ref">/NXbias_spectroscopy/POSITIONER_SPM/z_offset-field</span></a></p></li>
+</ul>
+<dl class="simple">
+<dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXbias_spectroscopy.nxdl.xml">https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXbias_spectroscopy.nxdl.xml</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Example data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optical-spectroscopy-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spm-structure.html">8. Scanning Probe Microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../laboratory-structure.html">11. Sample preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">13. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">14. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.47. NXbias_spectroscopy</a><ul>
+<li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="NXbeam_transfer_matrix_table.html" title="previous chapter"><span class="section-number">2.3.3.3.46. </span>NXbeam_transfer_matrix_table</a></li>
+      <li>Next: <a href="NXbias_sweep.html" title="next chapter"><span class="section-number">2.3.3.3.48. </span>NXbias_sweep</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2025, The FAIRmat collaboration.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/NXbias_spectroscopy.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

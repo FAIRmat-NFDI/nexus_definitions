@@ -1,0 +1,851 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.108. NXxas_pfy &#8212; NeXus-FAIRmat v2026.01 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=3f530b75" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=1f37a852" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/details_summary_hide.css?v=30df4bca" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bolditalic.css?v=504f8cd9" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=167d9c14"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.109. NXxas_tey" href="NXxas_tey.html" />
+    <link rel="prev" title="2.3.3.3.107. NXxas_pey" href="NXxas_pey.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nxxas-pfy">
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.108. </span>NXxas_pfy<a class="headerlink" href="#nxxas-pfy" title="Link to this heading">¶</a></h1>
+<p><strong>Status</strong>:</p>
+<blockquote>
+<div><p><em>application definition</em> (contribution), extends <a class="reference internal" href="NXxas.html#nxxas"><span class="std std-ref">NXxas</span></a></p>
+</div></blockquote>
+<p><strong>Description</strong>:</p>
+<blockquote>
+<div><details class="summary-in-partial-fluorescence-yield-pfy-only-a-selected-portion-of-the">
+<summary>In partial fluorescence yield (PFY), only a selected portion of the ...</summary><p>In partial fluorescence yield (PFY), only a selected portion of the
+fluorescence emission is detected, typically around a specific
+fluorescence line of the absorbing element (e.g. <span class="math notranslate nohighlight">\(K\alpha\)</span>).
+Experimentally, this energy selectivity can be achieved in several ways:</p>
+<ul class="simple">
+<li><p><strong>Energy-dispersive detector</strong> (e.g. silicon-drift diode,
+high-purity Ge detector, superconducting tunnel junction, etc.):
+the detector bins photons by emission energy into channels; the
+fluorescence line is isolated by selecting a channel range.</p></li>
+<li><p><strong>Grating spectrometer</strong>: a diffraction grating disperses the
+emitted photons by energy onto a 2D detector, providing
+higher energy resolution.</p></li>
+</ul>
+<p>The top-level <a class="reference internal" href="NXxas.html#nxxas-entry-intensity-field"><span class="std std-ref">intensity</span></a>
+field stores the ratio <span class="math notranslate nohighlight">\(I_f/I_0\)</span>, where <span class="math notranslate nohighlight">\(I_f\)</span> is the
+selected fluorescence intensity and <span class="math notranslate nohighlight">\(I_0\)</span> is the incident beam
+intensity. This ratio is proportional to the absorption coefficient:</p>
+<div class="math notranslate nohighlight">
+\[\mu(E) \propto I_f/I_0\]</div>
+<p>PFY may be affected by detector dead-time and self-absorption effects.</p>
+<p>When the raw detector data and processing steps are available, they can be
+stored in the optional <code class="docutils literal notranslate"><span class="pre">NXinstrument</span></code>, <code class="docutils literal notranslate"><span class="pre">NXcollection</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">NXprocess</span></code> groups, enabling full reproducibility of the data reduction.</p>
+</details></div></blockquote>
+<p><strong>Symbols</strong>:</p>
+<blockquote>
+<div><details class="summary-the-symbol-s-listed-here-will-be-used-below-to-coordinate-datasets">
+<summary>The symbol(s) listed here will be used below to coordinate datasets ...</summary><p>The symbol(s) listed here will be used below to coordinate datasets
+with the same shape.</p>
+</details><p><strong>nEnergy</strong>: Number of energy data points</p>
+<p><strong>nChannels</strong>: Number of selected detector channels within the emission energy window</p>
+<p><strong>nY</strong>: Number of pixel rows in the region of interest (ROI) on the grating-based spectrometer</p>
+<p><strong>nX</strong>: Number of pixel columns in the region of interest (ROI) on the grating-based spectrometer</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="../base_classes/NXbeam.html#nxbeam"><span class="std std-ref">NXbeam</span></a>, <a class="reference internal" href="../base_classes/NXcollection.html#nxcollection"><span class="std std-ref">NXcollection</span></a>, <a class="reference internal" href="../base_classes/NXcoordinate_system.html#nxcoordinate-system"><span class="std std-ref">NXcoordinate_system</span></a>, <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector"><span class="std std-ref">NXdetector</span></a>, <a class="reference internal" href="NXemission_line.html#nxemission-line"><span class="std std-ref">NXemission_line</span></a>, <a class="reference internal" href="../base_classes/NXentry.html#nxentry"><span class="std std-ref">NXentry</span></a>, <a class="reference internal" href="../base_classes/NXgrating.html#nxgrating"><span class="std std-ref">NXgrating</span></a>, <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument"><span class="std std-ref">NXinstrument</span></a>, <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a>, <a class="reference internal" href="../base_classes/NXsample.html#nxsample"><span class="std std-ref">NXsample</span></a>, <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations"><span class="std std-ref">NXtransformations</span></a></p>
+</dd>
+</dl>
+<p id="index-1"><strong>Structure</strong>:</p>
+<blockquote>
+<div><p id="nxxas-pfy-entry-group"><span class="bolditalic">ENTRY</span>: (required) <a class="reference internal" href="../base_classes/NXentry.html#nxentry"><span class="std std-ref">NXentry</span></a> <a class="reference internal" href="NXxas.html#nxxas-entry-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-2"><span id="nxxas-pfy-entry-definition-field"></span><strong>definition</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXxas.html#nxxas-entry-definition-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-official-nexus-nxdl-schema-to-which-this-file-conforms">
+<summary>Official NeXus NXDL schema to which this file conforms. ...</summary><p>Official NeXus NXDL schema to which this file conforms.</p>
+<p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">NXxas_pfy</span></code></p>
+</details></div></blockquote>
+<p id="index-3"><span id="nxxas-pfy-entry-intensity-field"></span><strong>intensity</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 1, Dimensions: [nEnergy]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>} <a class="reference internal" href="NXxas.html#nxxas-entry-intensity-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-ratio-math-i-f-i-0-where-math-i-f-is-the-selected">
+<summary>The ratio :math:`I_f/I_0`, where :math:`I_f` is the selected ...</summary><p>The ratio <span class="math notranslate nohighlight">\(I_f/I_0\)</span>, where <span class="math notranslate nohighlight">\(I_f\)</span> is the selected
+fluorescence intensity and <span class="math notranslate nohighlight">\(I_0\)</span> is the incident beam
+intensity.</p>
+</details></div></blockquote>
+<p id="nxxas-pfy-entry-line-emission-line-group"><span class="bolditalic">LINE</span><strong>_emission_line</strong>: (required) <a class="reference internal" href="NXemission_line.html#nxemission-line"><span class="std std-ref">NXemission_line</span></a></p>
+<blockquote>
+<div><details class="summary-the-emission-line-s-selected-for-the-partial-fluorescence">
+<summary>The emission line(s) selected for the partial fluorescence ...</summary><p>The emission line(s) selected for the partial fluorescence
+yield measurement, whether via a channel range or a
+grating-based spectrometer. For multiple lines use one
+group per line (e.g. <code class="docutils literal notranslate"><span class="pre">ka1_emission_line</span></code>,
+<code class="docutils literal notranslate"><span class="pre">kb1_emission_line</span></code>).</p>
+</details><p id="index-4"><span id="nxxas-pfy-entry-line-emission-line-name-field"></span><strong>name</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXemission_line.html#nxemission-line-name-field"><span class="std std-ref">⤆</span></a></p>
+</div></blockquote>
+<p id="index-5"><span id="nxxas-pfy-entry-emission-energy-window-field"></span><strong>emission_energy_window</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 1, Dimensions: [2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-energy"><span class="std std-ref">NX_ENERGY</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-lower-and-upper-bounds-math-e-min-e-max-of-the">
+<summary>The lower and upper bounds :math:`[e_{min}, e_{max}]` of the ...</summary><p>The lower and upper bounds <span class="math notranslate nohighlight">\([e_{min}, e_{max}]\)</span> of the
+detected emission energy window. This is the energy range
+over which fluorescence photons are accepted, whether
+defined by a detector channel range or a spectrometer
+region of interest.</p>
+</details></div></blockquote>
+<p id="nxxas-pfy-entry-beamline-coordinate-system-group"><strong>beamline_coordinate_system</strong>: (optional) <a class="reference internal" href="../base_classes/NXcoordinate_system.html#nxcoordinate-system"><span class="std std-ref">NXcoordinate_system</span></a></p>
+<blockquote>
+<div><details class="summary-beamline-coordinate-system-with-the-sample-at-the-origin">
+<summary>Beamline coordinate system with the sample at the origin: ...</summary><p>Beamline coordinate system with the sample at the origin:
+x along the beam, y horizontal, z opposite to gravity.</p>
+</details><p id="index-6"><span id="nxxas-pfy-entry-beamline-coordinate-system-origin-field"></span><strong>origin</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXcoordinate_system.html#nxcoordinate-system-origin-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">sample</span></code></p>
+</div></blockquote>
+<p id="index-7"><span id="nxxas-pfy-entry-beamline-coordinate-system-x-direction-field"></span><strong>x_direction</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXcoordinate_system.html#nxcoordinate-system-x-direction-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">along</span> <span class="pre">incident</span> <span class="pre">beam</span></code></p>
+</div></blockquote>
+<p id="index-8"><span id="nxxas-pfy-entry-beamline-coordinate-system-y-direction-field"></span><strong>y_direction</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXcoordinate_system.html#nxcoordinate-system-y-direction-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">horizontal</span> <span class="pre">perpendicular</span> <span class="pre">to</span> <span class="pre">beam</span></code></p>
+</div></blockquote>
+<p id="index-9"><span id="nxxas-pfy-entry-beamline-coordinate-system-z-direction-field"></span><strong>z_direction</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXcoordinate_system.html#nxcoordinate-system-z-direction-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">opposite</span> <span class="pre">to</span> <span class="pre">gravity</span></code></p>
+</div></blockquote>
+<p id="index-10"><span id="nxxas-pfy-entry-beamline-coordinate-system-x-field"></span><strong>x</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="../base_classes/NXcoordinate_system.html#nxcoordinate-system-x-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">0,</span> <span class="pre">0]</span></code></p>
+</div></blockquote>
+<p id="index-11"><span id="nxxas-pfy-entry-beamline-coordinate-system-y-field"></span><strong>y</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="../base_classes/NXcoordinate_system.html#nxcoordinate-system-y-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">0]</span></code></p>
+</div></blockquote>
+<p id="index-12"><span id="nxxas-pfy-entry-beamline-coordinate-system-z-field"></span><strong>z</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="../base_classes/NXcoordinate_system.html#nxcoordinate-system-z-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">1]</span></code></p>
+</div></blockquote>
+<p id="index-13"><span id="nxxas-pfy-entry-beamline-coordinate-system-depends-on-field"></span><strong>depends_on</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXcoordinate_system.html#nxcoordinate-system-depends-on-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-should-point-to">
+<summary>Should point to ...</summary><p>Should point to
+<code class="docutils literal notranslate"><span class="pre">transformations/beam</span></code>.</p>
+</details></div></blockquote>
+<p id="nxxas-pfy-entry-beamline-coordinate-system-transformations-group"><strong>transformations</strong>: (required) <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations"><span class="std std-ref">NXtransformations</span></a> <a class="reference internal" href="../base_classes/NXcoordinate_system.html#nxcoordinate-system-transformations-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-two-rotations-relating-the-beamline-frame-to">
+<summary>Two rotations relating the beamline frame to ...</summary><p>Two rotations relating the beamline frame to
+the NeXus laboratory frame, plus direction
+vectors labeling beam and gravity.</p>
+</details><p id="index-14"><span id="nxxas-pfy-entry-beamline-coordinate-system-transformations-beam-field"></span><strong>beam</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>} <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-direction-of-the-incident-beam-in-the-beamline">
+<summary>Direction of the incident beam in the beamline ...</summary><p>Direction of the incident beam in the beamline
+coordinate system.</p>
+</details><p id="index-15"><span id="nxxas-pfy-entry-beamline-coordinate-system-transformations-beam-vector-attribute"></span><strong>&#64;vector</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-vector-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">0,</span> <span class="pre">0]</span></code></p>
+</div></blockquote>
+<p id="index-16"><span id="nxxas-pfy-entry-beamline-coordinate-system-transformations-beam-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-depends-on-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">gravity</span></code></p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-17"><span id="nxxas-pfy-entry-beamline-coordinate-system-transformations-gravity-field"></span><strong>gravity</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>} <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-direction-of-gravity-in-the-beamline-coordinate">
+<summary>Direction of gravity in the beamline coordinate ...</summary><p>Direction of gravity in the beamline coordinate
+system.</p>
+</details><p id="index-18"><span id="nxxas-pfy-entry-beamline-coordinate-system-transformations-gravity-vector-attribute"></span><strong>&#64;vector</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-vector-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">-1]</span></code></p>
+</div></blockquote>
+<p id="index-19"><span id="nxxas-pfy-entry-beamline-coordinate-system-transformations-gravity-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-depends-on-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">rotate_gravity_to_minus_y</span></code></p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-20"><span id="nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-gravity-to-minus-y-field"></span><strong>rotate_gravity_to_minus_y</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>} <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-active-rotation-moving-gravity-from-the">
+<summary>Active rotation moving gravity from the ...</summary><p>Active rotation moving gravity from the
+beamline direction (-z) to the NeXus direction (-y).</p>
+</details><p id="index-21"><span id="nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-gravity-to-minus-y-transformation-type-attribute"></span><strong>&#64;transformation_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-transformation-type-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">rotation</span></code></p>
+</div></blockquote>
+<p id="index-22"><span id="nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-gravity-to-minus-y-vector-attribute"></span><strong>&#64;vector</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-vector-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">0,</span> <span class="pre">0]</span></code></p>
+</div></blockquote>
+<p id="index-23"><span id="nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-gravity-to-minus-y-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-depends-on-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">rotate_beam_to_plus_z</span></code></p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-24"><span id="nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-beam-to-plus-z-field"></span><strong>rotate_beam_to_plus_z</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>} <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-active-rotation-moving-the-beam-from-the">
+<summary>Active rotation moving the beam from the ...</summary><p>Active rotation moving the beam from the
+beamline direction (+x) to the NeXus direction (+z).</p>
+</details><p id="index-25"><span id="nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-beam-to-plus-z-transformation-type-attribute"></span><strong>&#64;transformation_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-transformation-type-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">rotation</span></code></p>
+</div></blockquote>
+<p id="index-26"><span id="nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-beam-to-plus-z-vector-attribute"></span><strong>&#64;vector</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-vector-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">0]</span></code></p>
+</div></blockquote>
+<p id="index-27"><span id="nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-beam-to-plus-z-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-depends-on-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-should-point-to-the-nexus-laboratory">
+<summary>Should point to ``.`` (the NeXus laboratory ...</summary><p>Should point to <code class="docutils literal notranslate"><span class="pre">.</span></code> (the NeXus laboratory
+frame).</p>
+</details></div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxxas-pfy-entry-sample-group"><span class="bolditalic">SAMPLE</span>: (required) <a class="reference internal" href="../base_classes/NXsample.html#nxsample"><span class="std std-ref">NXsample</span></a> <a class="reference internal" href="NXxas.html#nxxas-entry-sample-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-28"><span id="nxxas-pfy-entry-sample-depends-on-field"></span><strong>depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXcomponent.html#nxcomponent-depends-on-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-sample-is-at-the-origin-of-the-beamline">
+<summary>The sample is at the origin of the beamline ...</summary><p>The sample is at the origin of the beamline
+coordinate system, rotated about the vertical
+axis. Should point to
+<code class="docutils literal notranslate"><span class="pre">transformations/sample_rotation</span></code>.</p>
+</details></div></blockquote>
+<p id="nxxas-pfy-entry-sample-transformations-group"><strong>transformations</strong>: (optional) <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations"><span class="std std-ref">NXtransformations</span></a> <a class="reference internal" href="../base_classes/NXcomponent.html#nxcomponent-transformations-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-orientation-of-the-sample-in-the-beamline">
+<summary>Orientation of the sample in the beamline ...</summary><p>Orientation of the sample in the beamline
+coordinate system.</p>
+</details><p id="index-29"><span id="nxxas-pfy-entry-sample-transformations-sample-rotation-field"></span><strong>sample_rotation</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>} <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-rotation-of-the-sample-about-the-vertical-axis">
+<summary>Rotation of the sample about the vertical axis, ...</summary><p>Rotation of the sample about the vertical axis,
+orienting the sample surface between the incident beam
+and the fluorescence detector.</p>
+</details><p id="index-30"><span id="nxxas-pfy-entry-sample-transformations-sample-rotation-transformation-type-attribute"></span><strong>&#64;transformation_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-transformation-type-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">rotation</span></code></p>
+</div></blockquote>
+<p id="index-31"><span id="nxxas-pfy-entry-sample-transformations-sample-rotation-vector-attribute"></span><strong>&#64;vector</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-vector-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">1]</span></code></p>
+</div></blockquote>
+<p id="index-32"><span id="nxxas-pfy-entry-sample-transformations-sample-rotation-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-depends-on-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-should-point-to">
+<summary>Should point to ...</summary><p>Should point to
+<code class="docutils literal notranslate"><span class="pre">/entry/beamline_coordinate_system</span></code>.</p>
+</details></div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxxas-pfy-entry-instrument-group"><span class="bolditalic">INSTRUMENT</span>: (optional) <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument"><span class="std std-ref">NXinstrument</span></a> <a class="reference internal" href="../base_classes/NXentry.html#nxentry-instrument-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-the-data-field-of-each-detector-below-holds-the-intensity">
+<summary>The ``data`` field of each detector below holds the intensity ...</summary><p>The <code class="docutils literal notranslate"><span class="pre">data</span></code> field of each detector below holds the intensity
+used in the analysis and may already include corrections (for
+example dead-time, self-absorption, or detector-channel or ROI
+integration). If the uncorrected values are kept, they are
+archived in the <code class="docutils literal notranslate"><span class="pre">NXcollection</span></code> group and the corrections are
+described in <code class="docutils literal notranslate"><span class="pre">NXprocess</span></code>.</p>
+</details><p id="nxxas-pfy-entry-instrument-beam-group"><strong>beam</strong>: (optional) <a class="reference internal" href="../base_classes/NXbeam.html#nxbeam"><span class="std std-ref">NXbeam</span></a> <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument-beam-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>The incident X-ray beam.</p>
+<p id="index-33"><span id="nxxas-pfy-entry-instrument-beam-depends-on-field"></span><strong>depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXbeam.html#nxbeam-depends-on-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-should-point-to">
+<summary>Should point to ...</summary><p>Should point to
+<code class="docutils literal notranslate"><span class="pre">transformations/beam_direction</span></code>.</p>
+</details></div></blockquote>
+<p id="nxxas-pfy-entry-instrument-beam-transformations-group"><strong>transformations</strong>: (optional) <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations"><span class="std std-ref">NXtransformations</span></a> <a class="reference internal" href="../base_classes/NXbeam.html#nxbeam-transformations-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-34"><span id="nxxas-pfy-entry-instrument-beam-transformations-beam-direction-field"></span><strong>beam_direction</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>} <a class="reference internal" href="../base_classes/NXbeam.html#nxbeam-transformations-beamdirection-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-beam-direction-in-the-beamline-coordinate">
+<summary>Beam direction in the beamline coordinate ...</summary><p>Beam direction in the beamline coordinate
+system. The beam travels along +x.</p>
+</details><p id="index-35"><span id="nxxas-pfy-entry-instrument-beam-transformations-beam-direction-vector-attribute"></span><strong>&#64;vector</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXbeam.html#nxbeam-transformations-beamdirection-vector-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">0,</span> <span class="pre">0]</span></code></p>
+</div></blockquote>
+<p id="index-36"><span id="nxxas-pfy-entry-instrument-beam-transformations-beam-direction-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXbeam.html#nxbeam-transformations-beamdirection-depends-on-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-should-point-to">
+<summary>Should point to ...</summary><p>Should point to
+<code class="docutils literal notranslate"><span class="pre">/entry/beamline_coordinate_system</span></code>.</p>
+</details></div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxxas-pfy-entry-instrument-i0-group"><strong>i0</strong>: (recommended) <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector"><span class="std std-ref">NXdetector</span></a> <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument-detector-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Detector measuring the incident beam intensity <span class="math notranslate nohighlight">\(I_0\)</span>.</p>
+<p id="index-37"><span id="nxxas-pfy-entry-instrument-i0-data-field"></span><strong>data</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nEnergy]) <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector-data-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-38"><span id="nxxas-pfy-entry-instrument-i0-depends-on-field"></span><strong>depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector-depends-on-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-should-point-to">
+<summary>Should point to ...</summary><p>Should point to
+<code class="docutils literal notranslate"><span class="pre">transformations/i0_distance</span></code>.</p>
+</details></div></blockquote>
+<p id="nxxas-pfy-entry-instrument-i0-transformations-group"><strong>transformations</strong>: (optional) <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations"><span class="std std-ref">NXtransformations</span></a> <a class="reference internal" href="../base_classes/NXcomponent.html#nxcomponent-transformations-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-39"><span id="nxxas-pfy-entry-instrument-i0-transformations-i0-distance-field"></span><strong>i0_distance</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-distance-from-the-sample-to-the-i0-detector">
+<summary>Distance from the sample to the I0 detector, ...</summary><p>Distance from the sample to the I0 detector,
+measured upstream along the beam (negative x
+direction in the beamline frame).</p>
+</details><p id="index-40"><span id="nxxas-pfy-entry-instrument-i0-transformations-i0-distance-transformation-type-attribute"></span><strong>&#64;transformation_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-transformation-type-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">translation</span></code></p>
+</div></blockquote>
+<p id="index-41"><span id="nxxas-pfy-entry-instrument-i0-transformations-i0-distance-vector-attribute"></span><strong>&#64;vector</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-vector-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[-1,</span> <span class="pre">0,</span> <span class="pre">0]</span></code></p>
+</div></blockquote>
+<p id="index-42"><span id="nxxas-pfy-entry-instrument-i0-transformations-i0-distance-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-depends-on-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-should-point-to">
+<summary>Should point to ...</summary><p>Should point to
+<code class="docutils literal notranslate"><span class="pre">/entry/beamline_coordinate_system</span></code>.</p>
+</details></div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxxas-pfy-entry-instrument-grating-group"><strong>grating</strong>: (optional) <a class="reference internal" href="../base_classes/NXgrating.html#nxgrating"><span class="std std-ref">NXgrating</span></a></p>
+<blockquote>
+<div><details class="summary-diffraction-grating-used-to-select-the-emission-energy">
+<summary>Diffraction grating used to select the emission energy ...</summary><p>Diffraction grating used to select the emission energy
+in a grating-based spectrometer. Present only when a grating
+spectrometer is used instead of an energy-dispersive
+detector.</p>
+<p>The grating lies on the line connecting the sample and
+the fluorescence detector (<code class="docutils literal notranslate"><span class="pre">if</span></code>): the azimuthal and
+polar angles must therefore match those of
+<code class="docutils literal notranslate"><span class="pre">if/transformations</span></code>, and only the distance differs.</p>
+</details><p id="index-43"><span id="nxxas-pfy-entry-instrument-grating-depends-on-field"></span><strong>depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXgrating.html#nxgrating-depends-on-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-should-point-to-the-last-transformation-in-the">
+<summary>Should point to the last transformation in the ...</summary><p>Should point to the last transformation in the
+chain, i.e.
+<code class="docutils literal notranslate"><span class="pre">transformations/grating_distance</span></code>.</p>
+</details></div></blockquote>
+<p id="nxxas-pfy-entry-instrument-grating-transformations-group"><strong>transformations</strong>: (optional) <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations"><span class="std std-ref">NXtransformations</span></a> <a class="reference internal" href="../base_classes/NXgrating.html#nxgrating-transformations-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-transformation-chain-placing-the-grating-relative">
+<summary>Transformation chain placing the grating relative ...</summary><p>Transformation chain placing the grating relative
+to the sample. The azimuthal and polar angles must
+be equal to those of the fluorescence detector
+(<code class="docutils literal notranslate"><span class="pre">if</span></code>) to ensure colinearity.</p>
+</details><p id="index-44"><span id="nxxas-pfy-entry-instrument-grating-transformations-grating-distance-field"></span><strong>grating_distance</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-distance-from-the-sample-to-the-grating-along">
+<summary>Distance from the sample to the grating along ...</summary><p>Distance from the sample to the grating along
+the sample-to-detector direction.</p>
+</details><p id="index-45"><span id="nxxas-pfy-entry-instrument-grating-transformations-grating-distance-transformation-type-attribute"></span><strong>&#64;transformation_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-transformation-type-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">translation</span></code></p>
+</div></blockquote>
+<p id="index-46"><span id="nxxas-pfy-entry-instrument-grating-transformations-grating-distance-vector-attribute"></span><strong>&#64;vector</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-vector-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">0,</span> <span class="pre">0]</span></code></p>
+</div></blockquote>
+<p id="index-47"><span id="nxxas-pfy-entry-instrument-grating-transformations-grating-distance-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-depends-on-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">grating_polar_angle</span></code></p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-48"><span id="nxxas-pfy-entry-instrument-grating-transformations-grating-polar-angle-field"></span><strong>grating_polar_angle</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>} <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-polar-elevation-angle-of-the-grating-above">
+<summary>Polar (elevation) angle of the grating above ...</summary><p>Polar (elevation) angle of the grating above
+the horizontal beam plane. Must equal
+<code class="docutils literal notranslate"><span class="pre">if/transformations/if_polar_angle</span></code>.</p>
+</details><p id="index-49"><span id="nxxas-pfy-entry-instrument-grating-transformations-grating-polar-angle-transformation-type-attribute"></span><strong>&#64;transformation_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-transformation-type-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">rotation</span></code></p>
+</div></blockquote>
+<p id="index-50"><span id="nxxas-pfy-entry-instrument-grating-transformations-grating-polar-angle-vector-attribute"></span><strong>&#64;vector</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-vector-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">-1,</span> <span class="pre">0]</span></code></p>
+</div></blockquote>
+<p id="index-51"><span id="nxxas-pfy-entry-instrument-grating-transformations-grating-polar-angle-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-depends-on-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">grating_azimuthal_angle</span></code></p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-52"><span id="nxxas-pfy-entry-instrument-grating-transformations-grating-azimuthal-angle-field"></span><strong>grating_azimuthal_angle</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>} <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-azimuthal-horizontal-angle-of-the-grating">
+<summary>Azimuthal (horizontal) angle of the grating ...</summary><p>Azimuthal (horizontal) angle of the grating
+from the incident beam direction. Must equal
+<code class="docutils literal notranslate"><span class="pre">if/transformations/if_azimuthal_angle</span></code>.</p>
+</details><p id="index-53"><span id="nxxas-pfy-entry-instrument-grating-transformations-grating-azimuthal-angle-transformation-type-attribute"></span><strong>&#64;transformation_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-transformation-type-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">rotation</span></code></p>
+</div></blockquote>
+<p id="index-54"><span id="nxxas-pfy-entry-instrument-grating-transformations-grating-azimuthal-angle-vector-attribute"></span><strong>&#64;vector</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-vector-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">1]</span></code></p>
+</div></blockquote>
+<p id="index-55"><span id="nxxas-pfy-entry-instrument-grating-transformations-grating-azimuthal-angle-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-depends-on-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-should-point-to">
+<summary>Should point to ...</summary><p>Should point to
+<code class="docutils literal notranslate"><span class="pre">/entry/beamline_coordinate_system</span></code>.</p>
+</details></div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxxas-pfy-entry-instrument-ifluor-group"><strong>ifluor</strong>: (recommended) <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector"><span class="std std-ref">NXdetector</span></a> <a class="reference internal" href="../base_classes/NXinstrument.html#nxinstrument-detector-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-fluorescence-detector-measuring-math-i-f-when-using-an">
+<summary>Fluorescence detector measuring :math:`I_f`. When using an ...</summary><p>Fluorescence detector measuring <span class="math notranslate nohighlight">\(I_f\)</span>. When using an
+energy-dispersive detector, <code class="docutils literal notranslate"><span class="pre">data</span></code> holds the intensity
+integrated over the selected detector channels. When using a
+grating-based spectrometer, <code class="docutils literal notranslate"><span class="pre">data</span></code> holds the ROI integrated
+on the spectrometer detector. In both cases the data may be
+corrected for dead-time and self-absorption.</p>
+</details><p id="index-56"><span id="nxxas-pfy-entry-instrument-ifluor-data-field"></span><strong>data</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [nEnergy]) <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector-data-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-57"><span id="nxxas-pfy-entry-instrument-ifluor-dead-time-field"></span><strong>dead_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 1, Dimensions: [nEnergy]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>} <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector-dead-time-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Detector dead time per energy point.</p>
+</div></blockquote>
+<p id="index-58"><span id="nxxas-pfy-entry-instrument-ifluor-count-time-field"></span><strong>count_time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 1, Dimensions: [nEnergy]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><p>Detector live time per energy point.</p>
+</div></blockquote>
+<p id="index-59"><span id="nxxas-pfy-entry-instrument-ifluor-depends-on-field"></span><strong>depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXdetector.html#nxdetector-depends-on-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-should-point-to-the-last-transformation-in-the">
+<summary>Should point to the last transformation in the ...</summary><p>Should point to the last transformation in the
+chain, i.e.
+<code class="docutils literal notranslate"><span class="pre">transformations/if_distance</span></code>.</p>
+</details></div></blockquote>
+<p id="nxxas-pfy-entry-instrument-ifluor-transformations-group"><strong>transformations</strong>: (optional) <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations"><span class="std std-ref">NXtransformations</span></a> <a class="reference internal" href="../base_classes/NXcomponent.html#nxcomponent-transformations-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-transformation-chain-placing-the-fluorescence">
+<summary>Transformation chain placing the fluorescence ...</summary><p>Transformation chain placing the fluorescence
+detector relative to the sample: azimuthal angle,
+polar angle, then distance. These angles are
+required to compute self-absorption corrections.</p>
+</details><p id="index-60"><span id="nxxas-pfy-entry-instrument-ifluor-transformations-if-distance-field"></span><strong>if_distance</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-distance-from-the-sample-to-the-fluorescence">
+<summary>Distance from the sample to the fluorescence ...</summary><p>Distance from the sample to the fluorescence
+detector (or spectrometer entrance).</p>
+</details><p id="index-61"><span id="nxxas-pfy-entry-instrument-ifluor-transformations-if-distance-transformation-type-attribute"></span><strong>&#64;transformation_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-transformation-type-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">translation</span></code></p>
+</div></blockquote>
+<p id="index-62"><span id="nxxas-pfy-entry-instrument-ifluor-transformations-if-distance-vector-attribute"></span><strong>&#64;vector</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-vector-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">0,</span> <span class="pre">0]</span></code></p>
+</div></blockquote>
+<p id="index-63"><span id="nxxas-pfy-entry-instrument-ifluor-transformations-if-distance-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-depends-on-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">if_polar_angle</span></code></p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-64"><span id="nxxas-pfy-entry-instrument-ifluor-transformations-if-polar-angle-field"></span><strong>if_polar_angle</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>} <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-polar-elevation-angle-of-the-detector-above">
+<summary>Polar (elevation) angle of the detector above ...</summary><p>Polar (elevation) angle of the detector above
+the horizontal beam plane. A value of 0 means
+the detector is in the horizontal plane; 90
+degrees means it is directly above the sample.</p>
+</details><p id="index-65"><span id="nxxas-pfy-entry-instrument-ifluor-transformations-if-polar-angle-transformation-type-attribute"></span><strong>&#64;transformation_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-transformation-type-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">rotation</span></code></p>
+</div></blockquote>
+<p id="index-66"><span id="nxxas-pfy-entry-instrument-ifluor-transformations-if-polar-angle-vector-attribute"></span><strong>&#64;vector</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-vector-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">-1,</span> <span class="pre">0]</span></code></p>
+</div></blockquote>
+<p id="index-67"><span id="nxxas-pfy-entry-instrument-ifluor-transformations-if-polar-angle-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-depends-on-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">if_azimuthal_angle</span></code></p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-68"><span id="nxxas-pfy-entry-instrument-ifluor-transformations-if-azimuthal-angle-field"></span><strong>if_azimuthal_angle</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>} <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-azimuthal-horizontal-angle-of-the-detector">
+<summary>Azimuthal (horizontal) angle of the detector ...</summary><p>Azimuthal (horizontal) angle of the detector
+from the incident beam direction. Rotation
+around the vertical z-axis. Typically around
+90 degrees to minimize elastic scattering
+background.</p>
+</details><p id="index-69"><span id="nxxas-pfy-entry-instrument-ifluor-transformations-if-azimuthal-angle-transformation-type-attribute"></span><strong>&#64;transformation_type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-transformation-type-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">rotation</span></code></p>
+</div></blockquote>
+<p id="index-70"><span id="nxxas-pfy-entry-instrument-ifluor-transformations-if-azimuthal-angle-vector-attribute"></span><strong>&#64;vector</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-vector-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">1]</span></code></p>
+</div></blockquote>
+<p id="index-71"><span id="nxxas-pfy-entry-instrument-ifluor-transformations-if-azimuthal-angle-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXtransformations.html#nxtransformations-axisname-depends-on-attribute"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-should-point-to">
+<summary>Should point to ...</summary><p>Should point to
+<code class="docutils literal notranslate"><span class="pre">/entry/beamline_coordinate_system</span></code>.</p>
+</details></div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxxas-pfy-entry-collection-group"><span class="bolditalic">COLLECTION</span>: (optional) <a class="reference internal" href="../base_classes/NXcollection.html#nxcollection"><span class="std std-ref">NXcollection</span></a> <a class="reference internal" href="../base_classes/NXentry.html#nxentry-collection-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-raw-data-as-written-by-the-acquisition-software">
+<summary>Raw data as written by the acquisition software, ...</summary><p>Raw data as written by the acquisition software,
+preserved without modification to allow independent
+reprocessing. Either <code class="docutils literal notranslate"><span class="pre">detector_channels</span></code> or <code class="docutils literal notranslate"><span class="pre">detector_roi</span></code>
+will be present depending on the detector type used;
+not both simultaneously.</p>
+</details><p id="index-72"><span id="nxxas-pfy-entry-collection-detector-channels-field"></span><strong>detector_channels</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 2, Dimensions: [nEnergy, nChannels])</p>
+<blockquote>
+<div><details class="summary-raw-channel-counts-per-incident-energy-point-for-the">
+<summary>Raw channel counts per incident energy point for the ...</summary><p>Raw channel counts per incident energy point for the
+selected channels of an energy-dispersive detector.
+Only the channels within the emission energy window
+are stored. Axis 0 is the energy scan axis; axis 1
+enumerates the selected channels. Each value is the
+count in that channel for one energy point.</p>
+</details></div></blockquote>
+<p id="index-73"><span id="nxxas-pfy-entry-collection-detector-roi-field"></span><strong>detector_roi</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 3, Dimensions: [nEnergy, nY, nX])</p>
+<blockquote>
+<div><details class="summary-raw-detector-image-within-the-roi-per-incident-energy-point">
+<summary>Raw detector image within the ROI per incident energy point. ...</summary><p>Raw detector image within the ROI per incident energy point.
+Axis 0 is the energy scan axis; axes 1 and 2 span the 2D
+pixel grid of the downstream detector (nY rows, nX columns).</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="nxxas-pfy-entry-process-group"><span class="bolditalic">PROCESS</span>: (optional) <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a> <a class="reference internal" href="../base_classes/NXentry.html#nxentry-process-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-description-of-how-ref-intensity">
+<summary>Description of how :ref:`intensity ...</summary><p>Description of how <a class="reference internal" href="NXxas.html#nxxas-entry-intensity-field"><span class="std std-ref">intensity</span></a> was obtained from
+the raw detector data (i0, if), including any applied correction,
+e.g., dead-time or self-absorption.</p>
+</details><p id="index-74"><span id="nxxas-pfy-entry-process-program-field"></span><strong>program</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess-program-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Name of the program used for processing.</p>
+</div></blockquote>
+<p id="index-75"><span id="nxxas-pfy-entry-process-version-field"></span><strong>version</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess-version-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Version of the program used for processing.</p>
+</div></blockquote>
+<p id="index-76"><span id="nxxas-pfy-entry-process-date-field"></span><strong>date</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a> <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess-date-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Date and time of processing.</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<section id="hypertext-anchors">
+<h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
+<p>List of hypertext anchors for all groups, fields,
+attributes, and links defined in this class.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-group"><span class="std std-ref">/NXxas_pfy/ENTRY-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-group"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-depends-on-field"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/depends_on-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-origin-field"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/origin-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-transformations-group"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/transformations-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-transformations-beam-field"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/transformations/beam-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-transformations-beam-depends-on-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/transformations/beam&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-transformations-beam-vector-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/transformations/beam&#64;vector-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-transformations-gravity-field"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/transformations/gravity-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-transformations-gravity-depends-on-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/transformations/gravity&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-transformations-gravity-vector-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/transformations/gravity&#64;vector-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-beam-to-plus-z-field"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/transformations/rotate_beam_to_plus_z-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-beam-to-plus-z-depends-on-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/transformations/rotate_beam_to_plus_z&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-beam-to-plus-z-transformation-type-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/transformations/rotate_beam_to_plus_z&#64;transformation_type-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-beam-to-plus-z-vector-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/transformations/rotate_beam_to_plus_z&#64;vector-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-gravity-to-minus-y-field"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/transformations/rotate_gravity_to_minus_y-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-gravity-to-minus-y-depends-on-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/transformations/rotate_gravity_to_minus_y&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-gravity-to-minus-y-transformation-type-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/transformations/rotate_gravity_to_minus_y&#64;transformation_type-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-transformations-rotate-gravity-to-minus-y-vector-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/transformations/rotate_gravity_to_minus_y&#64;vector-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-x-field"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/x-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-x-direction-field"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/x_direction-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-y-field"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/y-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-y-direction-field"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/y_direction-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-z-field"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/z-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-beamline-coordinate-system-z-direction-field"><span class="std std-ref">/NXxas_pfy/ENTRY/beamline_coordinate_system/z_direction-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-collection-group"><span class="std std-ref">/NXxas_pfy/ENTRY/COLLECTION-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-collection-detector-channels-field"><span class="std std-ref">/NXxas_pfy/ENTRY/COLLECTION/detector_channels-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-collection-detector-roi-field"><span class="std std-ref">/NXxas_pfy/ENTRY/COLLECTION/detector_roi-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-definition-field"><span class="std std-ref">/NXxas_pfy/ENTRY/definition-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-emission-energy-window-field"><span class="std std-ref">/NXxas_pfy/ENTRY/emission_energy_window-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-group"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-beam-group"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/beam-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-beam-depends-on-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/beam/depends_on-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-beam-transformations-group"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/beam/transformations-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-beam-transformations-beam-direction-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/beam/transformations/beam_direction-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-beam-transformations-beam-direction-depends-on-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/beam/transformations/beam_direction&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-beam-transformations-beam-direction-vector-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/beam/transformations/beam_direction&#64;vector-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-grating-group"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/grating-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-grating-depends-on-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/grating/depends_on-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-grating-transformations-group"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/grating/transformations-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-grating-transformations-grating-azimuthal-angle-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/grating/transformations/grating_azimuthal_angle-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-grating-transformations-grating-azimuthal-angle-depends-on-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/grating/transformations/grating_azimuthal_angle&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-grating-transformations-grating-azimuthal-angle-transformation-type-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/grating/transformations/grating_azimuthal_angle&#64;transformation_type-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-grating-transformations-grating-azimuthal-angle-vector-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/grating/transformations/grating_azimuthal_angle&#64;vector-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-grating-transformations-grating-distance-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/grating/transformations/grating_distance-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-grating-transformations-grating-distance-depends-on-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/grating/transformations/grating_distance&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-grating-transformations-grating-distance-transformation-type-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/grating/transformations/grating_distance&#64;transformation_type-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-grating-transformations-grating-distance-vector-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/grating/transformations/grating_distance&#64;vector-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-grating-transformations-grating-polar-angle-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/grating/transformations/grating_polar_angle-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-grating-transformations-grating-polar-angle-depends-on-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/grating/transformations/grating_polar_angle&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-grating-transformations-grating-polar-angle-transformation-type-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/grating/transformations/grating_polar_angle&#64;transformation_type-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-grating-transformations-grating-polar-angle-vector-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/grating/transformations/grating_polar_angle&#64;vector-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-i0-group"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/i0-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-i0-data-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/i0/data-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-i0-depends-on-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/i0/depends_on-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-i0-transformations-group"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/i0/transformations-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-i0-transformations-i0-distance-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/i0/transformations/i0_distance-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-i0-transformations-i0-distance-depends-on-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/i0/transformations/i0_distance&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-i0-transformations-i0-distance-transformation-type-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/i0/transformations/i0_distance&#64;transformation_type-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-i0-transformations-i0-distance-vector-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/i0/transformations/i0_distance&#64;vector-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-group"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-count-time-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/count_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-data-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/data-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-dead-time-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/dead_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-depends-on-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/depends_on-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-transformations-group"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/transformations-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-transformations-if-azimuthal-angle-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/transformations/if_azimuthal_angle-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-transformations-if-azimuthal-angle-depends-on-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/transformations/if_azimuthal_angle&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-transformations-if-azimuthal-angle-transformation-type-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/transformations/if_azimuthal_angle&#64;transformation_type-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-transformations-if-azimuthal-angle-vector-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/transformations/if_azimuthal_angle&#64;vector-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-transformations-if-distance-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/transformations/if_distance-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-transformations-if-distance-depends-on-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/transformations/if_distance&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-transformations-if-distance-transformation-type-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/transformations/if_distance&#64;transformation_type-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-transformations-if-distance-vector-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/transformations/if_distance&#64;vector-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-transformations-if-polar-angle-field"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/transformations/if_polar_angle-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-transformations-if-polar-angle-depends-on-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/transformations/if_polar_angle&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-transformations-if-polar-angle-transformation-type-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/transformations/if_polar_angle&#64;transformation_type-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-instrument-ifluor-transformations-if-polar-angle-vector-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/INSTRUMENT/ifluor/transformations/if_polar_angle&#64;vector-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-intensity-field"><span class="std std-ref">/NXxas_pfy/ENTRY/intensity-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-line-emission-line-group"><span class="std std-ref">/NXxas_pfy/ENTRY/LINE_emission_line-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-line-emission-line-name-field"><span class="std std-ref">/NXxas_pfy/ENTRY/LINE_emission_line/name-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-process-group"><span class="std std-ref">/NXxas_pfy/ENTRY/PROCESS-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-process-date-field"><span class="std std-ref">/NXxas_pfy/ENTRY/PROCESS/date-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-process-program-field"><span class="std std-ref">/NXxas_pfy/ENTRY/PROCESS/program-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-process-version-field"><span class="std std-ref">/NXxas_pfy/ENTRY/PROCESS/version-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-sample-group"><span class="std std-ref">/NXxas_pfy/ENTRY/SAMPLE-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-sample-depends-on-field"><span class="std std-ref">/NXxas_pfy/ENTRY/SAMPLE/depends_on-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-sample-transformations-group"><span class="std std-ref">/NXxas_pfy/ENTRY/SAMPLE/transformations-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-sample-transformations-sample-rotation-field"><span class="std std-ref">/NXxas_pfy/ENTRY/SAMPLE/transformations/sample_rotation-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-sample-transformations-sample-rotation-depends-on-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/SAMPLE/transformations/sample_rotation&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-sample-transformations-sample-rotation-transformation-type-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/SAMPLE/transformations/sample_rotation&#64;transformation_type-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxxas-pfy-entry-sample-transformations-sample-rotation-vector-attribute"><span class="std std-ref">/NXxas_pfy/ENTRY/SAMPLE/transformations/sample_rotation&#64;vector-attribute</span></a></p></li>
+</ul>
+<dl class="simple">
+<dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXxas_pfy.nxdl.xml">https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXxas_pfy.nxdl.xml</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Example data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optical-spectroscopy-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spm-structure.html">8. Scanning Probe Microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">11. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">12. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.108. NXxas_pfy</a><ul>
+<li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="NXxas_pey.html" title="previous chapter"><span class="section-number">2.3.3.3.107. </span>NXxas_pey</a></li>
+      <li>Next: <a href="NXxas_tey.html" title="next chapter"><span class="section-number">2.3.3.3.109. </span>NXxas_tey</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2026, The FAIRmat consortium, a member of the German National Research Data Infrastructure (NFDI).
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/NXxas_pfy.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

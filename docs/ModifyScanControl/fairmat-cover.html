@@ -1,0 +1,304 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1. FAIRmat-NeXus Proposal &#8212; NeXus-FAIRmat v2024.02 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="_static/details_summary_hide.css?v=30df4bca" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="_static/bolditalic.css?v=504f8cd9" />
+    <link rel="stylesheet" href="_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="_static/rubric.css" type="text/css" />
+    <script src="_static/documentation_options.js?v=04096e4a"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="copyright" title="Copyright" href="copyright.html" />
+    <link rel="next" title="2. NeXus Documentation" href="nexus-index.html" />
+    <link rel="prev" title="User Manual and Reference Documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="fairmat-nexus-proposal">
+<span id="fairmatcover"></span><h1><span class="section-number">1. </span>FAIRmat-NeXus Proposal<a class="headerlink" href="#fairmat-nexus-proposal" title="Link to this heading">¶</a></h1>
+<section id="aim">
+<span id="index-0"></span><h2><span class="section-number">1.1. </span>Aim<a class="headerlink" href="#aim" title="Link to this heading">¶</a></h2>
+<p>Experiments nowadays create a set of very often voluminous and diverse numerical data and metadata.
+These pieces of information represent entities of what is effectively a graph of materials data.
+This graph can have a very large number of nodes and edges representing the large variety of
+relations which scientists ideally want to identify and master
+when transforming experimental research into knowledge.</p>
+<p>Experimentalists face the challenge that these pieces of information come at different levels
+of granularity and format, of which many need to be better documented. You have very likely experienced
+yourself how file and data formats are routinely encountered tasks to master in your daily
+research practice and you might have questioned how these formats are currently handled
+when you want to produce FAIR research data and publications.</p>
+<p>The NeXus-FAIRmat proposal is an interdisciplinary data science activity initiated by scientists of the
+condensed-matter physics community which strives to develop community-maintained open file and data formats
+for describing specific experimental techniques, their numerical data and metadata,
+and strategies how to exchange these pieces of information.</p>
+<p id="introductioncover">The FAIRmat proposal to NeXus is an effort by the community of scientists of the <a class="reference external" href="https://www.fairmat-nfdi.eu/fairmat/about-fairmat/consortium-fairmat">FAIRmat consortium</a>
+to refine and expand the structure of NeXus. As a project which aims at creating an infrastructure
+for experimental data to be findable, accessible, interoperable, and reusable (FAIR) in the fields of
+condensed-matter physics and the chemical physics of solids, FAIRmat has adopted NeXus as the common format.</p>
+<p><a class="reference external" href="https://www.nexusformat.org/">NeXus</a> is a common data exchange format which has its origin in the community of
+scientists performing neutron, x-ray, and muon experiments. The development of NeXus is coordinated by the
+NeXus International Advisory Committee (NIAC).
+NeXus defines a schema of data entries with a controlled vocabulary and defined relations between the entries.
+NeXus offers not only tools to document these schema definitions in a version-controlled manner but
+also tools to check and verify how and if specific instances of NeXus schemata comply with the intended
+schema definition when the data are written to files. Although, the Hierarchical Data Format (HDF5) is the
+most commonly used file format to write NeXus file to, NeXus can also be used with other file formats.</p>
+<p>NeXus defines domain-specific rules for organizing data in e.g. HDF5 files (<a class="reference internal" href="classes/applications/index.html#application-definitions"><span class="std std-ref">Application Definitions</span></a>)
+and defines a dictionary of well-defined domain-specific (a vocabulary) of terms (<a class="reference internal" href="classes/base_classes/index.html#base-class-definitions"><span class="std std-ref">Base Class Definitions</span></a>).
+The meta- and numerical data in a NeXus file represent a hierarchical graph which encodes a specifically
+granularized representation of relevant pieces of information and results that should be stored with
+an experiment.</p>
+<p>Base classes and application definitions are two key components of the NeXus data model.
+A base class represents a set of numerical data and metadata which specify details about
+scientists, projects, instruments, and other physical devices, including the numerical data
+and metadata which are deemed relevant for their description and the associated
+computational analyses. Application definitions are constructed from combining such experiment-
+and research-question-specifically customized base classes.</p>
+<p>In this combination, an application definition is a data contract between
+a producer and a consumer of these scientific data.</p>
+<p>This design has sufficient flexibility to cover any experimental technique and instrumentation, while
+ensuring rigorous, application-specific structures that can be processed in an automated manner.</p>
+<p>In cases where base classes or application definitions have not yet been proposed advantage of NeXus can be taken
+if the respective scientific community explicitly designs, implements, uses, and continuously evolves
+these classes and definitions. Here the role of the NIAC is to support the community with
+data modeling and data science technical expertise, thus taking an important role of
+cross-disciplinary review.</p>
+<p>The NeXus-FAIRmat proposal represents the results of this development for experiments and use cases which have not yet used NeXus.
+Specifically, the proposal includes cases in the materials-science-branch of electron microscopy (EM), photo-emission spectroscopy,
+ellipsometry, and the field of atom probe tomography and related field-ion microscopy, here jointly referred to as atom probe microscopy.</p>
+<p>The documentation available here includes parts of the contents of the NeXus User Manual (also available <a class="reference external" href="https://manual.nexusformat.org/user_manual.html">here</a>),
+reported here for the convenience of the user, but is restricted to the parts most pertinent to the our proposal.</p>
+<p>For more extensive information, please visit the original manual.</p>
+</section>
+<section id="our-scope-and-perspective">
+<span id="ourscope"></span><h2><span class="section-number">1.2. </span>Our scope and perspective<a class="headerlink" href="#our-scope-and-perspective" title="Link to this heading">¶</a></h2>
+<p>Thanks to a cooperative approach across a wide variety of experimental techniques,
+the NeXus-FAIRmat proposal of the FAIRmat project has an opportunity
+to expand the set of data/metadata accurately described via NeXus.</p>
+<p>With a closely-connected team of domain experts, we will develop such expansion while at the same time maintaining
+a consistent structure across different techniques and methods, striving for the maximum simplicity of use.</p>
+<p>Achieving a standardized and FAIR data structure has a wide spectrum of advantages, ranging from radical
+progress in scientific transparency to the development of new, far-reaching tools that can be shared across
+the whole scientific community. The convenience of such tools can range from guaranteeing data reusability within
+a single lab, to enabling open-source availability of ready-to-use advanced analysis software.</p>
+<p>Perhaps the greatest resource, however, is the inclusion of experimental datasets in the <a class="reference external" href="https://nomad-lab.eu/about/scope">NOMAD Laboratory</a>:
+a data infrastructure that already hosts the largest computational material science repository in the world, representing a
+homogeneous and machine-readable archive, a human-accessible encyclopedia of materials data
+with tools for automated artificial intelligence analyses and data access.</p>
+</section>
+<section id="outreach-to-the-community">
+<span id="outreach"></span><h2><span class="section-number">1.3. </span>Outreach to the community<a class="headerlink" href="#outreach-to-the-community" title="Link to this heading">¶</a></h2>
+<p>A data infrastructure is not effective if it does not integrate seamlessly in the day-to-day workflow of a laboratory.
+For this reason, we approach our newly developed NeXus proposal as a community-driven development.
+We have drafted an accurate and consistent expansion of NeXus capabilities for a number of lab-based techniques,
+but need extensive testing and tweaking of its characteristics by the community.</p>
+<p>If your data is generated with these techniques and you are interested in producing FAIR data and accessing the FAIRmat tools, we
+invite you to try out our proposed structure. If you find any conflicts or inconsistencies, please raise them to us using the
+comment section. These comments are implemented with <a class="reference external" href="https://web.hypothes.is/">Hypothesis</a>, a modern web annotation
+tool from the journalism community. The commenting function for each page of the proposal enable you to contribute to the
+creation of a more consistent and practical NeXus structure which, in our firm belief, can serve your community and beyond.</p>
+<p>If you do not find your specific experimental technique but would be interested in participating in the development
+of a standard using NeXus, feel also very much invited to contact us directly at the <a class="reference external" href="https://www.fair-di.eu/fairmat/about-fairmat/team-fairmat">FAIRmat-Team</a>.</p>
+</section>
+<section id="which-data-should-i-convert">
+<span id="whichdata"></span><h2><span class="section-number">1.4. </span>Which data should I convert?<a class="headerlink" href="#which-data-should-i-convert" title="Link to this heading">¶</a></h2>
+<p>You are free to choose at which point in the workflow you wish to convert the data to NeXus, as its flexibility allows to
+describe raw data, pre-processed data and fully processed data. As an entry step, we suggest to use a test dataset
+that is fully processed and already published (or, alternatively, of negligible scientific content). These datasets, indeed, require often the most
+extensive metadata description, but are most easily converted to NeXus, with minimal to no impact on the data processing pipeline.</p>
+<p>In fact, a low barrier (but high yield!) way to participate to FAIRmat consists in converting only fully processed datasets that
+are used for a publication, and publishing them via FAIRmat only when your manuscript is in press. This makes the task of
+converting to NeXus much more sporadic than fairifying raw data, to the point that it may be even acceptable not to automate it. At the same time,
+it guarantees full control on the data until publication. We are confident that if you take this approach, more appetite will come with eating,
+and you will be naturally inclined to gradually integrate FAIRmat structures and tools further in your workflow.</p>
+<span class="target" id="whatisnew"></span></section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. FAIRmat-NeXus Proposal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#aim">1.1. Aim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#our-scope-and-perspective">1.2. Our scope and perspective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#outreach-to-the-community">1.3. Outreach to the community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#which-data-should-i-convert">1.4. Which data should I convert?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nexus-index.html">2. NeXus Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optical-spectroscopy-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spm-structure.html">8. Scanning Probe Microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratory-structure.html">11. Sample preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="napi.html">13. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">14. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">1. FAIRmat-NeXus Proposal</a><ul>
+<li><a class="reference internal" href="#aim">1.1. Aim</a></li>
+<li><a class="reference internal" href="#our-scope-and-perspective">1.2. Our scope and perspective</a></li>
+<li><a class="reference internal" href="#outreach-to-the-community">1.3. Outreach to the community</a></li>
+<li><a class="reference internal" href="#which-data-should-i-convert">1.4. Which data should I convert?</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">User Manual and Reference Documentation</a></li>
+      <li>Next: <a href="nexus-index.html" title="next chapter"><span class="section-number">2. </span>NeXus Documentation</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2025, The FAIRmat collaboration.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/fairmat-cover.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
