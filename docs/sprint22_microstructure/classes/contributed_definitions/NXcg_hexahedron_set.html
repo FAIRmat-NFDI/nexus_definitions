@@ -1,0 +1,359 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.64. NXcg_hexahedron_set &#8212; NeXus-FAIRmat v2022.07 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=329478a8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.65. NXcg_marching_cubes" href="NXcg_marching_cubes.html" />
+    <link rel="prev" title="2.3.3.3.63. NXcg_half_edge_data_structure" href="NXcg_half_edge_data_structure.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nxcg-hexahedron-set">
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.64. </span>NXcg_hexahedron_set<a class="headerlink" href="#nxcg-hexahedron-set" title="Link to this heading">¶</a></h1>
+<p><strong>Status</strong>:</p>
+<blockquote>
+<div><p>base class, extends <a class="reference internal" href="NXcg_primitive_set.html#nxcg-primitive-set"><span class="std std-ref">NXcg_primitive_set</span></a></p>
+</div></blockquote>
+<p><strong>Description</strong>:</p>
+<blockquote>
+<div><details class="summary-computational-geometry-description-of-a-set-of-hexahedra-in-euclidean-space">
+<summary>Computational geometry description of a set of hexahedra in Euclidean space. ...</summary><p>Computational geometry description of a set of hexahedra in Euclidean space.</p>
+<p>This class can also be used to describe cuboids or cubes, axis-aligned or not.
+The class represents different access and description levels to offer both
+applied scientists and computational geometry experts an approach whereby
+different specific views can be implemented using the same base class:</p>
+<ul class="simple">
+<li><p>In the simplest case experimentalists may use this base class to describe
+the dimensions or size of a specimen. In this case the alignment with axes
+is not relevant as eventually only the volume of the specimen is of interest.</p></li>
+<li><p>In many cases, take for example an experiment where a specimen was cut out
+from a specifically deformed piece of material, the orientation of the
+specimen’s edges with the experiment coordinate system is of high relevance.
+Examples include knowledge about the specimen edge, whether it is
+parallel to the rolling, the transverse, or the normal direction.</p></li>
+<li><p>While the above-mentioned use cases are sufficient to pinpoint the sample
+within a known laboratory/experiment coordinate system, these descriptions
+are not detailed enough to specify e.g. a CAD model of the specimen.</p></li>
+<li><p>Therefore, groups and fields for an additional, computational-geometry-
+based view of hexahedra is offered to serve additional computational
+tasks: storage-oriented simple views or detailed topological/graph-based
+descriptions.</p></li>
+</ul>
+<p>Hexahedra are important geometrical primitives, which are among the most
+frequently used elements in finite element meshing/modeling.</p>
+<p>As a specialization of the <a class="reference internal" href="NXcg_primitive_set.html#nxcg-primitive-set"><span class="std std-ref">NXcg_primitive_set</span></a> base class hexahedra
+are assumed non-degenerated, closed, and built of polygons that are
+not self-intersecting.</p>
+<p>The term hexahedra will be used throughout this base class but includes
+the special cases cuboid, cube, box, axis-aligned bounding box (AABB),
+and optimal bounding box (OBB).</p>
+<p>An axis-aligned bounding box is a common data object in computational science
+and simulation codes to represent a cuboid whose edges are aligned with the
+base vectors of a coordinate system. As a part of binary trees, these data
+objects are important for making time- as well as space-efficient queries
+of geometric primitives in techniques like kd-trees.</p>
+<p>An optimal bounding box is a common data object which provides the best
+tightly fitting box about an arbitrary object. In general, such boxes are
+rotated. Exact and substantially faster in practice approximate algorithms
+exist to compute optimal or near optimal bounding boxes for sets of points.</p>
+</details></div></blockquote>
+<p><strong>Symbols</strong>:</p>
+<blockquote>
+<div><p>The symbols used in the schema to specify e.g. dimensions of arrays.</p>
+<p><strong>c</strong>: The cardinality of the set, i.e. the number of hexahedra.</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="NXcg_face_list_data_structure.html#nxcg-face-list-data-structure"><span class="std std-ref">NXcg_face_list_data_structure</span></a>, <a class="reference internal" href="NXcg_half_edge_data_structure.html#nxcg-half-edge-data-structure"><span class="std std-ref">NXcg_half_edge_data_structure</span></a>, <a class="reference internal" href="NXcg_unit_normal_set.html#nxcg-unit-normal-set"><span class="std std-ref">NXcg_unit_normal_set</span></a></p>
+</dd>
+</dl>
+<p id="index-1"><strong>Structure</strong>:</p>
+<blockquote>
+<div><p id="index-2"><span id="nxcg-hexahedron-set-shape-field"></span><strong>shape</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [c, 3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="NXcg_primitive_set.html#nxcg-primitive-set-shape-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Qualifier for the shape of each hexahedron.</p>
+</div></blockquote>
+<p id="index-3"><span id="nxcg-hexahedron-set-length-field"></span><strong>length</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [c]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="NXcg_primitive_set.html#nxcg-primitive-set-length-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-qualifier-that-is-useful-in-cases-when-one-edge-is-longer-than-all-other">
+<summary>Qualifier that is useful in cases when one edge is longer than all other ...</summary><p>Qualifier that is useful in cases when one edge is longer than all other
+edges of the hexahedra. Often the term length is associated with the
+assumption that one edge is parallel to an axis of the coordinate system.</p>
+</details></div></blockquote>
+<p id="index-4"><span id="nxcg-hexahedron-set-width-field"></span><strong>width</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [c]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="NXcg_primitive_set.html#nxcg-primitive-set-width-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-qualifier-often-used-to-describe-the-extent-of-an-object-in-the-horizontal">
+<summary>Qualifier often used to describe the extent of an object in the horizontal ...</summary><p>Qualifier often used to describe the extent of an object in the horizontal
+direction assuming a specific coordinate system.</p>
+<p>For the sake of explicitness quantities like length, width, and height
+should not be reported without specifying also the assumed reference frame.</p>
+</details></div></blockquote>
+<p id="index-5"><span id="nxcg-hexahedron-set-height-field"></span><strong>height</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [c]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><details class="summary-qualifier-often-used-to-describe-the-extent-of-an-object-in-the-vertical">
+<summary>Qualifier often used to describe the extent of an object in the vertical ...</summary><p>Qualifier often used to describe the extent of an object in the vertical
+direction assuming a specific coordinate system.</p>
+</details></div></blockquote>
+<p id="index-6"><span id="nxcg-hexahedron-set-volume-field"></span><strong>volume</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [c]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-volume"><span class="std std-ref">NX_VOLUME</span></a>} <a class="reference internal" href="NXcg_primitive_set.html#nxcg-primitive-set-volume-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Volume of each hexahedron.</p>
+</div></blockquote>
+<p id="index-7"><span id="nxcg-hexahedron-set-area-field"></span><strong>area</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [c]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-area"><span class="std std-ref">NX_AREA</span></a>} <a class="reference internal" href="NXcg_primitive_set.html#nxcg-primitive-set-area-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Total (surface) area (of all six faces) of each hexahedron.</p>
+</div></blockquote>
+<p id="index-8"><span id="nxcg-hexahedron-set-face-area-field"></span><strong>face_area</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [c, 6]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-area"><span class="std std-ref">NX_AREA</span></a>}</p>
+<blockquote>
+<div><p>Area of each of the six faces of each hexahedron.</p>
+</div></blockquote>
+<p id="index-9"><span id="nxcg-hexahedron-set-is-box-field"></span><strong>is_box</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a> (Rank: 1, Dimensions: [c])</p>
+<blockquote>
+<div><details class="summary-specifies-if-the-hexahedra-represent-cuboids-or-cubes-eventually-rotated">
+<summary>Specifies if the hexahedra represent cuboids or cubes eventually rotated ...</summary><p>Specifies if the hexahedra represent cuboids or cubes eventually rotated
+ones but at least not too exotic six-faced polyhedra.</p>
+</details></div></blockquote>
+<p id="index-10"><span id="nxcg-hexahedron-set-is-axis-aligned-field"></span><strong>is_axis_aligned</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a> (Rank: 1, Dimensions: [c])</p>
+<blockquote>
+<div><details class="summary-only-to-be-used-if-is-box-is-present-in-this-case-this-field-describes">
+<summary>Only to be used if is_box is present. In this case, this field describes ...</summary><p>Only to be used if is_box is present. In this case, this field describes
+whether hexahedra are boxes whose primary edges are parallel to the
+axes of the coordinate system.</p>
+</details></div></blockquote>
+<p id="nxcg-hexahedron-set-vertex-normal-group"><strong>vertex_normal</strong>: (optional) <a class="reference internal" href="NXcg_unit_normal_set.html#nxcg-unit-normal-set"><span class="std std-ref">NXcg_unit_normal_set</span></a> <a class="reference internal" href="NXcg_primitive_set.html#nxcg-primitive-set-vertex-normal-group"><span class="std std-ref">⤆</span></a></p>
+<p id="nxcg-hexahedron-set-edge-normal-group"><strong>edge_normal</strong>: (optional) <a class="reference internal" href="NXcg_unit_normal_set.html#nxcg-unit-normal-set"><span class="std std-ref">NXcg_unit_normal_set</span></a> <a class="reference internal" href="NXcg_primitive_set.html#nxcg-primitive-set-edge-normal-group"><span class="std std-ref">⤆</span></a></p>
+<p id="nxcg-hexahedron-set-face-normal-group"><strong>face_normal</strong>: (optional) <a class="reference internal" href="NXcg_unit_normal_set.html#nxcg-unit-normal-set"><span class="std std-ref">NXcg_unit_normal_set</span></a> <a class="reference internal" href="NXcg_primitive_set.html#nxcg-primitive-set-face-normal-group"><span class="std std-ref">⤆</span></a></p>
+<p id="nxcg-hexahedron-set-hexahedra-group"><strong>hexahedra</strong>: (optional) <a class="reference internal" href="NXcg_face_list_data_structure.html#nxcg-face-list-data-structure"><span class="std std-ref">NXcg_face_list_data_structure</span></a></p>
+<blockquote>
+<div><p>Combined storage of all primitives of all hexahedra.</p>
+</div></blockquote>
+<p id="nxcg-hexahedron-set-hexahedronid-group"><strong>hexahedronID</strong>: (optional) <a class="reference internal" href="NXcg_face_list_data_structure.html#nxcg-face-list-data-structure"><span class="std std-ref">NXcg_face_list_data_structure</span></a></p>
+<blockquote>
+<div><p>Individual storage of each hexahedron.</p>
+</div></blockquote>
+<p id="nxcg-hexahedron-set-hexahedron-half-edgeid-group"><strong>hexahedron_half_edgeID</strong>: (optional) <a class="reference internal" href="NXcg_half_edge_data_structure.html#nxcg-half-edge-data-structure"><span class="std std-ref">NXcg_half_edge_data_structure</span></a></p>
+<blockquote>
+<div><p>Individual storage of each hexahedron as a graph.</p>
+</div></blockquote>
+</div></blockquote>
+<section id="hypertext-anchors">
+<h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
+<p>List of hypertext anchors for all groups, fields,
+attributes, and links defined in this class.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nxcg-hexahedron-set-area-field"><span class="std std-ref">/NXcg_hexahedron_set/area-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxcg-hexahedron-set-edge-normal-group"><span class="std std-ref">/NXcg_hexahedron_set/edge_normal-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxcg-hexahedron-set-face-area-field"><span class="std std-ref">/NXcg_hexahedron_set/face_area-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxcg-hexahedron-set-face-normal-group"><span class="std std-ref">/NXcg_hexahedron_set/face_normal-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxcg-hexahedron-set-height-field"><span class="std std-ref">/NXcg_hexahedron_set/height-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxcg-hexahedron-set-hexahedra-group"><span class="std std-ref">/NXcg_hexahedron_set/hexahedra-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxcg-hexahedron-set-hexahedron-half-edgeid-group"><span class="std std-ref">/NXcg_hexahedron_set/hexahedron_half_edgeID-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxcg-hexahedron-set-hexahedronid-group"><span class="std std-ref">/NXcg_hexahedron_set/hexahedronID-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxcg-hexahedron-set-is-axis-aligned-field"><span class="std std-ref">/NXcg_hexahedron_set/is_axis_aligned-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxcg-hexahedron-set-is-box-field"><span class="std std-ref">/NXcg_hexahedron_set/is_box-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxcg-hexahedron-set-length-field"><span class="std std-ref">/NXcg_hexahedron_set/length-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxcg-hexahedron-set-shape-field"><span class="std std-ref">/NXcg_hexahedron_set/shape-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxcg-hexahedron-set-vertex-normal-group"><span class="std std-ref">/NXcg_hexahedron_set/vertex_normal-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxcg-hexahedron-set-volume-field"><span class="std std-ref">/NXcg_hexahedron_set/volume-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxcg-hexahedron-set-width-field"><span class="std std-ref">/NXcg_hexahedron_set/width-field</span></a></p></li>
+</ul>
+<dl class="simple">
+<dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXcg_hexahedron_set.nxdl.xml">https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXcg_hexahedron_set.nxdl.xml</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Examples data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ellipsometry-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sts-structure.html">8. Scanning Tunneling Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../laboratory-structure.html">11. Sample preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">13. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">14. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.64. NXcg_hexahedron_set</a><ul>
+<li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="NXcg_half_edge_data_structure.html" title="previous chapter"><span class="section-number">2.3.3.3.63. </span>NXcg_half_edge_data_structure</a></li>
+      <li>Next: <a href="NXcg_marching_cubes.html" title="next chapter"><span class="section-number">2.3.3.3.65. </span>NXcg_marching_cubes</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2024, The FAIRmat collaboration.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/NXcg_hexahedron_set.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

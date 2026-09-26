@@ -1,0 +1,312 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.22. NXapm_hit_finding &#8212; NeXus-FAIRmat v2022.07 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=329478a8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.23. NXapm_msr" href="NXapm_msr.html" />
+    <link rel="prev" title="2.3.3.3.21. NXapm_compositionspace_results" href="NXapm_compositionspace_results.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nxapm-hit-finding">
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.22. </span>NXapm_hit_finding<a class="headerlink" href="#nxapm-hit-finding" title="Link to this heading">¶</a></h1>
+<p><strong>Status</strong>:</p>
+<blockquote>
+<div><p>base class, extends <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a></p>
+</div></blockquote>
+<p><strong>Description</strong>:</p>
+<blockquote>
+<div><p>Base class for the configuration and results from a hit finding algorithm.</p>
+</div></blockquote>
+<p><strong>Symbols</strong>:</p>
+<blockquote>
+<div><p>The symbols used in the schema to specify e.g. dimensions of arrays.</p>
+<p><strong>n_dld</strong>: Number of delay-line wires of the detector.</p>
+<p><strong>n_ht</strong>: Number of hit qualities (hit types) distinguished.</p>
+<p><strong>p</strong>: Number of pulses collected in between start_time and end_time resolved by an instance of <a class="reference internal" href="NXevent_data_apm.html#nxevent-data-apm"><span class="std std-ref">NXevent_data_apm</span></a>. If this is not defined, p is the number of ions included in the reconstructed volume if an application definition is used to store results of already reconstructed datasets.</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="NXprogram.html#nxprogram"><span class="std std-ref">NXprogram</span></a>, <a class="reference internal" href="NXserialized.html#nxserialized"><span class="std std-ref">NXserialized</span></a></p>
+</dd>
+</dl>
+<p id="index-1"><strong>Structure</strong>:</p>
+<blockquote>
+<div><p id="index-2"><span id="nxapm-hit-finding-number-of-dld-wires-field"></span><strong>number_of_dld_wires</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-number-of-wires-in-the-detector">
+<summary>The number of wires in the detector. ...</summary><p>The number of wires in the detector.</p>
+<p>Any of these values: <code class="docutils literal notranslate"><span class="pre">1</span></code> | <code class="docutils literal notranslate"><span class="pre">2</span></code> | <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
+</details></div></blockquote>
+<p id="index-3"><span id="nxapm-hit-finding-dld-wire-names-field"></span><strong>dld_wire_names</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> (Rank: 2, Dimensions: [n_dld, 2])</p>
+<blockquote>
+<div><details class="summary-alias-tuple-begin-end-of-each-dld-wire-of-the-detector">
+<summary>Alias tuple (begin, end) of each DLD wire of the detector. ...</summary><p>Alias tuple (begin, end) of each DLD wire of the detector.
+Order follows arrival_time_pairs.</p>
+</details></div></blockquote>
+<p id="index-4"><span id="nxapm-hit-finding-arrival-time-pairs-field"></span><strong>arrival_time_pairs</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 3, Dimensions: [p, n_dld, 2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-raw-readings-from-the-analog-to-digital-converter">
+<summary>Raw readings from the analog-to-digital-converter ...</summary><p>Raw readings from the analog-to-digital-converter
+timing circuits of the detector wires.</p>
+</details></div></blockquote>
+<p id="index-5"><span id="nxapm-hit-finding-hit-positions-field"></span><strong>hit_positions</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 2, Dimensions: [p, 2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><details class="summary-evaluated-ion-impact-coordinates-on-the-detector">
+<summary>Evaluated ion impact coordinates on the detector. ...</summary><p>Evaluated ion impact coordinates on the detector.
+Use the depends_on field to spec</p>
+</details><p id="index-6"><span id="nxapm-hit-finding-hit-positions-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>The instance of <a class="reference internal" href="NXcoordinate_system.html#nxcoordinate-system"><span class="std std-ref">NXcoordinate_system</span></a> in which the positions are defined.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-7"><span id="nxapm-hit-finding-hit-quality-types-field"></span><strong>hit_quality_types</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> (Rank: 1, Dimensions: [n_ht])</p>
+<blockquote>
+<div><details class="summary-name-of-the-hit-qualities-distinguished">
+<summary>Name of the hit_qualities distinguished. ...</summary><p>Name of the hit_qualities distinguished.
+AMETEK/Cameca uses e.g. golden, multiple, partial,
+irrecoverable, and multi-first and multi-late.</p>
+</details></div></blockquote>
+<p id="index-8"><span id="nxapm-hit-finding-hit-quality-identifier-field"></span><strong>hit_quality_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a></p>
+<blockquote>
+<div><details class="summary-identifier-used-for-each-hit-quality-type">
+<summary>Identifier used for each hit_quality type. ...</summary><p>Identifier used for each hit_quality type.
+Following the order of hit_quality_types.</p>
+</details></div></blockquote>
+<p id="index-9"><span id="nxapm-hit-finding-hit-quality-field"></span><strong>hit_quality</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 1, Dimensions: [p]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-hit-quality-identifier-for-each-pulse">
+<summary>Hit quality identifier for each pulse. ...</summary><p>Hit quality identifier for each pulse.
+Identifier have to be within hit_quality_identifier.</p>
+</details></div></blockquote>
+<p id="index-10"><span id="nxapm-hit-finding-hit-multiplicity-field"></span><strong>hit_multiplicity</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 1, Dimensions: [p]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-this-processing-yields-for-each-ion-with-how-many-others-it-evaporated">
+<summary>This processing yields for each ion with how many others it evaporated ...</summary><p>This processing yields for each ion with how many others it evaporated
+if these were collected on the same pulse. Extraction of multiple ions
+on one pulse on different or even the same pixel of the detector are possible.</p>
+<p>Multiplicity must not be confused with how many atoms of the same element
+a molecular ion contains (which is instead encoded with the
+isotope_vector field of each <a class="reference internal" href="NXion.html#nxion"><span class="std std-ref">NXion</span></a> instance).</p>
+</details></div></blockquote>
+<p id="nxapm-hit-finding-program-group"><strong>PROGRAM</strong>: (optional) <a class="reference internal" href="NXprogram.html#nxprogram"><span class="std std-ref">NXprogram</span></a></p>
+<p id="nxapm-hit-finding-serialized-group"><strong>SERIALIZED</strong>: (optional) <a class="reference internal" href="NXserialized.html#nxserialized"><span class="std std-ref">NXserialized</span></a></p>
+</div></blockquote>
+<section id="hypertext-anchors">
+<h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
+<p>List of hypertext anchors for all groups, fields,
+attributes, and links defined in this class.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nxapm-hit-finding-arrival-time-pairs-field"><span class="std std-ref">/NXapm_hit_finding/arrival_time_pairs-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-hit-finding-dld-wire-names-field"><span class="std std-ref">/NXapm_hit_finding/dld_wire_names-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-hit-finding-hit-multiplicity-field"><span class="std std-ref">/NXapm_hit_finding/hit_multiplicity-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-hit-finding-hit-positions-field"><span class="std std-ref">/NXapm_hit_finding/hit_positions-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-hit-finding-hit-positions-depends-on-attribute"><span class="std std-ref">/NXapm_hit_finding/hit_positions&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-hit-finding-hit-quality-field"><span class="std std-ref">/NXapm_hit_finding/hit_quality-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-hit-finding-hit-quality-identifier-field"><span class="std std-ref">/NXapm_hit_finding/hit_quality_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-hit-finding-hit-quality-types-field"><span class="std std-ref">/NXapm_hit_finding/hit_quality_types-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-hit-finding-number-of-dld-wires-field"><span class="std std-ref">/NXapm_hit_finding/number_of_dld_wires-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-hit-finding-program-group"><span class="std std-ref">/NXapm_hit_finding/PROGRAM-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-hit-finding-serialized-group"><span class="std std-ref">/NXapm_hit_finding/SERIALIZED-group</span></a></p></li>
+</ul>
+<dl class="simple">
+<dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXapm_hit_finding.nxdl.xml">https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXapm_hit_finding.nxdl.xml</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Examples data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ellipsometry-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sts-structure.html">8. Scanning Tunneling Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../laboratory-structure.html">11. Sample preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">13. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">14. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.22. NXapm_hit_finding</a><ul>
+<li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="NXapm_compositionspace_results.html" title="previous chapter"><span class="section-number">2.3.3.3.21. </span>NXapm_compositionspace_results</a></li>
+      <li>Next: <a href="NXapm_msr.html" title="next chapter"><span class="section-number">2.3.3.3.23. </span>NXapm_msr</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2024, The FAIRmat collaboration.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/NXapm_hit_finding.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,367 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.211. NXstage_lab &#8212; NeXus-FAIRmat v2022.07 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/details_summary_hide.css?v=30df4bca" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=329478a8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.212. NXstm" href="NXstm.html" />
+    <link rel="prev" title="2.3.3.3.210. NXspm" href="NXspm.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nxstage-lab">
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.211. </span>NXstage_lab<a class="headerlink" href="#nxstage-lab" title="Link to this heading">¶</a></h1>
+<p><strong>Status</strong>:</p>
+<blockquote>
+<div><p>base class, extends <a class="reference internal" href="NXcomponent.html#nxcomponent"><span class="std std-ref">NXcomponent</span></a></p>
+</div></blockquote>
+<p><strong>Description</strong>:</p>
+<blockquote>
+<div><details class="summary-base-class-for-a-stage-lab-used-to-hold-orient-and-prepare-a-specimen">
+<summary>Base class for a stage (lab) used to hold, orient, and prepare a specimen. ...</summary><p>Base class for a stage (lab) used to hold, orient, and prepare a specimen.</p>
+<p>Modern stages are multi-functional devices. Stages provide a controlled
+environment around the specimen. Stages enable experimentalists to apply
+controlled external stimuli on the specimen. A stage_lab is a multi-purpose
+/-functional tool that is constructed from multiple actuators, sensors,
+and other components.</p>
+<p>With such stages comes the need for storing various (meta)data
+that are generated while working and modifying the sample.</p>
+<p>Modern stages realize a hierarchy of components. Two examples are given to help
+clarify how <a class="reference internal" href="#nxstage-lab"><span class="std std-ref">NXstage_lab</span></a> instances should be used: Take a specimen that is
+mounted on a multi-axial tilt rotation holder. This holder is fixed in the
+support unit which connects the holder to the rest of the instrument.
+Evidently different components are all considerable as to represent instances
+of stages.</p>
+<p>In another example, taken from atom probe microscopy, researchers may work
+with wire samples which are clipped into a larger fixing unit to enable
+careful specimen handling. Alternatively, a microtip is a silicon post
+upon which e.g. an atom probe specimen is mounted.
+Multiple microtips are grouped into a microtip array to conveniently enable
+loading of multiple specimens into the instrument with fewer operations.
+That microtip array is fixed on a holder. Fixture units in atom probe are known
+as stubs. Stubs in turn are positioned onto pucks. Pucks are then loaded onto
+carousels. A carousel is a carrier unit with which eventually entire sets of
+specimens can be moved in between parts of the microscope. All of these units
+can be considered stage_lab instances.</p>
+<p>The <a class="reference internal" href="#nxstage-lab"><span class="std std-ref">NXstage_lab</span></a> base class reflects this hierarchy. To cover for an as flexible
+design of complex stages as possible, users should nest multiple instances of
+<a class="reference internal" href="#nxstage-lab"><span class="std std-ref">NXstage_lab</span></a> according to their needs to reflect the differences between what
+they consider as the holder and what they consider is the stage.
+The alias field can be used to specify the community jargon if necessary.</p>
+<p>However, a much clearer approach to reflect the hierarchy of all <a class="reference internal" href="#nxstage-lab"><span class="std std-ref">NXstage_lab</span></a>
+instances is postfix each instance named stage_lab with integers starting
+from 1 as the top level unit.
+In the microtip example one could thus use stage_lab1 for the microtip,
+stage_lab2 for the microtip array, stage_lab3 holder, etc.
+The depends_on keyword should be used to additional clarify the hierarchy
+especially when users decide to not follow the above-mentioned postfixing
+notation or when is not obvious from the postfixes which stage_lab is at
+which level of the stage_lab hierarchy.</p>
+<p>Some examples for stage_labs in applications:</p>
+<ul class="simple">
+<li><p>A nanoparticle on a copper grid. The copper grid is the holder.
+The grid itself is fixed to a stage.</p></li>
+<li><p>An atom probe specimen fixed in a stub. In this case the stub can be
+considered the holder, while the cryostat temperature control unit is
+a component of the stage.</p></li>
+<li><p>Samples with arrays of specimens, like a microtip on a microtip array
+is an example of an at least three-layer hierarchy commonly employed for
+efficient sequential processing of atom probe experiments.</p></li>
+<li><p>With one entry of an application definition only one microtip should be
+described. Therefore, the microtip is the specimen,
+the array is the holder and the remaining mounting unit
+that is attached to the cryo-controller is the stage.</p></li>
+<li><p>For in-situ experiments with e.g. chips with read-out electronics
+as actuators, the chips are again placed in a larger unit. A typical
+example are in-situ experiments using e.g. the tools of <a class="reference external" href="https://www.protochips.com">Protochips</a>.</p></li>
+<li><p>Other examples are (quasi) in-situ experiments where experimentalists
+anneal or deform the specimen via e.g. in-situ tensile testing machines
+which are mounted on the specimen holder.</p></li>
+</ul>
+<p>For specific details and inspiration about stages in electron microscopes:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.nanotechnik.com/e5as.html">Holders with multiple axes</a></p></li>
+<li><p><a class="reference external" href="https://www.protochips.com/products/fusion/fusion-select-components/">Chip-based designs</a></p></li>
+<li><p><a class="reference external" href="https://www.nanoprobetech.com/about">Further chip-based designs</a></p></li>
+<li><p><a class="reference external" href="https://doi.org/10.1007/978-3-662-14824-2">Stages in transmission electron microscopy</a> (page 103, table 4.2)</p></li>
+<li><p><a class="reference external" href="https://doi.org/10.1007/978-1-4757-2519-3">Further stages in transmission electron microscopy</a> (page 124ff)</p></li>
+<li><p><a class="reference external" href="https://doi.org/10.1007/978-1-4614-8721-0">Specimens in atom probe</a> (page 47ff)</p></li>
+<li><p><a class="reference external" href="https://nano.oxinst.com/products/omniprobe/omniprobe-200">Exemplar micro-manipulators</a></p></li>
+</ul>
+<p>We are looking forward to suggestions from the scientists.</p>
+</details></div></blockquote>
+<p><strong>Symbols</strong>:</p>
+<blockquote>
+<div><p>No symbol table</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="../base_classes/NXpositioner.html#nxpositioner"><span class="std std-ref">NXpositioner</span></a>, <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor"><span class="std std-ref">NXsensor</span></a></p>
+</dd>
+</dl>
+<p id="index-1"><strong>Structure</strong>:</p>
+<blockquote>
+<div><p id="index-2"><span id="nxstage-lab-design-field"></span><strong>design</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-principal-design-of-the-stage">
+<summary>Principal design of the stage. ...</summary><p>Principal design of the stage.</p>
+<p>Exemplar terms could be side_entry, top_entry,
+single_tilt, quick_change, multiple_specimen,
+bulk_specimen, double_tilt, tilt_rotate,
+heating_chip, atmosphere_chip,
+electrical_biasing_chip, liquid_cell_chip</p>
+</details></div></blockquote>
+<p id="index-3"><span id="nxstage-lab-alias-field"></span><strong>alias</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-free-text-field-to-give-a-term-how-that-a-stage-lab-at-this-level-of-the">
+<summary>Free-text field to give a term how that a stage_lab at this level of the ...</summary><p>Free-text field to give a term how that a stage_lab at this level of the
+stage_lab hierarchy is commonly referred to. Examples could be stub,
+puck, carousel, microtip, clip, holder, etc.</p>
+</details></div></blockquote>
+<p id="index-4"><span id="nxstage-lab-tilt-1-field"></span><strong>tilt_1</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-interpretation-of-this-tilt-should-be-specialized">
+<summary>The interpretation of this tilt should be specialized ...</summary><p>The interpretation of this tilt should be specialized
+and thus detailed via the application definition.</p>
+</details></div></blockquote>
+<p id="index-5"><span id="nxstage-lab-tilt-2-field"></span><strong>tilt_2</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-interpretation-of-this-tilt-should-be-specialized">
+<summary>The interpretation of this tilt should be specialized ...</summary><p>The interpretation of this tilt should be specialized
+and thus detailed via the application definition.</p>
+</details></div></blockquote>
+<p id="index-6"><span id="nxstage-lab-rotation-field"></span><strong>rotation</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-interpretation-of-this-rotation-should-be-specialized">
+<summary>The interpretation of this rotation should be specialized ...</summary><p>The interpretation of this rotation should be specialized
+and thus detailed via the application definition.</p>
+</details></div></blockquote>
+<p id="index-7"><span id="nxstage-lab-position-field"></span><strong>position</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-interpretation-of-this-position-should-be-specialized">
+<summary>The interpretation of this position should be specialized ...</summary><p>The interpretation of this position should be specialized
+and thus detailed via the application definition.</p>
+</details></div></blockquote>
+<p id="index-8"><span id="nxstage-lab-bias-voltage-field"></span><strong>bias_voltage</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-voltage"><span class="std std-ref">NX_VOLTAGE</span></a>}</p>
+<blockquote>
+<div><p>Voltage applied to the stage to decelerate electrons.</p>
+</div></blockquote>
+<p id="nxstage-lab-positioner-group"><strong>POSITIONER</strong>: (optional) <a class="reference internal" href="../base_classes/NXpositioner.html#nxpositioner"><span class="std std-ref">NXpositioner</span></a></p>
+<p id="nxstage-lab-sensor-group"><strong>SENSOR</strong>: (optional) <a class="reference internal" href="../base_classes/NXsensor.html#nxsensor"><span class="std std-ref">NXsensor</span></a></p>
+</div></blockquote>
+<section id="hypertext-anchors">
+<h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
+<p>List of hypertext anchors for all groups, fields,
+attributes, and links defined in this class.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nxstage-lab-alias-field"><span class="std std-ref">/NXstage_lab/alias-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstage-lab-bias-voltage-field"><span class="std std-ref">/NXstage_lab/bias_voltage-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstage-lab-design-field"><span class="std std-ref">/NXstage_lab/design-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstage-lab-position-field"><span class="std std-ref">/NXstage_lab/position-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstage-lab-positioner-group"><span class="std std-ref">/NXstage_lab/POSITIONER-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstage-lab-rotation-field"><span class="std std-ref">/NXstage_lab/rotation-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstage-lab-sensor-group"><span class="std std-ref">/NXstage_lab/SENSOR-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstage-lab-tilt-1-field"><span class="std std-ref">/NXstage_lab/tilt_1-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxstage-lab-tilt-2-field"><span class="std std-ref">/NXstage_lab/tilt_2-field</span></a></p></li>
+</ul>
+<dl class="simple">
+<dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXstage_lab.nxdl.xml">https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXstage_lab.nxdl.xml</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Examples data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optical-spectroscopy-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spm-structure.html">8. Scanning Probe Microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../laboratory-structure.html">11. Sample preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">13. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">14. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.211. NXstage_lab</a><ul>
+<li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="NXspm.html" title="previous chapter"><span class="section-number">2.3.3.3.210. </span>NXspm</a></li>
+      <li>Next: <a href="NXstm.html" title="next chapter"><span class="section-number">2.3.3.3.212. </span>NXstm</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2024, The FAIRmat collaboration.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/NXstage_lab.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,375 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.159. NXms_ipf &#8212; NeXus-FAIRmat v2022.07 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=329478a8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.160. NXms_ipf_set" href="NXms_ipf_set.html" />
+    <link rel="prev" title="2.3.3.3.158. NXms_feature_set" href="NXms_feature_set.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nxms-ipf">
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.159. </span>NXms_ipf<a class="headerlink" href="#nxms-ipf" title="Link to this heading">¶</a></h1>
+<p><strong>Status</strong>:</p>
+<blockquote>
+<div><p>base class, extends <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a></p>
+</div></blockquote>
+<p><strong>Description</strong>:</p>
+<blockquote>
+<div><p>Base class to store an inverse pole figure (IPF) mapping (IPF map).</p>
+</div></blockquote>
+<p><strong>Symbols</strong>:</p>
+<blockquote>
+<div><p><strong>n_z</strong>: Number of pixel along the z slowest direction.</p>
+<p><strong>n_y</strong>: Number of pixel along the y slow direction.</p>
+<p><strong>n_x</strong>: Number of pixel along the x fast direction.</p>
+<p><strong>n_rgb</strong>: Number of RGB values along the fastest direction, always three.</p>
+<p><strong>d</strong>: Dimensionality of the mapping (either 2 or 3).</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="NXcg_grid.html#nxcg-grid"><span class="std std-ref">NXcg_grid</span></a>, <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a></p>
+</dd>
+</dl>
+<p id="index-1"><strong>Structure</strong>:</p>
+<blockquote>
+<div><p id="index-2"><span id="nxms-ipf-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-reference-to-the-coordinate-system-whereby-the-projection-direction-is-defined">
+<summary>Reference to the coordinate system whereby the projection_direction is defined ...</summary><p>Reference to the coordinate system whereby the projection_direction is defined.</p>
+<p>If the field depends_on is not provided but a parent of the instance
+of this base class or its specialization defines an <a class="reference internal" href="NXcoordinate_system_set.html#nxcoordinate-system-set"><span class="std std-ref">NXcoordinate_system_set</span></a>
+and exactly one <a class="reference internal" href="NXcoordinate_system.html#nxcoordinate-system"><span class="std std-ref">NXcoordinate_system</span></a>, the reference points to this system.</p>
+<p>If nothing is provided and none of the above-mentioned references pointing
+in a parent, McStas is assumed.</p>
+</details></div></blockquote>
+<p id="index-3"><span id="nxms-ipf-projection-direction-field"></span><strong>projection_direction</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>The direction along which orientations are projected.</p>
+</div></blockquote>
+<p id="index-4"><span id="nxms-ipf-interpolation-field"></span><strong>interpolation</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-how-where-orientation-values-at-the-location-of-the-output-grid">
+<summary>How where orientation values at the location of the output grid ...</summary><p>How where orientation values at the location of the output grid
+positions computed.</p>
+<p>Nearest neighbour means the orientation of the closed (Euclidean distance)
+grid point of the input_grid was taken.</p>
+<p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">nearest_neighbour</span></code></p>
+</details></div></blockquote>
+<p id="nxms-ipf-input-grid-group"><strong>input_grid</strong>: (optional) <a class="reference internal" href="NXcg_grid.html#nxcg-grid"><span class="std std-ref">NXcg_grid</span></a></p>
+<blockquote>
+<div><details class="summary-details-about-the-original-grid">
+<summary>Details about the original grid. ...</summary><p>Details about the original grid.</p>
+<p>Here original grid means the one onto which the IPF map was computed
+when exported from the tech partner’s file format representation.</p>
+</details></div></blockquote>
+<p id="nxms-ipf-output-grid-group"><strong>output_grid</strong>: (optional) <a class="reference internal" href="NXcg_grid.html#nxcg-grid"><span class="std std-ref">NXcg_grid</span></a></p>
+<blockquote>
+<div><details class="summary-details-about-the-grid-onto-which-the-ipf-is-recomputed">
+<summary>Details about the grid onto which the IPF is recomputed. ...</summary><p>Details about the grid onto which the IPF is recomputed.</p>
+<p>Rescaling the visualization of the IPF map may be needed to enable
+visualization in specific software tools like H5Web.
+The value specifies the fractional change of the spacing between
+the original mapping and the scaled one.</p>
+</details></div></blockquote>
+<p id="nxms-ipf-map-group"><strong>map</strong>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a></p>
+<blockquote>
+<div><details class="summary-inverse-pole-figure-mapping">
+<summary>Inverse pole figure mapping. ...</summary><p>Inverse pole figure mapping.</p>
+<p>Default inverse pole figure (IPF) plot of the data specific for each
+phase. No ipf_mapID instances for non-indexed scan points as these are
+by definition assigned the null phase with phase_identifier 0.
+Inspect the definition of <a class="reference internal" href="NXcrystal_structure.html#nxcrystal-structure"><span class="std std-ref">NXcrystal_structure</span></a> and its field
+phase_identifier for further details.</p>
+<p>Details about possible regridding and associated interpolation
+during the computation of the IPF map visualization can be stored
+using the input_grid, output_grid, and interpolation fields.</p>
+<p>The main purpose of this map is to offer a normalized default representation
+of the IPF map for consumption by a research data management system (RDMS).
+This is aligned with the first aim of <a class="reference internal" href="#nxms-ipf"><span class="std std-ref">NXms_ipf</span></a>, to bring colleagues and
+users of IPF maps together to discuss which pieces of information
+need to be stored together. We are convinced a step-by-step design and
+community-driven discussion about which pieces of information should
+and/or need to be included is a practical strategy to work towards an
+interoperable description and data model for exchanging IPF maps as specific
+community-accepted tools to convey orientation maps.</p>
+<p>With this design the individual RDMS solutions and tools can still continue
+to support specific custom data analyses workflow and routes but at least
+there is one common understanding which enables also those users who are
+not necessarily experts in all the details of the underlying techniques
+can understand and thus eventually judge if the dataset is worth to be
+reused or repurposed.</p>
+</details><p id="index-5"><span id="nxms-ipf-map-data-field"></span><strong>data</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 3, Dimensions: [n_y, n_x, 3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-data-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Inverse pole figure color code for each map coordinate.</p>
+</div></blockquote>
+<p id="index-6"><span id="nxms-ipf-map-axis-z-field"></span><strong>axis_z</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n_z]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Pixel center coordinate calibrated for step size along the z axis of the map.</p>
+</div></blockquote>
+<p id="index-7"><span id="nxms-ipf-map-axis-y-field"></span><strong>axis_y</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n_y]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Pixel center coordinate calibrated for step size along the y axis of the map.</p>
+</div></blockquote>
+<p id="index-8"><span id="nxms-ipf-map-axis-x-field"></span><strong>axis_x</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n_x]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Pixel center coordinate calibrated for step size along the x axis of the map.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxms-ipf-legend-group"><strong>legend</strong>: (optional) <a class="reference internal" href="../base_classes/NXdata.html#nxdata"><span class="std std-ref">NXdata</span></a></p>
+<blockquote>
+<div><details class="summary-the-color-code-which-maps-colors-into-orientation-into-the-fundamental-zone">
+<summary>The color code which maps colors into orientation into the fundamental zone. ...</summary><p>The color code which maps colors into orientation into the fundamental zone.</p>
+<p>For each stereographic standard triangle (SST), i.e. a rendering of the
+fundamental zone of the crystal-symmetry-reduced orientation space
+SO3, it is possible to define a color model which assigns each point in
+the fundamental zone a color.</p>
+<p>Different mapping models are used. These implement (slightly) different
+scaling relations. Differences exist across representations of tech partners.</p>
+<p>Differences are which base colors of the RGB color model are placed in
+which extremal position of the SST and where the white point is located.</p>
+<p>For further details see:</p>
+<ul class="simple">
+<li><p>[G. Nolze et al.](<a class="reference external" href="https://doi.org/10.1107/S1600576716012942">https://doi.org/10.1107/S1600576716012942</a>)</p></li>
+<li><p>Srikanth Patala and coworkers”’” work and of others.</p></li>
+</ul>
+<p>Details are implementation-specific and not standardized yet.</p>
+<p>Given that the SST has a complicated geometry, it cannot yet be
+visualized using tools like H5Web, which is why for now the matrix
+of a rasterized image which is rendered by the backend tool gets
+copied into an RGB matrix to offer a default plot.</p>
+</details><p id="index-9"><span id="nxms-ipf-legend-data-field"></span><strong>data</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 3, Dimensions: [n_y, n_x, 3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-data-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Inverse pole figure color code for each map coordinate.</p>
+</div></blockquote>
+<p id="index-10"><span id="nxms-ipf-legend-axis-y-field"></span><strong>axis_y</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n_y]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Pixel along the y-axis.</p>
+</div></blockquote>
+<p id="index-11"><span id="nxms-ipf-legend-axis-x-field"></span><strong>axis_x</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n_x]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>} <a class="reference internal" href="../base_classes/NXdata.html#nxdata-axisname-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Pixel along the x-axis.</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<section id="hypertext-anchors">
+<h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
+<p>List of hypertext anchors for all groups, fields,
+attributes, and links defined in this class.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nxms-ipf-input-grid-group"><span class="std std-ref">/NXms_ipf/input_grid-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-ipf-interpolation-field"><span class="std std-ref">/NXms_ipf/interpolation-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-ipf-legend-group"><span class="std std-ref">/NXms_ipf/legend-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-ipf-legend-axis-x-field"><span class="std std-ref">/NXms_ipf/legend/axis_x-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-ipf-legend-axis-y-field"><span class="std std-ref">/NXms_ipf/legend/axis_y-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-ipf-legend-data-field"><span class="std std-ref">/NXms_ipf/legend/data-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-ipf-map-group"><span class="std std-ref">/NXms_ipf/map-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-ipf-map-axis-x-field"><span class="std std-ref">/NXms_ipf/map/axis_x-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-ipf-map-axis-y-field"><span class="std std-ref">/NXms_ipf/map/axis_y-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-ipf-map-axis-z-field"><span class="std std-ref">/NXms_ipf/map/axis_z-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-ipf-map-data-field"><span class="std std-ref">/NXms_ipf/map/data-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-ipf-output-grid-group"><span class="std std-ref">/NXms_ipf/output_grid-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-ipf-projection-direction-field"><span class="std std-ref">/NXms_ipf/projection_direction-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-ipf-depends-on-attribute"><span class="std std-ref">/NXms_ipf&#64;depends_on-attribute</span></a></p></li>
+</ul>
+<dl class="simple">
+<dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXms_ipf.nxdl.xml">https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXms_ipf.nxdl.xml</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Examples data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optical-spectroscopy-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sts-structure.html">8. Scanning Tunneling Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../laboratory-structure.html">11. Sample preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">13. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">14. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.159. NXms_ipf</a><ul>
+<li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="NXms_feature_set.html" title="previous chapter"><span class="section-number">2.3.3.3.158. </span>NXms_feature_set</a></li>
+      <li>Next: <a href="NXms_ipf_set.html" title="next chapter"><span class="section-number">2.3.3.3.160. </span>NXms_ipf_set</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2024, The FAIRmat collaboration.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/NXms_ipf.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

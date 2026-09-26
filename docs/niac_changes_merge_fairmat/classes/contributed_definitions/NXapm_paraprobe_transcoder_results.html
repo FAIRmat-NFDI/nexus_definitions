@@ -1,0 +1,439 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.39. NXapm_paraprobe_transcoder_results &#8212; NeXus-FAIRmat v2024.02 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/details_summary_hide.css?v=30df4bca" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bolditalic.css?v=504f8cd9" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=04096e4a"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.40. NXapm_ranging" href="NXapm_ranging.html" />
+    <link rel="prev" title="2.3.3.3.38. NXapm_paraprobe_transcoder_config" href="NXapm_paraprobe_transcoder_config.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nxapm-paraprobe-transcoder-results">
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.39. </span>NXapm_paraprobe_transcoder_results<a class="headerlink" href="#nxapm-paraprobe-transcoder-results" title="Link to this heading">¶</a></h1>
+<p><strong>Status</strong>:</p>
+<blockquote>
+<div><p><em>application definition</em> (contribution), extends <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+</div></blockquote>
+<p><strong>Description</strong>:</p>
+<blockquote>
+<div><details class="summary-application-definition-for-results-files-of-the-paraprobe-transcoder-tool">
+<summary>Application definition for results files of the paraprobe-transcoder tool. ...</summary><p>Application definition for results files of the paraprobe-transcoder tool.</p>
+<p>This tool is part of the paraprobe-toolbox. Inspect the base class <a class="reference internal" href="NXapm_paraprobe_tool_results.html#nxapm-paraprobe-tool-results"><span class="std std-ref">NXapm_paraprobe_tool_results</span></a>.
+The purpose and need of the paraprobe-transcoder tool is to create a standardized representation
+of reconstructed position and mass-to-charge-state-ratio values surplus other pieces of information
+to enable working with atom probe data in reconstruction space in the paraprobe-toolbox.
+This includes ranging definitions which map mass-to-charge-state ratio values onto iontypes.</p>
+<p>So far the atom probe community has not yet agreed upon a comprehensive standardization on how to
+exchange information especially when it comes to the communication of configurations and results
+from analyses of atom probe data. Instead, different simplistic file formats are used, such as POS, ePOS,
+APT, or RNG and RRNG. None of these formats, though, are self-descriptive, standardize, or document
+their origin and thus the sequence in which the file was generated during an analysis.</p>
+<p>Paraprobe-transcoder solves this limitation by interpreting the information content in such files
+and standardize the representation prior injection into the scientific data analysis tools of the toolbox.
+Therefore, the here proposed set of NeXus base classes and application definitions can be a useful
+starting point for the atom probe community to take advantage of standardized information
+exchange and improve the here proposed classes and concepts to become more inclusive.</p>
+<p>Paraprobe-transcoder uses a Python library developed based on efforts by members of the
+global atom probe community <a class="reference external" href="https://www.github.com/atomprobe-tc/ifes_apt_tc_data_modeling">International Field Emission Society (IFES) Atom Probe Technical Committee (APT TC)</a>. This library offers the
+actual low-level I/O operations and respective information interpretation of above-mentioned file formats.</p>
+</details></div></blockquote>
+<p><strong>Symbols</strong>:</p>
+<blockquote>
+<div><p>The symbols used in the schema to specify e.g. dimensions of arrays.</p>
+<p><strong>n_ions</strong>: The total number of ions in the reconstruction.</p>
+<p><strong>n_ivec_max</strong>: Maximum number of allowed atoms per (molecular) ion (fragment). Needs to match maximum_number_of_atoms_per_molecular_ion.</p>
+<p><strong>n_topology</strong>: Total number of integers in the supplementary XDMF topology array.</p>
+<p><strong>n_variable</strong>: Number of entries</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="NXapm_paraprobe_tool_common.html#nxapm-paraprobe-tool-common"><span class="std std-ref">NXapm_paraprobe_tool_common</span></a>, <a class="reference internal" href="NXapm_paraprobe_tool_results.html#nxapm-paraprobe-tool-results"><span class="std std-ref">NXapm_paraprobe_tool_results</span></a>, <a class="reference internal" href="NXcoordinate_system_set.html#nxcoordinate-system-set"><span class="std std-ref">NXcoordinate_system_set</span></a>, <a class="reference internal" href="NXcoordinate_system.html#nxcoordinate-system"><span class="std std-ref">NXcoordinate_system</span></a>, <a class="reference internal" href="NXcs_filter_boolean_mask.html#nxcs-filter-boolean-mask"><span class="std std-ref">NXcs_filter_boolean_mask</span></a>, <a class="reference internal" href="NXcs_profiling.html#nxcs-profiling"><span class="std std-ref">NXcs_profiling</span></a>, <a class="reference internal" href="../base_classes/NXentry.html#nxentry"><span class="std std-ref">NXentry</span></a>, <a class="reference internal" href="NXion.html#nxion"><span class="std std-ref">NXion</span></a>, <a class="reference internal" href="../base_classes/NXnote.html#nxnote"><span class="std std-ref">NXnote</span></a>, <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a>, <a class="reference internal" href="NXprogram.html#nxprogram"><span class="std std-ref">NXprogram</span></a>, <a class="reference internal" href="../base_classes/NXuser.html#nxuser"><span class="std std-ref">NXuser</span></a></p>
+</dd>
+</dl>
+<p id="index-1"><strong>Structure</strong>:</p>
+<blockquote>
+<div><p id="nxapm-paraprobe-transcoder-results-entry-group"><span class="bolditalic">ENTRY</span>: (required) <a class="reference internal" href="../base_classes/NXentry.html#nxentry"><span class="std std-ref">NXentry</span></a></p>
+<blockquote>
+<div><p id="index-2"><span id="nxapm-paraprobe-transcoder-results-entry-definition-field"></span><strong>definition</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXentry.html#nxentry-definition-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>Obligatory value: <code class="docutils literal notranslate"><span class="pre">NXapm_paraprobe_transcoder_results</span></code></p>
+<p id="index-3"><span id="nxapm-paraprobe-transcoder-results-entry-definition-version-attribute"></span><strong>&#64;version</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXentry.html#nxentry-definition-version-attribute"><span class="std std-ref">⤆</span></a></p>
+</div></blockquote>
+<p id="nxapm-paraprobe-transcoder-results-entry-atom-probe-group"><strong>atom_probe</strong>: (required) <a class="reference internal" href="NXapm_paraprobe_tool_results.html#nxapm-paraprobe-tool-results"><span class="std std-ref">NXapm_paraprobe_tool_results</span></a></p>
+<blockquote>
+<div><p id="index-4"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-identifier-analysis-field"></span><strong>identifier_analysis</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a></p>
+<p id="nxapm-paraprobe-transcoder-results-entry-atom-probe-config-group"><strong>config</strong>: (required) <a class="reference internal" href="../base_classes/NXnote.html#nxnote"><span class="std std-ref">NXnote</span></a> <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess-note-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-5"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-config-type-field"></span><strong>type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXnote.html#nxnote-type-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-6"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-config-file-name-field"></span><strong>file_name</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXnote.html#nxnote-file-name-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-7"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-config-checksum-field"></span><strong>checksum</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXnote.html#nxnote-checksum-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-8"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-config-algorithm-field"></span><strong>algorithm</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXnote.html#nxnote-algorithm-field"><span class="std std-ref">⤆</span></a></p>
+</div></blockquote>
+<p id="nxapm-paraprobe-transcoder-results-entry-atom-probe-window-group"><strong>window</strong>: (optional) <a class="reference internal" href="NXcs_filter_boolean_mask.html#nxcs-filter-boolean-mask"><span class="std std-ref">NXcs_filter_boolean_mask</span></a> <a class="reference internal" href="NXapm_paraprobe_tool_results.html#nxapm-paraprobe-tool-results-window-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><details class="summary-by-default-the-entire-reconstructed-volume-is-processed">
+<summary>By default the entire reconstructed volume is processed. ...</summary><p>By default the entire reconstructed volume is processed.
+In this case, using window is also equivalent to an
+NXspatial_filter that specified a window <em>entire_dataset</em>.</p>
+</details><p id="index-9"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-window-number-of-ions-field"></span><strong>number_of_ions</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> <a class="reference internal" href="NXapm_paraprobe_tool_results.html#nxapm-paraprobe-tool-results-window-number-of-ions-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-10"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-window-bitdepth-field"></span><strong>bitdepth</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> <a class="reference internal" href="NXapm_paraprobe_tool_results.html#nxapm-paraprobe-tool-results-window-bitdepth-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-11"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-window-mask-field"></span><strong>mask</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> <a class="reference internal" href="NXapm_paraprobe_tool_results.html#nxapm-paraprobe-tool-results-window-mask-field"><span class="std std-ref">⤆</span></a></p>
+</div></blockquote>
+<p id="nxapm-paraprobe-transcoder-results-entry-atom-probe-mass-to-charge-conversion-group"><strong>mass_to_charge_conversion</strong>: (required) <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a></p>
+<blockquote>
+<div><p id="index-12"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-mass-to-charge-conversion-mass-to-charge-field"></span><strong>mass_to_charge</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 1, Dimensions: [n_ions]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>Mass-to-charge-state-ratio values.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxapm-paraprobe-transcoder-results-entry-atom-probe-reconstruction-group"><strong>reconstruction</strong>: (required) <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a></p>
+<blockquote>
+<div><p id="index-13"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-reconstruction-reconstructed-positions-field"></span><strong>reconstructed_positions</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 2, Dimensions: [n_ions, 3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><details class="summary-three-dimensional-reconstructed-positions-of-the-ions">
+<summary>Three-dimensional reconstructed positions of the ions. ...</summary><p>Three-dimensional reconstructed positions of the ions.
+Interleaved array of x, y, z positions in the specimen space.</p>
+</details><p id="index-14"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-reconstruction-reconstructed-positions-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Defines in which reference frame the positions are defined.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxapm-paraprobe-transcoder-results-entry-atom-probe-reconstruction-visualization-group"><strong>visualization</strong>: (recommended) <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a></p>
+<blockquote>
+<div><p id="index-15"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-reconstruction-visualization-xdmf-topology-field"></span><strong>xdmf_topology</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> (Rank: 1, Dimensions: [n_topology]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-an-array-of-triplets-of-integers-which-can-serve-as-a-supplementary">
+<summary>An array of triplets of integers which can serve as a supplementary ...</summary><p>An array of triplets of integers which can serve as a supplementary
+array for Paraview to display the reconstruction. The XDMF datatype
+is here 1, the number of primitives 1 per triplet, the last integer
+in each triplet is the identifier of each point starting from zero.</p>
+</details></div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxapm-paraprobe-transcoder-results-entry-atom-probe-ranging-group"><strong>ranging</strong>: (required) <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a></p>
+<blockquote>
+<div><p id="nxapm-paraprobe-transcoder-results-entry-atom-probe-ranging-peak-identification-group"><strong>peak_identification</strong>: (required) <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a></p>
+<blockquote>
+<div><p>Details about how peaks are interpreted as ion types or not.</p>
+<p id="nxapm-paraprobe-transcoder-results-entry-atom-probe-ranging-peak-identification-ion-group"><span class="bolditalic">ION</span>: (required) <a class="reference internal" href="NXion.html#nxion"><span class="std std-ref">NXion</span></a></p>
+<blockquote>
+<div><p id="index-16"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-ranging-peak-identification-ion-nuclide-hash-field"></span><strong>nuclide_hash</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> <a class="reference internal" href="NXion.html#nxion-nuclide-hash-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-17"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-ranging-peak-identification-ion-nuclide-list-field"></span><strong>nuclide_list</strong>: (recommended) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> <a class="reference internal" href="NXion.html#nxion-nuclide-list-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-18"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-ranging-peak-identification-ion-charge-state-field"></span><strong>charge_state</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> <a class="reference internal" href="NXion.html#nxion-charge-state-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-19"><span id="nxapm-paraprobe-transcoder-results-entry-atom-probe-ranging-peak-identification-ion-mass-to-charge-range-field"></span><strong>mass_to_charge_range</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> (Rank: 2, Dimensions: [n_variable, 2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p id="nxapm-paraprobe-transcoder-results-entry-common-group"><strong>common</strong>: (required) <a class="reference internal" href="NXapm_paraprobe_tool_common.html#nxapm-paraprobe-tool-common"><span class="std std-ref">NXapm_paraprobe_tool_common</span></a></p>
+<blockquote>
+<div><p id="index-20"><span id="nxapm-paraprobe-transcoder-results-entry-common-status-field"></span><strong>status</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXapm_paraprobe_tool_common.html#nxapm-paraprobe-tool-common-status-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-21"><span id="nxapm-paraprobe-transcoder-results-entry-common-identifier-analysis-field"></span><strong>identifier_analysis</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> <a class="reference internal" href="NXapm_paraprobe_tool_common.html#nxapm-paraprobe-tool-common-identifier-analysis-field"><span class="std std-ref">⤆</span></a></p>
+<p id="nxapm-paraprobe-transcoder-results-entry-common-config-group"><strong>config</strong>: (required) <a class="reference internal" href="../base_classes/NXnote.html#nxnote"><span class="std std-ref">NXnote</span></a> <a class="reference internal" href="NXapm_paraprobe_tool_common.html#nxapm-paraprobe-tool-common-config-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-22"><span id="nxapm-paraprobe-transcoder-results-entry-common-config-type-field"></span><strong>type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXnote.html#nxnote-type-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-23"><span id="nxapm-paraprobe-transcoder-results-entry-common-config-file-name-field"></span><strong>file_name</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXnote.html#nxnote-file-name-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-24"><span id="nxapm-paraprobe-transcoder-results-entry-common-config-checksum-field"></span><strong>checksum</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXnote.html#nxnote-checksum-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-25"><span id="nxapm-paraprobe-transcoder-results-entry-common-config-algorithm-field"></span><strong>algorithm</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXnote.html#nxnote-algorithm-field"><span class="std std-ref">⤆</span></a></p>
+</div></blockquote>
+<p id="nxapm-paraprobe-transcoder-results-entry-common-program-group"><span class="bolditalic">PROGRAM</span>: (required) <a class="reference internal" href="NXprogram.html#nxprogram"><span class="std std-ref">NXprogram</span></a> <a class="reference internal" href="NXapm_paraprobe_tool_common.html#nxapm-paraprobe-tool-common-program-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-26"><span id="nxapm-paraprobe-transcoder-results-entry-common-program-program-field"></span><strong>program</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXprogram.html#nxprogram-program-field"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-27"><span id="nxapm-paraprobe-transcoder-results-entry-common-program-program-version-attribute"></span><strong>&#64;version</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXprogram.html#nxprogram-program-version-attribute"><span class="std std-ref">⤆</span></a></p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxapm-paraprobe-transcoder-results-entry-common-profiling-group"><strong>profiling</strong>: (recommended) <a class="reference internal" href="NXcs_profiling.html#nxcs-profiling"><span class="std std-ref">NXcs_profiling</span></a> <a class="reference internal" href="NXapm_paraprobe_tool_common.html#nxapm-paraprobe-tool-common-profiling-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-28"><span id="nxapm-paraprobe-transcoder-results-entry-common-profiling-start-time-field"></span><strong>start_time</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a> <a class="reference internal" href="NXapm_paraprobe_tool_common.html#nxapm-paraprobe-tool-common-profiling-start-time-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-29"><span id="nxapm-paraprobe-transcoder-results-entry-common-profiling-end-time-field"></span><strong>end_time</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a> <a class="reference internal" href="NXapm_paraprobe_tool_common.html#nxapm-paraprobe-tool-common-profiling-end-time-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-30"><span id="nxapm-paraprobe-transcoder-results-entry-common-profiling-total-elapsed-time-field"></span><strong>total_elapsed_time</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-float"><span class="std std-ref">NX_FLOAT</span></a> <a class="reference internal" href="NXapm_paraprobe_tool_common.html#nxapm-paraprobe-tool-common-profiling-total-elapsed-time-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-31"><span id="nxapm-paraprobe-transcoder-results-entry-common-profiling-current-working-directory-field"></span><strong>current_working_directory</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXcs_profiling.html#nxcs-profiling-current-working-directory-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-32"><span id="nxapm-paraprobe-transcoder-results-entry-common-profiling-number-of-processes-field"></span><strong>number_of_processes</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-posint"><span class="std std-ref">NX_POSINT</span></a></p>
+<p id="index-33"><span id="nxapm-paraprobe-transcoder-results-entry-common-profiling-number-of-threads-field"></span><strong>number_of_threads</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-posint"><span class="std std-ref">NX_POSINT</span></a></p>
+<p id="index-34"><span id="nxapm-paraprobe-transcoder-results-entry-common-profiling-number-of-gpus-field"></span><strong>number_of_gpus</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-posint"><span class="std std-ref">NX_POSINT</span></a></p>
+</div></blockquote>
+<p id="nxapm-paraprobe-transcoder-results-entry-common-user-group"><span class="bolditalic">USER</span>: (optional) <a class="reference internal" href="../base_classes/NXuser.html#nxuser"><span class="std std-ref">NXuser</span></a> <a class="reference internal" href="NXapm_paraprobe_tool_common.html#nxapm-paraprobe-tool-common-user-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p>If used, metadata of at least the person who performed this analysis.</p>
+<p id="index-35"><span id="nxapm-paraprobe-transcoder-results-entry-common-user-name-field"></span><strong>name</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="../base_classes/NXuser.html#nxuser-name-field"><span class="std std-ref">⤆</span></a></p>
+</div></blockquote>
+<p id="nxapm-paraprobe-transcoder-results-entry-common-coordinate-system-set-group"><strong>coordinate_system_set</strong>: (required) <a class="reference internal" href="NXcoordinate_system_set.html#nxcoordinate-system-set"><span class="std std-ref">NXcoordinate_system_set</span></a> <a class="reference internal" href="NXapm_paraprobe_tool_common.html#nxapm-paraprobe-tool-common-coordinate-system-set-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="nxapm-paraprobe-transcoder-results-entry-common-coordinate-system-set-paraprobe-group"><strong>paraprobe</strong>: (required) <a class="reference internal" href="NXcoordinate_system.html#nxcoordinate-system"><span class="std std-ref">NXcoordinate_system</span></a> <a class="reference internal" href="NXapm_paraprobe_tool_common.html#nxapm-paraprobe-tool-common-coordinate-system-set-coordinate-system-group"><span class="std std-ref">⤆</span></a></p>
+<blockquote>
+<div><p id="index-36"><span id="nxapm-paraprobe-transcoder-results-entry-common-coordinate-system-set-paraprobe-type-field"></span><strong>type</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXcoordinate_system.html#nxcoordinate-system-type-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-37"><span id="nxapm-paraprobe-transcoder-results-entry-common-coordinate-system-set-paraprobe-handedness-field"></span><strong>handedness</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a> <a class="reference internal" href="NXcoordinate_system.html#nxcoordinate-system-handedness-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-38"><span id="nxapm-paraprobe-transcoder-results-entry-common-coordinate-system-set-paraprobe-x-field"></span><strong>x</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="NXcoordinate_system.html#nxcoordinate-system-x-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-39"><span id="nxapm-paraprobe-transcoder-results-entry-common-coordinate-system-set-paraprobe-y-field"></span><strong>y</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="NXcoordinate_system.html#nxcoordinate-system-y-field"><span class="std std-ref">⤆</span></a></p>
+<p id="index-40"><span id="nxapm-paraprobe-transcoder-results-entry-common-coordinate-system-set-paraprobe-z-field"></span><strong>z</strong>: (required) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>} <a class="reference internal" href="NXcoordinate_system.html#nxcoordinate-system-z-field"><span class="std std-ref">⤆</span></a></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<section id="hypertext-anchors">
+<h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
+<p>List of hypertext anchors for all groups, fields,
+attributes, and links defined in this class.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-config-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/config-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-config-algorithm-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/config/algorithm-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-config-checksum-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/config/checksum-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-config-file-name-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/config/file_name-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-config-type-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/config/type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-identifier-analysis-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/identifier_analysis-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-mass-to-charge-conversion-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/mass_to_charge_conversion-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-mass-to-charge-conversion-mass-to-charge-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/mass_to_charge_conversion/mass_to_charge-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-ranging-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/ranging-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-ranging-peak-identification-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/ranging/peak_identification-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-ranging-peak-identification-ion-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/ranging/peak_identification/ION-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-ranging-peak-identification-ion-charge-state-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/ranging/peak_identification/ION/charge_state-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-ranging-peak-identification-ion-mass-to-charge-range-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/ranging/peak_identification/ION/mass_to_charge_range-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-ranging-peak-identification-ion-nuclide-hash-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/ranging/peak_identification/ION/nuclide_hash-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-ranging-peak-identification-ion-nuclide-list-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/ranging/peak_identification/ION/nuclide_list-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-reconstruction-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/reconstruction-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-reconstruction-reconstructed-positions-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/reconstruction/reconstructed_positions-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-reconstruction-reconstructed-positions-depends-on-attribute"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/reconstruction/reconstructed_positions&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-reconstruction-visualization-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/reconstruction/visualization-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-reconstruction-visualization-xdmf-topology-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/reconstruction/visualization/xdmf_topology-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-window-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/window-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-window-bitdepth-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/window/bitdepth-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-window-mask-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/window/mask-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-atom-probe-window-number-of-ions-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/atom_probe/window/number_of_ions-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-config-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/config-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-config-algorithm-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/config/algorithm-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-config-checksum-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/config/checksum-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-config-file-name-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/config/file_name-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-config-type-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/config/type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-coordinate-system-set-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/coordinate_system_set-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-coordinate-system-set-paraprobe-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/coordinate_system_set/paraprobe-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-coordinate-system-set-paraprobe-handedness-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/coordinate_system_set/paraprobe/handedness-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-coordinate-system-set-paraprobe-type-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/coordinate_system_set/paraprobe/type-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-coordinate-system-set-paraprobe-x-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/coordinate_system_set/paraprobe/x-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-coordinate-system-set-paraprobe-y-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/coordinate_system_set/paraprobe/y-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-coordinate-system-set-paraprobe-z-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/coordinate_system_set/paraprobe/z-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-identifier-analysis-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/identifier_analysis-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-profiling-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/profiling-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-profiling-current-working-directory-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/profiling/current_working_directory-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-profiling-end-time-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/profiling/end_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-profiling-number-of-gpus-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/profiling/number_of_gpus-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-profiling-number-of-processes-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/profiling/number_of_processes-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-profiling-number-of-threads-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/profiling/number_of_threads-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-profiling-start-time-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/profiling/start_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-profiling-total-elapsed-time-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/profiling/total_elapsed_time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-program-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/PROGRAM-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-program-program-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/PROGRAM/program-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-program-program-version-attribute"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/PROGRAM/program&#64;version-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-status-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/status-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-user-group"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/USER-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-common-user-name-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/common/USER/name-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-definition-field"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/definition-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxapm-paraprobe-transcoder-results-entry-definition-version-attribute"><span class="std std-ref">/NXapm_paraprobe_transcoder_results/ENTRY/definition&#64;version-attribute</span></a></p></li>
+</ul>
+<dl class="simple">
+<dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXapm_paraprobe_transcoder_results.nxdl.xml">https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXapm_paraprobe_transcoder_results.nxdl.xml</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Example data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optical-spectroscopy-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spm-structure.html">8. Scanning Probe Microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../laboratory-structure.html">11. Sample preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">13. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">14. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.39. NXapm_paraprobe_transcoder_results</a><ul>
+<li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="NXapm_paraprobe_transcoder_config.html" title="previous chapter"><span class="section-number">2.3.3.3.38. </span>NXapm_paraprobe_transcoder_config</a></li>
+      <li>Next: <a href="NXapm_ranging.html" title="next chapter"><span class="section-number">2.3.3.3.40. </span>NXapm_ranging</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2025, The FAIRmat collaboration.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/NXapm_paraprobe_transcoder_results.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

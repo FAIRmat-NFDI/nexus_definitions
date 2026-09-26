@@ -1,0 +1,539 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.166. NXms_recon &#8212; NeXus-FAIRmat v2022.07 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=329478a8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.167. NXms_score_config" href="NXms_score_config.html" />
+    <link rel="prev" title="2.3.3.3.165. NXms_pf_set" href="NXms_pf_set.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nxms-recon">
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.166. </span>NXms_recon<a class="headerlink" href="#nxms-recon" title="Link to this heading">¶</a></h1>
+<p><strong>Status</strong>:</p>
+<blockquote>
+<div><p>base class, extends <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+</div></blockquote>
+<p><strong>Description</strong>:</p>
+<blockquote>
+<div><details class="summary-base-class-to-describe-discretized-micro-structural-features-of-a-material">
+<summary>Base class to describe discretized (micro)structural features of a material. ...</summary><p>Base class to describe discretized (micro)structural features of a material.</p>
+<p>One instance of this base class can be used to describe the current configuration
+the base class does not include time-dependent descriptions for the sake of
+clarity and because of the fact that virtually all simulations or experiments
+probe time by sampling. Therefore, time-dependent state descriptions should
+be realized with creating a set of <a class="reference internal" href="NXms_snapshot_set.html#nxms-snapshot-set"><span class="std std-ref">NXms_snapshot_set</span></a> with instances of
+<a class="reference internal" href="NXms_snapshot.html#nxms-snapshot"><span class="std std-ref">NXms_snapshot</span></a> using e.g. <a class="reference internal" href="#nxms-recon"><span class="std std-ref">NXms_recon</span></a> base class instances.</p>
+</details></div></blockquote>
+<p><strong>Symbols</strong>:</p>
+<blockquote>
+<div><p>The symbols used in the schema to specify e.g. dimensions of arrays.</p>
+<p><strong>n_c_two</strong>: The number of crystal projections.</p>
+<p><strong>n_i_two</strong>: The number of interface projections.</p>
+<p><strong>n_t_two</strong>: The number of assumed triple junction projections aka triple points.</p>
+<p><strong>n_c</strong>: The number of crystals.</p>
+<p><strong>n_i</strong>: The number of interfaces</p>
+<p><strong>n_t</strong>: The number of triple lines</p>
+<p><strong>n_q</strong>: The number of quadruple junctions.</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="NXcg_point_set.html#nxcg-point-set"><span class="std std-ref">NXcg_point_set</span></a>, <a class="reference internal" href="NXcg_polyhedron_set.html#nxcg-polyhedron-set"><span class="std std-ref">NXcg_polyhedron_set</span></a>, <a class="reference internal" href="NXcg_polyline_set.html#nxcg-polyline-set"><span class="std std-ref">NXcg_polyline_set</span></a>, <a class="reference internal" href="NXcg_triangle_set.html#nxcg-triangle-set"><span class="std std-ref">NXcg_triangle_set</span></a>, <a class="reference internal" href="NXms_feature_set.html#nxms-feature-set"><span class="std std-ref">NXms_feature_set</span></a>, <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a>, <a class="reference internal" href="NXrotation_set.html#nxrotation-set"><span class="std std-ref">NXrotation_set</span></a></p>
+</dd>
+</dl>
+<p id="index-1"><strong>Structure</strong>:</p>
+<blockquote>
+<div><p id="nxms-recon-configuration-group"><strong>configuration</strong>: (optional) <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a></p>
+<blockquote>
+<div><details class="summary-the-configuration-and-parameterization-of-the-reconstruction-algorithm">
+<summary>The configuration and parameterization of the reconstruction algorithm ...</summary><p>The configuration and parameterization of the reconstruction algorithm
+whereby the microstructural features were identified.</p>
+</details><p id="index-2"><span id="nxms-recon-configuration-dimensionality-field"></span><strong>dimensionality</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-posint"><span class="std std-ref">NX_POSINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-dimensionality-of-the-analysis">
+<summary>Dimensionality of the analysis. ...</summary><p>Dimensionality of the analysis.</p>
+<p>This field can be used e.g. by a research data management system
+to identify if the described feature set specifies a
+one-, two-, or three-dimensional feature set.</p>
+<p>Any of these values: <code class="docutils literal notranslate"><span class="pre">1</span></code> | <code class="docutils literal notranslate"><span class="pre">2</span></code> | <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
+</details></div></blockquote>
+<p id="index-3"><span id="nxms-recon-configuration-algorithm-field"></span><strong>algorithm</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-which-algorithm-is-used-to-reconstruct-the-features">
+<summary>Which algorithm is used to reconstruct the features. ...</summary><p>Which algorithm is used to reconstruct the features.</p>
+<p>Any of these values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">unknown</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">disorientation_clustering</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fast_multiscale_clustering</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">markov_chain_clustering</span></code></p></li>
+</ul>
+</div></blockquote>
+</details></div></blockquote>
+<p id="index-4"><span id="nxms-recon-configuration-disorientation-threshold-field"></span><strong>disorientation_threshold</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>}</p>
+<blockquote>
+<div><details class="summary-threshold-to-define-at-which-disorientation-angle-to-assume">
+<summary>Threshold to define at which disorientation angle to assume ...</summary><p>Threshold to define at which disorientation angle to assume
+two crystalline regions have a significant orientation difference
+which warrants to argue that there is an interface between the
+two regions.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="nxms-recon-points-group"><strong>points</strong>: (optional) <a class="reference internal" href="NXcg_point_set.html#nxcg-point-set"><span class="std std-ref">NXcg_point_set</span></a></p>
+<p id="nxms-recon-lines-group"><strong>lines</strong>: (optional) <a class="reference internal" href="NXcg_polyline_set.html#nxcg-polyline-set"><span class="std std-ref">NXcg_polyline_set</span></a></p>
+<p id="nxms-recon-surfaces-group"><strong>surfaces</strong>: (optional) <a class="reference internal" href="NXcg_triangle_set.html#nxcg-triangle-set"><span class="std std-ref">NXcg_triangle_set</span></a></p>
+<p id="nxms-recon-volumes-group"><strong>volumes</strong>: (optional) <a class="reference internal" href="NXcg_polyhedron_set.html#nxcg-polyhedron-set"><span class="std std-ref">NXcg_polyhedron_set</span></a></p>
+<p id="nxms-recon-crystal-projections-group"><strong>crystal_projections</strong>: (optional) <a class="reference internal" href="NXms_feature_set.html#nxms-feature-set"><span class="std std-ref">NXms_feature_set</span></a></p>
+<blockquote>
+<div><details class="summary-projections-of-crystals-on-the-sample-surface-as-typically">
+<summary>Projections of crystals on the sample surface as typically ...</summary><p>Projections of crystals on the sample surface as typically
+characterized with optical or electron microscopy.</p>
+</details><p id="index-5"><span id="nxms-recon-crystal-projections-discretization-attribute"></span><strong>&#64;discretization</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-reference-to-lines-nxcg-polyline-set-which-supports-the">
+<summary>Reference to lines(NXcg_polyline_set) which supports the ...</summary><p>Reference to lines(NXcg_polyline_set) which supports the
+discretized shape of each cross-sectioned crystal.</p>
+<p>Most microscopy techniques support to generate only a two-dimensional
+representation (projection) of the characterized material.</p>
+<p>For true volumetric techniques use the specifically
+specialized crystals <a class="reference internal" href="NXms_feature_set.html#nxms-feature-set"><span class="std std-ref">NXms_feature_set</span></a> instead.
+See stereology literature for more details e.g.
+E.E. Underwood’s book entitled Quantitative Stereology</p>
+</details></div></blockquote>
+<p id="index-6"><span id="nxms-recon-crystal-projections-number-of-crystals-field"></span><strong>number_of_crystals</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Number of crystals.</p>
+</div></blockquote>
+<p id="index-7"><span id="nxms-recon-crystal-projections-crystal-identifier-offset-field"></span><strong>crystal_identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-integer-offset-whereby-the-identifier-of-the-first-member">
+<summary>Integer offset whereby the identifier of the first member ...</summary><p>Integer offset whereby the identifier of the first member
+of the set differs from zero.</p>
+<p>Identifiers can be defined either implicitly or explicitly.
+For implicit indexing identifiers are defined on the interval
+<span class="math notranslate nohighlight">\([identifier\_offset, identifier\_offset + c - 1]\)</span>.</p>
+</details></div></blockquote>
+<p id="index-8"><span id="nxms-recon-crystal-projections-crystal-identifier-field"></span><strong>crystal_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_c_two]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Identifier used for crystals for explicit indexing.</p>
+</div></blockquote>
+<p id="index-9"><span id="nxms-recon-crystal-projections-number-of-phases-field"></span><strong>number_of_phases</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>How many phases are distinguished</p>
+</div></blockquote>
+<p id="index-10"><span id="nxms-recon-crystal-projections-phase-identifier-offset-field"></span><strong>phase_identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-integer-offset-whereby-the-identifier-of-the-first-member">
+<summary>Integer offset whereby the identifier of the first member ...</summary><p>Integer offset whereby the identifier of the first member
+of the set differs from zero.</p>
+</details></div></blockquote>
+<p id="index-11"><span id="nxms-recon-crystal-projections-phase-identifier-field"></span><strong>phase_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_c_two]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Identifier used for phase for explicit indexing.</p>
+</div></blockquote>
+<p id="index-12"><span id="nxms-recon-crystal-projections-boundary-contact-field"></span><strong>boundary_contact</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a> (Rank: 1, Dimensions: [n_c_two])</p>
+<blockquote>
+<div><details class="summary-true-if-the-crystal-makes-contact-with-the-edge-of-the-roi">
+<summary>True, if the crystal makes contact with the edge of the ROI, ...</summary><p>True, if the crystal makes contact with the edge of the ROI,
+false otherwise.</p>
+</details></div></blockquote>
+<p id="index-13"><span id="nxms-recon-crystal-projections-orientation-spread-field"></span><strong>orientation_spread</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n_c_two]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>}</p>
+<blockquote>
+<div><details class="summary-average-disorientation-angle-between-individual-orientation-of-the">
+<summary>Average disorientation angle between individual orientation of the ...</summary><p>Average disorientation angle between individual orientation of the
+crystal at probed positions (weighted by area of that position) versus
+the average disorientation of the crystal.</p>
+</details></div></blockquote>
+<p id="index-14"><span id="nxms-recon-crystal-projections-area-field"></span><strong>area</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n_c_two]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-area"><span class="std std-ref">NX_AREA</span></a>}</p>
+<blockquote>
+<div><p>Calibrated area of surrounded by the polyline about each crystal.</p>
+</div></blockquote>
+<p id="nxms-recon-crystal-projections-rotation-set-group"><strong>ROTATION_SET</strong>: (optional) <a class="reference internal" href="NXrotation_set.html#nxrotation-set"><span class="std std-ref">NXrotation_set</span></a></p>
+</div></blockquote>
+<p id="nxms-recon-interface-projections-group"><strong>interface_projections</strong>: (optional) <a class="reference internal" href="NXms_feature_set.html#nxms-feature-set"><span class="std std-ref">NXms_feature_set</span></a></p>
+<blockquote>
+<div><details class="summary-projections-of-grain-or-phase-boundaries-as-typically-sectioned">
+<summary>Projections of grain or phase boundaries as typically sectioned ...</summary><p>Projections of grain or phase boundaries as typically sectioned
+with optical or electron microscopy characterization.</p>
+</details><p id="index-15"><span id="nxms-recon-interface-projections-discretization-attribute"></span><strong>&#64;discretization</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-reference-to-lines-nxcg-polyline-set-which-supports-the">
+<summary>Reference to lines(NXcg_polyline_set) which supports the ...</summary><p>Reference to lines(NXcg_polyline_set) which supports the
+discretized shape of each cross-sectioned crystal.</p>
+<p>Set of tuples of polyline segments which build the interface.</p>
+</details></div></blockquote>
+<p id="index-16"><span id="nxms-recon-interface-projections-crystals-field"></span><strong>crystals</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [n_i_two, 2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-set-of-pairs-of-crystal-identifier-resolved-via-depends-on-which">
+<summary>Set of pairs of crystal_identifier resolved via depends_on which ...</summary><p>Set of pairs of crystal_identifier resolved via depends_on which
+are adjacent to each interface.</p>
+</details><p id="index-17"><span id="nxms-recon-interface-projections-crystals-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-the-specific-crystal-projections-nxms-feature-set-instance">
+<summary>The specific crystal_projections(NXms_feature_set) instance ...</summary><p>The specific crystal_projections(NXms_feature_set) instance
+to resolve crystal identifier.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="index-18"><span id="nxms-recon-interface-projections-triple-points-field"></span><strong>triple_points</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [n_i_two, 2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-set-of-pairs-of-triple-point-identifier-which-the-interface-connects">
+<summary>Set of pairs of triple_point_identifier which the interface connects. ...</summary><p>Set of pairs of triple_point_identifier which the interface connects.
+For 2D projections of 3D microstructural features a triple point is
+physically only the projection of a triple line.</p>
+</details><p id="index-19"><span id="nxms-recon-interface-projections-triple-points-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-the-specific-triple-line-projections-nxms-feature-set-instance">
+<summary>The specific triple_line_projections(NXms_feature_set) instance ...</summary><p>The specific triple_line_projections(NXms_feature_set) instance
+whereby to resolve triple_point identifier.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="index-20"><span id="nxms-recon-interface-projections-length-field"></span><strong>length</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [n_i_two]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-length-of-the-interface">
+<summary>The length of the interface. ...</summary><p>The length of the interface.</p>
+<p>This is not necessarily the same as the length of the individual
+polyline segments whereby the interface is discretized.</p>
+<p>The actual coordinate system whereby the geometry is calibrated
+with real physical dimensions is typically documented by the
+depends_on attribute of the respective NXcg_primitive_set.
+This depends_on attribute should point explicitly to an
+instance of a <a class="reference internal" href="NXcoordinate_system.html#nxcoordinate-system"><span class="std std-ref">NXcoordinate_system</span></a> to support users as
+much as possible with interpreting how and where the lines are
+located in the reference frame.</p>
+</details></div></blockquote>
+<p id="index-21"><span id="nxms-recon-interface-projections-interface-identifier-offset-field"></span><strong>interface_identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-integer-offset-whereby-the-identifier-of-the-first-member">
+<summary>Integer offset whereby the identifier of the first member ...</summary><p>Integer offset whereby the identifier of the first member
+of the set differs from zero.</p>
+<p>Identifiers can be defined either implicitly or explicitly.
+For implicit indexing identifiers are defined on the interval
+<span class="math notranslate nohighlight">\([identifier\_offset, identifier\_offset + c - 1]\)</span>.</p>
+</details></div></blockquote>
+<p id="index-22"><span id="nxms-recon-interface-projections-interface-identifier-field"></span><strong>interface_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_i_two]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Identifier for each interface using explicit indexing.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxms-recon-triple-line-projections-group"><strong>triple_line_projections</strong>: (optional) <a class="reference internal" href="NXms_feature_set.html#nxms-feature-set"><span class="std std-ref">NXms_feature_set</span></a></p>
+<blockquote>
+<div><details class="summary-projections-of-triple-lines-as-typically-characterized-with-optical">
+<summary>Projections of triple lines as typically characterized with optical ...</summary><p>Projections of triple lines as typically characterized with optical
+or electron microscopy.</p>
+<p>Mind that most specimens are thermo-chemo-mechanically treated before
+they are characterized. Therefore, the projected crystal defects are
+have physically no longer the same structure as in the bulk.</p>
+<p>Examples are manifest as effects such as thermal grooving, or relaxation
+effects of an intersection between a triple line that is cut
+by the specimen surface as these defects are then exposed typically
+to a different atmosphere and hence have different thermodynamic boundary
+conditions than of their true volumetric defects in the bulk.</p>
+</details><p id="index-23"><span id="nxms-recon-triple-line-projections-discretization-attribute"></span><strong>&#64;discretization</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-reference-to-points-nxcg-point-set-which-supports-the">
+<summary>Reference to points(NXcg_point_set) which supports the ...</summary><p>Reference to points(NXcg_point_set) which supports the
+locations of these triple points.</p>
+</details></div></blockquote>
+<p id="index-24"><span id="nxms-recon-triple-line-projections-number-of-triple-points-field"></span><strong>number_of_triple_points</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Number of triple points.</p>
+</div></blockquote>
+<p id="index-25"><span id="nxms-recon-triple-line-projections-triple-point-identifier-offset-field"></span><strong>triple_point_identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-integer-offset-whereby-the-identifier-of-the-first-member">
+<summary>Integer offset whereby the identifier of the first member ...</summary><p>Integer offset whereby the identifier of the first member
+of the set differs from zero.</p>
+<p>Identifiers can be defined either implicitly or explicitly.
+For implicit indexing identifiers are defined on the interval
+<span class="math notranslate nohighlight">\([identifier\_offset, identifier\_offset + c - 1]\)</span>.</p>
+</details></div></blockquote>
+<p id="index-26"><span id="nxms-recon-triple-line-projections-triple-point-identifier-field"></span><strong>triple_point_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_t_two]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Identifier for each triple point using explicit indexing.</p>
+</div></blockquote>
+<p id="index-27"><span id="nxms-recon-triple-line-projections-location-field"></span><strong>location</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [n_t_two]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Set of triple point identifiers.</p>
+<p id="index-28"><span id="nxms-recon-triple-line-projections-location-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-the-relevant-points-nxcg-point-set-instance-whereby-to">
+<summary>The relevant points(NXcg_point_set) instance whereby to ...</summary><p>The relevant points(NXcg_point_set) instance whereby to
+resolve interface identifiers.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="index-29"><span id="nxms-recon-triple-line-projections-interfaces-field"></span><strong>interfaces</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [n_t_two, 3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-set-of-triplets-of-identifier-of-line-like-features">
+<summary>Set of triplets of identifier of line-like features. ...</summary><p>Set of triplets of identifier of line-like features.
+Each triplet resolves which three interface projections
+the triple point connects.</p>
+</details><p id="index-30"><span id="nxms-recon-triple-line-projections-interfaces-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-the-specific-interface-projections-nxms-feature-set">
+<summary>The specific interface_projections(NXms_feature_set) ...</summary><p>The specific interface_projections(NXms_feature_set)
+instance whereby to resolve interface identifiers.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="index-31"><span id="nxms-recon-triple-line-projections-polylines-field"></span><strong>polylines</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [n_t_two, 3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-triplet-of-identifier-of-polyline-segments-each-triplet-resolves">
+<summary>Triplet of identifier of polyline segments. Each triplet resolves ...</summary><p>Triplet of identifier of polyline segments. Each triplet resolves
+which three segments of polyline segments the triple junction connects.</p>
+</details><p id="index-32"><span id="nxms-recon-triple-line-projections-polylines-depends-on-attribute"></span><strong>&#64;depends_on</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-the-specific-lines-nxcg-polyline-set-instance-to-resolve">
+<summary>The specific lines(NXcg_polyline_set) instance to resolve ...</summary><p>The specific lines(NXcg_polyline_set) instance to resolve
+polyline segments.</p>
+</details></div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<section id="hypertext-anchors">
+<h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
+<p>List of hypertext anchors for all groups, fields,
+attributes, and links defined in this class.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nxms-recon-configuration-group"><span class="std std-ref">/NXms_recon/configuration-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-configuration-algorithm-field"><span class="std std-ref">/NXms_recon/configuration/algorithm-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-configuration-dimensionality-field"><span class="std std-ref">/NXms_recon/configuration/dimensionality-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-configuration-disorientation-threshold-field"><span class="std std-ref">/NXms_recon/configuration/disorientation_threshold-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-crystal-projections-group"><span class="std std-ref">/NXms_recon/crystal_projections-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-crystal-projections-area-field"><span class="std std-ref">/NXms_recon/crystal_projections/area-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-crystal-projections-boundary-contact-field"><span class="std std-ref">/NXms_recon/crystal_projections/boundary_contact-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-crystal-projections-crystal-identifier-field"><span class="std std-ref">/NXms_recon/crystal_projections/crystal_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-crystal-projections-crystal-identifier-offset-field"><span class="std std-ref">/NXms_recon/crystal_projections/crystal_identifier_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-crystal-projections-number-of-crystals-field"><span class="std std-ref">/NXms_recon/crystal_projections/number_of_crystals-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-crystal-projections-number-of-phases-field"><span class="std std-ref">/NXms_recon/crystal_projections/number_of_phases-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-crystal-projections-orientation-spread-field"><span class="std std-ref">/NXms_recon/crystal_projections/orientation_spread-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-crystal-projections-phase-identifier-field"><span class="std std-ref">/NXms_recon/crystal_projections/phase_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-crystal-projections-phase-identifier-offset-field"><span class="std std-ref">/NXms_recon/crystal_projections/phase_identifier_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-crystal-projections-rotation-set-group"><span class="std std-ref">/NXms_recon/crystal_projections/ROTATION_SET-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-crystal-projections-discretization-attribute"><span class="std std-ref">/NXms_recon/crystal_projections&#64;discretization-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-interface-projections-group"><span class="std std-ref">/NXms_recon/interface_projections-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-interface-projections-crystals-field"><span class="std std-ref">/NXms_recon/interface_projections/crystals-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-interface-projections-crystals-depends-on-attribute"><span class="std std-ref">/NXms_recon/interface_projections/crystals&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-interface-projections-interface-identifier-field"><span class="std std-ref">/NXms_recon/interface_projections/interface_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-interface-projections-interface-identifier-offset-field"><span class="std std-ref">/NXms_recon/interface_projections/interface_identifier_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-interface-projections-length-field"><span class="std std-ref">/NXms_recon/interface_projections/length-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-interface-projections-triple-points-field"><span class="std std-ref">/NXms_recon/interface_projections/triple_points-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-interface-projections-triple-points-depends-on-attribute"><span class="std std-ref">/NXms_recon/interface_projections/triple_points&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-interface-projections-discretization-attribute"><span class="std std-ref">/NXms_recon/interface_projections&#64;discretization-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-lines-group"><span class="std std-ref">/NXms_recon/lines-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-points-group"><span class="std std-ref">/NXms_recon/points-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-surfaces-group"><span class="std std-ref">/NXms_recon/surfaces-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-triple-line-projections-group"><span class="std std-ref">/NXms_recon/triple_line_projections-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-triple-line-projections-interfaces-field"><span class="std std-ref">/NXms_recon/triple_line_projections/interfaces-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-triple-line-projections-interfaces-depends-on-attribute"><span class="std std-ref">/NXms_recon/triple_line_projections/interfaces&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-triple-line-projections-location-field"><span class="std std-ref">/NXms_recon/triple_line_projections/location-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-triple-line-projections-location-depends-on-attribute"><span class="std std-ref">/NXms_recon/triple_line_projections/location&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-triple-line-projections-number-of-triple-points-field"><span class="std std-ref">/NXms_recon/triple_line_projections/number_of_triple_points-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-triple-line-projections-polylines-field"><span class="std std-ref">/NXms_recon/triple_line_projections/polylines-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-triple-line-projections-polylines-depends-on-attribute"><span class="std std-ref">/NXms_recon/triple_line_projections/polylines&#64;depends_on-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-triple-line-projections-triple-point-identifier-field"><span class="std std-ref">/NXms_recon/triple_line_projections/triple_point_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-triple-line-projections-triple-point-identifier-offset-field"><span class="std std-ref">/NXms_recon/triple_line_projections/triple_point_identifier_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-triple-line-projections-discretization-attribute"><span class="std std-ref">/NXms_recon/triple_line_projections&#64;discretization-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxms-recon-volumes-group"><span class="std std-ref">/NXms_recon/volumes-group</span></a></p></li>
+</ul>
+<dl class="simple">
+<dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXms_recon.nxdl.xml">https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXms_recon.nxdl.xml</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Examples data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optical-spectroscopy-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sts-structure.html">8. Scanning Tunneling Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../laboratory-structure.html">11. Sample preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">13. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">14. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.166. NXms_recon</a><ul>
+<li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="NXms_pf_set.html" title="previous chapter"><span class="section-number">2.3.3.3.165. </span>NXms_pf_set</a></li>
+      <li>Next: <a href="NXms_score_config.html" title="next chapter"><span class="section-number">2.3.3.3.167. </span>NXms_score_config</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2024, The FAIRmat collaboration.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/NXms_recon.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

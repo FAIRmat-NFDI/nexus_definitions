@@ -1,0 +1,228 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1. FAIRmat-NeXus Proposal &#8212; NeXus-FAIRmat v2026.01 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=3f530b75" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=1f37a852" />
+    <link rel="stylesheet" type="text/css" href="_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="_static/details_summary_hide.css?v=30df4bca" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" href="_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="_static/rubric.css" type="text/css" />
+    <script src="_static/documentation_options.js?v=167d9c14"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="copyright" title="Copyright" href="copyright.html" />
+    <link rel="next" title="2. NeXus Documentation" href="nexus-index.html" />
+    <link rel="prev" title="User Manual and Reference Documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="fairmat-nexus-proposal">
+<span id="fairmatcover"></span><h1><span class="section-number">1. </span>FAIRmat-NeXus Proposal<a class="headerlink" href="#fairmat-nexus-proposal" title="Link to this heading">¶</a></h1>
+<section id="aims-and-contextualization">
+<span id="aimscontextualization"></span><span id="index-0"></span><h2><span class="section-number">1.1. </span>Aims and contextualization<a class="headerlink" href="#aims-and-contextualization" title="Link to this heading">¶</a></h2>
+<p>Organizing (meta)data for materials characterization calls for a mastering of formatting varieties and data volume handling while assuring semantic interpretability, validity, and keeping inaccuracies documented and controlled. Data schemas and file formats are the tools that enable a structured and semantically annotated storage and processing of research data. Frequently, these tools organize entities effectively as graph-based representations.
+In practice, experimentalists need to navigate a tool landscape that is heterogeneous with different levels of (meta)data and information granularity,
+different formatting, and differing semantic concepts. This reduces interoperability when working with the same data across different software tools
+be this for research data management and documentation or data processing.</p>
+<p><a class="reference external" href="https://www.nexusformat.org/">NeXus</a> is a project for standardizing the formatting of (meta)data schema. NeXus is rooted in the condensed matter physics. The development of NeXus is coordinated by the <a class="reference external" href="https://www.nexusformat.org/NIAC.html">NeXus International Advisory Committee (NIAC)</a>.</p>
+<p>The FAIRmat-NeXus proposal is an interdisciplinary data-science- and semantic-technology-driven standardization project that extends NeXus beyond its original scope, which has been the standardization of neutron, x-ray, and muon experiments. The extensions from the FAIRmat-NeXus proposal cover the materials-science-branch of electron microscopy (EM), photoemission spectroscopy (PES), optical spectroscopy, standards for the field of atom probe tomography and related field-ion microscopy (atom probe microscopy), and contributed definitions for scanning probe microscopy. The FAIRmat proposal to NeXus is an effort by the community of scientists of the <a class="reference external" href="https://www.fairmat-nfdi.eu/fairmat/about-fairmat/consortium-fairmat">FAIRmat consortium</a>. As a project which aims at creating an infrastructure for experimental data to be findable, accessible, interoperable, and reusable (FAIR) in the fields of condensed-matter physics and the chemical physics of solids, FAIRmat has adopted NeXus as the common format.</p>
+<p>NeXus defines a set of data schemas. These define terms (concepts) with a controlled vocabulary and defined further semantic relations between concepts, including definitions for specifying details how (meta)data instances should be recorded for file based storage. NeXus definitions are version-controlled. Software tools are provided by members of the NIAC and the FAIRmat consortium for checking and verifying if specific instances of NeXus files are compliant with the specific versioned schema definitions. The file format most commonly used with NeXus is the Hierarchical Data Format (<a class="reference external" href="https://www.hdfgroup.org/solutions/hdf5/">HDF5</a>) but using other file formats is also possible.</p>
+<p>Base classes (<a class="reference internal" href="classes/base_classes/index.html#base-class-definitions"><span class="std std-ref">Base Class Definitions</span></a>) and application definitions (<a class="reference internal" href="classes/applications/index.html#application-definitions"><span class="std std-ref">Application Definitions</span></a>) are the two key components of the NeXus data model. A base class represents a set of concepts, (meta)data (categorical or numerical) which specify details about e.g., scientists, projects, instruments, and other physical devices. NeXus includes also base classes with concepts to document (meta)data of associated computational analyses and data processing steps. Application definitions are constructed from combining such experiment- and research-question-specific base classes. In effect, an application definition is a data contract between a producer and a consumer of (meta)data. Humans or software are the contractual partners. This design has sufficient flexibility to cover any experimental technique and instrumentation, while ensuring rigorous, application-specific structures that can be processed in an automated manner. Representing a panel of scientists with cross-disciplinary expertise, the role of the NIAC ranges from offering support with community consensus building and technical reviewing.</p>
+</section>
+<section id="achievements">
+<span id="id1"></span><h2><span class="section-number">1.2. </span>Achievements<a class="headerlink" href="#achievements" title="Link to this heading">¶</a></h2>
+<p>Within the five years funding of the FAIRmat project, we have achieved a substantiated broadening of the experimental techniques that NeXus covers. This manual details these achievements for each technique and connects to the contents of the official NeXus User Manual (<a class="reference external" href="https://manual.nexusformat.org/user_manual.html">see</a>). Here, we compile both efforts into one documentation for making the exploring of NeXus more convenient for users. The content of the FAIRmat-NeXus proposal has been successfully accepted as a standard, after several community discussions at international meetings with the NIAC. Decisions were made public with the <a class="reference external" href="https://github.com/nexusformat/definitions/releases/tag/v2025.11">v2025.11</a> and the <a class="reference external" href="https://github.com/nexusformat/definitions/releases/tag/v2026.01">v2026.01</a> releases.</p>
+<p>However, developing data schemas alone is insufficient for making research data management an effective reality. Instead, also examples are required that prove these schemas turn out useful in practice and production environments. Therefore, perhaps the greatest resource of the coordinated work between the NeXus community and the FAIRmat consortium has been the inclusion of experimental datasets in the <a class="reference external" href="https://nomad-lab.eu">NOMAD Laboratory</a> while assuring that these store along the definitions of the FAIRmat-NeXus proposal.</p>
+</section>
+<section id="outreach-to-the-community">
+<span id="outreach"></span><h2><span class="section-number">1.3. </span>Outreach to the community<a class="headerlink" href="#outreach-to-the-community" title="Link to this heading">¶</a></h2>
+<p>If you apply any of the characterization methods described here and are interested in producing FAIR data and using the FAIRmat tools, we invite you to try out our proposed data structure. If you find any conflicts or inconsistencies, please create an issue on the <a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/issues">GitHub repository of the project</a> or leave note in the comment section (that is implemented with <a class="reference external" href="https://web.hypothes.is/">Hypothesis</a>). Feel also very much invited to contact us directly at the <a class="reference external" href="https://www.fair-di.eu/fairmat/about-fairmat/team-fairmat">FAIRmat-Team</a>.</p>
+</section>
+<section id="conceptual-alignment-of-the-official-niac-repository-and-its-fairmat-nexus-fork">
+<span id="versionalignment"></span><h2><span class="section-number">1.4. </span>Conceptual alignment of the official NIAC repository and its FAIRmat-NeXus fork<a class="headerlink" href="#conceptual-alignment-of-the-official-niac-repository-and-its-fairmat-nexus-fork" title="Link to this heading">¶</a></h2>
+<p>NeXus definitions are version controlled. Different GitHub repositories exists where these versions are stored: One is the <a class="reference external" href="https://github.com/nexusformat/definitions">official NeXus repository</a> that is maintained by the NIAC. Another one, representing a fork of this NIAC repository, is the <a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions">FAIRmat nexus_definitions repository</a>. As FAIRmat we assure to keep the <a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat">fairmat branch of the nexus_definitions</a> branch up-to-date with the <a class="reference external" href="https://github.com/nexusformat/definitions/tree/main">main branch of the official definitions</a> that is being maintained by the NIAC. Updates will be synced to bring back content from official releases issued by the NIAC. This assures that each version of the definitions from the FAIRmat-NeXus proposal remains as closely as possibly semantically aligned with a version published by the NIAC. At the same time this approach ensures that the development speed and update cycles of FAIRmat and the NIAC can be different and do not block each other. Maintaining and minimizing though semantic mismatch is key. It is possible that specific application definitions and base classes of the FAIRmat-NeXus proposal may contain additional concepts that have not yet been brought back or standardized by the NIAC. We avoid though a relaxing of requirement constraints for concepts within in the FAIRmat definitions when compared to the closest matching versions of these concepts in the official definitions. Occasionally, additional optional concepts for specific FAIRmat definitions may extend the official definitions.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. FAIRmat-NeXus Proposal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#aims-and-contextualization">1.1. Aims and contextualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#achievements">1.2. Achievements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#outreach-to-the-community">1.3. Outreach to the community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conceptual-alignment-of-the-official-niac-repository-and-its-fairmat-nexus-fork">1.4. Conceptual alignment of the official NIAC repository and its FAIRmat-NeXus fork</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nexus-index.html">2. NeXus Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optical-spectroscopy-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spm-structure.html">8. Scanning Probe Microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="napi.html">11. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">12. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">1. FAIRmat-NeXus Proposal</a><ul>
+<li><a class="reference internal" href="#aims-and-contextualization">1.1. Aims and contextualization</a></li>
+<li><a class="reference internal" href="#achievements">1.2. Achievements</a></li>
+<li><a class="reference internal" href="#outreach-to-the-community">1.3. Outreach to the community</a></li>
+<li><a class="reference internal" href="#conceptual-alignment-of-the-official-niac-repository-and-its-fairmat-nexus-fork">1.4. Conceptual alignment of the official NIAC repository and its FAIRmat-NeXus fork</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">User Manual and Reference Documentation</a></li>
+      <li>Next: <a href="nexus-index.html" title="next chapter"><span class="section-number">2. </span>NeXus Documentation</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2026, The FAIRmat consortium, a member of the German National Research Data Infrastructure (NFDI).
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/fairmat-cover.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

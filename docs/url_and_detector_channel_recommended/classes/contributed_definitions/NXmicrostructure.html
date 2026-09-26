@@ -1,0 +1,801 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.3.3.3.153. NXmicrostructure &#8212; NeXus-FAIRmat v2022.07 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=88eabb7f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/to_alabaster.css?v=30f5938c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/details_summary_hide.css?v=30df4bca" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" href="../../_static/blockquote.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/rubric.css" type="text/css" />
+    <script src="../../_static/documentation_options.js?v=329478a8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="2.3.3.3.154. NXmicrostructure_gragles_config" href="NXmicrostructure_gragles_config.html" />
+    <link rel="prev" title="2.3.3.3.152. NXmatch_filter" href="NXmatch_filter.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="nxmicrostructure">
+<span id="index-0"></span><span id="id1"></span><h1><span class="section-number">2.3.3.3.153. </span>NXmicrostructure<a class="headerlink" href="#nxmicrostructure" title="Link to this heading">¶</a></h1>
+<p><strong>Status</strong>:</p>
+<blockquote>
+<div><p>base class, extends <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+</div></blockquote>
+<p><strong>Description</strong>:</p>
+<blockquote>
+<div><details class="summary-base-class-to-describe-a-microstructure-its-structural-aspects-associated-desc">
+<summary>Base class to describe a microstructure, its structural aspects, associated desc ...</summary><p>Base class to describe a microstructure, its structural aspects, associated descriptors, properties.</p>
+<p>Whether one uses a continuum or atomic scale description of materials, these are always a model only of
+the true internal structure of a material. Such models are useful as they enable a coarse-graining and
+categorizing of properties and representational aspects from which measured or simulated descriptions
+can be correlated with properties, i.e. descriptor values.</p>
+<p>Keep in mind that most specimens are thermo-chemo-mechanically processed prior characterization.
+Therefore, the characterized microstructure may not have probed the same structure as of the untreated
+sample from which the region-of-interests on the specimen were sampled.</p>
+<p>Fields such as time and increment enable a quantification of the spatiotemporal evolution of a materials’
+structure by using multiple instances of NXmicrostructure. Both measurements and simulation virtually
+always sample this evolution. Most microscopy techniques support to generate only a two-dimensional
+representation (projection) of the characterized material. Often materials are characterized only for
+specific states or via sampling coarsely in time relative to the timescale at which the
+physical phenomena take place. This is typically a compromise between the research questions at hand and technical surplus practical limitations.</p>
+<p>The term microstructural feature covers here crystals and all sorts of crystal defects within the material.
+A key challenge with the description of representations and properties of microstructural features is that
+features with different dimensionality exist and combinations of features of different dimensionality are
+frequently expected to be documented with intuitive naming conventions using flat property lists.
+For these key-value dictionaries often folksonomies are used. These can be based on ad hoc documentation
+of such dictionaries in the literature and the metadata section of public data repositories.</p>
+<p>NXmicrostructure is an attempt to standardize these descriptions stronger.</p>
+<p>The descriptive variety is large especially for junctions. Like crystals and interfaces, junctions are features in
+three-dimensional Euclidean space even if they are formed maybe only through a monolayer or pearl chain of atoms.
+Either way the local atomic and electronic environment is different compared to the situation of an ideal crystal,
+which gives typically rise to a plethora of configurations of which some yield useful properties.</p>
+<p>Like crystals and interfaces, junctions are assumed to represent groups of atoms that have specific descriptor values
+which are different to other features. Taking an example, a triple junction is practically a three-dimensional defect as its atoms
+are arranged in three-dimensional space but the characteristics of that defect can often be reduced to a lower-dimensional
+description such as a triple point or a triple line. Therefore, different representations can be used to describe the location,
+shape, and structure of the defect. As different types of crystal defects can interact, there is a substantial number of
+in principle characterizable and representable objects. Take again a triple line as an example. It is a tubular feature built from three
+adjoining interfaces. However, dislocations as line defects can interact with triple lines. Therefore, one can also argue that
+along a triple line there can be dislocation-line-triple-line junctions, likewise dislocations form own junctions.</p>
+<p>It is not the aim of this base class to cover all these cases, rather this base class currently provides examples how the
+typically most relevant types of features can be represented using a combination of base classes in NeXus. Currently,
+these are crystals, interfaces, triple lines, quadruple junctions.</p>
+<p>The description attempt here took inspiration from <a class="reference external" href="https://doi.org/10.1111/j.1365-2818.1972.tb03709.x">E. E. Underwood</a>
+and E. E. Underwood’s book on Quantitative Stereology published 1970 to categorize features based on their dimensionality.</p>
+<p>Identifiers can be defined either implicitly or explicitly. Identifiers for implicit indexing are defined
+on the interval <span class="math notranslate nohighlight">\([identifier\_offset, identifier\_offset + cardinality - 1]\)</span>.</p>
+</details></div></blockquote>
+<p><strong>Symbols</strong>:</p>
+<blockquote>
+<div><p>The symbols used in the schema to specify e.g. dimensions of arrays.</p>
+<p><strong>n_c_one</strong>: The number of one-dimensional crystal projections</p>
+<p><strong>n_i_one</strong>: The number of one-dimensional interface projections</p>
+<p><strong>n_c_two</strong>: The number of two-dimensional crystal projections</p>
+<p><strong>n_i_two</strong>: The number of two-dimensional interface projections</p>
+<p><strong>n_tj_two</strong>: The number of two-dimensional triple line projections</p>
+<p><strong>n_ld_two</strong>: The number of two-dimensional line defect projections</p>
+<p><strong>n_c_three</strong>: The number of crystals (grain and sub-grain are exact synonyms for crystal).</p>
+<p><strong>n_i_three</strong>: The number of interfaces (grain boundary and phase boundary are subclasses of interfaces).</p>
+<p><strong>n_tj_three</strong>: The number of triple junctions (triple line is a exact synonym for triple junction, triple point is projection of a triple junction).</p>
+<p><strong>n_qj_three</strong>: The number of quadruple junctions.</p>
+<p><strong>d</strong>: The dimensionality of the representation that needs to match the value for configuration/dimensionality</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>Groups cited</strong>:</dt><dd><p><a class="reference internal" href="NXcg_grid.html#nxcg-grid"><span class="std std-ref">NXcg_grid</span></a>, <a class="reference internal" href="NXcg_point_set.html#nxcg-point-set"><span class="std std-ref">NXcg_point_set</span></a>, <a class="reference internal" href="NXcg_polygon_set.html#nxcg-polygon-set"><span class="std std-ref">NXcg_polygon_set</span></a>, <a class="reference internal" href="NXcg_polyhedron_set.html#nxcg-polyhedron-set"><span class="std std-ref">NXcg_polyhedron_set</span></a>, <a class="reference internal" href="NXcg_polyline_set.html#nxcg-polyline-set"><span class="std std-ref">NXcg_polyline_set</span></a>, <a class="reference internal" href="NXcg_triangle_set.html#nxcg-triangle-set"><span class="std std-ref">NXcg_triangle_set</span></a>, <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a>, <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a>, <a class="reference internal" href="NXprogram.html#nxprogram"><span class="std std-ref">NXprogram</span></a></p>
+</dd>
+</dl>
+<p id="index-1"><strong>Structure</strong>:</p>
+<blockquote>
+<div><p id="index-2"><span id="nxmicrostructure-comment-field"></span><strong>comment</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>Discouraged free-text field for leaving comments.</p>
+</div></blockquote>
+<p id="index-3"><span id="nxmicrostructure-date-field"></span><strong>date</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-date-time"><span class="std std-ref">NX_DATE_TIME</span></a></p>
+<blockquote>
+<div><p>ISO8601 with offset to local time zone included when a timestamp is required.</p>
+</div></blockquote>
+<p id="index-4"><span id="nxmicrostructure-time-field"></span><strong>time</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-time"><span class="std std-ref">NX_TIME</span></a>}</p>
+<blockquote>
+<div><details class="summary-measured-or-simulated-physical-time-stamp-for-this-microstructure-snapshot">
+<summary>Measured or simulated physical time stamp for this microstructure snapshot. ...</summary><p>Measured or simulated physical time stamp for this microstructure snapshot.
+Not to be confused with wall-clock timing or profiling data.</p>
+</details></div></blockquote>
+<p id="index-5"><span id="nxmicrostructure-iteration-field"></span><strong>iteration</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Iteration or increment counter.</p>
+</div></blockquote>
+<p id="nxmicrostructure-configuration-group"><strong>configuration</strong>: (optional) <a class="reference internal" href="../base_classes/NXprocess.html#nxprocess"><span class="std std-ref">NXprocess</span></a></p>
+<blockquote>
+<div><details class="summary-group-where-to-store-details-about-the-configuration-and-parameterization-of-a">
+<summary>Group where to store details about the configuration and parameterization of a ...</summary><p>Group where to store details about the configuration and parameterization of algorithms
+used whereby microstructural features were identified.</p>
+</details><p id="index-6"><span id="nxmicrostructure-configuration-dimensionality-field"></span><strong>dimensionality</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-posint"><span class="std std-ref">NX_POSINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-dimensionality-of-euclidean-space-in-which-the-analysis-is-performed">
+<summary>Dimensionality of Euclidean space in which the analysis is performed. ...</summary><p>Dimensionality of Euclidean space in which the analysis is performed.</p>
+<p>This field can be used e.g. by a research data management system to identify
+if the description specifies one-, two-, or three-dimensional microstructural representations.</p>
+<p>Any of these values: <code class="docutils literal notranslate"><span class="pre">1</span></code> | <code class="docutils literal notranslate"><span class="pre">2</span></code> | <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
+</details></div></blockquote>
+<p id="index-7"><span id="nxmicrostructure-configuration-algorithm-field"></span><strong>algorithm</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-algorithm-whereby-interfaces-between-crystals-were-reconstructed">
+<summary>Algorithm whereby interfaces between crystals were reconstructed. ...</summary><p>Algorithm whereby interfaces between crystals were reconstructed.</p>
+<ul class="simple">
+<li><p>Disorientation clustering groups nearby material points based on their crystallographic disorientation</p></li>
+<li><p>Fast multiscale clustering based on <a class="reference external" href="https://doi.org/10.1016/j.patcog.2006.04.007">D. Kushnir et al.</a></p></li>
+<li><p>Markov chain clustering <a class="reference external" href="https://doi.org/10.1107/S1600576721011560">F. Niessen et al.</a></p></li>
+</ul>
+<p>Any of these values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">unknown</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">disorientation_clustering</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fast_multiscale_clustering</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">markov_chain_clustering</span></code></p></li>
+</ul>
+</div></blockquote>
+</details></div></blockquote>
+<p id="index-8"><span id="nxmicrostructure-configuration-disorientation-threshold-field"></span><strong>disorientation_threshold</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>}</p>
+<blockquote>
+<div><details class="summary-threshold-to-define-at-which-disorientation-angle-to-assume-two-crystalline">
+<summary>Threshold to define at which disorientation angle to assume two crystalline  ...</summary><p>Threshold to define at which disorientation angle to assume two crystalline regions have a significant
+orientation difference that warrants to assume that there exists an interface between the two regions.</p>
+</details></div></blockquote>
+<p id="nxmicrostructure-configuration-program-group"><strong>PROGRAM</strong>: (optional) <a class="reference internal" href="NXprogram.html#nxprogram"><span class="std std-ref">NXprogram</span></a></p>
+<blockquote>
+<div><p>The program with which the microstructure was reconstructed.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxmicrostructure-cg-grid-group"><strong>CG_GRID</strong>: (optional) <a class="reference internal" href="NXcg_grid.html#nxcg-grid"><span class="std std-ref">NXcg_grid</span></a></p>
+<p id="nxmicrostructure-cg-point-set-group"><strong>CG_POINT_SET</strong>: (optional) <a class="reference internal" href="NXcg_point_set.html#nxcg-point-set"><span class="std std-ref">NXcg_point_set</span></a></p>
+<p id="nxmicrostructure-cg-polyline-set-group"><strong>CG_POLYLINE_SET</strong>: (optional) <a class="reference internal" href="NXcg_polyline_set.html#nxcg-polyline-set"><span class="std std-ref">NXcg_polyline_set</span></a></p>
+<p id="nxmicrostructure-cg-triangle-set-group"><strong>CG_TRIANGLE_SET</strong>: (optional) <a class="reference internal" href="NXcg_triangle_set.html#nxcg-triangle-set"><span class="std std-ref">NXcg_triangle_set</span></a></p>
+<p id="nxmicrostructure-cg-polygon-set-group"><strong>CG_POLYGON_SET</strong>: (optional) <a class="reference internal" href="NXcg_polygon_set.html#nxcg-polygon-set"><span class="std std-ref">NXcg_polygon_set</span></a></p>
+<p id="nxmicrostructure-cg-polyhedron-set-group"><strong>CG_POLYHEDRON_SET</strong>: (optional) <a class="reference internal" href="NXcg_polyhedron_set.html#nxcg-polyhedron-set"><span class="std std-ref">NXcg_polyhedron_set</span></a></p>
+<p id="nxmicrostructure-crystal-group"><strong>crystal</strong>: (optional) <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+<blockquote>
+<div><details class="summary-one-or-two-dimensional-projections-or-three-dimensional-representations-of-c">
+<summary>One- or two-dimensional projections, or three-dimensional representations of c ...</summary><p>One- or two-dimensional projections, or three-dimensional representations of crystals.</p>
+<p>An example for a volume bounded by other crystal defects. Crystals can be grains of
+different phases, precipitates, dispersoids; there are many terms used specifically in
+the materials engineering community.</p>
+<p>Typically, crystals are measured on the surface of a sample via optical or electron microscopy.
+Using X-ray diffraction methods crystals can be observed in bulk specimens.</p>
+<p>Crystals are represented by a set of pixel, voxel, or polygons and their polyline boundaries.
+In rare cases the volume bounded gets represented using constructive solid geometry approaches.</p>
+</details><p id="index-9"><span id="nxmicrostructure-crystal-representation-field"></span><strong>representation</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-reference-to-an-instance-of">
+<summary>Reference to an instance of: ...</summary><p>Reference to an instance of:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="NXcg_polyline_set.html#nxcg-polyline-set"><span class="std std-ref">NXcg_polyline_set</span></a> for a one-dimensional representation as only a projection is available (like in linear intercept analysis)</p></li>
+<li><p><a class="reference internal" href="NXcg_polygon_set.html#nxcg-polygon-set"><span class="std std-ref">NXcg_polygon_set</span></a> for a two-dimensional representation as only a projection is available (like in most experiments)</p></li>
+<li><p><a class="reference internal" href="NXcg_polyhedron_set.html#nxcg-polyhedron-set"><span class="std std-ref">NXcg_polyhedron_set</span></a> or <a class="reference internal" href="NXcg_grid.html#nxcg-grid"><span class="std std-ref">NXcg_grid</span></a> for regularly pixelated or voxelated representation in one, two, or three dimensions
+(like in computer simulations or 3D experiments)</p></li>
+</ul>
+<p>which represent the geometrical entities of the discretization.</p>
+</details></div></blockquote>
+<p id="index-10"><span id="nxmicrostructure-crystal-number-of-crystals-field"></span><strong>number_of_crystals</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-how-many-crystals-are-distinguished">
+<summary>How many crystals are distinguished. ...</summary><p>How many crystals are distinguished.</p>
+<p>Crystals are listed irrespective of the phase to which these are assigned.</p>
+</details></div></blockquote>
+<p id="index-11"><span id="nxmicrostructure-crystal-number-of-phases-field"></span><strong>number_of_phases</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-how-many-phases-are-distinguished">
+<summary>How many phases are distinguished. ...</summary><p>How many phases are distinguished.</p>
+<p>Phases are typically distinguished based on statistical thermodynamics argument and crystal structure.</p>
+</details></div></blockquote>
+<p id="index-12"><span id="nxmicrostructure-crystal-crystal-identifier-offset-field"></span><strong>crystal_identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>First identifier whereby to identify crystals implicitly.</p>
+</div></blockquote>
+<p id="index-13"><span id="nxmicrostructure-crystal-crystal-identifier-field"></span><strong>crystal_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Identifier whereby to identify each crystal explicitly.</p>
+</div></blockquote>
+<p id="index-14"><span id="nxmicrostructure-crystal-phase-identifier-offset-field"></span><strong>phase_identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>First identifier whereby to identify phases implicitly.</p>
+</div></blockquote>
+<p id="index-15"><span id="nxmicrostructure-crystal-phase-identifier-field"></span><strong>phase_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Identifier whereby to identify phase for each crystal explicitly.</p>
+</div></blockquote>
+<p id="index-16"><span id="nxmicrostructure-crystal-boundary-contact-field"></span><strong>boundary_contact</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a> (Rank: 1, Dimensions: [i])</p>
+<blockquote>
+<div><details class="summary-true-or-false-value-one-for-each-crystal-to-communicate-whether-that-featu">
+<summary>True or false value, one for each crystal, to communicate whether that featu ...</summary><p>True or false value, one for each crystal, to communicate whether that feature
+makes contact with the edge of the ROI.</p>
+</details></div></blockquote>
+<p id="index-17"><span id="nxmicrostructure-crystal-orientation-spread-field"></span><strong>orientation_spread</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-angle"><span class="std std-ref">NX_ANGLE</span></a>}</p>
+<blockquote>
+<div><details class="summary-average-disorientation-angle-for-each-crystal-between-individual-orientation">
+<summary>Average disorientation angle for each crystal between individual orientation ...</summary><p>Average disorientation angle for each crystal between individual orientations
+of that crystal evaluated as a summary statistic for all probed positions vs the
+average disorientation of that crystal.</p>
+</details></div></blockquote>
+<p id="index-18"><span id="nxmicrostructure-crystal-length-field"></span><strong>length</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><p>Length of each crystal</p>
+</div></blockquote>
+<p id="index-19"><span id="nxmicrostructure-crystal-area-field"></span><strong>area</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-area"><span class="std std-ref">NX_AREA</span></a>}</p>
+<blockquote>
+<div><p>Area of each crystal.</p>
+</div></blockquote>
+<p id="index-20"><span id="nxmicrostructure-crystal-volume-field"></span><strong>volume</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-volume"><span class="std std-ref">NX_VOLUME</span></a>}</p>
+<blockquote>
+<div><p>Volume of each crystal</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxmicrostructure-interface-group"><strong>interface</strong>: (optional) <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+<blockquote>
+<div><details class="summary-one-or-two-dimensional-projections-or-three-dimensional-representation-of-int">
+<summary>One- or two-dimensional projections or three-dimensional representation of int ...</summary><p>One- or two-dimensional projections or three-dimensional representation of interfaces
+between crystals as topological entities equivalent to dual_junctions.</p>
+<p>An example for a surface defect. Most important are interfaces such as grain and phase boundaries
+but factually interfaces also exist between the environment and crystals exposed at the
+surface of the specimen or internal surfaces like between crystals, cracks, or pores.</p>
+</details><p id="index-21"><span id="nxmicrostructure-interface-representation-field"></span><strong>representation</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-reference-to-an-instance-of">
+<summary>Reference to an instance of: ...</summary><p>Reference to an instance of:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="NXcg_point_set.html#nxcg-point-set"><span class="std std-ref">NXcg_point_set</span></a> for a one-dimensional representation as only a projection is available (as in linear intercept analyses)</p></li>
+<li><p><a class="reference internal" href="NXcg_polyline_set.html#nxcg-polyline-set"><span class="std std-ref">NXcg_polyline_set</span></a> or <a class="reference internal" href="NXcg_polygon_set.html#nxcg-polygon-set"><span class="std std-ref">NXcg_polygon_set</span></a> for a two-dimensional representation as only a projection is available (like in most experiments)</p></li>
+<li><p><a class="reference internal" href="NXcg_grid.html#nxcg-grid"><span class="std std-ref">NXcg_grid</span></a> for regularly pixelated or voxelated representation in one, two, or three dimensions using (boolean) masks
+(like in computer simulations or 3D experiments)</p></li>
+</ul>
+<p>which represent the geometrical entities of the discretization.</p>
+</details></div></blockquote>
+<p id="index-22"><span id="nxmicrostructure-interface-number-of-interfaces-field"></span><strong>number_of_interfaces</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>How many interfaces are distinguished.</p>
+</div></blockquote>
+<p id="index-23"><span id="nxmicrostructure-interface-identifier-offset-field"></span><strong>identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>First identifier whereby to identify interfaces implicitly.</p>
+</div></blockquote>
+<p id="index-24"><span id="nxmicrostructure-interface-identifier-field"></span><strong>identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Identifier whereby to identify each interface explicitly.</p>
+</div></blockquote>
+<p id="index-25"><span id="nxmicrostructure-interface-crystal-identifier-field"></span><strong>crystal_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [i, 2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Set of pairs of crystal_identifier for each interface.</p>
+<p id="index-26"><span id="nxmicrostructure-interface-crystal-identifier-use-these-attribute"></span><strong>&#64;use_these</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>The specific identifiers whereby to resolve ambiguities.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-27"><span id="nxmicrostructure-interface-phase-identifier-field"></span><strong>phase_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [i, 2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Set of pairs of phase_identifier for each interface.</p>
+<p id="index-28"><span id="nxmicrostructure-interface-phase-identifier-use-these-attribute"></span><strong>&#64;use_these</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>The specific identifiers whereby to resolve ambiguities.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-29"><span id="nxmicrostructure-interface-triple-junction-identifier-field"></span><strong>triple_junction_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [i, 2]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Set of pairs of triple_junction_identifier for each interface.</p>
+<p id="index-30"><span id="nxmicrostructure-interface-triple-junction-identifier-use-these-attribute"></span><strong>&#64;use_these</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>The specific identifiers whereby to resolve ambiguities.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-31"><span id="nxmicrostructure-interface-boundary-contact-field"></span><strong>boundary_contact</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a> (Rank: 1, Dimensions: [i])</p>
+<blockquote>
+<div><details class="summary-true-or-false-value-one-for-each-crystal-to-communicate-whether-that-featu">
+<summary>True or false value, one for each crystal, to communicate whether that featu ...</summary><p>True or false value, one for each crystal, to communicate whether that feature
+makes contact with the edge of the ROI.</p>
+</details></div></blockquote>
+<p id="index-32"><span id="nxmicrostructure-interface-surface-energy-field"></span><strong>surface_energy</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>Gibbs free surface energy for each interface.</p>
+</div></blockquote>
+<p id="index-33"><span id="nxmicrostructure-interface-mobility-field"></span><strong>mobility</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>Non-intrinsic mobility of each interface.</p>
+</div></blockquote>
+<p id="index-34"><span id="nxmicrostructure-interface-length-field"></span><strong>length</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-length-of-each-interface-if-only-projections-are-available">
+<summary>The length of each interface if only projections are available. ...</summary><p>The length of each interface if only projections are available.</p>
+<p>This is not necessarily the same as the length of the individual
+polyline segments whereby the interface is discretized.</p>
+</details></div></blockquote>
+<p id="index-35"><span id="nxmicrostructure-interface-area-field"></span><strong>area</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-area"><span class="std std-ref">NX_AREA</span></a>}</p>
+<blockquote>
+<div><p>The surface area of all interfaces.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxmicrostructure-triple-junction-group"><strong>triple_junction</strong>: (optional) <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+<blockquote>
+<div><details class="summary-projections-or-representations-of-junctions-at-which-three-interfaces-meet">
+<summary>Projections or representations of junctions at which three interfaces meet. ...</summary><p>Projections or representations of junctions at which three interfaces meet.</p>
+<p>An example for a line defect. Triple junctions are characterized as triple lines or triple points as their projections,
+or junctions observed between crystals (at the specimen surface exposed to an environment)
+(including wetting phenomena) or inside the specimen (crack, pores).</p>
+</details><p id="index-36"><span id="nxmicrostructure-triple-junction-representation-field"></span><strong>representation</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-reference-to-an-instance-of">
+<summary>Reference to an instance of: ...</summary><p>Reference to an instance of:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="NXcg_point_set.html#nxcg-point-set"><span class="std std-ref">NXcg_point_set</span></a> for a one-dimensional representation as only a projection is available (like in most experiments)</p></li>
+<li><p><a class="reference internal" href="NXcg_polyline_set.html#nxcg-polyline-set"><span class="std std-ref">NXcg_polyline_set</span></a> for a two-dimensional representation as only a projection is available</p></li>
+<li><p><a class="reference internal" href="NXcg_polygon_set.html#nxcg-polygon-set"><span class="std std-ref">NXcg_polygon_set</span></a> for a two-dimensional representation in the (seldom) case of sufficient spatial resolution
+and the line in the projection plane or cases where triple junction locations are approximated e.g. using a set of triangles</p></li>
+<li><p><a class="reference internal" href="NXcg_polyhedron_set.html#nxcg-polyhedron-set"><span class="std std-ref">NXcg_polyhedron_set</span></a> for a three-dimensional representation via e.g. a representation of Voronoi cells about atoms</p></li>
+<li><p><a class="reference internal" href="NXcg_grid.html#nxcg-grid"><span class="std std-ref">NXcg_grid</span></a> for regularly pixelated or voxelated representation in one, two, or three dimensions using (boolean) masks</p></li>
+</ul>
+<p>which represent the geometrical entities of the discretization.</p>
+</details></div></blockquote>
+<p id="index-37"><span id="nxmicrostructure-triple-junction-number-of-junctions-field"></span><strong>number_of_junctions</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Number of triple junctions.</p>
+</div></blockquote>
+<p id="index-38"><span id="nxmicrostructure-triple-junction-identifier-offset-field"></span><strong>identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>First identifier to identify triple junctions implicitly.</p>
+</div></blockquote>
+<p id="index-39"><span id="nxmicrostructure-triple-junction-identifier-field"></span><strong>identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Identifier to identify each triple junction explicitly.</p>
+</div></blockquote>
+<p id="index-40"><span id="nxmicrostructure-triple-junction-location-field"></span><strong>location</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-set-of-identifier-for-positions-whereby-to-identify-the-location-of-each">
+<summary>Set of identifier for positions whereby to identify the location of each ...</summary><p>Set of identifier for positions whereby to identify the location of each
+junction.</p>
+</details><p id="index-41"><span id="nxmicrostructure-triple-junction-location-use-these-attribute"></span><strong>&#64;use_these</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>The specific identifiers whereby to resolve ambiguities.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-42"><span id="nxmicrostructure-triple-junction-position-field"></span><strong>position</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [i, d]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><p>Explicit positions.</p>
+</div></blockquote>
+<p id="index-43"><span id="nxmicrostructure-triple-junction-crystal-identifier-field"></span><strong>crystal_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [i, 3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-set-of-tuples-of-identifier-of-crystals-connected-to-the-junction-for-each">
+<summary>Set of tuples of identifier of crystals connected to the junction for each ...</summary><p>Set of tuples of identifier of crystals connected to the junction for each
+triple junction.</p>
+</details></div></blockquote>
+<p id="index-44"><span id="nxmicrostructure-triple-junction-interface-identifier-field"></span><strong>interface_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [i, 3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-set-of-tuples-of-identifier-of-interfaces-connected-to-the-junction-for-each">
+<summary>Set of tuples of identifier of interfaces connected to the junction for each ...</summary><p>Set of tuples of identifier of interfaces connected to the junction for each
+triple junction.</p>
+</details><p id="index-45"><span id="nxmicrostructure-triple-junction-interface-identifier-use-these-attribute"></span><strong>&#64;use_these</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>The specific interface identifiers whereby to resolve ambiguities.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-46"><span id="nxmicrostructure-triple-junction-polyline-identifier-field"></span><strong>polyline_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [i, 3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-set-of-tuples-of-identifier-for-polyline-segments-connected-to-the-junction">
+<summary>Set of tuples of identifier for polyline segments connected to the junction  ...</summary><p>Set of tuples of identifier for polyline segments connected to the junction for
+each triple junction.</p>
+</details><p id="index-47"><span id="nxmicrostructure-triple-junction-polyline-identifier-use-these-attribute"></span><strong>&#64;use_these</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>The specific polyline identifiers whereby to resolve ambiguities.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-48"><span id="nxmicrostructure-triple-junction-boundary-contact-field"></span><strong>boundary_contact</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a> (Rank: 1, Dimensions: [i])</p>
+<blockquote>
+<div><details class="summary-true-or-false-value-one-for-each-crystal-to-communicate-whether-that-featu">
+<summary>True or false value, one for each crystal, to communicate whether that featu ...</summary><p>True or false value, one for each crystal, to communicate whether that feature
+makes contact with the edge of the ROI.</p>
+</details></div></blockquote>
+<p id="index-49"><span id="nxmicrostructure-triple-junction-line-energy-field"></span><strong>line_energy</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>Specific line energy of each triple junction</p>
+</div></blockquote>
+<p id="index-50"><span id="nxmicrostructure-triple-junction-mobility-field"></span><strong>mobility</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>Non-intrinsic mobility of each triple junction.</p>
+</div></blockquote>
+<p id="index-51"><span id="nxmicrostructure-triple-junction-length-field"></span><strong>length</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><details class="summary-the-length-of-each-triple-junction">
+<summary>The length of each triple junction. ...</summary><p>The length of each triple junction.</p>
+<p>This is not necessarily the same as the length of the individual
+polyline segments whereby the junction is discretized.</p>
+</details></div></blockquote>
+<p id="index-52"><span id="nxmicrostructure-triple-junction-volume-field"></span><strong>volume</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-volume"><span class="std std-ref">NX_VOLUME</span></a>}</p>
+<blockquote>
+<div><p>The volume of the each triple junction</p>
+</div></blockquote>
+</div></blockquote>
+<p id="nxmicrostructure-quadruple-junction-group"><strong>quadruple_junction</strong>: (optional) <a class="reference internal" href="../base_classes/NXobject.html#nxobject"><span class="std std-ref">NXobject</span></a></p>
+<blockquote>
+<div><details class="summary-quadruple-junctions-as-a-region-where-four-crystals-meet">
+<summary>Quadruple junctions as a region where four crystals meet. ...</summary><p>Quadruple junctions as a region where four crystals meet.</p>
+<p>An example for a point defect.</p>
+</details><p id="index-53"><span id="nxmicrostructure-quadruple-junction-representation-field"></span><strong>representation</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-reference-to-an-instance-of">
+<summary>Reference to an instance of: ...</summary><p>Reference to an instance of:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="NXcg_point_set.html#nxcg-point-set"><span class="std std-ref">NXcg_point_set</span></a></p></li>
+<li><p><a class="reference internal" href="NXcg_grid.html#nxcg-grid"><span class="std std-ref">NXcg_grid</span></a> for regularly pixelated or voxelated representation in one, two, or three dimensions using (boolean) masks</p></li>
+</ul>
+</details></div></blockquote>
+<p id="index-54"><span id="nxmicrostructure-quadruple-junction-number-of-junctions-field"></span><strong>number_of_junctions</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-uint"><span class="std std-ref">NX_UINT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Number of quadruple junctions.</p>
+</div></blockquote>
+<p id="index-55"><span id="nxmicrostructure-quadruple-junction-identifier-offset-field"></span><strong>identifier_offset</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>First identifier to identify quadruple junctions implicitly.</p>
+</div></blockquote>
+<p id="index-56"><span id="nxmicrostructure-quadruple-junction-identifier-field"></span><strong>identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><p>Identifier to identify each quadruple junction explicitly.</p>
+</div></blockquote>
+<p id="index-57"><span id="nxmicrostructure-quadruple-junction-location-field"></span><strong>location</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-set-of-identifier-for-positions-whereby-to-identify-the-location-of-each">
+<summary>Set of identifier for positions whereby to identify the location of each ...</summary><p>Set of identifier for positions whereby to identify the location of each
+junction.</p>
+</details><p id="index-58"><span id="nxmicrostructure-quadruple-junction-location-use-these-attribute"></span><strong>&#64;use_these</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><p>The specific point identifier whereby to resolve ambiguities.</p>
+</div></blockquote>
+</div></blockquote>
+<p id="index-59"><span id="nxmicrostructure-quadruple-junction-position-field"></span><strong>position</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [i, 3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-length"><span class="std std-ref">NX_LENGTH</span></a>}</p>
+<blockquote>
+<div><p>Explicit positions.</p>
+</div></blockquote>
+<p id="index-60"><span id="nxmicrostructure-quadruple-junction-crystal-identifier-field"></span><strong>crystal_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [i, 4]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-set-of-tuples-of-identifier-of-crystals-connected-to-the-junction-for-each">
+<summary>Set of tuples of identifier of crystals connected to the junction for each ...</summary><p>Set of tuples of identifier of crystals connected to the junction for each
+junction.</p>
+</details><p id="index-61"><span id="nxmicrostructure-quadruple-junction-crystal-identifier-use-these-attribute"></span><strong>&#64;use_these</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-the-specific-identifier-to-instances-of-crystal-identifiers-whereby-to-res">
+<summary>The specific identifier to instances of crystal identifiers whereby to res ...</summary><p>The specific identifier to instances of crystal identifiers whereby to resolve
+ambiguities.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="index-62"><span id="nxmicrostructure-quadruple-junction-interface-identifier-field"></span><strong>interface_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [i, 4]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-set-of-tuples-of-identifier-of-interfaces-connected-to-the-junction-for-each">
+<summary>Set of tuples of identifier of interfaces connected to the junction for each ...</summary><p>Set of tuples of identifier of interfaces connected to the junction for each
+junction.</p>
+</details><p id="index-63"><span id="nxmicrostructure-quadruple-junction-interface-identifier-use-these-attribute"></span><strong>&#64;use_these</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-the-specific-identifier-to-instances-of-interface-identifiers-whereby-to-r">
+<summary>The specific identifier to instances of interface identifiers whereby to r ...</summary><p>The specific identifier to instances of interface identifiers whereby to resolve
+ambiguities.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="index-64"><span id="nxmicrostructure-quadruple-junction-triple-junction-identifier-field"></span><strong>triple_junction_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [i, 3]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-set-of-tuples-of-identifier-for-triple-junctions-connected-to-the-junction-f">
+<summary>Set of tuples of identifier for triple junctions connected to the junction f ...</summary><p>Set of tuples of identifier for triple junctions connected to the junction for
+each quadruple junction.</p>
+</details><p id="index-65"><span id="nxmicrostructure-quadruple-junction-triple-junction-identifier-use-these-attribute"></span><strong>&#64;use_these</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-the-specific-identifier-to-instances-of-triple-junction-identifiers-whereb">
+<summary>The specific identifier to instances of triple junction identifiers whereb ...</summary><p>The specific identifier to instances of triple junction identifiers whereby to
+resolve ambiguities.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="index-66"><span id="nxmicrostructure-quadruple-junction-phase-identifier-field"></span><strong>phase_identifier</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-int"><span class="std std-ref">NX_INT</span></a> (Rank: 2, Dimensions: [i, 4]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-unitless"><span class="std std-ref">NX_UNITLESS</span></a>}</p>
+<blockquote>
+<div><details class="summary-set-of-tuples-of-identifier-for-phases-of-crystals-connected-to-the-junction">
+<summary>Set of tuples of identifier for phases of crystals connected to the junction ...</summary><p>Set of tuples of identifier for phases of crystals connected to the junction for
+each quadruple junction.</p>
+</details><p id="index-67"><span id="nxmicrostructure-quadruple-junction-phase-identifier-use-these-attribute"></span><strong>&#64;use_these</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-char"><span class="std std-ref">NX_CHAR</span></a></p>
+<blockquote>
+<div><details class="summary-the-specific-identifier-to-instances-of-phase-identifier-whereby-to-resolv">
+<summary>The specific identifier to instances of phase identifier whereby to resolv ...</summary><p>The specific identifier to instances of phase identifier whereby to resolve
+ambiguities.</p>
+</details></div></blockquote>
+</div></blockquote>
+<p id="index-68"><span id="nxmicrostructure-quadruple-junction-boundary-contact-field"></span><strong>boundary_contact</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-boolean"><span class="std std-ref">NX_BOOLEAN</span></a> (Rank: 1, Dimensions: [i])</p>
+<blockquote>
+<div><details class="summary-true-or-false-value-one-for-each-crystal-to-communicate-whether-that-featu">
+<summary>True or false value, one for each crystal, to communicate whether that featu ...</summary><p>True or false value, one for each crystal, to communicate whether that feature
+makes contact with the edge of the ROI.</p>
+</details></div></blockquote>
+<p id="index-69"><span id="nxmicrostructure-quadruple-junction-energy-field"></span><strong>energy</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>Energy of the quadruple_junction as a defect.</p>
+</div></blockquote>
+<p id="index-70"><span id="nxmicrostructure-quadruple-junction-mobility-field"></span><strong>mobility</strong>: (optional) <a class="reference internal" href="../../nxdl-types.html#nx-number"><span class="std std-ref">NX_NUMBER</span></a> (Rank: 1, Dimensions: [i]) {units=<a class="reference internal" href="../../nxdl-types.html#nx-any"><span class="std std-ref">NX_ANY</span></a>}</p>
+<blockquote>
+<div><p>Non-intrinsic mobility of each quadruple_junction.</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<section id="hypertext-anchors">
+<h2>Hypertext Anchors<a class="headerlink" href="#hypertext-anchors" title="Link to this heading">¶</a></h2>
+<p>List of hypertext anchors for all groups, fields,
+attributes, and links defined in this class.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nxmicrostructure-cg-grid-group"><span class="std std-ref">/NXmicrostructure/CG_GRID-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-cg-point-set-group"><span class="std std-ref">/NXmicrostructure/CG_POINT_SET-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-cg-polygon-set-group"><span class="std std-ref">/NXmicrostructure/CG_POLYGON_SET-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-cg-polyhedron-set-group"><span class="std std-ref">/NXmicrostructure/CG_POLYHEDRON_SET-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-cg-polyline-set-group"><span class="std std-ref">/NXmicrostructure/CG_POLYLINE_SET-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-cg-triangle-set-group"><span class="std std-ref">/NXmicrostructure/CG_TRIANGLE_SET-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-comment-field"><span class="std std-ref">/NXmicrostructure/comment-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-configuration-group"><span class="std std-ref">/NXmicrostructure/configuration-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-configuration-algorithm-field"><span class="std std-ref">/NXmicrostructure/configuration/algorithm-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-configuration-dimensionality-field"><span class="std std-ref">/NXmicrostructure/configuration/dimensionality-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-configuration-disorientation-threshold-field"><span class="std std-ref">/NXmicrostructure/configuration/disorientation_threshold-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-configuration-program-group"><span class="std std-ref">/NXmicrostructure/configuration/PROGRAM-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-crystal-group"><span class="std std-ref">/NXmicrostructure/crystal-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-crystal-area-field"><span class="std std-ref">/NXmicrostructure/crystal/area-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-crystal-boundary-contact-field"><span class="std std-ref">/NXmicrostructure/crystal/boundary_contact-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-crystal-crystal-identifier-field"><span class="std std-ref">/NXmicrostructure/crystal/crystal_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-crystal-crystal-identifier-offset-field"><span class="std std-ref">/NXmicrostructure/crystal/crystal_identifier_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-crystal-length-field"><span class="std std-ref">/NXmicrostructure/crystal/length-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-crystal-number-of-crystals-field"><span class="std std-ref">/NXmicrostructure/crystal/number_of_crystals-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-crystal-number-of-phases-field"><span class="std std-ref">/NXmicrostructure/crystal/number_of_phases-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-crystal-orientation-spread-field"><span class="std std-ref">/NXmicrostructure/crystal/orientation_spread-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-crystal-phase-identifier-field"><span class="std std-ref">/NXmicrostructure/crystal/phase_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-crystal-phase-identifier-offset-field"><span class="std std-ref">/NXmicrostructure/crystal/phase_identifier_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-crystal-representation-field"><span class="std std-ref">/NXmicrostructure/crystal/representation-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-crystal-volume-field"><span class="std std-ref">/NXmicrostructure/crystal/volume-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-date-field"><span class="std std-ref">/NXmicrostructure/date-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-group"><span class="std std-ref">/NXmicrostructure/interface-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-area-field"><span class="std std-ref">/NXmicrostructure/interface/area-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-boundary-contact-field"><span class="std std-ref">/NXmicrostructure/interface/boundary_contact-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-crystal-identifier-field"><span class="std std-ref">/NXmicrostructure/interface/crystal_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-crystal-identifier-use-these-attribute"><span class="std std-ref">/NXmicrostructure/interface/crystal_identifier&#64;use_these-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-identifier-field"><span class="std std-ref">/NXmicrostructure/interface/identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-identifier-offset-field"><span class="std std-ref">/NXmicrostructure/interface/identifier_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-length-field"><span class="std std-ref">/NXmicrostructure/interface/length-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-mobility-field"><span class="std std-ref">/NXmicrostructure/interface/mobility-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-number-of-interfaces-field"><span class="std std-ref">/NXmicrostructure/interface/number_of_interfaces-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-phase-identifier-field"><span class="std std-ref">/NXmicrostructure/interface/phase_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-phase-identifier-use-these-attribute"><span class="std std-ref">/NXmicrostructure/interface/phase_identifier&#64;use_these-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-representation-field"><span class="std std-ref">/NXmicrostructure/interface/representation-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-surface-energy-field"><span class="std std-ref">/NXmicrostructure/interface/surface_energy-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-triple-junction-identifier-field"><span class="std std-ref">/NXmicrostructure/interface/triple_junction_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-interface-triple-junction-identifier-use-these-attribute"><span class="std std-ref">/NXmicrostructure/interface/triple_junction_identifier&#64;use_these-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-iteration-field"><span class="std std-ref">/NXmicrostructure/iteration-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-group"><span class="std std-ref">/NXmicrostructure/quadruple_junction-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-boundary-contact-field"><span class="std std-ref">/NXmicrostructure/quadruple_junction/boundary_contact-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-crystal-identifier-field"><span class="std std-ref">/NXmicrostructure/quadruple_junction/crystal_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-crystal-identifier-use-these-attribute"><span class="std std-ref">/NXmicrostructure/quadruple_junction/crystal_identifier&#64;use_these-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-energy-field"><span class="std std-ref">/NXmicrostructure/quadruple_junction/energy-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-identifier-field"><span class="std std-ref">/NXmicrostructure/quadruple_junction/identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-identifier-offset-field"><span class="std std-ref">/NXmicrostructure/quadruple_junction/identifier_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-interface-identifier-field"><span class="std std-ref">/NXmicrostructure/quadruple_junction/interface_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-interface-identifier-use-these-attribute"><span class="std std-ref">/NXmicrostructure/quadruple_junction/interface_identifier&#64;use_these-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-location-field"><span class="std std-ref">/NXmicrostructure/quadruple_junction/location-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-location-use-these-attribute"><span class="std std-ref">/NXmicrostructure/quadruple_junction/location&#64;use_these-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-mobility-field"><span class="std std-ref">/NXmicrostructure/quadruple_junction/mobility-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-number-of-junctions-field"><span class="std std-ref">/NXmicrostructure/quadruple_junction/number_of_junctions-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-phase-identifier-field"><span class="std std-ref">/NXmicrostructure/quadruple_junction/phase_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-phase-identifier-use-these-attribute"><span class="std std-ref">/NXmicrostructure/quadruple_junction/phase_identifier&#64;use_these-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-position-field"><span class="std std-ref">/NXmicrostructure/quadruple_junction/position-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-representation-field"><span class="std std-ref">/NXmicrostructure/quadruple_junction/representation-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-triple-junction-identifier-field"><span class="std std-ref">/NXmicrostructure/quadruple_junction/triple_junction_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-quadruple-junction-triple-junction-identifier-use-these-attribute"><span class="std std-ref">/NXmicrostructure/quadruple_junction/triple_junction_identifier&#64;use_these-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-time-field"><span class="std std-ref">/NXmicrostructure/time-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-group"><span class="std std-ref">/NXmicrostructure/triple_junction-group</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-boundary-contact-field"><span class="std std-ref">/NXmicrostructure/triple_junction/boundary_contact-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-crystal-identifier-field"><span class="std std-ref">/NXmicrostructure/triple_junction/crystal_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-identifier-field"><span class="std std-ref">/NXmicrostructure/triple_junction/identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-identifier-offset-field"><span class="std std-ref">/NXmicrostructure/triple_junction/identifier_offset-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-interface-identifier-field"><span class="std std-ref">/NXmicrostructure/triple_junction/interface_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-interface-identifier-use-these-attribute"><span class="std std-ref">/NXmicrostructure/triple_junction/interface_identifier&#64;use_these-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-length-field"><span class="std std-ref">/NXmicrostructure/triple_junction/length-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-line-energy-field"><span class="std std-ref">/NXmicrostructure/triple_junction/line_energy-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-location-field"><span class="std std-ref">/NXmicrostructure/triple_junction/location-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-location-use-these-attribute"><span class="std std-ref">/NXmicrostructure/triple_junction/location&#64;use_these-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-mobility-field"><span class="std std-ref">/NXmicrostructure/triple_junction/mobility-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-number-of-junctions-field"><span class="std std-ref">/NXmicrostructure/triple_junction/number_of_junctions-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-polyline-identifier-field"><span class="std std-ref">/NXmicrostructure/triple_junction/polyline_identifier-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-polyline-identifier-use-these-attribute"><span class="std std-ref">/NXmicrostructure/triple_junction/polyline_identifier&#64;use_these-attribute</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-position-field"><span class="std std-ref">/NXmicrostructure/triple_junction/position-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-representation-field"><span class="std std-ref">/NXmicrostructure/triple_junction/representation-field</span></a></p></li>
+<li><p><a class="reference internal" href="#nxmicrostructure-triple-junction-volume-field"><span class="std std-ref">/NXmicrostructure/triple_junction/volume-field</span></a></p></li>
+</ul>
+<dl class="simple">
+<dt><strong>NXDL Source</strong>:</dt><dd><p><a class="reference external" href="https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXmicrostructure.nxdl.xml">https://github.com/FAIRmat-NFDI/nexus_definitions/tree/fairmat/contributed_definitions/NXmicrostructure.nxdl.xml</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/FAIRmat_new.png" alt="Logo of NeXus-FAIRmat"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">NeXus-FAIRmat</a></h1>
+
+
+
+<p class="blurb">Proposal of NeXus expansion for FAIRmat data.</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=FAIRmat-NFDI&repo=nexus_definitions&type=watch&count=false&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fairmat-cover.html">1. FAIRmat-NeXus Proposal</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../nexus-index.html">2. NeXus Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../user_manual.html">2.1. NeXus: User Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/index.html">2.2. NeXus: Examples data files I/O</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../ref_doc.html">2.3. NeXus: Reference Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html">2.4. NeXus Community</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html">2.5. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities.html">2.6. NeXus Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs_about.html">2.7. About these docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../em-structure.html">3. Electron microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mpes-structure.html">4. Photoemission &amp; core-level spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../optical-spectroscopy-structure.html">5. Optical spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apm-structure.html">6. Atom-probe tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../transport-structure.html">7. Transport phenomena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spm-structure.html">8. Scanning Probe Microscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cgms-structure.html">9. Geometry and microstructures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../north-structure.html">10. NOMAD OASIS Remote Tools Hub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../laboratory-structure.html">11. Sample preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../icme-structure.html">12. Integrated Computational Materials Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../napi.html">13. NAPI: NeXus Application Programmer Interface (frozen)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">14. Brief history of NeXus</a></li>
+</ul>
+
+
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">2.3.3.3.153. NXmicrostructure</a><ul>
+<li><a class="reference internal" href="#hypertext-anchors">Hypertext Anchors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../nexus-index.html"><span class="section-number">2. </span>NeXus Documentation</a><ul>
+  <li><a href="../../ref_doc.html"><span class="section-number">2.3. </span>NeXus: Reference Documentation</a><ul>
+  <li><a href="../index.html"><span class="section-number">2.3.3. </span>NeXus Class Definitions</a><ul>
+  <li><a href="index.html"><span class="section-number">2.3.3.3. </span>Contributed Definitions</a><ul>
+      <li>Previous: <a href="NXmatch_filter.html" title="previous chapter"><span class="section-number">2.3.3.3.152. </span>NXmatch_filter</a></li>
+      <li>Next: <a href="NXmicrostructure_gragles_config.html" title="next chapter"><span class="section-number">2.3.3.3.154. </span>NXmicrostructure_gragles_config</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <p>Have a Question? <a href="https://github.com/nexusformat/definitions/issues/new">Get help</a></p>
+    <ul class="this-page-menu">
+    <style>
+		  .avatar-container {
+		    display: flex;
+		    align-items: center;
+		  }
+		
+		  .avatar {
+		    width: 32px;
+		    height: 32px;
+		    border-radius: 50%;
+		    margin-right: 5px;
+		  }
+		</style>
+		
+    
+    
+		<div class="avatar-container">
+      
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<div id="google_search" style="display: none">
+	<hr />
+	<h3>Google search</h3>
+	<form method="get" action="https://www.google.com/search">
+		<table border="0" align="center" cellpadding="0">
+			<tr>
+				<td>
+					<input type="text"   name="q" value="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="font-size:75%">
+					<input type="radio"  name="sitesearch" value="" />global
+					<input type="radio"  name="sitesearch"
+						value="manual.nexusformat.org" 
+						checked />NeXus manual
+					<input type="submit" value="Go" />
+					<br />
+				</td>
+			</tr>
+		</table>
+	</form>                                
+</div>
+<script type="text/javascript">$('#google_search').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2022-2024, The FAIRmat collaboration.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/classes/contributed_definitions/NXmicrostructure.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
