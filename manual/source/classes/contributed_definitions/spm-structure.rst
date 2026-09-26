@@ -45,6 +45,9 @@ fundamental technical elements are inherited consistently across specific experi
 Application Definition
 ######################
 
+    :ref:`NXsensor_scan`:
+        A generic application definition for scans with sensors. This is the parent application definition
+        for :ref:`NXspm` and further specialized definitions.
     :ref:`NXspm`:
        An application definition for scanning Probe Microscopy domain experiments. 
        The :ref:`NXspm` in herited from the :ref:`NXsensor_scan` is considered as
@@ -67,8 +70,17 @@ Application Definition
 Base Classes
 ############
 
+    :ref:`NXamplifier`:
+    A base class to describe amplifier devices.
+
     :ref:`NXlockin`:
     A base class to describe lock-in amplifier instrument.
+
+    :ref:`NXphase_lock_loop`:
+    A base class to describe phase lock loop in AFM experiments.
+
+    :ref:`NXrcs`:
+    A base class for the Real Time Control System (RCS).
 
     :ref:`NXspm_bias_spectroscopy`:
     A base class to describe bias spectroscopy measurement to measure I/V curve in STS expriment.
@@ -82,14 +94,11 @@ Base Classes
     :ref:`NXspm_cantilever_oscillator`:
     A base class to describe cantilever oscillator in AFM experiments.
 
-    :ref:`NXphase_lock_loop`:
-    A base class to describe phase lock loop in AFM experiments.
+    :ref:`NXspm_piezo_config`:
+    A base class to describe piezo configuration in SPM experiments.
 
     :ref:`NXspm_piezo_sensor`:
     A base class to describe piezo sensor in SPM experiments.
-
-    :ref:`NXspm_piezo_config`:
-    A base class to describe piezo configuration in SPM experiments.
 
     :ref:`NXspm_piezoelectric_material`:
     A base class to draw piezoelectric material properties used in cantilever tip.
